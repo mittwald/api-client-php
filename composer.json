@@ -1,0 +1,18 @@
+{
+    "name": "mittwald/api-client",
+    "description": "Client library for the mittwald mStudio v2 API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mittwald\\ApiClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Martin Helmich",
+            "email": "m.helmich@mittwald.de"
+        }
+    ],
+    "require": {}
+}
