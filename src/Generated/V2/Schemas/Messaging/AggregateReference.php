@@ -214,7 +214,7 @@ class AggregateReference
         $id = $input->{'id'};
         $parents = null;
         if (isset($input->{'parents'})) {
-            $parents = array_map(fn (array $i): AggregateReferenceParentsItem => AggregateReferenceParentsItem::buildFromInput($i, validate: $validate), $input->{'parents'});
+            $parents = array_map(fn (array|object $i): AggregateReferenceParentsItem => AggregateReferenceParentsItem::buildFromInput($i, validate: $validate), $input->{'parents'});
         }
 
         $obj = new self($aggregate, $domain, $id);

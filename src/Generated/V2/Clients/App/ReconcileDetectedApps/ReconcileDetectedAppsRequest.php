@@ -140,7 +140,7 @@ class ReconcileDetectedAppsRequest
         }
 
         $projectShortId = $input->{'projectShortId'};
-        $body = array_map(fn (array $i): ReconcileDetectedAppsRequestBodyItem => ReconcileDetectedAppsRequestBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): ReconcileDetectedAppsRequestBodyItem => ReconcileDetectedAppsRequestBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($projectShortId, $body);
 

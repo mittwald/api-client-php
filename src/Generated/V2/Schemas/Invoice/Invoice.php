@@ -723,7 +723,7 @@ class Invoice
         $currency = $input->{'currency'};
         $customerId = $input->{'customerId'};
         $date = new \DateTime($input->{'date'});
-        $groups = array_map(fn (array $i): InvoiceGroupsItem => InvoiceGroupsItem::buildFromInput($i, validate: $validate), $input->{'groups'});
+        $groups = array_map(fn (array|object $i): InvoiceGroupsItem => InvoiceGroupsItem::buildFromInput($i, validate: $validate), $input->{'groups'});
         $id = $input->{'id'};
         $invoiceNumber = $input->{'invoiceNumber'};
         $invoiceType = InvoiceInvoiceType::from($input->{'invoiceType'});

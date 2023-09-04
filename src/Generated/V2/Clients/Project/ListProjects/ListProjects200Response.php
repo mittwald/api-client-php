@@ -139,7 +139,7 @@ class ListProjects200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): ListProjects200ResponseBodyItem => ListProjects200ResponseBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): ListProjects200ResponseBodyItem => ListProjects200ResponseBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

@@ -326,7 +326,7 @@ class PatchAppinstallationRequestBody
         }
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = array_map(fn (array $i): PatchAppinstallationRequestBodySystemSoftwareItem => PatchAppinstallationRequestBodySystemSoftwareItem::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
+            $systemSoftware = array_map(fn (array|object $i): PatchAppinstallationRequestBodySystemSoftwareItem => PatchAppinstallationRequestBodySystemSoftwareItem::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
