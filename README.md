@@ -6,8 +6,7 @@ This package contains a (mostly auto-generated) PHP client for the mittwald mStu
 
 Copyright (c) 2023 Mittwald CM Service GmbH & Co. KG and contributors
 
-This project (and all NPM packages) therein is licensed under the MIT License;
-see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License; see the [LICENSE](./LICENSE) file for details.
 
 ## Installation
 
