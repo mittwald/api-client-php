@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRequestUpload;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
 {
     /**
@@ -49,7 +53,7 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
      */
     private ?DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -62,7 +66,7 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
      * @return
      * DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions|null
      */
-    public function getImageDimensions() : ?DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions
+    public function getImageDimensions(): ?DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
@@ -71,7 +75,7 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
      * @param DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions
      * @return self
      */
-    public function withImageDimensions(DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions) : self
+    public function withImageDimensions(DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
         $clone->imageDimensions = $imageDimensions;
@@ -82,7 +86,7 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
     /**
      * @return self
      */
-    public function withoutImageDimensions() : self
+    public function withoutImageDimensions(): self
     {
         $clone = clone $this;
         unset($clone->imageDimensions);
@@ -96,11 +100,11 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -120,7 +124,7 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->imageDimensions)) {
@@ -136,19 +140,19 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -161,7 +165,7 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -169,4 +173,3 @@ class DeprecatedUserServiceAvatarRequestUpload200ResponseBodyRulesProperties
         return $response;
     }
 }
-

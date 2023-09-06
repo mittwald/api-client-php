@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Dns;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class RecordMXRecord
 {
     /**
@@ -55,7 +58,7 @@ class RecordMXRecord
     /**
      * @return string
      */
-    public function getFqdn() : string
+    public function getFqdn(): string
     {
         return $this->fqdn;
     }
@@ -63,7 +66,7 @@ class RecordMXRecord
     /**
      * @return int
      */
-    public function getPriority() : int
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -72,12 +75,12 @@ class RecordMXRecord
      * @param string $fqdn
      * @return self
      */
-    public function withFqdn(string $fqdn) : self
+    public function withFqdn(string $fqdn): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($fqdn, static::$schema['properties']['fqdn']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -90,12 +93,12 @@ class RecordMXRecord
      * @param int $priority
      * @return self
      */
-    public function withPriority(int $priority) : self
+    public function withPriority(int $priority): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($priority, static::$schema['properties']['priority']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,11 +113,11 @@ class RecordMXRecord
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RecordMXRecord Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RecordMXRecord
+    public static function buildFromInput(array|object $input, bool $validate = true): RecordMXRecord
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -132,7 +135,7 @@ class RecordMXRecord
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['fqdn'] = $this->fqdn;
@@ -147,19 +150,19 @@ class RecordMXRecord
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -169,4 +172,3 @@ class RecordMXRecord
     {
     }
 }
-

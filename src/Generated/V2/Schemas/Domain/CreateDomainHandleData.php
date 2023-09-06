@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CreateDomainHandleData
 {
     /**
@@ -53,7 +56,7 @@ class CreateDomainHandleData
     /**
      * @return HandleField[]|null
      */
-    public function getAdminC() : ?array
+    public function getAdminC(): ?array
     {
         return $this->adminC ?? null;
     }
@@ -61,7 +64,7 @@ class CreateDomainHandleData
     /**
      * @return HandleField[]
      */
-    public function getOwnerC() : array
+    public function getOwnerC(): array
     {
         return $this->ownerC;
     }
@@ -70,7 +73,7 @@ class CreateDomainHandleData
      * @param HandleField[] $adminC
      * @return self
      */
-    public function withAdminC(array $adminC) : self
+    public function withAdminC(array $adminC): self
     {
         $clone = clone $this;
         $clone->adminC = $adminC;
@@ -81,7 +84,7 @@ class CreateDomainHandleData
     /**
      * @return self
      */
-    public function withoutAdminC() : self
+    public function withoutAdminC(): self
     {
         $clone = clone $this;
         unset($clone->adminC);
@@ -93,7 +96,7 @@ class CreateDomainHandleData
      * @param HandleField[] $ownerC
      * @return self
      */
-    public function withOwnerC(array $ownerC) : self
+    public function withOwnerC(array $ownerC): self
     {
         $clone = clone $this;
         $clone->ownerC = $ownerC;
@@ -107,20 +110,20 @@ class CreateDomainHandleData
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateDomainHandleData Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateDomainHandleData
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateDomainHandleData
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $adminC = null;
         if (isset($input->{'adminC'})) {
-            $adminC = array_map(fn(array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'adminC'});
+            $adminC = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'adminC'});
         }
-        $ownerC = array_map(fn(array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
+        $ownerC = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
 
         $obj = new self($ownerC);
         $obj->adminC = $adminC;
@@ -132,13 +135,13 @@ class CreateDomainHandleData
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->adminC)) {
-            $output['adminC'] = array_map(fn(HandleField $i): array => $i->toJson(), $this->adminC);
+            $output['adminC'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->adminC);
         }
-        $output['ownerC'] = array_map(fn(HandleField $i): array => $i->toJson(), $this->ownerC);
+        $output['ownerC'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->ownerC);
 
         return $output;
     }
@@ -149,19 +152,19 @@ class CreateDomainHandleData
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -171,4 +174,3 @@ class CreateDomainHandleData
     {
     }
 }
-

@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Cronjob;
 
-enum CronjobExecutionStatus: string {
+enum CronjobExecutionStatus: string
+{
     case Complete = 'Complete';
     case Failed = 'Failed';
     case AbortedBySystem = 'AbortedBySystem';

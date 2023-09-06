@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy;
+
 class PatchAppinstallationRequestBodySystemSoftwareItem
 {
     public const method = 'patch';
@@ -31,12 +35,12 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     private ?string $systemSoftwareVersion = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy|null
+     * @var SystemSoftwareUpdatePolicy|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy $updatePolicy = null;
+    private ?SystemSoftwareUpdatePolicy $updatePolicy = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -49,7 +53,7 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     /**
      * @return string|null
      */
-    public function getSystemSoftwareVersion() : ?string
+    public function getSystemSoftwareVersion(): ?string
     {
         return $this->systemSoftwareVersion ?? null;
     }
@@ -58,7 +62,7 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy|null
      */
-    public function getUpdatePolicy() : ?\Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy
+    public function getUpdatePolicy(): ?SystemSoftwareUpdatePolicy
     {
         return $this->updatePolicy ?? null;
     }
@@ -67,12 +71,12 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
      * @param string $systemSoftwareVersion
      * @return self
      */
-    public function withSystemSoftwareVersion(string $systemSoftwareVersion) : self
+    public function withSystemSoftwareVersion(string $systemSoftwareVersion): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($systemSoftwareVersion, static::$schema['properties']['systemSoftwareVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -84,7 +88,7 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     /**
      * @return self
      */
-    public function withoutSystemSoftwareVersion() : self
+    public function withoutSystemSoftwareVersion(): self
     {
         $clone = clone $this;
         unset($clone->systemSoftwareVersion);
@@ -93,10 +97,10 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy $updatePolicy
+     * @param SystemSoftwareUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(\Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy $updatePolicy) : self
+    public function withUpdatePolicy(SystemSoftwareUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -107,7 +111,7 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     /**
      * @return self
      */
-    public function withoutUpdatePolicy() : self
+    public function withoutUpdatePolicy(): self
     {
         $clone = clone $this;
         unset($clone->updatePolicy);
@@ -121,11 +125,11 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return PatchAppinstallationRequestBodySystemSoftwareItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : PatchAppinstallationRequestBodySystemSoftwareItem
+    public static function buildFromInput(array|object $input, bool $validate = true): PatchAppinstallationRequestBodySystemSoftwareItem
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -136,7 +140,7 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
-            $updatePolicy = \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy::from($input->{'updatePolicy'});
+            $updatePolicy = SystemSoftwareUpdatePolicy::from($input->{'updatePolicy'});
         }
 
         $obj = new self();
@@ -150,7 +154,7 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->systemSoftwareVersion)) {
@@ -169,19 +173,19 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -191,30 +195,29 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
         return '/v2/appinstallations/' . $appInstallationId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

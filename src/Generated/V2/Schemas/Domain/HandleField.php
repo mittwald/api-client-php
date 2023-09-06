@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class HandleField
 {
     /**
@@ -51,7 +54,7 @@ class HandleField
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -59,7 +62,7 @@ class HandleField
     /**
      * @return string
      */
-    public function getValue() : string
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -68,12 +71,12 @@ class HandleField
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -86,12 +89,12 @@ class HandleField
      * @param string $value
      * @return self
      */
-    public function withValue(string $value) : self
+    public function withValue(string $value): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($value, static::$schema['properties']['value']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -106,11 +109,11 @@ class HandleField
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return HandleField Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : HandleField
+    public static function buildFromInput(array|object $input, bool $validate = true): HandleField
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -128,7 +131,7 @@ class HandleField
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['name'] = $this->name;
@@ -143,19 +146,19 @@ class HandleField
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -165,4 +168,3 @@ class HandleField
     {
     }
 }
-

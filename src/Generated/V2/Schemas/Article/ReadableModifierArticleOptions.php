@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ReadableModifierArticleOptions
 {
     /**
@@ -73,7 +76,7 @@ class ReadableModifierArticleOptions
     /**
      * @return string
      */
-    public function getArticleId() : string
+    public function getArticleId(): string
     {
         return $this->articleId;
     }
@@ -81,7 +84,7 @@ class ReadableModifierArticleOptions
     /**
      * @return ReadableModifierArticleOptionsInfo|null
      */
-    public function getInfo() : ?ReadableModifierArticleOptionsInfo
+    public function getInfo(): ?ReadableModifierArticleOptionsInfo
     {
         return $this->info ?? null;
     }
@@ -89,7 +92,7 @@ class ReadableModifierArticleOptions
     /**
      * @return int|float
      */
-    public function getMaxArticleCount() : int|float
+    public function getMaxArticleCount(): int|float
     {
         return $this->maxArticleCount;
     }
@@ -98,12 +101,12 @@ class ReadableModifierArticleOptions
      * @param string $articleId
      * @return self
      */
-    public function withArticleId(string $articleId) : self
+    public function withArticleId(string $articleId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($articleId, static::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -116,7 +119,7 @@ class ReadableModifierArticleOptions
      * @param ReadableModifierArticleOptionsInfo $info
      * @return self
      */
-    public function withInfo(ReadableModifierArticleOptionsInfo $info) : self
+    public function withInfo(ReadableModifierArticleOptionsInfo $info): self
     {
         $clone = clone $this;
         $clone->info = $info;
@@ -127,7 +130,7 @@ class ReadableModifierArticleOptions
     /**
      * @return self
      */
-    public function withoutInfo() : self
+    public function withoutInfo(): self
     {
         $clone = clone $this;
         unset($clone->info);
@@ -139,12 +142,12 @@ class ReadableModifierArticleOptions
      * @param int|float $maxArticleCount
      * @return self
      */
-    public function withMaxArticleCount(int|float $maxArticleCount) : self
+    public function withMaxArticleCount(int|float $maxArticleCount): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($maxArticleCount, static::$schema['properties']['maxArticleCount']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -159,11 +162,11 @@ class ReadableModifierArticleOptions
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ReadableModifierArticleOptions Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ReadableModifierArticleOptions
+    public static function buildFromInput(array|object $input, bool $validate = true): ReadableModifierArticleOptions
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -185,7 +188,7 @@ class ReadableModifierArticleOptions
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['articleId'] = $this->articleId;
@@ -203,19 +206,19 @@ class ReadableModifierArticleOptions
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -228,4 +231,3 @@ class ReadableModifierArticleOptions
         }
     }
 }
-

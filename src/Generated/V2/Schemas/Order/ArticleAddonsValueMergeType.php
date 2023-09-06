@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
-enum ArticleAddonsValueMergeType: string {
+enum ArticleAddonsValueMergeType: string
+{
     case add = 'add';
     case set = 'set';
 }

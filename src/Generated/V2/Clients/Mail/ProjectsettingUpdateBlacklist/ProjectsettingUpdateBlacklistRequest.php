@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklist;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ProjectsettingUpdateBlacklistRequest
 {
     public const method = 'put';
@@ -52,7 +55,7 @@ class ProjectsettingUpdateBlacklistRequest
     private ProjectsettingUpdateBlacklistRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -68,7 +71,7 @@ class ProjectsettingUpdateBlacklistRequest
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -76,7 +79,7 @@ class ProjectsettingUpdateBlacklistRequest
     /**
      * @return ProjectsettingUpdateBlacklistRequestBody
      */
-    public function getBody() : ProjectsettingUpdateBlacklistRequestBody
+    public function getBody(): ProjectsettingUpdateBlacklistRequestBody
     {
         return $this->body;
     }
@@ -85,12 +88,12 @@ class ProjectsettingUpdateBlacklistRequest
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -103,7 +106,7 @@ class ProjectsettingUpdateBlacklistRequest
      * @param ProjectsettingUpdateBlacklistRequestBody $body
      * @return self
      */
-    public function withBody(ProjectsettingUpdateBlacklistRequestBody $body) : self
+    public function withBody(ProjectsettingUpdateBlacklistRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -117,11 +120,11 @@ class ProjectsettingUpdateBlacklistRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectsettingUpdateBlacklistRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectsettingUpdateBlacklistRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectsettingUpdateBlacklistRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -139,7 +142,7 @@ class ProjectsettingUpdateBlacklistRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectId'] = $this->projectId;
@@ -154,19 +157,19 @@ class ProjectsettingUpdateBlacklistRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -177,30 +180,29 @@ class ProjectsettingUpdateBlacklistRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/mailsettings/blacklist';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

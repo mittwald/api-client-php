@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class DeleteUser409ResponseBody
 {
     /**
@@ -59,7 +63,7 @@ class DeleteUser409ResponseBody
      */
     private DeleteUser409ResponseBodyName $name;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $message
@@ -74,7 +78,7 @@ class DeleteUser409ResponseBody
     /**
      * @return DeleteUser409ResponseBodyInfo|null
      */
-    public function getInfo() : ?DeleteUser409ResponseBodyInfo
+    public function getInfo(): ?DeleteUser409ResponseBodyInfo
     {
         return $this->info ?? null;
     }
@@ -82,7 +86,7 @@ class DeleteUser409ResponseBody
     /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -90,7 +94,7 @@ class DeleteUser409ResponseBody
     /**
      * @return DeleteUser409ResponseBodyName
      */
-    public function getName() : DeleteUser409ResponseBodyName
+    public function getName(): DeleteUser409ResponseBodyName
     {
         return $this->name;
     }
@@ -99,7 +103,7 @@ class DeleteUser409ResponseBody
      * @param DeleteUser409ResponseBodyInfo $info
      * @return self
      */
-    public function withInfo(DeleteUser409ResponseBodyInfo $info) : self
+    public function withInfo(DeleteUser409ResponseBodyInfo $info): self
     {
         $clone = clone $this;
         $clone->info = $info;
@@ -110,7 +114,7 @@ class DeleteUser409ResponseBody
     /**
      * @return self
      */
-    public function withoutInfo() : self
+    public function withoutInfo(): self
     {
         $clone = clone $this;
         unset($clone->info);
@@ -122,12 +126,12 @@ class DeleteUser409ResponseBody
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -140,7 +144,7 @@ class DeleteUser409ResponseBody
      * @param DeleteUser409ResponseBodyName $name
      * @return self
      */
-    public function withName(DeleteUser409ResponseBodyName $name) : self
+    public function withName(DeleteUser409ResponseBodyName $name): self
     {
         $clone = clone $this;
         $clone->name = $name;
@@ -154,11 +158,11 @@ class DeleteUser409ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeleteUser409ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeleteUser409ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeleteUser409ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -180,7 +184,7 @@ class DeleteUser409ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->info)) {
@@ -198,19 +202,19 @@ class DeleteUser409ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -223,7 +227,7 @@ class DeleteUser409ResponseBody
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -231,4 +235,3 @@ class DeleteUser409ResponseBody
         return $response;
     }
 }
-

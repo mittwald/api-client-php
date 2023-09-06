@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest;
+
 class CreateCronjobRequest
 {
     public const method = 'post';
@@ -36,19 +40,19 @@ class CreateCronjobRequest
     private string $projectId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest
+     * @var CronjobRequest
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest $body;
+    private CronjobRequest $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
      * @param string $projectId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest $body
+     * @param CronjobRequest $body
      */
-    public function __construct(string $projectId, \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest $body)
+    public function __construct(string $projectId, CronjobRequest $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
@@ -57,15 +61,15 @@ class CreateCronjobRequest
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest
+     * @return CronjobRequest
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest
+    public function getBody(): CronjobRequest
     {
         return $this->body;
     }
@@ -74,12 +78,12 @@ class CreateCronjobRequest
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -89,10 +93,10 @@ class CreateCronjobRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest $body
+     * @param CronjobRequest $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest $body) : self
+    public function withBody(CronjobRequest $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -106,17 +110,17 @@ class CreateCronjobRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateCronjobRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateCronjobRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateCronjobRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $projectId = $input->{'projectId'};
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobRequest::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CronjobRequest::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($projectId, $body);
 
@@ -128,7 +132,7 @@ class CreateCronjobRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectId'] = $this->projectId;
@@ -143,19 +147,19 @@ class CreateCronjobRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -165,30 +169,29 @@ class CreateCronjobRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/cronjobs';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

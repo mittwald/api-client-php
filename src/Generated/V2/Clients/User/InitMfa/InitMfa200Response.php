@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class InitMfa200Response
 {
     /**
@@ -46,7 +50,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      */
     private InitMfa200ResponseBody $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param InitMfa200ResponseBody $body
@@ -59,7 +63,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     /**
      * @return InitMfa200ResponseBody
      */
-    public function getBody() : InitMfa200ResponseBody
+    public function getBody(): InitMfa200ResponseBody
     {
         return $this->body;
     }
@@ -68,7 +72,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param InitMfa200ResponseBody $body
      * @return self
      */
-    public function withBody(InitMfa200ResponseBody $body) : self
+    public function withBody(InitMfa200ResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -82,11 +86,11 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InitMfa200Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InitMfa200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): InitMfa200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -103,7 +107,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -117,19 +121,19 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -140,7 +144,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
         $this->body = clone $this->body;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -148,4 +152,3 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
         return $response;
     }
 }
-

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\Register;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class Register201ResponseBody
 {
     /**
@@ -29,7 +33,7 @@ class Register201ResponseBody
      */
     private string $userId;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $userId
@@ -42,7 +46,7 @@ class Register201ResponseBody
     /**
      * @return string
      */
-    public function getUserId() : string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -51,12 +55,12 @@ class Register201ResponseBody
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -71,11 +75,11 @@ class Register201ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Register201ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Register201ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): Register201ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -92,7 +96,7 @@ class Register201ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['userId'] = $this->userId;
@@ -106,19 +110,19 @@ class Register201ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -128,7 +132,7 @@ class Register201ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -136,4 +140,3 @@ class Register201ResponseBody
         return $response;
     }
 }
-

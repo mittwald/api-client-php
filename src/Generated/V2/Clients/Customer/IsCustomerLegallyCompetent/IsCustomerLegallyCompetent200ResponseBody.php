@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class IsCustomerLegallyCompetent200ResponseBody
 {
     /**
@@ -25,7 +29,7 @@ class IsCustomerLegallyCompetent200ResponseBody
      */
     private ?bool $isLegallyCompetent = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -37,7 +41,7 @@ class IsCustomerLegallyCompetent200ResponseBody
     /**
      * @return bool|null
      */
-    public function getIsLegallyCompetent() : ?bool
+    public function getIsLegallyCompetent(): ?bool
     {
         return $this->isLegallyCompetent ?? null;
     }
@@ -46,12 +50,12 @@ class IsCustomerLegallyCompetent200ResponseBody
      * @param bool $isLegallyCompetent
      * @return self
      */
-    public function withIsLegallyCompetent(bool $isLegallyCompetent) : self
+    public function withIsLegallyCompetent(bool $isLegallyCompetent): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isLegallyCompetent, static::$schema['properties']['isLegallyCompetent']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -63,7 +67,7 @@ class IsCustomerLegallyCompetent200ResponseBody
     /**
      * @return self
      */
-    public function withoutIsLegallyCompetent() : self
+    public function withoutIsLegallyCompetent(): self
     {
         $clone = clone $this;
         unset($clone->isLegallyCompetent);
@@ -77,11 +81,11 @@ class IsCustomerLegallyCompetent200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return IsCustomerLegallyCompetent200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : IsCustomerLegallyCompetent200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): IsCustomerLegallyCompetent200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -101,7 +105,7 @@ class IsCustomerLegallyCompetent200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->isLegallyCompetent)) {
@@ -117,19 +121,19 @@ class IsCustomerLegallyCompetent200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -139,7 +143,7 @@ class IsCustomerLegallyCompetent200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -147,4 +151,3 @@ class IsCustomerLegallyCompetent200ResponseBody
         return $response;
     }
 }
-

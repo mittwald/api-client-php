@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Varnish;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ConfigTemplate
 {
     /**
@@ -81,9 +85,9 @@ class ConfigTemplate
     private string $softwareTemplateId;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $updatedAt = null;
+    private ?DateTime $updatedAt = null;
 
     /**
      * @param ConfigFileRef[] $files
@@ -100,7 +104,7 @@ class ConfigTemplate
     /**
      * @return ConfigFileRef[]
      */
-    public function getFiles() : array
+    public function getFiles(): array
     {
         return $this->files;
     }
@@ -108,7 +112,7 @@ class ConfigTemplate
     /**
      * @return bool|null
      */
-    public function getIsGlobal() : ?bool
+    public function getIsGlobal(): ?bool
     {
         return $this->isGlobal ?? null;
     }
@@ -116,7 +120,7 @@ class ConfigTemplate
     /**
      * @return string|null
      */
-    public function getNote() : ?string
+    public function getNote(): ?string
     {
         return $this->note ?? null;
     }
@@ -124,7 +128,7 @@ class ConfigTemplate
     /**
      * @return string|null
      */
-    public function getProjectId() : ?string
+    public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
@@ -132,7 +136,7 @@ class ConfigTemplate
     /**
      * @return string
      */
-    public function getSoftwareConfigTemplateId() : string
+    public function getSoftwareConfigTemplateId(): string
     {
         return $this->softwareConfigTemplateId;
     }
@@ -140,15 +144,15 @@ class ConfigTemplate
     /**
      * @return string
      */
-    public function getSoftwareTemplateId() : string
+    public function getSoftwareTemplateId(): string
     {
         return $this->softwareTemplateId;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUpdatedAt() : ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt ?? null;
     }
@@ -157,7 +161,7 @@ class ConfigTemplate
      * @param ConfigFileRef[] $files
      * @return self
      */
-    public function withFiles(array $files) : self
+    public function withFiles(array $files): self
     {
         $clone = clone $this;
         $clone->files = $files;
@@ -169,12 +173,12 @@ class ConfigTemplate
      * @param bool $isGlobal
      * @return self
      */
-    public function withIsGlobal(bool $isGlobal) : self
+    public function withIsGlobal(bool $isGlobal): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isGlobal, static::$schema['properties']['isGlobal']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -186,7 +190,7 @@ class ConfigTemplate
     /**
      * @return self
      */
-    public function withoutIsGlobal() : self
+    public function withoutIsGlobal(): self
     {
         $clone = clone $this;
         unset($clone->isGlobal);
@@ -198,12 +202,12 @@ class ConfigTemplate
      * @param string $note
      * @return self
      */
-    public function withNote(string $note) : self
+    public function withNote(string $note): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($note, static::$schema['properties']['note']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -215,7 +219,7 @@ class ConfigTemplate
     /**
      * @return self
      */
-    public function withoutNote() : self
+    public function withoutNote(): self
     {
         $clone = clone $this;
         unset($clone->note);
@@ -227,12 +231,12 @@ class ConfigTemplate
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -244,7 +248,7 @@ class ConfigTemplate
     /**
      * @return self
      */
-    public function withoutProjectId() : self
+    public function withoutProjectId(): self
     {
         $clone = clone $this;
         unset($clone->projectId);
@@ -256,12 +260,12 @@ class ConfigTemplate
      * @param string $softwareConfigTemplateId
      * @return self
      */
-    public function withSoftwareConfigTemplateId(string $softwareConfigTemplateId) : self
+    public function withSoftwareConfigTemplateId(string $softwareConfigTemplateId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($softwareConfigTemplateId, static::$schema['properties']['softwareConfigTemplateId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -274,12 +278,12 @@ class ConfigTemplate
      * @param string $softwareTemplateId
      * @return self
      */
-    public function withSoftwareTemplateId(string $softwareTemplateId) : self
+    public function withSoftwareTemplateId(string $softwareTemplateId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($softwareTemplateId, static::$schema['properties']['softwareTemplateId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -289,10 +293,10 @@ class ConfigTemplate
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -303,7 +307,7 @@ class ConfigTemplate
     /**
      * @return self
      */
-    public function withoutUpdatedAt() : self
+    public function withoutUpdatedAt(): self
     {
         $clone = clone $this;
         unset($clone->updatedAt);
@@ -317,16 +321,16 @@ class ConfigTemplate
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ConfigTemplate Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ConfigTemplate
+    public static function buildFromInput(array|object $input, bool $validate = true): ConfigTemplate
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $files = array_map(fn(array $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
+        $files = array_map(fn (array $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
         $isGlobal = null;
         if (isset($input->{'isGlobal'})) {
             $isGlobal = (bool)($input->{'isGlobal'});
@@ -343,7 +347,7 @@ class ConfigTemplate
         $softwareTemplateId = $input->{'softwareTemplateId'};
         $updatedAt = null;
         if (isset($input->{'updatedAt'})) {
-            $updatedAt = new \DateTime($input->{'updatedAt'});
+            $updatedAt = new DateTime($input->{'updatedAt'});
         }
 
         $obj = new self($files, $softwareConfigTemplateId, $softwareTemplateId);
@@ -359,10 +363,10 @@ class ConfigTemplate
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['files'] = array_map(fn(ConfigFileRef $i): array => $i->toJson(), $this->files);
+        $output['files'] = array_map(fn (ConfigFileRef $i): array => $i->toJson(), $this->files);
         if (isset($this->isGlobal)) {
             $output['isGlobal'] = $this->isGlobal;
         }
@@ -375,7 +379,7 @@ class ConfigTemplate
         $output['softwareConfigTemplateId'] = $this->softwareConfigTemplateId;
         $output['softwareTemplateId'] = $this->softwareTemplateId;
         if (isset($this->updatedAt)) {
-            $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+            $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         }
 
         return $output;
@@ -387,19 +391,19 @@ class ConfigTemplate
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -412,4 +416,3 @@ class ConfigTemplate
         }
     }
 }
-

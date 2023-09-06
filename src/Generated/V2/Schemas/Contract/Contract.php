@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Contract
 {
     /**
@@ -121,7 +124,7 @@ class Contract
     /**
      * @return ContractItem[]|null
      */
-    public function getAdditionalItems() : ?array
+    public function getAdditionalItems(): ?array
     {
         return $this->additionalItems ?? null;
     }
@@ -129,7 +132,7 @@ class Contract
     /**
      * @return ContractItem
      */
-    public function getBaseItem() : ContractItem
+    public function getBaseItem(): ContractItem
     {
         return $this->baseItem;
     }
@@ -137,7 +140,7 @@ class Contract
     /**
      * @return string
      */
-    public function getContractId() : string
+    public function getContractId(): string
     {
         return $this->contractId;
     }
@@ -145,7 +148,7 @@ class Contract
     /**
      * @return string
      */
-    public function getContractNumber() : string
+    public function getContractNumber(): string
     {
         return $this->contractNumber;
     }
@@ -153,7 +156,7 @@ class Contract
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -161,7 +164,7 @@ class Contract
     /**
      * @return bool|null
      */
-    public function getIsInvoicingDeactivated() : ?bool
+    public function getIsInvoicingDeactivated(): ?bool
     {
         return $this->isInvoicingDeactivated ?? null;
     }
@@ -169,7 +172,7 @@ class Contract
     /**
      * @return bool|null
      */
-    public function getIsInvoicingPaused() : ?bool
+    public function getIsInvoicingPaused(): ?bool
     {
         return $this->isInvoicingPaused ?? null;
     }
@@ -177,7 +180,7 @@ class Contract
     /**
      * @return Contact
      */
-    public function getOwner() : Contact
+    public function getOwner(): Contact
     {
         return $this->owner;
     }
@@ -185,7 +188,7 @@ class Contract
     /**
      * @return Termination|null
      */
-    public function getTermination() : ?Termination
+    public function getTermination(): ?Termination
     {
         return $this->termination ?? null;
     }
@@ -194,7 +197,7 @@ class Contract
      * @param ContractItem[] $additionalItems
      * @return self
      */
-    public function withAdditionalItems(array $additionalItems) : self
+    public function withAdditionalItems(array $additionalItems): self
     {
         $clone = clone $this;
         $clone->additionalItems = $additionalItems;
@@ -205,7 +208,7 @@ class Contract
     /**
      * @return self
      */
-    public function withoutAdditionalItems() : self
+    public function withoutAdditionalItems(): self
     {
         $clone = clone $this;
         unset($clone->additionalItems);
@@ -217,7 +220,7 @@ class Contract
      * @param ContractItem $baseItem
      * @return self
      */
-    public function withBaseItem(ContractItem $baseItem) : self
+    public function withBaseItem(ContractItem $baseItem): self
     {
         $clone = clone $this;
         $clone->baseItem = $baseItem;
@@ -229,12 +232,12 @@ class Contract
      * @param string $contractId
      * @return self
      */
-    public function withContractId(string $contractId) : self
+    public function withContractId(string $contractId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractId, static::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -247,12 +250,12 @@ class Contract
      * @param string $contractNumber
      * @return self
      */
-    public function withContractNumber(string $contractNumber) : self
+    public function withContractNumber(string $contractNumber): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractNumber, static::$schema['properties']['contractNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -265,12 +268,12 @@ class Contract
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -283,12 +286,12 @@ class Contract
      * @param bool $isInvoicingDeactivated
      * @return self
      */
-    public function withIsInvoicingDeactivated(bool $isInvoicingDeactivated) : self
+    public function withIsInvoicingDeactivated(bool $isInvoicingDeactivated): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInvoicingDeactivated, static::$schema['properties']['isInvoicingDeactivated']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -300,7 +303,7 @@ class Contract
     /**
      * @return self
      */
-    public function withoutIsInvoicingDeactivated() : self
+    public function withoutIsInvoicingDeactivated(): self
     {
         $clone = clone $this;
         unset($clone->isInvoicingDeactivated);
@@ -312,12 +315,12 @@ class Contract
      * @param bool $isInvoicingPaused
      * @return self
      */
-    public function withIsInvoicingPaused(bool $isInvoicingPaused) : self
+    public function withIsInvoicingPaused(bool $isInvoicingPaused): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInvoicingPaused, static::$schema['properties']['isInvoicingPaused']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -329,7 +332,7 @@ class Contract
     /**
      * @return self
      */
-    public function withoutIsInvoicingPaused() : self
+    public function withoutIsInvoicingPaused(): self
     {
         $clone = clone $this;
         unset($clone->isInvoicingPaused);
@@ -341,7 +344,7 @@ class Contract
      * @param Contact $owner
      * @return self
      */
-    public function withOwner(Contact $owner) : self
+    public function withOwner(Contact $owner): self
     {
         $clone = clone $this;
         $clone->owner = $owner;
@@ -353,7 +356,7 @@ class Contract
      * @param Termination $termination
      * @return self
      */
-    public function withTermination(Termination $termination) : self
+    public function withTermination(Termination $termination): self
     {
         $clone = clone $this;
         $clone->termination = $termination;
@@ -364,7 +367,7 @@ class Contract
     /**
      * @return self
      */
-    public function withoutTermination() : self
+    public function withoutTermination(): self
     {
         $clone = clone $this;
         unset($clone->termination);
@@ -378,18 +381,18 @@ class Contract
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Contract Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Contract
+    public static function buildFromInput(array|object $input, bool $validate = true): Contract
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $additionalItems = null;
         if (isset($input->{'additionalItems'})) {
-            $additionalItems = array_map(fn(array $i): ContractItem => ContractItem::buildFromInput($i, validate: $validate), $input->{'additionalItems'});
+            $additionalItems = array_map(fn (array $i): ContractItem => ContractItem::buildFromInput($i, validate: $validate), $input->{'additionalItems'});
         }
         $baseItem = ContractItem::buildFromInput($input->{'baseItem'}, validate: $validate);
         $contractId = $input->{'contractId'};
@@ -422,11 +425,11 @@ class Contract
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->additionalItems)) {
-            $output['additionalItems'] = array_map(fn(ContractItem $i): array => $i->toJson(), $this->additionalItems);
+            $output['additionalItems'] = array_map(fn (ContractItem $i): array => $i->toJson(), $this->additionalItems);
         }
         $output['baseItem'] = $this->baseItem->toJson();
         $output['contractId'] = $this->contractId;
@@ -452,19 +455,19 @@ class Contract
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -474,4 +477,3 @@ class Contract
     {
     }
 }
-

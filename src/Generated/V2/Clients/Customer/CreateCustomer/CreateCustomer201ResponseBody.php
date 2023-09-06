@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class CreateCustomer201ResponseBody
 {
     /**
@@ -46,7 +50,7 @@ class CreateCustomer201ResponseBody
      */
     private string $name;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $customerId
@@ -63,7 +67,7 @@ class CreateCustomer201ResponseBody
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -71,7 +75,7 @@ class CreateCustomer201ResponseBody
     /**
      * @return string
      */
-    public function getCustomerNumber() : string
+    public function getCustomerNumber(): string
     {
         return $this->customerNumber;
     }
@@ -79,7 +83,7 @@ class CreateCustomer201ResponseBody
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -88,12 +92,12 @@ class CreateCustomer201ResponseBody
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -106,12 +110,12 @@ class CreateCustomer201ResponseBody
      * @param string $customerNumber
      * @return self
      */
-    public function withCustomerNumber(string $customerNumber) : self
+    public function withCustomerNumber(string $customerNumber): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerNumber, static::$schema['properties']['customerNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -124,12 +128,12 @@ class CreateCustomer201ResponseBody
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -144,11 +148,11 @@ class CreateCustomer201ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateCustomer201ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateCustomer201ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateCustomer201ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -167,7 +171,7 @@ class CreateCustomer201ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['customerId'] = $this->customerId;
@@ -183,19 +187,19 @@ class CreateCustomer201ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -205,7 +209,7 @@ class CreateCustomer201ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -213,4 +217,3 @@ class CreateCustomer201ResponseBody
         return $response;
     }
 }
-

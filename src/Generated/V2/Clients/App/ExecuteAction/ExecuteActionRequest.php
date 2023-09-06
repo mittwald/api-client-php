@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\Action;
+
 class ExecuteActionRequest
 {
     public const method = 'post';
@@ -39,9 +43,9 @@ class ExecuteActionRequest
     private string $appInstallationId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\Action
+     * @var Action
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action;
+    private Action $action;
 
     /**
      * @var ExecuteActionRequestBody
@@ -49,15 +53,15 @@ class ExecuteActionRequest
     private ExecuteActionRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
      * @param string $appInstallationId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action
+     * @param Action $action
      * @param ExecuteActionRequestBody $body
      */
-    public function __construct(string $appInstallationId, \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action, ExecuteActionRequestBody $body)
+    public function __construct(string $appInstallationId, Action $action, ExecuteActionRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
         $this->action = $action;
@@ -67,15 +71,15 @@ class ExecuteActionRequest
     /**
      * @return string
      */
-    public function getAppInstallationId() : string
+    public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\Action
+     * @return Action
      */
-    public function getAction() : \Mittwald\ApiClient\Generated\V2\Schemas\App\Action
+    public function getAction(): Action
     {
         return $this->action;
     }
@@ -83,7 +87,7 @@ class ExecuteActionRequest
     /**
      * @return ExecuteActionRequestBody
      */
-    public function getBody() : ExecuteActionRequestBody
+    public function getBody(): ExecuteActionRequestBody
     {
         return $this->body;
     }
@@ -92,12 +96,12 @@ class ExecuteActionRequest
      * @param string $appInstallationId
      * @return self
      */
-    public function withAppInstallationId(string $appInstallationId) : self
+    public function withAppInstallationId(string $appInstallationId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appInstallationId, static::$schema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,10 +111,10 @@ class ExecuteActionRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action
+     * @param Action $action
      * @return self
      */
-    public function withAction(\Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action) : self
+    public function withAction(Action $action): self
     {
         $clone = clone $this;
         $clone->action = $action;
@@ -122,7 +126,7 @@ class ExecuteActionRequest
      * @param ExecuteActionRequestBody $body
      * @return self
      */
-    public function withBody(ExecuteActionRequestBody $body) : self
+    public function withBody(ExecuteActionRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -136,17 +140,17 @@ class ExecuteActionRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ExecuteActionRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ExecuteActionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExecuteActionRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $appInstallationId = $input->{'appInstallationId'};
-        $action = \Mittwald\ApiClient\Generated\V2\Schemas\App\Action::from($input->{'action'});
+        $action = Action::from($input->{'action'});
         $body = ExecuteActionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($appInstallationId, $action, $body);
@@ -159,7 +163,7 @@ class ExecuteActionRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['appInstallationId'] = $this->appInstallationId;
@@ -175,19 +179,19 @@ class ExecuteActionRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -198,7 +202,7 @@ class ExecuteActionRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
@@ -206,23 +210,22 @@ class ExecuteActionRequest
         return '/v2/appinstallations/' . $appInstallationId . '/actions/' . $action;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

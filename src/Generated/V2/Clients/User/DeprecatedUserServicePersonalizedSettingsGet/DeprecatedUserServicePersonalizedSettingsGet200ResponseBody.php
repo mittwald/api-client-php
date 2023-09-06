@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsGet;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
 {
     /**
@@ -25,7 +29,7 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
      */
     private ?string $settingsString = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -37,7 +41,7 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
     /**
      * @return string|null
      */
-    public function getSettingsString() : ?string
+    public function getSettingsString(): ?string
     {
         return $this->settingsString ?? null;
     }
@@ -46,12 +50,12 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
      * @param string $settingsString
      * @return self
      */
-    public function withSettingsString(string $settingsString) : self
+    public function withSettingsString(string $settingsString): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($settingsString, static::$schema['properties']['settingsString']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -63,7 +67,7 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
     /**
      * @return self
      */
-    public function withoutSettingsString() : self
+    public function withoutSettingsString(): self
     {
         $clone = clone $this;
         unset($clone->settingsString);
@@ -77,11 +81,11 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserServicePersonalizedSettingsGet200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -101,7 +105,7 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->settingsString)) {
@@ -117,19 +121,19 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -139,7 +143,7 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -147,4 +151,3 @@ class DeprecatedUserServicePersonalizedSettingsGet200ResponseBody
         return $response;
     }
 }
-

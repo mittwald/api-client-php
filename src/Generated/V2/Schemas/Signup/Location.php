@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Location
 {
     /**
@@ -54,7 +57,7 @@ class Location
     /**
      * @return string|null
      */
-    public function getCity() : ?string
+    public function getCity(): ?string
     {
         return $this->city ?? null;
     }
@@ -62,7 +65,7 @@ class Location
     /**
      * @return string|null
      */
-    public function getCountry() : ?string
+    public function getCountry(): ?string
     {
         return $this->country ?? null;
     }
@@ -70,7 +73,7 @@ class Location
     /**
      * @return string|null
      */
-    public function getIpAddress() : ?string
+    public function getIpAddress(): ?string
     {
         return $this->ipAddress ?? null;
     }
@@ -79,12 +82,12 @@ class Location
      * @param string $city
      * @return self
      */
-    public function withCity(string $city) : self
+    public function withCity(string $city): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($city, static::$schema['properties']['city']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -96,7 +99,7 @@ class Location
     /**
      * @return self
      */
-    public function withoutCity() : self
+    public function withoutCity(): self
     {
         $clone = clone $this;
         unset($clone->city);
@@ -108,12 +111,12 @@ class Location
      * @param string $country
      * @return self
      */
-    public function withCountry(string $country) : self
+    public function withCountry(string $country): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($country, static::$schema['properties']['country']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,7 +128,7 @@ class Location
     /**
      * @return self
      */
-    public function withoutCountry() : self
+    public function withoutCountry(): self
     {
         $clone = clone $this;
         unset($clone->country);
@@ -137,12 +140,12 @@ class Location
      * @param string $ipAddress
      * @return self
      */
-    public function withIpAddress(string $ipAddress) : self
+    public function withIpAddress(string $ipAddress): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($ipAddress, static::$schema['properties']['ipAddress']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -154,7 +157,7 @@ class Location
     /**
      * @return self
      */
-    public function withoutIpAddress() : self
+    public function withoutIpAddress(): self
     {
         $clone = clone $this;
         unset($clone->ipAddress);
@@ -168,11 +171,11 @@ class Location
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Location Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Location
+    public static function buildFromInput(array|object $input, bool $validate = true): Location
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -202,7 +205,7 @@ class Location
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->city)) {
@@ -224,19 +227,19 @@ class Location
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -246,4 +249,3 @@ class Location
     {
     }
 }
-

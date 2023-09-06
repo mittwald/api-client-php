@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Commons;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ValidationErrors
 {
     /**
@@ -65,7 +68,7 @@ class ValidationErrors
     /**
      * @return ValidationErrorsType
      */
-    public function getType() : ValidationErrorsType
+    public function getType(): ValidationErrorsType
     {
         return $this->type;
     }
@@ -73,7 +76,7 @@ class ValidationErrors
     /**
      * @return string|null
      */
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
@@ -81,7 +84,7 @@ class ValidationErrors
     /**
      * @return ValidationErrorSchema[]
      */
-    public function getValidationErrors() : array
+    public function getValidationErrors(): array
     {
         return $this->validationErrors;
     }
@@ -90,7 +93,7 @@ class ValidationErrors
      * @param ValidationErrorsType $type
      * @return self
      */
-    public function withType(ValidationErrorsType $type) : self
+    public function withType(ValidationErrorsType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
@@ -102,12 +105,12 @@ class ValidationErrors
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -119,7 +122,7 @@ class ValidationErrors
     /**
      * @return self
      */
-    public function withoutMessage() : self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
         unset($clone->message);
@@ -131,7 +134,7 @@ class ValidationErrors
      * @param ValidationErrorSchema[] $validationErrors
      * @return self
      */
-    public function withValidationErrors(array $validationErrors) : self
+    public function withValidationErrors(array $validationErrors): self
     {
         $clone = clone $this;
         $clone->validationErrors = $validationErrors;
@@ -145,11 +148,11 @@ class ValidationErrors
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ValidationErrors Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ValidationErrors
+    public static function buildFromInput(array|object $input, bool $validate = true): ValidationErrors
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -159,7 +162,7 @@ class ValidationErrors
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
-        $validationErrors = array_map(fn(array $i): ValidationErrorSchema => ValidationErrorSchema::buildFromInput($i, validate: $validate), $input->{'validationErrors'});
+        $validationErrors = array_map(fn (array $i): ValidationErrorSchema => ValidationErrorSchema::buildFromInput($i, validate: $validate), $input->{'validationErrors'});
 
         $obj = new self($type, $validationErrors);
         $obj->message = $message;
@@ -171,14 +174,14 @@ class ValidationErrors
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['type'] = ($this->type)->value;
         if (isset($this->message)) {
             $output['message'] = $this->message;
         }
-        $output['validationErrors'] = array_map(fn(ValidationErrorSchema $i): array => $i->toJson(), $this->validationErrors);
+        $output['validationErrors'] = array_map(fn (ValidationErrorSchema $i): array => $i->toJson(), $this->validationErrors);
 
         return $output;
     }
@@ -189,19 +192,19 @@ class ValidationErrors
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -211,4 +214,3 @@ class ValidationErrors
     {
     }
 }
-

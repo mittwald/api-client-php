@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngress;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class DnsRecordASetManagedByIngressRequest
 {
     public const method = 'post';
@@ -23,7 +26,7 @@ class DnsRecordASetManagedByIngressRequest
             'body' => [
                 'additionalProperties' => false,
                 'properties' => [
-                    
+
                 ],
                 'type' => 'object',
             ],
@@ -45,7 +48,7 @@ class DnsRecordASetManagedByIngressRequest
     private DnsRecordASetManagedByIngressRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -61,7 +64,7 @@ class DnsRecordASetManagedByIngressRequest
     /**
      * @return string
      */
-    public function getZoneId() : string
+    public function getZoneId(): string
     {
         return $this->zoneId;
     }
@@ -69,7 +72,7 @@ class DnsRecordASetManagedByIngressRequest
     /**
      * @return DnsRecordASetManagedByIngressRequestBody
      */
-    public function getBody() : DnsRecordASetManagedByIngressRequestBody
+    public function getBody(): DnsRecordASetManagedByIngressRequestBody
     {
         return $this->body;
     }
@@ -78,12 +81,12 @@ class DnsRecordASetManagedByIngressRequest
      * @param string $zoneId
      * @return self
      */
-    public function withZoneId(string $zoneId) : self
+    public function withZoneId(string $zoneId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($zoneId, static::$schema['properties']['zoneId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -96,7 +99,7 @@ class DnsRecordASetManagedByIngressRequest
      * @param DnsRecordASetManagedByIngressRequestBody $body
      * @return self
      */
-    public function withBody(DnsRecordASetManagedByIngressRequestBody $body) : self
+    public function withBody(DnsRecordASetManagedByIngressRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -110,11 +113,11 @@ class DnsRecordASetManagedByIngressRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DnsRecordASetManagedByIngressRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DnsRecordASetManagedByIngressRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsRecordASetManagedByIngressRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -132,7 +135,7 @@ class DnsRecordASetManagedByIngressRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['zoneId'] = $this->zoneId;
@@ -147,19 +150,19 @@ class DnsRecordASetManagedByIngressRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -170,30 +173,29 @@ class DnsRecordASetManagedByIngressRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $zoneId = urlencode($mapped['zoneId']);
         return '/v2/dns/zones/' . $zoneId . '/recordset/acombined/managed/ingress';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

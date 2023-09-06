@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Customer;
 
-enum CustomerVatIdValidationState: string {
+enum CustomerVatIdValidationState: string
+{
     case valid = 'valid';
     case invalid = 'invalid';
     case pending = 'pending';

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Varnish;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ConfigRevision
 {
     /**
@@ -63,16 +67,16 @@ class ConfigRevision
     private int $revision;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updated;
+    private DateTime $updated;
 
     /**
      * @param ConfigFileRef[] $files
      * @param int $revision
-     * @param \DateTime $updated
+     * @param DateTime $updated
      */
-    public function __construct(array $files, int $revision, \DateTime $updated)
+    public function __construct(array $files, int $revision, DateTime $updated)
     {
         $this->files = $files;
         $this->revision = $revision;
@@ -82,7 +86,7 @@ class ConfigRevision
     /**
      * @return int|null
      */
-    public function getExpire() : ?int
+    public function getExpire(): ?int
     {
         return $this->expire ?? null;
     }
@@ -90,7 +94,7 @@ class ConfigRevision
     /**
      * @return ConfigFileRef[]
      */
-    public function getFiles() : array
+    public function getFiles(): array
     {
         return $this->files;
     }
@@ -98,7 +102,7 @@ class ConfigRevision
     /**
      * @return string|null
      */
-    public function getNote() : ?string
+    public function getNote(): ?string
     {
         return $this->note ?? null;
     }
@@ -106,15 +110,15 @@ class ConfigRevision
     /**
      * @return int
      */
-    public function getRevision() : int
+    public function getRevision(): int
     {
         return $this->revision;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdated() : \DateTime
+    public function getUpdated(): DateTime
     {
         return $this->updated;
     }
@@ -123,12 +127,12 @@ class ConfigRevision
      * @param int $expire
      * @return self
      */
-    public function withExpire(int $expire) : self
+    public function withExpire(int $expire): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($expire, static::$schema['properties']['expire']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -140,7 +144,7 @@ class ConfigRevision
     /**
      * @return self
      */
-    public function withoutExpire() : self
+    public function withoutExpire(): self
     {
         $clone = clone $this;
         unset($clone->expire);
@@ -152,7 +156,7 @@ class ConfigRevision
      * @param ConfigFileRef[] $files
      * @return self
      */
-    public function withFiles(array $files) : self
+    public function withFiles(array $files): self
     {
         $clone = clone $this;
         $clone->files = $files;
@@ -164,12 +168,12 @@ class ConfigRevision
      * @param string $note
      * @return self
      */
-    public function withNote(string $note) : self
+    public function withNote(string $note): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($note, static::$schema['properties']['note']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -181,7 +185,7 @@ class ConfigRevision
     /**
      * @return self
      */
-    public function withoutNote() : self
+    public function withoutNote(): self
     {
         $clone = clone $this;
         unset($clone->note);
@@ -193,12 +197,12 @@ class ConfigRevision
      * @param int $revision
      * @return self
      */
-    public function withRevision(int $revision) : self
+    public function withRevision(int $revision): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($revision, static::$schema['properties']['revision']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -208,10 +212,10 @@ class ConfigRevision
     }
 
     /**
-     * @param \DateTime $updated
+     * @param DateTime $updated
      * @return self
      */
-    public function withUpdated(\DateTime $updated) : self
+    public function withUpdated(DateTime $updated): self
     {
         $clone = clone $this;
         $clone->updated = $updated;
@@ -225,11 +229,11 @@ class ConfigRevision
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ConfigRevision Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ConfigRevision
+    public static function buildFromInput(array|object $input, bool $validate = true): ConfigRevision
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -238,13 +242,13 @@ class ConfigRevision
         if (isset($input->{'expire'})) {
             $expire = (int)($input->{'expire'});
         }
-        $files = array_map(fn(array $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
+        $files = array_map(fn (array $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
         $note = null;
         if (isset($input->{'note'})) {
             $note = $input->{'note'};
         }
         $revision = (int)($input->{'revision'});
-        $updated = new \DateTime($input->{'updated'});
+        $updated = new DateTime($input->{'updated'});
 
         $obj = new self($files, $revision, $updated);
         $obj->expire = $expire;
@@ -257,18 +261,18 @@ class ConfigRevision
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->expire)) {
             $output['expire'] = $this->expire;
         }
-        $output['files'] = array_map(fn(ConfigFileRef $i): array => $i->toJson(), $this->files);
+        $output['files'] = array_map(fn (ConfigFileRef $i): array => $i->toJson(), $this->files);
         if (isset($this->note)) {
             $output['note'] = $this->note;
         }
         $output['revision'] = $this->revision;
-        $output['updated'] = ($this->updated)->format(\DateTime::ATOM);
+        $output['updated'] = ($this->updated)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -279,19 +283,19 @@ class ConfigRevision
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -302,4 +306,3 @@ class ConfigRevision
         $this->updated = clone $this->updated;
     }
 }
-

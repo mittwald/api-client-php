@@ -2,277 +2,307 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxCreate\DeliveryboxCreate201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxCreate\DeliveryboxCreateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxDelete\DeliveryboxDeleteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxGetSpecific\DeliveryboxGetSpecific200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxGetSpecific\DeliveryboxGetSpecificRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxList\DeliveryboxList200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxList\DeliveryboxListRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdateDescription\DeliveryboxUpdateDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdatePassword\DeliveryboxUpdatePasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressCreate\MailaddressCreate201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressCreate\MailaddressCreate400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressCreate\MailaddressCreateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressDelete\MailaddressDeleteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressGetSpecific\MailaddressGetSpecific200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressGetSpecific\MailaddressGetSpecificRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressList\MailaddressList200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressList\MailaddressListRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddress\MailaddressUpdateAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAutoresponder\MailaddressUpdateAutoresponderRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateCatchall\MailaddressUpdateCatchall400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateCatchall\MailaddressUpdateCatchallRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateForwardaddresses\MailaddressUpdateForwardaddressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdatePassword\MailaddressUpdatePasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateQuota\MailaddressUpdateQuotaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateSpamprotection\MailaddressUpdateSpamprotectionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingGetSpecific\ProjectsettingGetSpecific200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingGetSpecific\ProjectsettingGetSpecificRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklist\ProjectsettingUpdateBlacklistRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelist\ProjectsettingUpdateWhitelistRequest;
 
 class MailClient
 {
-    private \GuzzleHttp\Client $client;
+    private Client $client;
 
-    public function __construct(\GuzzleHttp\Client $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function deliveryboxCreate(DeliveryboxCreate\DeliveryboxCreateRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxCreate\DeliveryboxCreate201Response
+    public function deliveryboxCreate(DeliveryboxCreateRequest $request): EmptyResponse|DeliveryboxCreate201Response
     {
-        $httpRequest = new Request(DeliveryboxCreate\DeliveryboxCreateRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeliveryboxCreateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => DeliveryboxCreate\DeliveryboxCreate201Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            201 => DeliveryboxCreate201Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function deliveryboxList(DeliveryboxList\DeliveryboxListRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxList\DeliveryboxList200Response
+    public function deliveryboxList(DeliveryboxListRequest $request): EmptyResponse|DeliveryboxList200Response
     {
-        $httpRequest = new Request(DeliveryboxList\DeliveryboxListRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeliveryboxListRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => DeliveryboxList\DeliveryboxList200Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200 => DeliveryboxList200Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function deliveryboxDelete(DeliveryboxDelete\DeliveryboxDeleteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function deliveryboxDelete(DeliveryboxDeleteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeliveryboxDelete\DeliveryboxDeleteRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeliveryboxDeleteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function deliveryboxGetSpecific(DeliveryboxGetSpecific\DeliveryboxGetSpecificRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxGetSpecific\DeliveryboxGetSpecific200Response
+    public function deliveryboxGetSpecific(DeliveryboxGetSpecificRequest $request): EmptyResponse|DeliveryboxGetSpecific200Response
     {
-        $httpRequest = new Request(DeliveryboxGetSpecific\DeliveryboxGetSpecificRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeliveryboxGetSpecificRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => DeliveryboxGetSpecific\DeliveryboxGetSpecific200Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200 => DeliveryboxGetSpecific200Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function deliveryboxUpdateDescription(DeliveryboxUpdateDescription\DeliveryboxUpdateDescriptionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function deliveryboxUpdateDescription(DeliveryboxUpdateDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeliveryboxUpdateDescription\DeliveryboxUpdateDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-        };
-    }
-
-    public function deliveryboxUpdatePassword(DeliveryboxUpdatePassword\DeliveryboxUpdatePasswordRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
-    {
-        $httpRequest = new Request(DeliveryboxUpdatePassword\DeliveryboxUpdatePasswordRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeliveryboxUpdateDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressCreate(MailaddressCreate\MailaddressCreateRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressCreate\MailaddressCreate201Response|MailaddressCreate\MailaddressCreate400Response
+    public function deliveryboxUpdatePassword(DeliveryboxUpdatePasswordRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(MailaddressCreate\MailaddressCreateRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeliveryboxUpdatePasswordRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => MailaddressCreate\MailaddressCreate201Response::fromResponse($httpResponse),
-            400 => MailaddressCreate\MailaddressCreate400Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressList(MailaddressList\MailaddressListRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressList\MailaddressList200Response
+    public function mailaddressCreate(MailaddressCreateRequest $request): EmptyResponse|MailaddressCreate201Response|MailaddressCreate400Response
     {
-        $httpRequest = new Request(MailaddressList\MailaddressListRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => MailaddressList\MailaddressList200Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-        };
-    }
-
-    public function mailaddressDelete(MailaddressDelete\MailaddressDeleteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
-    {
-        $httpRequest = new Request(MailaddressDelete\MailaddressDeleteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-        };
-    }
-
-    public function mailaddressGetSpecific(MailaddressGetSpecific\MailaddressGetSpecificRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressGetSpecific\MailaddressGetSpecific200Response
-    {
-        $httpRequest = new Request(MailaddressGetSpecific\MailaddressGetSpecificRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => MailaddressGetSpecific\MailaddressGetSpecific200Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-        };
-    }
-
-    public function mailaddressUpdateAddress(MailaddressUpdateAddress\MailaddressUpdateAddressRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
-    {
-        $httpRequest = new Request(MailaddressUpdateAddress\MailaddressUpdateAddressRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressCreateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            201 => MailaddressCreate201Response::fromResponse($httpResponse),
+            400 => MailaddressCreate400Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressUpdateAutoresponder(MailaddressUpdateAutoresponder\MailaddressUpdateAutoresponderRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressList(MailaddressListRequest $request): EmptyResponse|MailaddressList200Response
     {
-        $httpRequest = new Request(MailaddressUpdateAutoresponder\MailaddressUpdateAutoresponderRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressListRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => MailaddressList200Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        };
+    }
+
+    public function mailaddressDelete(MailaddressDeleteRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(MailaddressDeleteRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        };
+    }
+
+    public function mailaddressGetSpecific(MailaddressGetSpecificRequest $request): EmptyResponse|MailaddressGetSpecific200Response
+    {
+        $httpRequest = new Request(MailaddressGetSpecificRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => MailaddressGetSpecific200Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        };
+    }
+
+    public function mailaddressUpdateAddress(MailaddressUpdateAddressRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(MailaddressUpdateAddressRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressUpdateCatchall(MailaddressUpdateCatchall\MailaddressUpdateCatchallRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressUpdateCatchall\MailaddressUpdateCatchall400Response
+    public function mailaddressUpdateAutoresponder(MailaddressUpdateAutoresponderRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(MailaddressUpdateCatchall\MailaddressUpdateCatchallRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressUpdateAutoresponderRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => MailaddressUpdateCatchall\MailaddressUpdateCatchall400Response::fromResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressUpdateForwardaddresses(MailaddressUpdateForwardaddresses\MailaddressUpdateForwardaddressesRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateCatchall(MailaddressUpdateCatchallRequest $request): EmptyResponse|MailaddressUpdateCatchall400Response
     {
-        $httpRequest = new Request(MailaddressUpdateForwardaddresses\MailaddressUpdateForwardaddressesRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressUpdateCatchallRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
+            400 => MailaddressUpdateCatchall400Response::fromResponse($httpResponse),
         };
     }
 
-    public function mailaddressUpdatePassword(MailaddressUpdatePassword\MailaddressUpdatePasswordRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateForwardaddresses(MailaddressUpdateForwardaddressesRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(MailaddressUpdatePassword\MailaddressUpdatePasswordRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressUpdateForwardaddressesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressUpdateQuota(MailaddressUpdateQuota\MailaddressUpdateQuotaRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdatePassword(MailaddressUpdatePasswordRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(MailaddressUpdateQuota\MailaddressUpdateQuotaRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressUpdatePasswordRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function mailaddressUpdateSpamprotection(MailaddressUpdateSpamprotection\MailaddressUpdateSpamprotectionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateQuota(MailaddressUpdateQuotaRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(MailaddressUpdateSpamprotection\MailaddressUpdateSpamprotectionRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressUpdateQuotaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function projectsettingGetSpecific(ProjectsettingGetSpecific\ProjectsettingGetSpecificRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ProjectsettingGetSpecific\ProjectsettingGetSpecific200Response
+    public function mailaddressUpdateSpamprotection(MailaddressUpdateSpamprotectionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ProjectsettingGetSpecific\ProjectsettingGetSpecificRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ProjectsettingGetSpecific\ProjectsettingGetSpecific200Response::fromResponse($httpResponse),
-            403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-        };
-    }
-
-    public function projectsettingUpdateBlacklist(ProjectsettingUpdateBlacklist\ProjectsettingUpdateBlacklistRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
-    {
-        $httpRequest = new Request(ProjectsettingUpdateBlacklist\ProjectsettingUpdateBlacklistRequest::method, $request->getUrl());
+        $httpRequest = new Request(MailaddressUpdateSpamprotectionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 
-    public function projectsettingUpdateWhitelist(ProjectsettingUpdateWhitelist\ProjectsettingUpdateWhitelistRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function projectsettingGetSpecific(ProjectsettingGetSpecificRequest $request): EmptyResponse|ProjectsettingGetSpecific200Response
     {
-        $httpRequest = new Request(ProjectsettingUpdateWhitelist\ProjectsettingUpdateWhitelistRequest::method, $request->getUrl());
+        $httpRequest = new Request(ProjectsettingGetSpecificRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ProjectsettingGetSpecific200Response::fromResponse($httpResponse),
+            403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        };
+    }
+
+    public function projectsettingUpdateBlacklist(ProjectsettingUpdateBlacklistRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ProjectsettingUpdateBlacklistRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 403, 404, 500, 503 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        };
+    }
+
+    public function projectsettingUpdateWhitelist(ProjectsettingUpdateWhitelistRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ProjectsettingUpdateWhitelistRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
         };
     }
 }
-

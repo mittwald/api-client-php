@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class AppVersion
 {
     /**
@@ -144,7 +147,7 @@ class AppVersion
     /**
      * @return BreakingNote|null
      */
-    public function getBreakingNote() : ?BreakingNote
+    public function getBreakingNote(): ?BreakingNote
     {
         return $this->breakingNote ?? null;
     }
@@ -152,7 +155,7 @@ class AppVersion
     /**
      * @return DatabaseDependency[]|null
      */
-    public function getDatabases() : ?array
+    public function getDatabases(): ?array
     {
         return $this->databases ?? null;
     }
@@ -160,7 +163,7 @@ class AppVersion
     /**
      * @return string
      */
-    public function getDocRoot() : string
+    public function getDocRoot(): string
     {
         return $this->docRoot;
     }
@@ -168,7 +171,7 @@ class AppVersion
     /**
      * @return bool
      */
-    public function getDocRootUserEditable() : bool
+    public function getDocRootUserEditable(): bool
     {
         return $this->docRootUserEditable;
     }
@@ -176,7 +179,7 @@ class AppVersion
     /**
      * @return string
      */
-    public function getExternalVersion() : string
+    public function getExternalVersion(): string
     {
         return $this->externalVersion;
     }
@@ -184,7 +187,7 @@ class AppVersion
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -192,7 +195,7 @@ class AppVersion
     /**
      * @return string
      */
-    public function getInternalVersion() : string
+    public function getInternalVersion(): string
     {
         return $this->internalVersion;
     }
@@ -200,7 +203,7 @@ class AppVersion
     /**
      * @return bool|null
      */
-    public function getRecommended() : ?bool
+    public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
     }
@@ -209,7 +212,7 @@ class AppVersion
      * @return
      * RequestHandlerRequirement|null
      */
-    public function getRequestHandler() : ?RequestHandlerRequirement
+    public function getRequestHandler(): ?RequestHandlerRequirement
     {
         return $this->requestHandler ?? null;
     }
@@ -218,7 +221,7 @@ class AppVersion
      * @return
      * SystemSoftwareDependency[]|null
      */
-    public function getSystemSoftwareDependencies() : ?array
+    public function getSystemSoftwareDependencies(): ?array
     {
         return $this->systemSoftwareDependencies ?? null;
     }
@@ -226,7 +229,7 @@ class AppVersion
     /**
      * @return UserInput[]|null
      */
-    public function getUserInputs() : ?array
+    public function getUserInputs(): ?array
     {
         return $this->userInputs ?? null;
     }
@@ -235,7 +238,7 @@ class AppVersion
      * @param BreakingNote $breakingNote
      * @return self
      */
-    public function withBreakingNote(BreakingNote $breakingNote) : self
+    public function withBreakingNote(BreakingNote $breakingNote): self
     {
         $clone = clone $this;
         $clone->breakingNote = $breakingNote;
@@ -246,7 +249,7 @@ class AppVersion
     /**
      * @return self
      */
-    public function withoutBreakingNote() : self
+    public function withoutBreakingNote(): self
     {
         $clone = clone $this;
         unset($clone->breakingNote);
@@ -258,7 +261,7 @@ class AppVersion
      * @param DatabaseDependency[] $databases
      * @return self
      */
-    public function withDatabases(array $databases) : self
+    public function withDatabases(array $databases): self
     {
         $clone = clone $this;
         $clone->databases = $databases;
@@ -269,7 +272,7 @@ class AppVersion
     /**
      * @return self
      */
-    public function withoutDatabases() : self
+    public function withoutDatabases(): self
     {
         $clone = clone $this;
         unset($clone->databases);
@@ -281,12 +284,12 @@ class AppVersion
      * @param string $docRoot
      * @return self
      */
-    public function withDocRoot(string $docRoot) : self
+    public function withDocRoot(string $docRoot): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($docRoot, static::$schema['properties']['docRoot']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -299,12 +302,12 @@ class AppVersion
      * @param bool $docRootUserEditable
      * @return self
      */
-    public function withDocRootUserEditable(bool $docRootUserEditable) : self
+    public function withDocRootUserEditable(bool $docRootUserEditable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($docRootUserEditable, static::$schema['properties']['docRootUserEditable']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -317,12 +320,12 @@ class AppVersion
      * @param string $externalVersion
      * @return self
      */
-    public function withExternalVersion(string $externalVersion) : self
+    public function withExternalVersion(string $externalVersion): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($externalVersion, static::$schema['properties']['externalVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -335,12 +338,12 @@ class AppVersion
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -353,12 +356,12 @@ class AppVersion
      * @param string $internalVersion
      * @return self
      */
-    public function withInternalVersion(string $internalVersion) : self
+    public function withInternalVersion(string $internalVersion): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($internalVersion, static::$schema['properties']['internalVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -371,12 +374,12 @@ class AppVersion
      * @param bool $recommended
      * @return self
      */
-    public function withRecommended(bool $recommended) : self
+    public function withRecommended(bool $recommended): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($recommended, static::$schema['properties']['recommended']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -388,7 +391,7 @@ class AppVersion
     /**
      * @return self
      */
-    public function withoutRecommended() : self
+    public function withoutRecommended(): self
     {
         $clone = clone $this;
         unset($clone->recommended);
@@ -400,7 +403,7 @@ class AppVersion
      * @param RequestHandlerRequirement $requestHandler
      * @return self
      */
-    public function withRequestHandler(RequestHandlerRequirement $requestHandler) : self
+    public function withRequestHandler(RequestHandlerRequirement $requestHandler): self
     {
         $clone = clone $this;
         $clone->requestHandler = $requestHandler;
@@ -411,7 +414,7 @@ class AppVersion
     /**
      * @return self
      */
-    public function withoutRequestHandler() : self
+    public function withoutRequestHandler(): self
     {
         $clone = clone $this;
         unset($clone->requestHandler);
@@ -423,7 +426,7 @@ class AppVersion
      * @param SystemSoftwareDependency[] $systemSoftwareDependencies
      * @return self
      */
-    public function withSystemSoftwareDependencies(array $systemSoftwareDependencies) : self
+    public function withSystemSoftwareDependencies(array $systemSoftwareDependencies): self
     {
         $clone = clone $this;
         $clone->systemSoftwareDependencies = $systemSoftwareDependencies;
@@ -434,7 +437,7 @@ class AppVersion
     /**
      * @return self
      */
-    public function withoutSystemSoftwareDependencies() : self
+    public function withoutSystemSoftwareDependencies(): self
     {
         $clone = clone $this;
         unset($clone->systemSoftwareDependencies);
@@ -446,7 +449,7 @@ class AppVersion
      * @param UserInput[] $userInputs
      * @return self
      */
-    public function withUserInputs(array $userInputs) : self
+    public function withUserInputs(array $userInputs): self
     {
         $clone = clone $this;
         $clone->userInputs = $userInputs;
@@ -457,7 +460,7 @@ class AppVersion
     /**
      * @return self
      */
-    public function withoutUserInputs() : self
+    public function withoutUserInputs(): self
     {
         $clone = clone $this;
         unset($clone->userInputs);
@@ -471,11 +474,11 @@ class AppVersion
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AppVersion Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AppVersion
+    public static function buildFromInput(array|object $input, bool $validate = true): AppVersion
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -486,7 +489,7 @@ class AppVersion
         }
         $databases = null;
         if (isset($input->{'databases'})) {
-            $databases = array_map(fn(array $i): DatabaseDependency => DatabaseDependency::buildFromInput($i, validate: $validate), $input->{'databases'});
+            $databases = array_map(fn (array $i): DatabaseDependency => DatabaseDependency::buildFromInput($i, validate: $validate), $input->{'databases'});
         }
         $docRoot = $input->{'docRoot'};
         $docRootUserEditable = (bool)($input->{'docRootUserEditable'});
@@ -503,11 +506,11 @@ class AppVersion
         }
         $systemSoftwareDependencies = null;
         if (isset($input->{'systemSoftwareDependencies'})) {
-            $systemSoftwareDependencies = array_map(fn(array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
+            $systemSoftwareDependencies = array_map(fn (array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn(array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self($docRoot, $docRootUserEditable, $externalVersion, $id, $internalVersion);
@@ -525,14 +528,14 @@ class AppVersion
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->breakingNote)) {
             $output['breakingNote'] = $this->breakingNote->toJson();
         }
         if (isset($this->databases)) {
-            $output['databases'] = array_map(fn(DatabaseDependency $i): array => $i->toJson(), $this->databases);
+            $output['databases'] = array_map(fn (DatabaseDependency $i): array => $i->toJson(), $this->databases);
         }
         $output['docRoot'] = $this->docRoot;
         $output['docRootUserEditable'] = $this->docRootUserEditable;
@@ -546,10 +549,10 @@ class AppVersion
             $output['requestHandler'] = $this->requestHandler->toJson();
         }
         if (isset($this->systemSoftwareDependencies)) {
-            $output['systemSoftwareDependencies'] = array_map(fn(SystemSoftwareDependency $i): array => $i->toJson(), $this->systemSoftwareDependencies);
+            $output['systemSoftwareDependencies'] = array_map(fn (SystemSoftwareDependency $i): array => $i->toJson(), $this->systemSoftwareDependencies);
         }
         if (isset($this->userInputs)) {
-            $output['userInputs'] = array_map(fn(UserInput $i): array => $i->toJson(), $this->userInputs);
+            $output['userInputs'] = array_map(fn (UserInput $i): array => $i->toJson(), $this->userInputs);
         }
 
         return $output;
@@ -561,19 +564,19 @@ class AppVersion
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -583,4 +586,3 @@ class AppVersion
     {
     }
 }
-

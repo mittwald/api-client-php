@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Dns;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CombinedAManagedManagedByAlternative1
 {
     /**
@@ -40,7 +43,7 @@ class CombinedAManagedManagedByAlternative1
     /**
      * @return string
      */
-    public function getIngressId() : string
+    public function getIngressId(): string
     {
         return $this->ingressId;
     }
@@ -49,12 +52,12 @@ class CombinedAManagedManagedByAlternative1
      * @param string $ingressId
      * @return self
      */
-    public function withIngressId(string $ingressId) : self
+    public function withIngressId(string $ingressId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($ingressId, static::$schema['properties']['ingressId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -69,11 +72,11 @@ class CombinedAManagedManagedByAlternative1
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CombinedAManagedManagedByAlternative1 Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CombinedAManagedManagedByAlternative1
+    public static function buildFromInput(array|object $input, bool $validate = true): CombinedAManagedManagedByAlternative1
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -90,7 +93,7 @@ class CombinedAManagedManagedByAlternative1
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['ingressId'] = $this->ingressId;
@@ -104,19 +107,19 @@ class CombinedAManagedManagedByAlternative1
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -126,4 +129,3 @@ class CombinedAManagedManagedByAlternative1
     {
     }
 }
-

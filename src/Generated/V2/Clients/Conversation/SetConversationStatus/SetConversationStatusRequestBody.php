@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class SetConversationStatusRequestBody
 {
     public const method = 'put';
@@ -35,7 +38,7 @@ class SetConversationStatusRequestBody
     private SetConversationStatusRequestBodyStatus $status;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -49,7 +52,7 @@ class SetConversationStatusRequestBody
     /**
      * @return SetConversationStatusRequestBodyStatus
      */
-    public function getStatus() : SetConversationStatusRequestBodyStatus
+    public function getStatus(): SetConversationStatusRequestBodyStatus
     {
         return $this->status;
     }
@@ -58,7 +61,7 @@ class SetConversationStatusRequestBody
      * @param SetConversationStatusRequestBodyStatus $status
      * @return self
      */
-    public function withStatus(SetConversationStatusRequestBodyStatus $status) : self
+    public function withStatus(SetConversationStatusRequestBodyStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -72,11 +75,11 @@ class SetConversationStatusRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SetConversationStatusRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SetConversationStatusRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): SetConversationStatusRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -93,7 +96,7 @@ class SetConversationStatusRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['status'] = ($this->status)->value;
@@ -107,19 +110,19 @@ class SetConversationStatusRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -129,30 +132,29 @@ class SetConversationStatusRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $conversationId = urlencode($mapped['conversationId']);
         return '/v2/conversations/' . $conversationId . '/status';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

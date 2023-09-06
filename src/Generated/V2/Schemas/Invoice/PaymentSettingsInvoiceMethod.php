@@ -2,6 +2,7 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
-enum PaymentSettingsInvoiceMethod: string {
+enum PaymentSettingsInvoiceMethod: string
+{
     case invoice = 'invoice';
 }

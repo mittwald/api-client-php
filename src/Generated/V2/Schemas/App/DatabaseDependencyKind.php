@@ -2,6 +2,7 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
-enum DatabaseDependencyKind: string {
+enum DatabaseDependencyKind: string
+{
     case mysql = 'mysql';
 }

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser;
+use Psr\Http\Message\ResponseInterface;
+
 class CreateSftpUser201Response
 {
     /**
@@ -24,33 +29,33 @@ class CreateSftpUser201Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser
+     * @var SftpUser
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser $body;
+    private SftpUser $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser $body
+     * @param SftpUser $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser $body)
+    public function __construct(SftpUser $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser
+     * @return SftpUser
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser
+    public function getBody(): SftpUser
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser $body
+     * @param SftpUser $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser $body) : self
+    public function withBody(SftpUser $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,16 +69,16 @@ class CreateSftpUser201Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateSftpUser201Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateSftpUser201Response
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateSftpUser201Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser::buildFromInput($input->{'body'}, validate: $validate);
+        $body = SftpUser::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -85,7 +90,7 @@ class CreateSftpUser201Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = $this->body->toJson();
@@ -99,19 +104,19 @@ class CreateSftpUser201Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -121,7 +126,7 @@ class CreateSftpUser201Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -129,4 +134,3 @@ class CreateSftpUser201Response
         return $response;
     }
 }
-

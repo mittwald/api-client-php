@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategoryDeprecated;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class CreateCategoryDeprecated201ResponseBody
 {
     /**
@@ -60,7 +64,7 @@ class CreateCategoryDeprecated201ResponseBody
      */
     private ?bool $useAgencySslPrices = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -72,7 +76,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return string|null
      */
-    public function getCustomerId() : ?string
+    public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
@@ -80,7 +84,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return bool|null
      */
-    public function getIsPublic() : ?bool
+    public function getIsPublic(): ?bool
     {
         return $this->isPublic ?? null;
     }
@@ -88,7 +92,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name ?? null;
     }
@@ -96,7 +100,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return bool|null
      */
-    public function getUseAgencyDomainPrices() : ?bool
+    public function getUseAgencyDomainPrices(): ?bool
     {
         return $this->useAgencyDomainPrices ?? null;
     }
@@ -104,7 +108,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return bool|null
      */
-    public function getUseAgencySslPrices() : ?bool
+    public function getUseAgencySslPrices(): ?bool
     {
         return $this->useAgencySslPrices ?? null;
     }
@@ -113,12 +117,12 @@ class CreateCategoryDeprecated201ResponseBody
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -130,7 +134,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return self
      */
-    public function withoutCustomerId() : self
+    public function withoutCustomerId(): self
     {
         $clone = clone $this;
         unset($clone->customerId);
@@ -142,12 +146,12 @@ class CreateCategoryDeprecated201ResponseBody
      * @param bool $isPublic
      * @return self
      */
-    public function withIsPublic(bool $isPublic) : self
+    public function withIsPublic(bool $isPublic): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isPublic, static::$schema['properties']['isPublic']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -159,7 +163,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return self
      */
-    public function withoutIsPublic() : self
+    public function withoutIsPublic(): self
     {
         $clone = clone $this;
         unset($clone->isPublic);
@@ -171,12 +175,12 @@ class CreateCategoryDeprecated201ResponseBody
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -188,7 +192,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return self
      */
-    public function withoutName() : self
+    public function withoutName(): self
     {
         $clone = clone $this;
         unset($clone->name);
@@ -200,12 +204,12 @@ class CreateCategoryDeprecated201ResponseBody
      * @param bool $useAgencyDomainPrices
      * @return self
      */
-    public function withUseAgencyDomainPrices(bool $useAgencyDomainPrices) : self
+    public function withUseAgencyDomainPrices(bool $useAgencyDomainPrices): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($useAgencyDomainPrices, static::$schema['properties']['useAgencyDomainPrices']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -217,7 +221,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return self
      */
-    public function withoutUseAgencyDomainPrices() : self
+    public function withoutUseAgencyDomainPrices(): self
     {
         $clone = clone $this;
         unset($clone->useAgencyDomainPrices);
@@ -229,12 +233,12 @@ class CreateCategoryDeprecated201ResponseBody
      * @param bool $useAgencySslPrices
      * @return self
      */
-    public function withUseAgencySslPrices(bool $useAgencySslPrices) : self
+    public function withUseAgencySslPrices(bool $useAgencySslPrices): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($useAgencySslPrices, static::$schema['properties']['useAgencySslPrices']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -246,7 +250,7 @@ class CreateCategoryDeprecated201ResponseBody
     /**
      * @return self
      */
-    public function withoutUseAgencySslPrices() : self
+    public function withoutUseAgencySslPrices(): self
     {
         $clone = clone $this;
         unset($clone->useAgencySslPrices);
@@ -260,11 +264,11 @@ class CreateCategoryDeprecated201ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateCategoryDeprecated201ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateCategoryDeprecated201ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateCategoryDeprecated201ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -304,7 +308,7 @@ class CreateCategoryDeprecated201ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->customerId)) {
@@ -332,19 +336,19 @@ class CreateCategoryDeprecated201ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -354,7 +358,7 @@ class CreateCategoryDeprecated201ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -362,4 +366,3 @@ class CreateCategoryDeprecated201ResponseBody
         return $response;
     }
 }
-

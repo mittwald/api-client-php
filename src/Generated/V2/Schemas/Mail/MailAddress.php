@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class MailAddress
 {
     /**
@@ -203,9 +207,9 @@ class MailAddress
     private bool $receivingDisabled;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @param string $address
@@ -216,9 +220,9 @@ class MailAddress
      * @param bool $isCatchAll
      * @param string $projectId
      * @param bool $receivingDisabled
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function __construct(string $address, MailAddressAutoResponder $autoResponder, array $forwardAddresses, string $id, bool $isArchived, bool $isCatchAll, string $projectId, bool $receivingDisabled, \DateTime $updatedAt)
+    public function __construct(string $address, MailAddressAutoResponder $autoResponder, array $forwardAddresses, string $id, bool $isArchived, bool $isCatchAll, string $projectId, bool $receivingDisabled, DateTime $updatedAt)
     {
         $this->address = $address;
         $this->autoResponder = $autoResponder;
@@ -234,7 +238,7 @@ class MailAddress
     /**
      * @return string
      */
-    public function getAddress() : string
+    public function getAddress(): string
     {
         return $this->address;
     }
@@ -242,7 +246,7 @@ class MailAddress
     /**
      * @return MailAddressAutoResponder
      */
-    public function getAutoResponder() : MailAddressAutoResponder
+    public function getAutoResponder(): MailAddressAutoResponder
     {
         return $this->autoResponder;
     }
@@ -250,7 +254,7 @@ class MailAddress
     /**
      * @return string[]
      */
-    public function getForwardAddresses() : array
+    public function getForwardAddresses(): array
     {
         return $this->forwardAddresses;
     }
@@ -258,7 +262,7 @@ class MailAddress
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -266,7 +270,7 @@ class MailAddress
     /**
      * @return bool
      */
-    public function getIsArchived() : bool
+    public function getIsArchived(): bool
     {
         return $this->isArchived;
     }
@@ -274,7 +278,7 @@ class MailAddress
     /**
      * @return bool
      */
-    public function getIsCatchAll() : bool
+    public function getIsCatchAll(): bool
     {
         return $this->isCatchAll;
     }
@@ -282,7 +286,7 @@ class MailAddress
     /**
      * @return MailAddressMailbox|null
      */
-    public function getMailbox() : ?MailAddressMailbox
+    public function getMailbox(): ?MailAddressMailbox
     {
         return $this->mailbox ?? null;
     }
@@ -290,7 +294,7 @@ class MailAddress
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -298,15 +302,15 @@ class MailAddress
     /**
      * @return bool
      */
-    public function getReceivingDisabled() : bool
+    public function getReceivingDisabled(): bool
     {
         return $this->receivingDisabled;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -315,12 +319,12 @@ class MailAddress
      * @param string $address
      * @return self
      */
-    public function withAddress(string $address) : self
+    public function withAddress(string $address): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($address, static::$schema['properties']['address']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -333,7 +337,7 @@ class MailAddress
      * @param MailAddressAutoResponder $autoResponder
      * @return self
      */
-    public function withAutoResponder(MailAddressAutoResponder $autoResponder) : self
+    public function withAutoResponder(MailAddressAutoResponder $autoResponder): self
     {
         $clone = clone $this;
         $clone->autoResponder = $autoResponder;
@@ -345,12 +349,12 @@ class MailAddress
      * @param string[] $forwardAddresses
      * @return self
      */
-    public function withForwardAddresses(array $forwardAddresses) : self
+    public function withForwardAddresses(array $forwardAddresses): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($forwardAddresses, static::$schema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -363,12 +367,12 @@ class MailAddress
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -381,12 +385,12 @@ class MailAddress
      * @param bool $isArchived
      * @return self
      */
-    public function withIsArchived(bool $isArchived) : self
+    public function withIsArchived(bool $isArchived): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isArchived, static::$schema['properties']['isArchived']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -399,12 +403,12 @@ class MailAddress
      * @param bool $isCatchAll
      * @return self
      */
-    public function withIsCatchAll(bool $isCatchAll) : self
+    public function withIsCatchAll(bool $isCatchAll): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isCatchAll, static::$schema['properties']['isCatchAll']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -417,7 +421,7 @@ class MailAddress
      * @param MailAddressMailbox $mailbox
      * @return self
      */
-    public function withMailbox(MailAddressMailbox $mailbox) : self
+    public function withMailbox(MailAddressMailbox $mailbox): self
     {
         $clone = clone $this;
         $clone->mailbox = $mailbox;
@@ -428,7 +432,7 @@ class MailAddress
     /**
      * @return self
      */
-    public function withoutMailbox() : self
+    public function withoutMailbox(): self
     {
         $clone = clone $this;
         unset($clone->mailbox);
@@ -440,12 +444,12 @@ class MailAddress
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -458,12 +462,12 @@ class MailAddress
      * @param bool $receivingDisabled
      * @return self
      */
-    public function withReceivingDisabled(bool $receivingDisabled) : self
+    public function withReceivingDisabled(bool $receivingDisabled): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($receivingDisabled, static::$schema['properties']['receivingDisabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -473,10 +477,10 @@ class MailAddress
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -490,11 +494,11 @@ class MailAddress
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MailAddress Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MailAddress
+    public static function buildFromInput(array|object $input, bool $validate = true): MailAddress
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -511,7 +515,7 @@ class MailAddress
         }
         $projectId = $input->{'projectId'};
         $receivingDisabled = (bool)($input->{'receivingDisabled'});
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($address, $autoResponder, $forwardAddresses, $id, $isArchived, $isCatchAll, $projectId, $receivingDisabled, $updatedAt);
         $obj->mailbox = $mailbox;
@@ -523,7 +527,7 @@ class MailAddress
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['address'] = $this->address;
@@ -537,7 +541,7 @@ class MailAddress
         }
         $output['projectId'] = $this->projectId;
         $output['receivingDisabled'] = $this->receivingDisabled;
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -548,19 +552,19 @@ class MailAddress
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -575,4 +579,3 @@ class MailAddress
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

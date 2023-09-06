@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Message
 {
     /**
@@ -125,7 +128,7 @@ class Message
     /**
      * @return string
      */
-    public function getConversationId() : string
+    public function getConversationId(): string
     {
         return $this->conversationId;
     }
@@ -133,7 +136,7 @@ class Message
     /**
      * @return string
      */
-    public function getCreatedAt() : string
+    public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
@@ -141,7 +144,7 @@ class Message
     /**
      * @return User|null
      */
-    public function getCreatedBy() : ?User
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy ?? null;
     }
@@ -150,7 +153,7 @@ class Message
      * @return
      * (RequestedFile|UploadedFile)[]|null
      */
-    public function getFiles() : ?array
+    public function getFiles(): ?array
     {
         return $this->files ?? null;
     }
@@ -159,7 +162,7 @@ class Message
      * @return
      * MessageHistoryItem[]
      */
-    public function getHistory() : array
+    public function getHistory(): array
     {
         return $this->history;
     }
@@ -167,7 +170,7 @@ class Message
     /**
      * @return bool|null
      */
-    public function getInternal() : ?bool
+    public function getInternal(): ?bool
     {
         return $this->internal ?? null;
     }
@@ -175,7 +178,7 @@ class Message
     /**
      * @return string|null
      */
-    public function getMessageContent() : ?string
+    public function getMessageContent(): ?string
     {
         return $this->messageContent ?? null;
     }
@@ -183,7 +186,7 @@ class Message
     /**
      * @return string
      */
-    public function getMessageId() : string
+    public function getMessageId(): string
     {
         return $this->messageId;
     }
@@ -191,7 +194,7 @@ class Message
     /**
      * @return MessageType
      */
-    public function getType() : MessageType
+    public function getType(): MessageType
     {
         return $this->type;
     }
@@ -200,12 +203,12 @@ class Message
      * @param string $conversationId
      * @return self
      */
-    public function withConversationId(string $conversationId) : self
+    public function withConversationId(string $conversationId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($conversationId, static::$schema['properties']['conversationId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -218,12 +221,12 @@ class Message
      * @param string $createdAt
      * @return self
      */
-    public function withCreatedAt(string $createdAt) : self
+    public function withCreatedAt(string $createdAt): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($createdAt, static::$schema['properties']['createdAt']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -236,7 +239,7 @@ class Message
      * @param User $createdBy
      * @return self
      */
-    public function withCreatedBy(User $createdBy) : self
+    public function withCreatedBy(User $createdBy): self
     {
         $clone = clone $this;
         $clone->createdBy = $createdBy;
@@ -247,7 +250,7 @@ class Message
     /**
      * @return self
      */
-    public function withoutCreatedBy() : self
+    public function withoutCreatedBy(): self
     {
         $clone = clone $this;
         unset($clone->createdBy);
@@ -259,7 +262,7 @@ class Message
      * @param (RequestedFile|UploadedFile)[] $files
      * @return self
      */
-    public function withFiles(array $files) : self
+    public function withFiles(array $files): self
     {
         $clone = clone $this;
         $clone->files = $files;
@@ -270,7 +273,7 @@ class Message
     /**
      * @return self
      */
-    public function withoutFiles() : self
+    public function withoutFiles(): self
     {
         $clone = clone $this;
         unset($clone->files);
@@ -282,7 +285,7 @@ class Message
      * @param MessageHistoryItem[] $history
      * @return self
      */
-    public function withHistory(array $history) : self
+    public function withHistory(array $history): self
     {
         $clone = clone $this;
         $clone->history = $history;
@@ -294,12 +297,12 @@ class Message
      * @param bool $internal
      * @return self
      */
-    public function withInternal(bool $internal) : self
+    public function withInternal(bool $internal): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($internal, static::$schema['properties']['internal']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -311,7 +314,7 @@ class Message
     /**
      * @return self
      */
-    public function withoutInternal() : self
+    public function withoutInternal(): self
     {
         $clone = clone $this;
         unset($clone->internal);
@@ -323,12 +326,12 @@ class Message
      * @param string $messageContent
      * @return self
      */
-    public function withMessageContent(string $messageContent) : self
+    public function withMessageContent(string $messageContent): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($messageContent, static::$schema['properties']['messageContent']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -340,7 +343,7 @@ class Message
     /**
      * @return self
      */
-    public function withoutMessageContent() : self
+    public function withoutMessageContent(): self
     {
         $clone = clone $this;
         unset($clone->messageContent);
@@ -352,12 +355,12 @@ class Message
      * @param string $messageId
      * @return self
      */
-    public function withMessageId(string $messageId) : self
+    public function withMessageId(string $messageId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($messageId, static::$schema['properties']['messageId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -370,7 +373,7 @@ class Message
      * @param MessageType $type
      * @return self
      */
-    public function withType(MessageType $type) : self
+    public function withType(MessageType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
@@ -384,11 +387,11 @@ class Message
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Message Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Message
+    public static function buildFromInput(array|object $input, bool $validate = true): Message
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -401,13 +404,13 @@ class Message
         }
         $files = null;
         if (isset($input->{'files'})) {
-            $files = array_map(fn(array $i): RequestedFile|UploadedFile => match (true) {
-                default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            $files = array_map(fn (array $i): RequestedFile|UploadedFile => match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 RequestedFile::validateInput($i, true) => RequestedFile::buildFromInput($i, validate: $validate),
                 UploadedFile::validateInput($i, true) => UploadedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
-        $history = array_map(fn(array $i): MessageHistoryItem => MessageHistoryItem::buildFromInput($i, validate: $validate), $input->{'history'});
+        $history = array_map(fn (array $i): MessageHistoryItem => MessageHistoryItem::buildFromInput($i, validate: $validate), $input->{'history'});
         $internal = null;
         if (isset($input->{'internal'})) {
             $internal = (bool)($input->{'internal'});
@@ -432,7 +435,7 @@ class Message
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['conversationId'] = $this->conversationId;
@@ -441,12 +444,12 @@ class Message
             $output['createdBy'] = $this->createdBy->toJson();
         }
         if (isset($this->files)) {
-            $output['files'] = array_map(fn(RequestedFile|UploadedFile $i): array => match (true) {
-                default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            $output['files'] = array_map(fn (RequestedFile|UploadedFile $i): array => match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 ($i) instanceof RequestedFile, ($i) instanceof UploadedFile => $i->toJson(),
             }, $this->files);
         }
-        $output['history'] = array_map(fn(MessageHistoryItem $i): array => $i->toJson(), $this->history);
+        $output['history'] = array_map(fn (MessageHistoryItem $i): array => $i->toJson(), $this->history);
         if (isset($this->internal)) {
             $output['internal'] = $this->internal;
         }
@@ -465,19 +468,19 @@ class Message
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -487,4 +490,3 @@ class Message
     {
     }
 }
-

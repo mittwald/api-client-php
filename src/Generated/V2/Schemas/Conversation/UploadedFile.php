@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UploadedFile
 {
     /**
@@ -76,7 +79,7 @@ class UploadedFile
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -84,7 +87,7 @@ class UploadedFile
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -92,7 +95,7 @@ class UploadedFile
     /**
      * @return UploadedFileStatus
      */
-    public function getStatus() : UploadedFileStatus
+    public function getStatus(): UploadedFileStatus
     {
         return $this->status;
     }
@@ -100,7 +103,7 @@ class UploadedFile
     /**
      * @return string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return $this->type;
     }
@@ -109,12 +112,12 @@ class UploadedFile
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -127,12 +130,12 @@ class UploadedFile
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -145,7 +148,7 @@ class UploadedFile
      * @param UploadedFileStatus $status
      * @return self
      */
-    public function withStatus(UploadedFileStatus $status) : self
+    public function withStatus(UploadedFileStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -157,12 +160,12 @@ class UploadedFile
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -177,11 +180,11 @@ class UploadedFile
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UploadedFile Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UploadedFile
+    public static function buildFromInput(array|object $input, bool $validate = true): UploadedFile
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -201,7 +204,7 @@ class UploadedFile
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['id'] = $this->id;
@@ -218,19 +221,19 @@ class UploadedFile
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -240,4 +243,3 @@ class UploadedFile
     {
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class AuthenticateMfaRequest
 {
     public const method = 'post';
@@ -53,7 +56,7 @@ class AuthenticateMfaRequest
     private AuthenticateMfaRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -67,7 +70,7 @@ class AuthenticateMfaRequest
     /**
      * @return AuthenticateMfaRequestBody
      */
-    public function getBody() : AuthenticateMfaRequestBody
+    public function getBody(): AuthenticateMfaRequestBody
     {
         return $this->body;
     }
@@ -76,7 +79,7 @@ class AuthenticateMfaRequest
      * @param AuthenticateMfaRequestBody $body
      * @return self
      */
-    public function withBody(AuthenticateMfaRequestBody $body) : self
+    public function withBody(AuthenticateMfaRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -90,11 +93,11 @@ class AuthenticateMfaRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AuthenticateMfaRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AuthenticateMfaRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateMfaRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -111,7 +114,7 @@ class AuthenticateMfaRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -125,19 +128,19 @@ class AuthenticateMfaRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -148,29 +151,28 @@ class AuthenticateMfaRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/authenticate-mfa';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CreateMailAddressMailbox
 {
     /**
@@ -62,7 +65,7 @@ class CreateMailAddressMailbox
     /**
      * @return bool
      */
-    public function getEnableSpamProtection() : bool
+    public function getEnableSpamProtection(): bool
     {
         return $this->enableSpamProtection;
     }
@@ -70,7 +73,7 @@ class CreateMailAddressMailbox
     /**
      * @return string
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -78,7 +81,7 @@ class CreateMailAddressMailbox
     /**
      * @return int|float
      */
-    public function getQuotaInBytes() : int|float
+    public function getQuotaInBytes(): int|float
     {
         return $this->quotaInBytes;
     }
@@ -87,12 +90,12 @@ class CreateMailAddressMailbox
      * @param bool $enableSpamProtection
      * @return self
      */
-    public function withEnableSpamProtection(bool $enableSpamProtection) : self
+    public function withEnableSpamProtection(bool $enableSpamProtection): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($enableSpamProtection, static::$schema['properties']['enableSpamProtection']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -105,12 +108,12 @@ class CreateMailAddressMailbox
      * @param string $password
      * @return self
      */
-    public function withPassword(string $password) : self
+    public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -123,12 +126,12 @@ class CreateMailAddressMailbox
      * @param int|float $quotaInBytes
      * @return self
      */
-    public function withQuotaInBytes(int|float $quotaInBytes) : self
+    public function withQuotaInBytes(int|float $quotaInBytes): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($quotaInBytes, static::$schema['properties']['quotaInBytes']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -143,11 +146,11 @@ class CreateMailAddressMailbox
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateMailAddressMailbox Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateMailAddressMailbox
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateMailAddressMailbox
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -166,7 +169,7 @@ class CreateMailAddressMailbox
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['enableSpamProtection'] = $this->enableSpamProtection;
@@ -182,19 +185,19 @@ class CreateMailAddressMailbox
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -204,4 +207,3 @@ class CreateMailAddressMailbox
     {
     }
 }
-

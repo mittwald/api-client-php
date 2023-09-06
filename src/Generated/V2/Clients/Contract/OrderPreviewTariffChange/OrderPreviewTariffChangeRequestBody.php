@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange;
+
 class OrderPreviewTariffChangeRequestBody
 {
     public const method = 'post';
@@ -37,9 +42,9 @@ class OrderPreviewTariffChangeRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
+     * @var ProjectHostingTariffChange|ServerTariffChange|null
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null $tariffChangeData = null;
+    private ProjectHostingTariffChange|ServerTariffChange|null $tariffChangeData = null;
 
     /**
      * @var OrderPreviewTariffChangeRequestBodyTariffChangeType|null
@@ -47,7 +52,7 @@ class OrderPreviewTariffChangeRequestBody
     private ?OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -61,7 +66,7 @@ class OrderPreviewTariffChangeRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
      */
-    public function getTariffChangeData() : \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
+    public function getTariffChangeData(): ProjectHostingTariffChange|ServerTariffChange|null
     {
         return $this->tariffChangeData;
     }
@@ -69,16 +74,16 @@ class OrderPreviewTariffChangeRequestBody
     /**
      * @return OrderPreviewTariffChangeRequestBodyTariffChangeType|null
      */
-    public function getTariffChangeType() : ?OrderPreviewTariffChangeRequestBodyTariffChangeType
+    public function getTariffChangeType(): ?OrderPreviewTariffChangeRequestBodyTariffChangeType
     {
         return $this->tariffChangeType ?? null;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange $tariffChangeData
+     * @param ProjectHostingTariffChange|ServerTariffChange $tariffChangeData
      * @return self
      */
-    public function withTariffChangeData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange $tariffChangeData) : self
+    public function withTariffChangeData(ProjectHostingTariffChange|ServerTariffChange $tariffChangeData): self
     {
         $clone = clone $this;
         $clone->tariffChangeData = $tariffChangeData;
@@ -89,7 +94,7 @@ class OrderPreviewTariffChangeRequestBody
     /**
      * @return self
      */
-    public function withoutTariffChangeData() : self
+    public function withoutTariffChangeData(): self
     {
         $clone = clone $this;
         unset($clone->tariffChangeData);
@@ -101,7 +106,7 @@ class OrderPreviewTariffChangeRequestBody
      * @param OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType
      * @return self
      */
-    public function withTariffChangeType(OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType) : self
+    public function withTariffChangeType(OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType): self
     {
         $clone = clone $this;
         $clone->tariffChangeType = $tariffChangeType;
@@ -112,7 +117,7 @@ class OrderPreviewTariffChangeRequestBody
     /**
      * @return self
      */
-    public function withoutTariffChangeType() : self
+    public function withoutTariffChangeType(): self
     {
         $clone = clone $this;
         unset($clone->tariffChangeType);
@@ -126,11 +131,11 @@ class OrderPreviewTariffChangeRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderPreviewTariffChangeRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderPreviewTariffChangeRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderPreviewTariffChangeRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -138,8 +143,8 @@ class OrderPreviewTariffChangeRequestBody
         $tariffChangeData = null;
         if (isset($input->{'tariffChangeData'})) {
             $tariffChangeData = match (true) {
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange::validateInput($input->{'tariffChangeData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange::validateInput($input->{'tariffChangeData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
+                ProjectHostingTariffChange::validateInput($input->{'tariffChangeData'}, true) => ProjectHostingTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
+                ServerTariffChange::validateInput($input->{'tariffChangeData'}, true) => ServerTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
             };
         }
         $tariffChangeType = null;
@@ -158,12 +163,12 @@ class OrderPreviewTariffChangeRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->tariffChangeData)) {
             $output['tariffChangeData'] = match (true) {
-                ($this->tariffChangeData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange, ($this->tariffChangeData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange => $this->tariffChangeData->toJson(),
+                ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange => $this->tariffChangeData->toJson(),
             };
         }
         if (isset($this->tariffChangeType)) {
@@ -179,19 +184,19 @@ class OrderPreviewTariffChangeRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -201,34 +206,33 @@ class OrderPreviewTariffChangeRequestBody
     {
         if (isset($this->tariffChangeData)) {
             $this->tariffChangeData = match (true) {
-                ($this->tariffChangeData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange, ($this->tariffChangeData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange => $this->tariffChangeData,
+                ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange => $this->tariffChangeData,
             };
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/tariff-change-previews';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

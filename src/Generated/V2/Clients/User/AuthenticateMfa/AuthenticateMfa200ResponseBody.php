@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class AuthenticateMfa200ResponseBody
 {
     /**
@@ -33,9 +38,9 @@ class AuthenticateMfa200ResponseBody
     /**
      * Expiration unix timestamp
      *
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $expires;
+    private DateTime $expires;
 
     /**
      * Public token to identify yourself against the api gateway.
@@ -44,22 +49,22 @@ class AuthenticateMfa200ResponseBody
      */
     private string $token;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \DateTime $expires
+     * @param DateTime $expires
      * @param string $token
      */
-    public function __construct(\DateTime $expires, string $token)
+    public function __construct(DateTime $expires, string $token)
     {
         $this->expires = $expires;
         $this->token = $token;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getExpires() : \DateTime
+    public function getExpires(): DateTime
     {
         return $this->expires;
     }
@@ -67,16 +72,16 @@ class AuthenticateMfa200ResponseBody
     /**
      * @return string
      */
-    public function getToken() : string
+    public function getToken(): string
     {
         return $this->token;
     }
 
     /**
-     * @param \DateTime $expires
+     * @param DateTime $expires
      * @return self
      */
-    public function withExpires(\DateTime $expires) : self
+    public function withExpires(DateTime $expires): self
     {
         $clone = clone $this;
         $clone->expires = $expires;
@@ -88,12 +93,12 @@ class AuthenticateMfa200ResponseBody
      * @param string $token
      * @return self
      */
-    public function withToken(string $token) : self
+    public function withToken(string $token): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($token, static::$schema['properties']['token']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -108,16 +113,16 @@ class AuthenticateMfa200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AuthenticateMfa200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AuthenticateMfa200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateMfa200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $expires = new \DateTime($input->{'expires'});
+        $expires = new DateTime($input->{'expires'});
         $token = $input->{'token'};
 
         $obj = new self($expires, $token);
@@ -130,10 +135,10 @@ class AuthenticateMfa200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['expires'] = ($this->expires)->format(\DateTime::ATOM);
+        $output['expires'] = ($this->expires)->format(DateTime::ATOM);
         $output['token'] = $this->token;
 
         return $output;
@@ -145,19 +150,19 @@ class AuthenticateMfa200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -168,7 +173,7 @@ class AuthenticateMfa200ResponseBody
         $this->expires = clone $this->expires;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -176,4 +181,3 @@ class AuthenticateMfa200ResponseBody
         return $response;
     }
 }
-

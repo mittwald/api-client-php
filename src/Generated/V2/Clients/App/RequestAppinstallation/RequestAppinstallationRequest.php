@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class RequestAppinstallationRequest
 {
     public const method = 'post';
@@ -65,7 +68,7 @@ class RequestAppinstallationRequest
     private RequestAppinstallationRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -81,7 +84,7 @@ class RequestAppinstallationRequest
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -89,7 +92,7 @@ class RequestAppinstallationRequest
     /**
      * @return RequestAppinstallationRequestBody
      */
-    public function getBody() : RequestAppinstallationRequestBody
+    public function getBody(): RequestAppinstallationRequestBody
     {
         return $this->body;
     }
@@ -98,12 +101,12 @@ class RequestAppinstallationRequest
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -116,7 +119,7 @@ class RequestAppinstallationRequest
      * @param RequestAppinstallationRequestBody $body
      * @return self
      */
-    public function withBody(RequestAppinstallationRequestBody $body) : self
+    public function withBody(RequestAppinstallationRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -130,11 +133,11 @@ class RequestAppinstallationRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestAppinstallationRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestAppinstallationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -152,7 +155,7 @@ class RequestAppinstallationRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectId'] = $this->projectId;
@@ -167,19 +170,19 @@ class RequestAppinstallationRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -190,30 +193,29 @@ class RequestAppinstallationRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/appinstallations';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

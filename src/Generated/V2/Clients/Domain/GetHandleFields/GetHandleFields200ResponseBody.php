@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFields;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class GetHandleFields200ResponseBody
 {
     /**
@@ -36,7 +40,7 @@ class GetHandleFields200ResponseBody
      */
     private GetHandleFields200ResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param GetHandleFields200ResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC
@@ -49,7 +53,7 @@ class GetHandleFields200ResponseBody
     /**
      * @return GetHandleFields200ResponseBodyJsonSchemaAdminC|null
      */
-    public function getJsonSchemaAdminC() : ?GetHandleFields200ResponseBodyJsonSchemaAdminC
+    public function getJsonSchemaAdminC(): ?GetHandleFields200ResponseBodyJsonSchemaAdminC
     {
         return $this->jsonSchemaAdminC ?? null;
     }
@@ -57,7 +61,7 @@ class GetHandleFields200ResponseBody
     /**
      * @return GetHandleFields200ResponseBodyJsonSchemaOwnerC
      */
-    public function getJsonSchemaOwnerC() : GetHandleFields200ResponseBodyJsonSchemaOwnerC
+    public function getJsonSchemaOwnerC(): GetHandleFields200ResponseBodyJsonSchemaOwnerC
     {
         return $this->jsonSchemaOwnerC;
     }
@@ -66,7 +70,7 @@ class GetHandleFields200ResponseBody
      * @param GetHandleFields200ResponseBodyJsonSchemaAdminC $jsonSchemaAdminC
      * @return self
      */
-    public function withJsonSchemaAdminC(GetHandleFields200ResponseBodyJsonSchemaAdminC $jsonSchemaAdminC) : self
+    public function withJsonSchemaAdminC(GetHandleFields200ResponseBodyJsonSchemaAdminC $jsonSchemaAdminC): self
     {
         $clone = clone $this;
         $clone->jsonSchemaAdminC = $jsonSchemaAdminC;
@@ -77,7 +81,7 @@ class GetHandleFields200ResponseBody
     /**
      * @return self
      */
-    public function withoutJsonSchemaAdminC() : self
+    public function withoutJsonSchemaAdminC(): self
     {
         $clone = clone $this;
         unset($clone->jsonSchemaAdminC);
@@ -89,7 +93,7 @@ class GetHandleFields200ResponseBody
      * @param GetHandleFields200ResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC
      * @return self
      */
-    public function withJsonSchemaOwnerC(GetHandleFields200ResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC) : self
+    public function withJsonSchemaOwnerC(GetHandleFields200ResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC): self
     {
         $clone = clone $this;
         $clone->jsonSchemaOwnerC = $jsonSchemaOwnerC;
@@ -103,11 +107,11 @@ class GetHandleFields200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetHandleFields200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetHandleFields200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetHandleFields200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -128,7 +132,7 @@ class GetHandleFields200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->jsonSchemaAdminC)) {
@@ -145,19 +149,19 @@ class GetHandleFields200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -171,7 +175,7 @@ class GetHandleFields200ResponseBody
         $this->jsonSchemaOwnerC = clone $this->jsonSchemaOwnerC;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -179,4 +183,3 @@ class GetHandleFields200ResponseBody
         return $response;
     }
 }
-

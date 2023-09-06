@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CreateMySqlUser
 {
     /**
@@ -93,7 +96,7 @@ class CreateMySqlUser
     /**
      * @return string|null
      */
-    public function getAccessIpMask() : ?string
+    public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
@@ -101,7 +104,7 @@ class CreateMySqlUser
     /**
      * @return CreateMySqlUserAccessLevel
      */
-    public function getAccessLevel() : CreateMySqlUserAccessLevel
+    public function getAccessLevel(): CreateMySqlUserAccessLevel
     {
         return $this->accessLevel;
     }
@@ -109,7 +112,7 @@ class CreateMySqlUser
     /**
      * @return string
      */
-    public function getDatabaseId() : string
+    public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
@@ -117,7 +120,7 @@ class CreateMySqlUser
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -125,7 +128,7 @@ class CreateMySqlUser
     /**
      * @return bool|null
      */
-    public function getExternalAccess() : ?bool
+    public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
     }
@@ -133,7 +136,7 @@ class CreateMySqlUser
     /**
      * @return string
      */
-    public function getPassword() : string
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -142,12 +145,12 @@ class CreateMySqlUser
      * @param string $accessIpMask
      * @return self
      */
-    public function withAccessIpMask(string $accessIpMask) : self
+    public function withAccessIpMask(string $accessIpMask): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($accessIpMask, static::$schema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -159,7 +162,7 @@ class CreateMySqlUser
     /**
      * @return self
      */
-    public function withoutAccessIpMask() : self
+    public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
         unset($clone->accessIpMask);
@@ -171,7 +174,7 @@ class CreateMySqlUser
      * @param CreateMySqlUserAccessLevel $accessLevel
      * @return self
      */
-    public function withAccessLevel(CreateMySqlUserAccessLevel $accessLevel) : self
+    public function withAccessLevel(CreateMySqlUserAccessLevel $accessLevel): self
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
@@ -183,12 +186,12 @@ class CreateMySqlUser
      * @param string $databaseId
      * @return self
      */
-    public function withDatabaseId(string $databaseId) : self
+    public function withDatabaseId(string $databaseId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseId, static::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -201,12 +204,12 @@ class CreateMySqlUser
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -219,12 +222,12 @@ class CreateMySqlUser
      * @param bool $externalAccess
      * @return self
      */
-    public function withExternalAccess(bool $externalAccess) : self
+    public function withExternalAccess(bool $externalAccess): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($externalAccess, static::$schema['properties']['externalAccess']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -236,7 +239,7 @@ class CreateMySqlUser
     /**
      * @return self
      */
-    public function withoutExternalAccess() : self
+    public function withoutExternalAccess(): self
     {
         $clone = clone $this;
         unset($clone->externalAccess);
@@ -248,12 +251,12 @@ class CreateMySqlUser
      * @param string $password
      * @return self
      */
-    public function withPassword(string $password) : self
+    public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -268,11 +271,11 @@ class CreateMySqlUser
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateMySqlUser Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateMySqlUser
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateMySqlUser
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -301,7 +304,7 @@ class CreateMySqlUser
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->accessIpMask)) {
@@ -324,19 +327,19 @@ class CreateMySqlUser
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -346,4 +349,3 @@ class CreateMySqlUser
     {
     }
 }
-

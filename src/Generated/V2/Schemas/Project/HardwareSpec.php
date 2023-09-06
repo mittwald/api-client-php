@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class HardwareSpec
 {
     /**
@@ -64,7 +67,7 @@ class HardwareSpec
     /**
      * @return string
      */
-    public function getCpu() : string
+    public function getCpu(): string
     {
         return $this->cpu;
     }
@@ -72,7 +75,7 @@ class HardwareSpec
     /**
      * @return string
      */
-    public function getMem() : string
+    public function getMem(): string
     {
         return $this->mem;
     }
@@ -80,7 +83,7 @@ class HardwareSpec
     /**
      * @return string
      */
-    public function getStorage() : string
+    public function getStorage(): string
     {
         return $this->storage;
     }
@@ -89,12 +92,12 @@ class HardwareSpec
      * @param string $cpu
      * @return self
      */
-    public function withCpu(string $cpu) : self
+    public function withCpu(string $cpu): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($cpu, static::$schema['properties']['cpu']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,12 +110,12 @@ class HardwareSpec
      * @param string $mem
      * @return self
      */
-    public function withMem(string $mem) : self
+    public function withMem(string $mem): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($mem, static::$schema['properties']['mem']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,12 +128,12 @@ class HardwareSpec
      * @param string $storage
      * @return self
      */
-    public function withStorage(string $storage) : self
+    public function withStorage(string $storage): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($storage, static::$schema['properties']['storage']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -145,11 +148,11 @@ class HardwareSpec
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return HardwareSpec Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : HardwareSpec
+    public static function buildFromInput(array|object $input, bool $validate = true): HardwareSpec
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -168,7 +171,7 @@ class HardwareSpec
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['cpu'] = $this->cpu;
@@ -184,19 +187,19 @@ class HardwareSpec
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -206,4 +209,3 @@ class HardwareSpec
     {
     }
 }
-

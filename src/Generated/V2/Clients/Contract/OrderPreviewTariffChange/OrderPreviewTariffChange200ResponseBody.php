@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class OrderPreviewTariffChange200ResponseBody
 {
     /**
@@ -48,7 +52,7 @@ class OrderPreviewTariffChange200ResponseBody
      */
     private int|float $totalPrice;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param int|float $machineTypePrice
@@ -65,7 +69,7 @@ class OrderPreviewTariffChange200ResponseBody
     /**
      * @return int|float
      */
-    public function getMachineTypePrice() : int|float
+    public function getMachineTypePrice(): int|float
     {
         return $this->machineTypePrice;
     }
@@ -73,7 +77,7 @@ class OrderPreviewTariffChange200ResponseBody
     /**
      * @return int|float
      */
-    public function getStoragePrice() : int|float
+    public function getStoragePrice(): int|float
     {
         return $this->storagePrice;
     }
@@ -81,7 +85,7 @@ class OrderPreviewTariffChange200ResponseBody
     /**
      * @return int|float
      */
-    public function getTotalPrice() : int|float
+    public function getTotalPrice(): int|float
     {
         return $this->totalPrice;
     }
@@ -90,12 +94,12 @@ class OrderPreviewTariffChange200ResponseBody
      * @param int|float $machineTypePrice
      * @return self
      */
-    public function withMachineTypePrice(int|float $machineTypePrice) : self
+    public function withMachineTypePrice(int|float $machineTypePrice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($machineTypePrice, static::$schema['properties']['machineTypePrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -108,12 +112,12 @@ class OrderPreviewTariffChange200ResponseBody
      * @param int|float $storagePrice
      * @return self
      */
-    public function withStoragePrice(int|float $storagePrice) : self
+    public function withStoragePrice(int|float $storagePrice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($storagePrice, static::$schema['properties']['storagePrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -126,12 +130,12 @@ class OrderPreviewTariffChange200ResponseBody
      * @param int|float $totalPrice
      * @return self
      */
-    public function withTotalPrice(int|float $totalPrice) : self
+    public function withTotalPrice(int|float $totalPrice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -146,11 +150,11 @@ class OrderPreviewTariffChange200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderPreviewTariffChange200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderPreviewTariffChange200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderPreviewTariffChange200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -169,7 +173,7 @@ class OrderPreviewTariffChange200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['machineTypePrice'] = $this->machineTypePrice;
@@ -185,19 +189,19 @@ class OrderPreviewTariffChange200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -207,7 +211,7 @@ class OrderPreviewTariffChange200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -215,4 +219,3 @@ class OrderPreviewTariffChange200ResponseBody
         return $response;
     }
 }
-

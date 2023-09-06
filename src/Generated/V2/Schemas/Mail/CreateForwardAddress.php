@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CreateForwardAddress
 {
     /**
@@ -55,7 +58,7 @@ class CreateForwardAddress
     /**
      * @return string
      */
-    public function getAddress() : string
+    public function getAddress(): string
     {
         return $this->address;
     }
@@ -63,7 +66,7 @@ class CreateForwardAddress
     /**
      * @return string[]
      */
-    public function getForwardAddresses() : array
+    public function getForwardAddresses(): array
     {
         return $this->forwardAddresses;
     }
@@ -72,12 +75,12 @@ class CreateForwardAddress
      * @param string $address
      * @return self
      */
-    public function withAddress(string $address) : self
+    public function withAddress(string $address): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($address, static::$schema['properties']['address']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -90,12 +93,12 @@ class CreateForwardAddress
      * @param string[] $forwardAddresses
      * @return self
      */
-    public function withForwardAddresses(array $forwardAddresses) : self
+    public function withForwardAddresses(array $forwardAddresses): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($forwardAddresses, static::$schema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,11 +113,11 @@ class CreateForwardAddress
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateForwardAddress Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateForwardAddress
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateForwardAddress
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -132,7 +135,7 @@ class CreateForwardAddress
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['address'] = $this->address;
@@ -147,19 +150,19 @@ class CreateForwardAddress
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -169,4 +172,3 @@ class CreateForwardAddress
     {
     }
 }
-

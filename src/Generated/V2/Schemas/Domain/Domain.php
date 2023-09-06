@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Domain
 {
     /**
@@ -182,7 +185,7 @@ class Domain
     /**
      * @return AuthCode|null
      */
-    public function getAuthCode() : ?AuthCode
+    public function getAuthCode(): ?AuthCode
     {
         return $this->authCode ?? null;
     }
@@ -190,7 +193,7 @@ class Domain
     /**
      * @return AuthCode2|null
      */
-    public function getAuthCode2() : ?AuthCode2
+    public function getAuthCode2(): ?AuthCode2
     {
         return $this->authCode2 ?? null;
     }
@@ -198,7 +201,7 @@ class Domain
     /**
      * @return bool
      */
-    public function getConnected() : bool
+    public function getConnected(): bool
     {
         return $this->connected;
     }
@@ -206,7 +209,7 @@ class Domain
     /**
      * @return bool
      */
-    public function getDeleted() : bool
+    public function getDeleted(): bool
     {
         return $this->deleted;
     }
@@ -214,7 +217,7 @@ class Domain
     /**
      * @return string
      */
-    public function getDomain() : string
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -222,7 +225,7 @@ class Domain
     /**
      * @return string
      */
-    public function getDomainId() : string
+    public function getDomainId(): string
     {
         return $this->domainId;
     }
@@ -230,7 +233,7 @@ class Domain
     /**
      * @return DomainHandles
      */
-    public function getHandles() : DomainHandles
+    public function getHandles(): DomainHandles
     {
         return $this->handles;
     }
@@ -238,7 +241,7 @@ class Domain
     /**
      * @return bool
      */
-    public function getHasAuthCode() : bool
+    public function getHasAuthCode(): bool
     {
         return $this->hasAuthCode;
     }
@@ -246,7 +249,7 @@ class Domain
     /**
      * @return string[]
      */
-    public function getNameservers() : array
+    public function getNameservers(): array
     {
         return $this->nameservers;
     }
@@ -254,7 +257,7 @@ class Domain
     /**
      * @return Process[]|null
      */
-    public function getProcesses() : ?array
+    public function getProcesses(): ?array
     {
         return $this->processes ?? null;
     }
@@ -262,7 +265,7 @@ class Domain
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -270,7 +273,7 @@ class Domain
     /**
      * @return string|null
      */
-    public function getTransferInAuthCode() : ?string
+    public function getTransferInAuthCode(): ?string
     {
         return $this->transferInAuthCode ?? null;
     }
@@ -278,7 +281,7 @@ class Domain
     /**
      * @return bool
      */
-    public function getUsesDefaultNameserver() : bool
+    public function getUsesDefaultNameserver(): bool
     {
         return $this->usesDefaultNameserver;
     }
@@ -287,7 +290,7 @@ class Domain
      * @param AuthCode $authCode
      * @return self
      */
-    public function withAuthCode(AuthCode $authCode) : self
+    public function withAuthCode(AuthCode $authCode): self
     {
         $clone = clone $this;
         $clone->authCode = $authCode;
@@ -298,7 +301,7 @@ class Domain
     /**
      * @return self
      */
-    public function withoutAuthCode() : self
+    public function withoutAuthCode(): self
     {
         $clone = clone $this;
         unset($clone->authCode);
@@ -310,7 +313,7 @@ class Domain
      * @param AuthCode2 $authCode2
      * @return self
      */
-    public function withAuthCode2(AuthCode2 $authCode2) : self
+    public function withAuthCode2(AuthCode2 $authCode2): self
     {
         $clone = clone $this;
         $clone->authCode2 = $authCode2;
@@ -321,7 +324,7 @@ class Domain
     /**
      * @return self
      */
-    public function withoutAuthCode2() : self
+    public function withoutAuthCode2(): self
     {
         $clone = clone $this;
         unset($clone->authCode2);
@@ -333,12 +336,12 @@ class Domain
      * @param bool $connected
      * @return self
      */
-    public function withConnected(bool $connected) : self
+    public function withConnected(bool $connected): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($connected, static::$schema['properties']['connected']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -351,12 +354,12 @@ class Domain
      * @param bool $deleted
      * @return self
      */
-    public function withDeleted(bool $deleted) : self
+    public function withDeleted(bool $deleted): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($deleted, static::$schema['properties']['deleted']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -369,12 +372,12 @@ class Domain
      * @param string $domain
      * @return self
      */
-    public function withDomain(string $domain) : self
+    public function withDomain(string $domain): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($domain, static::$schema['properties']['domain']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -387,12 +390,12 @@ class Domain
      * @param string $domainId
      * @return self
      */
-    public function withDomainId(string $domainId) : self
+    public function withDomainId(string $domainId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($domainId, static::$schema['properties']['domainId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -405,7 +408,7 @@ class Domain
      * @param DomainHandles $handles
      * @return self
      */
-    public function withHandles(DomainHandles $handles) : self
+    public function withHandles(DomainHandles $handles): self
     {
         $clone = clone $this;
         $clone->handles = $handles;
@@ -417,12 +420,12 @@ class Domain
      * @param bool $hasAuthCode
      * @return self
      */
-    public function withHasAuthCode(bool $hasAuthCode) : self
+    public function withHasAuthCode(bool $hasAuthCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hasAuthCode, static::$schema['properties']['hasAuthCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -435,12 +438,12 @@ class Domain
      * @param string[] $nameservers
      * @return self
      */
-    public function withNameservers(array $nameservers) : self
+    public function withNameservers(array $nameservers): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($nameservers, static::$schema['properties']['nameservers']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -453,7 +456,7 @@ class Domain
      * @param Process[] $processes
      * @return self
      */
-    public function withProcesses(array $processes) : self
+    public function withProcesses(array $processes): self
     {
         $clone = clone $this;
         $clone->processes = $processes;
@@ -464,7 +467,7 @@ class Domain
     /**
      * @return self
      */
-    public function withoutProcesses() : self
+    public function withoutProcesses(): self
     {
         $clone = clone $this;
         unset($clone->processes);
@@ -476,12 +479,12 @@ class Domain
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -494,12 +497,12 @@ class Domain
      * @param string $transferInAuthCode
      * @return self
      */
-    public function withTransferInAuthCode(string $transferInAuthCode) : self
+    public function withTransferInAuthCode(string $transferInAuthCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($transferInAuthCode, static::$schema['properties']['transferInAuthCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -511,7 +514,7 @@ class Domain
     /**
      * @return self
      */
-    public function withoutTransferInAuthCode() : self
+    public function withoutTransferInAuthCode(): self
     {
         $clone = clone $this;
         unset($clone->transferInAuthCode);
@@ -523,12 +526,12 @@ class Domain
      * @param bool $usesDefaultNameserver
      * @return self
      */
-    public function withUsesDefaultNameserver(bool $usesDefaultNameserver) : self
+    public function withUsesDefaultNameserver(bool $usesDefaultNameserver): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($usesDefaultNameserver, static::$schema['properties']['usesDefaultNameserver']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -543,11 +546,11 @@ class Domain
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Domain Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Domain
+    public static function buildFromInput(array|object $input, bool $validate = true): Domain
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -569,7 +572,7 @@ class Domain
         $nameservers = $input->{'nameservers'};
         $processes = null;
         if (isset($input->{'processes'})) {
-            $processes = array_map(fn(array $i): Process => Process::buildFromInput($i, validate: $validate), $input->{'processes'});
+            $processes = array_map(fn (array $i): Process => Process::buildFromInput($i, validate: $validate), $input->{'processes'});
         }
         $projectId = $input->{'projectId'};
         $transferInAuthCode = null;
@@ -591,7 +594,7 @@ class Domain
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->authCode)) {
@@ -608,7 +611,7 @@ class Domain
         $output['hasAuthCode'] = $this->hasAuthCode;
         $output['nameservers'] = $this->nameservers;
         if (isset($this->processes)) {
-            $output['processes'] = array_map(fn(Process $i): array => $i->toJson(), $this->processes);
+            $output['processes'] = array_map(fn (Process $i): array => $i->toJson(), $this->processes);
         }
         $output['projectId'] = $this->projectId;
         if (isset($this->transferInAuthCode)) {
@@ -625,19 +628,19 @@ class Domain
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -648,4 +651,3 @@ class Domain
         $this->handles = clone $this->handles;
     }
 }
-

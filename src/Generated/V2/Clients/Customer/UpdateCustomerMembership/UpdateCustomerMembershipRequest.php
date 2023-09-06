@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UpdateCustomerMembershipRequest
 {
     public const method = 'patch';
@@ -54,7 +57,7 @@ class UpdateCustomerMembershipRequest
     private UpdateCustomerMembershipRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -70,7 +73,7 @@ class UpdateCustomerMembershipRequest
     /**
      * @return string
      */
-    public function getMembershipId() : string
+    public function getMembershipId(): string
     {
         return $this->membershipId;
     }
@@ -78,7 +81,7 @@ class UpdateCustomerMembershipRequest
     /**
      * @return UpdateCustomerMembershipRequestBody
      */
-    public function getBody() : UpdateCustomerMembershipRequestBody
+    public function getBody(): UpdateCustomerMembershipRequestBody
     {
         return $this->body;
     }
@@ -87,12 +90,12 @@ class UpdateCustomerMembershipRequest
      * @param string $membershipId
      * @return self
      */
-    public function withMembershipId(string $membershipId) : self
+    public function withMembershipId(string $membershipId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($membershipId, static::$schema['properties']['membershipId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -105,7 +108,7 @@ class UpdateCustomerMembershipRequest
      * @param UpdateCustomerMembershipRequestBody $body
      * @return self
      */
-    public function withBody(UpdateCustomerMembershipRequestBody $body) : self
+    public function withBody(UpdateCustomerMembershipRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -119,11 +122,11 @@ class UpdateCustomerMembershipRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateCustomerMembershipRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateCustomerMembershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCustomerMembershipRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -141,7 +144,7 @@ class UpdateCustomerMembershipRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['membershipId'] = $this->membershipId;
@@ -156,19 +159,19 @@ class UpdateCustomerMembershipRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -179,30 +182,29 @@ class UpdateCustomerMembershipRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $membershipId = urlencode($mapped['membershipId']);
         return '/v2/customer-memberships/' . $membershipId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

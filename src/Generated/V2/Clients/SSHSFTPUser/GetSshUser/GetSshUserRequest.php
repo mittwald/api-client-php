@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class GetSshUserRequest
 {
     public const method = 'get';
@@ -31,7 +34,7 @@ class GetSshUserRequest
     private string $sshUserId;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -45,7 +48,7 @@ class GetSshUserRequest
     /**
      * @return string
      */
-    public function getSshUserId() : string
+    public function getSshUserId(): string
     {
         return $this->sshUserId;
     }
@@ -54,12 +57,12 @@ class GetSshUserRequest
      * @param string $sshUserId
      * @return self
      */
-    public function withSshUserId(string $sshUserId) : self
+    public function withSshUserId(string $sshUserId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($sshUserId, static::$schema['properties']['sshUserId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -74,11 +77,11 @@ class GetSshUserRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetSshUserRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetSshUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetSshUserRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -95,7 +98,7 @@ class GetSshUserRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['sshUserId'] = $this->sshUserId;
@@ -109,19 +112,19 @@ class GetSshUserRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -131,30 +134,29 @@ class GetSshUserRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $sshUserId = urlencode($mapped['sshUserId']);
         return '/v2/ssh-users/' . $sshUserId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

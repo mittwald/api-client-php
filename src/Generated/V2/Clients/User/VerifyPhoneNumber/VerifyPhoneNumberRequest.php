@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class VerifyPhoneNumberRequest
 {
     public const method = 'post';
@@ -67,7 +70,7 @@ class VerifyPhoneNumberRequest
     private VerifyPhoneNumberRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -83,7 +86,7 @@ class VerifyPhoneNumberRequest
     /**
      * @return VerifyPhoneNumberRequestUserIdAlternative1|string
      */
-    public function getUserId() : VerifyPhoneNumberRequestUserIdAlternative1|string
+    public function getUserId(): VerifyPhoneNumberRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
@@ -91,7 +94,7 @@ class VerifyPhoneNumberRequest
     /**
      * @return VerifyPhoneNumberRequestBody
      */
-    public function getBody() : VerifyPhoneNumberRequestBody
+    public function getBody(): VerifyPhoneNumberRequestBody
     {
         return $this->body;
     }
@@ -100,7 +103,7 @@ class VerifyPhoneNumberRequest
      * @param VerifyPhoneNumberRequestUserIdAlternative1|string $userId
      * @return self
      */
-    public function withUserId(VerifyPhoneNumberRequestUserIdAlternative1|string $userId) : self
+    public function withUserId(VerifyPhoneNumberRequestUserIdAlternative1|string $userId): self
     {
         $clone = clone $this;
         $clone->userId = $userId;
@@ -112,7 +115,7 @@ class VerifyPhoneNumberRequest
      * @param VerifyPhoneNumberRequestBody $body
      * @return self
      */
-    public function withBody(VerifyPhoneNumberRequestBody $body) : self
+    public function withBody(VerifyPhoneNumberRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -126,11 +129,11 @@ class VerifyPhoneNumberRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return VerifyPhoneNumberRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : VerifyPhoneNumberRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): VerifyPhoneNumberRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -151,7 +154,7 @@ class VerifyPhoneNumberRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['userId'] = match (true) {
@@ -169,19 +172,19 @@ class VerifyPhoneNumberRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -195,30 +198,29 @@ class VerifyPhoneNumberRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $userId = urlencode($mapped['userId']);
         return '/v2/users/' . $userId . '/phone/verify';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

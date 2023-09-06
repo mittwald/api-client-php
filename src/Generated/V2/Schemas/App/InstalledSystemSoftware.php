@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class InstalledSystemSoftware
 {
     /**
@@ -62,7 +65,7 @@ class InstalledSystemSoftware
     /**
      * @return string
      */
-    public function getSystemSoftwareId() : string
+    public function getSystemSoftwareId(): string
     {
         return $this->systemSoftwareId;
     }
@@ -70,7 +73,7 @@ class InstalledSystemSoftware
     /**
      * @return VersionStatus
      */
-    public function getSystemSoftwareVersion() : VersionStatus
+    public function getSystemSoftwareVersion(): VersionStatus
     {
         return $this->systemSoftwareVersion;
     }
@@ -78,7 +81,7 @@ class InstalledSystemSoftware
     /**
      * @return SystemSoftwareUpdatePolicy
      */
-    public function getUpdatePolicy() : SystemSoftwareUpdatePolicy
+    public function getUpdatePolicy(): SystemSoftwareUpdatePolicy
     {
         return $this->updatePolicy;
     }
@@ -87,12 +90,12 @@ class InstalledSystemSoftware
      * @param string $systemSoftwareId
      * @return self
      */
-    public function withSystemSoftwareId(string $systemSoftwareId) : self
+    public function withSystemSoftwareId(string $systemSoftwareId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($systemSoftwareId, static::$schema['properties']['systemSoftwareId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -105,7 +108,7 @@ class InstalledSystemSoftware
      * @param VersionStatus $systemSoftwareVersion
      * @return self
      */
-    public function withSystemSoftwareVersion(VersionStatus $systemSoftwareVersion) : self
+    public function withSystemSoftwareVersion(VersionStatus $systemSoftwareVersion): self
     {
         $clone = clone $this;
         $clone->systemSoftwareVersion = $systemSoftwareVersion;
@@ -117,7 +120,7 @@ class InstalledSystemSoftware
      * @param SystemSoftwareUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(SystemSoftwareUpdatePolicy $updatePolicy) : self
+    public function withUpdatePolicy(SystemSoftwareUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -131,11 +134,11 @@ class InstalledSystemSoftware
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InstalledSystemSoftware Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InstalledSystemSoftware
+    public static function buildFromInput(array|object $input, bool $validate = true): InstalledSystemSoftware
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -154,7 +157,7 @@ class InstalledSystemSoftware
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['systemSoftwareId'] = $this->systemSoftwareId;
@@ -170,19 +173,19 @@ class InstalledSystemSoftware
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -192,4 +195,3 @@ class InstalledSystemSoftware
     {
     }
 }
-

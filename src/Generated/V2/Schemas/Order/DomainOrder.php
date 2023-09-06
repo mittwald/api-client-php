@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class DomainOrder
 {
     /**
@@ -90,7 +93,7 @@ class DomainOrder
     /**
      * @return string|null
      */
-    public function getAuthCode() : ?string
+    public function getAuthCode(): ?string
     {
         return $this->authCode ?? null;
     }
@@ -98,7 +101,7 @@ class DomainOrder
     /**
      * @return string
      */
-    public function getDomain() : string
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -106,7 +109,7 @@ class DomainOrder
     /**
      * @return DomainOrderHandleData
      */
-    public function getHandleData() : DomainOrderHandleData
+    public function getHandleData(): DomainOrderHandleData
     {
         return $this->handleData;
     }
@@ -114,7 +117,7 @@ class DomainOrder
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -123,12 +126,12 @@ class DomainOrder
      * @param string $authCode
      * @return self
      */
-    public function withAuthCode(string $authCode) : self
+    public function withAuthCode(string $authCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($authCode, static::$schema['properties']['authCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -140,7 +143,7 @@ class DomainOrder
     /**
      * @return self
      */
-    public function withoutAuthCode() : self
+    public function withoutAuthCode(): self
     {
         $clone = clone $this;
         unset($clone->authCode);
@@ -152,12 +155,12 @@ class DomainOrder
      * @param string $domain
      * @return self
      */
-    public function withDomain(string $domain) : self
+    public function withDomain(string $domain): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($domain, static::$schema['properties']['domain']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -170,7 +173,7 @@ class DomainOrder
      * @param DomainOrderHandleData $handleData
      * @return self
      */
-    public function withHandleData(DomainOrderHandleData $handleData) : self
+    public function withHandleData(DomainOrderHandleData $handleData): self
     {
         $clone = clone $this;
         $clone->handleData = $handleData;
@@ -182,12 +185,12 @@ class DomainOrder
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -202,11 +205,11 @@ class DomainOrder
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DomainOrder Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DomainOrder
+    public static function buildFromInput(array|object $input, bool $validate = true): DomainOrder
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -229,7 +232,7 @@ class DomainOrder
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->authCode)) {
@@ -248,19 +251,19 @@ class DomainOrder
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -271,4 +274,3 @@ class DomainOrder
         $this->handleData = clone $this->handleData;
     }
 }
-

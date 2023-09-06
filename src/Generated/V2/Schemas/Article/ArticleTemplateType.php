@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
-enum ArticleTemplateType: string {
+enum ArticleTemplateType: string
+{
     case miscellaneous = 'miscellaneous';
     case base = 'base';
     case additional = 'additional';

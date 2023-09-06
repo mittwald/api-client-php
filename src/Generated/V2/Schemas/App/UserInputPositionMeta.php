@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UserInputPositionMeta
 {
     /**
@@ -51,7 +54,7 @@ class UserInputPositionMeta
     /**
      * @return int|float|null
      */
-    public function getIndex() : int|float|null
+    public function getIndex(): int|float|null
     {
         return $this->index;
     }
@@ -59,7 +62,7 @@ class UserInputPositionMeta
     /**
      * @return string|null
      */
-    public function getSection() : ?string
+    public function getSection(): ?string
     {
         return $this->section ?? null;
     }
@@ -67,7 +70,7 @@ class UserInputPositionMeta
     /**
      * @return string|null
      */
-    public function getStep() : ?string
+    public function getStep(): ?string
     {
         return $this->step ?? null;
     }
@@ -76,12 +79,12 @@ class UserInputPositionMeta
      * @param int|float $index
      * @return self
      */
-    public function withIndex(int|float $index) : self
+    public function withIndex(int|float $index): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($index, static::$schema['properties']['index']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -93,7 +96,7 @@ class UserInputPositionMeta
     /**
      * @return self
      */
-    public function withoutIndex() : self
+    public function withoutIndex(): self
     {
         $clone = clone $this;
         unset($clone->index);
@@ -105,12 +108,12 @@ class UserInputPositionMeta
      * @param string $section
      * @return self
      */
-    public function withSection(string $section) : self
+    public function withSection(string $section): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($section, static::$schema['properties']['section']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -122,7 +125,7 @@ class UserInputPositionMeta
     /**
      * @return self
      */
-    public function withoutSection() : self
+    public function withoutSection(): self
     {
         $clone = clone $this;
         unset($clone->section);
@@ -134,12 +137,12 @@ class UserInputPositionMeta
      * @param string $step
      * @return self
      */
-    public function withStep(string $step) : self
+    public function withStep(string $step): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($step, static::$schema['properties']['step']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -151,7 +154,7 @@ class UserInputPositionMeta
     /**
      * @return self
      */
-    public function withoutStep() : self
+    public function withoutStep(): self
     {
         $clone = clone $this;
         unset($clone->step);
@@ -165,11 +168,11 @@ class UserInputPositionMeta
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UserInputPositionMeta Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UserInputPositionMeta
+    public static function buildFromInput(array|object $input, bool $validate = true): UserInputPositionMeta
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -199,7 +202,7 @@ class UserInputPositionMeta
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->index)) {
@@ -221,19 +224,19 @@ class UserInputPositionMeta
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -243,4 +246,3 @@ class UserInputPositionMeta
     {
     }
 }
-

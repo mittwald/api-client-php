@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Dns;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class RecordSRVRecord
 {
     /**
@@ -82,7 +85,7 @@ class RecordSRVRecord
     /**
      * @return string
      */
-    public function getFqdn() : string
+    public function getFqdn(): string
     {
         return $this->fqdn;
     }
@@ -90,7 +93,7 @@ class RecordSRVRecord
     /**
      * @return int
      */
-    public function getPort() : int
+    public function getPort(): int
     {
         return $this->port;
     }
@@ -98,7 +101,7 @@ class RecordSRVRecord
     /**
      * @return int
      */
-    public function getPriority() : int
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -106,7 +109,7 @@ class RecordSRVRecord
     /**
      * @return int
      */
-    public function getWeight() : int
+    public function getWeight(): int
     {
         return $this->weight;
     }
@@ -115,12 +118,12 @@ class RecordSRVRecord
      * @param string $fqdn
      * @return self
      */
-    public function withFqdn(string $fqdn) : self
+    public function withFqdn(string $fqdn): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($fqdn, static::$schema['properties']['fqdn']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -133,12 +136,12 @@ class RecordSRVRecord
      * @param int $port
      * @return self
      */
-    public function withPort(int $port) : self
+    public function withPort(int $port): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($port, static::$schema['properties']['port']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -151,12 +154,12 @@ class RecordSRVRecord
      * @param int $priority
      * @return self
      */
-    public function withPriority(int $priority) : self
+    public function withPriority(int $priority): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($priority, static::$schema['properties']['priority']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -169,12 +172,12 @@ class RecordSRVRecord
      * @param int $weight
      * @return self
      */
-    public function withWeight(int $weight) : self
+    public function withWeight(int $weight): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($weight, static::$schema['properties']['weight']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -189,11 +192,11 @@ class RecordSRVRecord
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RecordSRVRecord Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RecordSRVRecord
+    public static function buildFromInput(array|object $input, bool $validate = true): RecordSRVRecord
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -213,7 +216,7 @@ class RecordSRVRecord
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['fqdn'] = $this->fqdn;
@@ -230,19 +233,19 @@ class RecordSRVRecord
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -252,4 +255,3 @@ class RecordSRVRecord
     {
     }
 }
-

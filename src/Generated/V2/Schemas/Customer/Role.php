@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Customer;
 
-enum Role: string {
+enum Role: string
+{
     case owner = 'owner';
     case member = 'member';
     case accountant = 'accountant';

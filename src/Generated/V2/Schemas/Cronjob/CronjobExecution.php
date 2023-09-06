@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Cronjob;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CronjobExecution
 {
     /**
@@ -99,19 +103,19 @@ class CronjobExecution
     private int $durationInMilliseconds;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $end = null;
+    private ?DateTime $end = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $executionEnd = null;
+    private ?DateTime $executionEnd = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $executionStart = null;
+    private ?DateTime $executionStart = null;
 
     /**
      * @var string
@@ -124,9 +128,9 @@ class CronjobExecution
     private string $logPath;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $start = null;
+    private ?DateTime $start = null;
 
     /**
      * @var CronjobExecutionStatus
@@ -162,7 +166,7 @@ class CronjobExecution
     /**
      * @return CronjobExecutionAbortedBy|null
      */
-    public function getAbortedBy() : ?CronjobExecutionAbortedBy
+    public function getAbortedBy(): ?CronjobExecutionAbortedBy
     {
         return $this->abortedBy ?? null;
     }
@@ -170,31 +174,31 @@ class CronjobExecution
     /**
      * @return int
      */
-    public function getDurationInMilliseconds() : int
+    public function getDurationInMilliseconds(): int
     {
         return $this->durationInMilliseconds;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getEnd() : ?\DateTime
+    public function getEnd(): ?DateTime
     {
         return $this->end ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExecutionEnd() : ?\DateTime
+    public function getExecutionEnd(): ?DateTime
     {
         return $this->executionEnd ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExecutionStart() : ?\DateTime
+    public function getExecutionStart(): ?DateTime
     {
         return $this->executionStart ?? null;
     }
@@ -202,7 +206,7 @@ class CronjobExecution
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -210,15 +214,15 @@ class CronjobExecution
     /**
      * @return string
      */
-    public function getLogPath() : string
+    public function getLogPath(): string
     {
         return $this->logPath;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getStart() : ?\DateTime
+    public function getStart(): ?DateTime
     {
         return $this->start ?? null;
     }
@@ -226,7 +230,7 @@ class CronjobExecution
     /**
      * @return CronjobExecutionStatus
      */
-    public function getStatus() : CronjobExecutionStatus
+    public function getStatus(): CronjobExecutionStatus
     {
         return $this->status;
     }
@@ -234,7 +238,7 @@ class CronjobExecution
     /**
      * @return bool
      */
-    public function getSuccessful() : bool
+    public function getSuccessful(): bool
     {
         return $this->successful;
     }
@@ -242,7 +246,7 @@ class CronjobExecution
     /**
      * @return CronjobExecutionTriggeredBy|null
      */
-    public function getTriggeredBy() : ?CronjobExecutionTriggeredBy
+    public function getTriggeredBy(): ?CronjobExecutionTriggeredBy
     {
         return $this->triggeredBy ?? null;
     }
@@ -251,7 +255,7 @@ class CronjobExecution
      * @param CronjobExecutionAbortedBy $abortedBy
      * @return self
      */
-    public function withAbortedBy(CronjobExecutionAbortedBy $abortedBy) : self
+    public function withAbortedBy(CronjobExecutionAbortedBy $abortedBy): self
     {
         $clone = clone $this;
         $clone->abortedBy = $abortedBy;
@@ -262,7 +266,7 @@ class CronjobExecution
     /**
      * @return self
      */
-    public function withoutAbortedBy() : self
+    public function withoutAbortedBy(): self
     {
         $clone = clone $this;
         unset($clone->abortedBy);
@@ -274,12 +278,12 @@ class CronjobExecution
      * @param int $durationInMilliseconds
      * @return self
      */
-    public function withDurationInMilliseconds(int $durationInMilliseconds) : self
+    public function withDurationInMilliseconds(int $durationInMilliseconds): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($durationInMilliseconds, static::$schema['properties']['durationInMilliseconds']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -289,10 +293,10 @@ class CronjobExecution
     }
 
     /**
-     * @param \DateTime $end
+     * @param DateTime $end
      * @return self
      */
-    public function withEnd(\DateTime $end) : self
+    public function withEnd(DateTime $end): self
     {
         $clone = clone $this;
         $clone->end = $end;
@@ -303,7 +307,7 @@ class CronjobExecution
     /**
      * @return self
      */
-    public function withoutEnd() : self
+    public function withoutEnd(): self
     {
         $clone = clone $this;
         unset($clone->end);
@@ -312,10 +316,10 @@ class CronjobExecution
     }
 
     /**
-     * @param \DateTime $executionEnd
+     * @param DateTime $executionEnd
      * @return self
      */
-    public function withExecutionEnd(\DateTime $executionEnd) : self
+    public function withExecutionEnd(DateTime $executionEnd): self
     {
         $clone = clone $this;
         $clone->executionEnd = $executionEnd;
@@ -326,7 +330,7 @@ class CronjobExecution
     /**
      * @return self
      */
-    public function withoutExecutionEnd() : self
+    public function withoutExecutionEnd(): self
     {
         $clone = clone $this;
         unset($clone->executionEnd);
@@ -335,10 +339,10 @@ class CronjobExecution
     }
 
     /**
-     * @param \DateTime $executionStart
+     * @param DateTime $executionStart
      * @return self
      */
-    public function withExecutionStart(\DateTime $executionStart) : self
+    public function withExecutionStart(DateTime $executionStart): self
     {
         $clone = clone $this;
         $clone->executionStart = $executionStart;
@@ -349,7 +353,7 @@ class CronjobExecution
     /**
      * @return self
      */
-    public function withoutExecutionStart() : self
+    public function withoutExecutionStart(): self
     {
         $clone = clone $this;
         unset($clone->executionStart);
@@ -361,12 +365,12 @@ class CronjobExecution
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -379,12 +383,12 @@ class CronjobExecution
      * @param string $logPath
      * @return self
      */
-    public function withLogPath(string $logPath) : self
+    public function withLogPath(string $logPath): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($logPath, static::$schema['properties']['logPath']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -394,10 +398,10 @@ class CronjobExecution
     }
 
     /**
-     * @param \DateTime $start
+     * @param DateTime $start
      * @return self
      */
-    public function withStart(\DateTime $start) : self
+    public function withStart(DateTime $start): self
     {
         $clone = clone $this;
         $clone->start = $start;
@@ -408,7 +412,7 @@ class CronjobExecution
     /**
      * @return self
      */
-    public function withoutStart() : self
+    public function withoutStart(): self
     {
         $clone = clone $this;
         unset($clone->start);
@@ -420,7 +424,7 @@ class CronjobExecution
      * @param CronjobExecutionStatus $status
      * @return self
      */
-    public function withStatus(CronjobExecutionStatus $status) : self
+    public function withStatus(CronjobExecutionStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -432,12 +436,12 @@ class CronjobExecution
      * @param bool $successful
      * @return self
      */
-    public function withSuccessful(bool $successful) : self
+    public function withSuccessful(bool $successful): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($successful, static::$schema['properties']['successful']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -450,7 +454,7 @@ class CronjobExecution
      * @param CronjobExecutionTriggeredBy $triggeredBy
      * @return self
      */
-    public function withTriggeredBy(CronjobExecutionTriggeredBy $triggeredBy) : self
+    public function withTriggeredBy(CronjobExecutionTriggeredBy $triggeredBy): self
     {
         $clone = clone $this;
         $clone->triggeredBy = $triggeredBy;
@@ -461,7 +465,7 @@ class CronjobExecution
     /**
      * @return self
      */
-    public function withoutTriggeredBy() : self
+    public function withoutTriggeredBy(): self
     {
         $clone = clone $this;
         unset($clone->triggeredBy);
@@ -475,11 +479,11 @@ class CronjobExecution
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CronjobExecution Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CronjobExecution
+    public static function buildFromInput(array|object $input, bool $validate = true): CronjobExecution
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -491,21 +495,21 @@ class CronjobExecution
         $durationInMilliseconds = (int)($input->{'durationInMilliseconds'});
         $end = null;
         if (isset($input->{'end'})) {
-            $end = new \DateTime($input->{'end'});
+            $end = new DateTime($input->{'end'});
         }
         $executionEnd = null;
         if (isset($input->{'executionEnd'})) {
-            $executionEnd = new \DateTime($input->{'executionEnd'});
+            $executionEnd = new DateTime($input->{'executionEnd'});
         }
         $executionStart = null;
         if (isset($input->{'executionStart'})) {
-            $executionStart = new \DateTime($input->{'executionStart'});
+            $executionStart = new DateTime($input->{'executionStart'});
         }
         $id = $input->{'id'};
         $logPath = $input->{'logPath'};
         $start = null;
         if (isset($input->{'start'})) {
-            $start = new \DateTime($input->{'start'});
+            $start = new DateTime($input->{'start'});
         }
         $status = CronjobExecutionStatus::from($input->{'status'});
         $successful = (bool)($input->{'successful'});
@@ -529,7 +533,7 @@ class CronjobExecution
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->abortedBy)) {
@@ -537,18 +541,18 @@ class CronjobExecution
         }
         $output['durationInMilliseconds'] = $this->durationInMilliseconds;
         if (isset($this->end)) {
-            $output['end'] = ($this->end)->format(\DateTime::ATOM);
+            $output['end'] = ($this->end)->format(DateTime::ATOM);
         }
         if (isset($this->executionEnd)) {
-            $output['executionEnd'] = ($this->executionEnd)->format(\DateTime::ATOM);
+            $output['executionEnd'] = ($this->executionEnd)->format(DateTime::ATOM);
         }
         if (isset($this->executionStart)) {
-            $output['executionStart'] = ($this->executionStart)->format(\DateTime::ATOM);
+            $output['executionStart'] = ($this->executionStart)->format(DateTime::ATOM);
         }
         $output['id'] = $this->id;
         $output['logPath'] = $this->logPath;
         if (isset($this->start)) {
-            $output['start'] = ($this->start)->format(\DateTime::ATOM);
+            $output['start'] = ($this->start)->format(DateTime::ATOM);
         }
         $output['status'] = ($this->status)->value;
         $output['successful'] = $this->successful;
@@ -565,19 +569,19 @@ class CronjobExecution
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -605,4 +609,3 @@ class CronjobExecution
         }
     }
 }
-

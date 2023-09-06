@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class AppInstallationStatus
 {
     /**
@@ -72,7 +75,7 @@ class AppInstallationStatus
     /**
      * @return int|float|null
      */
-    public function getLastExitCode() : int|float|null
+    public function getLastExitCode(): int|float|null
     {
         return $this->lastExitCode;
     }
@@ -80,7 +83,7 @@ class AppInstallationStatus
     /**
      * @return string
      */
-    public function getLogFileLocation() : string
+    public function getLogFileLocation(): string
     {
         return $this->logFileLocation;
     }
@@ -88,7 +91,7 @@ class AppInstallationStatus
     /**
      * @return AppInstallationStatusState
      */
-    public function getState() : AppInstallationStatusState
+    public function getState(): AppInstallationStatusState
     {
         return $this->state;
     }
@@ -96,7 +99,7 @@ class AppInstallationStatus
     /**
      * @return int|float|null
      */
-    public function getUptimeSeconds() : int|float|null
+    public function getUptimeSeconds(): int|float|null
     {
         return $this->uptimeSeconds;
     }
@@ -105,12 +108,12 @@ class AppInstallationStatus
      * @param int|float $lastExitCode
      * @return self
      */
-    public function withLastExitCode(int|float $lastExitCode) : self
+    public function withLastExitCode(int|float $lastExitCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($lastExitCode, static::$schema['properties']['lastExitCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -122,7 +125,7 @@ class AppInstallationStatus
     /**
      * @return self
      */
-    public function withoutLastExitCode() : self
+    public function withoutLastExitCode(): self
     {
         $clone = clone $this;
         unset($clone->lastExitCode);
@@ -134,12 +137,12 @@ class AppInstallationStatus
      * @param string $logFileLocation
      * @return self
      */
-    public function withLogFileLocation(string $logFileLocation) : self
+    public function withLogFileLocation(string $logFileLocation): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($logFileLocation, static::$schema['properties']['logFileLocation']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -152,7 +155,7 @@ class AppInstallationStatus
      * @param AppInstallationStatusState $state
      * @return self
      */
-    public function withState(AppInstallationStatusState $state) : self
+    public function withState(AppInstallationStatusState $state): self
     {
         $clone = clone $this;
         $clone->state = $state;
@@ -164,12 +167,12 @@ class AppInstallationStatus
      * @param int|float $uptimeSeconds
      * @return self
      */
-    public function withUptimeSeconds(int|float $uptimeSeconds) : self
+    public function withUptimeSeconds(int|float $uptimeSeconds): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($uptimeSeconds, static::$schema['properties']['uptimeSeconds']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -181,7 +184,7 @@ class AppInstallationStatus
     /**
      * @return self
      */
-    public function withoutUptimeSeconds() : self
+    public function withoutUptimeSeconds(): self
     {
         $clone = clone $this;
         unset($clone->uptimeSeconds);
@@ -195,11 +198,11 @@ class AppInstallationStatus
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AppInstallationStatus Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AppInstallationStatus
+    public static function buildFromInput(array|object $input, bool $validate = true): AppInstallationStatus
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -226,7 +229,7 @@ class AppInstallationStatus
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->lastExitCode)) {
@@ -247,19 +250,19 @@ class AppInstallationStatus
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -269,4 +272,3 @@ class AppInstallationStatus
     {
     }
 }
-

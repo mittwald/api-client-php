@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\File;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class FileUploadRulesPropertiesImageDimensionsMax
 {
     /**
@@ -43,7 +46,7 @@ class FileUploadRulesPropertiesImageDimensionsMax
     /**
      * @return int|null
      */
-    public function getHeight() : ?int
+    public function getHeight(): ?int
     {
         return $this->height ?? null;
     }
@@ -51,7 +54,7 @@ class FileUploadRulesPropertiesImageDimensionsMax
     /**
      * @return int|null
      */
-    public function getWidth() : ?int
+    public function getWidth(): ?int
     {
         return $this->width ?? null;
     }
@@ -60,12 +63,12 @@ class FileUploadRulesPropertiesImageDimensionsMax
      * @param int $height
      * @return self
      */
-    public function withHeight(int $height) : self
+    public function withHeight(int $height): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($height, static::$schema['properties']['height']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -77,7 +80,7 @@ class FileUploadRulesPropertiesImageDimensionsMax
     /**
      * @return self
      */
-    public function withoutHeight() : self
+    public function withoutHeight(): self
     {
         $clone = clone $this;
         unset($clone->height);
@@ -89,12 +92,12 @@ class FileUploadRulesPropertiesImageDimensionsMax
      * @param int $width
      * @return self
      */
-    public function withWidth(int $width) : self
+    public function withWidth(int $width): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($width, static::$schema['properties']['width']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -106,7 +109,7 @@ class FileUploadRulesPropertiesImageDimensionsMax
     /**
      * @return self
      */
-    public function withoutWidth() : self
+    public function withoutWidth(): self
     {
         $clone = clone $this;
         unset($clone->width);
@@ -120,11 +123,11 @@ class FileUploadRulesPropertiesImageDimensionsMax
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return FileUploadRulesPropertiesImageDimensionsMax Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : FileUploadRulesPropertiesImageDimensionsMax
+    public static function buildFromInput(array|object $input, bool $validate = true): FileUploadRulesPropertiesImageDimensionsMax
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -149,7 +152,7 @@ class FileUploadRulesPropertiesImageDimensionsMax
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->height)) {
@@ -168,19 +171,19 @@ class FileUploadRulesPropertiesImageDimensionsMax
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -190,4 +193,3 @@ class FileUploadRulesPropertiesImageDimensionsMax
     {
     }
 }
-

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path;
+
 class IngressCreateRequestBody
 {
     public const method = 'post';
@@ -47,7 +51,7 @@ class IngressCreateRequestBody
     /**
      * A list of paths. The default path `/` is always present and cannot be removed.
      *
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[]
+     * @var Path[]
      */
     private array $paths;
 
@@ -57,12 +61,12 @@ class IngressCreateRequestBody
     private string $projectId;
 
     private array $headers = [
-        
+
     ];
 
     /**
      * @param string $hostname
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[] $paths
+     * @param Path[] $paths
      * @param string $projectId
      */
     public function __construct(string $hostname, array $paths, string $projectId)
@@ -75,15 +79,15 @@ class IngressCreateRequestBody
     /**
      * @return string
      */
-    public function getHostname() : string
+    public function getHostname(): string
     {
         return $this->hostname;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[]
+     * @return Path[]
      */
-    public function getPaths() : array
+    public function getPaths(): array
     {
         return $this->paths;
     }
@@ -91,7 +95,7 @@ class IngressCreateRequestBody
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -100,12 +104,12 @@ class IngressCreateRequestBody
      * @param string $hostname
      * @return self
      */
-    public function withHostname(string $hostname) : self
+    public function withHostname(string $hostname): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hostname, static::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -115,10 +119,10 @@ class IngressCreateRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[] $paths
+     * @param Path[] $paths
      * @return self
      */
-    public function withPaths(array $paths) : self
+    public function withPaths(array $paths): self
     {
         $clone = clone $this;
         $clone->paths = $paths;
@@ -130,12 +134,12 @@ class IngressCreateRequestBody
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,17 +154,17 @@ class IngressCreateRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return IngressCreateRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : IngressCreateRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): IngressCreateRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $hostname = $input->{'hostname'};
-        $paths = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path => \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path::buildFromInput($i, validate: $validate), $input->{'paths'});
+        $paths = array_map(fn (array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
 
         $obj = new self($hostname, $paths, $projectId);
@@ -173,11 +177,11 @@ class IngressCreateRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['hostname'] = $this->hostname;
-        $output['paths'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path $i): array => $i->toJson(), $this->paths);
+        $output['paths'] = array_map(fn (Path $i): array => $i->toJson(), $this->paths);
         $output['projectId'] = $this->projectId;
 
         return $output;
@@ -189,19 +193,19 @@ class IngressCreateRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -211,29 +215,28 @@ class IngressCreateRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/ingresses/';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Profile
 {
     /**
@@ -86,7 +89,7 @@ class Profile
     /**
      * @return string
      */
-    public function getEmail() : string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -94,7 +97,7 @@ class Profile
     /**
      * @return string|null
      */
-    public function getFirstName() : ?string
+    public function getFirstName(): ?string
     {
         return $this->first_name ?? null;
     }
@@ -102,7 +105,7 @@ class Profile
     /**
      * @return string|null
      */
-    public function getLastName() : ?string
+    public function getLastName(): ?string
     {
         return $this->last_name ?? null;
     }
@@ -110,7 +113,7 @@ class Profile
     /**
      * @return ProfileTitle|null
      */
-    public function getTitle() : ?ProfileTitle
+    public function getTitle(): ?ProfileTitle
     {
         return $this->title ?? null;
     }
@@ -118,7 +121,7 @@ class Profile
     /**
      * @return string
      */
-    public function getUserId() : string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -127,12 +130,12 @@ class Profile
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -145,12 +148,12 @@ class Profile
      * @param string $first_name
      * @return self
      */
-    public function withFirstName(string $first_name) : self
+    public function withFirstName(string $first_name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($first_name, static::$schema['properties']['first_name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -162,7 +165,7 @@ class Profile
     /**
      * @return self
      */
-    public function withoutFirstName() : self
+    public function withoutFirstName(): self
     {
         $clone = clone $this;
         unset($clone->first_name);
@@ -174,12 +177,12 @@ class Profile
      * @param string $last_name
      * @return self
      */
-    public function withLastName(string $last_name) : self
+    public function withLastName(string $last_name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($last_name, static::$schema['properties']['last_name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -191,7 +194,7 @@ class Profile
     /**
      * @return self
      */
-    public function withoutLastName() : self
+    public function withoutLastName(): self
     {
         $clone = clone $this;
         unset($clone->last_name);
@@ -203,7 +206,7 @@ class Profile
      * @param ProfileTitle $title
      * @return self
      */
-    public function withTitle(ProfileTitle $title) : self
+    public function withTitle(ProfileTitle $title): self
     {
         $clone = clone $this;
         $clone->title = $title;
@@ -214,7 +217,7 @@ class Profile
     /**
      * @return self
      */
-    public function withoutTitle() : self
+    public function withoutTitle(): self
     {
         $clone = clone $this;
         unset($clone->title);
@@ -226,12 +229,12 @@ class Profile
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -246,11 +249,11 @@ class Profile
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Profile Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Profile
+    public static function buildFromInput(array|object $input, bool $validate = true): Profile
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -282,7 +285,7 @@ class Profile
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['email'] = $this->email;
@@ -306,19 +309,19 @@ class Profile
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -328,4 +331,3 @@ class Profile
     {
     }
 }
-

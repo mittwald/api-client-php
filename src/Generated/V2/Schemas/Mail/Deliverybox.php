@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Deliverybox
 {
     /**
@@ -75,9 +79,9 @@ class Deliverybox
     private string $name;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $passwordUpdatedAt;
+    private DateTime $passwordUpdatedAt;
 
     /**
      * @var string
@@ -90,21 +94,21 @@ class Deliverybox
     private bool $sendingEnabled;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @param bool $authenticationEnabled
      * @param string $description
      * @param string $id
      * @param string $name
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @param string $projectId
      * @param bool $sendingEnabled
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function __construct(bool $authenticationEnabled, string $description, string $id, string $name, \DateTime $passwordUpdatedAt, string $projectId, bool $sendingEnabled, \DateTime $updatedAt)
+    public function __construct(bool $authenticationEnabled, string $description, string $id, string $name, DateTime $passwordUpdatedAt, string $projectId, bool $sendingEnabled, DateTime $updatedAt)
     {
         $this->authenticationEnabled = $authenticationEnabled;
         $this->description = $description;
@@ -119,7 +123,7 @@ class Deliverybox
     /**
      * @return bool
      */
-    public function getAuthenticationEnabled() : bool
+    public function getAuthenticationEnabled(): bool
     {
         return $this->authenticationEnabled;
     }
@@ -127,7 +131,7 @@ class Deliverybox
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -135,7 +139,7 @@ class Deliverybox
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -143,15 +147,15 @@ class Deliverybox
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getPasswordUpdatedAt() : \DateTime
+    public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
@@ -159,7 +163,7 @@ class Deliverybox
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -167,15 +171,15 @@ class Deliverybox
     /**
      * @return bool
      */
-    public function getSendingEnabled() : bool
+    public function getSendingEnabled(): bool
     {
         return $this->sendingEnabled;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -184,12 +188,12 @@ class Deliverybox
      * @param bool $authenticationEnabled
      * @return self
      */
-    public function withAuthenticationEnabled(bool $authenticationEnabled) : self
+    public function withAuthenticationEnabled(bool $authenticationEnabled): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($authenticationEnabled, static::$schema['properties']['authenticationEnabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -202,12 +206,12 @@ class Deliverybox
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -220,12 +224,12 @@ class Deliverybox
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -238,12 +242,12 @@ class Deliverybox
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -253,10 +257,10 @@ class Deliverybox
     }
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @return self
      */
-    public function withPasswordUpdatedAt(\DateTime $passwordUpdatedAt) : self
+    public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
         $clone->passwordUpdatedAt = $passwordUpdatedAt;
@@ -268,12 +272,12 @@ class Deliverybox
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -286,12 +290,12 @@ class Deliverybox
      * @param bool $sendingEnabled
      * @return self
      */
-    public function withSendingEnabled(bool $sendingEnabled) : self
+    public function withSendingEnabled(bool $sendingEnabled): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($sendingEnabled, static::$schema['properties']['sendingEnabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -301,10 +305,10 @@ class Deliverybox
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -318,11 +322,11 @@ class Deliverybox
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Deliverybox Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Deliverybox
+    public static function buildFromInput(array|object $input, bool $validate = true): Deliverybox
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -331,10 +335,10 @@ class Deliverybox
         $description = $input->{'description'};
         $id = $input->{'id'};
         $name = $input->{'name'};
-        $passwordUpdatedAt = new \DateTime($input->{'passwordUpdatedAt'});
+        $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
         $projectId = $input->{'projectId'};
         $sendingEnabled = (bool)($input->{'sendingEnabled'});
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($authenticationEnabled, $description, $id, $name, $passwordUpdatedAt, $projectId, $sendingEnabled, $updatedAt);
 
@@ -346,17 +350,17 @@ class Deliverybox
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['authenticationEnabled'] = $this->authenticationEnabled;
         $output['description'] = $this->description;
         $output['id'] = $this->id;
         $output['name'] = $this->name;
-        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(\DateTime::ATOM);
+        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
         $output['projectId'] = $this->projectId;
         $output['sendingEnabled'] = $this->sendingEnabled;
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -367,19 +371,19 @@ class Deliverybox
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -391,4 +395,3 @@ class Deliverybox
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

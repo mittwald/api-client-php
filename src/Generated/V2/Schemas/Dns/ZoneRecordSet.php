@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Dns;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ZoneRecordSet
 {
     /**
@@ -84,7 +87,7 @@ class ZoneRecordSet
      * @return
      * RecordUnset|RecordCNAMEComponent
      */
-    public function getCname() : RecordCNAMEComponent|RecordUnset
+    public function getCname(): RecordCNAMEComponent|RecordUnset
     {
         return $this->cname;
     }
@@ -93,7 +96,7 @@ class ZoneRecordSet
      * @return
      * RecordUnset|CombinedACustom|CombinedAManaged
      */
-    public function getCombinedARecords() : CombinedACustom|CombinedAManaged|RecordUnset
+    public function getCombinedARecords(): CombinedACustom|CombinedAManaged|RecordUnset
     {
         return $this->combinedARecords;
     }
@@ -102,7 +105,7 @@ class ZoneRecordSet
      * @return
      * RecordUnset|RecordMXManaged|RecordMXCustom
      */
-    public function getMx() : RecordMXCustom|RecordMXManaged|RecordUnset
+    public function getMx(): RecordMXCustom|RecordMXManaged|RecordUnset
     {
         return $this->mx;
     }
@@ -111,7 +114,7 @@ class ZoneRecordSet
      * @return
      * RecordUnset|RecordSRVComponent
      */
-    public function getSrv() : RecordSRVComponent|RecordUnset
+    public function getSrv(): RecordSRVComponent|RecordUnset
     {
         return $this->srv;
     }
@@ -120,7 +123,7 @@ class ZoneRecordSet
      * @return
      * RecordUnset|RecordTXTComponent
      */
-    public function getTxt() : RecordTXTComponent|RecordUnset
+    public function getTxt(): RecordTXTComponent|RecordUnset
     {
         return $this->txt;
     }
@@ -129,7 +132,7 @@ class ZoneRecordSet
      * @param RecordUnset|RecordCNAMEComponent $cname
      * @return self
      */
-    public function withCname(RecordCNAMEComponent|RecordUnset $cname) : self
+    public function withCname(RecordCNAMEComponent|RecordUnset $cname): self
     {
         $clone = clone $this;
         $clone->cname = $cname;
@@ -141,7 +144,7 @@ class ZoneRecordSet
      * @param RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords
      * @return self
      */
-    public function withCombinedARecords(CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords) : self
+    public function withCombinedARecords(CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords): self
     {
         $clone = clone $this;
         $clone->combinedARecords = $combinedARecords;
@@ -153,7 +156,7 @@ class ZoneRecordSet
      * @param RecordUnset|RecordMXManaged|RecordMXCustom $mx
      * @return self
      */
-    public function withMx(RecordMXCustom|RecordMXManaged|RecordUnset $mx) : self
+    public function withMx(RecordMXCustom|RecordMXManaged|RecordUnset $mx): self
     {
         $clone = clone $this;
         $clone->mx = $mx;
@@ -165,7 +168,7 @@ class ZoneRecordSet
      * @param RecordUnset|RecordSRVComponent $srv
      * @return self
      */
-    public function withSrv(RecordSRVComponent|RecordUnset $srv) : self
+    public function withSrv(RecordSRVComponent|RecordUnset $srv): self
     {
         $clone = clone $this;
         $clone->srv = $srv;
@@ -177,7 +180,7 @@ class ZoneRecordSet
      * @param RecordUnset|RecordTXTComponent $txt
      * @return self
      */
-    public function withTxt(RecordTXTComponent|RecordUnset $txt) : self
+    public function withTxt(RecordTXTComponent|RecordUnset $txt): self
     {
         $clone = clone $this;
         $clone->txt = $txt;
@@ -191,39 +194,39 @@ class ZoneRecordSet
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ZoneRecordSet Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ZoneRecordSet
+    public static function buildFromInput(array|object $input, bool $validate = true): ZoneRecordSet
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $cname = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             RecordUnset::validateInput($input->{'cname'}, true) => RecordUnset::buildFromInput($input->{'cname'}, validate: $validate),
             RecordCNAMEComponent::validateInput($input->{'cname'}, true) => RecordCNAMEComponent::buildFromInput($input->{'cname'}, validate: $validate),
         };
         $combinedARecords = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             RecordUnset::validateInput($input->{'combinedARecords'}, true) => RecordUnset::buildFromInput($input->{'combinedARecords'}, validate: $validate),
             CombinedACustom::validateInput($input->{'combinedARecords'}, true) => CombinedACustom::buildFromInput($input->{'combinedARecords'}, validate: $validate),
             CombinedAManaged::validateInput($input->{'combinedARecords'}, true) => CombinedAManaged::buildFromInput($input->{'combinedARecords'}, validate: $validate),
         };
         $mx = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             RecordUnset::validateInput($input->{'mx'}, true) => RecordUnset::buildFromInput($input->{'mx'}, validate: $validate),
             RecordMXManaged::validateInput($input->{'mx'}, true) => RecordMXManaged::buildFromInput($input->{'mx'}, validate: $validate),
             RecordMXCustom::validateInput($input->{'mx'}, true) => RecordMXCustom::buildFromInput($input->{'mx'}, validate: $validate),
         };
         $srv = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             RecordUnset::validateInput($input->{'srv'}, true) => RecordUnset::buildFromInput($input->{'srv'}, validate: $validate),
             RecordSRVComponent::validateInput($input->{'srv'}, true) => RecordSRVComponent::buildFromInput($input->{'srv'}, validate: $validate),
         };
         $txt = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             RecordUnset::validateInput($input->{'txt'}, true) => RecordUnset::buildFromInput($input->{'txt'}, validate: $validate),
             RecordTXTComponent::validateInput($input->{'txt'}, true) => RecordTXTComponent::buildFromInput($input->{'txt'}, validate: $validate),
         };
@@ -238,27 +241,27 @@ class ZoneRecordSet
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['cname'] = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             ($this->cname) instanceof RecordUnset, ($this->cname) instanceof RecordCNAMEComponent => $this->cname->toJson(),
         };
         $output['combinedARecords'] = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             ($this->combinedARecords) instanceof RecordUnset, ($this->combinedARecords) instanceof CombinedACustom, ($this->combinedARecords) instanceof CombinedAManaged => $this->combinedARecords->toJson(),
         };
         $output['mx'] = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             ($this->mx) instanceof RecordUnset, ($this->mx) instanceof RecordMXManaged, ($this->mx) instanceof RecordMXCustom => $this->mx->toJson(),
         };
         $output['srv'] = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             ($this->srv) instanceof RecordUnset, ($this->srv) instanceof RecordSRVComponent => $this->srv->toJson(),
         };
         $output['txt'] = match (true) {
-            default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             ($this->txt) instanceof RecordUnset, ($this->txt) instanceof RecordTXTComponent => $this->txt->toJson(),
         };
 
@@ -271,19 +274,19 @@ class ZoneRecordSet
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -293,4 +296,3 @@ class ZoneRecordSet
     {
     }
 }
-

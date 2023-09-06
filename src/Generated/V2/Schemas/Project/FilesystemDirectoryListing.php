@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class FilesystemDirectoryListing
 {
     /**
@@ -112,7 +115,7 @@ class FilesystemDirectoryListing
     /**
      * @return string
      */
-    public function getAbsolutePath() : string
+    public function getAbsolutePath(): string
     {
         return $this->absolutePath;
     }
@@ -120,7 +123,7 @@ class FilesystemDirectoryListing
     /**
      * @return bool|null
      */
-    public function getIsDirectory() : ?bool
+    public function getIsDirectory(): ?bool
     {
         return $this->isDirectory ?? null;
     }
@@ -128,7 +131,7 @@ class FilesystemDirectoryListing
     /**
      * @return bool|null
      */
-    public function getIsExecutable() : ?bool
+    public function getIsExecutable(): ?bool
     {
         return $this->isExecutable ?? null;
     }
@@ -136,7 +139,7 @@ class FilesystemDirectoryListing
     /**
      * @return bool|null
      */
-    public function getIsFile() : ?bool
+    public function getIsFile(): ?bool
     {
         return $this->isFile ?? null;
     }
@@ -144,7 +147,7 @@ class FilesystemDirectoryListing
     /**
      * @return bool|null
      */
-    public function getIsSymlink() : ?bool
+    public function getIsSymlink(): ?bool
     {
         return $this->isSymlink ?? null;
     }
@@ -153,7 +156,7 @@ class FilesystemDirectoryListing
      * @return
      * FilesystemDirectoryListing[]|null
      */
-    public function getItems() : ?array
+    public function getItems(): ?array
     {
         return $this->items ?? null;
     }
@@ -161,7 +164,7 @@ class FilesystemDirectoryListing
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -169,7 +172,7 @@ class FilesystemDirectoryListing
     /**
      * @return int
      */
-    public function getSize() : int
+    public function getSize(): int
     {
         return $this->size;
     }
@@ -177,7 +180,7 @@ class FilesystemDirectoryListing
     /**
      * @return string|null
      */
-    public function getTarget() : ?string
+    public function getTarget(): ?string
     {
         return $this->target ?? null;
     }
@@ -186,12 +189,12 @@ class FilesystemDirectoryListing
      * @param string $absolutePath
      * @return self
      */
-    public function withAbsolutePath(string $absolutePath) : self
+    public function withAbsolutePath(string $absolutePath): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($absolutePath, static::$schema['properties']['absolutePath']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -204,12 +207,12 @@ class FilesystemDirectoryListing
      * @param bool $isDirectory
      * @return self
      */
-    public function withIsDirectory(bool $isDirectory) : self
+    public function withIsDirectory(bool $isDirectory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isDirectory, static::$schema['properties']['isDirectory']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -221,7 +224,7 @@ class FilesystemDirectoryListing
     /**
      * @return self
      */
-    public function withoutIsDirectory() : self
+    public function withoutIsDirectory(): self
     {
         $clone = clone $this;
         unset($clone->isDirectory);
@@ -233,12 +236,12 @@ class FilesystemDirectoryListing
      * @param bool $isExecutable
      * @return self
      */
-    public function withIsExecutable(bool $isExecutable) : self
+    public function withIsExecutable(bool $isExecutable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isExecutable, static::$schema['properties']['isExecutable']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -250,7 +253,7 @@ class FilesystemDirectoryListing
     /**
      * @return self
      */
-    public function withoutIsExecutable() : self
+    public function withoutIsExecutable(): self
     {
         $clone = clone $this;
         unset($clone->isExecutable);
@@ -262,12 +265,12 @@ class FilesystemDirectoryListing
      * @param bool $isFile
      * @return self
      */
-    public function withIsFile(bool $isFile) : self
+    public function withIsFile(bool $isFile): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isFile, static::$schema['properties']['isFile']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -279,7 +282,7 @@ class FilesystemDirectoryListing
     /**
      * @return self
      */
-    public function withoutIsFile() : self
+    public function withoutIsFile(): self
     {
         $clone = clone $this;
         unset($clone->isFile);
@@ -291,12 +294,12 @@ class FilesystemDirectoryListing
      * @param bool $isSymlink
      * @return self
      */
-    public function withIsSymlink(bool $isSymlink) : self
+    public function withIsSymlink(bool $isSymlink): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isSymlink, static::$schema['properties']['isSymlink']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -308,7 +311,7 @@ class FilesystemDirectoryListing
     /**
      * @return self
      */
-    public function withoutIsSymlink() : self
+    public function withoutIsSymlink(): self
     {
         $clone = clone $this;
         unset($clone->isSymlink);
@@ -320,7 +323,7 @@ class FilesystemDirectoryListing
      * @param FilesystemDirectoryListing[] $items
      * @return self
      */
-    public function withItems(array $items) : self
+    public function withItems(array $items): self
     {
         $clone = clone $this;
         $clone->items = $items;
@@ -331,7 +334,7 @@ class FilesystemDirectoryListing
     /**
      * @return self
      */
-    public function withoutItems() : self
+    public function withoutItems(): self
     {
         $clone = clone $this;
         unset($clone->items);
@@ -343,12 +346,12 @@ class FilesystemDirectoryListing
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -361,12 +364,12 @@ class FilesystemDirectoryListing
      * @param int $size
      * @return self
      */
-    public function withSize(int $size) : self
+    public function withSize(int $size): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($size, static::$schema['properties']['size']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -379,12 +382,12 @@ class FilesystemDirectoryListing
      * @param string $target
      * @return self
      */
-    public function withTarget(string $target) : self
+    public function withTarget(string $target): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($target, static::$schema['properties']['target']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -396,7 +399,7 @@ class FilesystemDirectoryListing
     /**
      * @return self
      */
-    public function withoutTarget() : self
+    public function withoutTarget(): self
     {
         $clone = clone $this;
         unset($clone->target);
@@ -410,11 +413,11 @@ class FilesystemDirectoryListing
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return FilesystemDirectoryListing Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : FilesystemDirectoryListing
+    public static function buildFromInput(array|object $input, bool $validate = true): FilesystemDirectoryListing
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -438,7 +441,7 @@ class FilesystemDirectoryListing
         }
         $items = null;
         if (isset($input->{'items'})) {
-            $items = array_map(fn(array $i): FilesystemDirectoryListing => FilesystemDirectoryListing::buildFromInput($i, validate: $validate), $input->{'items'});
+            $items = array_map(fn (array $i): FilesystemDirectoryListing => FilesystemDirectoryListing::buildFromInput($i, validate: $validate), $input->{'items'});
         }
         $name = $input->{'name'};
         $size = (int)($input->{'size'});
@@ -462,7 +465,7 @@ class FilesystemDirectoryListing
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['absolutePath'] = $this->absolutePath;
@@ -479,7 +482,7 @@ class FilesystemDirectoryListing
             $output['isSymlink'] = $this->isSymlink;
         }
         if (isset($this->items)) {
-            $output['items'] = array_map(fn(FilesystemDirectoryListing $i): array => $i->toJson(), $this->items);
+            $output['items'] = array_map(fn (FilesystemDirectoryListing $i): array => $i->toJson(), $this->items);
         }
         $output['name'] = $this->name;
         $output['size'] = $this->size;
@@ -496,19 +499,19 @@ class FilesystemDirectoryListing
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -518,4 +521,3 @@ class FilesystemDirectoryListing
     {
     }
 }
-

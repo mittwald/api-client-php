@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSet;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset;
+
 class DnsRecordSrvSetRequest
 {
     public const method = 'put';
@@ -43,19 +48,19 @@ class DnsRecordSrvSetRequest
     private string $zoneId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent
+     * @var RecordUnset|RecordSRVComponent
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent $body;
+    private RecordUnset|RecordSRVComponent $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
      * @param string $zoneId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent $body
+     * @param RecordUnset|RecordSRVComponent $body
      */
-    public function __construct(string $zoneId, \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset $body)
+    public function __construct(string $zoneId, RecordSRVComponent|RecordUnset $body)
     {
         $this->zoneId = $zoneId;
         $this->body = $body;
@@ -64,7 +69,7 @@ class DnsRecordSrvSetRequest
     /**
      * @return string
      */
-    public function getZoneId() : string
+    public function getZoneId(): string
     {
         return $this->zoneId;
     }
@@ -73,7 +78,7 @@ class DnsRecordSrvSetRequest
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset
+    public function getBody(): RecordSRVComponent|RecordUnset
     {
         return $this->body;
     }
@@ -82,12 +87,12 @@ class DnsRecordSrvSetRequest
      * @param string $zoneId
      * @return self
      */
-    public function withZoneId(string $zoneId) : self
+    public function withZoneId(string $zoneId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($zoneId, static::$schema['properties']['zoneId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -97,10 +102,10 @@ class DnsRecordSrvSetRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent $body
+     * @param RecordUnset|RecordSRVComponent $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset $body) : self
+    public function withBody(RecordSRVComponent|RecordUnset $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -114,19 +119,19 @@ class DnsRecordSrvSetRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DnsRecordSrvSetRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DnsRecordSrvSetRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsRecordSrvSetRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $zoneId = $input->{'zoneId'};
         $body = match (true) {
-            \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset::buildFromInput($input->{'body'}, validate: $validate),
-            \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent::buildFromInput($input->{'body'}, validate: $validate),
+            RecordUnset::validateInput($input->{'body'}, true) => RecordUnset::buildFromInput($input->{'body'}, validate: $validate),
+            RecordSRVComponent::validateInput($input->{'body'}, true) => RecordSRVComponent::buildFromInput($input->{'body'}, validate: $validate),
         };
 
         $obj = new self($zoneId, $body);
@@ -139,12 +144,12 @@ class DnsRecordSrvSetRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['zoneId'] = $this->zoneId;
         $output['body'] = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent => $this->body->toJson(),
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof RecordSRVComponent => $this->body->toJson(),
         };
 
         return $output;
@@ -156,19 +161,19 @@ class DnsRecordSrvSetRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -177,34 +182,33 @@ class DnsRecordSrvSetRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent => $this->body,
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof RecordSRVComponent => $this->body,
         };
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $zoneId = urlencode($mapped['zoneId']);
         return '/v2/dns/zones/' . $zoneId . '/recordset/srv';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

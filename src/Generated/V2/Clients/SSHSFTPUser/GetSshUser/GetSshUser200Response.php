@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
+use Psr\Http\Message\ResponseInterface;
+
 class GetSshUser200Response
 {
     /**
@@ -24,33 +29,33 @@ class GetSshUser200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser
+     * @var SshUser
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser $body;
+    private SshUser $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser $body
+     * @param SshUser $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser $body)
+    public function __construct(SshUser $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser
+     * @return SshUser
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser
+    public function getBody(): SshUser
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser $body
+     * @param SshUser $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser $body) : self
+    public function withBody(SshUser $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,16 +69,16 @@ class GetSshUser200Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetSshUser200Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetSshUser200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): GetSshUser200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser::buildFromInput($input->{'body'}, validate: $validate);
+        $body = SshUser::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -85,7 +90,7 @@ class GetSshUser200Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = $this->body->toJson();
@@ -99,19 +104,19 @@ class GetSshUser200Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -121,7 +126,7 @@ class GetSshUser200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -129,4 +134,3 @@ class GetSshUser200Response
         return $response;
     }
 }
-

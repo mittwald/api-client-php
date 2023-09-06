@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput;
+
 class PatchAppinstallationRequestBody
 {
     public const method = 'patch';
@@ -73,17 +78,17 @@ class PatchAppinstallationRequestBody
     private ?array $systemSoftware = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy|null
+     * @var AppUpdatePolicy|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy = null;
+    private ?AppUpdatePolicy $updatePolicy = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]|null
+     * @var SavedUserInput[]|null
      */
     private ?array $userInputs = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -96,7 +101,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return string|null
      */
-    public function getAppVersionId() : ?string
+    public function getAppVersionId(): ?string
     {
         return $this->appVersionId ?? null;
     }
@@ -104,7 +109,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return string|null
      */
-    public function getCustomDocumentRoot() : ?string
+    public function getCustomDocumentRoot(): ?string
     {
         return $this->customDocumentRoot ?? null;
     }
@@ -112,7 +117,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
@@ -120,23 +125,23 @@ class PatchAppinstallationRequestBody
     /**
      * @return PatchAppinstallationRequestBodySystemSoftwareItem[]|null
      */
-    public function getSystemSoftware() : ?array
+    public function getSystemSoftware(): ?array
     {
         return $this->systemSoftware ?? null;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy|null
+     * @return AppUpdatePolicy|null
      */
-    public function getUpdatePolicy() : ?\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
+    public function getUpdatePolicy(): ?AppUpdatePolicy
     {
         return $this->updatePolicy ?? null;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]|null
+     * @return SavedUserInput[]|null
      */
-    public function getUserInputs() : ?array
+    public function getUserInputs(): ?array
     {
         return $this->userInputs ?? null;
     }
@@ -145,12 +150,12 @@ class PatchAppinstallationRequestBody
      * @param string $appVersionId
      * @return self
      */
-    public function withAppVersionId(string $appVersionId) : self
+    public function withAppVersionId(string $appVersionId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appVersionId, static::$schema['properties']['appVersionId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -162,7 +167,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return self
      */
-    public function withoutAppVersionId() : self
+    public function withoutAppVersionId(): self
     {
         $clone = clone $this;
         unset($clone->appVersionId);
@@ -174,12 +179,12 @@ class PatchAppinstallationRequestBody
      * @param string $customDocumentRoot
      * @return self
      */
-    public function withCustomDocumentRoot(string $customDocumentRoot) : self
+    public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customDocumentRoot, static::$schema['properties']['customDocumentRoot']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -191,7 +196,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return self
      */
-    public function withoutCustomDocumentRoot() : self
+    public function withoutCustomDocumentRoot(): self
     {
         $clone = clone $this;
         unset($clone->customDocumentRoot);
@@ -203,12 +208,12 @@ class PatchAppinstallationRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -220,7 +225,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -232,7 +237,7 @@ class PatchAppinstallationRequestBody
      * @param PatchAppinstallationRequestBodySystemSoftwareItem[] $systemSoftware
      * @return self
      */
-    public function withSystemSoftware(array $systemSoftware) : self
+    public function withSystemSoftware(array $systemSoftware): self
     {
         $clone = clone $this;
         $clone->systemSoftware = $systemSoftware;
@@ -243,7 +248,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return self
      */
-    public function withoutSystemSoftware() : self
+    public function withoutSystemSoftware(): self
     {
         $clone = clone $this;
         unset($clone->systemSoftware);
@@ -252,10 +257,10 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy
+     * @param AppUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy) : self
+    public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -266,7 +271,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return self
      */
-    public function withoutUpdatePolicy() : self
+    public function withoutUpdatePolicy(): self
     {
         $clone = clone $this;
         unset($clone->updatePolicy);
@@ -275,10 +280,10 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[] $userInputs
+     * @param SavedUserInput[] $userInputs
      * @return self
      */
-    public function withUserInputs(array $userInputs) : self
+    public function withUserInputs(array $userInputs): self
     {
         $clone = clone $this;
         $clone->userInputs = $userInputs;
@@ -289,7 +294,7 @@ class PatchAppinstallationRequestBody
     /**
      * @return self
      */
-    public function withoutUserInputs() : self
+    public function withoutUserInputs(): self
     {
         $clone = clone $this;
         unset($clone->userInputs);
@@ -303,11 +308,11 @@ class PatchAppinstallationRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return PatchAppinstallationRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : PatchAppinstallationRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): PatchAppinstallationRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -330,11 +335,11 @@ class PatchAppinstallationRequestBody
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
-            $updatePolicy = \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy::from($input->{'updatePolicy'});
+            $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput => \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self();
@@ -352,7 +357,7 @@ class PatchAppinstallationRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->appVersionId)) {
@@ -371,7 +376,7 @@ class PatchAppinstallationRequestBody
             $output['updatePolicy'] = $this->updatePolicy->value;
         }
         if (isset($this->userInputs)) {
-            $output['userInputs'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput $i): array => $i->toJson(), $this->userInputs);
+            $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
         }
 
         return $output;
@@ -383,19 +388,19 @@ class PatchAppinstallationRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -408,30 +413,29 @@ class PatchAppinstallationRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
         return '/v2/appinstallations/' . $appInstallationId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Commons;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Address
 {
     /**
@@ -91,7 +94,7 @@ class Address
     /**
      * @return string
      */
-    public function getStreet() : string
+    public function getStreet(): string
     {
         return $this->street;
     }
@@ -99,7 +102,7 @@ class Address
     /**
      * @return string
      */
-    public function getHouseNumber() : string
+    public function getHouseNumber(): string
     {
         return $this->houseNumber;
     }
@@ -107,7 +110,7 @@ class Address
     /**
      * @return string
      */
-    public function getCity() : string
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -115,7 +118,7 @@ class Address
     /**
      * @return string
      */
-    public function getZip() : string
+    public function getZip(): string
     {
         return $this->zip;
     }
@@ -123,7 +126,7 @@ class Address
     /**
      * @return string
      */
-    public function getCountryCode() : string
+    public function getCountryCode(): string
     {
         return $this->countryCode;
     }
@@ -132,12 +135,12 @@ class Address
      * @param string $street
      * @return self
      */
-    public function withStreet(string $street) : self
+    public function withStreet(string $street): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($street, static::$schema['properties']['street']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,12 +153,12 @@ class Address
      * @param string $houseNumber
      * @return self
      */
-    public function withHouseNumber(string $houseNumber) : self
+    public function withHouseNumber(string $houseNumber): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($houseNumber, static::$schema['properties']['houseNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -168,12 +171,12 @@ class Address
      * @param string $city
      * @return self
      */
-    public function withCity(string $city) : self
+    public function withCity(string $city): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($city, static::$schema['properties']['city']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -186,12 +189,12 @@ class Address
      * @param string $zip
      * @return self
      */
-    public function withZip(string $zip) : self
+    public function withZip(string $zip): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($zip, static::$schema['properties']['zip']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -204,12 +207,12 @@ class Address
      * @param string $countryCode
      * @return self
      */
-    public function withCountryCode(string $countryCode) : self
+    public function withCountryCode(string $countryCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($countryCode, static::$schema['properties']['countryCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -224,11 +227,11 @@ class Address
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Address Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Address
+    public static function buildFromInput(array|object $input, bool $validate = true): Address
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -249,7 +252,7 @@ class Address
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['street'] = $this->street;
@@ -267,19 +270,19 @@ class Address
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -289,4 +292,3 @@ class Address
     {
     }
 }
-

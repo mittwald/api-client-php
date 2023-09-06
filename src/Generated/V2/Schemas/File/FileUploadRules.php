@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\File;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class FileUploadRules
 {
     /**
@@ -95,7 +98,7 @@ class FileUploadRules
     /**
      * @return int
      */
-    public function getMaxSizeInKB() : int
+    public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
     }
@@ -103,7 +106,7 @@ class FileUploadRules
     /**
      * @return string[]
      */
-    public function getMimeTypes() : array
+    public function getMimeTypes(): array
     {
         return $this->mimeTypes;
     }
@@ -111,7 +114,7 @@ class FileUploadRules
     /**
      * @return FileUploadRulesProperties|null
      */
-    public function getProperties() : ?FileUploadRulesProperties
+    public function getProperties(): ?FileUploadRulesProperties
     {
         return $this->properties ?? null;
     }
@@ -120,12 +123,12 @@ class FileUploadRules
      * @param int $maxSizeInKB
      * @return self
      */
-    public function withMaxSizeInKB(int $maxSizeInKB) : self
+    public function withMaxSizeInKB(int $maxSizeInKB): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($maxSizeInKB, static::$schema['properties']['maxSizeInKB']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -138,12 +141,12 @@ class FileUploadRules
      * @param string[] $mimeTypes
      * @return self
      */
-    public function withMimeTypes(array $mimeTypes) : self
+    public function withMimeTypes(array $mimeTypes): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($mimeTypes, static::$schema['properties']['mimeTypes']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -156,7 +159,7 @@ class FileUploadRules
      * @param FileUploadRulesProperties $properties
      * @return self
      */
-    public function withProperties(FileUploadRulesProperties $properties) : self
+    public function withProperties(FileUploadRulesProperties $properties): self
     {
         $clone = clone $this;
         $clone->properties = $properties;
@@ -167,7 +170,7 @@ class FileUploadRules
     /**
      * @return self
      */
-    public function withoutProperties() : self
+    public function withoutProperties(): self
     {
         $clone = clone $this;
         unset($clone->properties);
@@ -181,11 +184,11 @@ class FileUploadRules
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return FileUploadRules Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : FileUploadRules
+    public static function buildFromInput(array|object $input, bool $validate = true): FileUploadRules
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -207,7 +210,7 @@ class FileUploadRules
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['maxSizeInKB'] = $this->maxSizeInKB;
@@ -225,19 +228,19 @@ class FileUploadRules
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -250,4 +253,3 @@ class FileUploadRules
         }
     }
 }
-

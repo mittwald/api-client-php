@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Backup;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ProjectBackup
 {
     /**
@@ -58,9 +62,9 @@ class ProjectBackup
     ];
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $createdAt = null;
+    private ?DateTime $createdAt = null;
 
     /**
      * @var bool
@@ -73,9 +77,9 @@ class ProjectBackup
     private ?string $description = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var ProjectBackupExport|null
@@ -117,9 +121,9 @@ class ProjectBackup
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getCreatedAt() : ?\DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt ?? null;
     }
@@ -127,7 +131,7 @@ class ProjectBackup
     /**
      * @return bool
      */
-    public function getDeletable() : bool
+    public function getDeletable(): bool
     {
         return $this->deletable;
     }
@@ -135,15 +139,15 @@ class ProjectBackup
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -151,7 +155,7 @@ class ProjectBackup
     /**
      * @return ProjectBackupExport|null
      */
-    public function getExport() : ?ProjectBackupExport
+    public function getExport(): ?ProjectBackupExport
     {
         return $this->export ?? null;
     }
@@ -159,7 +163,7 @@ class ProjectBackup
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -167,7 +171,7 @@ class ProjectBackup
     /**
      * @return string|null
      */
-    public function getParentId() : ?string
+    public function getParentId(): ?string
     {
         return $this->parentId ?? null;
     }
@@ -175,7 +179,7 @@ class ProjectBackup
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -183,16 +187,16 @@ class ProjectBackup
     /**
      * @return string
      */
-    public function getStatus() : string
+    public function getStatus(): string
     {
         return $this->status;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -203,7 +207,7 @@ class ProjectBackup
     /**
      * @return self
      */
-    public function withoutCreatedAt() : self
+    public function withoutCreatedAt(): self
     {
         $clone = clone $this;
         unset($clone->createdAt);
@@ -215,12 +219,12 @@ class ProjectBackup
      * @param bool $deletable
      * @return self
      */
-    public function withDeletable(bool $deletable) : self
+    public function withDeletable(bool $deletable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($deletable, static::$schema['properties']['deletable']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -233,12 +237,12 @@ class ProjectBackup
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -250,7 +254,7 @@ class ProjectBackup
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -259,10 +263,10 @@ class ProjectBackup
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -273,7 +277,7 @@ class ProjectBackup
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -285,7 +289,7 @@ class ProjectBackup
      * @param ProjectBackupExport $export
      * @return self
      */
-    public function withExport(ProjectBackupExport $export) : self
+    public function withExport(ProjectBackupExport $export): self
     {
         $clone = clone $this;
         $clone->export = $export;
@@ -296,7 +300,7 @@ class ProjectBackup
     /**
      * @return self
      */
-    public function withoutExport() : self
+    public function withoutExport(): self
     {
         $clone = clone $this;
         unset($clone->export);
@@ -308,12 +312,12 @@ class ProjectBackup
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -326,12 +330,12 @@ class ProjectBackup
      * @param string $parentId
      * @return self
      */
-    public function withParentId(string $parentId) : self
+    public function withParentId(string $parentId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($parentId, static::$schema['properties']['parentId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -343,7 +347,7 @@ class ProjectBackup
     /**
      * @return self
      */
-    public function withoutParentId() : self
+    public function withoutParentId(): self
     {
         $clone = clone $this;
         unset($clone->parentId);
@@ -355,12 +359,12 @@ class ProjectBackup
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -373,12 +377,12 @@ class ProjectBackup
      * @param string $status
      * @return self
      */
-    public function withStatus(string $status) : self
+    public function withStatus(string $status): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($status, static::$schema['properties']['status']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -393,18 +397,18 @@ class ProjectBackup
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectBackup Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectBackup
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectBackup
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $createdAt = null;
         if (isset($input->{'createdAt'})) {
-            $createdAt = new \DateTime($input->{'createdAt'});
+            $createdAt = new DateTime($input->{'createdAt'});
         }
         $deletable = (bool)($input->{'deletable'});
         $description = null;
@@ -413,7 +417,7 @@ class ProjectBackup
         }
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $export = null;
         if (isset($input->{'export'})) {
@@ -441,18 +445,18 @@ class ProjectBackup
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->createdAt)) {
-            $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+            $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         }
         $output['deletable'] = $this->deletable;
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         if (isset($this->export)) {
             $output['export'] = $this->export->toJson();
@@ -473,19 +477,19 @@ class ProjectBackup
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -501,4 +505,3 @@ class ProjectBackup
         }
     }
 }
-

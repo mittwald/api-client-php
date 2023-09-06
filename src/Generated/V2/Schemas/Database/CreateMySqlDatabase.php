@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CreateMySqlDatabase
 {
     /**
@@ -70,7 +73,7 @@ class CreateMySqlDatabase
     /**
      * @return CharacterSettings|null
      */
-    public function getCharacterSettings() : ?CharacterSettings
+    public function getCharacterSettings(): ?CharacterSettings
     {
         return $this->characterSettings ?? null;
     }
@@ -78,7 +81,7 @@ class CreateMySqlDatabase
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -86,7 +89,7 @@ class CreateMySqlDatabase
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -94,7 +97,7 @@ class CreateMySqlDatabase
     /**
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -103,7 +106,7 @@ class CreateMySqlDatabase
      * @param CharacterSettings $characterSettings
      * @return self
      */
-    public function withCharacterSettings(CharacterSettings $characterSettings) : self
+    public function withCharacterSettings(CharacterSettings $characterSettings): self
     {
         $clone = clone $this;
         $clone->characterSettings = $characterSettings;
@@ -114,7 +117,7 @@ class CreateMySqlDatabase
     /**
      * @return self
      */
-    public function withoutCharacterSettings() : self
+    public function withoutCharacterSettings(): self
     {
         $clone = clone $this;
         unset($clone->characterSettings);
@@ -126,12 +129,12 @@ class CreateMySqlDatabase
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -144,12 +147,12 @@ class CreateMySqlDatabase
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -162,12 +165,12 @@ class CreateMySqlDatabase
      * @param string $version
      * @return self
      */
-    public function withVersion(string $version) : self
+    public function withVersion(string $version): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($version, static::$schema['properties']['version']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -182,11 +185,11 @@ class CreateMySqlDatabase
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateMySqlDatabase Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateMySqlDatabase
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateMySqlDatabase
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -209,7 +212,7 @@ class CreateMySqlDatabase
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->characterSettings)) {
@@ -228,19 +231,19 @@ class CreateMySqlDatabase
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -250,4 +253,3 @@ class CreateMySqlDatabase
     {
     }
 }
-

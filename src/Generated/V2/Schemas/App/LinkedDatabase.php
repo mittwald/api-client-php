@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class LinkedDatabase
 {
     /**
@@ -82,7 +85,7 @@ class LinkedDatabase
     /**
      * @return string
      */
-    public function getDatabaseId() : string
+    public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
@@ -90,7 +93,7 @@ class LinkedDatabase
     /**
      * @return string[]|null
      */
-    public function getDatabaseUserIds() : ?array
+    public function getDatabaseUserIds(): ?array
     {
         return $this->databaseUserIds ?? null;
     }
@@ -98,7 +101,7 @@ class LinkedDatabase
     /**
      * @return LinkedDatabaseKind
      */
-    public function getKind() : LinkedDatabaseKind
+    public function getKind(): LinkedDatabaseKind
     {
         return $this->kind;
     }
@@ -106,7 +109,7 @@ class LinkedDatabase
     /**
      * @return LinkedDatabasePurpose
      */
-    public function getPurpose() : LinkedDatabasePurpose
+    public function getPurpose(): LinkedDatabasePurpose
     {
         return $this->purpose;
     }
@@ -115,12 +118,12 @@ class LinkedDatabase
      * @param string $databaseId
      * @return self
      */
-    public function withDatabaseId(string $databaseId) : self
+    public function withDatabaseId(string $databaseId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseId, static::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -133,12 +136,12 @@ class LinkedDatabase
      * @param string[] $databaseUserIds
      * @return self
      */
-    public function withDatabaseUserIds(array $databaseUserIds) : self
+    public function withDatabaseUserIds(array $databaseUserIds): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseUserIds, static::$schema['properties']['databaseUserIds']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,7 +153,7 @@ class LinkedDatabase
     /**
      * @return self
      */
-    public function withoutDatabaseUserIds() : self
+    public function withoutDatabaseUserIds(): self
     {
         $clone = clone $this;
         unset($clone->databaseUserIds);
@@ -162,7 +165,7 @@ class LinkedDatabase
      * @param LinkedDatabaseKind $kind
      * @return self
      */
-    public function withKind(LinkedDatabaseKind $kind) : self
+    public function withKind(LinkedDatabaseKind $kind): self
     {
         $clone = clone $this;
         $clone->kind = $kind;
@@ -174,7 +177,7 @@ class LinkedDatabase
      * @param LinkedDatabasePurpose $purpose
      * @return self
      */
-    public function withPurpose(LinkedDatabasePurpose $purpose) : self
+    public function withPurpose(LinkedDatabasePurpose $purpose): self
     {
         $clone = clone $this;
         $clone->purpose = $purpose;
@@ -188,11 +191,11 @@ class LinkedDatabase
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return LinkedDatabase Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : LinkedDatabase
+    public static function buildFromInput(array|object $input, bool $validate = true): LinkedDatabase
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -215,7 +218,7 @@ class LinkedDatabase
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['databaseId'] = $this->databaseId;
@@ -234,19 +237,19 @@ class LinkedDatabase
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -256,4 +259,3 @@ class LinkedDatabase
     {
     }
 }
-

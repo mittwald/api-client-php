@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Membership;
 
-enum ProjectRoles: string {
+enum ProjectRoles: string
+{
     case notset = 'notset';
     case owner = 'owner';
     case emailadmin = 'emailadmin';

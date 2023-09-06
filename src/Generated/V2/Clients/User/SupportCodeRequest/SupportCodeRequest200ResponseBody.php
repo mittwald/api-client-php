@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class SupportCodeRequest200ResponseBody
 {
     /**
@@ -34,9 +39,9 @@ class SupportCodeRequest200ResponseBody
     /**
      * Expiration of the support code
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * support code to authenticate yourself against the mittwald support via telephone
@@ -45,7 +50,7 @@ class SupportCodeRequest200ResponseBody
      */
     private ?string $supportCode = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -55,9 +60,9 @@ class SupportCodeRequest200ResponseBody
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -65,16 +70,16 @@ class SupportCodeRequest200ResponseBody
     /**
      * @return string|null
      */
-    public function getSupportCode() : ?string
+    public function getSupportCode(): ?string
     {
         return $this->supportCode ?? null;
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -85,7 +90,7 @@ class SupportCodeRequest200ResponseBody
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -97,12 +102,12 @@ class SupportCodeRequest200ResponseBody
      * @param string $supportCode
      * @return self
      */
-    public function withSupportCode(string $supportCode) : self
+    public function withSupportCode(string $supportCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($supportCode, static::$schema['properties']['supportCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -114,7 +119,7 @@ class SupportCodeRequest200ResponseBody
     /**
      * @return self
      */
-    public function withoutSupportCode() : self
+    public function withoutSupportCode(): self
     {
         $clone = clone $this;
         unset($clone->supportCode);
@@ -128,18 +133,18 @@ class SupportCodeRequest200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SupportCodeRequest200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SupportCodeRequest200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): SupportCodeRequest200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $supportCode = null;
         if (isset($input->{'supportCode'})) {
@@ -157,11 +162,11 @@ class SupportCodeRequest200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         if (isset($this->supportCode)) {
             $output['supportCode'] = $this->supportCode;
@@ -176,19 +181,19 @@ class SupportCodeRequest200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -201,7 +206,7 @@ class SupportCodeRequest200ResponseBody
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -209,4 +214,3 @@ class SupportCodeRequest200ResponseBody
         return $response;
     }
 }
-

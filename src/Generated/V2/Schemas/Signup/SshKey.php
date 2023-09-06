@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class SshKey
 {
     /**
@@ -64,14 +68,14 @@ class SshKey
     private string $comment;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var string
@@ -91,12 +95,12 @@ class SshKey
     /**
      * @param string $algorithm
      * @param string $comment
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $fingerprint
      * @param string $key
      * @param string $sshKeyId
      */
-    public function __construct(string $algorithm, string $comment, \DateTime $createdAt, string $fingerprint, string $key, string $sshKeyId)
+    public function __construct(string $algorithm, string $comment, DateTime $createdAt, string $fingerprint, string $key, string $sshKeyId)
     {
         $this->algorithm = $algorithm;
         $this->comment = $comment;
@@ -109,7 +113,7 @@ class SshKey
     /**
      * @return string
      */
-    public function getAlgorithm() : string
+    public function getAlgorithm(): string
     {
         return $this->algorithm;
     }
@@ -117,23 +121,23 @@ class SshKey
     /**
      * @return string
      */
-    public function getComment() : string
+    public function getComment(): string
     {
         return $this->comment;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -141,7 +145,7 @@ class SshKey
     /**
      * @return string
      */
-    public function getFingerprint() : string
+    public function getFingerprint(): string
     {
         return $this->fingerprint;
     }
@@ -149,7 +153,7 @@ class SshKey
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -157,7 +161,7 @@ class SshKey
     /**
      * @return string
      */
-    public function getSshKeyId() : string
+    public function getSshKeyId(): string
     {
         return $this->sshKeyId;
     }
@@ -166,12 +170,12 @@ class SshKey
      * @param string $algorithm
      * @return self
      */
-    public function withAlgorithm(string $algorithm) : self
+    public function withAlgorithm(string $algorithm): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($algorithm, static::$schema['properties']['algorithm']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -184,12 +188,12 @@ class SshKey
      * @param string $comment
      * @return self
      */
-    public function withComment(string $comment) : self
+    public function withComment(string $comment): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($comment, static::$schema['properties']['comment']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -199,10 +203,10 @@ class SshKey
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -211,10 +215,10 @@ class SshKey
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -225,7 +229,7 @@ class SshKey
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -237,12 +241,12 @@ class SshKey
      * @param string $fingerprint
      * @return self
      */
-    public function withFingerprint(string $fingerprint) : self
+    public function withFingerprint(string $fingerprint): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($fingerprint, static::$schema['properties']['fingerprint']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -255,12 +259,12 @@ class SshKey
      * @param string $key
      * @return self
      */
-    public function withKey(string $key) : self
+    public function withKey(string $key): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($key, static::$schema['properties']['key']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -273,12 +277,12 @@ class SshKey
      * @param string $sshKeyId
      * @return self
      */
-    public function withSshKeyId(string $sshKeyId) : self
+    public function withSshKeyId(string $sshKeyId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($sshKeyId, static::$schema['properties']['sshKeyId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -293,21 +297,21 @@ class SshKey
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SshKey Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SshKey
+    public static function buildFromInput(array|object $input, bool $validate = true): SshKey
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $algorithm = $input->{'algorithm'};
         $comment = $input->{'comment'};
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $fingerprint = $input->{'fingerprint'};
         $key = $input->{'key'};
@@ -323,14 +327,14 @@ class SshKey
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['algorithm'] = $this->algorithm;
         $output['comment'] = $this->comment;
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['fingerprint'] = $this->fingerprint;
         $output['key'] = $this->key;
@@ -345,19 +349,19 @@ class SshKey
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -371,4 +375,3 @@ class SshKey
         }
     }
 }
-

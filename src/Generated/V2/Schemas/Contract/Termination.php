@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Termination
 {
     /**
@@ -70,7 +73,7 @@ class Termination
     /**
      * @return string|null
      */
-    public function getReason() : ?string
+    public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
@@ -78,7 +81,7 @@ class Termination
     /**
      * @return string
      */
-    public function getScheduledAtDate() : string
+    public function getScheduledAtDate(): string
     {
         return $this->scheduledAtDate;
     }
@@ -86,7 +89,7 @@ class Termination
     /**
      * @return string|null
      */
-    public function getScheduledByUserId() : ?string
+    public function getScheduledByUserId(): ?string
     {
         return $this->scheduledByUserId ?? null;
     }
@@ -94,7 +97,7 @@ class Termination
     /**
      * @return string
      */
-    public function getTargetDate() : string
+    public function getTargetDate(): string
     {
         return $this->targetDate;
     }
@@ -103,12 +106,12 @@ class Termination
      * @param string $reason
      * @return self
      */
-    public function withReason(string $reason) : self
+    public function withReason(string $reason): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($reason, static::$schema['properties']['reason']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -120,7 +123,7 @@ class Termination
     /**
      * @return self
      */
-    public function withoutReason() : self
+    public function withoutReason(): self
     {
         $clone = clone $this;
         unset($clone->reason);
@@ -132,12 +135,12 @@ class Termination
      * @param string $scheduledAtDate
      * @return self
      */
-    public function withScheduledAtDate(string $scheduledAtDate) : self
+    public function withScheduledAtDate(string $scheduledAtDate): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($scheduledAtDate, static::$schema['properties']['scheduledAtDate']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,12 +153,12 @@ class Termination
      * @param string $scheduledByUserId
      * @return self
      */
-    public function withScheduledByUserId(string $scheduledByUserId) : self
+    public function withScheduledByUserId(string $scheduledByUserId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($scheduledByUserId, static::$schema['properties']['scheduledByUserId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -167,7 +170,7 @@ class Termination
     /**
      * @return self
      */
-    public function withoutScheduledByUserId() : self
+    public function withoutScheduledByUserId(): self
     {
         $clone = clone $this;
         unset($clone->scheduledByUserId);
@@ -179,12 +182,12 @@ class Termination
      * @param string $targetDate
      * @return self
      */
-    public function withTargetDate(string $targetDate) : self
+    public function withTargetDate(string $targetDate): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($targetDate, static::$schema['properties']['targetDate']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -199,11 +202,11 @@ class Termination
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Termination Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Termination
+    public static function buildFromInput(array|object $input, bool $validate = true): Termination
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -230,7 +233,7 @@ class Termination
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->reason)) {
@@ -251,19 +254,19 @@ class Termination
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -273,4 +276,3 @@ class Termination
     {
     }
 }
-

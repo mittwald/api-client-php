@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UserSession
 {
     /**
@@ -41,9 +45,9 @@ class UserSession
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $created;
+    private DateTime $created;
 
     /**
      * @var DeviceInfo
@@ -51,9 +55,9 @@ class UserSession
     private DeviceInfo $device;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $lastAccess = null;
+    private ?DateTime $lastAccess = null;
 
     /**
      * @var Location|null
@@ -66,11 +70,11 @@ class UserSession
     private string $tokenId;
 
     /**
-     * @param \DateTime $created
+     * @param DateTime $created
      * @param DeviceInfo $device
      * @param string $tokenId
      */
-    public function __construct(\DateTime $created, DeviceInfo $device, string $tokenId)
+    public function __construct(DateTime $created, DeviceInfo $device, string $tokenId)
     {
         $this->created = $created;
         $this->device = $device;
@@ -78,9 +82,9 @@ class UserSession
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreated() : \DateTime
+    public function getCreated(): DateTime
     {
         return $this->created;
     }
@@ -88,15 +92,15 @@ class UserSession
     /**
      * @return DeviceInfo
      */
-    public function getDevice() : DeviceInfo
+    public function getDevice(): DeviceInfo
     {
         return $this->device;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getLastAccess() : ?\DateTime
+    public function getLastAccess(): ?DateTime
     {
         return $this->lastAccess ?? null;
     }
@@ -104,7 +108,7 @@ class UserSession
     /**
      * @return Location|null
      */
-    public function getLocation() : ?Location
+    public function getLocation(): ?Location
     {
         return $this->location ?? null;
     }
@@ -112,16 +116,16 @@ class UserSession
     /**
      * @return string
      */
-    public function getTokenId() : string
+    public function getTokenId(): string
     {
         return $this->tokenId;
     }
 
     /**
-     * @param \DateTime $created
+     * @param DateTime $created
      * @return self
      */
-    public function withCreated(\DateTime $created) : self
+    public function withCreated(DateTime $created): self
     {
         $clone = clone $this;
         $clone->created = $created;
@@ -133,7 +137,7 @@ class UserSession
      * @param DeviceInfo $device
      * @return self
      */
-    public function withDevice(DeviceInfo $device) : self
+    public function withDevice(DeviceInfo $device): self
     {
         $clone = clone $this;
         $clone->device = $device;
@@ -142,10 +146,10 @@ class UserSession
     }
 
     /**
-     * @param \DateTime $lastAccess
+     * @param DateTime $lastAccess
      * @return self
      */
-    public function withLastAccess(\DateTime $lastAccess) : self
+    public function withLastAccess(DateTime $lastAccess): self
     {
         $clone = clone $this;
         $clone->lastAccess = $lastAccess;
@@ -156,7 +160,7 @@ class UserSession
     /**
      * @return self
      */
-    public function withoutLastAccess() : self
+    public function withoutLastAccess(): self
     {
         $clone = clone $this;
         unset($clone->lastAccess);
@@ -168,7 +172,7 @@ class UserSession
      * @param Location $location
      * @return self
      */
-    public function withLocation(Location $location) : self
+    public function withLocation(Location $location): self
     {
         $clone = clone $this;
         $clone->location = $location;
@@ -179,7 +183,7 @@ class UserSession
     /**
      * @return self
      */
-    public function withoutLocation() : self
+    public function withoutLocation(): self
     {
         $clone = clone $this;
         unset($clone->location);
@@ -191,12 +195,12 @@ class UserSession
      * @param string $tokenId
      * @return self
      */
-    public function withTokenId(string $tokenId) : self
+    public function withTokenId(string $tokenId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($tokenId, static::$schema['properties']['tokenId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -211,20 +215,20 @@ class UserSession
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UserSession Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UserSession
+    public static function buildFromInput(array|object $input, bool $validate = true): UserSession
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $created = new \DateTime($input->{'created'});
+        $created = new DateTime($input->{'created'});
         $device = DeviceInfo::buildFromInput($input->{'device'}, validate: $validate);
         $lastAccess = null;
         if (isset($input->{'lastAccess'})) {
-            $lastAccess = new \DateTime($input->{'lastAccess'});
+            $lastAccess = new DateTime($input->{'lastAccess'});
         }
         $location = null;
         if (isset($input->{'location'})) {
@@ -243,13 +247,13 @@ class UserSession
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['created'] = ($this->created)->format(\DateTime::ATOM);
+        $output['created'] = ($this->created)->format(DateTime::ATOM);
         $output['device'] = $this->device->toJson();
         if (isset($this->lastAccess)) {
-            $output['lastAccess'] = ($this->lastAccess)->format(\DateTime::ATOM);
+            $output['lastAccess'] = ($this->lastAccess)->format(DateTime::ATOM);
         }
         if (isset($this->location)) {
             $output['location'] = $this->location->toJson();
@@ -265,19 +269,19 @@ class UserSession
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -291,4 +295,3 @@ class UserSession
         }
     }
 }
-

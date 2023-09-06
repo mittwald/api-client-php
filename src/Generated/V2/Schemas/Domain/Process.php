@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Process
 {
     /**
@@ -51,9 +55,9 @@ class Process
     private ?string $error = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $lastUpdate;
+    private DateTime $lastUpdate;
 
     /**
      * @var ProcessType
@@ -81,12 +85,12 @@ class Process
     private string $transactionId;
 
     /**
-     * @param \DateTime $lastUpdate
+     * @param DateTime $lastUpdate
      * @param ProcessType $processType
      * @param ProcessState $state
      * @param string $transactionId
      */
-    public function __construct(\DateTime $lastUpdate, ProcessType $processType, ProcessState $state, string $transactionId)
+    public function __construct(DateTime $lastUpdate, ProcessType $processType, ProcessState $state, string $transactionId)
     {
         $this->lastUpdate = $lastUpdate;
         $this->processType = $processType;
@@ -97,15 +101,15 @@ class Process
     /**
      * @return string|null
      */
-    public function getError() : ?string
+    public function getError(): ?string
     {
         return $this->error ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getLastUpdate() : \DateTime
+    public function getLastUpdate(): DateTime
     {
         return $this->lastUpdate;
     }
@@ -113,7 +117,7 @@ class Process
     /**
      * @return ProcessType
      */
-    public function getProcessType() : ProcessType
+    public function getProcessType(): ProcessType
     {
         return $this->processType;
     }
@@ -121,7 +125,7 @@ class Process
     /**
      * @return ProcessState
      */
-    public function getState() : ProcessState
+    public function getState(): ProcessState
     {
         return $this->state;
     }
@@ -129,7 +133,7 @@ class Process
     /**
      * @return string|null
      */
-    public function getStatus() : ?string
+    public function getStatus(): ?string
     {
         return $this->status ?? null;
     }
@@ -137,7 +141,7 @@ class Process
     /**
      * @return string|null
      */
-    public function getStatusCode() : ?string
+    public function getStatusCode(): ?string
     {
         return $this->statusCode ?? null;
     }
@@ -145,7 +149,7 @@ class Process
     /**
      * @return string
      */
-    public function getTransactionId() : string
+    public function getTransactionId(): string
     {
         return $this->transactionId;
     }
@@ -154,12 +158,12 @@ class Process
      * @param string $error
      * @return self
      */
-    public function withError(string $error) : self
+    public function withError(string $error): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($error, static::$schema['properties']['error']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -171,7 +175,7 @@ class Process
     /**
      * @return self
      */
-    public function withoutError() : self
+    public function withoutError(): self
     {
         $clone = clone $this;
         unset($clone->error);
@@ -180,10 +184,10 @@ class Process
     }
 
     /**
-     * @param \DateTime $lastUpdate
+     * @param DateTime $lastUpdate
      * @return self
      */
-    public function withLastUpdate(\DateTime $lastUpdate) : self
+    public function withLastUpdate(DateTime $lastUpdate): self
     {
         $clone = clone $this;
         $clone->lastUpdate = $lastUpdate;
@@ -195,7 +199,7 @@ class Process
      * @param ProcessType $processType
      * @return self
      */
-    public function withProcessType(ProcessType $processType) : self
+    public function withProcessType(ProcessType $processType): self
     {
         $clone = clone $this;
         $clone->processType = $processType;
@@ -207,7 +211,7 @@ class Process
      * @param ProcessState $state
      * @return self
      */
-    public function withState(ProcessState $state) : self
+    public function withState(ProcessState $state): self
     {
         $clone = clone $this;
         $clone->state = $state;
@@ -219,12 +223,12 @@ class Process
      * @param string $status
      * @return self
      */
-    public function withStatus(string $status) : self
+    public function withStatus(string $status): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($status, static::$schema['properties']['status']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -236,7 +240,7 @@ class Process
     /**
      * @return self
      */
-    public function withoutStatus() : self
+    public function withoutStatus(): self
     {
         $clone = clone $this;
         unset($clone->status);
@@ -248,12 +252,12 @@ class Process
      * @param string $statusCode
      * @return self
      */
-    public function withStatusCode(string $statusCode) : self
+    public function withStatusCode(string $statusCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($statusCode, static::$schema['properties']['statusCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -265,7 +269,7 @@ class Process
     /**
      * @return self
      */
-    public function withoutStatusCode() : self
+    public function withoutStatusCode(): self
     {
         $clone = clone $this;
         unset($clone->statusCode);
@@ -277,12 +281,12 @@ class Process
      * @param string $transactionId
      * @return self
      */
-    public function withTransactionId(string $transactionId) : self
+    public function withTransactionId(string $transactionId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($transactionId, static::$schema['properties']['transactionId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -297,11 +301,11 @@ class Process
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Process Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Process
+    public static function buildFromInput(array|object $input, bool $validate = true): Process
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -310,7 +314,7 @@ class Process
         if (isset($input->{'error'})) {
             $error = $input->{'error'};
         }
-        $lastUpdate = new \DateTime($input->{'lastUpdate'});
+        $lastUpdate = new DateTime($input->{'lastUpdate'});
         $processType = ProcessType::from($input->{'processType'});
         $state = ProcessState::from($input->{'state'});
         $status = null;
@@ -335,13 +339,13 @@ class Process
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->error)) {
             $output['error'] = $this->error;
         }
-        $output['lastUpdate'] = ($this->lastUpdate)->format(\DateTime::ATOM);
+        $output['lastUpdate'] = ($this->lastUpdate)->format(DateTime::ATOM);
         $output['processType'] = $this->processType->value;
         $output['state'] = $this->state->value;
         if (isset($this->status)) {
@@ -361,19 +365,19 @@ class Process
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -384,4 +388,3 @@ class Process
         $this->lastUpdate = clone $this->lastUpdate;
     }
 }
-

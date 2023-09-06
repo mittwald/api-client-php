@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UpdateMysqlUserRequestBody
 {
     public const method = 'put';
@@ -59,7 +62,7 @@ class UpdateMysqlUserRequestBody
     private ?bool $externalAccess = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -75,7 +78,7 @@ class UpdateMysqlUserRequestBody
     /**
      * @return string|null
      */
-    public function getAccessIpMask() : ?string
+    public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
@@ -83,7 +86,7 @@ class UpdateMysqlUserRequestBody
     /**
      * @return UpdateMysqlUserRequestBodyAccessLevel
      */
-    public function getAccessLevel() : UpdateMysqlUserRequestBodyAccessLevel
+    public function getAccessLevel(): UpdateMysqlUserRequestBodyAccessLevel
     {
         return $this->accessLevel;
     }
@@ -91,7 +94,7 @@ class UpdateMysqlUserRequestBody
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -99,7 +102,7 @@ class UpdateMysqlUserRequestBody
     /**
      * @return bool|null
      */
-    public function getExternalAccess() : ?bool
+    public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
     }
@@ -108,12 +111,12 @@ class UpdateMysqlUserRequestBody
      * @param string $accessIpMask
      * @return self
      */
-    public function withAccessIpMask(string $accessIpMask) : self
+    public function withAccessIpMask(string $accessIpMask): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($accessIpMask, static::$schema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,7 +128,7 @@ class UpdateMysqlUserRequestBody
     /**
      * @return self
      */
-    public function withoutAccessIpMask() : self
+    public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
         unset($clone->accessIpMask);
@@ -137,7 +140,7 @@ class UpdateMysqlUserRequestBody
      * @param UpdateMysqlUserRequestBodyAccessLevel $accessLevel
      * @return self
      */
-    public function withAccessLevel(UpdateMysqlUserRequestBodyAccessLevel $accessLevel) : self
+    public function withAccessLevel(UpdateMysqlUserRequestBodyAccessLevel $accessLevel): self
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
@@ -149,12 +152,12 @@ class UpdateMysqlUserRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -167,12 +170,12 @@ class UpdateMysqlUserRequestBody
      * @param bool $externalAccess
      * @return self
      */
-    public function withExternalAccess(bool $externalAccess) : self
+    public function withExternalAccess(bool $externalAccess): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($externalAccess, static::$schema['properties']['externalAccess']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -184,7 +187,7 @@ class UpdateMysqlUserRequestBody
     /**
      * @return self
      */
-    public function withoutExternalAccess() : self
+    public function withoutExternalAccess(): self
     {
         $clone = clone $this;
         unset($clone->externalAccess);
@@ -198,11 +201,11 @@ class UpdateMysqlUserRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateMysqlUserRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateMysqlUserRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -229,7 +232,7 @@ class UpdateMysqlUserRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->accessIpMask)) {
@@ -250,19 +253,19 @@ class UpdateMysqlUserRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -272,30 +275,29 @@ class UpdateMysqlUserRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/mysql-users/' . $id;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

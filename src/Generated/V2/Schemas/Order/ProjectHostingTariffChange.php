@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ProjectHostingTariffChange
 {
     /**
@@ -69,7 +72,7 @@ class ProjectHostingTariffChange
     /**
      * @return string
      */
-    public function getContractId() : string
+    public function getContractId(): string
     {
         return $this->contractId;
     }
@@ -77,7 +80,7 @@ class ProjectHostingTariffChange
     /**
      * @return int|float
      */
-    public function getDiskspaceInGiB() : int|float
+    public function getDiskspaceInGiB(): int|float
     {
         return $this->diskspaceInGiB;
     }
@@ -86,7 +89,7 @@ class ProjectHostingTariffChange
      * @return
      * MachineTypeSpec|HardwareSpec
      */
-    public function getSpec() : HardwareSpec|MachineTypeSpec
+    public function getSpec(): HardwareSpec|MachineTypeSpec
     {
         return $this->spec;
     }
@@ -95,12 +98,12 @@ class ProjectHostingTariffChange
      * @param string $contractId
      * @return self
      */
-    public function withContractId(string $contractId) : self
+    public function withContractId(string $contractId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractId, static::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -113,12 +116,12 @@ class ProjectHostingTariffChange
      * @param int|float $diskspaceInGiB
      * @return self
      */
-    public function withDiskspaceInGiB(int|float $diskspaceInGiB) : self
+    public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($diskspaceInGiB, static::$schema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -131,7 +134,7 @@ class ProjectHostingTariffChange
      * @param MachineTypeSpec|HardwareSpec $spec
      * @return self
      */
-    public function withSpec(HardwareSpec|MachineTypeSpec $spec) : self
+    public function withSpec(HardwareSpec|MachineTypeSpec $spec): self
     {
         $clone = clone $this;
         $clone->spec = $spec;
@@ -145,11 +148,11 @@ class ProjectHostingTariffChange
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectHostingTariffChange Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectHostingTariffChange
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectHostingTariffChange
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -171,7 +174,7 @@ class ProjectHostingTariffChange
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['contractId'] = $this->contractId;
@@ -189,19 +192,19 @@ class ProjectHostingTariffChange
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -214,4 +217,3 @@ class ProjectHostingTariffChange
         };
     }
 }
-

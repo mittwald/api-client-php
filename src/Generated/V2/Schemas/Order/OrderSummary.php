@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class OrderSummary
 {
     /**
@@ -67,7 +70,7 @@ class OrderSummary
     /**
      * @return int|float
      */
-    public function getNonRecurring() : int|float
+    public function getNonRecurring(): int|float
     {
         return $this->nonRecurring;
     }
@@ -75,7 +78,7 @@ class OrderSummary
     /**
      * @return int|float
      */
-    public function getRecurring() : int|float
+    public function getRecurring(): int|float
     {
         return $this->recurring;
     }
@@ -83,7 +86,7 @@ class OrderSummary
     /**
      * @return int|float
      */
-    public function getSummary() : int|float
+    public function getSummary(): int|float
     {
         return $this->summary;
     }
@@ -92,12 +95,12 @@ class OrderSummary
      * @param int|float $nonRecurring
      * @return self
      */
-    public function withNonRecurring(int|float $nonRecurring) : self
+    public function withNonRecurring(int|float $nonRecurring): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($nonRecurring, static::$schema['properties']['nonRecurring']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,12 +113,12 @@ class OrderSummary
      * @param int|float $recurring
      * @return self
      */
-    public function withRecurring(int|float $recurring) : self
+    public function withRecurring(int|float $recurring): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($recurring, static::$schema['properties']['recurring']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -128,12 +131,12 @@ class OrderSummary
      * @param int|float $summary
      * @return self
      */
-    public function withSummary(int|float $summary) : self
+    public function withSummary(int|float $summary): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($summary, static::$schema['properties']['summary']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -148,11 +151,11 @@ class OrderSummary
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderSummary Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderSummary
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderSummary
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -171,7 +174,7 @@ class OrderSummary
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['nonRecurring'] = $this->nonRecurring;
@@ -187,19 +190,19 @@ class OrderSummary
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -209,4 +212,3 @@ class OrderSummary
     {
     }
 }
-

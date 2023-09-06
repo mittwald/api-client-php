@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UpdateSshUserRequest
 {
     public const method = 'patch';
@@ -61,7 +64,7 @@ class UpdateSshUserRequest
     private UpdateSshUserRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -77,7 +80,7 @@ class UpdateSshUserRequest
     /**
      * @return string
      */
-    public function getSshUserId() : string
+    public function getSshUserId(): string
     {
         return $this->sshUserId;
     }
@@ -85,7 +88,7 @@ class UpdateSshUserRequest
     /**
      * @return UpdateSshUserRequestBody
      */
-    public function getBody() : UpdateSshUserRequestBody
+    public function getBody(): UpdateSshUserRequestBody
     {
         return $this->body;
     }
@@ -94,12 +97,12 @@ class UpdateSshUserRequest
      * @param string $sshUserId
      * @return self
      */
-    public function withSshUserId(string $sshUserId) : self
+    public function withSshUserId(string $sshUserId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($sshUserId, static::$schema['properties']['sshUserId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -112,7 +115,7 @@ class UpdateSshUserRequest
      * @param UpdateSshUserRequestBody $body
      * @return self
      */
-    public function withBody(UpdateSshUserRequestBody $body) : self
+    public function withBody(UpdateSshUserRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -126,11 +129,11 @@ class UpdateSshUserRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateSshUserRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateSshUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateSshUserRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -148,7 +151,7 @@ class UpdateSshUserRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['sshUserId'] = $this->sshUserId;
@@ -163,19 +166,19 @@ class UpdateSshUserRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -186,30 +189,29 @@ class UpdateSshUserRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $sshUserId = urlencode($mapped['sshUserId']);
         return '/v2/sshusers/' . $sshUserId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

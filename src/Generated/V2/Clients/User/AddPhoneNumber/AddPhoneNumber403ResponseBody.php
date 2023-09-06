@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class AddPhoneNumber403ResponseBody
 {
     /**
@@ -35,7 +39,7 @@ class AddPhoneNumber403ResponseBody
      */
     private ?string $type = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -47,7 +51,7 @@ class AddPhoneNumber403ResponseBody
     /**
      * @return string|null
      */
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
@@ -55,7 +59,7 @@ class AddPhoneNumber403ResponseBody
     /**
      * @return string|null
      */
-    public function getType() : ?string
+    public function getType(): ?string
     {
         return $this->type ?? null;
     }
@@ -64,12 +68,12 @@ class AddPhoneNumber403ResponseBody
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -81,7 +85,7 @@ class AddPhoneNumber403ResponseBody
     /**
      * @return self
      */
-    public function withoutMessage() : self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
         unset($clone->message);
@@ -93,12 +97,12 @@ class AddPhoneNumber403ResponseBody
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,7 +114,7 @@ class AddPhoneNumber403ResponseBody
     /**
      * @return self
      */
-    public function withoutType() : self
+    public function withoutType(): self
     {
         $clone = clone $this;
         unset($clone->type);
@@ -124,11 +128,11 @@ class AddPhoneNumber403ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AddPhoneNumber403ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AddPhoneNumber403ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): AddPhoneNumber403ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -153,7 +157,7 @@ class AddPhoneNumber403ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->message)) {
@@ -172,19 +176,19 @@ class AddPhoneNumber403ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -194,7 +198,7 @@ class AddPhoneNumber403ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -202,4 +206,3 @@ class AddPhoneNumber403ResponseBody
         return $response;
     }
 }
-

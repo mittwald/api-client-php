@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser;
+use Psr\Http\Message\ResponseInterface;
+
 class ListSftpUsers200Response
 {
     /**
@@ -27,14 +32,14 @@ class ListSftpUsers200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser[]
+     * @var SftpUser[]
      */
     private array $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser[] $body
+     * @param SftpUser[] $body
      */
     public function __construct(array $body)
     {
@@ -42,18 +47,18 @@ class ListSftpUsers200Response
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser[]
+     * @return SftpUser[]
      */
-    public function getBody() : array
+    public function getBody(): array
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser[] $body
+     * @param SftpUser[] $body
      * @return self
      */
-    public function withBody(array $body) : self
+    public function withBody(array $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -67,16 +72,16 @@ class ListSftpUsers200Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListSftpUsers200Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListSftpUsers200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): ListSftpUsers200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): SftpUser => SftpUser::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -88,10 +93,10 @@ class ListSftpUsers200Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SftpUser $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (SftpUser $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -102,19 +107,19 @@ class ListSftpUsers200Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -124,7 +129,7 @@ class ListSftpUsers200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -132,4 +137,3 @@ class ListSftpUsers200Response
         return $response;
     }
 }
-

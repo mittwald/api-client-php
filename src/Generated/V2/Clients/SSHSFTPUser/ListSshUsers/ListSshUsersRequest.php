@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ListSshUsersRequest
 {
     public const method = 'get';
@@ -47,7 +50,7 @@ class ListSshUsersRequest
     private ?int $skip = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -61,7 +64,7 @@ class ListSshUsersRequest
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -69,7 +72,7 @@ class ListSshUsersRequest
     /**
      * @return int|null
      */
-    public function getLimit() : ?int
+    public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
@@ -77,7 +80,7 @@ class ListSshUsersRequest
     /**
      * @return int|null
      */
-    public function getSkip() : ?int
+    public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
@@ -86,12 +89,12 @@ class ListSshUsersRequest
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -104,12 +107,12 @@ class ListSshUsersRequest
      * @param int $limit
      * @return self
      */
-    public function withLimit(int $limit) : self
+    public function withLimit(int $limit): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -121,7 +124,7 @@ class ListSshUsersRequest
     /**
      * @return self
      */
-    public function withoutLimit() : self
+    public function withoutLimit(): self
     {
         $clone = clone $this;
         unset($clone->limit);
@@ -133,12 +136,12 @@ class ListSshUsersRequest
      * @param int $skip
      * @return self
      */
-    public function withSkip(int $skip) : self
+    public function withSkip(int $skip): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,7 +153,7 @@ class ListSshUsersRequest
     /**
      * @return self
      */
-    public function withoutSkip() : self
+    public function withoutSkip(): self
     {
         $clone = clone $this;
         unset($clone->skip);
@@ -164,11 +167,11 @@ class ListSshUsersRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListSshUsersRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListSshUsersRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListSshUsersRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -194,7 +197,7 @@ class ListSshUsersRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectId'] = $this->projectId;
@@ -214,19 +217,19 @@ class ListSshUsersRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -236,14 +239,14 @@ class ListSshUsersRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/ssh-users';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -256,16 +259,15 @@ class ListSshUsersRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

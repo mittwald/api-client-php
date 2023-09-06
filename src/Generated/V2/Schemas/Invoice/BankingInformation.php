@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class BankingInformation
 {
     /**
@@ -64,7 +67,7 @@ class BankingInformation
     /**
      * @return string
      */
-    public function getAccountHolder() : string
+    public function getAccountHolder(): string
     {
         return $this->accountHolder;
     }
@@ -72,7 +75,7 @@ class BankingInformation
     /**
      * @return string
      */
-    public function getBic() : string
+    public function getBic(): string
     {
         return $this->bic;
     }
@@ -80,7 +83,7 @@ class BankingInformation
     /**
      * @return string
      */
-    public function getIban() : string
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -89,12 +92,12 @@ class BankingInformation
      * @param string $accountHolder
      * @return self
      */
-    public function withAccountHolder(string $accountHolder) : self
+    public function withAccountHolder(string $accountHolder): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($accountHolder, static::$schema['properties']['accountHolder']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,12 +110,12 @@ class BankingInformation
      * @param string $bic
      * @return self
      */
-    public function withBic(string $bic) : self
+    public function withBic(string $bic): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($bic, static::$schema['properties']['bic']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,12 +128,12 @@ class BankingInformation
      * @param string $iban
      * @return self
      */
-    public function withIban(string $iban) : self
+    public function withIban(string $iban): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($iban, static::$schema['properties']['iban']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -145,11 +148,11 @@ class BankingInformation
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return BankingInformation Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : BankingInformation
+    public static function buildFromInput(array|object $input, bool $validate = true): BankingInformation
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -168,7 +171,7 @@ class BankingInformation
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['accountHolder'] = $this->accountHolder;
@@ -184,19 +187,19 @@ class BankingInformation
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -206,4 +209,3 @@ class BankingInformation
     {
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainAvailability;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CheckDomainAvailabilityRequest
 {
     public const method = 'post';
@@ -39,7 +42,7 @@ class CheckDomainAvailabilityRequest
     private CheckDomainAvailabilityRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -53,7 +56,7 @@ class CheckDomainAvailabilityRequest
     /**
      * @return CheckDomainAvailabilityRequestBody
      */
-    public function getBody() : CheckDomainAvailabilityRequestBody
+    public function getBody(): CheckDomainAvailabilityRequestBody
     {
         return $this->body;
     }
@@ -62,7 +65,7 @@ class CheckDomainAvailabilityRequest
      * @param CheckDomainAvailabilityRequestBody $body
      * @return self
      */
-    public function withBody(CheckDomainAvailabilityRequestBody $body) : self
+    public function withBody(CheckDomainAvailabilityRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -76,11 +79,11 @@ class CheckDomainAvailabilityRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CheckDomainAvailabilityRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CheckDomainAvailabilityRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainAvailabilityRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -97,7 +100,7 @@ class CheckDomainAvailabilityRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -111,19 +114,19 @@ class CheckDomainAvailabilityRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -134,29 +137,28 @@ class CheckDomainAvailabilityRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/domains';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

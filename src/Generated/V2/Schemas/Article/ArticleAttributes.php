@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ArticleAttributes
 {
     /**
@@ -98,7 +101,7 @@ class ArticleAttributes
     /**
      * @return bool|null
      */
-    public function getCustomerEditable() : ?bool
+    public function getCustomerEditable(): ?bool
     {
         return $this->customerEditable ?? null;
     }
@@ -106,7 +109,7 @@ class ArticleAttributes
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -114,7 +117,7 @@ class ArticleAttributes
     /**
      * @return ArticleAttributesMergeType|null
      */
-    public function getMergeType() : ?ArticleAttributesMergeType
+    public function getMergeType(): ?ArticleAttributesMergeType
     {
         return $this->mergeType ?? null;
     }
@@ -122,7 +125,7 @@ class ArticleAttributes
     /**
      * @return bool|null
      */
-    public function getReadonly() : ?bool
+    public function getReadonly(): ?bool
     {
         return $this->readonly ?? null;
     }
@@ -130,7 +133,7 @@ class ArticleAttributes
     /**
      * @return bool|null
      */
-    public function getRequired() : ?bool
+    public function getRequired(): ?bool
     {
         return $this->required ?? null;
     }
@@ -138,7 +141,7 @@ class ArticleAttributes
     /**
      * @return string|null
      */
-    public function getUnit() : ?string
+    public function getUnit(): ?string
     {
         return $this->unit ?? null;
     }
@@ -146,7 +149,7 @@ class ArticleAttributes
     /**
      * @return string
      */
-    public function getValue() : string
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -155,12 +158,12 @@ class ArticleAttributes
      * @param bool $customerEditable
      * @return self
      */
-    public function withCustomerEditable(bool $customerEditable) : self
+    public function withCustomerEditable(bool $customerEditable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerEditable, static::$schema['properties']['customerEditable']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -172,7 +175,7 @@ class ArticleAttributes
     /**
      * @return self
      */
-    public function withoutCustomerEditable() : self
+    public function withoutCustomerEditable(): self
     {
         $clone = clone $this;
         unset($clone->customerEditable);
@@ -184,12 +187,12 @@ class ArticleAttributes
      * @param string $key
      * @return self
      */
-    public function withKey(string $key) : self
+    public function withKey(string $key): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($key, static::$schema['properties']['key']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -202,7 +205,7 @@ class ArticleAttributes
      * @param ArticleAttributesMergeType $mergeType
      * @return self
      */
-    public function withMergeType(ArticleAttributesMergeType $mergeType) : self
+    public function withMergeType(ArticleAttributesMergeType $mergeType): self
     {
         $clone = clone $this;
         $clone->mergeType = $mergeType;
@@ -213,7 +216,7 @@ class ArticleAttributes
     /**
      * @return self
      */
-    public function withoutMergeType() : self
+    public function withoutMergeType(): self
     {
         $clone = clone $this;
         unset($clone->mergeType);
@@ -225,12 +228,12 @@ class ArticleAttributes
      * @param bool $readonly
      * @return self
      */
-    public function withReadonly(bool $readonly) : self
+    public function withReadonly(bool $readonly): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($readonly, static::$schema['properties']['readonly']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -242,7 +245,7 @@ class ArticleAttributes
     /**
      * @return self
      */
-    public function withoutReadonly() : self
+    public function withoutReadonly(): self
     {
         $clone = clone $this;
         unset($clone->readonly);
@@ -254,12 +257,12 @@ class ArticleAttributes
      * @param bool $required
      * @return self
      */
-    public function withRequired(bool $required) : self
+    public function withRequired(bool $required): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($required, static::$schema['properties']['required']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -271,7 +274,7 @@ class ArticleAttributes
     /**
      * @return self
      */
-    public function withoutRequired() : self
+    public function withoutRequired(): self
     {
         $clone = clone $this;
         unset($clone->required);
@@ -283,12 +286,12 @@ class ArticleAttributes
      * @param string $unit
      * @return self
      */
-    public function withUnit(string $unit) : self
+    public function withUnit(string $unit): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($unit, static::$schema['properties']['unit']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -300,7 +303,7 @@ class ArticleAttributes
     /**
      * @return self
      */
-    public function withoutUnit() : self
+    public function withoutUnit(): self
     {
         $clone = clone $this;
         unset($clone->unit);
@@ -312,12 +315,12 @@ class ArticleAttributes
      * @param string $value
      * @return self
      */
-    public function withValue(string $value) : self
+    public function withValue(string $value): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($value, static::$schema['properties']['value']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -332,11 +335,11 @@ class ArticleAttributes
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ArticleAttributes Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ArticleAttributes
+    public static function buildFromInput(array|object $input, bool $validate = true): ArticleAttributes
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -378,7 +381,7 @@ class ArticleAttributes
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->customerEditable)) {
@@ -408,19 +411,19 @@ class ArticleAttributes
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -430,4 +433,3 @@ class ArticleAttributes
     {
     }
 }
-

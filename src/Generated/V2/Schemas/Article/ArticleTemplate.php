@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ArticleTemplate
 {
     /**
@@ -145,7 +148,7 @@ class ArticleTemplate
      * @return
      * ReadableBookableArticleOptions[]|null
      */
-    public function getAdditionalArticles() : ?array
+    public function getAdditionalArticles(): ?array
     {
         return $this->additionalArticles ?? null;
     }
@@ -153,7 +156,7 @@ class ArticleTemplate
     /**
      * @return ArticleAddons[]|null
      */
-    public function getAddons() : ?array
+    public function getAddons(): ?array
     {
         return $this->addons ?? null;
     }
@@ -162,7 +165,7 @@ class ArticleTemplate
      * @return
      * ArticleAttributes[]|null
      */
-    public function getAttributes() : ?array
+    public function getAttributes(): ?array
     {
         return $this->attributes ?? null;
     }
@@ -170,7 +173,7 @@ class ArticleTemplate
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
@@ -178,7 +181,7 @@ class ArticleTemplate
     /**
      * @return string|null
      */
-    public function getId() : ?string
+    public function getId(): ?string
     {
         return $this->id ?? null;
     }
@@ -186,7 +189,7 @@ class ArticleTemplate
     /**
      * @return bool
      */
-    public function getIsManagedByDomain() : bool
+    public function getIsManagedByDomain(): bool
     {
         return $this->isManagedByDomain;
     }
@@ -194,7 +197,7 @@ class ArticleTemplate
     /**
      * @return bool
      */
-    public function getIsRecurring() : bool
+    public function getIsRecurring(): bool
     {
         return $this->isRecurring;
     }
@@ -203,7 +206,7 @@ class ArticleTemplate
      * @return
      * ReadableModifierArticleOptions[]|null
      */
-    public function getModifierArticles() : ?array
+    public function getModifierArticles(): ?array
     {
         return $this->modifierArticles ?? null;
     }
@@ -211,7 +214,7 @@ class ArticleTemplate
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -219,7 +222,7 @@ class ArticleTemplate
     /**
      * @return ArticleTemplateType
      */
-    public function getType() : ArticleTemplateType
+    public function getType(): ArticleTemplateType
     {
         return $this->type;
     }
@@ -228,7 +231,7 @@ class ArticleTemplate
      * @param ReadableBookableArticleOptions[] $additionalArticles
      * @return self
      */
-    public function withAdditionalArticles(array $additionalArticles) : self
+    public function withAdditionalArticles(array $additionalArticles): self
     {
         $clone = clone $this;
         $clone->additionalArticles = $additionalArticles;
@@ -239,7 +242,7 @@ class ArticleTemplate
     /**
      * @return self
      */
-    public function withoutAdditionalArticles() : self
+    public function withoutAdditionalArticles(): self
     {
         $clone = clone $this;
         unset($clone->additionalArticles);
@@ -251,7 +254,7 @@ class ArticleTemplate
      * @param ArticleAddons[] $addons
      * @return self
      */
-    public function withAddons(array $addons) : self
+    public function withAddons(array $addons): self
     {
         $clone = clone $this;
         $clone->addons = $addons;
@@ -262,7 +265,7 @@ class ArticleTemplate
     /**
      * @return self
      */
-    public function withoutAddons() : self
+    public function withoutAddons(): self
     {
         $clone = clone $this;
         unset($clone->addons);
@@ -274,7 +277,7 @@ class ArticleTemplate
      * @param ArticleAttributes[] $attributes
      * @return self
      */
-    public function withAttributes(array $attributes) : self
+    public function withAttributes(array $attributes): self
     {
         $clone = clone $this;
         $clone->attributes = $attributes;
@@ -285,7 +288,7 @@ class ArticleTemplate
     /**
      * @return self
      */
-    public function withoutAttributes() : self
+    public function withoutAttributes(): self
     {
         $clone = clone $this;
         unset($clone->attributes);
@@ -297,12 +300,12 @@ class ArticleTemplate
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -314,7 +317,7 @@ class ArticleTemplate
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -326,12 +329,12 @@ class ArticleTemplate
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -343,7 +346,7 @@ class ArticleTemplate
     /**
      * @return self
      */
-    public function withoutId() : self
+    public function withoutId(): self
     {
         $clone = clone $this;
         unset($clone->id);
@@ -355,12 +358,12 @@ class ArticleTemplate
      * @param bool $isManagedByDomain
      * @return self
      */
-    public function withIsManagedByDomain(bool $isManagedByDomain) : self
+    public function withIsManagedByDomain(bool $isManagedByDomain): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isManagedByDomain, static::$schema['properties']['isManagedByDomain']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -373,12 +376,12 @@ class ArticleTemplate
      * @param bool $isRecurring
      * @return self
      */
-    public function withIsRecurring(bool $isRecurring) : self
+    public function withIsRecurring(bool $isRecurring): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isRecurring, static::$schema['properties']['isRecurring']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -391,7 +394,7 @@ class ArticleTemplate
      * @param ReadableModifierArticleOptions[] $modifierArticles
      * @return self
      */
-    public function withModifierArticles(array $modifierArticles) : self
+    public function withModifierArticles(array $modifierArticles): self
     {
         $clone = clone $this;
         $clone->modifierArticles = $modifierArticles;
@@ -402,7 +405,7 @@ class ArticleTemplate
     /**
      * @return self
      */
-    public function withoutModifierArticles() : self
+    public function withoutModifierArticles(): self
     {
         $clone = clone $this;
         unset($clone->modifierArticles);
@@ -414,12 +417,12 @@ class ArticleTemplate
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -432,7 +435,7 @@ class ArticleTemplate
      * @param ArticleTemplateType $type
      * @return self
      */
-    public function withType(ArticleTemplateType $type) : self
+    public function withType(ArticleTemplateType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
@@ -446,26 +449,26 @@ class ArticleTemplate
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ArticleTemplate Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ArticleTemplate
+    public static function buildFromInput(array|object $input, bool $validate = true): ArticleTemplate
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $additionalArticles = null;
         if (isset($input->{'additionalArticles'})) {
-            $additionalArticles = array_map(fn(array $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
+            $additionalArticles = array_map(fn (array $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
         }
         $addons = null;
         if (isset($input->{'addons'})) {
-            $addons = array_map(fn(array $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
+            $addons = array_map(fn (array $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
         }
         $attributes = null;
         if (isset($input->{'attributes'})) {
-            $attributes = array_map(fn(array $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
+            $attributes = array_map(fn (array $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
         }
         $description = null;
         if (isset($input->{'description'})) {
@@ -479,7 +482,7 @@ class ArticleTemplate
         $isRecurring = (bool)($input->{'isRecurring'});
         $modifierArticles = null;
         if (isset($input->{'modifierArticles'})) {
-            $modifierArticles = array_map(fn(array $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
+            $modifierArticles = array_map(fn (array $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
         }
         $name = $input->{'name'};
         $type = ArticleTemplateType::from($input->{'type'});
@@ -499,17 +502,17 @@ class ArticleTemplate
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->additionalArticles)) {
-            $output['additionalArticles'] = array_map(fn(ReadableBookableArticleOptions $i): array => $i->toJson(), $this->additionalArticles);
+            $output['additionalArticles'] = array_map(fn (ReadableBookableArticleOptions $i): array => $i->toJson(), $this->additionalArticles);
         }
         if (isset($this->addons)) {
-            $output['addons'] = array_map(fn(ArticleAddons $i): array => $i->toJson(), $this->addons);
+            $output['addons'] = array_map(fn (ArticleAddons $i): array => $i->toJson(), $this->addons);
         }
         if (isset($this->attributes)) {
-            $output['attributes'] = array_map(fn(ArticleAttributes $i): array => $i->toJson(), $this->attributes);
+            $output['attributes'] = array_map(fn (ArticleAttributes $i): array => $i->toJson(), $this->attributes);
         }
         if (isset($this->description)) {
             $output['description'] = $this->description;
@@ -520,7 +523,7 @@ class ArticleTemplate
         $output['isManagedByDomain'] = $this->isManagedByDomain;
         $output['isRecurring'] = $this->isRecurring;
         if (isset($this->modifierArticles)) {
-            $output['modifierArticles'] = array_map(fn(ReadableModifierArticleOptions $i): array => $i->toJson(), $this->modifierArticles);
+            $output['modifierArticles'] = array_map(fn (ReadableModifierArticleOptions $i): array => $i->toJson(), $this->modifierArticles);
         }
         $output['name'] = $this->name;
         $output['type'] = ($this->type)->value;
@@ -534,19 +537,19 @@ class ArticleTemplate
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -556,4 +559,3 @@ class ArticleTemplate
     {
     }
 }
-

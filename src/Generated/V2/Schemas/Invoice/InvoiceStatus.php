@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
-enum InvoiceStatus: string {
+enum InvoiceStatus: string
+{
     case NEW = 'NEW';
     case CONFIRMED = 'CONFIRMED';
     case DENIED = 'DENIED';

@@ -1,4 +1,5 @@
 <?php
+
 namespace Mittwald\ApiClient\Client;
 
 use Psr\Http\Message\ResponseInterface;

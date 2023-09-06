@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Membership;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ProjectMembership
 {
     /**
@@ -65,9 +69,9 @@ class ProjectMembership
     /**
      * Time the ProjectMembership should expire at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * ID of the ProjectMembership.
@@ -93,9 +97,9 @@ class ProjectMembership
     /**
      * Date the projectMembership was created at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $memberSince = null;
+    private ?DateTime $memberSince = null;
 
     /**
      * ID of the Project the membership is for.
@@ -135,9 +139,9 @@ class ProjectMembership
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -145,7 +149,7 @@ class ProjectMembership
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -153,7 +157,7 @@ class ProjectMembership
     /**
      * @return bool
      */
-    public function getInherited() : bool
+    public function getInherited(): bool
     {
         return $this->inherited;
     }
@@ -161,15 +165,15 @@ class ProjectMembership
     /**
      * @return string
      */
-    public function getInviteId() : string
+    public function getInviteId(): string
     {
         return $this->inviteId;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getMemberSince() : ?\DateTime
+    public function getMemberSince(): ?DateTime
     {
         return $this->memberSince ?? null;
     }
@@ -177,7 +181,7 @@ class ProjectMembership
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -185,7 +189,7 @@ class ProjectMembership
     /**
      * @return ProjectRoles
      */
-    public function getRole() : ProjectRoles
+    public function getRole(): ProjectRoles
     {
         return $this->role;
     }
@@ -193,16 +197,16 @@ class ProjectMembership
     /**
      * @return string
      */
-    public function getUserId() : string
+    public function getUserId(): string
     {
         return $this->userId;
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -213,7 +217,7 @@ class ProjectMembership
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -225,12 +229,12 @@ class ProjectMembership
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -243,12 +247,12 @@ class ProjectMembership
      * @param bool $inherited
      * @return self
      */
-    public function withInherited(bool $inherited) : self
+    public function withInherited(bool $inherited): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($inherited, static::$schema['properties']['inherited']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -261,12 +265,12 @@ class ProjectMembership
      * @param string $inviteId
      * @return self
      */
-    public function withInviteId(string $inviteId) : self
+    public function withInviteId(string $inviteId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -276,10 +280,10 @@ class ProjectMembership
     }
 
     /**
-     * @param \DateTime $memberSince
+     * @param DateTime $memberSince
      * @return self
      */
-    public function withMemberSince(\DateTime $memberSince) : self
+    public function withMemberSince(DateTime $memberSince): self
     {
         $clone = clone $this;
         $clone->memberSince = $memberSince;
@@ -290,7 +294,7 @@ class ProjectMembership
     /**
      * @return self
      */
-    public function withoutMemberSince() : self
+    public function withoutMemberSince(): self
     {
         $clone = clone $this;
         unset($clone->memberSince);
@@ -302,12 +306,12 @@ class ProjectMembership
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -320,7 +324,7 @@ class ProjectMembership
      * @param ProjectRoles $role
      * @return self
      */
-    public function withRole(ProjectRoles $role) : self
+    public function withRole(ProjectRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -332,12 +336,12 @@ class ProjectMembership
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -352,25 +356,25 @@ class ProjectMembership
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectMembership Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectMembership
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectMembership
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $id = $input->{'id'};
         $inherited = (bool)($input->{'inherited'});
         $inviteId = $input->{'inviteId'};
         $memberSince = null;
         if (isset($input->{'memberSince'})) {
-            $memberSince = new \DateTime($input->{'memberSince'});
+            $memberSince = new DateTime($input->{'memberSince'});
         }
         $projectId = $input->{'projectId'};
         $role = ProjectRoles::from($input->{'role'});
@@ -387,17 +391,17 @@ class ProjectMembership
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['id'] = $this->id;
         $output['inherited'] = $this->inherited;
         $output['inviteId'] = $this->inviteId;
         if (isset($this->memberSince)) {
-            $output['memberSince'] = ($this->memberSince)->format(\DateTime::ATOM);
+            $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }
         $output['projectId'] = $this->projectId;
         $output['role'] = $this->role->value;
@@ -412,19 +416,19 @@ class ProjectMembership
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -440,4 +444,3 @@ class ProjectMembership
         }
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Screenshot;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ScreenshotSettings
 {
     /**
@@ -88,7 +91,7 @@ class ScreenshotSettings
     /**
      * @return ScreenshotSettingsDataType
      */
-    public function getDataType() : ScreenshotSettingsDataType
+    public function getDataType(): ScreenshotSettingsDataType
     {
         return $this->dataType;
     }
@@ -96,7 +99,7 @@ class ScreenshotSettings
     /**
      * @return int|float
      */
-    public function getDelay() : int|float
+    public function getDelay(): int|float
     {
         return $this->delay;
     }
@@ -104,7 +107,7 @@ class ScreenshotSettings
     /**
      * @return int|float
      */
-    public function getHeight() : int|float
+    public function getHeight(): int|float
     {
         return $this->height;
     }
@@ -112,7 +115,7 @@ class ScreenshotSettings
     /**
      * @return int|float
      */
-    public function getQuality() : int|float
+    public function getQuality(): int|float
     {
         return $this->quality;
     }
@@ -120,7 +123,7 @@ class ScreenshotSettings
     /**
      * @return int|float
      */
-    public function getWidth() : int|float
+    public function getWidth(): int|float
     {
         return $this->width;
     }
@@ -129,7 +132,7 @@ class ScreenshotSettings
      * @param ScreenshotSettingsDataType $dataType
      * @return self
      */
-    public function withDataType(ScreenshotSettingsDataType $dataType) : self
+    public function withDataType(ScreenshotSettingsDataType $dataType): self
     {
         $clone = clone $this;
         $clone->dataType = $dataType;
@@ -141,12 +144,12 @@ class ScreenshotSettings
      * @param int|float $delay
      * @return self
      */
-    public function withDelay(int|float $delay) : self
+    public function withDelay(int|float $delay): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($delay, static::$schema['properties']['delay']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -159,12 +162,12 @@ class ScreenshotSettings
      * @param int|float $height
      * @return self
      */
-    public function withHeight(int|float $height) : self
+    public function withHeight(int|float $height): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($height, static::$schema['properties']['height']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -177,12 +180,12 @@ class ScreenshotSettings
      * @param int|float $quality
      * @return self
      */
-    public function withQuality(int|float $quality) : self
+    public function withQuality(int|float $quality): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($quality, static::$schema['properties']['quality']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -195,12 +198,12 @@ class ScreenshotSettings
      * @param int|float $width
      * @return self
      */
-    public function withWidth(int|float $width) : self
+    public function withWidth(int|float $width): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($width, static::$schema['properties']['width']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -215,11 +218,11 @@ class ScreenshotSettings
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ScreenshotSettings Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ScreenshotSettings
+    public static function buildFromInput(array|object $input, bool $validate = true): ScreenshotSettings
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -240,7 +243,7 @@ class ScreenshotSettings
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['dataType'] = ($this->dataType)->value;
@@ -258,19 +261,19 @@ class ScreenshotSettings
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -280,4 +283,3 @@ class ScreenshotSettings
     {
     }
 }
-

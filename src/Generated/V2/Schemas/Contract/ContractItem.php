@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ContractItem
 {
     /**
@@ -112,9 +116,9 @@ class ContractItem
     ];
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $activationDate = null;
+    private ?DateTime $activationDate = null;
 
     /**
      * @var AggregateReference|null
@@ -174,28 +178,28 @@ class ContractItem
     /**
      * If this attribute is not set, termination is not allowed.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $nextPossibleDowngradeDate = null;
+    private ?DateTime $nextPossibleDowngradeDate = null;
 
     /**
      * If this attribute is not set, a tariff change is not allowed.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $nextPossibleTerminationDate = null;
+    private ?DateTime $nextPossibleTerminationDate = null;
 
     /**
      * If this attribute is not set, a tariff change is not allowed.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $nextPossibleUpgradeDate = null;
+    private ?DateTime $nextPossibleUpgradeDate = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $orderDate;
+    private DateTime $orderDate;
 
     /**
      * @var string|null
@@ -230,10 +234,10 @@ class ContractItem
      * @param bool $isActivated
      * @param bool $isBaseItem
      * @param string $itemId
-     * @param \DateTime $orderDate
+     * @param DateTime $orderDate
      * @param Price $totalPrice
      */
-    public function __construct(array $articles, int|float $contractPeriod, string $description, int|float $invoicingPeriod, bool $isActivated, bool $isBaseItem, string $itemId, \DateTime $orderDate, Price $totalPrice)
+    public function __construct(array $articles, int|float $contractPeriod, string $description, int|float $invoicingPeriod, bool $isActivated, bool $isBaseItem, string $itemId, DateTime $orderDate, Price $totalPrice)
     {
         $this->articles = $articles;
         $this->contractPeriod = $contractPeriod;
@@ -247,9 +251,9 @@ class ContractItem
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getActivationDate() : ?\DateTime
+    public function getActivationDate(): ?DateTime
     {
         return $this->activationDate ?? null;
     }
@@ -258,7 +262,7 @@ class ContractItem
      * @return
      * AggregateReference|null
      */
-    public function getAggregateReference() : ?AggregateReference
+    public function getAggregateReference(): ?AggregateReference
     {
         return $this->aggregateReference ?? null;
     }
@@ -266,7 +270,7 @@ class ContractItem
     /**
      * @return Article[]
      */
-    public function getArticles() : array
+    public function getArticles(): array
     {
         return $this->articles;
     }
@@ -274,7 +278,7 @@ class ContractItem
     /**
      * @return int|float
      */
-    public function getContractPeriod() : int|float
+    public function getContractPeriod(): int|float
     {
         return $this->contractPeriod;
     }
@@ -282,7 +286,7 @@ class ContractItem
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -290,7 +294,7 @@ class ContractItem
     /**
      * @return string|null
      */
-    public function getGroupByProjectId() : ?string
+    public function getGroupByProjectId(): ?string
     {
         return $this->groupByProjectId ?? null;
     }
@@ -298,7 +302,7 @@ class ContractItem
     /**
      * @return int|float
      */
-    public function getInvoicingPeriod() : int|float
+    public function getInvoicingPeriod(): int|float
     {
         return $this->invoicingPeriod;
     }
@@ -306,7 +310,7 @@ class ContractItem
     /**
      * @return bool
      */
-    public function getIsActivated() : bool
+    public function getIsActivated(): bool
     {
         return $this->isActivated;
     }
@@ -314,7 +318,7 @@ class ContractItem
     /**
      * @return bool
      */
-    public function getIsBaseItem() : bool
+    public function getIsBaseItem(): bool
     {
         return $this->isBaseItem;
     }
@@ -322,7 +326,7 @@ class ContractItem
     /**
      * @return bool|null
      */
-    public function getIsInFreeTrial() : ?bool
+    public function getIsInFreeTrial(): ?bool
     {
         return $this->isInFreeTrial ?? null;
     }
@@ -330,7 +334,7 @@ class ContractItem
     /**
      * @return bool|null
      */
-    public function getIsInclusive() : ?bool
+    public function getIsInclusive(): ?bool
     {
         return $this->isInclusive ?? null;
     }
@@ -338,39 +342,39 @@ class ContractItem
     /**
      * @return string
      */
-    public function getItemId() : string
+    public function getItemId(): string
     {
         return $this->itemId;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getNextPossibleDowngradeDate() : ?\DateTime
+    public function getNextPossibleDowngradeDate(): ?DateTime
     {
         return $this->nextPossibleDowngradeDate ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getNextPossibleTerminationDate() : ?\DateTime
+    public function getNextPossibleTerminationDate(): ?DateTime
     {
         return $this->nextPossibleTerminationDate ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getNextPossibleUpgradeDate() : ?\DateTime
+    public function getNextPossibleUpgradeDate(): ?DateTime
     {
         return $this->nextPossibleUpgradeDate ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getOrderDate() : \DateTime
+    public function getOrderDate(): DateTime
     {
         return $this->orderDate;
     }
@@ -378,7 +382,7 @@ class ContractItem
     /**
      * @return string|null
      */
-    public function getOrderId() : ?string
+    public function getOrderId(): ?string
     {
         return $this->orderId ?? null;
     }
@@ -386,7 +390,7 @@ class ContractItem
     /**
      * @return string|null
      */
-    public function getReplacedByItem() : ?string
+    public function getReplacedByItem(): ?string
     {
         return $this->replacedByItem ?? null;
     }
@@ -394,7 +398,7 @@ class ContractItem
     /**
      * @return TariffChange|null
      */
-    public function getTariffChange() : ?TariffChange
+    public function getTariffChange(): ?TariffChange
     {
         return $this->tariffChange ?? null;
     }
@@ -402,7 +406,7 @@ class ContractItem
     /**
      * @return Termination|null
      */
-    public function getTermination() : ?Termination
+    public function getTermination(): ?Termination
     {
         return $this->termination ?? null;
     }
@@ -410,16 +414,16 @@ class ContractItem
     /**
      * @return Price
      */
-    public function getTotalPrice() : Price
+    public function getTotalPrice(): Price
     {
         return $this->totalPrice;
     }
 
     /**
-     * @param \DateTime $activationDate
+     * @param DateTime $activationDate
      * @return self
      */
-    public function withActivationDate(\DateTime $activationDate) : self
+    public function withActivationDate(DateTime $activationDate): self
     {
         $clone = clone $this;
         $clone->activationDate = $activationDate;
@@ -430,7 +434,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutActivationDate() : self
+    public function withoutActivationDate(): self
     {
         $clone = clone $this;
         unset($clone->activationDate);
@@ -442,7 +446,7 @@ class ContractItem
      * @param AggregateReference $aggregateReference
      * @return self
      */
-    public function withAggregateReference(AggregateReference $aggregateReference) : self
+    public function withAggregateReference(AggregateReference $aggregateReference): self
     {
         $clone = clone $this;
         $clone->aggregateReference = $aggregateReference;
@@ -453,7 +457,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutAggregateReference() : self
+    public function withoutAggregateReference(): self
     {
         $clone = clone $this;
         unset($clone->aggregateReference);
@@ -465,7 +469,7 @@ class ContractItem
      * @param Article[] $articles
      * @return self
      */
-    public function withArticles(array $articles) : self
+    public function withArticles(array $articles): self
     {
         $clone = clone $this;
         $clone->articles = $articles;
@@ -477,12 +481,12 @@ class ContractItem
      * @param int|float $contractPeriod
      * @return self
      */
-    public function withContractPeriod(int|float $contractPeriod) : self
+    public function withContractPeriod(int|float $contractPeriod): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractPeriod, static::$schema['properties']['contractPeriod']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -495,12 +499,12 @@ class ContractItem
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -513,12 +517,12 @@ class ContractItem
      * @param string $groupByProjectId
      * @return self
      */
-    public function withGroupByProjectId(string $groupByProjectId) : self
+    public function withGroupByProjectId(string $groupByProjectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($groupByProjectId, static::$schema['properties']['groupByProjectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -530,7 +534,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutGroupByProjectId() : self
+    public function withoutGroupByProjectId(): self
     {
         $clone = clone $this;
         unset($clone->groupByProjectId);
@@ -542,12 +546,12 @@ class ContractItem
      * @param int|float $invoicingPeriod
      * @return self
      */
-    public function withInvoicingPeriod(int|float $invoicingPeriod) : self
+    public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($invoicingPeriod, static::$schema['properties']['invoicingPeriod']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -560,12 +564,12 @@ class ContractItem
      * @param bool $isActivated
      * @return self
      */
-    public function withIsActivated(bool $isActivated) : self
+    public function withIsActivated(bool $isActivated): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isActivated, static::$schema['properties']['isActivated']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -578,12 +582,12 @@ class ContractItem
      * @param bool $isBaseItem
      * @return self
      */
-    public function withIsBaseItem(bool $isBaseItem) : self
+    public function withIsBaseItem(bool $isBaseItem): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isBaseItem, static::$schema['properties']['isBaseItem']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -596,12 +600,12 @@ class ContractItem
      * @param bool $isInFreeTrial
      * @return self
      */
-    public function withIsInFreeTrial(bool $isInFreeTrial) : self
+    public function withIsInFreeTrial(bool $isInFreeTrial): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInFreeTrial, static::$schema['properties']['isInFreeTrial']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -613,7 +617,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutIsInFreeTrial() : self
+    public function withoutIsInFreeTrial(): self
     {
         $clone = clone $this;
         unset($clone->isInFreeTrial);
@@ -625,12 +629,12 @@ class ContractItem
      * @param bool $isInclusive
      * @return self
      */
-    public function withIsInclusive(bool $isInclusive) : self
+    public function withIsInclusive(bool $isInclusive): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInclusive, static::$schema['properties']['isInclusive']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -642,7 +646,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutIsInclusive() : self
+    public function withoutIsInclusive(): self
     {
         $clone = clone $this;
         unset($clone->isInclusive);
@@ -654,12 +658,12 @@ class ContractItem
      * @param string $itemId
      * @return self
      */
-    public function withItemId(string $itemId) : self
+    public function withItemId(string $itemId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($itemId, static::$schema['properties']['itemId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -669,10 +673,10 @@ class ContractItem
     }
 
     /**
-     * @param \DateTime $nextPossibleDowngradeDate
+     * @param DateTime $nextPossibleDowngradeDate
      * @return self
      */
-    public function withNextPossibleDowngradeDate(\DateTime $nextPossibleDowngradeDate) : self
+    public function withNextPossibleDowngradeDate(DateTime $nextPossibleDowngradeDate): self
     {
         $clone = clone $this;
         $clone->nextPossibleDowngradeDate = $nextPossibleDowngradeDate;
@@ -683,7 +687,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutNextPossibleDowngradeDate() : self
+    public function withoutNextPossibleDowngradeDate(): self
     {
         $clone = clone $this;
         unset($clone->nextPossibleDowngradeDate);
@@ -692,10 +696,10 @@ class ContractItem
     }
 
     /**
-     * @param \DateTime $nextPossibleTerminationDate
+     * @param DateTime $nextPossibleTerminationDate
      * @return self
      */
-    public function withNextPossibleTerminationDate(\DateTime $nextPossibleTerminationDate) : self
+    public function withNextPossibleTerminationDate(DateTime $nextPossibleTerminationDate): self
     {
         $clone = clone $this;
         $clone->nextPossibleTerminationDate = $nextPossibleTerminationDate;
@@ -706,7 +710,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutNextPossibleTerminationDate() : self
+    public function withoutNextPossibleTerminationDate(): self
     {
         $clone = clone $this;
         unset($clone->nextPossibleTerminationDate);
@@ -715,10 +719,10 @@ class ContractItem
     }
 
     /**
-     * @param \DateTime $nextPossibleUpgradeDate
+     * @param DateTime $nextPossibleUpgradeDate
      * @return self
      */
-    public function withNextPossibleUpgradeDate(\DateTime $nextPossibleUpgradeDate) : self
+    public function withNextPossibleUpgradeDate(DateTime $nextPossibleUpgradeDate): self
     {
         $clone = clone $this;
         $clone->nextPossibleUpgradeDate = $nextPossibleUpgradeDate;
@@ -729,7 +733,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutNextPossibleUpgradeDate() : self
+    public function withoutNextPossibleUpgradeDate(): self
     {
         $clone = clone $this;
         unset($clone->nextPossibleUpgradeDate);
@@ -738,10 +742,10 @@ class ContractItem
     }
 
     /**
-     * @param \DateTime $orderDate
+     * @param DateTime $orderDate
      * @return self
      */
-    public function withOrderDate(\DateTime $orderDate) : self
+    public function withOrderDate(DateTime $orderDate): self
     {
         $clone = clone $this;
         $clone->orderDate = $orderDate;
@@ -753,12 +757,12 @@ class ContractItem
      * @param string $orderId
      * @return self
      */
-    public function withOrderId(string $orderId) : self
+    public function withOrderId(string $orderId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($orderId, static::$schema['properties']['orderId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -770,7 +774,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutOrderId() : self
+    public function withoutOrderId(): self
     {
         $clone = clone $this;
         unset($clone->orderId);
@@ -782,12 +786,12 @@ class ContractItem
      * @param string $replacedByItem
      * @return self
      */
-    public function withReplacedByItem(string $replacedByItem) : self
+    public function withReplacedByItem(string $replacedByItem): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($replacedByItem, static::$schema['properties']['replacedByItem']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -799,7 +803,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutReplacedByItem() : self
+    public function withoutReplacedByItem(): self
     {
         $clone = clone $this;
         unset($clone->replacedByItem);
@@ -811,7 +815,7 @@ class ContractItem
      * @param TariffChange $tariffChange
      * @return self
      */
-    public function withTariffChange(TariffChange $tariffChange) : self
+    public function withTariffChange(TariffChange $tariffChange): self
     {
         $clone = clone $this;
         $clone->tariffChange = $tariffChange;
@@ -822,7 +826,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutTariffChange() : self
+    public function withoutTariffChange(): self
     {
         $clone = clone $this;
         unset($clone->tariffChange);
@@ -834,7 +838,7 @@ class ContractItem
      * @param Termination $termination
      * @return self
      */
-    public function withTermination(Termination $termination) : self
+    public function withTermination(Termination $termination): self
     {
         $clone = clone $this;
         $clone->termination = $termination;
@@ -845,7 +849,7 @@ class ContractItem
     /**
      * @return self
      */
-    public function withoutTermination() : self
+    public function withoutTermination(): self
     {
         $clone = clone $this;
         unset($clone->termination);
@@ -857,7 +861,7 @@ class ContractItem
      * @param Price $totalPrice
      * @return self
      */
-    public function withTotalPrice(Price $totalPrice) : self
+    public function withTotalPrice(Price $totalPrice): self
     {
         $clone = clone $this;
         $clone->totalPrice = $totalPrice;
@@ -871,24 +875,24 @@ class ContractItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ContractItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ContractItem
+    public static function buildFromInput(array|object $input, bool $validate = true): ContractItem
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $activationDate = null;
         if (isset($input->{'activationDate'})) {
-            $activationDate = new \DateTime($input->{'activationDate'});
+            $activationDate = new DateTime($input->{'activationDate'});
         }
         $aggregateReference = null;
         if (isset($input->{'aggregateReference'})) {
             $aggregateReference = AggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
         }
-        $articles = array_map(fn(array $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'articles'});
+        $articles = array_map(fn (array $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'articles'});
         $contractPeriod = str_contains($input->{'contractPeriod'}, '.') ? (float)($input->{'contractPeriod'}) : (int)($input->{'contractPeriod'});
         $description = $input->{'description'};
         $groupByProjectId = null;
@@ -909,17 +913,17 @@ class ContractItem
         $itemId = $input->{'itemId'};
         $nextPossibleDowngradeDate = null;
         if (isset($input->{'nextPossibleDowngradeDate'})) {
-            $nextPossibleDowngradeDate = new \DateTime($input->{'nextPossibleDowngradeDate'});
+            $nextPossibleDowngradeDate = new DateTime($input->{'nextPossibleDowngradeDate'});
         }
         $nextPossibleTerminationDate = null;
         if (isset($input->{'nextPossibleTerminationDate'})) {
-            $nextPossibleTerminationDate = new \DateTime($input->{'nextPossibleTerminationDate'});
+            $nextPossibleTerminationDate = new DateTime($input->{'nextPossibleTerminationDate'});
         }
         $nextPossibleUpgradeDate = null;
         if (isset($input->{'nextPossibleUpgradeDate'})) {
-            $nextPossibleUpgradeDate = new \DateTime($input->{'nextPossibleUpgradeDate'});
+            $nextPossibleUpgradeDate = new DateTime($input->{'nextPossibleUpgradeDate'});
         }
-        $orderDate = new \DateTime($input->{'orderDate'});
+        $orderDate = new DateTime($input->{'orderDate'});
         $orderId = null;
         if (isset($input->{'orderId'})) {
             $orderId = $input->{'orderId'};
@@ -959,16 +963,16 @@ class ContractItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->activationDate)) {
-            $output['activationDate'] = ($this->activationDate)->format(\DateTime::ATOM);
+            $output['activationDate'] = ($this->activationDate)->format(DateTime::ATOM);
         }
         if (isset($this->aggregateReference)) {
             $output['aggregateReference'] = $this->aggregateReference->toJson();
         }
-        $output['articles'] = array_map(fn(Article $i): array => $i->toJson(), $this->articles);
+        $output['articles'] = array_map(fn (Article $i): array => $i->toJson(), $this->articles);
         $output['contractPeriod'] = $this->contractPeriod;
         $output['description'] = $this->description;
         if (isset($this->groupByProjectId)) {
@@ -985,15 +989,15 @@ class ContractItem
         }
         $output['itemId'] = $this->itemId;
         if (isset($this->nextPossibleDowngradeDate)) {
-            $output['nextPossibleDowngradeDate'] = ($this->nextPossibleDowngradeDate)->format(\DateTime::ATOM);
+            $output['nextPossibleDowngradeDate'] = ($this->nextPossibleDowngradeDate)->format(DateTime::ATOM);
         }
         if (isset($this->nextPossibleTerminationDate)) {
-            $output['nextPossibleTerminationDate'] = ($this->nextPossibleTerminationDate)->format(\DateTime::ATOM);
+            $output['nextPossibleTerminationDate'] = ($this->nextPossibleTerminationDate)->format(DateTime::ATOM);
         }
         if (isset($this->nextPossibleUpgradeDate)) {
-            $output['nextPossibleUpgradeDate'] = ($this->nextPossibleUpgradeDate)->format(\DateTime::ATOM);
+            $output['nextPossibleUpgradeDate'] = ($this->nextPossibleUpgradeDate)->format(DateTime::ATOM);
         }
-        $output['orderDate'] = ($this->orderDate)->format(\DateTime::ATOM);
+        $output['orderDate'] = ($this->orderDate)->format(DateTime::ATOM);
         if (isset($this->orderId)) {
             $output['orderId'] = $this->orderId;
         }
@@ -1017,19 +1021,19 @@ class ContractItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -1052,4 +1056,3 @@ class ContractItem
         $this->orderDate = clone $this->orderDate;
     }
 }
-

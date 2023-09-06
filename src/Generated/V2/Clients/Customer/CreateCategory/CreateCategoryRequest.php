@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category;
+
 class CreateCategoryRequest
 {
     public const method = 'post';
@@ -26,35 +30,35 @@ class CreateCategoryRequest
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+     * @var Category
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body;
+    private Category $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
+     * @param Category $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body)
+    public function __construct(Category $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+     * @return Category
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+    public function getBody(): Category
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
+     * @param Category $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body) : self
+    public function withBody(Category $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,16 +72,16 @@ class CreateCategoryRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateCategoryRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateCategoryRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateCategoryRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Category::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -89,7 +93,7 @@ class CreateCategoryRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = $this->body->toJson();
@@ -103,19 +107,19 @@ class CreateCategoryRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -125,29 +129,28 @@ class CreateCategoryRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/customer-categories';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UserInput
 {
     /**
@@ -121,7 +124,7 @@ class UserInput
     /**
      * @return string|null
      */
-    public function getDataSource() : ?string
+    public function getDataSource(): ?string
     {
         return $this->dataSource ?? null;
     }
@@ -129,7 +132,7 @@ class UserInput
     /**
      * @return UserInputDataType
      */
-    public function getDataType() : UserInputDataType
+    public function getDataType(): UserInputDataType
     {
         return $this->dataType;
     }
@@ -137,7 +140,7 @@ class UserInput
     /**
      * @return string|null
      */
-    public function getDefaultValue() : ?string
+    public function getDefaultValue(): ?string
     {
         return $this->defaultValue ?? null;
     }
@@ -145,7 +148,7 @@ class UserInput
     /**
      * @return UserInputFormat|null
      */
-    public function getFormat() : ?UserInputFormat
+    public function getFormat(): ?UserInputFormat
     {
         return $this->format ?? null;
     }
@@ -153,7 +156,7 @@ class UserInput
     /**
      * @return AppInstallationLifecycle
      */
-    public function getLifecycleConstraint() : AppInstallationLifecycle
+    public function getLifecycleConstraint(): AppInstallationLifecycle
     {
         return $this->lifecycleConstraint;
     }
@@ -161,7 +164,7 @@ class UserInput
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -169,7 +172,7 @@ class UserInput
     /**
      * @return UserInputPositionMeta|null
      */
-    public function getPositionMeta() : ?UserInputPositionMeta
+    public function getPositionMeta(): ?UserInputPositionMeta
     {
         return $this->positionMeta ?? null;
     }
@@ -177,7 +180,7 @@ class UserInput
     /**
      * @return bool
      */
-    public function getRequired() : bool
+    public function getRequired(): bool
     {
         return $this->required;
     }
@@ -185,7 +188,7 @@ class UserInput
     /**
      * @return string
      */
-    public function getValidationSchema() : string
+    public function getValidationSchema(): string
     {
         return $this->validationSchema;
     }
@@ -194,12 +197,12 @@ class UserInput
      * @param string $dataSource
      * @return self
      */
-    public function withDataSource(string $dataSource) : self
+    public function withDataSource(string $dataSource): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($dataSource, static::$schema['properties']['dataSource']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -211,7 +214,7 @@ class UserInput
     /**
      * @return self
      */
-    public function withoutDataSource() : self
+    public function withoutDataSource(): self
     {
         $clone = clone $this;
         unset($clone->dataSource);
@@ -223,7 +226,7 @@ class UserInput
      * @param UserInputDataType $dataType
      * @return self
      */
-    public function withDataType(UserInputDataType $dataType) : self
+    public function withDataType(UserInputDataType $dataType): self
     {
         $clone = clone $this;
         $clone->dataType = $dataType;
@@ -235,12 +238,12 @@ class UserInput
      * @param string $defaultValue
      * @return self
      */
-    public function withDefaultValue(string $defaultValue) : self
+    public function withDefaultValue(string $defaultValue): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($defaultValue, static::$schema['properties']['defaultValue']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -252,7 +255,7 @@ class UserInput
     /**
      * @return self
      */
-    public function withoutDefaultValue() : self
+    public function withoutDefaultValue(): self
     {
         $clone = clone $this;
         unset($clone->defaultValue);
@@ -264,7 +267,7 @@ class UserInput
      * @param UserInputFormat $format
      * @return self
      */
-    public function withFormat(UserInputFormat $format) : self
+    public function withFormat(UserInputFormat $format): self
     {
         $clone = clone $this;
         $clone->format = $format;
@@ -275,7 +278,7 @@ class UserInput
     /**
      * @return self
      */
-    public function withoutFormat() : self
+    public function withoutFormat(): self
     {
         $clone = clone $this;
         unset($clone->format);
@@ -287,7 +290,7 @@ class UserInput
      * @param AppInstallationLifecycle $lifecycleConstraint
      * @return self
      */
-    public function withLifecycleConstraint(AppInstallationLifecycle $lifecycleConstraint) : self
+    public function withLifecycleConstraint(AppInstallationLifecycle $lifecycleConstraint): self
     {
         $clone = clone $this;
         $clone->lifecycleConstraint = $lifecycleConstraint;
@@ -299,12 +302,12 @@ class UserInput
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -317,7 +320,7 @@ class UserInput
      * @param UserInputPositionMeta $positionMeta
      * @return self
      */
-    public function withPositionMeta(UserInputPositionMeta $positionMeta) : self
+    public function withPositionMeta(UserInputPositionMeta $positionMeta): self
     {
         $clone = clone $this;
         $clone->positionMeta = $positionMeta;
@@ -328,7 +331,7 @@ class UserInput
     /**
      * @return self
      */
-    public function withoutPositionMeta() : self
+    public function withoutPositionMeta(): self
     {
         $clone = clone $this;
         unset($clone->positionMeta);
@@ -340,12 +343,12 @@ class UserInput
      * @param bool $required
      * @return self
      */
-    public function withRequired(bool $required) : self
+    public function withRequired(bool $required): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($required, static::$schema['properties']['required']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -358,12 +361,12 @@ class UserInput
      * @param string $validationSchema
      * @return self
      */
-    public function withValidationSchema(string $validationSchema) : self
+    public function withValidationSchema(string $validationSchema): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($validationSchema, static::$schema['properties']['validationSchema']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -378,11 +381,11 @@ class UserInput
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UserInput Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UserInput
+    public static function buildFromInput(array|object $input, bool $validate = true): UserInput
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -422,7 +425,7 @@ class UserInput
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->dataSource)) {
@@ -452,19 +455,19 @@ class UserInput
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -474,4 +477,3 @@ class UserInput
     {
     }
 }
-

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class NewsletterGetInfo200ResponseBody
 {
     /**
@@ -49,7 +53,7 @@ class NewsletterGetInfo200ResponseBody
      */
     private bool $registered;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param bool $active
@@ -66,7 +70,7 @@ class NewsletterGetInfo200ResponseBody
     /**
      * @return bool
      */
-    public function getActive() : bool
+    public function getActive(): bool
     {
         return $this->active;
     }
@@ -74,7 +78,7 @@ class NewsletterGetInfo200ResponseBody
     /**
      * @return string
      */
-    public function getEmail() : string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -82,7 +86,7 @@ class NewsletterGetInfo200ResponseBody
     /**
      * @return bool
      */
-    public function getRegistered() : bool
+    public function getRegistered(): bool
     {
         return $this->registered;
     }
@@ -91,12 +95,12 @@ class NewsletterGetInfo200ResponseBody
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -109,12 +113,12 @@ class NewsletterGetInfo200ResponseBody
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -127,12 +131,12 @@ class NewsletterGetInfo200ResponseBody
      * @param bool $registered
      * @return self
      */
-    public function withRegistered(bool $registered) : self
+    public function withRegistered(bool $registered): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($registered, static::$schema['properties']['registered']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -147,11 +151,11 @@ class NewsletterGetInfo200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return NewsletterGetInfo200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : NewsletterGetInfo200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): NewsletterGetInfo200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -170,7 +174,7 @@ class NewsletterGetInfo200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['active'] = $this->active;
@@ -186,19 +190,19 @@ class NewsletterGetInfo200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -208,7 +212,7 @@ class NewsletterGetInfo200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -216,4 +220,3 @@ class NewsletterGetInfo200ResponseBody
         return $response;
     }
 }
-

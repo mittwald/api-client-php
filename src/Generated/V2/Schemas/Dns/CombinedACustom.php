@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Dns;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CombinedACustom
 {
     /**
@@ -69,7 +72,7 @@ class CombinedACustom
     /**
      * @return string[]
      */
-    public function getA() : array
+    public function getA(): array
     {
         return $this->a;
     }
@@ -77,7 +80,7 @@ class CombinedACustom
     /**
      * @return string[]
      */
-    public function getAaaa() : array
+    public function getAaaa(): array
     {
         return $this->aaaa;
     }
@@ -85,7 +88,7 @@ class CombinedACustom
     /**
      * @return RecordSettings
      */
-    public function getSettings() : RecordSettings
+    public function getSettings(): RecordSettings
     {
         return $this->settings;
     }
@@ -94,7 +97,7 @@ class CombinedACustom
      * @param string[] $a
      * @return self
      */
-    public function withA(array $a) : self
+    public function withA(array $a): self
     {
         $clone = clone $this;
         $clone->a = $a;
@@ -106,7 +109,7 @@ class CombinedACustom
      * @param string[] $aaaa
      * @return self
      */
-    public function withAaaa(array $aaaa) : self
+    public function withAaaa(array $aaaa): self
     {
         $clone = clone $this;
         $clone->aaaa = $aaaa;
@@ -118,7 +121,7 @@ class CombinedACustom
      * @param RecordSettings $settings
      * @return self
      */
-    public function withSettings(RecordSettings $settings) : self
+    public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;
         $clone->settings = $settings;
@@ -132,17 +135,17 @@ class CombinedACustom
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CombinedACustom Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CombinedACustom
+    public static function buildFromInput(array|object $input, bool $validate = true): CombinedACustom
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $a = array_map(fn(string $i): string => $i, $input->{'a'});
-        $aaaa = array_map(fn(string $i): string => $i, $input->{'aaaa'});
+        $a = array_map(fn (string $i): string => $i, $input->{'a'});
+        $aaaa = array_map(fn (string $i): string => $i, $input->{'aaaa'});
         $settings = RecordSettings::buildFromInput($input->{'settings'}, validate: $validate);
 
         $obj = new self($a, $aaaa, $settings);
@@ -155,11 +158,11 @@ class CombinedACustom
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['a'] = array_map(fn(string $i): string => $i, $this->a);
-        $output['aaaa'] = array_map(fn(string $i): string => $i, $this->aaaa);
+        $output['a'] = array_map(fn (string $i): string => $i, $this->a);
+        $output['aaaa'] = array_map(fn (string $i): string => $i, $this->aaaa);
         $output['settings'] = $this->settings->toJson();
 
         return $output;
@@ -171,19 +174,19 @@ class CombinedACustom
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -193,4 +196,3 @@ class CombinedACustom
     {
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class PaymentSettingsInvoice
 {
     /**
@@ -42,7 +45,7 @@ class PaymentSettingsInvoice
     /**
      * @return PaymentSettingsInvoiceMethod
      */
-    public function getMethod() : PaymentSettingsInvoiceMethod
+    public function getMethod(): PaymentSettingsInvoiceMethod
     {
         return $this->method;
     }
@@ -51,7 +54,7 @@ class PaymentSettingsInvoice
      * @param PaymentSettingsInvoiceMethod $method
      * @return self
      */
-    public function withMethod(PaymentSettingsInvoiceMethod $method) : self
+    public function withMethod(PaymentSettingsInvoiceMethod $method): self
     {
         $clone = clone $this;
         $clone->method = $method;
@@ -65,11 +68,11 @@ class PaymentSettingsInvoice
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return PaymentSettingsInvoice Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : PaymentSettingsInvoice
+    public static function buildFromInput(array|object $input, bool $validate = true): PaymentSettingsInvoice
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -86,7 +89,7 @@ class PaymentSettingsInvoice
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['method'] = ($this->method)->value;
@@ -100,19 +103,19 @@ class PaymentSettingsInvoice
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -122,4 +125,3 @@ class PaymentSettingsInvoice
     {
     }
 }
-

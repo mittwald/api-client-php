@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class DatePeriod
 {
     /**
@@ -30,46 +34,46 @@ class DatePeriod
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $end;
+    private DateTime $end;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $start;
+    private DateTime $start;
 
     /**
-     * @param \DateTime $end
-     * @param \DateTime $start
+     * @param DateTime $end
+     * @param DateTime $start
      */
-    public function __construct(\DateTime $end, \DateTime $start)
+    public function __construct(DateTime $end, DateTime $start)
     {
         $this->end = $end;
         $this->start = $start;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getEnd() : \DateTime
+    public function getEnd(): DateTime
     {
         return $this->end;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getStart() : \DateTime
+    public function getStart(): DateTime
     {
         return $this->start;
     }
 
     /**
-     * @param \DateTime $end
+     * @param DateTime $end
      * @return self
      */
-    public function withEnd(\DateTime $end) : self
+    public function withEnd(DateTime $end): self
     {
         $clone = clone $this;
         $clone->end = $end;
@@ -78,10 +82,10 @@ class DatePeriod
     }
 
     /**
-     * @param \DateTime $start
+     * @param DateTime $start
      * @return self
      */
-    public function withStart(\DateTime $start) : self
+    public function withStart(DateTime $start): self
     {
         $clone = clone $this;
         $clone->start = $start;
@@ -95,17 +99,17 @@ class DatePeriod
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DatePeriod Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DatePeriod
+    public static function buildFromInput(array|object $input, bool $validate = true): DatePeriod
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $end = new \DateTime($input->{'end'});
-        $start = new \DateTime($input->{'start'});
+        $end = new DateTime($input->{'end'});
+        $start = new DateTime($input->{'start'});
 
         $obj = new self($end, $start);
 
@@ -117,11 +121,11 @@ class DatePeriod
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['end'] = ($this->end)->format(\DateTime::ATOM);
-        $output['start'] = ($this->start)->format(\DateTime::ATOM);
+        $output['end'] = ($this->end)->format(DateTime::ATOM);
+        $output['start'] = ($this->start)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -132,19 +136,19 @@ class DatePeriod
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -156,4 +160,3 @@ class DatePeriod
         $this->start = clone $this->start;
     }
 }
-

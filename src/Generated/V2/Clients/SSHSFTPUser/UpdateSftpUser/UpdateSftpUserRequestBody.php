@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
+
 class UpdateSftpUserRequestBody
 {
     public const method = 'patch';
@@ -73,9 +78,9 @@ class UpdateSftpUserRequestBody
     private ?array $directories = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var string|null
@@ -83,12 +88,12 @@ class UpdateSftpUserRequestBody
     private ?string $password = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
+     * @var PublicKey[]|null
      */
     private ?array $publicKeys = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -101,7 +106,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return UpdateSftpUserRequestBodyAccessLevel|null
      */
-    public function getAccessLevel() : ?UpdateSftpUserRequestBodyAccessLevel
+    public function getAccessLevel(): ?UpdateSftpUserRequestBodyAccessLevel
     {
         return $this->accessLevel ?? null;
     }
@@ -109,7 +114,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return bool|null
      */
-    public function getActive() : ?bool
+    public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
@@ -117,7 +122,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
@@ -125,15 +130,15 @@ class UpdateSftpUserRequestBody
     /**
      * @return string[]|null
      */
-    public function getDirectories() : ?array
+    public function getDirectories(): ?array
     {
         return $this->directories ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -141,15 +146,15 @@ class UpdateSftpUserRequestBody
     /**
      * @return string|null
      */
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
         return $this->password ?? null;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
+     * @return PublicKey[]|null
      */
-    public function getPublicKeys() : ?array
+    public function getPublicKeys(): ?array
     {
         return $this->publicKeys ?? null;
     }
@@ -158,7 +163,7 @@ class UpdateSftpUserRequestBody
      * @param UpdateSftpUserRequestBodyAccessLevel $accessLevel
      * @return self
      */
-    public function withAccessLevel(UpdateSftpUserRequestBodyAccessLevel $accessLevel) : self
+    public function withAccessLevel(UpdateSftpUserRequestBodyAccessLevel $accessLevel): self
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
@@ -169,7 +174,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutAccessLevel() : self
+    public function withoutAccessLevel(): self
     {
         $clone = clone $this;
         unset($clone->accessLevel);
@@ -181,12 +186,12 @@ class UpdateSftpUserRequestBody
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -198,7 +203,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutActive() : self
+    public function withoutActive(): self
     {
         $clone = clone $this;
         unset($clone->active);
@@ -210,12 +215,12 @@ class UpdateSftpUserRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -227,7 +232,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -239,12 +244,12 @@ class UpdateSftpUserRequestBody
      * @param string[] $directories
      * @return self
      */
-    public function withDirectories(array $directories) : self
+    public function withDirectories(array $directories): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($directories, static::$schema['properties']['directories']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -256,7 +261,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutDirectories() : self
+    public function withoutDirectories(): self
     {
         $clone = clone $this;
         unset($clone->directories);
@@ -265,10 +270,10 @@ class UpdateSftpUserRequestBody
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -279,7 +284,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -291,12 +296,12 @@ class UpdateSftpUserRequestBody
      * @param string $password
      * @return self
      */
-    public function withPassword(string $password) : self
+    public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -308,7 +313,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutPassword() : self
+    public function withoutPassword(): self
     {
         $clone = clone $this;
         unset($clone->password);
@@ -317,10 +322,10 @@ class UpdateSftpUserRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[] $publicKeys
+     * @param PublicKey[] $publicKeys
      * @return self
      */
-    public function withPublicKeys(array $publicKeys) : self
+    public function withPublicKeys(array $publicKeys): self
     {
         $clone = clone $this;
         $clone->publicKeys = $publicKeys;
@@ -331,7 +336,7 @@ class UpdateSftpUserRequestBody
     /**
      * @return self
      */
-    public function withoutPublicKeys() : self
+    public function withoutPublicKeys(): self
     {
         $clone = clone $this;
         unset($clone->publicKeys);
@@ -345,11 +350,11 @@ class UpdateSftpUserRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateSftpUserRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateSftpUserRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateSftpUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -372,7 +377,7 @@ class UpdateSftpUserRequestBody
         }
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $password = null;
         if (isset($input->{'password'})) {
@@ -380,7 +385,7 @@ class UpdateSftpUserRequestBody
         }
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
 
         $obj = new self();
@@ -399,7 +404,7 @@ class UpdateSftpUserRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->accessLevel)) {
@@ -415,13 +420,13 @@ class UpdateSftpUserRequestBody
             $output['directories'] = $this->directories;
         }
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         if (isset($this->password)) {
             $output['password'] = $this->password;
         }
         if (isset($this->publicKeys)) {
-            $output['publicKeys'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey $i): array => $i->toJson(), $this->publicKeys);
+            $output['publicKeys'] = array_map(fn (PublicKey $i): array => $i->toJson(), $this->publicKeys);
         }
 
         return $output;
@@ -433,19 +438,19 @@ class UpdateSftpUserRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -458,30 +463,29 @@ class UpdateSftpUserRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $sftpUserId = urlencode($mapped['sftpUserId']);
         return '/v2/sftp-users/' . $sftpUserId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

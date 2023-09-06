@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Ingress;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class Ingress
 {
     /**
@@ -170,7 +173,7 @@ class Ingress
     /**
      * @return string[]
      */
-    public function getDnsValidationErrors() : array
+    public function getDnsValidationErrors(): array
     {
         return $this->dnsValidationErrors;
     }
@@ -178,7 +181,7 @@ class Ingress
     /**
      * @return string
      */
-    public function getHostname() : string
+    public function getHostname(): string
     {
         return $this->hostname;
     }
@@ -186,7 +189,7 @@ class Ingress
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -194,7 +197,7 @@ class Ingress
     /**
      * @return IngressIps
      */
-    public function getIps() : IngressIps
+    public function getIps(): IngressIps
     {
         return $this->ips;
     }
@@ -202,7 +205,7 @@ class Ingress
     /**
      * @return bool
      */
-    public function getIsDefault() : bool
+    public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
@@ -210,7 +213,7 @@ class Ingress
     /**
      * @return bool
      */
-    public function getIsEnabled() : bool
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
@@ -218,7 +221,7 @@ class Ingress
     /**
      * @return Path[]
      */
-    public function getPaths() : array
+    public function getPaths(): array
     {
         return $this->paths;
     }
@@ -226,7 +229,7 @@ class Ingress
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -235,7 +238,7 @@ class Ingress
      * @return
      * TlsAcme|TlsCertificate
      */
-    public function getTls() : TlsAcme|TlsCertificate
+    public function getTls(): TlsAcme|TlsCertificate
     {
         return $this->tls;
     }
@@ -244,12 +247,12 @@ class Ingress
      * @param string[] $dnsValidationErrors
      * @return self
      */
-    public function withDnsValidationErrors(array $dnsValidationErrors) : self
+    public function withDnsValidationErrors(array $dnsValidationErrors): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($dnsValidationErrors, static::$schema['properties']['dnsValidationErrors']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -262,12 +265,12 @@ class Ingress
      * @param string $hostname
      * @return self
      */
-    public function withHostname(string $hostname) : self
+    public function withHostname(string $hostname): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hostname, static::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -280,12 +283,12 @@ class Ingress
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -298,7 +301,7 @@ class Ingress
      * @param IngressIps $ips
      * @return self
      */
-    public function withIps(IngressIps $ips) : self
+    public function withIps(IngressIps $ips): self
     {
         $clone = clone $this;
         $clone->ips = $ips;
@@ -310,12 +313,12 @@ class Ingress
      * @param bool $isDefault
      * @return self
      */
-    public function withIsDefault(bool $isDefault) : self
+    public function withIsDefault(bool $isDefault): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isDefault, static::$schema['properties']['isDefault']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -328,12 +331,12 @@ class Ingress
      * @param bool $isEnabled
      * @return self
      */
-    public function withIsEnabled(bool $isEnabled) : self
+    public function withIsEnabled(bool $isEnabled): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isEnabled, static::$schema['properties']['isEnabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -346,7 +349,7 @@ class Ingress
      * @param Path[] $paths
      * @return self
      */
-    public function withPaths(array $paths) : self
+    public function withPaths(array $paths): self
     {
         $clone = clone $this;
         $clone->paths = $paths;
@@ -358,12 +361,12 @@ class Ingress
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -376,7 +379,7 @@ class Ingress
      * @param TlsAcme|TlsCertificate $tls
      * @return self
      */
-    public function withTls(TlsAcme|TlsCertificate $tls) : self
+    public function withTls(TlsAcme|TlsCertificate $tls): self
     {
         $clone = clone $this;
         $clone->tls = $tls;
@@ -390,11 +393,11 @@ class Ingress
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Ingress Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Ingress
+    public static function buildFromInput(array|object $input, bool $validate = true): Ingress
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -405,7 +408,7 @@ class Ingress
         $ips = IngressIps::buildFromInput($input->{'ips'}, validate: $validate);
         $isDefault = (bool)($input->{'isDefault'});
         $isEnabled = (bool)($input->{'isEnabled'});
-        $paths = array_map(fn(array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
+        $paths = array_map(fn (array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
         $tls = match (true) {
             TlsAcme::validateInput($input->{'tls'}, true) => TlsAcme::buildFromInput($input->{'tls'}, validate: $validate),
@@ -422,7 +425,7 @@ class Ingress
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['dnsValidationErrors'] = $this->dnsValidationErrors;
@@ -431,7 +434,7 @@ class Ingress
         $output['ips'] = ($this->ips)->toJson();
         $output['isDefault'] = $this->isDefault;
         $output['isEnabled'] = $this->isEnabled;
-        $output['paths'] = array_map(fn(Path $i): array => $i->toJson(), $this->paths);
+        $output['paths'] = array_map(fn (Path $i): array => $i->toJson(), $this->paths);
         $output['projectId'] = $this->projectId;
         $output['tls'] = match (true) {
             ($this->tls) instanceof TlsAcme, ($this->tls) instanceof TlsCertificate => $this->tls->toJson(),
@@ -446,19 +449,19 @@ class Ingress
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -472,4 +475,3 @@ class Ingress
         };
     }
 }
-

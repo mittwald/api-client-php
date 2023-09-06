@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\ReconcileDetectedApps;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ReconcileDetectedAppsRequest
 {
     public const method = 'put';
@@ -65,7 +68,7 @@ class ReconcileDetectedAppsRequest
     private array $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -81,7 +84,7 @@ class ReconcileDetectedAppsRequest
     /**
      * @return string
      */
-    public function getProjectShortId() : string
+    public function getProjectShortId(): string
     {
         return $this->projectShortId;
     }
@@ -89,7 +92,7 @@ class ReconcileDetectedAppsRequest
     /**
      * @return ReconcileDetectedAppsRequestBodyItem[]
      */
-    public function getBody() : array
+    public function getBody(): array
     {
         return $this->body;
     }
@@ -98,12 +101,12 @@ class ReconcileDetectedAppsRequest
      * @param string $projectShortId
      * @return self
      */
-    public function withProjectShortId(string $projectShortId) : self
+    public function withProjectShortId(string $projectShortId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectShortId, static::$schema['properties']['projectShortId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -116,7 +119,7 @@ class ReconcileDetectedAppsRequest
      * @param ReconcileDetectedAppsRequestBodyItem[] $body
      * @return self
      */
-    public function withBody(array $body) : self
+    public function withBody(array $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -130,11 +133,11 @@ class ReconcileDetectedAppsRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ReconcileDetectedAppsRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ReconcileDetectedAppsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ReconcileDetectedAppsRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -152,7 +155,7 @@ class ReconcileDetectedAppsRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectShortId'] = $this->projectShortId;
@@ -167,19 +170,19 @@ class ReconcileDetectedAppsRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -190,30 +193,29 @@ class ReconcileDetectedAppsRequest
         $this->body = array_map(fn (ReconcileDetectedAppsRequestBodyItem $i) => clone $i, $this->body);
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectShortId = urlencode($mapped['projectShortId']);
         return '/v2/projects/' . $projectShortId . '/appinstallations';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

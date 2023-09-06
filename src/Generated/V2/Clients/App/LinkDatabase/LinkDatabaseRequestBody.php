@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class LinkDatabaseRequestBody
 {
     public const method = 'put';
@@ -57,7 +60,7 @@ class LinkDatabaseRequestBody
     private LinkDatabaseRequestBodyPurpose $purpose;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -73,7 +76,7 @@ class LinkDatabaseRequestBody
     /**
      * @return string
      */
-    public function getDatabaseId() : string
+    public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
@@ -81,7 +84,7 @@ class LinkDatabaseRequestBody
     /**
      * @return string[]|null
      */
-    public function getDatabaseUserIds() : ?array
+    public function getDatabaseUserIds(): ?array
     {
         return $this->databaseUserIds ?? null;
     }
@@ -89,7 +92,7 @@ class LinkDatabaseRequestBody
     /**
      * @return LinkDatabaseRequestBodyPurpose
      */
-    public function getPurpose() : LinkDatabaseRequestBodyPurpose
+    public function getPurpose(): LinkDatabaseRequestBodyPurpose
     {
         return $this->purpose;
     }
@@ -98,12 +101,12 @@ class LinkDatabaseRequestBody
      * @param string $databaseId
      * @return self
      */
-    public function withDatabaseId(string $databaseId) : self
+    public function withDatabaseId(string $databaseId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseId, static::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -116,12 +119,12 @@ class LinkDatabaseRequestBody
      * @param string[] $databaseUserIds
      * @return self
      */
-    public function withDatabaseUserIds(array $databaseUserIds) : self
+    public function withDatabaseUserIds(array $databaseUserIds): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseUserIds, static::$schema['properties']['databaseUserIds']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -133,7 +136,7 @@ class LinkDatabaseRequestBody
     /**
      * @return self
      */
-    public function withoutDatabaseUserIds() : self
+    public function withoutDatabaseUserIds(): self
     {
         $clone = clone $this;
         unset($clone->databaseUserIds);
@@ -145,7 +148,7 @@ class LinkDatabaseRequestBody
      * @param LinkDatabaseRequestBodyPurpose $purpose
      * @return self
      */
-    public function withPurpose(LinkDatabaseRequestBodyPurpose $purpose) : self
+    public function withPurpose(LinkDatabaseRequestBodyPurpose $purpose): self
     {
         $clone = clone $this;
         $clone->purpose = $purpose;
@@ -159,11 +162,11 @@ class LinkDatabaseRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return LinkDatabaseRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : LinkDatabaseRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): LinkDatabaseRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -185,7 +188,7 @@ class LinkDatabaseRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['databaseId'] = $this->databaseId;
@@ -203,19 +206,19 @@ class LinkDatabaseRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -225,30 +228,29 @@ class LinkDatabaseRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
         return '/v2/appinstallations/' . $appInstallationId . '/databases';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

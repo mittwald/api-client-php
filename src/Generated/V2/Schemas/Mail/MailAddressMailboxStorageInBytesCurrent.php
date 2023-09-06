@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class MailAddressMailboxStorageInBytesCurrent
 {
     /**
@@ -29,9 +33,9 @@ class MailAddressMailboxStorageInBytesCurrent
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @var int|float
@@ -39,19 +43,19 @@ class MailAddressMailboxStorageInBytesCurrent
     private int|float $value;
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @param int|float $value
      */
-    public function __construct(\DateTime $updatedAt, int|float $value)
+    public function __construct(DateTime $updatedAt, int|float $value)
     {
         $this->updatedAt = $updatedAt;
         $this->value = $value;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -59,16 +63,16 @@ class MailAddressMailboxStorageInBytesCurrent
     /**
      * @return int|float
      */
-    public function getValue() : int|float
+    public function getValue(): int|float
     {
         return $this->value;
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -80,12 +84,12 @@ class MailAddressMailboxStorageInBytesCurrent
      * @param int|float $value
      * @return self
      */
-    public function withValue(int|float $value) : self
+    public function withValue(int|float $value): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($value, static::$schema['properties']['value']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -100,16 +104,16 @@ class MailAddressMailboxStorageInBytesCurrent
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MailAddressMailboxStorageInBytesCurrent Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MailAddressMailboxStorageInBytesCurrent
+    public static function buildFromInput(array|object $input, bool $validate = true): MailAddressMailboxStorageInBytesCurrent
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
         $value = str_contains($input->{'value'}, '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
 
         $obj = new self($updatedAt, $value);
@@ -122,10 +126,10 @@ class MailAddressMailboxStorageInBytesCurrent
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         $output['value'] = $this->value;
 
         return $output;
@@ -137,19 +141,19 @@ class MailAddressMailboxStorageInBytesCurrent
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -160,4 +164,3 @@ class MailAddressMailboxStorageInBytesCurrent
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ApiToken
 {
     /**
@@ -55,9 +59,9 @@ class ApiToken
     private string $apiTokenId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -65,9 +69,9 @@ class ApiToken
     private string $description;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var string[]
@@ -76,11 +80,11 @@ class ApiToken
 
     /**
      * @param string $apiTokenId
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $description
      * @param string[] $roles
      */
-    public function __construct(string $apiTokenId, \DateTime $createdAt, string $description, array $roles)
+    public function __construct(string $apiTokenId, DateTime $createdAt, string $description, array $roles)
     {
         $this->apiTokenId = $apiTokenId;
         $this->createdAt = $createdAt;
@@ -91,15 +95,15 @@ class ApiToken
     /**
      * @return string
      */
-    public function getApiTokenId() : string
+    public function getApiTokenId(): string
     {
         return $this->apiTokenId;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -107,15 +111,15 @@ class ApiToken
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -123,7 +127,7 @@ class ApiToken
     /**
      * @return string[]
      */
-    public function getRoles() : array
+    public function getRoles(): array
     {
         return $this->roles;
     }
@@ -132,12 +136,12 @@ class ApiToken
      * @param string $apiTokenId
      * @return self
      */
-    public function withApiTokenId(string $apiTokenId) : self
+    public function withApiTokenId(string $apiTokenId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($apiTokenId, static::$schema['properties']['apiTokenId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -147,10 +151,10 @@ class ApiToken
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -162,12 +166,12 @@ class ApiToken
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -177,10 +181,10 @@ class ApiToken
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -191,7 +195,7 @@ class ApiToken
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -203,12 +207,12 @@ class ApiToken
      * @param string[] $roles
      * @return self
      */
-    public function withRoles(array $roles) : self
+    public function withRoles(array $roles): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($roles, static::$schema['properties']['roles']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -223,21 +227,21 @@ class ApiToken
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ApiToken Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ApiToken
+    public static function buildFromInput(array|object $input, bool $validate = true): ApiToken
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $apiTokenId = $input->{'apiTokenId'};
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $roles = $input->{'roles'};
 
@@ -251,14 +255,14 @@ class ApiToken
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['apiTokenId'] = $this->apiTokenId;
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['roles'] = $this->roles;
 
@@ -271,19 +275,19 @@ class ApiToken
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -297,4 +301,3 @@ class ApiToken
         }
     }
 }
-

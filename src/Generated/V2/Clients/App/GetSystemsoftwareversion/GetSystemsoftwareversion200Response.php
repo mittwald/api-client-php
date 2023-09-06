@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion;
+use Psr\Http\Message\ResponseInterface;
+
 class GetSystemsoftwareversion200Response
 {
     /**
@@ -24,33 +29,33 @@ class GetSystemsoftwareversion200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion
+     * @var SystemSoftwareVersion
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion $body;
+    private SystemSoftwareVersion $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion $body
+     * @param SystemSoftwareVersion $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion $body)
+    public function __construct(SystemSoftwareVersion $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion
+     * @return SystemSoftwareVersion
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion
+    public function getBody(): SystemSoftwareVersion
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion $body
+     * @param SystemSoftwareVersion $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion $body) : self
+    public function withBody(SystemSoftwareVersion $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,16 +69,16 @@ class GetSystemsoftwareversion200Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetSystemsoftwareversion200Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetSystemsoftwareversion200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): GetSystemsoftwareversion200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareVersion::buildFromInput($input->{'body'}, validate: $validate);
+        $body = SystemSoftwareVersion::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -85,7 +90,7 @@ class GetSystemsoftwareversion200Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = $this->body->toJson();
@@ -99,19 +104,19 @@ class GetSystemsoftwareversion200Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -121,7 +126,7 @@ class GetSystemsoftwareversion200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -129,4 +134,3 @@ class GetSystemsoftwareversion200Response
         return $response;
     }
 }
-

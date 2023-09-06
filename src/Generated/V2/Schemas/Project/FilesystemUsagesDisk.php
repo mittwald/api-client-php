@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class FilesystemUsagesDisk
 {
     /**
@@ -51,7 +54,7 @@ class FilesystemUsagesDisk
     /**
      * @return string|null
      */
-    public function getPath() : ?string
+    public function getPath(): ?string
     {
         return $this->path ?? null;
     }
@@ -59,7 +62,7 @@ class FilesystemUsagesDisk
     /**
      * @return int|null
      */
-    public function getTotalBytes() : ?int
+    public function getTotalBytes(): ?int
     {
         return $this->totalBytes ?? null;
     }
@@ -67,7 +70,7 @@ class FilesystemUsagesDisk
     /**
      * @return int|null
      */
-    public function getUsedBytes() : ?int
+    public function getUsedBytes(): ?int
     {
         return $this->usedBytes ?? null;
     }
@@ -76,12 +79,12 @@ class FilesystemUsagesDisk
      * @param string $path
      * @return self
      */
-    public function withPath(string $path) : self
+    public function withPath(string $path): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($path, static::$schema['properties']['path']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -93,7 +96,7 @@ class FilesystemUsagesDisk
     /**
      * @return self
      */
-    public function withoutPath() : self
+    public function withoutPath(): self
     {
         $clone = clone $this;
         unset($clone->path);
@@ -105,12 +108,12 @@ class FilesystemUsagesDisk
      * @param int $totalBytes
      * @return self
      */
-    public function withTotalBytes(int $totalBytes) : self
+    public function withTotalBytes(int $totalBytes): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($totalBytes, static::$schema['properties']['totalBytes']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -122,7 +125,7 @@ class FilesystemUsagesDisk
     /**
      * @return self
      */
-    public function withoutTotalBytes() : self
+    public function withoutTotalBytes(): self
     {
         $clone = clone $this;
         unset($clone->totalBytes);
@@ -134,12 +137,12 @@ class FilesystemUsagesDisk
      * @param int $usedBytes
      * @return self
      */
-    public function withUsedBytes(int $usedBytes) : self
+    public function withUsedBytes(int $usedBytes): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($usedBytes, static::$schema['properties']['usedBytes']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -151,7 +154,7 @@ class FilesystemUsagesDisk
     /**
      * @return self
      */
-    public function withoutUsedBytes() : self
+    public function withoutUsedBytes(): self
     {
         $clone = clone $this;
         unset($clone->usedBytes);
@@ -165,11 +168,11 @@ class FilesystemUsagesDisk
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return FilesystemUsagesDisk Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : FilesystemUsagesDisk
+    public static function buildFromInput(array|object $input, bool $validate = true): FilesystemUsagesDisk
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -199,7 +202,7 @@ class FilesystemUsagesDisk
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->path)) {
@@ -221,19 +224,19 @@ class FilesystemUsagesDisk
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -243,4 +246,3 @@ class FilesystemUsagesDisk
     {
     }
 }
-

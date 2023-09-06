@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class DeprecatedUserResendVerificationEmailRequestBody
 {
     public const method = 'post';
@@ -42,7 +45,7 @@ class DeprecatedUserResendVerificationEmailRequestBody
     private ?string $userId = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -55,7 +58,7 @@ class DeprecatedUserResendVerificationEmailRequestBody
     /**
      * @return string|null
      */
-    public function getEmail() : ?string
+    public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
@@ -63,7 +66,7 @@ class DeprecatedUserResendVerificationEmailRequestBody
     /**
      * @return string|null
      */
-    public function getUserId() : ?string
+    public function getUserId(): ?string
     {
         return $this->userId ?? null;
     }
@@ -72,12 +75,12 @@ class DeprecatedUserResendVerificationEmailRequestBody
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -89,7 +92,7 @@ class DeprecatedUserResendVerificationEmailRequestBody
     /**
      * @return self
      */
-    public function withoutEmail() : self
+    public function withoutEmail(): self
     {
         $clone = clone $this;
         unset($clone->email);
@@ -101,12 +104,12 @@ class DeprecatedUserResendVerificationEmailRequestBody
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -118,7 +121,7 @@ class DeprecatedUserResendVerificationEmailRequestBody
     /**
      * @return self
      */
-    public function withoutUserId() : self
+    public function withoutUserId(): self
     {
         $clone = clone $this;
         unset($clone->userId);
@@ -132,11 +135,11 @@ class DeprecatedUserResendVerificationEmailRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserResendVerificationEmailRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserResendVerificationEmailRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserResendVerificationEmailRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -161,7 +164,7 @@ class DeprecatedUserResendVerificationEmailRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->email)) {
@@ -180,19 +183,19 @@ class DeprecatedUserResendVerificationEmailRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -202,29 +205,28 @@ class DeprecatedUserResendVerificationEmailRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/signup/email/resend';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

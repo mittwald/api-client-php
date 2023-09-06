@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact;
+
 class UpdateCustomerRequestBody
 {
     public const method = 'put';
@@ -54,9 +58,9 @@ class UpdateCustomerRequestBody
     private string $name;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact|null
+     * @var Contact|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner = null;
+    private ?Contact $owner = null;
 
     /**
      * @var string|null
@@ -64,7 +68,7 @@ class UpdateCustomerRequestBody
     private ?string $vatId = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -80,7 +84,7 @@ class UpdateCustomerRequestBody
     /**
      * @return string|null
      */
-    public function getCategoryId() : ?string
+    public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
     }
@@ -88,7 +92,7 @@ class UpdateCustomerRequestBody
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -96,15 +100,15 @@ class UpdateCustomerRequestBody
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact|null
+     * @return Contact|null
      */
-    public function getOwner() : ?\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact
+    public function getOwner(): ?Contact
     {
         return $this->owner ?? null;
     }
@@ -112,7 +116,7 @@ class UpdateCustomerRequestBody
     /**
      * @return string|null
      */
-    public function getVatId() : ?string
+    public function getVatId(): ?string
     {
         return $this->vatId ?? null;
     }
@@ -121,12 +125,12 @@ class UpdateCustomerRequestBody
      * @param string $categoryId
      * @return self
      */
-    public function withCategoryId(string $categoryId) : self
+    public function withCategoryId(string $categoryId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -138,7 +142,7 @@ class UpdateCustomerRequestBody
     /**
      * @return self
      */
-    public function withoutCategoryId() : self
+    public function withoutCategoryId(): self
     {
         $clone = clone $this;
         unset($clone->categoryId);
@@ -150,12 +154,12 @@ class UpdateCustomerRequestBody
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -168,12 +172,12 @@ class UpdateCustomerRequestBody
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -183,10 +187,10 @@ class UpdateCustomerRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner
+     * @param Contact $owner
      * @return self
      */
-    public function withOwner(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner) : self
+    public function withOwner(Contact $owner): self
     {
         $clone = clone $this;
         $clone->owner = $owner;
@@ -197,7 +201,7 @@ class UpdateCustomerRequestBody
     /**
      * @return self
      */
-    public function withoutOwner() : self
+    public function withoutOwner(): self
     {
         $clone = clone $this;
         unset($clone->owner);
@@ -209,12 +213,12 @@ class UpdateCustomerRequestBody
      * @param string $vatId
      * @return self
      */
-    public function withVatId(string $vatId) : self
+    public function withVatId(string $vatId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($vatId, static::$schema['properties']['vatId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -226,7 +230,7 @@ class UpdateCustomerRequestBody
     /**
      * @return self
      */
-    public function withoutVatId() : self
+    public function withoutVatId(): self
     {
         $clone = clone $this;
         unset($clone->vatId);
@@ -240,11 +244,11 @@ class UpdateCustomerRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateCustomerRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateCustomerRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCustomerRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -257,7 +261,7 @@ class UpdateCustomerRequestBody
         $name = $input->{'name'};
         $owner = null;
         if (isset($input->{'owner'})) {
-            $owner = \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact::buildFromInput($input->{'owner'}, validate: $validate);
+            $owner = Contact::buildFromInput($input->{'owner'}, validate: $validate);
         }
         $vatId = null;
         if (isset($input->{'vatId'})) {
@@ -276,7 +280,7 @@ class UpdateCustomerRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->categoryId)) {
@@ -300,19 +304,19 @@ class UpdateCustomerRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -322,30 +326,29 @@ class UpdateCustomerRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
         return '/v2/customers/' . $customerId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

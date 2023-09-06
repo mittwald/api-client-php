@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview;
+
 class OrderPreviewOrderRequestBody
 {
     public const method = 'post';
@@ -41,9 +47,9 @@ class OrderPreviewOrderRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|null
+     * @var ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|null
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|null $orderData = null;
+    private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|null $orderData = null;
 
     /**
      * @var OrderPreviewOrderRequestBodyOrderType|null
@@ -51,7 +57,7 @@ class OrderPreviewOrderRequestBody
     private ?OrderPreviewOrderRequestBodyOrderType $orderType = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -65,7 +71,7 @@ class OrderPreviewOrderRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|null
      */
-    public function getOrderData() : \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|null
+    public function getOrderData(): DomainOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null
     {
         return $this->orderData;
     }
@@ -73,16 +79,16 @@ class OrderPreviewOrderRequestBody
     /**
      * @return OrderPreviewOrderRequestBodyOrderType|null
      */
-    public function getOrderType() : ?OrderPreviewOrderRequestBodyOrderType
+    public function getOrderType(): ?OrderPreviewOrderRequestBodyOrderType
     {
         return $this->orderType ?? null;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview $orderData
+     * @param ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview $orderData
      * @return self
      */
-    public function withOrderData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview $orderData) : self
+    public function withOrderData(DomainOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -93,7 +99,7 @@ class OrderPreviewOrderRequestBody
     /**
      * @return self
      */
-    public function withoutOrderData() : self
+    public function withoutOrderData(): self
     {
         $clone = clone $this;
         unset($clone->orderData);
@@ -105,7 +111,7 @@ class OrderPreviewOrderRequestBody
      * @param OrderPreviewOrderRequestBodyOrderType $orderType
      * @return self
      */
-    public function withOrderType(OrderPreviewOrderRequestBodyOrderType $orderType) : self
+    public function withOrderType(OrderPreviewOrderRequestBodyOrderType $orderType): self
     {
         $clone = clone $this;
         $clone->orderType = $orderType;
@@ -116,7 +122,7 @@ class OrderPreviewOrderRequestBody
     /**
      * @return self
      */
-    public function withoutOrderType() : self
+    public function withoutOrderType(): self
     {
         $clone = clone $this;
         unset($clone->orderType);
@@ -130,11 +136,11 @@ class OrderPreviewOrderRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderPreviewOrderRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderPreviewOrderRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderPreviewOrderRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -142,9 +148,9 @@ class OrderPreviewOrderRequestBody
         $orderData = null;
         if (isset($input->{'orderData'})) {
             $orderData = match (true) {
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview::validateInput($input->{'orderData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview::validateInput($input->{'orderData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview::validateInput($input->{'orderData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
+                ProjectHostingOrderPreview::validateInput($input->{'orderData'}, true) => ProjectHostingOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
+                ServerOrderPreview::validateInput($input->{'orderData'}, true) => ServerOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
+                DomainOrderPreview::validateInput($input->{'orderData'}, true) => DomainOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
             };
         }
         $orderType = null;
@@ -163,12 +169,12 @@ class OrderPreviewOrderRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->orderData)) {
             $output['orderData'] = match (true) {
-                ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview => $this->orderData->toJson(),
+                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview => $this->orderData->toJson(),
             };
         }
         if (isset($this->orderType)) {
@@ -184,19 +190,19 @@ class OrderPreviewOrderRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -206,34 +212,33 @@ class OrderPreviewOrderRequestBody
     {
         if (isset($this->orderData)) {
             $this->orderData = match (true) {
-                ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview => $this->orderData,
+                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview => $this->orderData,
             };
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/order-previews';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

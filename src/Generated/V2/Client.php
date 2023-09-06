@@ -2,91 +2,108 @@
 
 namespace Mittwald\ApiClient\Generated\V2;
 
+use Mittwald\ApiClient\Client\BaseClient;
+use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
+use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
+
 /**
  * Auto-generated factory for mittwald mStudio v2 clients.
  *
  * @internal
  */
-class Client extends \Mittwald\ApiClient\Client\BaseClient
+class Client extends BaseClient
 {
-    public function project() : \Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient
+    public function project(): ProjectClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient($this->client);
+        return new ProjectClient($this->client);
     }
 
-    public function backup() : \Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient
+    public function backup(): BackupClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient($this->client);
+        return new BackupClient($this->client);
     }
 
-    public function sSHSFTPUser() : \Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient
+    public function sSHSFTPUser(): SSHSFTPUserClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient($this->client);
+        return new SSHSFTPUserClient($this->client);
     }
 
-    public function cronjob() : \Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient
+    public function cronjob(): CronjobClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient($this->client);
+        return new CronjobClient($this->client);
     }
 
-    public function app() : \Mittwald\ApiClient\Generated\V2\Clients\App\AppClient
+    public function app(): AppClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\App\AppClient($this->client);
+        return new AppClient($this->client);
     }
 
-    public function projectFileSystem() : \Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient
+    public function projectFileSystem(): ProjectFileSystemClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient($this->client);
+        return new ProjectFileSystemClient($this->client);
     }
 
-    public function contract() : \Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient
+    public function contract(): ContractClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient($this->client);
+        return new ContractClient($this->client);
     }
 
-    public function database() : \Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient
+    public function database(): DatabaseClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient($this->client);
+        return new DatabaseClient($this->client);
     }
 
-    public function domain() : \Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient
+    public function domain(): DomainClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient($this->client);
+        return new DomainClient($this->client);
     }
 
-    public function conversation() : \Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient
+    public function conversation(): ConversationClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient($this->client);
+        return new ConversationClient($this->client);
     }
 
-    public function customer() : \Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient
+    public function customer(): CustomerClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Customer\CustomerClient($this->client);
+        return new CustomerClient($this->client);
     }
 
-    public function user() : \Mittwald\ApiClient\Generated\V2\Clients\User\UserClient
+    public function user(): UserClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\User\UserClient($this->client);
+        return new UserClient($this->client);
     }
 
-    public function notification() : \Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient
+    public function notification(): NotificationClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient($this->client);
+        return new NotificationClient($this->client);
     }
 
-    public function file() : \Mittwald\ApiClient\Generated\V2\Clients\File\FileClient
+    public function file(): FileClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\File\FileClient($this->client);
+        return new FileClient($this->client);
     }
 
-    public function mail() : \Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient
+    public function mail(): MailClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient($this->client);
+        return new MailClient($this->client);
     }
 
-    public function article() : \Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient
+    public function article(): ArticleClient
     {
-        return new \Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient($this->client);
+        return new ArticleClient($this->client);
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ListCustomersRequest
 {
     public const method = 'get';
@@ -33,7 +36,7 @@ class ListCustomersRequest
             ],
         ],
         'required' => [
-            
+
         ],
     ];
 
@@ -58,7 +61,7 @@ class ListCustomersRequest
     private ?int $page = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -71,7 +74,7 @@ class ListCustomersRequest
     /**
      * @return string|null
      */
-    public function getRole() : ?string
+    public function getRole(): ?string
     {
         return $this->role ?? null;
     }
@@ -79,7 +82,7 @@ class ListCustomersRequest
     /**
      * @return int|null
      */
-    public function getLimit() : ?int
+    public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
@@ -87,7 +90,7 @@ class ListCustomersRequest
     /**
      * @return int|null
      */
-    public function getSkip() : ?int
+    public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
@@ -95,7 +98,7 @@ class ListCustomersRequest
     /**
      * @return int|null
      */
-    public function getPage() : ?int
+    public function getPage(): ?int
     {
         return $this->page ?? null;
     }
@@ -104,12 +107,12 @@ class ListCustomersRequest
      * @param string $role
      * @return self
      */
-    public function withRole(string $role) : self
+    public function withRole(string $role): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($role, static::$schema['properties']['role']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -121,7 +124,7 @@ class ListCustomersRequest
     /**
      * @return self
      */
-    public function withoutRole() : self
+    public function withoutRole(): self
     {
         $clone = clone $this;
         unset($clone->role);
@@ -133,12 +136,12 @@ class ListCustomersRequest
      * @param int $limit
      * @return self
      */
-    public function withLimit(int $limit) : self
+    public function withLimit(int $limit): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,7 +153,7 @@ class ListCustomersRequest
     /**
      * @return self
      */
-    public function withoutLimit() : self
+    public function withoutLimit(): self
     {
         $clone = clone $this;
         unset($clone->limit);
@@ -162,12 +165,12 @@ class ListCustomersRequest
      * @param int $skip
      * @return self
      */
-    public function withSkip(int $skip) : self
+    public function withSkip(int $skip): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -179,7 +182,7 @@ class ListCustomersRequest
     /**
      * @return self
      */
-    public function withoutSkip() : self
+    public function withoutSkip(): self
     {
         $clone = clone $this;
         unset($clone->skip);
@@ -191,12 +194,12 @@ class ListCustomersRequest
      * @param int $page
      * @return self
      */
-    public function withPage(int $page) : self
+    public function withPage(int $page): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($page, static::$schema['properties']['page']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -208,7 +211,7 @@ class ListCustomersRequest
     /**
      * @return self
      */
-    public function withoutPage() : self
+    public function withoutPage(): self
     {
         $clone = clone $this;
         unset($clone->page);
@@ -222,11 +225,11 @@ class ListCustomersRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListCustomersRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListCustomersRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListCustomersRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -261,7 +264,7 @@ class ListCustomersRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->role)) {
@@ -286,19 +289,19 @@ class ListCustomersRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -308,13 +311,13 @@ class ListCustomersRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/customers';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -333,16 +336,15 @@ class ListCustomersRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

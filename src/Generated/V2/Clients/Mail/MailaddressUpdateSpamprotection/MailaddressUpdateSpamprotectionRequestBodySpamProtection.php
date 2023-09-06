@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateSpamprotection;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class MailaddressUpdateSpamprotectionRequestBodySpamProtection
 {
     public const method = 'put';
@@ -63,7 +66,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
     private int $relocationMinSpamScore;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -83,7 +86,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
     /**
      * @return bool
      */
-    public function getActive() : bool
+    public function getActive(): bool
     {
         return $this->active;
     }
@@ -91,7 +94,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
     /**
      * @return bool
      */
-    public function getAutoDeleteSpam() : bool
+    public function getAutoDeleteSpam(): bool
     {
         return $this->autoDeleteSpam;
     }
@@ -99,7 +102,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
     /**
      * @return MailaddressUpdateSpamprotectionRequestBodySpamProtectionFolder
      */
-    public function getFolder() : MailaddressUpdateSpamprotectionRequestBodySpamProtectionFolder
+    public function getFolder(): MailaddressUpdateSpamprotectionRequestBodySpamProtectionFolder
     {
         return $this->folder;
     }
@@ -107,7 +110,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
     /**
      * @return int
      */
-    public function getRelocationMinSpamScore() : int
+    public function getRelocationMinSpamScore(): int
     {
         return $this->relocationMinSpamScore;
     }
@@ -116,12 +119,12 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -134,12 +137,12 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      * @param bool $autoDeleteSpam
      * @return self
      */
-    public function withAutoDeleteSpam(bool $autoDeleteSpam) : self
+    public function withAutoDeleteSpam(bool $autoDeleteSpam): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($autoDeleteSpam, static::$schema['properties']['autoDeleteSpam']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -152,7 +155,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      * @param MailaddressUpdateSpamprotectionRequestBodySpamProtectionFolder $folder
      * @return self
      */
-    public function withFolder(MailaddressUpdateSpamprotectionRequestBodySpamProtectionFolder $folder) : self
+    public function withFolder(MailaddressUpdateSpamprotectionRequestBodySpamProtectionFolder $folder): self
     {
         $clone = clone $this;
         $clone->folder = $folder;
@@ -164,12 +167,12 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      * @param int $relocationMinSpamScore
      * @return self
      */
-    public function withRelocationMinSpamScore(int $relocationMinSpamScore) : self
+    public function withRelocationMinSpamScore(int $relocationMinSpamScore): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($relocationMinSpamScore, static::$schema['properties']['relocationMinSpamScore']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -184,11 +187,11 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MailaddressUpdateSpamprotectionRequestBodySpamProtection Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MailaddressUpdateSpamprotectionRequestBodySpamProtection
+    public static function buildFromInput(array|object $input, bool $validate = true): MailaddressUpdateSpamprotectionRequestBodySpamProtection
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -208,7 +211,7 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['active'] = $this->active;
@@ -225,19 +228,19 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -247,30 +250,29 @@ class MailaddressUpdateSpamprotectionRequestBodySpamProtection
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/mailaddresses/' . $id . '/spamprotection';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -2,6 +2,7 @@
 
 namespace Mittwald\ApiClient;
 
+use Exception;
 use Mittwald\ApiClient\Generated\V2\Client;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\Authenticate200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
@@ -21,7 +22,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateReques
  */
 class MittwaldAPIV2Client extends Client
 {
-    protected final function __construct(string $baseUri, string|null $apiKey = null)
+    final protected function __construct(string $baseUri, string|null $apiKey = null)
     {
         parent::__construct($baseUri, $apiKey);
     }
@@ -71,7 +72,7 @@ class MittwaldAPIV2Client extends Client
 
         return match (get_class($authenticateResponse)) {
             Authenticate200Response::class => static::newWithToken($authenticateResponse->getBody()->getToken()),
-            default => throw new \Exception("Unexpected response: " . json_encode($authenticateResponse->getBody()->toJson())),
+            default => throw new Exception("Unexpected response: " . json_encode($authenticateResponse->getBody()->toJson())),
         };
     }
 }

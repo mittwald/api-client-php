@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Messaging;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class AggregateReference
 {
     /**
@@ -88,7 +91,7 @@ class AggregateReference
     /**
      * @return string
      */
-    public function getAggregate() : string
+    public function getAggregate(): string
     {
         return $this->aggregate;
     }
@@ -96,7 +99,7 @@ class AggregateReference
     /**
      * @return string
      */
-    public function getDomain() : string
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -104,7 +107,7 @@ class AggregateReference
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -112,7 +115,7 @@ class AggregateReference
     /**
      * @return AggregateReferenceParentsItem[]|null
      */
-    public function getParents() : ?array
+    public function getParents(): ?array
     {
         return $this->parents ?? null;
     }
@@ -121,12 +124,12 @@ class AggregateReference
      * @param string $aggregate
      * @return self
      */
-    public function withAggregate(string $aggregate) : self
+    public function withAggregate(string $aggregate): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($aggregate, static::$schema['properties']['aggregate']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -139,12 +142,12 @@ class AggregateReference
      * @param string $domain
      * @return self
      */
-    public function withDomain(string $domain) : self
+    public function withDomain(string $domain): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($domain, static::$schema['properties']['domain']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -157,12 +160,12 @@ class AggregateReference
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -175,7 +178,7 @@ class AggregateReference
      * @param AggregateReferenceParentsItem[] $parents
      * @return self
      */
-    public function withParents(array $parents) : self
+    public function withParents(array $parents): self
     {
         $clone = clone $this;
         $clone->parents = $parents;
@@ -186,7 +189,7 @@ class AggregateReference
     /**
      * @return self
      */
-    public function withoutParents() : self
+    public function withoutParents(): self
     {
         $clone = clone $this;
         unset($clone->parents);
@@ -200,11 +203,11 @@ class AggregateReference
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AggregateReference Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AggregateReference
+    public static function buildFromInput(array|object $input, bool $validate = true): AggregateReference
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -227,7 +230,7 @@ class AggregateReference
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['aggregate'] = $this->aggregate;
@@ -246,19 +249,19 @@ class AggregateReference
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -271,4 +274,3 @@ class AggregateReference
         }
     }
 }
-

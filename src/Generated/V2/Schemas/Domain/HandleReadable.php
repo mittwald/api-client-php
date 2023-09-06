@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class HandleReadable
 {
     /**
@@ -47,7 +50,7 @@ class HandleReadable
     /**
      * @return HandleData
      */
-    public function getCurrent() : HandleData
+    public function getCurrent(): HandleData
     {
         return $this->current;
     }
@@ -55,7 +58,7 @@ class HandleReadable
     /**
      * @return HandleData|null
      */
-    public function getDesired() : ?HandleData
+    public function getDesired(): ?HandleData
     {
         return $this->desired ?? null;
     }
@@ -64,7 +67,7 @@ class HandleReadable
      * @param HandleData $current
      * @return self
      */
-    public function withCurrent(HandleData $current) : self
+    public function withCurrent(HandleData $current): self
     {
         $clone = clone $this;
         $clone->current = $current;
@@ -76,7 +79,7 @@ class HandleReadable
      * @param HandleData $desired
      * @return self
      */
-    public function withDesired(HandleData $desired) : self
+    public function withDesired(HandleData $desired): self
     {
         $clone = clone $this;
         $clone->desired = $desired;
@@ -87,7 +90,7 @@ class HandleReadable
     /**
      * @return self
      */
-    public function withoutDesired() : self
+    public function withoutDesired(): self
     {
         $clone = clone $this;
         unset($clone->desired);
@@ -101,11 +104,11 @@ class HandleReadable
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return HandleReadable Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : HandleReadable
+    public static function buildFromInput(array|object $input, bool $validate = true): HandleReadable
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -126,7 +129,7 @@ class HandleReadable
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['current'] = $this->current->toJson();
@@ -143,19 +146,19 @@ class HandleReadable
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -165,4 +168,3 @@ class HandleReadable
     {
     }
 }
-

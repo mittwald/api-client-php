@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackup;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class CreateProjectBackupRequestBody
 {
     public const method = 'post';
@@ -42,18 +46,18 @@ class CreateProjectBackupRequestBody
     /**
      * Time when to expire the Backup.
      *
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $expirationTime;
+    private DateTime $expirationTime;
 
     private array $headers = [
-        
+
     ];
 
     /**
-     * @param \DateTime $expirationTime
+     * @param DateTime $expirationTime
      */
-    public function __construct(\DateTime $expirationTime)
+    public function __construct(DateTime $expirationTime)
     {
         $this->expirationTime = $expirationTime;
     }
@@ -61,15 +65,15 @@ class CreateProjectBackupRequestBody
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getExpirationTime() : \DateTime
+    public function getExpirationTime(): DateTime
     {
         return $this->expirationTime;
     }
@@ -78,12 +82,12 @@ class CreateProjectBackupRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -95,7 +99,7 @@ class CreateProjectBackupRequestBody
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -104,10 +108,10 @@ class CreateProjectBackupRequestBody
     }
 
     /**
-     * @param \DateTime $expirationTime
+     * @param DateTime $expirationTime
      * @return self
      */
-    public function withExpirationTime(\DateTime $expirationTime) : self
+    public function withExpirationTime(DateTime $expirationTime): self
     {
         $clone = clone $this;
         $clone->expirationTime = $expirationTime;
@@ -121,11 +125,11 @@ class CreateProjectBackupRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateProjectBackupRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateProjectBackupRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateProjectBackupRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -134,7 +138,7 @@ class CreateProjectBackupRequestBody
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
         }
-        $expirationTime = new \DateTime($input->{'expirationTime'});
+        $expirationTime = new DateTime($input->{'expirationTime'});
 
         $obj = new self($expirationTime);
         $obj->description = $description;
@@ -146,13 +150,13 @@ class CreateProjectBackupRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
-        $output['expirationTime'] = ($this->expirationTime)->format(\DateTime::ATOM);
+        $output['expirationTime'] = ($this->expirationTime)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -163,19 +167,19 @@ class CreateProjectBackupRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -186,30 +190,29 @@ class CreateProjectBackupRequestBody
         $this->expirationTime = clone $this->expirationTime;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/backups';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class AuthCode2
 {
     /**
@@ -25,31 +29,31 @@ class AuthCode2
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $expires;
+    private DateTime $expires;
 
     /**
-     * @param \DateTime $expires
+     * @param DateTime $expires
      */
-    public function __construct(\DateTime $expires)
+    public function __construct(DateTime $expires)
     {
         $this->expires = $expires;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getExpires() : \DateTime
+    public function getExpires(): DateTime
     {
         return $this->expires;
     }
 
     /**
-     * @param \DateTime $expires
+     * @param DateTime $expires
      * @return self
      */
-    public function withExpires(\DateTime $expires) : self
+    public function withExpires(DateTime $expires): self
     {
         $clone = clone $this;
         $clone->expires = $expires;
@@ -63,16 +67,16 @@ class AuthCode2
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AuthCode2 Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AuthCode2
+    public static function buildFromInput(array|object $input, bool $validate = true): AuthCode2
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $expires = new \DateTime($input->{'expires'});
+        $expires = new DateTime($input->{'expires'});
 
         $obj = new self($expires);
 
@@ -84,10 +88,10 @@ class AuthCode2
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['expires'] = ($this->expires)->format(\DateTime::ATOM);
+        $output['expires'] = ($this->expires)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -98,19 +102,19 @@ class AuthCode2
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -121,4 +125,3 @@ class AuthCode2
         $this->expires = clone $this->expires;
     }
 }
-

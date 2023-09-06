@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class StatusUpdateMeta
 {
     /**
@@ -35,7 +38,7 @@ class StatusUpdateMeta
     /**
      * @return User|null
      */
-    public function getUser() : ?User
+    public function getUser(): ?User
     {
         return $this->user ?? null;
     }
@@ -44,7 +47,7 @@ class StatusUpdateMeta
      * @param User $user
      * @return self
      */
-    public function withUser(User $user) : self
+    public function withUser(User $user): self
     {
         $clone = clone $this;
         $clone->user = $user;
@@ -55,7 +58,7 @@ class StatusUpdateMeta
     /**
      * @return self
      */
-    public function withoutUser() : self
+    public function withoutUser(): self
     {
         $clone = clone $this;
         unset($clone->user);
@@ -69,11 +72,11 @@ class StatusUpdateMeta
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return StatusUpdateMeta Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : StatusUpdateMeta
+    public static function buildFromInput(array|object $input, bool $validate = true): StatusUpdateMeta
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -93,7 +96,7 @@ class StatusUpdateMeta
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->user)) {
@@ -109,19 +112,19 @@ class StatusUpdateMeta
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -131,4 +134,3 @@ class StatusUpdateMeta
     {
     }
 }
-

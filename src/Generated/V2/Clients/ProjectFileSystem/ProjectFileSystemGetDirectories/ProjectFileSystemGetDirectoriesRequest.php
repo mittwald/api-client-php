@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ProjectFileSystemGetDirectoriesRequest
 {
     public const method = 'get';
@@ -82,7 +85,7 @@ class ProjectFileSystemGetDirectoriesRequest
     private ?bool $hidden = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -96,7 +99,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -104,7 +107,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return string|null
      */
-    public function getDirectory() : ?string
+    public function getDirectory(): ?string
     {
         return $this->directory ?? null;
     }
@@ -112,7 +115,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name ?? null;
     }
@@ -120,7 +123,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return int|null
      */
-    public function getMaxDepth() : ?int
+    public function getMaxDepth(): ?int
     {
         return $this->max_depth ?? null;
     }
@@ -128,7 +131,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return string[]|null
      */
-    public function getType() : ?array
+    public function getType(): ?array
     {
         return $this->type ?? null;
     }
@@ -136,7 +139,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return bool|null
      */
-    public function getExecutable() : ?bool
+    public function getExecutable(): ?bool
     {
         return $this->executable ?? null;
     }
@@ -144,7 +147,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return bool|null
      */
-    public function getHidden() : ?bool
+    public function getHidden(): ?bool
     {
         return $this->hidden ?? null;
     }
@@ -153,12 +156,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -171,12 +174,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param string $directory
      * @return self
      */
-    public function withDirectory(string $directory) : self
+    public function withDirectory(string $directory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($directory, static::$schema['properties']['directory']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -188,7 +191,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return self
      */
-    public function withoutDirectory() : self
+    public function withoutDirectory(): self
     {
         $clone = clone $this;
         unset($clone->directory);
@@ -200,12 +203,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -217,7 +220,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return self
      */
-    public function withoutName() : self
+    public function withoutName(): self
     {
         $clone = clone $this;
         unset($clone->name);
@@ -229,12 +232,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param int $max_depth
      * @return self
      */
-    public function withMaxDepth(int $max_depth) : self
+    public function withMaxDepth(int $max_depth): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($max_depth, static::$schema['properties']['max_depth']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -246,7 +249,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return self
      */
-    public function withoutMaxDepth() : self
+    public function withoutMaxDepth(): self
     {
         $clone = clone $this;
         unset($clone->max_depth);
@@ -258,12 +261,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param string[] $type
      * @return self
      */
-    public function withType(array $type) : self
+    public function withType(array $type): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -275,7 +278,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return self
      */
-    public function withoutType() : self
+    public function withoutType(): self
     {
         $clone = clone $this;
         unset($clone->type);
@@ -287,12 +290,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param bool $executable
      * @return self
      */
-    public function withExecutable(bool $executable) : self
+    public function withExecutable(bool $executable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($executable, static::$schema['properties']['executable']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -304,7 +307,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return self
      */
-    public function withoutExecutable() : self
+    public function withoutExecutable(): self
     {
         $clone = clone $this;
         unset($clone->executable);
@@ -316,12 +319,12 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param bool $hidden
      * @return self
      */
-    public function withHidden(bool $hidden) : self
+    public function withHidden(bool $hidden): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hidden, static::$schema['properties']['hidden']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -333,7 +336,7 @@ class ProjectFileSystemGetDirectoriesRequest
     /**
      * @return self
      */
-    public function withoutHidden() : self
+    public function withoutHidden(): self
     {
         $clone = clone $this;
         unset($clone->hidden);
@@ -347,11 +350,11 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectFileSystemGetDirectoriesRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectFileSystemGetDirectoriesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectFileSystemGetDirectoriesRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -397,7 +400,7 @@ class ProjectFileSystemGetDirectoriesRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectId'] = $this->projectId;
@@ -429,19 +432,19 @@ class ProjectFileSystemGetDirectoriesRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -451,14 +454,14 @@ class ProjectFileSystemGetDirectoriesRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/filesystem/directories';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -483,16 +486,15 @@ class ProjectFileSystemGetDirectoriesRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

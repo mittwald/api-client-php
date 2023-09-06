@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Varnish;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class ConfigFileMetadata
 {
     /**
@@ -47,7 +50,7 @@ class ConfigFileMetadata
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -55,7 +58,7 @@ class ConfigFileMetadata
     /**
      * @return string|null
      */
-    public function getPath() : ?string
+    public function getPath(): ?string
     {
         return $this->path ?? null;
     }
@@ -64,12 +67,12 @@ class ConfigFileMetadata
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -82,12 +85,12 @@ class ConfigFileMetadata
      * @param string $path
      * @return self
      */
-    public function withPath(string $path) : self
+    public function withPath(string $path): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($path, static::$schema['properties']['path']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -99,7 +102,7 @@ class ConfigFileMetadata
     /**
      * @return self
      */
-    public function withoutPath() : self
+    public function withoutPath(): self
     {
         $clone = clone $this;
         unset($clone->path);
@@ -113,11 +116,11 @@ class ConfigFileMetadata
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ConfigFileMetadata Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ConfigFileMetadata
+    public static function buildFromInput(array|object $input, bool $validate = true): ConfigFileMetadata
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -138,7 +141,7 @@ class ConfigFileMetadata
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['name'] = $this->name;
@@ -155,19 +158,19 @@ class ConfigFileMetadata
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -177,4 +180,3 @@ class ConfigFileMetadata
     {
     }
 }
-

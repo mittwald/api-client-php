@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class UpdateMysqlUserPasswordRequest
 {
     public const method = 'patch';
@@ -48,7 +51,7 @@ class UpdateMysqlUserPasswordRequest
     private UpdateMysqlUserPasswordRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -64,7 +67,7 @@ class UpdateMysqlUserPasswordRequest
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -72,7 +75,7 @@ class UpdateMysqlUserPasswordRequest
     /**
      * @return UpdateMysqlUserPasswordRequestBody
      */
-    public function getBody() : UpdateMysqlUserPasswordRequestBody
+    public function getBody(): UpdateMysqlUserPasswordRequestBody
     {
         return $this->body;
     }
@@ -81,12 +84,12 @@ class UpdateMysqlUserPasswordRequest
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -99,7 +102,7 @@ class UpdateMysqlUserPasswordRequest
      * @param UpdateMysqlUserPasswordRequestBody $body
      * @return self
      */
-    public function withBody(UpdateMysqlUserPasswordRequestBody $body) : self
+    public function withBody(UpdateMysqlUserPasswordRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -113,11 +116,11 @@ class UpdateMysqlUserPasswordRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateMysqlUserPasswordRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateMysqlUserPasswordRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserPasswordRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -135,7 +138,7 @@ class UpdateMysqlUserPasswordRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['id'] = $this->id;
@@ -150,19 +153,19 @@ class UpdateMysqlUserPasswordRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -173,30 +176,29 @@ class UpdateMysqlUserPasswordRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/mysql-users/' . $id . '/password';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

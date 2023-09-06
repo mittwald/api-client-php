@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
 class HandleData
 {
     /**
@@ -46,7 +49,7 @@ class HandleData
     /**
      * @return HandleField[]|null
      */
-    public function getHandleFields() : ?array
+    public function getHandleFields(): ?array
     {
         return $this->handleFields ?? null;
     }
@@ -54,7 +57,7 @@ class HandleData
     /**
      * @return string|null
      */
-    public function getHandleRef() : ?string
+    public function getHandleRef(): ?string
     {
         return $this->handleRef ?? null;
     }
@@ -63,7 +66,7 @@ class HandleData
      * @param HandleField[] $handleFields
      * @return self
      */
-    public function withHandleFields(array $handleFields) : self
+    public function withHandleFields(array $handleFields): self
     {
         $clone = clone $this;
         $clone->handleFields = $handleFields;
@@ -74,7 +77,7 @@ class HandleData
     /**
      * @return self
      */
-    public function withoutHandleFields() : self
+    public function withoutHandleFields(): self
     {
         $clone = clone $this;
         unset($clone->handleFields);
@@ -86,12 +89,12 @@ class HandleData
      * @param string $handleRef
      * @return self
      */
-    public function withHandleRef(string $handleRef) : self
+    public function withHandleRef(string $handleRef): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($handleRef, static::$schema['properties']['handleRef']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -103,7 +106,7 @@ class HandleData
     /**
      * @return self
      */
-    public function withoutHandleRef() : self
+    public function withoutHandleRef(): self
     {
         $clone = clone $this;
         unset($clone->handleRef);
@@ -117,18 +120,18 @@ class HandleData
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return HandleData Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : HandleData
+    public static function buildFromInput(array|object $input, bool $validate = true): HandleData
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $handleFields = null;
         if (isset($input->{'handleFields'})) {
-            $handleFields = array_map(fn(array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'handleFields'});
+            $handleFields = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'handleFields'});
         }
         $handleRef = null;
         if (isset($input->{'handleRef'})) {
@@ -146,11 +149,11 @@ class HandleData
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->handleFields)) {
-            $output['handleFields'] = array_map(fn(HandleField $i): array => $i->toJson(), $this->handleFields);
+            $output['handleFields'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->handleFields);
         }
         if (isset($this->handleRef)) {
             $output['handleRef'] = $this->handleRef;
@@ -165,19 +168,19 @@ class HandleData
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -187,4 +190,3 @@ class HandleData
     {
     }
 }
-

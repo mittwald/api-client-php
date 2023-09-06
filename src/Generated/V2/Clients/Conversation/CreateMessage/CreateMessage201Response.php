@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage;
 
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
+
 class CreateMessage201Response
 {
     /**
@@ -42,7 +46,7 @@ class CreateMessage201Response
      */
     private CreateMessage201ResponseBody $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param CreateMessage201ResponseBody $body
@@ -55,7 +59,7 @@ class CreateMessage201Response
     /**
      * @return CreateMessage201ResponseBody
      */
-    public function getBody() : CreateMessage201ResponseBody
+    public function getBody(): CreateMessage201ResponseBody
     {
         return $this->body;
     }
@@ -64,7 +68,7 @@ class CreateMessage201Response
      * @param CreateMessage201ResponseBody $body
      * @return self
      */
-    public function withBody(CreateMessage201ResponseBody $body) : self
+    public function withBody(CreateMessage201ResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -78,11 +82,11 @@ class CreateMessage201Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateMessage201Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateMessage201Response
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateMessage201Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -99,7 +103,7 @@ class CreateMessage201Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -113,19 +117,19 @@ class CreateMessage201Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -136,7 +140,7 @@ class CreateMessage201Response
         $this->body = clone $this->body;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -144,4 +148,3 @@ class CreateMessage201Response
         return $response;
     }
 }
-
