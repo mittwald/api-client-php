@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
 class ResendVerificationEmail403ResponseBody
 {
@@ -37,7 +39,7 @@ class ResendVerificationEmail403ResponseBody
      */
     private ?string $type = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -68,7 +70,7 @@ class ResendVerificationEmail403ResponseBody
      */
     public function withMessage(string $message): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -97,7 +99,7 @@ class ResendVerificationEmail403ResponseBody
      */
     public function withType(string $type): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -130,7 +132,7 @@ class ResendVerificationEmail403ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ResendVerificationEmail403ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -178,8 +180,8 @@ class ResendVerificationEmail403ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -196,7 +198,7 @@ class ResendVerificationEmail403ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

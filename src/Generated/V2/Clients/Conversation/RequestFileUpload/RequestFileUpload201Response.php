@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
 class RequestFileUpload201Response
 {
@@ -94,7 +96,7 @@ class RequestFileUpload201Response
      */
     private RequestFileUpload201ResponseBody $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param RequestFileUpload201ResponseBody $body
@@ -134,7 +136,7 @@ class RequestFileUpload201Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): RequestFileUpload201Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -169,8 +171,8 @@ class RequestFileUpload201Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -188,7 +190,7 @@ class RequestFileUpload201Response
         $this->body = clone $this->body;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

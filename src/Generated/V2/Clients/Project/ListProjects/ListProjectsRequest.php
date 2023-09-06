@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ListProjectsRequest
 {
@@ -75,7 +76,7 @@ class ListProjectsRequest
      */
     public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -104,7 +105,7 @@ class ListProjectsRequest
      */
     public function withServerId(string $serverId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($serverId, static::$schema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -137,7 +138,7 @@ class ListProjectsRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListProjectsRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -185,8 +186,8 @@ class ListProjectsRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class CustomerOrder
 {
@@ -268,7 +269,7 @@ class CustomerOrder
      */
     public function withContractChangeContractId(string $contractChangeContractId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractChangeContractId, static::$schema['properties']['contractChangeContractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -297,7 +298,7 @@ class CustomerOrder
      */
     public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -338,7 +339,7 @@ class CustomerOrder
      */
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($invoicingPeriod, static::$schema['properties']['invoicingPeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -380,7 +381,7 @@ class CustomerOrder
      */
     public function withOrderId(string $orderId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($orderId, static::$schema['properties']['orderId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -398,7 +399,7 @@ class CustomerOrder
      */
     public function withOrderNumber(string $orderNumber): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($orderNumber, static::$schema['properties']['orderNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -479,7 +480,7 @@ class CustomerOrder
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CustomerOrder
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -553,8 +554,8 @@ class CustomerOrder
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

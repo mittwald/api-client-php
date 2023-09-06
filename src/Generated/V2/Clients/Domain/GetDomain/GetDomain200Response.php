@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain;
+use Psr\Http\Message\ResponseInterface;
 
 class GetDomain200Response
 {
@@ -26,33 +29,33 @@ class GetDomain200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain
+     * @var Domain
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain $body;
+    private Domain $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain $body
+     * @param Domain $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain $body)
+    public function __construct(Domain $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain
+     * @return Domain
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain
+    public function getBody(): Domain
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain $body
+     * @param Domain $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain $body): self
+    public function withBody(Domain $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -70,12 +73,12 @@ class GetDomain200Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): GetDomain200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Domain\Domain::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Domain::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -105,8 +108,8 @@ class GetDomain200Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -123,7 +126,7 @@ class GetDomain200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class InvoiceItemReference
 {
@@ -73,7 +74,7 @@ class InvoiceItemReference
      */
     public function withSourceInvoiceId(string $sourceInvoiceId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($sourceInvoiceId, static::$schema['properties']['sourceInvoiceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -91,7 +92,7 @@ class InvoiceItemReference
      */
     public function withSourceInvoiceItemId(string $sourceInvoiceItemId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($sourceInvoiceItemId, static::$schema['properties']['sourceInvoiceItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -113,7 +114,7 @@ class InvoiceItemReference
      */
     public static function buildFromInput(array|object $input, bool $validate = true): InvoiceItemReference
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -150,8 +151,8 @@ class InvoiceItemReference
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

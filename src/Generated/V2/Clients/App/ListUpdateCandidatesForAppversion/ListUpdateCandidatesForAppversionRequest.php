@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ListUpdateCandidatesForAppversionRequest
 {
@@ -79,7 +80,7 @@ class ListUpdateCandidatesForAppversionRequest
      */
     public function withAppId(string $appId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appId, static::$schema['properties']['appId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -97,7 +98,7 @@ class ListUpdateCandidatesForAppversionRequest
      */
     public function withBaseAppVersionId(string $baseAppVersionId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($baseAppVersionId, static::$schema['properties']['baseAppVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -119,7 +120,7 @@ class ListUpdateCandidatesForAppversionRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListUpdateCandidatesForAppversionRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -156,8 +157,8 @@ class ListUpdateCandidatesForAppversionRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

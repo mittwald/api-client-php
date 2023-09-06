@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules;
+use Psr\Http\Message\ResponseInterface;
 
 class RequestProjectAvatarUpload200ResponseBody
 {
@@ -36,17 +39,17 @@ class RequestProjectAvatarUpload200ResponseBody
     private string $refId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules
+     * @var AvatarRules
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules;
+    private AvatarRules $rules;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $refId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules
+     * @param AvatarRules $rules
      */
-    public function __construct(string $refId, \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules)
+    public function __construct(string $refId, AvatarRules $rules)
     {
         $this->refId = $refId;
         $this->rules = $rules;
@@ -61,9 +64,9 @@ class RequestProjectAvatarUpload200ResponseBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules
+     * @return AvatarRules
      */
-    public function getRules(): \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules
+    public function getRules(): AvatarRules
     {
         return $this->rules;
     }
@@ -74,7 +77,7 @@ class RequestProjectAvatarUpload200ResponseBody
      */
     public function withRefId(string $refId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($refId, static::$schema['properties']['refId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -87,10 +90,10 @@ class RequestProjectAvatarUpload200ResponseBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules
+     * @param AvatarRules $rules
      * @return self
      */
-    public function withRules(\Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules): self
+    public function withRules(AvatarRules $rules): self
     {
         $clone = clone $this;
         $clone->rules = $rules;
@@ -108,13 +111,13 @@ class RequestProjectAvatarUpload200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectAvatarUpload200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $refId = $input->{'refId'};
-        $rules = \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules::buildFromInput($input->{'rules'}, validate: $validate);
+        $rules = AvatarRules::buildFromInput($input->{'rules'}, validate: $validate);
 
         $obj = new self($refId, $rules);
 
@@ -145,8 +148,8 @@ class RequestProjectAvatarUpload200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -163,7 +166,7 @@ class RequestProjectAvatarUpload200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

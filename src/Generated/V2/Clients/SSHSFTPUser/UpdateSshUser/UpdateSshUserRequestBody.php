@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 
 class UpdateSshUserRequestBody
 {
@@ -62,7 +64,7 @@ class UpdateSshUserRequestBody
     private ?string $password = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
+     * @var PublicKey[]|null
      */
     private ?array $publicKeys = null;
 
@@ -110,7 +112,7 @@ class UpdateSshUserRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
+     * @return PublicKey[]|null
      */
     public function getPublicKeys(): ?array
     {
@@ -123,7 +125,7 @@ class UpdateSshUserRequestBody
      */
     public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -152,7 +154,7 @@ class UpdateSshUserRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -204,7 +206,7 @@ class UpdateSshUserRequestBody
      */
     public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -228,7 +230,7 @@ class UpdateSshUserRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[] $publicKeys
+     * @param PublicKey[] $publicKeys
      * @return self
      */
     public function withPublicKeys(array $publicKeys): self
@@ -260,7 +262,7 @@ class UpdateSshUserRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateSshUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -283,7 +285,7 @@ class UpdateSshUserRequestBody
         }
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
 
         $obj = new self();
@@ -316,7 +318,7 @@ class UpdateSshUserRequestBody
             $output['password'] = $this->password;
         }
         if (isset($this->publicKeys)) {
-            $output['publicKeys'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey $i): array => $i->toJson(), $this->publicKeys);
+            $output['publicKeys'] = array_map(fn (PublicKey $i): array => $i->toJson(), $this->publicKeys);
         }
 
         return $output;
@@ -332,8 +334,8 @@ class UpdateSshUserRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

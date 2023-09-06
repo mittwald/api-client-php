@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class StatusUpdate
 {
@@ -149,7 +150,7 @@ class StatusUpdate
      */
     public function withConversationId(string $conversationId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($conversationId, static::$schema['properties']['conversationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -167,7 +168,7 @@ class StatusUpdate
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($createdAt, static::$schema['properties']['createdAt']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -185,7 +186,7 @@ class StatusUpdate
      */
     public function withInternal(bool $internal): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($internal, static::$schema['properties']['internal']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -214,7 +215,7 @@ class StatusUpdate
      */
     public function withMessageContent(string $messageContent): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($messageContent, static::$schema['properties']['messageContent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -271,7 +272,7 @@ class StatusUpdate
      */
     public static function buildFromInput(array|object $input, bool $validate = true): StatusUpdate
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -327,8 +328,8 @@ class StatusUpdate
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

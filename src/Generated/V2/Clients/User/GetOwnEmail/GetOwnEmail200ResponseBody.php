@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
 class GetOwnEmail200ResponseBody
 {
@@ -32,7 +34,7 @@ class GetOwnEmail200ResponseBody
      */
     private string $email;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $email
@@ -56,7 +58,7 @@ class GetOwnEmail200ResponseBody
      */
     public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -78,7 +80,7 @@ class GetOwnEmail200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): GetOwnEmail200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -113,8 +115,8 @@ class GetOwnEmail200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -131,7 +133,7 @@ class GetOwnEmail200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

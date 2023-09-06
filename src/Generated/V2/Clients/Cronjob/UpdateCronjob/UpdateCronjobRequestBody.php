@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl;
 
 class UpdateCronjobRequestBody
 {
@@ -57,9 +60,9 @@ class UpdateCronjobRequestBody
     private ?string $description = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand|null
+     * @var CronjobUrl|CronjobCommand|null
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand|null $destination = null;
+    private CronjobUrl|CronjobCommand|null $destination = null;
 
     /**
      * @var string|null
@@ -102,7 +105,7 @@ class UpdateCronjobRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand|null
      */
-    public function getDestination(): \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl|null
+    public function getDestination(): CronjobCommand|CronjobUrl|null
     {
         return $this->destination;
     }
@@ -129,7 +132,7 @@ class UpdateCronjobRequestBody
      */
     public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -158,7 +161,7 @@ class UpdateCronjobRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -182,10 +185,10 @@ class UpdateCronjobRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand $destination
+     * @param CronjobUrl|CronjobCommand $destination
      * @return self
      */
-    public function withDestination(\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl $destination): self
+    public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
         $clone = clone $this;
         $clone->destination = $destination;
@@ -210,7 +213,7 @@ class UpdateCronjobRequestBody
      */
     public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -239,7 +242,7 @@ class UpdateCronjobRequestBody
      */
     public function withInterval(string $interval): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($interval, static::$schema['properties']['interval']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -272,7 +275,7 @@ class UpdateCronjobRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -288,8 +291,8 @@ class UpdateCronjobRequestBody
         $destination = null;
         if (isset($input->{'destination'})) {
             $destination = match (true) {
-                \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl::validateInput($input->{'destination'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl::buildFromInput($input->{'destination'}, validate: $validate),
-                \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand::validateInput($input->{'destination'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand::buildFromInput($input->{'destination'}, validate: $validate),
+                CronjobUrl::validateInput($input->{'destination'}, true) => CronjobUrl::buildFromInput($input->{'destination'}, validate: $validate),
+                CronjobCommand::validateInput($input->{'destination'}, true) => CronjobCommand::buildFromInput($input->{'destination'}, validate: $validate),
             };
         }
         $email = null;
@@ -326,7 +329,7 @@ class UpdateCronjobRequestBody
         }
         if (isset($this->destination)) {
             $output['destination'] = match (true) {
-                ($this->destination) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl, ($this->destination) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand => $this->destination->toJson(),
+                ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination->toJson(),
             };
         }
         if (isset($this->email)) {
@@ -349,8 +352,8 @@ class UpdateCronjobRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -367,7 +370,7 @@ class UpdateCronjobRequestBody
     {
         if (isset($this->destination)) {
             $this->destination = match (true) {
-                ($this->destination) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl, ($this->destination) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand => $this->destination,
+                ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination,
             };
         }
     }

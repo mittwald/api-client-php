@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ListExecutionsRequest
 {
@@ -162,7 +163,7 @@ class ListExecutionsRequest
      */
     public function withCronjobId(string $cronjobId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -180,7 +181,7 @@ class ListExecutionsRequest
      */
     public function withLimit(int $limit): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -209,7 +210,7 @@ class ListExecutionsRequest
      */
     public function withSkip(int $skip): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -238,7 +239,7 @@ class ListExecutionsRequest
      */
     public function withPage(int $page): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($page, static::$schema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -313,7 +314,7 @@ class ListExecutionsRequest
      */
     public function withStatus(string $status): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($status, static::$schema['properties']['status']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -346,7 +347,7 @@ class ListExecutionsRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListExecutionsRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -428,8 +429,8 @@ class ListExecutionsRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

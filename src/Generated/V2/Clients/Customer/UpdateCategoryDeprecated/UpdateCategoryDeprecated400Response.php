@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
+use Psr\Http\Message\ResponseInterface;
 
 class UpdateCategoryDeprecated400Response
 {
@@ -26,33 +29,33 @@ class UpdateCategoryDeprecated400Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors
+     * @var ValidationErrors
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors $body;
+    private ValidationErrors $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors $body
+     * @param ValidationErrors $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors
+     * @return ValidationErrors
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors $body
+     * @param ValidationErrors $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -70,12 +73,12 @@ class UpdateCategoryDeprecated400Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateCategoryDeprecated400Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -105,8 +108,8 @@ class UpdateCategoryDeprecated400Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -123,7 +126,7 @@ class UpdateCategoryDeprecated400Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

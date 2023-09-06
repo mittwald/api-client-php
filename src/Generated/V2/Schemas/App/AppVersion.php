@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class AppVersion
 {
@@ -285,7 +286,7 @@ class AppVersion
      */
     public function withDocRoot(string $docRoot): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($docRoot, static::$schema['properties']['docRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -303,7 +304,7 @@ class AppVersion
      */
     public function withDocRootUserEditable(bool $docRootUserEditable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($docRootUserEditable, static::$schema['properties']['docRootUserEditable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -321,7 +322,7 @@ class AppVersion
      */
     public function withExternalVersion(string $externalVersion): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($externalVersion, static::$schema['properties']['externalVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -339,7 +340,7 @@ class AppVersion
      */
     public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -357,7 +358,7 @@ class AppVersion
      */
     public function withInternalVersion(string $internalVersion): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($internalVersion, static::$schema['properties']['internalVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -375,7 +376,7 @@ class AppVersion
      */
     public function withRecommended(bool $recommended): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($recommended, static::$schema['properties']['recommended']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -477,7 +478,7 @@ class AppVersion
      */
     public static function buildFromInput(array|object $input, bool $validate = true): AppVersion
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -567,8 +568,8 @@ class AppVersion
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

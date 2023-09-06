@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class UpdateMysqlUserRequestBody
 {
@@ -112,7 +113,7 @@ class UpdateMysqlUserRequestBody
      */
     public function withAccessIpMask(string $accessIpMask): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($accessIpMask, static::$schema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -153,7 +154,7 @@ class UpdateMysqlUserRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -171,7 +172,7 @@ class UpdateMysqlUserRequestBody
      */
     public function withExternalAccess(bool $externalAccess): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($externalAccess, static::$schema['properties']['externalAccess']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -204,7 +205,7 @@ class UpdateMysqlUserRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -256,8 +257,8 @@ class UpdateMysqlUserRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

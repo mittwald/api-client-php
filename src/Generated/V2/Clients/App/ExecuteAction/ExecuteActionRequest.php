@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\Action;
 
 class ExecuteActionRequest
 {
@@ -41,9 +43,9 @@ class ExecuteActionRequest
     private string $appInstallationId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\Action
+     * @var Action
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action;
+    private Action $action;
 
     /**
      * @var ExecuteActionRequestBody
@@ -56,10 +58,10 @@ class ExecuteActionRequest
 
     /**
      * @param string $appInstallationId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action
+     * @param Action $action
      * @param ExecuteActionRequestBody $body
      */
-    public function __construct(string $appInstallationId, \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action, ExecuteActionRequestBody $body)
+    public function __construct(string $appInstallationId, Action $action, ExecuteActionRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
         $this->action = $action;
@@ -75,9 +77,9 @@ class ExecuteActionRequest
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\Action
+     * @return Action
      */
-    public function getAction(): \Mittwald\ApiClient\Generated\V2\Schemas\App\Action
+    public function getAction(): Action
     {
         return $this->action;
     }
@@ -96,7 +98,7 @@ class ExecuteActionRequest
      */
     public function withAppInstallationId(string $appInstallationId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appInstallationId, static::$schema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -109,10 +111,10 @@ class ExecuteActionRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action
+     * @param Action $action
      * @return self
      */
-    public function withAction(\Mittwald\ApiClient\Generated\V2\Schemas\App\Action $action): self
+    public function withAction(Action $action): self
     {
         $clone = clone $this;
         $clone->action = $action;
@@ -142,13 +144,13 @@ class ExecuteActionRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ExecuteActionRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $appInstallationId = $input->{'appInstallationId'};
-        $action = \Mittwald\ApiClient\Generated\V2\Schemas\App\Action::from($input->{'action'});
+        $action = Action::from($input->{'action'});
         $body = ExecuteActionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($appInstallationId, $action, $body);
@@ -181,8 +183,8 @@ class ExecuteActionRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

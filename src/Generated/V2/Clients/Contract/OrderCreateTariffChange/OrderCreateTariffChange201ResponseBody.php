@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
 class OrderCreateTariffChange201ResponseBody
 {
@@ -29,7 +31,7 @@ class OrderCreateTariffChange201ResponseBody
      */
     private string $orderId;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $orderId
@@ -53,7 +55,7 @@ class OrderCreateTariffChange201ResponseBody
      */
     public function withOrderId(string $orderId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($orderId, static::$schema['properties']['orderId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -75,7 +77,7 @@ class OrderCreateTariffChange201ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateTariffChange201ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -110,8 +112,8 @@ class OrderCreateTariffChange201ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -128,7 +130,7 @@ class OrderCreateTariffChange201ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

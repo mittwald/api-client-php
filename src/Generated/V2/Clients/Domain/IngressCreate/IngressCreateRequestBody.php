@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path;
 
 class IngressCreateRequestBody
 {
@@ -49,7 +51,7 @@ class IngressCreateRequestBody
     /**
      * A list of paths. The default path `/` is always present and cannot be removed.
      *
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[]
+     * @var Path[]
      */
     private array $paths;
 
@@ -64,7 +66,7 @@ class IngressCreateRequestBody
 
     /**
      * @param string $hostname
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[] $paths
+     * @param Path[] $paths
      * @param string $projectId
      */
     public function __construct(string $hostname, array $paths, string $projectId)
@@ -83,7 +85,7 @@ class IngressCreateRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[]
+     * @return Path[]
      */
     public function getPaths(): array
     {
@@ -104,7 +106,7 @@ class IngressCreateRequestBody
      */
     public function withHostname(string $hostname): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hostname, static::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -117,7 +119,7 @@ class IngressCreateRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[] $paths
+     * @param Path[] $paths
      * @return self
      */
     public function withPaths(array $paths): self
@@ -134,7 +136,7 @@ class IngressCreateRequestBody
      */
     public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -156,13 +158,13 @@ class IngressCreateRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): IngressCreateRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $hostname = $input->{'hostname'};
-        $paths = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path => \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path::buildFromInput($i, validate: $validate), $input->{'paths'});
+        $paths = array_map(fn (array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
 
         $obj = new self($hostname, $paths, $projectId);
@@ -179,7 +181,7 @@ class IngressCreateRequestBody
     {
         $output = [];
         $output['hostname'] = $this->hostname;
-        $output['paths'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path $i): array => $i->toJson(), $this->paths);
+        $output['paths'] = array_map(fn (Path $i): array => $i->toJson(), $this->paths);
         $output['projectId'] = $this->projectId;
 
         return $output;
@@ -195,8 +197,8 @@ class IngressCreateRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

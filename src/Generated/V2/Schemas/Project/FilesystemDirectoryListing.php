@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class FilesystemDirectoryListing
 {
@@ -190,7 +191,7 @@ class FilesystemDirectoryListing
      */
     public function withAbsolutePath(string $absolutePath): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($absolutePath, static::$schema['properties']['absolutePath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -208,7 +209,7 @@ class FilesystemDirectoryListing
      */
     public function withIsDirectory(bool $isDirectory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isDirectory, static::$schema['properties']['isDirectory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -237,7 +238,7 @@ class FilesystemDirectoryListing
      */
     public function withIsExecutable(bool $isExecutable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isExecutable, static::$schema['properties']['isExecutable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -266,7 +267,7 @@ class FilesystemDirectoryListing
      */
     public function withIsFile(bool $isFile): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isFile, static::$schema['properties']['isFile']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -295,7 +296,7 @@ class FilesystemDirectoryListing
      */
     public function withIsSymlink(bool $isSymlink): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isSymlink, static::$schema['properties']['isSymlink']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -347,7 +348,7 @@ class FilesystemDirectoryListing
      */
     public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -365,7 +366,7 @@ class FilesystemDirectoryListing
      */
     public function withSize(int $size): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($size, static::$schema['properties']['size']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -383,7 +384,7 @@ class FilesystemDirectoryListing
      */
     public function withTarget(string $target): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($target, static::$schema['properties']['target']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -416,7 +417,7 @@ class FilesystemDirectoryListing
      */
     public static function buildFromInput(array|object $input, bool $validate = true): FilesystemDirectoryListing
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -502,8 +503,8 @@ class FilesystemDirectoryListing
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

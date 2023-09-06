@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class UpdateProjectBackupDescriptionRequest
 {
@@ -85,7 +86,7 @@ class UpdateProjectBackupDescriptionRequest
      */
     public function withProjectBackupId(string $projectBackupId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectBackupId, static::$schema['properties']['projectBackupId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -119,7 +120,7 @@ class UpdateProjectBackupDescriptionRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupDescriptionRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -156,8 +157,8 @@ class UpdateProjectBackupDescriptionRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

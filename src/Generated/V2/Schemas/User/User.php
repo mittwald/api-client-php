@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\User;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person;
 
 class User
 {
@@ -58,9 +60,9 @@ class User
     private ?string $email = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+     * @var Person
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person;
+    private Person $person;
 
     /**
      * @var string|null
@@ -78,10 +80,10 @@ class User
     private string $userId;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
+     * @param Person $person
      * @param string $userId
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person, string $userId)
+    public function __construct(Person $person, string $userId)
     {
         $this->person = $person;
         $this->userId = $userId;
@@ -104,9 +106,9 @@ class User
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+     * @return Person
      */
-    public function getPerson(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+    public function getPerson(): Person
     {
         return $this->person;
     }
@@ -141,7 +143,7 @@ class User
      */
     public function withAvatarRef(string $avatarRef): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($avatarRef, static::$schema['properties']['avatarRef']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -170,7 +172,7 @@ class User
      */
     public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -194,10 +196,10 @@ class User
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
+     * @param Person $person
      * @return self
      */
-    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person): self
+    public function withPerson(Person $person): self
     {
         $clone = clone $this;
         $clone->person = $person;
@@ -211,7 +213,7 @@ class User
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($phoneNumber, static::$schema['properties']['phoneNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -263,7 +265,7 @@ class User
      */
     public function withUserId(string $userId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -285,7 +287,7 @@ class User
      */
     public static function buildFromInput(array|object $input, bool $validate = true): User
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -298,7 +300,7 @@ class User
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
         }
-        $person = \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person::buildFromInput($input->{'person'}, validate: $validate);
+        $person = Person::buildFromInput($input->{'person'}, validate: $validate);
         $phoneNumber = null;
         if (isset($input->{'phoneNumber'})) {
             $phoneNumber = $input->{'phoneNumber'};
@@ -353,8 +355,8 @@ class User
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

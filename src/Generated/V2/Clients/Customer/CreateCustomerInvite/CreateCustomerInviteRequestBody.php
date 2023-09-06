@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles;
 
 class CreateCustomerInviteRequestBody
 {
@@ -65,9 +67,9 @@ class CreateCustomerInviteRequestBody
     private ?string $message = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles
+     * @var CustomerRoles
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role;
+    private CustomerRoles $role;
 
     private array $headers = [
 
@@ -75,9 +77,9 @@ class CreateCustomerInviteRequestBody
 
     /**
      * @param string $mailAddress
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role
+     * @param CustomerRoles $role
      */
-    public function __construct(string $mailAddress, \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role)
+    public function __construct(string $mailAddress, CustomerRoles $role)
     {
         $this->mailAddress = $mailAddress;
         $this->role = $role;
@@ -108,9 +110,9 @@ class CreateCustomerInviteRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles
+     * @return CustomerRoles
      */
-    public function getRole(): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles
+    public function getRole(): CustomerRoles
     {
         return $this->role;
     }
@@ -121,7 +123,7 @@ class CreateCustomerInviteRequestBody
      */
     public function withMailAddress(string $mailAddress): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($mailAddress, static::$schema['properties']['mailAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -162,7 +164,7 @@ class CreateCustomerInviteRequestBody
      */
     public function withMessage(string $message): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -186,10 +188,10 @@ class CreateCustomerInviteRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role
+     * @param CustomerRoles $role
      * @return self
      */
-    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role): self
+    public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -207,7 +209,7 @@ class CreateCustomerInviteRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CreateCustomerInviteRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -221,7 +223,7 @@ class CreateCustomerInviteRequestBody
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
-        $role = \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles::from($input->{'role'});
+        $role = CustomerRoles::from($input->{'role'});
 
         $obj = new self($mailAddress, $role);
         $obj->membershipExpiresAt = $membershipExpiresAt;
@@ -259,8 +261,8 @@ class CreateCustomerInviteRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

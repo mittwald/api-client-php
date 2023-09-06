@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameservers;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class DeclareNameserversRequestBody
 {
@@ -59,7 +60,7 @@ class DeclareNameserversRequestBody
      */
     public function withNameservers(array $nameservers): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($nameservers, static::$schema['properties']['nameservers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -92,7 +93,7 @@ class DeclareNameserversRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DeclareNameserversRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -132,8 +133,8 @@ class DeclareNameserversRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

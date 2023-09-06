@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
 class NotificationsCountUnreadNotifications200ResponseBody
 {
@@ -71,7 +73,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     private int $warning;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param int $error
@@ -135,7 +137,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public function withError(int $error): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($error, static::$schema['properties']['error']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -153,7 +155,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public function withInfo(int $info): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($info, static::$schema['properties']['info']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -171,7 +173,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public function withSuccess(int $success): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($success, static::$schema['properties']['success']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -189,7 +191,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public function withTotal(int $total): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($total, static::$schema['properties']['total']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -207,7 +209,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public function withWarning(int $warning): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($warning, static::$schema['properties']['warning']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -229,7 +231,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): NotificationsCountUnreadNotifications200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -272,8 +274,8 @@ class NotificationsCountUnreadNotifications200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -290,7 +292,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

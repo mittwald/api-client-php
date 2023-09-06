@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput;
 
 class RequestAppinstallationRequestBody
 {
@@ -54,12 +57,12 @@ class RequestAppinstallationRequestBody
     private string $description;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
+     * @var AppUpdatePolicy
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy;
+    private AppUpdatePolicy $updatePolicy;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]
+     * @var SavedUserInput[]
      */
     private array $userInputs;
 
@@ -70,10 +73,10 @@ class RequestAppinstallationRequestBody
     /**
      * @param string $appVersionId
      * @param string $description
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[] $userInputs
+     * @param AppUpdatePolicy $updatePolicy
+     * @param SavedUserInput[] $userInputs
      */
-    public function __construct(string $appVersionId, string $description, \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy, array $userInputs)
+    public function __construct(string $appVersionId, string $description, AppUpdatePolicy $updatePolicy, array $userInputs)
     {
         $this->appVersionId = $appVersionId;
         $this->description = $description;
@@ -98,15 +101,15 @@ class RequestAppinstallationRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
+     * @return AppUpdatePolicy
      */
-    public function getUpdatePolicy(): \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
+    public function getUpdatePolicy(): AppUpdatePolicy
     {
         return $this->updatePolicy;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]
+     * @return SavedUserInput[]
      */
     public function getUserInputs(): array
     {
@@ -119,7 +122,7 @@ class RequestAppinstallationRequestBody
      */
     public function withAppVersionId(string $appVersionId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appVersionId, static::$schema['properties']['appVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -137,7 +140,7 @@ class RequestAppinstallationRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -150,10 +153,10 @@ class RequestAppinstallationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy
+     * @param AppUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy): self
+    public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -162,7 +165,7 @@ class RequestAppinstallationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[] $userInputs
+     * @param SavedUserInput[] $userInputs
      * @return self
      */
     public function withUserInputs(array $userInputs): self
@@ -183,15 +186,15 @@ class RequestAppinstallationRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $appVersionId = $input->{'appVersionId'};
         $description = $input->{'description'};
-        $updatePolicy = \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy::from($input->{'updatePolicy'});
-        $userInputs = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput => \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+        $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
+        $userInputs = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appVersionId, $description, $updatePolicy, $userInputs);
 
@@ -209,7 +212,7 @@ class RequestAppinstallationRequestBody
         $output['appVersionId'] = $this->appVersionId;
         $output['description'] = $this->description;
         $output['updatePolicy'] = $this->updatePolicy->value;
-        $output['userInputs'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput $i): array => $i->toJson(), $this->userInputs);
+        $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
 
         return $output;
     }
@@ -224,8 +227,8 @@ class RequestAppinstallationRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

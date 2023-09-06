@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListConversations;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation;
+use Psr\Http\Message\ResponseInterface;
 
 class ListConversations200Response
 {
@@ -29,14 +32,14 @@ class ListConversations200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation[]
+     * @var Conversation[]
      */
     private array $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation[] $body
+     * @param Conversation[] $body
      */
     public function __construct(array $body)
     {
@@ -44,7 +47,7 @@ class ListConversations200Response
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation[]
+     * @return Conversation[]
      */
     public function getBody(): array
     {
@@ -52,7 +55,7 @@ class ListConversations200Response
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation[] $body
+     * @param Conversation[] $body
      * @return self
      */
     public function withBody(array $body): self
@@ -73,12 +76,12 @@ class ListConversations200Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListConversations200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation => \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): Conversation => Conversation::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -93,7 +96,7 @@ class ListConversations200Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\Conversation $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (Conversation $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -108,8 +111,8 @@ class ListConversations200Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -126,7 +129,7 @@ class ListConversations200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

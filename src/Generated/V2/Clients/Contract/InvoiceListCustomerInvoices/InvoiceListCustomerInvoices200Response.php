@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice;
+use Psr\Http\Message\ResponseInterface;
 
 class InvoiceListCustomerInvoices200Response
 {
@@ -29,14 +32,14 @@ class InvoiceListCustomerInvoices200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice[]
+     * @var Invoice[]
      */
     private array $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice[] $body
+     * @param Invoice[] $body
      */
     public function __construct(array $body)
     {
@@ -44,7 +47,7 @@ class InvoiceListCustomerInvoices200Response
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice[]
+     * @return Invoice[]
      */
     public function getBody(): array
     {
@@ -52,7 +55,7 @@ class InvoiceListCustomerInvoices200Response
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice[] $body
+     * @param Invoice[] $body
      * @return self
      */
     public function withBody(array $body): self
@@ -73,12 +76,12 @@ class InvoiceListCustomerInvoices200Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): InvoiceListCustomerInvoices200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice => \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): Invoice => Invoice::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -93,7 +96,7 @@ class InvoiceListCustomerInvoices200Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (Invoice $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -108,8 +111,8 @@ class InvoiceListCustomerInvoices200Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -126,7 +129,7 @@ class InvoiceListCustomerInvoices200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class DeclineCustomerInviteRequest
 {
@@ -78,7 +79,7 @@ class DeclineCustomerInviteRequest
      */
     public function withInviteId(string $inviteId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -96,7 +97,7 @@ class DeclineCustomerInviteRequest
      */
     public function withBody($body): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($body, static::$schema['properties']['body']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -118,7 +119,7 @@ class DeclineCustomerInviteRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DeclineCustomerInviteRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -155,8 +156,8 @@ class DeclineCustomerInviteRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

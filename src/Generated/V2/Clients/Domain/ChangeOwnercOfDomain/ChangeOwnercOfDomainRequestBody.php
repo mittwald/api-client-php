@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomain;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField;
 
 class ChangeOwnercOfDomainRequestBody
 {
@@ -31,7 +33,7 @@ class ChangeOwnercOfDomainRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField[]
+     * @var HandleField[]
      */
     private array $ownerC;
 
@@ -40,7 +42,7 @@ class ChangeOwnercOfDomainRequestBody
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField[] $ownerC
+     * @param HandleField[] $ownerC
      */
     public function __construct(array $ownerC)
     {
@@ -48,7 +50,7 @@ class ChangeOwnercOfDomainRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField[]
+     * @return HandleField[]
      */
     public function getOwnerC(): array
     {
@@ -56,7 +58,7 @@ class ChangeOwnercOfDomainRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField[] $ownerC
+     * @param HandleField[] $ownerC
      * @return self
      */
     public function withOwnerC(array $ownerC): self
@@ -77,12 +79,12 @@ class ChangeOwnercOfDomainRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ChangeOwnercOfDomainRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $ownerC = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField => \Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
+        $ownerC = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
 
         $obj = new self($ownerC);
 
@@ -97,7 +99,7 @@ class ChangeOwnercOfDomainRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['ownerC'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField $i): array => $i->toJson(), $this->ownerC);
+        $output['ownerC'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->ownerC);
 
         return $output;
     }
@@ -112,8 +114,8 @@ class ChangeOwnercOfDomainRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

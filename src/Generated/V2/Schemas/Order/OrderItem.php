@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class OrderItem
 {
@@ -243,7 +244,7 @@ class OrderItem
      */
     public function withAmount(int|float $amount): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($amount, static::$schema['properties']['amount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -261,7 +262,7 @@ class OrderItem
      */
     public function withArticleId(string $articleId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($articleId, static::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -279,7 +280,7 @@ class OrderItem
      */
     public function withArticleTemplateName(string $articleTemplateName): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($articleTemplateName, static::$schema['properties']['articleTemplateName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -331,7 +332,7 @@ class OrderItem
      */
     public function withIsInclusive(bool $isInclusive): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInclusive, static::$schema['properties']['isInclusive']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -349,7 +350,7 @@ class OrderItem
      */
     public function withOrderItemId(string $orderItemId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($orderItemId, static::$schema['properties']['orderItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -367,7 +368,7 @@ class OrderItem
      */
     public function withPredefinedDomainAggregateId(string $predefinedDomainAggregateId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($predefinedDomainAggregateId, static::$schema['properties']['predefinedDomainAggregateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -396,7 +397,7 @@ class OrderItem
      */
     public function withPrice(int|float $price): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($price, static::$schema['properties']['price']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -441,7 +442,7 @@ class OrderItem
      */
     public static function buildFromInput(array|object $input, bool $validate = true): OrderItem
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -523,8 +524,8 @@ class OrderItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

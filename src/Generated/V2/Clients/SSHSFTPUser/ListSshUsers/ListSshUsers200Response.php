@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser;
+use Psr\Http\Message\ResponseInterface;
 
 class ListSshUsers200Response
 {
@@ -29,14 +32,14 @@ class ListSshUsers200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser[]
+     * @var SshUser[]
      */
     private array $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser[] $body
+     * @param SshUser[] $body
      */
     public function __construct(array $body)
     {
@@ -44,7 +47,7 @@ class ListSshUsers200Response
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser[]
+     * @return SshUser[]
      */
     public function getBody(): array
     {
@@ -52,7 +55,7 @@ class ListSshUsers200Response
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser[] $body
+     * @param SshUser[] $body
      * @return self
      */
     public function withBody(array $body): self
@@ -73,12 +76,12 @@ class ListSshUsers200Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListSshUsers200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): SshUser => SshUser::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -93,7 +96,7 @@ class ListSshUsers200Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\SshUser $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (SshUser $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -108,8 +111,8 @@ class ListSshUsers200Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -126,7 +129,7 @@ class ListSshUsers200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

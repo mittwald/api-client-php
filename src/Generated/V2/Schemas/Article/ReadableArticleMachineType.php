@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ReadableArticleMachineType
 {
@@ -93,7 +94,7 @@ class ReadableArticleMachineType
      */
     public function withCpu(string $cpu): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($cpu, static::$schema['properties']['cpu']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -111,7 +112,7 @@ class ReadableArticleMachineType
      */
     public function withMemory(string $memory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($memory, static::$schema['properties']['memory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -129,7 +130,7 @@ class ReadableArticleMachineType
      */
     public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -151,7 +152,7 @@ class ReadableArticleMachineType
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ReadableArticleMachineType
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -190,8 +191,8 @@ class ReadableArticleMachineType
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

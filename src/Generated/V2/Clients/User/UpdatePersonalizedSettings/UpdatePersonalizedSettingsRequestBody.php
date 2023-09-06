@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class UpdatePersonalizedSettingsRequestBody
 {
@@ -60,7 +61,7 @@ class UpdatePersonalizedSettingsRequestBody
      */
     public function withSettingsString(string $settingsString): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($settingsString, static::$schema['properties']['settingsString']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -82,7 +83,7 @@ class UpdatePersonalizedSettingsRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdatePersonalizedSettingsRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -117,8 +118,8 @@ class UpdatePersonalizedSettingsRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

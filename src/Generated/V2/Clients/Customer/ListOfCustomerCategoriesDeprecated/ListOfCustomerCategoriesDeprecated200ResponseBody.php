@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategoriesDeprecated;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category;
+use Psr\Http\Message\ResponseInterface;
 
 class ListOfCustomerCategoriesDeprecated200ResponseBody
 {
@@ -25,11 +28,11 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category[]|null
+     * @var Category[]|null
      */
     private ?array $categories = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -39,7 +42,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category[]|null
+     * @return Category[]|null
      */
     public function getCategories(): ?array
     {
@@ -47,7 +50,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category[] $categories
+     * @param Category[] $categories
      * @return self
      */
     public function withCategories(array $categories): self
@@ -79,14 +82,14 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListOfCustomerCategoriesDeprecated200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $categories = null;
         if (isset($input->{'categories'})) {
-            $categories = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category => \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category::buildFromInput($i, validate: $validate), $input->{'categories'});
+            $categories = array_map(fn (array $i): Category => Category::buildFromInput($i, validate: $validate), $input->{'categories'});
         }
 
         $obj = new self();
@@ -103,7 +106,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     {
         $output = [];
         if (isset($this->categories)) {
-            $output['categories'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $i): array => $i->toJson(), $this->categories);
+            $output['categories'] = array_map(fn (Category $i): array => $i->toJson(), $this->categories);
         }
 
         return $output;
@@ -119,8 +122,8 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -137,7 +140,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus;
 
 class OrderListCustomerOrdersRequest
 {
@@ -78,12 +80,12 @@ class OrderListCustomerOrdersRequest
     private ?int $page = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[]|null
+     * @var OrderStatus[]|null
      */
     private ?array $includesStatus = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[]|null
+     * @var OrderStatus[]|null
      */
     private ?array $excludesStatus = null;
 
@@ -137,7 +139,7 @@ class OrderListCustomerOrdersRequest
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[]|null
+     * @return OrderStatus[]|null
      */
     public function getIncludesStatus(): ?array
     {
@@ -145,7 +147,7 @@ class OrderListCustomerOrdersRequest
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[]|null
+     * @return OrderStatus[]|null
      */
     public function getExcludesStatus(): ?array
     {
@@ -166,7 +168,7 @@ class OrderListCustomerOrdersRequest
      */
     public function withCustomerId(string $customerId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -184,7 +186,7 @@ class OrderListCustomerOrdersRequest
      */
     public function withLimit(int $limit): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -213,7 +215,7 @@ class OrderListCustomerOrdersRequest
      */
     public function withSkip(int $skip): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -242,7 +244,7 @@ class OrderListCustomerOrdersRequest
      */
     public function withPage(int $page): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($page, static::$schema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -266,7 +268,7 @@ class OrderListCustomerOrdersRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[] $includesStatus
+     * @param OrderStatus[] $includesStatus
      * @return self
      */
     public function withIncludesStatus(array $includesStatus): self
@@ -289,7 +291,7 @@ class OrderListCustomerOrdersRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[] $excludesStatus
+     * @param OrderStatus[] $excludesStatus
      * @return self
      */
     public function withExcludesStatus(array $excludesStatus): self
@@ -317,7 +319,7 @@ class OrderListCustomerOrdersRequest
      */
     public function withTemplateNames(array $templateNames): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($templateNames, static::$schema['properties']['templateNames']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -350,7 +352,7 @@ class OrderListCustomerOrdersRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): OrderListCustomerOrdersRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -370,11 +372,11 @@ class OrderListCustomerOrdersRequest
         }
         $includesStatus = null;
         if (isset($input->{'includesStatus'})) {
-            $includesStatus = array_map(fn (string $i): \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus => \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus::from($i), $input->{'includesStatus'});
+            $includesStatus = array_map(fn (string $i): OrderStatus => OrderStatus::from($i), $input->{'includesStatus'});
         }
         $excludesStatus = null;
         if (isset($input->{'excludesStatus'})) {
-            $excludesStatus = array_map(fn (string $i): \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus => \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus::from($i), $input->{'excludesStatus'});
+            $excludesStatus = array_map(fn (string $i): OrderStatus => OrderStatus::from($i), $input->{'excludesStatus'});
         }
         $templateNames = null;
         if (isset($input->{'templateNames'})) {
@@ -410,10 +412,10 @@ class OrderListCustomerOrdersRequest
             $output['page'] = $this->page;
         }
         if (isset($this->includesStatus)) {
-            $output['includesStatus'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus $i): string => $i->value, $this->includesStatus);
+            $output['includesStatus'] = array_map(fn (OrderStatus $i): string => $i->value, $this->includesStatus);
         }
         if (isset($this->excludesStatus)) {
-            $output['excludesStatus'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus $i): string => $i->value, $this->excludesStatus);
+            $output['excludesStatus'] = array_map(fn (OrderStatus $i): string => $i->value, $this->excludesStatus);
         }
         if (isset($this->templateNames)) {
             $output['templateNames'] = $this->templateNames;
@@ -432,8 +434,8 @@ class OrderListCustomerOrdersRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

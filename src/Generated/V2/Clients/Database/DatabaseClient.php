@@ -2,391 +2,508 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabase201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabase400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabase404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUser201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUser400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUser404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabase201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabase400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabase404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabase400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabase412Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabase500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabase503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUser400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUser404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabase400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabase412Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabase500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabase503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUser400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUser404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUser400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUser404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabase200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabase400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabase404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabase500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUser200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUser400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUser404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabase200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabase400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabase404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabase500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsets200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsets400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsets404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabases200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabases400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabases404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsers200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsers400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsers404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersions200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersions400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersions404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabases200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabases400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabases404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersions200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersions400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersions404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharset400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharset404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescription400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescription404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUser400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUser404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPassword400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPassword404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfiguration400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfiguration404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescription400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescription404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest;
 
 class DatabaseClient
 {
-    private \GuzzleHttp\Client $client;
+    private Client $client;
 
-    public function __construct(\GuzzleHttp\Client $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function createMysqlDatabase(CreateMysqlDatabase\CreateMysqlDatabaseRequest $request): CreateMysqlDatabase\CreateMysqlDatabase201Response|CreateMysqlDatabase\CreateMysqlDatabase400Response|CreateMysqlDatabase\CreateMysqlDatabase404Response|CreateMysqlDatabase\CreateMysqlDatabaseDefaultResponse
+    public function createMysqlDatabase(CreateMysqlDatabaseRequest $request): CreateMysqlDatabase201Response|CreateMysqlDatabase400Response|CreateMysqlDatabase404Response|CreateMysqlDatabaseDefaultResponse
     {
-        $httpRequest = new Request(CreateMysqlDatabase\CreateMysqlDatabaseRequest::method, $request->getUrl());
+        $httpRequest = new Request(CreateMysqlDatabaseRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => CreateMysqlDatabase\CreateMysqlDatabase201Response::fromResponse($httpResponse),
-            400 => CreateMysqlDatabase\CreateMysqlDatabase400Response::fromResponse($httpResponse),
-            404 => CreateMysqlDatabase\CreateMysqlDatabase404Response::fromResponse($httpResponse),
-            default => CreateMysqlDatabase\CreateMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
+            201 => CreateMysqlDatabase201Response::fromResponse($httpResponse),
+            400 => CreateMysqlDatabase400Response::fromResponse($httpResponse),
+            404 => CreateMysqlDatabase404Response::fromResponse($httpResponse),
+            default => CreateMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function listMysqlDatabases(ListMysqlDatabases\ListMysqlDatabasesRequest $request): ListMysqlDatabases\ListMysqlDatabases200Response|ListMysqlDatabases\ListMysqlDatabases400Response|ListMysqlDatabases\ListMysqlDatabases404Response|ListMysqlDatabases\ListMysqlDatabasesDefaultResponse
+    public function listMysqlDatabases(ListMysqlDatabasesRequest $request): ListMysqlDatabases200Response|ListMysqlDatabases400Response|ListMysqlDatabases404Response|ListMysqlDatabasesDefaultResponse
     {
-        $httpRequest = new Request(ListMysqlDatabases\ListMysqlDatabasesRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListMysqlDatabasesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => ListMysqlDatabases\ListMysqlDatabases200Response::fromResponse($httpResponse),
-            400 => ListMysqlDatabases\ListMysqlDatabases400Response::fromResponse($httpResponse),
-            404 => ListMysqlDatabases\ListMysqlDatabases404Response::fromResponse($httpResponse),
-            default => ListMysqlDatabases\ListMysqlDatabasesDefaultResponse::fromResponse($httpResponse),
+            200 => ListMysqlDatabases200Response::fromResponse($httpResponse),
+            400 => ListMysqlDatabases400Response::fromResponse($httpResponse),
+            404 => ListMysqlDatabases404Response::fromResponse($httpResponse),
+            default => ListMysqlDatabasesDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function createMysqlUser(CreateMysqlUser\CreateMysqlUserRequest $request): CreateMysqlUser\CreateMysqlUser201Response|CreateMysqlUser\CreateMysqlUser400Response|CreateMysqlUser\CreateMysqlUser404Response|CreateMysqlUser\CreateMysqlUserDefaultResponse
+    public function createMysqlUser(CreateMysqlUserRequest $request): CreateMysqlUser201Response|CreateMysqlUser400Response|CreateMysqlUser404Response|CreateMysqlUserDefaultResponse
     {
-        $httpRequest = new Request(CreateMysqlUser\CreateMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateMysqlUser\CreateMysqlUser201Response::fromResponse($httpResponse),
-            400 => CreateMysqlUser\CreateMysqlUser400Response::fromResponse($httpResponse),
-            404 => CreateMysqlUser\CreateMysqlUser404Response::fromResponse($httpResponse),
-            default => CreateMysqlUser\CreateMysqlUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function listMysqlUsers(ListMysqlUsers\ListMysqlUsersRequest $request): ListMysqlUsers\ListMysqlUsers200Response|ListMysqlUsers\ListMysqlUsers400Response|ListMysqlUsers\ListMysqlUsers404Response|ListMysqlUsers\ListMysqlUsersDefaultResponse
-    {
-        $httpRequest = new Request(ListMysqlUsers\ListMysqlUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListMysqlUsers\ListMysqlUsers200Response::fromResponse($httpResponse),
-            400 => ListMysqlUsers\ListMysqlUsers400Response::fromResponse($httpResponse),
-            404 => ListMysqlUsers\ListMysqlUsers404Response::fromResponse($httpResponse),
-            default => ListMysqlUsers\ListMysqlUsersDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function createRedisDatabase(CreateRedisDatabase\CreateRedisDatabaseRequest $request): CreateRedisDatabase\CreateRedisDatabase201Response|CreateRedisDatabase\CreateRedisDatabase400Response|CreateRedisDatabase\CreateRedisDatabase404Response|CreateRedisDatabase\CreateRedisDatabaseDefaultResponse
-    {
-        $httpRequest = new Request(CreateRedisDatabase\CreateRedisDatabaseRequest::method, $request->getUrl());
+        $httpRequest = new Request(CreateMysqlUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => CreateRedisDatabase\CreateRedisDatabase201Response::fromResponse($httpResponse),
-            400 => CreateRedisDatabase\CreateRedisDatabase400Response::fromResponse($httpResponse),
-            404 => CreateRedisDatabase\CreateRedisDatabase404Response::fromResponse($httpResponse),
-            default => CreateRedisDatabase\CreateRedisDatabaseDefaultResponse::fromResponse($httpResponse),
+            201 => CreateMysqlUser201Response::fromResponse($httpResponse),
+            400 => CreateMysqlUser400Response::fromResponse($httpResponse),
+            404 => CreateMysqlUser404Response::fromResponse($httpResponse),
+            default => CreateMysqlUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function listRedisDatabases(ListRedisDatabases\ListRedisDatabasesRequest $request): ListRedisDatabases\ListRedisDatabases200Response|ListRedisDatabases\ListRedisDatabases400Response|ListRedisDatabases\ListRedisDatabases404Response|ListRedisDatabases\ListRedisDatabasesDefaultResponse
+    public function listMysqlUsers(ListMysqlUsersRequest $request): ListMysqlUsers200Response|ListMysqlUsers400Response|ListMysqlUsers404Response|ListMysqlUsersDefaultResponse
     {
-        $httpRequest = new Request(ListRedisDatabases\ListRedisDatabasesRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListMysqlUsersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => ListRedisDatabases\ListRedisDatabases200Response::fromResponse($httpResponse),
-            400 => ListRedisDatabases\ListRedisDatabases400Response::fromResponse($httpResponse),
-            404 => ListRedisDatabases\ListRedisDatabases404Response::fromResponse($httpResponse),
-            default => ListRedisDatabases\ListRedisDatabasesDefaultResponse::fromResponse($httpResponse),
+            200 => ListMysqlUsers200Response::fromResponse($httpResponse),
+            400 => ListMysqlUsers400Response::fromResponse($httpResponse),
+            404 => ListMysqlUsers404Response::fromResponse($httpResponse),
+            default => ListMysqlUsersDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function deleteMysqlDatabase(DeleteMysqlDatabase\DeleteMysqlDatabaseRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteMysqlDatabase\DeleteMysqlDatabase400Response|DeleteMysqlDatabase\DeleteMysqlDatabase412Response|DeleteMysqlDatabase\DeleteMysqlDatabase500Response|DeleteMysqlDatabase\DeleteMysqlDatabase503Response|DeleteMysqlDatabase\DeleteMysqlDatabaseDefaultResponse
+    public function createRedisDatabase(CreateRedisDatabaseRequest $request): CreateRedisDatabase201Response|CreateRedisDatabase400Response|CreateRedisDatabase404Response|CreateRedisDatabaseDefaultResponse
     {
-        $httpRequest = new Request(DeleteMysqlDatabase\DeleteMysqlDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200, 204 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => DeleteMysqlDatabase\DeleteMysqlDatabase400Response::fromResponse($httpResponse),
-            412 => DeleteMysqlDatabase\DeleteMysqlDatabase412Response::fromResponse($httpResponse),
-            500 => DeleteMysqlDatabase\DeleteMysqlDatabase500Response::fromResponse($httpResponse),
-            503 => DeleteMysqlDatabase\DeleteMysqlDatabase503Response::fromResponse($httpResponse),
-            default => DeleteMysqlDatabase\DeleteMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function getMysqlDatabase(GetMysqlDatabase\GetMysqlDatabaseRequest $request): GetMysqlDatabase\GetMysqlDatabase200Response|GetMysqlDatabase\GetMysqlDatabase400Response|GetMysqlDatabase\GetMysqlDatabase404Response|GetMysqlDatabase\GetMysqlDatabase500Response|GetMysqlDatabase\GetMysqlDatabaseDefaultResponse
-    {
-        $httpRequest = new Request(GetMysqlDatabase\GetMysqlDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetMysqlDatabase\GetMysqlDatabase200Response::fromResponse($httpResponse),
-            400 => GetMysqlDatabase\GetMysqlDatabase400Response::fromResponse($httpResponse),
-            404 => GetMysqlDatabase\GetMysqlDatabase404Response::fromResponse($httpResponse),
-            500 => GetMysqlDatabase\GetMysqlDatabase500Response::fromResponse($httpResponse),
-            default => GetMysqlDatabase\GetMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function deleteMysqlUser(DeleteMysqlUser\DeleteMysqlUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteMysqlUser\DeleteMysqlUser400Response|DeleteMysqlUser\DeleteMysqlUser404Response|DeleteMysqlUser\DeleteMysqlUserDefaultResponse
-    {
-        $httpRequest = new Request(DeleteMysqlUser\DeleteMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200, 204 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => DeleteMysqlUser\DeleteMysqlUser400Response::fromResponse($httpResponse),
-            404 => DeleteMysqlUser\DeleteMysqlUser404Response::fromResponse($httpResponse),
-            default => DeleteMysqlUser\DeleteMysqlUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function getMysqlUser(GetMysqlUser\GetMysqlUserRequest $request): GetMysqlUser\GetMysqlUser200Response|GetMysqlUser\GetMysqlUser400Response|GetMysqlUser\GetMysqlUser404Response|GetMysqlUser\GetMysqlUserDefaultResponse
-    {
-        $httpRequest = new Request(GetMysqlUser\GetMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetMysqlUser\GetMysqlUser200Response::fromResponse($httpResponse),
-            400 => GetMysqlUser\GetMysqlUser400Response::fromResponse($httpResponse),
-            404 => GetMysqlUser\GetMysqlUser404Response::fromResponse($httpResponse),
-            default => GetMysqlUser\GetMysqlUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function updateMysqlUser(UpdateMysqlUser\UpdateMysqlUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateMysqlUser\UpdateMysqlUser400Response|UpdateMysqlUser\UpdateMysqlUser404Response|UpdateMysqlUser\UpdateMysqlUserDefaultResponse
-    {
-        $httpRequest = new Request(UpdateMysqlUser\UpdateMysqlUserRequest::method, $request->getUrl());
+        $httpRequest = new Request(CreateRedisDatabaseRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => UpdateMysqlUser\UpdateMysqlUser400Response::fromResponse($httpResponse),
-            404 => UpdateMysqlUser\UpdateMysqlUser404Response::fromResponse($httpResponse),
-            default => UpdateMysqlUser\UpdateMysqlUserDefaultResponse::fromResponse($httpResponse),
+            201 => CreateRedisDatabase201Response::fromResponse($httpResponse),
+            400 => CreateRedisDatabase400Response::fromResponse($httpResponse),
+            404 => CreateRedisDatabase404Response::fromResponse($httpResponse),
+            default => CreateRedisDatabaseDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function deleteRedisDatabase(DeleteRedisDatabase\DeleteRedisDatabaseRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteRedisDatabase\DeleteRedisDatabase400Response|DeleteRedisDatabase\DeleteRedisDatabase412Response|DeleteRedisDatabase\DeleteRedisDatabase500Response|DeleteRedisDatabase\DeleteRedisDatabase503Response|DeleteRedisDatabase\DeleteRedisDatabaseDefaultResponse
+    public function listRedisDatabases(ListRedisDatabasesRequest $request): ListRedisDatabases200Response|ListRedisDatabases400Response|ListRedisDatabases404Response|ListRedisDatabasesDefaultResponse
     {
-        $httpRequest = new Request(DeleteRedisDatabase\DeleteRedisDatabaseRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListRedisDatabasesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200, 204 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => DeleteRedisDatabase\DeleteRedisDatabase400Response::fromResponse($httpResponse),
-            412 => DeleteRedisDatabase\DeleteRedisDatabase412Response::fromResponse($httpResponse),
-            500 => DeleteRedisDatabase\DeleteRedisDatabase500Response::fromResponse($httpResponse),
-            503 => DeleteRedisDatabase\DeleteRedisDatabase503Response::fromResponse($httpResponse),
-            default => DeleteRedisDatabase\DeleteRedisDatabaseDefaultResponse::fromResponse($httpResponse),
+            200 => ListRedisDatabases200Response::fromResponse($httpResponse),
+            400 => ListRedisDatabases400Response::fromResponse($httpResponse),
+            404 => ListRedisDatabases404Response::fromResponse($httpResponse),
+            default => ListRedisDatabasesDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function getRedisDatabase(GetRedisDatabase\GetRedisDatabaseRequest $request): GetRedisDatabase\GetRedisDatabase200Response|GetRedisDatabase\GetRedisDatabase400Response|GetRedisDatabase\GetRedisDatabase404Response|GetRedisDatabase\GetRedisDatabase500Response|GetRedisDatabase\GetRedisDatabaseDefaultResponse
+    public function deleteMysqlDatabase(DeleteMysqlDatabaseRequest $request): EmptyResponse|DeleteMysqlDatabase400Response|DeleteMysqlDatabase412Response|DeleteMysqlDatabase500Response|DeleteMysqlDatabase503Response|DeleteMysqlDatabaseDefaultResponse
     {
-        $httpRequest = new Request(GetRedisDatabase\GetRedisDatabaseRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeleteMysqlDatabaseRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => GetRedisDatabase\GetRedisDatabase200Response::fromResponse($httpResponse),
-            400 => GetRedisDatabase\GetRedisDatabase400Response::fromResponse($httpResponse),
-            404 => GetRedisDatabase\GetRedisDatabase404Response::fromResponse($httpResponse),
-            500 => GetRedisDatabase\GetRedisDatabase500Response::fromResponse($httpResponse),
-            default => GetRedisDatabase\GetRedisDatabaseDefaultResponse::fromResponse($httpResponse),
+            200, 204 => new EmptyResponse($httpResponse),
+            400 => DeleteMysqlDatabase400Response::fromResponse($httpResponse),
+            412 => DeleteMysqlDatabase412Response::fromResponse($httpResponse),
+            500 => DeleteMysqlDatabase500Response::fromResponse($httpResponse),
+            503 => DeleteMysqlDatabase503Response::fromResponse($httpResponse),
+            default => DeleteMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function disableMysqlUser(DisableMysqlUser\DisableMysqlUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DisableMysqlUser\DisableMysqlUser400Response|DisableMysqlUser\DisableMysqlUser404Response|DisableMysqlUser\DisableMysqlUserDefaultResponse
+    public function getMysqlDatabase(GetMysqlDatabaseRequest $request): GetMysqlDatabase200Response|GetMysqlDatabase400Response|GetMysqlDatabase404Response|GetMysqlDatabase500Response|GetMysqlDatabaseDefaultResponse
     {
-        $httpRequest = new Request(DisableMysqlUser\DisableMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => DisableMysqlUser\DisableMysqlUser400Response::fromResponse($httpResponse),
-            404 => DisableMysqlUser\DisableMysqlUser404Response::fromResponse($httpResponse),
-            default => DisableMysqlUser\DisableMysqlUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function enableMysqlUser(EnableMysqlUser\EnableMysqlUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|EnableMysqlUser\EnableMysqlUser400Response|EnableMysqlUser\EnableMysqlUser404Response|EnableMysqlUser\EnableMysqlUserDefaultResponse
-    {
-        $httpRequest = new Request(EnableMysqlUser\EnableMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => EnableMysqlUser\EnableMysqlUser400Response::fromResponse($httpResponse),
-            404 => EnableMysqlUser\EnableMysqlUser404Response::fromResponse($httpResponse),
-            default => EnableMysqlUser\EnableMysqlUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function getMysqlUserPhpMyAdminUrl(GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlRequest $request): GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl200Response|GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl400Response|GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl404Response|GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlDefaultResponse
-    {
-        $httpRequest = new Request(GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetMysqlDatabaseRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl200Response::fromResponse($httpResponse),
-            400 => GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl400Response::fromResponse($httpResponse),
-            404 => GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrl404Response::fromResponse($httpResponse),
-            default => GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlDefaultResponse::fromResponse($httpResponse),
+            200 => GetMysqlDatabase200Response::fromResponse($httpResponse),
+            400 => GetMysqlDatabase400Response::fromResponse($httpResponse),
+            404 => GetMysqlDatabase404Response::fromResponse($httpResponse),
+            500 => GetMysqlDatabase500Response::fromResponse($httpResponse),
+            default => GetMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function listMysqlCharsets(ListMysqlCharsets\ListMysqlCharsetsRequest $request): ListMysqlCharsets\ListMysqlCharsets200Response|ListMysqlCharsets\ListMysqlCharsets400Response|ListMysqlCharsets\ListMysqlCharsets404Response|ListMysqlCharsets\ListMysqlCharsetsDefaultResponse
+    public function deleteMysqlUser(DeleteMysqlUserRequest $request): EmptyResponse|DeleteMysqlUser400Response|DeleteMysqlUser404Response|DeleteMysqlUserDefaultResponse
     {
-        $httpRequest = new Request(ListMysqlCharsets\ListMysqlCharsetsRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeleteMysqlUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => ListMysqlCharsets\ListMysqlCharsets200Response::fromResponse($httpResponse),
-            400 => ListMysqlCharsets\ListMysqlCharsets400Response::fromResponse($httpResponse),
-            404 => ListMysqlCharsets\ListMysqlCharsets404Response::fromResponse($httpResponse),
-            default => ListMysqlCharsets\ListMysqlCharsetsDefaultResponse::fromResponse($httpResponse),
+            200, 204 => new EmptyResponse($httpResponse),
+            400 => DeleteMysqlUser400Response::fromResponse($httpResponse),
+            404 => DeleteMysqlUser404Response::fromResponse($httpResponse),
+            default => DeleteMysqlUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function listMysqlVersions(ListMysqlVersions\ListMysqlVersionsRequest $request): ListMysqlVersions\ListMysqlVersions200Response|ListMysqlVersions\ListMysqlVersions400Response|ListMysqlVersions\ListMysqlVersions404Response|ListMysqlVersions\ListMysqlVersionsDefaultResponse
+    public function getMysqlUser(GetMysqlUserRequest $request): GetMysqlUser200Response|GetMysqlUser400Response|GetMysqlUser404Response|GetMysqlUserDefaultResponse
     {
-        $httpRequest = new Request(ListMysqlVersions\ListMysqlVersionsRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetMysqlUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => ListMysqlVersions\ListMysqlVersions200Response::fromResponse($httpResponse),
-            400 => ListMysqlVersions\ListMysqlVersions400Response::fromResponse($httpResponse),
-            404 => ListMysqlVersions\ListMysqlVersions404Response::fromResponse($httpResponse),
-            default => ListMysqlVersions\ListMysqlVersionsDefaultResponse::fromResponse($httpResponse),
+            200 => GetMysqlUser200Response::fromResponse($httpResponse),
+            400 => GetMysqlUser400Response::fromResponse($httpResponse),
+            404 => GetMysqlUser404Response::fromResponse($httpResponse),
+            default => GetMysqlUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function listRedisVersions(ListRedisVersions\ListRedisVersionsRequest $request): ListRedisVersions\ListRedisVersions200Response|ListRedisVersions\ListRedisVersions400Response|ListRedisVersions\ListRedisVersions404Response|ListRedisVersions\ListRedisVersionsDefaultResponse
+    public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse|UpdateMysqlUser400Response|UpdateMysqlUser404Response|UpdateMysqlUserDefaultResponse
     {
-        $httpRequest = new Request(ListRedisVersions\ListRedisVersionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListRedisVersions\ListRedisVersions200Response::fromResponse($httpResponse),
-            400 => ListRedisVersions\ListRedisVersions400Response::fromResponse($httpResponse),
-            404 => ListRedisVersions\ListRedisVersions404Response::fromResponse($httpResponse),
-            default => ListRedisVersions\ListRedisVersionsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharset400Response|UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharset404Response|UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse
-    {
-        $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->getUrl());
+        $httpRequest = new Request(UpdateMysqlUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharset400Response::fromResponse($httpResponse),
-            404 => UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharset404Response::fromResponse($httpResponse),
-            default => UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse::fromResponse($httpResponse),
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMysqlUser400Response::fromResponse($httpResponse),
+            404 => UpdateMysqlUser404Response::fromResponse($httpResponse),
+            default => UpdateMysqlUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescription400Response|UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescription404Response|UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionDefaultResponse
+    public function deleteRedisDatabase(DeleteRedisDatabaseRequest $request): EmptyResponse|DeleteRedisDatabase400Response|DeleteRedisDatabase412Response|DeleteRedisDatabase500Response|DeleteRedisDatabase503Response|DeleteRedisDatabaseDefaultResponse
     {
-        $httpRequest = new Request(UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeleteRedisDatabaseRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200, 204 => new EmptyResponse($httpResponse),
+            400 => DeleteRedisDatabase400Response::fromResponse($httpResponse),
+            412 => DeleteRedisDatabase412Response::fromResponse($httpResponse),
+            500 => DeleteRedisDatabase500Response::fromResponse($httpResponse),
+            503 => DeleteRedisDatabase503Response::fromResponse($httpResponse),
+            default => DeleteRedisDatabaseDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function getRedisDatabase(GetRedisDatabaseRequest $request): GetRedisDatabase200Response|GetRedisDatabase400Response|GetRedisDatabase404Response|GetRedisDatabase500Response|GetRedisDatabaseDefaultResponse
+    {
+        $httpRequest = new Request(GetRedisDatabaseRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetRedisDatabase200Response::fromResponse($httpResponse),
+            400 => GetRedisDatabase400Response::fromResponse($httpResponse),
+            404 => GetRedisDatabase404Response::fromResponse($httpResponse),
+            500 => GetRedisDatabase500Response::fromResponse($httpResponse),
+            default => GetRedisDatabaseDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function disableMysqlUser(DisableMysqlUserRequest $request): EmptyResponse|DisableMysqlUser400Response|DisableMysqlUser404Response|DisableMysqlUserDefaultResponse
+    {
+        $httpRequest = new Request(DisableMysqlUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescription400Response::fromResponse($httpResponse),
-            404 => UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescription404Response::fromResponse($httpResponse),
-            default => UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
+            200 => new EmptyResponse($httpResponse),
+            400 => DisableMysqlUser400Response::fromResponse($httpResponse),
+            404 => DisableMysqlUser404Response::fromResponse($httpResponse),
+            default => DisableMysqlUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function updateMysqlUserPassword(UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateMysqlUserPassword\UpdateMysqlUserPassword400Response|UpdateMysqlUserPassword\UpdateMysqlUserPassword404Response|UpdateMysqlUserPassword\UpdateMysqlUserPasswordDefaultResponse
+    public function enableMysqlUser(EnableMysqlUserRequest $request): EmptyResponse|EnableMysqlUser400Response|EnableMysqlUser404Response|EnableMysqlUserDefaultResponse
     {
-        $httpRequest = new Request(UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest::method, $request->getUrl());
+        $httpRequest = new Request(EnableMysqlUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => UpdateMysqlUserPassword\UpdateMysqlUserPassword400Response::fromResponse($httpResponse),
-            404 => UpdateMysqlUserPassword\UpdateMysqlUserPassword404Response::fromResponse($httpResponse),
-            default => UpdateMysqlUserPassword\UpdateMysqlUserPasswordDefaultResponse::fromResponse($httpResponse),
+            200 => new EmptyResponse($httpResponse),
+            400 => EnableMysqlUser400Response::fromResponse($httpResponse),
+            404 => EnableMysqlUser404Response::fromResponse($httpResponse),
+            default => EnableMysqlUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfiguration400Response|UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfiguration404Response|UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationDefaultResponse
+    public function getMysqlUserPhpMyAdminUrl(GetMysqlUserPhpMyAdminUrlRequest $request): GetMysqlUserPhpMyAdminUrl200Response|GetMysqlUserPhpMyAdminUrl400Response|GetMysqlUserPhpMyAdminUrl404Response|GetMysqlUserPhpMyAdminUrlDefaultResponse
     {
-        $httpRequest = new Request(UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetMysqlUserPhpMyAdminUrlRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetMysqlUserPhpMyAdminUrl200Response::fromResponse($httpResponse),
+            400 => GetMysqlUserPhpMyAdminUrl400Response::fromResponse($httpResponse),
+            404 => GetMysqlUserPhpMyAdminUrl404Response::fromResponse($httpResponse),
+            default => GetMysqlUserPhpMyAdminUrlDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function listMysqlCharsets(ListMysqlCharsetsRequest $request): ListMysqlCharsets200Response|ListMysqlCharsets400Response|ListMysqlCharsets404Response|ListMysqlCharsetsDefaultResponse
+    {
+        $httpRequest = new Request(ListMysqlCharsetsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListMysqlCharsets200Response::fromResponse($httpResponse),
+            400 => ListMysqlCharsets400Response::fromResponse($httpResponse),
+            404 => ListMysqlCharsets404Response::fromResponse($httpResponse),
+            default => ListMysqlCharsetsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function listMysqlVersions(ListMysqlVersionsRequest $request): ListMysqlVersions200Response|ListMysqlVersions400Response|ListMysqlVersions404Response|ListMysqlVersionsDefaultResponse
+    {
+        $httpRequest = new Request(ListMysqlVersionsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListMysqlVersions200Response::fromResponse($httpResponse),
+            400 => ListMysqlVersions400Response::fromResponse($httpResponse),
+            404 => ListMysqlVersions404Response::fromResponse($httpResponse),
+            default => ListMysqlVersionsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function listRedisVersions(ListRedisVersionsRequest $request): ListRedisVersions200Response|ListRedisVersions400Response|ListRedisVersions404Response|ListRedisVersionsDefaultResponse
+    {
+        $httpRequest = new Request(ListRedisVersionsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListRedisVersions200Response::fromResponse($httpResponse),
+            400 => ListRedisVersions400Response::fromResponse($httpResponse),
+            404 => ListRedisVersions404Response::fromResponse($httpResponse),
+            default => ListRedisVersionsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse|UpdateMysqlDatabaseDefaultCharset400Response|UpdateMysqlDatabaseDefaultCharset404Response|UpdateMysqlDatabaseDefaultCharsetDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfiguration400Response::fromResponse($httpResponse),
-            404 => UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfiguration404Response::fromResponse($httpResponse),
-            default => UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationDefaultResponse::fromResponse($httpResponse),
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMysqlDatabaseDefaultCharset400Response::fromResponse($httpResponse),
+            404 => UpdateMysqlDatabaseDefaultCharset404Response::fromResponse($httpResponse),
+            default => UpdateMysqlDatabaseDefaultCharsetDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescription400Response|UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescription404Response|UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionDefaultResponse
+    public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse|UpdateMysqlDatabaseDescription400Response|UpdateMysqlDatabaseDescription404Response|UpdateMysqlDatabaseDescriptionDefaultResponse
     {
-        $httpRequest = new Request(UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest::method, $request->getUrl());
+        $httpRequest = new Request(UpdateMysqlDatabaseDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => new \Mittwald\ApiClient\Client\EmptyResponse($httpResponse),
-            400 => UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescription400Response::fromResponse($httpResponse),
-            404 => UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescription404Response::fromResponse($httpResponse),
-            default => UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMysqlDatabaseDescription400Response::fromResponse($httpResponse),
+            404 => UpdateMysqlDatabaseDescription404Response::fromResponse($httpResponse),
+            default => UpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse|UpdateMysqlUserPassword400Response|UpdateMysqlUserPassword404Response|UpdateMysqlUserPasswordDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMysqlUserPasswordRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMysqlUserPassword400Response::fromResponse($httpResponse),
+            404 => UpdateMysqlUserPassword404Response::fromResponse($httpResponse),
+            default => UpdateMysqlUserPasswordDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse|UpdateRedisDatabaseConfiguration400Response|UpdateRedisDatabaseConfiguration404Response|UpdateRedisDatabaseConfigurationDefaultResponse
+    {
+        $httpRequest = new Request(UpdateRedisDatabaseConfigurationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateRedisDatabaseConfiguration400Response::fromResponse($httpResponse),
+            404 => UpdateRedisDatabaseConfiguration404Response::fromResponse($httpResponse),
+            default => UpdateRedisDatabaseConfigurationDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse|UpdateRedisDatabaseDescription400Response|UpdateRedisDatabaseDescription404Response|UpdateRedisDatabaseDescriptionDefaultResponse
+    {
+        $httpRequest = new Request(UpdateRedisDatabaseDescriptionRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateRedisDatabaseDescription400Response::fromResponse($httpResponse),
+            404 => UpdateRedisDatabaseDescription404Response::fromResponse($httpResponse),
+            default => UpdateRedisDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

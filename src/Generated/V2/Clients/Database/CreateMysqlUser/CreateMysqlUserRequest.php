@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser;
 
 class CreateMysqlUserRequest
 {
@@ -38,9 +40,9 @@ class CreateMysqlUserRequest
     private string $databaseId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser
+     * @var CreateMySqlUser
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser $body;
+    private CreateMySqlUser $body;
 
     private array $headers = [
 
@@ -48,9 +50,9 @@ class CreateMysqlUserRequest
 
     /**
      * @param string $databaseId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser $body
+     * @param CreateMySqlUser $body
      */
-    public function __construct(string $databaseId, \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser $body)
+    public function __construct(string $databaseId, CreateMySqlUser $body)
     {
         $this->databaseId = $databaseId;
         $this->body = $body;
@@ -65,9 +67,9 @@ class CreateMysqlUserRequest
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser
+     * @return CreateMySqlUser
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser
+    public function getBody(): CreateMySqlUser
     {
         return $this->body;
     }
@@ -78,7 +80,7 @@ class CreateMysqlUserRequest
      */
     public function withDatabaseId(string $databaseId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseId, static::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -91,10 +93,10 @@ class CreateMysqlUserRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser $body
+     * @param CreateMySqlUser $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser $body): self
+    public function withBody(CreateMySqlUser $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -112,13 +114,13 @@ class CreateMysqlUserRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CreateMysqlUserRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $databaseId = $input->{'databaseId'};
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUser::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CreateMySqlUser::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($databaseId, $body);
 
@@ -149,8 +151,8 @@ class CreateMysqlUserRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

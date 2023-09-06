@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class OrderSummary
 {
@@ -96,7 +97,7 @@ class OrderSummary
      */
     public function withNonRecurring(int|float $nonRecurring): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($nonRecurring, static::$schema['properties']['nonRecurring']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -114,7 +115,7 @@ class OrderSummary
      */
     public function withRecurring(int|float $recurring): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($recurring, static::$schema['properties']['recurring']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -132,7 +133,7 @@ class OrderSummary
      */
     public function withSummary(int|float $summary): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($summary, static::$schema['properties']['summary']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -154,7 +155,7 @@ class OrderSummary
      */
     public static function buildFromInput(array|object $input, bool $validate = true): OrderSummary
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -193,8 +194,8 @@ class OrderSummary
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

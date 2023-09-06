@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ReadableArticle
 {
@@ -463,7 +464,7 @@ class ReadableArticle
      */
     public function withArticleId(string $articleId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($articleId, static::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -504,7 +505,7 @@ class ReadableArticle
      */
     public function withBalanceAddonKey(string $balanceAddonKey): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($balanceAddonKey, static::$schema['properties']['balanceAddonKey']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -533,7 +534,7 @@ class ReadableArticle
      */
     public function withContractDurationInMonth(int|float $contractDurationInMonth): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractDurationInMonth, static::$schema['properties']['contractDurationInMonth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -551,7 +552,7 @@ class ReadableArticle
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -569,7 +570,7 @@ class ReadableArticle
      */
     public function withForcedInvoicingPeriodInMonth(int|float $forcedInvoicingPeriodInMonth): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($forcedInvoicingPeriodInMonth, static::$schema['properties']['forcedInvoicingPeriodInMonth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -598,7 +599,7 @@ class ReadableArticle
      */
     public function withHasIndependentContractPeriod(bool $hasIndependentContractPeriod): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hasIndependentContractPeriod, static::$schema['properties']['hasIndependentContractPeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -627,7 +628,7 @@ class ReadableArticle
      */
     public function withHideOnInvoice(bool $hideOnInvoice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hideOnInvoice, static::$schema['properties']['hideOnInvoice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -702,7 +703,7 @@ class ReadableArticle
      */
     public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -732,7 +733,7 @@ class ReadableArticle
      */
     public function withPicture(string $picture): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($picture, static::$schema['properties']['picture']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -784,7 +785,7 @@ class ReadableArticle
      */
     public function withPrice(int|float $price): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($price, static::$schema['properties']['price']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -852,7 +853,7 @@ class ReadableArticle
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ReadableArticle
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -1000,8 +1001,8 @@ class ReadableArticle
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

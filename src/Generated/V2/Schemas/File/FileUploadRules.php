@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\File;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class FileUploadRules
 {
@@ -124,7 +125,7 @@ class FileUploadRules
      */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($maxSizeInKB, static::$schema['properties']['maxSizeInKB']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -142,7 +143,7 @@ class FileUploadRules
      */
     public function withMimeTypes(array $mimeTypes): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($mimeTypes, static::$schema['properties']['mimeTypes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -187,7 +188,7 @@ class FileUploadRules
      */
     public static function buildFromInput(array|object $input, bool $validate = true): FileUploadRules
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -231,8 +232,8 @@ class FileUploadRules
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

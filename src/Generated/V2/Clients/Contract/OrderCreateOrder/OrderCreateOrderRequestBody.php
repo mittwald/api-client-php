@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder;
 
 class OrderCreateOrderRequestBody
 {
@@ -43,9 +47,9 @@ class OrderCreateOrderRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|null
+     * @var ProjectHostingOrder|ServerOrder|DomainOrder|null
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|null $orderData = null;
+    private ProjectHostingOrder|ServerOrder|DomainOrder|null $orderData = null;
 
     /**
      * @var OrderCreateOrderRequestBodyOrderType|null
@@ -67,7 +71,7 @@ class OrderCreateOrderRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|null
      */
-    public function getOrderData(): \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|null
+    public function getOrderData(): DomainOrder|ProjectHostingOrder|ServerOrder|null
     {
         return $this->orderData;
     }
@@ -81,10 +85,10 @@ class OrderCreateOrderRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder $orderData
+     * @param ProjectHostingOrder|ServerOrder|DomainOrder $orderData
      * @return self
      */
-    public function withOrderData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder $orderData): self
+    public function withOrderData(DomainOrder|ProjectHostingOrder|ServerOrder $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -136,7 +140,7 @@ class OrderCreateOrderRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateOrderRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -144,9 +148,9 @@ class OrderCreateOrderRequestBody
         $orderData = null;
         if (isset($input->{'orderData'})) {
             $orderData = match (true) {
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder::validateInput($input->{'orderData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder::buildFromInput($input->{'orderData'}, validate: $validate),
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder::validateInput($input->{'orderData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder::buildFromInput($input->{'orderData'}, validate: $validate),
-                \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder::validateInput($input->{'orderData'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder::buildFromInput($input->{'orderData'}, validate: $validate),
+                ProjectHostingOrder::validateInput($input->{'orderData'}, true) => ProjectHostingOrder::buildFromInput($input->{'orderData'}, validate: $validate),
+                ServerOrder::validateInput($input->{'orderData'}, true) => ServerOrder::buildFromInput($input->{'orderData'}, validate: $validate),
+                DomainOrder::validateInput($input->{'orderData'}, true) => DomainOrder::buildFromInput($input->{'orderData'}, validate: $validate),
             };
         }
         $orderType = null;
@@ -170,7 +174,7 @@ class OrderCreateOrderRequestBody
         $output = [];
         if (isset($this->orderData)) {
             $output['orderData'] = match (true) {
-                ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder => $this->orderData->toJson(),
+                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder => $this->orderData->toJson(),
             };
         }
         if (isset($this->orderType)) {
@@ -190,8 +194,8 @@ class OrderCreateOrderRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -208,7 +212,7 @@ class OrderCreateOrderRequestBody
     {
         if (isset($this->orderData)) {
             $this->orderData = match (true) {
-                ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder, ($this->orderData) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder => $this->orderData,
+                ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder => $this->orderData,
             };
         }
     }

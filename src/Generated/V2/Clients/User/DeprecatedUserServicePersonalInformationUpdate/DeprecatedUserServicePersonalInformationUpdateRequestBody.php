@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalInformationUpdate;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person;
 
 class DeprecatedUserServicePersonalInformationUpdateRequestBody
 {
@@ -28,35 +30,35 @@ class DeprecatedUserServicePersonalInformationUpdateRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+     * @var Person
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person;
+    private Person $person;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
+     * @param Person $person
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person)
+    public function __construct(Person $person)
     {
         $this->person = $person;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+     * @return Person
      */
-    public function getPerson(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+    public function getPerson(): Person
     {
         return $this->person;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
+     * @param Person $person
      * @return self
      */
-    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person): self
+    public function withPerson(Person $person): self
     {
         $clone = clone $this;
         $clone->person = $person;
@@ -74,12 +76,12 @@ class DeprecatedUserServicePersonalInformationUpdateRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserServicePersonalInformationUpdateRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $person = \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person::buildFromInput($input->{'person'}, validate: $validate);
+        $person = Person::buildFromInput($input->{'person'}, validate: $validate);
 
         $obj = new self($person);
 
@@ -109,8 +111,8 @@ class DeprecatedUserServicePersonalInformationUpdateRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

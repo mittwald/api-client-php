@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput;
 
 class PatchAppinstallationRequestBody
 {
@@ -75,12 +78,12 @@ class PatchAppinstallationRequestBody
     private ?array $systemSoftware = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy|null
+     * @var AppUpdatePolicy|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy = null;
+    private ?AppUpdatePolicy $updatePolicy = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]|null
+     * @var SavedUserInput[]|null
      */
     private ?array $userInputs = null;
 
@@ -128,15 +131,15 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy|null
+     * @return AppUpdatePolicy|null
      */
-    public function getUpdatePolicy(): ?\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
+    public function getUpdatePolicy(): ?AppUpdatePolicy
     {
         return $this->updatePolicy ?? null;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]|null
+     * @return SavedUserInput[]|null
      */
     public function getUserInputs(): ?array
     {
@@ -149,7 +152,7 @@ class PatchAppinstallationRequestBody
      */
     public function withAppVersionId(string $appVersionId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appVersionId, static::$schema['properties']['appVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -178,7 +181,7 @@ class PatchAppinstallationRequestBody
      */
     public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($customDocumentRoot, static::$schema['properties']['customDocumentRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -207,7 +210,7 @@ class PatchAppinstallationRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -254,10 +257,10 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy
+     * @param AppUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy): self
+    public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -277,7 +280,7 @@ class PatchAppinstallationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[] $userInputs
+     * @param SavedUserInput[] $userInputs
      * @return self
      */
     public function withUserInputs(array $userInputs): self
@@ -309,7 +312,7 @@ class PatchAppinstallationRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): PatchAppinstallationRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -332,11 +335,11 @@ class PatchAppinstallationRequestBody
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
-            $updatePolicy = \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy::from($input->{'updatePolicy'});
+            $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput => \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self();
@@ -373,7 +376,7 @@ class PatchAppinstallationRequestBody
             $output['updatePolicy'] = $this->updatePolicy->value;
         }
         if (isset($this->userInputs)) {
-            $output['userInputs'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput $i): array => $i->toJson(), $this->userInputs);
+            $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
         }
 
         return $output;
@@ -389,8 +392,8 @@ class PatchAppinstallationRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

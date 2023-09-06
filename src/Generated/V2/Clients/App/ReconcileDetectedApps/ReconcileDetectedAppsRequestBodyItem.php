@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\ReconcileDetectedApps;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ReconcileDetectedAppsRequestBodyItem
 {
@@ -128,7 +129,7 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public function withAppName(string $appName): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appName, static::$schema['properties']['appName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -146,7 +147,7 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public function withAppVersionClusterVersion(string $appVersionClusterVersion): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($appVersionClusterVersion, static::$schema['properties']['appVersionClusterVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -164,7 +165,7 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public function withDatabaseHost(string $databaseHost): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseHost, static::$schema['properties']['databaseHost']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -193,7 +194,7 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public function withDatabaseUserName(string $databaseUserName): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($databaseUserName, static::$schema['properties']['databaseUserName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -222,7 +223,7 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public function withInstallationDirectory(string $installationDirectory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($installationDirectory, static::$schema['properties']['installationDirectory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -244,7 +245,7 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ReconcileDetectedAppsRequestBodyItem
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -298,8 +299,8 @@ class ReconcileDetectedAppsRequestBodyItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

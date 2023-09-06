@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles;
 
 class UpdateProjectMembershipRequestBody
 {
@@ -41,18 +43,18 @@ class UpdateProjectMembershipRequestBody
     private ?DateTime $expiresAt = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
+     * @var ProjectRoles
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role;
+    private ProjectRoles $role;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role
+     * @param ProjectRoles $role
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role)
+    public function __construct(ProjectRoles $role)
     {
         $this->role = $role;
     }
@@ -66,9 +68,9 @@ class UpdateProjectMembershipRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
+     * @return ProjectRoles
      */
-    public function getRole(): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
+    public function getRole(): ProjectRoles
     {
         return $this->role;
     }
@@ -97,10 +99,10 @@ class UpdateProjectMembershipRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role
+     * @param ProjectRoles $role
      * @return self
      */
-    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role): self
+    public function withRole(ProjectRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -118,7 +120,7 @@ class UpdateProjectMembershipRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectMembershipRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -127,7 +129,7 @@ class UpdateProjectMembershipRequestBody
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
-        $role = \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles::from($input->{'role'});
+        $role = ProjectRoles::from($input->{'role'});
 
         $obj = new self($role);
         $obj->expiresAt = $expiresAt;
@@ -160,8 +162,8 @@ class UpdateProjectMembershipRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

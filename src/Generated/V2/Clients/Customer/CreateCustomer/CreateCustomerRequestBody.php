@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact;
 
 class CreateCustomerRequestBody
 {
@@ -47,9 +49,9 @@ class CreateCustomerRequestBody
     private string $name;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact|null
+     * @var Contact|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner = null;
+    private ?Contact $owner = null;
 
     /**
      * @var string|null
@@ -85,9 +87,9 @@ class CreateCustomerRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact|null
+     * @return Contact|null
      */
-    public function getOwner(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact
+    public function getOwner(): ?Contact
     {
         return $this->owner ?? null;
     }
@@ -106,7 +108,7 @@ class CreateCustomerRequestBody
      */
     public function withCategoryId(string $categoryId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -135,7 +137,7 @@ class CreateCustomerRequestBody
      */
     public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -148,10 +150,10 @@ class CreateCustomerRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner
+     * @param Contact $owner
      * @return self
      */
-    public function withOwner(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner): self
+    public function withOwner(Contact $owner): self
     {
         $clone = clone $this;
         $clone->owner = $owner;
@@ -176,7 +178,7 @@ class CreateCustomerRequestBody
      */
     public function withVatId(string $vatId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($vatId, static::$schema['properties']['vatId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -209,7 +211,7 @@ class CreateCustomerRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CreateCustomerRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -221,7 +223,7 @@ class CreateCustomerRequestBody
         $name = $input->{'name'};
         $owner = null;
         if (isset($input->{'owner'})) {
-            $owner = \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact::buildFromInput($input->{'owner'}, validate: $validate);
+            $owner = Contact::buildFromInput($input->{'owner'}, validate: $validate);
         }
         $vatId = null;
         if (isset($input->{'vatId'})) {
@@ -267,8 +269,8 @@ class CreateCustomerRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\Register;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person;
 
 class RegisterRequestBody
 {
@@ -53,9 +55,9 @@ class RegisterRequestBody
     private string $password;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+     * @var Person
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person;
+    private Person $person;
 
     private array $headers = [
 
@@ -64,9 +66,9 @@ class RegisterRequestBody
     /**
      * @param string $email
      * @param string $password
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
+     * @param Person $person
      */
-    public function __construct(string $email, string $password, \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person)
+    public function __construct(string $email, string $password, Person $person)
     {
         $this->email = $email;
         $this->password = $password;
@@ -90,9 +92,9 @@ class RegisterRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+     * @return Person
      */
-    public function getPerson(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+    public function getPerson(): Person
     {
         return $this->person;
     }
@@ -103,7 +105,7 @@ class RegisterRequestBody
      */
     public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -121,7 +123,7 @@ class RegisterRequestBody
      */
     public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -134,10 +136,10 @@ class RegisterRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
+     * @param Person $person
      * @return self
      */
-    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person): self
+    public function withPerson(Person $person): self
     {
         $clone = clone $this;
         $clone->person = $person;
@@ -155,14 +157,14 @@ class RegisterRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): RegisterRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $email = $input->{'email'};
         $password = $input->{'password'};
-        $person = \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person::buildFromInput($input->{'person'}, validate: $validate);
+        $person = Person::buildFromInput($input->{'person'}, validate: $validate);
 
         $obj = new self($email, $password, $person);
 
@@ -194,8 +196,8 @@ class RegisterRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

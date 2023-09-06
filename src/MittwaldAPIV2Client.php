@@ -2,11 +2,11 @@
 
 namespace Mittwald\ApiClient;
 
+use Exception;
 use Mittwald\ApiClient\Generated\V2\Client;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\Authenticate200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequestBody;
-use Exception;
 
 /**
  * MittwaldAPIV2Client is the main entry point for the mStudio v2 API.

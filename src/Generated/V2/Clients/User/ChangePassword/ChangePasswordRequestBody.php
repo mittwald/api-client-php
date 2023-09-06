@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ChangePasswordRequestBody
 {
@@ -109,7 +110,7 @@ This is optional, depending on the MFA activation status of the profile.
      */
     public function withMultiFactorCode(string $multiFactorCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($multiFactorCode, static::$schema['properties']['multiFactorCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -138,7 +139,7 @@ This is optional, depending on the MFA activation status of the profile.
      */
     public function withNewPassword(string $newPassword): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($newPassword, static::$schema['properties']['newPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -156,7 +157,7 @@ This is optional, depending on the MFA activation status of the profile.
      */
     public function withOldPassword(string $oldPassword): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($oldPassword, static::$schema['properties']['oldPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -178,7 +179,7 @@ This is optional, depending on the MFA activation status of the profile.
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ChangePasswordRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -222,8 +223,8 @@ This is optional, depending on the MFA activation status of the profile.
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

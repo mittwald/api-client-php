@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateForwardaddresses;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class MailaddressUpdateForwardaddressesRequestBody
 {
@@ -61,7 +62,7 @@ class MailaddressUpdateForwardaddressesRequestBody
      */
     public function withForwardAddresses(array $forwardAddresses): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($forwardAddresses, static::$schema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -83,7 +84,7 @@ class MailaddressUpdateForwardaddressesRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): MailaddressUpdateForwardaddressesRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -118,8 +119,8 @@ class MailaddressUpdateForwardaddressesRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

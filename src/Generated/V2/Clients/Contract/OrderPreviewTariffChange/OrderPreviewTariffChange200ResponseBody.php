@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
 class OrderPreviewTariffChange200ResponseBody
 {
@@ -50,7 +52,7 @@ class OrderPreviewTariffChange200ResponseBody
      */
     private int|float $totalPrice;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      * @param int|float $machineTypePrice
@@ -94,7 +96,7 @@ class OrderPreviewTariffChange200ResponseBody
      */
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($machineTypePrice, static::$schema['properties']['machineTypePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -112,7 +114,7 @@ class OrderPreviewTariffChange200ResponseBody
      */
     public function withStoragePrice(int|float $storagePrice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($storagePrice, static::$schema['properties']['storagePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -130,7 +132,7 @@ class OrderPreviewTariffChange200ResponseBody
      */
     public function withTotalPrice(int|float $totalPrice): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -152,7 +154,7 @@ class OrderPreviewTariffChange200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): OrderPreviewTariffChange200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -191,8 +193,8 @@ class OrderPreviewTariffChange200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -209,7 +211,7 @@ class OrderPreviewTariffChange200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

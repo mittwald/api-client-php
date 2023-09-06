@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ContractItem
 {
@@ -482,7 +483,7 @@ class ContractItem
      */
     public function withContractPeriod(int|float $contractPeriod): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($contractPeriod, static::$schema['properties']['contractPeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -500,7 +501,7 @@ class ContractItem
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -518,7 +519,7 @@ class ContractItem
      */
     public function withGroupByProjectId(string $groupByProjectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($groupByProjectId, static::$schema['properties']['groupByProjectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -547,7 +548,7 @@ class ContractItem
      */
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($invoicingPeriod, static::$schema['properties']['invoicingPeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -565,7 +566,7 @@ class ContractItem
      */
     public function withIsActivated(bool $isActivated): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isActivated, static::$schema['properties']['isActivated']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -583,7 +584,7 @@ class ContractItem
      */
     public function withIsBaseItem(bool $isBaseItem): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isBaseItem, static::$schema['properties']['isBaseItem']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -601,7 +602,7 @@ class ContractItem
      */
     public function withIsInFreeTrial(bool $isInFreeTrial): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInFreeTrial, static::$schema['properties']['isInFreeTrial']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -630,7 +631,7 @@ class ContractItem
      */
     public function withIsInclusive(bool $isInclusive): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($isInclusive, static::$schema['properties']['isInclusive']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -659,7 +660,7 @@ class ContractItem
      */
     public function withItemId(string $itemId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($itemId, static::$schema['properties']['itemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -758,7 +759,7 @@ class ContractItem
      */
     public function withOrderId(string $orderId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($orderId, static::$schema['properties']['orderId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -787,7 +788,7 @@ class ContractItem
      */
     public function withReplacedByItem(string $replacedByItem): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($replacedByItem, static::$schema['properties']['replacedByItem']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -878,7 +879,7 @@ class ContractItem
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ContractItem
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -1024,8 +1025,8 @@ class ContractItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

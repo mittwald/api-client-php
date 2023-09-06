@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2;
 
 class CreateSftpUserRequestBody
 {
@@ -57,9 +60,9 @@ class CreateSftpUserRequestBody
     private ?CreateSftpUserRequestBodyAccessLevel $accessLevel = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2
+     * @var AuthenticationAlternative1|AuthenticationAlternative2
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 $authentication;
+    private AuthenticationAlternative1|AuthenticationAlternative2 $authentication;
 
     /**
      * @var string
@@ -81,11 +84,11 @@ class CreateSftpUserRequestBody
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 $authentication
+     * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
      * @param string $description
      * @param string[] $directories
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 $authentication, string $description, array $directories)
+    public function __construct(AuthenticationAlternative1|AuthenticationAlternative2 $authentication, string $description, array $directories)
     {
         $this->authentication = $authentication;
         $this->description = $description;
@@ -104,7 +107,7 @@ class CreateSftpUserRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2
      */
-    public function getAuthentication(): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2
+    public function getAuthentication(): AuthenticationAlternative1|AuthenticationAlternative2
     {
         return $this->authentication;
     }
@@ -157,10 +160,10 @@ class CreateSftpUserRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 $authentication
+     * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
      * @return self
      */
-    public function withAuthentication(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 $authentication): self
+    public function withAuthentication(AuthenticationAlternative1|AuthenticationAlternative2 $authentication): self
     {
         $clone = clone $this;
         $clone->authentication = $authentication;
@@ -174,7 +177,7 @@ class CreateSftpUserRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -192,7 +195,7 @@ class CreateSftpUserRequestBody
      */
     public function withDirectories(array $directories): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($directories, static::$schema['properties']['directories']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -237,7 +240,7 @@ class CreateSftpUserRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CreateSftpUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -248,8 +251,8 @@ class CreateSftpUserRequestBody
         }
         $authentication = match (true) {
             default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-            \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1::validateInput($input->{'authentication'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1::buildFromInput($input->{'authentication'}, validate: $validate),
-            \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2::validateInput($input->{'authentication'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2::buildFromInput($input->{'authentication'}, validate: $validate),
+            AuthenticationAlternative1::validateInput($input->{'authentication'}, true) => AuthenticationAlternative1::buildFromInput($input->{'authentication'}, validate: $validate),
+            AuthenticationAlternative2::validateInput($input->{'authentication'}, true) => AuthenticationAlternative2::buildFromInput($input->{'authentication'}, validate: $validate),
         };
         $description = $input->{'description'};
         $directories = $input->{'directories'};
@@ -277,7 +280,7 @@ class CreateSftpUserRequestBody
         }
         $output['authentication'] = match (true) {
             default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-            ($this->authentication) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1, ($this->authentication) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2 => $this->authentication->toJson(),
+            ($this->authentication) instanceof AuthenticationAlternative1, ($this->authentication) instanceof AuthenticationAlternative2 => $this->authentication->toJson(),
         };
         $output['description'] = $this->description;
         $output['directories'] = $this->directories;
@@ -298,8 +301,8 @@ class CreateSftpUserRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

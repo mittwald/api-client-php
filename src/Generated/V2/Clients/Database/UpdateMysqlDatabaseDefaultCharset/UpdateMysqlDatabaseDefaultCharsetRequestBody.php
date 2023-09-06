@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings;
 
 class UpdateMysqlDatabaseDefaultCharsetRequestBody
 {
@@ -27,35 +29,35 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings
+     * @var CharacterSettings
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings;
+    private CharacterSettings $characterSettings;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings
+     * @param CharacterSettings $characterSettings
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings)
+    public function __construct(CharacterSettings $characterSettings)
     {
         $this->characterSettings = $characterSettings;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings
+     * @return CharacterSettings
      */
-    public function getCharacterSettings(): \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings
+    public function getCharacterSettings(): CharacterSettings
     {
         return $this->characterSettings;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings
+     * @param CharacterSettings $characterSettings
      * @return self
      */
-    public function withCharacterSettings(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings): self
+    public function withCharacterSettings(CharacterSettings $characterSettings): self
     {
         $clone = clone $this;
         $clone->characterSettings = $characterSettings;
@@ -73,12 +75,12 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlDatabaseDefaultCharsetRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $characterSettings = \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings::buildFromInput($input->{'characterSettings'}, validate: $validate);
+        $characterSettings = CharacterSettings::buildFromInput($input->{'characterSettings'}, validate: $validate);
 
         $obj = new self($characterSettings);
 
@@ -108,8 +110,8 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

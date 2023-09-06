@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ProjectFileSystemGetDirectoriesRequest
 {
@@ -157,7 +158,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -175,7 +176,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withDirectory(string $directory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($directory, static::$schema['properties']['directory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -204,7 +205,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withName(string $name): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -233,7 +234,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withMaxDepth(int $max_depth): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($max_depth, static::$schema['properties']['max_depth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -262,7 +263,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withType(array $type): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -291,7 +292,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withExecutable(bool $executable): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($executable, static::$schema['properties']['executable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -320,7 +321,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public function withHidden(bool $hidden): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hidden, static::$schema['properties']['hidden']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -353,7 +354,7 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ProjectFileSystemGetDirectoriesRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -435,8 +436,8 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

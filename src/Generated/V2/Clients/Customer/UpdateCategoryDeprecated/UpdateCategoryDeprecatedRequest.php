@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category;
 
 class UpdateCategoryDeprecatedRequest
 {
@@ -37,9 +39,9 @@ class UpdateCategoryDeprecatedRequest
     private string $categoryId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+     * @var Category
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body;
+    private Category $body;
 
     private array $headers = [
 
@@ -47,9 +49,9 @@ class UpdateCategoryDeprecatedRequest
 
     /**
      * @param string $categoryId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
+     * @param Category $body
      */
-    public function __construct(string $categoryId, \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body)
+    public function __construct(string $categoryId, Category $body)
     {
         $this->categoryId = $categoryId;
         $this->body = $body;
@@ -64,9 +66,9 @@ class UpdateCategoryDeprecatedRequest
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+     * @return Category
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+    public function getBody(): Category
     {
         return $this->body;
     }
@@ -77,7 +79,7 @@ class UpdateCategoryDeprecatedRequest
      */
     public function withCategoryId(string $categoryId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -90,10 +92,10 @@ class UpdateCategoryDeprecatedRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
+     * @param Category $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body): self
+    public function withBody(Category $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -111,13 +113,13 @@ class UpdateCategoryDeprecatedRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateCategoryDeprecatedRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $categoryId = $input->{'categoryId'};
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Category::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($categoryId, $body);
 
@@ -148,8 +150,8 @@ class UpdateCategoryDeprecatedRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

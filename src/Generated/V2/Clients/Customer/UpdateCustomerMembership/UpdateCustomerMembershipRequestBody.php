@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles;
 
 class UpdateCustomerMembershipRequestBody
 {
@@ -41,18 +43,18 @@ class UpdateCustomerMembershipRequestBody
     private ?DateTime $expiresAt = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles
+     * @var CustomerRoles
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role;
+    private CustomerRoles $role;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role
+     * @param CustomerRoles $role
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role)
+    public function __construct(CustomerRoles $role)
     {
         $this->role = $role;
     }
@@ -66,9 +68,9 @@ class UpdateCustomerMembershipRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles
+     * @return CustomerRoles
      */
-    public function getRole(): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles
+    public function getRole(): CustomerRoles
     {
         return $this->role;
     }
@@ -97,10 +99,10 @@ class UpdateCustomerMembershipRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role
+     * @param CustomerRoles $role
      * @return self
      */
-    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles $role): self
+    public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -118,7 +120,7 @@ class UpdateCustomerMembershipRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateCustomerMembershipRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -127,7 +129,7 @@ class UpdateCustomerMembershipRequestBody
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
-        $role = \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerRoles::from($input->{'role'});
+        $role = CustomerRoles::from($input->{'role'});
 
         $obj = new self($role);
         $obj->expiresAt = $expiresAt;
@@ -160,8 +162,8 @@ class UpdateCustomerMembershipRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

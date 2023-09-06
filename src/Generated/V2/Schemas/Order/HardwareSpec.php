@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class HardwareSpec
 {
@@ -66,7 +67,7 @@ class HardwareSpec
      */
     public function withRam(int|float $ram): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($ram, static::$schema['properties']['ram']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -95,7 +96,7 @@ class HardwareSpec
      */
     public function withVcpu(int|float $vcpu): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($vcpu, static::$schema['properties']['vcpu']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -128,7 +129,7 @@ class HardwareSpec
      */
     public static function buildFromInput(array|object $input, bool $validate = true): HardwareSpec
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -176,8 +177,8 @@ class HardwareSpec
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGetOwn;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\User\User;
+use Psr\Http\Message\ResponseInterface;
 
 class DeprecatedUserServiceUserGetOwn200Response
 {
@@ -26,33 +29,33 @@ class DeprecatedUserServiceUserGetOwn200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\User\User
+     * @var User
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\User\User $body;
+    private User $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\User\User $body
+     * @param User $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\User\User $body)
+    public function __construct(User $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\User\User
+     * @return User
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\User\User
+    public function getBody(): User
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\User\User $body
+     * @param User $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\User\User $body): self
+    public function withBody(User $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -70,12 +73,12 @@ class DeprecatedUserServiceUserGetOwn200Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserServiceUserGetOwn200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\User\User::buildFromInput($input->{'body'}, validate: $validate);
+        $body = User::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -105,8 +108,8 @@ class DeprecatedUserServiceUserGetOwn200Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -123,7 +126,7 @@ class DeprecatedUserServiceUserGetOwn200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

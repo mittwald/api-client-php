@@ -2,41 +2,49 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Article;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticle200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticle404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticles200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticlesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticlesRequest;
 
 class ArticleClient
 {
-    private \GuzzleHttp\Client $client;
+    private Client $client;
 
-    public function __construct(\GuzzleHttp\Client $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function getArticle(GetArticle\GetArticleRequest $request): GetArticle\GetArticle200Response|GetArticle\GetArticle404Response|GetArticle\GetArticleDefaultResponse
+    public function getArticle(GetArticleRequest $request): GetArticle200Response|GetArticle404Response|GetArticleDefaultResponse
     {
-        $httpRequest = new Request(GetArticle\GetArticleRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetArticleRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => GetArticle\GetArticle200Response::fromResponse($httpResponse),
-            404 => GetArticle\GetArticle404Response::fromResponse($httpResponse),
-            default => GetArticle\GetArticleDefaultResponse::fromResponse($httpResponse),
+            200 => GetArticle200Response::fromResponse($httpResponse),
+            404 => GetArticle404Response::fromResponse($httpResponse),
+            default => GetArticleDefaultResponse::fromResponse($httpResponse),
         };
     }
 
-    public function listArticles(ListArticles\ListArticlesRequest $request): ListArticles\ListArticles200Response|ListArticles\ListArticlesDefaultResponse
+    public function listArticles(ListArticlesRequest $request): ListArticles200Response|ListArticlesDefaultResponse
     {
-        $httpRequest = new Request(ListArticles\ListArticlesRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListArticlesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => ListArticles\ListArticles200Response::fromResponse($httpResponse),
-            default => ListArticles\ListArticlesDefaultResponse::fromResponse($httpResponse),
+            200 => ListArticles200Response::fromResponse($httpResponse),
+            default => ListArticlesDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

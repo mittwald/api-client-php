@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference;
 
 class UpdateConversationRequestBody
 {
@@ -36,9 +38,9 @@ class UpdateConversationRequestBody
     private ?string $categoryId = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
+     * @var AggregateReference|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference $relatedTo = null;
+    private ?AggregateReference $relatedTo = null;
 
     /**
      * @var string|null
@@ -68,7 +70,7 @@ class UpdateConversationRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
      */
-    public function getRelatedTo(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference
+    public function getRelatedTo(): ?AggregateReference
     {
         return $this->relatedTo ?? null;
     }
@@ -87,7 +89,7 @@ class UpdateConversationRequestBody
      */
     public function withCategoryId(string $categoryId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -111,10 +113,10 @@ class UpdateConversationRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference $relatedTo
+     * @param AggregateReference $relatedTo
      * @return self
      */
-    public function withRelatedTo(\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference $relatedTo): self
+    public function withRelatedTo(AggregateReference $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -139,7 +141,7 @@ class UpdateConversationRequestBody
      */
     public function withTitle(string $title): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($title, static::$schema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -172,7 +174,7 @@ class UpdateConversationRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateConversationRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -183,7 +185,7 @@ class UpdateConversationRequestBody
         }
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
-            $relatedTo = \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
+            $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
         }
         $title = null;
         if (isset($input->{'title'})) {
@@ -228,8 +230,8 @@ class UpdateConversationRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

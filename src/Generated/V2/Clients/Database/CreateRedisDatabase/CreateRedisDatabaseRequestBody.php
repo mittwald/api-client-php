@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration;
 
 class CreateRedisDatabaseRequestBody
 {
@@ -41,9 +43,9 @@ class CreateRedisDatabaseRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration|null
+     * @var RedisDatabaseConfiguration|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration = null;
+    private ?RedisDatabaseConfiguration $configuration = null;
 
     /**
      * A description for the database.
@@ -77,7 +79,7 @@ class CreateRedisDatabaseRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration|null
      */
-    public function getConfiguration(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration
+    public function getConfiguration(): ?RedisDatabaseConfiguration
     {
         return $this->configuration ?? null;
     }
@@ -99,10 +101,10 @@ class CreateRedisDatabaseRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration
+     * @param RedisDatabaseConfiguration $configuration
      * @return self
      */
-    public function withConfiguration(\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration): self
+    public function withConfiguration(RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
         $clone->configuration = $configuration;
@@ -127,7 +129,7 @@ class CreateRedisDatabaseRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -145,7 +147,7 @@ class CreateRedisDatabaseRequestBody
      */
     public function withVersion(string $version): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($version, static::$schema['properties']['version']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -167,14 +169,14 @@ class CreateRedisDatabaseRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CreateRedisDatabaseRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $configuration = null;
         if (isset($input->{'configuration'})) {
-            $configuration = \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration::buildFromInput($input->{'configuration'}, validate: $validate);
+            $configuration = RedisDatabaseConfiguration::buildFromInput($input->{'configuration'}, validate: $validate);
         }
         $description = $input->{'description'};
         $version = $input->{'version'};
@@ -211,8 +213,8 @@ class CreateRedisDatabaseRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustom;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset;
 
 class DnsRecordASetCustomRequest
 {
@@ -45,9 +48,9 @@ class DnsRecordASetCustomRequest
     private string $zoneId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom
+     * @var RecordUnset|CombinedACustom
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom $body;
+    private RecordUnset|CombinedACustom $body;
 
     private array $headers = [
 
@@ -55,9 +58,9 @@ class DnsRecordASetCustomRequest
 
     /**
      * @param string $zoneId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom $body
+     * @param RecordUnset|CombinedACustom $body
      */
-    public function __construct(string $zoneId, \Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset $body)
+    public function __construct(string $zoneId, CombinedACustom|RecordUnset $body)
     {
         $this->zoneId = $zoneId;
         $this->body = $body;
@@ -75,7 +78,7 @@ class DnsRecordASetCustomRequest
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset
+    public function getBody(): CombinedACustom|RecordUnset
     {
         return $this->body;
     }
@@ -86,7 +89,7 @@ class DnsRecordASetCustomRequest
      */
     public function withZoneId(string $zoneId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($zoneId, static::$schema['properties']['zoneId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -99,10 +102,10 @@ class DnsRecordASetCustomRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom $body
+     * @param RecordUnset|CombinedACustom $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset $body): self
+    public function withBody(CombinedACustom|RecordUnset $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -120,15 +123,15 @@ class DnsRecordASetCustomRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DnsRecordASetCustomRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $zoneId = $input->{'zoneId'};
         $body = match (true) {
-            \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset::buildFromInput($input->{'body'}, validate: $validate),
-            \Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom::buildFromInput($input->{'body'}, validate: $validate),
+            RecordUnset::validateInput($input->{'body'}, true) => RecordUnset::buildFromInput($input->{'body'}, validate: $validate),
+            CombinedACustom::validateInput($input->{'body'}, true) => CombinedACustom::buildFromInput($input->{'body'}, validate: $validate),
         };
 
         $obj = new self($zoneId, $body);
@@ -146,7 +149,7 @@ class DnsRecordASetCustomRequest
         $output = [];
         $output['zoneId'] = $this->zoneId;
         $output['body'] = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom => $this->body->toJson(),
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof CombinedACustom => $this->body->toJson(),
         };
 
         return $output;
@@ -162,8 +165,8 @@ class DnsRecordASetCustomRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -179,7 +182,7 @@ class DnsRecordASetCustomRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom => $this->body,
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof CombinedACustom => $this->body,
         };
     }
 

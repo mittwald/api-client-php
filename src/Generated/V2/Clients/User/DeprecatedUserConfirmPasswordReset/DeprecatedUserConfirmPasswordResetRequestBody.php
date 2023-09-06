@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class DeprecatedUserConfirmPasswordResetRequestBody
 {
@@ -108,7 +109,7 @@ class DeprecatedUserConfirmPasswordResetRequestBody
      */
     public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -126,7 +127,7 @@ class DeprecatedUserConfirmPasswordResetRequestBody
      */
     public function withToken(string $token): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($token, static::$schema['properties']['token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -144,7 +145,7 @@ class DeprecatedUserConfirmPasswordResetRequestBody
      */
     public function withUserId(string $userId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -166,7 +167,7 @@ class DeprecatedUserConfirmPasswordResetRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserConfirmPasswordResetRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -205,8 +206,8 @@ class DeprecatedUserConfirmPasswordResetRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

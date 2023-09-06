@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class RedisDatabaseConfiguration
 {
@@ -116,7 +117,7 @@ class RedisDatabaseConfiguration
      */
     public function withAdditionalFlags(array $additionalFlags): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($additionalFlags, static::$schema['properties']['additionalFlags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -145,7 +146,7 @@ class RedisDatabaseConfiguration
      */
     public function withMaxMemory(string $maxMemory): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($maxMemory, static::$schema['properties']['maxMemory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -174,7 +175,7 @@ class RedisDatabaseConfiguration
      */
     public function withMaxMemoryPolicy(string $maxMemoryPolicy): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($maxMemoryPolicy, static::$schema['properties']['maxMemoryPolicy']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -203,7 +204,7 @@ class RedisDatabaseConfiguration
      */
     public function withPersistent(bool $persistent): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($persistent, static::$schema['properties']['persistent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -236,7 +237,7 @@ class RedisDatabaseConfiguration
      */
     public static function buildFromInput(array|object $input, bool $validate = true): RedisDatabaseConfiguration
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -300,8 +301,8 @@ class RedisDatabaseConfiguration
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

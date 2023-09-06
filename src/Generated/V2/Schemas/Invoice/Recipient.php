@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation;
 
 class Recipient
 {
@@ -60,9 +63,9 @@ class Recipient
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address
+     * @var Address
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address;
+    private Address $address;
 
     /**
      * @var string|null
@@ -90,9 +93,9 @@ class Recipient
     private ?array $phoneNumbers = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation
+     * @var Salutation
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation;
+    private Salutation $salutation;
 
     /**
      * @var string|null
@@ -105,19 +108,19 @@ class Recipient
     private ?bool $useFormalTerm = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation
+     * @param Address $address
+     * @param Salutation $salutation
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address, \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation)
+    public function __construct(Address $address, Salutation $salutation)
     {
         $this->address = $address;
         $this->salutation = $salutation;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address
+     * @return Address
      */
-    public function getAddress(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address
+    public function getAddress(): Address
     {
         return $this->address;
     }
@@ -163,9 +166,9 @@ class Recipient
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation
+     * @return Salutation
      */
-    public function getSalutation(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation
+    public function getSalutation(): Salutation
     {
         return $this->salutation;
     }
@@ -187,10 +190,10 @@ class Recipient
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address
+     * @param Address $address
      * @return self
      */
-    public function withAddress(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address): self
+    public function withAddress(Address $address): self
     {
         $clone = clone $this;
         $clone->address = $address;
@@ -204,7 +207,7 @@ class Recipient
      */
     public function withCompany(string $company): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($company, static::$schema['properties']['company']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -233,7 +236,7 @@ class Recipient
      */
     public function withEmailAddress(string $emailAddress): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($emailAddress, static::$schema['properties']['emailAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -262,7 +265,7 @@ class Recipient
      */
     public function withFirstName(string $firstName): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($firstName, static::$schema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -291,7 +294,7 @@ class Recipient
      */
     public function withLastName(string $lastName): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($lastName, static::$schema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -320,7 +323,7 @@ class Recipient
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($phoneNumbers, static::$schema['properties']['phoneNumbers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -344,10 +347,10 @@ class Recipient
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation
+     * @param Salutation $salutation
      * @return self
      */
-    public function withSalutation(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation): self
+    public function withSalutation(Salutation $salutation): self
     {
         $clone = clone $this;
         $clone->salutation = $salutation;
@@ -361,7 +364,7 @@ class Recipient
      */
     public function withTitle(string $title): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($title, static::$schema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -390,7 +393,7 @@ class Recipient
      */
     public function withUseFormalTerm(bool $useFormalTerm): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($useFormalTerm, static::$schema['properties']['useFormalTerm']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -423,12 +426,12 @@ class Recipient
      */
     public static function buildFromInput(array|object $input, bool $validate = true): Recipient
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $address = \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address::buildFromInput($input->{'address'}, validate: $validate);
+        $address = Address::buildFromInput($input->{'address'}, validate: $validate);
         $company = null;
         if (isset($input->{'company'})) {
             $company = $input->{'company'};
@@ -449,7 +452,7 @@ class Recipient
         if (isset($input->{'phoneNumbers'})) {
             $phoneNumbers = $input->{'phoneNumbers'};
         }
-        $salutation = \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation::from($input->{'salutation'});
+        $salutation = Salutation::from($input->{'salutation'});
         $title = null;
         if (isset($input->{'title'})) {
             $title = $input->{'title'};
@@ -515,8 +518,8 @@ class Recipient
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency;
+use Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput;
+use Psr\Http\Message\ResponseInterface;
 
 class GetMissingDependenciesForAppinstallation200ResponseBody
 {
@@ -32,16 +36,16 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency[]|null
+     * @var SystemSoftwareDependency[]|null
      */
     private ?array $missingSystemSoftwareDependencies = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput[]|null
+     * @var UserInput[]|null
      */
     private ?array $missingUserInputs = null;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -60,7 +64,7 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput[]|null
+     * @return UserInput[]|null
      */
     public function getMissingUserInputs(): ?array
     {
@@ -68,7 +72,7 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency[] $missingSystemSoftwareDependencies
+     * @param SystemSoftwareDependency[] $missingSystemSoftwareDependencies
      * @return self
      */
     public function withMissingSystemSoftwareDependencies(array $missingSystemSoftwareDependencies): self
@@ -91,7 +95,7 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput[] $missingUserInputs
+     * @param UserInput[] $missingUserInputs
      * @return self
      */
     public function withMissingUserInputs(array $missingUserInputs): self
@@ -123,18 +127,18 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): GetMissingDependenciesForAppinstallation200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $missingSystemSoftwareDependencies = null;
         if (isset($input->{'missingSystemSoftwareDependencies'})) {
-            $missingSystemSoftwareDependencies = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency => \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'missingSystemSoftwareDependencies'});
+            $missingSystemSoftwareDependencies = array_map(fn (array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'missingSystemSoftwareDependencies'});
         }
         $missingUserInputs = null;
         if (isset($input->{'missingUserInputs'})) {
-            $missingUserInputs = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput => \Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput::buildFromInput($i, validate: $validate), $input->{'missingUserInputs'});
+            $missingUserInputs = array_map(fn (array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'missingUserInputs'});
         }
 
         $obj = new self();
@@ -152,10 +156,10 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
     {
         $output = [];
         if (isset($this->missingSystemSoftwareDependencies)) {
-            $output['missingSystemSoftwareDependencies'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency $i): array => $i->toJson(), $this->missingSystemSoftwareDependencies);
+            $output['missingSystemSoftwareDependencies'] = array_map(fn (SystemSoftwareDependency $i): array => $i->toJson(), $this->missingSystemSoftwareDependencies);
         }
         if (isset($this->missingUserInputs)) {
-            $output['missingUserInputs'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput $i): array => $i->toJson(), $this->missingUserInputs);
+            $output['missingUserInputs'] = array_map(fn (UserInput $i): array => $i->toJson(), $this->missingUserInputs);
         }
 
         return $output;
@@ -171,8 +175,8 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -189,7 +193,7 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

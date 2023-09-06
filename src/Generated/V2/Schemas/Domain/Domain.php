@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class Domain
 {
@@ -337,7 +338,7 @@ class Domain
      */
     public function withConnected(bool $connected): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($connected, static::$schema['properties']['connected']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -355,7 +356,7 @@ class Domain
      */
     public function withDeleted(bool $deleted): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($deleted, static::$schema['properties']['deleted']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -373,7 +374,7 @@ class Domain
      */
     public function withDomain(string $domain): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($domain, static::$schema['properties']['domain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -391,7 +392,7 @@ class Domain
      */
     public function withDomainId(string $domainId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($domainId, static::$schema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -421,7 +422,7 @@ class Domain
      */
     public function withHasAuthCode(bool $hasAuthCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($hasAuthCode, static::$schema['properties']['hasAuthCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -439,7 +440,7 @@ class Domain
      */
     public function withNameservers(array $nameservers): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($nameservers, static::$schema['properties']['nameservers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -480,7 +481,7 @@ class Domain
      */
     public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -498,7 +499,7 @@ class Domain
      */
     public function withTransferInAuthCode(string $transferInAuthCode): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($transferInAuthCode, static::$schema['properties']['transferInAuthCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -527,7 +528,7 @@ class Domain
      */
     public function withUsesDefaultNameserver(bool $usesDefaultNameserver): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($usesDefaultNameserver, static::$schema['properties']['usesDefaultNameserver']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -549,7 +550,7 @@ class Domain
      */
     public static function buildFromInput(array|object $input, bool $validate = true): Domain
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -631,8 +632,8 @@ class Domain
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

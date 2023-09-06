@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category;
 
 class CreateCategoryRequest
 {
@@ -28,35 +30,35 @@ class CreateCategoryRequest
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+     * @var Category
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body;
+    private Category $body;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
+     * @param Category $body
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body)
+    public function __construct(Category $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+     * @return Category
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+    public function getBody(): Category
     {
         return $this->body;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
+     * @param Category $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body): self
+    public function withBody(Category $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -74,12 +76,12 @@ class CreateCategoryRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): CreateCategoryRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Category::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -109,8 +111,8 @@ class CreateCategoryRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

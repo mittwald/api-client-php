@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAutoresponder;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class MailaddressUpdateAutoresponderRequestBodyAutoResponder
 {
@@ -113,7 +114,7 @@ class MailaddressUpdateAutoresponderRequestBodyAutoResponder
      */
     public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -154,7 +155,7 @@ class MailaddressUpdateAutoresponderRequestBodyAutoResponder
      */
     public function withMessage(string $message): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -199,7 +200,7 @@ class MailaddressUpdateAutoresponderRequestBodyAutoResponder
      */
     public static function buildFromInput(array|object $input, bool $validate = true): MailaddressUpdateAutoresponderRequestBodyAutoResponder
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -251,8 +252,8 @@ class MailaddressUpdateAutoresponderRequestBodyAutoResponder
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

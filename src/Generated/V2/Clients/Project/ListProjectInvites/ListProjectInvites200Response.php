@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite;
+use Psr\Http\Message\ResponseInterface;
 
 class ListProjectInvites200Response
 {
@@ -29,14 +32,14 @@ class ListProjectInvites200Response
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite[]
+     * @var ProjectInvite[]
      */
     private array $body;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite[] $body
+     * @param ProjectInvite[] $body
      */
     public function __construct(array $body)
     {
@@ -44,7 +47,7 @@ class ListProjectInvites200Response
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite[]
+     * @return ProjectInvite[]
      */
     public function getBody(): array
     {
@@ -52,7 +55,7 @@ class ListProjectInvites200Response
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite[] $body
+     * @param ProjectInvite[] $body
      * @return self
      */
     public function withBody(array $body): self
@@ -73,12 +76,12 @@ class ListProjectInvites200Response
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ListProjectInvites200Response
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite => \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): ProjectInvite => ProjectInvite::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -93,7 +96,7 @@ class ListProjectInvites200Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectInvite $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (ProjectInvite $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -108,8 +111,8 @@ class ListProjectInvites200Response
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -126,7 +129,7 @@ class ListProjectInvites200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

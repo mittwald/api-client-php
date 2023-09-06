@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Commons;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ValidationErrorSchemaContext
 {
@@ -43,7 +44,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ValidationErrorSchemaContext
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -78,8 +79,8 @@ type that failed validation (e.g. "missingProperty" for type "required")
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

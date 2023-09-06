@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterSubscribeUser;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class DeprecatedNewsletterSubscribeUserRequestBody
 {
@@ -59,7 +60,7 @@ class DeprecatedNewsletterSubscribeUserRequestBody
      */
     public function withEmail(string $email): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -81,7 +82,7 @@ class DeprecatedNewsletterSubscribeUserRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedNewsletterSubscribeUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -116,8 +117,8 @@ class DeprecatedNewsletterSubscribeUserRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

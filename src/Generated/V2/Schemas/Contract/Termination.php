@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class Termination
 {
@@ -107,7 +108,7 @@ class Termination
      */
     public function withReason(string $reason): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($reason, static::$schema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -136,7 +137,7 @@ class Termination
      */
     public function withScheduledAtDate(string $scheduledAtDate): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($scheduledAtDate, static::$schema['properties']['scheduledAtDate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -154,7 +155,7 @@ class Termination
      */
     public function withScheduledByUserId(string $scheduledByUserId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($scheduledByUserId, static::$schema['properties']['scheduledByUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -183,7 +184,7 @@ class Termination
      */
     public function withTargetDate(string $targetDate): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($targetDate, static::$schema['properties']['targetDate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -205,7 +206,7 @@ class Termination
      */
     public static function buildFromInput(array|object $input, bool $validate = true): Termination
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -257,8 +258,8 @@ class Termination
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

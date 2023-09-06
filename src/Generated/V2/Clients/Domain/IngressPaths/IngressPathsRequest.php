@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPaths;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path;
 
 class IngressPathsRequest
 {
@@ -41,7 +43,7 @@ class IngressPathsRequest
     private string $ingressId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[]
+     * @var Path[]
      */
     private array $body;
 
@@ -51,7 +53,7 @@ class IngressPathsRequest
 
     /**
      * @param string $ingressId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[] $body
+     * @param Path[] $body
      */
     public function __construct(string $ingressId, array $body)
     {
@@ -68,7 +70,7 @@ class IngressPathsRequest
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[]
+     * @return Path[]
      */
     public function getBody(): array
     {
@@ -81,7 +83,7 @@ class IngressPathsRequest
      */
     public function withIngressId(string $ingressId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($ingressId, static::$schema['properties']['ingressId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -94,7 +96,7 @@ class IngressPathsRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path[] $body
+     * @param Path[] $body
      * @return self
      */
     public function withBody(array $body): self
@@ -115,13 +117,13 @@ class IngressPathsRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): IngressPathsRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $ingressId = $input->{'ingressId'};
-        $body = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path => \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($ingressId, $body);
 
@@ -137,7 +139,7 @@ class IngressPathsRequest
     {
         $output = [];
         $output['ingressId'] = $this->ingressId;
-        $output['body'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Path $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (Path $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -152,8 +154,8 @@ class IngressPathsRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus;
+use Psr\Http\Message\ResponseInterface;
 
 class NotificationsReadAllNotifications200ResponseBody
 {
@@ -26,33 +29,33 @@ class NotificationsReadAllNotifications200ResponseBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus
+     * @var NotificationStatus
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus $status;
+    private NotificationStatus $status;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus $status
+     * @param NotificationStatus $status
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus $status)
+    public function __construct(NotificationStatus $status)
     {
         $this->status = $status;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus
+     * @return NotificationStatus
      */
-    public function getStatus(): \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus
+    public function getStatus(): NotificationStatus
     {
         return $this->status;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus $status
+     * @param NotificationStatus $status
      * @return self
      */
-    public function withStatus(\Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus $status): self
+    public function withStatus(NotificationStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -70,12 +73,12 @@ class NotificationsReadAllNotifications200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotifications200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $status = \Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus::from($input->{'status'});
+        $status = NotificationStatus::from($input->{'status'});
 
         $obj = new self($status);
 
@@ -105,8 +108,8 @@ class NotificationsReadAllNotifications200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -123,7 +126,7 @@ class NotificationsReadAllNotifications200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

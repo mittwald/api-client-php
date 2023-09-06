@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressCreate;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress;
+use Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress;
 
 class MailaddressCreateRequest
 {
@@ -44,9 +47,9 @@ class MailaddressCreateRequest
     private string $projectId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress
+     * @var CreateForwardAddress|CreateMailAddress
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress $body;
+    private CreateForwardAddress|CreateMailAddress $body;
 
     private array $headers = [
 
@@ -54,9 +57,9 @@ class MailaddressCreateRequest
 
     /**
      * @param string $projectId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress $body
+     * @param CreateForwardAddress|CreateMailAddress $body
      */
-    public function __construct(string $projectId, \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress $body)
+    public function __construct(string $projectId, CreateForwardAddress|CreateMailAddress $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
@@ -74,7 +77,7 @@ class MailaddressCreateRequest
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress
+    public function getBody(): CreateForwardAddress|CreateMailAddress
     {
         return $this->body;
     }
@@ -85,7 +88,7 @@ class MailaddressCreateRequest
      */
     public function withProjectId(string $projectId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -98,10 +101,10 @@ class MailaddressCreateRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress $body
+     * @param CreateForwardAddress|CreateMailAddress $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress $body): self
+    public function withBody(CreateForwardAddress|CreateMailAddress $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -119,15 +122,15 @@ class MailaddressCreateRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): MailaddressCreateRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $projectId = $input->{'projectId'};
         $body = match (true) {
-            \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress::buildFromInput($input->{'body'}, validate: $validate),
-            \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress::buildFromInput($input->{'body'}, validate: $validate),
+            CreateForwardAddress::validateInput($input->{'body'}, true) => CreateForwardAddress::buildFromInput($input->{'body'}, validate: $validate),
+            CreateMailAddress::validateInput($input->{'body'}, true) => CreateMailAddress::buildFromInput($input->{'body'}, validate: $validate),
         };
 
         $obj = new self($projectId, $body);
@@ -145,7 +148,7 @@ class MailaddressCreateRequest
         $output = [];
         $output['projectId'] = $this->projectId;
         $output['body'] = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress => $this->body->toJson(),
+            ($this->body) instanceof CreateForwardAddress, ($this->body) instanceof CreateMailAddress => $this->body->toJson(),
         };
 
         return $output;
@@ -161,8 +164,8 @@ class MailaddressCreateRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -178,7 +181,7 @@ class MailaddressCreateRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress => $this->body,
+            ($this->body) instanceof CreateForwardAddress, ($this->body) instanceof CreateMailAddress => $this->body,
         };
     }
 

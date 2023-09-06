@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 
 class UpdateSftpUserRequestBody
 {
@@ -86,7 +88,7 @@ class UpdateSftpUserRequestBody
     private ?string $password = null;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
+     * @var PublicKey[]|null
      */
     private ?array $publicKeys = null;
 
@@ -150,7 +152,7 @@ class UpdateSftpUserRequestBody
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
+     * @return PublicKey[]|null
      */
     public function getPublicKeys(): ?array
     {
@@ -186,7 +188,7 @@ class UpdateSftpUserRequestBody
      */
     public function withActive(bool $active): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -215,7 +217,7 @@ class UpdateSftpUserRequestBody
      */
     public function withDescription(string $description): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -244,7 +246,7 @@ class UpdateSftpUserRequestBody
      */
     public function withDirectories(array $directories): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($directories, static::$schema['properties']['directories']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -296,7 +298,7 @@ class UpdateSftpUserRequestBody
      */
     public function withPassword(string $password): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -320,7 +322,7 @@ class UpdateSftpUserRequestBody
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[] $publicKeys
+     * @param PublicKey[] $publicKeys
      * @return self
      */
     public function withPublicKeys(array $publicKeys): self
@@ -352,7 +354,7 @@ class UpdateSftpUserRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateSftpUserRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -383,7 +385,7 @@ class UpdateSftpUserRequestBody
         }
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
 
         $obj = new self();
@@ -424,7 +426,7 @@ class UpdateSftpUserRequestBody
             $output['password'] = $this->password;
         }
         if (isset($this->publicKeys)) {
-            $output['publicKeys'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey $i): array => $i->toJson(), $this->publicKeys);
+            $output['publicKeys'] = array_map(fn (PublicKey $i): array => $i->toJson(), $this->publicKeys);
         }
 
         return $output;
@@ -440,8 +442,8 @@ class UpdateSftpUserRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

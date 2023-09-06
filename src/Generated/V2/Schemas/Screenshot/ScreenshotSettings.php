@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Screenshot;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
 
 class ScreenshotSettings
 {
@@ -145,7 +146,7 @@ class ScreenshotSettings
      */
     public function withDelay(int|float $delay): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($delay, static::$schema['properties']['delay']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -163,7 +164,7 @@ class ScreenshotSettings
      */
     public function withHeight(int|float $height): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($height, static::$schema['properties']['height']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -181,7 +182,7 @@ class ScreenshotSettings
      */
     public function withQuality(int|float $quality): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($quality, static::$schema['properties']['quality']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -199,7 +200,7 @@ class ScreenshotSettings
      */
     public function withWidth(int|float $width): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($width, static::$schema['properties']['width']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -221,7 +222,7 @@ class ScreenshotSettings
      */
     public static function buildFromInput(array|object $input, bool $validate = true): ScreenshotSettings
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -264,8 +265,8 @@ class ScreenshotSettings
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

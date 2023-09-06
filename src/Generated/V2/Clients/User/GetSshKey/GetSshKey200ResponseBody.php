@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey;
+use Psr\Http\Message\ResponseInterface;
 
 class GetSshKey200ResponseBody
 {
@@ -26,33 +29,33 @@ class GetSshKey200ResponseBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey
+     * @var SshKey
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey;
+    private SshKey $sshKey;
 
-    public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey
+     * @param SshKey $sshKey
      */
-    public function __construct(\Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey)
+    public function __construct(SshKey $sshKey)
     {
         $this->sshKey = $sshKey;
     }
 
     /**
-     * @return \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey
+     * @return SshKey
      */
-    public function getSshKey(): \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey
+    public function getSshKey(): SshKey
     {
         return $this->sshKey;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey
+     * @param SshKey $sshKey
      * @return self
      */
-    public function withSshKey(\Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey): self
+    public function withSshKey(SshKey $sshKey): self
     {
         $clone = clone $this;
         $clone->sshKey = $sshKey;
@@ -70,12 +73,12 @@ class GetSshKey200ResponseBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): GetSshKey200ResponseBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $sshKey = \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey::buildFromInput($input->{'sshKey'}, validate: $validate);
+        $sshKey = SshKey::buildFromInput($input->{'sshKey'}, validate: $validate);
 
         $obj = new self($sshKey);
 
@@ -105,8 +108,8 @@ class GetSshKey200ResponseBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -123,7 +126,7 @@ class GetSshKey200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);

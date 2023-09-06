@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Screenshot;
 
-use InvalidArgumentException;
 use DateTime;
+use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 
 class Task
 {
@@ -87,9 +89,9 @@ class Task
     private Target $target;
 
     /**
-     * @var string|\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error|null
+     * @var string|Error|null
      */
-    private string|\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error|null $taskState = null;
+    private string|Error|null $taskState = null;
 
     /**
      * @param string $id
@@ -154,9 +156,9 @@ class Task
     }
 
     /**
-     * @return string|\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error|null
+     * @return string|Error|null
      */
-    public function getTaskState(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error|string|null
+    public function getTaskState(): Error|string|null
     {
         return $this->taskState;
     }
@@ -190,7 +192,7 @@ class Task
      */
     public function withFileReference(string $fileReference): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($fileReference, static::$schema['properties']['fileReference']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -219,7 +221,7 @@ class Task
      */
     public function withId(string $id): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -237,7 +239,7 @@ class Task
      */
     public function withPriority(int|float $priority): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($priority, static::$schema['properties']['priority']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -274,10 +276,10 @@ class Task
     }
 
     /**
-     * @param string|\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error $taskState
+     * @param string|Error $taskState
      * @return self
      */
-    public function withTaskState(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error|string $taskState): self
+    public function withTaskState(Error|string $taskState): self
     {
         $clone = clone $this;
         $clone->taskState = $taskState;
@@ -306,7 +308,7 @@ class Task
      */
     public static function buildFromInput(array|object $input, bool $validate = true): Task
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
@@ -327,7 +329,7 @@ class Task
         if (isset($input->{'taskState'})) {
             $taskState = match (true) {
                 is_string($input->{'taskState'}) => $input->{'taskState'},
-                \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error::validateInput($input->{'taskState'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error::buildFromInput($input->{'taskState'}, validate: $validate),
+                Error::validateInput($input->{'taskState'}, true) => Error::buildFromInput($input->{'taskState'}, validate: $validate),
             };
         }
 
@@ -359,7 +361,7 @@ class Task
         if (isset($this->taskState)) {
             $output['taskState'] = match (true) {
                 is_string($this->taskState) => $this->taskState,
-                ($this->taskState) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error => $this->taskState->toJson(),
+                ($this->taskState) instanceof Error => $this->taskState->toJson(),
             };
         }
 
@@ -376,8 +378,8 @@ class Task
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -397,7 +399,7 @@ class Task
         }
         if (isset($this->taskState)) {
             $this->taskState = match (true) {
-                is_string($this->taskState), ($this->taskState) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error => $this->taskState,
+                is_string($this->taskState), ($this->taskState) instanceof Error => $this->taskState,
             };
         }
     }

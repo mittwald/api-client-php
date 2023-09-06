@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration;
 
 class UpdateRedisDatabaseConfigurationRequestBody
 {
@@ -24,9 +26,9 @@ class UpdateRedisDatabaseConfigurationRequestBody
     ];
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration|null
+     * @var RedisDatabaseConfiguration|null
      */
-    private ?\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration = null;
+    private ?RedisDatabaseConfiguration $configuration = null;
 
     private array $headers = [
 
@@ -43,16 +45,16 @@ class UpdateRedisDatabaseConfigurationRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration|null
      */
-    public function getConfiguration(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration
+    public function getConfiguration(): ?RedisDatabaseConfiguration
     {
         return $this->configuration ?? null;
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration
+     * @param RedisDatabaseConfiguration $configuration
      * @return self
      */
-    public function withConfiguration(\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration): self
+    public function withConfiguration(RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
         $clone->configuration = $configuration;
@@ -81,14 +83,14 @@ class UpdateRedisDatabaseConfigurationRequestBody
      */
     public static function buildFromInput(array|object $input, bool $validate = true): UpdateRedisDatabaseConfigurationRequestBody
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $configuration = null;
         if (isset($input->{'configuration'})) {
-            $configuration = \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration::buildFromInput($input->{'configuration'}, validate: $validate);
+            $configuration = RedisDatabaseConfiguration::buildFromInput($input->{'configuration'}, validate: $validate);
         }
 
         $obj = new self();
@@ -121,8 +123,8 @@ class UpdateRedisDatabaseConfigurationRequestBody
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {

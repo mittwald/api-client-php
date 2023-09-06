@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTls;
 
 use InvalidArgumentException;
+use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate;
 
 class IngressTlsRequest
 {
@@ -45,9 +48,9 @@ class IngressTlsRequest
     private string $ingressId;
 
     /**
-     * @var \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate
+     * @var TlsAcme|TlsCertificate
      */
-    private \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate $body;
+    private TlsAcme|TlsCertificate $body;
 
     private array $headers = [
 
@@ -55,9 +58,9 @@ class IngressTlsRequest
 
     /**
      * @param string $ingressId
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate $body
+     * @param TlsAcme|TlsCertificate $body
      */
-    public function __construct(string $ingressId, \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate $body)
+    public function __construct(string $ingressId, TlsAcme|TlsCertificate $body)
     {
         $this->ingressId = $ingressId;
         $this->body = $body;
@@ -75,7 +78,7 @@ class IngressTlsRequest
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate
      */
-    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate
+    public function getBody(): TlsAcme|TlsCertificate
     {
         return $this->body;
     }
@@ -86,7 +89,7 @@ class IngressTlsRequest
      */
     public function withIngressId(string $ingressId): self
     {
-        $validator = new \JsonSchema\Validator();
+        $validator = new Validator();
         $validator->validate($ingressId, static::$schema['properties']['ingressId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
@@ -99,10 +102,10 @@ class IngressTlsRequest
     }
 
     /**
-     * @param \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate $body
+     * @param TlsAcme|TlsCertificate $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate $body): self
+    public function withBody(TlsAcme|TlsCertificate $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -120,15 +123,15 @@ class IngressTlsRequest
      */
     public static function buildFromInput(array|object $input, bool $validate = true): IngressTlsRequest
     {
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
         $ingressId = $input->{'ingressId'};
         $body = match (true) {
-            \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme::buildFromInput($input->{'body'}, validate: $validate),
-            \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate::validateInput($input->{'body'}, true) => \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate::buildFromInput($input->{'body'}, validate: $validate),
+            TlsAcme::validateInput($input->{'body'}, true) => TlsAcme::buildFromInput($input->{'body'}, validate: $validate),
+            TlsCertificate::validateInput($input->{'body'}, true) => TlsCertificate::buildFromInput($input->{'body'}, validate: $validate),
         };
 
         $obj = new self($ingressId, $body);
@@ -146,7 +149,7 @@ class IngressTlsRequest
         $output = [];
         $output['ingressId'] = $this->ingressId;
         $output['body'] = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate => $this->body->toJson(),
+            ($this->body) instanceof TlsAcme, ($this->body) instanceof TlsCertificate => $this->body->toJson(),
         };
 
         return $output;
@@ -162,8 +165,8 @@ class IngressTlsRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new \JsonSchema\Validator();
-        $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
+        $validator = new Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
@@ -179,7 +182,7 @@ class IngressTlsRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme, ($this->body) instanceof \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate => $this->body,
+            ($this->body) instanceof TlsAcme, ($this->body) instanceof TlsCertificate => $this->body,
         };
     }
 
