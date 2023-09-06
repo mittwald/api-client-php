@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation;
 
+use InvalidArgumentException;
+
 class UpdatePersonalInformationRequest
 {
     public const method = 'put';
@@ -59,7 +61,7 @@ class UpdatePersonalInformationRequest
     private UpdatePersonalInformationRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -75,7 +77,7 @@ class UpdatePersonalInformationRequest
     /**
      * @return UpdatePersonalInformationRequestUserIdAlternative1|string
      */
-    public function getUserId() : UpdatePersonalInformationRequestUserIdAlternative1|string
+    public function getUserId(): UpdatePersonalInformationRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
@@ -83,7 +85,7 @@ class UpdatePersonalInformationRequest
     /**
      * @return UpdatePersonalInformationRequestBody
      */
-    public function getBody() : UpdatePersonalInformationRequestBody
+    public function getBody(): UpdatePersonalInformationRequestBody
     {
         return $this->body;
     }
@@ -92,7 +94,7 @@ class UpdatePersonalInformationRequest
      * @param UpdatePersonalInformationRequestUserIdAlternative1|string $userId
      * @return self
      */
-    public function withUserId(UpdatePersonalInformationRequestUserIdAlternative1|string $userId) : self
+    public function withUserId(UpdatePersonalInformationRequestUserIdAlternative1|string $userId): self
     {
         $clone = clone $this;
         $clone->userId = $userId;
@@ -104,7 +106,7 @@ class UpdatePersonalInformationRequest
      * @param UpdatePersonalInformationRequestBody $body
      * @return self
      */
-    public function withBody(UpdatePersonalInformationRequestBody $body) : self
+    public function withBody(UpdatePersonalInformationRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -118,9 +120,9 @@ class UpdatePersonalInformationRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdatePersonalInformationRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdatePersonalInformationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdatePersonalInformationRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -143,7 +145,7 @@ class UpdatePersonalInformationRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['userId'] = match (true) {
@@ -161,19 +163,19 @@ class UpdatePersonalInformationRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -187,30 +189,29 @@ class UpdatePersonalInformationRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $userId = urlencode($mapped['userId']);
         return '/v2/users/' . $userId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

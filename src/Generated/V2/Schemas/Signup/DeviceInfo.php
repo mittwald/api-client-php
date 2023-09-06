@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use InvalidArgumentException;
+
 class DeviceInfo
 {
     /**
@@ -63,7 +65,7 @@ class DeviceInfo
     /**
      * @return string|null
      */
-    public function getBrowser() : ?string
+    public function getBrowser(): ?string
     {
         return $this->browser ?? null;
     }
@@ -71,7 +73,7 @@ class DeviceInfo
     /**
      * @return string|null
      */
-    public function getModel() : ?string
+    public function getModel(): ?string
     {
         return $this->model ?? null;
     }
@@ -79,7 +81,7 @@ class DeviceInfo
     /**
      * @return string|null
      */
-    public function getOs() : ?string
+    public function getOs(): ?string
     {
         return $this->os ?? null;
     }
@@ -87,7 +89,7 @@ class DeviceInfo
     /**
      * @return string|null
      */
-    public function getType() : ?string
+    public function getType(): ?string
     {
         return $this->type ?? null;
     }
@@ -96,12 +98,12 @@ class DeviceInfo
      * @param string $browser
      * @return self
      */
-    public function withBrowser(string $browser) : self
+    public function withBrowser(string $browser): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($browser, static::$schema['properties']['browser']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -113,7 +115,7 @@ class DeviceInfo
     /**
      * @return self
      */
-    public function withoutBrowser() : self
+    public function withoutBrowser(): self
     {
         $clone = clone $this;
         unset($clone->browser);
@@ -125,12 +127,12 @@ class DeviceInfo
      * @param string $model
      * @return self
      */
-    public function withModel(string $model) : self
+    public function withModel(string $model): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($model, static::$schema['properties']['model']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -142,7 +144,7 @@ class DeviceInfo
     /**
      * @return self
      */
-    public function withoutModel() : self
+    public function withoutModel(): self
     {
         $clone = clone $this;
         unset($clone->model);
@@ -154,12 +156,12 @@ class DeviceInfo
      * @param string $os
      * @return self
      */
-    public function withOs(string $os) : self
+    public function withOs(string $os): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($os, static::$schema['properties']['os']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -171,7 +173,7 @@ class DeviceInfo
     /**
      * @return self
      */
-    public function withoutOs() : self
+    public function withoutOs(): self
     {
         $clone = clone $this;
         unset($clone->os);
@@ -183,12 +185,12 @@ class DeviceInfo
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -200,7 +202,7 @@ class DeviceInfo
     /**
      * @return self
      */
-    public function withoutType() : self
+    public function withoutType(): self
     {
         $clone = clone $this;
         unset($clone->type);
@@ -214,9 +216,9 @@ class DeviceInfo
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeviceInfo Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeviceInfo
+    public static function buildFromInput(array|object $input, bool $validate = true): DeviceInfo
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -253,7 +255,7 @@ class DeviceInfo
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->browser)) {
@@ -278,19 +280,19 @@ class DeviceInfo
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -300,4 +302,3 @@ class DeviceInfo
     {
     }
 }
-

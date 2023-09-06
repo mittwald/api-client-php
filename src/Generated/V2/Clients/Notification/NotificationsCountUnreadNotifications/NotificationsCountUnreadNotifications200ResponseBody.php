@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications;
 
+use InvalidArgumentException;
+
 class NotificationsCountUnreadNotifications200ResponseBody
 {
     /**
@@ -90,7 +92,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     /**
      * @return int
      */
-    public function getError() : int
+    public function getError(): int
     {
         return $this->error;
     }
@@ -98,7 +100,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     /**
      * @return int
      */
-    public function getInfo() : int
+    public function getInfo(): int
     {
         return $this->info;
     }
@@ -106,7 +108,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     /**
      * @return int
      */
-    public function getSuccess() : int
+    public function getSuccess(): int
     {
         return $this->success;
     }
@@ -114,7 +116,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     /**
      * @return int
      */
-    public function getTotal() : int
+    public function getTotal(): int
     {
         return $this->total;
     }
@@ -122,7 +124,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     /**
      * @return int
      */
-    public function getWarning() : int
+    public function getWarning(): int
     {
         return $this->warning;
     }
@@ -131,12 +133,12 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param int $error
      * @return self
      */
-    public function withError(int $error) : self
+    public function withError(int $error): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($error, static::$schema['properties']['error']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -149,12 +151,12 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param int $info
      * @return self
      */
-    public function withInfo(int $info) : self
+    public function withInfo(int $info): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($info, static::$schema['properties']['info']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -167,12 +169,12 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param int $success
      * @return self
      */
-    public function withSuccess(int $success) : self
+    public function withSuccess(int $success): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($success, static::$schema['properties']['success']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -185,12 +187,12 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param int $total
      * @return self
      */
-    public function withTotal(int $total) : self
+    public function withTotal(int $total): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($total, static::$schema['properties']['total']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -203,12 +205,12 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param int $warning
      * @return self
      */
-    public function withWarning(int $warning) : self
+    public function withWarning(int $warning): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($warning, static::$schema['properties']['warning']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -223,9 +225,9 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return NotificationsCountUnreadNotifications200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : NotificationsCountUnreadNotifications200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsCountUnreadNotifications200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -248,7 +250,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['error'] = $this->error;
@@ -266,19 +268,19 @@ class NotificationsCountUnreadNotifications200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -288,7 +290,7 @@ class NotificationsCountUnreadNotifications200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -296,4 +298,3 @@ class NotificationsCountUnreadNotifications200ResponseBody
         return $response;
     }
 }
-

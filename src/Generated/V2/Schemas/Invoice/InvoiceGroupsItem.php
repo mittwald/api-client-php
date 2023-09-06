@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+
 class InvoiceGroupsItem
 {
     /**
@@ -63,7 +65,7 @@ class InvoiceGroupsItem
     /**
      * @return string|null
      */
-    public function getContractId() : ?string
+    public function getContractId(): ?string
     {
         return $this->contractId ?? null;
     }
@@ -71,7 +73,7 @@ class InvoiceGroupsItem
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -79,7 +81,7 @@ class InvoiceGroupsItem
     /**
      * @return InvoiceItem[]
      */
-    public function getItems() : array
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -88,12 +90,12 @@ class InvoiceGroupsItem
      * @param string $contractId
      * @return self
      */
-    public function withContractId(string $contractId) : self
+    public function withContractId(string $contractId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractId, static::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -105,7 +107,7 @@ class InvoiceGroupsItem
     /**
      * @return self
      */
-    public function withoutContractId() : self
+    public function withoutContractId(): self
     {
         $clone = clone $this;
         unset($clone->contractId);
@@ -117,12 +119,12 @@ class InvoiceGroupsItem
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -135,7 +137,7 @@ class InvoiceGroupsItem
      * @param InvoiceItem[] $items
      * @return self
      */
-    public function withItems(array $items) : self
+    public function withItems(array $items): self
     {
         $clone = clone $this;
         $clone->items = $items;
@@ -149,9 +151,9 @@ class InvoiceGroupsItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InvoiceGroupsItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InvoiceGroupsItem
+    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceGroupsItem
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -163,7 +165,7 @@ class InvoiceGroupsItem
             $contractId = $input->{'contractId'};
         }
         $description = $input->{'description'};
-        $items = array_map(fn(array $i): InvoiceItem => InvoiceItem::buildFromInput($i, validate: $validate), $input->{'items'});
+        $items = array_map(fn (array $i): InvoiceItem => InvoiceItem::buildFromInput($i, validate: $validate), $input->{'items'});
 
         $obj = new self($description, $items);
         $obj->contractId = $contractId;
@@ -175,14 +177,14 @@ class InvoiceGroupsItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->contractId)) {
             $output['contractId'] = $this->contractId;
         }
         $output['description'] = $this->description;
-        $output['items'] = array_map(fn(InvoiceItem $i): array => $i->toJson(), $this->items);
+        $output['items'] = array_map(fn (InvoiceItem $i): array => $i->toJson(), $this->items);
 
         return $output;
     }
@@ -193,19 +195,19 @@ class InvoiceGroupsItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -215,4 +217,3 @@ class InvoiceGroupsItem
     {
     }
 }
-

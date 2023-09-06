@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
+use InvalidArgumentException;
+use DateTime;
+
 class TariffChange
 {
     /**
@@ -48,9 +51,9 @@ class TariffChange
     /**
      * This is only set if the tariff change has already been carried out.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $executedAtDate = null;
+    private ?DateTime $executedAtDate = null;
 
     /**
      * @var Article[]
@@ -58,9 +61,9 @@ class TariffChange
     private array $newArticles;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $scheduledAtDate;
+    private DateTime $scheduledAtDate;
 
     /**
      * @var string|null
@@ -68,16 +71,16 @@ class TariffChange
     private ?string $scheduledByUserId = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $targetDate;
+    private DateTime $targetDate;
 
     /**
      * @param Article[] $newArticles
-     * @param \DateTime $scheduledAtDate
-     * @param \DateTime $targetDate
+     * @param DateTime $scheduledAtDate
+     * @param DateTime $targetDate
      */
-    public function __construct(array $newArticles, \DateTime $scheduledAtDate, \DateTime $targetDate)
+    public function __construct(array $newArticles, DateTime $scheduledAtDate, DateTime $targetDate)
     {
         $this->newArticles = $newArticles;
         $this->scheduledAtDate = $scheduledAtDate;
@@ -85,9 +88,9 @@ class TariffChange
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExecutedAtDate() : ?\DateTime
+    public function getExecutedAtDate(): ?DateTime
     {
         return $this->executedAtDate ?? null;
     }
@@ -95,15 +98,15 @@ class TariffChange
     /**
      * @return Article[]
      */
-    public function getNewArticles() : array
+    public function getNewArticles(): array
     {
         return $this->newArticles;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getScheduledAtDate() : \DateTime
+    public function getScheduledAtDate(): DateTime
     {
         return $this->scheduledAtDate;
     }
@@ -111,24 +114,24 @@ class TariffChange
     /**
      * @return string|null
      */
-    public function getScheduledByUserId() : ?string
+    public function getScheduledByUserId(): ?string
     {
         return $this->scheduledByUserId ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getTargetDate() : \DateTime
+    public function getTargetDate(): DateTime
     {
         return $this->targetDate;
     }
 
     /**
-     * @param \DateTime $executedAtDate
+     * @param DateTime $executedAtDate
      * @return self
      */
-    public function withExecutedAtDate(\DateTime $executedAtDate) : self
+    public function withExecutedAtDate(DateTime $executedAtDate): self
     {
         $clone = clone $this;
         $clone->executedAtDate = $executedAtDate;
@@ -139,7 +142,7 @@ class TariffChange
     /**
      * @return self
      */
-    public function withoutExecutedAtDate() : self
+    public function withoutExecutedAtDate(): self
     {
         $clone = clone $this;
         unset($clone->executedAtDate);
@@ -151,7 +154,7 @@ class TariffChange
      * @param Article[] $newArticles
      * @return self
      */
-    public function withNewArticles(array $newArticles) : self
+    public function withNewArticles(array $newArticles): self
     {
         $clone = clone $this;
         $clone->newArticles = $newArticles;
@@ -160,10 +163,10 @@ class TariffChange
     }
 
     /**
-     * @param \DateTime $scheduledAtDate
+     * @param DateTime $scheduledAtDate
      * @return self
      */
-    public function withScheduledAtDate(\DateTime $scheduledAtDate) : self
+    public function withScheduledAtDate(DateTime $scheduledAtDate): self
     {
         $clone = clone $this;
         $clone->scheduledAtDate = $scheduledAtDate;
@@ -175,12 +178,12 @@ class TariffChange
      * @param string $scheduledByUserId
      * @return self
      */
-    public function withScheduledByUserId(string $scheduledByUserId) : self
+    public function withScheduledByUserId(string $scheduledByUserId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($scheduledByUserId, static::$schema['properties']['scheduledByUserId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -192,7 +195,7 @@ class TariffChange
     /**
      * @return self
      */
-    public function withoutScheduledByUserId() : self
+    public function withoutScheduledByUserId(): self
     {
         $clone = clone $this;
         unset($clone->scheduledByUserId);
@@ -201,10 +204,10 @@ class TariffChange
     }
 
     /**
-     * @param \DateTime $targetDate
+     * @param DateTime $targetDate
      * @return self
      */
-    public function withTargetDate(\DateTime $targetDate) : self
+    public function withTargetDate(DateTime $targetDate): self
     {
         $clone = clone $this;
         $clone->targetDate = $targetDate;
@@ -218,9 +221,9 @@ class TariffChange
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return TariffChange Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : TariffChange
+    public static function buildFromInput(array|object $input, bool $validate = true): TariffChange
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -229,15 +232,15 @@ class TariffChange
 
         $executedAtDate = null;
         if (isset($input->{'executedAtDate'})) {
-            $executedAtDate = new \DateTime($input->{'executedAtDate'});
+            $executedAtDate = new DateTime($input->{'executedAtDate'});
         }
-        $newArticles = array_map(fn(array $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'newArticles'});
-        $scheduledAtDate = new \DateTime($input->{'scheduledAtDate'});
+        $newArticles = array_map(fn (array $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'newArticles'});
+        $scheduledAtDate = new DateTime($input->{'scheduledAtDate'});
         $scheduledByUserId = null;
         if (isset($input->{'scheduledByUserId'})) {
             $scheduledByUserId = $input->{'scheduledByUserId'};
         }
-        $targetDate = new \DateTime($input->{'targetDate'});
+        $targetDate = new DateTime($input->{'targetDate'});
 
         $obj = new self($newArticles, $scheduledAtDate, $targetDate);
         $obj->executedAtDate = $executedAtDate;
@@ -250,18 +253,18 @@ class TariffChange
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->executedAtDate)) {
-            $output['executedAtDate'] = ($this->executedAtDate)->format(\DateTime::ATOM);
+            $output['executedAtDate'] = ($this->executedAtDate)->format(DateTime::ATOM);
         }
-        $output['newArticles'] = array_map(fn(Article $i): array => $i->toJson(), $this->newArticles);
-        $output['scheduledAtDate'] = ($this->scheduledAtDate)->format(\DateTime::ATOM);
+        $output['newArticles'] = array_map(fn (Article $i): array => $i->toJson(), $this->newArticles);
+        $output['scheduledAtDate'] = ($this->scheduledAtDate)->format(DateTime::ATOM);
         if (isset($this->scheduledByUserId)) {
             $output['scheduledByUserId'] = $this->scheduledByUserId;
         }
-        $output['targetDate'] = ($this->targetDate)->format(\DateTime::ATOM);
+        $output['targetDate'] = ($this->targetDate)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -272,19 +275,19 @@ class TariffChange
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -299,4 +302,3 @@ class TariffChange
         $this->targetDate = clone $this->targetDate;
     }
 }
-

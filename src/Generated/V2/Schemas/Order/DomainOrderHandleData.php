@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+
 class DomainOrderHandleData
 {
     /**
@@ -54,7 +56,7 @@ class DomainOrderHandleData
     /**
      * @return DomainHandleField[]|null
      */
-    public function getAdminC() : ?array
+    public function getAdminC(): ?array
     {
         return $this->adminC ?? null;
     }
@@ -62,7 +64,7 @@ class DomainOrderHandleData
     /**
      * @return DomainHandleField[]
      */
-    public function getOwnerC() : array
+    public function getOwnerC(): array
     {
         return $this->ownerC;
     }
@@ -71,7 +73,7 @@ class DomainOrderHandleData
      * @param DomainHandleField[] $adminC
      * @return self
      */
-    public function withAdminC(array $adminC) : self
+    public function withAdminC(array $adminC): self
     {
         $clone = clone $this;
         $clone->adminC = $adminC;
@@ -82,7 +84,7 @@ class DomainOrderHandleData
     /**
      * @return self
      */
-    public function withoutAdminC() : self
+    public function withoutAdminC(): self
     {
         $clone = clone $this;
         unset($clone->adminC);
@@ -94,7 +96,7 @@ class DomainOrderHandleData
      * @param DomainHandleField[] $ownerC
      * @return self
      */
-    public function withOwnerC(array $ownerC) : self
+    public function withOwnerC(array $ownerC): self
     {
         $clone = clone $this;
         $clone->ownerC = $ownerC;
@@ -108,9 +110,9 @@ class DomainOrderHandleData
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DomainOrderHandleData Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DomainOrderHandleData
+    public static function buildFromInput(array|object $input, bool $validate = true): DomainOrderHandleData
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -119,9 +121,9 @@ class DomainOrderHandleData
 
         $adminC = null;
         if (isset($input->{'adminC'})) {
-            $adminC = array_map(fn(array $i): DomainHandleField => DomainHandleField::buildFromInput($i, validate: $validate), $input->{'adminC'});
+            $adminC = array_map(fn (array $i): DomainHandleField => DomainHandleField::buildFromInput($i, validate: $validate), $input->{'adminC'});
         }
-        $ownerC = array_map(fn(array $i): DomainHandleField => DomainHandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
+        $ownerC = array_map(fn (array $i): DomainHandleField => DomainHandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
 
         $obj = new self($ownerC);
         $obj->adminC = $adminC;
@@ -133,13 +135,13 @@ class DomainOrderHandleData
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->adminC)) {
-            $output['adminC'] = array_map(fn(DomainHandleField $i): array => $i->toJson(), $this->adminC);
+            $output['adminC'] = array_map(fn (DomainHandleField $i): array => $i->toJson(), $this->adminC);
         }
-        $output['ownerC'] = array_map(fn(DomainHandleField $i): array => $i->toJson(), $this->ownerC);
+        $output['ownerC'] = array_map(fn (DomainHandleField $i): array => $i->toJson(), $this->ownerC);
 
         return $output;
     }
@@ -150,19 +152,19 @@ class DomainOrderHandleData
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -172,4 +174,3 @@ class DomainOrderHandleData
     {
     }
 }
-

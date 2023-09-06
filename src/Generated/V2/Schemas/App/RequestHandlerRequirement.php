@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+
 class RequestHandlerRequirement
 {
     /**
@@ -72,7 +74,7 @@ class RequestHandlerRequirement
     /**
      * @return SavedUserInput[]|null
      */
-    public function getExampleValues() : ?array
+    public function getExampleValues(): ?array
     {
         return $this->exampleValues ?? null;
     }
@@ -80,7 +82,7 @@ class RequestHandlerRequirement
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -88,7 +90,7 @@ class RequestHandlerRequirement
     /**
      * @return string
      */
-    public function getNamespace() : string
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
@@ -96,7 +98,7 @@ class RequestHandlerRequirement
     /**
      * @return string
      */
-    public function getParametersTemplate() : string
+    public function getParametersTemplate(): string
     {
         return $this->parametersTemplate;
     }
@@ -105,7 +107,7 @@ class RequestHandlerRequirement
      * @param SavedUserInput[] $exampleValues
      * @return self
      */
-    public function withExampleValues(array $exampleValues) : self
+    public function withExampleValues(array $exampleValues): self
     {
         $clone = clone $this;
         $clone->exampleValues = $exampleValues;
@@ -116,7 +118,7 @@ class RequestHandlerRequirement
     /**
      * @return self
      */
-    public function withoutExampleValues() : self
+    public function withoutExampleValues(): self
     {
         $clone = clone $this;
         unset($clone->exampleValues);
@@ -128,12 +130,12 @@ class RequestHandlerRequirement
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -146,12 +148,12 @@ class RequestHandlerRequirement
      * @param string $namespace
      * @return self
      */
-    public function withNamespace(string $namespace) : self
+    public function withNamespace(string $namespace): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($namespace, static::$schema['properties']['namespace']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -164,12 +166,12 @@ class RequestHandlerRequirement
      * @param string $parametersTemplate
      * @return self
      */
-    public function withParametersTemplate(string $parametersTemplate) : self
+    public function withParametersTemplate(string $parametersTemplate): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($parametersTemplate, static::$schema['properties']['parametersTemplate']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -184,9 +186,9 @@ class RequestHandlerRequirement
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestHandlerRequirement Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestHandlerRequirement
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestHandlerRequirement
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -195,7 +197,7 @@ class RequestHandlerRequirement
 
         $exampleValues = null;
         if (isset($input->{'exampleValues'})) {
-            $exampleValues = array_map(fn(array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'exampleValues'});
+            $exampleValues = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'exampleValues'});
         }
         $name = $input->{'name'};
         $namespace = $input->{'namespace'};
@@ -211,11 +213,11 @@ class RequestHandlerRequirement
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->exampleValues)) {
-            $output['exampleValues'] = array_map(fn(SavedUserInput $i): array => $i->toJson(), $this->exampleValues);
+            $output['exampleValues'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->exampleValues);
         }
         $output['name'] = $this->name;
         $output['namespace'] = $this->namespace;
@@ -230,19 +232,19 @@ class RequestHandlerRequirement
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -252,4 +254,3 @@ class RequestHandlerRequirement
     {
     }
 }
-

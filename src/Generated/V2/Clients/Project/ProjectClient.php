@@ -13,7 +13,7 @@ class ProjectClient
         $this->client = $client;
     }
 
-    public function acceptProjectInvite(AcceptProjectInvite\AcceptProjectInviteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|AcceptProjectInvite\AcceptProjectInvite400Response|AcceptProjectInvite\AcceptProjectInvite403Response|AcceptProjectInvite\AcceptProjectInvite412Response|AcceptProjectInvite\AcceptProjectInviteDefaultResponse
+    public function acceptProjectInvite(AcceptProjectInvite\AcceptProjectInviteRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|AcceptProjectInvite\AcceptProjectInvite400Response|AcceptProjectInvite\AcceptProjectInvite403Response|AcceptProjectInvite\AcceptProjectInvite412Response|AcceptProjectInvite\AcceptProjectInviteDefaultResponse
     {
         $httpRequest = new Request(AcceptProjectInvite\AcceptProjectInviteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -30,7 +30,7 @@ class ProjectClient
         };
     }
 
-    public function createProjectInvite(CreateProjectInvite\CreateProjectInviteRequest $request) : CreateProjectInvite\CreateProjectInvite201Response|CreateProjectInvite\CreateProjectInvite400Response|CreateProjectInvite\CreateProjectInvite409Response|CreateProjectInvite\CreateProjectInviteDefaultResponse
+    public function createProjectInvite(CreateProjectInvite\CreateProjectInviteRequest $request): CreateProjectInvite\CreateProjectInvite201Response|CreateProjectInvite\CreateProjectInvite400Response|CreateProjectInvite\CreateProjectInvite409Response|CreateProjectInvite\CreateProjectInviteDefaultResponse
     {
         $httpRequest = new Request(CreateProjectInvite\CreateProjectInviteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -46,7 +46,7 @@ class ProjectClient
         };
     }
 
-    public function createProject(CreateProject\CreateProjectRequest $request) : CreateProject\CreateProject201Response|CreateProject\CreateProject400Response|CreateProject\CreateProject412Response|CreateProject\CreateProjectDefaultResponse
+    public function createProject(CreateProject\CreateProjectRequest $request): CreateProject\CreateProject201Response|CreateProject\CreateProject400Response|CreateProject\CreateProject412Response|CreateProject\CreateProjectDefaultResponse
     {
         $httpRequest = new Request(CreateProject\CreateProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -62,7 +62,7 @@ class ProjectClient
         };
     }
 
-    public function declineProjectInvite(DeclineProjectInvite\DeclineProjectInviteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeclineProjectInvite\DeclineProjectInviteDefaultResponse
+    public function declineProjectInvite(DeclineProjectInvite\DeclineProjectInviteRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeclineProjectInvite\DeclineProjectInviteDefaultResponse
     {
         $httpRequest = new Request(DeclineProjectInvite\DeclineProjectInviteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -76,7 +76,7 @@ class ProjectClient
         };
     }
 
-    public function deleteProjectAvatar(DeleteProjectAvatar\DeleteProjectAvatarRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteProjectAvatar\DeleteProjectAvatar400Response|DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse
+    public function deleteProjectAvatar(DeleteProjectAvatar\DeleteProjectAvatarRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteProjectAvatar\DeleteProjectAvatar400Response|DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse
     {
         $httpRequest = new Request(DeleteProjectAvatar\DeleteProjectAvatarRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -90,7 +90,7 @@ class ProjectClient
         };
     }
 
-    public function requestProjectAvatarUpload(RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest $request) : RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse
+    public function requestProjectAvatarUpload(RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse
     {
         $httpRequest = new Request(RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -104,7 +104,7 @@ class ProjectClient
         };
     }
 
-    public function deleteProjectInvite(DeleteProjectInvite\DeleteProjectInviteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteProjectInvite\DeleteProjectInviteDefaultResponse
+    public function deleteProjectInvite(DeleteProjectInvite\DeleteProjectInviteRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteProjectInvite\DeleteProjectInviteDefaultResponse
     {
         $httpRequest = new Request(DeleteProjectInvite\DeleteProjectInviteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -117,7 +117,7 @@ class ProjectClient
         };
     }
 
-    public function getProjectInvite(GetProjectInvite\GetProjectInviteRequest $request) : GetProjectInvite\GetProjectInvite200Response|GetProjectInvite\GetProjectInvite404Response|GetProjectInvite\GetProjectInviteDefaultResponse
+    public function getProjectInvite(GetProjectInvite\GetProjectInviteRequest $request): GetProjectInvite\GetProjectInvite200Response|GetProjectInvite\GetProjectInvite404Response|GetProjectInvite\GetProjectInviteDefaultResponse
     {
         $httpRequest = new Request(GetProjectInvite\GetProjectInviteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -131,7 +131,7 @@ class ProjectClient
         };
     }
 
-    public function deleteProjectMembership(DeleteProjectMembership\DeleteProjectMembershipRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteProjectMembership\DeleteProjectMembershipDefaultResponse
+    public function deleteProjectMembership(DeleteProjectMembership\DeleteProjectMembershipRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteProjectMembership\DeleteProjectMembershipDefaultResponse
     {
         $httpRequest = new Request(DeleteProjectMembership\DeleteProjectMembershipRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -144,7 +144,7 @@ class ProjectClient
         };
     }
 
-    public function getProjectMembership(GetProjectMembership\GetProjectMembershipRequest $request) : GetProjectMembership\GetProjectMembership200Response|GetProjectMembership\GetProjectMembership404Response|GetProjectMembership\GetProjectMembershipDefaultResponse
+    public function getProjectMembership(GetProjectMembership\GetProjectMembershipRequest $request): GetProjectMembership\GetProjectMembership200Response|GetProjectMembership\GetProjectMembership404Response|GetProjectMembership\GetProjectMembershipDefaultResponse
     {
         $httpRequest = new Request(GetProjectMembership\GetProjectMembershipRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -158,7 +158,7 @@ class ProjectClient
         };
     }
 
-    public function updateProjectMembership(UpdateProjectMembership\UpdateProjectMembershipRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateProjectMembership\UpdateProjectMembershipDefaultResponse
+    public function updateProjectMembership(UpdateProjectMembership\UpdateProjectMembershipRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateProjectMembership\UpdateProjectMembershipDefaultResponse
     {
         $httpRequest = new Request(UpdateProjectMembership\UpdateProjectMembershipRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -172,7 +172,7 @@ class ProjectClient
         };
     }
 
-    public function deleteProject(DeleteProject\DeleteProjectRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteProject\DeleteProject200Response|DeleteProject\DeleteProject400Response|DeleteProject\DeleteProject412Response|DeleteProject\DeleteProject500Response|DeleteProject\DeleteProjectDefaultResponse
+    public function deleteProject(DeleteProject\DeleteProjectRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteProject\DeleteProject200Response|DeleteProject\DeleteProject400Response|DeleteProject\DeleteProject412Response|DeleteProject\DeleteProject500Response|DeleteProject\DeleteProjectDefaultResponse
     {
         $httpRequest = new Request(DeleteProject\DeleteProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -189,7 +189,7 @@ class ProjectClient
         };
     }
 
-    public function deleteServerAvatar(DeleteServerAvatar\DeleteServerAvatarRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteServerAvatar\DeleteServerAvatar400Response|DeleteServerAvatar\DeleteServerAvatarDefaultResponse
+    public function deleteServerAvatar(DeleteServerAvatar\DeleteServerAvatarRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteServerAvatar\DeleteServerAvatar400Response|DeleteServerAvatar\DeleteServerAvatarDefaultResponse
     {
         $httpRequest = new Request(DeleteServerAvatar\DeleteServerAvatarRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -203,7 +203,7 @@ class ProjectClient
         };
     }
 
-    public function requestServerAvatarUpload(RequestServerAvatarUpload\RequestServerAvatarUploadRequest $request) : RequestServerAvatarUpload\RequestServerAvatarUpload200Response|RequestServerAvatarUpload\RequestServerAvatarUpload400Response|RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse
+    public function requestServerAvatarUpload(RequestServerAvatarUpload\RequestServerAvatarUploadRequest $request): RequestServerAvatarUpload\RequestServerAvatarUpload200Response|RequestServerAvatarUpload\RequestServerAvatarUpload400Response|RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse
     {
         $httpRequest = new Request(RequestServerAvatarUpload\RequestServerAvatarUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -217,7 +217,7 @@ class ProjectClient
         };
     }
 
-    public function getProjectTokenInvite(GetProjectTokenInvite\GetProjectTokenInviteRequest $request) : GetProjectTokenInvite\GetProjectTokenInvite200Response|GetProjectTokenInvite\GetProjectTokenInvite404Response|GetProjectTokenInvite\GetProjectTokenInviteDefaultResponse
+    public function getProjectTokenInvite(GetProjectTokenInvite\GetProjectTokenInviteRequest $request): GetProjectTokenInvite\GetProjectTokenInvite200Response|GetProjectTokenInvite\GetProjectTokenInvite404Response|GetProjectTokenInvite\GetProjectTokenInviteDefaultResponse
     {
         $httpRequest = new Request(GetProjectTokenInvite\GetProjectTokenInviteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -231,7 +231,7 @@ class ProjectClient
         };
     }
 
-    public function getProject(GetProject\GetProjectRequest $request) : GetProject\GetProject200Response|GetProject\GetProject404Response|GetProject\GetProjectDefaultResponse
+    public function getProject(GetProject\GetProjectRequest $request): GetProject\GetProject200Response|GetProject\GetProject404Response|GetProject\GetProjectDefaultResponse
     {
         $httpRequest = new Request(GetProject\GetProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -245,7 +245,7 @@ class ProjectClient
         };
     }
 
-    public function getSelfMembershipForProject(GetSelfMembershipForProject\GetSelfMembershipForProjectRequest $request) : GetSelfMembershipForProject\GetSelfMembershipForProject200Response|GetSelfMembershipForProject\GetSelfMembershipForProject404Response|GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse
+    public function getSelfMembershipForProject(GetSelfMembershipForProject\GetSelfMembershipForProjectRequest $request): GetSelfMembershipForProject\GetSelfMembershipForProject200Response|GetSelfMembershipForProject\GetSelfMembershipForProject404Response|GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse
     {
         $httpRequest = new Request(GetSelfMembershipForProject\GetSelfMembershipForProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -259,7 +259,7 @@ class ProjectClient
         };
     }
 
-    public function getServer(GetServer\GetServerRequest $request) : GetServer\GetServer200Response|GetServer\GetServer404Response|GetServer\GetServerDefaultResponse
+    public function getServer(GetServer\GetServerRequest $request): GetServer\GetServer200Response|GetServer\GetServer404Response|GetServer\GetServerDefaultResponse
     {
         $httpRequest = new Request(GetServer\GetServerRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -273,7 +273,7 @@ class ProjectClient
         };
     }
 
-    public function leaveProject(LeaveProject\LeaveProjectRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|LeaveProject\LeaveProjectDefaultResponse
+    public function leaveProject(LeaveProject\LeaveProjectRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|LeaveProject\LeaveProjectDefaultResponse
     {
         $httpRequest = new Request(LeaveProject\LeaveProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -287,7 +287,7 @@ class ProjectClient
         };
     }
 
-    public function listInvitesForProject(ListInvitesForProject\ListInvitesForProjectRequest $request) : ListInvitesForProject\ListInvitesForProject200Response|ListInvitesForProject\ListInvitesForProject404Response|ListInvitesForProject\ListInvitesForProjectDefaultResponse
+    public function listInvitesForProject(ListInvitesForProject\ListInvitesForProjectRequest $request): ListInvitesForProject\ListInvitesForProject200Response|ListInvitesForProject\ListInvitesForProject404Response|ListInvitesForProject\ListInvitesForProjectDefaultResponse
     {
         $httpRequest = new Request(ListInvitesForProject\ListInvitesForProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -301,7 +301,7 @@ class ProjectClient
         };
     }
 
-    public function listMembershipsForProject(ListMembershipsForProject\ListMembershipsForProjectRequest $request) : ListMembershipsForProject\ListMembershipsForProject200Response|ListMembershipsForProject\ListMembershipsForProject404Response|ListMembershipsForProject\ListMembershipsForProjectDefaultResponse
+    public function listMembershipsForProject(ListMembershipsForProject\ListMembershipsForProjectRequest $request): ListMembershipsForProject\ListMembershipsForProject200Response|ListMembershipsForProject\ListMembershipsForProject404Response|ListMembershipsForProject\ListMembershipsForProjectDefaultResponse
     {
         $httpRequest = new Request(ListMembershipsForProject\ListMembershipsForProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -315,7 +315,7 @@ class ProjectClient
         };
     }
 
-    public function listProjectInvites(ListProjectInvites\ListProjectInvitesRequest $request) : ListProjectInvites\ListProjectInvites200Response|ListProjectInvites\ListProjectInvites404Response|ListProjectInvites\ListProjectInvitesDefaultResponse
+    public function listProjectInvites(ListProjectInvites\ListProjectInvitesRequest $request): ListProjectInvites\ListProjectInvites200Response|ListProjectInvites\ListProjectInvites404Response|ListProjectInvites\ListProjectInvitesDefaultResponse
     {
         $httpRequest = new Request(ListProjectInvites\ListProjectInvitesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -329,7 +329,7 @@ class ProjectClient
         };
     }
 
-    public function listProjectMemberships(ListProjectMemberships\ListProjectMembershipsRequest $request) : ListProjectMemberships\ListProjectMemberships200Response|ListProjectMemberships\ListProjectMemberships404Response|ListProjectMemberships\ListProjectMembershipsDefaultResponse
+    public function listProjectMemberships(ListProjectMemberships\ListProjectMembershipsRequest $request): ListProjectMemberships\ListProjectMemberships200Response|ListProjectMemberships\ListProjectMemberships404Response|ListProjectMemberships\ListProjectMembershipsDefaultResponse
     {
         $httpRequest = new Request(ListProjectMemberships\ListProjectMembershipsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -343,7 +343,7 @@ class ProjectClient
         };
     }
 
-    public function listProjects(ListProjects\ListProjectsRequest $request) : ListProjects\ListProjects200Response|ListProjects\ListProjects400Response|ListProjects\ListProjectsDefaultResponse
+    public function listProjects(ListProjects\ListProjectsRequest $request): ListProjects\ListProjects200Response|ListProjects\ListProjects400Response|ListProjects\ListProjectsDefaultResponse
     {
         $httpRequest = new Request(ListProjects\ListProjectsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -357,7 +357,7 @@ class ProjectClient
         };
     }
 
-    public function listServers(ListServers\ListServersRequest $request) : ListServers\ListServers200Response|ListServers\ListServers403Response|ListServers\ListServersDefaultResponse
+    public function listServers(ListServers\ListServersRequest $request): ListServers\ListServers200Response|ListServers\ListServers403Response|ListServers\ListServersDefaultResponse
     {
         $httpRequest = new Request(ListServers\ListServersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -371,7 +371,7 @@ class ProjectClient
         };
     }
 
-    public function resendProjectInviteMail(ResendProjectInviteMail\ResendProjectInviteMailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ResendProjectInviteMail\ResendProjectInviteMail403Response|ResendProjectInviteMail\ResendProjectInviteMailDefaultResponse
+    public function resendProjectInviteMail(ResendProjectInviteMail\ResendProjectInviteMailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ResendProjectInviteMail\ResendProjectInviteMail403Response|ResendProjectInviteMail\ResendProjectInviteMailDefaultResponse
     {
         $httpRequest = new Request(ResendProjectInviteMail\ResendProjectInviteMailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -386,7 +386,7 @@ class ProjectClient
         };
     }
 
-    public function updateProjectDescription(UpdateProjectDescription\UpdateProjectDescriptionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateProjectDescription\UpdateProjectDescription400Response|UpdateProjectDescription\UpdateProjectDescription404Response|UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse
+    public function updateProjectDescription(UpdateProjectDescription\UpdateProjectDescriptionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateProjectDescription\UpdateProjectDescription400Response|UpdateProjectDescription\UpdateProjectDescription404Response|UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse
     {
         $httpRequest = new Request(UpdateProjectDescription\UpdateProjectDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -402,7 +402,7 @@ class ProjectClient
         };
     }
 
-    public function updateServerDescription(UpdateServerDescription\UpdateServerDescriptionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateServerDescription\UpdateServerDescription400Response
+    public function updateServerDescription(UpdateServerDescription\UpdateServerDescriptionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateServerDescription\UpdateServerDescription400Response
     {
         $httpRequest = new Request(UpdateServerDescription\UpdateServerDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -416,4 +416,3 @@ class ProjectClient
         };
     }
 }
-

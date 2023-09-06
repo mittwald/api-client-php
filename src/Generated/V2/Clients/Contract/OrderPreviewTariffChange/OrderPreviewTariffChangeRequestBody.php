@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange;
 
+use InvalidArgumentException;
+
 class OrderPreviewTariffChangeRequestBody
 {
     public const method = 'post';
@@ -47,7 +49,7 @@ class OrderPreviewTariffChangeRequestBody
     private ?OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -61,7 +63,7 @@ class OrderPreviewTariffChangeRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
      */
-    public function getTariffChangeData() : \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
+    public function getTariffChangeData(): \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
     {
         return $this->tariffChangeData;
     }
@@ -69,7 +71,7 @@ class OrderPreviewTariffChangeRequestBody
     /**
      * @return OrderPreviewTariffChangeRequestBodyTariffChangeType|null
      */
-    public function getTariffChangeType() : ?OrderPreviewTariffChangeRequestBodyTariffChangeType
+    public function getTariffChangeType(): ?OrderPreviewTariffChangeRequestBodyTariffChangeType
     {
         return $this->tariffChangeType ?? null;
     }
@@ -78,7 +80,7 @@ class OrderPreviewTariffChangeRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange $tariffChangeData
      * @return self
      */
-    public function withTariffChangeData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange $tariffChangeData) : self
+    public function withTariffChangeData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange $tariffChangeData): self
     {
         $clone = clone $this;
         $clone->tariffChangeData = $tariffChangeData;
@@ -89,7 +91,7 @@ class OrderPreviewTariffChangeRequestBody
     /**
      * @return self
      */
-    public function withoutTariffChangeData() : self
+    public function withoutTariffChangeData(): self
     {
         $clone = clone $this;
         unset($clone->tariffChangeData);
@@ -101,7 +103,7 @@ class OrderPreviewTariffChangeRequestBody
      * @param OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType
      * @return self
      */
-    public function withTariffChangeType(OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType) : self
+    public function withTariffChangeType(OrderPreviewTariffChangeRequestBodyTariffChangeType $tariffChangeType): self
     {
         $clone = clone $this;
         $clone->tariffChangeType = $tariffChangeType;
@@ -112,7 +114,7 @@ class OrderPreviewTariffChangeRequestBody
     /**
      * @return self
      */
-    public function withoutTariffChangeType() : self
+    public function withoutTariffChangeType(): self
     {
         $clone = clone $this;
         unset($clone->tariffChangeType);
@@ -126,9 +128,9 @@ class OrderPreviewTariffChangeRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderPreviewTariffChangeRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderPreviewTariffChangeRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderPreviewTariffChangeRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -158,7 +160,7 @@ class OrderPreviewTariffChangeRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->tariffChangeData)) {
@@ -179,19 +181,19 @@ class OrderPreviewTariffChangeRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -206,29 +208,28 @@ class OrderPreviewTariffChangeRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/tariff-change-previews';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

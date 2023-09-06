@@ -13,7 +13,7 @@ class ConversationClient
         $this->client = $client;
     }
 
-    public function createConversation(CreateConversation\CreateConversationRequest $request) : CreateConversation\CreateConversation201Response|CreateConversation\CreateConversation400Response|CreateConversation\CreateConversationDefaultResponse
+    public function createConversation(CreateConversation\CreateConversationRequest $request): CreateConversation\CreateConversation201Response|CreateConversation\CreateConversation400Response|CreateConversation\CreateConversationDefaultResponse
     {
         $httpRequest = new Request(CreateConversation\CreateConversationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -28,7 +28,7 @@ class ConversationClient
         };
     }
 
-    public function listConversations(ListConversations\ListConversationsRequest $request) : ListConversations\ListConversations200Response|ListConversations\ListConversationsDefaultResponse
+    public function listConversations(ListConversations\ListConversationsRequest $request): ListConversations\ListConversations200Response|ListConversations\ListConversationsDefaultResponse
     {
         $httpRequest = new Request(ListConversations\ListConversationsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -41,7 +41,7 @@ class ConversationClient
         };
     }
 
-    public function createMessage(CreateMessage\CreateMessageRequest $request) : CreateMessage\CreateMessage201Response|CreateMessage\CreateMessage400Response|CreateMessage\CreateMessage403Response|CreateMessage\CreateMessage404Response|CreateMessage\CreateMessageDefaultResponse
+    public function createMessage(CreateMessage\CreateMessageRequest $request): CreateMessage\CreateMessage201Response|CreateMessage\CreateMessage400Response|CreateMessage\CreateMessage403Response|CreateMessage\CreateMessage404Response|CreateMessage\CreateMessageDefaultResponse
     {
         $httpRequest = new Request(CreateMessage\CreateMessageRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -58,7 +58,7 @@ class ConversationClient
         };
     }
 
-    public function listMessagesByConversation(ListMessagesByConversation\ListMessagesByConversationRequest $request) : \Mittwald\ApiClient\Client\UntypedResponse|ListMessagesByConversation\ListMessagesByConversation403Response|ListMessagesByConversation\ListMessagesByConversation404Response|ListMessagesByConversation\ListMessagesByConversationDefaultResponse
+    public function listMessagesByConversation(ListMessagesByConversation\ListMessagesByConversationRequest $request): \Mittwald\ApiClient\Client\UntypedResponse|ListMessagesByConversation\ListMessagesByConversation403Response|ListMessagesByConversation\ListMessagesByConversation404Response|ListMessagesByConversation\ListMessagesByConversationDefaultResponse
     {
         $httpRequest = new Request(ListMessagesByConversation\ListMessagesByConversationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -73,7 +73,7 @@ class ConversationClient
         };
     }
 
-    public function getCategory(GetCategory\GetCategoryRequest $request) : GetCategory\GetCategory200Response|GetCategory\GetCategory400Response|GetCategory\GetCategory404Response|GetCategory\GetCategoryDefaultResponse
+    public function getCategory(GetCategory\GetCategoryRequest $request): GetCategory\GetCategory200Response|GetCategory\GetCategory400Response|GetCategory\GetCategory404Response|GetCategory\GetCategoryDefaultResponse
     {
         $httpRequest = new Request(GetCategory\GetCategoryRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -88,7 +88,7 @@ class ConversationClient
         };
     }
 
-    public function getConversation(GetConversation\GetConversationRequest $request) : GetConversation\GetConversation200Response|GetConversation\GetConversation400Response|GetConversation\GetConversation403Response|GetConversation\GetConversation404Response|GetConversation\GetConversationDefaultResponse
+    public function getConversation(GetConversation\GetConversationRequest $request): GetConversation\GetConversation200Response|GetConversation\GetConversation400Response|GetConversation\GetConversation403Response|GetConversation\GetConversation404Response|GetConversation\GetConversationDefaultResponse
     {
         $httpRequest = new Request(GetConversation\GetConversationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -104,7 +104,7 @@ class ConversationClient
         };
     }
 
-    public function updateConversation(UpdateConversation\UpdateConversationRequest $request) : UpdateConversation\UpdateConversation200Response|UpdateConversation\UpdateConversation400Response|UpdateConversation\UpdateConversation403Response|UpdateConversation\UpdateConversation404Response|UpdateConversation\UpdateConversationDefaultResponse
+    public function updateConversation(UpdateConversation\UpdateConversationRequest $request): UpdateConversation\UpdateConversation200Response|UpdateConversation\UpdateConversation400Response|UpdateConversation\UpdateConversation403Response|UpdateConversation\UpdateConversation404Response|UpdateConversation\UpdateConversationDefaultResponse
     {
         $httpRequest = new Request(UpdateConversation\UpdateConversationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -121,7 +121,7 @@ class ConversationClient
         };
     }
 
-    public function listCategories(ListCategories\ListCategoriesRequest $request) : ListCategories\ListCategories200Response|ListCategories\ListCategoriesDefaultResponse
+    public function listCategories(ListCategories\ListCategoriesRequest $request): ListCategories\ListCategories200Response|ListCategories\ListCategoriesDefaultResponse
     {
         $httpRequest = new Request(ListCategories\ListCategoriesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -134,7 +134,7 @@ class ConversationClient
         };
     }
 
-    public function requestFileUpload(RequestFileUpload\RequestFileUploadRequest $request) : RequestFileUpload\RequestFileUpload201Response|RequestFileUpload\RequestFileUpload400Response|RequestFileUpload\RequestFileUploadDefaultResponse
+    public function requestFileUpload(RequestFileUpload\RequestFileUploadRequest $request): RequestFileUpload\RequestFileUpload201Response|RequestFileUpload\RequestFileUpload400Response|RequestFileUpload\RequestFileUploadDefaultResponse
     {
         $httpRequest = new Request(RequestFileUpload\RequestFileUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -149,7 +149,7 @@ class ConversationClient
         };
     }
 
-    public function setConversationStatus(SetConversationStatus\SetConversationStatusRequest $request) : SetConversationStatus\SetConversationStatus200Response|SetConversationStatus\SetConversationStatus400Response|SetConversationStatus\SetConversationStatus403Response|SetConversationStatus\SetConversationStatus404Response|SetConversationStatus\SetConversationStatusDefaultResponse
+    public function setConversationStatus(SetConversationStatus\SetConversationStatusRequest $request): SetConversationStatus\SetConversationStatus200Response|SetConversationStatus\SetConversationStatus400Response|SetConversationStatus\SetConversationStatus403Response|SetConversationStatus\SetConversationStatus404Response|SetConversationStatus\SetConversationStatusDefaultResponse
     {
         $httpRequest = new Request(SetConversationStatus\SetConversationStatusRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -166,7 +166,7 @@ class ConversationClient
         };
     }
 
-    public function updateMessage(UpdateMessage\UpdateMessageRequest $request) : UpdateMessage\UpdateMessage200Response|UpdateMessage\UpdateMessage400Response|UpdateMessage\UpdateMessage403Response|UpdateMessage\UpdateMessage404Response|UpdateMessage\UpdateMessageDefaultResponse
+    public function updateMessage(UpdateMessage\UpdateMessageRequest $request): UpdateMessage\UpdateMessage200Response|UpdateMessage\UpdateMessage400Response|UpdateMessage\UpdateMessage403Response|UpdateMessage\UpdateMessage404Response|UpdateMessage\UpdateMessageDefaultResponse
     {
         $httpRequest = new Request(UpdateMessage\UpdateMessageRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -183,4 +183,3 @@ class ConversationClient
         };
     }
 }
-

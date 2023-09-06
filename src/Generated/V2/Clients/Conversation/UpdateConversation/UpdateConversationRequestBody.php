@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation;
 
+use InvalidArgumentException;
+
 class UpdateConversationRequestBody
 {
     public const method = 'put';
@@ -44,7 +46,7 @@ class UpdateConversationRequestBody
     private ?string $title = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -57,7 +59,7 @@ class UpdateConversationRequestBody
     /**
      * @return string|null
      */
-    public function getCategoryId() : ?string
+    public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
     }
@@ -66,7 +68,7 @@ class UpdateConversationRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
      */
-    public function getRelatedTo() : ?\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference
+    public function getRelatedTo(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference
     {
         return $this->relatedTo ?? null;
     }
@@ -74,7 +76,7 @@ class UpdateConversationRequestBody
     /**
      * @return string|null
      */
-    public function getTitle() : ?string
+    public function getTitle(): ?string
     {
         return $this->title ?? null;
     }
@@ -83,12 +85,12 @@ class UpdateConversationRequestBody
      * @param string $categoryId
      * @return self
      */
-    public function withCategoryId(string $categoryId) : self
+    public function withCategoryId(string $categoryId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -100,7 +102,7 @@ class UpdateConversationRequestBody
     /**
      * @return self
      */
-    public function withoutCategoryId() : self
+    public function withoutCategoryId(): self
     {
         $clone = clone $this;
         unset($clone->categoryId);
@@ -112,7 +114,7 @@ class UpdateConversationRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference $relatedTo
      * @return self
      */
-    public function withRelatedTo(\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference $relatedTo) : self
+    public function withRelatedTo(\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -123,7 +125,7 @@ class UpdateConversationRequestBody
     /**
      * @return self
      */
-    public function withoutRelatedTo() : self
+    public function withoutRelatedTo(): self
     {
         $clone = clone $this;
         unset($clone->relatedTo);
@@ -135,12 +137,12 @@ class UpdateConversationRequestBody
      * @param string $title
      * @return self
      */
-    public function withTitle(string $title) : self
+    public function withTitle(string $title): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($title, static::$schema['properties']['title']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -152,7 +154,7 @@ class UpdateConversationRequestBody
     /**
      * @return self
      */
-    public function withoutTitle() : self
+    public function withoutTitle(): self
     {
         $clone = clone $this;
         unset($clone->title);
@@ -166,9 +168,9 @@ class UpdateConversationRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateConversationRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateConversationRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateConversationRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -200,7 +202,7 @@ class UpdateConversationRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->categoryId)) {
@@ -222,19 +224,19 @@ class UpdateConversationRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -244,30 +246,29 @@ class UpdateConversationRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $conversationId = urlencode($mapped['conversationId']);
         return '/v2/conversations/' . $conversationId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

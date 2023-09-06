@@ -13,7 +13,7 @@ class UserClient
         $this->client = $client;
     }
 
-    public function deprecatedUserChangeEmail(DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserChangeEmail\DeprecatedUserChangeEmail400Response|DeprecatedUserChangeEmail\DeprecatedUserChangeEmailDefaultResponse
+    public function deprecatedUserChangeEmail(DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserChangeEmail\DeprecatedUserChangeEmail400Response|DeprecatedUserChangeEmail\DeprecatedUserChangeEmailDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -28,7 +28,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserConfirmPasswordReset(DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordReset400Response|DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetDefaultResponse
+    public function deprecatedUserConfirmPasswordReset(DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordReset400Response|DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -43,7 +43,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserCreateIssue(DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest $request) : DeprecatedUserCreateIssue\DeprecatedUserCreateIssue201Response|DeprecatedUserCreateIssue\DeprecatedUserCreateIssue401Response|DeprecatedUserCreateIssue\DeprecatedUserCreateIssue404Response|DeprecatedUserCreateIssue\DeprecatedUserCreateIssueDefaultResponse
+    public function deprecatedUserCreateIssue(DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest $request): DeprecatedUserCreateIssue\DeprecatedUserCreateIssue201Response|DeprecatedUserCreateIssue\DeprecatedUserCreateIssue401Response|DeprecatedUserCreateIssue\DeprecatedUserCreateIssue404Response|DeprecatedUserCreateIssue\DeprecatedUserCreateIssueDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -59,7 +59,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserDeleteApiToken(DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiToken400Response|DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenDefaultResponse
+    public function deprecatedUserDeleteApiToken(DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiToken400Response|DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -73,7 +73,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserEditApiToken(DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserEditApiToken\DeprecatedUserEditApiToken400Response|DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenDefaultResponse
+    public function deprecatedUserEditApiToken(DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserEditApiToken\DeprecatedUserEditApiToken400Response|DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -88,7 +88,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserDeleteSshKey(DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyDefaultResponse
+    public function deprecatedUserDeleteSshKey(DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -101,7 +101,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserEditSshKey(DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserEditSshKey\DeprecatedUserEditSshKey400Response|DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyDefaultResponse
+    public function deprecatedUserEditSshKey(DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserEditSshKey\DeprecatedUserEditSshKey400Response|DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -116,7 +116,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserDisableMfa(DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserDisableMfa\DeprecatedUserDisableMfa400Response|DeprecatedUserDisableMfa\DeprecatedUserDisableMfaDefaultResponse
+    public function deprecatedUserDisableMfa(DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserDisableMfa\DeprecatedUserDisableMfa400Response|DeprecatedUserDisableMfa\DeprecatedUserDisableMfaDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -131,7 +131,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserInitPasswordReset(DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordReset400Response|DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetDefaultResponse
+    public function deprecatedUserInitPasswordReset(DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordReset400Response|DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -146,7 +146,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserLogout(DeprecatedUserLogout\DeprecatedUserLogoutRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserLogout\DeprecatedUserLogout400Response|DeprecatedUserLogout\DeprecatedUserLogoutDefaultResponse
+    public function deprecatedUserLogout(DeprecatedUserLogout\DeprecatedUserLogoutRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserLogout\DeprecatedUserLogout400Response|DeprecatedUserLogout\DeprecatedUserLogoutDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserLogout\DeprecatedUserLogoutRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -161,7 +161,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserResendVerificationEmail(DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmail400Response|DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmail403Response|DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailDefaultResponse
+    public function deprecatedUserResendVerificationEmail(DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmail400Response|DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmail403Response|DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -177,7 +177,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceAvatarRemove(DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemove400Response|DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveDefaultResponse
+    public function deprecatedUserServiceAvatarRemove(DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemove400Response|DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -191,7 +191,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceAvatarRequestUpload(DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadRequest $request) : DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUpload200Response|DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUpload400Response|DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadDefaultResponse
+    public function deprecatedUserServiceAvatarRequestUpload(DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadRequest $request): DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUpload200Response|DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUpload400Response|DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -206,7 +206,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceFeedbackCreate(DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateRequest $request) : DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreate201Response|DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreate401Response|DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreate404Response|DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateDefaultResponse
+    public function deprecatedUserServiceFeedbackCreate(DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateRequest $request): DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreate201Response|DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreate401Response|DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreate404Response|DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -222,7 +222,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceFeedbackList(DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListRequest $request) : DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackList200Response|DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListDefaultResponse
+    public function deprecatedUserServiceFeedbackList(DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListRequest $request): DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackList200Response|DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -235,7 +235,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceIssueNew(DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewDefaultResponse
+    public function deprecatedUserServiceIssueNew(DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -249,7 +249,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServicePersonalInformationUpdate(DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdate400Response|DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateDefaultResponse
+    public function deprecatedUserServicePersonalInformationUpdate(DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdate400Response|DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -264,7 +264,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request) : DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet200Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet403Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet404Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet412Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetDefaultResponse
+    public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet200Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet403Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet404Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGet412Response|DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -280,7 +280,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServicePersonalizedSettingsGet(DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetRequest $request) : DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGet200Response|DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetDefaultResponse
+    public function deprecatedUserServicePersonalizedSettingsGet(DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetRequest $request): DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGet200Response|DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -293,7 +293,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServicePersonalizedSettingsUpdate(DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdate400Response|DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateDefaultResponse
+    public function deprecatedUserServicePersonalizedSettingsUpdate(DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdate400Response|DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -308,7 +308,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServicePhoneNumberAdd(DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAdd400Response|DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAdd409Response|DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddDefaultResponse
+    public function deprecatedUserServicePhoneNumberAdd(DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAdd400Response|DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAdd409Response|DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -324,7 +324,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServicePhoneNumberRemove(DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemove400Response|DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveDefaultResponse
+    public function deprecatedUserServicePhoneNumberRemove(DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemove400Response|DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -338,7 +338,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServicePhoneNumberVerify(DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerify400Response|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerify404Response|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerify409Response|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyDefaultResponse
+    public function deprecatedUserServicePhoneNumberVerify(DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerify400Response|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerify404Response|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerify409Response|DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -355,7 +355,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserServiceUserGetOwn(DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnRequest $request) : DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwn200Response|DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnDefaultResponse
+    public function deprecatedUserServiceUserGetOwn(DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnRequest $request): DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwn200Response|DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -368,7 +368,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserTerminateAllSessions(DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsDefaultResponse
+    public function deprecatedUserTerminateAllSessions(DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -381,7 +381,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserTerminateSession(DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserTerminateSession\DeprecatedUserTerminateSession404Response|DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionDefaultResponse
+    public function deprecatedUserTerminateSession(DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserTerminateSession\DeprecatedUserTerminateSession404Response|DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -395,7 +395,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserUpdateAccount(DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccount400Response|DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountDefaultResponse
+    public function deprecatedUserUpdateAccount(DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccount400Response|DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -410,7 +410,7 @@ class UserClient
         };
     }
 
-    public function deprecatedUserVerifyEmail(DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmail400Response|DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmail404Response|DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailDefaultResponse
+    public function deprecatedUserVerifyEmail(DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmail400Response|DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmail404Response|DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailDefaultResponse
     {
         $httpRequest = new Request(DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -426,7 +426,7 @@ class UserClient
         };
     }
 
-    public function addPhoneNumber(AddPhoneNumber\AddPhoneNumberRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|AddPhoneNumber\AddPhoneNumber400Response|AddPhoneNumber\AddPhoneNumber403Response|AddPhoneNumber\AddPhoneNumber409Response|AddPhoneNumber\AddPhoneNumberDefaultResponse
+    public function addPhoneNumber(AddPhoneNumber\AddPhoneNumberRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|AddPhoneNumber\AddPhoneNumber400Response|AddPhoneNumber\AddPhoneNumber403Response|AddPhoneNumber\AddPhoneNumber409Response|AddPhoneNumber\AddPhoneNumberDefaultResponse
     {
         $httpRequest = new Request(AddPhoneNumber\AddPhoneNumberRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -443,7 +443,7 @@ class UserClient
         };
     }
 
-    public function removePhoneNumber(RemovePhoneNumber\RemovePhoneNumberRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|RemovePhoneNumber\RemovePhoneNumber400Response|RemovePhoneNumber\RemovePhoneNumberDefaultResponse
+    public function removePhoneNumber(RemovePhoneNumber\RemovePhoneNumberRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|RemovePhoneNumber\RemovePhoneNumber400Response|RemovePhoneNumber\RemovePhoneNumberDefaultResponse
     {
         $httpRequest = new Request(RemovePhoneNumber\RemovePhoneNumberRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -457,7 +457,7 @@ class UserClient
         };
     }
 
-    public function authenticateMfa(AuthenticateMfa\AuthenticateMfaRequest $request) : \Mittwald\ApiClient\Client\UntypedResponse|AuthenticateMfa\AuthenticateMfa200Response|AuthenticateMfa\AuthenticateMfa400Response|AuthenticateMfa\AuthenticateMfaDefaultResponse
+    public function authenticateMfa(AuthenticateMfa\AuthenticateMfaRequest $request): \Mittwald\ApiClient\Client\UntypedResponse|AuthenticateMfa\AuthenticateMfa200Response|AuthenticateMfa\AuthenticateMfa400Response|AuthenticateMfa\AuthenticateMfaDefaultResponse
     {
         $httpRequest = new Request(AuthenticateMfa\AuthenticateMfaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -473,7 +473,7 @@ class UserClient
         };
     }
 
-    public function authenticate(Authenticate\AuthenticateRequest $request) : Authenticate\Authenticate200Response|Authenticate\Authenticate202Response|Authenticate\Authenticate400Response|Authenticate\Authenticate401Response|Authenticate\AuthenticateDefaultResponse
+    public function authenticate(Authenticate\AuthenticateRequest $request): Authenticate\Authenticate200Response|Authenticate\Authenticate202Response|Authenticate\Authenticate400Response|Authenticate\Authenticate401Response|Authenticate\AuthenticateDefaultResponse
     {
         $httpRequest = new Request(Authenticate\AuthenticateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -490,7 +490,7 @@ class UserClient
         };
     }
 
-    public function changeEmail(ChangeEmail\ChangeEmailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ChangeEmail\ChangeEmail400Response|ChangeEmail\ChangeEmailDefaultResponse
+    public function changeEmail(ChangeEmail\ChangeEmailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ChangeEmail\ChangeEmail400Response|ChangeEmail\ChangeEmailDefaultResponse
     {
         $httpRequest = new Request(ChangeEmail\ChangeEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -505,7 +505,7 @@ class UserClient
         };
     }
 
-    public function getOwnEmail(GetOwnEmail\GetOwnEmailRequest $request) : GetOwnEmail\GetOwnEmail200Response|GetOwnEmail\GetOwnEmail404Response|GetOwnEmail\GetOwnEmailDefaultResponse
+    public function getOwnEmail(GetOwnEmail\GetOwnEmailRequest $request): GetOwnEmail\GetOwnEmail200Response|GetOwnEmail\GetOwnEmail404Response|GetOwnEmail\GetOwnEmailDefaultResponse
     {
         $httpRequest = new Request(GetOwnEmail\GetOwnEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -519,7 +519,7 @@ class UserClient
         };
     }
 
-    public function changePassword(ChangePassword\ChangePasswordRequest $request) : \Mittwald\ApiClient\Client\UntypedResponse|ChangePassword\ChangePassword200Response|ChangePassword\ChangePassword400Response|ChangePassword\ChangePasswordDefaultResponse
+    public function changePassword(ChangePassword\ChangePasswordRequest $request): \Mittwald\ApiClient\Client\UntypedResponse|ChangePassword\ChangePassword200Response|ChangePassword\ChangePassword400Response|ChangePassword\ChangePasswordDefaultResponse
     {
         $httpRequest = new Request(ChangePassword\ChangePasswordRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -535,7 +535,7 @@ class UserClient
         };
     }
 
-    public function checkToken(CheckToken\CheckTokenRequest $request) : CheckToken\CheckToken200Response|CheckToken\CheckTokenDefaultResponse
+    public function checkToken(CheckToken\CheckTokenRequest $request): CheckToken\CheckToken200Response|CheckToken\CheckTokenDefaultResponse
     {
         $httpRequest = new Request(CheckToken\CheckTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -549,7 +549,7 @@ class UserClient
         };
     }
 
-    public function confirmMfa(ConfirmMfa\ConfirmMfaRequest $request) : ConfirmMfa\ConfirmMfa200Response|ConfirmMfa\ConfirmMfa400Response|ConfirmMfa\ConfirmMfaDefaultResponse
+    public function confirmMfa(ConfirmMfa\ConfirmMfaRequest $request): ConfirmMfa\ConfirmMfa200Response|ConfirmMfa\ConfirmMfa400Response|ConfirmMfa\ConfirmMfaDefaultResponse
     {
         $httpRequest = new Request(ConfirmMfa\ConfirmMfaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -564,7 +564,7 @@ class UserClient
         };
     }
 
-    public function disableMfa(DisableMfa\DisableMfaRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DisableMfa\DisableMfa400Response|DisableMfa\DisableMfaDefaultResponse
+    public function disableMfa(DisableMfa\DisableMfaRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DisableMfa\DisableMfa400Response|DisableMfa\DisableMfaDefaultResponse
     {
         $httpRequest = new Request(DisableMfa\DisableMfaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -579,7 +579,7 @@ class UserClient
         };
     }
 
-    public function getMfaStatus(GetMfaStatus\GetMfaStatusRequest $request) : GetMfaStatus\GetMfaStatus200Response|GetMfaStatus\GetMfaStatusDefaultResponse
+    public function getMfaStatus(GetMfaStatus\GetMfaStatusRequest $request): GetMfaStatus\GetMfaStatus200Response|GetMfaStatus\GetMfaStatusDefaultResponse
     {
         $httpRequest = new Request(GetMfaStatus\GetMfaStatusRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -592,7 +592,7 @@ class UserClient
         };
     }
 
-    public function resetRecoverycodes(ResetRecoverycodes\ResetRecoverycodesRequest $request) : ResetRecoverycodes\ResetRecoverycodes200Response|ResetRecoverycodes\ResetRecoverycodes400Response|ResetRecoverycodes\ResetRecoverycodesDefaultResponse
+    public function resetRecoverycodes(ResetRecoverycodes\ResetRecoverycodesRequest $request): ResetRecoverycodes\ResetRecoverycodes200Response|ResetRecoverycodes\ResetRecoverycodes400Response|ResetRecoverycodes\ResetRecoverycodesDefaultResponse
     {
         $httpRequest = new Request(ResetRecoverycodes\ResetRecoverycodesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -607,7 +607,7 @@ class UserClient
         };
     }
 
-    public function confirmPasswordReset(ConfirmPasswordReset\ConfirmPasswordResetRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ConfirmPasswordReset\ConfirmPasswordReset400Response|ConfirmPasswordReset\ConfirmPasswordResetDefaultResponse
+    public function confirmPasswordReset(ConfirmPasswordReset\ConfirmPasswordResetRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ConfirmPasswordReset\ConfirmPasswordReset400Response|ConfirmPasswordReset\ConfirmPasswordResetDefaultResponse
     {
         $httpRequest = new Request(ConfirmPasswordReset\ConfirmPasswordResetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -622,7 +622,7 @@ class UserClient
         };
     }
 
-    public function createApiToken(CreateApiToken\CreateApiTokenRequest $request) : CreateApiToken\CreateApiToken201Response|CreateApiToken\CreateApiToken400Response|CreateApiToken\CreateApiTokenDefaultResponse
+    public function createApiToken(CreateApiToken\CreateApiTokenRequest $request): CreateApiToken\CreateApiToken201Response|CreateApiToken\CreateApiToken400Response|CreateApiToken\CreateApiTokenDefaultResponse
     {
         $httpRequest = new Request(CreateApiToken\CreateApiTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -637,7 +637,7 @@ class UserClient
         };
     }
 
-    public function listApiTokens(ListApiTokens\ListApiTokensRequest $request) : ListApiTokens\ListApiTokens200Response|ListApiTokens\ListApiTokensDefaultResponse
+    public function listApiTokens(ListApiTokens\ListApiTokensRequest $request): ListApiTokens\ListApiTokens200Response|ListApiTokens\ListApiTokensDefaultResponse
     {
         $httpRequest = new Request(ListApiTokens\ListApiTokensRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -650,7 +650,7 @@ class UserClient
         };
     }
 
-    public function createFeedback(CreateFeedback\CreateFeedbackRequest $request) : CreateFeedback\CreateFeedback201Response|CreateFeedback\CreateFeedback401Response|CreateFeedback\CreateFeedback404Response|CreateFeedback\CreateFeedbackDefaultResponse
+    public function createFeedback(CreateFeedback\CreateFeedbackRequest $request): CreateFeedback\CreateFeedback201Response|CreateFeedback\CreateFeedback401Response|CreateFeedback\CreateFeedback404Response|CreateFeedback\CreateFeedbackDefaultResponse
     {
         $httpRequest = new Request(CreateFeedback\CreateFeedbackRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -666,7 +666,7 @@ class UserClient
         };
     }
 
-    public function createSshKey(CreateSshKey\CreateSshKeyRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|CreateSshKey\CreateSshKey400Response|CreateSshKey\CreateSshKeyDefaultResponse
+    public function createSshKey(CreateSshKey\CreateSshKeyRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|CreateSshKey\CreateSshKey400Response|CreateSshKey\CreateSshKeyDefaultResponse
     {
         $httpRequest = new Request(CreateSshKey\CreateSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -681,7 +681,7 @@ class UserClient
         };
     }
 
-    public function listSshKeys(ListSshKeys\ListSshKeysRequest $request) : ListSshKeys\ListSshKeys200Response|ListSshKeys\ListSshKeysDefaultResponse
+    public function listSshKeys(ListSshKeys\ListSshKeysRequest $request): ListSshKeys\ListSshKeys200Response|ListSshKeys\ListSshKeysDefaultResponse
     {
         $httpRequest = new Request(ListSshKeys\ListSshKeysRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -694,7 +694,7 @@ class UserClient
         };
     }
 
-    public function deleteApiToken(DeleteApiToken\DeleteApiTokenRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteApiToken\DeleteApiToken400Response|DeleteApiToken\DeleteApiTokenDefaultResponse
+    public function deleteApiToken(DeleteApiToken\DeleteApiTokenRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteApiToken\DeleteApiToken400Response|DeleteApiToken\DeleteApiTokenDefaultResponse
     {
         $httpRequest = new Request(DeleteApiToken\DeleteApiTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -708,7 +708,7 @@ class UserClient
         };
     }
 
-    public function editApiToken(EditApiToken\EditApiTokenRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|EditApiToken\EditApiToken400Response|EditApiToken\EditApiTokenDefaultResponse
+    public function editApiToken(EditApiToken\EditApiTokenRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|EditApiToken\EditApiToken400Response|EditApiToken\EditApiTokenDefaultResponse
     {
         $httpRequest = new Request(EditApiToken\EditApiTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -723,7 +723,7 @@ class UserClient
         };
     }
 
-    public function getApiToken(GetApiToken\GetApiTokenRequest $request) : GetApiToken\GetApiToken200Response|GetApiToken\GetApiToken404Response|GetApiToken\GetApiTokenDefaultResponse
+    public function getApiToken(GetApiToken\GetApiTokenRequest $request): GetApiToken\GetApiToken200Response|GetApiToken\GetApiToken404Response|GetApiToken\GetApiTokenDefaultResponse
     {
         $httpRequest = new Request(GetApiToken\GetApiTokenRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -737,7 +737,7 @@ class UserClient
         };
     }
 
-    public function deleteSshKey(DeleteSshKey\DeleteSshKeyRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteSshKey\DeleteSshKeyDefaultResponse
+    public function deleteSshKey(DeleteSshKey\DeleteSshKeyRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteSshKey\DeleteSshKeyDefaultResponse
     {
         $httpRequest = new Request(DeleteSshKey\DeleteSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -750,7 +750,7 @@ class UserClient
         };
     }
 
-    public function editSshKey(EditSshKey\EditSshKeyRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|EditSshKey\EditSshKey400Response|EditSshKey\EditSshKeyDefaultResponse
+    public function editSshKey(EditSshKey\EditSshKeyRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|EditSshKey\EditSshKey400Response|EditSshKey\EditSshKeyDefaultResponse
     {
         $httpRequest = new Request(EditSshKey\EditSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -765,7 +765,7 @@ class UserClient
         };
     }
 
-    public function getSshKey(GetSshKey\GetSshKeyRequest $request) : GetSshKey\GetSshKey200Response|GetSshKey\GetSshKey404Response|GetSshKey\GetSshKeyDefaultResponse
+    public function getSshKey(GetSshKey\GetSshKeyRequest $request): GetSshKey\GetSshKey200Response|GetSshKey\GetSshKey404Response|GetSshKey\GetSshKeyDefaultResponse
     {
         $httpRequest = new Request(GetSshKey\GetSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -779,7 +779,7 @@ class UserClient
         };
     }
 
-    public function deleteUser(DeleteUser\DeleteUserRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|\Mittwald\ApiClient\Client\UntypedResponse|DeleteUser\DeleteUser400Response|DeleteUser\DeleteUser409Response|DeleteUser\DeleteUserDefaultResponse
+    public function deleteUser(DeleteUser\DeleteUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|\Mittwald\ApiClient\Client\UntypedResponse|DeleteUser\DeleteUser400Response|DeleteUser\DeleteUser409Response|DeleteUser\DeleteUserDefaultResponse
     {
         $httpRequest = new Request(DeleteUser\DeleteUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -796,7 +796,7 @@ class UserClient
         };
     }
 
-    public function getOwnAccount(GetOwnAccount\GetOwnAccountRequest $request) : GetOwnAccount\GetOwnAccount200Response|GetOwnAccount\GetOwnAccountDefaultResponse
+    public function getOwnAccount(GetOwnAccount\GetOwnAccountRequest $request): GetOwnAccount\GetOwnAccount200Response|GetOwnAccount\GetOwnAccountDefaultResponse
     {
         $httpRequest = new Request(GetOwnAccount\GetOwnAccountRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -810,7 +810,7 @@ class UserClient
         };
     }
 
-    public function updateAccount(UpdateAccount\UpdateAccountRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateAccount\UpdateAccount400Response|UpdateAccount\UpdateAccountDefaultResponse
+    public function updateAccount(UpdateAccount\UpdateAccountRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateAccount\UpdateAccount400Response|UpdateAccount\UpdateAccountDefaultResponse
     {
         $httpRequest = new Request(UpdateAccount\UpdateAccountRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -825,7 +825,7 @@ class UserClient
         };
     }
 
-    public function getPasswordUpdatedAt(GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest $request) : GetPasswordUpdatedAt\GetPasswordUpdatedAt200Response|GetPasswordUpdatedAt\GetPasswordUpdatedAtDefaultResponse
+    public function getPasswordUpdatedAt(GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest $request): GetPasswordUpdatedAt\GetPasswordUpdatedAt200Response|GetPasswordUpdatedAt\GetPasswordUpdatedAtDefaultResponse
     {
         $httpRequest = new Request(GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -839,7 +839,7 @@ class UserClient
         };
     }
 
-    public function getPersonalizedSettings(GetPersonalizedSettings\GetPersonalizedSettingsRequest $request) : GetPersonalizedSettings\GetPersonalizedSettings200Response|GetPersonalizedSettings\GetPersonalizedSettingsDefaultResponse
+    public function getPersonalizedSettings(GetPersonalizedSettings\GetPersonalizedSettingsRequest $request): GetPersonalizedSettings\GetPersonalizedSettings200Response|GetPersonalizedSettings\GetPersonalizedSettingsDefaultResponse
     {
         $httpRequest = new Request(GetPersonalizedSettings\GetPersonalizedSettingsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -852,7 +852,7 @@ class UserClient
         };
     }
 
-    public function updatePersonalizedSettings(UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdatePersonalizedSettings\UpdatePersonalizedSettings400Response|UpdatePersonalizedSettings\UpdatePersonalizedSettingsDefaultResponse
+    public function updatePersonalizedSettings(UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdatePersonalizedSettings\UpdatePersonalizedSettings400Response|UpdatePersonalizedSettings\UpdatePersonalizedSettingsDefaultResponse
     {
         $httpRequest = new Request(UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -867,7 +867,7 @@ class UserClient
         };
     }
 
-    public function getSession(GetSession\GetSessionRequest $request) : GetSession\GetSession200Response|GetSession\GetSession404Response|GetSession\GetSessionDefaultResponse
+    public function getSession(GetSession\GetSessionRequest $request): GetSession\GetSession200Response|GetSession\GetSession404Response|GetSession\GetSessionDefaultResponse
     {
         $httpRequest = new Request(GetSession\GetSessionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -881,7 +881,7 @@ class UserClient
         };
     }
 
-    public function terminateSession(TerminateSession\TerminateSessionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|TerminateSession\TerminateSession404Response|TerminateSession\TerminateSessionDefaultResponse
+    public function terminateSession(TerminateSession\TerminateSessionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|TerminateSession\TerminateSession404Response|TerminateSession\TerminateSessionDefaultResponse
     {
         $httpRequest = new Request(TerminateSession\TerminateSessionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -895,7 +895,7 @@ class UserClient
         };
     }
 
-    public function getUser(GetUser\GetUserRequest $request) : GetUser\GetUser200Response|GetUser\GetUser403Response|GetUser\GetUser404Response|GetUser\GetUser412Response|GetUser\GetUserDefaultResponse
+    public function getUser(GetUser\GetUserRequest $request): GetUser\GetUser200Response|GetUser\GetUser403Response|GetUser\GetUser404Response|GetUser\GetUser412Response|GetUser\GetUserDefaultResponse
     {
         $httpRequest = new Request(GetUser\GetUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -911,7 +911,7 @@ class UserClient
         };
     }
 
-    public function updatePersonalInformation(UpdatePersonalInformation\UpdatePersonalInformationRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdatePersonalInformation\UpdatePersonalInformation400Response|UpdatePersonalInformation\UpdatePersonalInformationDefaultResponse
+    public function updatePersonalInformation(UpdatePersonalInformation\UpdatePersonalInformationRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdatePersonalInformation\UpdatePersonalInformation400Response|UpdatePersonalInformation\UpdatePersonalInformationDefaultResponse
     {
         $httpRequest = new Request(UpdatePersonalInformation\UpdatePersonalInformationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -926,7 +926,7 @@ class UserClient
         };
     }
 
-    public function initMfa(InitMfa\InitMfaRequest $request) : InitMfa\InitMfa200Response|InitMfa\InitMfa400Response|InitMfa\InitMfaDefaultResponse
+    public function initMfa(InitMfa\InitMfaRequest $request): InitMfa\InitMfa200Response|InitMfa\InitMfa400Response|InitMfa\InitMfaDefaultResponse
     {
         $httpRequest = new Request(InitMfa\InitMfaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -941,7 +941,7 @@ class UserClient
         };
     }
 
-    public function initPasswordReset(InitPasswordReset\InitPasswordResetRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|InitPasswordReset\InitPasswordReset400Response|InitPasswordReset\InitPasswordResetDefaultResponse
+    public function initPasswordReset(InitPasswordReset\InitPasswordResetRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|InitPasswordReset\InitPasswordReset400Response|InitPasswordReset\InitPasswordResetDefaultResponse
     {
         $httpRequest = new Request(InitPasswordReset\InitPasswordResetRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -956,7 +956,7 @@ class UserClient
         };
     }
 
-    public function listFeedback(ListFeedback\ListFeedbackRequest $request) : ListFeedback\ListFeedback200Response|ListFeedback\ListFeedbackDefaultResponse
+    public function listFeedback(ListFeedback\ListFeedbackRequest $request): ListFeedback\ListFeedback200Response|ListFeedback\ListFeedbackDefaultResponse
     {
         $httpRequest = new Request(ListFeedback\ListFeedbackRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -969,7 +969,7 @@ class UserClient
         };
     }
 
-    public function listSessions(ListSessions\ListSessionsRequest $request) : ListSessions\ListSessions200Response|ListSessions\ListSessionsDefaultResponse
+    public function listSessions(ListSessions\ListSessionsRequest $request): ListSessions\ListSessions200Response|ListSessions\ListSessionsDefaultResponse
     {
         $httpRequest = new Request(ListSessions\ListSessionsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -982,7 +982,7 @@ class UserClient
         };
     }
 
-    public function terminateAllSessions(TerminateAllSessions\TerminateAllSessionsRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|TerminateAllSessions\TerminateAllSessionsDefaultResponse
+    public function terminateAllSessions(TerminateAllSessions\TerminateAllSessionsRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|TerminateAllSessions\TerminateAllSessionsDefaultResponse
     {
         $httpRequest = new Request(TerminateAllSessions\TerminateAllSessionsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -995,7 +995,7 @@ class UserClient
         };
     }
 
-    public function logout(Logout\LogoutRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|Logout\Logout400Response|Logout\LogoutDefaultResponse
+    public function logout(Logout\LogoutRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|Logout\Logout400Response|Logout\LogoutDefaultResponse
     {
         $httpRequest = new Request(Logout\LogoutRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1010,7 +1010,7 @@ class UserClient
         };
     }
 
-    public function register(Register\RegisterRequest $request) : Register\Register201Response|Register\Register400Response|Register\RegisterDefaultResponse
+    public function register(Register\RegisterRequest $request): Register\Register201Response|Register\Register400Response|Register\RegisterDefaultResponse
     {
         $httpRequest = new Request(Register\RegisterRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1025,7 +1025,7 @@ class UserClient
         };
     }
 
-    public function removeAvatar(RemoveAvatar\RemoveAvatarRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|RemoveAvatar\RemoveAvatar400Response|RemoveAvatar\RemoveAvatarDefaultResponse
+    public function removeAvatar(RemoveAvatar\RemoveAvatarRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|RemoveAvatar\RemoveAvatar400Response|RemoveAvatar\RemoveAvatarDefaultResponse
     {
         $httpRequest = new Request(RemoveAvatar\RemoveAvatarRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1039,7 +1039,7 @@ class UserClient
         };
     }
 
-    public function requestAvatarUpload(RequestAvatarUpload\RequestAvatarUploadRequest $request) : RequestAvatarUpload\RequestAvatarUpload200Response|RequestAvatarUpload\RequestAvatarUpload400Response|RequestAvatarUpload\RequestAvatarUploadDefaultResponse
+    public function requestAvatarUpload(RequestAvatarUpload\RequestAvatarUploadRequest $request): RequestAvatarUpload\RequestAvatarUpload200Response|RequestAvatarUpload\RequestAvatarUpload400Response|RequestAvatarUpload\RequestAvatarUploadDefaultResponse
     {
         $httpRequest = new Request(RequestAvatarUpload\RequestAvatarUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1054,7 +1054,7 @@ class UserClient
         };
     }
 
-    public function resendVerificationEmail(ResendVerificationEmail\ResendVerificationEmailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ResendVerificationEmail\ResendVerificationEmail400Response|ResendVerificationEmail\ResendVerificationEmail403Response|ResendVerificationEmail\ResendVerificationEmailDefaultResponse
+    public function resendVerificationEmail(ResendVerificationEmail\ResendVerificationEmailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ResendVerificationEmail\ResendVerificationEmail400Response|ResendVerificationEmail\ResendVerificationEmail403Response|ResendVerificationEmail\ResendVerificationEmailDefaultResponse
     {
         $httpRequest = new Request(ResendVerificationEmail\ResendVerificationEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1070,7 +1070,7 @@ class UserClient
         };
     }
 
-    public function supportCodeRequest(SupportCodeRequest\SupportCodeRequestRequest $request) : SupportCodeRequest\SupportCodeRequest200Response|SupportCodeRequest\SupportCodeRequestDefaultResponse
+    public function supportCodeRequest(SupportCodeRequest\SupportCodeRequestRequest $request): SupportCodeRequest\SupportCodeRequest200Response|SupportCodeRequest\SupportCodeRequestDefaultResponse
     {
         $httpRequest = new Request(SupportCodeRequest\SupportCodeRequestRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1083,7 +1083,7 @@ class UserClient
         };
     }
 
-    public function verifyEmail(VerifyEmail\VerifyEmailRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|VerifyEmail\VerifyEmail400Response|VerifyEmail\VerifyEmail404Response|VerifyEmail\VerifyEmailDefaultResponse
+    public function verifyEmail(VerifyEmail\VerifyEmailRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|VerifyEmail\VerifyEmail400Response|VerifyEmail\VerifyEmail404Response|VerifyEmail\VerifyEmailDefaultResponse
     {
         $httpRequest = new Request(VerifyEmail\VerifyEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1099,7 +1099,7 @@ class UserClient
         };
     }
 
-    public function verifyPhoneNumber(VerifyPhoneNumber\VerifyPhoneNumberRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|VerifyPhoneNumber\VerifyPhoneNumber400Response|VerifyPhoneNumber\VerifyPhoneNumber404Response|VerifyPhoneNumber\VerifyPhoneNumber409Response|VerifyPhoneNumber\VerifyPhoneNumberDefaultResponse
+    public function verifyPhoneNumber(VerifyPhoneNumber\VerifyPhoneNumberRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|VerifyPhoneNumber\VerifyPhoneNumber400Response|VerifyPhoneNumber\VerifyPhoneNumber404Response|VerifyPhoneNumber\VerifyPhoneNumber409Response|VerifyPhoneNumber\VerifyPhoneNumberDefaultResponse
     {
         $httpRequest = new Request(VerifyPhoneNumber\VerifyPhoneNumberRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1116,7 +1116,7 @@ class UserClient
         };
     }
 
-    public function verifyRegistration(VerifyRegistration\VerifyRegistrationRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|VerifyRegistration\VerifyRegistration400Response|VerifyRegistration\VerifyRegistration404Response|VerifyRegistration\VerifyRegistrationDefaultResponse
+    public function verifyRegistration(VerifyRegistration\VerifyRegistrationRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|VerifyRegistration\VerifyRegistration400Response|VerifyRegistration\VerifyRegistration404Response|VerifyRegistration\VerifyRegistrationDefaultResponse
     {
         $httpRequest = new Request(VerifyRegistration\VerifyRegistrationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -1132,4 +1132,3 @@ class UserClient
         };
     }
 }
-

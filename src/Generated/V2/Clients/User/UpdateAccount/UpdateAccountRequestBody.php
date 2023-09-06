@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount;
 
+use InvalidArgumentException;
+
 class UpdateAccountRequestBody
 {
     public const method = 'put';
@@ -31,7 +33,7 @@ class UpdateAccountRequestBody
     private \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -45,7 +47,7 @@ class UpdateAccountRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
      */
-    public function getPerson() : \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+    public function getPerson(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
     {
         return $this->person;
     }
@@ -54,7 +56,7 @@ class UpdateAccountRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
      * @return self
      */
-    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person) : self
+    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person): self
     {
         $clone = clone $this;
         $clone->person = $person;
@@ -68,9 +70,9 @@ class UpdateAccountRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateAccountRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateAccountRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateAccountRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -89,7 +91,7 @@ class UpdateAccountRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['person'] = $this->person->toJson();
@@ -103,19 +105,19 @@ class UpdateAccountRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -125,29 +127,28 @@ class UpdateAccountRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/users/self/personal-information';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

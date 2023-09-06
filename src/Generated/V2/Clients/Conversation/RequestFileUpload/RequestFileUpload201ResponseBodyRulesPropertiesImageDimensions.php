@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload;
 
+use InvalidArgumentException;
+
 class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
 {
     /**
@@ -61,7 +63,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
     /**
      * @return RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMax|null
      */
-    public function getMax() : ?RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMax
+    public function getMax(): ?RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMax
     {
         return $this->max ?? null;
     }
@@ -69,7 +71,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
     /**
      * @return RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMin|null
      */
-    public function getMin() : ?RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMin
+    public function getMin(): ?RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMin
     {
         return $this->min ?? null;
     }
@@ -78,7 +80,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
      * @param RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMax $max
      * @return self
      */
-    public function withMax(RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMax $max) : self
+    public function withMax(RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMax $max): self
     {
         $clone = clone $this;
         $clone->max = $max;
@@ -89,7 +91,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
     /**
      * @return self
      */
-    public function withoutMax() : self
+    public function withoutMax(): self
     {
         $clone = clone $this;
         unset($clone->max);
@@ -101,7 +103,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
      * @param RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMin $min
      * @return self
      */
-    public function withMin(RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMin $min) : self
+    public function withMin(RequestFileUpload201ResponseBodyRulesPropertiesImageDimensionsMin $min): self
     {
         $clone = clone $this;
         $clone->min = $min;
@@ -112,7 +114,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
     /**
      * @return self
      */
-    public function withoutMin() : self
+    public function withoutMin(): self
     {
         $clone = clone $this;
         unset($clone->min);
@@ -126,9 +128,9 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -155,7 +157,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->max)) {
@@ -174,19 +176,19 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -202,7 +204,7 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -210,4 +212,3 @@ class RequestFileUpload201ResponseBodyRulesPropertiesImageDimensions
         return $response;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Sshuser;
 
+use InvalidArgumentException;
+use DateTime;
+
 class SshUser
 {
     /**
@@ -73,14 +76,14 @@ class SshUser
     private ?bool $active = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $authUpdatedAt;
+    private DateTime $authUpdatedAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -88,9 +91,9 @@ class SshUser
     private string $description;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var bool
@@ -113,9 +116,9 @@ class SshUser
     private ?array $publicKeys = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $updatedAt = null;
+    private ?DateTime $updatedAt = null;
 
     /**
      * @var string
@@ -123,15 +126,15 @@ class SshUser
     private string $userName;
 
     /**
-     * @param \DateTime $authUpdatedAt
-     * @param \DateTime $createdAt
+     * @param DateTime $authUpdatedAt
+     * @param DateTime $createdAt
      * @param string $description
      * @param bool $hasPassword
      * @param string $id
      * @param string $projectId
      * @param string $userName
      */
-    public function __construct(\DateTime $authUpdatedAt, \DateTime $createdAt, string $description, bool $hasPassword, string $id, string $projectId, string $userName)
+    public function __construct(DateTime $authUpdatedAt, DateTime $createdAt, string $description, bool $hasPassword, string $id, string $projectId, string $userName)
     {
         $this->authUpdatedAt = $authUpdatedAt;
         $this->createdAt = $createdAt;
@@ -145,23 +148,23 @@ class SshUser
     /**
      * @return bool|null
      */
-    public function getActive() : ?bool
+    public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getAuthUpdatedAt() : \DateTime
+    public function getAuthUpdatedAt(): DateTime
     {
         return $this->authUpdatedAt;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -169,15 +172,15 @@ class SshUser
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -185,7 +188,7 @@ class SshUser
     /**
      * @return bool
      */
-    public function getHasPassword() : bool
+    public function getHasPassword(): bool
     {
         return $this->hasPassword;
     }
@@ -193,7 +196,7 @@ class SshUser
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -201,7 +204,7 @@ class SshUser
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -209,15 +212,15 @@ class SshUser
     /**
      * @return PublicKey[]|null
      */
-    public function getPublicKeys() : ?array
+    public function getPublicKeys(): ?array
     {
         return $this->publicKeys ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUpdatedAt() : ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt ?? null;
     }
@@ -225,7 +228,7 @@ class SshUser
     /**
      * @return string
      */
-    public function getUserName() : string
+    public function getUserName(): string
     {
         return $this->userName;
     }
@@ -234,12 +237,12 @@ class SshUser
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -251,7 +254,7 @@ class SshUser
     /**
      * @return self
      */
-    public function withoutActive() : self
+    public function withoutActive(): self
     {
         $clone = clone $this;
         unset($clone->active);
@@ -260,10 +263,10 @@ class SshUser
     }
 
     /**
-     * @param \DateTime $authUpdatedAt
+     * @param DateTime $authUpdatedAt
      * @return self
      */
-    public function withAuthUpdatedAt(\DateTime $authUpdatedAt) : self
+    public function withAuthUpdatedAt(DateTime $authUpdatedAt): self
     {
         $clone = clone $this;
         $clone->authUpdatedAt = $authUpdatedAt;
@@ -272,10 +275,10 @@ class SshUser
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -287,12 +290,12 @@ class SshUser
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -302,10 +305,10 @@ class SshUser
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -316,7 +319,7 @@ class SshUser
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -328,12 +331,12 @@ class SshUser
      * @param bool $hasPassword
      * @return self
      */
-    public function withHasPassword(bool $hasPassword) : self
+    public function withHasPassword(bool $hasPassword): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hasPassword, static::$schema['properties']['hasPassword']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -346,12 +349,12 @@ class SshUser
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -364,12 +367,12 @@ class SshUser
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -382,7 +385,7 @@ class SshUser
      * @param PublicKey[] $publicKeys
      * @return self
      */
-    public function withPublicKeys(array $publicKeys) : self
+    public function withPublicKeys(array $publicKeys): self
     {
         $clone = clone $this;
         $clone->publicKeys = $publicKeys;
@@ -393,7 +396,7 @@ class SshUser
     /**
      * @return self
      */
-    public function withoutPublicKeys() : self
+    public function withoutPublicKeys(): self
     {
         $clone = clone $this;
         unset($clone->publicKeys);
@@ -402,10 +405,10 @@ class SshUser
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -416,7 +419,7 @@ class SshUser
     /**
      * @return self
      */
-    public function withoutUpdatedAt() : self
+    public function withoutUpdatedAt(): self
     {
         $clone = clone $this;
         unset($clone->updatedAt);
@@ -428,12 +431,12 @@ class SshUser
      * @param string $userName
      * @return self
      */
-    public function withUserName(string $userName) : self
+    public function withUserName(string $userName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($userName, static::$schema['properties']['userName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -448,9 +451,9 @@ class SshUser
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SshUser Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SshUser
+    public static function buildFromInput(array|object $input, bool $validate = true): SshUser
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -461,23 +464,23 @@ class SshUser
         if (isset($input->{'active'})) {
             $active = (bool)($input->{'active'});
         }
-        $authUpdatedAt = new \DateTime($input->{'authUpdatedAt'});
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $authUpdatedAt = new DateTime($input->{'authUpdatedAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $hasPassword = (bool)($input->{'hasPassword'});
         $id = $input->{'id'};
         $projectId = $input->{'projectId'};
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn(array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
         $updatedAt = null;
         if (isset($input->{'updatedAt'})) {
-            $updatedAt = new \DateTime($input->{'updatedAt'});
+            $updatedAt = new DateTime($input->{'updatedAt'});
         }
         $userName = $input->{'userName'};
 
@@ -494,26 +497,26 @@ class SshUser
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->active)) {
             $output['active'] = $this->active;
         }
-        $output['authUpdatedAt'] = ($this->authUpdatedAt)->format(\DateTime::ATOM);
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['authUpdatedAt'] = ($this->authUpdatedAt)->format(DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['hasPassword'] = $this->hasPassword;
         $output['id'] = $this->id;
         $output['projectId'] = $this->projectId;
         if (isset($this->publicKeys)) {
-            $output['publicKeys'] = array_map(fn(PublicKey $i): array => $i->toJson(), $this->publicKeys);
+            $output['publicKeys'] = array_map(fn (PublicKey $i): array => $i->toJson(), $this->publicKeys);
         }
         if (isset($this->updatedAt)) {
-            $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+            $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         }
         $output['userName'] = $this->userName;
 
@@ -526,19 +529,19 @@ class SshUser
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -556,4 +559,3 @@ class SshUser
         }
     }
 }
-

@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
-enum ProcessType: string {
+enum ProcessType: string
+{
     case UNSPECIFIED = 'UNSPECIFIED';
     case REGISTER = 'REGISTER';
     case TRANSFER = 'TRANSFER';

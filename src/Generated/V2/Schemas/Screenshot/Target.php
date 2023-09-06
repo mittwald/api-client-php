@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Screenshot;
 
+use InvalidArgumentException;
+
 class Target
 {
     /**
@@ -64,7 +66,7 @@ class Target
     /**
      * @return string
      */
-    public function getDomain() : string
+    public function getDomain(): string
     {
         return $this->domain;
     }
@@ -72,7 +74,7 @@ class Target
     /**
      * @return string|null
      */
-    public function getPath() : ?string
+    public function getPath(): ?string
     {
         return $this->path ?? null;
     }
@@ -80,7 +82,7 @@ class Target
     /**
      * @return TargetScheme
      */
-    public function getScheme() : TargetScheme
+    public function getScheme(): TargetScheme
     {
         return $this->scheme;
     }
@@ -89,12 +91,12 @@ class Target
      * @param string $domain
      * @return self
      */
-    public function withDomain(string $domain) : self
+    public function withDomain(string $domain): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($domain, static::$schema['properties']['domain']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,12 +109,12 @@ class Target
      * @param string $path
      * @return self
      */
-    public function withPath(string $path) : self
+    public function withPath(string $path): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($path, static::$schema['properties']['path']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -124,7 +126,7 @@ class Target
     /**
      * @return self
      */
-    public function withoutPath() : self
+    public function withoutPath(): self
     {
         $clone = clone $this;
         unset($clone->path);
@@ -136,7 +138,7 @@ class Target
      * @param TargetScheme $scheme
      * @return self
      */
-    public function withScheme(TargetScheme $scheme) : self
+    public function withScheme(TargetScheme $scheme): self
     {
         $clone = clone $this;
         $clone->scheme = $scheme;
@@ -150,9 +152,9 @@ class Target
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Target Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Target
+    public static function buildFromInput(array|object $input, bool $validate = true): Target
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -176,7 +178,7 @@ class Target
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['domain'] = $this->domain;
@@ -194,19 +196,19 @@ class Target
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -216,4 +218,3 @@ class Target
     {
     }
 }
-

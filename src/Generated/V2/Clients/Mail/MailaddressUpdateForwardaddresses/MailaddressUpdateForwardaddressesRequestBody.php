@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateForwardaddresses;
 
+use InvalidArgumentException;
+
 class MailaddressUpdateForwardaddressesRequestBody
 {
     public const method = 'put';
@@ -34,7 +36,7 @@ class MailaddressUpdateForwardaddressesRequestBody
     private array $forwardAddresses;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -48,7 +50,7 @@ class MailaddressUpdateForwardaddressesRequestBody
     /**
      * @return string[]
      */
-    public function getForwardAddresses() : array
+    public function getForwardAddresses(): array
     {
         return $this->forwardAddresses;
     }
@@ -57,12 +59,12 @@ class MailaddressUpdateForwardaddressesRequestBody
      * @param string[] $forwardAddresses
      * @return self
      */
-    public function withForwardAddresses(array $forwardAddresses) : self
+    public function withForwardAddresses(array $forwardAddresses): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($forwardAddresses, static::$schema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -77,9 +79,9 @@ class MailaddressUpdateForwardaddressesRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MailaddressUpdateForwardaddressesRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MailaddressUpdateForwardaddressesRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): MailaddressUpdateForwardaddressesRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -98,7 +100,7 @@ class MailaddressUpdateForwardaddressesRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['forwardAddresses'] = $this->forwardAddresses;
@@ -112,19 +114,19 @@ class MailaddressUpdateForwardaddressesRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -134,30 +136,29 @@ class MailaddressUpdateForwardaddressesRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/mailaddresses/' . $id . '/forwardaddresses';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

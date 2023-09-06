@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Backup;
 
+use InvalidArgumentException;
+use DateTime;
+
 class BackupTemplate
 {
     /**
@@ -28,9 +31,9 @@ class BackupTemplate
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $expirationTime;
+    private DateTime $expirationTime;
 
     /**
      * @var IgnoredSources|null
@@ -38,17 +41,17 @@ class BackupTemplate
     private ?IgnoredSources $ignoredSources = null;
 
     /**
-     * @param \DateTime $expirationTime
+     * @param DateTime $expirationTime
      */
-    public function __construct(\DateTime $expirationTime)
+    public function __construct(DateTime $expirationTime)
     {
         $this->expirationTime = $expirationTime;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getExpirationTime() : \DateTime
+    public function getExpirationTime(): DateTime
     {
         return $this->expirationTime;
     }
@@ -56,16 +59,16 @@ class BackupTemplate
     /**
      * @return IgnoredSources|null
      */
-    public function getIgnoredSources() : ?IgnoredSources
+    public function getIgnoredSources(): ?IgnoredSources
     {
         return $this->ignoredSources ?? null;
     }
 
     /**
-     * @param \DateTime $expirationTime
+     * @param DateTime $expirationTime
      * @return self
      */
-    public function withExpirationTime(\DateTime $expirationTime) : self
+    public function withExpirationTime(DateTime $expirationTime): self
     {
         $clone = clone $this;
         $clone->expirationTime = $expirationTime;
@@ -77,7 +80,7 @@ class BackupTemplate
      * @param IgnoredSources $ignoredSources
      * @return self
      */
-    public function withIgnoredSources(IgnoredSources $ignoredSources) : self
+    public function withIgnoredSources(IgnoredSources $ignoredSources): self
     {
         $clone = clone $this;
         $clone->ignoredSources = $ignoredSources;
@@ -88,7 +91,7 @@ class BackupTemplate
     /**
      * @return self
      */
-    public function withoutIgnoredSources() : self
+    public function withoutIgnoredSources(): self
     {
         $clone = clone $this;
         unset($clone->ignoredSources);
@@ -102,16 +105,16 @@ class BackupTemplate
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return BackupTemplate Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : BackupTemplate
+    public static function buildFromInput(array|object $input, bool $validate = true): BackupTemplate
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $expirationTime = new \DateTime($input->{'expirationTime'});
+        $expirationTime = new DateTime($input->{'expirationTime'});
         $ignoredSources = null;
         if (isset($input->{'ignoredSources'})) {
             $ignoredSources = IgnoredSources::buildFromInput($input->{'ignoredSources'}, validate: $validate);
@@ -127,10 +130,10 @@ class BackupTemplate
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['expirationTime'] = ($this->expirationTime)->format(\DateTime::ATOM);
+        $output['expirationTime'] = ($this->expirationTime)->format(DateTime::ATOM);
         if (isset($this->ignoredSources)) {
             $output['ignoredSources'] = $this->ignoredSources->toJson();
         }
@@ -144,19 +147,19 @@ class BackupTemplate
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -167,4 +170,3 @@ class BackupTemplate
         $this->expirationTime = clone $this->expirationTime;
     }
 }
-

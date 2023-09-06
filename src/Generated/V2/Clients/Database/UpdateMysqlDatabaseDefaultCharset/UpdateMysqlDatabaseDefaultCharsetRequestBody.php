@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset;
 
+use InvalidArgumentException;
+
 class UpdateMysqlDatabaseDefaultCharsetRequestBody
 {
     public const method = 'patch';
@@ -30,7 +32,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
     private \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -44,7 +46,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings
      */
-    public function getCharacterSettings() : \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings
+    public function getCharacterSettings(): \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings
     {
         return $this->characterSettings;
     }
@@ -53,7 +55,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings
      * @return self
      */
-    public function withCharacterSettings(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings) : self
+    public function withCharacterSettings(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings $characterSettings): self
     {
         $clone = clone $this;
         $clone->characterSettings = $characterSettings;
@@ -67,9 +69,9 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateMysqlDatabaseDefaultCharsetRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateMysqlDatabaseDefaultCharsetRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlDatabaseDefaultCharsetRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -88,7 +90,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['characterSettings'] = $this->characterSettings->toJson();
@@ -102,19 +104,19 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -124,30 +126,29 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/mysql-databases/' . $id . '/default-charset';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

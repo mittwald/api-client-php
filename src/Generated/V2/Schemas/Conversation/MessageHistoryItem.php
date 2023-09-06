@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use InvalidArgumentException;
+
 class MessageHistoryItem
 {
     /**
@@ -58,7 +60,7 @@ class MessageHistoryItem
     /**
      * @return string
      */
-    public function getContent() : string
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -66,7 +68,7 @@ class MessageHistoryItem
     /**
      * @return string
      */
-    public function getUpdatedAt() : string
+    public function getUpdatedAt(): string
     {
         return $this->updatedAt;
     }
@@ -74,7 +76,7 @@ class MessageHistoryItem
     /**
      * @return User|null
      */
-    public function getUpdatedBy() : ?User
+    public function getUpdatedBy(): ?User
     {
         return $this->updatedBy ?? null;
     }
@@ -83,12 +85,12 @@ class MessageHistoryItem
      * @param string $content
      * @return self
      */
-    public function withContent(string $content) : self
+    public function withContent(string $content): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($content, static::$schema['properties']['content']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -101,12 +103,12 @@ class MessageHistoryItem
      * @param string $updatedAt
      * @return self
      */
-    public function withUpdatedAt(string $updatedAt) : self
+    public function withUpdatedAt(string $updatedAt): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($updatedAt, static::$schema['properties']['updatedAt']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -119,7 +121,7 @@ class MessageHistoryItem
      * @param User $updatedBy
      * @return self
      */
-    public function withUpdatedBy(User $updatedBy) : self
+    public function withUpdatedBy(User $updatedBy): self
     {
         $clone = clone $this;
         $clone->updatedBy = $updatedBy;
@@ -130,7 +132,7 @@ class MessageHistoryItem
     /**
      * @return self
      */
-    public function withoutUpdatedBy() : self
+    public function withoutUpdatedBy(): self
     {
         $clone = clone $this;
         unset($clone->updatedBy);
@@ -144,9 +146,9 @@ class MessageHistoryItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MessageHistoryItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MessageHistoryItem
+    public static function buildFromInput(array|object $input, bool $validate = true): MessageHistoryItem
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -170,7 +172,7 @@ class MessageHistoryItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['content'] = $this->content;
@@ -188,19 +190,19 @@ class MessageHistoryItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -210,4 +212,3 @@ class MessageHistoryItem
     {
     }
 }
-

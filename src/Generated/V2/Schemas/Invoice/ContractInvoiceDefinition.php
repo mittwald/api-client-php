@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+
 class ContractInvoiceDefinition
 {
     /**
@@ -54,7 +56,7 @@ class ContractInvoiceDefinition
     /**
      * @return string
      */
-    public function getContractId() : string
+    public function getContractId(): string
     {
         return $this->contractId;
     }
@@ -63,7 +65,7 @@ class ContractInvoiceDefinition
      * @return
      * ContractItemInvoiceDefinition[]
      */
-    public function getItems() : array
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -72,12 +74,12 @@ class ContractInvoiceDefinition
      * @param string $contractId
      * @return self
      */
-    public function withContractId(string $contractId) : self
+    public function withContractId(string $contractId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractId, static::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -90,7 +92,7 @@ class ContractInvoiceDefinition
      * @param ContractItemInvoiceDefinition[] $items
      * @return self
      */
-    public function withItems(array $items) : self
+    public function withItems(array $items): self
     {
         $clone = clone $this;
         $clone->items = $items;
@@ -104,9 +106,9 @@ class ContractInvoiceDefinition
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ContractInvoiceDefinition Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ContractInvoiceDefinition
+    public static function buildFromInput(array|object $input, bool $validate = true): ContractInvoiceDefinition
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -114,7 +116,7 @@ class ContractInvoiceDefinition
         }
 
         $contractId = $input->{'contractId'};
-        $items = array_map(fn(array $i): ContractItemInvoiceDefinition => ContractItemInvoiceDefinition::buildFromInput($i, validate: $validate), $input->{'items'});
+        $items = array_map(fn (array $i): ContractItemInvoiceDefinition => ContractItemInvoiceDefinition::buildFromInput($i, validate: $validate), $input->{'items'});
 
         $obj = new self($contractId, $items);
 
@@ -126,11 +128,11 @@ class ContractInvoiceDefinition
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['contractId'] = $this->contractId;
-        $output['items'] = array_map(fn(ContractItemInvoiceDefinition $i): array => $i->toJson(), $this->items);
+        $output['items'] = array_map(fn (ContractItemInvoiceDefinition $i): array => $i->toJson(), $this->items);
 
         return $output;
     }
@@ -141,19 +143,19 @@ class ContractInvoiceDefinition
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -163,4 +165,3 @@ class ContractInvoiceDefinition
     {
     }
 }
-

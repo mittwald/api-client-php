@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Varnish;
 
+use InvalidArgumentException;
+
 class SoftwareConfig
 {
     /**
@@ -54,7 +56,7 @@ class SoftwareConfig
     /**
      * @return ConfigExpiration|null
      */
-    public function getConfigExpiration() : ?ConfigExpiration
+    public function getConfigExpiration(): ?ConfigExpiration
     {
         return $this->configExpiration ?? null;
     }
@@ -62,7 +64,7 @@ class SoftwareConfig
     /**
      * @return int|float|null
      */
-    public function getLatestConfigRevision() : int|float|null
+    public function getLatestConfigRevision(): int|float|null
     {
         return $this->latestConfigRevision;
     }
@@ -70,7 +72,7 @@ class SoftwareConfig
     /**
      * @return ConfigRevision[]|null
      */
-    public function getRevisions() : ?array
+    public function getRevisions(): ?array
     {
         return $this->revisions ?? null;
     }
@@ -79,7 +81,7 @@ class SoftwareConfig
      * @param ConfigExpiration $configExpiration
      * @return self
      */
-    public function withConfigExpiration(ConfigExpiration $configExpiration) : self
+    public function withConfigExpiration(ConfigExpiration $configExpiration): self
     {
         $clone = clone $this;
         $clone->configExpiration = $configExpiration;
@@ -90,7 +92,7 @@ class SoftwareConfig
     /**
      * @return self
      */
-    public function withoutConfigExpiration() : self
+    public function withoutConfigExpiration(): self
     {
         $clone = clone $this;
         unset($clone->configExpiration);
@@ -102,12 +104,12 @@ class SoftwareConfig
      * @param int|float $latestConfigRevision
      * @return self
      */
-    public function withLatestConfigRevision(int|float $latestConfigRevision) : self
+    public function withLatestConfigRevision(int|float $latestConfigRevision): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($latestConfigRevision, static::$schema['properties']['latestConfigRevision']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -119,7 +121,7 @@ class SoftwareConfig
     /**
      * @return self
      */
-    public function withoutLatestConfigRevision() : self
+    public function withoutLatestConfigRevision(): self
     {
         $clone = clone $this;
         unset($clone->latestConfigRevision);
@@ -131,7 +133,7 @@ class SoftwareConfig
      * @param ConfigRevision[] $revisions
      * @return self
      */
-    public function withRevisions(array $revisions) : self
+    public function withRevisions(array $revisions): self
     {
         $clone = clone $this;
         $clone->revisions = $revisions;
@@ -142,7 +144,7 @@ class SoftwareConfig
     /**
      * @return self
      */
-    public function withoutRevisions() : self
+    public function withoutRevisions(): self
     {
         $clone = clone $this;
         unset($clone->revisions);
@@ -156,9 +158,9 @@ class SoftwareConfig
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SoftwareConfig Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SoftwareConfig
+    public static function buildFromInput(array|object $input, bool $validate = true): SoftwareConfig
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -175,7 +177,7 @@ class SoftwareConfig
         }
         $revisions = null;
         if (isset($input->{'revisions'})) {
-            $revisions = array_map(fn(array $i): ConfigRevision => ConfigRevision::buildFromInput($i, validate: $validate), $input->{'revisions'});
+            $revisions = array_map(fn (array $i): ConfigRevision => ConfigRevision::buildFromInput($i, validate: $validate), $input->{'revisions'});
         }
 
         $obj = new self();
@@ -190,7 +192,7 @@ class SoftwareConfig
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->configExpiration)) {
@@ -200,7 +202,7 @@ class SoftwareConfig
             $output['latestConfigRevision'] = $this->latestConfigRevision;
         }
         if (isset($this->revisions)) {
-            $output['revisions'] = array_map(fn(ConfigRevision $i): array => $i->toJson(), $this->revisions);
+            $output['revisions'] = array_map(fn (ConfigRevision $i): array => $i->toJson(), $this->revisions);
         }
 
         return $output;
@@ -212,19 +214,19 @@ class SoftwareConfig
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -234,4 +236,3 @@ class SoftwareConfig
     {
     }
 }
-

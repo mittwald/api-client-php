@@ -13,7 +13,7 @@ class FileClient
         $this->client = $client;
     }
 
-    public function createFile(CreateFile\CreateFileRequest $request) : CreateFile\CreateFile201Response|CreateFile\CreateFile400Response|CreateFile\CreateFile500Response|CreateFile\CreateFileDefaultResponse
+    public function createFile(CreateFile\CreateFileRequest $request): CreateFile\CreateFile201Response|CreateFile\CreateFile400Response|CreateFile\CreateFile500Response|CreateFile\CreateFileDefaultResponse
     {
         $httpRequest = new Request(CreateFile\CreateFileRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -28,7 +28,7 @@ class FileClient
         };
     }
 
-    public function getFileMeta(GetFileMeta\GetFileMetaRequest $request) : GetFileMeta\GetFileMeta200Response|GetFileMeta\GetFileMeta404Response|GetFileMeta\GetFileMetaDefaultResponse
+    public function getFileMeta(GetFileMeta\GetFileMetaRequest $request): GetFileMeta\GetFileMeta200Response|GetFileMeta\GetFileMeta404Response|GetFileMeta\GetFileMetaDefaultResponse
     {
         $httpRequest = new Request(GetFileMeta\GetFileMetaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -42,7 +42,7 @@ class FileClient
         };
     }
 
-    public function getFileTokenRules(GetFileTokenRules\GetFileTokenRulesRequest $request) : GetFileTokenRules\GetFileTokenRules200Response|GetFileTokenRules\GetFileTokenRules404Response|GetFileTokenRules\GetFileTokenRules500Response|GetFileTokenRules\GetFileTokenRulesDefaultResponse
+    public function getFileTokenRules(GetFileTokenRules\GetFileTokenRulesRequest $request): GetFileTokenRules\GetFileTokenRules200Response|GetFileTokenRules\GetFileTokenRules404Response|GetFileTokenRules\GetFileTokenRules500Response|GetFileTokenRules\GetFileTokenRulesDefaultResponse
     {
         $httpRequest = new Request(GetFileTokenRules\GetFileTokenRulesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -57,7 +57,7 @@ class FileClient
         };
     }
 
-    public function getFileTypeRules(GetFileTypeRules\GetFileTypeRulesRequest $request) : GetFileTypeRules\GetFileTypeRules200Response|GetFileTypeRules\GetFileTypeRules404Response|GetFileTypeRules\GetFileTypeRules500Response|GetFileTypeRules\GetFileTypeRulesDefaultResponse
+    public function getFileTypeRules(GetFileTypeRules\GetFileTypeRulesRequest $request): GetFileTypeRules\GetFileTypeRules200Response|GetFileTypeRules\GetFileTypeRules404Response|GetFileTypeRules\GetFileTypeRules500Response|GetFileTypeRules\GetFileTypeRulesDefaultResponse
     {
         $httpRequest = new Request(GetFileTypeRules\GetFileTypeRulesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -72,7 +72,7 @@ class FileClient
         };
     }
 
-    public function getFile(GetFile\GetFileRequest $request) : \Mittwald\ApiClient\Client\StringResponse|GetFile\GetFile400Response|GetFile\GetFile404Response|GetFile\GetFile500Response|GetFile\GetFileDefaultResponse
+    public function getFile(GetFile\GetFileRequest $request): \Mittwald\ApiClient\Client\StringResponse|GetFile\GetFile400Response|GetFile\GetFile404Response|GetFile\GetFile500Response|GetFile\GetFileDefaultResponse
     {
         $httpRequest = new Request(GetFile\GetFileRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -88,4 +88,3 @@ class FileClient
         };
     }
 }
-

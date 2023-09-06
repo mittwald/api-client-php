@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload;
 
+use InvalidArgumentException;
+
 class RequestAvatarUpload200ResponseBodyRules
 {
     /**
@@ -92,7 +94,7 @@ class RequestAvatarUpload200ResponseBodyRules
     /**
      * @return int
      */
-    public function getMaxSizeInKB() : int
+    public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
     }
@@ -100,7 +102,7 @@ class RequestAvatarUpload200ResponseBodyRules
     /**
      * @return string[]
      */
-    public function getMimeTypes() : array
+    public function getMimeTypes(): array
     {
         return $this->mimeTypes;
     }
@@ -108,7 +110,7 @@ class RequestAvatarUpload200ResponseBodyRules
     /**
      * @return RequestAvatarUpload200ResponseBodyRulesProperties|null
      */
-    public function getProperties() : ?RequestAvatarUpload200ResponseBodyRulesProperties
+    public function getProperties(): ?RequestAvatarUpload200ResponseBodyRulesProperties
     {
         return $this->properties ?? null;
     }
@@ -117,12 +119,12 @@ class RequestAvatarUpload200ResponseBodyRules
      * @param int $maxSizeInKB
      * @return self
      */
-    public function withMaxSizeInKB(int $maxSizeInKB) : self
+    public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($maxSizeInKB, static::$schema['properties']['maxSizeInKB']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -135,12 +137,12 @@ class RequestAvatarUpload200ResponseBodyRules
      * @param string[] $mimeTypes
      * @return self
      */
-    public function withMimeTypes(array $mimeTypes) : self
+    public function withMimeTypes(array $mimeTypes): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($mimeTypes, static::$schema['properties']['mimeTypes']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -153,7 +155,7 @@ class RequestAvatarUpload200ResponseBodyRules
      * @param RequestAvatarUpload200ResponseBodyRulesProperties $properties
      * @return self
      */
-    public function withProperties(RequestAvatarUpload200ResponseBodyRulesProperties $properties) : self
+    public function withProperties(RequestAvatarUpload200ResponseBodyRulesProperties $properties): self
     {
         $clone = clone $this;
         $clone->properties = $properties;
@@ -164,7 +166,7 @@ class RequestAvatarUpload200ResponseBodyRules
     /**
      * @return self
      */
-    public function withoutProperties() : self
+    public function withoutProperties(): self
     {
         $clone = clone $this;
         unset($clone->properties);
@@ -178,9 +180,9 @@ class RequestAvatarUpload200ResponseBodyRules
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestAvatarUpload200ResponseBodyRules Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestAvatarUpload200ResponseBodyRules
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestAvatarUpload200ResponseBodyRules
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -204,7 +206,7 @@ class RequestAvatarUpload200ResponseBodyRules
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['maxSizeInKB'] = $this->maxSizeInKB;
@@ -222,19 +224,19 @@ class RequestAvatarUpload200ResponseBodyRules
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -247,7 +249,7 @@ class RequestAvatarUpload200ResponseBodyRules
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -255,4 +257,3 @@ class RequestAvatarUpload200ResponseBodyRules
         return $response;
     }
 }
-

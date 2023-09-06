@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+
 class EmptyResponse
 {
     /**
@@ -50,7 +52,7 @@ class EmptyResponse
     /**
      * @return EmptyResponseError_props
      */
-    public function getErrorProps() : EmptyResponseError_props
+    public function getErrorProps(): EmptyResponseError_props
     {
         return $this->error_props;
     }
@@ -58,7 +60,7 @@ class EmptyResponse
     /**
      * @return string
      */
-    public function getErrorReason() : string
+    public function getErrorReason(): string
     {
         return $this->error_reason;
     }
@@ -67,7 +69,7 @@ class EmptyResponse
      * @param EmptyResponseError_props $error_props
      * @return self
      */
-    public function withErrorProps(EmptyResponseError_props $error_props) : self
+    public function withErrorProps(EmptyResponseError_props $error_props): self
     {
         $clone = clone $this;
         $clone->error_props = $error_props;
@@ -79,12 +81,12 @@ class EmptyResponse
      * @param string $error_reason
      * @return self
      */
-    public function withErrorReason(string $error_reason) : self
+    public function withErrorReason(string $error_reason): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($error_reason, static::$schema['properties']['error_reason']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -99,9 +101,9 @@ class EmptyResponse
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return EmptyResponse Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : EmptyResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): EmptyResponse
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -121,7 +123,7 @@ class EmptyResponse
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['error_props'] = ($this->error_props)->toJson();
@@ -136,19 +138,19 @@ class EmptyResponse
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -159,4 +161,3 @@ class EmptyResponse
         $this->error_props = clone $this->error_props;
     }
 }
-

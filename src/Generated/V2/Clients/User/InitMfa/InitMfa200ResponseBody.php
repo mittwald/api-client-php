@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa;
 
+use InvalidArgumentException;
+
 class InitMfa200ResponseBody
 {
     /**
@@ -65,7 +67,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     /**
      * @return string
      */
-    public function getBarcode() : string
+    public function getBarcode(): string
     {
         return $this->barcode;
     }
@@ -73,7 +75,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -82,12 +84,12 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param string $barcode
      * @return self
      */
-    public function withBarcode(string $barcode) : self
+    public function withBarcode(string $barcode): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($barcode, static::$schema['properties']['barcode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -100,12 +102,12 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param string $url
      * @return self
      */
-    public function withUrl(string $url) : self
+    public function withUrl(string $url): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($url, static::$schema['properties']['url']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -120,9 +122,9 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InitMfa200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InitMfa200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): InitMfa200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -142,7 +144,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['barcode'] = $this->barcode;
@@ -157,19 +159,19 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -179,7 +181,7 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -187,4 +189,3 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
         return $response;
     }
 }
-

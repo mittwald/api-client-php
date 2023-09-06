@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription;
 
+use InvalidArgumentException;
+
 class UpdateMysqlDatabaseDescriptionRequest
 {
     public const method = 'patch';
@@ -48,7 +50,7 @@ class UpdateMysqlDatabaseDescriptionRequest
     private UpdateMysqlDatabaseDescriptionRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -64,7 +66,7 @@ class UpdateMysqlDatabaseDescriptionRequest
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -72,7 +74,7 @@ class UpdateMysqlDatabaseDescriptionRequest
     /**
      * @return UpdateMysqlDatabaseDescriptionRequestBody
      */
-    public function getBody() : UpdateMysqlDatabaseDescriptionRequestBody
+    public function getBody(): UpdateMysqlDatabaseDescriptionRequestBody
     {
         return $this->body;
     }
@@ -81,12 +83,12 @@ class UpdateMysqlDatabaseDescriptionRequest
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -99,7 +101,7 @@ class UpdateMysqlDatabaseDescriptionRequest
      * @param UpdateMysqlDatabaseDescriptionRequestBody $body
      * @return self
      */
-    public function withBody(UpdateMysqlDatabaseDescriptionRequestBody $body) : self
+    public function withBody(UpdateMysqlDatabaseDescriptionRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -113,9 +115,9 @@ class UpdateMysqlDatabaseDescriptionRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateMysqlDatabaseDescriptionRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateMysqlDatabaseDescriptionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateMysqlDatabaseDescriptionRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -135,7 +137,7 @@ class UpdateMysqlDatabaseDescriptionRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['id'] = $this->id;
@@ -150,19 +152,19 @@ class UpdateMysqlDatabaseDescriptionRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -173,30 +175,29 @@ class UpdateMysqlDatabaseDescriptionRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/mysql-databases/' . $id . '/description';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

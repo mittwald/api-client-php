@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+
 class AvatarRulesProperties
 {
     /**
@@ -59,7 +61,7 @@ class AvatarRulesProperties
     /**
      * @return AvatarRulesPropertiesImageDimensions|null
      */
-    public function getImageDimensions() : ?AvatarRulesPropertiesImageDimensions
+    public function getImageDimensions(): ?AvatarRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
@@ -68,7 +70,7 @@ class AvatarRulesProperties
      * @param AvatarRulesPropertiesImageDimensions $imageDimensions
      * @return self
      */
-    public function withImageDimensions(AvatarRulesPropertiesImageDimensions $imageDimensions) : self
+    public function withImageDimensions(AvatarRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
         $clone->imageDimensions = $imageDimensions;
@@ -79,7 +81,7 @@ class AvatarRulesProperties
     /**
      * @return self
      */
-    public function withoutImageDimensions() : self
+    public function withoutImageDimensions(): self
     {
         $clone = clone $this;
         unset($clone->imageDimensions);
@@ -93,9 +95,9 @@ class AvatarRulesProperties
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AvatarRulesProperties Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AvatarRulesProperties
+    public static function buildFromInput(array|object $input, bool $validate = true): AvatarRulesProperties
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -117,7 +119,7 @@ class AvatarRulesProperties
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->imageDimensions)) {
@@ -133,19 +135,19 @@ class AvatarRulesProperties
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -158,4 +160,3 @@ class AvatarRulesProperties
         }
     }
 }
-

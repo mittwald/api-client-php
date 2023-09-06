@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule;
 
+use InvalidArgumentException;
+
 class UpdateProjectBackupScheduleRequest
 {
     public const method = 'patch';
@@ -58,7 +60,7 @@ class UpdateProjectBackupScheduleRequest
     private UpdateProjectBackupScheduleRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -74,7 +76,7 @@ class UpdateProjectBackupScheduleRequest
     /**
      * @return string
      */
-    public function getProjectBackupScheduleId() : string
+    public function getProjectBackupScheduleId(): string
     {
         return $this->projectBackupScheduleId;
     }
@@ -82,7 +84,7 @@ class UpdateProjectBackupScheduleRequest
     /**
      * @return UpdateProjectBackupScheduleRequestBody
      */
-    public function getBody() : UpdateProjectBackupScheduleRequestBody
+    public function getBody(): UpdateProjectBackupScheduleRequestBody
     {
         return $this->body;
     }
@@ -91,12 +93,12 @@ class UpdateProjectBackupScheduleRequest
      * @param string $projectBackupScheduleId
      * @return self
      */
-    public function withProjectBackupScheduleId(string $projectBackupScheduleId) : self
+    public function withProjectBackupScheduleId(string $projectBackupScheduleId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectBackupScheduleId, static::$schema['properties']['projectBackupScheduleId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -109,7 +111,7 @@ class UpdateProjectBackupScheduleRequest
      * @param UpdateProjectBackupScheduleRequestBody $body
      * @return self
      */
-    public function withBody(UpdateProjectBackupScheduleRequestBody $body) : self
+    public function withBody(UpdateProjectBackupScheduleRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -123,9 +125,9 @@ class UpdateProjectBackupScheduleRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateProjectBackupScheduleRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateProjectBackupScheduleRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectBackupScheduleRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -145,7 +147,7 @@ class UpdateProjectBackupScheduleRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectBackupScheduleId'] = $this->projectBackupScheduleId;
@@ -160,19 +162,19 @@ class UpdateProjectBackupScheduleRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -183,30 +185,29 @@ class UpdateProjectBackupScheduleRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectBackupScheduleId = urlencode($mapped['projectBackupScheduleId']);
         return '/v2/project-backup-schedules/' . $projectBackupScheduleId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

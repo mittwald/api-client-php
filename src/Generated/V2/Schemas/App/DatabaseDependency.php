@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+
 class DatabaseDependency
 {
     /**
@@ -76,7 +78,7 @@ class DatabaseDependency
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -84,7 +86,7 @@ class DatabaseDependency
     /**
      * @return DatabaseDependencyKind
      */
-    public function getKind() : DatabaseDependencyKind
+    public function getKind(): DatabaseDependencyKind
     {
         return $this->kind;
     }
@@ -92,7 +94,7 @@ class DatabaseDependency
     /**
      * @return string[]|null
      */
-    public function getParameters() : ?array
+    public function getParameters(): ?array
     {
         return $this->parameters ?? null;
     }
@@ -100,7 +102,7 @@ class DatabaseDependency
     /**
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -109,12 +111,12 @@ class DatabaseDependency
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -127,7 +129,7 @@ class DatabaseDependency
      * @param DatabaseDependencyKind $kind
      * @return self
      */
-    public function withKind(DatabaseDependencyKind $kind) : self
+    public function withKind(DatabaseDependencyKind $kind): self
     {
         $clone = clone $this;
         $clone->kind = $kind;
@@ -139,12 +141,12 @@ class DatabaseDependency
      * @param string[] $parameters
      * @return self
      */
-    public function withParameters(array $parameters) : self
+    public function withParameters(array $parameters): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($parameters, static::$schema['properties']['parameters']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -156,7 +158,7 @@ class DatabaseDependency
     /**
      * @return self
      */
-    public function withoutParameters() : self
+    public function withoutParameters(): self
     {
         $clone = clone $this;
         unset($clone->parameters);
@@ -168,12 +170,12 @@ class DatabaseDependency
      * @param string $version
      * @return self
      */
-    public function withVersion(string $version) : self
+    public function withVersion(string $version): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($version, static::$schema['properties']['version']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -188,9 +190,9 @@ class DatabaseDependency
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DatabaseDependency Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DatabaseDependency
+    public static function buildFromInput(array|object $input, bool $validate = true): DatabaseDependency
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -215,7 +217,7 @@ class DatabaseDependency
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['description'] = $this->description;
@@ -234,19 +236,19 @@ class DatabaseDependency
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -256,4 +258,3 @@ class DatabaseDependency
     {
     }
 }
-

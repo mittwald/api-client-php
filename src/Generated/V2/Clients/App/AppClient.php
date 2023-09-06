@@ -13,7 +13,7 @@ class AppClient
         $this->client = $client;
     }
 
-    public function executeAction(ExecuteAction\ExecuteActionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ExecuteAction\ExecuteAction404Response|ExecuteAction\ExecuteActionDefaultResponse
+    public function executeAction(ExecuteAction\ExecuteActionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ExecuteAction\ExecuteAction404Response|ExecuteAction\ExecuteActionDefaultResponse
     {
         $httpRequest = new Request(ExecuteAction\ExecuteActionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -28,7 +28,7 @@ class AppClient
         };
     }
 
-    public function getApp(GetApp\GetAppRequest $request) : GetApp\GetApp200Response|GetApp\GetApp404Response|GetApp\GetAppDefaultResponse
+    public function getApp(GetApp\GetAppRequest $request): GetApp\GetApp200Response|GetApp\GetApp404Response|GetApp\GetAppDefaultResponse
     {
         $httpRequest = new Request(GetApp\GetAppRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -42,7 +42,7 @@ class AppClient
         };
     }
 
-    public function getAppinstallation(GetAppinstallation\GetAppinstallationRequest $request) : GetAppinstallation\GetAppinstallation200Response|GetAppinstallation\GetAppinstallation404Response|GetAppinstallation\GetAppinstallationDefaultResponse
+    public function getAppinstallation(GetAppinstallation\GetAppinstallationRequest $request): GetAppinstallation\GetAppinstallation200Response|GetAppinstallation\GetAppinstallation404Response|GetAppinstallation\GetAppinstallationDefaultResponse
     {
         $httpRequest = new Request(GetAppinstallation\GetAppinstallationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -56,7 +56,7 @@ class AppClient
         };
     }
 
-    public function patchAppinstallation(PatchAppinstallation\PatchAppinstallationRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|PatchAppinstallation\PatchAppinstallation404Response|PatchAppinstallation\PatchAppinstallationDefaultResponse
+    public function patchAppinstallation(PatchAppinstallation\PatchAppinstallationRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|PatchAppinstallation\PatchAppinstallation404Response|PatchAppinstallation\PatchAppinstallationDefaultResponse
     {
         $httpRequest = new Request(PatchAppinstallation\PatchAppinstallationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -71,7 +71,7 @@ class AppClient
         };
     }
 
-    public function uninstallAppinstallation(UninstallAppinstallation\UninstallAppinstallationRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UninstallAppinstallation\UninstallAppinstallation404Response|UninstallAppinstallation\UninstallAppinstallationDefaultResponse
+    public function uninstallAppinstallation(UninstallAppinstallation\UninstallAppinstallationRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UninstallAppinstallation\UninstallAppinstallation404Response|UninstallAppinstallation\UninstallAppinstallationDefaultResponse
     {
         $httpRequest = new Request(UninstallAppinstallation\UninstallAppinstallationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -85,7 +85,7 @@ class AppClient
         };
     }
 
-    public function getAppversion(GetAppversion\GetAppversionRequest $request) : GetAppversion\GetAppversion200Response|GetAppversion\GetAppversion404Response|GetAppversion\GetAppversionDefaultResponse
+    public function getAppversion(GetAppversion\GetAppversionRequest $request): GetAppversion\GetAppversion200Response|GetAppversion\GetAppversion404Response|GetAppversion\GetAppversionDefaultResponse
     {
         $httpRequest = new Request(GetAppversion\GetAppversionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -99,7 +99,7 @@ class AppClient
         };
     }
 
-    public function getMissingDependenciesForAppinstallation(GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest $request) : GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallation200Response|GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallation404Response|GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationDefaultResponse
+    public function getMissingDependenciesForAppinstallation(GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest $request): GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallation200Response|GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallation404Response|GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationDefaultResponse
     {
         $httpRequest = new Request(GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -113,7 +113,7 @@ class AppClient
         };
     }
 
-    public function getSystemsoftware(GetSystemsoftware\GetSystemsoftwareRequest $request) : GetSystemsoftware\GetSystemsoftware200Response|GetSystemsoftware\GetSystemsoftware404Response|GetSystemsoftware\GetSystemsoftwareDefaultResponse
+    public function getSystemsoftware(GetSystemsoftware\GetSystemsoftwareRequest $request): GetSystemsoftware\GetSystemsoftware200Response|GetSystemsoftware\GetSystemsoftware404Response|GetSystemsoftware\GetSystemsoftwareDefaultResponse
     {
         $httpRequest = new Request(GetSystemsoftware\GetSystemsoftwareRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -127,7 +127,7 @@ class AppClient
         };
     }
 
-    public function getSystemsoftwareversion(GetSystemsoftwareversion\GetSystemsoftwareversionRequest $request) : GetSystemsoftwareversion\GetSystemsoftwareversion200Response|GetSystemsoftwareversion\GetSystemsoftwareversion404Response|GetSystemsoftwareversion\GetSystemsoftwareversionDefaultResponse
+    public function getSystemsoftwareversion(GetSystemsoftwareversion\GetSystemsoftwareversionRequest $request): GetSystemsoftwareversion\GetSystemsoftwareversion200Response|GetSystemsoftwareversion\GetSystemsoftwareversion404Response|GetSystemsoftwareversion\GetSystemsoftwareversionDefaultResponse
     {
         $httpRequest = new Request(GetSystemsoftwareversion\GetSystemsoftwareversionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -141,7 +141,7 @@ class AppClient
         };
     }
 
-    public function linkDatabase(LinkDatabase\LinkDatabaseRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|LinkDatabase\LinkDatabase404Response|LinkDatabase\LinkDatabaseDefaultResponse
+    public function linkDatabase(LinkDatabase\LinkDatabaseRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|LinkDatabase\LinkDatabase404Response|LinkDatabase\LinkDatabaseDefaultResponse
     {
         $httpRequest = new Request(LinkDatabase\LinkDatabaseRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -156,7 +156,7 @@ class AppClient
         };
     }
 
-    public function listAppinstallations(ListAppinstallations\ListAppinstallationsRequest $request) : ListAppinstallations\ListAppinstallations200Response|ListAppinstallations\ListAppinstallationsDefaultResponse
+    public function listAppinstallations(ListAppinstallations\ListAppinstallationsRequest $request): ListAppinstallations\ListAppinstallations200Response|ListAppinstallations\ListAppinstallationsDefaultResponse
     {
         $httpRequest = new Request(ListAppinstallations\ListAppinstallationsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -169,7 +169,7 @@ class AppClient
         };
     }
 
-    public function requestAppinstallation(RequestAppinstallation\RequestAppinstallationRequest $request) : RequestAppinstallation\RequestAppinstallation201Response|RequestAppinstallation\RequestAppinstallation404Response|RequestAppinstallation\RequestAppinstallationDefaultResponse
+    public function requestAppinstallation(RequestAppinstallation\RequestAppinstallationRequest $request): RequestAppinstallation\RequestAppinstallation201Response|RequestAppinstallation\RequestAppinstallation404Response|RequestAppinstallation\RequestAppinstallationDefaultResponse
     {
         $httpRequest = new Request(RequestAppinstallation\RequestAppinstallationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -184,7 +184,7 @@ class AppClient
         };
     }
 
-    public function listApps(ListApps\ListAppsRequest $request) : ListApps\ListApps200Response|ListApps\ListAppsDefaultResponse
+    public function listApps(ListApps\ListAppsRequest $request): ListApps\ListApps200Response|ListApps\ListAppsDefaultResponse
     {
         $httpRequest = new Request(ListApps\ListAppsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -197,7 +197,7 @@ class AppClient
         };
     }
 
-    public function listAppversions(ListAppversions\ListAppversionsRequest $request) : ListAppversions\ListAppversions200Response|ListAppversions\ListAppversionsDefaultResponse
+    public function listAppversions(ListAppversions\ListAppversionsRequest $request): ListAppversions\ListAppversions200Response|ListAppversions\ListAppversionsDefaultResponse
     {
         $httpRequest = new Request(ListAppversions\ListAppversionsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -210,7 +210,7 @@ class AppClient
         };
     }
 
-    public function listSystemsoftwares(ListSystemsoftwares\ListSystemsoftwaresRequest $request) : ListSystemsoftwares\ListSystemsoftwares200Response|ListSystemsoftwares\ListSystemsoftwaresDefaultResponse
+    public function listSystemsoftwares(ListSystemsoftwares\ListSystemsoftwaresRequest $request): ListSystemsoftwares\ListSystemsoftwares200Response|ListSystemsoftwares\ListSystemsoftwaresDefaultResponse
     {
         $httpRequest = new Request(ListSystemsoftwares\ListSystemsoftwaresRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -223,7 +223,7 @@ class AppClient
         };
     }
 
-    public function listSystemsoftwareversions(ListSystemsoftwareversions\ListSystemsoftwareversionsRequest $request) : ListSystemsoftwareversions\ListSystemsoftwareversions200Response|ListSystemsoftwareversions\ListSystemsoftwareversionsDefaultResponse
+    public function listSystemsoftwareversions(ListSystemsoftwareversions\ListSystemsoftwareversionsRequest $request): ListSystemsoftwareversions\ListSystemsoftwareversions200Response|ListSystemsoftwareversions\ListSystemsoftwareversionsDefaultResponse
     {
         $httpRequest = new Request(ListSystemsoftwareversions\ListSystemsoftwareversionsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -236,7 +236,7 @@ class AppClient
         };
     }
 
-    public function listUpdateCandidatesForAppversion(ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest $request) : ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversion200Response|ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionDefaultResponse
+    public function listUpdateCandidatesForAppversion(ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest $request): ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversion200Response|ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionDefaultResponse
     {
         $httpRequest = new Request(ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -249,7 +249,7 @@ class AppClient
         };
     }
 
-    public function reconcileDetectedApps(ReconcileDetectedApps\ReconcileDetectedAppsRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ReconcileDetectedApps\ReconcileDetectedApps404Response|ReconcileDetectedApps\ReconcileDetectedAppsDefaultResponse
+    public function reconcileDetectedApps(ReconcileDetectedApps\ReconcileDetectedAppsRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ReconcileDetectedApps\ReconcileDetectedApps404Response|ReconcileDetectedApps\ReconcileDetectedAppsDefaultResponse
     {
         $httpRequest = new Request(ReconcileDetectedApps\ReconcileDetectedAppsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -264,7 +264,7 @@ class AppClient
         };
     }
 
-    public function requestAppinstallationCopy(RequestAppinstallationCopy\RequestAppinstallationCopyRequest $request) : RequestAppinstallationCopy\RequestAppinstallationCopy201Response|RequestAppinstallationCopy\RequestAppinstallationCopy404Response|RequestAppinstallationCopy\RequestAppinstallationCopyDefaultResponse
+    public function requestAppinstallationCopy(RequestAppinstallationCopy\RequestAppinstallationCopyRequest $request): RequestAppinstallationCopy\RequestAppinstallationCopy201Response|RequestAppinstallationCopy\RequestAppinstallationCopy404Response|RequestAppinstallationCopy\RequestAppinstallationCopyDefaultResponse
     {
         $httpRequest = new Request(RequestAppinstallationCopy\RequestAppinstallationCopyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -279,7 +279,7 @@ class AppClient
         };
     }
 
-    public function retrieveStatus(RetrieveStatus\RetrieveStatusRequest $request) : RetrieveStatus\RetrieveStatus200Response|RetrieveStatus\RetrieveStatus404Response|RetrieveStatus\RetrieveStatusDefaultResponse
+    public function retrieveStatus(RetrieveStatus\RetrieveStatusRequest $request): RetrieveStatus\RetrieveStatus200Response|RetrieveStatus\RetrieveStatus404Response|RetrieveStatus\RetrieveStatusDefaultResponse
     {
         $httpRequest = new Request(RetrieveStatus\RetrieveStatusRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -293,7 +293,7 @@ class AppClient
         };
     }
 
-    public function setDatabaseUsers(SetDatabaseUsers\SetDatabaseUsersRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|SetDatabaseUsers\SetDatabaseUsers404Response|SetDatabaseUsers\SetDatabaseUsersDefaultResponse
+    public function setDatabaseUsers(SetDatabaseUsers\SetDatabaseUsersRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|SetDatabaseUsers\SetDatabaseUsers404Response|SetDatabaseUsers\SetDatabaseUsersDefaultResponse
     {
         $httpRequest = new Request(SetDatabaseUsers\SetDatabaseUsersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -308,7 +308,7 @@ class AppClient
         };
     }
 
-    public function unlinkDatabase(UnlinkDatabase\UnlinkDatabaseRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UnlinkDatabase\UnlinkDatabase404Response|UnlinkDatabase\UnlinkDatabaseDefaultResponse
+    public function unlinkDatabase(UnlinkDatabase\UnlinkDatabaseRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UnlinkDatabase\UnlinkDatabase404Response|UnlinkDatabase\UnlinkDatabaseDefaultResponse
     {
         $httpRequest = new Request(UnlinkDatabase\UnlinkDatabaseRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -322,4 +322,3 @@ class AppClient
         };
     }
 }
-

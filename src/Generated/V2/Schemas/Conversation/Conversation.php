@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Conversation
 {
     /**
@@ -82,9 +85,9 @@ class Conversation
     private string $conversationId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var User|null
@@ -92,9 +95,9 @@ class Conversation
     private ?User $createdBy = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $lastMessageAt = null;
+    private ?DateTime $lastMessageAt = null;
 
     /**
      * @var User|null
@@ -133,12 +136,12 @@ class Conversation
 
     /**
      * @param string $conversationId
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $shortId
      * @param ConversationStatus $status
      * @param string $title
      */
-    public function __construct(string $conversationId, \DateTime $createdAt, string $shortId, ConversationStatus $status, string $title)
+    public function __construct(string $conversationId, DateTime $createdAt, string $shortId, ConversationStatus $status, string $title)
     {
         $this->conversationId = $conversationId;
         $this->createdAt = $createdAt;
@@ -150,7 +153,7 @@ class Conversation
     /**
      * @return Category|null
      */
-    public function getCategory() : ?Category
+    public function getCategory(): ?Category
     {
         return $this->category ?? null;
     }
@@ -158,15 +161,15 @@ class Conversation
     /**
      * @return string
      */
-    public function getConversationId() : string
+    public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -174,15 +177,15 @@ class Conversation
     /**
      * @return User|null
      */
-    public function getCreatedBy() : ?User
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getLastMessageAt() : ?\DateTime
+    public function getLastMessageAt(): ?DateTime
     {
         return $this->lastMessageAt ?? null;
     }
@@ -190,7 +193,7 @@ class Conversation
     /**
      * @return User|null
      */
-    public function getLastMessageBy() : ?User
+    public function getLastMessageBy(): ?User
     {
         return $this->lastMessageBy ?? null;
     }
@@ -199,7 +202,7 @@ class Conversation
      * @return
      * AggregateReference|null
      */
-    public function getRelatedTo() : ?AggregateReference
+    public function getRelatedTo(): ?AggregateReference
     {
         return $this->relatedTo ?? null;
     }
@@ -208,7 +211,7 @@ class Conversation
      * @return
      * AggregateReference[]|null
      */
-    public function getRelations() : ?array
+    public function getRelations(): ?array
     {
         return $this->relations ?? null;
     }
@@ -217,7 +220,7 @@ class Conversation
      * @return
      * AggregateReference|null
      */
-    public function getSharedWith() : ?AggregateReference
+    public function getSharedWith(): ?AggregateReference
     {
         return $this->sharedWith ?? null;
     }
@@ -225,7 +228,7 @@ class Conversation
     /**
      * @return string
      */
-    public function getShortId() : string
+    public function getShortId(): string
     {
         return $this->shortId;
     }
@@ -233,7 +236,7 @@ class Conversation
     /**
      * @return ConversationStatus
      */
-    public function getStatus() : ConversationStatus
+    public function getStatus(): ConversationStatus
     {
         return $this->status;
     }
@@ -241,7 +244,7 @@ class Conversation
     /**
      * @return string
      */
-    public function getTitle() : string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -250,7 +253,7 @@ class Conversation
      * @param Category $category
      * @return self
      */
-    public function withCategory(Category $category) : self
+    public function withCategory(Category $category): self
     {
         $clone = clone $this;
         $clone->category = $category;
@@ -261,7 +264,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutCategory() : self
+    public function withoutCategory(): self
     {
         $clone = clone $this;
         unset($clone->category);
@@ -273,12 +276,12 @@ class Conversation
      * @param string $conversationId
      * @return self
      */
-    public function withConversationId(string $conversationId) : self
+    public function withConversationId(string $conversationId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($conversationId, static::$schema['properties']['conversationId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -288,10 +291,10 @@ class Conversation
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -303,7 +306,7 @@ class Conversation
      * @param User $createdBy
      * @return self
      */
-    public function withCreatedBy(User $createdBy) : self
+    public function withCreatedBy(User $createdBy): self
     {
         $clone = clone $this;
         $clone->createdBy = $createdBy;
@@ -314,7 +317,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutCreatedBy() : self
+    public function withoutCreatedBy(): self
     {
         $clone = clone $this;
         unset($clone->createdBy);
@@ -323,10 +326,10 @@ class Conversation
     }
 
     /**
-     * @param \DateTime $lastMessageAt
+     * @param DateTime $lastMessageAt
      * @return self
      */
-    public function withLastMessageAt(\DateTime $lastMessageAt) : self
+    public function withLastMessageAt(DateTime $lastMessageAt): self
     {
         $clone = clone $this;
         $clone->lastMessageAt = $lastMessageAt;
@@ -337,7 +340,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutLastMessageAt() : self
+    public function withoutLastMessageAt(): self
     {
         $clone = clone $this;
         unset($clone->lastMessageAt);
@@ -349,7 +352,7 @@ class Conversation
      * @param User $lastMessageBy
      * @return self
      */
-    public function withLastMessageBy(User $lastMessageBy) : self
+    public function withLastMessageBy(User $lastMessageBy): self
     {
         $clone = clone $this;
         $clone->lastMessageBy = $lastMessageBy;
@@ -360,7 +363,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutLastMessageBy() : self
+    public function withoutLastMessageBy(): self
     {
         $clone = clone $this;
         unset($clone->lastMessageBy);
@@ -372,7 +375,7 @@ class Conversation
      * @param AggregateReference $relatedTo
      * @return self
      */
-    public function withRelatedTo(AggregateReference $relatedTo) : self
+    public function withRelatedTo(AggregateReference $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -383,7 +386,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutRelatedTo() : self
+    public function withoutRelatedTo(): self
     {
         $clone = clone $this;
         unset($clone->relatedTo);
@@ -395,7 +398,7 @@ class Conversation
      * @param AggregateReference[] $relations
      * @return self
      */
-    public function withRelations(array $relations) : self
+    public function withRelations(array $relations): self
     {
         $clone = clone $this;
         $clone->relations = $relations;
@@ -406,7 +409,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutRelations() : self
+    public function withoutRelations(): self
     {
         $clone = clone $this;
         unset($clone->relations);
@@ -418,7 +421,7 @@ class Conversation
      * @param AggregateReference $sharedWith
      * @return self
      */
-    public function withSharedWith(AggregateReference $sharedWith) : self
+    public function withSharedWith(AggregateReference $sharedWith): self
     {
         $clone = clone $this;
         $clone->sharedWith = $sharedWith;
@@ -429,7 +432,7 @@ class Conversation
     /**
      * @return self
      */
-    public function withoutSharedWith() : self
+    public function withoutSharedWith(): self
     {
         $clone = clone $this;
         unset($clone->sharedWith);
@@ -441,12 +444,12 @@ class Conversation
      * @param string $shortId
      * @return self
      */
-    public function withShortId(string $shortId) : self
+    public function withShortId(string $shortId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($shortId, static::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -459,7 +462,7 @@ class Conversation
      * @param ConversationStatus $status
      * @return self
      */
-    public function withStatus(ConversationStatus $status) : self
+    public function withStatus(ConversationStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -471,12 +474,12 @@ class Conversation
      * @param string $title
      * @return self
      */
-    public function withTitle(string $title) : self
+    public function withTitle(string $title): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($title, static::$schema['properties']['title']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -491,9 +494,9 @@ class Conversation
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Conversation Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Conversation
+    public static function buildFromInput(array|object $input, bool $validate = true): Conversation
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -505,14 +508,14 @@ class Conversation
             $category = Category::buildFromInput($input->{'category'}, validate: $validate);
         }
         $conversationId = $input->{'conversationId'};
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $createdBy = null;
         if (isset($input->{'createdBy'})) {
             $createdBy = User::buildFromInput($input->{'createdBy'}, validate: $validate);
         }
         $lastMessageAt = null;
         if (isset($input->{'lastMessageAt'})) {
-            $lastMessageAt = new \DateTime($input->{'lastMessageAt'});
+            $lastMessageAt = new DateTime($input->{'lastMessageAt'});
         }
         $lastMessageBy = null;
         if (isset($input->{'lastMessageBy'})) {
@@ -524,7 +527,7 @@ class Conversation
         }
         $relations = null;
         if (isset($input->{'relations'})) {
-            $relations = array_map(fn(array $i): AggregateReference => AggregateReference::buildFromInput($i, validate: $validate), $input->{'relations'});
+            $relations = array_map(fn (array $i): AggregateReference => AggregateReference::buildFromInput($i, validate: $validate), $input->{'relations'});
         }
         $sharedWith = null;
         if (isset($input->{'sharedWith'})) {
@@ -550,19 +553,19 @@ class Conversation
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->category)) {
             $output['category'] = $this->category->toJson();
         }
         $output['conversationId'] = $this->conversationId;
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->createdBy)) {
             $output['createdBy'] = $this->createdBy->toJson();
         }
         if (isset($this->lastMessageAt)) {
-            $output['lastMessageAt'] = ($this->lastMessageAt)->format(\DateTime::ATOM);
+            $output['lastMessageAt'] = ($this->lastMessageAt)->format(DateTime::ATOM);
         }
         if (isset($this->lastMessageBy)) {
             $output['lastMessageBy'] = $this->lastMessageBy->toJson();
@@ -571,7 +574,7 @@ class Conversation
             $output['relatedTo'] = $this->relatedTo->toJson();
         }
         if (isset($this->relations)) {
-            $output['relations'] = array_map(fn(AggregateReference $i): array => $i->toJson(), $this->relations);
+            $output['relations'] = array_map(fn (AggregateReference $i): array => $i->toJson(), $this->relations);
         }
         if (isset($this->sharedWith)) {
             $output['sharedWith'] = $this->sharedWith->toJson();
@@ -589,19 +592,19 @@ class Conversation
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -615,4 +618,3 @@ class Conversation
         }
     }
 }
-

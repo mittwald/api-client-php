@@ -13,7 +13,7 @@ class ArticleClient
         $this->client = $client;
     }
 
-    public function getArticle(GetArticle\GetArticleRequest $request) : GetArticle\GetArticle200Response|GetArticle\GetArticle404Response|GetArticle\GetArticleDefaultResponse
+    public function getArticle(GetArticle\GetArticleRequest $request): GetArticle\GetArticle200Response|GetArticle\GetArticle404Response|GetArticle\GetArticleDefaultResponse
     {
         $httpRequest = new Request(GetArticle\GetArticleRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -27,7 +27,7 @@ class ArticleClient
         };
     }
 
-    public function listArticles(ListArticles\ListArticlesRequest $request) : ListArticles\ListArticles200Response|ListArticles\ListArticlesDefaultResponse
+    public function listArticles(ListArticles\ListArticlesRequest $request): ListArticles\ListArticles200Response|ListArticles\ListArticlesDefaultResponse
     {
         $httpRequest = new Request(ListArticles\ListArticlesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -40,4 +40,3 @@ class ArticleClient
         };
     }
 }
-

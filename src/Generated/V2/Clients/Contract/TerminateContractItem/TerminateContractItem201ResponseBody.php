@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem;
 
+use InvalidArgumentException;
+use DateTime;
+
 class TerminateContractItem201ResponseBody
 {
     /**
@@ -48,9 +51,9 @@ class TerminateContractItem201ResponseBody
     private ?string $reason = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $terminationTargetDate = null;
+    private ?DateTime $terminationTargetDate = null;
 
     public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
 
@@ -64,7 +67,7 @@ class TerminateContractItem201ResponseBody
     /**
      * @return string|null
      */
-    public function getContractId() : ?string
+    public function getContractId(): ?string
     {
         return $this->contractId ?? null;
     }
@@ -72,7 +75,7 @@ class TerminateContractItem201ResponseBody
     /**
      * @return string|null
      */
-    public function getContractItemId() : ?string
+    public function getContractItemId(): ?string
     {
         return $this->contractItemId ?? null;
     }
@@ -80,15 +83,15 @@ class TerminateContractItem201ResponseBody
     /**
      * @return string|null
      */
-    public function getReason() : ?string
+    public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getTerminationTargetDate() : ?\DateTime
+    public function getTerminationTargetDate(): ?DateTime
     {
         return $this->terminationTargetDate ?? null;
     }
@@ -97,12 +100,12 @@ class TerminateContractItem201ResponseBody
      * @param string $contractId
      * @return self
      */
-    public function withContractId(string $contractId) : self
+    public function withContractId(string $contractId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractId, static::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -114,7 +117,7 @@ class TerminateContractItem201ResponseBody
     /**
      * @return self
      */
-    public function withoutContractId() : self
+    public function withoutContractId(): self
     {
         $clone = clone $this;
         unset($clone->contractId);
@@ -126,12 +129,12 @@ class TerminateContractItem201ResponseBody
      * @param string $contractItemId
      * @return self
      */
-    public function withContractItemId(string $contractItemId) : self
+    public function withContractItemId(string $contractItemId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractItemId, static::$schema['properties']['contractItemId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -143,7 +146,7 @@ class TerminateContractItem201ResponseBody
     /**
      * @return self
      */
-    public function withoutContractItemId() : self
+    public function withoutContractItemId(): self
     {
         $clone = clone $this;
         unset($clone->contractItemId);
@@ -155,12 +158,12 @@ class TerminateContractItem201ResponseBody
      * @param string $reason
      * @return self
      */
-    public function withReason(string $reason) : self
+    public function withReason(string $reason): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($reason, static::$schema['properties']['reason']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -172,7 +175,7 @@ class TerminateContractItem201ResponseBody
     /**
      * @return self
      */
-    public function withoutReason() : self
+    public function withoutReason(): self
     {
         $clone = clone $this;
         unset($clone->reason);
@@ -181,10 +184,10 @@ class TerminateContractItem201ResponseBody
     }
 
     /**
-     * @param \DateTime $terminationTargetDate
+     * @param DateTime $terminationTargetDate
      * @return self
      */
-    public function withTerminationTargetDate(\DateTime $terminationTargetDate) : self
+    public function withTerminationTargetDate(DateTime $terminationTargetDate): self
     {
         $clone = clone $this;
         $clone->terminationTargetDate = $terminationTargetDate;
@@ -195,7 +198,7 @@ class TerminateContractItem201ResponseBody
     /**
      * @return self
      */
-    public function withoutTerminationTargetDate() : self
+    public function withoutTerminationTargetDate(): self
     {
         $clone = clone $this;
         unset($clone->terminationTargetDate);
@@ -209,9 +212,9 @@ class TerminateContractItem201ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return TerminateContractItem201ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : TerminateContractItem201ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): TerminateContractItem201ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -232,7 +235,7 @@ class TerminateContractItem201ResponseBody
         }
         $terminationTargetDate = null;
         if (isset($input->{'terminationTargetDate'})) {
-            $terminationTargetDate = new \DateTime($input->{'terminationTargetDate'});
+            $terminationTargetDate = new DateTime($input->{'terminationTargetDate'});
         }
 
         $obj = new self();
@@ -248,7 +251,7 @@ class TerminateContractItem201ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->contractId)) {
@@ -261,7 +264,7 @@ class TerminateContractItem201ResponseBody
             $output['reason'] = $this->reason;
         }
         if (isset($this->terminationTargetDate)) {
-            $output['terminationTargetDate'] = ($this->terminationTargetDate)->format(\DateTime::ATOM);
+            $output['terminationTargetDate'] = ($this->terminationTargetDate)->format(DateTime::ATOM);
         }
 
         return $output;
@@ -273,19 +276,19 @@ class TerminateContractItem201ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -298,7 +301,7 @@ class TerminateContractItem201ResponseBody
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -306,4 +309,3 @@ class TerminateContractItem201ResponseBody
         return $response;
     }
 }
-

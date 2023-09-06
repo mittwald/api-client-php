@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
 
+use InvalidArgumentException;
+
 class Authenticate202ResponseBody
 {
     /**
@@ -40,7 +42,7 @@ class Authenticate202ResponseBody
     /**
      * @return Authenticate202ResponseBodyName|null
      */
-    public function getName() : ?Authenticate202ResponseBodyName
+    public function getName(): ?Authenticate202ResponseBodyName
     {
         return $this->name ?? null;
     }
@@ -49,7 +51,7 @@ class Authenticate202ResponseBody
      * @param Authenticate202ResponseBodyName $name
      * @return self
      */
-    public function withName(Authenticate202ResponseBodyName $name) : self
+    public function withName(Authenticate202ResponseBodyName $name): self
     {
         $clone = clone $this;
         $clone->name = $name;
@@ -60,7 +62,7 @@ class Authenticate202ResponseBody
     /**
      * @return self
      */
-    public function withoutName() : self
+    public function withoutName(): self
     {
         $clone = clone $this;
         unset($clone->name);
@@ -74,9 +76,9 @@ class Authenticate202ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Authenticate202ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Authenticate202ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): Authenticate202ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -98,7 +100,7 @@ class Authenticate202ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->name)) {
@@ -114,19 +116,19 @@ class Authenticate202ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -136,7 +138,7 @@ class Authenticate202ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -144,4 +146,3 @@ class Authenticate202ResponseBody
         return $response;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership;
 
+use InvalidArgumentException;
+
 class GetProjectMembershipRequest
 {
     public const method = 'get';
@@ -31,7 +33,7 @@ class GetProjectMembershipRequest
     private string $membershipId;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -45,7 +47,7 @@ class GetProjectMembershipRequest
     /**
      * @return string
      */
-    public function getMembershipId() : string
+    public function getMembershipId(): string
     {
         return $this->membershipId;
     }
@@ -54,12 +56,12 @@ class GetProjectMembershipRequest
      * @param string $membershipId
      * @return self
      */
-    public function withMembershipId(string $membershipId) : self
+    public function withMembershipId(string $membershipId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($membershipId, static::$schema['properties']['membershipId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -74,9 +76,9 @@ class GetProjectMembershipRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetProjectMembershipRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetProjectMembershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectMembershipRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -95,7 +97,7 @@ class GetProjectMembershipRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['membershipId'] = $this->membershipId;
@@ -109,19 +111,19 @@ class GetProjectMembershipRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -131,30 +133,29 @@ class GetProjectMembershipRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $membershipId = urlencode($mapped['membershipId']);
         return '/v2/project-memberships/' . $membershipId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

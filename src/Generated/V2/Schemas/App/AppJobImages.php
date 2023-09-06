@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+
 class AppJobImages
 {
     /**
@@ -72,7 +74,7 @@ class AppJobImages
     /**
      * @return AppJobImage
      */
-    public function getReconfigureImage() : AppJobImage
+    public function getReconfigureImage(): AppJobImage
     {
         return $this->reconfigureImage;
     }
@@ -80,7 +82,7 @@ class AppJobImages
     /**
      * @return AppJobImage
      */
-    public function getSetupImage() : AppJobImage
+    public function getSetupImage(): AppJobImage
     {
         return $this->setupImage;
     }
@@ -88,7 +90,7 @@ class AppJobImages
     /**
      * @return AppJobImage
      */
-    public function getUninstallImage() : AppJobImage
+    public function getUninstallImage(): AppJobImage
     {
         return $this->uninstallImage;
     }
@@ -96,7 +98,7 @@ class AppJobImages
     /**
      * @return AppJobImage
      */
-    public function getUpgradeImage() : AppJobImage
+    public function getUpgradeImage(): AppJobImage
     {
         return $this->upgradeImage;
     }
@@ -105,7 +107,7 @@ class AppJobImages
      * @param AppJobImage $reconfigureImage
      * @return self
      */
-    public function withReconfigureImage(AppJobImage $reconfigureImage) : self
+    public function withReconfigureImage(AppJobImage $reconfigureImage): self
     {
         $clone = clone $this;
         $clone->reconfigureImage = $reconfigureImage;
@@ -117,7 +119,7 @@ class AppJobImages
      * @param AppJobImage $setupImage
      * @return self
      */
-    public function withSetupImage(AppJobImage $setupImage) : self
+    public function withSetupImage(AppJobImage $setupImage): self
     {
         $clone = clone $this;
         $clone->setupImage = $setupImage;
@@ -129,7 +131,7 @@ class AppJobImages
      * @param AppJobImage $uninstallImage
      * @return self
      */
-    public function withUninstallImage(AppJobImage $uninstallImage) : self
+    public function withUninstallImage(AppJobImage $uninstallImage): self
     {
         $clone = clone $this;
         $clone->uninstallImage = $uninstallImage;
@@ -141,7 +143,7 @@ class AppJobImages
      * @param AppJobImage $upgradeImage
      * @return self
      */
-    public function withUpgradeImage(AppJobImage $upgradeImage) : self
+    public function withUpgradeImage(AppJobImage $upgradeImage): self
     {
         $clone = clone $this;
         $clone->upgradeImage = $upgradeImage;
@@ -155,9 +157,9 @@ class AppJobImages
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AppJobImages Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AppJobImages
+    public static function buildFromInput(array|object $input, bool $validate = true): AppJobImages
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -179,7 +181,7 @@ class AppJobImages
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['reconfigureImage'] = $this->reconfigureImage->toJson();
@@ -196,19 +198,19 @@ class AppJobImages
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -218,4 +220,3 @@ class AppJobImages
     {
     }
 }
-

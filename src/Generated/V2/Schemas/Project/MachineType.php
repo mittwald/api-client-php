@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+
 class MachineType
 {
     /**
@@ -64,7 +66,7 @@ class MachineType
     /**
      * @return string
      */
-    public function getCpu() : string
+    public function getCpu(): string
     {
         return $this->cpu;
     }
@@ -72,7 +74,7 @@ class MachineType
     /**
      * @return string
      */
-    public function getMemory() : string
+    public function getMemory(): string
     {
         return $this->memory;
     }
@@ -80,7 +82,7 @@ class MachineType
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -89,12 +91,12 @@ class MachineType
      * @param string $cpu
      * @return self
      */
-    public function withCpu(string $cpu) : self
+    public function withCpu(string $cpu): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($cpu, static::$schema['properties']['cpu']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,12 +109,12 @@ class MachineType
      * @param string $memory
      * @return self
      */
-    public function withMemory(string $memory) : self
+    public function withMemory(string $memory): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($memory, static::$schema['properties']['memory']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,12 +127,12 @@ class MachineType
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -145,9 +147,9 @@ class MachineType
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MachineType Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MachineType
+    public static function buildFromInput(array|object $input, bool $validate = true): MachineType
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -168,7 +170,7 @@ class MachineType
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['cpu'] = $this->cpu;
@@ -184,19 +186,19 @@ class MachineType
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -206,4 +208,3 @@ class MachineType
     {
     }
 }
-

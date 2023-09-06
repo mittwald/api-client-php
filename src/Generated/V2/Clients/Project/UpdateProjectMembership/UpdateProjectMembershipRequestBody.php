@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership;
 
+use InvalidArgumentException;
+use DateTime;
+
 class UpdateProjectMembershipRequestBody
 {
     public const method = 'patch';
@@ -33,9 +36,9 @@ class UpdateProjectMembershipRequestBody
     /**
      * Time the ProjectMembership should expire at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
@@ -43,7 +46,7 @@ class UpdateProjectMembershipRequestBody
     private \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -55,9 +58,9 @@ class UpdateProjectMembershipRequestBody
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -65,16 +68,16 @@ class UpdateProjectMembershipRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
      */
-    public function getRole() : \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
+    public function getRole(): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
     {
         return $this->role;
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -85,7 +88,7 @@ class UpdateProjectMembershipRequestBody
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -97,7 +100,7 @@ class UpdateProjectMembershipRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role
      * @return self
      */
-    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role) : self
+    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -111,9 +114,9 @@ class UpdateProjectMembershipRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateProjectMembershipRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateProjectMembershipRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectMembershipRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -122,7 +125,7 @@ class UpdateProjectMembershipRequestBody
 
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $role = \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles::from($input->{'role'});
 
@@ -136,11 +139,11 @@ class UpdateProjectMembershipRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['role'] = $this->role->value;
 
@@ -153,19 +156,19 @@ class UpdateProjectMembershipRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -178,30 +181,29 @@ class UpdateProjectMembershipRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $membershipId = urlencode($mapped['membershipId']);
         return '/v2/project-memberships/' . $membershipId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions;
 
+use InvalidArgumentException;
+use DateTime;
+
 class ListExecutionsRequest
 {
     public const method = 'get';
@@ -71,14 +74,14 @@ class ListExecutionsRequest
     private ?int $page = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $since = null;
+    private ?DateTime $since = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $until = null;
+    private ?DateTime $until = null;
 
     /**
      * @var string|null
@@ -86,7 +89,7 @@ class ListExecutionsRequest
     private ?string $status = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -100,7 +103,7 @@ class ListExecutionsRequest
     /**
      * @return string
      */
-    public function getCronjobId() : string
+    public function getCronjobId(): string
     {
         return $this->cronjobId;
     }
@@ -108,7 +111,7 @@ class ListExecutionsRequest
     /**
      * @return int|null
      */
-    public function getLimit() : ?int
+    public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
@@ -116,7 +119,7 @@ class ListExecutionsRequest
     /**
      * @return int|null
      */
-    public function getSkip() : ?int
+    public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
@@ -124,23 +127,23 @@ class ListExecutionsRequest
     /**
      * @return int|null
      */
-    public function getPage() : ?int
+    public function getPage(): ?int
     {
         return $this->page ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getSince() : ?\DateTime
+    public function getSince(): ?DateTime
     {
         return $this->since ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUntil() : ?\DateTime
+    public function getUntil(): ?DateTime
     {
         return $this->until ?? null;
     }
@@ -148,7 +151,7 @@ class ListExecutionsRequest
     /**
      * @return string|null
      */
-    public function getStatus() : ?string
+    public function getStatus(): ?string
     {
         return $this->status ?? null;
     }
@@ -157,12 +160,12 @@ class ListExecutionsRequest
      * @param string $cronjobId
      * @return self
      */
-    public function withCronjobId(string $cronjobId) : self
+    public function withCronjobId(string $cronjobId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -175,12 +178,12 @@ class ListExecutionsRequest
      * @param int $limit
      * @return self
      */
-    public function withLimit(int $limit) : self
+    public function withLimit(int $limit): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -192,7 +195,7 @@ class ListExecutionsRequest
     /**
      * @return self
      */
-    public function withoutLimit() : self
+    public function withoutLimit(): self
     {
         $clone = clone $this;
         unset($clone->limit);
@@ -204,12 +207,12 @@ class ListExecutionsRequest
      * @param int $skip
      * @return self
      */
-    public function withSkip(int $skip) : self
+    public function withSkip(int $skip): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -221,7 +224,7 @@ class ListExecutionsRequest
     /**
      * @return self
      */
-    public function withoutSkip() : self
+    public function withoutSkip(): self
     {
         $clone = clone $this;
         unset($clone->skip);
@@ -233,12 +236,12 @@ class ListExecutionsRequest
      * @param int $page
      * @return self
      */
-    public function withPage(int $page) : self
+    public function withPage(int $page): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($page, static::$schema['properties']['page']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -250,7 +253,7 @@ class ListExecutionsRequest
     /**
      * @return self
      */
-    public function withoutPage() : self
+    public function withoutPage(): self
     {
         $clone = clone $this;
         unset($clone->page);
@@ -259,10 +262,10 @@ class ListExecutionsRequest
     }
 
     /**
-     * @param \DateTime $since
+     * @param DateTime $since
      * @return self
      */
-    public function withSince(\DateTime $since) : self
+    public function withSince(DateTime $since): self
     {
         $clone = clone $this;
         $clone->since = $since;
@@ -273,7 +276,7 @@ class ListExecutionsRequest
     /**
      * @return self
      */
-    public function withoutSince() : self
+    public function withoutSince(): self
     {
         $clone = clone $this;
         unset($clone->since);
@@ -282,10 +285,10 @@ class ListExecutionsRequest
     }
 
     /**
-     * @param \DateTime $until
+     * @param DateTime $until
      * @return self
      */
-    public function withUntil(\DateTime $until) : self
+    public function withUntil(DateTime $until): self
     {
         $clone = clone $this;
         $clone->until = $until;
@@ -296,7 +299,7 @@ class ListExecutionsRequest
     /**
      * @return self
      */
-    public function withoutUntil() : self
+    public function withoutUntil(): self
     {
         $clone = clone $this;
         unset($clone->until);
@@ -308,12 +311,12 @@ class ListExecutionsRequest
      * @param string $status
      * @return self
      */
-    public function withStatus(string $status) : self
+    public function withStatus(string $status): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($status, static::$schema['properties']['status']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -325,7 +328,7 @@ class ListExecutionsRequest
     /**
      * @return self
      */
-    public function withoutStatus() : self
+    public function withoutStatus(): self
     {
         $clone = clone $this;
         unset($clone->status);
@@ -339,9 +342,9 @@ class ListExecutionsRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListExecutionsRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListExecutionsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListExecutionsRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -363,11 +366,11 @@ class ListExecutionsRequest
         }
         $since = null;
         if (isset($input->{'since'})) {
-            $since = new \DateTime($input->{'since'});
+            $since = new DateTime($input->{'since'});
         }
         $until = null;
         if (isset($input->{'until'})) {
-            $until = new \DateTime($input->{'until'});
+            $until = new DateTime($input->{'until'});
         }
         $status = null;
         if (isset($input->{'status'})) {
@@ -389,7 +392,7 @@ class ListExecutionsRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['cronjobId'] = $this->cronjobId;
@@ -403,10 +406,10 @@ class ListExecutionsRequest
             $output['page'] = $this->page;
         }
         if (isset($this->since)) {
-            $output['since'] = ($this->since)->format(\DateTime::ATOM);
+            $output['since'] = ($this->since)->format(DateTime::ATOM);
         }
         if (isset($this->until)) {
-            $output['until'] = ($this->until)->format(\DateTime::ATOM);
+            $output['until'] = ($this->until)->format(DateTime::ATOM);
         }
         if (isset($this->status)) {
             $output['status'] = $this->status;
@@ -421,19 +424,19 @@ class ListExecutionsRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -449,14 +452,14 @@ class ListExecutionsRequest
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $cronjobId = urlencode($mapped['cronjobId']);
         return '/v2/cronjobs/' . $cronjobId . '/executions';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -481,16 +484,15 @@ class ListExecutionsRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
+use InvalidArgumentException;
+
 class Article
 {
     /**
@@ -100,7 +102,7 @@ class Article
     /**
      * @return int
      */
-    public function getAmount() : int
+    public function getAmount(): int
     {
         return $this->amount;
     }
@@ -108,7 +110,7 @@ class Article
     /**
      * @return string
      */
-    public function getArticleTemplateId() : string
+    public function getArticleTemplateId(): string
     {
         return $this->articleTemplateId;
     }
@@ -116,7 +118,7 @@ class Article
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -124,7 +126,7 @@ class Article
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -132,7 +134,7 @@ class Article
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -140,7 +142,7 @@ class Article
     /**
      * @return Price
      */
-    public function getUnitPrice() : Price
+    public function getUnitPrice(): Price
     {
         return $this->unitPrice;
     }
@@ -149,12 +151,12 @@ class Article
      * @param int $amount
      * @return self
      */
-    public function withAmount(int $amount) : self
+    public function withAmount(int $amount): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($amount, static::$schema['properties']['amount']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -167,12 +169,12 @@ class Article
      * @param string $articleTemplateId
      * @return self
      */
-    public function withArticleTemplateId(string $articleTemplateId) : self
+    public function withArticleTemplateId(string $articleTemplateId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($articleTemplateId, static::$schema['properties']['articleTemplateId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -185,12 +187,12 @@ class Article
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -203,12 +205,12 @@ class Article
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -221,12 +223,12 @@ class Article
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -239,7 +241,7 @@ class Article
      * @param Price $unitPrice
      * @return self
      */
-    public function withUnitPrice(Price $unitPrice) : self
+    public function withUnitPrice(Price $unitPrice): self
     {
         $clone = clone $this;
         $clone->unitPrice = $unitPrice;
@@ -253,9 +255,9 @@ class Article
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Article Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Article
+    public static function buildFromInput(array|object $input, bool $validate = true): Article
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -279,7 +281,7 @@ class Article
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['amount'] = $this->amount;
@@ -298,19 +300,19 @@ class Article
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -320,4 +322,3 @@ class Article
     {
     }
 }
-

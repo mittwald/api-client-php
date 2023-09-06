@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload;
 
+use InvalidArgumentException;
+
 class RequestProjectAvatarUpload200ResponseBody
 {
     /**
@@ -53,7 +55,7 @@ class RequestProjectAvatarUpload200ResponseBody
     /**
      * @return string
      */
-    public function getRefId() : string
+    public function getRefId(): string
     {
         return $this->refId;
     }
@@ -61,7 +63,7 @@ class RequestProjectAvatarUpload200ResponseBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules
      */
-    public function getRules() : \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules
+    public function getRules(): \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules
     {
         return $this->rules;
     }
@@ -70,12 +72,12 @@ class RequestProjectAvatarUpload200ResponseBody
      * @param string $refId
      * @return self
      */
-    public function withRefId(string $refId) : self
+    public function withRefId(string $refId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($refId, static::$schema['properties']['refId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -88,7 +90,7 @@ class RequestProjectAvatarUpload200ResponseBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules
      * @return self
      */
-    public function withRules(\Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules) : self
+    public function withRules(\Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules $rules): self
     {
         $clone = clone $this;
         $clone->rules = $rules;
@@ -102,9 +104,9 @@ class RequestProjectAvatarUpload200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestProjectAvatarUpload200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestProjectAvatarUpload200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestProjectAvatarUpload200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -124,7 +126,7 @@ class RequestProjectAvatarUpload200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['refId'] = $this->refId;
@@ -139,19 +141,19 @@ class RequestProjectAvatarUpload200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -161,7 +163,7 @@ class RequestProjectAvatarUpload200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -169,4 +171,3 @@ class RequestProjectAvatarUpload200ResponseBody
         return $response;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use InvalidArgumentException;
+use DateTime;
+
 class MailAddressAutoResponder
 {
     /**
@@ -42,9 +45,9 @@ class MailAddressAutoResponder
     private bool $active;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var string
@@ -52,9 +55,9 @@ class MailAddressAutoResponder
     private string $message;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $startsAt = null;
+    private ?DateTime $startsAt = null;
 
     /**
      * @param bool $active
@@ -69,15 +72,15 @@ class MailAddressAutoResponder
     /**
      * @return bool
      */
-    public function getActive() : bool
+    public function getActive(): bool
     {
         return $this->active;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -85,15 +88,15 @@ class MailAddressAutoResponder
     /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getStartsAt() : ?\DateTime
+    public function getStartsAt(): ?DateTime
     {
         return $this->startsAt ?? null;
     }
@@ -102,12 +105,12 @@ class MailAddressAutoResponder
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -117,10 +120,10 @@ class MailAddressAutoResponder
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -131,7 +134,7 @@ class MailAddressAutoResponder
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -143,12 +146,12 @@ class MailAddressAutoResponder
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -158,10 +161,10 @@ class MailAddressAutoResponder
     }
 
     /**
-     * @param \DateTime $startsAt
+     * @param DateTime $startsAt
      * @return self
      */
-    public function withStartsAt(\DateTime $startsAt) : self
+    public function withStartsAt(DateTime $startsAt): self
     {
         $clone = clone $this;
         $clone->startsAt = $startsAt;
@@ -172,7 +175,7 @@ class MailAddressAutoResponder
     /**
      * @return self
      */
-    public function withoutStartsAt() : self
+    public function withoutStartsAt(): self
     {
         $clone = clone $this;
         unset($clone->startsAt);
@@ -186,9 +189,9 @@ class MailAddressAutoResponder
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MailAddressAutoResponder Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MailAddressAutoResponder
+    public static function buildFromInput(array|object $input, bool $validate = true): MailAddressAutoResponder
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -198,12 +201,12 @@ class MailAddressAutoResponder
         $active = (bool)($input->{'active'});
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $message = $input->{'message'};
         $startsAt = null;
         if (isset($input->{'startsAt'})) {
-            $startsAt = new \DateTime($input->{'startsAt'});
+            $startsAt = new DateTime($input->{'startsAt'});
         }
 
         $obj = new self($active, $message);
@@ -217,16 +220,16 @@ class MailAddressAutoResponder
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['active'] = $this->active;
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['message'] = $this->message;
         if (isset($this->startsAt)) {
-            $output['startsAt'] = ($this->startsAt)->format(\DateTime::ATOM);
+            $output['startsAt'] = ($this->startsAt)->format(DateTime::ATOM);
         }
 
         return $output;
@@ -238,19 +241,19 @@ class MailAddressAutoResponder
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -266,4 +269,3 @@ class MailAddressAutoResponder
         }
     }
 }
-

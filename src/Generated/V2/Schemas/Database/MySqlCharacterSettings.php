@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+
 class MySqlCharacterSettings
 {
     /**
@@ -71,7 +73,7 @@ class MySqlCharacterSettings
     /**
      * @return string[]
      */
-    public function getCollations() : array
+    public function getCollations(): array
     {
         return $this->collations;
     }
@@ -79,7 +81,7 @@ class MySqlCharacterSettings
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -87,7 +89,7 @@ class MySqlCharacterSettings
     /**
      * @return string
      */
-    public function getVersionId() : string
+    public function getVersionId(): string
     {
         return $this->versionId;
     }
@@ -96,12 +98,12 @@ class MySqlCharacterSettings
      * @param string[] $collations
      * @return self
      */
-    public function withCollations(array $collations) : self
+    public function withCollations(array $collations): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($collations, static::$schema['properties']['collations']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -114,12 +116,12 @@ class MySqlCharacterSettings
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -132,12 +134,12 @@ class MySqlCharacterSettings
      * @param string $versionId
      * @return self
      */
-    public function withVersionId(string $versionId) : self
+    public function withVersionId(string $versionId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($versionId, static::$schema['properties']['versionId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -152,9 +154,9 @@ class MySqlCharacterSettings
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MySqlCharacterSettings Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MySqlCharacterSettings
+    public static function buildFromInput(array|object $input, bool $validate = true): MySqlCharacterSettings
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -175,7 +177,7 @@ class MySqlCharacterSettings
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['collations'] = $this->collations;
@@ -191,19 +193,19 @@ class MySqlCharacterSettings
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -213,4 +215,3 @@ class MySqlCharacterSettings
     {
     }
 }
-

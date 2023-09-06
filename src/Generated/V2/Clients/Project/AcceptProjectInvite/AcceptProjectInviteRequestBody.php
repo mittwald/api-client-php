@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite;
 
+use InvalidArgumentException;
+
 class AcceptProjectInviteRequestBody
 {
     public const method = 'post';
@@ -31,7 +33,7 @@ class AcceptProjectInviteRequestBody
     private ?string $invitationToken = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -44,7 +46,7 @@ class AcceptProjectInviteRequestBody
     /**
      * @return string|null
      */
-    public function getInvitationToken() : ?string
+    public function getInvitationToken(): ?string
     {
         return $this->invitationToken ?? null;
     }
@@ -53,12 +55,12 @@ class AcceptProjectInviteRequestBody
      * @param string $invitationToken
      * @return self
      */
-    public function withInvitationToken(string $invitationToken) : self
+    public function withInvitationToken(string $invitationToken): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($invitationToken, static::$schema['properties']['invitationToken']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -70,7 +72,7 @@ class AcceptProjectInviteRequestBody
     /**
      * @return self
      */
-    public function withoutInvitationToken() : self
+    public function withoutInvitationToken(): self
     {
         $clone = clone $this;
         unset($clone->invitationToken);
@@ -84,9 +86,9 @@ class AcceptProjectInviteRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AcceptProjectInviteRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AcceptProjectInviteRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): AcceptProjectInviteRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -108,7 +110,7 @@ class AcceptProjectInviteRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->invitationToken)) {
@@ -124,19 +126,19 @@ class AcceptProjectInviteRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -146,30 +148,29 @@ class AcceptProjectInviteRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $inviteId = urlencode($mapped['inviteId']);
         return '/v2/project-invites/' . $inviteId . '/actions/accept';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

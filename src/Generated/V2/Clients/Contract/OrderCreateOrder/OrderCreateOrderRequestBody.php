@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
 
+use InvalidArgumentException;
+
 class OrderCreateOrderRequestBody
 {
     public const method = 'post';
@@ -51,7 +53,7 @@ class OrderCreateOrderRequestBody
     private ?OrderCreateOrderRequestBodyOrderType $orderType = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -65,7 +67,7 @@ class OrderCreateOrderRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|null
      */
-    public function getOrderData() : \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|null
+    public function getOrderData(): \Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|null
     {
         return $this->orderData;
     }
@@ -73,7 +75,7 @@ class OrderCreateOrderRequestBody
     /**
      * @return OrderCreateOrderRequestBodyOrderType|null
      */
-    public function getOrderType() : ?OrderCreateOrderRequestBodyOrderType
+    public function getOrderType(): ?OrderCreateOrderRequestBodyOrderType
     {
         return $this->orderType ?? null;
     }
@@ -82,7 +84,7 @@ class OrderCreateOrderRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder $orderData
      * @return self
      */
-    public function withOrderData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder $orderData) : self
+    public function withOrderData(\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -93,7 +95,7 @@ class OrderCreateOrderRequestBody
     /**
      * @return self
      */
-    public function withoutOrderData() : self
+    public function withoutOrderData(): self
     {
         $clone = clone $this;
         unset($clone->orderData);
@@ -105,7 +107,7 @@ class OrderCreateOrderRequestBody
      * @param OrderCreateOrderRequestBodyOrderType $orderType
      * @return self
      */
-    public function withOrderType(OrderCreateOrderRequestBodyOrderType $orderType) : self
+    public function withOrderType(OrderCreateOrderRequestBodyOrderType $orderType): self
     {
         $clone = clone $this;
         $clone->orderType = $orderType;
@@ -116,7 +118,7 @@ class OrderCreateOrderRequestBody
     /**
      * @return self
      */
-    public function withoutOrderType() : self
+    public function withoutOrderType(): self
     {
         $clone = clone $this;
         unset($clone->orderType);
@@ -130,9 +132,9 @@ class OrderCreateOrderRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderCreateOrderRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderCreateOrderRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateOrderRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -163,7 +165,7 @@ class OrderCreateOrderRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->orderData)) {
@@ -184,19 +186,19 @@ class OrderCreateOrderRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -211,29 +213,28 @@ class OrderCreateOrderRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/orders';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

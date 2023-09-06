@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications;
 
+use InvalidArgumentException;
+
 class NotificationsListNotificationsRequest
 {
     public const method = 'get';
@@ -25,7 +27,7 @@ class NotificationsListNotificationsRequest
             ],
         ],
         'required' => [
-            
+
         ],
     ];
 
@@ -35,7 +37,7 @@ class NotificationsListNotificationsRequest
     private ?NotificationsListNotificationsRequestStatus $status = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -48,7 +50,7 @@ class NotificationsListNotificationsRequest
     /**
      * @return NotificationsListNotificationsRequestStatus|null
      */
-    public function getStatus() : ?NotificationsListNotificationsRequestStatus
+    public function getStatus(): ?NotificationsListNotificationsRequestStatus
     {
         return $this->status ?? null;
     }
@@ -57,7 +59,7 @@ class NotificationsListNotificationsRequest
      * @param NotificationsListNotificationsRequestStatus $status
      * @return self
      */
-    public function withStatus(NotificationsListNotificationsRequestStatus $status) : self
+    public function withStatus(NotificationsListNotificationsRequestStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -68,7 +70,7 @@ class NotificationsListNotificationsRequest
     /**
      * @return self
      */
-    public function withoutStatus() : self
+    public function withoutStatus(): self
     {
         $clone = clone $this;
         unset($clone->status);
@@ -82,9 +84,9 @@ class NotificationsListNotificationsRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return NotificationsListNotificationsRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : NotificationsListNotificationsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsListNotificationsRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -106,7 +108,7 @@ class NotificationsListNotificationsRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->status)) {
@@ -122,19 +124,19 @@ class NotificationsListNotificationsRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -144,13 +146,13 @@ class NotificationsListNotificationsRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/notifications';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -160,16 +162,15 @@ class NotificationsListNotificationsRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

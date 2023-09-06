@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\User;
 
+use InvalidArgumentException;
+use DateTime;
+
 class User
 {
     /**
@@ -65,9 +68,9 @@ class User
     private ?string $phoneNumber = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $registeredAt = null;
+    private ?DateTime $registeredAt = null;
 
     /**
      * @var string
@@ -87,7 +90,7 @@ class User
     /**
      * @return string|null
      */
-    public function getAvatarRef() : ?string
+    public function getAvatarRef(): ?string
     {
         return $this->avatarRef ?? null;
     }
@@ -95,7 +98,7 @@ class User
     /**
      * @return string|null
      */
-    public function getEmail() : ?string
+    public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
@@ -103,7 +106,7 @@ class User
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
      */
-    public function getPerson() : \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+    public function getPerson(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
     {
         return $this->person;
     }
@@ -111,15 +114,15 @@ class User
     /**
      * @return string|null
      */
-    public function getPhoneNumber() : ?string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getRegisteredAt() : ?\DateTime
+    public function getRegisteredAt(): ?DateTime
     {
         return $this->registeredAt ?? null;
     }
@@ -127,7 +130,7 @@ class User
     /**
      * @return string
      */
-    public function getUserId() : string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -136,12 +139,12 @@ class User
      * @param string $avatarRef
      * @return self
      */
-    public function withAvatarRef(string $avatarRef) : self
+    public function withAvatarRef(string $avatarRef): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($avatarRef, static::$schema['properties']['avatarRef']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -153,7 +156,7 @@ class User
     /**
      * @return self
      */
-    public function withoutAvatarRef() : self
+    public function withoutAvatarRef(): self
     {
         $clone = clone $this;
         unset($clone->avatarRef);
@@ -165,12 +168,12 @@ class User
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -182,7 +185,7 @@ class User
     /**
      * @return self
      */
-    public function withoutEmail() : self
+    public function withoutEmail(): self
     {
         $clone = clone $this;
         unset($clone->email);
@@ -194,7 +197,7 @@ class User
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
      * @return self
      */
-    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person) : self
+    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person): self
     {
         $clone = clone $this;
         $clone->person = $person;
@@ -206,12 +209,12 @@ class User
      * @param string $phoneNumber
      * @return self
      */
-    public function withPhoneNumber(string $phoneNumber) : self
+    public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($phoneNumber, static::$schema['properties']['phoneNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -223,7 +226,7 @@ class User
     /**
      * @return self
      */
-    public function withoutPhoneNumber() : self
+    public function withoutPhoneNumber(): self
     {
         $clone = clone $this;
         unset($clone->phoneNumber);
@@ -232,10 +235,10 @@ class User
     }
 
     /**
-     * @param \DateTime $registeredAt
+     * @param DateTime $registeredAt
      * @return self
      */
-    public function withRegisteredAt(\DateTime $registeredAt) : self
+    public function withRegisteredAt(DateTime $registeredAt): self
     {
         $clone = clone $this;
         $clone->registeredAt = $registeredAt;
@@ -246,7 +249,7 @@ class User
     /**
      * @return self
      */
-    public function withoutRegisteredAt() : self
+    public function withoutRegisteredAt(): self
     {
         $clone = clone $this;
         unset($clone->registeredAt);
@@ -258,12 +261,12 @@ class User
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -278,9 +281,9 @@ class User
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return User Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : User
+    public static function buildFromInput(array|object $input, bool $validate = true): User
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -302,7 +305,7 @@ class User
         }
         $registeredAt = null;
         if (isset($input->{'registeredAt'})) {
-            $registeredAt = new \DateTime($input->{'registeredAt'});
+            $registeredAt = new DateTime($input->{'registeredAt'});
         }
         $userId = $input->{'userId'};
 
@@ -319,7 +322,7 @@ class User
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->avatarRef)) {
@@ -333,7 +336,7 @@ class User
             $output['phoneNumber'] = $this->phoneNumber;
         }
         if (isset($this->registeredAt)) {
-            $output['registeredAt'] = ($this->registeredAt)->format(\DateTime::ATOM);
+            $output['registeredAt'] = ($this->registeredAt)->format(DateTime::ATOM);
         }
         $output['userId'] = $this->userId;
 
@@ -346,19 +349,19 @@ class User
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -371,4 +374,3 @@ class User
         }
     }
 }
-

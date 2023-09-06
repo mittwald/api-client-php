@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback;
 
+use InvalidArgumentException;
+
 class ListFeedbackRequest
 {
     public const method = 'get';
@@ -50,7 +52,7 @@ class ListFeedbackRequest
     private ?string $subject = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -64,7 +66,7 @@ class ListFeedbackRequest
     /**
      * @return ListFeedbackRequestUserIdAlternative1|string
      */
-    public function getUserId() : ListFeedbackRequestUserIdAlternative1|string
+    public function getUserId(): ListFeedbackRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
@@ -72,7 +74,7 @@ class ListFeedbackRequest
     /**
      * @return string|null
      */
-    public function getSubject() : ?string
+    public function getSubject(): ?string
     {
         return $this->subject ?? null;
     }
@@ -81,7 +83,7 @@ class ListFeedbackRequest
      * @param ListFeedbackRequestUserIdAlternative1|string $userId
      * @return self
      */
-    public function withUserId(ListFeedbackRequestUserIdAlternative1|string $userId) : self
+    public function withUserId(ListFeedbackRequestUserIdAlternative1|string $userId): self
     {
         $clone = clone $this;
         $clone->userId = $userId;
@@ -93,12 +95,12 @@ class ListFeedbackRequest
      * @param string $subject
      * @return self
      */
-    public function withSubject(string $subject) : self
+    public function withSubject(string $subject): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($subject, static::$schema['properties']['subject']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,7 +112,7 @@ class ListFeedbackRequest
     /**
      * @return self
      */
-    public function withoutSubject() : self
+    public function withoutSubject(): self
     {
         $clone = clone $this;
         unset($clone->subject);
@@ -124,9 +126,9 @@ class ListFeedbackRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListFeedbackRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListFeedbackRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListFeedbackRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -152,7 +154,7 @@ class ListFeedbackRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['userId'] = match (true) {
@@ -172,19 +174,19 @@ class ListFeedbackRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -197,14 +199,14 @@ class ListFeedbackRequest
         };
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $userId = urlencode($mapped['userId']);
         return '/v2/users/' . $userId . '/feedback';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -214,16 +216,15 @@ class ListFeedbackRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

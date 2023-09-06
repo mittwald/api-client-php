@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Account
 {
     /**
@@ -57,9 +60,9 @@ class Account
     private ?AccountMfaDetails $mfaDetails = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $passwordUpdatedAt = null;
+    private ?DateTime $passwordUpdatedAt = null;
 
     /**
      * @var \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person|null
@@ -81,7 +84,7 @@ class Account
     /**
      * @return string|null
      */
-    public function getEmail() : ?string
+    public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
@@ -89,15 +92,15 @@ class Account
     /**
      * @return AccountMfaDetails|null
      */
-    public function getMfaDetails() : ?AccountMfaDetails
+    public function getMfaDetails(): ?AccountMfaDetails
     {
         return $this->mfaDetails ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getPasswordUpdatedAt() : ?\DateTime
+    public function getPasswordUpdatedAt(): ?DateTime
     {
         return $this->passwordUpdatedAt ?? null;
     }
@@ -105,7 +108,7 @@ class Account
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person|null
      */
-    public function getPerson() : ?\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
+    public function getPerson(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person
     {
         return $this->person ?? null;
     }
@@ -113,7 +116,7 @@ class Account
     /**
      * @return string|null
      */
-    public function getUserId() : ?string
+    public function getUserId(): ?string
     {
         return $this->userId ?? null;
     }
@@ -122,12 +125,12 @@ class Account
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -139,7 +142,7 @@ class Account
     /**
      * @return self
      */
-    public function withoutEmail() : self
+    public function withoutEmail(): self
     {
         $clone = clone $this;
         unset($clone->email);
@@ -151,7 +154,7 @@ class Account
      * @param AccountMfaDetails $mfaDetails
      * @return self
      */
-    public function withMfaDetails(AccountMfaDetails $mfaDetails) : self
+    public function withMfaDetails(AccountMfaDetails $mfaDetails): self
     {
         $clone = clone $this;
         $clone->mfaDetails = $mfaDetails;
@@ -162,7 +165,7 @@ class Account
     /**
      * @return self
      */
-    public function withoutMfaDetails() : self
+    public function withoutMfaDetails(): self
     {
         $clone = clone $this;
         unset($clone->mfaDetails);
@@ -171,10 +174,10 @@ class Account
     }
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @return self
      */
-    public function withPasswordUpdatedAt(\DateTime $passwordUpdatedAt) : self
+    public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
         $clone->passwordUpdatedAt = $passwordUpdatedAt;
@@ -185,7 +188,7 @@ class Account
     /**
      * @return self
      */
-    public function withoutPasswordUpdatedAt() : self
+    public function withoutPasswordUpdatedAt(): self
     {
         $clone = clone $this;
         unset($clone->passwordUpdatedAt);
@@ -197,7 +200,7 @@ class Account
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person
      * @return self
      */
-    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person) : self
+    public function withPerson(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Person $person): self
     {
         $clone = clone $this;
         $clone->person = $person;
@@ -208,7 +211,7 @@ class Account
     /**
      * @return self
      */
-    public function withoutPerson() : self
+    public function withoutPerson(): self
     {
         $clone = clone $this;
         unset($clone->person);
@@ -220,12 +223,12 @@ class Account
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -237,7 +240,7 @@ class Account
     /**
      * @return self
      */
-    public function withoutUserId() : self
+    public function withoutUserId(): self
     {
         $clone = clone $this;
         unset($clone->userId);
@@ -251,9 +254,9 @@ class Account
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Account Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Account
+    public static function buildFromInput(array|object $input, bool $validate = true): Account
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -270,7 +273,7 @@ class Account
         }
         $passwordUpdatedAt = null;
         if (isset($input->{'passwordUpdatedAt'})) {
-            $passwordUpdatedAt = new \DateTime($input->{'passwordUpdatedAt'});
+            $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
         }
         $person = null;
         if (isset($input->{'person'})) {
@@ -295,7 +298,7 @@ class Account
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->email)) {
@@ -305,7 +308,7 @@ class Account
             $output['mfaDetails'] = ($this->mfaDetails)->toJson();
         }
         if (isset($this->passwordUpdatedAt)) {
-            $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(\DateTime::ATOM);
+            $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
         }
         if (isset($this->person)) {
             $output['person'] = $this->person->toJson();
@@ -323,19 +326,19 @@ class Account
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -351,4 +354,3 @@ class Account
         }
     }
 }
-

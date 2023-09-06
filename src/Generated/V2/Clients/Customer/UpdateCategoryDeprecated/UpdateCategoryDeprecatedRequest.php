@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated;
 
+use InvalidArgumentException;
+
 class UpdateCategoryDeprecatedRequest
 {
     public const method = 'put';
@@ -40,7 +42,7 @@ class UpdateCategoryDeprecatedRequest
     private \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -56,7 +58,7 @@ class UpdateCategoryDeprecatedRequest
     /**
      * @return string
      */
-    public function getCategoryId() : string
+    public function getCategoryId(): string
     {
         return $this->categoryId;
     }
@@ -64,7 +66,7 @@ class UpdateCategoryDeprecatedRequest
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
+    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category
     {
         return $this->body;
     }
@@ -73,12 +75,12 @@ class UpdateCategoryDeprecatedRequest
      * @param string $categoryId
      * @return self
      */
-    public function withCategoryId(string $categoryId) : self
+    public function withCategoryId(string $categoryId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -91,7 +93,7 @@ class UpdateCategoryDeprecatedRequest
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body) : self
+    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -105,9 +107,9 @@ class UpdateCategoryDeprecatedRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateCategoryDeprecatedRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateCategoryDeprecatedRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCategoryDeprecatedRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -127,7 +129,7 @@ class UpdateCategoryDeprecatedRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['categoryId'] = $this->categoryId;
@@ -142,19 +144,19 @@ class UpdateCategoryDeprecatedRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -164,30 +166,29 @@ class UpdateCategoryDeprecatedRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $categoryId = urlencode($mapped['categoryId']);
         return '/v2/customercategories/' . $categoryId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

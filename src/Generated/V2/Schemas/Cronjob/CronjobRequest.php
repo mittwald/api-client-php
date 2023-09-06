@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Cronjob;
 
+use InvalidArgumentException;
+
 class CronjobRequest
 {
     /**
@@ -102,7 +104,7 @@ class CronjobRequest
     /**
      * @return bool
      */
-    public function getActive() : bool
+    public function getActive(): bool
     {
         return $this->active;
     }
@@ -110,7 +112,7 @@ class CronjobRequest
     /**
      * @return string
      */
-    public function getAppId() : string
+    public function getAppId(): string
     {
         return $this->appId;
     }
@@ -118,7 +120,7 @@ class CronjobRequest
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -127,7 +129,7 @@ class CronjobRequest
      * @return
      * CronjobUrl|CronjobCommand
      */
-    public function getDestination() : CronjobCommand|CronjobUrl
+    public function getDestination(): CronjobCommand|CronjobUrl
     {
         return $this->destination;
     }
@@ -135,7 +137,7 @@ class CronjobRequest
     /**
      * @return string|null
      */
-    public function getEmail() : ?string
+    public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
@@ -143,7 +145,7 @@ class CronjobRequest
     /**
      * @return string
      */
-    public function getInterval() : string
+    public function getInterval(): string
     {
         return $this->interval;
     }
@@ -152,12 +154,12 @@ class CronjobRequest
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -170,12 +172,12 @@ class CronjobRequest
      * @param string $appId
      * @return self
      */
-    public function withAppId(string $appId) : self
+    public function withAppId(string $appId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($appId, static::$schema['properties']['appId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -188,12 +190,12 @@ class CronjobRequest
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -206,7 +208,7 @@ class CronjobRequest
      * @param CronjobUrl|CronjobCommand $destination
      * @return self
      */
-    public function withDestination(CronjobCommand|CronjobUrl $destination) : self
+    public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
         $clone = clone $this;
         $clone->destination = $destination;
@@ -218,12 +220,12 @@ class CronjobRequest
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -235,7 +237,7 @@ class CronjobRequest
     /**
      * @return self
      */
-    public function withoutEmail() : self
+    public function withoutEmail(): self
     {
         $clone = clone $this;
         unset($clone->email);
@@ -247,12 +249,12 @@ class CronjobRequest
      * @param string $interval
      * @return self
      */
-    public function withInterval(string $interval) : self
+    public function withInterval(string $interval): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($interval, static::$schema['properties']['interval']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -267,9 +269,9 @@ class CronjobRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CronjobRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CronjobRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CronjobRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -299,7 +301,7 @@ class CronjobRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['active'] = $this->active;
@@ -322,19 +324,19 @@ class CronjobRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -347,4 +349,3 @@ class CronjobRequest
         };
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+
 class Cancellation
 {
     /**
@@ -85,7 +87,7 @@ class Cancellation
     /**
      * @return string
      */
-    public function getCancellationId() : string
+    public function getCancellationId(): string
     {
         return $this->cancellationId;
     }
@@ -93,7 +95,7 @@ class Cancellation
     /**
      * @return string
      */
-    public function getCancelledAt() : string
+    public function getCancelledAt(): string
     {
         return $this->cancelledAt;
     }
@@ -101,7 +103,7 @@ class Cancellation
     /**
      * @return string
      */
-    public function getCorrectionNumber() : string
+    public function getCorrectionNumber(): string
     {
         return $this->correctionNumber;
     }
@@ -109,7 +111,7 @@ class Cancellation
     /**
      * @return string
      */
-    public function getPdfId() : string
+    public function getPdfId(): string
     {
         return $this->pdfId;
     }
@@ -117,7 +119,7 @@ class Cancellation
     /**
      * @return string|null
      */
-    public function getReason() : ?string
+    public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
@@ -126,12 +128,12 @@ class Cancellation
      * @param string $cancellationId
      * @return self
      */
-    public function withCancellationId(string $cancellationId) : self
+    public function withCancellationId(string $cancellationId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($cancellationId, static::$schema['properties']['cancellationId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -144,12 +146,12 @@ class Cancellation
      * @param string $cancelledAt
      * @return self
      */
-    public function withCancelledAt(string $cancelledAt) : self
+    public function withCancelledAt(string $cancelledAt): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($cancelledAt, static::$schema['properties']['cancelledAt']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -162,12 +164,12 @@ class Cancellation
      * @param string $correctionNumber
      * @return self
      */
-    public function withCorrectionNumber(string $correctionNumber) : self
+    public function withCorrectionNumber(string $correctionNumber): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($correctionNumber, static::$schema['properties']['correctionNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -180,12 +182,12 @@ class Cancellation
      * @param string $pdfId
      * @return self
      */
-    public function withPdfId(string $pdfId) : self
+    public function withPdfId(string $pdfId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($pdfId, static::$schema['properties']['pdfId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -198,12 +200,12 @@ class Cancellation
      * @param string $reason
      * @return self
      */
-    public function withReason(string $reason) : self
+    public function withReason(string $reason): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($reason, static::$schema['properties']['reason']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -215,7 +217,7 @@ class Cancellation
     /**
      * @return self
      */
-    public function withoutReason() : self
+    public function withoutReason(): self
     {
         $clone = clone $this;
         unset($clone->reason);
@@ -229,9 +231,9 @@ class Cancellation
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Cancellation Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Cancellation
+    public static function buildFromInput(array|object $input, bool $validate = true): Cancellation
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -257,7 +259,7 @@ class Cancellation
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['cancellationId'] = $this->cancellationId;
@@ -277,19 +279,19 @@ class Cancellation
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -299,4 +301,3 @@ class Cancellation
     {
     }
 }
-

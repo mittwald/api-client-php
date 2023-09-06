@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles;
 
+use InvalidArgumentException;
+
 class ListArticlesRequest
 {
     public const method = 'get';
@@ -67,7 +69,7 @@ class ListArticlesRequest
             ],
         ],
         'required' => [
-            
+
         ],
     ];
 
@@ -117,7 +119,7 @@ class ListArticlesRequest
     private ?string $name = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -130,7 +132,7 @@ class ListArticlesRequest
     /**
      * @return string|null
      */
-    public function getCustomerId() : ?string
+    public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
@@ -138,7 +140,7 @@ class ListArticlesRequest
     /**
      * @return int|null
      */
-    public function getLimit() : ?int
+    public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
@@ -146,7 +148,7 @@ class ListArticlesRequest
     /**
      * @return int|null
      */
-    public function getSkip() : ?int
+    public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
@@ -154,7 +156,7 @@ class ListArticlesRequest
     /**
      * @return int|null
      */
-    public function getPage() : ?int
+    public function getPage(): ?int
     {
         return $this->page ?? null;
     }
@@ -162,7 +164,7 @@ class ListArticlesRequest
     /**
      * @return string[]|null
      */
-    public function getTags() : ?array
+    public function getTags(): ?array
     {
         return $this->tags ?? null;
     }
@@ -170,7 +172,7 @@ class ListArticlesRequest
     /**
      * @return string[]|null
      */
-    public function getTemplateNames() : ?array
+    public function getTemplateNames(): ?array
     {
         return $this->templateNames ?? null;
     }
@@ -178,7 +180,7 @@ class ListArticlesRequest
     /**
      * @return string[]|null
      */
-    public function getArticleIds() : ?array
+    public function getArticleIds(): ?array
     {
         return $this->articleIds ?? null;
     }
@@ -186,7 +188,7 @@ class ListArticlesRequest
     /**
      * @return string[]|null
      */
-    public function getOrderable() : ?array
+    public function getOrderable(): ?array
     {
         return $this->orderable ?? null;
     }
@@ -194,7 +196,7 @@ class ListArticlesRequest
     /**
      * @return string|null
      */
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name ?? null;
     }
@@ -203,12 +205,12 @@ class ListArticlesRequest
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -220,7 +222,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutCustomerId() : self
+    public function withoutCustomerId(): self
     {
         $clone = clone $this;
         unset($clone->customerId);
@@ -232,12 +234,12 @@ class ListArticlesRequest
      * @param int $limit
      * @return self
      */
-    public function withLimit(int $limit) : self
+    public function withLimit(int $limit): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -249,7 +251,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutLimit() : self
+    public function withoutLimit(): self
     {
         $clone = clone $this;
         unset($clone->limit);
@@ -261,12 +263,12 @@ class ListArticlesRequest
      * @param int $skip
      * @return self
      */
-    public function withSkip(int $skip) : self
+    public function withSkip(int $skip): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -278,7 +280,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutSkip() : self
+    public function withoutSkip(): self
     {
         $clone = clone $this;
         unset($clone->skip);
@@ -290,12 +292,12 @@ class ListArticlesRequest
      * @param int $page
      * @return self
      */
-    public function withPage(int $page) : self
+    public function withPage(int $page): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($page, static::$schema['properties']['page']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -307,7 +309,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutPage() : self
+    public function withoutPage(): self
     {
         $clone = clone $this;
         unset($clone->page);
@@ -319,12 +321,12 @@ class ListArticlesRequest
      * @param string[] $tags
      * @return self
      */
-    public function withTags(array $tags) : self
+    public function withTags(array $tags): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($tags, static::$schema['properties']['tags']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -336,7 +338,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutTags() : self
+    public function withoutTags(): self
     {
         $clone = clone $this;
         unset($clone->tags);
@@ -348,12 +350,12 @@ class ListArticlesRequest
      * @param string[] $templateNames
      * @return self
      */
-    public function withTemplateNames(array $templateNames) : self
+    public function withTemplateNames(array $templateNames): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($templateNames, static::$schema['properties']['templateNames']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -365,7 +367,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutTemplateNames() : self
+    public function withoutTemplateNames(): self
     {
         $clone = clone $this;
         unset($clone->templateNames);
@@ -377,12 +379,12 @@ class ListArticlesRequest
      * @param string[] $articleIds
      * @return self
      */
-    public function withArticleIds(array $articleIds) : self
+    public function withArticleIds(array $articleIds): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($articleIds, static::$schema['properties']['articleIds']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -394,7 +396,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutArticleIds() : self
+    public function withoutArticleIds(): self
     {
         $clone = clone $this;
         unset($clone->articleIds);
@@ -406,12 +408,12 @@ class ListArticlesRequest
      * @param string[] $orderable
      * @return self
      */
-    public function withOrderable(array $orderable) : self
+    public function withOrderable(array $orderable): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($orderable, static::$schema['properties']['orderable']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -423,7 +425,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutOrderable() : self
+    public function withoutOrderable(): self
     {
         $clone = clone $this;
         unset($clone->orderable);
@@ -435,12 +437,12 @@ class ListArticlesRequest
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -452,7 +454,7 @@ class ListArticlesRequest
     /**
      * @return self
      */
-    public function withoutName() : self
+    public function withoutName(): self
     {
         $clone = clone $this;
         unset($clone->name);
@@ -466,9 +468,9 @@ class ListArticlesRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListArticlesRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListArticlesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListArticlesRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -530,7 +532,7 @@ class ListArticlesRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->customerId)) {
@@ -570,19 +572,19 @@ class ListArticlesRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -592,13 +594,13 @@ class ListArticlesRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/articles';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -632,16 +634,15 @@ class ListArticlesRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

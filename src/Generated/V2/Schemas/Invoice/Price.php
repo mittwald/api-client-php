@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+
 class Price
 {
     /**
@@ -54,7 +56,7 @@ class Price
     /**
      * @return PriceCurrency
      */
-    public function getCurrency() : PriceCurrency
+    public function getCurrency(): PriceCurrency
     {
         return $this->currency;
     }
@@ -62,7 +64,7 @@ class Price
     /**
      * @return int
      */
-    public function getValue() : int
+    public function getValue(): int
     {
         return $this->value;
     }
@@ -71,7 +73,7 @@ class Price
      * @param PriceCurrency $currency
      * @return self
      */
-    public function withCurrency(PriceCurrency $currency) : self
+    public function withCurrency(PriceCurrency $currency): self
     {
         $clone = clone $this;
         $clone->currency = $currency;
@@ -83,12 +85,12 @@ class Price
      * @param int $value
      * @return self
      */
-    public function withValue(int $value) : self
+    public function withValue(int $value): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($value, static::$schema['properties']['value']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -103,9 +105,9 @@ class Price
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Price Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Price
+    public static function buildFromInput(array|object $input, bool $validate = true): Price
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -125,7 +127,7 @@ class Price
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['currency'] = ($this->currency)->value;
@@ -140,19 +142,19 @@ class Price
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -162,4 +164,3 @@ class Price
     {
     }
 }
-

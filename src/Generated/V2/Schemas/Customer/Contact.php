@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Customer;
 
+use InvalidArgumentException;
+
 class Contact
 {
     /**
@@ -110,7 +112,7 @@ class Contact
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address
      */
-    public function getAddress() : \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address
+    public function getAddress(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address
     {
         return $this->address;
     }
@@ -118,7 +120,7 @@ class Contact
     /**
      * @return string|null
      */
-    public function getCompany() : ?string
+    public function getCompany(): ?string
     {
         return $this->company ?? null;
     }
@@ -126,7 +128,7 @@ class Contact
     /**
      * @return string|null
      */
-    public function getEmailAddress() : ?string
+    public function getEmailAddress(): ?string
     {
         return $this->emailAddress ?? null;
     }
@@ -134,7 +136,7 @@ class Contact
     /**
      * @return string|null
      */
-    public function getFirstName() : ?string
+    public function getFirstName(): ?string
     {
         return $this->firstName ?? null;
     }
@@ -142,7 +144,7 @@ class Contact
     /**
      * @return string|null
      */
-    public function getLastName() : ?string
+    public function getLastName(): ?string
     {
         return $this->lastName ?? null;
     }
@@ -150,7 +152,7 @@ class Contact
     /**
      * @return string[]|null
      */
-    public function getPhoneNumbers() : ?array
+    public function getPhoneNumbers(): ?array
     {
         return $this->phoneNumbers ?? null;
     }
@@ -158,7 +160,7 @@ class Contact
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation
      */
-    public function getSalutation() : \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation
+    public function getSalutation(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation
     {
         return $this->salutation;
     }
@@ -166,7 +168,7 @@ class Contact
     /**
      * @return string|null
      */
-    public function getTitle() : ?string
+    public function getTitle(): ?string
     {
         return $this->title ?? null;
     }
@@ -174,7 +176,7 @@ class Contact
     /**
      * @return bool|null
      */
-    public function getUseFormalTerm() : ?bool
+    public function getUseFormalTerm(): ?bool
     {
         return $this->useFormalTerm ?? null;
     }
@@ -183,7 +185,7 @@ class Contact
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address
      * @return self
      */
-    public function withAddress(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address) : self
+    public function withAddress(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Address $address): self
     {
         $clone = clone $this;
         $clone->address = $address;
@@ -195,12 +197,12 @@ class Contact
      * @param string $company
      * @return self
      */
-    public function withCompany(string $company) : self
+    public function withCompany(string $company): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($company, static::$schema['properties']['company']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -212,7 +214,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutCompany() : self
+    public function withoutCompany(): self
     {
         $clone = clone $this;
         unset($clone->company);
@@ -224,12 +226,12 @@ class Contact
      * @param string $emailAddress
      * @return self
      */
-    public function withEmailAddress(string $emailAddress) : self
+    public function withEmailAddress(string $emailAddress): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($emailAddress, static::$schema['properties']['emailAddress']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -241,7 +243,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutEmailAddress() : self
+    public function withoutEmailAddress(): self
     {
         $clone = clone $this;
         unset($clone->emailAddress);
@@ -253,12 +255,12 @@ class Contact
      * @param string $firstName
      * @return self
      */
-    public function withFirstName(string $firstName) : self
+    public function withFirstName(string $firstName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($firstName, static::$schema['properties']['firstName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -270,7 +272,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutFirstName() : self
+    public function withoutFirstName(): self
     {
         $clone = clone $this;
         unset($clone->firstName);
@@ -282,12 +284,12 @@ class Contact
      * @param string $lastName
      * @return self
      */
-    public function withLastName(string $lastName) : self
+    public function withLastName(string $lastName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($lastName, static::$schema['properties']['lastName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -299,7 +301,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutLastName() : self
+    public function withoutLastName(): self
     {
         $clone = clone $this;
         unset($clone->lastName);
@@ -311,12 +313,12 @@ class Contact
      * @param string[] $phoneNumbers
      * @return self
      */
-    public function withPhoneNumbers(array $phoneNumbers) : self
+    public function withPhoneNumbers(array $phoneNumbers): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($phoneNumbers, static::$schema['properties']['phoneNumbers']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -328,7 +330,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutPhoneNumbers() : self
+    public function withoutPhoneNumbers(): self
     {
         $clone = clone $this;
         unset($clone->phoneNumbers);
@@ -340,7 +342,7 @@ class Contact
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation
      * @return self
      */
-    public function withSalutation(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation) : self
+    public function withSalutation(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Salutation $salutation): self
     {
         $clone = clone $this;
         $clone->salutation = $salutation;
@@ -352,12 +354,12 @@ class Contact
      * @param string $title
      * @return self
      */
-    public function withTitle(string $title) : self
+    public function withTitle(string $title): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($title, static::$schema['properties']['title']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -369,7 +371,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutTitle() : self
+    public function withoutTitle(): self
     {
         $clone = clone $this;
         unset($clone->title);
@@ -381,12 +383,12 @@ class Contact
      * @param bool $useFormalTerm
      * @return self
      */
-    public function withUseFormalTerm(bool $useFormalTerm) : self
+    public function withUseFormalTerm(bool $useFormalTerm): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($useFormalTerm, static::$schema['properties']['useFormalTerm']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -398,7 +400,7 @@ class Contact
     /**
      * @return self
      */
-    public function withoutUseFormalTerm() : self
+    public function withoutUseFormalTerm(): self
     {
         $clone = clone $this;
         unset($clone->useFormalTerm);
@@ -412,9 +414,9 @@ class Contact
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Contact Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Contact
+    public static function buildFromInput(array|object $input, bool $validate = true): Contact
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -468,7 +470,7 @@ class Contact
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['address'] = $this->address->toJson();
@@ -504,19 +506,19 @@ class Contact
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -526,4 +528,3 @@ class Contact
     {
     }
 }
-

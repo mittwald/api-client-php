@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Commons;
 
+use InvalidArgumentException;
+
 class ValidationErrorSchema
 {
     /**
@@ -96,7 +98,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -104,7 +106,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     /**
      * @return string
      */
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -112,7 +114,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     /**
      * @return string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return $this->type;
     }
@@ -120,7 +122,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     /**
      * @return string[]|null
      */
-    public function getContext() : ?array
+    public function getContext(): ?array
     {
         return $this->context ?? null;
     }
@@ -129,12 +131,12 @@ type that failed validation (e.g. "missingProperty" for type "required")
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -147,12 +149,12 @@ type that failed validation (e.g. "missingProperty" for type "required")
      * @param string $path
      * @return self
      */
-    public function withPath(string $path) : self
+    public function withPath(string $path): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($path, static::$schema['properties']['path']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -165,12 +167,12 @@ type that failed validation (e.g. "missingProperty" for type "required")
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -183,12 +185,12 @@ type that failed validation (e.g. "missingProperty" for type "required")
      * @param string[] $context
      * @return self
      */
-    public function withContext(array $context) : self
+    public function withContext(array $context): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($context, static::$schema['properties']['context']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -200,7 +202,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     /**
      * @return self
      */
-    public function withoutContext() : self
+    public function withoutContext(): self
     {
         $clone = clone $this;
         unset($clone->context);
@@ -214,9 +216,9 @@ type that failed validation (e.g. "missingProperty" for type "required")
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ValidationErrorSchema Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ValidationErrorSchema
+    public static function buildFromInput(array|object $input, bool $validate = true): ValidationErrorSchema
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -241,7 +243,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['message'] = $this->message;
@@ -260,19 +262,19 @@ type that failed validation (e.g. "missingProperty" for type "required")
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -282,4 +284,3 @@ type that failed validation (e.g. "missingProperty" for type "required")
     {
     }
 }
-

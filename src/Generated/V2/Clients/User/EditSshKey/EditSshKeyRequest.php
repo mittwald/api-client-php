@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\EditSshKey;
 
+use InvalidArgumentException;
+
 class EditSshKeyRequest
 {
     public const method = 'put';
@@ -54,7 +56,7 @@ class EditSshKeyRequest
     private EditSshKeyRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -70,7 +72,7 @@ class EditSshKeyRequest
     /**
      * @return string
      */
-    public function getSshKeyId() : string
+    public function getSshKeyId(): string
     {
         return $this->sshKeyId;
     }
@@ -78,7 +80,7 @@ class EditSshKeyRequest
     /**
      * @return EditSshKeyRequestBody
      */
-    public function getBody() : EditSshKeyRequestBody
+    public function getBody(): EditSshKeyRequestBody
     {
         return $this->body;
     }
@@ -87,12 +89,12 @@ class EditSshKeyRequest
      * @param string $sshKeyId
      * @return self
      */
-    public function withSshKeyId(string $sshKeyId) : self
+    public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($sshKeyId, static::$schema['properties']['sshKeyId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -105,7 +107,7 @@ class EditSshKeyRequest
      * @param EditSshKeyRequestBody $body
      * @return self
      */
-    public function withBody(EditSshKeyRequestBody $body) : self
+    public function withBody(EditSshKeyRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -119,9 +121,9 @@ class EditSshKeyRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return EditSshKeyRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : EditSshKeyRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): EditSshKeyRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -141,7 +143,7 @@ class EditSshKeyRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['sshKeyId'] = $this->sshKeyId;
@@ -156,19 +158,19 @@ class EditSshKeyRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -179,30 +181,29 @@ class EditSshKeyRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $sshKeyId = urlencode($mapped['sshKeyId']);
         return '/v2/users/self/ssh-keys/' . $sshKeyId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

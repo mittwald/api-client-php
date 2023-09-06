@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use InvalidArgumentException;
+
 class AccountMfaDetails
 {
     /**
@@ -44,7 +46,7 @@ class AccountMfaDetails
     /**
      * @return bool|null
      */
-    public function getMfaConfirmed() : ?bool
+    public function getMfaConfirmed(): ?bool
     {
         return $this->mfaConfirmed ?? null;
     }
@@ -52,7 +54,7 @@ class AccountMfaDetails
     /**
      * @return bool|null
      */
-    public function getMfaInitialized() : ?bool
+    public function getMfaInitialized(): ?bool
     {
         return $this->mfaInitialized ?? null;
     }
@@ -61,12 +63,12 @@ class AccountMfaDetails
      * @param bool $mfaConfirmed
      * @return self
      */
-    public function withMfaConfirmed(bool $mfaConfirmed) : self
+    public function withMfaConfirmed(bool $mfaConfirmed): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($mfaConfirmed, static::$schema['properties']['mfaConfirmed']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -78,7 +80,7 @@ class AccountMfaDetails
     /**
      * @return self
      */
-    public function withoutMfaConfirmed() : self
+    public function withoutMfaConfirmed(): self
     {
         $clone = clone $this;
         unset($clone->mfaConfirmed);
@@ -90,12 +92,12 @@ class AccountMfaDetails
      * @param bool $mfaInitialized
      * @return self
      */
-    public function withMfaInitialized(bool $mfaInitialized) : self
+    public function withMfaInitialized(bool $mfaInitialized): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($mfaInitialized, static::$schema['properties']['mfaInitialized']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,7 +109,7 @@ class AccountMfaDetails
     /**
      * @return self
      */
-    public function withoutMfaInitialized() : self
+    public function withoutMfaInitialized(): self
     {
         $clone = clone $this;
         unset($clone->mfaInitialized);
@@ -121,9 +123,9 @@ class AccountMfaDetails
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AccountMfaDetails Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AccountMfaDetails
+    public static function buildFromInput(array|object $input, bool $validate = true): AccountMfaDetails
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -150,7 +152,7 @@ class AccountMfaDetails
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->mfaConfirmed)) {
@@ -169,19 +171,19 @@ class AccountMfaDetails
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -191,4 +193,3 @@ class AccountMfaDetails
     {
     }
 }
-

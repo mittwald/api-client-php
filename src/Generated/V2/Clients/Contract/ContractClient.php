@@ -13,7 +13,7 @@ class ContractClient
         $this->client = $client;
     }
 
-    public function cancelContractItemTermination(CancelContractItemTermination\CancelContractItemTerminationRequest $request) : CancelContractItemTermination\CancelContractItemTermination200Response|CancelContractItemTermination\CancelContractItemTermination400Response|CancelContractItemTermination\CancelContractItemTermination404Response|CancelContractItemTermination\CancelContractItemTerminationDefaultResponse
+    public function cancelContractItemTermination(CancelContractItemTermination\CancelContractItemTerminationRequest $request): CancelContractItemTermination\CancelContractItemTermination200Response|CancelContractItemTermination\CancelContractItemTermination400Response|CancelContractItemTermination\CancelContractItemTermination404Response|CancelContractItemTermination\CancelContractItemTerminationDefaultResponse
     {
         $httpRequest = new Request(CancelContractItemTermination\CancelContractItemTerminationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -29,7 +29,7 @@ class ContractClient
         };
     }
 
-    public function terminateContractItem(TerminateContractItem\TerminateContractItemRequest $request) : TerminateContractItem\TerminateContractItem201Response|TerminateContractItem\TerminateContractItem400Response|TerminateContractItem\TerminateContractItem404Response|TerminateContractItem\TerminateContractItemDefaultResponse
+    public function terminateContractItem(TerminateContractItem\TerminateContractItemRequest $request): TerminateContractItem\TerminateContractItem201Response|TerminateContractItem\TerminateContractItem400Response|TerminateContractItem\TerminateContractItem404Response|TerminateContractItem\TerminateContractItemDefaultResponse
     {
         $httpRequest = new Request(TerminateContractItem\TerminateContractItemRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -45,7 +45,7 @@ class ContractClient
         };
     }
 
-    public function cancelContractTariffChange(CancelContractTariffChange\CancelContractTariffChangeRequest $request) : CancelContractTariffChange\CancelContractTariffChange200Response|CancelContractTariffChange\CancelContractTariffChange400Response|CancelContractTariffChange\CancelContractTariffChange404Response|CancelContractTariffChange\CancelContractTariffChangeDefaultResponse
+    public function cancelContractTariffChange(CancelContractTariffChange\CancelContractTariffChangeRequest $request): CancelContractTariffChange\CancelContractTariffChange200Response|CancelContractTariffChange\CancelContractTariffChange400Response|CancelContractTariffChange\CancelContractTariffChange404Response|CancelContractTariffChange\CancelContractTariffChangeDefaultResponse
     {
         $httpRequest = new Request(CancelContractTariffChange\CancelContractTariffChangeRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -61,7 +61,7 @@ class ContractClient
         };
     }
 
-    public function cancelContractTermination(CancelContractTermination\CancelContractTerminationRequest $request) : CancelContractTermination\CancelContractTermination200Response|CancelContractTermination\CancelContractTermination400Response|CancelContractTermination\CancelContractTermination404Response|CancelContractTermination\CancelContractTerminationDefaultResponse
+    public function cancelContractTermination(CancelContractTermination\CancelContractTerminationRequest $request): CancelContractTermination\CancelContractTermination200Response|CancelContractTermination\CancelContractTermination400Response|CancelContractTermination\CancelContractTermination404Response|CancelContractTermination\CancelContractTerminationDefaultResponse
     {
         $httpRequest = new Request(CancelContractTermination\CancelContractTerminationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -77,7 +77,7 @@ class ContractClient
         };
     }
 
-    public function terminateContract(TerminateContract\TerminateContractRequest $request) : TerminateContract\TerminateContract201Response|TerminateContract\TerminateContract400Response|TerminateContract\TerminateContract404Response|TerminateContract\TerminateContractDefaultResponse
+    public function terminateContract(TerminateContract\TerminateContractRequest $request): TerminateContract\TerminateContract201Response|TerminateContract\TerminateContract400Response|TerminateContract\TerminateContract404Response|TerminateContract\TerminateContractDefaultResponse
     {
         $httpRequest = new Request(TerminateContract\TerminateContractRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -93,7 +93,7 @@ class ContractClient
         };
     }
 
-    public function getBaseItemOfContract(GetBaseItemOfContract\GetBaseItemOfContractRequest $request) : GetBaseItemOfContract\GetBaseItemOfContract200Response|GetBaseItemOfContract\GetBaseItemOfContract400Response|GetBaseItemOfContract\GetBaseItemOfContract404Response|GetBaseItemOfContract\GetBaseItemOfContractDefaultResponse
+    public function getBaseItemOfContract(GetBaseItemOfContract\GetBaseItemOfContractRequest $request): GetBaseItemOfContract\GetBaseItemOfContract200Response|GetBaseItemOfContract\GetBaseItemOfContract400Response|GetBaseItemOfContract\GetBaseItemOfContract404Response|GetBaseItemOfContract\GetBaseItemOfContractDefaultResponse
     {
         $httpRequest = new Request(GetBaseItemOfContract\GetBaseItemOfContractRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -108,7 +108,7 @@ class ContractClient
         };
     }
 
-    public function getDetailOfContractByDomain(GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest $request) : GetDetailOfContractByDomain\GetDetailOfContractByDomain200Response|GetDetailOfContractByDomain\GetDetailOfContractByDomain400Response|GetDetailOfContractByDomain\GetDetailOfContractByDomain404Response|GetDetailOfContractByDomain\GetDetailOfContractByDomainDefaultResponse
+    public function getDetailOfContractByDomain(GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest $request): GetDetailOfContractByDomain\GetDetailOfContractByDomain200Response|GetDetailOfContractByDomain\GetDetailOfContractByDomain400Response|GetDetailOfContractByDomain\GetDetailOfContractByDomain404Response|GetDetailOfContractByDomain\GetDetailOfContractByDomainDefaultResponse
     {
         $httpRequest = new Request(GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -123,7 +123,7 @@ class ContractClient
         };
     }
 
-    public function getDetailOfContractByProject(GetDetailOfContractByProject\GetDetailOfContractByProjectRequest $request) : GetDetailOfContractByProject\GetDetailOfContractByProject200Response|GetDetailOfContractByProject\GetDetailOfContractByProject400Response|GetDetailOfContractByProject\GetDetailOfContractByProject404Response|GetDetailOfContractByProject\GetDetailOfContractByProjectDefaultResponse
+    public function getDetailOfContractByProject(GetDetailOfContractByProject\GetDetailOfContractByProjectRequest $request): GetDetailOfContractByProject\GetDetailOfContractByProject200Response|GetDetailOfContractByProject\GetDetailOfContractByProject400Response|GetDetailOfContractByProject\GetDetailOfContractByProject404Response|GetDetailOfContractByProject\GetDetailOfContractByProjectDefaultResponse
     {
         $httpRequest = new Request(GetDetailOfContractByProject\GetDetailOfContractByProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -138,7 +138,7 @@ class ContractClient
         };
     }
 
-    public function getDetailOfContractByServer(GetDetailOfContractByServer\GetDetailOfContractByServerRequest $request) : GetDetailOfContractByServer\GetDetailOfContractByServer200Response|GetDetailOfContractByServer\GetDetailOfContractByServer400Response|GetDetailOfContractByServer\GetDetailOfContractByServer404Response|GetDetailOfContractByServer\GetDetailOfContractByServerDefaultResponse
+    public function getDetailOfContractByServer(GetDetailOfContractByServer\GetDetailOfContractByServerRequest $request): GetDetailOfContractByServer\GetDetailOfContractByServer200Response|GetDetailOfContractByServer\GetDetailOfContractByServer400Response|GetDetailOfContractByServer\GetDetailOfContractByServer404Response|GetDetailOfContractByServer\GetDetailOfContractByServerDefaultResponse
     {
         $httpRequest = new Request(GetDetailOfContractByServer\GetDetailOfContractByServerRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -153,7 +153,7 @@ class ContractClient
         };
     }
 
-    public function getDetailOfContractItem(GetDetailOfContractItem\GetDetailOfContractItemRequest $request) : GetDetailOfContractItem\GetDetailOfContractItem200Response|GetDetailOfContractItem\GetDetailOfContractItem400Response|GetDetailOfContractItem\GetDetailOfContractItem404Response|GetDetailOfContractItem\GetDetailOfContractItemDefaultResponse
+    public function getDetailOfContractItem(GetDetailOfContractItem\GetDetailOfContractItemRequest $request): GetDetailOfContractItem\GetDetailOfContractItem200Response|GetDetailOfContractItem\GetDetailOfContractItem400Response|GetDetailOfContractItem\GetDetailOfContractItem404Response|GetDetailOfContractItem\GetDetailOfContractItemDefaultResponse
     {
         $httpRequest = new Request(GetDetailOfContractItem\GetDetailOfContractItemRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -168,7 +168,7 @@ class ContractClient
         };
     }
 
-    public function getDetailOfContract(GetDetailOfContract\GetDetailOfContractRequest $request) : GetDetailOfContract\GetDetailOfContract200Response|GetDetailOfContract\GetDetailOfContract400Response|GetDetailOfContract\GetDetailOfContract404Response|GetDetailOfContract\GetDetailOfContractDefaultResponse
+    public function getDetailOfContract(GetDetailOfContract\GetDetailOfContractRequest $request): GetDetailOfContract\GetDetailOfContract200Response|GetDetailOfContract\GetDetailOfContract400Response|GetDetailOfContract\GetDetailOfContract404Response|GetDetailOfContract\GetDetailOfContractDefaultResponse
     {
         $httpRequest = new Request(GetDetailOfContract\GetDetailOfContractRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -183,7 +183,7 @@ class ContractClient
         };
     }
 
-    public function getNextTerminationDateForItem(GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest $request) : GetNextTerminationDateForItem\GetNextTerminationDateForItem200Response|GetNextTerminationDateForItem\GetNextTerminationDateForItem400Response|GetNextTerminationDateForItem\GetNextTerminationDateForItem404Response|GetNextTerminationDateForItem\GetNextTerminationDateForItemDefaultResponse
+    public function getNextTerminationDateForItem(GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest $request): GetNextTerminationDateForItem\GetNextTerminationDateForItem200Response|GetNextTerminationDateForItem\GetNextTerminationDateForItem400Response|GetNextTerminationDateForItem\GetNextTerminationDateForItem404Response|GetNextTerminationDateForItem\GetNextTerminationDateForItemDefaultResponse
     {
         $httpRequest = new Request(GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -198,7 +198,7 @@ class ContractClient
         };
     }
 
-    public function listContracts(ListContracts\ListContractsRequest $request) : ListContracts\ListContracts200Response|ListContracts\ListContracts400Response|ListContracts\ListContracts404Response|ListContracts\ListContractsDefaultResponse
+    public function listContracts(ListContracts\ListContractsRequest $request): ListContracts\ListContracts200Response|ListContracts\ListContracts400Response|ListContracts\ListContracts404Response|ListContracts\ListContractsDefaultResponse
     {
         $httpRequest = new Request(ListContracts\ListContractsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -213,7 +213,7 @@ class ContractClient
         };
     }
 
-    public function deprecatedContractGetDetailOfContractByDomain(DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomainRequest $request) : DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomain200Response|DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomain400Response|DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomain404Response|DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomainDefaultResponse
+    public function deprecatedContractGetDetailOfContractByDomain(DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomainRequest $request): DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomain200Response|DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomain400Response|DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomain404Response|DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomainDefaultResponse
     {
         $httpRequest = new Request(DeprecatedContractGetDetailOfContractByDomain\DeprecatedContractGetDetailOfContractByDomainRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -228,7 +228,7 @@ class ContractClient
         };
     }
 
-    public function deprecatedContractGetDetailOfContractByProject(DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProjectRequest $request) : DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProject200Response|DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProject400Response|DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProject404Response|DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProjectDefaultResponse
+    public function deprecatedContractGetDetailOfContractByProject(DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProjectRequest $request): DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProject200Response|DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProject400Response|DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProject404Response|DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProjectDefaultResponse
     {
         $httpRequest = new Request(DeprecatedContractGetDetailOfContractByProject\DeprecatedContractGetDetailOfContractByProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -243,7 +243,7 @@ class ContractClient
         };
     }
 
-    public function deprecatedContractGetDetailOfContractByServer(DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServerRequest $request) : DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServer200Response|DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServer400Response|DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServer404Response|DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServerDefaultResponse
+    public function deprecatedContractGetDetailOfContractByServer(DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServerRequest $request): DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServer200Response|DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServer400Response|DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServer404Response|DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServerDefaultResponse
     {
         $httpRequest = new Request(DeprecatedContractGetDetailOfContractByServer\DeprecatedContractGetDetailOfContractByServerRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -258,7 +258,7 @@ class ContractClient
         };
     }
 
-    public function invoiceDetailOfInvoice(InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest $request) : InvoiceDetailOfInvoice\InvoiceDetailOfInvoice200Response|InvoiceDetailOfInvoice\InvoiceDetailOfInvoice400Response|InvoiceDetailOfInvoice\InvoiceDetailOfInvoice404Response|InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceDefaultResponse
+    public function invoiceDetailOfInvoice(InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest $request): InvoiceDetailOfInvoice\InvoiceDetailOfInvoice200Response|InvoiceDetailOfInvoice\InvoiceDetailOfInvoice400Response|InvoiceDetailOfInvoice\InvoiceDetailOfInvoice404Response|InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceDefaultResponse
     {
         $httpRequest = new Request(InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -273,7 +273,7 @@ class ContractClient
         };
     }
 
-    public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest $request) : InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings200Response|InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings400Response|InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings404Response|InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsDefaultResponse
+    public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest $request): InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings200Response|InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings400Response|InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings404Response|InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsDefaultResponse
     {
         $httpRequest = new Request(InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -288,7 +288,7 @@ class ContractClient
         };
     }
 
-    public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request) : InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettings200Response|InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettings400Response|InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettings404Response|InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsDefaultResponse
+    public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettings200Response|InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettings400Response|InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettings404Response|InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsDefaultResponse
     {
         $httpRequest = new Request(InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -304,7 +304,7 @@ class ContractClient
         };
     }
 
-    public function invoiceListCustomerInvoices(InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest $request) : InvoiceListCustomerInvoices\InvoiceListCustomerInvoices200Response|InvoiceListCustomerInvoices\InvoiceListCustomerInvoices400Response|InvoiceListCustomerInvoices\InvoiceListCustomerInvoices404Response|InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesDefaultResponse
+    public function invoiceListCustomerInvoices(InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest $request): InvoiceListCustomerInvoices\InvoiceListCustomerInvoices200Response|InvoiceListCustomerInvoices\InvoiceListCustomerInvoices400Response|InvoiceListCustomerInvoices\InvoiceListCustomerInvoices404Response|InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesDefaultResponse
     {
         $httpRequest = new Request(InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -319,7 +319,7 @@ class ContractClient
         };
     }
 
-    public function orderCreateOrder(OrderCreateOrder\OrderCreateOrderRequest $request) : OrderCreateOrder\OrderCreateOrder201Response|OrderCreateOrder\OrderCreateOrder400Response|OrderCreateOrder\OrderCreateOrderDefaultResponse
+    public function orderCreateOrder(OrderCreateOrder\OrderCreateOrderRequest $request): OrderCreateOrder\OrderCreateOrder201Response|OrderCreateOrder\OrderCreateOrder400Response|OrderCreateOrder\OrderCreateOrderDefaultResponse
     {
         $httpRequest = new Request(OrderCreateOrder\OrderCreateOrderRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -334,7 +334,7 @@ class ContractClient
         };
     }
 
-    public function orderCreateTariffChange(OrderCreateTariffChange\OrderCreateTariffChangeRequest $request) : OrderCreateTariffChange\OrderCreateTariffChange201Response|OrderCreateTariffChange\OrderCreateTariffChange400Response|OrderCreateTariffChange\OrderCreateTariffChangeDefaultResponse
+    public function orderCreateTariffChange(OrderCreateTariffChange\OrderCreateTariffChangeRequest $request): OrderCreateTariffChange\OrderCreateTariffChange201Response|OrderCreateTariffChange\OrderCreateTariffChange400Response|OrderCreateTariffChange\OrderCreateTariffChangeDefaultResponse
     {
         $httpRequest = new Request(OrderCreateTariffChange\OrderCreateTariffChangeRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -349,7 +349,7 @@ class ContractClient
         };
     }
 
-    public function orderGetOrder(OrderGetOrder\OrderGetOrderRequest $request) : OrderGetOrder\OrderGetOrder200Response|OrderGetOrder\OrderGetOrderDefaultResponse
+    public function orderGetOrder(OrderGetOrder\OrderGetOrderRequest $request): OrderGetOrder\OrderGetOrder200Response|OrderGetOrder\OrderGetOrderDefaultResponse
     {
         $httpRequest = new Request(OrderGetOrder\OrderGetOrderRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -362,7 +362,7 @@ class ContractClient
         };
     }
 
-    public function orderListCustomerOrders(OrderListCustomerOrders\OrderListCustomerOrdersRequest $request) : OrderListCustomerOrders\OrderListCustomerOrders200Response|OrderListCustomerOrders\OrderListCustomerOrdersDefaultResponse
+    public function orderListCustomerOrders(OrderListCustomerOrders\OrderListCustomerOrdersRequest $request): OrderListCustomerOrders\OrderListCustomerOrders200Response|OrderListCustomerOrders\OrderListCustomerOrdersDefaultResponse
     {
         $httpRequest = new Request(OrderListCustomerOrders\OrderListCustomerOrdersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -375,7 +375,7 @@ class ContractClient
         };
     }
 
-    public function orderListProjectOrders(OrderListProjectOrders\OrderListProjectOrdersRequest $request) : OrderListProjectOrders\OrderListProjectOrders200Response|OrderListProjectOrders\OrderListProjectOrdersDefaultResponse
+    public function orderListProjectOrders(OrderListProjectOrders\OrderListProjectOrdersRequest $request): OrderListProjectOrders\OrderListProjectOrders200Response|OrderListProjectOrders\OrderListProjectOrdersDefaultResponse
     {
         $httpRequest = new Request(OrderListProjectOrders\OrderListProjectOrdersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -388,7 +388,7 @@ class ContractClient
         };
     }
 
-    public function orderPreviewOrder(OrderPreviewOrder\OrderPreviewOrderRequest $request) : \Mittwald\ApiClient\Client\UntypedResponse|OrderPreviewOrder\OrderPreviewOrder400Response|OrderPreviewOrder\OrderPreviewOrderDefaultResponse
+    public function orderPreviewOrder(OrderPreviewOrder\OrderPreviewOrderRequest $request): \Mittwald\ApiClient\Client\UntypedResponse|OrderPreviewOrder\OrderPreviewOrder400Response|OrderPreviewOrder\OrderPreviewOrderDefaultResponse
     {
         $httpRequest = new Request(OrderPreviewOrder\OrderPreviewOrderRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -403,7 +403,7 @@ class ContractClient
         };
     }
 
-    public function orderPreviewTariffChange(OrderPreviewTariffChange\OrderPreviewTariffChangeRequest $request) : OrderPreviewTariffChange\OrderPreviewTariffChange200Response|OrderPreviewTariffChange\OrderPreviewTariffChange400Response|OrderPreviewTariffChange\OrderPreviewTariffChangeDefaultResponse
+    public function orderPreviewTariffChange(OrderPreviewTariffChange\OrderPreviewTariffChangeRequest $request): OrderPreviewTariffChange\OrderPreviewTariffChange200Response|OrderPreviewTariffChange\OrderPreviewTariffChange400Response|OrderPreviewTariffChange\OrderPreviewTariffChangeDefaultResponse
     {
         $httpRequest = new Request(OrderPreviewTariffChange\OrderPreviewTariffChangeRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -418,4 +418,3 @@ class ContractClient
         };
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+use DateTime;
+
 class RedisDatabase
 {
     /**
@@ -100,9 +103,9 @@ class RedisDatabase
     private ?RedisDatabaseConfiguration $configuration = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -140,9 +143,9 @@ class RedisDatabase
     private string $projectId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @var string
@@ -150,7 +153,7 @@ class RedisDatabase
     private string $version;
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $description
      * @param string[] $finalizers
      * @param string $hostname
@@ -158,10 +161,10 @@ class RedisDatabase
      * @param string $name
      * @param int $port
      * @param string $projectId
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @param string $version
      */
-    public function __construct(\DateTime $createdAt, string $description, array $finalizers, string $hostname, string $id, string $name, int $port, string $projectId, \DateTime $updatedAt, string $version)
+    public function __construct(DateTime $createdAt, string $description, array $finalizers, string $hostname, string $id, string $name, int $port, string $projectId, DateTime $updatedAt, string $version)
     {
         $this->createdAt = $createdAt;
         $this->description = $description;
@@ -179,15 +182,15 @@ class RedisDatabase
      * @return
      * RedisDatabaseConfiguration|null
      */
-    public function getConfiguration() : ?RedisDatabaseConfiguration
+    public function getConfiguration(): ?RedisDatabaseConfiguration
     {
         return $this->configuration ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -195,7 +198,7 @@ class RedisDatabase
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -203,7 +206,7 @@ class RedisDatabase
     /**
      * @return string[]
      */
-    public function getFinalizers() : array
+    public function getFinalizers(): array
     {
         return $this->finalizers;
     }
@@ -211,7 +214,7 @@ class RedisDatabase
     /**
      * @return string
      */
-    public function getHostname() : string
+    public function getHostname(): string
     {
         return $this->hostname;
     }
@@ -219,7 +222,7 @@ class RedisDatabase
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -227,7 +230,7 @@ class RedisDatabase
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -235,7 +238,7 @@ class RedisDatabase
     /**
      * @return int
      */
-    public function getPort() : int
+    public function getPort(): int
     {
         return $this->port;
     }
@@ -243,15 +246,15 @@ class RedisDatabase
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -259,7 +262,7 @@ class RedisDatabase
     /**
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -268,7 +271,7 @@ class RedisDatabase
      * @param RedisDatabaseConfiguration $configuration
      * @return self
      */
-    public function withConfiguration(RedisDatabaseConfiguration $configuration) : self
+    public function withConfiguration(RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
         $clone->configuration = $configuration;
@@ -279,7 +282,7 @@ class RedisDatabase
     /**
      * @return self
      */
-    public function withoutConfiguration() : self
+    public function withoutConfiguration(): self
     {
         $clone = clone $this;
         unset($clone->configuration);
@@ -288,10 +291,10 @@ class RedisDatabase
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -303,12 +306,12 @@ class RedisDatabase
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -321,12 +324,12 @@ class RedisDatabase
      * @param string[] $finalizers
      * @return self
      */
-    public function withFinalizers(array $finalizers) : self
+    public function withFinalizers(array $finalizers): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($finalizers, static::$schema['properties']['finalizers']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -339,12 +342,12 @@ class RedisDatabase
      * @param string $hostname
      * @return self
      */
-    public function withHostname(string $hostname) : self
+    public function withHostname(string $hostname): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hostname, static::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -357,12 +360,12 @@ class RedisDatabase
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -375,12 +378,12 @@ class RedisDatabase
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -393,12 +396,12 @@ class RedisDatabase
      * @param int $port
      * @return self
      */
-    public function withPort(int $port) : self
+    public function withPort(int $port): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($port, static::$schema['properties']['port']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -411,12 +414,12 @@ class RedisDatabase
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -426,10 +429,10 @@ class RedisDatabase
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -441,12 +444,12 @@ class RedisDatabase
      * @param string $version
      * @return self
      */
-    public function withVersion(string $version) : self
+    public function withVersion(string $version): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($version, static::$schema['properties']['version']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -461,9 +464,9 @@ class RedisDatabase
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RedisDatabase Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RedisDatabase
+    public static function buildFromInput(array|object $input, bool $validate = true): RedisDatabase
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -474,7 +477,7 @@ class RedisDatabase
         if (isset($input->{'configuration'})) {
             $configuration = RedisDatabaseConfiguration::buildFromInput($input->{'configuration'}, validate: $validate);
         }
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $finalizers = $input->{'finalizers'};
         $hostname = $input->{'hostname'};
@@ -482,7 +485,7 @@ class RedisDatabase
         $name = $input->{'name'};
         $port = (int)($input->{'port'});
         $projectId = $input->{'projectId'};
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
         $obj = new self($createdAt, $description, $finalizers, $hostname, $id, $name, $port, $projectId, $updatedAt, $version);
@@ -495,13 +498,13 @@ class RedisDatabase
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->configuration)) {
             $output['configuration'] = $this->configuration->toJson();
         }
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         $output['finalizers'] = $this->finalizers;
         $output['hostname'] = $this->hostname;
@@ -509,7 +512,7 @@ class RedisDatabase
         $output['name'] = $this->name;
         $output['port'] = $this->port;
         $output['projectId'] = $this->projectId;
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         $output['version'] = $this->version;
 
         return $output;
@@ -521,19 +524,19 @@ class RedisDatabase
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -545,4 +548,3 @@ class RedisDatabase
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

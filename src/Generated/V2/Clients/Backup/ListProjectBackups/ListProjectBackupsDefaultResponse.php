@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups;
 
+use InvalidArgumentException;
+
 class ListProjectBackupsDefaultResponse
 {
     /**
@@ -41,7 +43,7 @@ class ListProjectBackupsDefaultResponse
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error
      */
-    public function getBody() : \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error
+    public function getBody(): \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error
     {
         return $this->body;
     }
@@ -50,7 +52,7 @@ class ListProjectBackupsDefaultResponse
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error $body
      * @return self
      */
-    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error $body) : self
+    public function withBody(\Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -64,9 +66,9 @@ class ListProjectBackupsDefaultResponse
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListProjectBackupsDefaultResponse Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListProjectBackupsDefaultResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ListProjectBackupsDefaultResponse
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -85,7 +87,7 @@ class ListProjectBackupsDefaultResponse
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = $this->body->toJson();
@@ -99,19 +101,19 @@ class ListProjectBackupsDefaultResponse
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -121,7 +123,7 @@ class ListProjectBackupsDefaultResponse
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -129,4 +131,3 @@ class ListProjectBackupsDefaultResponse
         return $response;
     }
 }
-

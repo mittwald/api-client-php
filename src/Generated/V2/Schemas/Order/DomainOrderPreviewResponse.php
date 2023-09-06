@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+
 class DomainOrderPreviewResponse
 {
     /**
@@ -54,7 +56,7 @@ class DomainOrderPreviewResponse
     /**
      * @return int|float|null
      */
-    public function getDomainPrice() : int|float|null
+    public function getDomainPrice(): int|float|null
     {
         return $this->domainPrice;
     }
@@ -62,7 +64,7 @@ class DomainOrderPreviewResponse
     /**
      * @return int|float|null
      */
-    public function getFeePrice() : int|float|null
+    public function getFeePrice(): int|float|null
     {
         return $this->feePrice;
     }
@@ -70,7 +72,7 @@ class DomainOrderPreviewResponse
     /**
      * @return int|float|null
      */
-    public function getTotalPrice() : int|float|null
+    public function getTotalPrice(): int|float|null
     {
         return $this->totalPrice;
     }
@@ -79,12 +81,12 @@ class DomainOrderPreviewResponse
      * @param int|float $domainPrice
      * @return self
      */
-    public function withDomainPrice(int|float $domainPrice) : self
+    public function withDomainPrice(int|float $domainPrice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($domainPrice, static::$schema['properties']['domainPrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -96,7 +98,7 @@ class DomainOrderPreviewResponse
     /**
      * @return self
      */
-    public function withoutDomainPrice() : self
+    public function withoutDomainPrice(): self
     {
         $clone = clone $this;
         unset($clone->domainPrice);
@@ -108,12 +110,12 @@ class DomainOrderPreviewResponse
      * @param int|float $feePrice
      * @return self
      */
-    public function withFeePrice(int|float $feePrice) : self
+    public function withFeePrice(int|float $feePrice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($feePrice, static::$schema['properties']['feePrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,7 +127,7 @@ class DomainOrderPreviewResponse
     /**
      * @return self
      */
-    public function withoutFeePrice() : self
+    public function withoutFeePrice(): self
     {
         $clone = clone $this;
         unset($clone->feePrice);
@@ -137,12 +139,12 @@ class DomainOrderPreviewResponse
      * @param int|float $totalPrice
      * @return self
      */
-    public function withTotalPrice(int|float $totalPrice) : self
+    public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -154,7 +156,7 @@ class DomainOrderPreviewResponse
     /**
      * @return self
      */
-    public function withoutTotalPrice() : self
+    public function withoutTotalPrice(): self
     {
         $clone = clone $this;
         unset($clone->totalPrice);
@@ -168,9 +170,9 @@ class DomainOrderPreviewResponse
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DomainOrderPreviewResponse Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DomainOrderPreviewResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DomainOrderPreviewResponse
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -202,7 +204,7 @@ class DomainOrderPreviewResponse
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->domainPrice)) {
@@ -224,19 +226,19 @@ class DomainOrderPreviewResponse
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -246,4 +248,3 @@ class DomainOrderPreviewResponse
     {
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Server
 {
     /**
@@ -78,9 +81,9 @@ class Server
     private string $clusterName;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -134,7 +137,7 @@ class Server
 
     /**
      * @param string $clusterName
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $customerId
      * @param string $description
      * @param string $id
@@ -144,7 +147,7 @@ class Server
      * @param string $shortId
      * @param string $storage
      */
-    public function __construct(string $clusterName, \DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, ProjectReadinessStatus $readiness, string $shortId, string $storage)
+    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, ProjectReadinessStatus $readiness, string $shortId, string $storage)
     {
         $this->clusterName = $clusterName;
         $this->createdAt = $createdAt;
@@ -161,15 +164,15 @@ class Server
     /**
      * @return string
      */
-    public function getClusterName() : string
+    public function getClusterName(): string
     {
         return $this->clusterName;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -177,7 +180,7 @@ class Server
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -185,7 +188,7 @@ class Server
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -194,7 +197,7 @@ class Server
      * @return
      * ServerDisableReason|null
      */
-    public function getDisabledReason() : ?ServerDisableReason
+    public function getDisabledReason(): ?ServerDisableReason
     {
         return $this->disabledReason ?? null;
     }
@@ -202,7 +205,7 @@ class Server
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -210,7 +213,7 @@ class Server
     /**
      * @return string|null
      */
-    public function getImageRefId() : ?string
+    public function getImageRefId(): ?string
     {
         return $this->imageRefId ?? null;
     }
@@ -218,7 +221,7 @@ class Server
     /**
      * @return bool
      */
-    public function getIsReady() : bool
+    public function getIsReady(): bool
     {
         return $this->isReady;
     }
@@ -226,7 +229,7 @@ class Server
     /**
      * @return MachineType
      */
-    public function getMachineType() : MachineType
+    public function getMachineType(): MachineType
     {
         return $this->machineType;
     }
@@ -234,7 +237,7 @@ class Server
     /**
      * @return ProjectReadinessStatus
      */
-    public function getReadiness() : ProjectReadinessStatus
+    public function getReadiness(): ProjectReadinessStatus
     {
         return $this->readiness;
     }
@@ -242,7 +245,7 @@ class Server
     /**
      * @return string
      */
-    public function getShortId() : string
+    public function getShortId(): string
     {
         return $this->shortId;
     }
@@ -250,7 +253,7 @@ class Server
     /**
      * @return string
      */
-    public function getStorage() : string
+    public function getStorage(): string
     {
         return $this->storage;
     }
@@ -259,12 +262,12 @@ class Server
      * @param string $clusterName
      * @return self
      */
-    public function withClusterName(string $clusterName) : self
+    public function withClusterName(string $clusterName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($clusterName, static::$schema['properties']['clusterName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -274,10 +277,10 @@ class Server
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -289,12 +292,12 @@ class Server
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -307,12 +310,12 @@ class Server
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -325,7 +328,7 @@ class Server
      * @param ServerDisableReason $disabledReason
      * @return self
      */
-    public function withDisabledReason(ServerDisableReason $disabledReason) : self
+    public function withDisabledReason(ServerDisableReason $disabledReason): self
     {
         $clone = clone $this;
         $clone->disabledReason = $disabledReason;
@@ -336,7 +339,7 @@ class Server
     /**
      * @return self
      */
-    public function withoutDisabledReason() : self
+    public function withoutDisabledReason(): self
     {
         $clone = clone $this;
         unset($clone->disabledReason);
@@ -348,12 +351,12 @@ class Server
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -366,12 +369,12 @@ class Server
      * @param string $imageRefId
      * @return self
      */
-    public function withImageRefId(string $imageRefId) : self
+    public function withImageRefId(string $imageRefId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($imageRefId, static::$schema['properties']['imageRefId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -383,7 +386,7 @@ class Server
     /**
      * @return self
      */
-    public function withoutImageRefId() : self
+    public function withoutImageRefId(): self
     {
         $clone = clone $this;
         unset($clone->imageRefId);
@@ -395,12 +398,12 @@ class Server
      * @param bool $isReady
      * @return self
      */
-    public function withIsReady(bool $isReady) : self
+    public function withIsReady(bool $isReady): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($isReady, static::$schema['properties']['isReady']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -413,7 +416,7 @@ class Server
      * @param MachineType $machineType
      * @return self
      */
-    public function withMachineType(MachineType $machineType) : self
+    public function withMachineType(MachineType $machineType): self
     {
         $clone = clone $this;
         $clone->machineType = $machineType;
@@ -425,7 +428,7 @@ class Server
      * @param ProjectReadinessStatus $readiness
      * @return self
      */
-    public function withReadiness(ProjectReadinessStatus $readiness) : self
+    public function withReadiness(ProjectReadinessStatus $readiness): self
     {
         $clone = clone $this;
         $clone->readiness = $readiness;
@@ -437,12 +440,12 @@ class Server
      * @param string $shortId
      * @return self
      */
-    public function withShortId(string $shortId) : self
+    public function withShortId(string $shortId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($shortId, static::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -455,12 +458,12 @@ class Server
      * @param string $storage
      * @return self
      */
-    public function withStorage(string $storage) : self
+    public function withStorage(string $storage): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($storage, static::$schema['properties']['storage']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -475,9 +478,9 @@ class Server
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Server Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Server
+    public static function buildFromInput(array|object $input, bool $validate = true): Server
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -485,7 +488,7 @@ class Server
         }
 
         $clusterName = $input->{'clusterName'};
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $customerId = $input->{'customerId'};
         $description = $input->{'description'};
         $disabledReason = null;
@@ -514,11 +517,11 @@ class Server
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['clusterName'] = $this->clusterName;
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
         $output['description'] = $this->description;
         if (isset($this->disabledReason)) {
@@ -543,19 +546,19 @@ class Server
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -566,4 +569,3 @@ class Server
         $this->createdAt = clone $this->createdAt;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+
 class ReadableBookableArticleOptions
 {
     /**
@@ -71,7 +73,7 @@ class ReadableBookableArticleOptions
     /**
      * @return string
      */
-    public function getArticleId() : string
+    public function getArticleId(): string
     {
         return $this->articleId;
     }
@@ -79,7 +81,7 @@ class ReadableBookableArticleOptions
     /**
      * @return ReadableBookableArticleOptionsInfo|null
      */
-    public function getInfo() : ?ReadableBookableArticleOptionsInfo
+    public function getInfo(): ?ReadableBookableArticleOptionsInfo
     {
         return $this->info ?? null;
     }
@@ -87,7 +89,7 @@ class ReadableBookableArticleOptions
     /**
      * @return int|float|null
      */
-    public function getMaxArticleCount() : int|float|null
+    public function getMaxArticleCount(): int|float|null
     {
         return $this->maxArticleCount;
     }
@@ -96,12 +98,12 @@ class ReadableBookableArticleOptions
      * @param string $articleId
      * @return self
      */
-    public function withArticleId(string $articleId) : self
+    public function withArticleId(string $articleId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($articleId, static::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -114,7 +116,7 @@ class ReadableBookableArticleOptions
      * @param ReadableBookableArticleOptionsInfo $info
      * @return self
      */
-    public function withInfo(ReadableBookableArticleOptionsInfo $info) : self
+    public function withInfo(ReadableBookableArticleOptionsInfo $info): self
     {
         $clone = clone $this;
         $clone->info = $info;
@@ -125,7 +127,7 @@ class ReadableBookableArticleOptions
     /**
      * @return self
      */
-    public function withoutInfo() : self
+    public function withoutInfo(): self
     {
         $clone = clone $this;
         unset($clone->info);
@@ -137,12 +139,12 @@ class ReadableBookableArticleOptions
      * @param int|float $maxArticleCount
      * @return self
      */
-    public function withMaxArticleCount(int|float $maxArticleCount) : self
+    public function withMaxArticleCount(int|float $maxArticleCount): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($maxArticleCount, static::$schema['properties']['maxArticleCount']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -154,7 +156,7 @@ class ReadableBookableArticleOptions
     /**
      * @return self
      */
-    public function withoutMaxArticleCount() : self
+    public function withoutMaxArticleCount(): self
     {
         $clone = clone $this;
         unset($clone->maxArticleCount);
@@ -168,9 +170,9 @@ class ReadableBookableArticleOptions
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ReadableBookableArticleOptions Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ReadableBookableArticleOptions
+    public static function buildFromInput(array|object $input, bool $validate = true): ReadableBookableArticleOptions
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -198,7 +200,7 @@ class ReadableBookableArticleOptions
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['articleId'] = $this->articleId;
@@ -218,19 +220,19 @@ class ReadableBookableArticleOptions
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -243,4 +245,3 @@ class ReadableBookableArticleOptions
         }
     }
 }
-

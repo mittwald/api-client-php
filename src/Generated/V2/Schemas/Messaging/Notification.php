@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Messaging;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Notification
 {
     /**
@@ -52,9 +55,9 @@ class Notification
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -82,14 +85,14 @@ class Notification
     private string $type;
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $id
      * @param bool $read
      * @param AggregateReference $reference
      * @param NotificationSeverity $severity
      * @param string $type
      */
-    public function __construct(\DateTime $createdAt, string $id, bool $read, AggregateReference $reference, NotificationSeverity $severity, string $type)
+    public function __construct(DateTime $createdAt, string $id, bool $read, AggregateReference $reference, NotificationSeverity $severity, string $type)
     {
         $this->createdAt = $createdAt;
         $this->id = $id;
@@ -100,9 +103,9 @@ class Notification
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -110,7 +113,7 @@ class Notification
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -118,7 +121,7 @@ class Notification
     /**
      * @return bool
      */
-    public function getRead() : bool
+    public function getRead(): bool
     {
         return $this->read;
     }
@@ -126,7 +129,7 @@ class Notification
     /**
      * @return AggregateReference
      */
-    public function getReference() : AggregateReference
+    public function getReference(): AggregateReference
     {
         return $this->reference;
     }
@@ -134,7 +137,7 @@ class Notification
     /**
      * @return NotificationSeverity
      */
-    public function getSeverity() : NotificationSeverity
+    public function getSeverity(): NotificationSeverity
     {
         return $this->severity;
     }
@@ -142,16 +145,16 @@ class Notification
     /**
      * @return string
      */
-    public function getType() : string
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -163,12 +166,12 @@ class Notification
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -181,12 +184,12 @@ class Notification
      * @param bool $read
      * @return self
      */
-    public function withRead(bool $read) : self
+    public function withRead(bool $read): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($read, static::$schema['properties']['read']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -199,7 +202,7 @@ class Notification
      * @param AggregateReference $reference
      * @return self
      */
-    public function withReference(AggregateReference $reference) : self
+    public function withReference(AggregateReference $reference): self
     {
         $clone = clone $this;
         $clone->reference = $reference;
@@ -211,7 +214,7 @@ class Notification
      * @param NotificationSeverity $severity
      * @return self
      */
-    public function withSeverity(NotificationSeverity $severity) : self
+    public function withSeverity(NotificationSeverity $severity): self
     {
         $clone = clone $this;
         $clone->severity = $severity;
@@ -223,12 +226,12 @@ class Notification
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -243,16 +246,16 @@ class Notification
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Notification Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Notification
+    public static function buildFromInput(array|object $input, bool $validate = true): Notification
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $id = $input->{'id'};
         $read = (bool)($input->{'read'});
         $reference = AggregateReference::buildFromInput($input->{'reference'}, validate: $validate);
@@ -269,10 +272,10 @@ class Notification
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['id'] = $this->id;
         $output['read'] = $this->read;
         $output['reference'] = $this->reference->toJson();
@@ -288,19 +291,19 @@ class Notification
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -311,4 +314,3 @@ class Notification
         $this->createdAt = clone $this->createdAt;
     }
 }
-

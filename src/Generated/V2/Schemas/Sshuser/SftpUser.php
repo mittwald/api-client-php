@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Sshuser;
 
+use InvalidArgumentException;
+use DateTime;
+
 class SftpUser
 {
     /**
@@ -88,14 +91,14 @@ class SftpUser
     private ?bool $active = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $authUpdatedAt;
+    private DateTime $authUpdatedAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -108,9 +111,9 @@ class SftpUser
     private ?array $directories = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var bool
@@ -133,9 +136,9 @@ class SftpUser
     private ?array $publicKeys = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $updatedAt = null;
+    private ?DateTime $updatedAt = null;
 
     /**
      * @var string
@@ -144,15 +147,15 @@ class SftpUser
 
     /**
      * @param AccessLevel $accessLevel
-     * @param \DateTime $authUpdatedAt
-     * @param \DateTime $createdAt
+     * @param DateTime $authUpdatedAt
+     * @param DateTime $createdAt
      * @param string $description
      * @param bool $hasPassword
      * @param string $id
      * @param string $projectId
      * @param string $userName
      */
-    public function __construct(AccessLevel $accessLevel, \DateTime $authUpdatedAt, \DateTime $createdAt, string $description, bool $hasPassword, string $id, string $projectId, string $userName)
+    public function __construct(AccessLevel $accessLevel, DateTime $authUpdatedAt, DateTime $createdAt, string $description, bool $hasPassword, string $id, string $projectId, string $userName)
     {
         $this->accessLevel = $accessLevel;
         $this->authUpdatedAt = $authUpdatedAt;
@@ -167,7 +170,7 @@ class SftpUser
     /**
      * @return AccessLevel
      */
-    public function getAccessLevel() : AccessLevel
+    public function getAccessLevel(): AccessLevel
     {
         return $this->accessLevel;
     }
@@ -175,23 +178,23 @@ class SftpUser
     /**
      * @return bool|null
      */
-    public function getActive() : ?bool
+    public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getAuthUpdatedAt() : \DateTime
+    public function getAuthUpdatedAt(): DateTime
     {
         return $this->authUpdatedAt;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -199,7 +202,7 @@ class SftpUser
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -207,15 +210,15 @@ class SftpUser
     /**
      * @return string[]|null
      */
-    public function getDirectories() : ?array
+    public function getDirectories(): ?array
     {
         return $this->directories ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -223,7 +226,7 @@ class SftpUser
     /**
      * @return bool
      */
-    public function getHasPassword() : bool
+    public function getHasPassword(): bool
     {
         return $this->hasPassword;
     }
@@ -231,7 +234,7 @@ class SftpUser
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -239,7 +242,7 @@ class SftpUser
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -247,15 +250,15 @@ class SftpUser
     /**
      * @return PublicKey[]|null
      */
-    public function getPublicKeys() : ?array
+    public function getPublicKeys(): ?array
     {
         return $this->publicKeys ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUpdatedAt() : ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt ?? null;
     }
@@ -263,7 +266,7 @@ class SftpUser
     /**
      * @return string
      */
-    public function getUserName() : string
+    public function getUserName(): string
     {
         return $this->userName;
     }
@@ -272,7 +275,7 @@ class SftpUser
      * @param AccessLevel $accessLevel
      * @return self
      */
-    public function withAccessLevel(AccessLevel $accessLevel) : self
+    public function withAccessLevel(AccessLevel $accessLevel): self
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
@@ -284,12 +287,12 @@ class SftpUser
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -301,7 +304,7 @@ class SftpUser
     /**
      * @return self
      */
-    public function withoutActive() : self
+    public function withoutActive(): self
     {
         $clone = clone $this;
         unset($clone->active);
@@ -310,10 +313,10 @@ class SftpUser
     }
 
     /**
-     * @param \DateTime $authUpdatedAt
+     * @param DateTime $authUpdatedAt
      * @return self
      */
-    public function withAuthUpdatedAt(\DateTime $authUpdatedAt) : self
+    public function withAuthUpdatedAt(DateTime $authUpdatedAt): self
     {
         $clone = clone $this;
         $clone->authUpdatedAt = $authUpdatedAt;
@@ -322,10 +325,10 @@ class SftpUser
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -337,12 +340,12 @@ class SftpUser
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -355,12 +358,12 @@ class SftpUser
      * @param string[] $directories
      * @return self
      */
-    public function withDirectories(array $directories) : self
+    public function withDirectories(array $directories): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($directories, static::$schema['properties']['directories']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -372,7 +375,7 @@ class SftpUser
     /**
      * @return self
      */
-    public function withoutDirectories() : self
+    public function withoutDirectories(): self
     {
         $clone = clone $this;
         unset($clone->directories);
@@ -381,10 +384,10 @@ class SftpUser
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -395,7 +398,7 @@ class SftpUser
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -407,12 +410,12 @@ class SftpUser
      * @param bool $hasPassword
      * @return self
      */
-    public function withHasPassword(bool $hasPassword) : self
+    public function withHasPassword(bool $hasPassword): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hasPassword, static::$schema['properties']['hasPassword']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -425,12 +428,12 @@ class SftpUser
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -443,12 +446,12 @@ class SftpUser
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -461,7 +464,7 @@ class SftpUser
      * @param PublicKey[] $publicKeys
      * @return self
      */
-    public function withPublicKeys(array $publicKeys) : self
+    public function withPublicKeys(array $publicKeys): self
     {
         $clone = clone $this;
         $clone->publicKeys = $publicKeys;
@@ -472,7 +475,7 @@ class SftpUser
     /**
      * @return self
      */
-    public function withoutPublicKeys() : self
+    public function withoutPublicKeys(): self
     {
         $clone = clone $this;
         unset($clone->publicKeys);
@@ -481,10 +484,10 @@ class SftpUser
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -495,7 +498,7 @@ class SftpUser
     /**
      * @return self
      */
-    public function withoutUpdatedAt() : self
+    public function withoutUpdatedAt(): self
     {
         $clone = clone $this;
         unset($clone->updatedAt);
@@ -507,12 +510,12 @@ class SftpUser
      * @param string $userName
      * @return self
      */
-    public function withUserName(string $userName) : self
+    public function withUserName(string $userName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($userName, static::$schema['properties']['userName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -527,9 +530,9 @@ class SftpUser
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SftpUser Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SftpUser
+    public static function buildFromInput(array|object $input, bool $validate = true): SftpUser
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -541,8 +544,8 @@ class SftpUser
         if (isset($input->{'active'})) {
             $active = (bool)($input->{'active'});
         }
-        $authUpdatedAt = new \DateTime($input->{'authUpdatedAt'});
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $authUpdatedAt = new DateTime($input->{'authUpdatedAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $directories = null;
         if (isset($input->{'directories'})) {
@@ -550,18 +553,18 @@ class SftpUser
         }
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $hasPassword = (bool)($input->{'hasPassword'});
         $id = $input->{'id'};
         $projectId = $input->{'projectId'};
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn(array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
         $updatedAt = null;
         if (isset($input->{'updatedAt'})) {
-            $updatedAt = new \DateTime($input->{'updatedAt'});
+            $updatedAt = new DateTime($input->{'updatedAt'});
         }
         $userName = $input->{'userName'};
 
@@ -579,30 +582,30 @@ class SftpUser
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['accessLevel'] = $this->accessLevel->value;
         if (isset($this->active)) {
             $output['active'] = $this->active;
         }
-        $output['authUpdatedAt'] = ($this->authUpdatedAt)->format(\DateTime::ATOM);
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['authUpdatedAt'] = ($this->authUpdatedAt)->format(DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         if (isset($this->directories)) {
             $output['directories'] = $this->directories;
         }
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['hasPassword'] = $this->hasPassword;
         $output['id'] = $this->id;
         $output['projectId'] = $this->projectId;
         if (isset($this->publicKeys)) {
-            $output['publicKeys'] = array_map(fn(PublicKey $i): array => $i->toJson(), $this->publicKeys);
+            $output['publicKeys'] = array_map(fn (PublicKey $i): array => $i->toJson(), $this->publicKeys);
         }
         if (isset($this->updatedAt)) {
-            $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+            $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         }
         $output['userName'] = $this->userName;
 
@@ -615,19 +618,19 @@ class SftpUser
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -645,4 +648,3 @@ class SftpUser
         }
     }
 }
-

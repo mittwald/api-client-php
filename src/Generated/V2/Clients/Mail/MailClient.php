@@ -13,7 +13,7 @@ class MailClient
         $this->client = $client;
     }
 
-    public function deliveryboxCreate(DeliveryboxCreate\DeliveryboxCreateRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxCreate\DeliveryboxCreate201Response
+    public function deliveryboxCreate(DeliveryboxCreate\DeliveryboxCreateRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxCreate\DeliveryboxCreate201Response
     {
         $httpRequest = new Request(DeliveryboxCreate\DeliveryboxCreateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -27,7 +27,7 @@ class MailClient
         };
     }
 
-    public function deliveryboxList(DeliveryboxList\DeliveryboxListRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxList\DeliveryboxList200Response
+    public function deliveryboxList(DeliveryboxList\DeliveryboxListRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxList\DeliveryboxList200Response
     {
         $httpRequest = new Request(DeliveryboxList\DeliveryboxListRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -40,7 +40,7 @@ class MailClient
         };
     }
 
-    public function deliveryboxDelete(DeliveryboxDelete\DeliveryboxDeleteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function deliveryboxDelete(DeliveryboxDelete\DeliveryboxDeleteRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(DeliveryboxDelete\DeliveryboxDeleteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -52,7 +52,7 @@ class MailClient
         };
     }
 
-    public function deliveryboxGetSpecific(DeliveryboxGetSpecific\DeliveryboxGetSpecificRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxGetSpecific\DeliveryboxGetSpecific200Response
+    public function deliveryboxGetSpecific(DeliveryboxGetSpecific\DeliveryboxGetSpecificRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeliveryboxGetSpecific\DeliveryboxGetSpecific200Response
     {
         $httpRequest = new Request(DeliveryboxGetSpecific\DeliveryboxGetSpecificRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -65,7 +65,7 @@ class MailClient
         };
     }
 
-    public function deliveryboxUpdateDescription(DeliveryboxUpdateDescription\DeliveryboxUpdateDescriptionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function deliveryboxUpdateDescription(DeliveryboxUpdateDescription\DeliveryboxUpdateDescriptionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(DeliveryboxUpdateDescription\DeliveryboxUpdateDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -78,7 +78,7 @@ class MailClient
         };
     }
 
-    public function deliveryboxUpdatePassword(DeliveryboxUpdatePassword\DeliveryboxUpdatePasswordRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function deliveryboxUpdatePassword(DeliveryboxUpdatePassword\DeliveryboxUpdatePasswordRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(DeliveryboxUpdatePassword\DeliveryboxUpdatePasswordRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -91,7 +91,7 @@ class MailClient
         };
     }
 
-    public function mailaddressCreate(MailaddressCreate\MailaddressCreateRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressCreate\MailaddressCreate201Response|MailaddressCreate\MailaddressCreate400Response
+    public function mailaddressCreate(MailaddressCreate\MailaddressCreateRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|MailaddressCreate\MailaddressCreate201Response|MailaddressCreate\MailaddressCreate400Response
     {
         $httpRequest = new Request(MailaddressCreate\MailaddressCreateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -106,7 +106,7 @@ class MailClient
         };
     }
 
-    public function mailaddressList(MailaddressList\MailaddressListRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressList\MailaddressList200Response
+    public function mailaddressList(MailaddressList\MailaddressListRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|MailaddressList\MailaddressList200Response
     {
         $httpRequest = new Request(MailaddressList\MailaddressListRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -119,7 +119,7 @@ class MailClient
         };
     }
 
-    public function mailaddressDelete(MailaddressDelete\MailaddressDeleteRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressDelete(MailaddressDelete\MailaddressDeleteRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressDelete\MailaddressDeleteRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -131,7 +131,7 @@ class MailClient
         };
     }
 
-    public function mailaddressGetSpecific(MailaddressGetSpecific\MailaddressGetSpecificRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressGetSpecific\MailaddressGetSpecific200Response
+    public function mailaddressGetSpecific(MailaddressGetSpecific\MailaddressGetSpecificRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|MailaddressGetSpecific\MailaddressGetSpecific200Response
     {
         $httpRequest = new Request(MailaddressGetSpecific\MailaddressGetSpecificRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -144,7 +144,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdateAddress(MailaddressUpdateAddress\MailaddressUpdateAddressRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateAddress(MailaddressUpdateAddress\MailaddressUpdateAddressRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressUpdateAddress\MailaddressUpdateAddressRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -157,7 +157,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdateAutoresponder(MailaddressUpdateAutoresponder\MailaddressUpdateAutoresponderRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateAutoresponder(MailaddressUpdateAutoresponder\MailaddressUpdateAutoresponderRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressUpdateAutoresponder\MailaddressUpdateAutoresponderRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -170,7 +170,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdateCatchall(MailaddressUpdateCatchall\MailaddressUpdateCatchallRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|MailaddressUpdateCatchall\MailaddressUpdateCatchall400Response
+    public function mailaddressUpdateCatchall(MailaddressUpdateCatchall\MailaddressUpdateCatchallRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|MailaddressUpdateCatchall\MailaddressUpdateCatchall400Response
     {
         $httpRequest = new Request(MailaddressUpdateCatchall\MailaddressUpdateCatchallRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -184,7 +184,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdateForwardaddresses(MailaddressUpdateForwardaddresses\MailaddressUpdateForwardaddressesRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateForwardaddresses(MailaddressUpdateForwardaddresses\MailaddressUpdateForwardaddressesRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressUpdateForwardaddresses\MailaddressUpdateForwardaddressesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -197,7 +197,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdatePassword(MailaddressUpdatePassword\MailaddressUpdatePasswordRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdatePassword(MailaddressUpdatePassword\MailaddressUpdatePasswordRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressUpdatePassword\MailaddressUpdatePasswordRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -210,7 +210,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdateQuota(MailaddressUpdateQuota\MailaddressUpdateQuotaRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateQuota(MailaddressUpdateQuota\MailaddressUpdateQuotaRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressUpdateQuota\MailaddressUpdateQuotaRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -223,7 +223,7 @@ class MailClient
         };
     }
 
-    public function mailaddressUpdateSpamprotection(MailaddressUpdateSpamprotection\MailaddressUpdateSpamprotectionRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function mailaddressUpdateSpamprotection(MailaddressUpdateSpamprotection\MailaddressUpdateSpamprotectionRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(MailaddressUpdateSpamprotection\MailaddressUpdateSpamprotectionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -236,7 +236,7 @@ class MailClient
         };
     }
 
-    public function projectsettingGetSpecific(ProjectsettingGetSpecific\ProjectsettingGetSpecificRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|ProjectsettingGetSpecific\ProjectsettingGetSpecific200Response
+    public function projectsettingGetSpecific(ProjectsettingGetSpecific\ProjectsettingGetSpecificRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|ProjectsettingGetSpecific\ProjectsettingGetSpecific200Response
     {
         $httpRequest = new Request(ProjectsettingGetSpecific\ProjectsettingGetSpecificRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -249,7 +249,7 @@ class MailClient
         };
     }
 
-    public function projectsettingUpdateBlacklist(ProjectsettingUpdateBlacklist\ProjectsettingUpdateBlacklistRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function projectsettingUpdateBlacklist(ProjectsettingUpdateBlacklist\ProjectsettingUpdateBlacklistRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(ProjectsettingUpdateBlacklist\ProjectsettingUpdateBlacklistRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -262,7 +262,7 @@ class MailClient
         };
     }
 
-    public function projectsettingUpdateWhitelist(ProjectsettingUpdateWhitelist\ProjectsettingUpdateWhitelistRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse
+    public function projectsettingUpdateWhitelist(ProjectsettingUpdateWhitelist\ProjectsettingUpdateWhitelistRequest $request): \Mittwald\ApiClient\Client\EmptyResponse
     {
         $httpRequest = new Request(ProjectsettingUpdateWhitelist\ProjectsettingUpdateWhitelistRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -275,4 +275,3 @@ class MailClient
         };
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects;
 
+use InvalidArgumentException;
+use DateTime;
+
 class ListProjects200ResponseBodyItem
 {
     /**
@@ -79,9 +82,9 @@ class ListProjects200ResponseBodyItem
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -148,7 +151,7 @@ class ListProjects200ResponseBodyItem
     public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $customerId
      * @param ListProjects200ResponseBodyItemCustomerMeta $customerMeta
      * @param string $description
@@ -158,7 +161,7 @@ class ListProjects200ResponseBodyItem
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus $readiness
      * @param string $shortId
      */
-    public function __construct(\DateTime $createdAt, string $customerId, ListProjects200ResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus $readiness, string $shortId)
+    public function __construct(DateTime $createdAt, string $customerId, ListProjects200ResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus $readiness, string $shortId)
     {
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
@@ -172,9 +175,9 @@ class ListProjects200ResponseBodyItem
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -182,7 +185,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -190,7 +193,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return ListProjects200ResponseBodyItemCustomerMeta
      */
-    public function getCustomerMeta() : ListProjects200ResponseBodyItemCustomerMeta
+    public function getCustomerMeta(): ListProjects200ResponseBodyItemCustomerMeta
     {
         return $this->customerMeta;
     }
@@ -198,7 +201,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -206,7 +209,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason|null
      */
-    public function getDisableReason() : ?\Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason
+    public function getDisableReason(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason
     {
         return $this->disableReason ?? null;
     }
@@ -214,7 +217,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return bool
      */
-    public function getEnabled() : bool
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
@@ -222,7 +225,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -230,7 +233,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string|null
      */
-    public function getImageRefId() : ?string
+    public function getImageRefId(): ?string
     {
         return $this->imageRefId ?? null;
     }
@@ -238,7 +241,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return bool
      */
-    public function getIsReady() : bool
+    public function getIsReady(): bool
     {
         return $this->isReady;
     }
@@ -246,7 +249,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string|null
      */
-    public function getProjectHostingId() : ?string
+    public function getProjectHostingId(): ?string
     {
         return $this->projectHostingId ?? null;
     }
@@ -254,7 +257,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus
      */
-    public function getReadiness() : \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus
+    public function getReadiness(): \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus
     {
         return $this->readiness;
     }
@@ -262,7 +265,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string|null
      */
-    public function getServerId() : ?string
+    public function getServerId(): ?string
     {
         return $this->serverId ?? null;
     }
@@ -270,16 +273,16 @@ class ListProjects200ResponseBodyItem
     /**
      * @return string
      */
-    public function getShortId() : string
+    public function getShortId(): string
     {
         return $this->shortId;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -291,12 +294,12 @@ class ListProjects200ResponseBodyItem
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -309,7 +312,7 @@ class ListProjects200ResponseBodyItem
      * @param ListProjects200ResponseBodyItemCustomerMeta $customerMeta
      * @return self
      */
-    public function withCustomerMeta(ListProjects200ResponseBodyItemCustomerMeta $customerMeta) : self
+    public function withCustomerMeta(ListProjects200ResponseBodyItemCustomerMeta $customerMeta): self
     {
         $clone = clone $this;
         $clone->customerMeta = $customerMeta;
@@ -321,12 +324,12 @@ class ListProjects200ResponseBodyItem
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -339,7 +342,7 @@ class ListProjects200ResponseBodyItem
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason $disableReason
      * @return self
      */
-    public function withDisableReason(\Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason $disableReason) : self
+    public function withDisableReason(\Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason $disableReason): self
     {
         $clone = clone $this;
         $clone->disableReason = $disableReason;
@@ -350,7 +353,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return self
      */
-    public function withoutDisableReason() : self
+    public function withoutDisableReason(): self
     {
         $clone = clone $this;
         unset($clone->disableReason);
@@ -362,12 +365,12 @@ class ListProjects200ResponseBodyItem
      * @param bool $enabled
      * @return self
      */
-    public function withEnabled(bool $enabled) : self
+    public function withEnabled(bool $enabled): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($enabled, static::$schema['properties']['enabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -380,12 +383,12 @@ class ListProjects200ResponseBodyItem
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -398,12 +401,12 @@ class ListProjects200ResponseBodyItem
      * @param string $imageRefId
      * @return self
      */
-    public function withImageRefId(string $imageRefId) : self
+    public function withImageRefId(string $imageRefId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($imageRefId, static::$schema['properties']['imageRefId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -415,7 +418,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return self
      */
-    public function withoutImageRefId() : self
+    public function withoutImageRefId(): self
     {
         $clone = clone $this;
         unset($clone->imageRefId);
@@ -427,12 +430,12 @@ class ListProjects200ResponseBodyItem
      * @param bool $isReady
      * @return self
      */
-    public function withIsReady(bool $isReady) : self
+    public function withIsReady(bool $isReady): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($isReady, static::$schema['properties']['isReady']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -445,12 +448,12 @@ class ListProjects200ResponseBodyItem
      * @param string $projectHostingId
      * @return self
      */
-    public function withProjectHostingId(string $projectHostingId) : self
+    public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectHostingId, static::$schema['properties']['projectHostingId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -462,7 +465,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return self
      */
-    public function withoutProjectHostingId() : self
+    public function withoutProjectHostingId(): self
     {
         $clone = clone $this;
         unset($clone->projectHostingId);
@@ -474,7 +477,7 @@ class ListProjects200ResponseBodyItem
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus $readiness
      * @return self
      */
-    public function withReadiness(\Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus $readiness) : self
+    public function withReadiness(\Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus $readiness): self
     {
         $clone = clone $this;
         $clone->readiness = $readiness;
@@ -486,12 +489,12 @@ class ListProjects200ResponseBodyItem
      * @param string $serverId
      * @return self
      */
-    public function withServerId(string $serverId) : self
+    public function withServerId(string $serverId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($serverId, static::$schema['properties']['serverId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -503,7 +506,7 @@ class ListProjects200ResponseBodyItem
     /**
      * @return self
      */
-    public function withoutServerId() : self
+    public function withoutServerId(): self
     {
         $clone = clone $this;
         unset($clone->serverId);
@@ -515,12 +518,12 @@ class ListProjects200ResponseBodyItem
      * @param string $shortId
      * @return self
      */
-    public function withShortId(string $shortId) : self
+    public function withShortId(string $shortId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($shortId, static::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -535,16 +538,16 @@ class ListProjects200ResponseBodyItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListProjects200ResponseBodyItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListProjects200ResponseBodyItem
+    public static function buildFromInput(array|object $input, bool $validate = true): ListProjects200ResponseBodyItem
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $customerId = $input->{'customerId'};
         $customerMeta = ListProjects200ResponseBodyItemCustomerMeta::buildFromInput($input->{'customerMeta'}, validate: $validate);
         $description = $input->{'description'};
@@ -583,10 +586,10 @@ class ListProjects200ResponseBodyItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
         $output['customerMeta'] = ($this->customerMeta)->toJson();
         $output['description'] = $this->description;
@@ -617,19 +620,19 @@ class ListProjects200ResponseBodyItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -641,7 +644,7 @@ class ListProjects200ResponseBodyItem
         $this->customerMeta = clone $this->customerMeta;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -649,4 +652,3 @@ class ListProjects200ResponseBodyItem
         return $response;
     }
 }
-

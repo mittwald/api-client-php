@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+
 class PhpMyAdminURL
 {
     /**
@@ -39,7 +41,7 @@ class PhpMyAdminURL
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -48,12 +50,12 @@ class PhpMyAdminURL
      * @param string $url
      * @return self
      */
-    public function withUrl(string $url) : self
+    public function withUrl(string $url): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($url, static::$schema['properties']['url']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -68,9 +70,9 @@ class PhpMyAdminURL
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return PhpMyAdminURL Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : PhpMyAdminURL
+    public static function buildFromInput(array|object $input, bool $validate = true): PhpMyAdminURL
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -89,7 +91,7 @@ class PhpMyAdminURL
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['url'] = $this->url;
@@ -103,19 +105,19 @@ class PhpMyAdminURL
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -125,4 +127,3 @@ class PhpMyAdminURL
     {
     }
 }
-

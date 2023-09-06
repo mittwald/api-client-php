@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFields;
 
+use InvalidArgumentException;
+
 class GetHandleFields200Response
 {
     /**
@@ -52,7 +54,7 @@ class GetHandleFields200Response
     /**
      * @return GetHandleFields200ResponseBody
      */
-    public function getBody() : GetHandleFields200ResponseBody
+    public function getBody(): GetHandleFields200ResponseBody
     {
         return $this->body;
     }
@@ -61,7 +63,7 @@ class GetHandleFields200Response
      * @param GetHandleFields200ResponseBody $body
      * @return self
      */
-    public function withBody(GetHandleFields200ResponseBody $body) : self
+    public function withBody(GetHandleFields200ResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -75,9 +77,9 @@ class GetHandleFields200Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetHandleFields200Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetHandleFields200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): GetHandleFields200Response
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -96,7 +98,7 @@ class GetHandleFields200Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -110,19 +112,19 @@ class GetHandleFields200Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -133,7 +135,7 @@ class GetHandleFields200Response
         $this->body = clone $this->body;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -141,4 +143,3 @@ class GetHandleFields200Response
         return $response;
     }
 }
-

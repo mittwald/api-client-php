@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Dns;
 
+use InvalidArgumentException;
+
 class RecordSRVComponent
 {
     /**
@@ -55,7 +57,7 @@ class RecordSRVComponent
     /**
      * @return RecordSRVRecord[]
      */
-    public function getRecords() : array
+    public function getRecords(): array
     {
         return $this->records;
     }
@@ -63,7 +65,7 @@ class RecordSRVComponent
     /**
      * @return RecordSettings
      */
-    public function getSettings() : RecordSettings
+    public function getSettings(): RecordSettings
     {
         return $this->settings;
     }
@@ -72,7 +74,7 @@ class RecordSRVComponent
      * @param RecordSRVRecord[] $records
      * @return self
      */
-    public function withRecords(array $records) : self
+    public function withRecords(array $records): self
     {
         $clone = clone $this;
         $clone->records = $records;
@@ -84,7 +86,7 @@ class RecordSRVComponent
      * @param RecordSettings $settings
      * @return self
      */
-    public function withSettings(RecordSettings $settings) : self
+    public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;
         $clone->settings = $settings;
@@ -98,16 +100,16 @@ class RecordSRVComponent
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RecordSRVComponent Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RecordSRVComponent
+    public static function buildFromInput(array|object $input, bool $validate = true): RecordSRVComponent
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $records = array_map(fn(array $i): RecordSRVRecord => RecordSRVRecord::buildFromInput($i, validate: $validate), $input->{'records'});
+        $records = array_map(fn (array $i): RecordSRVRecord => RecordSRVRecord::buildFromInput($i, validate: $validate), $input->{'records'});
         $settings = RecordSettings::buildFromInput($input->{'settings'}, validate: $validate);
 
         $obj = new self($records, $settings);
@@ -120,10 +122,10 @@ class RecordSRVComponent
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['records'] = array_map(fn(RecordSRVRecord $i): array => $i->toJson(), $this->records);
+        $output['records'] = array_map(fn (RecordSRVRecord $i): array => $i->toJson(), $this->records);
         $output['settings'] = $this->settings->toJson();
 
         return $output;
@@ -135,19 +137,19 @@ class RecordSRVComponent
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -157,4 +159,3 @@ class RecordSRVComponent
     {
     }
 }
-

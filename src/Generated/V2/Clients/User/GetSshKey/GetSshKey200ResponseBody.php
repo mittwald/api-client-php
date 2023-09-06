@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey;
 
+use InvalidArgumentException;
+
 class GetSshKey200ResponseBody
 {
     /**
@@ -41,7 +43,7 @@ class GetSshKey200ResponseBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey
      */
-    public function getSshKey() : \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey
+    public function getSshKey(): \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey
     {
         return $this->sshKey;
     }
@@ -50,7 +52,7 @@ class GetSshKey200ResponseBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey
      * @return self
      */
-    public function withSshKey(\Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey) : self
+    public function withSshKey(\Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey $sshKey): self
     {
         $clone = clone $this;
         $clone->sshKey = $sshKey;
@@ -64,9 +66,9 @@ class GetSshKey200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetSshKey200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetSshKey200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetSshKey200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -85,7 +87,7 @@ class GetSshKey200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['sshKey'] = $this->sshKey->toJson();
@@ -99,19 +101,19 @@ class GetSshKey200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -121,7 +123,7 @@ class GetSshKey200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -129,4 +131,3 @@ class GetSshKey200ResponseBody
         return $response;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage;
 
+use InvalidArgumentException;
+
 class ProjectFileSystemGetDiskUsageRequest
 {
     public const method = 'get';
@@ -41,7 +43,7 @@ class ProjectFileSystemGetDiskUsageRequest
     private ?string $directory = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -55,7 +57,7 @@ class ProjectFileSystemGetDiskUsageRequest
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -63,7 +65,7 @@ class ProjectFileSystemGetDiskUsageRequest
     /**
      * @return string|null
      */
-    public function getDirectory() : ?string
+    public function getDirectory(): ?string
     {
         return $this->directory ?? null;
     }
@@ -72,12 +74,12 @@ class ProjectFileSystemGetDiskUsageRequest
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -90,12 +92,12 @@ class ProjectFileSystemGetDiskUsageRequest
      * @param string $directory
      * @return self
      */
-    public function withDirectory(string $directory) : self
+    public function withDirectory(string $directory): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($directory, static::$schema['properties']['directory']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,7 +109,7 @@ class ProjectFileSystemGetDiskUsageRequest
     /**
      * @return self
      */
-    public function withoutDirectory() : self
+    public function withoutDirectory(): self
     {
         $clone = clone $this;
         unset($clone->directory);
@@ -121,9 +123,9 @@ class ProjectFileSystemGetDiskUsageRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectFileSystemGetDiskUsageRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectFileSystemGetDiskUsageRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectFileSystemGetDiskUsageRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -146,7 +148,7 @@ class ProjectFileSystemGetDiskUsageRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['projectId'] = $this->projectId;
@@ -163,19 +165,19 @@ class ProjectFileSystemGetDiskUsageRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -185,14 +187,14 @@ class ProjectFileSystemGetDiskUsageRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/filesystem/usages/disk';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -202,16 +204,15 @@ class ProjectFileSystemGetDiskUsageRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

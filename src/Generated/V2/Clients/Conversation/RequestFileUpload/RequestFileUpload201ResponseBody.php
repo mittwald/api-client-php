@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload;
 
+use InvalidArgumentException;
+
 class RequestFileUpload201ResponseBody
 {
     /**
@@ -111,7 +113,7 @@ class RequestFileUpload201ResponseBody
     /**
      * @return string
      */
-    public function getConversationId() : string
+    public function getConversationId(): string
     {
         return $this->conversationId;
     }
@@ -119,7 +121,7 @@ class RequestFileUpload201ResponseBody
     /**
      * @return RequestFileUpload201ResponseBodyRules
      */
-    public function getRules() : RequestFileUpload201ResponseBodyRules
+    public function getRules(): RequestFileUpload201ResponseBodyRules
     {
         return $this->rules;
     }
@@ -127,7 +129,7 @@ class RequestFileUpload201ResponseBody
     /**
      * @return string
      */
-    public function getUploadToken() : string
+    public function getUploadToken(): string
     {
         return $this->uploadToken;
     }
@@ -136,12 +138,12 @@ class RequestFileUpload201ResponseBody
      * @param string $conversationId
      * @return self
      */
-    public function withConversationId(string $conversationId) : self
+    public function withConversationId(string $conversationId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($conversationId, static::$schema['properties']['conversationId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -154,7 +156,7 @@ class RequestFileUpload201ResponseBody
      * @param RequestFileUpload201ResponseBodyRules $rules
      * @return self
      */
-    public function withRules(RequestFileUpload201ResponseBodyRules $rules) : self
+    public function withRules(RequestFileUpload201ResponseBodyRules $rules): self
     {
         $clone = clone $this;
         $clone->rules = $rules;
@@ -166,12 +168,12 @@ class RequestFileUpload201ResponseBody
      * @param string $uploadToken
      * @return self
      */
-    public function withUploadToken(string $uploadToken) : self
+    public function withUploadToken(string $uploadToken): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($uploadToken, static::$schema['properties']['uploadToken']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -186,9 +188,9 @@ class RequestFileUpload201ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestFileUpload201ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestFileUpload201ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestFileUpload201ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -209,7 +211,7 @@ class RequestFileUpload201ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['conversationId'] = $this->conversationId;
@@ -225,19 +227,19 @@ class RequestFileUpload201ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -248,7 +250,7 @@ class RequestFileUpload201ResponseBody
         $this->rules = clone $this->rules;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -256,4 +258,3 @@ class RequestFileUpload201ResponseBody
         return $response;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId;
 
+use InvalidArgumentException;
+
 class UpdateCronjobAppIdRequest
 {
     public const method = 'patch';
@@ -50,7 +52,7 @@ class UpdateCronjobAppIdRequest
     private UpdateCronjobAppIdRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -66,7 +68,7 @@ class UpdateCronjobAppIdRequest
     /**
      * @return string
      */
-    public function getCronjobId() : string
+    public function getCronjobId(): string
     {
         return $this->cronjobId;
     }
@@ -74,7 +76,7 @@ class UpdateCronjobAppIdRequest
     /**
      * @return UpdateCronjobAppIdRequestBody
      */
-    public function getBody() : UpdateCronjobAppIdRequestBody
+    public function getBody(): UpdateCronjobAppIdRequestBody
     {
         return $this->body;
     }
@@ -83,12 +85,12 @@ class UpdateCronjobAppIdRequest
      * @param string $cronjobId
      * @return self
      */
-    public function withCronjobId(string $cronjobId) : self
+    public function withCronjobId(string $cronjobId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -101,7 +103,7 @@ class UpdateCronjobAppIdRequest
      * @param UpdateCronjobAppIdRequestBody $body
      * @return self
      */
-    public function withBody(UpdateCronjobAppIdRequestBody $body) : self
+    public function withBody(UpdateCronjobAppIdRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -115,9 +117,9 @@ class UpdateCronjobAppIdRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateCronjobAppIdRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateCronjobAppIdRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -137,7 +139,7 @@ class UpdateCronjobAppIdRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['cronjobId'] = $this->cronjobId;
@@ -152,19 +154,19 @@ class UpdateCronjobAppIdRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -175,30 +177,29 @@ class UpdateCronjobAppIdRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $cronjobId = urlencode($mapped['cronjobId']);
         return '/v2/cronjobs/' . $cronjobId . '/app-id';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer;
 
+use InvalidArgumentException;
+
 class CreateCustomerRequestBody
 {
     public const method = 'post';
@@ -55,7 +57,7 @@ class CreateCustomerRequestBody
     private ?string $vatId = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -69,7 +71,7 @@ class CreateCustomerRequestBody
     /**
      * @return string|null
      */
-    public function getCategoryId() : ?string
+    public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
     }
@@ -77,7 +79,7 @@ class CreateCustomerRequestBody
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -85,7 +87,7 @@ class CreateCustomerRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact|null
      */
-    public function getOwner() : ?\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact
+    public function getOwner(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact
     {
         return $this->owner ?? null;
     }
@@ -93,7 +95,7 @@ class CreateCustomerRequestBody
     /**
      * @return string|null
      */
-    public function getVatId() : ?string
+    public function getVatId(): ?string
     {
         return $this->vatId ?? null;
     }
@@ -102,12 +104,12 @@ class CreateCustomerRequestBody
      * @param string $categoryId
      * @return self
      */
-    public function withCategoryId(string $categoryId) : self
+    public function withCategoryId(string $categoryId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -119,7 +121,7 @@ class CreateCustomerRequestBody
     /**
      * @return self
      */
-    public function withoutCategoryId() : self
+    public function withoutCategoryId(): self
     {
         $clone = clone $this;
         unset($clone->categoryId);
@@ -131,12 +133,12 @@ class CreateCustomerRequestBody
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -149,7 +151,7 @@ class CreateCustomerRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner
      * @return self
      */
-    public function withOwner(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner) : self
+    public function withOwner(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact $owner): self
     {
         $clone = clone $this;
         $clone->owner = $owner;
@@ -160,7 +162,7 @@ class CreateCustomerRequestBody
     /**
      * @return self
      */
-    public function withoutOwner() : self
+    public function withoutOwner(): self
     {
         $clone = clone $this;
         unset($clone->owner);
@@ -172,12 +174,12 @@ class CreateCustomerRequestBody
      * @param string $vatId
      * @return self
      */
-    public function withVatId(string $vatId) : self
+    public function withVatId(string $vatId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($vatId, static::$schema['properties']['vatId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -189,7 +191,7 @@ class CreateCustomerRequestBody
     /**
      * @return self
      */
-    public function withoutVatId() : self
+    public function withoutVatId(): self
     {
         $clone = clone $this;
         unset($clone->vatId);
@@ -203,9 +205,9 @@ class CreateCustomerRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateCustomerRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateCustomerRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateCustomerRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -238,7 +240,7 @@ class CreateCustomerRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->categoryId)) {
@@ -261,19 +263,19 @@ class CreateCustomerRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -283,29 +285,28 @@ class CreateCustomerRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/customers';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

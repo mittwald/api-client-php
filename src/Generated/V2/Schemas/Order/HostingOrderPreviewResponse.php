@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+
 class HostingOrderPreviewResponse
 {
     /**
@@ -64,7 +66,7 @@ class HostingOrderPreviewResponse
     /**
      * @return int|float
      */
-    public function getMachineTypePrice() : int|float
+    public function getMachineTypePrice(): int|float
     {
         return $this->machineTypePrice;
     }
@@ -72,7 +74,7 @@ class HostingOrderPreviewResponse
     /**
      * @return int|float
      */
-    public function getStoragePrice() : int|float
+    public function getStoragePrice(): int|float
     {
         return $this->storagePrice;
     }
@@ -80,7 +82,7 @@ class HostingOrderPreviewResponse
     /**
      * @return int|float
      */
-    public function getTotalPrice() : int|float
+    public function getTotalPrice(): int|float
     {
         return $this->totalPrice;
     }
@@ -89,12 +91,12 @@ class HostingOrderPreviewResponse
      * @param int|float $machineTypePrice
      * @return self
      */
-    public function withMachineTypePrice(int|float $machineTypePrice) : self
+    public function withMachineTypePrice(int|float $machineTypePrice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($machineTypePrice, static::$schema['properties']['machineTypePrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -107,12 +109,12 @@ class HostingOrderPreviewResponse
      * @param int|float $storagePrice
      * @return self
      */
-    public function withStoragePrice(int|float $storagePrice) : self
+    public function withStoragePrice(int|float $storagePrice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($storagePrice, static::$schema['properties']['storagePrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -125,12 +127,12 @@ class HostingOrderPreviewResponse
      * @param int|float $totalPrice
      * @return self
      */
-    public function withTotalPrice(int|float $totalPrice) : self
+    public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -145,9 +147,9 @@ class HostingOrderPreviewResponse
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return HostingOrderPreviewResponse Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : HostingOrderPreviewResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): HostingOrderPreviewResponse
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -168,7 +170,7 @@ class HostingOrderPreviewResponse
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['machineTypePrice'] = $this->machineTypePrice;
@@ -184,19 +186,19 @@ class HostingOrderPreviewResponse
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -206,4 +208,3 @@ class HostingOrderPreviewResponse
     {
     }
 }
-

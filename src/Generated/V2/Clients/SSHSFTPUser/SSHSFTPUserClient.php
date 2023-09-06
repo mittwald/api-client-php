@@ -13,7 +13,7 @@ class SSHSFTPUserClient
         $this->client = $client;
     }
 
-    public function createSftpUser(CreateSftpUser\CreateSftpUserRequest $request) : CreateSftpUser\CreateSftpUser201Response|CreateSftpUser\CreateSftpUser400Response|CreateSftpUser\CreateSftpUserDefaultResponse
+    public function createSftpUser(CreateSftpUser\CreateSftpUserRequest $request): CreateSftpUser\CreateSftpUser201Response|CreateSftpUser\CreateSftpUser400Response|CreateSftpUser\CreateSftpUserDefaultResponse
     {
         $httpRequest = new Request(CreateSftpUser\CreateSftpUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -28,7 +28,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function listSftpUsers(ListSftpUsers\ListSftpUsersRequest $request) : ListSftpUsers\ListSftpUsers200Response|ListSftpUsers\ListSftpUsers404Response|ListSftpUsers\ListSftpUsersDefaultResponse
+    public function listSftpUsers(ListSftpUsers\ListSftpUsersRequest $request): ListSftpUsers\ListSftpUsers200Response|ListSftpUsers\ListSftpUsers404Response|ListSftpUsers\ListSftpUsersDefaultResponse
     {
         $httpRequest = new Request(ListSftpUsers\ListSftpUsersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -42,7 +42,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function deleteSftpUser(DeleteSftpUser\DeleteSftpUserRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteSftpUser\DeleteSftpUserDefaultResponse
+    public function deleteSftpUser(DeleteSftpUser\DeleteSftpUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteSftpUser\DeleteSftpUserDefaultResponse
     {
         $httpRequest = new Request(DeleteSftpUser\DeleteSftpUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -55,7 +55,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function getSftpUser(GetSftpUser\GetSftpUserRequest $request) : GetSftpUser\GetSftpUser200Response|GetSftpUser\GetSftpUser404Response|GetSftpUser\GetSftpUserDefaultResponse
+    public function getSftpUser(GetSftpUser\GetSftpUserRequest $request): GetSftpUser\GetSftpUser200Response|GetSftpUser\GetSftpUser404Response|GetSftpUser\GetSftpUserDefaultResponse
     {
         $httpRequest = new Request(GetSftpUser\GetSftpUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -69,7 +69,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function updateSftpUser(UpdateSftpUser\UpdateSftpUserRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateSftpUser\UpdateSftpUser400Response|UpdateSftpUser\UpdateSftpUserDefaultResponse
+    public function updateSftpUser(UpdateSftpUser\UpdateSftpUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateSftpUser\UpdateSftpUser400Response|UpdateSftpUser\UpdateSftpUserDefaultResponse
     {
         $httpRequest = new Request(UpdateSftpUser\UpdateSftpUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -84,7 +84,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function createSshUser(CreateSshUser\CreateSshUserRequest $request) : CreateSshUser\CreateSshUser201Response|CreateSshUser\CreateSshUser400Response|CreateSshUser\CreateSshUserDefaultResponse
+    public function createSshUser(CreateSshUser\CreateSshUserRequest $request): CreateSshUser\CreateSshUser201Response|CreateSshUser\CreateSshUser400Response|CreateSshUser\CreateSshUserDefaultResponse
     {
         $httpRequest = new Request(CreateSshUser\CreateSshUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -99,7 +99,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function listSshUsers(ListSshUsers\ListSshUsersRequest $request) : ListSshUsers\ListSshUsers200Response|ListSshUsers\ListSshUsers404Response|ListSshUsers\ListSshUsersDefaultResponse
+    public function listSshUsers(ListSshUsers\ListSshUsersRequest $request): ListSshUsers\ListSshUsers200Response|ListSshUsers\ListSshUsers404Response|ListSshUsers\ListSshUsersDefaultResponse
     {
         $httpRequest = new Request(ListSshUsers\ListSshUsersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -113,7 +113,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function deleteSshUser(DeleteSshUser\DeleteSshUserRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteSshUser\DeleteSshUserDefaultResponse
+    public function deleteSshUser(DeleteSshUser\DeleteSshUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteSshUser\DeleteSshUserDefaultResponse
     {
         $httpRequest = new Request(DeleteSshUser\DeleteSshUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -126,7 +126,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function getSshUser(GetSshUser\GetSshUserRequest $request) : GetSshUser\GetSshUser200Response|GetSshUser\GetSshUser404Response|GetSshUser\GetSshUserDefaultResponse
+    public function getSshUser(GetSshUser\GetSshUserRequest $request): GetSshUser\GetSshUser200Response|GetSshUser\GetSshUser404Response|GetSshUser\GetSshUserDefaultResponse
     {
         $httpRequest = new Request(GetSshUser\GetSshUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -140,7 +140,7 @@ class SSHSFTPUserClient
         };
     }
 
-    public function updateSshUser(UpdateSshUser\UpdateSshUserRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateSshUser\UpdateSshUser400Response|UpdateSshUser\UpdateSshUserDefaultResponse
+    public function updateSshUser(UpdateSshUser\UpdateSshUserRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateSshUser\UpdateSshUser400Response|UpdateSshUser\UpdateSshUserDefaultResponse
     {
         $httpRequest = new Request(UpdateSshUser\UpdateSshUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -155,4 +155,3 @@ class SSHSFTPUserClient
         };
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt;
 
+use InvalidArgumentException;
+use DateTime;
+
 class GetPasswordUpdatedAt200ResponseBody
 {
     /**
@@ -25,33 +28,33 @@ class GetPasswordUpdatedAt200ResponseBody
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $passwordUpdatedAt;
+    private DateTime $passwordUpdatedAt;
 
     public \Psr\Http\Message\ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      */
-    public function __construct(\DateTime $passwordUpdatedAt)
+    public function __construct(DateTime $passwordUpdatedAt)
     {
         $this->passwordUpdatedAt = $passwordUpdatedAt;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getPasswordUpdatedAt() : \DateTime
+    public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @return self
      */
-    public function withPasswordUpdatedAt(\DateTime $passwordUpdatedAt) : self
+    public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
         $clone->passwordUpdatedAt = $passwordUpdatedAt;
@@ -65,16 +68,16 @@ class GetPasswordUpdatedAt200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return GetPasswordUpdatedAt200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : GetPasswordUpdatedAt200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetPasswordUpdatedAt200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $passwordUpdatedAt = new \DateTime($input->{'passwordUpdatedAt'});
+        $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
 
         $obj = new self($passwordUpdatedAt);
 
@@ -86,10 +89,10 @@ class GetPasswordUpdatedAt200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(\DateTime::ATOM);
+        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -100,19 +103,19 @@ class GetPasswordUpdatedAt200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -123,7 +126,7 @@ class GetPasswordUpdatedAt200ResponseBody
         $this->passwordUpdatedAt = clone $this->passwordUpdatedAt;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -131,4 +134,3 @@ class GetPasswordUpdatedAt200ResponseBody
         return $response;
     }
 }
-

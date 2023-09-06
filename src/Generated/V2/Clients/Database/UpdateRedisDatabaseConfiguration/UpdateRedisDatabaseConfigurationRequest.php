@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration;
 
+use InvalidArgumentException;
+
 class UpdateRedisDatabaseConfigurationRequest
 {
     public const method = 'patch';
@@ -45,7 +47,7 @@ class UpdateRedisDatabaseConfigurationRequest
     private UpdateRedisDatabaseConfigurationRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -61,7 +63,7 @@ class UpdateRedisDatabaseConfigurationRequest
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -69,7 +71,7 @@ class UpdateRedisDatabaseConfigurationRequest
     /**
      * @return UpdateRedisDatabaseConfigurationRequestBody
      */
-    public function getBody() : UpdateRedisDatabaseConfigurationRequestBody
+    public function getBody(): UpdateRedisDatabaseConfigurationRequestBody
     {
         return $this->body;
     }
@@ -78,12 +80,12 @@ class UpdateRedisDatabaseConfigurationRequest
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -96,7 +98,7 @@ class UpdateRedisDatabaseConfigurationRequest
      * @param UpdateRedisDatabaseConfigurationRequestBody $body
      * @return self
      */
-    public function withBody(UpdateRedisDatabaseConfigurationRequestBody $body) : self
+    public function withBody(UpdateRedisDatabaseConfigurationRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -110,9 +112,9 @@ class UpdateRedisDatabaseConfigurationRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateRedisDatabaseConfigurationRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateRedisDatabaseConfigurationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateRedisDatabaseConfigurationRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -132,7 +134,7 @@ class UpdateRedisDatabaseConfigurationRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['id'] = $this->id;
@@ -147,19 +149,19 @@ class UpdateRedisDatabaseConfigurationRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -170,30 +172,29 @@ class UpdateRedisDatabaseConfigurationRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
         return '/v2/redis-databases/' . $id . '/configuration';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Invoice
 {
     /**
@@ -160,9 +163,9 @@ class Invoice
     private string $customerId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $date;
+    private DateTime $date;
 
     /**
      * @var InvoiceGroupsItem[]
@@ -223,7 +226,7 @@ class Invoice
      * @param int|float $amountPaid
      * @param string $currency
      * @param string $customerId
-     * @param \DateTime $date
+     * @param DateTime $date
      * @param InvoiceGroupsItem[] $groups
      * @param string $id
      * @param string $invoiceNumber
@@ -234,7 +237,7 @@ class Invoice
      * @param int|float $totalGross
      * @param int|float $totalNet
      */
-    public function __construct(int|float $amountPaid, string $currency, string $customerId, \DateTime $date, array $groups, string $id, string $invoiceNumber, InvoiceInvoiceType $invoiceType, string $pdfId, Recipient $recipient, InvoiceStatus $status, int|float $totalGross, int|float $totalNet)
+    public function __construct(int|float $amountPaid, string $currency, string $customerId, DateTime $date, array $groups, string $id, string $invoiceNumber, InvoiceInvoiceType $invoiceType, string $pdfId, Recipient $recipient, InvoiceStatus $status, int|float $totalGross, int|float $totalNet)
     {
         $this->amountPaid = $amountPaid;
         $this->currency = $currency;
@@ -254,7 +257,7 @@ class Invoice
     /**
      * @return int|float
      */
-    public function getAmountPaid() : int|float
+    public function getAmountPaid(): int|float
     {
         return $this->amountPaid;
     }
@@ -262,7 +265,7 @@ class Invoice
     /**
      * @return Cancellation|null
      */
-    public function getCancellation() : ?Cancellation
+    public function getCancellation(): ?Cancellation
     {
         return $this->cancellation ?? null;
     }
@@ -270,7 +273,7 @@ class Invoice
     /**
      * @return string|null
      */
-    public function getCancellationOf() : ?string
+    public function getCancellationOf(): ?string
     {
         return $this->cancellationOf ?? null;
     }
@@ -278,7 +281,7 @@ class Invoice
     /**
      * @return string
      */
-    public function getCurrency() : string
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -286,15 +289,15 @@ class Invoice
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDate() : \DateTime
+    public function getDate(): DateTime
     {
         return $this->date;
     }
@@ -302,7 +305,7 @@ class Invoice
     /**
      * @return InvoiceGroupsItem[]
      */
-    public function getGroups() : array
+    public function getGroups(): array
     {
         return $this->groups;
     }
@@ -310,7 +313,7 @@ class Invoice
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -318,7 +321,7 @@ class Invoice
     /**
      * @return string
      */
-    public function getInvoiceNumber() : string
+    public function getInvoiceNumber(): string
     {
         return $this->invoiceNumber;
     }
@@ -326,7 +329,7 @@ class Invoice
     /**
      * @return InvoiceInvoiceType
      */
-    public function getInvoiceType() : InvoiceInvoiceType
+    public function getInvoiceType(): InvoiceInvoiceType
     {
         return $this->invoiceType;
     }
@@ -335,7 +338,7 @@ class Invoice
      * @return
      * PaymentSettingsDebit|PaymentSettingsInvoice|null
      */
-    public function getPaymentSettings() : PaymentSettingsDebit|PaymentSettingsInvoice|null
+    public function getPaymentSettings(): PaymentSettingsDebit|PaymentSettingsInvoice|null
     {
         return $this->paymentSettings;
     }
@@ -343,7 +346,7 @@ class Invoice
     /**
      * @return string
      */
-    public function getPdfId() : string
+    public function getPdfId(): string
     {
         return $this->pdfId;
     }
@@ -351,7 +354,7 @@ class Invoice
     /**
      * @return Recipient
      */
-    public function getRecipient() : Recipient
+    public function getRecipient(): Recipient
     {
         return $this->recipient;
     }
@@ -359,7 +362,7 @@ class Invoice
     /**
      * @return InvoiceStatus
      */
-    public function getStatus() : InvoiceStatus
+    public function getStatus(): InvoiceStatus
     {
         return $this->status;
     }
@@ -367,7 +370,7 @@ class Invoice
     /**
      * @return int|float
      */
-    public function getTotalGross() : int|float
+    public function getTotalGross(): int|float
     {
         return $this->totalGross;
     }
@@ -375,7 +378,7 @@ class Invoice
     /**
      * @return int|float
      */
-    public function getTotalNet() : int|float
+    public function getTotalNet(): int|float
     {
         return $this->totalNet;
     }
@@ -383,7 +386,7 @@ class Invoice
     /**
      * @return string|null
      */
-    public function getVatId() : ?string
+    public function getVatId(): ?string
     {
         return $this->vatId ?? null;
     }
@@ -392,12 +395,12 @@ class Invoice
      * @param int|float $amountPaid
      * @return self
      */
-    public function withAmountPaid(int|float $amountPaid) : self
+    public function withAmountPaid(int|float $amountPaid): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($amountPaid, static::$schema['properties']['amountPaid']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -410,7 +413,7 @@ class Invoice
      * @param Cancellation $cancellation
      * @return self
      */
-    public function withCancellation(Cancellation $cancellation) : self
+    public function withCancellation(Cancellation $cancellation): self
     {
         $clone = clone $this;
         $clone->cancellation = $cancellation;
@@ -421,7 +424,7 @@ class Invoice
     /**
      * @return self
      */
-    public function withoutCancellation() : self
+    public function withoutCancellation(): self
     {
         $clone = clone $this;
         unset($clone->cancellation);
@@ -433,12 +436,12 @@ class Invoice
      * @param string $cancellationOf
      * @return self
      */
-    public function withCancellationOf(string $cancellationOf) : self
+    public function withCancellationOf(string $cancellationOf): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($cancellationOf, static::$schema['properties']['cancellationOf']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -450,7 +453,7 @@ class Invoice
     /**
      * @return self
      */
-    public function withoutCancellationOf() : self
+    public function withoutCancellationOf(): self
     {
         $clone = clone $this;
         unset($clone->cancellationOf);
@@ -462,12 +465,12 @@ class Invoice
      * @param string $currency
      * @return self
      */
-    public function withCurrency(string $currency) : self
+    public function withCurrency(string $currency): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($currency, static::$schema['properties']['currency']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -480,12 +483,12 @@ class Invoice
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -495,10 +498,10 @@ class Invoice
     }
 
     /**
-     * @param \DateTime $date
+     * @param DateTime $date
      * @return self
      */
-    public function withDate(\DateTime $date) : self
+    public function withDate(DateTime $date): self
     {
         $clone = clone $this;
         $clone->date = $date;
@@ -510,7 +513,7 @@ class Invoice
      * @param InvoiceGroupsItem[] $groups
      * @return self
      */
-    public function withGroups(array $groups) : self
+    public function withGroups(array $groups): self
     {
         $clone = clone $this;
         $clone->groups = $groups;
@@ -522,12 +525,12 @@ class Invoice
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -540,12 +543,12 @@ class Invoice
      * @param string $invoiceNumber
      * @return self
      */
-    public function withInvoiceNumber(string $invoiceNumber) : self
+    public function withInvoiceNumber(string $invoiceNumber): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($invoiceNumber, static::$schema['properties']['invoiceNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -558,7 +561,7 @@ class Invoice
      * @param InvoiceInvoiceType $invoiceType
      * @return self
      */
-    public function withInvoiceType(InvoiceInvoiceType $invoiceType) : self
+    public function withInvoiceType(InvoiceInvoiceType $invoiceType): self
     {
         $clone = clone $this;
         $clone->invoiceType = $invoiceType;
@@ -570,7 +573,7 @@ class Invoice
      * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
      * @return self
      */
-    public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings) : self
+    public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
         $clone = clone $this;
         $clone->paymentSettings = $paymentSettings;
@@ -581,7 +584,7 @@ class Invoice
     /**
      * @return self
      */
-    public function withoutPaymentSettings() : self
+    public function withoutPaymentSettings(): self
     {
         $clone = clone $this;
         unset($clone->paymentSettings);
@@ -593,12 +596,12 @@ class Invoice
      * @param string $pdfId
      * @return self
      */
-    public function withPdfId(string $pdfId) : self
+    public function withPdfId(string $pdfId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($pdfId, static::$schema['properties']['pdfId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -611,7 +614,7 @@ class Invoice
      * @param Recipient $recipient
      * @return self
      */
-    public function withRecipient(Recipient $recipient) : self
+    public function withRecipient(Recipient $recipient): self
     {
         $clone = clone $this;
         $clone->recipient = $recipient;
@@ -623,7 +626,7 @@ class Invoice
      * @param InvoiceStatus $status
      * @return self
      */
-    public function withStatus(InvoiceStatus $status) : self
+    public function withStatus(InvoiceStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -635,12 +638,12 @@ class Invoice
      * @param int|float $totalGross
      * @return self
      */
-    public function withTotalGross(int|float $totalGross) : self
+    public function withTotalGross(int|float $totalGross): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($totalGross, static::$schema['properties']['totalGross']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -653,12 +656,12 @@ class Invoice
      * @param int|float $totalNet
      * @return self
      */
-    public function withTotalNet(int|float $totalNet) : self
+    public function withTotalNet(int|float $totalNet): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($totalNet, static::$schema['properties']['totalNet']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -671,12 +674,12 @@ class Invoice
      * @param string $vatId
      * @return self
      */
-    public function withVatId(string $vatId) : self
+    public function withVatId(string $vatId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($vatId, static::$schema['properties']['vatId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -688,7 +691,7 @@ class Invoice
     /**
      * @return self
      */
-    public function withoutVatId() : self
+    public function withoutVatId(): self
     {
         $clone = clone $this;
         unset($clone->vatId);
@@ -702,9 +705,9 @@ class Invoice
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Invoice Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Invoice
+    public static function buildFromInput(array|object $input, bool $validate = true): Invoice
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -722,7 +725,7 @@ class Invoice
         }
         $currency = $input->{'currency'};
         $customerId = $input->{'customerId'};
-        $date = new \DateTime($input->{'date'});
+        $date = new DateTime($input->{'date'});
         $groups = array_map(fn (array|object $i): InvoiceGroupsItem => InvoiceGroupsItem::buildFromInput($i, validate: $validate), $input->{'groups'});
         $id = $input->{'id'};
         $invoiceNumber = $input->{'invoiceNumber'};
@@ -730,7 +733,7 @@ class Invoice
         $paymentSettings = null;
         if (isset($input->{'paymentSettings'})) {
             $paymentSettings = match (true) {
-                default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 PaymentSettingsDebit::validateInput($input->{'paymentSettings'}, true) => PaymentSettingsDebit::buildFromInput($input->{'paymentSettings'}, validate: $validate),
                 PaymentSettingsInvoice::validateInput($input->{'paymentSettings'}, true) => PaymentSettingsInvoice::buildFromInput($input->{'paymentSettings'}, validate: $validate),
             };
@@ -758,7 +761,7 @@ class Invoice
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['amountPaid'] = $this->amountPaid;
@@ -770,14 +773,14 @@ class Invoice
         }
         $output['currency'] = $this->currency;
         $output['customerId'] = $this->customerId;
-        $output['date'] = ($this->date)->format(\DateTime::ATOM);
+        $output['date'] = ($this->date)->format(DateTime::ATOM);
         $output['groups'] = array_map(fn (InvoiceGroupsItem $i) => $i->toJson(), $this->groups);
         $output['id'] = $this->id;
         $output['invoiceNumber'] = $this->invoiceNumber;
         $output['invoiceType'] = ($this->invoiceType)->value;
         if (isset($this->paymentSettings)) {
             $output['paymentSettings'] = match (true) {
-                default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 ($this->paymentSettings) instanceof PaymentSettingsDebit, ($this->paymentSettings) instanceof PaymentSettingsInvoice => $this->paymentSettings->toJson(),
             };
         }
@@ -799,19 +802,19 @@ class Invoice
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -823,4 +826,3 @@ class Invoice
         $this->groups = array_map(fn (InvoiceGroupsItem $i) => clone $i, $this->groups);
     }
 }
-

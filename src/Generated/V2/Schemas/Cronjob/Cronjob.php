@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Cronjob;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Cronjob
 {
     /**
@@ -95,9 +98,9 @@ class Cronjob
     private string $appId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -130,9 +133,9 @@ class Cronjob
     private ?CronjobExecution $latestExecution = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $nextExecutionTime = null;
+    private ?DateTime $nextExecutionTime = null;
 
     /**
      * @var string|null
@@ -145,22 +148,22 @@ class Cronjob
     private string $shortId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @param bool $active
      * @param string $appId
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $description
      * @param CronjobUrl|CronjobCommand $destination
      * @param string $id
      * @param string $interval
      * @param string $shortId
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function __construct(bool $active, string $appId, \DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, \DateTime $updatedAt)
+    public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, DateTime $updatedAt)
     {
         $this->active = $active;
         $this->appId = $appId;
@@ -176,7 +179,7 @@ class Cronjob
     /**
      * @return bool
      */
-    public function getActive() : bool
+    public function getActive(): bool
     {
         return $this->active;
     }
@@ -184,15 +187,15 @@ class Cronjob
     /**
      * @return string
      */
-    public function getAppId() : string
+    public function getAppId(): string
     {
         return $this->appId;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -200,7 +203,7 @@ class Cronjob
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -209,7 +212,7 @@ class Cronjob
      * @return
      * CronjobUrl|CronjobCommand
      */
-    public function getDestination() : CronjobCommand|CronjobUrl
+    public function getDestination(): CronjobCommand|CronjobUrl
     {
         return $this->destination;
     }
@@ -217,7 +220,7 @@ class Cronjob
     /**
      * @return string|null
      */
-    public function getEmail() : ?string
+    public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
@@ -225,7 +228,7 @@ class Cronjob
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -233,7 +236,7 @@ class Cronjob
     /**
      * @return string
      */
-    public function getInterval() : string
+    public function getInterval(): string
     {
         return $this->interval;
     }
@@ -241,15 +244,15 @@ class Cronjob
     /**
      * @return CronjobExecution|null
      */
-    public function getLatestExecution() : ?CronjobExecution
+    public function getLatestExecution(): ?CronjobExecution
     {
         return $this->latestExecution ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getNextExecutionTime() : ?\DateTime
+    public function getNextExecutionTime(): ?DateTime
     {
         return $this->nextExecutionTime ?? null;
     }
@@ -257,7 +260,7 @@ class Cronjob
     /**
      * @return string|null
      */
-    public function getProjectId() : ?string
+    public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
@@ -265,15 +268,15 @@ class Cronjob
     /**
      * @return string
      */
-    public function getShortId() : string
+    public function getShortId(): string
     {
         return $this->shortId;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -282,12 +285,12 @@ class Cronjob
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -300,12 +303,12 @@ class Cronjob
      * @param string $appId
      * @return self
      */
-    public function withAppId(string $appId) : self
+    public function withAppId(string $appId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($appId, static::$schema['properties']['appId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -315,10 +318,10 @@ class Cronjob
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -330,12 +333,12 @@ class Cronjob
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -348,7 +351,7 @@ class Cronjob
      * @param CronjobUrl|CronjobCommand $destination
      * @return self
      */
-    public function withDestination(CronjobCommand|CronjobUrl $destination) : self
+    public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
         $clone = clone $this;
         $clone->destination = $destination;
@@ -360,12 +363,12 @@ class Cronjob
      * @param string $email
      * @return self
      */
-    public function withEmail(string $email) : self
+    public function withEmail(string $email): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($email, static::$schema['properties']['email']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -377,7 +380,7 @@ class Cronjob
     /**
      * @return self
      */
-    public function withoutEmail() : self
+    public function withoutEmail(): self
     {
         $clone = clone $this;
         unset($clone->email);
@@ -389,12 +392,12 @@ class Cronjob
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -407,12 +410,12 @@ class Cronjob
      * @param string $interval
      * @return self
      */
-    public function withInterval(string $interval) : self
+    public function withInterval(string $interval): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($interval, static::$schema['properties']['interval']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -425,7 +428,7 @@ class Cronjob
      * @param CronjobExecution $latestExecution
      * @return self
      */
-    public function withLatestExecution(CronjobExecution $latestExecution) : self
+    public function withLatestExecution(CronjobExecution $latestExecution): self
     {
         $clone = clone $this;
         $clone->latestExecution = $latestExecution;
@@ -436,7 +439,7 @@ class Cronjob
     /**
      * @return self
      */
-    public function withoutLatestExecution() : self
+    public function withoutLatestExecution(): self
     {
         $clone = clone $this;
         unset($clone->latestExecution);
@@ -445,10 +448,10 @@ class Cronjob
     }
 
     /**
-     * @param \DateTime $nextExecutionTime
+     * @param DateTime $nextExecutionTime
      * @return self
      */
-    public function withNextExecutionTime(\DateTime $nextExecutionTime) : self
+    public function withNextExecutionTime(DateTime $nextExecutionTime): self
     {
         $clone = clone $this;
         $clone->nextExecutionTime = $nextExecutionTime;
@@ -459,7 +462,7 @@ class Cronjob
     /**
      * @return self
      */
-    public function withoutNextExecutionTime() : self
+    public function withoutNextExecutionTime(): self
     {
         $clone = clone $this;
         unset($clone->nextExecutionTime);
@@ -471,12 +474,12 @@ class Cronjob
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -488,7 +491,7 @@ class Cronjob
     /**
      * @return self
      */
-    public function withoutProjectId() : self
+    public function withoutProjectId(): self
     {
         $clone = clone $this;
         unset($clone->projectId);
@@ -500,12 +503,12 @@ class Cronjob
      * @param string $shortId
      * @return self
      */
-    public function withShortId(string $shortId) : self
+    public function withShortId(string $shortId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($shortId, static::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -515,10 +518,10 @@ class Cronjob
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -532,9 +535,9 @@ class Cronjob
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Cronjob Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Cronjob
+    public static function buildFromInput(array|object $input, bool $validate = true): Cronjob
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -543,7 +546,7 @@ class Cronjob
 
         $active = (bool)($input->{'active'});
         $appId = $input->{'appId'};
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $destination = match (true) {
             CronjobUrl::validateInput($input->{'destination'}, true) => CronjobUrl::buildFromInput($input->{'destination'}, validate: $validate),
@@ -561,14 +564,14 @@ class Cronjob
         }
         $nextExecutionTime = null;
         if (isset($input->{'nextExecutionTime'})) {
-            $nextExecutionTime = new \DateTime($input->{'nextExecutionTime'});
+            $nextExecutionTime = new DateTime($input->{'nextExecutionTime'});
         }
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
         }
         $shortId = $input->{'shortId'};
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $updatedAt);
         $obj->email = $email;
@@ -583,12 +586,12 @@ class Cronjob
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['active'] = $this->active;
         $output['appId'] = $this->appId;
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         $output['destination'] = match (true) {
             ($this->destination) instanceof CronjobUrl, ($this->destination) instanceof CronjobCommand => $this->destination->toJson(),
@@ -602,13 +605,13 @@ class Cronjob
             $output['latestExecution'] = $this->latestExecution->toJson();
         }
         if (isset($this->nextExecutionTime)) {
-            $output['nextExecutionTime'] = ($this->nextExecutionTime)->format(\DateTime::ATOM);
+            $output['nextExecutionTime'] = ($this->nextExecutionTime)->format(DateTime::ATOM);
         }
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
         }
         $output['shortId'] = $this->shortId;
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -619,19 +622,19 @@ class Cronjob
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -649,4 +652,3 @@ class Cronjob
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

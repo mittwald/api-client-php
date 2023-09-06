@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites;
 
+use InvalidArgumentException;
+
 class ListCustomerInvites200Response
 {
     /**
@@ -44,7 +46,7 @@ class ListCustomerInvites200Response
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite[]
      */
-    public function getBody() : array
+    public function getBody(): array
     {
         return $this->body;
     }
@@ -53,7 +55,7 @@ class ListCustomerInvites200Response
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite[] $body
      * @return self
      */
-    public function withBody(array $body) : self
+    public function withBody(array $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -67,16 +69,16 @@ class ListCustomerInvites200Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListCustomerInvites200Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListCustomerInvites200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): ListCustomerInvites200Response
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite => \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite => \Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -88,10 +90,10 @@ class ListCustomerInvites200Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Membership\CustomerInvite $i): array => $i->toJson(), $this->body);
 
         return $output;
     }
@@ -102,19 +104,19 @@ class ListCustomerInvites200Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -124,7 +126,7 @@ class ListCustomerInvites200Response
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -132,4 +134,3 @@ class ListCustomerInvites200Response
         return $response;
     }
 }
-

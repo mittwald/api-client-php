@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingGetSpecific;
 
+use InvalidArgumentException;
+
 class ProjectsettingGetSpecific200ResponseBody
 {
     /**
@@ -71,7 +73,7 @@ class ProjectsettingGetSpecific200ResponseBody
     /**
      * @return string[]
      */
-    public function getBlacklist() : array
+    public function getBlacklist(): array
     {
         return $this->blacklist;
     }
@@ -79,7 +81,7 @@ class ProjectsettingGetSpecific200ResponseBody
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -87,7 +89,7 @@ class ProjectsettingGetSpecific200ResponseBody
     /**
      * @return string[]
      */
-    public function getWhitelist() : array
+    public function getWhitelist(): array
     {
         return $this->whitelist;
     }
@@ -96,12 +98,12 @@ class ProjectsettingGetSpecific200ResponseBody
      * @param string[] $blacklist
      * @return self
      */
-    public function withBlacklist(array $blacklist) : self
+    public function withBlacklist(array $blacklist): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($blacklist, static::$schema['properties']['blacklist']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -114,12 +116,12 @@ class ProjectsettingGetSpecific200ResponseBody
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -132,12 +134,12 @@ class ProjectsettingGetSpecific200ResponseBody
      * @param string[] $whitelist
      * @return self
      */
-    public function withWhitelist(array $whitelist) : self
+    public function withWhitelist(array $whitelist): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($whitelist, static::$schema['properties']['whitelist']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -152,9 +154,9 @@ class ProjectsettingGetSpecific200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectsettingGetSpecific200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectsettingGetSpecific200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectsettingGetSpecific200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -175,7 +177,7 @@ class ProjectsettingGetSpecific200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['blacklist'] = $this->blacklist;
@@ -191,19 +193,19 @@ class ProjectsettingGetSpecific200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -213,7 +215,7 @@ class ProjectsettingGetSpecific200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -221,4 +223,3 @@ class ProjectsettingGetSpecific200ResponseBody
         return $response;
     }
 }
-

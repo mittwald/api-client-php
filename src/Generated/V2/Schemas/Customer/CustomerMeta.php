@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Customer;
 
+use InvalidArgumentException;
+
 class CustomerMeta
 {
     /**
@@ -58,7 +60,7 @@ class CustomerMeta
     /**
      * @return string|null
      */
-    public function getAvatarRefId() : ?string
+    public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
@@ -66,7 +68,7 @@ class CustomerMeta
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -74,7 +76,7 @@ class CustomerMeta
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -83,12 +85,12 @@ class CustomerMeta
      * @param string $avatarRefId
      * @return self
      */
-    public function withAvatarRefId(string $avatarRefId) : self
+    public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($avatarRefId, static::$schema['properties']['avatarRefId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -100,7 +102,7 @@ class CustomerMeta
     /**
      * @return self
      */
-    public function withoutAvatarRefId() : self
+    public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
         unset($clone->avatarRefId);
@@ -112,12 +114,12 @@ class CustomerMeta
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -130,12 +132,12 @@ class CustomerMeta
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -150,9 +152,9 @@ class CustomerMeta
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CustomerMeta Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CustomerMeta
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerMeta
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -176,7 +178,7 @@ class CustomerMeta
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->avatarRefId)) {
@@ -194,19 +196,19 @@ class CustomerMeta
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -216,4 +218,3 @@ class CustomerMeta
     {
     }
 }
-

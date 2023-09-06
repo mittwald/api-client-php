@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+
 class ArticleAddons
 {
     /**
@@ -79,7 +81,7 @@ class ArticleAddons
     /**
      * @return bool|null
      */
-    public function getHidden() : ?bool
+    public function getHidden(): ?bool
     {
         return $this->hidden ?? null;
     }
@@ -87,7 +89,7 @@ class ArticleAddons
     /**
      * @return string
      */
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -95,7 +97,7 @@ class ArticleAddons
     /**
      * @return string|null
      */
-    public function getType() : ?string
+    public function getType(): ?string
     {
         return $this->type ?? null;
     }
@@ -103,7 +105,7 @@ class ArticleAddons
     /**
      * @return string
      */
-    public function getValue() : string
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -111,7 +113,7 @@ class ArticleAddons
     /**
      * @return ArticleAddonsValueMergeType|null
      */
-    public function getValueMergeType() : ?ArticleAddonsValueMergeType
+    public function getValueMergeType(): ?ArticleAddonsValueMergeType
     {
         return $this->valueMergeType ?? null;
     }
@@ -120,12 +122,12 @@ class ArticleAddons
      * @param bool $hidden
      * @return self
      */
-    public function withHidden(bool $hidden) : self
+    public function withHidden(bool $hidden): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hidden, static::$schema['properties']['hidden']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -137,7 +139,7 @@ class ArticleAddons
     /**
      * @return self
      */
-    public function withoutHidden() : self
+    public function withoutHidden(): self
     {
         $clone = clone $this;
         unset($clone->hidden);
@@ -149,12 +151,12 @@ class ArticleAddons
      * @param string $key
      * @return self
      */
-    public function withKey(string $key) : self
+    public function withKey(string $key): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($key, static::$schema['properties']['key']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -167,12 +169,12 @@ class ArticleAddons
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -184,7 +186,7 @@ class ArticleAddons
     /**
      * @return self
      */
-    public function withoutType() : self
+    public function withoutType(): self
     {
         $clone = clone $this;
         unset($clone->type);
@@ -196,12 +198,12 @@ class ArticleAddons
      * @param string $value
      * @return self
      */
-    public function withValue(string $value) : self
+    public function withValue(string $value): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($value, static::$schema['properties']['value']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -214,7 +216,7 @@ class ArticleAddons
      * @param ArticleAddonsValueMergeType $valueMergeType
      * @return self
      */
-    public function withValueMergeType(ArticleAddonsValueMergeType $valueMergeType) : self
+    public function withValueMergeType(ArticleAddonsValueMergeType $valueMergeType): self
     {
         $clone = clone $this;
         $clone->valueMergeType = $valueMergeType;
@@ -225,7 +227,7 @@ class ArticleAddons
     /**
      * @return self
      */
-    public function withoutValueMergeType() : self
+    public function withoutValueMergeType(): self
     {
         $clone = clone $this;
         unset($clone->valueMergeType);
@@ -239,9 +241,9 @@ class ArticleAddons
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ArticleAddons Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ArticleAddons
+    public static function buildFromInput(array|object $input, bool $validate = true): ArticleAddons
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -275,7 +277,7 @@ class ArticleAddons
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->hidden)) {
@@ -299,19 +301,19 @@ class ArticleAddons
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -321,4 +323,3 @@ class ArticleAddons
     {
     }
 }
-

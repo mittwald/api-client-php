@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Backup;
 
+use InvalidArgumentException;
+
 class IgnoredSources
 {
     /**
@@ -50,7 +52,7 @@ class IgnoredSources
     /**
      * @return DatabaseReference[]|null
      */
-    public function getDatabases() : ?array
+    public function getDatabases(): ?array
     {
         return $this->databases ?? null;
     }
@@ -58,7 +60,7 @@ class IgnoredSources
     /**
      * @return bool
      */
-    public function getFiles() : bool
+    public function getFiles(): bool
     {
         return $this->files;
     }
@@ -67,7 +69,7 @@ class IgnoredSources
      * @param DatabaseReference[] $databases
      * @return self
      */
-    public function withDatabases(array $databases) : self
+    public function withDatabases(array $databases): self
     {
         $clone = clone $this;
         $clone->databases = $databases;
@@ -78,7 +80,7 @@ class IgnoredSources
     /**
      * @return self
      */
-    public function withoutDatabases() : self
+    public function withoutDatabases(): self
     {
         $clone = clone $this;
         unset($clone->databases);
@@ -90,12 +92,12 @@ class IgnoredSources
      * @param bool $files
      * @return self
      */
-    public function withFiles(bool $files) : self
+    public function withFiles(bool $files): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($files, static::$schema['properties']['files']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,9 +112,9 @@ class IgnoredSources
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return IgnoredSources Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : IgnoredSources
+    public static function buildFromInput(array|object $input, bool $validate = true): IgnoredSources
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -121,7 +123,7 @@ class IgnoredSources
 
         $databases = null;
         if (isset($input->{'databases'})) {
-            $databases = array_map(fn(array $i): DatabaseReference => DatabaseReference::buildFromInput($i, validate: $validate), $input->{'databases'});
+            $databases = array_map(fn (array $i): DatabaseReference => DatabaseReference::buildFromInput($i, validate: $validate), $input->{'databases'});
         }
         $files = (bool)($input->{'files'});
 
@@ -135,11 +137,11 @@ class IgnoredSources
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->databases)) {
-            $output['databases'] = array_map(fn(DatabaseReference $i): array => $i->toJson(), $this->databases);
+            $output['databases'] = array_map(fn (DatabaseReference $i): array => $i->toJson(), $this->databases);
         }
         $output['files'] = $this->files;
 
@@ -152,19 +154,19 @@ class IgnoredSources
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -174,4 +176,3 @@ class IgnoredSources
     {
     }
 }
-

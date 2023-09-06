@@ -13,7 +13,7 @@ class CronjobClient
         $this->client = $client;
     }
 
-    public function abortExecution(AbortExecution\AbortExecutionRequest $request) : AbortExecution\AbortExecution200Response|AbortExecution\AbortExecution404Response|AbortExecution\AbortExecutionDefaultResponse
+    public function abortExecution(AbortExecution\AbortExecutionRequest $request): AbortExecution\AbortExecution200Response|AbortExecution\AbortExecution404Response|AbortExecution\AbortExecutionDefaultResponse
     {
         $httpRequest = new Request(AbortExecution\AbortExecutionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -28,7 +28,7 @@ class CronjobClient
         };
     }
 
-    public function createCronjob(CreateCronjob\CreateCronjobRequest $request) : CreateCronjob\CreateCronjob201Response|CreateCronjob\CreateCronjob400Response|CreateCronjob\CreateCronjob412Response|CreateCronjob\CreateCronjobDefaultResponse
+    public function createCronjob(CreateCronjob\CreateCronjobRequest $request): CreateCronjob\CreateCronjob201Response|CreateCronjob\CreateCronjob400Response|CreateCronjob\CreateCronjob412Response|CreateCronjob\CreateCronjobDefaultResponse
     {
         $httpRequest = new Request(CreateCronjob\CreateCronjobRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -44,7 +44,7 @@ class CronjobClient
         };
     }
 
-    public function listCronjobs(ListCronjobs\ListCronjobsRequest $request) : ListCronjobs\ListCronjobs200Response|ListCronjobs\ListCronjobsDefaultResponse
+    public function listCronjobs(ListCronjobs\ListCronjobsRequest $request): ListCronjobs\ListCronjobs200Response|ListCronjobs\ListCronjobsDefaultResponse
     {
         $httpRequest = new Request(ListCronjobs\ListCronjobsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -57,7 +57,7 @@ class CronjobClient
         };
     }
 
-    public function createExecution(CreateExecution\CreateExecutionRequest $request) : CreateExecution\CreateExecution201Response|CreateExecution\CreateExecution404Response|CreateExecution\CreateExecution412Response|CreateExecution\CreateExecutionDefaultResponse
+    public function createExecution(CreateExecution\CreateExecutionRequest $request): CreateExecution\CreateExecution201Response|CreateExecution\CreateExecution404Response|CreateExecution\CreateExecution412Response|CreateExecution\CreateExecutionDefaultResponse
     {
         $httpRequest = new Request(CreateExecution\CreateExecutionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -73,7 +73,7 @@ class CronjobClient
         };
     }
 
-    public function listExecutions(ListExecutions\ListExecutionsRequest $request) : ListExecutions\ListExecutions200Response|ListExecutions\ListExecutionsDefaultResponse
+    public function listExecutions(ListExecutions\ListExecutionsRequest $request): ListExecutions\ListExecutions200Response|ListExecutions\ListExecutionsDefaultResponse
     {
         $httpRequest = new Request(ListExecutions\ListExecutionsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -86,7 +86,7 @@ class CronjobClient
         };
     }
 
-    public function deleteCronjob(DeleteCronjob\DeleteCronjobRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|DeleteCronjob\DeleteCronjob400Response|DeleteCronjob\DeleteCronjob412Response|DeleteCronjob\DeleteCronjobDefaultResponse
+    public function deleteCronjob(DeleteCronjob\DeleteCronjobRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|DeleteCronjob\DeleteCronjob400Response|DeleteCronjob\DeleteCronjob412Response|DeleteCronjob\DeleteCronjobDefaultResponse
     {
         $httpRequest = new Request(DeleteCronjob\DeleteCronjobRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -101,7 +101,7 @@ class CronjobClient
         };
     }
 
-    public function getCronjob(GetCronjob\GetCronjobRequest $request) : GetCronjob\GetCronjob200Response|GetCronjob\GetCronjob404Response|GetCronjob\GetCronjobDefaultResponse
+    public function getCronjob(GetCronjob\GetCronjobRequest $request): GetCronjob\GetCronjob200Response|GetCronjob\GetCronjob404Response|GetCronjob\GetCronjobDefaultResponse
     {
         $httpRequest = new Request(GetCronjob\GetCronjobRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -115,7 +115,7 @@ class CronjobClient
         };
     }
 
-    public function updateCronjob(UpdateCronjob\UpdateCronjobRequest $request) : UpdateCronjob\UpdateCronjob200Response|UpdateCronjob\UpdateCronjob400Response|UpdateCronjob\UpdateCronjob404Response|UpdateCronjob\UpdateCronjob412Response|UpdateCronjob\UpdateCronjobDefaultResponse
+    public function updateCronjob(UpdateCronjob\UpdateCronjobRequest $request): UpdateCronjob\UpdateCronjob200Response|UpdateCronjob\UpdateCronjob400Response|UpdateCronjob\UpdateCronjob404Response|UpdateCronjob\UpdateCronjob412Response|UpdateCronjob\UpdateCronjobDefaultResponse
     {
         $httpRequest = new Request(UpdateCronjob\UpdateCronjobRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -132,7 +132,7 @@ class CronjobClient
         };
     }
 
-    public function getExecution(GetExecution\GetExecutionRequest $request) : GetExecution\GetExecution200Response|GetExecution\GetExecution404Response|GetExecution\GetExecutionDefaultResponse
+    public function getExecution(GetExecution\GetExecutionRequest $request): GetExecution\GetExecution200Response|GetExecution\GetExecution404Response|GetExecution\GetExecutionDefaultResponse
     {
         $httpRequest = new Request(GetExecution\GetExecutionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -146,7 +146,7 @@ class CronjobClient
         };
     }
 
-    public function updateCronjobAppId(UpdateCronjobAppId\UpdateCronjobAppIdRequest $request) : \Mittwald\ApiClient\Client\EmptyResponse|UpdateCronjobAppId\UpdateCronjobAppId201Response|UpdateCronjobAppId\UpdateCronjobAppId400Response|UpdateCronjobAppId\UpdateCronjobAppId412Response|UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse
+    public function updateCronjobAppId(UpdateCronjobAppId\UpdateCronjobAppIdRequest $request): \Mittwald\ApiClient\Client\EmptyResponse|UpdateCronjobAppId\UpdateCronjobAppId201Response|UpdateCronjobAppId\UpdateCronjobAppId400Response|UpdateCronjobAppId\UpdateCronjobAppId412Response|UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse
     {
         $httpRequest = new Request(UpdateCronjobAppId\UpdateCronjobAppIdRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -163,4 +163,3 @@ class CronjobClient
         };
     }
 }
-

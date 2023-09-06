@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Varnish;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Software
 {
     /**
@@ -81,9 +84,9 @@ class Software
     private string $softwareVersion;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @param SoftwareConfig $config
@@ -91,9 +94,9 @@ class Software
      * @param string $softwareId
      * @param string $softwareTemplateId
      * @param string $softwareVersion
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function __construct(SoftwareConfig $config, string $projectId, string $softwareId, string $softwareTemplateId, string $softwareVersion, \DateTime $updatedAt)
+    public function __construct(SoftwareConfig $config, string $projectId, string $softwareId, string $softwareTemplateId, string $softwareVersion, DateTime $updatedAt)
     {
         $this->config = $config;
         $this->projectId = $projectId;
@@ -106,7 +109,7 @@ class Software
     /**
      * @return SoftwareConfig
      */
-    public function getConfig() : SoftwareConfig
+    public function getConfig(): SoftwareConfig
     {
         return $this->config;
     }
@@ -114,7 +117,7 @@ class Software
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -122,7 +125,7 @@ class Software
     /**
      * @return string[]|null
      */
-    public function getSettings() : ?array
+    public function getSettings(): ?array
     {
         return $this->settings ?? null;
     }
@@ -130,7 +133,7 @@ class Software
     /**
      * @return string
      */
-    public function getSoftwareId() : string
+    public function getSoftwareId(): string
     {
         return $this->softwareId;
     }
@@ -138,7 +141,7 @@ class Software
     /**
      * @return string
      */
-    public function getSoftwareTemplateId() : string
+    public function getSoftwareTemplateId(): string
     {
         return $this->softwareTemplateId;
     }
@@ -146,15 +149,15 @@ class Software
     /**
      * @return string
      */
-    public function getSoftwareVersion() : string
+    public function getSoftwareVersion(): string
     {
         return $this->softwareVersion;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -163,7 +166,7 @@ class Software
      * @param SoftwareConfig $config
      * @return self
      */
-    public function withConfig(SoftwareConfig $config) : self
+    public function withConfig(SoftwareConfig $config): self
     {
         $clone = clone $this;
         $clone->config = $config;
@@ -175,12 +178,12 @@ class Software
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -193,12 +196,12 @@ class Software
      * @param string[] $settings
      * @return self
      */
-    public function withSettings(array $settings) : self
+    public function withSettings(array $settings): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($settings, static::$schema['properties']['settings']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -210,7 +213,7 @@ class Software
     /**
      * @return self
      */
-    public function withoutSettings() : self
+    public function withoutSettings(): self
     {
         $clone = clone $this;
         unset($clone->settings);
@@ -222,12 +225,12 @@ class Software
      * @param string $softwareId
      * @return self
      */
-    public function withSoftwareId(string $softwareId) : self
+    public function withSoftwareId(string $softwareId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($softwareId, static::$schema['properties']['softwareId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -240,12 +243,12 @@ class Software
      * @param string $softwareTemplateId
      * @return self
      */
-    public function withSoftwareTemplateId(string $softwareTemplateId) : self
+    public function withSoftwareTemplateId(string $softwareTemplateId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($softwareTemplateId, static::$schema['properties']['softwareTemplateId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -258,12 +261,12 @@ class Software
      * @param string $softwareVersion
      * @return self
      */
-    public function withSoftwareVersion(string $softwareVersion) : self
+    public function withSoftwareVersion(string $softwareVersion): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($softwareVersion, static::$schema['properties']['softwareVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -273,10 +276,10 @@ class Software
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -290,9 +293,9 @@ class Software
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Software Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Software
+    public static function buildFromInput(array|object $input, bool $validate = true): Software
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -308,7 +311,7 @@ class Software
         $softwareId = $input->{'softwareId'};
         $softwareTemplateId = $input->{'softwareTemplateId'};
         $softwareVersion = $input->{'softwareVersion'};
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($config, $projectId, $softwareId, $softwareTemplateId, $softwareVersion, $updatedAt);
         $obj->settings = $settings;
@@ -320,7 +323,7 @@ class Software
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['config'] = $this->config->toJson();
@@ -331,7 +334,7 @@ class Software
         $output['softwareId'] = $this->softwareId;
         $output['softwareTemplateId'] = $this->softwareTemplateId;
         $output['softwareVersion'] = $this->softwareVersion;
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -342,19 +345,19 @@ class Software
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -365,4 +368,3 @@ class Software
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

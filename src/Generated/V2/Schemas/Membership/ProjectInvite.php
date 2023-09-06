@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Membership;
 
+use InvalidArgumentException;
+use DateTime;
+
 class ProjectInvite
 {
     /**
@@ -82,9 +85,9 @@ class ProjectInvite
     /**
      * Time the ProjectMembership should expire at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $membershipExpiresAt = null;
+    private ?DateTime $membershipExpiresAt = null;
 
     /**
      * Message contained in the ProjectInvite.
@@ -133,7 +136,7 @@ class ProjectInvite
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -141,7 +144,7 @@ class ProjectInvite
     /**
      * @return InviteInformation
      */
-    public function getInformation() : InviteInformation
+    public function getInformation(): InviteInformation
     {
         return $this->information;
     }
@@ -149,15 +152,15 @@ class ProjectInvite
     /**
      * @return string
      */
-    public function getMailAddress() : string
+    public function getMailAddress(): string
     {
         return $this->mailAddress;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getMembershipExpiresAt() : ?\DateTime
+    public function getMembershipExpiresAt(): ?DateTime
     {
         return $this->membershipExpiresAt ?? null;
     }
@@ -165,7 +168,7 @@ class ProjectInvite
     /**
      * @return string|null
      */
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
@@ -173,7 +176,7 @@ class ProjectInvite
     /**
      * @return string
      */
-    public function getProjectDescription() : string
+    public function getProjectDescription(): string
     {
         return $this->projectDescription;
     }
@@ -181,7 +184,7 @@ class ProjectInvite
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -189,7 +192,7 @@ class ProjectInvite
     /**
      * @return ProjectRoles
      */
-    public function getRole() : ProjectRoles
+    public function getRole(): ProjectRoles
     {
         return $this->role;
     }
@@ -198,12 +201,12 @@ class ProjectInvite
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -216,7 +219,7 @@ class ProjectInvite
      * @param InviteInformation $information
      * @return self
      */
-    public function withInformation(InviteInformation $information) : self
+    public function withInformation(InviteInformation $information): self
     {
         $clone = clone $this;
         $clone->information = $information;
@@ -228,12 +231,12 @@ class ProjectInvite
      * @param string $mailAddress
      * @return self
      */
-    public function withMailAddress(string $mailAddress) : self
+    public function withMailAddress(string $mailAddress): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($mailAddress, static::$schema['properties']['mailAddress']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -243,10 +246,10 @@ class ProjectInvite
     }
 
     /**
-     * @param \DateTime $membershipExpiresAt
+     * @param DateTime $membershipExpiresAt
      * @return self
      */
-    public function withMembershipExpiresAt(\DateTime $membershipExpiresAt) : self
+    public function withMembershipExpiresAt(DateTime $membershipExpiresAt): self
     {
         $clone = clone $this;
         $clone->membershipExpiresAt = $membershipExpiresAt;
@@ -257,7 +260,7 @@ class ProjectInvite
     /**
      * @return self
      */
-    public function withoutMembershipExpiresAt() : self
+    public function withoutMembershipExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->membershipExpiresAt);
@@ -269,12 +272,12 @@ class ProjectInvite
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -286,7 +289,7 @@ class ProjectInvite
     /**
      * @return self
      */
-    public function withoutMessage() : self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
         unset($clone->message);
@@ -298,12 +301,12 @@ class ProjectInvite
      * @param string $projectDescription
      * @return self
      */
-    public function withProjectDescription(string $projectDescription) : self
+    public function withProjectDescription(string $projectDescription): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectDescription, static::$schema['properties']['projectDescription']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -316,12 +319,12 @@ class ProjectInvite
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -334,7 +337,7 @@ class ProjectInvite
      * @param ProjectRoles $role
      * @return self
      */
-    public function withRole(ProjectRoles $role) : self
+    public function withRole(ProjectRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -348,9 +351,9 @@ class ProjectInvite
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectInvite Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectInvite
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectInvite
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -362,7 +365,7 @@ class ProjectInvite
         $mailAddress = $input->{'mailAddress'};
         $membershipExpiresAt = null;
         if (isset($input->{'membershipExpiresAt'})) {
-            $membershipExpiresAt = new \DateTime($input->{'membershipExpiresAt'});
+            $membershipExpiresAt = new DateTime($input->{'membershipExpiresAt'});
         }
         $message = null;
         if (isset($input->{'message'})) {
@@ -383,14 +386,14 @@ class ProjectInvite
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['id'] = $this->id;
         $output['information'] = $this->information->toJson();
         $output['mailAddress'] = $this->mailAddress;
         if (isset($this->membershipExpiresAt)) {
-            $output['membershipExpiresAt'] = ($this->membershipExpiresAt)->format(\DateTime::ATOM);
+            $output['membershipExpiresAt'] = ($this->membershipExpiresAt)->format(DateTime::ATOM);
         }
         if (isset($this->message)) {
             $output['message'] = $this->message;
@@ -408,19 +411,19 @@ class ProjectInvite
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -433,4 +436,3 @@ class ProjectInvite
         }
     }
 }
-

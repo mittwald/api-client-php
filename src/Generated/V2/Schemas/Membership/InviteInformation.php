@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Membership;
 
+use InvalidArgumentException;
+
 class InviteInformation
 {
     /**
@@ -72,7 +74,7 @@ class InviteInformation
     /**
      * @return string
      */
-    public function getInvitationToken() : string
+    public function getInvitationToken(): string
     {
         return $this->invitationToken;
     }
@@ -80,7 +82,7 @@ class InviteInformation
     /**
      * @return string
      */
-    public function getInvitedBy() : string
+    public function getInvitedBy(): string
     {
         return $this->invitedBy;
     }
@@ -88,7 +90,7 @@ class InviteInformation
     /**
      * @return string
      */
-    public function getUserId() : string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -97,12 +99,12 @@ class InviteInformation
      * @param string $invitationToken
      * @return self
      */
-    public function withInvitationToken(string $invitationToken) : self
+    public function withInvitationToken(string $invitationToken): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($invitationToken, static::$schema['properties']['invitationToken']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -115,12 +117,12 @@ class InviteInformation
      * @param string $invitedBy
      * @return self
      */
-    public function withInvitedBy(string $invitedBy) : self
+    public function withInvitedBy(string $invitedBy): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($invitedBy, static::$schema['properties']['invitedBy']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -133,12 +135,12 @@ class InviteInformation
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -153,9 +155,9 @@ class InviteInformation
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InviteInformation Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InviteInformation
+    public static function buildFromInput(array|object $input, bool $validate = true): InviteInformation
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -176,7 +178,7 @@ class InviteInformation
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['invitationToken'] = $this->invitationToken;
@@ -192,19 +194,19 @@ class InviteInformation
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -214,4 +216,3 @@ class InviteInformation
     {
     }
 }
-

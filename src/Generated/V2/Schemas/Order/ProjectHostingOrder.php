@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+
 class ProjectHostingOrder
 {
     /**
@@ -89,7 +91,7 @@ class ProjectHostingOrder
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -97,7 +99,7 @@ class ProjectHostingOrder
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -105,7 +107,7 @@ class ProjectHostingOrder
     /**
      * @return int|float
      */
-    public function getDiskspaceInGiB() : int|float
+    public function getDiskspaceInGiB(): int|float
     {
         return $this->diskspaceInGiB;
     }
@@ -114,7 +116,7 @@ class ProjectHostingOrder
      * @return
      * MachineTypeSpec|HardwareSpec
      */
-    public function getSpec() : HardwareSpec|MachineTypeSpec
+    public function getSpec(): HardwareSpec|MachineTypeSpec
     {
         return $this->spec;
     }
@@ -122,7 +124,7 @@ class ProjectHostingOrder
     /**
      * @return bool|null
      */
-    public function getUseFreeTrial() : ?bool
+    public function getUseFreeTrial(): ?bool
     {
         return $this->useFreeTrial ?? null;
     }
@@ -131,12 +133,12 @@ class ProjectHostingOrder
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -149,12 +151,12 @@ class ProjectHostingOrder
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -167,12 +169,12 @@ class ProjectHostingOrder
      * @param int|float $diskspaceInGiB
      * @return self
      */
-    public function withDiskspaceInGiB(int|float $diskspaceInGiB) : self
+    public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($diskspaceInGiB, static::$schema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -185,7 +187,7 @@ class ProjectHostingOrder
      * @param MachineTypeSpec|HardwareSpec $spec
      * @return self
      */
-    public function withSpec(HardwareSpec|MachineTypeSpec $spec) : self
+    public function withSpec(HardwareSpec|MachineTypeSpec $spec): self
     {
         $clone = clone $this;
         $clone->spec = $spec;
@@ -197,12 +199,12 @@ class ProjectHostingOrder
      * @param bool $useFreeTrial
      * @return self
      */
-    public function withUseFreeTrial(bool $useFreeTrial) : self
+    public function withUseFreeTrial(bool $useFreeTrial): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($useFreeTrial, static::$schema['properties']['useFreeTrial']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -214,7 +216,7 @@ class ProjectHostingOrder
     /**
      * @return self
      */
-    public function withoutUseFreeTrial() : self
+    public function withoutUseFreeTrial(): self
     {
         $clone = clone $this;
         unset($clone->useFreeTrial);
@@ -228,9 +230,9 @@ class ProjectHostingOrder
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectHostingOrder Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectHostingOrder
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectHostingOrder
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -259,7 +261,7 @@ class ProjectHostingOrder
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['customerId'] = $this->customerId;
@@ -281,19 +283,19 @@ class ProjectHostingOrder
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -306,4 +308,3 @@ class ProjectHostingOrder
         };
     }
 }
-

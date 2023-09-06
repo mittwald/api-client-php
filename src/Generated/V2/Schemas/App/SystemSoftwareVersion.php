@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+
 class SystemSoftwareVersion
 {
     /**
@@ -93,7 +95,7 @@ class SystemSoftwareVersion
     /**
      * @return string
      */
-    public function getExternalVersion() : string
+    public function getExternalVersion(): string
     {
         return $this->externalVersion;
     }
@@ -101,7 +103,7 @@ class SystemSoftwareVersion
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -109,7 +111,7 @@ class SystemSoftwareVersion
     /**
      * @return string
      */
-    public function getInternalVersion() : string
+    public function getInternalVersion(): string
     {
         return $this->internalVersion;
     }
@@ -117,7 +119,7 @@ class SystemSoftwareVersion
     /**
      * @return bool|null
      */
-    public function getRecommended() : ?bool
+    public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
     }
@@ -126,7 +128,7 @@ class SystemSoftwareVersion
      * @return
      * SystemSoftwareDependency[]|null
      */
-    public function getSystemSoftwareDependencies() : ?array
+    public function getSystemSoftwareDependencies(): ?array
     {
         return $this->systemSoftwareDependencies ?? null;
     }
@@ -134,7 +136,7 @@ class SystemSoftwareVersion
     /**
      * @return UserInput[]|null
      */
-    public function getUserInputs() : ?array
+    public function getUserInputs(): ?array
     {
         return $this->userInputs ?? null;
     }
@@ -143,12 +145,12 @@ class SystemSoftwareVersion
      * @param string $externalVersion
      * @return self
      */
-    public function withExternalVersion(string $externalVersion) : self
+    public function withExternalVersion(string $externalVersion): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($externalVersion, static::$schema['properties']['externalVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -161,12 +163,12 @@ class SystemSoftwareVersion
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -179,12 +181,12 @@ class SystemSoftwareVersion
      * @param string $internalVersion
      * @return self
      */
-    public function withInternalVersion(string $internalVersion) : self
+    public function withInternalVersion(string $internalVersion): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($internalVersion, static::$schema['properties']['internalVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -197,12 +199,12 @@ class SystemSoftwareVersion
      * @param bool $recommended
      * @return self
      */
-    public function withRecommended(bool $recommended) : self
+    public function withRecommended(bool $recommended): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($recommended, static::$schema['properties']['recommended']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -214,7 +216,7 @@ class SystemSoftwareVersion
     /**
      * @return self
      */
-    public function withoutRecommended() : self
+    public function withoutRecommended(): self
     {
         $clone = clone $this;
         unset($clone->recommended);
@@ -226,7 +228,7 @@ class SystemSoftwareVersion
      * @param SystemSoftwareDependency[] $systemSoftwareDependencies
      * @return self
      */
-    public function withSystemSoftwareDependencies(array $systemSoftwareDependencies) : self
+    public function withSystemSoftwareDependencies(array $systemSoftwareDependencies): self
     {
         $clone = clone $this;
         $clone->systemSoftwareDependencies = $systemSoftwareDependencies;
@@ -237,7 +239,7 @@ class SystemSoftwareVersion
     /**
      * @return self
      */
-    public function withoutSystemSoftwareDependencies() : self
+    public function withoutSystemSoftwareDependencies(): self
     {
         $clone = clone $this;
         unset($clone->systemSoftwareDependencies);
@@ -249,7 +251,7 @@ class SystemSoftwareVersion
      * @param UserInput[] $userInputs
      * @return self
      */
-    public function withUserInputs(array $userInputs) : self
+    public function withUserInputs(array $userInputs): self
     {
         $clone = clone $this;
         $clone->userInputs = $userInputs;
@@ -260,7 +262,7 @@ class SystemSoftwareVersion
     /**
      * @return self
      */
-    public function withoutUserInputs() : self
+    public function withoutUserInputs(): self
     {
         $clone = clone $this;
         unset($clone->userInputs);
@@ -274,9 +276,9 @@ class SystemSoftwareVersion
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return SystemSoftwareVersion Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : SystemSoftwareVersion
+    public static function buildFromInput(array|object $input, bool $validate = true): SystemSoftwareVersion
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -292,11 +294,11 @@ class SystemSoftwareVersion
         }
         $systemSoftwareDependencies = null;
         if (isset($input->{'systemSoftwareDependencies'})) {
-            $systemSoftwareDependencies = array_map(fn(array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
+            $systemSoftwareDependencies = array_map(fn (array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn(array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self($externalVersion, $id, $internalVersion);
@@ -311,7 +313,7 @@ class SystemSoftwareVersion
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['externalVersion'] = $this->externalVersion;
@@ -321,10 +323,10 @@ class SystemSoftwareVersion
             $output['recommended'] = $this->recommended;
         }
         if (isset($this->systemSoftwareDependencies)) {
-            $output['systemSoftwareDependencies'] = array_map(fn(SystemSoftwareDependency $i): array => $i->toJson(), $this->systemSoftwareDependencies);
+            $output['systemSoftwareDependencies'] = array_map(fn (SystemSoftwareDependency $i): array => $i->toJson(), $this->systemSoftwareDependencies);
         }
         if (isset($this->userInputs)) {
-            $output['userInputs'] = array_map(fn(UserInput $i): array => $i->toJson(), $this->userInputs);
+            $output['userInputs'] = array_map(fn (UserInput $i): array => $i->toJson(), $this->userInputs);
         }
 
         return $output;
@@ -336,19 +338,19 @@ class SystemSoftwareVersion
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -358,4 +360,3 @@ class SystemSoftwareVersion
     {
     }
 }
-

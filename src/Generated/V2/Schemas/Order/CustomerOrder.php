@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+use DateTime;
+
 class CustomerOrder
 {
     /**
@@ -88,9 +91,9 @@ class CustomerOrder
     private string $customerId;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $dueDate = null;
+    private ?DateTime $dueDate = null;
 
     /**
      * Invoicing period in months
@@ -105,9 +108,9 @@ class CustomerOrder
     private array $items;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $orderDate;
+    private DateTime $orderDate;
 
     /**
      * @var string
@@ -143,14 +146,14 @@ class CustomerOrder
      * @param string $customerId
      * @param int|float $invoicingPeriod
      * @param OrderItem[] $items
-     * @param \DateTime $orderDate
+     * @param DateTime $orderDate
      * @param string $orderId
      * @param string $orderNumber
      * @param OrderStatus $status
      * @param OrderSummary $summary
      * @param OrderType $type
      */
-    public function __construct(string $customerId, int|float $invoicingPeriod, array $items, \DateTime $orderDate, string $orderId, string $orderNumber, OrderStatus $status, OrderSummary $summary, OrderType $type)
+    public function __construct(string $customerId, int|float $invoicingPeriod, array $items, DateTime $orderDate, string $orderId, string $orderNumber, OrderStatus $status, OrderSummary $summary, OrderType $type)
     {
         $this->customerId = $customerId;
         $this->invoicingPeriod = $invoicingPeriod;
@@ -166,7 +169,7 @@ class CustomerOrder
     /**
      * @return string|null
      */
-    public function getContractChangeContractId() : ?string
+    public function getContractChangeContractId(): ?string
     {
         return $this->contractChangeContractId ?? null;
     }
@@ -174,15 +177,15 @@ class CustomerOrder
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getDueDate() : ?\DateTime
+    public function getDueDate(): ?DateTime
     {
         return $this->dueDate ?? null;
     }
@@ -190,7 +193,7 @@ class CustomerOrder
     /**
      * @return int|float
      */
-    public function getInvoicingPeriod() : int|float
+    public function getInvoicingPeriod(): int|float
     {
         return $this->invoicingPeriod;
     }
@@ -198,15 +201,15 @@ class CustomerOrder
     /**
      * @return OrderItem[]
      */
-    public function getItems() : array
+    public function getItems(): array
     {
         return $this->items;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getOrderDate() : \DateTime
+    public function getOrderDate(): DateTime
     {
         return $this->orderDate;
     }
@@ -214,7 +217,7 @@ class CustomerOrder
     /**
      * @return string
      */
-    public function getOrderId() : string
+    public function getOrderId(): string
     {
         return $this->orderId;
     }
@@ -222,7 +225,7 @@ class CustomerOrder
     /**
      * @return string
      */
-    public function getOrderNumber() : string
+    public function getOrderNumber(): string
     {
         return $this->orderNumber;
     }
@@ -230,7 +233,7 @@ class CustomerOrder
     /**
      * @return Profile|null
      */
-    public function getProfile() : ?Profile
+    public function getProfile(): ?Profile
     {
         return $this->profile ?? null;
     }
@@ -238,7 +241,7 @@ class CustomerOrder
     /**
      * @return OrderStatus
      */
-    public function getStatus() : OrderStatus
+    public function getStatus(): OrderStatus
     {
         return $this->status;
     }
@@ -246,7 +249,7 @@ class CustomerOrder
     /**
      * @return OrderSummary
      */
-    public function getSummary() : OrderSummary
+    public function getSummary(): OrderSummary
     {
         return $this->summary;
     }
@@ -254,7 +257,7 @@ class CustomerOrder
     /**
      * @return OrderType
      */
-    public function getType() : OrderType
+    public function getType(): OrderType
     {
         return $this->type;
     }
@@ -263,12 +266,12 @@ class CustomerOrder
      * @param string $contractChangeContractId
      * @return self
      */
-    public function withContractChangeContractId(string $contractChangeContractId) : self
+    public function withContractChangeContractId(string $contractChangeContractId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractChangeContractId, static::$schema['properties']['contractChangeContractId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -280,7 +283,7 @@ class CustomerOrder
     /**
      * @return self
      */
-    public function withoutContractChangeContractId() : self
+    public function withoutContractChangeContractId(): self
     {
         $clone = clone $this;
         unset($clone->contractChangeContractId);
@@ -292,12 +295,12 @@ class CustomerOrder
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -307,10 +310,10 @@ class CustomerOrder
     }
 
     /**
-     * @param \DateTime $dueDate
+     * @param DateTime $dueDate
      * @return self
      */
-    public function withDueDate(\DateTime $dueDate) : self
+    public function withDueDate(DateTime $dueDate): self
     {
         $clone = clone $this;
         $clone->dueDate = $dueDate;
@@ -321,7 +324,7 @@ class CustomerOrder
     /**
      * @return self
      */
-    public function withoutDueDate() : self
+    public function withoutDueDate(): self
     {
         $clone = clone $this;
         unset($clone->dueDate);
@@ -333,12 +336,12 @@ class CustomerOrder
      * @param int|float $invoicingPeriod
      * @return self
      */
-    public function withInvoicingPeriod(int|float $invoicingPeriod) : self
+    public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($invoicingPeriod, static::$schema['properties']['invoicingPeriod']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -351,7 +354,7 @@ class CustomerOrder
      * @param OrderItem[] $items
      * @return self
      */
-    public function withItems(array $items) : self
+    public function withItems(array $items): self
     {
         $clone = clone $this;
         $clone->items = $items;
@@ -360,10 +363,10 @@ class CustomerOrder
     }
 
     /**
-     * @param \DateTime $orderDate
+     * @param DateTime $orderDate
      * @return self
      */
-    public function withOrderDate(\DateTime $orderDate) : self
+    public function withOrderDate(DateTime $orderDate): self
     {
         $clone = clone $this;
         $clone->orderDate = $orderDate;
@@ -375,12 +378,12 @@ class CustomerOrder
      * @param string $orderId
      * @return self
      */
-    public function withOrderId(string $orderId) : self
+    public function withOrderId(string $orderId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($orderId, static::$schema['properties']['orderId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -393,12 +396,12 @@ class CustomerOrder
      * @param string $orderNumber
      * @return self
      */
-    public function withOrderNumber(string $orderNumber) : self
+    public function withOrderNumber(string $orderNumber): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($orderNumber, static::$schema['properties']['orderNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -411,7 +414,7 @@ class CustomerOrder
      * @param Profile $profile
      * @return self
      */
-    public function withProfile(Profile $profile) : self
+    public function withProfile(Profile $profile): self
     {
         $clone = clone $this;
         $clone->profile = $profile;
@@ -422,7 +425,7 @@ class CustomerOrder
     /**
      * @return self
      */
-    public function withoutProfile() : self
+    public function withoutProfile(): self
     {
         $clone = clone $this;
         unset($clone->profile);
@@ -434,7 +437,7 @@ class CustomerOrder
      * @param OrderStatus $status
      * @return self
      */
-    public function withStatus(OrderStatus $status) : self
+    public function withStatus(OrderStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -446,7 +449,7 @@ class CustomerOrder
      * @param OrderSummary $summary
      * @return self
      */
-    public function withSummary(OrderSummary $summary) : self
+    public function withSummary(OrderSummary $summary): self
     {
         $clone = clone $this;
         $clone->summary = $summary;
@@ -458,7 +461,7 @@ class CustomerOrder
      * @param OrderType $type
      * @return self
      */
-    public function withType(OrderType $type) : self
+    public function withType(OrderType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
@@ -472,9 +475,9 @@ class CustomerOrder
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CustomerOrder Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CustomerOrder
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerOrder
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -488,11 +491,11 @@ class CustomerOrder
         $customerId = $input->{'customerId'};
         $dueDate = null;
         if (isset($input->{'dueDate'})) {
-            $dueDate = new \DateTime($input->{'dueDate'});
+            $dueDate = new DateTime($input->{'dueDate'});
         }
         $invoicingPeriod = str_contains($input->{'invoicingPeriod'}, '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
-        $items = array_map(fn(array $i): OrderItem => OrderItem::buildFromInput($i, validate: $validate), $input->{'items'});
-        $orderDate = new \DateTime($input->{'orderDate'});
+        $items = array_map(fn (array $i): OrderItem => OrderItem::buildFromInput($i, validate: $validate), $input->{'items'});
+        $orderDate = new DateTime($input->{'orderDate'});
         $orderId = $input->{'orderId'};
         $orderNumber = $input->{'orderNumber'};
         $profile = null;
@@ -515,7 +518,7 @@ class CustomerOrder
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->contractChangeContractId)) {
@@ -523,11 +526,11 @@ class CustomerOrder
         }
         $output['customerId'] = $this->customerId;
         if (isset($this->dueDate)) {
-            $output['dueDate'] = ($this->dueDate)->format(\DateTime::ATOM);
+            $output['dueDate'] = ($this->dueDate)->format(DateTime::ATOM);
         }
         $output['invoicingPeriod'] = $this->invoicingPeriod;
-        $output['items'] = array_map(fn(OrderItem $i): array => $i->toJson(), $this->items);
-        $output['orderDate'] = ($this->orderDate)->format(\DateTime::ATOM);
+        $output['items'] = array_map(fn (OrderItem $i): array => $i->toJson(), $this->items);
+        $output['orderDate'] = ($this->orderDate)->format(DateTime::ATOM);
         $output['orderId'] = $this->orderId;
         $output['orderNumber'] = $this->orderNumber;
         if (isset($this->profile)) {
@@ -546,19 +549,19 @@ class CustomerOrder
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -572,4 +575,3 @@ class CustomerOrder
         $this->orderDate = clone $this->orderDate;
     }
 }
-

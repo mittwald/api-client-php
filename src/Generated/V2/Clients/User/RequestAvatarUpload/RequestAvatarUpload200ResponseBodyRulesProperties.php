@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload;
 
+use InvalidArgumentException;
+
 class RequestAvatarUpload200ResponseBodyRulesProperties
 {
     /**
@@ -64,7 +66,7 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
     /**
      * @return RequestAvatarUpload200ResponseBodyRulesPropertiesImageDimensions|null
      */
-    public function getImageDimensions() : ?RequestAvatarUpload200ResponseBodyRulesPropertiesImageDimensions
+    public function getImageDimensions(): ?RequestAvatarUpload200ResponseBodyRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
@@ -73,7 +75,7 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
      * @param RequestAvatarUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions
      * @return self
      */
-    public function withImageDimensions(RequestAvatarUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions) : self
+    public function withImageDimensions(RequestAvatarUpload200ResponseBodyRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
         $clone->imageDimensions = $imageDimensions;
@@ -84,7 +86,7 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
     /**
      * @return self
      */
-    public function withoutImageDimensions() : self
+    public function withoutImageDimensions(): self
     {
         $clone = clone $this;
         unset($clone->imageDimensions);
@@ -98,9 +100,9 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestAvatarUpload200ResponseBodyRulesProperties Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestAvatarUpload200ResponseBodyRulesProperties
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestAvatarUpload200ResponseBodyRulesProperties
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -122,7 +124,7 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->imageDimensions)) {
@@ -138,19 +140,19 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -163,7 +165,7 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
         }
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -171,4 +173,3 @@ class RequestAvatarUpload200ResponseBodyRulesProperties
         return $response;
     }
 }
-

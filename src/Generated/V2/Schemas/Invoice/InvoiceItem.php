@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+
 class InvoiceItem
 {
     /**
@@ -134,7 +136,7 @@ class InvoiceItem
     /**
      * @return string|null
      */
-    public function getAdditionalDescription() : ?string
+    public function getAdditionalDescription(): ?string
     {
         return $this->additionalDescription ?? null;
     }
@@ -142,7 +144,7 @@ class InvoiceItem
     /**
      * @return string
      */
-    public function getContractItemId() : string
+    public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
@@ -150,7 +152,7 @@ class InvoiceItem
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -158,7 +160,7 @@ class InvoiceItem
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -166,7 +168,7 @@ class InvoiceItem
     /**
      * @return Price
      */
-    public function getPrice() : Price
+    public function getPrice(): Price
     {
         return $this->price;
     }
@@ -174,7 +176,7 @@ class InvoiceItem
     /**
      * @return InvoiceItemReference|null
      */
-    public function getReference() : ?InvoiceItemReference
+    public function getReference(): ?InvoiceItemReference
     {
         return $this->reference ?? null;
     }
@@ -182,7 +184,7 @@ class InvoiceItem
     /**
      * @return string|null
      */
-    public function getServiceDate() : ?string
+    public function getServiceDate(): ?string
     {
         return $this->serviceDate ?? null;
     }
@@ -190,7 +192,7 @@ class InvoiceItem
     /**
      * @return DatePeriod|null
      */
-    public function getServicePeriod() : ?DatePeriod
+    public function getServicePeriod(): ?DatePeriod
     {
         return $this->servicePeriod ?? null;
     }
@@ -198,7 +200,7 @@ class InvoiceItem
     /**
      * @return int|float
      */
-    public function getVatRate() : int|float
+    public function getVatRate(): int|float
     {
         return $this->vatRate;
     }
@@ -207,12 +209,12 @@ class InvoiceItem
      * @param string $additionalDescription
      * @return self
      */
-    public function withAdditionalDescription(string $additionalDescription) : self
+    public function withAdditionalDescription(string $additionalDescription): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($additionalDescription, static::$schema['properties']['additionalDescription']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -224,7 +226,7 @@ class InvoiceItem
     /**
      * @return self
      */
-    public function withoutAdditionalDescription() : self
+    public function withoutAdditionalDescription(): self
     {
         $clone = clone $this;
         unset($clone->additionalDescription);
@@ -236,12 +238,12 @@ class InvoiceItem
      * @param string $contractItemId
      * @return self
      */
-    public function withContractItemId(string $contractItemId) : self
+    public function withContractItemId(string $contractItemId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractItemId, static::$schema['properties']['contractItemId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -254,12 +256,12 @@ class InvoiceItem
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -272,12 +274,12 @@ class InvoiceItem
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -290,7 +292,7 @@ class InvoiceItem
      * @param Price $price
      * @return self
      */
-    public function withPrice(Price $price) : self
+    public function withPrice(Price $price): self
     {
         $clone = clone $this;
         $clone->price = $price;
@@ -302,7 +304,7 @@ class InvoiceItem
      * @param InvoiceItemReference $reference
      * @return self
      */
-    public function withReference(InvoiceItemReference $reference) : self
+    public function withReference(InvoiceItemReference $reference): self
     {
         $clone = clone $this;
         $clone->reference = $reference;
@@ -313,7 +315,7 @@ class InvoiceItem
     /**
      * @return self
      */
-    public function withoutReference() : self
+    public function withoutReference(): self
     {
         $clone = clone $this;
         unset($clone->reference);
@@ -325,7 +327,7 @@ class InvoiceItem
      * @param string $serviceDate
      * @return self
      */
-    public function withServiceDate(string $serviceDate) : self
+    public function withServiceDate(string $serviceDate): self
     {
         $clone = clone $this;
         $clone->serviceDate = $serviceDate;
@@ -336,7 +338,7 @@ class InvoiceItem
     /**
      * @return self
      */
-    public function withoutServiceDate() : self
+    public function withoutServiceDate(): self
     {
         $clone = clone $this;
         unset($clone->serviceDate);
@@ -348,7 +350,7 @@ class InvoiceItem
      * @param DatePeriod $servicePeriod
      * @return self
      */
-    public function withServicePeriod(DatePeriod $servicePeriod) : self
+    public function withServicePeriod(DatePeriod $servicePeriod): self
     {
         $clone = clone $this;
         $clone->servicePeriod = $servicePeriod;
@@ -359,7 +361,7 @@ class InvoiceItem
     /**
      * @return self
      */
-    public function withoutServicePeriod() : self
+    public function withoutServicePeriod(): self
     {
         $clone = clone $this;
         unset($clone->servicePeriod);
@@ -371,12 +373,12 @@ class InvoiceItem
      * @param int|float $vatRate
      * @return self
      */
-    public function withVatRate(int|float $vatRate) : self
+    public function withVatRate(int|float $vatRate): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($vatRate, static::$schema['properties']['vatRate']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -391,9 +393,9 @@ class InvoiceItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InvoiceItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InvoiceItem
+    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceItem
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -435,7 +437,7 @@ class InvoiceItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->additionalDescription)) {
@@ -465,19 +467,19 @@ class InvoiceItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -490,4 +492,3 @@ class InvoiceItem
         }
     }
 }
-

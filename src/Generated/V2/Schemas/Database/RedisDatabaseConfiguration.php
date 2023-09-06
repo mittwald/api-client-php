@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+
 class RedisDatabaseConfiguration
 {
     /**
@@ -79,7 +81,7 @@ class RedisDatabaseConfiguration
     /**
      * @return string[]|null
      */
-    public function getAdditionalFlags() : ?array
+    public function getAdditionalFlags(): ?array
     {
         return $this->additionalFlags ?? null;
     }
@@ -87,7 +89,7 @@ class RedisDatabaseConfiguration
     /**
      * @return string|null
      */
-    public function getMaxMemory() : ?string
+    public function getMaxMemory(): ?string
     {
         return $this->maxMemory ?? null;
     }
@@ -95,7 +97,7 @@ class RedisDatabaseConfiguration
     /**
      * @return string|null
      */
-    public function getMaxMemoryPolicy() : ?string
+    public function getMaxMemoryPolicy(): ?string
     {
         return $this->maxMemoryPolicy ?? null;
     }
@@ -103,7 +105,7 @@ class RedisDatabaseConfiguration
     /**
      * @return bool|null
      */
-    public function getPersistent() : ?bool
+    public function getPersistent(): ?bool
     {
         return $this->persistent ?? null;
     }
@@ -112,12 +114,12 @@ class RedisDatabaseConfiguration
      * @param string[] $additionalFlags
      * @return self
      */
-    public function withAdditionalFlags(array $additionalFlags) : self
+    public function withAdditionalFlags(array $additionalFlags): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($additionalFlags, static::$schema['properties']['additionalFlags']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -129,7 +131,7 @@ class RedisDatabaseConfiguration
     /**
      * @return self
      */
-    public function withoutAdditionalFlags() : self
+    public function withoutAdditionalFlags(): self
     {
         $clone = clone $this;
         unset($clone->additionalFlags);
@@ -141,12 +143,12 @@ class RedisDatabaseConfiguration
      * @param string $maxMemory
      * @return self
      */
-    public function withMaxMemory(string $maxMemory) : self
+    public function withMaxMemory(string $maxMemory): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($maxMemory, static::$schema['properties']['maxMemory']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -158,7 +160,7 @@ class RedisDatabaseConfiguration
     /**
      * @return self
      */
-    public function withoutMaxMemory() : self
+    public function withoutMaxMemory(): self
     {
         $clone = clone $this;
         unset($clone->maxMemory);
@@ -170,12 +172,12 @@ class RedisDatabaseConfiguration
      * @param string $maxMemoryPolicy
      * @return self
      */
-    public function withMaxMemoryPolicy(string $maxMemoryPolicy) : self
+    public function withMaxMemoryPolicy(string $maxMemoryPolicy): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($maxMemoryPolicy, static::$schema['properties']['maxMemoryPolicy']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -187,7 +189,7 @@ class RedisDatabaseConfiguration
     /**
      * @return self
      */
-    public function withoutMaxMemoryPolicy() : self
+    public function withoutMaxMemoryPolicy(): self
     {
         $clone = clone $this;
         unset($clone->maxMemoryPolicy);
@@ -199,12 +201,12 @@ class RedisDatabaseConfiguration
      * @param bool $persistent
      * @return self
      */
-    public function withPersistent(bool $persistent) : self
+    public function withPersistent(bool $persistent): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($persistent, static::$schema['properties']['persistent']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -216,7 +218,7 @@ class RedisDatabaseConfiguration
     /**
      * @return self
      */
-    public function withoutPersistent() : self
+    public function withoutPersistent(): self
     {
         $clone = clone $this;
         unset($clone->persistent);
@@ -230,9 +232,9 @@ class RedisDatabaseConfiguration
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RedisDatabaseConfiguration Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RedisDatabaseConfiguration
+    public static function buildFromInput(array|object $input, bool $validate = true): RedisDatabaseConfiguration
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -269,7 +271,7 @@ class RedisDatabaseConfiguration
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->additionalFlags)) {
@@ -294,19 +296,19 @@ class RedisDatabaseConfiguration
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -316,4 +318,3 @@ class RedisDatabaseConfiguration
     {
     }
 }
-

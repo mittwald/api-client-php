@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings;
 
+use InvalidArgumentException;
+
 class UpdatePersonalizedSettingsRequest
 {
     public const method = 'put';
@@ -61,7 +63,7 @@ class UpdatePersonalizedSettingsRequest
     private UpdatePersonalizedSettingsRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -77,7 +79,7 @@ class UpdatePersonalizedSettingsRequest
     /**
      * @return UpdatePersonalizedSettingsRequestUserIdAlternative1|string
      */
-    public function getUserId() : UpdatePersonalizedSettingsRequestUserIdAlternative1|string
+    public function getUserId(): UpdatePersonalizedSettingsRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
@@ -85,7 +87,7 @@ class UpdatePersonalizedSettingsRequest
     /**
      * @return UpdatePersonalizedSettingsRequestBody
      */
-    public function getBody() : UpdatePersonalizedSettingsRequestBody
+    public function getBody(): UpdatePersonalizedSettingsRequestBody
     {
         return $this->body;
     }
@@ -94,7 +96,7 @@ class UpdatePersonalizedSettingsRequest
      * @param UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId
      * @return self
      */
-    public function withUserId(UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId) : self
+    public function withUserId(UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId): self
     {
         $clone = clone $this;
         $clone->userId = $userId;
@@ -106,7 +108,7 @@ class UpdatePersonalizedSettingsRequest
      * @param UpdatePersonalizedSettingsRequestBody $body
      * @return self
      */
-    public function withBody(UpdatePersonalizedSettingsRequestBody $body) : self
+    public function withBody(UpdatePersonalizedSettingsRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -120,9 +122,9 @@ class UpdatePersonalizedSettingsRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdatePersonalizedSettingsRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdatePersonalizedSettingsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdatePersonalizedSettingsRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -145,7 +147,7 @@ class UpdatePersonalizedSettingsRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['userId'] = match (true) {
@@ -163,19 +165,19 @@ class UpdatePersonalizedSettingsRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -189,30 +191,29 @@ class UpdatePersonalizedSettingsRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $userId = urlencode($mapped['userId']);
         return '/v2/users/' . $userId . '/settings';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

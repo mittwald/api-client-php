@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Domain;
 
+use InvalidArgumentException;
+
 class DomainHandles
 {
     /**
@@ -47,7 +49,7 @@ class DomainHandles
     /**
      * @return HandleReadable|null
      */
-    public function getAdminC() : ?HandleReadable
+    public function getAdminC(): ?HandleReadable
     {
         return $this->adminC ?? null;
     }
@@ -55,7 +57,7 @@ class DomainHandles
     /**
      * @return HandleReadable
      */
-    public function getOwnerC() : HandleReadable
+    public function getOwnerC(): HandleReadable
     {
         return $this->ownerC;
     }
@@ -64,7 +66,7 @@ class DomainHandles
      * @param HandleReadable $adminC
      * @return self
      */
-    public function withAdminC(HandleReadable $adminC) : self
+    public function withAdminC(HandleReadable $adminC): self
     {
         $clone = clone $this;
         $clone->adminC = $adminC;
@@ -75,7 +77,7 @@ class DomainHandles
     /**
      * @return self
      */
-    public function withoutAdminC() : self
+    public function withoutAdminC(): self
     {
         $clone = clone $this;
         unset($clone->adminC);
@@ -87,7 +89,7 @@ class DomainHandles
      * @param HandleReadable $ownerC
      * @return self
      */
-    public function withOwnerC(HandleReadable $ownerC) : self
+    public function withOwnerC(HandleReadable $ownerC): self
     {
         $clone = clone $this;
         $clone->ownerC = $ownerC;
@@ -101,9 +103,9 @@ class DomainHandles
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DomainHandles Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DomainHandles
+    public static function buildFromInput(array|object $input, bool $validate = true): DomainHandles
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -126,7 +128,7 @@ class DomainHandles
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->adminC)) {
@@ -143,19 +145,19 @@ class DomainHandles
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -165,4 +167,3 @@ class DomainHandles
     {
     }
 }
-

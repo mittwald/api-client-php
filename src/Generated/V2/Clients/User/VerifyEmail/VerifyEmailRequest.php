@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail;
 
+use InvalidArgumentException;
+
 class VerifyEmailRequest
 {
     public const method = 'post';
@@ -47,7 +49,7 @@ class VerifyEmailRequest
     private VerifyEmailRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -61,7 +63,7 @@ class VerifyEmailRequest
     /**
      * @return VerifyEmailRequestBody
      */
-    public function getBody() : VerifyEmailRequestBody
+    public function getBody(): VerifyEmailRequestBody
     {
         return $this->body;
     }
@@ -70,7 +72,7 @@ class VerifyEmailRequest
      * @param VerifyEmailRequestBody $body
      * @return self
      */
-    public function withBody(VerifyEmailRequestBody $body) : self
+    public function withBody(VerifyEmailRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -84,9 +86,9 @@ class VerifyEmailRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return VerifyEmailRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : VerifyEmailRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): VerifyEmailRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -105,7 +107,7 @@ class VerifyEmailRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -119,19 +121,19 @@ class VerifyEmailRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -142,29 +144,28 @@ class VerifyEmailRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/users/self/credentials/email/actions/verify-email';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

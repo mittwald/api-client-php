@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+
 class AppInstallation
 {
     /**
@@ -185,7 +187,7 @@ class AppInstallation
     /**
      * @return string
      */
-    public function getAppId() : string
+    public function getAppId(): string
     {
         return $this->appId;
     }
@@ -193,7 +195,7 @@ class AppInstallation
     /**
      * @return VersionStatus
      */
-    public function getAppVersion() : VersionStatus
+    public function getAppVersion(): VersionStatus
     {
         return $this->appVersion;
     }
@@ -201,7 +203,7 @@ class AppInstallation
     /**
      * @return string|null
      */
-    public function getCustomDocumentRoot() : ?string
+    public function getCustomDocumentRoot(): ?string
     {
         return $this->customDocumentRoot ?? null;
     }
@@ -209,7 +211,7 @@ class AppInstallation
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -217,7 +219,7 @@ class AppInstallation
     /**
      * @return bool
      */
-    public function getDisabled() : bool
+    public function getDisabled(): bool
     {
         return $this->disabled;
     }
@@ -225,7 +227,7 @@ class AppInstallation
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -233,7 +235,7 @@ class AppInstallation
     /**
      * @return string
      */
-    public function getInstallationPath() : string
+    public function getInstallationPath(): string
     {
         return $this->installationPath;
     }
@@ -241,7 +243,7 @@ class AppInstallation
     /**
      * @return LinkedDatabase[]|null
      */
-    public function getLinkedDatabases() : ?array
+    public function getLinkedDatabases(): ?array
     {
         return $this->linkedDatabases ?? null;
     }
@@ -249,7 +251,7 @@ class AppInstallation
     /**
      * @return string[]|null
      */
-    public function getProcesses() : ?array
+    public function getProcesses(): ?array
     {
         return $this->processes ?? null;
     }
@@ -257,7 +259,7 @@ class AppInstallation
     /**
      * @return string|null
      */
-    public function getProjectId() : ?string
+    public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
@@ -265,7 +267,7 @@ class AppInstallation
     /**
      * @return string|null
      */
-    public function getScreenshotId() : ?string
+    public function getScreenshotId(): ?string
     {
         return $this->screenshotId ?? null;
     }
@@ -273,7 +275,7 @@ class AppInstallation
     /**
      * @return string|null
      */
-    public function getScreenshotRef() : ?string
+    public function getScreenshotRef(): ?string
     {
         return $this->screenshotRef ?? null;
     }
@@ -282,7 +284,7 @@ class AppInstallation
      * @return
      * InstalledSystemSoftware[]|null
      */
-    public function getSystemSoftware() : ?array
+    public function getSystemSoftware(): ?array
     {
         return $this->systemSoftware ?? null;
     }
@@ -290,7 +292,7 @@ class AppInstallation
     /**
      * @return AppUpdatePolicy|null
      */
-    public function getUpdatePolicy() : ?AppUpdatePolicy
+    public function getUpdatePolicy(): ?AppUpdatePolicy
     {
         return $this->updatePolicy ?? null;
     }
@@ -298,7 +300,7 @@ class AppInstallation
     /**
      * @return SavedUserInput[]|null
      */
-    public function getUserInputs() : ?array
+    public function getUserInputs(): ?array
     {
         return $this->userInputs ?? null;
     }
@@ -307,12 +309,12 @@ class AppInstallation
      * @param string $appId
      * @return self
      */
-    public function withAppId(string $appId) : self
+    public function withAppId(string $appId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($appId, static::$schema['properties']['appId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -325,7 +327,7 @@ class AppInstallation
      * @param VersionStatus $appVersion
      * @return self
      */
-    public function withAppVersion(VersionStatus $appVersion) : self
+    public function withAppVersion(VersionStatus $appVersion): self
     {
         $clone = clone $this;
         $clone->appVersion = $appVersion;
@@ -337,12 +339,12 @@ class AppInstallation
      * @param string $customDocumentRoot
      * @return self
      */
-    public function withCustomDocumentRoot(string $customDocumentRoot) : self
+    public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customDocumentRoot, static::$schema['properties']['customDocumentRoot']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -354,7 +356,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutCustomDocumentRoot() : self
+    public function withoutCustomDocumentRoot(): self
     {
         $clone = clone $this;
         unset($clone->customDocumentRoot);
@@ -366,12 +368,12 @@ class AppInstallation
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -384,12 +386,12 @@ class AppInstallation
      * @param bool $disabled
      * @return self
      */
-    public function withDisabled(bool $disabled) : self
+    public function withDisabled(bool $disabled): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($disabled, static::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -402,12 +404,12 @@ class AppInstallation
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -420,12 +422,12 @@ class AppInstallation
      * @param string $installationPath
      * @return self
      */
-    public function withInstallationPath(string $installationPath) : self
+    public function withInstallationPath(string $installationPath): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($installationPath, static::$schema['properties']['installationPath']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -438,7 +440,7 @@ class AppInstallation
      * @param LinkedDatabase[] $linkedDatabases
      * @return self
      */
-    public function withLinkedDatabases(array $linkedDatabases) : self
+    public function withLinkedDatabases(array $linkedDatabases): self
     {
         $clone = clone $this;
         $clone->linkedDatabases = $linkedDatabases;
@@ -449,7 +451,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutLinkedDatabases() : self
+    public function withoutLinkedDatabases(): self
     {
         $clone = clone $this;
         unset($clone->linkedDatabases);
@@ -461,12 +463,12 @@ class AppInstallation
      * @param string[] $processes
      * @return self
      */
-    public function withProcesses(array $processes) : self
+    public function withProcesses(array $processes): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($processes, static::$schema['properties']['processes']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -478,7 +480,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutProcesses() : self
+    public function withoutProcesses(): self
     {
         $clone = clone $this;
         unset($clone->processes);
@@ -490,12 +492,12 @@ class AppInstallation
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -507,7 +509,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutProjectId() : self
+    public function withoutProjectId(): self
     {
         $clone = clone $this;
         unset($clone->projectId);
@@ -519,12 +521,12 @@ class AppInstallation
      * @param string $screenshotId
      * @return self
      */
-    public function withScreenshotId(string $screenshotId) : self
+    public function withScreenshotId(string $screenshotId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($screenshotId, static::$schema['properties']['screenshotId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -536,7 +538,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutScreenshotId() : self
+    public function withoutScreenshotId(): self
     {
         $clone = clone $this;
         unset($clone->screenshotId);
@@ -548,12 +550,12 @@ class AppInstallation
      * @param string $screenshotRef
      * @return self
      */
-    public function withScreenshotRef(string $screenshotRef) : self
+    public function withScreenshotRef(string $screenshotRef): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($screenshotRef, static::$schema['properties']['screenshotRef']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -565,7 +567,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutScreenshotRef() : self
+    public function withoutScreenshotRef(): self
     {
         $clone = clone $this;
         unset($clone->screenshotRef);
@@ -577,7 +579,7 @@ class AppInstallation
      * @param InstalledSystemSoftware[] $systemSoftware
      * @return self
      */
-    public function withSystemSoftware(array $systemSoftware) : self
+    public function withSystemSoftware(array $systemSoftware): self
     {
         $clone = clone $this;
         $clone->systemSoftware = $systemSoftware;
@@ -588,7 +590,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutSystemSoftware() : self
+    public function withoutSystemSoftware(): self
     {
         $clone = clone $this;
         unset($clone->systemSoftware);
@@ -600,7 +602,7 @@ class AppInstallation
      * @param AppUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(AppUpdatePolicy $updatePolicy) : self
+    public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -611,7 +613,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutUpdatePolicy() : self
+    public function withoutUpdatePolicy(): self
     {
         $clone = clone $this;
         unset($clone->updatePolicy);
@@ -623,7 +625,7 @@ class AppInstallation
      * @param SavedUserInput[] $userInputs
      * @return self
      */
-    public function withUserInputs(array $userInputs) : self
+    public function withUserInputs(array $userInputs): self
     {
         $clone = clone $this;
         $clone->userInputs = $userInputs;
@@ -634,7 +636,7 @@ class AppInstallation
     /**
      * @return self
      */
-    public function withoutUserInputs() : self
+    public function withoutUserInputs(): self
     {
         $clone = clone $this;
         unset($clone->userInputs);
@@ -648,9 +650,9 @@ class AppInstallation
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AppInstallation Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AppInstallation
+    public static function buildFromInput(array|object $input, bool $validate = true): AppInstallation
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -669,7 +671,7 @@ class AppInstallation
         $installationPath = $input->{'installationPath'};
         $linkedDatabases = null;
         if (isset($input->{'linkedDatabases'})) {
-            $linkedDatabases = array_map(fn(array $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
+            $linkedDatabases = array_map(fn (array $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
         }
         $processes = null;
         if (isset($input->{'processes'})) {
@@ -689,7 +691,7 @@ class AppInstallation
         }
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = array_map(fn(array $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
+            $systemSoftware = array_map(fn (array $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
@@ -697,7 +699,7 @@ class AppInstallation
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn(array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self($appId, $appVersion, $description, $disabled, $id, $installationPath);
@@ -718,7 +720,7 @@ class AppInstallation
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['appId'] = $this->appId;
@@ -731,7 +733,7 @@ class AppInstallation
         $output['id'] = $this->id;
         $output['installationPath'] = $this->installationPath;
         if (isset($this->linkedDatabases)) {
-            $output['linkedDatabases'] = array_map(fn(LinkedDatabase $i): array => $i->toJson(), $this->linkedDatabases);
+            $output['linkedDatabases'] = array_map(fn (LinkedDatabase $i): array => $i->toJson(), $this->linkedDatabases);
         }
         if (isset($this->processes)) {
             $output['processes'] = $this->processes;
@@ -746,13 +748,13 @@ class AppInstallation
             $output['screenshotRef'] = $this->screenshotRef;
         }
         if (isset($this->systemSoftware)) {
-            $output['systemSoftware'] = array_map(fn(InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
+            $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
         }
         if (isset($this->updatePolicy)) {
             $output['updatePolicy'] = $this->updatePolicy->value;
         }
         if (isset($this->userInputs)) {
-            $output['userInputs'] = array_map(fn(SavedUserInput $i): array => $i->toJson(), $this->userInputs);
+            $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
         }
 
         return $output;
@@ -764,19 +766,19 @@ class AppInstallation
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -786,4 +788,3 @@ class AppInstallation
     {
     }
 }
-

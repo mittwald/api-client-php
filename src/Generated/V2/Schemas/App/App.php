@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use InvalidArgumentException;
+
 class App
 {
     /**
@@ -74,7 +76,7 @@ class App
     /**
      * @return Action[]|null
      */
-    public function getActionCapabilities() : ?array
+    public function getActionCapabilities(): ?array
     {
         return $this->actionCapabilities ?? null;
     }
@@ -82,7 +84,7 @@ class App
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -90,7 +92,7 @@ class App
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -98,7 +100,7 @@ class App
     /**
      * @return string[]
      */
-    public function getTags() : array
+    public function getTags(): array
     {
         return $this->tags;
     }
@@ -107,7 +109,7 @@ class App
      * @param Action[] $actionCapabilities
      * @return self
      */
-    public function withActionCapabilities(array $actionCapabilities) : self
+    public function withActionCapabilities(array $actionCapabilities): self
     {
         $clone = clone $this;
         $clone->actionCapabilities = $actionCapabilities;
@@ -118,7 +120,7 @@ class App
     /**
      * @return self
      */
-    public function withoutActionCapabilities() : self
+    public function withoutActionCapabilities(): self
     {
         $clone = clone $this;
         unset($clone->actionCapabilities);
@@ -130,12 +132,12 @@ class App
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -148,12 +150,12 @@ class App
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -166,12 +168,12 @@ class App
      * @param string[] $tags
      * @return self
      */
-    public function withTags(array $tags) : self
+    public function withTags(array $tags): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($tags, static::$schema['properties']['tags']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -186,9 +188,9 @@ class App
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return App Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : App
+    public static function buildFromInput(array|object $input, bool $validate = true): App
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -197,7 +199,7 @@ class App
 
         $actionCapabilities = null;
         if (isset($input->{'actionCapabilities'})) {
-            $actionCapabilities = array_map(fn(string $item) : Action => Action::from($item), $input->{'actionCapabilities'});
+            $actionCapabilities = array_map(fn (string $item): Action => Action::from($item), $input->{'actionCapabilities'});
         }
         $id = $input->{'id'};
         $name = $input->{'name'};
@@ -213,11 +215,11 @@ class App
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->actionCapabilities)) {
-            $output['actionCapabilities'] = array_map(fn($item): string => $item->value, $this->actionCapabilities);
+            $output['actionCapabilities'] = array_map(fn ($item): string => $item->value, $this->actionCapabilities);
         }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
@@ -232,19 +234,19 @@ class App
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -254,4 +256,3 @@ class App
     {
     }
 }
-

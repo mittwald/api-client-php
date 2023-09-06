@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser;
 
+use InvalidArgumentException;
+use DateTime;
+
 class UpdateSshUserRequestBody
 {
     public const method = 'patch';
@@ -49,9 +52,9 @@ class UpdateSshUserRequestBody
     private ?string $description = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var string|null
@@ -64,7 +67,7 @@ class UpdateSshUserRequestBody
     private ?array $publicKeys = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -77,7 +80,7 @@ class UpdateSshUserRequestBody
     /**
      * @return bool|null
      */
-    public function getActive() : ?bool
+    public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
@@ -85,15 +88,15 @@ class UpdateSshUserRequestBody
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -101,7 +104,7 @@ class UpdateSshUserRequestBody
     /**
      * @return string|null
      */
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
         return $this->password ?? null;
     }
@@ -109,7 +112,7 @@ class UpdateSshUserRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[]|null
      */
-    public function getPublicKeys() : ?array
+    public function getPublicKeys(): ?array
     {
         return $this->publicKeys ?? null;
     }
@@ -118,12 +121,12 @@ class UpdateSshUserRequestBody
      * @param bool $active
      * @return self
      */
-    public function withActive(bool $active) : self
+    public function withActive(bool $active): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($active, static::$schema['properties']['active']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -135,7 +138,7 @@ class UpdateSshUserRequestBody
     /**
      * @return self
      */
-    public function withoutActive() : self
+    public function withoutActive(): self
     {
         $clone = clone $this;
         unset($clone->active);
@@ -147,12 +150,12 @@ class UpdateSshUserRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -164,7 +167,7 @@ class UpdateSshUserRequestBody
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -173,10 +176,10 @@ class UpdateSshUserRequestBody
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -187,7 +190,7 @@ class UpdateSshUserRequestBody
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -199,12 +202,12 @@ class UpdateSshUserRequestBody
      * @param string $password
      * @return self
      */
-    public function withPassword(string $password) : self
+    public function withPassword(string $password): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($password, static::$schema['properties']['password']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -216,7 +219,7 @@ class UpdateSshUserRequestBody
     /**
      * @return self
      */
-    public function withoutPassword() : self
+    public function withoutPassword(): self
     {
         $clone = clone $this;
         unset($clone->password);
@@ -228,7 +231,7 @@ class UpdateSshUserRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey[] $publicKeys
      * @return self
      */
-    public function withPublicKeys(array $publicKeys) : self
+    public function withPublicKeys(array $publicKeys): self
     {
         $clone = clone $this;
         $clone->publicKeys = $publicKeys;
@@ -239,7 +242,7 @@ class UpdateSshUserRequestBody
     /**
      * @return self
      */
-    public function withoutPublicKeys() : self
+    public function withoutPublicKeys(): self
     {
         $clone = clone $this;
         unset($clone->publicKeys);
@@ -253,9 +256,9 @@ class UpdateSshUserRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return UpdateSshUserRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : UpdateSshUserRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateSshUserRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -272,7 +275,7 @@ class UpdateSshUserRequestBody
         }
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $password = null;
         if (isset($input->{'password'})) {
@@ -280,7 +283,7 @@ class UpdateSshUserRequestBody
         }
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey => \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
 
         $obj = new self();
@@ -297,7 +300,7 @@ class UpdateSshUserRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->active)) {
@@ -307,13 +310,13 @@ class UpdateSshUserRequestBody
             $output['description'] = $this->description;
         }
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         if (isset($this->password)) {
             $output['password'] = $this->password;
         }
         if (isset($this->publicKeys)) {
-            $output['publicKeys'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey $i): array => $i->toJson(), $this->publicKeys);
+            $output['publicKeys'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey $i): array => $i->toJson(), $this->publicKeys);
         }
 
         return $output;
@@ -325,19 +328,19 @@ class UpdateSshUserRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -350,30 +353,29 @@ class UpdateSshUserRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $sshUserId = urlencode($mapped['sshUserId']);
         return '/v2/sshusers/' . $sshUserId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

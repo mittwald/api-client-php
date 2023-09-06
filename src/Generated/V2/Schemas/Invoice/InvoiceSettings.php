@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use InvalidArgumentException;
+
 class InvoiceSettings
 {
     /**
@@ -110,7 +112,7 @@ class InvoiceSettings
     /**
      * @return string[]|null
      */
-    public function getAdditionalEmailRecipients() : ?array
+    public function getAdditionalEmailRecipients(): ?array
     {
         return $this->additionalEmailRecipients ?? null;
     }
@@ -118,7 +120,7 @@ class InvoiceSettings
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -126,7 +128,7 @@ class InvoiceSettings
     /**
      * @return int|null
      */
-    public function getInvoicePeriod() : ?int
+    public function getInvoicePeriod(): ?int
     {
         return $this->invoicePeriod ?? null;
     }
@@ -134,7 +136,7 @@ class InvoiceSettings
     /**
      * @return BankingInformation|null
      */
-    public function getLastBankingInformation() : ?BankingInformation
+    public function getLastBankingInformation(): ?BankingInformation
     {
         return $this->lastBankingInformation ?? null;
     }
@@ -143,7 +145,7 @@ class InvoiceSettings
      * @return
      * PaymentSettingsDebit|PaymentSettingsInvoice|null
      */
-    public function getPaymentSettings() : PaymentSettingsDebit|PaymentSettingsInvoice|null
+    public function getPaymentSettings(): PaymentSettingsDebit|PaymentSettingsInvoice|null
     {
         return $this->paymentSettings;
     }
@@ -151,7 +153,7 @@ class InvoiceSettings
     /**
      * @return bool|null
      */
-    public function getPrintedInvoices() : ?bool
+    public function getPrintedInvoices(): ?bool
     {
         return $this->printedInvoices ?? null;
     }
@@ -159,7 +161,7 @@ class InvoiceSettings
     /**
      * @return Recipient|null
      */
-    public function getRecipient() : ?Recipient
+    public function getRecipient(): ?Recipient
     {
         return $this->recipient ?? null;
     }
@@ -167,7 +169,7 @@ class InvoiceSettings
     /**
      * @return bool|null
      */
-    public function getRecipientSameAsOwner() : ?bool
+    public function getRecipientSameAsOwner(): ?bool
     {
         return $this->recipientSameAsOwner ?? null;
     }
@@ -175,7 +177,7 @@ class InvoiceSettings
     /**
      * @return int|null
      */
-    public function getTargetDay() : ?int
+    public function getTargetDay(): ?int
     {
         return $this->targetDay ?? null;
     }
@@ -184,12 +186,12 @@ class InvoiceSettings
      * @param string[] $additionalEmailRecipients
      * @return self
      */
-    public function withAdditionalEmailRecipients(array $additionalEmailRecipients) : self
+    public function withAdditionalEmailRecipients(array $additionalEmailRecipients): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($additionalEmailRecipients, static::$schema['properties']['additionalEmailRecipients']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -201,7 +203,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutAdditionalEmailRecipients() : self
+    public function withoutAdditionalEmailRecipients(): self
     {
         $clone = clone $this;
         unset($clone->additionalEmailRecipients);
@@ -213,12 +215,12 @@ class InvoiceSettings
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -231,12 +233,12 @@ class InvoiceSettings
      * @param int $invoicePeriod
      * @return self
      */
-    public function withInvoicePeriod(int $invoicePeriod) : self
+    public function withInvoicePeriod(int $invoicePeriod): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($invoicePeriod, static::$schema['properties']['invoicePeriod']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -248,7 +250,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutInvoicePeriod() : self
+    public function withoutInvoicePeriod(): self
     {
         $clone = clone $this;
         unset($clone->invoicePeriod);
@@ -260,7 +262,7 @@ class InvoiceSettings
      * @param BankingInformation $lastBankingInformation
      * @return self
      */
-    public function withLastBankingInformation(BankingInformation $lastBankingInformation) : self
+    public function withLastBankingInformation(BankingInformation $lastBankingInformation): self
     {
         $clone = clone $this;
         $clone->lastBankingInformation = $lastBankingInformation;
@@ -271,7 +273,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutLastBankingInformation() : self
+    public function withoutLastBankingInformation(): self
     {
         $clone = clone $this;
         unset($clone->lastBankingInformation);
@@ -283,7 +285,7 @@ class InvoiceSettings
      * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
      * @return self
      */
-    public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings) : self
+    public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
         $clone = clone $this;
         $clone->paymentSettings = $paymentSettings;
@@ -294,7 +296,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutPaymentSettings() : self
+    public function withoutPaymentSettings(): self
     {
         $clone = clone $this;
         unset($clone->paymentSettings);
@@ -306,12 +308,12 @@ class InvoiceSettings
      * @param bool $printedInvoices
      * @return self
      */
-    public function withPrintedInvoices(bool $printedInvoices) : self
+    public function withPrintedInvoices(bool $printedInvoices): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($printedInvoices, static::$schema['properties']['printedInvoices']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -323,7 +325,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutPrintedInvoices() : self
+    public function withoutPrintedInvoices(): self
     {
         $clone = clone $this;
         unset($clone->printedInvoices);
@@ -335,7 +337,7 @@ class InvoiceSettings
      * @param Recipient $recipient
      * @return self
      */
-    public function withRecipient(Recipient $recipient) : self
+    public function withRecipient(Recipient $recipient): self
     {
         $clone = clone $this;
         $clone->recipient = $recipient;
@@ -346,7 +348,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutRecipient() : self
+    public function withoutRecipient(): self
     {
         $clone = clone $this;
         unset($clone->recipient);
@@ -358,12 +360,12 @@ class InvoiceSettings
      * @param bool $recipientSameAsOwner
      * @return self
      */
-    public function withRecipientSameAsOwner(bool $recipientSameAsOwner) : self
+    public function withRecipientSameAsOwner(bool $recipientSameAsOwner): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($recipientSameAsOwner, static::$schema['properties']['recipientSameAsOwner']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -375,7 +377,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutRecipientSameAsOwner() : self
+    public function withoutRecipientSameAsOwner(): self
     {
         $clone = clone $this;
         unset($clone->recipientSameAsOwner);
@@ -387,12 +389,12 @@ class InvoiceSettings
      * @param int $targetDay
      * @return self
      */
-    public function withTargetDay(int $targetDay) : self
+    public function withTargetDay(int $targetDay): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($targetDay, static::$schema['properties']['targetDay']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -404,7 +406,7 @@ class InvoiceSettings
     /**
      * @return self
      */
-    public function withoutTargetDay() : self
+    public function withoutTargetDay(): self
     {
         $clone = clone $this;
         unset($clone->targetDay);
@@ -418,9 +420,9 @@ class InvoiceSettings
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return InvoiceSettings Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : InvoiceSettings
+    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceSettings
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -443,7 +445,7 @@ class InvoiceSettings
         $paymentSettings = null;
         if (isset($input->{'paymentSettings'})) {
             $paymentSettings = match (true) {
-                default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 PaymentSettingsDebit::validateInput($input->{'paymentSettings'}, true) => PaymentSettingsDebit::buildFromInput($input->{'paymentSettings'}, validate: $validate),
                 PaymentSettingsInvoice::validateInput($input->{'paymentSettings'}, true) => PaymentSettingsInvoice::buildFromInput($input->{'paymentSettings'}, validate: $validate),
             };
@@ -482,7 +484,7 @@ class InvoiceSettings
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->additionalEmailRecipients)) {
@@ -497,7 +499,7 @@ class InvoiceSettings
         }
         if (isset($this->paymentSettings)) {
             $output['paymentSettings'] = match (true) {
-                default => throw new \InvalidArgumentException("input cannot be mapped to any valid type"),
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 ($this->paymentSettings) instanceof PaymentSettingsDebit, ($this->paymentSettings) instanceof PaymentSettingsInvoice => $this->paymentSettings->toJson(),
             };
         }
@@ -523,19 +525,19 @@ class InvoiceSettings
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -545,4 +547,3 @@ class InvoiceSettings
     {
     }
 }
-

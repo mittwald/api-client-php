@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+
 class ReadableChangeArticleOptions
 {
     /**
@@ -61,7 +63,7 @@ class ReadableChangeArticleOptions
     /**
      * @return string
      */
-    public function getArticleId() : string
+    public function getArticleId(): string
     {
         return $this->articleId;
     }
@@ -69,7 +71,7 @@ class ReadableChangeArticleOptions
     /**
      * @return ReadableChangeArticleOptionsInfo|null
      */
-    public function getInfo() : ?ReadableChangeArticleOptionsInfo
+    public function getInfo(): ?ReadableChangeArticleOptionsInfo
     {
         return $this->info ?? null;
     }
@@ -78,12 +80,12 @@ class ReadableChangeArticleOptions
      * @param string $articleId
      * @return self
      */
-    public function withArticleId(string $articleId) : self
+    public function withArticleId(string $articleId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($articleId, static::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -96,7 +98,7 @@ class ReadableChangeArticleOptions
      * @param ReadableChangeArticleOptionsInfo $info
      * @return self
      */
-    public function withInfo(ReadableChangeArticleOptionsInfo $info) : self
+    public function withInfo(ReadableChangeArticleOptionsInfo $info): self
     {
         $clone = clone $this;
         $clone->info = $info;
@@ -107,7 +109,7 @@ class ReadableChangeArticleOptions
     /**
      * @return self
      */
-    public function withoutInfo() : self
+    public function withoutInfo(): self
     {
         $clone = clone $this;
         unset($clone->info);
@@ -121,9 +123,9 @@ class ReadableChangeArticleOptions
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ReadableChangeArticleOptions Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ReadableChangeArticleOptions
+    public static function buildFromInput(array|object $input, bool $validate = true): ReadableChangeArticleOptions
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -146,7 +148,7 @@ class ReadableChangeArticleOptions
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['articleId'] = $this->articleId;
@@ -163,19 +165,19 @@ class ReadableChangeArticleOptions
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -188,4 +190,3 @@ class ReadableChangeArticleOptions
         }
     }
 }
-

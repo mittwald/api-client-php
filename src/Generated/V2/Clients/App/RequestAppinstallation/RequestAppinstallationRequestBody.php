@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation;
 
+use InvalidArgumentException;
+
 class RequestAppinstallationRequestBody
 {
     public const method = 'post';
@@ -62,7 +64,7 @@ class RequestAppinstallationRequestBody
     private array $userInputs;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -82,7 +84,7 @@ class RequestAppinstallationRequestBody
     /**
      * @return string
      */
-    public function getAppVersionId() : string
+    public function getAppVersionId(): string
     {
         return $this->appVersionId;
     }
@@ -90,7 +92,7 @@ class RequestAppinstallationRequestBody
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -98,7 +100,7 @@ class RequestAppinstallationRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
      */
-    public function getUpdatePolicy() : \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
+    public function getUpdatePolicy(): \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy
     {
         return $this->updatePolicy;
     }
@@ -106,7 +108,7 @@ class RequestAppinstallationRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[]
      */
-    public function getUserInputs() : array
+    public function getUserInputs(): array
     {
         return $this->userInputs;
     }
@@ -115,12 +117,12 @@ class RequestAppinstallationRequestBody
      * @param string $appVersionId
      * @return self
      */
-    public function withAppVersionId(string $appVersionId) : self
+    public function withAppVersionId(string $appVersionId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($appVersionId, static::$schema['properties']['appVersionId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -133,12 +135,12 @@ class RequestAppinstallationRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -151,7 +153,7 @@ class RequestAppinstallationRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy
      * @return self
      */
-    public function withUpdatePolicy(\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy) : self
+    public function withUpdatePolicy(\Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
@@ -163,7 +165,7 @@ class RequestAppinstallationRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput[] $userInputs
      * @return self
      */
-    public function withUserInputs(array $userInputs) : self
+    public function withUserInputs(array $userInputs): self
     {
         $clone = clone $this;
         $clone->userInputs = $userInputs;
@@ -177,9 +179,9 @@ class RequestAppinstallationRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return RequestAppinstallationRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : RequestAppinstallationRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -189,7 +191,7 @@ class RequestAppinstallationRequestBody
         $appVersionId = $input->{'appVersionId'};
         $description = $input->{'description'};
         $updatePolicy = \Mittwald\ApiClient\Generated\V2\Schemas\App\AppUpdatePolicy::from($input->{'updatePolicy'});
-        $userInputs = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput => \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+        $userInputs = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput => \Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appVersionId, $description, $updatePolicy, $userInputs);
 
@@ -201,13 +203,13 @@ class RequestAppinstallationRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['appVersionId'] = $this->appVersionId;
         $output['description'] = $this->description;
         $output['updatePolicy'] = $this->updatePolicy->value;
-        $output['userInputs'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput $i): array => $i->toJson(), $this->userInputs);
+        $output['userInputs'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\App\SavedUserInput $i): array => $i->toJson(), $this->userInputs);
 
         return $output;
     }
@@ -218,19 +220,19 @@ class RequestAppinstallationRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -240,30 +242,29 @@ class RequestAppinstallationRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/appinstallations';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

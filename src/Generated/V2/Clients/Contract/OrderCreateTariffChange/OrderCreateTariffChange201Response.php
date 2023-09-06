@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange;
 
+use InvalidArgumentException;
+
 class OrderCreateTariffChange201Response
 {
     /**
@@ -48,7 +50,7 @@ class OrderCreateTariffChange201Response
     /**
      * @return OrderCreateTariffChange201ResponseBody
      */
-    public function getBody() : OrderCreateTariffChange201ResponseBody
+    public function getBody(): OrderCreateTariffChange201ResponseBody
     {
         return $this->body;
     }
@@ -57,7 +59,7 @@ class OrderCreateTariffChange201Response
      * @param OrderCreateTariffChange201ResponseBody $body
      * @return self
      */
-    public function withBody(OrderCreateTariffChange201ResponseBody $body) : self
+    public function withBody(OrderCreateTariffChange201ResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -71,9 +73,9 @@ class OrderCreateTariffChange201Response
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderCreateTariffChange201Response Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderCreateTariffChange201Response
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateTariffChange201Response
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -92,7 +94,7 @@ class OrderCreateTariffChange201Response
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['body'] = ($this->body)->toJson();
@@ -106,19 +108,19 @@ class OrderCreateTariffChange201Response
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -129,7 +131,7 @@ class OrderCreateTariffChange201Response
         $this->body = clone $this->body;
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -137,4 +139,3 @@ class OrderCreateTariffChange201Response
         return $response;
     }
 }
-

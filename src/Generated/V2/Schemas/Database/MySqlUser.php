@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+use DateTime;
+
 class MySqlUser
 {
     /**
@@ -85,9 +88,9 @@ class MySqlUser
     private MySqlUserAccessLevel $accessLevel;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -125,28 +128,28 @@ class MySqlUser
     private string $name;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $passwordUpdatedAt;
+    private DateTime $passwordUpdatedAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @param MySqlUserAccessLevel $accessLevel
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $databaseId
      * @param bool $disabled
      * @param bool $externalAccess
      * @param string $id
      * @param bool $mainUser
      * @param string $name
-     * @param \DateTime $passwordUpdatedAt
-     * @param \DateTime $updatedAt
+     * @param DateTime $passwordUpdatedAt
+     * @param DateTime $updatedAt
      */
-    public function __construct(MySqlUserAccessLevel $accessLevel, \DateTime $createdAt, string $databaseId, bool $disabled, bool $externalAccess, string $id, bool $mainUser, string $name, \DateTime $passwordUpdatedAt, \DateTime $updatedAt)
+    public function __construct(MySqlUserAccessLevel $accessLevel, DateTime $createdAt, string $databaseId, bool $disabled, bool $externalAccess, string $id, bool $mainUser, string $name, DateTime $passwordUpdatedAt, DateTime $updatedAt)
     {
         $this->accessLevel = $accessLevel;
         $this->createdAt = $createdAt;
@@ -163,7 +166,7 @@ class MySqlUser
     /**
      * @return string|null
      */
-    public function getAccessIpMask() : ?string
+    public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
@@ -171,15 +174,15 @@ class MySqlUser
     /**
      * @return MySqlUserAccessLevel
      */
-    public function getAccessLevel() : MySqlUserAccessLevel
+    public function getAccessLevel(): MySqlUserAccessLevel
     {
         return $this->accessLevel;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -187,7 +190,7 @@ class MySqlUser
     /**
      * @return string
      */
-    public function getDatabaseId() : string
+    public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
@@ -195,7 +198,7 @@ class MySqlUser
     /**
      * @return string|null
      */
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
@@ -203,7 +206,7 @@ class MySqlUser
     /**
      * @return bool
      */
-    public function getDisabled() : bool
+    public function getDisabled(): bool
     {
         return $this->disabled;
     }
@@ -211,7 +214,7 @@ class MySqlUser
     /**
      * @return bool
      */
-    public function getExternalAccess() : bool
+    public function getExternalAccess(): bool
     {
         return $this->externalAccess;
     }
@@ -219,7 +222,7 @@ class MySqlUser
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -227,7 +230,7 @@ class MySqlUser
     /**
      * @return bool
      */
-    public function getMainUser() : bool
+    public function getMainUser(): bool
     {
         return $this->mainUser;
     }
@@ -235,23 +238,23 @@ class MySqlUser
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getPasswordUpdatedAt() : \DateTime
+    public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -260,12 +263,12 @@ class MySqlUser
      * @param string $accessIpMask
      * @return self
      */
-    public function withAccessIpMask(string $accessIpMask) : self
+    public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($accessIpMask, static::$schema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -277,7 +280,7 @@ class MySqlUser
     /**
      * @return self
      */
-    public function withoutAccessIpMask() : self
+    public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
         unset($clone->accessIpMask);
@@ -289,7 +292,7 @@ class MySqlUser
      * @param MySqlUserAccessLevel $accessLevel
      * @return self
      */
-    public function withAccessLevel(MySqlUserAccessLevel $accessLevel) : self
+    public function withAccessLevel(MySqlUserAccessLevel $accessLevel): self
     {
         $clone = clone $this;
         $clone->accessLevel = $accessLevel;
@@ -298,10 +301,10 @@ class MySqlUser
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -313,12 +316,12 @@ class MySqlUser
      * @param string $databaseId
      * @return self
      */
-    public function withDatabaseId(string $databaseId) : self
+    public function withDatabaseId(string $databaseId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($databaseId, static::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -331,12 +334,12 @@ class MySqlUser
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -348,7 +351,7 @@ class MySqlUser
     /**
      * @return self
      */
-    public function withoutDescription() : self
+    public function withoutDescription(): self
     {
         $clone = clone $this;
         unset($clone->description);
@@ -360,12 +363,12 @@ class MySqlUser
      * @param bool $disabled
      * @return self
      */
-    public function withDisabled(bool $disabled) : self
+    public function withDisabled(bool $disabled): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($disabled, static::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -378,12 +381,12 @@ class MySqlUser
      * @param bool $externalAccess
      * @return self
      */
-    public function withExternalAccess(bool $externalAccess) : self
+    public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($externalAccess, static::$schema['properties']['externalAccess']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -396,12 +399,12 @@ class MySqlUser
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -414,12 +417,12 @@ class MySqlUser
      * @param bool $mainUser
      * @return self
      */
-    public function withMainUser(bool $mainUser) : self
+    public function withMainUser(bool $mainUser): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($mainUser, static::$schema['properties']['mainUser']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -432,12 +435,12 @@ class MySqlUser
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -447,10 +450,10 @@ class MySqlUser
     }
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @return self
      */
-    public function withPasswordUpdatedAt(\DateTime $passwordUpdatedAt) : self
+    public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
         $clone->passwordUpdatedAt = $passwordUpdatedAt;
@@ -459,10 +462,10 @@ class MySqlUser
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -476,9 +479,9 @@ class MySqlUser
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MySqlUser Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MySqlUser
+    public static function buildFromInput(array|object $input, bool $validate = true): MySqlUser
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -490,7 +493,7 @@ class MySqlUser
             $accessIpMask = $input->{'accessIpMask'};
         }
         $accessLevel = MySqlUserAccessLevel::from($input->{'accessLevel'});
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $databaseId = $input->{'databaseId'};
         $description = null;
         if (isset($input->{'description'})) {
@@ -501,8 +504,8 @@ class MySqlUser
         $id = $input->{'id'};
         $mainUser = (bool)($input->{'mainUser'});
         $name = $input->{'name'};
-        $passwordUpdatedAt = new \DateTime($input->{'passwordUpdatedAt'});
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($accessLevel, $createdAt, $databaseId, $disabled, $externalAccess, $id, $mainUser, $name, $passwordUpdatedAt, $updatedAt);
         $obj->accessIpMask = $accessIpMask;
@@ -515,14 +518,14 @@ class MySqlUser
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->accessIpMask)) {
             $output['accessIpMask'] = $this->accessIpMask;
         }
         $output['accessLevel'] = ($this->accessLevel)->value;
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['databaseId'] = $this->databaseId;
         if (isset($this->description)) {
             $output['description'] = $this->description;
@@ -532,8 +535,8 @@ class MySqlUser
         $output['id'] = $this->id;
         $output['mainUser'] = $this->mainUser;
         $output['name'] = $this->name;
-        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(\DateTime::ATOM);
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -544,19 +547,19 @@ class MySqlUser
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -569,4 +572,3 @@ class MySqlUser
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Backup;
 
+use InvalidArgumentException;
+use DateTime;
+
 class ProjectBackupExport
 {
     /**
@@ -54,9 +57,9 @@ class ProjectBackupExport
     private ?string $downloadURL = null;
 
     /**
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * @var string
@@ -86,15 +89,15 @@ class ProjectBackupExport
     /**
      * @return string|null
      */
-    public function getDownloadURL() : ?string
+    public function getDownloadURL(): ?string
     {
         return $this->downloadURL ?? null;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -102,7 +105,7 @@ class ProjectBackupExport
     /**
      * @return string
      */
-    public function getFormat() : string
+    public function getFormat(): string
     {
         return $this->format;
     }
@@ -110,7 +113,7 @@ class ProjectBackupExport
     /**
      * @return ProjectBackupExportPhase|null
      */
-    public function getPhase() : ?ProjectBackupExportPhase
+    public function getPhase(): ?ProjectBackupExportPhase
     {
         return $this->phase ?? null;
     }
@@ -118,7 +121,7 @@ class ProjectBackupExport
     /**
      * @return bool
      */
-    public function getWithPassword() : bool
+    public function getWithPassword(): bool
     {
         return $this->withPassword;
     }
@@ -127,12 +130,12 @@ class ProjectBackupExport
      * @param string $downloadURL
      * @return self
      */
-    public function withDownloadURL(string $downloadURL) : self
+    public function withDownloadURL(string $downloadURL): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($downloadURL, static::$schema['properties']['downloadURL']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -144,7 +147,7 @@ class ProjectBackupExport
     /**
      * @return self
      */
-    public function withoutDownloadURL() : self
+    public function withoutDownloadURL(): self
     {
         $clone = clone $this;
         unset($clone->downloadURL);
@@ -153,10 +156,10 @@ class ProjectBackupExport
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -167,7 +170,7 @@ class ProjectBackupExport
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -179,12 +182,12 @@ class ProjectBackupExport
      * @param string $format
      * @return self
      */
-    public function withFormat(string $format) : self
+    public function withFormat(string $format): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($format, static::$schema['properties']['format']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -197,7 +200,7 @@ class ProjectBackupExport
      * @param ProjectBackupExportPhase $phase
      * @return self
      */
-    public function withPhase(ProjectBackupExportPhase $phase) : self
+    public function withPhase(ProjectBackupExportPhase $phase): self
     {
         $clone = clone $this;
         $clone->phase = $phase;
@@ -208,7 +211,7 @@ class ProjectBackupExport
     /**
      * @return self
      */
-    public function withoutPhase() : self
+    public function withoutPhase(): self
     {
         $clone = clone $this;
         unset($clone->phase);
@@ -220,12 +223,12 @@ class ProjectBackupExport
      * @param bool $withPassword
      * @return self
      */
-    public function withWithPassword(bool $withPassword) : self
+    public function withWithPassword(bool $withPassword): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($withPassword, static::$schema['properties']['withPassword']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -240,9 +243,9 @@ class ProjectBackupExport
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ProjectBackupExport Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ProjectBackupExport
+    public static function buildFromInput(array|object $input, bool $validate = true): ProjectBackupExport
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -255,7 +258,7 @@ class ProjectBackupExport
         }
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $format = $input->{'format'};
         $phase = null;
@@ -276,14 +279,14 @@ class ProjectBackupExport
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->downloadURL)) {
             $output['downloadURL'] = $this->downloadURL;
         }
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['format'] = $this->format;
         if (isset($this->phase)) {
@@ -300,19 +303,19 @@ class ProjectBackupExport
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -325,4 +328,3 @@ class ProjectBackupExport
         }
     }
 }
-

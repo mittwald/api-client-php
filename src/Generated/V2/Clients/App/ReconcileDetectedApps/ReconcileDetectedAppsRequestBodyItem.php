@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\App\ReconcileDetectedApps;
 
+use InvalidArgumentException;
+
 class ReconcileDetectedAppsRequestBodyItem
 {
     public const method = 'put';
@@ -65,7 +67,7 @@ class ReconcileDetectedAppsRequestBodyItem
     private string $installationDirectory;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -83,7 +85,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return string
      */
-    public function getAppName() : string
+    public function getAppName(): string
     {
         return $this->appName;
     }
@@ -91,7 +93,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return string
      */
-    public function getAppVersionClusterVersion() : string
+    public function getAppVersionClusterVersion(): string
     {
         return $this->appVersionClusterVersion;
     }
@@ -99,7 +101,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return string|null
      */
-    public function getDatabaseHost() : ?string
+    public function getDatabaseHost(): ?string
     {
         return $this->databaseHost ?? null;
     }
@@ -107,7 +109,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return string|null
      */
-    public function getDatabaseUserName() : ?string
+    public function getDatabaseUserName(): ?string
     {
         return $this->databaseUserName ?? null;
     }
@@ -115,7 +117,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return string
      */
-    public function getInstallationDirectory() : string
+    public function getInstallationDirectory(): string
     {
         return $this->installationDirectory;
     }
@@ -124,12 +126,12 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param string $appName
      * @return self
      */
-    public function withAppName(string $appName) : self
+    public function withAppName(string $appName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($appName, static::$schema['properties']['appName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -142,12 +144,12 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param string $appVersionClusterVersion
      * @return self
      */
-    public function withAppVersionClusterVersion(string $appVersionClusterVersion) : self
+    public function withAppVersionClusterVersion(string $appVersionClusterVersion): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($appVersionClusterVersion, static::$schema['properties']['appVersionClusterVersion']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -160,12 +162,12 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param string $databaseHost
      * @return self
      */
-    public function withDatabaseHost(string $databaseHost) : self
+    public function withDatabaseHost(string $databaseHost): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($databaseHost, static::$schema['properties']['databaseHost']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -177,7 +179,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return self
      */
-    public function withoutDatabaseHost() : self
+    public function withoutDatabaseHost(): self
     {
         $clone = clone $this;
         unset($clone->databaseHost);
@@ -189,12 +191,12 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param string $databaseUserName
      * @return self
      */
-    public function withDatabaseUserName(string $databaseUserName) : self
+    public function withDatabaseUserName(string $databaseUserName): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($databaseUserName, static::$schema['properties']['databaseUserName']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -206,7 +208,7 @@ class ReconcileDetectedAppsRequestBodyItem
     /**
      * @return self
      */
-    public function withoutDatabaseUserName() : self
+    public function withoutDatabaseUserName(): self
     {
         $clone = clone $this;
         unset($clone->databaseUserName);
@@ -218,12 +220,12 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param string $installationDirectory
      * @return self
      */
-    public function withInstallationDirectory(string $installationDirectory) : self
+    public function withInstallationDirectory(string $installationDirectory): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($installationDirectory, static::$schema['properties']['installationDirectory']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -238,9 +240,9 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ReconcileDetectedAppsRequestBodyItem Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ReconcileDetectedAppsRequestBodyItem
+    public static function buildFromInput(array|object $input, bool $validate = true): ReconcileDetectedAppsRequestBodyItem
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -270,7 +272,7 @@ class ReconcileDetectedAppsRequestBodyItem
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['appName'] = $this->appName;
@@ -292,19 +294,19 @@ class ReconcileDetectedAppsRequestBodyItem
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -314,30 +316,29 @@ class ReconcileDetectedAppsRequestBodyItem
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectShortId = urlencode($mapped['projectShortId']);
         return '/v2/projects/' . $projectShortId . '/appinstallations';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
 
+use InvalidArgumentException;
+
 class ChangePasswordRequestBody
 {
     public const method = 'put';
@@ -64,7 +66,7 @@ This is optional, depending on the MFA activation status of the profile.
     private string $oldPassword;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -80,7 +82,7 @@ This is optional, depending on the MFA activation status of the profile.
     /**
      * @return string|null
      */
-    public function getMultiFactorCode() : ?string
+    public function getMultiFactorCode(): ?string
     {
         return $this->multiFactorCode ?? null;
     }
@@ -88,7 +90,7 @@ This is optional, depending on the MFA activation status of the profile.
     /**
      * @return string
      */
-    public function getNewPassword() : string
+    public function getNewPassword(): string
     {
         return $this->newPassword;
     }
@@ -96,7 +98,7 @@ This is optional, depending on the MFA activation status of the profile.
     /**
      * @return string
      */
-    public function getOldPassword() : string
+    public function getOldPassword(): string
     {
         return $this->oldPassword;
     }
@@ -105,12 +107,12 @@ This is optional, depending on the MFA activation status of the profile.
      * @param string $multiFactorCode
      * @return self
      */
-    public function withMultiFactorCode(string $multiFactorCode) : self
+    public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($multiFactorCode, static::$schema['properties']['multiFactorCode']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -122,7 +124,7 @@ This is optional, depending on the MFA activation status of the profile.
     /**
      * @return self
      */
-    public function withoutMultiFactorCode() : self
+    public function withoutMultiFactorCode(): self
     {
         $clone = clone $this;
         unset($clone->multiFactorCode);
@@ -134,12 +136,12 @@ This is optional, depending on the MFA activation status of the profile.
      * @param string $newPassword
      * @return self
      */
-    public function withNewPassword(string $newPassword) : self
+    public function withNewPassword(string $newPassword): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($newPassword, static::$schema['properties']['newPassword']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -152,12 +154,12 @@ This is optional, depending on the MFA activation status of the profile.
      * @param string $oldPassword
      * @return self
      */
-    public function withOldPassword(string $oldPassword) : self
+    public function withOldPassword(string $oldPassword): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($oldPassword, static::$schema['properties']['oldPassword']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -172,9 +174,9 @@ This is optional, depending on the MFA activation status of the profile.
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ChangePasswordRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ChangePasswordRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ChangePasswordRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -198,7 +200,7 @@ This is optional, depending on the MFA activation status of the profile.
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->multiFactorCode)) {
@@ -216,19 +218,19 @@ This is optional, depending on the MFA activation status of the profile.
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -238,29 +240,28 @@ This is optional, depending on the MFA activation status of the profile.
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/users/self/credentials/password';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

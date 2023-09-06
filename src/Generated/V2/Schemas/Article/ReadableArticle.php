@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Article;
 
+use InvalidArgumentException;
+
 class ReadableArticle
 {
     /**
@@ -257,7 +259,7 @@ class ReadableArticle
      * @return
      * ReadableBookableArticleOptions[]|null
      */
-    public function getAdditionalArticles() : ?array
+    public function getAdditionalArticles(): ?array
     {
         return $this->additionalArticles ?? null;
     }
@@ -265,7 +267,7 @@ class ReadableArticle
     /**
      * @return ArticleAddons[]|null
      */
-    public function getAddons() : ?array
+    public function getAddons(): ?array
     {
         return $this->addons ?? null;
     }
@@ -273,7 +275,7 @@ class ReadableArticle
     /**
      * @return string
      */
-    public function getArticleId() : string
+    public function getArticleId(): string
     {
         return $this->articleId;
     }
@@ -282,7 +284,7 @@ class ReadableArticle
      * @return
      * ArticleAttributes[]|null
      */
-    public function getAttributes() : ?array
+    public function getAttributes(): ?array
     {
         return $this->attributes ?? null;
     }
@@ -290,7 +292,7 @@ class ReadableArticle
     /**
      * @return string|null
      */
-    public function getBalanceAddonKey() : ?string
+    public function getBalanceAddonKey(): ?string
     {
         return $this->balanceAddonKey ?? null;
     }
@@ -298,7 +300,7 @@ class ReadableArticle
     /**
      * @return int|float
      */
-    public function getContractDurationInMonth() : int|float
+    public function getContractDurationInMonth(): int|float
     {
         return $this->contractDurationInMonth;
     }
@@ -306,7 +308,7 @@ class ReadableArticle
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -314,7 +316,7 @@ class ReadableArticle
     /**
      * @return int|float|null
      */
-    public function getForcedInvoicingPeriodInMonth() : int|float|null
+    public function getForcedInvoicingPeriodInMonth(): int|float|null
     {
         return $this->forcedInvoicingPeriodInMonth;
     }
@@ -322,7 +324,7 @@ class ReadableArticle
     /**
      * @return bool|null
      */
-    public function getHasIndependentContractPeriod() : ?bool
+    public function getHasIndependentContractPeriod(): ?bool
     {
         return $this->hasIndependentContractPeriod ?? null;
     }
@@ -330,7 +332,7 @@ class ReadableArticle
     /**
      * @return bool|null
      */
-    public function getHideOnInvoice() : ?bool
+    public function getHideOnInvoice(): ?bool
     {
         return $this->hideOnInvoice ?? null;
     }
@@ -338,7 +340,7 @@ class ReadableArticle
     /**
      * @return ReadableArticleMachineType|null
      */
-    public function getMachineType() : ?ReadableArticleMachineType
+    public function getMachineType(): ?ReadableArticleMachineType
     {
         return $this->machineType ?? null;
     }
@@ -347,7 +349,7 @@ class ReadableArticle
      * @return
      * ReadableModifierArticleOptions[]|null
      */
-    public function getModifierArticles() : ?array
+    public function getModifierArticles(): ?array
     {
         return $this->modifierArticles ?? null;
     }
@@ -355,7 +357,7 @@ class ReadableArticle
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -363,7 +365,7 @@ class ReadableArticle
     /**
      * @return ReadableArticleOrderable
      */
-    public function getOrderable() : ReadableArticleOrderable
+    public function getOrderable(): ReadableArticleOrderable
     {
         return $this->orderable;
     }
@@ -371,7 +373,7 @@ class ReadableArticle
     /**
      * @return string|null
      */
-    public function getPicture() : ?string
+    public function getPicture(): ?string
     {
         return $this->picture ?? null;
     }
@@ -380,7 +382,7 @@ class ReadableArticle
      * @return
      * ReadableChangeArticleOptions[]|null
      */
-    public function getPossibleArticleChanges() : ?array
+    public function getPossibleArticleChanges(): ?array
     {
         return $this->possibleArticleChanges ?? null;
     }
@@ -388,7 +390,7 @@ class ReadableArticle
     /**
      * @return int|float|null
      */
-    public function getPrice() : int|float|null
+    public function getPrice(): int|float|null
     {
         return $this->price;
     }
@@ -396,7 +398,7 @@ class ReadableArticle
     /**
      * @return ArticleTag[]|null
      */
-    public function getTags() : ?array
+    public function getTags(): ?array
     {
         return $this->tags ?? null;
     }
@@ -404,7 +406,7 @@ class ReadableArticle
     /**
      * @return ArticleTemplate
      */
-    public function getTemplate() : ArticleTemplate
+    public function getTemplate(): ArticleTemplate
     {
         return $this->template;
     }
@@ -413,7 +415,7 @@ class ReadableArticle
      * @param ReadableBookableArticleOptions[] $additionalArticles
      * @return self
      */
-    public function withAdditionalArticles(array $additionalArticles) : self
+    public function withAdditionalArticles(array $additionalArticles): self
     {
         $clone = clone $this;
         $clone->additionalArticles = $additionalArticles;
@@ -424,7 +426,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutAdditionalArticles() : self
+    public function withoutAdditionalArticles(): self
     {
         $clone = clone $this;
         unset($clone->additionalArticles);
@@ -436,7 +438,7 @@ class ReadableArticle
      * @param ArticleAddons[] $addons
      * @return self
      */
-    public function withAddons(array $addons) : self
+    public function withAddons(array $addons): self
     {
         $clone = clone $this;
         $clone->addons = $addons;
@@ -447,7 +449,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutAddons() : self
+    public function withoutAddons(): self
     {
         $clone = clone $this;
         unset($clone->addons);
@@ -459,12 +461,12 @@ class ReadableArticle
      * @param string $articleId
      * @return self
      */
-    public function withArticleId(string $articleId) : self
+    public function withArticleId(string $articleId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($articleId, static::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -477,7 +479,7 @@ class ReadableArticle
      * @param ArticleAttributes[] $attributes
      * @return self
      */
-    public function withAttributes(array $attributes) : self
+    public function withAttributes(array $attributes): self
     {
         $clone = clone $this;
         $clone->attributes = $attributes;
@@ -488,7 +490,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutAttributes() : self
+    public function withoutAttributes(): self
     {
         $clone = clone $this;
         unset($clone->attributes);
@@ -500,12 +502,12 @@ class ReadableArticle
      * @param string $balanceAddonKey
      * @return self
      */
-    public function withBalanceAddonKey(string $balanceAddonKey) : self
+    public function withBalanceAddonKey(string $balanceAddonKey): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($balanceAddonKey, static::$schema['properties']['balanceAddonKey']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -517,7 +519,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutBalanceAddonKey() : self
+    public function withoutBalanceAddonKey(): self
     {
         $clone = clone $this;
         unset($clone->balanceAddonKey);
@@ -529,12 +531,12 @@ class ReadableArticle
      * @param int|float $contractDurationInMonth
      * @return self
      */
-    public function withContractDurationInMonth(int|float $contractDurationInMonth) : self
+    public function withContractDurationInMonth(int|float $contractDurationInMonth): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($contractDurationInMonth, static::$schema['properties']['contractDurationInMonth']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -547,12 +549,12 @@ class ReadableArticle
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -565,12 +567,12 @@ class ReadableArticle
      * @param int|float $forcedInvoicingPeriodInMonth
      * @return self
      */
-    public function withForcedInvoicingPeriodInMonth(int|float $forcedInvoicingPeriodInMonth) : self
+    public function withForcedInvoicingPeriodInMonth(int|float $forcedInvoicingPeriodInMonth): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($forcedInvoicingPeriodInMonth, static::$schema['properties']['forcedInvoicingPeriodInMonth']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -582,7 +584,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutForcedInvoicingPeriodInMonth() : self
+    public function withoutForcedInvoicingPeriodInMonth(): self
     {
         $clone = clone $this;
         unset($clone->forcedInvoicingPeriodInMonth);
@@ -594,12 +596,12 @@ class ReadableArticle
      * @param bool $hasIndependentContractPeriod
      * @return self
      */
-    public function withHasIndependentContractPeriod(bool $hasIndependentContractPeriod) : self
+    public function withHasIndependentContractPeriod(bool $hasIndependentContractPeriod): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hasIndependentContractPeriod, static::$schema['properties']['hasIndependentContractPeriod']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -611,7 +613,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutHasIndependentContractPeriod() : self
+    public function withoutHasIndependentContractPeriod(): self
     {
         $clone = clone $this;
         unset($clone->hasIndependentContractPeriod);
@@ -623,12 +625,12 @@ class ReadableArticle
      * @param bool $hideOnInvoice
      * @return self
      */
-    public function withHideOnInvoice(bool $hideOnInvoice) : self
+    public function withHideOnInvoice(bool $hideOnInvoice): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hideOnInvoice, static::$schema['properties']['hideOnInvoice']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -640,7 +642,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutHideOnInvoice() : self
+    public function withoutHideOnInvoice(): self
     {
         $clone = clone $this;
         unset($clone->hideOnInvoice);
@@ -652,7 +654,7 @@ class ReadableArticle
      * @param ReadableArticleMachineType $machineType
      * @return self
      */
-    public function withMachineType(ReadableArticleMachineType $machineType) : self
+    public function withMachineType(ReadableArticleMachineType $machineType): self
     {
         $clone = clone $this;
         $clone->machineType = $machineType;
@@ -663,7 +665,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutMachineType() : self
+    public function withoutMachineType(): self
     {
         $clone = clone $this;
         unset($clone->machineType);
@@ -675,7 +677,7 @@ class ReadableArticle
      * @param ReadableModifierArticleOptions[] $modifierArticles
      * @return self
      */
-    public function withModifierArticles(array $modifierArticles) : self
+    public function withModifierArticles(array $modifierArticles): self
     {
         $clone = clone $this;
         $clone->modifierArticles = $modifierArticles;
@@ -686,7 +688,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutModifierArticles() : self
+    public function withoutModifierArticles(): self
     {
         $clone = clone $this;
         unset($clone->modifierArticles);
@@ -698,12 +700,12 @@ class ReadableArticle
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -716,7 +718,7 @@ class ReadableArticle
      * @param ReadableArticleOrderable $orderable
      * @return self
      */
-    public function withOrderable(ReadableArticleOrderable $orderable) : self
+    public function withOrderable(ReadableArticleOrderable $orderable): self
     {
         $clone = clone $this;
         $clone->orderable = $orderable;
@@ -728,12 +730,12 @@ class ReadableArticle
      * @param string $picture
      * @return self
      */
-    public function withPicture(string $picture) : self
+    public function withPicture(string $picture): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($picture, static::$schema['properties']['picture']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -745,7 +747,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutPicture() : self
+    public function withoutPicture(): self
     {
         $clone = clone $this;
         unset($clone->picture);
@@ -757,7 +759,7 @@ class ReadableArticle
      * @param ReadableChangeArticleOptions[] $possibleArticleChanges
      * @return self
      */
-    public function withPossibleArticleChanges(array $possibleArticleChanges) : self
+    public function withPossibleArticleChanges(array $possibleArticleChanges): self
     {
         $clone = clone $this;
         $clone->possibleArticleChanges = $possibleArticleChanges;
@@ -768,7 +770,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutPossibleArticleChanges() : self
+    public function withoutPossibleArticleChanges(): self
     {
         $clone = clone $this;
         unset($clone->possibleArticleChanges);
@@ -780,12 +782,12 @@ class ReadableArticle
      * @param int|float $price
      * @return self
      */
-    public function withPrice(int|float $price) : self
+    public function withPrice(int|float $price): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($price, static::$schema['properties']['price']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -797,7 +799,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutPrice() : self
+    public function withoutPrice(): self
     {
         $clone = clone $this;
         unset($clone->price);
@@ -809,7 +811,7 @@ class ReadableArticle
      * @param ArticleTag[] $tags
      * @return self
      */
-    public function withTags(array $tags) : self
+    public function withTags(array $tags): self
     {
         $clone = clone $this;
         $clone->tags = $tags;
@@ -820,7 +822,7 @@ class ReadableArticle
     /**
      * @return self
      */
-    public function withoutTags() : self
+    public function withoutTags(): self
     {
         $clone = clone $this;
         unset($clone->tags);
@@ -832,7 +834,7 @@ class ReadableArticle
      * @param ArticleTemplate $template
      * @return self
      */
-    public function withTemplate(ArticleTemplate $template) : self
+    public function withTemplate(ArticleTemplate $template): self
     {
         $clone = clone $this;
         $clone->template = $template;
@@ -846,9 +848,9 @@ class ReadableArticle
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ReadableArticle Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ReadableArticle
+    public static function buildFromInput(array|object $input, bool $validate = true): ReadableArticle
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -857,16 +859,16 @@ class ReadableArticle
 
         $additionalArticles = null;
         if (isset($input->{'additionalArticles'})) {
-            $additionalArticles = array_map(fn(array $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
+            $additionalArticles = array_map(fn (array $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
         }
         $addons = null;
         if (isset($input->{'addons'})) {
-            $addons = array_map(fn(array $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
+            $addons = array_map(fn (array $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
         }
         $articleId = $input->{'articleId'};
         $attributes = null;
         if (isset($input->{'attributes'})) {
-            $attributes = array_map(fn(array $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
+            $attributes = array_map(fn (array $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
         }
         $balanceAddonKey = null;
         if (isset($input->{'balanceAddonKey'})) {
@@ -892,7 +894,7 @@ class ReadableArticle
         }
         $modifierArticles = null;
         if (isset($input->{'modifierArticles'})) {
-            $modifierArticles = array_map(fn(array $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
+            $modifierArticles = array_map(fn (array $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
         }
         $name = $input->{'name'};
         $orderable = ReadableArticleOrderable::from($input->{'orderable'});
@@ -902,7 +904,7 @@ class ReadableArticle
         }
         $possibleArticleChanges = null;
         if (isset($input->{'possibleArticleChanges'})) {
-            $possibleArticleChanges = array_map(fn(array $i): ReadableChangeArticleOptions => ReadableChangeArticleOptions::buildFromInput($i, validate: $validate), $input->{'possibleArticleChanges'});
+            $possibleArticleChanges = array_map(fn (array $i): ReadableChangeArticleOptions => ReadableChangeArticleOptions::buildFromInput($i, validate: $validate), $input->{'possibleArticleChanges'});
         }
         $price = null;
         if (isset($input->{'price'})) {
@@ -910,7 +912,7 @@ class ReadableArticle
         }
         $tags = null;
         if (isset($input->{'tags'})) {
-            $tags = array_map(fn(array $i): ArticleTag => ArticleTag::buildFromInput($i, validate: $validate), $input->{'tags'});
+            $tags = array_map(fn (array $i): ArticleTag => ArticleTag::buildFromInput($i, validate: $validate), $input->{'tags'});
         }
         $template = ArticleTemplate::buildFromInput($input->{'template'}, validate: $validate);
 
@@ -936,18 +938,18 @@ class ReadableArticle
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->additionalArticles)) {
-            $output['additionalArticles'] = array_map(fn(ReadableBookableArticleOptions $i): array => $i->toJson(), $this->additionalArticles);
+            $output['additionalArticles'] = array_map(fn (ReadableBookableArticleOptions $i): array => $i->toJson(), $this->additionalArticles);
         }
         if (isset($this->addons)) {
-            $output['addons'] = array_map(fn(ArticleAddons $i): array => $i->toJson(), $this->addons);
+            $output['addons'] = array_map(fn (ArticleAddons $i): array => $i->toJson(), $this->addons);
         }
         $output['articleId'] = $this->articleId;
         if (isset($this->attributes)) {
-            $output['attributes'] = array_map(fn(ArticleAttributes $i): array => $i->toJson(), $this->attributes);
+            $output['attributes'] = array_map(fn (ArticleAttributes $i): array => $i->toJson(), $this->attributes);
         }
         if (isset($this->balanceAddonKey)) {
             $output['balanceAddonKey'] = $this->balanceAddonKey;
@@ -967,7 +969,7 @@ class ReadableArticle
             $output['machineType'] = ($this->machineType)->toJson();
         }
         if (isset($this->modifierArticles)) {
-            $output['modifierArticles'] = array_map(fn(ReadableModifierArticleOptions $i): array => $i->toJson(), $this->modifierArticles);
+            $output['modifierArticles'] = array_map(fn (ReadableModifierArticleOptions $i): array => $i->toJson(), $this->modifierArticles);
         }
         $output['name'] = $this->name;
         $output['orderable'] = ($this->orderable)->value;
@@ -975,13 +977,13 @@ class ReadableArticle
             $output['picture'] = $this->picture;
         }
         if (isset($this->possibleArticleChanges)) {
-            $output['possibleArticleChanges'] = array_map(fn(ReadableChangeArticleOptions $i): array => $i->toJson(), $this->possibleArticleChanges);
+            $output['possibleArticleChanges'] = array_map(fn (ReadableChangeArticleOptions $i): array => $i->toJson(), $this->possibleArticleChanges);
         }
         if (isset($this->price)) {
             $output['price'] = $this->price;
         }
         if (isset($this->tags)) {
-            $output['tags'] = array_map(fn(ArticleTag $i): array => $i->toJson(), $this->tags);
+            $output['tags'] = array_map(fn (ArticleTag $i): array => $i->toJson(), $this->tags);
         }
         $output['template'] = $this->template->toJson();
 
@@ -994,19 +996,19 @@ class ReadableArticle
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -1019,4 +1021,3 @@ class ReadableArticle
         }
     }
 }
-

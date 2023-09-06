@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber;
 
+use InvalidArgumentException;
+
 class AddPhoneNumberRequest
 {
     public const method = 'post';
@@ -60,7 +62,7 @@ class AddPhoneNumberRequest
     private AddPhoneNumberRequestBody $body;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -76,7 +78,7 @@ class AddPhoneNumberRequest
     /**
      * @return AddPhoneNumberRequestUserIdAlternative1|string
      */
-    public function getUserId() : AddPhoneNumberRequestUserIdAlternative1|string
+    public function getUserId(): AddPhoneNumberRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
@@ -84,7 +86,7 @@ class AddPhoneNumberRequest
     /**
      * @return AddPhoneNumberRequestBody
      */
-    public function getBody() : AddPhoneNumberRequestBody
+    public function getBody(): AddPhoneNumberRequestBody
     {
         return $this->body;
     }
@@ -93,7 +95,7 @@ class AddPhoneNumberRequest
      * @param AddPhoneNumberRequestUserIdAlternative1|string $userId
      * @return self
      */
-    public function withUserId(AddPhoneNumberRequestUserIdAlternative1|string $userId) : self
+    public function withUserId(AddPhoneNumberRequestUserIdAlternative1|string $userId): self
     {
         $clone = clone $this;
         $clone->userId = $userId;
@@ -105,7 +107,7 @@ class AddPhoneNumberRequest
      * @param AddPhoneNumberRequestBody $body
      * @return self
      */
-    public function withBody(AddPhoneNumberRequestBody $body) : self
+    public function withBody(AddPhoneNumberRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -119,9 +121,9 @@ class AddPhoneNumberRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AddPhoneNumberRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AddPhoneNumberRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): AddPhoneNumberRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -144,7 +146,7 @@ class AddPhoneNumberRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['userId'] = match (true) {
@@ -162,19 +164,19 @@ class AddPhoneNumberRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -188,30 +190,29 @@ class AddPhoneNumberRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $userId = urlencode($mapped['userId']);
         return '/v2/users/' . $userId . '/phone';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

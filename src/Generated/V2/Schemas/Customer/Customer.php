@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Customer;
 
+use InvalidArgumentException;
+use DateTime;
+
 class Customer
 {
     /**
@@ -107,9 +110,9 @@ class Customer
     private ?string $categoryId = null;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $creationDate;
+    private DateTime $creationDate;
 
     /**
      * @var string
@@ -167,14 +170,14 @@ class Customer
     private ?CustomerVatIdValidationState $vatIdValidationState = null;
 
     /**
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      * @param string $customerId
      * @param string $customerNumber
      * @param int $memberCount
      * @param string $name
      * @param int $projectCount
      */
-    public function __construct(\DateTime $creationDate, string $customerId, string $customerNumber, int $memberCount, string $name, int $projectCount)
+    public function __construct(DateTime $creationDate, string $customerId, string $customerNumber, int $memberCount, string $name, int $projectCount)
     {
         $this->creationDate = $creationDate;
         $this->customerId = $customerId;
@@ -187,7 +190,7 @@ class Customer
     /**
      * @return CustomerActiveSuspension|null
      */
-    public function getActiveSuspension() : ?CustomerActiveSuspension
+    public function getActiveSuspension(): ?CustomerActiveSuspension
     {
         return $this->activeSuspension ?? null;
     }
@@ -195,7 +198,7 @@ class Customer
     /**
      * @return string|null
      */
-    public function getAvatarRefId() : ?string
+    public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
@@ -203,15 +206,15 @@ class Customer
     /**
      * @return string|null
      */
-    public function getCategoryId() : ?string
+    public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreationDate() : \DateTime
+    public function getCreationDate(): DateTime
     {
         return $this->creationDate;
     }
@@ -219,7 +222,7 @@ class Customer
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -227,7 +230,7 @@ class Customer
     /**
      * @return string
      */
-    public function getCustomerNumber() : string
+    public function getCustomerNumber(): string
     {
         return $this->customerNumber;
     }
@@ -235,7 +238,7 @@ class Customer
     /**
      * @return Role[]|null
      */
-    public function getExecutingUserRoles() : ?array
+    public function getExecutingUserRoles(): ?array
     {
         return $this->executingUserRoles ?? null;
     }
@@ -243,7 +246,7 @@ class Customer
     /**
      * @return bool|null
      */
-    public function getIsBanned() : ?bool
+    public function getIsBanned(): ?bool
     {
         return $this->isBanned ?? null;
     }
@@ -251,7 +254,7 @@ class Customer
     /**
      * @return bool|null
      */
-    public function getIsInDefaultOfPayment() : ?bool
+    public function getIsInDefaultOfPayment(): ?bool
     {
         return $this->isInDefaultOfPayment ?? null;
     }
@@ -259,7 +262,7 @@ class Customer
     /**
      * @return int
      */
-    public function getMemberCount() : int
+    public function getMemberCount(): int
     {
         return $this->memberCount;
     }
@@ -267,7 +270,7 @@ class Customer
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -275,7 +278,7 @@ class Customer
     /**
      * @return Contact|null
      */
-    public function getOwner() : ?Contact
+    public function getOwner(): ?Contact
     {
         return $this->owner ?? null;
     }
@@ -283,7 +286,7 @@ class Customer
     /**
      * @return int
      */
-    public function getProjectCount() : int
+    public function getProjectCount(): int
     {
         return $this->projectCount;
     }
@@ -291,7 +294,7 @@ class Customer
     /**
      * @return string|null
      */
-    public function getVatId() : ?string
+    public function getVatId(): ?string
     {
         return $this->vatId ?? null;
     }
@@ -299,7 +302,7 @@ class Customer
     /**
      * @return CustomerVatIdValidationState|null
      */
-    public function getVatIdValidationState() : ?CustomerVatIdValidationState
+    public function getVatIdValidationState(): ?CustomerVatIdValidationState
     {
         return $this->vatIdValidationState ?? null;
     }
@@ -308,7 +311,7 @@ class Customer
      * @param CustomerActiveSuspension $activeSuspension
      * @return self
      */
-    public function withActiveSuspension(CustomerActiveSuspension $activeSuspension) : self
+    public function withActiveSuspension(CustomerActiveSuspension $activeSuspension): self
     {
         $clone = clone $this;
         $clone->activeSuspension = $activeSuspension;
@@ -319,7 +322,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutActiveSuspension() : self
+    public function withoutActiveSuspension(): self
     {
         $clone = clone $this;
         unset($clone->activeSuspension);
@@ -331,12 +334,12 @@ class Customer
      * @param string $avatarRefId
      * @return self
      */
-    public function withAvatarRefId(string $avatarRefId) : self
+    public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($avatarRefId, static::$schema['properties']['avatarRefId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -348,7 +351,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutAvatarRefId() : self
+    public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
         unset($clone->avatarRefId);
@@ -360,12 +363,12 @@ class Customer
      * @param string $categoryId
      * @return self
      */
-    public function withCategoryId(string $categoryId) : self
+    public function withCategoryId(string $categoryId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($categoryId, static::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -377,7 +380,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutCategoryId() : self
+    public function withoutCategoryId(): self
     {
         $clone = clone $this;
         unset($clone->categoryId);
@@ -386,10 +389,10 @@ class Customer
     }
 
     /**
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      * @return self
      */
-    public function withCreationDate(\DateTime $creationDate) : self
+    public function withCreationDate(DateTime $creationDate): self
     {
         $clone = clone $this;
         $clone->creationDate = $creationDate;
@@ -401,12 +404,12 @@ class Customer
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -419,12 +422,12 @@ class Customer
      * @param string $customerNumber
      * @return self
      */
-    public function withCustomerNumber(string $customerNumber) : self
+    public function withCustomerNumber(string $customerNumber): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerNumber, static::$schema['properties']['customerNumber']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -437,7 +440,7 @@ class Customer
      * @param Role[] $executingUserRoles
      * @return self
      */
-    public function withExecutingUserRoles(array $executingUserRoles) : self
+    public function withExecutingUserRoles(array $executingUserRoles): self
     {
         $clone = clone $this;
         $clone->executingUserRoles = $executingUserRoles;
@@ -448,7 +451,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutExecutingUserRoles() : self
+    public function withoutExecutingUserRoles(): self
     {
         $clone = clone $this;
         unset($clone->executingUserRoles);
@@ -460,12 +463,12 @@ class Customer
      * @param bool $isBanned
      * @return self
      */
-    public function withIsBanned(bool $isBanned) : self
+    public function withIsBanned(bool $isBanned): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($isBanned, static::$schema['properties']['isBanned']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -477,7 +480,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutIsBanned() : self
+    public function withoutIsBanned(): self
     {
         $clone = clone $this;
         unset($clone->isBanned);
@@ -489,12 +492,12 @@ class Customer
      * @param bool $isInDefaultOfPayment
      * @return self
      */
-    public function withIsInDefaultOfPayment(bool $isInDefaultOfPayment) : self
+    public function withIsInDefaultOfPayment(bool $isInDefaultOfPayment): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($isInDefaultOfPayment, static::$schema['properties']['isInDefaultOfPayment']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -506,7 +509,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutIsInDefaultOfPayment() : self
+    public function withoutIsInDefaultOfPayment(): self
     {
         $clone = clone $this;
         unset($clone->isInDefaultOfPayment);
@@ -518,12 +521,12 @@ class Customer
      * @param int $memberCount
      * @return self
      */
-    public function withMemberCount(int $memberCount) : self
+    public function withMemberCount(int $memberCount): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($memberCount, static::$schema['properties']['memberCount']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -536,12 +539,12 @@ class Customer
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -554,7 +557,7 @@ class Customer
      * @param Contact $owner
      * @return self
      */
-    public function withOwner(Contact $owner) : self
+    public function withOwner(Contact $owner): self
     {
         $clone = clone $this;
         $clone->owner = $owner;
@@ -565,7 +568,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutOwner() : self
+    public function withoutOwner(): self
     {
         $clone = clone $this;
         unset($clone->owner);
@@ -577,12 +580,12 @@ class Customer
      * @param int $projectCount
      * @return self
      */
-    public function withProjectCount(int $projectCount) : self
+    public function withProjectCount(int $projectCount): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectCount, static::$schema['properties']['projectCount']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -595,12 +598,12 @@ class Customer
      * @param string $vatId
      * @return self
      */
-    public function withVatId(string $vatId) : self
+    public function withVatId(string $vatId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($vatId, static::$schema['properties']['vatId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -612,7 +615,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutVatId() : self
+    public function withoutVatId(): self
     {
         $clone = clone $this;
         unset($clone->vatId);
@@ -624,7 +627,7 @@ class Customer
      * @param CustomerVatIdValidationState $vatIdValidationState
      * @return self
      */
-    public function withVatIdValidationState(CustomerVatIdValidationState $vatIdValidationState) : self
+    public function withVatIdValidationState(CustomerVatIdValidationState $vatIdValidationState): self
     {
         $clone = clone $this;
         $clone->vatIdValidationState = $vatIdValidationState;
@@ -635,7 +638,7 @@ class Customer
     /**
      * @return self
      */
-    public function withoutVatIdValidationState() : self
+    public function withoutVatIdValidationState(): self
     {
         $clone = clone $this;
         unset($clone->vatIdValidationState);
@@ -649,9 +652,9 @@ class Customer
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return Customer Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : Customer
+    public static function buildFromInput(array|object $input, bool $validate = true): Customer
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -670,12 +673,12 @@ class Customer
         if (isset($input->{'categoryId'})) {
             $categoryId = $input->{'categoryId'};
         }
-        $creationDate = new \DateTime($input->{'creationDate'});
+        $creationDate = new DateTime($input->{'creationDate'});
         $customerId = $input->{'customerId'};
         $customerNumber = $input->{'customerNumber'};
         $executingUserRoles = null;
         if (isset($input->{'executingUserRoles'})) {
-            $executingUserRoles = array_map(fn(string $i): Role => Role::from($i), $input->{'executingUserRoles'});
+            $executingUserRoles = array_map(fn (string $i): Role => Role::from($i), $input->{'executingUserRoles'});
         }
         $isBanned = null;
         if (isset($input->{'isBanned'})) {
@@ -719,7 +722,7 @@ class Customer
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->activeSuspension)) {
@@ -731,11 +734,11 @@ class Customer
         if (isset($this->categoryId)) {
             $output['categoryId'] = $this->categoryId;
         }
-        $output['creationDate'] = ($this->creationDate)->format(\DateTime::ATOM);
+        $output['creationDate'] = ($this->creationDate)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
         $output['customerNumber'] = $this->customerNumber;
         if (isset($this->executingUserRoles)) {
-            $output['executingUserRoles'] = array_map(fn(Role $i): string => $i->value, $this->executingUserRoles);
+            $output['executingUserRoles'] = array_map(fn (Role $i): string => $i->value, $this->executingUserRoles);
         }
         if (isset($this->isBanned)) {
             $output['isBanned'] = $this->isBanned;
@@ -765,19 +768,19 @@ class Customer
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -791,4 +794,3 @@ class Customer
         $this->creationDate = clone $this->creationDate;
     }
 }
-

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteApiToken;
 
+use InvalidArgumentException;
+
 class DeprecatedUserDeleteApiTokenRequest
 {
     public const method = 'delete';
@@ -32,7 +34,7 @@ class DeprecatedUserDeleteApiTokenRequest
     private string $apiTokenId;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -46,7 +48,7 @@ class DeprecatedUserDeleteApiTokenRequest
     /**
      * @return string
      */
-    public function getApiTokenId() : string
+    public function getApiTokenId(): string
     {
         return $this->apiTokenId;
     }
@@ -55,12 +57,12 @@ class DeprecatedUserDeleteApiTokenRequest
      * @param string $apiTokenId
      * @return self
      */
-    public function withApiTokenId(string $apiTokenId) : self
+    public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($apiTokenId, static::$schema['properties']['apiTokenId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -75,9 +77,9 @@ class DeprecatedUserDeleteApiTokenRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserDeleteApiTokenRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserDeleteApiTokenRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserDeleteApiTokenRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -96,7 +98,7 @@ class DeprecatedUserDeleteApiTokenRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['apiTokenId'] = $this->apiTokenId;
@@ -110,19 +112,19 @@ class DeprecatedUserDeleteApiTokenRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -132,30 +134,29 @@ class DeprecatedUserDeleteApiTokenRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $apiTokenId = urlencode($mapped['apiTokenId']);
         return '/v2/signup/token/api/' . $apiTokenId;
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

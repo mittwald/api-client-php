@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite;
 
+use InvalidArgumentException;
+use DateTime;
+
 class CreateProjectInviteRequestBody
 {
     public const method = 'post';
@@ -50,9 +53,9 @@ class CreateProjectInviteRequestBody
     /**
      * Time the resulting ProjectMembership should expire at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $membershipExpiresAt = null;
+    private ?DateTime $membershipExpiresAt = null;
 
     /**
      * Message contained in the ProjectInvite.
@@ -67,7 +70,7 @@ class CreateProjectInviteRequestBody
     private \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -83,15 +86,15 @@ class CreateProjectInviteRequestBody
     /**
      * @return string
      */
-    public function getMailAddress() : string
+    public function getMailAddress(): string
     {
         return $this->mailAddress;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getMembershipExpiresAt() : ?\DateTime
+    public function getMembershipExpiresAt(): ?DateTime
     {
         return $this->membershipExpiresAt ?? null;
     }
@@ -99,7 +102,7 @@ class CreateProjectInviteRequestBody
     /**
      * @return string|null
      */
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
@@ -107,7 +110,7 @@ class CreateProjectInviteRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
      */
-    public function getRole() : \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
+    public function getRole(): \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles
     {
         return $this->role;
     }
@@ -116,12 +119,12 @@ class CreateProjectInviteRequestBody
      * @param string $mailAddress
      * @return self
      */
-    public function withMailAddress(string $mailAddress) : self
+    public function withMailAddress(string $mailAddress): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($mailAddress, static::$schema['properties']['mailAddress']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -131,10 +134,10 @@ class CreateProjectInviteRequestBody
     }
 
     /**
-     * @param \DateTime $membershipExpiresAt
+     * @param DateTime $membershipExpiresAt
      * @return self
      */
-    public function withMembershipExpiresAt(\DateTime $membershipExpiresAt) : self
+    public function withMembershipExpiresAt(DateTime $membershipExpiresAt): self
     {
         $clone = clone $this;
         $clone->membershipExpiresAt = $membershipExpiresAt;
@@ -145,7 +148,7 @@ class CreateProjectInviteRequestBody
     /**
      * @return self
      */
-    public function withoutMembershipExpiresAt() : self
+    public function withoutMembershipExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->membershipExpiresAt);
@@ -157,12 +160,12 @@ class CreateProjectInviteRequestBody
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -174,7 +177,7 @@ class CreateProjectInviteRequestBody
     /**
      * @return self
      */
-    public function withoutMessage() : self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
         unset($clone->message);
@@ -186,7 +189,7 @@ class CreateProjectInviteRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role
      * @return self
      */
-    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role) : self
+    public function withRole(\Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -200,9 +203,9 @@ class CreateProjectInviteRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateProjectInviteRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateProjectInviteRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateProjectInviteRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -212,7 +215,7 @@ class CreateProjectInviteRequestBody
         $mailAddress = $input->{'mailAddress'};
         $membershipExpiresAt = null;
         if (isset($input->{'membershipExpiresAt'})) {
-            $membershipExpiresAt = new \DateTime($input->{'membershipExpiresAt'});
+            $membershipExpiresAt = new DateTime($input->{'membershipExpiresAt'});
         }
         $message = null;
         if (isset($input->{'message'})) {
@@ -231,12 +234,12 @@ class CreateProjectInviteRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['mailAddress'] = $this->mailAddress;
         if (isset($this->membershipExpiresAt)) {
-            $output['membershipExpiresAt'] = ($this->membershipExpiresAt)->format(\DateTime::ATOM);
+            $output['membershipExpiresAt'] = ($this->membershipExpiresAt)->format(DateTime::ATOM);
         }
         if (isset($this->message)) {
             $output['message'] = $this->message;
@@ -252,19 +255,19 @@ class CreateProjectInviteRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -277,30 +280,29 @@ class CreateProjectInviteRequestBody
         }
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/project/' . $projectId . '/invites';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

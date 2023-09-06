@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Order;
 
+use InvalidArgumentException;
+
 class HardwareSpec
 {
     /**
@@ -45,7 +47,7 @@ class HardwareSpec
     /**
      * @return int|float|null
      */
-    public function getRam() : int|float|null
+    public function getRam(): int|float|null
     {
         return $this->ram;
     }
@@ -53,7 +55,7 @@ class HardwareSpec
     /**
      * @return int|float|null
      */
-    public function getVcpu() : int|float|null
+    public function getVcpu(): int|float|null
     {
         return $this->vcpu;
     }
@@ -62,12 +64,12 @@ class HardwareSpec
      * @param int|float $ram
      * @return self
      */
-    public function withRam(int|float $ram) : self
+    public function withRam(int|float $ram): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($ram, static::$schema['properties']['ram']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -79,7 +81,7 @@ class HardwareSpec
     /**
      * @return self
      */
-    public function withoutRam() : self
+    public function withoutRam(): self
     {
         $clone = clone $this;
         unset($clone->ram);
@@ -91,12 +93,12 @@ class HardwareSpec
      * @param int|float $vcpu
      * @return self
      */
-    public function withVcpu(int|float $vcpu) : self
+    public function withVcpu(int|float $vcpu): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($vcpu, static::$schema['properties']['vcpu']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -108,7 +110,7 @@ class HardwareSpec
     /**
      * @return self
      */
-    public function withoutVcpu() : self
+    public function withoutVcpu(): self
     {
         $clone = clone $this;
         unset($clone->vcpu);
@@ -122,9 +124,9 @@ class HardwareSpec
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return HardwareSpec Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : HardwareSpec
+    public static function buildFromInput(array|object $input, bool $validate = true): HardwareSpec
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -151,7 +153,7 @@ class HardwareSpec
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->ram)) {
@@ -170,19 +172,19 @@ class HardwareSpec
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -192,4 +194,3 @@ class HardwareSpec
     {
     }
 }
-

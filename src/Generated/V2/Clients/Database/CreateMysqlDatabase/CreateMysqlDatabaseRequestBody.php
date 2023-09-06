@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase;
 
+use InvalidArgumentException;
+
 class CreateMysqlDatabaseRequestBody
 {
     public const method = 'post';
@@ -40,7 +42,7 @@ class CreateMysqlDatabaseRequestBody
     private \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase $user;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -56,7 +58,7 @@ class CreateMysqlDatabaseRequestBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlDatabase
      */
-    public function getDatabase() : \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlDatabase
+    public function getDatabase(): \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlDatabase
     {
         return $this->database;
     }
@@ -65,7 +67,7 @@ class CreateMysqlDatabaseRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase
      */
-    public function getUser() : \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase
+    public function getUser(): \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase
     {
         return $this->user;
     }
@@ -74,7 +76,7 @@ class CreateMysqlDatabaseRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlDatabase $database
      * @return self
      */
-    public function withDatabase(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlDatabase $database) : self
+    public function withDatabase(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlDatabase $database): self
     {
         $clone = clone $this;
         $clone->database = $database;
@@ -86,7 +88,7 @@ class CreateMysqlDatabaseRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase $user
      * @return self
      */
-    public function withUser(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase $user) : self
+    public function withUser(\Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase $user): self
     {
         $clone = clone $this;
         $clone->user = $user;
@@ -100,9 +102,9 @@ class CreateMysqlDatabaseRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateMysqlDatabaseRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateMysqlDatabaseRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateMysqlDatabaseRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -122,7 +124,7 @@ class CreateMysqlDatabaseRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['database'] = $this->database->toJson();
@@ -137,19 +139,19 @@ class CreateMysqlDatabaseRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -159,30 +161,29 @@ class CreateMysqlDatabaseRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/mysql-databases';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

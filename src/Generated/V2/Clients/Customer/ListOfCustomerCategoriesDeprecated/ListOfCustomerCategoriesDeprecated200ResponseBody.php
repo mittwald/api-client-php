@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategoriesDeprecated;
 
+use InvalidArgumentException;
+
 class ListOfCustomerCategoriesDeprecated200ResponseBody
 {
     /**
@@ -39,7 +41,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category[]|null
      */
-    public function getCategories() : ?array
+    public function getCategories(): ?array
     {
         return $this->categories ?? null;
     }
@@ -48,7 +50,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category[] $categories
      * @return self
      */
-    public function withCategories(array $categories) : self
+    public function withCategories(array $categories): self
     {
         $clone = clone $this;
         $clone->categories = $categories;
@@ -59,7 +61,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     /**
      * @return self
      */
-    public function withoutCategories() : self
+    public function withoutCategories(): self
     {
         $clone = clone $this;
         unset($clone->categories);
@@ -73,9 +75,9 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return ListOfCustomerCategoriesDeprecated200ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : ListOfCustomerCategoriesDeprecated200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ListOfCustomerCategoriesDeprecated200ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -84,7 +86,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
 
         $categories = null;
         if (isset($input->{'categories'})) {
-            $categories = array_map(fn(array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category => \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category::buildFromInput($i, validate: $validate), $input->{'categories'});
+            $categories = array_map(fn (array $i): \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category => \Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category::buildFromInput($i, validate: $validate), $input->{'categories'});
         }
 
         $obj = new self();
@@ -97,11 +99,11 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->categories)) {
-            $output['categories'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $i): array => $i->toJson(), $this->categories);
+            $output['categories'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category $i): array => $i->toJson(), $this->categories);
         }
 
         return $output;
@@ -113,19 +115,19 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -135,7 +137,7 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -143,4 +145,3 @@ class ListOfCustomerCategoriesDeprecated200ResponseBody
         return $response;
     }
 }
-

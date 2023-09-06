@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase;
 
+use InvalidArgumentException;
+
 class CreateRedisDatabaseRequestBody
 {
     public const method = 'post';
@@ -58,7 +60,7 @@ class CreateRedisDatabaseRequestBody
     private string $version;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -75,7 +77,7 @@ class CreateRedisDatabaseRequestBody
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration|null
      */
-    public function getConfiguration() : ?\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration
+    public function getConfiguration(): ?\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration
     {
         return $this->configuration ?? null;
     }
@@ -83,7 +85,7 @@ class CreateRedisDatabaseRequestBody
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -91,7 +93,7 @@ class CreateRedisDatabaseRequestBody
     /**
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -100,7 +102,7 @@ class CreateRedisDatabaseRequestBody
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration
      * @return self
      */
-    public function withConfiguration(\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration) : self
+    public function withConfiguration(\Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
         $clone->configuration = $configuration;
@@ -111,7 +113,7 @@ class CreateRedisDatabaseRequestBody
     /**
      * @return self
      */
-    public function withoutConfiguration() : self
+    public function withoutConfiguration(): self
     {
         $clone = clone $this;
         unset($clone->configuration);
@@ -123,12 +125,12 @@ class CreateRedisDatabaseRequestBody
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -141,12 +143,12 @@ class CreateRedisDatabaseRequestBody
      * @param string $version
      * @return self
      */
-    public function withVersion(string $version) : self
+    public function withVersion(string $version): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($version, static::$schema['properties']['version']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -161,9 +163,9 @@ class CreateRedisDatabaseRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CreateRedisDatabaseRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CreateRedisDatabaseRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateRedisDatabaseRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -187,7 +189,7 @@ class CreateRedisDatabaseRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->configuration)) {
@@ -205,19 +207,19 @@ class CreateRedisDatabaseRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -227,30 +229,29 @@ class CreateRedisDatabaseRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
         return '/v2/projects/' . $projectId . '/redis-databases';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

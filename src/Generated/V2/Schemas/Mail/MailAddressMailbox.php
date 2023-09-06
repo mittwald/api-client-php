@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Mail;
 
+use InvalidArgumentException;
+use DateTime;
+
 class MailAddressMailbox
 {
     /**
@@ -87,9 +90,9 @@ class MailAddressMailbox
     ];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $passwordUpdatedAt;
+    private DateTime $passwordUpdatedAt;
 
     /**
      * @var bool
@@ -107,12 +110,12 @@ class MailAddressMailbox
     private MailAddressMailboxStorageInBytes $storageInBytes;
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @param bool $sendingEnabled
      * @param MailAddressMailboxSpamProtection $spamProtection
      * @param MailAddressMailboxStorageInBytes $storageInBytes
      */
-    public function __construct(\DateTime $passwordUpdatedAt, bool $sendingEnabled, MailAddressMailboxSpamProtection $spamProtection, MailAddressMailboxStorageInBytes $storageInBytes)
+    public function __construct(DateTime $passwordUpdatedAt, bool $sendingEnabled, MailAddressMailboxSpamProtection $spamProtection, MailAddressMailboxStorageInBytes $storageInBytes)
     {
         $this->passwordUpdatedAt = $passwordUpdatedAt;
         $this->sendingEnabled = $sendingEnabled;
@@ -121,9 +124,9 @@ class MailAddressMailbox
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getPasswordUpdatedAt() : \DateTime
+    public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
@@ -131,7 +134,7 @@ class MailAddressMailbox
     /**
      * @return bool
      */
-    public function getSendingEnabled() : bool
+    public function getSendingEnabled(): bool
     {
         return $this->sendingEnabled;
     }
@@ -139,7 +142,7 @@ class MailAddressMailbox
     /**
      * @return MailAddressMailboxSpamProtection
      */
-    public function getSpamProtection() : MailAddressMailboxSpamProtection
+    public function getSpamProtection(): MailAddressMailboxSpamProtection
     {
         return $this->spamProtection;
     }
@@ -147,16 +150,16 @@ class MailAddressMailbox
     /**
      * @return MailAddressMailboxStorageInBytes
      */
-    public function getStorageInBytes() : MailAddressMailboxStorageInBytes
+    public function getStorageInBytes(): MailAddressMailboxStorageInBytes
     {
         return $this->storageInBytes;
     }
 
     /**
-     * @param \DateTime $passwordUpdatedAt
+     * @param DateTime $passwordUpdatedAt
      * @return self
      */
-    public function withPasswordUpdatedAt(\DateTime $passwordUpdatedAt) : self
+    public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
         $clone->passwordUpdatedAt = $passwordUpdatedAt;
@@ -168,12 +171,12 @@ class MailAddressMailbox
      * @param bool $sendingEnabled
      * @return self
      */
-    public function withSendingEnabled(bool $sendingEnabled) : self
+    public function withSendingEnabled(bool $sendingEnabled): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($sendingEnabled, static::$schema['properties']['sendingEnabled']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -186,7 +189,7 @@ class MailAddressMailbox
      * @param MailAddressMailboxSpamProtection $spamProtection
      * @return self
      */
-    public function withSpamProtection(MailAddressMailboxSpamProtection $spamProtection) : self
+    public function withSpamProtection(MailAddressMailboxSpamProtection $spamProtection): self
     {
         $clone = clone $this;
         $clone->spamProtection = $spamProtection;
@@ -198,7 +201,7 @@ class MailAddressMailbox
      * @param MailAddressMailboxStorageInBytes $storageInBytes
      * @return self
      */
-    public function withStorageInBytes(MailAddressMailboxStorageInBytes $storageInBytes) : self
+    public function withStorageInBytes(MailAddressMailboxStorageInBytes $storageInBytes): self
     {
         $clone = clone $this;
         $clone->storageInBytes = $storageInBytes;
@@ -212,16 +215,16 @@ class MailAddressMailbox
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MailAddressMailbox Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MailAddressMailbox
+    public static function buildFromInput(array|object $input, bool $validate = true): MailAddressMailbox
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $passwordUpdatedAt = new \DateTime($input->{'passwordUpdatedAt'});
+        $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
         $sendingEnabled = (bool)($input->{'sendingEnabled'});
         $spamProtection = MailAddressMailboxSpamProtection::buildFromInput($input->{'spamProtection'}, validate: $validate);
         $storageInBytes = MailAddressMailboxStorageInBytes::buildFromInput($input->{'storageInBytes'}, validate: $validate);
@@ -236,10 +239,10 @@ class MailAddressMailbox
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
-        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(\DateTime::ATOM);
+        $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
         $output['sendingEnabled'] = $this->sendingEnabled;
         $output['spamProtection'] = ($this->spamProtection)->toJson();
         $output['storageInBytes'] = ($this->storageInBytes)->toJson();
@@ -253,19 +256,19 @@ class MailAddressMailbox
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -278,4 +281,3 @@ class MailAddressMailbox
         $this->storageInBytes = clone $this->storageInBytes;
     }
 }
-

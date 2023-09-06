@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Membership;
 
+use InvalidArgumentException;
+use DateTime;
+
 class CustomerMembership
 {
     /**
@@ -67,9 +70,9 @@ class CustomerMembership
     /**
      * Time the CustomerMembership should expire at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $expiresAt = null;
+    private ?DateTime $expiresAt = null;
 
     /**
      * ID of the CustomerMembership.
@@ -88,9 +91,9 @@ class CustomerMembership
     /**
      * Date the CustomerMembership was created at.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
-    private ?\DateTime $memberSince = null;
+    private ?DateTime $memberSince = null;
 
     /**
      * @var CustomerRoles
@@ -123,15 +126,15 @@ class CustomerMembership
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getExpiresAt() : ?\DateTime
+    public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
@@ -139,7 +142,7 @@ class CustomerMembership
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -147,15 +150,15 @@ class CustomerMembership
     /**
      * @return string
      */
-    public function getInviteId() : string
+    public function getInviteId(): string
     {
         return $this->inviteId;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getMemberSince() : ?\DateTime
+    public function getMemberSince(): ?DateTime
     {
         return $this->memberSince ?? null;
     }
@@ -163,7 +166,7 @@ class CustomerMembership
     /**
      * @return CustomerRoles
      */
-    public function getRole() : CustomerRoles
+    public function getRole(): CustomerRoles
     {
         return $this->role;
     }
@@ -171,7 +174,7 @@ class CustomerMembership
     /**
      * @return string
      */
-    public function getUserId() : string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -180,12 +183,12 @@ class CustomerMembership
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -195,10 +198,10 @@ class CustomerMembership
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * @param DateTime $expiresAt
      * @return self
      */
-    public function withExpiresAt(\DateTime $expiresAt) : self
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
@@ -209,7 +212,7 @@ class CustomerMembership
     /**
      * @return self
      */
-    public function withoutExpiresAt() : self
+    public function withoutExpiresAt(): self
     {
         $clone = clone $this;
         unset($clone->expiresAt);
@@ -221,12 +224,12 @@ class CustomerMembership
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -239,12 +242,12 @@ class CustomerMembership
      * @param string $inviteId
      * @return self
      */
-    public function withInviteId(string $inviteId) : self
+    public function withInviteId(string $inviteId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -254,10 +257,10 @@ class CustomerMembership
     }
 
     /**
-     * @param \DateTime $memberSince
+     * @param DateTime $memberSince
      * @return self
      */
-    public function withMemberSince(\DateTime $memberSince) : self
+    public function withMemberSince(DateTime $memberSince): self
     {
         $clone = clone $this;
         $clone->memberSince = $memberSince;
@@ -268,7 +271,7 @@ class CustomerMembership
     /**
      * @return self
      */
-    public function withoutMemberSince() : self
+    public function withoutMemberSince(): self
     {
         $clone = clone $this;
         unset($clone->memberSince);
@@ -280,7 +283,7 @@ class CustomerMembership
      * @param CustomerRoles $role
      * @return self
      */
-    public function withRole(CustomerRoles $role) : self
+    public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;
         $clone->role = $role;
@@ -292,12 +295,12 @@ class CustomerMembership
      * @param string $userId
      * @return self
      */
-    public function withUserId(string $userId) : self
+    public function withUserId(string $userId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -312,9 +315,9 @@ class CustomerMembership
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CustomerMembership Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CustomerMembership
+    public static function buildFromInput(array|object $input, bool $validate = true): CustomerMembership
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -324,13 +327,13 @@ class CustomerMembership
         $customerId = $input->{'customerId'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
-            $expiresAt = new \DateTime($input->{'expiresAt'});
+            $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $id = $input->{'id'};
         $inviteId = $input->{'inviteId'};
         $memberSince = null;
         if (isset($input->{'memberSince'})) {
-            $memberSince = new \DateTime($input->{'memberSince'});
+            $memberSince = new DateTime($input->{'memberSince'});
         }
         $role = CustomerRoles::from($input->{'role'});
         $userId = $input->{'userId'};
@@ -346,17 +349,17 @@ class CustomerMembership
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['customerId'] = $this->customerId;
         if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(\DateTime::ATOM);
+            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['id'] = $this->id;
         $output['inviteId'] = $this->inviteId;
         if (isset($this->memberSince)) {
-            $output['memberSince'] = ($this->memberSince)->format(\DateTime::ATOM);
+            $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }
         $output['role'] = $this->role->value;
         $output['userId'] = $this->userId;
@@ -370,19 +373,19 @@ class CustomerMembership
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -398,4 +401,3 @@ class CustomerMembership
         }
     }
 }
-

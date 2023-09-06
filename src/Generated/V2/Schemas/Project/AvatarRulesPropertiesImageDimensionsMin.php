@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
+use InvalidArgumentException;
+
 class AvatarRulesPropertiesImageDimensionsMin
 {
     /**
@@ -43,7 +45,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     /**
      * @return int|null
      */
-    public function getHeight() : ?int
+    public function getHeight(): ?int
     {
         return $this->height ?? null;
     }
@@ -51,7 +53,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     /**
      * @return int|null
      */
-    public function getWidth() : ?int
+    public function getWidth(): ?int
     {
         return $this->width ?? null;
     }
@@ -60,12 +62,12 @@ class AvatarRulesPropertiesImageDimensionsMin
      * @param int $height
      * @return self
      */
-    public function withHeight(int $height) : self
+    public function withHeight(int $height): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($height, static::$schema['properties']['height']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -77,7 +79,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     /**
      * @return self
      */
-    public function withoutHeight() : self
+    public function withoutHeight(): self
     {
         $clone = clone $this;
         unset($clone->height);
@@ -89,12 +91,12 @@ class AvatarRulesPropertiesImageDimensionsMin
      * @param int $width
      * @return self
      */
-    public function withWidth(int $width) : self
+    public function withWidth(int $width): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($width, static::$schema['properties']['width']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -106,7 +108,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     /**
      * @return self
      */
-    public function withoutWidth() : self
+    public function withoutWidth(): self
     {
         $clone = clone $this;
         unset($clone->width);
@@ -120,9 +122,9 @@ class AvatarRulesPropertiesImageDimensionsMin
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return AvatarRulesPropertiesImageDimensionsMin Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : AvatarRulesPropertiesImageDimensionsMin
+    public static function buildFromInput(array|object $input, bool $validate = true): AvatarRulesPropertiesImageDimensionsMin
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -149,7 +151,7 @@ class AvatarRulesPropertiesImageDimensionsMin
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->height)) {
@@ -168,19 +170,19 @@ class AvatarRulesPropertiesImageDimensionsMin
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -190,4 +192,3 @@ class AvatarRulesPropertiesImageDimensionsMin
     {
     }
 }
-

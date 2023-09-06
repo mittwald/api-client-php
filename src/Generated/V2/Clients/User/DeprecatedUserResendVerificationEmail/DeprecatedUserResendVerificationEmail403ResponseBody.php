@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail;
 
+use InvalidArgumentException;
+
 class DeprecatedUserResendVerificationEmail403ResponseBody
 {
     /**
@@ -47,7 +49,7 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
     /**
      * @return string|null
      */
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
@@ -55,7 +57,7 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
     /**
      * @return string|null
      */
-    public function getType() : ?string
+    public function getType(): ?string
     {
         return $this->type ?? null;
     }
@@ -64,12 +66,12 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -81,7 +83,7 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
     /**
      * @return self
      */
-    public function withoutMessage() : self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
         unset($clone->message);
@@ -93,12 +95,12 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
      * @param string $type
      * @return self
      */
-    public function withType(string $type) : self
+    public function withType(string $type): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($type, static::$schema['properties']['type']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -110,7 +112,7 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
     /**
      * @return self
      */
-    public function withoutType() : self
+    public function withoutType(): self
     {
         $clone = clone $this;
         unset($clone->type);
@@ -124,9 +126,9 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserResendVerificationEmail403ResponseBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserResendVerificationEmail403ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserResendVerificationEmail403ResponseBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -153,7 +155,7 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->message)) {
@@ -172,19 +174,19 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -194,7 +196,7 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
     {
     }
 
-    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse) : self
+    public static function fromResponse(\Psr\Http\Message\ResponseInterface $httpResponse): self
     {
         $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
@@ -202,4 +204,3 @@ class DeprecatedUserResendVerificationEmail403ResponseBody
         return $response;
     }
 }
-

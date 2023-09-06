@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Database;
 
+use InvalidArgumentException;
+use DateTime;
+
 class MySqlDatabase
 {
     /**
@@ -86,9 +89,9 @@ class MySqlDatabase
     private CharacterSettings $characterSettings;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var string
@@ -136,9 +139,9 @@ class MySqlDatabase
     private int $size;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    private \DateTime $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * @var string
@@ -147,7 +150,7 @@ class MySqlDatabase
 
     /**
      * @param CharacterSettings $characterSettings
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @param string $description
      * @param string $hostname
      * @param string $id
@@ -156,10 +159,10 @@ class MySqlDatabase
      * @param string $name
      * @param string $projectId
      * @param int $size
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @param string $version
      */
-    public function __construct(CharacterSettings $characterSettings, \DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, int $size, \DateTime $updatedAt, string $version)
+    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, int $size, DateTime $updatedAt, string $version)
     {
         $this->characterSettings = $characterSettings;
         $this->createdAt = $createdAt;
@@ -178,15 +181,15 @@ class MySqlDatabase
     /**
      * @return CharacterSettings
      */
-    public function getCharacterSettings() : CharacterSettings
+    public function getCharacterSettings(): CharacterSettings
     {
         return $this->characterSettings;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -194,7 +197,7 @@ class MySqlDatabase
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -202,7 +205,7 @@ class MySqlDatabase
     /**
      * @return string[]|null
      */
-    public function getFinalizers() : ?array
+    public function getFinalizers(): ?array
     {
         return $this->finalizers ?? null;
     }
@@ -210,7 +213,7 @@ class MySqlDatabase
     /**
      * @return string
      */
-    public function getHostname() : string
+    public function getHostname(): string
     {
         return $this->hostname;
     }
@@ -218,7 +221,7 @@ class MySqlDatabase
     /**
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -226,7 +229,7 @@ class MySqlDatabase
     /**
      * @return bool
      */
-    public function getIsReady() : bool
+    public function getIsReady(): bool
     {
         return $this->isReady;
     }
@@ -234,7 +237,7 @@ class MySqlDatabase
     /**
      * @return bool
      */
-    public function getIsShared() : bool
+    public function getIsShared(): bool
     {
         return $this->isShared;
     }
@@ -242,7 +245,7 @@ class MySqlDatabase
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -250,7 +253,7 @@ class MySqlDatabase
     /**
      * @return string
      */
-    public function getProjectId() : string
+    public function getProjectId(): string
     {
         return $this->projectId;
     }
@@ -258,15 +261,15 @@ class MySqlDatabase
     /**
      * @return int
      */
-    public function getSize() : int
+    public function getSize(): int
     {
         return $this->size;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -274,7 +277,7 @@ class MySqlDatabase
     /**
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
@@ -283,7 +286,7 @@ class MySqlDatabase
      * @param CharacterSettings $characterSettings
      * @return self
      */
-    public function withCharacterSettings(CharacterSettings $characterSettings) : self
+    public function withCharacterSettings(CharacterSettings $characterSettings): self
     {
         $clone = clone $this;
         $clone->characterSettings = $characterSettings;
@@ -292,10 +295,10 @@ class MySqlDatabase
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(\DateTime $createdAt) : self
+    public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
         $clone->createdAt = $createdAt;
@@ -307,12 +310,12 @@ class MySqlDatabase
      * @param string $description
      * @return self
      */
-    public function withDescription(string $description) : self
+    public function withDescription(string $description): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($description, static::$schema['properties']['description']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -325,12 +328,12 @@ class MySqlDatabase
      * @param string[] $finalizers
      * @return self
      */
-    public function withFinalizers(array $finalizers) : self
+    public function withFinalizers(array $finalizers): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($finalizers, static::$schema['properties']['finalizers']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -342,7 +345,7 @@ class MySqlDatabase
     /**
      * @return self
      */
-    public function withoutFinalizers() : self
+    public function withoutFinalizers(): self
     {
         $clone = clone $this;
         unset($clone->finalizers);
@@ -354,12 +357,12 @@ class MySqlDatabase
      * @param string $hostname
      * @return self
      */
-    public function withHostname(string $hostname) : self
+    public function withHostname(string $hostname): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($hostname, static::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -372,12 +375,12 @@ class MySqlDatabase
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -390,12 +393,12 @@ class MySqlDatabase
      * @param bool $isReady
      * @return self
      */
-    public function withIsReady(bool $isReady) : self
+    public function withIsReady(bool $isReady): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($isReady, static::$schema['properties']['isReady']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -408,12 +411,12 @@ class MySqlDatabase
      * @param bool $isShared
      * @return self
      */
-    public function withIsShared(bool $isShared) : self
+    public function withIsShared(bool $isShared): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($isShared, static::$schema['properties']['isShared']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -426,12 +429,12 @@ class MySqlDatabase
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -444,12 +447,12 @@ class MySqlDatabase
      * @param string $projectId
      * @return self
      */
-    public function withProjectId(string $projectId) : self
+    public function withProjectId(string $projectId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -462,12 +465,12 @@ class MySqlDatabase
      * @param int $size
      * @return self
      */
-    public function withSize(int $size) : self
+    public function withSize(int $size): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($size, static::$schema['properties']['size']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -477,10 +480,10 @@ class MySqlDatabase
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      * @return self
      */
-    public function withUpdatedAt(\DateTime $updatedAt) : self
+    public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
         $clone->updatedAt = $updatedAt;
@@ -492,12 +495,12 @@ class MySqlDatabase
      * @param string $version
      * @return self
      */
-    public function withVersion(string $version) : self
+    public function withVersion(string $version): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($version, static::$schema['properties']['version']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -512,9 +515,9 @@ class MySqlDatabase
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return MySqlDatabase Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : MySqlDatabase
+    public static function buildFromInput(array|object $input, bool $validate = true): MySqlDatabase
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -522,7 +525,7 @@ class MySqlDatabase
         }
 
         $characterSettings = CharacterSettings::buildFromInput($input->{'characterSettings'}, validate: $validate);
-        $createdAt = new \DateTime($input->{'createdAt'});
+        $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
         $finalizers = null;
         if (isset($input->{'finalizers'})) {
@@ -535,7 +538,7 @@ class MySqlDatabase
         $name = $input->{'name'};
         $projectId = $input->{'projectId'};
         $size = (int)($input->{'size'});
-        $updatedAt = new \DateTime($input->{'updatedAt'});
+        $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
         $obj = new self($characterSettings, $createdAt, $description, $hostname, $id, $isReady, $isShared, $name, $projectId, $size, $updatedAt, $version);
@@ -548,11 +551,11 @@ class MySqlDatabase
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['characterSettings'] = $this->characterSettings->toJson();
-        $output['createdAt'] = ($this->createdAt)->format(\DateTime::ATOM);
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
         if (isset($this->finalizers)) {
             $output['finalizers'] = $this->finalizers;
@@ -564,7 +567,7 @@ class MySqlDatabase
         $output['name'] = $this->name;
         $output['projectId'] = $this->projectId;
         $output['size'] = $this->size;
-        $output['updatedAt'] = ($this->updatedAt)->format(\DateTime::ATOM);
+        $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         $output['version'] = $this->version;
 
         return $output;
@@ -576,19 +579,19 @@ class MySqlDatabase
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -600,4 +603,3 @@ class MySqlDatabase
         $this->updatedAt = clone $this->updatedAt;
     }
 }
-

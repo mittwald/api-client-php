@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue;
 
+use InvalidArgumentException;
+
 class DeprecatedUserCreateIssueRequestBody
 {
     public const method = 'post';
@@ -86,7 +88,7 @@ class DeprecatedUserCreateIssueRequestBody
     private int|float|null $vote = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -102,7 +104,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -110,7 +112,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return string|null
      */
-    public function getOrigin() : ?string
+    public function getOrigin(): ?string
     {
         return $this->origin ?? null;
     }
@@ -118,7 +120,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return string|null
      */
-    public function getSubject() : ?string
+    public function getSubject(): ?string
     {
         return $this->subject ?? null;
     }
@@ -126,7 +128,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return DeprecatedUserCreateIssueRequestBodyType
      */
-    public function getType() : DeprecatedUserCreateIssueRequestBodyType
+    public function getType(): DeprecatedUserCreateIssueRequestBodyType
     {
         return $this->type;
     }
@@ -134,7 +136,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return int|float|null
      */
-    public function getVote() : int|float|null
+    public function getVote(): int|float|null
     {
         return $this->vote;
     }
@@ -143,12 +145,12 @@ class DeprecatedUserCreateIssueRequestBody
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -161,12 +163,12 @@ class DeprecatedUserCreateIssueRequestBody
      * @param string $origin
      * @return self
      */
-    public function withOrigin(string $origin) : self
+    public function withOrigin(string $origin): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($origin, static::$schema['properties']['origin']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -178,7 +180,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return self
      */
-    public function withoutOrigin() : self
+    public function withoutOrigin(): self
     {
         $clone = clone $this;
         unset($clone->origin);
@@ -190,12 +192,12 @@ class DeprecatedUserCreateIssueRequestBody
      * @param string $subject
      * @return self
      */
-    public function withSubject(string $subject) : self
+    public function withSubject(string $subject): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($subject, static::$schema['properties']['subject']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -207,7 +209,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return self
      */
-    public function withoutSubject() : self
+    public function withoutSubject(): self
     {
         $clone = clone $this;
         unset($clone->subject);
@@ -219,7 +221,7 @@ class DeprecatedUserCreateIssueRequestBody
      * @param DeprecatedUserCreateIssueRequestBodyType $type
      * @return self
      */
-    public function withType(DeprecatedUserCreateIssueRequestBodyType $type) : self
+    public function withType(DeprecatedUserCreateIssueRequestBodyType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
@@ -231,12 +233,12 @@ class DeprecatedUserCreateIssueRequestBody
      * @param int|float $vote
      * @return self
      */
-    public function withVote(int|float $vote) : self
+    public function withVote(int|float $vote): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($vote, static::$schema['properties']['vote']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -248,7 +250,7 @@ class DeprecatedUserCreateIssueRequestBody
     /**
      * @return self
      */
-    public function withoutVote() : self
+    public function withoutVote(): self
     {
         $clone = clone $this;
         unset($clone->vote);
@@ -262,9 +264,9 @@ class DeprecatedUserCreateIssueRequestBody
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserCreateIssueRequestBody Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserCreateIssueRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserCreateIssueRequestBody
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -298,7 +300,7 @@ class DeprecatedUserCreateIssueRequestBody
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['message'] = $this->message;
@@ -322,19 +324,19 @@ class DeprecatedUserCreateIssueRequestBody
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -344,29 +346,28 @@ class DeprecatedUserCreateIssueRequestBody
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/users/self/issues';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

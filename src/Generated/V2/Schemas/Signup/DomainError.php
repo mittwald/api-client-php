@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Signup;
 
+use InvalidArgumentException;
+
 class DomainError
 {
     /**
@@ -67,7 +69,7 @@ class DomainError
     /**
      * @return DomainErrorInfo|null
      */
-    public function getInfo() : ?DomainErrorInfo
+    public function getInfo(): ?DomainErrorInfo
     {
         return $this->info ?? null;
     }
@@ -75,7 +77,7 @@ class DomainError
     /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -83,7 +85,7 @@ class DomainError
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -92,7 +94,7 @@ class DomainError
      * @param DomainErrorInfo $info
      * @return self
      */
-    public function withInfo(DomainErrorInfo $info) : self
+    public function withInfo(DomainErrorInfo $info): self
     {
         $clone = clone $this;
         $clone->info = $info;
@@ -103,7 +105,7 @@ class DomainError
     /**
      * @return self
      */
-    public function withoutInfo() : self
+    public function withoutInfo(): self
     {
         $clone = clone $this;
         unset($clone->info);
@@ -115,12 +117,12 @@ class DomainError
      * @param string $message
      * @return self
      */
-    public function withMessage(string $message) : self
+    public function withMessage(string $message): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -133,12 +135,12 @@ class DomainError
      * @param string $name
      * @return self
      */
-    public function withName(string $name) : self
+    public function withName(string $name): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($name, static::$schema['properties']['name']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -153,9 +155,9 @@ class DomainError
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DomainError Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DomainError
+    public static function buildFromInput(array|object $input, bool $validate = true): DomainError
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -179,7 +181,7 @@ class DomainError
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->info)) {
@@ -197,19 +199,19 @@ class DomainError
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -222,4 +224,3 @@ class DomainError
         }
     }
 }
-

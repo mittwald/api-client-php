@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Cronjob;
 
+use InvalidArgumentException;
+
 class CronjobExecutionAbortedBy
 {
     /**
@@ -36,7 +38,7 @@ class CronjobExecutionAbortedBy
     /**
      * @return string|null
      */
-    public function getId() : ?string
+    public function getId(): ?string
     {
         return $this->id ?? null;
     }
@@ -45,12 +47,12 @@ class CronjobExecutionAbortedBy
      * @param string $id
      * @return self
      */
-    public function withId(string $id) : self
+    public function withId(string $id): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -62,7 +64,7 @@ class CronjobExecutionAbortedBy
     /**
      * @return self
      */
-    public function withoutId() : self
+    public function withoutId(): self
     {
         $clone = clone $this;
         unset($clone->id);
@@ -76,9 +78,9 @@ class CronjobExecutionAbortedBy
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return CronjobExecutionAbortedBy Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : CronjobExecutionAbortedBy
+    public static function buildFromInput(array|object $input, bool $validate = true): CronjobExecutionAbortedBy
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -100,7 +102,7 @@ class CronjobExecutionAbortedBy
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->id)) {
@@ -116,19 +118,19 @@ class CronjobExecutionAbortedBy
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -138,4 +140,3 @@ class CronjobExecutionAbortedBy
     {
     }
 }
-

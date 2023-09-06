@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackList;
 
+use InvalidArgumentException;
+
 class DeprecatedUserServiceFeedbackListRequest
 {
     public const method = 'get';
@@ -21,7 +23,7 @@ class DeprecatedUserServiceFeedbackListRequest
             ],
         ],
         'required' => [
-            
+
         ],
     ];
 
@@ -31,7 +33,7 @@ class DeprecatedUserServiceFeedbackListRequest
     private ?string $subject = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -44,7 +46,7 @@ class DeprecatedUserServiceFeedbackListRequest
     /**
      * @return string|null
      */
-    public function getSubject() : ?string
+    public function getSubject(): ?string
     {
         return $this->subject ?? null;
     }
@@ -53,12 +55,12 @@ class DeprecatedUserServiceFeedbackListRequest
      * @param string $subject
      * @return self
      */
-    public function withSubject(string $subject) : self
+    public function withSubject(string $subject): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($subject, static::$schema['properties']['subject']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -70,7 +72,7 @@ class DeprecatedUserServiceFeedbackListRequest
     /**
      * @return self
      */
-    public function withoutSubject() : self
+    public function withoutSubject(): self
     {
         $clone = clone $this;
         unset($clone->subject);
@@ -84,9 +86,9 @@ class DeprecatedUserServiceFeedbackListRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return DeprecatedUserServiceFeedbackListRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : DeprecatedUserServiceFeedbackListRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserServiceFeedbackListRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -108,7 +110,7 @@ class DeprecatedUserServiceFeedbackListRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         if (isset($this->subject)) {
@@ -124,19 +126,19 @@ class DeprecatedUserServiceFeedbackListRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -146,13 +148,13 @@ class DeprecatedUserServiceFeedbackListRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         return '/v2/user/feedback';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -162,16 +164,15 @@ class DeprecatedUserServiceFeedbackListRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-

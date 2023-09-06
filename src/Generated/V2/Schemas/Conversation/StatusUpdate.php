@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use InvalidArgumentException;
+
 class StatusUpdate
 {
     /**
@@ -96,7 +98,7 @@ class StatusUpdate
     /**
      * @return string
      */
-    public function getConversationId() : string
+    public function getConversationId(): string
     {
         return $this->conversationId;
     }
@@ -104,7 +106,7 @@ class StatusUpdate
     /**
      * @return string
      */
-    public function getCreatedAt() : string
+    public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
@@ -112,7 +114,7 @@ class StatusUpdate
     /**
      * @return bool|null
      */
-    public function getInternal() : ?bool
+    public function getInternal(): ?bool
     {
         return $this->internal ?? null;
     }
@@ -120,7 +122,7 @@ class StatusUpdate
     /**
      * @return string
      */
-    public function getMessageContent() : string
+    public function getMessageContent(): string
     {
         return $this->messageContent;
     }
@@ -128,7 +130,7 @@ class StatusUpdate
     /**
      * @return StatusUpdateMeta|null
      */
-    public function getMeta() : ?StatusUpdateMeta
+    public function getMeta(): ?StatusUpdateMeta
     {
         return $this->meta ?? null;
     }
@@ -136,7 +138,7 @@ class StatusUpdate
     /**
      * @return StatusUpdateType
      */
-    public function getType() : StatusUpdateType
+    public function getType(): StatusUpdateType
     {
         return $this->type;
     }
@@ -145,12 +147,12 @@ class StatusUpdate
      * @param string $conversationId
      * @return self
      */
-    public function withConversationId(string $conversationId) : self
+    public function withConversationId(string $conversationId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($conversationId, static::$schema['properties']['conversationId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -163,12 +165,12 @@ class StatusUpdate
      * @param string $createdAt
      * @return self
      */
-    public function withCreatedAt(string $createdAt) : self
+    public function withCreatedAt(string $createdAt): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($createdAt, static::$schema['properties']['createdAt']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -181,12 +183,12 @@ class StatusUpdate
      * @param bool $internal
      * @return self
      */
-    public function withInternal(bool $internal) : self
+    public function withInternal(bool $internal): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($internal, static::$schema['properties']['internal']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -198,7 +200,7 @@ class StatusUpdate
     /**
      * @return self
      */
-    public function withoutInternal() : self
+    public function withoutInternal(): self
     {
         $clone = clone $this;
         unset($clone->internal);
@@ -210,12 +212,12 @@ class StatusUpdate
      * @param string $messageContent
      * @return self
      */
-    public function withMessageContent(string $messageContent) : self
+    public function withMessageContent(string $messageContent): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($messageContent, static::$schema['properties']['messageContent']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -228,7 +230,7 @@ class StatusUpdate
      * @param StatusUpdateMeta $meta
      * @return self
      */
-    public function withMeta(StatusUpdateMeta $meta) : self
+    public function withMeta(StatusUpdateMeta $meta): self
     {
         $clone = clone $this;
         $clone->meta = $meta;
@@ -239,7 +241,7 @@ class StatusUpdate
     /**
      * @return self
      */
-    public function withoutMeta() : self
+    public function withoutMeta(): self
     {
         $clone = clone $this;
         unset($clone->meta);
@@ -251,7 +253,7 @@ class StatusUpdate
      * @param StatusUpdateType $type
      * @return self
      */
-    public function withType(StatusUpdateType $type) : self
+    public function withType(StatusUpdateType $type): self
     {
         $clone = clone $this;
         $clone->type = $type;
@@ -265,9 +267,9 @@ class StatusUpdate
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return StatusUpdate Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : StatusUpdate
+    public static function buildFromInput(array|object $input, bool $validate = true): StatusUpdate
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -298,7 +300,7 @@ class StatusUpdate
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['conversationId'] = $this->conversationId;
@@ -321,19 +323,19 @@ class StatusUpdate
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -346,4 +348,3 @@ class StatusUpdate
         }
     }
 }
-

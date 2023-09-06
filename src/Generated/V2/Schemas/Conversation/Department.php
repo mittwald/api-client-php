@@ -2,7 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
-enum Department: string {
+enum Department: string
+{
     case development = 'development';
     case mail = 'mail';
     case infra = 'infra';

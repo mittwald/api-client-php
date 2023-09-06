@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders;
 
+use InvalidArgumentException;
+
 class OrderListCustomerOrdersRequest
 {
     public const method = 'get';
@@ -91,7 +93,7 @@ class OrderListCustomerOrdersRequest
     private ?array $templateNames = null;
 
     private array $headers = [
-        
+
     ];
 
     /**
@@ -105,7 +107,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return string
      */
-    public function getCustomerId() : string
+    public function getCustomerId(): string
     {
         return $this->customerId;
     }
@@ -113,7 +115,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return int|null
      */
-    public function getLimit() : ?int
+    public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
@@ -121,7 +123,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return int|null
      */
-    public function getSkip() : ?int
+    public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
@@ -129,7 +131,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return int|null
      */
-    public function getPage() : ?int
+    public function getPage(): ?int
     {
         return $this->page ?? null;
     }
@@ -137,7 +139,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[]|null
      */
-    public function getIncludesStatus() : ?array
+    public function getIncludesStatus(): ?array
     {
         return $this->includesStatus ?? null;
     }
@@ -145,7 +147,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[]|null
      */
-    public function getExcludesStatus() : ?array
+    public function getExcludesStatus(): ?array
     {
         return $this->excludesStatus ?? null;
     }
@@ -153,7 +155,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return string[]|null
      */
-    public function getTemplateNames() : ?array
+    public function getTemplateNames(): ?array
     {
         return $this->templateNames ?? null;
     }
@@ -162,12 +164,12 @@ class OrderListCustomerOrdersRequest
      * @param string $customerId
      * @return self
      */
-    public function withCustomerId(string $customerId) : self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -180,12 +182,12 @@ class OrderListCustomerOrdersRequest
      * @param int $limit
      * @return self
      */
-    public function withLimit(int $limit) : self
+    public function withLimit(int $limit): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($limit, static::$schema['properties']['limit']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -197,7 +199,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return self
      */
-    public function withoutLimit() : self
+    public function withoutLimit(): self
     {
         $clone = clone $this;
         unset($clone->limit);
@@ -209,12 +211,12 @@ class OrderListCustomerOrdersRequest
      * @param int $skip
      * @return self
      */
-    public function withSkip(int $skip) : self
+    public function withSkip(int $skip): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($skip, static::$schema['properties']['skip']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -226,7 +228,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return self
      */
-    public function withoutSkip() : self
+    public function withoutSkip(): self
     {
         $clone = clone $this;
         unset($clone->skip);
@@ -238,12 +240,12 @@ class OrderListCustomerOrdersRequest
      * @param int $page
      * @return self
      */
-    public function withPage(int $page) : self
+    public function withPage(int $page): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($page, static::$schema['properties']['page']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -255,7 +257,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return self
      */
-    public function withoutPage() : self
+    public function withoutPage(): self
     {
         $clone = clone $this;
         unset($clone->page);
@@ -267,7 +269,7 @@ class OrderListCustomerOrdersRequest
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[] $includesStatus
      * @return self
      */
-    public function withIncludesStatus(array $includesStatus) : self
+    public function withIncludesStatus(array $includesStatus): self
     {
         $clone = clone $this;
         $clone->includesStatus = $includesStatus;
@@ -278,7 +280,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return self
      */
-    public function withoutIncludesStatus() : self
+    public function withoutIncludesStatus(): self
     {
         $clone = clone $this;
         unset($clone->includesStatus);
@@ -290,7 +292,7 @@ class OrderListCustomerOrdersRequest
      * @param \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus[] $excludesStatus
      * @return self
      */
-    public function withExcludesStatus(array $excludesStatus) : self
+    public function withExcludesStatus(array $excludesStatus): self
     {
         $clone = clone $this;
         $clone->excludesStatus = $excludesStatus;
@@ -301,7 +303,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return self
      */
-    public function withoutExcludesStatus() : self
+    public function withoutExcludesStatus(): self
     {
         $clone = clone $this;
         unset($clone->excludesStatus);
@@ -313,12 +315,12 @@ class OrderListCustomerOrdersRequest
      * @param string[] $templateNames
      * @return self
      */
-    public function withTemplateNames(array $templateNames) : self
+    public function withTemplateNames(array $templateNames): self
     {
         $validator = new \JsonSchema\Validator();
         $validator->validate($templateNames, static::$schema['properties']['templateNames']);
         if (!$validator->isValid()) {
-            throw new \InvalidArgumentException($validator->getErrors()[0]['message']);
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
@@ -330,7 +332,7 @@ class OrderListCustomerOrdersRequest
     /**
      * @return self
      */
-    public function withoutTemplateNames() : self
+    public function withoutTemplateNames(): self
     {
         $clone = clone $this;
         unset($clone->templateNames);
@@ -344,9 +346,9 @@ class OrderListCustomerOrdersRequest
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
      * @return OrderListCustomerOrdersRequest Created instance
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true) : OrderListCustomerOrdersRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): OrderListCustomerOrdersRequest
     {
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -368,11 +370,11 @@ class OrderListCustomerOrdersRequest
         }
         $includesStatus = null;
         if (isset($input->{'includesStatus'})) {
-            $includesStatus = array_map(fn(string $i): \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus => \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus::from($i), $input->{'includesStatus'});
+            $includesStatus = array_map(fn (string $i): \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus => \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus::from($i), $input->{'includesStatus'});
         }
         $excludesStatus = null;
         if (isset($input->{'excludesStatus'})) {
-            $excludesStatus = array_map(fn(string $i): \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus => \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus::from($i), $input->{'excludesStatus'});
+            $excludesStatus = array_map(fn (string $i): \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus => \Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus::from($i), $input->{'excludesStatus'});
         }
         $templateNames = null;
         if (isset($input->{'templateNames'})) {
@@ -394,7 +396,7 @@ class OrderListCustomerOrdersRequest
      *
      * @return array Converted array
      */
-    public function toJson() : array
+    public function toJson(): array
     {
         $output = [];
         $output['customerId'] = $this->customerId;
@@ -408,10 +410,10 @@ class OrderListCustomerOrdersRequest
             $output['page'] = $this->page;
         }
         if (isset($this->includesStatus)) {
-            $output['includesStatus'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus $i): string => $i->value, $this->includesStatus);
+            $output['includesStatus'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus $i): string => $i->value, $this->includesStatus);
         }
         if (isset($this->excludesStatus)) {
-            $output['excludesStatus'] = array_map(fn(\Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus $i): string => $i->value, $this->excludesStatus);
+            $output['excludesStatus'] = array_map(fn (\Mittwald\ApiClient\Generated\V2\Schemas\Order\OrderStatus $i): string => $i->value, $this->excludesStatus);
         }
         if (isset($this->templateNames)) {
             $output['templateNames'] = $this->templateNames;
@@ -426,19 +428,19 @@ class OrderListCustomerOrdersRequest
      * @param array|object $input Input data
      * @param bool $return Return instead of throwing errors
      * @return bool Validation result
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public static function validateInput(array|object $input, bool $return = false) : bool
+    public static function validateInput(array|object $input, bool $return = false): bool
     {
         $validator = new \JsonSchema\Validator();
         $input = is_array($input) ? \JsonSchema\Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
         if (!$validator->isValid() && !$return) {
-            $errors = array_map(function(array $e): string {
+            $errors = array_map(function (array $e): string {
                 return $e["property"] . ": " . $e["message"];
             }, $validator->getErrors());
-            throw new \InvalidArgumentException(join(", ", $errors));
+            throw new InvalidArgumentException(join(", ", $errors));
         }
 
         return $validator->isValid();
@@ -448,14 +450,14 @@ class OrderListCustomerOrdersRequest
     {
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
         return '/v2/customers/' . $customerId . '/orders';
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
@@ -480,16 +482,15 @@ class OrderListCustomerOrdersRequest
         return $query;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function withHeader(string $name, string|array $value) : self
+    public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;
         $clone->headers[$name] = $value;
         return $clone;
     }
 }
-
