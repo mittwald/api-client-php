@@ -20,9 +20,10 @@
   },
   "require-dev": {
     "vimeo/psalm": "^5.15",
-    "friendsofphp/php-cs-fixer": "^3.25"
+    "friendsofphp/php-cs-fixer": "^3.25",
+    "rector/rector": "^0.18.2"
   },
   "scripts": {
-    "format": "php-cs-fixer fix --allow-risky=yes"
+    "format": "rector && php-cs-fixer fix --allow-risky=yes"
   }
 }
