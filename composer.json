@@ -19,6 +19,10 @@
     "justinrainbow/json-schema": "^5.2"
   },
   "require-dev": {
-    "vimeo/psalm": "^5.15"
+    "vimeo/psalm": "^5.15",
+    "friendsofphp/php-cs-fixer": "^3.25"
+  },
+  "scripts": {
+    "format": "php-cs-fixer fix --allow-risky=yes"
   }
 }
