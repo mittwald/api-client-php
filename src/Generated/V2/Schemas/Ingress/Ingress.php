@@ -20,6 +20,7 @@ class Ingress
                         'ERROR_UNSPECIFIED',
                         'ERROR_QUAD_A',
                         'ERROR_NO_A_RECORD',
+                        'ERROR_ACME_CERTIFICATE_REQUEST_DEADLINE_EXCEEDED',
                     ],
                     'type' => 'string',
                 ],
