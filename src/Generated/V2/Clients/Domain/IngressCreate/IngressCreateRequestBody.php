@@ -164,7 +164,7 @@ class IngressCreateRequestBody
         }
 
         $hostname = $input->{'hostname'};
-        $paths = array_map(fn (array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
+        $paths = array_map(fn (array|object $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
 
         $obj = new self($hostname, $paths, $projectId);

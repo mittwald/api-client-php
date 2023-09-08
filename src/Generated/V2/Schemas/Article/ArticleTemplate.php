@@ -470,15 +470,15 @@ class ArticleTemplate
 
         $additionalArticles = null;
         if (isset($input->{'additionalArticles'})) {
-            $additionalArticles = array_map(fn (array $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
+            $additionalArticles = array_map(fn (array|object $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
         }
         $addons = null;
         if (isset($input->{'addons'})) {
-            $addons = array_map(fn (array $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
+            $addons = array_map(fn (array|object $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
         }
         $attributes = null;
         if (isset($input->{'attributes'})) {
-            $attributes = array_map(fn (array $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
+            $attributes = array_map(fn (array|object $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
         }
         $description = null;
         if (isset($input->{'description'})) {
@@ -492,7 +492,7 @@ class ArticleTemplate
         $isRecurring = (bool)($input->{'isRecurring'});
         $modifierArticles = null;
         if (isset($input->{'modifierArticles'})) {
-            $modifierArticles = array_map(fn (array $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
+            $modifierArticles = array_map(fn (array|object $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
         }
         $name = $input->{'name'};
         $type = ArticleTemplateType::from($input->{'type'});

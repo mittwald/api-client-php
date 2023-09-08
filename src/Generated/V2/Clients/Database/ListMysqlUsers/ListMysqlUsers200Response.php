@@ -81,7 +81,7 @@ class ListMysqlUsers200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): MySqlUser => MySqlUser::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): MySqlUser => MySqlUser::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

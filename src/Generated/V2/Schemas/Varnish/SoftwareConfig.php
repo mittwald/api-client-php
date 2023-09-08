@@ -188,7 +188,7 @@ class SoftwareConfig
         }
         $revisions = null;
         if (isset($input->{'revisions'})) {
-            $revisions = array_map(fn (array $i): ConfigRevision => ConfigRevision::buildFromInput($i, validate: $validate), $input->{'revisions'});
+            $revisions = array_map(fn (array|object $i): ConfigRevision => ConfigRevision::buildFromInput($i, validate: $validate), $input->{'revisions'});
         }
 
         $obj = new self();

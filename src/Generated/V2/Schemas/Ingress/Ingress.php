@@ -418,7 +418,7 @@ class Ingress
         $ips = IngressIps::buildFromInput($input->{'ips'}, validate: $validate);
         $isDefault = (bool)($input->{'isDefault'});
         $isEnabled = (bool)($input->{'isEnabled'});
-        $paths = array_map(fn (array $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
+        $paths = array_map(fn (array|object $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
         $tls = match (true) {
             TlsAcme::validateInput($input->{'tls'}, true) => TlsAcme::buildFromInput($input->{'tls'}, validate: $validate),

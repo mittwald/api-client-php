@@ -902,7 +902,7 @@ class ContractItem
         if (isset($input->{'aggregateReference'})) {
             $aggregateReference = AggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
         }
-        $articles = array_map(fn (array $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'articles'});
+        $articles = array_map(fn (array|object $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'articles'});
         $contractPeriod = str_contains($input->{'contractPeriod'}, '.') ? (float)($input->{'contractPeriod'}) : (int)($input->{'contractPeriod'});
         $description = $input->{'description'};
         $groupByProjectId = null;

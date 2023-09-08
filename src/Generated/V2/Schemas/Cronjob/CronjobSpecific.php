@@ -526,7 +526,7 @@ class CronjobSpecific
         }
         $executions = null;
         if (isset($input->{'executions'})) {
-            $executions = array_map(fn (array $i): CronjobExecution => CronjobExecution::buildFromInput($i, validate: $validate), $input->{'executions'});
+            $executions = array_map(fn (array|object $i): CronjobExecution => CronjobExecution::buildFromInput($i, validate: $validate), $input->{'executions'});
         }
         $id = $input->{'id'};
         $interval = $input->{'interval'};

@@ -252,7 +252,7 @@ class ConfigRevision
         if (isset($input->{'expire'})) {
             $expire = (int)($input->{'expire'});
         }
-        $files = array_map(fn (array $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
+        $files = array_map(fn (array|object $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
         $note = null;
         if (isset($input->{'note'})) {
             $note = $input->{'note'};

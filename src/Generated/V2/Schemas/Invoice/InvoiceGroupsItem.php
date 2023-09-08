@@ -176,7 +176,7 @@ class InvoiceGroupsItem
             $contractId = $input->{'contractId'};
         }
         $description = $input->{'description'};
-        $items = array_map(fn (array $i): InvoiceItem => InvoiceItem::buildFromInput($i, validate: $validate), $input->{'items'});
+        $items = array_map(fn (array|object $i): InvoiceItem => InvoiceItem::buildFromInput($i, validate: $validate), $input->{'items'});
 
         $obj = new self($description, $items);
         $obj->contractId = $contractId;

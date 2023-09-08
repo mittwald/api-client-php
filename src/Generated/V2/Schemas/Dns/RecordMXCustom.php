@@ -121,7 +121,7 @@ class RecordMXCustom
             static::validateInput($input);
         }
 
-        $records = array_map(fn (array $i): RecordMXRecord => RecordMXRecord::buildFromInput($i, validate: $validate), $input->{'records'});
+        $records = array_map(fn (array|object $i): RecordMXRecord => RecordMXRecord::buildFromInput($i, validate: $validate), $input->{'records'});
         $settings = RecordSettings::buildFromInput($input->{'settings'}, validate: $validate);
 
         $obj = new self($records, $settings);

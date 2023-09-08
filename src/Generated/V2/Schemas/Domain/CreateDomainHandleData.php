@@ -131,9 +131,9 @@ class CreateDomainHandleData
 
         $adminC = null;
         if (isset($input->{'adminC'})) {
-            $adminC = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'adminC'});
+            $adminC = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'adminC'});
         }
-        $ownerC = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
+        $ownerC = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
 
         $obj = new self($ownerC);
         $obj->adminC = $adminC;

@@ -459,7 +459,7 @@ class OrderItem
 
         $addons = null;
         if (isset($input->{'addons'})) {
-            $addons = array_map(fn (array $i): Addons => Addons::buildFromInput($i, validate: $validate), $input->{'addons'});
+            $addons = array_map(fn (array|object $i): Addons => Addons::buildFromInput($i, validate: $validate), $input->{'addons'});
         }
         $amount = str_contains($input->{'amount'}, '.') ? (float)($input->{'amount'}) : (int)($input->{'amount'});
         $articleId = $input->{'articleId'};
@@ -469,7 +469,7 @@ class OrderItem
         }
         $attributeConfiguration = null;
         if (isset($input->{'attributeConfiguration'})) {
-            $attributeConfiguration = array_map(fn (array $i): AttributeConfiguration => AttributeConfiguration::buildFromInput($i, validate: $validate), $input->{'attributeConfiguration'});
+            $attributeConfiguration = array_map(fn (array|object $i): AttributeConfiguration => AttributeConfiguration::buildFromInput($i, validate: $validate), $input->{'attributeConfiguration'});
         }
         $isInclusive = (bool)($input->{'isInclusive'});
         $orderItemId = $input->{'orderItemId'};

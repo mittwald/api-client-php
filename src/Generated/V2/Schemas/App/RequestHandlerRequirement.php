@@ -208,7 +208,7 @@ class RequestHandlerRequirement
 
         $exampleValues = null;
         if (isset($input->{'exampleValues'})) {
-            $exampleValues = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'exampleValues'});
+            $exampleValues = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'exampleValues'});
         }
         $name = $input->{'name'};
         $namespace = $input->{'namespace'};

@@ -141,7 +141,7 @@ class HandleData
 
         $handleFields = null;
         if (isset($input->{'handleFields'})) {
-            $handleFields = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'handleFields'});
+            $handleFields = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'handleFields'});
         }
         $handleRef = null;
         if (isset($input->{'handleRef'})) {

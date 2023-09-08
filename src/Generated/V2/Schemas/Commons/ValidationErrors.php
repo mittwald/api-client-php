@@ -172,7 +172,7 @@ class ValidationErrors
         if (isset($input->{'message'})) {
             $message = $input->{'message'};
         }
-        $validationErrors = array_map(fn (array $i): ValidationErrorSchema => ValidationErrorSchema::buildFromInput($i, validate: $validate), $input->{'validationErrors'});
+        $validationErrors = array_map(fn (array|object $i): ValidationErrorSchema => ValidationErrorSchema::buildFromInput($i, validate: $validate), $input->{'validationErrors'});
 
         $obj = new self($type, $validationErrors);
         $obj->message = $message;

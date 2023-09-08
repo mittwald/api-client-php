@@ -683,7 +683,7 @@ class AppInstallation
         $installationPath = $input->{'installationPath'};
         $linkedDatabases = null;
         if (isset($input->{'linkedDatabases'})) {
-            $linkedDatabases = array_map(fn (array $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
+            $linkedDatabases = array_map(fn (array|object $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
         }
         $processes = null;
         if (isset($input->{'processes'})) {
@@ -703,7 +703,7 @@ class AppInstallation
         }
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = array_map(fn (array $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
+            $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
         }
         $updatePolicy = null;
         if (isset($input->{'updatePolicy'})) {
@@ -711,7 +711,7 @@ class AppInstallation
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self($appId, $appVersion, $description, $disabled, $id, $installationPath);

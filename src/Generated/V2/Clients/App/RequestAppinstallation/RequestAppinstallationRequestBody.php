@@ -194,7 +194,7 @@ class RequestAppinstallationRequestBody
         $appVersionId = $input->{'appVersionId'};
         $description = $input->{'description'};
         $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
-        $userInputs = array_map(fn (array $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+        $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
         $obj = new self($appVersionId, $description, $updatePolicy, $userInputs);
 

@@ -451,7 +451,7 @@ class FilesystemDirectoryListing
         }
         $items = null;
         if (isset($input->{'items'})) {
-            $items = array_map(fn (array $i): FilesystemDirectoryListing => FilesystemDirectoryListing::buildFromInput($i, validate: $validate), $input->{'items'});
+            $items = array_map(fn (array|object $i): FilesystemDirectoryListing => FilesystemDirectoryListing::buildFromInput($i, validate: $validate), $input->{'items'});
         }
         $name = $input->{'name'};
         $size = (int)($input->{'size'});

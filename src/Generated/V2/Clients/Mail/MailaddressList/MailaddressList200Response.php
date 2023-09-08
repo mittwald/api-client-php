@@ -84,7 +84,7 @@ class MailaddressList200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): MailAddress => MailAddress::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): MailAddress => MailAddress::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

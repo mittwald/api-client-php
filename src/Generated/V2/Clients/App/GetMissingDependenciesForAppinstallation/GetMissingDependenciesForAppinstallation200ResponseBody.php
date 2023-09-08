@@ -134,11 +134,11 @@ class GetMissingDependenciesForAppinstallation200ResponseBody
 
         $missingSystemSoftwareDependencies = null;
         if (isset($input->{'missingSystemSoftwareDependencies'})) {
-            $missingSystemSoftwareDependencies = array_map(fn (array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'missingSystemSoftwareDependencies'});
+            $missingSystemSoftwareDependencies = array_map(fn (array|object $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'missingSystemSoftwareDependencies'});
         }
         $missingUserInputs = null;
         if (isset($input->{'missingUserInputs'})) {
-            $missingUserInputs = array_map(fn (array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'missingUserInputs'});
+            $missingUserInputs = array_map(fn (array|object $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'missingUserInputs'});
         }
 
         $obj = new self();

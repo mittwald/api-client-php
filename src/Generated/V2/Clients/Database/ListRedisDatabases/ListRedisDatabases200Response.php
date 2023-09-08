@@ -81,7 +81,7 @@ class ListRedisDatabases200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): RedisDatabase => RedisDatabase::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): RedisDatabase => RedisDatabase::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

@@ -582,7 +582,7 @@ class Domain
         $nameservers = $input->{'nameservers'};
         $processes = null;
         if (isset($input->{'processes'})) {
-            $processes = array_map(fn (array $i): Process => Process::buildFromInput($i, validate: $validate), $input->{'processes'});
+            $processes = array_map(fn (array|object $i): Process => Process::buildFromInput($i, validate: $validate), $input->{'processes'});
         }
         $projectId = $input->{'projectId'};
         $transferInAuthCode = null;

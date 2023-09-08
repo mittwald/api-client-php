@@ -84,7 +84,7 @@ class DeclareProcessChangeHandlesRequestBody
             static::validateInput($input);
         }
 
-        $ownerC = array_map(fn (array $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
+        $ownerC = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
 
         $obj = new self($ownerC);
 

@@ -402,7 +402,7 @@ class Contract
 
         $additionalItems = null;
         if (isset($input->{'additionalItems'})) {
-            $additionalItems = array_map(fn (array $i): ContractItem => ContractItem::buildFromInput($i, validate: $validate), $input->{'additionalItems'});
+            $additionalItems = array_map(fn (array|object $i): ContractItem => ContractItem::buildFromInput($i, validate: $validate), $input->{'additionalItems'});
         }
         $baseItem = ContractItem::buildFromInput($input->{'baseItem'}, validate: $validate);
         $contractId = $input->{'contractId'};

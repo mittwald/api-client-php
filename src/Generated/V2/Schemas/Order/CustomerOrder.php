@@ -505,7 +505,7 @@ class CustomerOrder
             $dueDate = new DateTime($input->{'dueDate'});
         }
         $invoicingPeriod = str_contains($input->{'invoicingPeriod'}, '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
-        $items = array_map(fn (array $i): OrderItem => OrderItem::buildFromInput($i, validate: $validate), $input->{'items'});
+        $items = array_map(fn (array|object $i): OrderItem => OrderItem::buildFromInput($i, validate: $validate), $input->{'items'});
         $orderDate = new DateTime($input->{'orderDate'});
         $orderId = $input->{'orderId'};
         $orderNumber = $input->{'orderNumber'};

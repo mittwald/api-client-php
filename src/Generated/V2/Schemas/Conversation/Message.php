@@ -414,13 +414,13 @@ class Message
         }
         $files = null;
         if (isset($input->{'files'})) {
-            $files = array_map(fn (array $i): RequestedFile|UploadedFile => match (true) {
+            $files = array_map(fn (array|object $i): RequestedFile|UploadedFile => match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 RequestedFile::validateInput($i, true) => RequestedFile::buildFromInput($i, validate: $validate),
                 UploadedFile::validateInput($i, true) => UploadedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
-        $history = array_map(fn (array $i): MessageHistoryItem => MessageHistoryItem::buildFromInput($i, validate: $validate), $input->{'history'});
+        $history = array_map(fn (array|object $i): MessageHistoryItem => MessageHistoryItem::buildFromInput($i, validate: $validate), $input->{'history'});
         $internal = null;
         if (isset($input->{'internal'})) {
             $internal = (bool)($input->{'internal'});

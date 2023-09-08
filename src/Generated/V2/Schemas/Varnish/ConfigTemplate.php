@@ -340,7 +340,7 @@ class ConfigTemplate
             static::validateInput($input);
         }
 
-        $files = array_map(fn (array $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
+        $files = array_map(fn (array|object $i): ConfigFileRef => ConfigFileRef::buildFromInput($i, validate: $validate), $input->{'files'});
         $isGlobal = null;
         if (isset($input->{'isGlobal'})) {
             $isGlobal = (bool)($input->{'isGlobal'});

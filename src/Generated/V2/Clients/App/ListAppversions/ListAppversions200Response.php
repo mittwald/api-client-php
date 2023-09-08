@@ -81,7 +81,7 @@ class ListAppversions200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): AppVersion => AppVersion::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): AppVersion => AppVersion::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

@@ -500,7 +500,7 @@ class AppVersion
         }
         $databases = null;
         if (isset($input->{'databases'})) {
-            $databases = array_map(fn (array $i): DatabaseDependency => DatabaseDependency::buildFromInput($i, validate: $validate), $input->{'databases'});
+            $databases = array_map(fn (array|object $i): DatabaseDependency => DatabaseDependency::buildFromInput($i, validate: $validate), $input->{'databases'});
         }
         $docRoot = $input->{'docRoot'};
         $docRootUserEditable = (bool)($input->{'docRootUserEditable'});
@@ -517,11 +517,11 @@ class AppVersion
         }
         $systemSoftwareDependencies = null;
         if (isset($input->{'systemSoftwareDependencies'})) {
-            $systemSoftwareDependencies = array_map(fn (array $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
+            $systemSoftwareDependencies = array_map(fn (array|object $i): SystemSoftwareDependency => SystemSoftwareDependency::buildFromInput($i, validate: $validate), $input->{'systemSoftwareDependencies'});
         }
         $userInputs = null;
         if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn (array $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
+            $userInputs = array_map(fn (array|object $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
         $obj = new self($docRoot, $docRootUserEditable, $externalVersion, $id, $internalVersion);

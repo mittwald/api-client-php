@@ -89,7 +89,7 @@ class ListOfCustomerCategories200ResponseBody
 
         $categories = null;
         if (isset($input->{'categories'})) {
-            $categories = array_map(fn (array $i): Category => Category::buildFromInput($i, validate: $validate), $input->{'categories'});
+            $categories = array_map(fn (array|object $i): Category => Category::buildFromInput($i, validate: $validate), $input->{'categories'});
         }
 
         $obj = new self();

@@ -90,7 +90,7 @@ class ListSshKeys200ResponseBody
 
         $sshKeys = null;
         if (isset($input->{'sshKeys'})) {
-            $sshKeys = array_map(fn (array $i): SshKey => SshKey::buildFromInput($i, validate: $validate), $input->{'sshKeys'});
+            $sshKeys = array_map(fn (array|object $i): SshKey => SshKey::buildFromInput($i, validate: $validate), $input->{'sshKeys'});
         }
 
         $obj = new self();

@@ -87,7 +87,7 @@ class AuthenticationAlternative2
             static::validateInput($input);
         }
 
-        $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+        $publicKeys = array_map(fn (array|object $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
 
         $obj = new self($publicKeys);
 

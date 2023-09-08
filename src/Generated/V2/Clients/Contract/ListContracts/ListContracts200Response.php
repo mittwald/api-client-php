@@ -81,7 +81,7 @@ class ListContracts200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): Contract => Contract::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): Contract => Contract::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

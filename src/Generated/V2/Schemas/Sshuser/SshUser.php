@@ -487,7 +487,7 @@ class SshUser
         $projectId = $input->{'projectId'};
         $publicKeys = null;
         if (isset($input->{'publicKeys'})) {
-            $publicKeys = array_map(fn (array $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
+            $publicKeys = array_map(fn (array|object $i): PublicKey => PublicKey::buildFromInput($i, validate: $validate), $input->{'publicKeys'});
         }
         $updatedAt = null;
         if (isset($input->{'updatedAt'})) {

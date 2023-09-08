@@ -127,7 +127,7 @@ class ContractInvoiceDefinition
         }
 
         $contractId = $input->{'contractId'};
-        $items = array_map(fn (array $i): ContractItemInvoiceDefinition => ContractItemInvoiceDefinition::buildFromInput($i, validate: $validate), $input->{'items'});
+        $items = array_map(fn (array|object $i): ContractItemInvoiceDefinition => ContractItemInvoiceDefinition::buildFromInput($i, validate: $validate), $input->{'items'});
 
         $obj = new self($contractId, $items);
 

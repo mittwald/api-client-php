@@ -134,7 +134,7 @@ class IgnoredSources
 
         $databases = null;
         if (isset($input->{'databases'})) {
-            $databases = array_map(fn (array $i): DatabaseReference => DatabaseReference::buildFromInput($i, validate: $validate), $input->{'databases'});
+            $databases = array_map(fn (array|object $i): DatabaseReference => DatabaseReference::buildFromInput($i, validate: $validate), $input->{'databases'});
         }
         $files = (bool)($input->{'files'});
 

@@ -81,7 +81,7 @@ class ListProjectBackups200Response
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array $i): ProjectBackup => ProjectBackup::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): ProjectBackup => ProjectBackup::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 

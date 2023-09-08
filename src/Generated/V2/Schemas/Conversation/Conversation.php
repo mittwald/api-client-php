@@ -538,7 +538,7 @@ class Conversation
         }
         $relations = null;
         if (isset($input->{'relations'})) {
-            $relations = array_map(fn (array $i): AggregateReference => AggregateReference::buildFromInput($i, validate: $validate), $input->{'relations'});
+            $relations = array_map(fn (array|object $i): AggregateReference => AggregateReference::buildFromInput($i, validate: $validate), $input->{'relations'});
         }
         $sharedWith = null;
         if (isset($input->{'sharedWith'})) {

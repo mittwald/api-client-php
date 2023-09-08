@@ -245,7 +245,7 @@ class TariffChange
         if (isset($input->{'executedAtDate'})) {
             $executedAtDate = new DateTime($input->{'executedAtDate'});
         }
-        $newArticles = array_map(fn (array $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'newArticles'});
+        $newArticles = array_map(fn (array|object $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'newArticles'});
         $scheduledAtDate = new DateTime($input->{'scheduledAtDate'});
         $scheduledByUserId = null;
         if (isset($input->{'scheduledByUserId'})) {

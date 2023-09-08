@@ -870,16 +870,16 @@ class ReadableArticle
 
         $additionalArticles = null;
         if (isset($input->{'additionalArticles'})) {
-            $additionalArticles = array_map(fn (array $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
+            $additionalArticles = array_map(fn (array|object $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
         }
         $addons = null;
         if (isset($input->{'addons'})) {
-            $addons = array_map(fn (array $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
+            $addons = array_map(fn (array|object $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
         }
         $articleId = $input->{'articleId'};
         $attributes = null;
         if (isset($input->{'attributes'})) {
-            $attributes = array_map(fn (array $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
+            $attributes = array_map(fn (array|object $i): ArticleAttributes => ArticleAttributes::buildFromInput($i, validate: $validate), $input->{'attributes'});
         }
         $balanceAddonKey = null;
         if (isset($input->{'balanceAddonKey'})) {
@@ -905,7 +905,7 @@ class ReadableArticle
         }
         $modifierArticles = null;
         if (isset($input->{'modifierArticles'})) {
-            $modifierArticles = array_map(fn (array $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
+            $modifierArticles = array_map(fn (array|object $i): ReadableModifierArticleOptions => ReadableModifierArticleOptions::buildFromInput($i, validate: $validate), $input->{'modifierArticles'});
         }
         $name = $input->{'name'};
         $orderable = ReadableArticleOrderable::from($input->{'orderable'});
@@ -915,7 +915,7 @@ class ReadableArticle
         }
         $possibleArticleChanges = null;
         if (isset($input->{'possibleArticleChanges'})) {
-            $possibleArticleChanges = array_map(fn (array $i): ReadableChangeArticleOptions => ReadableChangeArticleOptions::buildFromInput($i, validate: $validate), $input->{'possibleArticleChanges'});
+            $possibleArticleChanges = array_map(fn (array|object $i): ReadableChangeArticleOptions => ReadableChangeArticleOptions::buildFromInput($i, validate: $validate), $input->{'possibleArticleChanges'});
         }
         $price = null;
         if (isset($input->{'price'})) {
@@ -923,7 +923,7 @@ class ReadableArticle
         }
         $tags = null;
         if (isset($input->{'tags'})) {
-            $tags = array_map(fn (array $i): ArticleTag => ArticleTag::buildFromInput($i, validate: $validate), $input->{'tags'});
+            $tags = array_map(fn (array|object $i): ArticleTag => ArticleTag::buildFromInput($i, validate: $validate), $input->{'tags'});
         }
         $template = ArticleTemplate::buildFromInput($input->{'template'}, validate: $validate);
 
