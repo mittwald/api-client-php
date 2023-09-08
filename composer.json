@@ -24,6 +24,7 @@
     "rector/rector": "^0.18.2"
   },
   "scripts": {
+    "check": "psalm --show-info=false",
     "format": "rector && php-cs-fixer fix --allow-risky=yes"
   }
 }
