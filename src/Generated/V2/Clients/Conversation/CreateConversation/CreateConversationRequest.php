@@ -28,12 +28,8 @@ class CreateConversationRequest
                         '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
                     ],
                     'title' => [
-                        'minLength' => 1,
                         'type' => 'string',
                     ],
-                ],
-                'required' => [
-                    'title',
                 ],
                 'type' => 'object',
             ],

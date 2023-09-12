@@ -26,12 +26,8 @@ class CreateConversationRequestBody
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
             ],
             'title' => [
-                'minLength' => 1,
                 'type' => 'string',
             ],
-        ],
-        'required' => [
-            'title',
         ],
         'type' => 'object',
     ];
@@ -47,20 +43,19 @@ class CreateConversationRequestBody
     private ?AggregateReference $relatedTo = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $title;
+    private ?string $title = null;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $title
+     *
      */
-    public function __construct(string $title)
+    public function __construct()
     {
-        $this->title = $title;
     }
 
     /**
@@ -81,11 +76,11 @@ class CreateConversationRequestBody
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
-        return $this->title;
+        return $this->title ?? null;
     }
 
     /**
@@ -159,6 +154,17 @@ class CreateConversationRequestBody
     }
 
     /**
+     * @return self
+     */
+    public function withoutTitle(): self
+    {
+        $clone = clone $this;
+        unset($clone->title);
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -181,11 +187,15 @@ class CreateConversationRequestBody
         if (isset($input->{'relatedTo'})) {
             $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
         }
-        $title = $input->{'title'};
+        $title = null;
+        if (isset($input->{'title'})) {
+            $title = $input->{'title'};
+        }
 
-        $obj = new self($title);
+        $obj = new self();
         $obj->categoryId = $categoryId;
         $obj->relatedTo = $relatedTo;
+        $obj->title = $title;
         return $obj;
     }
 
@@ -203,7 +213,9 @@ class CreateConversationRequestBody
         if (isset($this->relatedTo)) {
             $output['relatedTo'] = $this->relatedTo->toJson();
         }
-        $output['title'] = $this->title;
+        if (isset($this->title)) {
+            $output['title'] = $this->title;
+        }
 
         return $output;
     }

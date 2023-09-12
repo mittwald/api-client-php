@@ -94,7 +94,6 @@ class CronjobExecution
         'required' => [
             'id',
             'shortId',
-            'logPath',
             'status',
             'durationInMilliseconds',
             'successful',
@@ -133,9 +132,9 @@ class CronjobExecution
     private string $id;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $logPath;
+    private ?string $logPath = null;
 
     /**
      * @var DateTime|null
@@ -160,15 +159,13 @@ class CronjobExecution
     /**
      * @param int $durationInMilliseconds
      * @param string $id
-     * @param string $logPath
      * @param CronjobExecutionStatus $status
      * @param bool $successful
      */
-    public function __construct(int $durationInMilliseconds, string $id, string $logPath, CronjobExecutionStatus $status, bool $successful)
+    public function __construct(int $durationInMilliseconds, string $id, CronjobExecutionStatus $status, bool $successful)
     {
         $this->durationInMilliseconds = $durationInMilliseconds;
         $this->id = $id;
-        $this->logPath = $logPath;
         $this->status = $status;
         $this->successful = $successful;
     }
@@ -222,11 +219,11 @@ class CronjobExecution
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLogPath(): string
+    public function getLogPath(): ?string
     {
-        return $this->logPath;
+        return $this->logPath ?? null;
     }
 
     /**
@@ -408,6 +405,17 @@ class CronjobExecution
     }
 
     /**
+     * @return self
+     */
+    public function withoutLogPath(): self
+    {
+        $clone = clone $this;
+        unset($clone->logPath);
+
+        return $clone;
+    }
+
+    /**
      * @param DateTime $start
      * @return self
      */
@@ -516,7 +524,10 @@ class CronjobExecution
             $executionStart = new DateTime($input->{'executionStart'});
         }
         $id = $input->{'id'};
-        $logPath = $input->{'logPath'};
+        $logPath = null;
+        if (isset($input->{'logPath'})) {
+            $logPath = $input->{'logPath'};
+        }
         $start = null;
         if (isset($input->{'start'})) {
             $start = new DateTime($input->{'start'});
@@ -528,11 +539,12 @@ class CronjobExecution
             $triggeredBy = CronjobExecutionTriggeredBy::buildFromInput($input->{'triggeredBy'}, validate: $validate);
         }
 
-        $obj = new self($durationInMilliseconds, $id, $logPath, $status, $successful);
+        $obj = new self($durationInMilliseconds, $id, $status, $successful);
         $obj->abortedBy = $abortedBy;
         $obj->end = $end;
         $obj->executionEnd = $executionEnd;
         $obj->executionStart = $executionStart;
+        $obj->logPath = $logPath;
         $obj->start = $start;
         $obj->triggeredBy = $triggeredBy;
         return $obj;
@@ -560,7 +572,9 @@ class CronjobExecution
             $output['executionStart'] = ($this->executionStart)->format(DateTime::ATOM);
         }
         $output['id'] = $this->id;
-        $output['logPath'] = $this->logPath;
+        if (isset($this->logPath)) {
+            $output['logPath'] = $this->logPath;
+        }
         if (isset($this->start)) {
             $output['start'] = ($this->start)->format(DateTime::ATOM);
         }
