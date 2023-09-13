@@ -36,6 +36,19 @@ class User
                 'format' => 'email',
                 'type' => 'string',
             ],
+            'employeeInformation' => [
+                'description' => 'additional information about mittwald employees',
+                'properties' => [
+                    'department' => [
+                        'example' => 'Kundenservice',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'department',
+                ],
+                'type' => 'object',
+            ],
             'person' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.commons.Person',
             ],
@@ -68,6 +81,13 @@ class User
      * @var string|null
      */
     private ?string $email = null;
+
+    /**
+     * additional information about mittwald employees
+     *
+     * @var UserEmployeeInformation|null
+     */
+    private ?UserEmployeeInformation $employeeInformation = null;
 
     /**
      * @var Person
@@ -113,6 +133,14 @@ class User
     public function getEmail(): ?string
     {
         return $this->email ?? null;
+    }
+
+    /**
+     * @return UserEmployeeInformation|null
+     */
+    public function getEmployeeInformation(): ?UserEmployeeInformation
+    {
+        return $this->employeeInformation ?? null;
     }
 
     /**
@@ -201,6 +229,29 @@ class User
     {
         $clone = clone $this;
         unset($clone->email);
+
+        return $clone;
+    }
+
+    /**
+     * @param UserEmployeeInformation $employeeInformation
+     * @return self
+     */
+    public function withEmployeeInformation(UserEmployeeInformation $employeeInformation): self
+    {
+        $clone = clone $this;
+        $clone->employeeInformation = $employeeInformation;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutEmployeeInformation(): self
+    {
+        $clone = clone $this;
+        unset($clone->employeeInformation);
 
         return $clone;
     }
@@ -310,6 +361,10 @@ class User
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
         }
+        $employeeInformation = null;
+        if (isset($input->{'employeeInformation'})) {
+            $employeeInformation = UserEmployeeInformation::buildFromInput($input->{'employeeInformation'}, validate: $validate);
+        }
         $person = Person::buildFromInput($input->{'person'}, validate: $validate);
         $phoneNumber = null;
         if (isset($input->{'phoneNumber'})) {
@@ -324,6 +379,7 @@ class User
         $obj = new self($person, $userId);
         $obj->avatarRef = $avatarRef;
         $obj->email = $email;
+        $obj->employeeInformation = $employeeInformation;
         $obj->phoneNumber = $phoneNumber;
         $obj->registeredAt = $registeredAt;
         return $obj;
@@ -342,6 +398,9 @@ class User
         }
         if (isset($this->email)) {
             $output['email'] = $this->email;
+        }
+        if (isset($this->employeeInformation)) {
+            $output['employeeInformation'] = ($this->employeeInformation)->toJson();
         }
         $output['person'] = $this->person->toJson();
         if (isset($this->phoneNumber)) {
@@ -381,6 +440,9 @@ class User
 
     public function __clone()
     {
+        if (isset($this->employeeInformation)) {
+            $this->employeeInformation = clone $this->employeeInformation;
+        }
         if (isset($this->registeredAt)) {
             $this->registeredAt = clone $this->registeredAt;
         }
