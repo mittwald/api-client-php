@@ -425,7 +425,7 @@ class DomainClient
     }
 
     /**
-     * Change the ownerC of a domain.
+     * Change the owner contact of a domain.
      *
      * Change the domain owner of a fully registered domain.
      *
