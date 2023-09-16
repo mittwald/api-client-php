@@ -678,7 +678,10 @@ class AppInstallation
             $customDocumentRoot = $input->{'customDocumentRoot'};
         }
         $description = $input->{'description'};
-        $disabled = (bool)($input->{'disabled'});
+        $disabled = false;
+        if (isset($input->{'disabled'})) {
+            $disabled = (bool)($input->{'disabled'});
+        }
         $id = $input->{'id'};
         $installationPath = $input->{'installationPath'};
         $linkedDatabases = null;
