@@ -6,15 +6,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterGetInfo\DeprecatedNewsletterGetInfo200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterGetInfo\DeprecatedNewsletterGetInfoDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterGetInfo\DeprecatedNewsletterGetInfoRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUser200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUser400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUserDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterUnsubscribeUser\DeprecatedNewsletterUnsubscribeUserDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\DeprecatedNewsletterUnsubscribeUser\DeprecatedNewsletterUnsubscribeUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfo200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoRequest;
@@ -61,67 +52,25 @@ class NotificationClient
     }
 
     /**
-     * getting the subscription status of the subscription
+     * Subscribe a user to the mStudio newsletter.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/deprecated-newsletter-get-info
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-subscribe-user
      * @throws GuzzleException
-     * @param DeprecatedNewsletterGetInfo\DeprecatedNewsletterGetInfoRequest $request An object representing the request for this operation
-     * @return DeprecatedNewsletterGetInfo\DeprecatedNewsletterGetInfo200Response|DeprecatedNewsletterGetInfo\DeprecatedNewsletterGetInfoDefaultResponse status information about the subscription
+     * @param NewsletterSubscribeUser\NewsletterSubscribeUserRequest $request An object representing the request for this operation
+     * @return NewsletterSubscribeUser\NewsletterSubscribeUser200Response|NewsletterSubscribeUser\NewsletterSubscribeUser400Response|NewsletterSubscribeUser\NewsletterSubscribeUserDefaultResponse Subscription information email has been sent.
      */
-    public function deprecatedNewsletterGetInfo(DeprecatedNewsletterGetInfoRequest $request): DeprecatedNewsletterGetInfo200Response|DeprecatedNewsletterGetInfoDefaultResponse
+    public function newsletterSubscribeUser(NewsletterSubscribeUserRequest $request): NewsletterSubscribeUser200Response|NewsletterSubscribeUser400Response|NewsletterSubscribeUserDefaultResponse
     {
-        $httpRequest = new Request(DeprecatedNewsletterGetInfoRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedNewsletterGetInfo200Response::fromResponse($httpResponse),
-            default => DeprecatedNewsletterGetInfoDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Unsubscribe a user from the mStudio newsletter.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/deprecated-newsletter-unsubscribe-user
-     * @throws GuzzleException
-     * @param DeprecatedNewsletterUnsubscribeUser\DeprecatedNewsletterUnsubscribeUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeprecatedNewsletterUnsubscribeUser\DeprecatedNewsletterUnsubscribeUserDefaultResponse User has been unsubscribed.
-     */
-    public function deprecatedNewsletterUnsubscribeUser(DeprecatedNewsletterUnsubscribeUserRequest $request): EmptyResponse|DeprecatedNewsletterUnsubscribeUserDefaultResponse
-    {
-        $httpRequest = new Request(DeprecatedNewsletterUnsubscribeUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => DeprecatedNewsletterUnsubscribeUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * subscribe a user to the mStudio newsletter
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/deprecated-newsletter-subscribe-user
-     * @throws GuzzleException
-     * @param DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUserRequest $request An object representing the request for this operation
-     * @return DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUser200Response|DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUser400Response|DeprecatedNewsletterSubscribeUser\DeprecatedNewsletterSubscribeUserDefaultResponse subscription information email has been send
-     */
-    public function deprecatedNewsletterSubscribeUser(DeprecatedNewsletterSubscribeUserRequest $request): DeprecatedNewsletterSubscribeUser200Response|DeprecatedNewsletterSubscribeUser400Response|DeprecatedNewsletterSubscribeUserDefaultResponse
-    {
-        $httpRequest = new Request(DeprecatedNewsletterSubscribeUserRequest::method, $request->getUrl());
+        $httpRequest = new Request(NewsletterSubscribeUserRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedNewsletterSubscribeUser200Response::fromResponse($httpResponse),
-            400 => DeprecatedNewsletterSubscribeUser400Response::fromResponse($httpResponse),
-            default => DeprecatedNewsletterSubscribeUserDefaultResponse::fromResponse($httpResponse),
+            200 => NewsletterSubscribeUser200Response::fromResponse($httpResponse),
+            400 => NewsletterSubscribeUser400Response::fromResponse($httpResponse),
+            default => NewsletterSubscribeUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -164,29 +113,6 @@ class NotificationClient
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
             default => NewsletterUnsubscribeUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Subscribe a user to the mStudio newsletter.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-subscribe-user
-     * @throws GuzzleException
-     * @param NewsletterSubscribeUser\NewsletterSubscribeUserRequest $request An object representing the request for this operation
-     * @return NewsletterSubscribeUser\NewsletterSubscribeUser200Response|NewsletterSubscribeUser\NewsletterSubscribeUser400Response|NewsletterSubscribeUser\NewsletterSubscribeUserDefaultResponse Subscription information email has been send.
-     */
-    public function newsletterSubscribeUser(NewsletterSubscribeUserRequest $request): NewsletterSubscribeUser200Response|NewsletterSubscribeUser400Response|NewsletterSubscribeUserDefaultResponse
-    {
-        $httpRequest = new Request(NewsletterSubscribeUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => NewsletterSubscribeUser200Response::fromResponse($httpResponse),
-            400 => NewsletterSubscribeUser400Response::fromResponse($httpResponse),
-            default => NewsletterSubscribeUserDefaultResponse::fromResponse($httpResponse),
         };
     }
 

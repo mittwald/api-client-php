@@ -21,13 +21,14 @@ class NewsletterSubscribeUserRequest
         'properties' => [
             'body' => [
                 'properties' => [
-                    'email' => [
-                        'example' => 'a.lovelace@example.com',
+                    'firstName' => [
+                        'example' => 'Ada',
                         'type' => 'string',
                     ],
-                ],
-                'required' => [
-                    'email',
+                    'lastName' => [
+                        'example' => 'Lovelace',
+                        'type' => 'string',
+                    ],
                 ],
                 'type' => 'object',
             ],

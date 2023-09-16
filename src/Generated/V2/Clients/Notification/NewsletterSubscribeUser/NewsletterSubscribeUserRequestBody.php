@@ -18,56 +18,109 @@ class NewsletterSubscribeUserRequestBody
      */
     private static array $schema = [
         'properties' => [
-            'email' => [
-                'example' => 'a.lovelace@example.com',
+            'firstName' => [
+                'example' => 'Ada',
                 'type' => 'string',
             ],
-        ],
-        'required' => [
-            'email',
+            'lastName' => [
+                'example' => 'Lovelace',
+                'type' => 'string',
+            ],
         ],
         'type' => 'object',
     ];
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $email;
+    private ?string $firstName = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $lastName = null;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $email
+     *
      */
-    public function __construct(string $email)
+    public function __construct()
     {
-        $this->email = $email;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getFirstName(): ?string
     {
-        return $this->email;
+        return $this->firstName ?? null;
     }
 
     /**
-     * @param string $email
+     * @return string|null
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName ?? null;
+    }
+
+    /**
+     * @param string $firstName
      * @return self
      */
-    public function withEmail(string $email): self
+    public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($email, static::$schema['properties']['email']);
+        $validator->validate($firstName, static::$schema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->email = $email;
+        $clone->firstName = $firstName;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutFirstName(): self
+    {
+        $clone = clone $this;
+        unset($clone->firstName);
+
+        return $clone;
+    }
+
+    /**
+     * @param string $lastName
+     * @return self
+     */
+    public function withLastName(string $lastName): self
+    {
+        $validator = new Validator();
+        $validator->validate($lastName, static::$schema['properties']['lastName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->lastName = $lastName;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutLastName(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastName);
 
         return $clone;
     }
@@ -87,10 +140,18 @@ class NewsletterSubscribeUserRequestBody
             static::validateInput($input);
         }
 
-        $email = $input->{'email'};
+        $firstName = null;
+        if (isset($input->{'firstName'})) {
+            $firstName = $input->{'firstName'};
+        }
+        $lastName = null;
+        if (isset($input->{'lastName'})) {
+            $lastName = $input->{'lastName'};
+        }
 
-        $obj = new self($email);
-
+        $obj = new self();
+        $obj->firstName = $firstName;
+        $obj->lastName = $lastName;
         return $obj;
     }
 
@@ -102,7 +163,12 @@ class NewsletterSubscribeUserRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['email'] = $this->email;
+        if (isset($this->firstName)) {
+            $output['firstName'] = $this->firstName;
+        }
+        if (isset($this->lastName)) {
+            $output['lastName'] = $this->lastName;
+        }
 
         return $output;
     }
