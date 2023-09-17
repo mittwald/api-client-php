@@ -241,7 +241,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
         $type = $input->{'type'};
         $context = null;
         if (isset($input->{'context'})) {
-            $context = $input->{'context'};
+            $context = (array)$input->{'context'};
         }
 
         $obj = new self($message, $path, $type);

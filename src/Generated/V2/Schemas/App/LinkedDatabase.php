@@ -213,7 +213,7 @@ class LinkedDatabase
         $databaseId = $input->{'databaseId'};
         $databaseUserIds = null;
         if (isset($input->{'databaseUserIds'})) {
-            $databaseUserIds = $input->{'databaseUserIds'};
+            $databaseUserIds = (array)$input->{'databaseUserIds'};
         }
         $kind = LinkedDatabaseKind::from($input->{'kind'});
         $purpose = LinkedDatabasePurpose::from($input->{'purpose'});

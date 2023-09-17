@@ -89,7 +89,7 @@ class SetDatabaseUsersRequestBody
             static::validateInput($input);
         }
 
-        $databaseUserIds = $input->{'databaseUserIds'};
+        $databaseUserIds = (array)$input->{'databaseUserIds'};
 
         $obj = new self($databaseUserIds);
 

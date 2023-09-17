@@ -174,7 +174,7 @@ class LinkDatabaseRequestBody
         $databaseId = $input->{'databaseId'};
         $databaseUserIds = null;
         if (isset($input->{'databaseUserIds'})) {
-            $databaseUserIds = $input->{'databaseUserIds'};
+            $databaseUserIds = (array)$input->{'databaseUserIds'};
         }
         $purpose = LinkDatabaseRequestBodyPurpose::from($input->{'purpose'});
 

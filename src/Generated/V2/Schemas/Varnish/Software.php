@@ -317,7 +317,7 @@ class Software
         $projectId = $input->{'projectId'};
         $settings = null;
         if (isset($input->{'settings'})) {
-            $settings = $input->{'settings'};
+            $settings = (array)$input->{'settings'};
         }
         $softwareId = $input->{'softwareId'};
         $softwareTemplateId = $input->{'softwareTemplateId'};

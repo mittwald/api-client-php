@@ -214,7 +214,7 @@ class DatabaseDependency
         $kind = DatabaseDependencyKind::from($input->{'kind'});
         $parameters = null;
         if (isset($input->{'parameters'})) {
-            $parameters = $input->{'parameters'};
+            $parameters = (array)$input->{'parameters'};
         }
         $version = $input->{'version'};
 

@@ -762,7 +762,7 @@ class Project
         $createdAt = new DateTime($input->{'createdAt'});
         $customerId = $input->{'customerId'};
         $description = $input->{'description'};
-        $directories = $input->{'directories'};
+        $directories = (array)$input->{'directories'};
         $disableReason = null;
         if (isset($input->{'disableReason'})) {
             $disableReason = DisableReason::from($input->{'disableReason'});
