@@ -65,10 +65,6 @@ class MySqlDatabase
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'size' => [
-                'format' => 'int64',
-                'type' => 'integer',
-            ],
             'updatedAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -86,7 +82,6 @@ class MySqlDatabase
             'description',
             'version',
             'characterSettings',
-            'size',
             'hostname',
             'isShared',
             'isReady',
@@ -145,11 +140,6 @@ class MySqlDatabase
     private string $projectId;
 
     /**
-     * @var int
-     */
-    private int $size;
-
-    /**
      * @var DateTime
      */
     private DateTime $updatedAt;
@@ -169,11 +159,10 @@ class MySqlDatabase
      * @param bool $isShared
      * @param string $name
      * @param string $projectId
-     * @param int $size
      * @param DateTime $updatedAt
      * @param string $version
      */
-    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, int $size, DateTime $updatedAt, string $version)
+    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, DateTime $updatedAt, string $version)
     {
         $this->characterSettings = $characterSettings;
         $this->createdAt = $createdAt;
@@ -184,7 +173,6 @@ class MySqlDatabase
         $this->isShared = $isShared;
         $this->name = $name;
         $this->projectId = $projectId;
-        $this->size = $size;
         $this->updatedAt = $updatedAt;
         $this->version = $version;
     }
@@ -267,14 +255,6 @@ class MySqlDatabase
     public function getProjectId(): string
     {
         return $this->projectId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSize(): int
-    {
-        return $this->size;
     }
 
     /**
@@ -473,24 +453,6 @@ class MySqlDatabase
     }
 
     /**
-     * @param int $size
-     * @return self
-     */
-    public function withSize(int $size): self
-    {
-        $validator = new Validator();
-        $validator->validate($size, static::$schema['properties']['size']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->size = $size;
-
-        return $clone;
-    }
-
-    /**
      * @param DateTime $updatedAt
      * @return self
      */
@@ -548,11 +510,10 @@ class MySqlDatabase
         $isShared = (bool)($input->{'isShared'});
         $name = $input->{'name'};
         $projectId = $input->{'projectId'};
-        $size = (int)($input->{'size'});
         $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
-        $obj = new self($characterSettings, $createdAt, $description, $hostname, $id, $isReady, $isShared, $name, $projectId, $size, $updatedAt, $version);
+        $obj = new self($characterSettings, $createdAt, $description, $hostname, $id, $isReady, $isShared, $name, $projectId, $updatedAt, $version);
         $obj->finalizers = $finalizers;
         return $obj;
     }
@@ -577,7 +538,6 @@ class MySqlDatabase
         $output['isShared'] = $this->isShared;
         $output['name'] = $this->name;
         $output['projectId'] = $this->projectId;
-        $output['size'] = $this->size;
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         $output['version'] = $this->version;
 

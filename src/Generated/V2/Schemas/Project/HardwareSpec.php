@@ -40,22 +40,20 @@ class HardwareSpec
             ],
         ],
         'required' => [
-            'cpu',
-            'mem',
             'storage',
         ],
         'type' => 'object',
     ];
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $cpu;
+    private ?string $cpu = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $mem;
+    private ?string $mem = null;
 
     /**
      * @var string
@@ -63,31 +61,27 @@ class HardwareSpec
     private string $storage;
 
     /**
-     * @param string $cpu
-     * @param string $mem
      * @param string $storage
      */
-    public function __construct(string $cpu, string $mem, string $storage)
+    public function __construct(string $storage)
     {
-        $this->cpu = $cpu;
-        $this->mem = $mem;
         $this->storage = $storage;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCpu(): string
+    public function getCpu(): ?string
     {
-        return $this->cpu;
+        return $this->cpu ?? null;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMem(): string
+    public function getMem(): ?string
     {
-        return $this->mem;
+        return $this->mem ?? null;
     }
 
     /**
@@ -117,6 +111,17 @@ class HardwareSpec
     }
 
     /**
+     * @return self
+     */
+    public function withoutCpu(): self
+    {
+        $clone = clone $this;
+        unset($clone->cpu);
+
+        return $clone;
+    }
+
+    /**
      * @param string $mem
      * @return self
      */
@@ -130,6 +135,17 @@ class HardwareSpec
 
         $clone = clone $this;
         $clone->mem = $mem;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutMem(): self
+    {
+        $clone = clone $this;
+        unset($clone->mem);
 
         return $clone;
     }
@@ -167,12 +183,19 @@ class HardwareSpec
             static::validateInput($input);
         }
 
-        $cpu = $input->{'cpu'};
-        $mem = $input->{'mem'};
+        $cpu = null;
+        if (isset($input->{'cpu'})) {
+            $cpu = $input->{'cpu'};
+        }
+        $mem = null;
+        if (isset($input->{'mem'})) {
+            $mem = $input->{'mem'};
+        }
         $storage = $input->{'storage'};
 
-        $obj = new self($cpu, $mem, $storage);
-
+        $obj = new self($storage);
+        $obj->cpu = $cpu;
+        $obj->mem = $mem;
         return $obj;
     }
 
@@ -184,8 +207,12 @@ class HardwareSpec
     public function toJson(): array
     {
         $output = [];
-        $output['cpu'] = $this->cpu;
-        $output['mem'] = $this->mem;
+        if (isset($this->cpu)) {
+            $output['cpu'] = $this->cpu;
+        }
+        if (isset($this->mem)) {
+            $output['mem'] = $this->mem;
+        }
         $output['storage'] = $this->storage;
 
         return $output;
