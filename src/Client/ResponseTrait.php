@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 
 trait ResponseTrait
 {
-    private ResponseInterface $response;
+    private readonly ResponseInterface $response;
 
     /**
      * Returns the underlying PSR-7 HTTP response object.
