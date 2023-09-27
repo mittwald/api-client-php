@@ -66,6 +66,11 @@ class Server
                 'example' => 's-4e7tz3',
                 'type' => 'string',
             ],
+            'statisticsBaseDomain' => [
+                'example' => 'pe-prod.staging.mcloud.services',
+                'format' => 'hostname',
+                'type' => 'string',
+            ],
             'storage' => [
                 'example' => '50Gi',
                 'type' => 'string',
@@ -140,6 +145,11 @@ class Server
      * @var string
      */
     private string $shortId;
+
+    /**
+     * @var string|null
+     */
+    private ?string $statisticsBaseDomain = null;
 
     /**
      * @var string
@@ -259,6 +269,14 @@ class Server
     public function getShortId(): string
     {
         return $this->shortId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStatisticsBaseDomain(): ?string
+    {
+        return $this->statisticsBaseDomain ?? null;
     }
 
     /**
@@ -466,6 +484,35 @@ class Server
     }
 
     /**
+     * @param string $statisticsBaseDomain
+     * @return self
+     */
+    public function withStatisticsBaseDomain(string $statisticsBaseDomain): self
+    {
+        $validator = new Validator();
+        $validator->validate($statisticsBaseDomain, static::$schema['properties']['statisticsBaseDomain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->statisticsBaseDomain = $statisticsBaseDomain;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutStatisticsBaseDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->statisticsBaseDomain);
+
+        return $clone;
+    }
+
+    /**
      * @param string $storage
      * @return self
      */
@@ -515,11 +562,16 @@ class Server
         $machineType = MachineType::buildFromInput($input->{'machineType'}, validate: $validate);
         $readiness = ProjectReadinessStatus::from($input->{'readiness'});
         $shortId = $input->{'shortId'};
+        $statisticsBaseDomain = null;
+        if (isset($input->{'statisticsBaseDomain'})) {
+            $statisticsBaseDomain = $input->{'statisticsBaseDomain'};
+        }
         $storage = $input->{'storage'};
 
         $obj = new self($clusterName, $createdAt, $customerId, $description, $id, $isReady, $machineType, $readiness, $shortId, $storage);
         $obj->disabledReason = $disabledReason;
         $obj->imageRefId = $imageRefId;
+        $obj->statisticsBaseDomain = $statisticsBaseDomain;
         return $obj;
     }
 
@@ -546,6 +598,9 @@ class Server
         $output['machineType'] = $this->machineType->toJson();
         $output['readiness'] = $this->readiness->value;
         $output['shortId'] = $this->shortId;
+        if (isset($this->statisticsBaseDomain)) {
+            $output['statisticsBaseDomain'] = $this->statisticsBaseDomain;
+        }
         $output['storage'] = $this->storage;
 
         return $output;

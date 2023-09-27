@@ -103,6 +103,11 @@ class Project
                     ],
                 ],
             ],
+            'statisticsBaseDomain' => [
+                'example' => 'pe-prod.staging.mcloud.services',
+                'format' => 'hostname',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -204,6 +209,11 @@ class Project
      * @var VisitorSpec|HardwareSpec|null
      */
     private VisitorSpec|HardwareSpec|null $spec = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $statisticsBaseDomain = null;
 
     /**
      * @param DateTime $createdAt
@@ -364,6 +374,14 @@ class Project
     public function getSpec(): HardwareSpec|VisitorSpec|null
     {
         return $this->spec;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStatisticsBaseDomain(): ?string
+    {
+        return $this->statisticsBaseDomain ?? null;
     }
 
     /**
@@ -737,6 +755,35 @@ class Project
     }
 
     /**
+     * @param string $statisticsBaseDomain
+     * @return self
+     */
+    public function withStatisticsBaseDomain(string $statisticsBaseDomain): self
+    {
+        $validator = new Validator();
+        $validator->validate($statisticsBaseDomain, static::$schema['properties']['statisticsBaseDomain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->statisticsBaseDomain = $statisticsBaseDomain;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutStatisticsBaseDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->statisticsBaseDomain);
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -795,6 +842,10 @@ class Project
                 HardwareSpec::validateInput($input->{'spec'}, true) => HardwareSpec::buildFromInput($input->{'spec'}, validate: $validate),
             };
         }
+        $statisticsBaseDomain = null;
+        if (isset($input->{'statisticsBaseDomain'})) {
+            $statisticsBaseDomain = $input->{'statisticsBaseDomain'};
+        }
 
         $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId);
         $obj->clusterDomain = $clusterDomain;
@@ -805,6 +856,7 @@ class Project
         $obj->serverId = $serverId;
         $obj->serverShortId = $serverShortId;
         $obj->spec = $spec;
+        $obj->statisticsBaseDomain = $statisticsBaseDomain;
         return $obj;
     }
 
@@ -850,6 +902,9 @@ class Project
             $output['spec'] = match (true) {
                 ($this->spec) instanceof VisitorSpec, ($this->spec) instanceof HardwareSpec => $this->spec->toJson(),
             };
+        }
+        if (isset($this->statisticsBaseDomain)) {
+            $output['statisticsBaseDomain'] = $this->statisticsBaseDomain;
         }
 
         return $output;
