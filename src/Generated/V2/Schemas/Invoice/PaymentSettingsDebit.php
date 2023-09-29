@@ -31,6 +31,7 @@ class PaymentSettingsDebit
                 'type' => 'string',
             ],
             'bic' => [
+                'description' => 'Optional. Required for payments outside of the European Union.',
                 'example' => 'DEUTDEDB123',
                 'type' => 'string',
             ],
@@ -48,7 +49,6 @@ class PaymentSettingsDebit
         'required' => [
             'method',
             'iban',
-            'bic',
             'accountHolder',
         ],
         'type' => 'object',
@@ -60,9 +60,11 @@ class PaymentSettingsDebit
     private string $accountHolder;
 
     /**
-     * @var string
+     * Optional. Required for payments outside of the European Union.
+     *
+     * @var string|null
      */
-    private string $bic;
+    private ?string $bic = null;
 
     /**
      * @var string
@@ -76,14 +78,12 @@ class PaymentSettingsDebit
 
     /**
      * @param string $accountHolder
-     * @param string $bic
      * @param string $iban
      * @param PaymentSettingsDebitMethod $method
      */
-    public function __construct(string $accountHolder, string $bic, string $iban, PaymentSettingsDebitMethod $method)
+    public function __construct(string $accountHolder, string $iban, PaymentSettingsDebitMethod $method)
     {
         $this->accountHolder = $accountHolder;
-        $this->bic = $bic;
         $this->iban = $iban;
         $this->method = $method;
     }
@@ -97,11 +97,11 @@ class PaymentSettingsDebit
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBic(): string
+    public function getBic(): ?string
     {
-        return $this->bic;
+        return $this->bic ?? null;
     }
 
     /**
@@ -157,6 +157,17 @@ class PaymentSettingsDebit
     }
 
     /**
+     * @return self
+     */
+    public function withoutBic(): self
+    {
+        $clone = clone $this;
+        unset($clone->bic);
+
+        return $clone;
+    }
+
+    /**
      * @param string $iban
      * @return self
      */
@@ -202,12 +213,15 @@ class PaymentSettingsDebit
         }
 
         $accountHolder = $input->{'accountHolder'};
-        $bic = $input->{'bic'};
+        $bic = null;
+        if (isset($input->{'bic'})) {
+            $bic = $input->{'bic'};
+        }
         $iban = $input->{'iban'};
         $method = PaymentSettingsDebitMethod::from($input->{'method'});
 
-        $obj = new self($accountHolder, $bic, $iban, $method);
-
+        $obj = new self($accountHolder, $iban, $method);
+        $obj->bic = $bic;
         return $obj;
     }
 
@@ -220,7 +234,9 @@ class PaymentSettingsDebit
     {
         $output = [];
         $output['accountHolder'] = $this->accountHolder;
-        $output['bic'] = $this->bic;
+        if (isset($this->bic)) {
+            $output['bic'] = $this->bic;
+        }
         $output['iban'] = $this->iban;
         $output['method'] = ($this->method)->value;
 

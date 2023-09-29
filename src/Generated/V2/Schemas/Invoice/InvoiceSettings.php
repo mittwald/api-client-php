@@ -56,6 +56,12 @@ class InvoiceSettings
             'recipientSameAsOwner' => [
                 'type' => 'boolean',
             ],
+            'status' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.invoice.InvoiceSettingsStatus',
+                ],
+                'type' => 'array',
+            ],
             'targetDay' => [
                 'example' => 15,
                 'type' => 'integer',
@@ -106,6 +112,11 @@ class InvoiceSettings
      * @var bool|null
      */
     private ?bool $recipientSameAsOwner = null;
+
+    /**
+     * @var InvoiceSettingsStatus[]|null
+     */
+    private ?array $status = null;
 
     /**
      * @var int|null
@@ -183,6 +194,15 @@ class InvoiceSettings
     public function getRecipientSameAsOwner(): ?bool
     {
         return $this->recipientSameAsOwner ?? null;
+    }
+
+    /**
+     * @return
+     * InvoiceSettingsStatus[]|null
+     */
+    public function getStatus(): ?array
+    {
+        return $this->status ?? null;
     }
 
     /**
@@ -397,6 +417,29 @@ class InvoiceSettings
     }
 
     /**
+     * @param InvoiceSettingsStatus[] $status
+     * @return self
+     */
+    public function withStatus(array $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutStatus(): self
+    {
+        $clone = clone $this;
+        unset($clone->status);
+
+        return $clone;
+    }
+
+    /**
      * @param int $targetDay
      * @return self
      */
@@ -473,6 +516,10 @@ class InvoiceSettings
         if (isset($input->{'recipientSameAsOwner'})) {
             $recipientSameAsOwner = (bool)($input->{'recipientSameAsOwner'});
         }
+        $status = null;
+        if (isset($input->{'status'})) {
+            $status = array_map(fn (array|object $i): InvoiceSettingsStatus => InvoiceSettingsStatus::buildFromInput($i, validate: $validate), $input->{'status'});
+        }
         $targetDay = null;
         if (isset($input->{'targetDay'})) {
             $targetDay = (int)($input->{'targetDay'});
@@ -486,6 +533,7 @@ class InvoiceSettings
         $obj->printedInvoices = $printedInvoices;
         $obj->recipient = $recipient;
         $obj->recipientSameAsOwner = $recipientSameAsOwner;
+        $obj->status = $status;
         $obj->targetDay = $targetDay;
         return $obj;
     }
@@ -522,6 +570,9 @@ class InvoiceSettings
         }
         if (isset($this->recipientSameAsOwner)) {
             $output['recipientSameAsOwner'] = $this->recipientSameAsOwner;
+        }
+        if (isset($this->status)) {
+            $output['status'] = array_map(fn (InvoiceSettingsStatus $i): array => $i->toJson(), $this->status);
         }
         if (isset($this->targetDay)) {
             $output['targetDay'] = $this->targetDay;

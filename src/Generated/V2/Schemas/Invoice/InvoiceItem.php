@@ -42,6 +42,22 @@ class InvoiceItem
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'itemCancelledOrCorrectedBy' => [
+                'items' => [
+                    'properties' => [
+                        'sourceInvoiceId' => [
+                            'format' => 'uuid',
+                            'type' => 'string',
+                        ],
+                        'sourceInvoiceItemId' => [
+                            'format' => 'uuid',
+                            'type' => 'string',
+                        ],
+                    ],
+                    'type' => 'object',
+                ],
+                'type' => 'array',
+            ],
             'price' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.invoice.Price',
             ],
@@ -102,6 +118,11 @@ class InvoiceItem
      * @var string
      */
     private string $id;
+
+    /**
+     * @var InvoiceItemItemCancelledOrCorrectedByItem[]|null
+     */
+    private ?array $itemCancelledOrCorrectedBy = null;
 
     /**
      * @var Price
@@ -174,6 +195,14 @@ class InvoiceItem
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return InvoiceItemItemCancelledOrCorrectedByItem[]|null
+     */
+    public function getItemCancelledOrCorrectedBy(): ?array
+    {
+        return $this->itemCancelledOrCorrectedBy ?? null;
     }
 
     /**
@@ -300,6 +329,29 @@ class InvoiceItem
     }
 
     /**
+     * @param InvoiceItemItemCancelledOrCorrectedByItem[] $itemCancelledOrCorrectedBy
+     * @return self
+     */
+    public function withItemCancelledOrCorrectedBy(array $itemCancelledOrCorrectedBy): self
+    {
+        $clone = clone $this;
+        $clone->itemCancelledOrCorrectedBy = $itemCancelledOrCorrectedBy;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutItemCancelledOrCorrectedBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->itemCancelledOrCorrectedBy);
+
+        return $clone;
+    }
+
+    /**
      * @param Price $price
      * @return self
      */
@@ -420,6 +472,10 @@ class InvoiceItem
         $contractItemId = $input->{'contractItemId'};
         $description = $input->{'description'};
         $id = $input->{'id'};
+        $itemCancelledOrCorrectedBy = null;
+        if (isset($input->{'itemCancelledOrCorrectedBy'})) {
+            $itemCancelledOrCorrectedBy = array_map(fn (array|object $i): InvoiceItemItemCancelledOrCorrectedByItem => InvoiceItemItemCancelledOrCorrectedByItem::buildFromInput($i, validate: $validate), $input->{'itemCancelledOrCorrectedBy'});
+        }
         $price = Price::buildFromInput($input->{'price'}, validate: $validate);
         $reference = null;
         if (isset($input->{'reference'})) {
@@ -437,6 +493,7 @@ class InvoiceItem
 
         $obj = new self($contractItemId, $description, $id, $price, $vatRate);
         $obj->additionalDescription = $additionalDescription;
+        $obj->itemCancelledOrCorrectedBy = $itemCancelledOrCorrectedBy;
         $obj->reference = $reference;
         $obj->serviceDate = $serviceDate;
         $obj->servicePeriod = $servicePeriod;
@@ -457,6 +514,9 @@ class InvoiceItem
         $output['contractItemId'] = $this->contractItemId;
         $output['description'] = $this->description;
         $output['id'] = $this->id;
+        if (isset($this->itemCancelledOrCorrectedBy)) {
+            $output['itemCancelledOrCorrectedBy'] = array_map(fn (InvoiceItemItemCancelledOrCorrectedByItem $i) => $i->toJson(), $this->itemCancelledOrCorrectedBy);
+        }
         $output['price'] = $this->price->toJson();
         if (isset($this->reference)) {
             $output['reference'] = ($this->reference)->toJson();
@@ -498,6 +558,9 @@ class InvoiceItem
 
     public function __clone()
     {
+        if (isset($this->itemCancelledOrCorrectedBy)) {
+            $this->itemCancelledOrCorrectedBy = array_map(fn (InvoiceItemItemCancelledOrCorrectedByItem $i) => clone $i, $this->itemCancelledOrCorrectedBy);
+        }
         if (isset($this->reference)) {
             $this->reference = clone $this->reference;
         }
