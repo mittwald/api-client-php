@@ -33,26 +33,10 @@ class TopLevel
             'tld' => [
                 'type' => 'string',
             ],
-            'transitAllowed' => [
-                'type' => 'boolean',
-            ],
-            'type' => [
-                'enum' => [
-                    'unknown',
-                    'countryCode',
-                    'generic',
-                    'newGeneric',
-                    'centralNic',
-                    'other',
-                ],
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'tld',
-            'type',
             'rgpDays',
-            'transitAllowed',
         ],
         'type' => 'object',
     ];
@@ -68,27 +52,13 @@ class TopLevel
     private string $tld;
 
     /**
-     * @var bool
-     */
-    private bool $transitAllowed;
-
-    /**
-     * @var TopLevelType
-     */
-    private TopLevelType $type;
-
-    /**
      * @param int $rgpDays
      * @param string $tld
-     * @param bool $transitAllowed
-     * @param TopLevelType $type
      */
-    public function __construct(int $rgpDays, string $tld, bool $transitAllowed, TopLevelType $type)
+    public function __construct(int $rgpDays, string $tld)
     {
         $this->rgpDays = $rgpDays;
         $this->tld = $tld;
-        $this->transitAllowed = $transitAllowed;
-        $this->type = $type;
     }
 
     /**
@@ -105,22 +75,6 @@ class TopLevel
     public function getTld(): string
     {
         return $this->tld;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getTransitAllowed(): bool
-    {
-        return $this->transitAllowed;
-    }
-
-    /**
-     * @return TopLevelType
-     */
-    public function getType(): TopLevelType
-    {
-        return $this->type;
     }
 
     /**
@@ -160,36 +114,6 @@ class TopLevel
     }
 
     /**
-     * @param bool $transitAllowed
-     * @return self
-     */
-    public function withTransitAllowed(bool $transitAllowed): self
-    {
-        $validator = new Validator();
-        $validator->validate($transitAllowed, static::$schema['properties']['transitAllowed']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->transitAllowed = $transitAllowed;
-
-        return $clone;
-    }
-
-    /**
-     * @param TopLevelType $type
-     * @return self
-     */
-    public function withType(TopLevelType $type): self
-    {
-        $clone = clone $this;
-        $clone->type = $type;
-
-        return $clone;
-    }
-
-    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -206,10 +130,8 @@ class TopLevel
 
         $rgpDays = (int)($input->{'rgpDays'});
         $tld = $input->{'tld'};
-        $transitAllowed = (bool)($input->{'transitAllowed'});
-        $type = TopLevelType::from($input->{'type'});
 
-        $obj = new self($rgpDays, $tld, $transitAllowed, $type);
+        $obj = new self($rgpDays, $tld);
 
         return $obj;
     }
@@ -224,8 +146,6 @@ class TopLevel
         $output = [];
         $output['rgpDays'] = $this->rgpDays;
         $output['tld'] = $this->tld;
-        $output['transitAllowed'] = $this->transitAllowed;
-        $output['type'] = ($this->type)->value;
 
         return $output;
     }

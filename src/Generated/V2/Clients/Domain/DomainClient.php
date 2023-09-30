@@ -102,6 +102,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\Ge
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnership404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSupportedTlds\GetSupportedTlds200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSupportedTlds\GetSupportedTldsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSupportedTlds\GetSupportedTldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreateDefaultResponse;
@@ -766,6 +769,29 @@ class DomainClient
             400 => VerifyDomainOwnership400Response::fromResponse($httpResponse),
             404 => VerifyDomainOwnership404Response::fromResponse($httpResponse),
             default => VerifyDomainOwnershipDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List all supported top level domains.
+     *
+     * All currently supported TLDs.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-supported-tlds
+     * @throws GuzzleException
+     * @param GetSupportedTlds\GetSupportedTldsRequest $request An object representing the request for this operation
+     * @return GetSupportedTlds\GetSupportedTlds200Response|GetSupportedTlds\GetSupportedTldsDefaultResponse An array of TLD objects.
+     */
+    public function getSupportedTlds(GetSupportedTldsRequest $request): GetSupportedTlds200Response|GetSupportedTldsDefaultResponse
+    {
+        $httpRequest = new Request(GetSupportedTldsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetSupportedTlds200Response::fromResponse($httpResponse),
+            default => GetSupportedTldsDefaultResponse::fromResponse($httpResponse),
         };
     }
 
