@@ -2,33 +2,65 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus;
+use Psr\Http\Message\ResponseInterface;
 
-class NotificationsReadAllNotificationsRequestBody
+class NotificationsReadAllNotificationsDeprecated200ResponseBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
      * @var array
      */
     private static array $schema = [
+        'properties' => [
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.messaging.NotificationStatus',
+            ],
+        ],
+        'required' => [
+            'status',
+        ],
         'type' => 'object',
     ];
 
-    private array $headers = [
+    /**
+     * @var NotificationStatus
+     */
+    private NotificationStatus $status;
 
-    ];
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     *
+     * @param NotificationStatus $status
      */
-    public function __construct()
+    public function __construct(NotificationStatus $status)
     {
+        $this->status = $status;
+    }
+
+    /**
+     * @return NotificationStatus
+     */
+    public function getStatus(): NotificationStatus
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param NotificationStatus $status
+     * @return self
+     */
+    public function withStatus(NotificationStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
     }
 
     /**
@@ -36,19 +68,19 @@ class NotificationsReadAllNotificationsRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return NotificationsReadAllNotificationsRequestBody Created instance
+     * @return NotificationsReadAllNotificationsDeprecated200ResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsDeprecated200ResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $status = NotificationStatus::from($input->{'status'});
 
-
-        $obj = new self();
+        $obj = new self($status);
 
         return $obj;
     }
@@ -61,7 +93,7 @@ class NotificationsReadAllNotificationsRequestBody
     public function toJson(): array
     {
         $output = [];
-
+        $output['status'] = $this->status->value;
 
         return $output;
     }
@@ -94,28 +126,11 @@ class NotificationsReadAllNotificationsRequestBody
     {
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        return '/v2/notifications/actions/read-all';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 }

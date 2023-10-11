@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
-class NotificationsReadAllNotificationsRequest
+class NotificationsReadAllNotificationsDeprecated200Response
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,46 +17,52 @@ class NotificationsReadAllNotificationsRequest
      */
     private static array $schema = [
         'type' => 'object',
-        'properties' => [
-            'body' => [
-                'type' => 'object',
-            ],
-        ],
         'required' => [
             'body',
         ],
+        'properties' => [
+            'body' => [
+                'properties' => [
+                    'status' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.messaging.NotificationStatus',
+                    ],
+                ],
+                'required' => [
+                    'status',
+                ],
+                'type' => 'object',
+            ],
+        ],
     ];
 
     /**
-     * @var NotificationsReadAllNotificationsRequestBody
+     * @var NotificationsReadAllNotificationsDeprecated200ResponseBody
      */
-    private NotificationsReadAllNotificationsRequestBody $body;
+    private NotificationsReadAllNotificationsDeprecated200ResponseBody $body;
 
-    private array $headers = [
-
-    ];
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param NotificationsReadAllNotificationsRequestBody $body
+     * @param NotificationsReadAllNotificationsDeprecated200ResponseBody $body
      */
-    public function __construct(NotificationsReadAllNotificationsRequestBody $body)
+    public function __construct(NotificationsReadAllNotificationsDeprecated200ResponseBody $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return NotificationsReadAllNotificationsRequestBody
+     * @return NotificationsReadAllNotificationsDeprecated200ResponseBody
      */
-    public function getBody(): NotificationsReadAllNotificationsRequestBody
+    public function getBody(): NotificationsReadAllNotificationsDeprecated200ResponseBody
     {
         return $this->body;
     }
 
     /**
-     * @param NotificationsReadAllNotificationsRequestBody $body
+     * @param NotificationsReadAllNotificationsDeprecated200ResponseBody $body
      * @return self
      */
-    public function withBody(NotificationsReadAllNotificationsRequestBody $body): self
+    public function withBody(NotificationsReadAllNotificationsDeprecated200ResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -70,17 +75,17 @@ class NotificationsReadAllNotificationsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return NotificationsReadAllNotificationsRequest Created instance
+     * @return NotificationsReadAllNotificationsDeprecated200Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsDeprecated200Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = NotificationsReadAllNotificationsRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = NotificationsReadAllNotificationsDeprecated200ResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -129,28 +134,11 @@ class NotificationsReadAllNotificationsRequest
         $this->body = clone $this->body;
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        return '/v2/notifications/actions/read-all';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class NotificationsReadNotificationRequest
+class NotificationsReadAllNotificationsDeprecatedRequest
 {
     public const method = 'put';
 
@@ -19,91 +19,45 @@ class NotificationsReadNotificationRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'notificationId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
             'body' => [
-                'properties' => [
-                    'status' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.messaging.NotificationStatus',
-                    ],
-                ],
-                'required' => [
-                    'status',
-                ],
                 'type' => 'object',
             ],
         ],
         'required' => [
-            'notificationId',
             'body',
         ],
     ];
 
     /**
-     * @var string
+     * @var NotificationsReadAllNotificationsDeprecatedRequestBody
      */
-    private string $notificationId;
-
-    /**
-     * @var NotificationsReadNotificationRequestBody
-     */
-    private NotificationsReadNotificationRequestBody $body;
+    private NotificationsReadAllNotificationsDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $notificationId
-     * @param NotificationsReadNotificationRequestBody $body
+     * @param NotificationsReadAllNotificationsDeprecatedRequestBody $body
      */
-    public function __construct(string $notificationId, NotificationsReadNotificationRequestBody $body)
+    public function __construct(NotificationsReadAllNotificationsDeprecatedRequestBody $body)
     {
-        $this->notificationId = $notificationId;
         $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return NotificationsReadAllNotificationsDeprecatedRequestBody
      */
-    public function getNotificationId(): string
-    {
-        return $this->notificationId;
-    }
-
-    /**
-     * @return NotificationsReadNotificationRequestBody
-     */
-    public function getBody(): NotificationsReadNotificationRequestBody
+    public function getBody(): NotificationsReadAllNotificationsDeprecatedRequestBody
     {
         return $this->body;
     }
 
     /**
-     * @param string $notificationId
+     * @param NotificationsReadAllNotificationsDeprecatedRequestBody $body
      * @return self
      */
-    public function withNotificationId(string $notificationId): self
-    {
-        $validator = new Validator();
-        $validator->validate($notificationId, static::$schema['properties']['notificationId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->notificationId = $notificationId;
-
-        return $clone;
-    }
-
-    /**
-     * @param NotificationsReadNotificationRequestBody $body
-     * @return self
-     */
-    public function withBody(NotificationsReadNotificationRequestBody $body): self
+    public function withBody(NotificationsReadAllNotificationsDeprecatedRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -116,20 +70,19 @@ class NotificationsReadNotificationRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return NotificationsReadNotificationRequest Created instance
+     * @return NotificationsReadAllNotificationsDeprecatedRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadNotificationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsDeprecatedRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $notificationId = $input->{'notificationId'};
-        $body = NotificationsReadNotificationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = NotificationsReadAllNotificationsDeprecatedRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($notificationId, $body);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -142,7 +95,6 @@ class NotificationsReadNotificationRequest
     public function toJson(): array
     {
         $output = [];
-        $output['notificationId'] = $this->notificationId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -180,8 +132,7 @@ class NotificationsReadNotificationRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $notificationId = urlencode($mapped['notificationId']);
-        return '/v2/notifications/' . $notificationId . '/status';
+        return '/v2/notifications/status';
     }
 
     public function getQuery(): array

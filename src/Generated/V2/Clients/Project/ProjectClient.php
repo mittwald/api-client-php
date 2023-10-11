@@ -13,6 +13,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptPr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject412Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectRequest;
@@ -25,11 +26,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\Decline
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject412Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject500Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatar400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatar403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteDefaultResponse;
@@ -37,10 +40,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeletePr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatar400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatar403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInvite200Response;
@@ -60,6 +64,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServer200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServer403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServer404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
@@ -83,6 +88,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListP
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServers200Response;
@@ -91,22 +97,26 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersDefau
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUpload403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUpload200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUpload400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUpload403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMail403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescription400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescription404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescription403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescription400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescription403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
 
 /**
@@ -186,9 +196,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project
      * @throws GuzzleException
      * @param CreateProject\CreateProjectRequest $request An object representing the request for this operation
-     * @return CreateProject\CreateProject201Response|CreateProject\CreateProject400Response|CreateProject\CreateProject412Response|CreateProject\CreateProjectDefaultResponse Created
+     * @return CreateProject\CreateProject201Response|CreateProject\CreateProject400Response|CreateProject\CreateProject403Response|CreateProject\CreateProject412Response|CreateProject\CreateProjectDefaultResponse Created
      */
-    public function createProject(CreateProjectRequest $request): CreateProject201Response|CreateProject400Response|CreateProject412Response|CreateProjectDefaultResponse
+    public function createProject(CreateProjectRequest $request): CreateProject201Response|CreateProject400Response|CreateProject403Response|CreateProject412Response|CreateProjectDefaultResponse
     {
         $httpRequest = new Request(CreateProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -199,6 +209,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             201 => CreateProject201Response::fromResponse($httpResponse),
             400 => CreateProject400Response::fromResponse($httpResponse),
+            403 => CreateProject403Response::fromResponse($httpResponse),
             412 => CreateProject412Response::fromResponse($httpResponse),
             default => CreateProjectDefaultResponse::fromResponse($httpResponse),
         };
@@ -232,9 +243,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-avatar
      * @throws GuzzleException
      * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteProjectAvatar\DeleteProjectAvatar400Response|DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse NoContent
+     * @return EmptyResponse|DeleteProjectAvatar\DeleteProjectAvatar400Response|DeleteProjectAvatar\DeleteProjectAvatar403Response|DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse NoContent
      */
-    public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse|DeleteProjectAvatar400Response|DeleteProjectAvatarDefaultResponse
+    public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse|DeleteProjectAvatar400Response|DeleteProjectAvatar403Response|DeleteProjectAvatarDefaultResponse
     {
         $httpRequest = new Request(DeleteProjectAvatarRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -244,6 +255,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
             400 => DeleteProjectAvatar400Response::fromResponse($httpResponse),
+            403 => DeleteProjectAvatar403Response::fromResponse($httpResponse),
             default => DeleteProjectAvatarDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -254,9 +266,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-request-project-avatar-upload
      * @throws GuzzleException
      * @param RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse OK
+     * @return RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload403Response|RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse OK
      */
-    public function requestProjectAvatarUpload(RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload400Response|RequestProjectAvatarUploadDefaultResponse
+    public function requestProjectAvatarUpload(RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload403Response|RequestProjectAvatarUploadDefaultResponse
     {
         $httpRequest = new Request(RequestProjectAvatarUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -266,6 +278,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             200 => RequestProjectAvatarUpload200Response::fromResponse($httpResponse),
             400 => RequestProjectAvatarUpload400Response::fromResponse($httpResponse),
+            403 => RequestProjectAvatarUpload403Response::fromResponse($httpResponse),
             default => RequestProjectAvatarUploadDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -384,9 +397,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project
      * @throws GuzzleException
      * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
-     * @return DeleteProject\DeleteProject200Response|EmptyResponse|DeleteProject\DeleteProject400Response|DeleteProject\DeleteProject412Response|DeleteProject\DeleteProject500Response|DeleteProject\DeleteProjectDefaultResponse NoContent
+     * @return DeleteProject\DeleteProject200Response|EmptyResponse|DeleteProject\DeleteProject400Response|DeleteProject\DeleteProject403Response|DeleteProject\DeleteProject412Response|DeleteProject\DeleteProject500Response|DeleteProject\DeleteProjectDefaultResponse NoContent
      */
-    public function deleteProject(DeleteProjectRequest $request): EmptyResponse|DeleteProject200Response|DeleteProject400Response|DeleteProject412Response|DeleteProject500Response|DeleteProjectDefaultResponse
+    public function deleteProject(DeleteProjectRequest $request): EmptyResponse|DeleteProject200Response|DeleteProject400Response|DeleteProject403Response|DeleteProject412Response|DeleteProject500Response|DeleteProjectDefaultResponse
     {
         $httpRequest = new Request(DeleteProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -397,6 +410,7 @@ class ProjectClient
             200 => DeleteProject200Response::fromResponse($httpResponse),
             204 => new EmptyResponse($httpResponse),
             400 => DeleteProject400Response::fromResponse($httpResponse),
+            403 => DeleteProject403Response::fromResponse($httpResponse),
             412 => DeleteProject412Response::fromResponse($httpResponse),
             500 => DeleteProject500Response::fromResponse($httpResponse),
             default => DeleteProjectDefaultResponse::fromResponse($httpResponse),
@@ -409,9 +423,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-server-avatar
      * @throws GuzzleException
      * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteServerAvatar\DeleteServerAvatar400Response|DeleteServerAvatar\DeleteServerAvatarDefaultResponse NoContent
+     * @return EmptyResponse|DeleteServerAvatar\DeleteServerAvatar400Response|DeleteServerAvatar\DeleteServerAvatar403Response|DeleteServerAvatar\DeleteServerAvatarDefaultResponse NoContent
      */
-    public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse|DeleteServerAvatar400Response|DeleteServerAvatarDefaultResponse
+    public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse|DeleteServerAvatar400Response|DeleteServerAvatar403Response|DeleteServerAvatarDefaultResponse
     {
         $httpRequest = new Request(DeleteServerAvatarRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -421,6 +435,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
             400 => DeleteServerAvatar400Response::fromResponse($httpResponse),
+            403 => DeleteServerAvatar403Response::fromResponse($httpResponse),
             default => DeleteServerAvatarDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -431,9 +446,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-request-server-avatar-upload
      * @throws GuzzleException
      * @param RequestServerAvatarUpload\RequestServerAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestServerAvatarUpload\RequestServerAvatarUpload200Response|RequestServerAvatarUpload\RequestServerAvatarUpload400Response|RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse OK
+     * @return RequestServerAvatarUpload\RequestServerAvatarUpload200Response|RequestServerAvatarUpload\RequestServerAvatarUpload400Response|RequestServerAvatarUpload\RequestServerAvatarUpload403Response|RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse OK
      */
-    public function requestServerAvatarUpload(RequestServerAvatarUploadRequest $request): RequestServerAvatarUpload200Response|RequestServerAvatarUpload400Response|RequestServerAvatarUploadDefaultResponse
+    public function requestServerAvatarUpload(RequestServerAvatarUploadRequest $request): RequestServerAvatarUpload200Response|RequestServerAvatarUpload400Response|RequestServerAvatarUpload403Response|RequestServerAvatarUploadDefaultResponse
     {
         $httpRequest = new Request(RequestServerAvatarUploadRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -443,6 +458,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             200 => RequestServerAvatarUpload200Response::fromResponse($httpResponse),
             400 => RequestServerAvatarUpload400Response::fromResponse($httpResponse),
+            403 => RequestServerAvatarUpload403Response::fromResponse($httpResponse),
             default => RequestServerAvatarUploadDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -475,9 +491,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project
      * @throws GuzzleException
      * @param GetProject\GetProjectRequest $request An object representing the request for this operation
-     * @return GetProject\GetProject200Response|GetProject\GetProject404Response|GetProject\GetProjectDefaultResponse OK
+     * @return GetProject\GetProject200Response|GetProject\GetProject403Response|GetProject\GetProjectDefaultResponse OK
      */
-    public function getProject(GetProjectRequest $request): GetProject200Response|GetProject404Response|GetProjectDefaultResponse
+    public function getProject(GetProjectRequest $request): GetProject200Response|GetProject403Response|GetProjectDefaultResponse
     {
         $httpRequest = new Request(GetProjectRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -486,7 +502,7 @@ class ProjectClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             200 => GetProject200Response::fromResponse($httpResponse),
-            404 => GetProject404Response::fromResponse($httpResponse),
+            403 => GetProject403Response::fromResponse($httpResponse),
             default => GetProjectDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -519,9 +535,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server
      * @throws GuzzleException
      * @param GetServer\GetServerRequest $request An object representing the request for this operation
-     * @return GetServer\GetServer200Response|GetServer\GetServer404Response|GetServer\GetServerDefaultResponse OK
+     * @return GetServer\GetServer200Response|GetServer\GetServer403Response|GetServer\GetServer404Response|GetServer\GetServerDefaultResponse OK
      */
-    public function getServer(GetServerRequest $request): GetServer200Response|GetServer404Response|GetServerDefaultResponse
+    public function getServer(GetServerRequest $request): GetServer200Response|GetServer403Response|GetServer404Response|GetServerDefaultResponse
     {
         $httpRequest = new Request(GetServerRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -530,6 +546,7 @@ class ProjectClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             200 => GetServer200Response::fromResponse($httpResponse),
+            403 => GetServer403Response::fromResponse($httpResponse),
             404 => GetServer404Response::fromResponse($httpResponse),
             default => GetServerDefaultResponse::fromResponse($httpResponse),
         };
@@ -651,9 +668,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-projects
      * @throws GuzzleException
      * @param ListProjects\ListProjectsRequest $request An object representing the request for this operation
-     * @return ListProjects\ListProjects200Response|ListProjects\ListProjects400Response|ListProjects\ListProjectsDefaultResponse OK
+     * @return ListProjects\ListProjects200Response|ListProjects\ListProjects400Response|ListProjects\ListProjects403Response|ListProjects\ListProjectsDefaultResponse OK
      */
-    public function listProjects(ListProjectsRequest $request): ListProjects200Response|ListProjects400Response|ListProjectsDefaultResponse
+    public function listProjects(ListProjectsRequest $request): ListProjects200Response|ListProjects400Response|ListProjects403Response|ListProjectsDefaultResponse
     {
         $httpRequest = new Request(ListProjectsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -663,6 +680,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             200 => ListProjects200Response::fromResponse($httpResponse),
             400 => ListProjects400Response::fromResponse($httpResponse),
+            403 => ListProjects403Response::fromResponse($httpResponse),
             default => ListProjectsDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -718,9 +736,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
      * @throws GuzzleException
      * @param UpdateProjectDescription\UpdateProjectDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateProjectDescription\UpdateProjectDescription400Response|UpdateProjectDescription\UpdateProjectDescription404Response|UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse OK
+     * @return EmptyResponse|UpdateProjectDescription\UpdateProjectDescription400Response|UpdateProjectDescription\UpdateProjectDescription403Response|UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse OK
      */
-    public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse|UpdateProjectDescription400Response|UpdateProjectDescription404Response|UpdateProjectDescriptionDefaultResponse
+    public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse|UpdateProjectDescription400Response|UpdateProjectDescription403Response|UpdateProjectDescriptionDefaultResponse
     {
         $httpRequest = new Request(UpdateProjectDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -731,7 +749,7 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             200 => new EmptyResponse($httpResponse),
             400 => UpdateProjectDescription400Response::fromResponse($httpResponse),
-            404 => UpdateProjectDescription404Response::fromResponse($httpResponse),
+            403 => UpdateProjectDescription403Response::fromResponse($httpResponse),
             default => UpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
         };
     }
@@ -742,9 +760,9 @@ class ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server-description
      * @throws GuzzleException
      * @param UpdateServerDescription\UpdateServerDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateServerDescription\UpdateServerDescription400Response OK
+     * @return EmptyResponse|UpdateServerDescription\UpdateServerDescription400Response|UpdateServerDescription\UpdateServerDescription403Response|UpdateServerDescription\UpdateServerDescriptionDefaultResponse OK
      */
-    public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse|UpdateServerDescription400Response
+    public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse|UpdateServerDescription400Response|UpdateServerDescription403Response|UpdateServerDescriptionDefaultResponse
     {
         $httpRequest = new Request(UpdateServerDescriptionRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
@@ -755,6 +773,8 @@ class ProjectClient
         return match ($httpResponse->getStatusCode()) {
             200 => new EmptyResponse($httpResponse),
             400 => UpdateServerDescription400Response::fromResponse($httpResponse),
+            403 => UpdateServerDescription403Response::fromResponse($httpResponse),
+            default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

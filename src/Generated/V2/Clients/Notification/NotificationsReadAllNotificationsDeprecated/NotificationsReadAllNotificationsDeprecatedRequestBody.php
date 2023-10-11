@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class NotificationsReadAllNotificationsRequestBody
+class NotificationsReadAllNotificationsDeprecatedRequestBody
 {
-    public const method = 'post';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,10 +36,10 @@ class NotificationsReadAllNotificationsRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return NotificationsReadAllNotificationsRequestBody Created instance
+     * @return NotificationsReadAllNotificationsDeprecatedRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsDeprecatedRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -97,7 +97,7 @@ class NotificationsReadAllNotificationsRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/notifications/actions/read-all';
+        return '/v2/notifications/status';
     }
 
     public function getQuery(): array

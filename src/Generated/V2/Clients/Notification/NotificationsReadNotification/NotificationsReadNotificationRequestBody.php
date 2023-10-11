@@ -132,8 +132,8 @@ class NotificationsReadNotificationRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $messageId = urlencode($mapped['messageId']);
-        return '/v2/notifications/' . $messageId . '/status';
+        $notificationId = urlencode($mapped['notificationId']);
+        return '/v2/notifications/' . $notificationId . '/status';
     }
 
     public function getQuery(): array

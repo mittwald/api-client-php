@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class NotificationsReadAllNotificationsRequestBody
+class DeleteServerAvatar403Response
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,17 +18,49 @@ class NotificationsReadAllNotificationsRequestBody
      */
     private static array $schema = [
         'type' => 'object',
-    ];
-
-    private array $headers = [
-
+        'required' => [
+            'body',
+        ],
+        'properties' => [
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+            ],
+        ],
     ];
 
     /**
-     *
+     * @var Error
      */
-    public function __construct()
+    private Error $body;
+
+    public ResponseInterface|null $httpResponse = null;
+
+    /**
+     * @param Error $body
+     */
+    public function __construct(Error $body)
     {
+        $this->body = $body;
+    }
+
+    /**
+     * @return Error
+     */
+    public function getBody(): Error
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param Error $body
+     * @return self
+     */
+    public function withBody(Error $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
     }
 
     /**
@@ -36,19 +68,19 @@ class NotificationsReadAllNotificationsRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return NotificationsReadAllNotificationsRequestBody Created instance
+     * @return DeleteServerAvatar403Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): NotificationsReadAllNotificationsRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeleteServerAvatar403Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-
-        $obj = new self();
+        $obj = new self($body);
 
         return $obj;
     }
@@ -61,7 +93,7 @@ class NotificationsReadAllNotificationsRequestBody
     public function toJson(): array
     {
         $output = [];
-
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -94,28 +126,11 @@ class NotificationsReadAllNotificationsRequestBody
     {
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        return '/v2/notifications/actions/read-all';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 }

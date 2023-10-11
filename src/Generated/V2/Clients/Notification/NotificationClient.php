@@ -25,6 +25,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNot
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotifications403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotification200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotification404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationDefaultResponse;
@@ -142,7 +146,7 @@ class NotificationClient
     }
 
     /**
-     * List all unread notifications
+     * List all unread notifications.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-list-notifications
      * @throws GuzzleException
@@ -159,6 +163,31 @@ class NotificationClient
         return match ($httpResponse->getStatusCode()) {
             200 => NotificationsListNotifications200Response::fromResponse($httpResponse),
             default => NotificationsListNotificationsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Mark all notifications as read (deprecated).
+     *
+     * Deprecated route. Please use /v2/notifications/actions/read-all instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications-deprecated
+     * @throws GuzzleException
+     * @param NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedRequest $request An object representing the request for this operation
+     * @return NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecated200Response|NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecated403Response|NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedDefaultResponse OK
+     */
+    public function notificationsReadAllNotificationsDeprecated(NotificationsReadAllNotificationsDeprecatedRequest $request): NotificationsReadAllNotificationsDeprecated200Response|NotificationsReadAllNotificationsDeprecated403Response|NotificationsReadAllNotificationsDeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(NotificationsReadAllNotificationsDeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => NotificationsReadAllNotificationsDeprecated200Response::fromResponse($httpResponse),
+            403 => NotificationsReadAllNotificationsDeprecated403Response::fromResponse($httpResponse),
+            default => NotificationsReadAllNotificationsDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
