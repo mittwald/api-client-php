@@ -19,55 +19,55 @@ class GetProjectRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'id',
+            'projectId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $projectId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $id
+     * @param string $projectId
      */
-    public function __construct(string $id)
+    public function __construct(string $projectId)
     {
-        $this->id = $id;
+        $this->projectId = $projectId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getProjectId(): string
     {
-        return $this->id;
+        return $this->projectId;
     }
 
     /**
-     * @param string $id
+     * @param string $projectId
      * @return self
      */
-    public function withId(string $id): self
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->projectId = $projectId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class GetProjectRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $projectId = $input->{'projectId'};
 
-        $obj = new self($id);
+        $obj = new self($projectId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class GetProjectRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['projectId'] = $this->projectId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class GetProjectRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/projects/' . $id;
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId;
     }
 
     public function getQuery(): array

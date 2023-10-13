@@ -137,8 +137,8 @@ class UpdateProjectDescriptionRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/projects/' . $id . '/description';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/description';
     }
 
     public function getQuery(): array

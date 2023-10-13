@@ -418,6 +418,28 @@ class ProjectClient
     }
 
     /**
+     * Get a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project
+     * @throws GuzzleException
+     * @param GetProject\GetProjectRequest $request An object representing the request for this operation
+     * @return GetProject\GetProject200Response|GetProject\GetProject403Response|GetProject\GetProjectDefaultResponse OK
+     */
+    public function getProject(GetProjectRequest $request): GetProject200Response|GetProject403Response|GetProjectDefaultResponse
+    {
+        $httpRequest = new Request(GetProjectRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetProject200Response::fromResponse($httpResponse),
+            403 => GetProject403Response::fromResponse($httpResponse),
+            default => GetProjectDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Delete a Server's avatar.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-server-avatar
@@ -482,28 +504,6 @@ class ProjectClient
             200 => GetProjectTokenInvite200Response::fromResponse($httpResponse),
             404 => GetProjectTokenInvite404Response::fromResponse($httpResponse),
             default => GetProjectTokenInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project
-     * @throws GuzzleException
-     * @param GetProject\GetProjectRequest $request An object representing the request for this operation
-     * @return GetProject\GetProject200Response|GetProject\GetProject403Response|GetProject\GetProjectDefaultResponse OK
-     */
-    public function getProject(GetProjectRequest $request): GetProject200Response|GetProject403Response|GetProjectDefaultResponse
-    {
-        $httpRequest = new Request(GetProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetProject200Response::fromResponse($httpResponse),
-            403 => GetProject403Response::fromResponse($httpResponse),
-            default => GetProjectDefaultResponse::fromResponse($httpResponse),
         };
     }
 

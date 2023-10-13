@@ -19,7 +19,7 @@ class UpdateProjectDescriptionRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -36,7 +36,7 @@ class UpdateProjectDescriptionRequest
             ],
         ],
         'required' => [
-            'id',
+            'projectId',
             'body',
         ],
     ];
@@ -44,7 +44,7 @@ class UpdateProjectDescriptionRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $projectId;
 
     /**
      * @var UpdateProjectDescriptionRequestBody
@@ -56,21 +56,21 @@ class UpdateProjectDescriptionRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $projectId
      * @param UpdateProjectDescriptionRequestBody $body
      */
-    public function __construct(string $id, UpdateProjectDescriptionRequestBody $body)
+    public function __construct(string $projectId, UpdateProjectDescriptionRequestBody $body)
     {
-        $this->id = $id;
+        $this->projectId = $projectId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getProjectId(): string
     {
-        return $this->id;
+        return $this->projectId;
     }
 
     /**
@@ -82,19 +82,19 @@ class UpdateProjectDescriptionRequest
     }
 
     /**
-     * @param string $id
+     * @param string $projectId
      * @return self
      */
-    public function withId(string $id): self
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->projectId = $projectId;
 
         return $clone;
     }
@@ -126,10 +126,10 @@ class UpdateProjectDescriptionRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $projectId = $input->{'projectId'};
         $body = UpdateProjectDescriptionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id, $body);
+        $obj = new self($projectId, $body);
 
         return $obj;
     }
@@ -142,7 +142,7 @@ class UpdateProjectDescriptionRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['projectId'] = $this->projectId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -180,8 +180,8 @@ class UpdateProjectDescriptionRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/projects/' . $id . '/description';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/description';
     }
 
     public function getQuery(): array
