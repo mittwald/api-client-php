@@ -27,6 +27,9 @@ class CreateConversationRequest
                     'relatedTo' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
                     ],
+                    'sharedWith' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                    ],
                     'title' => [
                         'type' => 'string',
                     ],

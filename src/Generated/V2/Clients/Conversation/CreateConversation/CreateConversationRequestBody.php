@@ -25,6 +25,9 @@ class CreateConversationRequestBody
             'relatedTo' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
             ],
+            'sharedWith' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+            ],
             'title' => [
                 'type' => 'string',
             ],
@@ -41,6 +44,11 @@ class CreateConversationRequestBody
      * @var AggregateReference|null
      */
     private ?AggregateReference $relatedTo = null;
+
+    /**
+     * @var AggregateReference|null
+     */
+    private ?AggregateReference $sharedWith = null;
 
     /**
      * @var string|null
@@ -73,6 +81,15 @@ class CreateConversationRequestBody
     public function getRelatedTo(): ?AggregateReference
     {
         return $this->relatedTo ?? null;
+    }
+
+    /**
+     * @return
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
+     */
+    public function getSharedWith(): ?AggregateReference
+    {
+        return $this->sharedWith ?? null;
     }
 
     /**
@@ -136,6 +153,29 @@ class CreateConversationRequestBody
     }
 
     /**
+     * @param AggregateReference $sharedWith
+     * @return self
+     */
+    public function withSharedWith(AggregateReference $sharedWith): self
+    {
+        $clone = clone $this;
+        $clone->sharedWith = $sharedWith;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutSharedWith(): self
+    {
+        $clone = clone $this;
+        unset($clone->sharedWith);
+
+        return $clone;
+    }
+
+    /**
      * @param string $title
      * @return self
      */
@@ -187,6 +227,10 @@ class CreateConversationRequestBody
         if (isset($input->{'relatedTo'})) {
             $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
         }
+        $sharedWith = null;
+        if (isset($input->{'sharedWith'})) {
+            $sharedWith = AggregateReference::buildFromInput($input->{'sharedWith'}, validate: $validate);
+        }
         $title = null;
         if (isset($input->{'title'})) {
             $title = $input->{'title'};
@@ -195,6 +239,7 @@ class CreateConversationRequestBody
         $obj = new self();
         $obj->categoryId = $categoryId;
         $obj->relatedTo = $relatedTo;
+        $obj->sharedWith = $sharedWith;
         $obj->title = $title;
         return $obj;
     }
@@ -212,6 +257,9 @@ class CreateConversationRequestBody
         }
         if (isset($this->relatedTo)) {
             $output['relatedTo'] = $this->relatedTo->toJson();
+        }
+        if (isset($this->sharedWith)) {
+            $output['sharedWith'] = $this->sharedWith->toJson();
         }
         if (isset($this->title)) {
             $output['title'] = $this->title;
