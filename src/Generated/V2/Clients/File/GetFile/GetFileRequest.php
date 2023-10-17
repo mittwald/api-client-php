@@ -19,56 +19,56 @@ class GetFileRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'fileId' => [
                 'example' => '3fa85f64-5717-4562-b3fc-2c963f66afa6',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'id',
+            'fileId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $fileId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $id
+     * @param string $fileId
      */
-    public function __construct(string $id)
+    public function __construct(string $fileId)
     {
-        $this->id = $id;
+        $this->fileId = $fileId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getFileId(): string
     {
-        return $this->id;
+        return $this->fileId;
     }
 
     /**
-     * @param string $id
+     * @param string $fileId
      * @return self
      */
-    public function withId(string $id): self
+    public function withFileId(string $fileId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($fileId, static::$schema['properties']['fileId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->fileId = $fileId;
 
         return $clone;
     }
@@ -88,9 +88,9 @@ class GetFileRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $fileId = $input->{'fileId'};
 
-        $obj = new self($id);
+        $obj = new self($fileId);
 
         return $obj;
     }
@@ -103,7 +103,7 @@ class GetFileRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['fileId'] = $this->fileId;
 
         return $output;
     }
@@ -139,8 +139,8 @@ class GetFileRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/files/' . $id;
+        $fileId = urlencode($mapped['fileId']);
+        return '/v2/files/' . $fileId;
     }
 
     public function getQuery(): array
