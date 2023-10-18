@@ -40,6 +40,9 @@ class Path
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TargetInstallation',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TargetUseDefaultPage',
+                    ],
                 ],
             ],
         ],
@@ -56,15 +59,15 @@ class Path
     private string $path;
 
     /**
-     * @var TargetDirectory|TargetUrl|TargetInstallation
+     * @var TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage
      */
-    private TargetDirectory|TargetUrl|TargetInstallation $target;
+    private TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target;
 
     /**
      * @param string $path
-     * @param TargetDirectory|TargetUrl|TargetInstallation $target
+     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target
      */
-    public function __construct(string $path, TargetDirectory|TargetInstallation|TargetUrl $target)
+    public function __construct(string $path, TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
     {
         $this->path = $path;
         $this->target = $target;
@@ -80,9 +83,9 @@ class Path
 
     /**
      * @return
-     * TargetDirectory|TargetUrl|TargetInstallation
+     * TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage
      */
-    public function getTarget(): TargetDirectory|TargetInstallation|TargetUrl
+    public function getTarget(): TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage
     {
         return $this->target;
     }
@@ -106,10 +109,10 @@ class Path
     }
 
     /**
-     * @param TargetDirectory|TargetUrl|TargetInstallation $target
+     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target
      * @return self
      */
-    public function withTarget(TargetDirectory|TargetInstallation|TargetUrl $target): self
+    public function withTarget(TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
     {
         $clone = clone $this;
         $clone->target = $target;
@@ -137,6 +140,7 @@ class Path
             TargetDirectory::validateInput($input->{'target'}, true) => TargetDirectory::buildFromInput($input->{'target'}, validate: $validate),
             TargetUrl::validateInput($input->{'target'}, true) => TargetUrl::buildFromInput($input->{'target'}, validate: $validate),
             TargetInstallation::validateInput($input->{'target'}, true) => TargetInstallation::buildFromInput($input->{'target'}, validate: $validate),
+            TargetUseDefaultPage::validateInput($input->{'target'}, true) => TargetUseDefaultPage::buildFromInput($input->{'target'}, validate: $validate),
         };
 
         $obj = new self($path, $target);
@@ -154,7 +158,7 @@ class Path
         $output = [];
         $output['path'] = $this->path;
         $output['target'] = match (true) {
-            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation => $this->target->toJson(),
+            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage => $this->target->toJson(),
         };
 
         return $output;
@@ -187,7 +191,7 @@ class Path
     public function __clone()
     {
         $this->target = match (true) {
-            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation => $this->target,
+            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage => $this->target,
         };
     }
 }
