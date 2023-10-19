@@ -57,9 +57,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversio
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallation404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReconcileDetectedApps\ReconcileDetectedApps404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReconcileDetectedApps\ReconcileDetectedAppsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ReconcileDetectedApps\ReconcileDetectedAppsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallation201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallation404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationDefaultResponse;
@@ -473,29 +470,6 @@ class AppClient
         return match ($httpResponse->getStatusCode()) {
             200 => ListUpdateCandidatesForAppversion200Response::fromResponse($httpResponse),
             default => ListUpdateCandidatesForAppversionDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * reconcile detected apps to appInstallations of a project
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-reconcile-detected-apps
-     * @throws GuzzleException
-     * @param ReconcileDetectedApps\ReconcileDetectedAppsRequest $request An object representing the request for this operation
-     * @return EmptyResponse|ReconcileDetectedApps\ReconcileDetectedApps404Response|ReconcileDetectedApps\ReconcileDetectedAppsDefaultResponse The AppInstallationStatus has been updated
-     */
-    public function reconcileDetectedApps(ReconcileDetectedAppsRequest $request): EmptyResponse|ReconcileDetectedApps404Response|ReconcileDetectedAppsDefaultResponse
-    {
-        $httpRequest = new Request(ReconcileDetectedAppsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->toJson()['body'],
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            404 => ReconcileDetectedApps404Response::fromResponse($httpResponse),
-            default => ReconcileDetectedAppsDefaultResponse::fromResponse($httpResponse),
         };
     }
 

@@ -76,6 +76,10 @@ class AppInstallation
             'screenshotRef' => [
                 'type' => 'string',
             ],
+            'shortId' => [
+                'example' => 'a-XXXXXX',
+                'type' => 'string',
+            ],
             'systemSoftware' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware',
@@ -95,6 +99,7 @@ class AppInstallation
         'required' => [
             'id',
             'appId',
+            'shortId',
             'appVersion',
             'description',
             'installationPath',
@@ -164,6 +169,11 @@ class AppInstallation
     private ?string $screenshotRef = null;
 
     /**
+     * @var string
+     */
+    private string $shortId;
+
+    /**
      * @var InstalledSystemSoftware[]|null
      */
     private ?array $systemSoftware = null;
@@ -185,8 +195,9 @@ class AppInstallation
      * @param bool $disabled
      * @param string $id
      * @param string $installationPath
+     * @param string $shortId
      */
-    public function __construct(string $appId, VersionStatus $appVersion, string $description, bool $disabled, string $id, string $installationPath)
+    public function __construct(string $appId, VersionStatus $appVersion, string $description, bool $disabled, string $id, string $installationPath, string $shortId)
     {
         $this->appId = $appId;
         $this->appVersion = $appVersion;
@@ -194,6 +205,7 @@ class AppInstallation
         $this->disabled = $disabled;
         $this->id = $id;
         $this->installationPath = $installationPath;
+        $this->shortId = $shortId;
     }
 
     /**
@@ -290,6 +302,14 @@ class AppInstallation
     public function getScreenshotRef(): ?string
     {
         return $this->screenshotRef ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortId(): string
+    {
+        return $this->shortId;
     }
 
     /**
@@ -588,6 +608,24 @@ class AppInstallation
     }
 
     /**
+     * @param string $shortId
+     * @return self
+     */
+    public function withShortId(string $shortId): self
+    {
+        $validator = new Validator();
+        $validator->validate($shortId, static::$schema['properties']['shortId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->shortId = $shortId;
+
+        return $clone;
+    }
+
+    /**
      * @param InstalledSystemSoftware[] $systemSoftware
      * @return self
      */
@@ -704,6 +742,7 @@ class AppInstallation
         if (isset($input->{'screenshotRef'})) {
             $screenshotRef = $input->{'screenshotRef'};
         }
+        $shortId = $input->{'shortId'};
         $systemSoftware = null;
         if (isset($input->{'systemSoftware'})) {
             $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
@@ -717,7 +756,7 @@ class AppInstallation
             $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
-        $obj = new self($appId, $appVersion, $description, $disabled, $id, $installationPath);
+        $obj = new self($appId, $appVersion, $description, $disabled, $id, $installationPath, $shortId);
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->linkedDatabases = $linkedDatabases;
         $obj->processes = $processes;
@@ -762,6 +801,7 @@ class AppInstallation
         if (isset($this->screenshotRef)) {
             $output['screenshotRef'] = $this->screenshotRef;
         }
+        $output['shortId'] = $this->shortId;
         if (isset($this->systemSoftware)) {
             $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
         }
