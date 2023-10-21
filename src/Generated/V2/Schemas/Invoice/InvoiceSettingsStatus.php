@@ -39,7 +39,7 @@ class InvoiceSettingsStatus
                 ],
                 'type' => 'string',
             ],
-            'statusType' => [
+            'type' => [
                 'enum' => [
                     'returnDebitNote',
                 ],
@@ -65,18 +65,20 @@ class InvoiceSettingsStatus
     private InvoiceSettingsStatusSeverity $severity;
 
     /**
-     * @var InvoiceSettingsStatusStatusType|null
+     * @var InvoiceSettingsStatusType
      */
-    private ?InvoiceSettingsStatusStatusType $statusType = null;
+    private InvoiceSettingsStatusType $type;
 
     /**
      * @param string $message
      * @param InvoiceSettingsStatusSeverity $severity
+     * @param InvoiceSettingsStatusType $type
      */
-    public function __construct(string $message, InvoiceSettingsStatusSeverity $severity)
+    public function __construct(string $message, InvoiceSettingsStatusSeverity $severity, InvoiceSettingsStatusType $type)
     {
         $this->message = $message;
         $this->severity = $severity;
+        $this->type = $type;
     }
 
     /**
@@ -96,11 +98,11 @@ class InvoiceSettingsStatus
     }
 
     /**
-     * @return InvoiceSettingsStatusStatusType|null
+     * @return InvoiceSettingsStatusType
      */
-    public function getStatusType(): ?InvoiceSettingsStatusStatusType
+    public function getType(): InvoiceSettingsStatusType
     {
-        return $this->statusType ?? null;
+        return $this->type;
     }
 
     /**
@@ -134,24 +136,13 @@ class InvoiceSettingsStatus
     }
 
     /**
-     * @param InvoiceSettingsStatusStatusType $statusType
+     * @param InvoiceSettingsStatusType $type
      * @return self
      */
-    public function withStatusType(InvoiceSettingsStatusStatusType $statusType): self
+    public function withType(InvoiceSettingsStatusType $type): self
     {
         $clone = clone $this;
-        $clone->statusType = $statusType;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutStatusType(): self
-    {
-        $clone = clone $this;
-        unset($clone->statusType);
+        $clone->type = $type;
 
         return $clone;
     }
@@ -173,13 +164,10 @@ class InvoiceSettingsStatus
 
         $message = $input->{'message'};
         $severity = InvoiceSettingsStatusSeverity::from($input->{'severity'});
-        $statusType = null;
-        if (isset($input->{'statusType'})) {
-            $statusType = InvoiceSettingsStatusStatusType::from($input->{'statusType'});
-        }
+        $type = InvoiceSettingsStatusType::from($input->{'type'});
 
-        $obj = new self($message, $severity);
-        $obj->statusType = $statusType;
+        $obj = new self($message, $severity, $type);
+
         return $obj;
     }
 
@@ -193,9 +181,7 @@ class InvoiceSettingsStatus
         $output = [];
         $output['message'] = $this->message;
         $output['severity'] = ($this->severity)->value;
-        if (isset($this->statusType)) {
-            $output['statusType'] = ($this->statusType)->value;
-        }
+        $output['type'] = ($this->type)->value;
 
         return $output;
     }
