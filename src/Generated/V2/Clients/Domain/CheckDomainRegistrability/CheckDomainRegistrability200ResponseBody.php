@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Psr\Http\Message\ResponseInterface;
 
-class DeleteDomainRequestBody
+class CheckDomainRegistrability200ResponseBody
 {
-    public const method = 'delete';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,65 +17,53 @@ class DeleteDomainRequestBody
      */
     private static array $schema = [
         'properties' => [
-            'transit' => [
-                'description' => 'Only for .de Domains.',
+            'registrable' => [
                 'type' => 'boolean',
             ],
+        ],
+        'required' => [
+            'registrable',
         ],
         'type' => 'object',
     ];
 
     /**
-     * Only for .de Domains.
-     *
-     * @var bool|null
+     * @var bool
      */
-    private ?bool $transit = null;
+    private bool $registrable;
 
-    private array $headers = [
-
-    ];
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     *
+     * @param bool $registrable
      */
-    public function __construct()
+    public function __construct(bool $registrable)
     {
+        $this->registrable = $registrable;
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getTransit(): ?bool
+    public function getRegistrable(): bool
     {
-        return $this->transit ?? null;
+        return $this->registrable;
     }
 
     /**
-     * @param bool $transit
+     * @param bool $registrable
      * @return self
      */
-    public function withTransit(bool $transit): self
+    public function withRegistrable(bool $registrable): self
     {
         $validator = new Validator();
-        $validator->validate($transit, static::$schema['properties']['transit']);
+        $validator->validate($registrable, static::$schema['properties']['registrable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->transit = $transit;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutTransit(): self
-    {
-        $clone = clone $this;
-        unset($clone->transit);
+        $clone->registrable = $registrable;
 
         return $clone;
     }
@@ -86,23 +73,20 @@ class DeleteDomainRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeleteDomainRequestBody Created instance
+     * @return CheckDomainRegistrability200ResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeleteDomainRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainRegistrability200ResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $transit = null;
-        if (isset($input->{'transit'})) {
-            $transit = (bool)($input->{'transit'});
-        }
+        $registrable = (bool)($input->{'registrable'});
 
-        $obj = new self();
-        $obj->transit = $transit;
+        $obj = new self($registrable);
+
         return $obj;
     }
 
@@ -114,9 +98,7 @@ class DeleteDomainRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->transit)) {
-            $output['transit'] = $this->transit;
-        }
+        $output['registrable'] = $this->registrable;
 
         return $output;
     }
@@ -149,29 +131,11 @@ class DeleteDomainRequestBody
     {
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        $domainId = urlencode($mapped['domainId']);
-        return '/v2/domains/' . $domainId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 }

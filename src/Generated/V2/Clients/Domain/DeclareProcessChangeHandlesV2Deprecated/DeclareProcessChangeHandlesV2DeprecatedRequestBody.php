@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField;
 
-class VerifyDomainOwnershipRequest
+class DeclareProcessChangeHandlesV2DeprecatedRequestBody
 {
-    public const method = 'post';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,94 +18,53 @@ class VerifyDomainOwnershipRequest
      * @var array
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-            'body' => [
-
+            'ownerC' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.domain.HandleField',
+                ],
+                'minItems' => 1,
+                'type' => 'array',
             ],
         ],
         'required' => [
-            'domainOwnershipId',
-            'body',
+            'ownerC',
         ],
     ];
 
     /**
-     * @var string
+     * @var HandleField[]
      */
-    private string $domainOwnershipId;
-
-    /**
-     * @var mixed
-     */
-    private $body;
+    private array $ownerC;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $domainOwnershipId
-     * @param mixed $body
+     * @param HandleField[] $ownerC
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct(array $ownerC)
     {
-        $this->domainOwnershipId = $domainOwnershipId;
-        $this->body = $body;
+        $this->ownerC = $ownerC;
     }
 
     /**
-     * @return string
+     * @return HandleField[]
      */
-    public function getDomainOwnershipId(): string
+    public function getOwnerC(): array
     {
-        return $this->domainOwnershipId;
+        return $this->ownerC;
     }
 
     /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $domainOwnershipId
+     * @param HandleField[] $ownerC
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withOwnerC(array $ownerC): self
     {
-        $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     * @return self
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->ownerC = $ownerC;
 
         return $clone;
     }
@@ -114,20 +74,19 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return DeclareProcessChangeHandlesV2DeprecatedRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeclareProcessChangeHandlesV2DeprecatedRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
-        $body = $input->{'body'};
+        $ownerC = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'ownerC'});
 
-        $obj = new self($domainOwnershipId, $body);
+        $obj = new self($ownerC);
 
         return $obj;
     }
@@ -140,8 +99,7 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
-        $output['body'] = $this->body;
+        $output['ownerC'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->ownerC);
 
         return $output;
     }
@@ -177,8 +135,8 @@ class VerifyDomainOwnershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $domainId = urlencode($mapped['domainId']);
+        return '/v2/domains/' . $domainId . '/declarations/handles';
     }
 
     public function getQuery(): array

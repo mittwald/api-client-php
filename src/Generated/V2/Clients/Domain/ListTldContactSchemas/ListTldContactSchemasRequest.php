@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerifyDomainOwnershipRequest
+class ListTldContactSchemasRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -19,92 +19,54 @@ class VerifyDomainOwnershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
-                'format' => 'uuid',
+            'tld' => [
                 'type' => 'string',
-            ],
-            'body' => [
-
             ],
         ],
         'required' => [
-            'domainOwnershipId',
-            'body',
+            'tld',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $domainOwnershipId;
-
-    /**
-     * @var mixed
-     */
-    private $body;
+    private string $tld;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $domainOwnershipId
-     * @param mixed $body
+     * @param string $tld
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct(string $tld)
     {
-        $this->domainOwnershipId = $domainOwnershipId;
-        $this->body = $body;
+        $this->tld = $tld;
     }
 
     /**
      * @return string
      */
-    public function getDomainOwnershipId(): string
+    public function getTld(): string
     {
-        return $this->domainOwnershipId;
+        return $this->tld;
     }
 
     /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $domainOwnershipId
+     * @param string $tld
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withTld(string $tld): self
     {
         $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
+        $validator->validate($tld, static::$schema['properties']['tld']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     * @return self
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->tld = $tld;
 
         return $clone;
     }
@@ -114,20 +76,19 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return ListTldContactSchemasRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListTldContactSchemasRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
-        $body = $input->{'body'};
+        $tld = $input->{'tld'};
 
-        $obj = new self($domainOwnershipId, $body);
+        $obj = new self($tld);
 
         return $obj;
     }
@@ -140,8 +101,7 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
-        $output['body'] = $this->body;
+        $output['tld'] = $this->tld;
 
         return $output;
     }
@@ -177,8 +137,8 @@ class VerifyDomainOwnershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $tld = urlencode($mapped['tld']);
+        return '/v2/domain-tlds/' . $tld . '/contact-schemas';
     }
 
     public function getQuery(): array

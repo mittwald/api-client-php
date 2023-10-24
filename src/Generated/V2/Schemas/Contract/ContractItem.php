@@ -49,6 +49,10 @@ class ContractItem
                 'example' => 'Space-Server: "Mein Space-Server"',
                 'type' => 'string',
             ],
+            'freeTrialDays' => [
+                'example' => 10,
+                'type' => 'number',
+            ],
             'groupByProjectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -121,6 +125,7 @@ class ContractItem
             'totalPrice',
             'description',
             'isBaseItem',
+            'freeTrialDays',
         ],
         'type' => 'object',
     ];
@@ -149,6 +154,11 @@ class ContractItem
      * @var string
      */
     private string $description;
+
+    /**
+     * @var int|float
+     */
+    private int|float $freeTrialDays;
 
     /**
      * @var string|null
@@ -240,6 +250,7 @@ class ContractItem
      * @param Article[] $articles
      * @param int|float $contractPeriod
      * @param string $description
+     * @param int|float $freeTrialDays
      * @param int|float $invoicingPeriod
      * @param bool $isActivated
      * @param bool $isBaseItem
@@ -247,11 +258,12 @@ class ContractItem
      * @param DateTime $orderDate
      * @param Price $totalPrice
      */
-    public function __construct(array $articles, int|float $contractPeriod, string $description, int|float $invoicingPeriod, bool $isActivated, bool $isBaseItem, string $itemId, DateTime $orderDate, Price $totalPrice)
+    public function __construct(array $articles, int|float $contractPeriod, string $description, int|float $freeTrialDays, int|float $invoicingPeriod, bool $isActivated, bool $isBaseItem, string $itemId, DateTime $orderDate, Price $totalPrice)
     {
         $this->articles = $articles;
         $this->contractPeriod = $contractPeriod;
         $this->description = $description;
+        $this->freeTrialDays = $freeTrialDays;
         $this->invoicingPeriod = $invoicingPeriod;
         $this->isActivated = $isActivated;
         $this->isBaseItem = $isBaseItem;
@@ -299,6 +311,14 @@ class ContractItem
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    /**
+     * @return int|float
+     */
+    public function getFreeTrialDays(): int|float
+    {
+        return $this->freeTrialDays;
     }
 
     /**
@@ -519,6 +539,24 @@ class ContractItem
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    /**
+     * @param int|float $freeTrialDays
+     * @return self
+     */
+    public function withFreeTrialDays(int|float $freeTrialDays): self
+    {
+        $validator = new Validator();
+        $validator->validate($freeTrialDays, static::$schema['properties']['freeTrialDays']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->freeTrialDays = $freeTrialDays;
 
         return $clone;
     }
@@ -905,6 +943,7 @@ class ContractItem
         $articles = array_map(fn (array|object $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'articles'});
         $contractPeriod = str_contains($input->{'contractPeriod'}, '.') ? (float)($input->{'contractPeriod'}) : (int)($input->{'contractPeriod'});
         $description = $input->{'description'};
+        $freeTrialDays = str_contains($input->{'freeTrialDays'}, '.') ? (float)($input->{'freeTrialDays'}) : (int)($input->{'freeTrialDays'});
         $groupByProjectId = null;
         if (isset($input->{'groupByProjectId'})) {
             $groupByProjectId = $input->{'groupByProjectId'};
@@ -952,7 +991,7 @@ class ContractItem
         }
         $totalPrice = Price::buildFromInput($input->{'totalPrice'}, validate: $validate);
 
-        $obj = new self($articles, $contractPeriod, $description, $invoicingPeriod, $isActivated, $isBaseItem, $itemId, $orderDate, $totalPrice);
+        $obj = new self($articles, $contractPeriod, $description, $freeTrialDays, $invoicingPeriod, $isActivated, $isBaseItem, $itemId, $orderDate, $totalPrice);
         $obj->activationDate = $activationDate;
         $obj->aggregateReference = $aggregateReference;
         $obj->groupByProjectId = $groupByProjectId;
@@ -985,6 +1024,7 @@ class ContractItem
         $output['articles'] = array_map(fn (Article $i): array => $i->toJson(), $this->articles);
         $output['contractPeriod'] = $this->contractPeriod;
         $output['description'] = $this->description;
+        $output['freeTrialDays'] = $this->freeTrialDays;
         if (isset($this->groupByProjectId)) {
             $output['groupByProjectId'] = $this->groupByProjectId;
         }

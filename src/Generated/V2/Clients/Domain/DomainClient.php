@@ -6,46 +6,50 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDeclareProcess\AbortDeclareProcess400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDeclareProcess\AbortDeclareProcess404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDeclareProcess\AbortDeclareProcessDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDeclareProcess\AbortDeclareProcessRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomain\ChangeOwnercOfDomain200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomain\ChangeOwnercOfDomain400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomain\ChangeOwnercOfDomain404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomain\ChangeOwnercOfDomainDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomain\ChangeOwnercOfDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomain\ChangeProjectOfDomain400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomain\ChangeProjectOfDomain404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomain\ChangeProjectOfDomainDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomain\ChangeProjectOfDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainAvailability\CheckDomainAvailability200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainAvailability\CheckDomainAvailability400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainAvailability\CheckDomainAvailabilityDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainAvailability\CheckDomainAvailabilityRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcode2ForDomain\CreateAuthcode2ForDomain400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcode2ForDomain\CreateAuthcode2ForDomain404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcode2ForDomain\CreateAuthcode2ForDomainDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcode2ForDomain\CreateAuthcode2ForDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcodeForDomain\CreateAuthcodeForDomain201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcodeForDomain\CreateAuthcodeForDomain400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcodeForDomain\CreateAuthcodeForDomain404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcodeForDomain\CreateAuthcodeForDomainDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateAuthcodeForDomain\CreateAuthcodeForDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameservers\DeclareNameservers400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameservers\DeclareNameservers404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameservers\DeclareNameserversDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameservers\DeclareNameserversRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcode200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcode400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcode404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcodeDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcodeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandles\DeclareProcessChangeHandles200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandles\DeclareProcessChangeHandles400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandles\DeclareProcessChangeHandles404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandles\DeclareProcessChangeHandlesDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandles\DeclareProcessChangeHandlesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclaration400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclaration404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrability200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrability400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCode201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCode400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCode404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2DefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2Request;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain404Response;
@@ -90,21 +94,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomain400Respons
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomain404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFields\GetHandleFields200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFields\GetHandleFieldsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFields\GetHandleFieldsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnership200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnership400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnership404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomain200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomain404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnership200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnership400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnership404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnershipDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSpecificDomainOwnership\GetSpecificDomainOwnershipRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSupportedTlds\GetSupportedTlds200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSupportedTlds\GetSupportedTldsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetSupportedTlds\GetSupportedTldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreateDefaultResponse;
@@ -143,10 +144,34 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomains200Res
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomains400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemas200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTlds200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmail400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmail404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCode200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCode400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCode404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContact200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContact400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContact404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContactDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContactRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainNameservers\UpdateDomainNameservers400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainNameservers\UpdateDomainNameservers404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainNameservers\UpdateDomainNameserversDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainNameservers\UpdateDomainNameserversRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectId400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectId404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectIdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectIdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnership400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnership404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnershipDefaultResponse;
@@ -403,9 +428,157 @@ class DomainClient
     }
 
     /**
-     * Delete a Domain.
+     * Change the owner contact of a domain.
      *
-     * Delete a fully registered domain.
+     * Change the domain owner of a fully registered domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-ownerc-of-domain-v2-deprecated
+     * @throws GuzzleException
+     * @param ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedRequest $request An object representing the request for this operation
+     * @return ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2Deprecated200Response|ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2Deprecated400Response|ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2Deprecated404Response|ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedDefaultResponse OK
+     */
+    public function changeOwnercOfDomainV2Deprecated(ChangeOwnercOfDomainV2DeprecatedRequest $request): ChangeOwnercOfDomainV2Deprecated200Response|ChangeOwnercOfDomainV2Deprecated400Response|ChangeOwnercOfDomainV2Deprecated404Response|ChangeOwnercOfDomainV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(ChangeOwnercOfDomainV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ChangeOwnercOfDomainV2Deprecated200Response::fromResponse($httpResponse),
+            400 => ChangeOwnercOfDomainV2Deprecated400Response::fromResponse($httpResponse),
+            404 => ChangeOwnercOfDomainV2Deprecated404Response::fromResponse($httpResponse),
+            default => ChangeOwnercOfDomainV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Change the Project relation of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-project-of-domain-v2-deprecated
+     * @throws GuzzleException
+     * @param ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2Deprecated400Response|ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2Deprecated404Response|ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedDefaultResponse No Content
+     */
+    public function changeProjectOfDomainV2Deprecated(ChangeProjectOfDomainV2DeprecatedRequest $request): EmptyResponse|ChangeProjectOfDomainV2Deprecated400Response|ChangeProjectOfDomainV2Deprecated404Response|ChangeProjectOfDomainV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(ChangeProjectOfDomainV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => ChangeProjectOfDomainV2Deprecated400Response::fromResponse($httpResponse),
+            404 => ChangeProjectOfDomainV2Deprecated404Response::fromResponse($httpResponse),
+            default => ChangeProjectOfDomainV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Change all nameservers of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers-v2-deprecated
+     * @throws GuzzleException
+     * @param DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DeclareNameserversV2Deprecated\DeclareNameserversV2Deprecated400Response|DeclareNameserversV2Deprecated\DeclareNameserversV2Deprecated404Response|DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedDefaultResponse No Content
+     */
+    public function declareNameserversV2Deprecated(DeclareNameserversV2DeprecatedRequest $request): EmptyResponse|DeclareNameserversV2Deprecated400Response|DeclareNameserversV2Deprecated404Response|DeclareNameserversV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(DeclareNameserversV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => DeclareNameserversV2Deprecated400Response::fromResponse($httpResponse),
+            404 => DeclareNameserversV2Deprecated404Response::fromResponse($httpResponse),
+            default => DeclareNameserversV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the nameservers of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-nameservers
+     * @throws GuzzleException
+     * @param UpdateDomainNameservers\UpdateDomainNameserversRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateDomainNameservers\UpdateDomainNameservers400Response|UpdateDomainNameservers\UpdateDomainNameservers404Response|UpdateDomainNameservers\UpdateDomainNameserversDefaultResponse No Content
+     */
+    public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse|UpdateDomainNameservers400Response|UpdateDomainNameservers404Response|UpdateDomainNameserversDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainNameserversRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => UpdateDomainNameservers400Response::fromResponse($httpResponse),
+            404 => UpdateDomainNameservers404Response::fromResponse($httpResponse),
+            default => UpdateDomainNameserversDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update an AuthCode.
+     *
+     * Change a wrong AuthCode of your transfer domain request (declare domain process). This route will also restart the transfer itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-authcode-v2-deprecated
+     * @throws GuzzleException
+     * @param DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedRequest $request An object representing the request for this operation
+     * @return DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2Deprecated200Response|DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2Deprecated400Response|DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2Deprecated404Response|DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedDefaultResponse OK
+     */
+    public function declareProcessChangeAuthcodeV2Deprecated(DeclareProcessChangeAuthcodeV2DeprecatedRequest $request): DeclareProcessChangeAuthcodeV2Deprecated200Response|DeclareProcessChangeAuthcodeV2Deprecated400Response|DeclareProcessChangeAuthcodeV2Deprecated404Response|DeclareProcessChangeAuthcodeV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(DeclareProcessChangeAuthcodeV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DeclareProcessChangeAuthcodeV2Deprecated200Response::fromResponse($httpResponse),
+            400 => DeclareProcessChangeAuthcodeV2Deprecated400Response::fromResponse($httpResponse),
+            404 => DeclareProcessChangeAuthcodeV2Deprecated404Response::fromResponse($httpResponse),
+            default => DeclareProcessChangeAuthcodeV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update a Domain's OwnerC handle.
+     *
+     * This route will also restart the transfer or register itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-handles-v2-deprecated
+     * @throws GuzzleException
+     * @param DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedRequest $request An object representing the request for this operation
+     * @return DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2Deprecated200Response|DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2Deprecated400Response|DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2Deprecated404Response|DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedDefaultResponse OK
+     */
+    public function declareProcessChangeHandlesV2Deprecated(DeclareProcessChangeHandlesV2DeprecatedRequest $request): DeclareProcessChangeHandlesV2Deprecated200Response|DeclareProcessChangeHandlesV2Deprecated400Response|DeclareProcessChangeHandlesV2Deprecated404Response|DeclareProcessChangeHandlesV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(DeclareProcessChangeHandlesV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DeclareProcessChangeHandlesV2Deprecated200Response::fromResponse($httpResponse),
+            400 => DeclareProcessChangeHandlesV2Deprecated400Response::fromResponse($httpResponse),
+            404 => DeclareProcessChangeHandlesV2Deprecated404Response::fromResponse($httpResponse),
+            default => DeclareProcessChangeHandlesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Delete a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-delete-domain
      * @throws GuzzleException
@@ -475,7 +648,30 @@ class DomainClient
     }
 
     /**
-     * List all domain ownerships of a project.
+     * Get a DomainOwnership.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain-ownership
+     * @throws GuzzleException
+     * @param GetDomainOwnership\GetDomainOwnershipRequest $request An object representing the request for this operation
+     * @return GetDomainOwnership\GetDomainOwnership200Response|GetDomainOwnership\GetDomainOwnership400Response|GetDomainOwnership\GetDomainOwnership404Response|GetDomainOwnership\GetDomainOwnershipDefaultResponse OK
+     */
+    public function getDomainOwnership(GetDomainOwnershipRequest $request): GetDomainOwnership200Response|GetDomainOwnership400Response|GetDomainOwnership404Response|GetDomainOwnershipDefaultResponse
+    {
+        $httpRequest = new Request(GetDomainOwnershipRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetDomainOwnership200Response::fromResponse($httpResponse),
+            400 => GetDomainOwnership400Response::fromResponse($httpResponse),
+            404 => GetDomainOwnership404Response::fromResponse($httpResponse),
+            default => GetDomainOwnershipDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List the DomainOwnerships of a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domain-ownerships
      * @throws GuzzleException
@@ -519,9 +715,9 @@ class DomainClient
     }
 
     /**
-     * Resend a domain email.
+     * Resend a Domain email.
      *
-     * A confirmation email or domain registrant verification email. Does not work with .de domains.
+     * Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-resend-domain-email
      * @throws GuzzleException
@@ -545,9 +741,9 @@ class DomainClient
     }
 
     /**
-     * Verify a domain ownership.
+     * Verify a DomainOwnership.
      *
-     * Verify your access to a domain with an already set TXT Record. On success, the domain will be linked with the webserver.
+     * Verify your access to a Domain with an already set TXT Record. On success, the domain will be linked with the webserver.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-verify-domain-ownership
      * @throws GuzzleException
@@ -567,29 +763,6 @@ class DomainClient
             400 => VerifyDomainOwnership400Response::fromResponse($httpResponse),
             404 => VerifyDomainOwnership404Response::fromResponse($httpResponse),
             default => VerifyDomainOwnershipDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a domain ownership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-specific-domain-ownership
-     * @throws GuzzleException
-     * @param GetSpecificDomainOwnership\GetSpecificDomainOwnershipRequest $request An object representing the request for this operation
-     * @return GetSpecificDomainOwnership\GetSpecificDomainOwnership200Response|GetSpecificDomainOwnership\GetSpecificDomainOwnership400Response|GetSpecificDomainOwnership\GetSpecificDomainOwnership404Response|GetSpecificDomainOwnership\GetSpecificDomainOwnershipDefaultResponse OK
-     */
-    public function getSpecificDomainOwnership(GetSpecificDomainOwnershipRequest $request): GetSpecificDomainOwnership200Response|GetSpecificDomainOwnership400Response|GetSpecificDomainOwnership404Response|GetSpecificDomainOwnershipDefaultResponse
-    {
-        $httpRequest = new Request(GetSpecificDomainOwnershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetSpecificDomainOwnership200Response::fromResponse($httpResponse),
-            400 => GetSpecificDomainOwnership400Response::fromResponse($httpResponse),
-            404 => GetSpecificDomainOwnership404Response::fromResponse($httpResponse),
-            default => GetSpecificDomainOwnershipDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -774,27 +947,27 @@ class DomainClient
     }
 
     /**
-     * Abort a declare process.
+     * Abort a Domain declaration.
      *
-     * Abort a failed declare process within all created contract items.
+     * Abort an incomplete Domain registration/transfer.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-declare-process
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-domain-declaration
      * @throws GuzzleException
-     * @param AbortDeclareProcess\AbortDeclareProcessRequest $request An object representing the request for this operation
-     * @return EmptyResponse|AbortDeclareProcess\AbortDeclareProcess400Response|AbortDeclareProcess\AbortDeclareProcess404Response|AbortDeclareProcess\AbortDeclareProcessDefaultResponse No Content
+     * @param AbortDomainDeclaration\AbortDomainDeclarationRequest $request An object representing the request for this operation
+     * @return EmptyResponse|AbortDomainDeclaration\AbortDomainDeclaration400Response|AbortDomainDeclaration\AbortDomainDeclaration404Response|AbortDomainDeclaration\AbortDomainDeclarationDefaultResponse No Content
      */
-    public function abortDeclareProcess(AbortDeclareProcessRequest $request): EmptyResponse|AbortDeclareProcess400Response|AbortDeclareProcess404Response|AbortDeclareProcessDefaultResponse
+    public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse|AbortDomainDeclaration400Response|AbortDomainDeclaration404Response|AbortDomainDeclarationDefaultResponse
     {
-        $httpRequest = new Request(AbortDeclareProcessRequest::method, $request->getUrl());
+        $httpRequest = new Request(AbortDomainDeclarationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => AbortDeclareProcess400Response::fromResponse($httpResponse),
-            404 => AbortDeclareProcess404Response::fromResponse($httpResponse),
-            default => AbortDeclareProcessDefaultResponse::fromResponse($httpResponse),
+            400 => AbortDomainDeclaration400Response::fromResponse($httpResponse),
+            404 => AbortDomainDeclaration404Response::fromResponse($httpResponse),
+            default => AbortDomainDeclarationDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -803,245 +976,241 @@ class DomainClient
      *
      * Get required handle fields of a registrar for your domain process (transfer/registration).
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields-v2-deprecated
      * @throws GuzzleException
-     * @param GetHandleFields\GetHandleFieldsRequest $request An object representing the request for this operation
-     * @return GetHandleFields\GetHandleFields200Response|GetHandleFields\GetHandleFieldsDefaultResponse The parseable json schema objects
+     * @param GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
+     * @return GetHandleFieldsV2Deprecated\GetHandleFieldsV2Deprecated200Response|GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse The parseable json schema objects
      */
-    public function getHandleFields(GetHandleFieldsRequest $request): GetHandleFields200Response|GetHandleFieldsDefaultResponse
+    public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2Deprecated200Response|GetHandleFieldsV2DeprecatedDefaultResponse
     {
-        $httpRequest = new Request(GetHandleFieldsRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetHandleFieldsV2DeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => GetHandleFields200Response::fromResponse($httpResponse),
-            default => GetHandleFieldsDefaultResponse::fromResponse($httpResponse),
+            200 => GetHandleFieldsV2Deprecated200Response::fromResponse($httpResponse),
+            default => GetHandleFieldsV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
-     * List all supported top level domains.
+     * List TLDs.
      *
-     * All currently supported TLDs.
+     * List the top level domains currently supported by our API.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-supported-tlds
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tlds
      * @throws GuzzleException
-     * @param GetSupportedTlds\GetSupportedTldsRequest $request An object representing the request for this operation
-     * @return GetSupportedTlds\GetSupportedTlds200Response|GetSupportedTlds\GetSupportedTldsDefaultResponse An array of TLD objects.
+     * @param ListTlds\ListTldsRequest $request An object representing the request for this operation
+     * @return ListTlds\ListTlds200Response|ListTlds\ListTldsDefaultResponse
      */
-    public function getSupportedTlds(GetSupportedTldsRequest $request): GetSupportedTlds200Response|GetSupportedTldsDefaultResponse
+    public function listTlds(ListTldsRequest $request): ListTlds200Response|ListTldsDefaultResponse
     {
-        $httpRequest = new Request(GetSupportedTldsRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListTldsRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => GetSupportedTlds200Response::fromResponse($httpResponse),
-            default => GetSupportedTldsDefaultResponse::fromResponse($httpResponse),
+            200 => ListTlds200Response::fromResponse($httpResponse),
+            default => ListTldsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List the contact schemas for a TLD.
+     *
+     * List the contact schemas describing the fields required to register/transfer a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tld-contact-schemas
+     * @throws GuzzleException
+     * @param ListTldContactSchemas\ListTldContactSchemasRequest $request An object representing the request for this operation
+     * @return ListTldContactSchemas\ListTldContactSchemas200Response|ListTldContactSchemas\ListTldContactSchemasDefaultResponse The JSON-Schema objects.
+     */
+    public function listTldContactSchemas(ListTldContactSchemasRequest $request): ListTldContactSchemas200Response|ListTldContactSchemasDefaultResponse
+    {
+        $httpRequest = new Request(ListTldContactSchemasRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListTldContactSchemas200Response::fromResponse($httpResponse),
+            default => ListTldContactSchemasDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the auth code of a Domain.
+     *
+     * Update an incorrect auth code of an ongoing/failed Domain transfer. This route will also restart the transfer itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-auth-code
+     * @throws GuzzleException
+     * @param UpdateDomainAuthCode\UpdateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return UpdateDomainAuthCode\UpdateDomainAuthCode200Response|UpdateDomainAuthCode\UpdateDomainAuthCode400Response|UpdateDomainAuthCode\UpdateDomainAuthCode404Response|UpdateDomainAuthCode\UpdateDomainAuthCodeDefaultResponse OK
+     */
+    public function updateDomainAuthCode(UpdateDomainAuthCodeRequest $request): UpdateDomainAuthCode200Response|UpdateDomainAuthCode400Response|UpdateDomainAuthCode404Response|UpdateDomainAuthCodeDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainAuthCodeRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => UpdateDomainAuthCode200Response::fromResponse($httpResponse),
+            400 => UpdateDomainAuthCode400Response::fromResponse($httpResponse),
+            404 => UpdateDomainAuthCode404Response::fromResponse($httpResponse),
+            default => UpdateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update a contact of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-contact
+     * @throws GuzzleException
+     * @param UpdateDomainContact\UpdateDomainContactRequest $request An object representing the request for this operation
+     * @return UpdateDomainContact\UpdateDomainContact200Response|UpdateDomainContact\UpdateDomainContact400Response|UpdateDomainContact\UpdateDomainContact404Response|UpdateDomainContact\UpdateDomainContactDefaultResponse OK
+     */
+    public function updateDomainContact(UpdateDomainContactRequest $request): UpdateDomainContact200Response|UpdateDomainContact400Response|UpdateDomainContact404Response|UpdateDomainContactDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainContactRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => UpdateDomainContact200Response::fromResponse($httpResponse),
+            400 => UpdateDomainContact400Response::fromResponse($httpResponse),
+            404 => UpdateDomainContact404Response::fromResponse($httpResponse),
+            default => UpdateDomainContactDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update a Domain's project id.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-project-id
+     * @throws GuzzleException
+     * @param UpdateDomainProjectId\UpdateDomainProjectIdRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateDomainProjectId\UpdateDomainProjectId400Response|UpdateDomainProjectId\UpdateDomainProjectId404Response|UpdateDomainProjectId\UpdateDomainProjectIdDefaultResponse No Content
+     */
+    public function updateDomainProjectId(UpdateDomainProjectIdRequest $request): EmptyResponse|UpdateDomainProjectId400Response|UpdateDomainProjectId404Response|UpdateDomainProjectIdDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainProjectIdRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => UpdateDomainProjectId400Response::fromResponse($httpResponse),
+            404 => UpdateDomainProjectId404Response::fromResponse($httpResponse),
+            default => UpdateDomainProjectIdDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Create an auth code for a Domains transfer-out process.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
+     * @throws GuzzleException
+     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return CreateDomainAuthCode\CreateDomainAuthCode201Response|CreateDomainAuthCode\CreateDomainAuthCode400Response|CreateDomainAuthCode\CreateDomainAuthCode404Response|CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse Created
+     */
+    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCode201Response|CreateDomainAuthCode400Response|CreateDomainAuthCode404Response|CreateDomainAuthCodeDefaultResponse
+    {
+        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            201 => CreateDomainAuthCode201Response::fromResponse($httpResponse),
+            400 => CreateDomainAuthCode400Response::fromResponse($httpResponse),
+            404 => CreateDomainAuthCode404Response::fromResponse($httpResponse),
+            default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Create an auth code 2.
+     *
+     * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code-2
+     * @throws GuzzleException
+     * @param CreateDomainAuthCode2\CreateDomainAuthCode2Request $request An object representing the request for this operation
+     * @return EmptyResponse|CreateDomainAuthCode2\CreateDomainAuthCode2400Response|CreateDomainAuthCode2\CreateDomainAuthCode2404Response|CreateDomainAuthCode2\CreateDomainAuthCode2DefaultResponse No Content
+     */
+    public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse|CreateDomainAuthCode2400Response|CreateDomainAuthCode2404Response|CreateDomainAuthCode2DefaultResponse
+    {
+        $httpRequest = new Request(CreateDomainAuthCode2Request::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => CreateDomainAuthCode2400Response::fromResponse($httpResponse),
+            404 => CreateDomainAuthCode2404Response::fromResponse($httpResponse),
+            default => CreateDomainAuthCode2DefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * Check if a Domain is available to register.
      *
-     * If true, you can register a domain. If false, you have to start a transfer with an AuthCode.
+     * If false, you have to start a transfer with an auth code instead.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-availability
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability
      * @throws GuzzleException
-     * @param CheckDomainAvailability\CheckDomainAvailabilityRequest $request An object representing the request for this operation
-     * @return CheckDomainAvailability\CheckDomainAvailability200Response|CheckDomainAvailability\CheckDomainAvailability400Response|CheckDomainAvailability\CheckDomainAvailabilityDefaultResponse OK
+     * @param CheckDomainRegistrability\CheckDomainRegistrabilityRequest $request An object representing the request for this operation
+     * @return CheckDomainRegistrability\CheckDomainRegistrability200Response|CheckDomainRegistrability\CheckDomainRegistrability400Response|CheckDomainRegistrability\CheckDomainRegistrabilityDefaultResponse OK
      */
-    public function checkDomainAvailability(CheckDomainAvailabilityRequest $request): CheckDomainAvailability200Response|CheckDomainAvailability400Response|CheckDomainAvailabilityDefaultResponse
+    public function checkDomainRegistrability(CheckDomainRegistrabilityRequest $request): CheckDomainRegistrability200Response|CheckDomainRegistrability400Response|CheckDomainRegistrabilityDefaultResponse
     {
-        $httpRequest = new Request(CheckDomainAvailabilityRequest::method, $request->getUrl());
+        $httpRequest = new Request(CheckDomainRegistrabilityRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => CheckDomainAvailability200Response::fromResponse($httpResponse),
-            400 => CheckDomainAvailability400Response::fromResponse($httpResponse),
-            default => CheckDomainAvailabilityDefaultResponse::fromResponse($httpResponse),
+            200 => CheckDomainRegistrability200Response::fromResponse($httpResponse),
+            400 => CheckDomainRegistrability400Response::fromResponse($httpResponse),
+            default => CheckDomainRegistrabilityDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
-     * Create an AuthCode for a Domains transfer out process.
+     * Check if a Domain is available to register.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-authcode-for-domain
+     * If false, you have to start a transfer with an auth code instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability-v2-deprecated
      * @throws GuzzleException
-     * @param CreateAuthcodeForDomain\CreateAuthcodeForDomainRequest $request An object representing the request for this operation
-     * @return CreateAuthcodeForDomain\CreateAuthcodeForDomain201Response|CreateAuthcodeForDomain\CreateAuthcodeForDomain400Response|CreateAuthcodeForDomain\CreateAuthcodeForDomain404Response|CreateAuthcodeForDomain\CreateAuthcodeForDomainDefaultResponse Created
+     * @param CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
+     * @return CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated200Response|CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated400Response|CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedDefaultResponse OK
      */
-    public function createAuthcodeForDomain(CreateAuthcodeForDomainRequest $request): CreateAuthcodeForDomain201Response|CreateAuthcodeForDomain400Response|CreateAuthcodeForDomain404Response|CreateAuthcodeForDomainDefaultResponse
+    public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2Deprecated200Response|CheckDomainRegistrabilityV2Deprecated400Response|CheckDomainRegistrabilityV2DeprecatedDefaultResponse
     {
-        $httpRequest = new Request(CreateAuthcodeForDomainRequest::method, $request->getUrl());
+        $httpRequest = new Request(CheckDomainRegistrabilityV2DeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => CreateAuthcodeForDomain201Response::fromResponse($httpResponse),
-            400 => CreateAuthcodeForDomain400Response::fromResponse($httpResponse),
-            404 => CreateAuthcodeForDomain404Response::fromResponse($httpResponse),
-            default => CreateAuthcodeForDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Create an AuthCode2.
-     *
-     * Start an AuthCode2 process for a DENIC domain. You will receive a letter from DENIC.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-authcode2-for-domain
-     * @throws GuzzleException
-     * @param CreateAuthcode2ForDomain\CreateAuthcode2ForDomainRequest $request An object representing the request for this operation
-     * @return EmptyResponse|CreateAuthcode2ForDomain\CreateAuthcode2ForDomain400Response|CreateAuthcode2ForDomain\CreateAuthcode2ForDomain404Response|CreateAuthcode2ForDomain\CreateAuthcode2ForDomainDefaultResponse No Content
-     */
-    public function createAuthcode2ForDomain(CreateAuthcode2ForDomainRequest $request): EmptyResponse|CreateAuthcode2ForDomain400Response|CreateAuthcode2ForDomain404Response|CreateAuthcode2ForDomainDefaultResponse
-    {
-        $httpRequest = new Request(CreateAuthcode2ForDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => CreateAuthcode2ForDomain400Response::fromResponse($httpResponse),
-            404 => CreateAuthcode2ForDomain404Response::fromResponse($httpResponse),
-            default => CreateAuthcode2ForDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Update an AuthCode.
-     *
-     * Change a wrong AuthCode of your transfer domain request (declare domain process). This route will also restart the transfer itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-authcode
-     * @throws GuzzleException
-     * @param DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcodeRequest $request An object representing the request for this operation
-     * @return DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcode200Response|DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcode400Response|DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcode404Response|DeclareProcessChangeAuthcode\DeclareProcessChangeAuthcodeDefaultResponse OK
-     */
-    public function declareProcessChangeAuthcode(DeclareProcessChangeAuthcodeRequest $request): DeclareProcessChangeAuthcode200Response|DeclareProcessChangeAuthcode400Response|DeclareProcessChangeAuthcode404Response|DeclareProcessChangeAuthcodeDefaultResponse
-    {
-        $httpRequest = new Request(DeclareProcessChangeAuthcodeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeclareProcessChangeAuthcode200Response::fromResponse($httpResponse),
-            400 => DeclareProcessChangeAuthcode400Response::fromResponse($httpResponse),
-            404 => DeclareProcessChangeAuthcode404Response::fromResponse($httpResponse),
-            default => DeclareProcessChangeAuthcodeDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Update a Domain's OwnerC handle.
-     *
-     * This route will also restart the transfer or register itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-handles
-     * @throws GuzzleException
-     * @param DeclareProcessChangeHandles\DeclareProcessChangeHandlesRequest $request An object representing the request for this operation
-     * @return DeclareProcessChangeHandles\DeclareProcessChangeHandles200Response|DeclareProcessChangeHandles\DeclareProcessChangeHandles400Response|DeclareProcessChangeHandles\DeclareProcessChangeHandles404Response|DeclareProcessChangeHandles\DeclareProcessChangeHandlesDefaultResponse OK
-     */
-    public function declareProcessChangeHandles(DeclareProcessChangeHandlesRequest $request): DeclareProcessChangeHandles200Response|DeclareProcessChangeHandles400Response|DeclareProcessChangeHandles404Response|DeclareProcessChangeHandlesDefaultResponse
-    {
-        $httpRequest = new Request(DeclareProcessChangeHandlesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeclareProcessChangeHandles200Response::fromResponse($httpResponse),
-            400 => DeclareProcessChangeHandles400Response::fromResponse($httpResponse),
-            404 => DeclareProcessChangeHandles404Response::fromResponse($httpResponse),
-            default => DeclareProcessChangeHandlesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Change the owner contact of a domain.
-     *
-     * Change the domain owner of a fully registered domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-ownerc-of-domain
-     * @throws GuzzleException
-     * @param ChangeOwnercOfDomain\ChangeOwnercOfDomainRequest $request An object representing the request for this operation
-     * @return ChangeOwnercOfDomain\ChangeOwnercOfDomain200Response|ChangeOwnercOfDomain\ChangeOwnercOfDomain400Response|ChangeOwnercOfDomain\ChangeOwnercOfDomain404Response|ChangeOwnercOfDomain\ChangeOwnercOfDomainDefaultResponse OK
-     */
-    public function changeOwnercOfDomain(ChangeOwnercOfDomainRequest $request): ChangeOwnercOfDomain200Response|ChangeOwnercOfDomain400Response|ChangeOwnercOfDomain404Response|ChangeOwnercOfDomainDefaultResponse
-    {
-        $httpRequest = new Request(ChangeOwnercOfDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ChangeOwnercOfDomain200Response::fromResponse($httpResponse),
-            400 => ChangeOwnercOfDomain400Response::fromResponse($httpResponse),
-            404 => ChangeOwnercOfDomain404Response::fromResponse($httpResponse),
-            default => ChangeOwnercOfDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Change the Project relation of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-project-of-domain
-     * @throws GuzzleException
-     * @param ChangeProjectOfDomain\ChangeProjectOfDomainRequest $request An object representing the request for this operation
-     * @return EmptyResponse|ChangeProjectOfDomain\ChangeProjectOfDomain400Response|ChangeProjectOfDomain\ChangeProjectOfDomain404Response|ChangeProjectOfDomain\ChangeProjectOfDomainDefaultResponse No Content
-     */
-    public function changeProjectOfDomain(ChangeProjectOfDomainRequest $request): EmptyResponse|ChangeProjectOfDomain400Response|ChangeProjectOfDomain404Response|ChangeProjectOfDomainDefaultResponse
-    {
-        $httpRequest = new Request(ChangeProjectOfDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => ChangeProjectOfDomain400Response::fromResponse($httpResponse),
-            404 => ChangeProjectOfDomain404Response::fromResponse($httpResponse),
-            default => ChangeProjectOfDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Change all nameservers of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers
-     * @throws GuzzleException
-     * @param DeclareNameservers\DeclareNameserversRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeclareNameservers\DeclareNameservers400Response|DeclareNameservers\DeclareNameservers404Response|DeclareNameservers\DeclareNameserversDefaultResponse No Content
-     */
-    public function declareNameservers(DeclareNameserversRequest $request): EmptyResponse|DeclareNameservers400Response|DeclareNameservers404Response|DeclareNameserversDefaultResponse
-    {
-        $httpRequest = new Request(DeclareNameserversRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => DeclareNameservers400Response::fromResponse($httpResponse),
-            404 => DeclareNameservers404Response::fromResponse($httpResponse),
-            default => DeclareNameserversDefaultResponse::fromResponse($httpResponse),
+            200 => CheckDomainRegistrabilityV2Deprecated200Response::fromResponse($httpResponse),
+            400 => CheckDomainRegistrabilityV2Deprecated400Response::fromResponse($httpResponse),
+            default => CheckDomainRegistrabilityV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

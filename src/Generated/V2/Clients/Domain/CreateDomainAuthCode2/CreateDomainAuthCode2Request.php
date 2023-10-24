@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerifyDomainOwnershipRequest
+class CreateDomainAuthCode2Request
 {
     public const method = 'post';
 
@@ -19,7 +19,7 @@ class VerifyDomainOwnershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
+            'domainId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -28,7 +28,7 @@ class VerifyDomainOwnershipRequest
             ],
         ],
         'required' => [
-            'domainOwnershipId',
+            'domainId',
             'body',
         ],
     ];
@@ -36,7 +36,7 @@ class VerifyDomainOwnershipRequest
     /**
      * @var string
      */
-    private string $domainOwnershipId;
+    private string $domainId;
 
     /**
      * @var mixed
@@ -48,21 +48,21 @@ class VerifyDomainOwnershipRequest
     ];
 
     /**
-     * @param string $domainOwnershipId
+     * @param string $domainId
      * @param mixed $body
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct(string $domainId, $body)
     {
-        $this->domainOwnershipId = $domainOwnershipId;
+        $this->domainId = $domainId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getDomainOwnershipId(): string
+    public function getDomainId(): string
     {
-        return $this->domainOwnershipId;
+        return $this->domainId;
     }
 
     /**
@@ -74,19 +74,19 @@ class VerifyDomainOwnershipRequest
     }
 
     /**
-     * @param string $domainOwnershipId
+     * @param string $domainId
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
+        $validator->validate($domainId, static::$schema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
+        $clone->domainId = $domainId;
 
         return $clone;
     }
@@ -114,20 +114,20 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return CreateDomainAuthCode2Request Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateDomainAuthCode2Request
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
+        $domainId = $input->{'domainId'};
         $body = $input->{'body'};
 
-        $obj = new self($domainOwnershipId, $body);
+        $obj = new self($domainId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
+        $output['domainId'] = $this->domainId;
         $output['body'] = $this->body;
 
         return $output;
@@ -177,8 +177,8 @@ class VerifyDomainOwnershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $domainId = urlencode($mapped['domainId']);
+        return '/v2/domains/' . $domainId . '/actions/auth-code-2';
     }
 
     public function getQuery(): array

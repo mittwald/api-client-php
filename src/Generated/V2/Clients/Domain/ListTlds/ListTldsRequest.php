@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeleteDomainRequestBody
+class ListTldsRequest
 {
-    public const method = 'delete';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,21 +17,14 @@ class DeleteDomainRequestBody
      * @var array
      */
     private static array $schema = [
-        'properties' => [
-            'transit' => [
-                'description' => 'Only for .de Domains.',
-                'type' => 'boolean',
-            ],
-        ],
         'type' => 'object',
-    ];
+        'properties' => [
 
-    /**
-     * Only for .de Domains.
-     *
-     * @var bool|null
-     */
-    private ?bool $transit = null;
+        ],
+        'required' => [
+
+        ],
+    ];
 
     private array $headers = [
 
@@ -45,64 +38,24 @@ class DeleteDomainRequestBody
     }
 
     /**
-     * @return bool|null
-     */
-    public function getTransit(): ?bool
-    {
-        return $this->transit ?? null;
-    }
-
-    /**
-     * @param bool $transit
-     * @return self
-     */
-    public function withTransit(bool $transit): self
-    {
-        $validator = new Validator();
-        $validator->validate($transit, static::$schema['properties']['transit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->transit = $transit;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutTransit(): self
-    {
-        $clone = clone $this;
-        unset($clone->transit);
-
-        return $clone;
-    }
-
-    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeleteDomainRequestBody Created instance
+     * @return ListTldsRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeleteDomainRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ListTldsRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $transit = null;
-        if (isset($input->{'transit'})) {
-            $transit = (bool)($input->{'transit'});
-        }
+
 
         $obj = new self();
-        $obj->transit = $transit;
+
         return $obj;
     }
 
@@ -114,9 +67,7 @@ class DeleteDomainRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->transit)) {
-            $output['transit'] = $this->transit;
-        }
+
 
         return $output;
     }
@@ -152,8 +103,7 @@ class DeleteDomainRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainId = urlencode($mapped['domainId']);
-        return '/v2/domains/' . $domainId;
+        return '/v2/domain-tlds';
     }
 
     public function getQuery(): array

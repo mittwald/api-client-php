@@ -26,7 +26,7 @@ class DeleteDomainRequest
             'body' => [
                 'properties' => [
                     'transit' => [
-                        'description' => 'If true, Domain is in grace period.',
+                        'description' => 'Only for .de Domains.',
                         'type' => 'boolean',
                     ],
                 ],

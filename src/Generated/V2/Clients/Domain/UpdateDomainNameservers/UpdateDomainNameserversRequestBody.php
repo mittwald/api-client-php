@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainNameservers;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerifyDomainOwnershipRequest
+class UpdateDomainNameserversRequestBody
 {
-    public const method = 'post';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,94 +17,68 @@ class VerifyDomainOwnershipRequest
      * @var array
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
-                'format' => 'uuid',
-                'type' => 'string',
+            'nameservers' => [
+                'items' => [
+                    'format' => 'hostname',
+                    'type' => 'string',
+                ],
+                'minItems' => 2,
+                'type' => 'array',
+                'uniqueItems' => true,
             ],
-            'body' => [
-
-            ],
-        ],
-        'required' => [
-            'domainOwnershipId',
-            'body',
         ],
     ];
 
     /**
-     * @var string
+     * @var string[]|null
      */
-    private string $domainOwnershipId;
-
-    /**
-     * @var mixed
-     */
-    private $body;
+    private ?array $nameservers = null;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $domainOwnershipId
-     * @param mixed $body
+     *
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct()
     {
-        $this->domainOwnershipId = $domainOwnershipId;
-        $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return string[]|null
      */
-    public function getDomainOwnershipId(): string
+    public function getNameservers(): ?array
     {
-        return $this->domainOwnershipId;
+        return $this->nameservers ?? null;
     }
 
     /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $domainOwnershipId
+     * @param string[] $nameservers
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withNameservers(array $nameservers): self
     {
         $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
+        $validator->validate($nameservers, static::$schema['properties']['nameservers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
+        $clone->nameservers = $nameservers;
 
         return $clone;
     }
 
     /**
-     * @param mixed $body
      * @return self
      */
-    public function withBody($body): self
+    public function withoutNameservers(): self
     {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->body = $body;
+        unset($clone->nameservers);
 
         return $clone;
     }
@@ -114,21 +88,23 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return UpdateDomainNameserversRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateDomainNameserversRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
-        $body = $input->{'body'};
+        $nameservers = null;
+        if (isset($input->{'nameservers'})) {
+            $nameservers = $input->{'nameservers'};
+        }
 
-        $obj = new self($domainOwnershipId, $body);
-
+        $obj = new self();
+        $obj->nameservers = $nameservers;
         return $obj;
     }
 
@@ -140,8 +116,9 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
-        $output['body'] = $this->body;
+        if (isset($this->nameservers)) {
+            $output['nameservers'] = $this->nameservers;
+        }
 
         return $output;
     }
@@ -177,8 +154,8 @@ class VerifyDomainOwnershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $domainId = urlencode($mapped['domainId']);
+        return '/v2/domains/' . $domainId . '/nameservers';
     }
 
     public function getQuery(): array

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerifyDomainOwnershipRequest
+class DeclareNameserversV2DeprecatedRequest
 {
-    public const method = 'post';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -19,16 +19,26 @@ class VerifyDomainOwnershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
+            'domainId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
-
+                'properties' => [
+                    'nameservers' => [
+                        'items' => [
+                            'format' => 'hostname',
+                            'type' => 'string',
+                        ],
+                        'minItems' => 2,
+                        'type' => 'array',
+                        'uniqueItems' => true,
+                    ],
+                ],
             ],
         ],
         'required' => [
-            'domainOwnershipId',
+            'domainId',
             'body',
         ],
     ];
@@ -36,73 +46,67 @@ class VerifyDomainOwnershipRequest
     /**
      * @var string
      */
-    private string $domainOwnershipId;
+    private string $domainId;
 
     /**
-     * @var mixed
+     * @var DeclareNameserversV2DeprecatedRequestBody
      */
-    private $body;
+    private DeclareNameserversV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $domainOwnershipId
-     * @param mixed $body
+     * @param string $domainId
+     * @param DeclareNameserversV2DeprecatedRequestBody $body
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct(string $domainId, DeclareNameserversV2DeprecatedRequestBody $body)
     {
-        $this->domainOwnershipId = $domainOwnershipId;
+        $this->domainId = $domainId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getDomainOwnershipId(): string
+    public function getDomainId(): string
     {
-        return $this->domainOwnershipId;
+        return $this->domainId;
     }
 
     /**
-     * @return mixed
+     * @return DeclareNameserversV2DeprecatedRequestBody
      */
-    public function getBody()
+    public function getBody(): DeclareNameserversV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
     /**
-     * @param string $domainOwnershipId
+     * @param string $domainId
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
+        $validator->validate($domainId, static::$schema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
+        $clone->domainId = $domainId;
 
         return $clone;
     }
 
     /**
-     * @param mixed $body
+     * @param DeclareNameserversV2DeprecatedRequestBody $body
      * @return self
      */
-    public function withBody($body): self
+    public function withBody(DeclareNameserversV2DeprecatedRequestBody $body): self
     {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->body = $body;
 
@@ -114,20 +118,20 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return DeclareNameserversV2DeprecatedRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeclareNameserversV2DeprecatedRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
-        $body = $input->{'body'};
+        $domainId = $input->{'domainId'};
+        $body = DeclareNameserversV2DeprecatedRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($domainOwnershipId, $body);
+        $obj = new self($domainId, $body);
 
         return $obj;
     }
@@ -140,8 +144,8 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
-        $output['body'] = $this->body;
+        $output['domainId'] = $this->domainId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -172,13 +176,14 @@ class VerifyDomainOwnershipRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $domainId = urlencode($mapped['domainId']);
+        return '/v2/domains/' . $domainId . '/nameservers';
     }
 
     public function getQuery(): array

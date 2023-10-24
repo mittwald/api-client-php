@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerifyDomainOwnershipRequest
+class UpdateDomainProjectIdRequestBody
 {
-    public const method = 'post';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,94 +17,63 @@ class VerifyDomainOwnershipRequest
      * @var array
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
+            'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-
-            ],
-        ],
-        'required' => [
-            'domainOwnershipId',
-            'body',
         ],
     ];
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $domainOwnershipId;
-
-    /**
-     * @var mixed
-     */
-    private $body;
+    private ?string $projectId = null;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $domainOwnershipId
-     * @param mixed $body
+     *
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct()
     {
-        $this->domainOwnershipId = $domainOwnershipId;
-        $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDomainOwnershipId(): string
+    public function getProjectId(): ?string
     {
-        return $this->domainOwnershipId;
+        return $this->projectId ?? null;
     }
 
     /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $domainOwnershipId
+     * @param string $projectId
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
+        $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
+        $clone->projectId = $projectId;
 
         return $clone;
     }
 
     /**
-     * @param mixed $body
      * @return self
      */
-    public function withBody($body): self
+    public function withoutProjectId(): self
     {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->body = $body;
+        unset($clone->projectId);
 
         return $clone;
     }
@@ -114,21 +83,23 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return UpdateDomainProjectIdRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateDomainProjectIdRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
-        $body = $input->{'body'};
+        $projectId = null;
+        if (isset($input->{'projectId'})) {
+            $projectId = $input->{'projectId'};
+        }
 
-        $obj = new self($domainOwnershipId, $body);
-
+        $obj = new self();
+        $obj->projectId = $projectId;
         return $obj;
     }
 
@@ -140,8 +111,9 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
-        $output['body'] = $this->body;
+        if (isset($this->projectId)) {
+            $output['projectId'] = $this->projectId;
+        }
 
         return $output;
     }
@@ -177,8 +149,8 @@ class VerifyDomainOwnershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $domainId = urlencode($mapped['domainId']);
+        return '/v2/domains/' . $domainId . '/project-id';
     }
 
     public function getQuery(): array

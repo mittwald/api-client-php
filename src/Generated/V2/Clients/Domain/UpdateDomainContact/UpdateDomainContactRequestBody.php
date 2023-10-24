@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField;
 
-class VerifyDomainOwnershipRequest
+class UpdateDomainContactRequestBody
 {
-    public const method = 'post';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,94 +18,53 @@ class VerifyDomainOwnershipRequest
      * @var array
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'domainOwnershipId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-            'body' => [
-
+            'contact' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.domain.HandleField',
+                ],
+                'minItems' => 1,
+                'type' => 'array',
             ],
         ],
         'required' => [
-            'domainOwnershipId',
-            'body',
+            'contact',
         ],
     ];
 
     /**
-     * @var string
+     * @var HandleField[]
      */
-    private string $domainOwnershipId;
-
-    /**
-     * @var mixed
-     */
-    private $body;
+    private array $contact;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $domainOwnershipId
-     * @param mixed $body
+     * @param HandleField[] $contact
      */
-    public function __construct(string $domainOwnershipId, $body)
+    public function __construct(array $contact)
     {
-        $this->domainOwnershipId = $domainOwnershipId;
-        $this->body = $body;
+        $this->contact = $contact;
     }
 
     /**
-     * @return string
+     * @return HandleField[]
      */
-    public function getDomainOwnershipId(): string
+    public function getContact(): array
     {
-        return $this->domainOwnershipId;
+        return $this->contact;
     }
 
     /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $domainOwnershipId
+     * @param HandleField[] $contact
      * @return self
      */
-    public function withDomainOwnershipId(string $domainOwnershipId): self
+    public function withContact(array $contact): self
     {
-        $validator = new Validator();
-        $validator->validate($domainOwnershipId, static::$schema['properties']['domainOwnershipId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->domainOwnershipId = $domainOwnershipId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     * @return self
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->contact = $contact;
 
         return $clone;
     }
@@ -114,20 +74,19 @@ class VerifyDomainOwnershipRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerifyDomainOwnershipRequest Created instance
+     * @return UpdateDomainContactRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerifyDomainOwnershipRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): UpdateDomainContactRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $domainOwnershipId = $input->{'domainOwnershipId'};
-        $body = $input->{'body'};
+        $contact = array_map(fn (array|object $i): HandleField => HandleField::buildFromInput($i, validate: $validate), $input->{'contact'});
 
-        $obj = new self($domainOwnershipId, $body);
+        $obj = new self($contact);
 
         return $obj;
     }
@@ -140,8 +99,7 @@ class VerifyDomainOwnershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['domainOwnershipId'] = $this->domainOwnershipId;
-        $output['body'] = $this->body;
+        $output['contact'] = array_map(fn (HandleField $i): array => $i->toJson(), $this->contact);
 
         return $output;
     }
@@ -177,8 +135,9 @@ class VerifyDomainOwnershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $domainOwnershipId = urlencode($mapped['domainOwnershipId']);
-        return '/v2/domain-ownerships/' . $domainOwnershipId . '/actions/verify';
+        $domainId = urlencode($mapped['domainId']);
+        $contact = urlencode($mapped['contact']);
+        return '/v2/domains/' . $domainId . '/contacts/' . $contact;
     }
 
     public function getQuery(): array
