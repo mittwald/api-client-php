@@ -55,40 +55,50 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain400R
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustom\DnsRecordASetCustom400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustom\DnsRecordASetCustomDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustom\DnsRecordASetCustomRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngress204Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngress400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngressDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngressRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSet\DnsRecordCnameSet400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSet\DnsRecordCnameSetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSet\DnsRecordCnameSetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustom\DnsRecordMxSetCustom400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustom\DnsRecordMxSetCustomDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustom\DnsRecordMxSetCustomRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManaged\DnsRecordMxSetManaged400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManaged\DnsRecordMxSetManagedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManaged\DnsRecordMxSetManagedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSet\DnsRecordSrvSet400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSet\DnsRecordSrvSetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSet\DnsRecordSrvSetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSet\DnsRecordTxtSet400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSet\DnsRecordTxtSetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSet\DnsRecordTxtSetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSubZoneCreate\DnsSubZoneCreate201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSubZoneCreate\DnsSubZoneCreate400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSubZoneCreate\DnsSubZoneCreateDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSubZoneCreate\DnsSubZoneCreateRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZoneGetSpecific\DnsZoneGetSpecific200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZoneGetSpecific\DnsZoneGetSpecific400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZoneGetSpecific\DnsZoneGetSpecificDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZoneGetSpecific\DnsZoneGetSpecificRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZonesForProject\DnsZonesForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZonesForProject\DnsZonesForProject400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZonesForProject\DnsZonesForProjectDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsZonesForProject\DnsZonesForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZone201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZone400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZone400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZone200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZone400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZones200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZones400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecated204Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManaged204Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManaged400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSet400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomain200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomain400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomain404Response;
@@ -200,16 +210,105 @@ class DomainClient
     }
 
     /**
+     * Create a DNSZone.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-dns-zone
+     * @throws GuzzleException
+     * @param DnsCreateDnsZone\DnsCreateDnsZoneRequest $request An object representing the request for this operation
+     * @return DnsCreateDnsZone\DnsCreateDnsZone201Response|DnsCreateDnsZone\DnsCreateDnsZone400Response|DnsCreateDnsZone\DnsCreateDnsZoneDefaultResponse The ID of the created DNSZone.
+     */
+    public function dnsCreateDnsZone(DnsCreateDnsZoneRequest $request): DnsCreateDnsZone201Response|DnsCreateDnsZone400Response|DnsCreateDnsZoneDefaultResponse
+    {
+        $httpRequest = new Request(DnsCreateDnsZoneRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            201 => DnsCreateDnsZone201Response::fromResponse($httpResponse),
+            400 => DnsCreateDnsZone400Response::fromResponse($httpResponse),
+            default => DnsCreateDnsZoneDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Delete a DNSZone.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-delete-dns-zone
+     * @throws GuzzleException
+     * @param DnsDeleteDnsZone\DnsDeleteDnsZoneRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsDeleteDnsZone\DnsDeleteDnsZone400Response|DnsDeleteDnsZone\DnsDeleteDnsZoneDefaultResponse OK
+     */
+    public function dnsDeleteDnsZone(DnsDeleteDnsZoneRequest $request): EmptyResponse|DnsDeleteDnsZone400Response|DnsDeleteDnsZoneDefaultResponse
+    {
+        $httpRequest = new Request(DnsDeleteDnsZoneRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => DnsDeleteDnsZone400Response::fromResponse($httpResponse),
+            default => DnsDeleteDnsZoneDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get a DNSZone.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-dns-zone
+     * @throws GuzzleException
+     * @param DnsGetDnsZone\DnsGetDnsZoneRequest $request An object representing the request for this operation
+     * @return DnsGetDnsZone\DnsGetDnsZone200Response|DnsGetDnsZone\DnsGetDnsZone400Response|DnsGetDnsZone\DnsGetDnsZoneDefaultResponse The requested DNSZone.
+     */
+    public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZone200Response|DnsGetDnsZone400Response|DnsGetDnsZoneDefaultResponse
+    {
+        $httpRequest = new Request(DnsGetDnsZoneRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DnsGetDnsZone200Response::fromResponse($httpResponse),
+            400 => DnsGetDnsZone400Response::fromResponse($httpResponse),
+            default => DnsGetDnsZoneDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List DNSZones belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-list-dns-zones
+     * @throws GuzzleException
+     * @param DnsListDnsZones\DnsListDnsZonesRequest $request An object representing the request for this operation
+     * @return DnsListDnsZones\DnsListDnsZones200Response|DnsListDnsZones\DnsListDnsZones400Response|DnsListDnsZones\DnsListDnsZonesDefaultResponse An array of DNSZone objects.
+     */
+    public function dnsListDnsZones(DnsListDnsZonesRequest $request): DnsListDnsZones200Response|DnsListDnsZones400Response|DnsListDnsZonesDefaultResponse
+    {
+        $httpRequest = new Request(DnsListDnsZonesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DnsListDnsZones200Response::fromResponse($httpResponse),
+            400 => DnsListDnsZones400Response::fromResponse($httpResponse),
+            default => DnsListDnsZonesDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * updates a-records for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-custom
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-custom-deprecated
      * @throws GuzzleException
-     * @param DnsRecordASetCustom\DnsRecordASetCustomRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DnsRecordASetCustom\DnsRecordASetCustom400Response|DnsRecordASetCustom\DnsRecordASetCustomDefaultResponse recordset updated
+     * @param DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecated400Response|DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecatedDefaultResponse recordset updated
      */
-    public function dnsRecordASetCustom(DnsRecordASetCustomRequest $request): EmptyResponse|DnsRecordASetCustom400Response|DnsRecordASetCustomDefaultResponse
+    public function dnsRecordASetCustomDeprecated(DnsRecordASetCustomDeprecatedRequest $request): EmptyResponse|DnsRecordASetCustomDeprecated400Response|DnsRecordASetCustomDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordASetCustomRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordASetCustomDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -217,45 +316,45 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => DnsRecordASetCustom400Response::fromResponse($httpResponse),
-            default => DnsRecordASetCustomDefaultResponse::fromResponse($httpResponse),
+            400 => DnsRecordASetCustomDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordASetCustomDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * set a-records managed by ingress for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-managed-by-ingress
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-managed-by-ingress-deprecated
      * @throws GuzzleException
-     * @param DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngressRequest $request An object representing the request for this operation
-     * @return DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngress204Response|DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngress400Response|DnsRecordASetManagedByIngress\DnsRecordASetManagedByIngressDefaultResponse zone set managed by ingressId
+     * @param DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedRequest $request An object representing the request for this operation
+     * @return DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecated204Response|DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecated400Response|DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedDefaultResponse zone set managed by ingressId
      */
-    public function dnsRecordASetManagedByIngress(DnsRecordASetManagedByIngressRequest $request): DnsRecordASetManagedByIngress204Response|DnsRecordASetManagedByIngress400Response|DnsRecordASetManagedByIngressDefaultResponse
+    public function dnsRecordASetManagedByIngressDeprecated(DnsRecordASetManagedByIngressDeprecatedRequest $request): DnsRecordASetManagedByIngressDeprecated204Response|DnsRecordASetManagedByIngressDeprecated400Response|DnsRecordASetManagedByIngressDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordASetManagedByIngressRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordASetManagedByIngressDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            204 => DnsRecordASetManagedByIngress204Response::fromResponse($httpResponse),
-            400 => DnsRecordASetManagedByIngress400Response::fromResponse($httpResponse),
-            default => DnsRecordASetManagedByIngressDefaultResponse::fromResponse($httpResponse),
+            204 => DnsRecordASetManagedByIngressDeprecated204Response::fromResponse($httpResponse),
+            400 => DnsRecordASetManagedByIngressDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordASetManagedByIngressDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * updates cname-record for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-cname-set
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-cname-set-deprecated
      * @throws GuzzleException
-     * @param DnsRecordCnameSet\DnsRecordCnameSetRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DnsRecordCnameSet\DnsRecordCnameSet400Response|DnsRecordCnameSet\DnsRecordCnameSetDefaultResponse recordset updated
+     * @param DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecated400Response|DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecatedDefaultResponse recordset updated
      */
-    public function dnsRecordCnameSet(DnsRecordCnameSetRequest $request): EmptyResponse|DnsRecordCnameSet400Response|DnsRecordCnameSetDefaultResponse
+    public function dnsRecordCnameSetDeprecated(DnsRecordCnameSetDeprecatedRequest $request): EmptyResponse|DnsRecordCnameSetDeprecated400Response|DnsRecordCnameSetDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordCnameSetRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordCnameSetDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -263,22 +362,22 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => DnsRecordCnameSet400Response::fromResponse($httpResponse),
-            default => DnsRecordCnameSetDefaultResponse::fromResponse($httpResponse),
+            400 => DnsRecordCnameSetDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordCnameSetDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * updates mx-records for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-custom
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-custom-deprecated
      * @throws GuzzleException
-     * @param DnsRecordMxSetCustom\DnsRecordMxSetCustomRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DnsRecordMxSetCustom\DnsRecordMxSetCustom400Response|DnsRecordMxSetCustom\DnsRecordMxSetCustomDefaultResponse recordset updated
+     * @param DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecated400Response|DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecatedDefaultResponse recordset updated
      */
-    public function dnsRecordMxSetCustom(DnsRecordMxSetCustomRequest $request): EmptyResponse|DnsRecordMxSetCustom400Response|DnsRecordMxSetCustomDefaultResponse
+    public function dnsRecordMxSetCustomDeprecated(DnsRecordMxSetCustomDeprecatedRequest $request): EmptyResponse|DnsRecordMxSetCustomDeprecated400Response|DnsRecordMxSetCustomDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordMxSetCustomRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordMxSetCustomDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -286,22 +385,22 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => DnsRecordMxSetCustom400Response::fromResponse($httpResponse),
-            default => DnsRecordMxSetCustomDefaultResponse::fromResponse($httpResponse),
+            400 => DnsRecordMxSetCustomDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordMxSetCustomDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * sets mx-records to managed for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-managed
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-managed-deprecated
      * @throws GuzzleException
-     * @param DnsRecordMxSetManaged\DnsRecordMxSetManagedRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DnsRecordMxSetManaged\DnsRecordMxSetManaged400Response|DnsRecordMxSetManaged\DnsRecordMxSetManagedDefaultResponse recordset updated
+     * @param DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecated400Response|DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecatedDefaultResponse recordset updated
      */
-    public function dnsRecordMxSetManaged(DnsRecordMxSetManagedRequest $request): EmptyResponse|DnsRecordMxSetManaged400Response|DnsRecordMxSetManagedDefaultResponse
+    public function dnsRecordMxSetManagedDeprecated(DnsRecordMxSetManagedDeprecatedRequest $request): EmptyResponse|DnsRecordMxSetManagedDeprecated400Response|DnsRecordMxSetManagedDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordMxSetManagedRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordMxSetManagedDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -309,22 +408,22 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => DnsRecordMxSetManaged400Response::fromResponse($httpResponse),
-            default => DnsRecordMxSetManagedDefaultResponse::fromResponse($httpResponse),
+            400 => DnsRecordMxSetManagedDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordMxSetManagedDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * updates srv-records for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-srv-set
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-srv-set-deprecated
      * @throws GuzzleException
-     * @param DnsRecordSrvSet\DnsRecordSrvSetRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DnsRecordSrvSet\DnsRecordSrvSet400Response|DnsRecordSrvSet\DnsRecordSrvSetDefaultResponse recordset updated
+     * @param DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecated400Response|DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecatedDefaultResponse recordset updated
      */
-    public function dnsRecordSrvSet(DnsRecordSrvSetRequest $request): EmptyResponse|DnsRecordSrvSet400Response|DnsRecordSrvSetDefaultResponse
+    public function dnsRecordSrvSetDeprecated(DnsRecordSrvSetDeprecatedRequest $request): EmptyResponse|DnsRecordSrvSetDeprecated400Response|DnsRecordSrvSetDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordSrvSetRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordSrvSetDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -332,22 +431,22 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => DnsRecordSrvSet400Response::fromResponse($httpResponse),
-            default => DnsRecordSrvSetDefaultResponse::fromResponse($httpResponse),
+            400 => DnsRecordSrvSetDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordSrvSetDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * updates txt-records for a specific zone
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-txt-set
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-txt-set-deprecated
      * @throws GuzzleException
-     * @param DnsRecordTxtSet\DnsRecordTxtSetRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DnsRecordTxtSet\DnsRecordTxtSet400Response|DnsRecordTxtSet\DnsRecordTxtSetDefaultResponse recordset updated
+     * @param DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecated400Response|DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecatedDefaultResponse recordset updated
      */
-    public function dnsRecordTxtSet(DnsRecordTxtSetRequest $request): EmptyResponse|DnsRecordTxtSet400Response|DnsRecordTxtSetDefaultResponse
+    public function dnsRecordTxtSetDeprecated(DnsRecordTxtSetDeprecatedRequest $request): EmptyResponse|DnsRecordTxtSetDeprecated400Response|DnsRecordTxtSetDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(DnsRecordTxtSetRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsRecordTxtSetDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -355,75 +454,79 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            400 => DnsRecordTxtSet400Response::fromResponse($httpResponse),
-            default => DnsRecordTxtSetDefaultResponse::fromResponse($httpResponse),
+            400 => DnsRecordTxtSetDeprecated400Response::fromResponse($httpResponse),
+            default => DnsRecordTxtSetDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
-     * creates a sub zone for a given dns zone
+     * Set a record set on a DNSZone to managed.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-sub-zone-create
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-set-record-set-managed
      * @throws GuzzleException
-     * @param DnsSubZoneCreate\DnsSubZoneCreateRequest $request An object representing the request for this operation
-     * @return DnsSubZoneCreate\DnsSubZoneCreate201Response|DnsSubZoneCreate\DnsSubZoneCreate400Response|DnsSubZoneCreate\DnsSubZoneCreateDefaultResponse
+     * @param DnsSetRecordSetManaged\DnsSetRecordSetManagedRequest $request An object representing the request for this operation
+     * @return DnsSetRecordSetManaged\DnsSetRecordSetManaged204Response|DnsSetRecordSetManaged\DnsSetRecordSetManaged400Response|DnsSetRecordSetManaged\DnsSetRecordSetManagedDefaultResponse The ID of the Ingress the a-records were set for, or an empty object if mx-records were set.
      */
-    public function dnsSubZoneCreate(DnsSubZoneCreateRequest $request): DnsSubZoneCreate201Response|DnsSubZoneCreate400Response|DnsSubZoneCreateDefaultResponse
+    public function dnsSetRecordSetManaged(DnsSetRecordSetManagedRequest $request): DnsSetRecordSetManaged204Response|DnsSetRecordSetManaged400Response|DnsSetRecordSetManagedDefaultResponse
     {
-        $httpRequest = new Request(DnsSubZoneCreateRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsSetRecordSetManagedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => DnsSubZoneCreate201Response::fromResponse($httpResponse),
-            400 => DnsSubZoneCreate400Response::fromResponse($httpResponse),
-            default => DnsSubZoneCreateDefaultResponse::fromResponse($httpResponse),
+            204 => DnsSetRecordSetManaged204Response::fromResponse($httpResponse),
+            400 => DnsSetRecordSetManaged400Response::fromResponse($httpResponse),
+            default => DnsSetRecordSetManagedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
-     * gets a specific zone
+     * Update a record set on a DNSZone.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-zone-get-specific
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-update-record-set
      * @throws GuzzleException
-     * @param DnsZoneGetSpecific\DnsZoneGetSpecificRequest $request An object representing the request for this operation
-     * @return DnsZoneGetSpecific\DnsZoneGetSpecific200Response|DnsZoneGetSpecific\DnsZoneGetSpecific400Response|DnsZoneGetSpecific\DnsZoneGetSpecificDefaultResponse zone
+     * @param DnsUpdateRecordSet\DnsUpdateRecordSetRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DnsUpdateRecordSet\DnsUpdateRecordSet400Response|DnsUpdateRecordSet\DnsUpdateRecordSetDefaultResponse Record set updated.
      */
-    public function dnsZoneGetSpecific(DnsZoneGetSpecificRequest $request): DnsZoneGetSpecific200Response|DnsZoneGetSpecific400Response|DnsZoneGetSpecificDefaultResponse
+    public function dnsUpdateRecordSet(DnsUpdateRecordSetRequest $request): EmptyResponse|DnsUpdateRecordSet400Response|DnsUpdateRecordSetDefaultResponse
     {
-        $httpRequest = new Request(DnsZoneGetSpecificRequest::method, $request->getUrl());
+        $httpRequest = new Request(DnsUpdateRecordSetRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => DnsUpdateRecordSet400Response::fromResponse($httpResponse),
+            default => DnsUpdateRecordSetDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Abort a Domain declaration.
+     *
+     * Abort an incomplete Domain registration/transfer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-domain-declaration
+     * @throws GuzzleException
+     * @param AbortDomainDeclaration\AbortDomainDeclarationRequest $request An object representing the request for this operation
+     * @return EmptyResponse|AbortDomainDeclaration\AbortDomainDeclaration400Response|AbortDomainDeclaration\AbortDomainDeclaration404Response|AbortDomainDeclaration\AbortDomainDeclarationDefaultResponse No Content
+     */
+    public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse|AbortDomainDeclaration400Response|AbortDomainDeclaration404Response|AbortDomainDeclarationDefaultResponse
+    {
+        $httpRequest = new Request(AbortDomainDeclarationRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => DnsZoneGetSpecific200Response::fromResponse($httpResponse),
-            400 => DnsZoneGetSpecific400Response::fromResponse($httpResponse),
-            default => DnsZoneGetSpecificDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * gets all dns zones by project id
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-zones-for-project
-     * @throws GuzzleException
-     * @param DnsZonesForProject\DnsZonesForProjectRequest $request An object representing the request for this operation
-     * @return DnsZonesForProject\DnsZonesForProject200Response|DnsZonesForProject\DnsZonesForProject400Response|DnsZonesForProject\DnsZonesForProjectDefaultResponse zone
-     */
-    public function dnsZonesForProject(DnsZonesForProjectRequest $request): DnsZonesForProject200Response|DnsZonesForProject400Response|DnsZonesForProjectDefaultResponse
-    {
-        $httpRequest = new Request(DnsZonesForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DnsZonesForProject200Response::fromResponse($httpResponse),
-            400 => DnsZonesForProject400Response::fromResponse($httpResponse),
-            default => DnsZonesForProjectDefaultResponse::fromResponse($httpResponse),
+            204 => new EmptyResponse($httpResponse),
+            400 => AbortDomainDeclaration400Response::fromResponse($httpResponse),
+            404 => AbortDomainDeclaration404Response::fromResponse($httpResponse),
+            default => AbortDomainDeclarationDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -474,6 +577,106 @@ class DomainClient
             400 => ChangeProjectOfDomainV2Deprecated400Response::fromResponse($httpResponse),
             404 => ChangeProjectOfDomainV2Deprecated404Response::fromResponse($httpResponse),
             default => ChangeProjectOfDomainV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Check if a Domain is available to register.
+     *
+     * If false, you have to start a transfer with an auth code instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability
+     * @throws GuzzleException
+     * @param CheckDomainRegistrability\CheckDomainRegistrabilityRequest $request An object representing the request for this operation
+     * @return CheckDomainRegistrability\CheckDomainRegistrability200Response|CheckDomainRegistrability\CheckDomainRegistrability400Response|CheckDomainRegistrability\CheckDomainRegistrabilityDefaultResponse OK
+     */
+    public function checkDomainRegistrability(CheckDomainRegistrabilityRequest $request): CheckDomainRegistrability200Response|CheckDomainRegistrability400Response|CheckDomainRegistrabilityDefaultResponse
+    {
+        $httpRequest = new Request(CheckDomainRegistrabilityRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => CheckDomainRegistrability200Response::fromResponse($httpResponse),
+            400 => CheckDomainRegistrability400Response::fromResponse($httpResponse),
+            default => CheckDomainRegistrabilityDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Check if a Domain is available to register.
+     *
+     * If false, you have to start a transfer with an auth code instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability-v2-deprecated
+     * @throws GuzzleException
+     * @param CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
+     * @return CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated200Response|CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated400Response|CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedDefaultResponse OK
+     */
+    public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2Deprecated200Response|CheckDomainRegistrabilityV2Deprecated400Response|CheckDomainRegistrabilityV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(CheckDomainRegistrabilityV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => CheckDomainRegistrabilityV2Deprecated200Response::fromResponse($httpResponse),
+            400 => CheckDomainRegistrabilityV2Deprecated400Response::fromResponse($httpResponse),
+            default => CheckDomainRegistrabilityV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Create an auth code 2.
+     *
+     * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code-2
+     * @throws GuzzleException
+     * @param CreateDomainAuthCode2\CreateDomainAuthCode2Request $request An object representing the request for this operation
+     * @return EmptyResponse|CreateDomainAuthCode2\CreateDomainAuthCode2400Response|CreateDomainAuthCode2\CreateDomainAuthCode2404Response|CreateDomainAuthCode2\CreateDomainAuthCode2DefaultResponse No Content
+     */
+    public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse|CreateDomainAuthCode2400Response|CreateDomainAuthCode2404Response|CreateDomainAuthCode2DefaultResponse
+    {
+        $httpRequest = new Request(CreateDomainAuthCode2Request::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => CreateDomainAuthCode2400Response::fromResponse($httpResponse),
+            404 => CreateDomainAuthCode2404Response::fromResponse($httpResponse),
+            default => CreateDomainAuthCode2DefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Create an auth code for a Domains transfer-out process.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
+     * @throws GuzzleException
+     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return CreateDomainAuthCode\CreateDomainAuthCode201Response|CreateDomainAuthCode\CreateDomainAuthCode400Response|CreateDomainAuthCode\CreateDomainAuthCode404Response|CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse Created
+     */
+    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCode201Response|CreateDomainAuthCode400Response|CreateDomainAuthCode404Response|CreateDomainAuthCodeDefaultResponse
+    {
+        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            201 => CreateDomainAuthCode201Response::fromResponse($httpResponse),
+            400 => CreateDomainAuthCode400Response::fromResponse($httpResponse),
+            404 => CreateDomainAuthCode404Response::fromResponse($httpResponse),
+            default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -625,29 +828,6 @@ class DomainClient
     }
 
     /**
-     * Get File Service Reference for a Screenshot of a domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-screenshot-for-domain
-     * @throws GuzzleException
-     * @param GetScreenshotForDomain\GetScreenshotForDomainRequest $request An object representing the request for this operation
-     * @return GetScreenshotForDomain\GetScreenshotForDomain200Response|GetScreenshotForDomain\GetScreenshotForDomain404Response|GetScreenshotForDomain\GetScreenshotForDomainDefaultResponse The References.
-     */
-    public function getScreenshotForDomain(GetScreenshotForDomainRequest $request): GetScreenshotForDomain200Response|GetScreenshotForDomain404Response|GetScreenshotForDomainDefaultResponse
-    {
-        $httpRequest = new Request(GetScreenshotForDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetScreenshotForDomain200Response::fromResponse($httpResponse),
-            404 => GetScreenshotForDomain404Response::fromResponse($httpResponse),
-            default => GetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
      * Get a DomainOwnership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain-ownership
@@ -667,6 +847,52 @@ class DomainClient
             400 => GetDomainOwnership400Response::fromResponse($httpResponse),
             404 => GetDomainOwnership404Response::fromResponse($httpResponse),
             default => GetDomainOwnershipDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get a HandleSchema.
+     *
+     * Get required handle fields of a registrar for your domain process (transfer/registration).
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields-v2-deprecated
+     * @throws GuzzleException
+     * @param GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
+     * @return GetHandleFieldsV2Deprecated\GetHandleFieldsV2Deprecated200Response|GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse The parseable json schema objects
+     */
+    public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2Deprecated200Response|GetHandleFieldsV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(GetHandleFieldsV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetHandleFieldsV2Deprecated200Response::fromResponse($httpResponse),
+            default => GetHandleFieldsV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get File Service Reference for a Screenshot of a domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-screenshot-for-domain
+     * @throws GuzzleException
+     * @param GetScreenshotForDomain\GetScreenshotForDomainRequest $request An object representing the request for this operation
+     * @return GetScreenshotForDomain\GetScreenshotForDomain200Response|GetScreenshotForDomain\GetScreenshotForDomain404Response|GetScreenshotForDomain\GetScreenshotForDomainDefaultResponse The References.
+     */
+    public function getScreenshotForDomain(GetScreenshotForDomainRequest $request): GetScreenshotForDomain200Response|GetScreenshotForDomain404Response|GetScreenshotForDomainDefaultResponse
+    {
+        $httpRequest = new Request(GetScreenshotForDomainRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetScreenshotForDomain200Response::fromResponse($httpResponse),
+            404 => GetScreenshotForDomain404Response::fromResponse($httpResponse),
+            default => GetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -715,6 +941,52 @@ class DomainClient
     }
 
     /**
+     * List the contact schemas for a TLD.
+     *
+     * List the contact schemas describing the fields required to register/transfer a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tld-contact-schemas
+     * @throws GuzzleException
+     * @param ListTldContactSchemas\ListTldContactSchemasRequest $request An object representing the request for this operation
+     * @return ListTldContactSchemas\ListTldContactSchemas200Response|ListTldContactSchemas\ListTldContactSchemasDefaultResponse The JSON-Schema objects.
+     */
+    public function listTldContactSchemas(ListTldContactSchemasRequest $request): ListTldContactSchemas200Response|ListTldContactSchemasDefaultResponse
+    {
+        $httpRequest = new Request(ListTldContactSchemasRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListTldContactSchemas200Response::fromResponse($httpResponse),
+            default => ListTldContactSchemasDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List TLDs.
+     *
+     * List the top level domains currently supported by our API.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tlds
+     * @throws GuzzleException
+     * @param ListTlds\ListTldsRequest $request An object representing the request for this operation
+     * @return ListTlds\ListTlds200Response|ListTlds\ListTldsDefaultResponse
+     */
+    public function listTlds(ListTldsRequest $request): ListTlds200Response|ListTldsDefaultResponse
+    {
+        $httpRequest = new Request(ListTldsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListTlds200Response::fromResponse($httpResponse),
+            default => ListTldsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Resend a Domain email.
      *
      * Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
@@ -737,6 +1009,80 @@ class DomainClient
             400 => ResendDomainEmail400Response::fromResponse($httpResponse),
             404 => ResendDomainEmail404Response::fromResponse($httpResponse),
             default => ResendDomainEmailDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the auth code of a Domain.
+     *
+     * Update an incorrect auth code of an ongoing/failed Domain transfer. This route will also restart the transfer itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-auth-code
+     * @throws GuzzleException
+     * @param UpdateDomainAuthCode\UpdateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return UpdateDomainAuthCode\UpdateDomainAuthCode200Response|UpdateDomainAuthCode\UpdateDomainAuthCode400Response|UpdateDomainAuthCode\UpdateDomainAuthCode404Response|UpdateDomainAuthCode\UpdateDomainAuthCodeDefaultResponse OK
+     */
+    public function updateDomainAuthCode(UpdateDomainAuthCodeRequest $request): UpdateDomainAuthCode200Response|UpdateDomainAuthCode400Response|UpdateDomainAuthCode404Response|UpdateDomainAuthCodeDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainAuthCodeRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => UpdateDomainAuthCode200Response::fromResponse($httpResponse),
+            400 => UpdateDomainAuthCode400Response::fromResponse($httpResponse),
+            404 => UpdateDomainAuthCode404Response::fromResponse($httpResponse),
+            default => UpdateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update a contact of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-contact
+     * @throws GuzzleException
+     * @param UpdateDomainContact\UpdateDomainContactRequest $request An object representing the request for this operation
+     * @return UpdateDomainContact\UpdateDomainContact200Response|UpdateDomainContact\UpdateDomainContact400Response|UpdateDomainContact\UpdateDomainContact404Response|UpdateDomainContact\UpdateDomainContactDefaultResponse OK
+     */
+    public function updateDomainContact(UpdateDomainContactRequest $request): UpdateDomainContact200Response|UpdateDomainContact400Response|UpdateDomainContact404Response|UpdateDomainContactDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainContactRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => UpdateDomainContact200Response::fromResponse($httpResponse),
+            400 => UpdateDomainContact400Response::fromResponse($httpResponse),
+            404 => UpdateDomainContact404Response::fromResponse($httpResponse),
+            default => UpdateDomainContactDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update a Domain's project id.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-project-id
+     * @throws GuzzleException
+     * @param UpdateDomainProjectId\UpdateDomainProjectIdRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateDomainProjectId\UpdateDomainProjectId400Response|UpdateDomainProjectId\UpdateDomainProjectId404Response|UpdateDomainProjectId\UpdateDomainProjectIdDefaultResponse No Content
+     */
+    public function updateDomainProjectId(UpdateDomainProjectIdRequest $request): EmptyResponse|UpdateDomainProjectId400Response|UpdateDomainProjectId404Response|UpdateDomainProjectIdDefaultResponse
+    {
+        $httpRequest = new Request(UpdateDomainProjectIdRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            400 => UpdateDomainProjectId400Response::fromResponse($httpResponse),
+            404 => UpdateDomainProjectId404Response::fromResponse($httpResponse),
+            default => UpdateDomainProjectIdDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -943,274 +1289,6 @@ class DomainClient
             200 => IngressTls200Response::fromResponse($httpResponse),
             404 => IngressTls404Response::fromResponse($httpResponse),
             default => IngressTlsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Abort a Domain declaration.
-     *
-     * Abort an incomplete Domain registration/transfer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-domain-declaration
-     * @throws GuzzleException
-     * @param AbortDomainDeclaration\AbortDomainDeclarationRequest $request An object representing the request for this operation
-     * @return EmptyResponse|AbortDomainDeclaration\AbortDomainDeclaration400Response|AbortDomainDeclaration\AbortDomainDeclaration404Response|AbortDomainDeclaration\AbortDomainDeclarationDefaultResponse No Content
-     */
-    public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse|AbortDomainDeclaration400Response|AbortDomainDeclaration404Response|AbortDomainDeclarationDefaultResponse
-    {
-        $httpRequest = new Request(AbortDomainDeclarationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => AbortDomainDeclaration400Response::fromResponse($httpResponse),
-            404 => AbortDomainDeclaration404Response::fromResponse($httpResponse),
-            default => AbortDomainDeclarationDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a HandleSchema.
-     *
-     * Get required handle fields of a registrar for your domain process (transfer/registration).
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields-v2-deprecated
-     * @throws GuzzleException
-     * @param GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
-     * @return GetHandleFieldsV2Deprecated\GetHandleFieldsV2Deprecated200Response|GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse The parseable json schema objects
-     */
-    public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2Deprecated200Response|GetHandleFieldsV2DeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(GetHandleFieldsV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetHandleFieldsV2Deprecated200Response::fromResponse($httpResponse),
-            default => GetHandleFieldsV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * List TLDs.
-     *
-     * List the top level domains currently supported by our API.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tlds
-     * @throws GuzzleException
-     * @param ListTlds\ListTldsRequest $request An object representing the request for this operation
-     * @return ListTlds\ListTlds200Response|ListTlds\ListTldsDefaultResponse
-     */
-    public function listTlds(ListTldsRequest $request): ListTlds200Response|ListTldsDefaultResponse
-    {
-        $httpRequest = new Request(ListTldsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListTlds200Response::fromResponse($httpResponse),
-            default => ListTldsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * List the contact schemas for a TLD.
-     *
-     * List the contact schemas describing the fields required to register/transfer a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tld-contact-schemas
-     * @throws GuzzleException
-     * @param ListTldContactSchemas\ListTldContactSchemasRequest $request An object representing the request for this operation
-     * @return ListTldContactSchemas\ListTldContactSchemas200Response|ListTldContactSchemas\ListTldContactSchemasDefaultResponse The JSON-Schema objects.
-     */
-    public function listTldContactSchemas(ListTldContactSchemasRequest $request): ListTldContactSchemas200Response|ListTldContactSchemasDefaultResponse
-    {
-        $httpRequest = new Request(ListTldContactSchemasRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListTldContactSchemas200Response::fromResponse($httpResponse),
-            default => ListTldContactSchemasDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Update the auth code of a Domain.
-     *
-     * Update an incorrect auth code of an ongoing/failed Domain transfer. This route will also restart the transfer itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-auth-code
-     * @throws GuzzleException
-     * @param UpdateDomainAuthCode\UpdateDomainAuthCodeRequest $request An object representing the request for this operation
-     * @return UpdateDomainAuthCode\UpdateDomainAuthCode200Response|UpdateDomainAuthCode\UpdateDomainAuthCode400Response|UpdateDomainAuthCode\UpdateDomainAuthCode404Response|UpdateDomainAuthCode\UpdateDomainAuthCodeDefaultResponse OK
-     */
-    public function updateDomainAuthCode(UpdateDomainAuthCodeRequest $request): UpdateDomainAuthCode200Response|UpdateDomainAuthCode400Response|UpdateDomainAuthCode404Response|UpdateDomainAuthCodeDefaultResponse
-    {
-        $httpRequest = new Request(UpdateDomainAuthCodeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => UpdateDomainAuthCode200Response::fromResponse($httpResponse),
-            400 => UpdateDomainAuthCode400Response::fromResponse($httpResponse),
-            404 => UpdateDomainAuthCode404Response::fromResponse($httpResponse),
-            default => UpdateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Update a contact of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-contact
-     * @throws GuzzleException
-     * @param UpdateDomainContact\UpdateDomainContactRequest $request An object representing the request for this operation
-     * @return UpdateDomainContact\UpdateDomainContact200Response|UpdateDomainContact\UpdateDomainContact400Response|UpdateDomainContact\UpdateDomainContact404Response|UpdateDomainContact\UpdateDomainContactDefaultResponse OK
-     */
-    public function updateDomainContact(UpdateDomainContactRequest $request): UpdateDomainContact200Response|UpdateDomainContact400Response|UpdateDomainContact404Response|UpdateDomainContactDefaultResponse
-    {
-        $httpRequest = new Request(UpdateDomainContactRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => UpdateDomainContact200Response::fromResponse($httpResponse),
-            400 => UpdateDomainContact400Response::fromResponse($httpResponse),
-            404 => UpdateDomainContact404Response::fromResponse($httpResponse),
-            default => UpdateDomainContactDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Update a Domain's project id.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-project-id
-     * @throws GuzzleException
-     * @param UpdateDomainProjectId\UpdateDomainProjectIdRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateDomainProjectId\UpdateDomainProjectId400Response|UpdateDomainProjectId\UpdateDomainProjectId404Response|UpdateDomainProjectId\UpdateDomainProjectIdDefaultResponse No Content
-     */
-    public function updateDomainProjectId(UpdateDomainProjectIdRequest $request): EmptyResponse|UpdateDomainProjectId400Response|UpdateDomainProjectId404Response|UpdateDomainProjectIdDefaultResponse
-    {
-        $httpRequest = new Request(UpdateDomainProjectIdRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => UpdateDomainProjectId400Response::fromResponse($httpResponse),
-            404 => UpdateDomainProjectId404Response::fromResponse($httpResponse),
-            default => UpdateDomainProjectIdDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Create an auth code for a Domains transfer-out process.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
-     * @throws GuzzleException
-     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
-     * @return CreateDomainAuthCode\CreateDomainAuthCode201Response|CreateDomainAuthCode\CreateDomainAuthCode400Response|CreateDomainAuthCode\CreateDomainAuthCode404Response|CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse Created
-     */
-    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCode201Response|CreateDomainAuthCode400Response|CreateDomainAuthCode404Response|CreateDomainAuthCodeDefaultResponse
-    {
-        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateDomainAuthCode201Response::fromResponse($httpResponse),
-            400 => CreateDomainAuthCode400Response::fromResponse($httpResponse),
-            404 => CreateDomainAuthCode404Response::fromResponse($httpResponse),
-            default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Create an auth code 2.
-     *
-     * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code-2
-     * @throws GuzzleException
-     * @param CreateDomainAuthCode2\CreateDomainAuthCode2Request $request An object representing the request for this operation
-     * @return EmptyResponse|CreateDomainAuthCode2\CreateDomainAuthCode2400Response|CreateDomainAuthCode2\CreateDomainAuthCode2404Response|CreateDomainAuthCode2\CreateDomainAuthCode2DefaultResponse No Content
-     */
-    public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse|CreateDomainAuthCode2400Response|CreateDomainAuthCode2404Response|CreateDomainAuthCode2DefaultResponse
-    {
-        $httpRequest = new Request(CreateDomainAuthCode2Request::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => CreateDomainAuthCode2400Response::fromResponse($httpResponse),
-            404 => CreateDomainAuthCode2404Response::fromResponse($httpResponse),
-            default => CreateDomainAuthCode2DefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Check if a Domain is available to register.
-     *
-     * If false, you have to start a transfer with an auth code instead.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability
-     * @throws GuzzleException
-     * @param CheckDomainRegistrability\CheckDomainRegistrabilityRequest $request An object representing the request for this operation
-     * @return CheckDomainRegistrability\CheckDomainRegistrability200Response|CheckDomainRegistrability\CheckDomainRegistrability400Response|CheckDomainRegistrability\CheckDomainRegistrabilityDefaultResponse OK
-     */
-    public function checkDomainRegistrability(CheckDomainRegistrabilityRequest $request): CheckDomainRegistrability200Response|CheckDomainRegistrability400Response|CheckDomainRegistrabilityDefaultResponse
-    {
-        $httpRequest = new Request(CheckDomainRegistrabilityRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => CheckDomainRegistrability200Response::fromResponse($httpResponse),
-            400 => CheckDomainRegistrability400Response::fromResponse($httpResponse),
-            default => CheckDomainRegistrabilityDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Check if a Domain is available to register.
-     *
-     * If false, you have to start a transfer with an auth code instead.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability-v2-deprecated
-     * @throws GuzzleException
-     * @param CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
-     * @return CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated200Response|CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2Deprecated400Response|CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedDefaultResponse OK
-     */
-    public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2Deprecated200Response|CheckDomainRegistrabilityV2Deprecated400Response|CheckDomainRegistrabilityV2DeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(CheckDomainRegistrabilityV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => CheckDomainRegistrabilityV2Deprecated200Response::fromResponse($httpResponse),
-            400 => CheckDomainRegistrabilityV2Deprecated400Response::fromResponse($httpResponse),
-            default => CheckDomainRegistrabilityV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 }
