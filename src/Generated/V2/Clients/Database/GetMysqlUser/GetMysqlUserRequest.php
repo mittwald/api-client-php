@@ -19,55 +19,55 @@ class GetMysqlUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'mysqlUserId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'id',
+            'mysqlUserId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $mysqlUserId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $id
+     * @param string $mysqlUserId
      */
-    public function __construct(string $id)
+    public function __construct(string $mysqlUserId)
     {
-        $this->id = $id;
+        $this->mysqlUserId = $mysqlUserId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getMysqlUserId(): string
     {
-        return $this->id;
+        return $this->mysqlUserId;
     }
 
     /**
-     * @param string $id
+     * @param string $mysqlUserId
      * @return self
      */
-    public function withId(string $id): self
+    public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($mysqlUserId, static::$schema['properties']['mysqlUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->mysqlUserId = $mysqlUserId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class GetMysqlUserRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $mysqlUserId = $input->{'mysqlUserId'};
 
-        $obj = new self($id);
+        $obj = new self($mysqlUserId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class GetMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['mysqlUserId'] = $this->mysqlUserId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class GetMysqlUserRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-users/' . $id;
+        $mysqlUserId = urlencode($mapped['mysqlUserId']);
+        return '/v2/mysql-users/' . $mysqlUserId;
     }
 
     public function getQuery(): array

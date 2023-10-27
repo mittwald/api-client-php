@@ -19,7 +19,7 @@ class UpdateMysqlUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'mysqlUserId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -49,7 +49,7 @@ class UpdateMysqlUserRequest
             ],
         ],
         'required' => [
-            'id',
+            'mysqlUserId',
             'body',
         ],
     ];
@@ -57,7 +57,7 @@ class UpdateMysqlUserRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $mysqlUserId;
 
     /**
      * @var UpdateMysqlUserRequestBody
@@ -69,21 +69,21 @@ class UpdateMysqlUserRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $mysqlUserId
      * @param UpdateMysqlUserRequestBody $body
      */
-    public function __construct(string $id, UpdateMysqlUserRequestBody $body)
+    public function __construct(string $mysqlUserId, UpdateMysqlUserRequestBody $body)
     {
-        $this->id = $id;
+        $this->mysqlUserId = $mysqlUserId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getMysqlUserId(): string
     {
-        return $this->id;
+        return $this->mysqlUserId;
     }
 
     /**
@@ -95,19 +95,19 @@ class UpdateMysqlUserRequest
     }
 
     /**
-     * @param string $id
+     * @param string $mysqlUserId
      * @return self
      */
-    public function withId(string $id): self
+    public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($mysqlUserId, static::$schema['properties']['mysqlUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->mysqlUserId = $mysqlUserId;
 
         return $clone;
     }
@@ -139,10 +139,10 @@ class UpdateMysqlUserRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $mysqlUserId = $input->{'mysqlUserId'};
         $body = UpdateMysqlUserRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id, $body);
+        $obj = new self($mysqlUserId, $body);
 
         return $obj;
     }
@@ -155,7 +155,7 @@ class UpdateMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['mysqlUserId'] = $this->mysqlUserId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -193,8 +193,8 @@ class UpdateMysqlUserRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-users/' . $id;
+        $mysqlUserId = urlencode($mapped['mysqlUserId']);
+        return '/v2/mysql-users/' . $mysqlUserId;
     }
 
     public function getQuery(): array

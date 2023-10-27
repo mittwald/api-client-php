@@ -15,10 +15,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCatego
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategory400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategoryDeprecated\CreateCategoryDeprecated201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategoryDeprecated\CreateCategoryDeprecated400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategoryDeprecated\CreateCategoryDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategoryDeprecated\CreateCategoryDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomer201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomer400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerDefaultResponse;
@@ -33,9 +29,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\Decli
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategory200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategoryDeprecated\DeleteCategoryDeprecated200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategoryDeprecated\DeleteCategoryDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategoryDeprecated\DeleteCategoryDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomer200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomer404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerDefaultResponse;
@@ -44,9 +37,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\Delete
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DetailOfCustomerCategoryDeprecated\DetailOfCustomerCategoryDeprecated200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DetailOfCustomerCategoryDeprecated\DetailOfCustomerCategoryDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DetailOfCustomerCategoryDeprecated\DetailOfCustomerCategoryDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomer200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomer404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerDefaultResponse;
@@ -95,9 +85,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategories200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategoriesDeprecated\ListOfCustomerCategoriesDeprecated200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategoriesDeprecated\ListOfCustomerCategoriesDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategoriesDeprecated\ListOfCustomerCategoriesDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatar400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatar401Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatar500Response;
@@ -115,11 +102,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCatego
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategory404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated\UpdateCategoryDeprecated200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated\UpdateCategoryDeprecated400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated\UpdateCategoryDeprecated404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated\UpdateCategoryDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategoryDeprecated\UpdateCategoryDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomer200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomer400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomer404Response;
@@ -171,50 +153,6 @@ class CustomerClient
             403 => AcceptCustomerInvite403Response::fromResponse($httpResponse),
             412 => AcceptCustomerInvite412Response::fromResponse($httpResponse),
             default => AcceptCustomerInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Create a new customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-category-deprecated
-     * @throws GuzzleException
-     * @param CreateCategoryDeprecated\CreateCategoryDeprecatedRequest $request An object representing the request for this operation
-     * @return CreateCategoryDeprecated\CreateCategoryDeprecated201Response|CreateCategoryDeprecated\CreateCategoryDeprecated400Response|CreateCategoryDeprecated\CreateCategoryDeprecatedDefaultResponse The new customer category
-     */
-    public function createCategoryDeprecated(CreateCategoryDeprecatedRequest $request): CreateCategoryDeprecated201Response|CreateCategoryDeprecated400Response|CreateCategoryDeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(CreateCategoryDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateCategoryDeprecated201Response::fromResponse($httpResponse),
-            400 => CreateCategoryDeprecated400Response::fromResponse($httpResponse),
-            default => CreateCategoryDeprecatedDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get all customer categories.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories-deprecated
-     * @throws GuzzleException
-     * @param ListOfCustomerCategoriesDeprecated\ListOfCustomerCategoriesDeprecatedRequest $request An object representing the request for this operation
-     * @return ListOfCustomerCategoriesDeprecated\ListOfCustomerCategoriesDeprecated200Response|ListOfCustomerCategoriesDeprecated\ListOfCustomerCategoriesDeprecatedDefaultResponse Object containing the list of customer categories
-     */
-    public function listOfCustomerCategoriesDeprecated(ListOfCustomerCategoriesDeprecatedRequest $request): ListOfCustomerCategoriesDeprecated200Response|ListOfCustomerCategoriesDeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(ListOfCustomerCategoriesDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListOfCustomerCategoriesDeprecated200Response::fromResponse($httpResponse),
-            default => ListOfCustomerCategoriesDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -349,72 +287,6 @@ class CustomerClient
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
             default => DeclineCustomerInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Delete a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-category-deprecated
-     * @throws GuzzleException
-     * @param DeleteCategoryDeprecated\DeleteCategoryDeprecatedRequest $request An object representing the request for this operation
-     * @return DeleteCategoryDeprecated\DeleteCategoryDeprecated200Response|DeleteCategoryDeprecated\DeleteCategoryDeprecatedDefaultResponse
-     */
-    public function deleteCategoryDeprecated(DeleteCategoryDeprecatedRequest $request): DeleteCategoryDeprecated200Response|DeleteCategoryDeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(DeleteCategoryDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeleteCategoryDeprecated200Response::fromResponse($httpResponse),
-            default => DeleteCategoryDeprecatedDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-detail-of-customer-category-deprecated
-     * @throws GuzzleException
-     * @param DetailOfCustomerCategoryDeprecated\DetailOfCustomerCategoryDeprecatedRequest $request An object representing the request for this operation
-     * @return DetailOfCustomerCategoryDeprecated\DetailOfCustomerCategoryDeprecated200Response|DetailOfCustomerCategoryDeprecated\DetailOfCustomerCategoryDeprecatedDefaultResponse Returns the customer category
-     */
-    public function detailOfCustomerCategoryDeprecated(DetailOfCustomerCategoryDeprecatedRequest $request): DetailOfCustomerCategoryDeprecated200Response|DetailOfCustomerCategoryDeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(DetailOfCustomerCategoryDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DetailOfCustomerCategoryDeprecated200Response::fromResponse($httpResponse),
-            default => DetailOfCustomerCategoryDeprecatedDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Update a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category-deprecated
-     * @throws GuzzleException
-     * @param UpdateCategoryDeprecated\UpdateCategoryDeprecatedRequest $request An object representing the request for this operation
-     * @return UpdateCategoryDeprecated\UpdateCategoryDeprecated200Response|UpdateCategoryDeprecated\UpdateCategoryDeprecated400Response|UpdateCategoryDeprecated\UpdateCategoryDeprecated404Response|UpdateCategoryDeprecated\UpdateCategoryDeprecatedDefaultResponse The updated customer category
-     */
-    public function updateCategoryDeprecated(UpdateCategoryDeprecatedRequest $request): UpdateCategoryDeprecated200Response|UpdateCategoryDeprecated400Response|UpdateCategoryDeprecated404Response|UpdateCategoryDeprecatedDefaultResponse
-    {
-        $httpRequest = new Request(UpdateCategoryDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => UpdateCategoryDeprecated200Response::fromResponse($httpResponse),
-            400 => UpdateCategoryDeprecated400Response::fromResponse($httpResponse),
-            404 => UpdateCategoryDeprecated404Response::fromResponse($httpResponse),
-            default => UpdateCategoryDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 

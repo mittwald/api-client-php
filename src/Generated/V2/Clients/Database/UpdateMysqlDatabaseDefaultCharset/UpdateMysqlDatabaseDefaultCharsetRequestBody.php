@@ -131,8 +131,8 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-databases/' . $id . '/default-charset';
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/default-charset';
     }
 
     public function getQuery(): array

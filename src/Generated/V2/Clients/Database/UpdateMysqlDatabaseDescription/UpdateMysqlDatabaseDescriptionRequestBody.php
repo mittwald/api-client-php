@@ -136,8 +136,8 @@ class UpdateMysqlDatabaseDescriptionRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-databases/' . $id . '/description';
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/description';
     }
 
     public function getQuery(): array

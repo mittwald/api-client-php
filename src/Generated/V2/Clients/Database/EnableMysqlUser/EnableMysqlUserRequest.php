@@ -19,7 +19,7 @@ class EnableMysqlUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'mysqlUserId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -28,7 +28,7 @@ class EnableMysqlUserRequest
             ],
         ],
         'required' => [
-            'id',
+            'mysqlUserId',
             'body',
         ],
     ];
@@ -36,7 +36,7 @@ class EnableMysqlUserRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $mysqlUserId;
 
     /**
      * @var mixed
@@ -48,21 +48,21 @@ class EnableMysqlUserRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $mysqlUserId
      * @param mixed $body
      */
-    public function __construct(string $id, $body)
+    public function __construct(string $mysqlUserId, $body)
     {
-        $this->id = $id;
+        $this->mysqlUserId = $mysqlUserId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getMysqlUserId(): string
     {
-        return $this->id;
+        return $this->mysqlUserId;
     }
 
     /**
@@ -74,19 +74,19 @@ class EnableMysqlUserRequest
     }
 
     /**
-     * @param string $id
+     * @param string $mysqlUserId
      * @return self
      */
-    public function withId(string $id): self
+    public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($mysqlUserId, static::$schema['properties']['mysqlUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->mysqlUserId = $mysqlUserId;
 
         return $clone;
     }
@@ -124,10 +124,10 @@ class EnableMysqlUserRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $mysqlUserId = $input->{'mysqlUserId'};
         $body = $input->{'body'};
 
-        $obj = new self($id, $body);
+        $obj = new self($mysqlUserId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class EnableMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['mysqlUserId'] = $this->mysqlUserId;
         $output['body'] = $this->body;
 
         return $output;
@@ -177,8 +177,8 @@ class EnableMysqlUserRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-users/' . $id . '/actions/enable';
+        $mysqlUserId = urlencode($mapped['mysqlUserId']);
+        return '/v2/mysql-users/' . $mysqlUserId . '/actions/enable';
     }
 
     public function getQuery(): array

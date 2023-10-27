@@ -144,8 +144,8 @@ class UpdateRedisDatabaseConfigurationRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/redis-databases/' . $id . '/configuration';
+        $redisDatabaseId = urlencode($mapped['redisDatabaseId']);
+        return '/v2/redis-databases/' . $redisDatabaseId . '/configuration';
     }
 
     public function getQuery(): array

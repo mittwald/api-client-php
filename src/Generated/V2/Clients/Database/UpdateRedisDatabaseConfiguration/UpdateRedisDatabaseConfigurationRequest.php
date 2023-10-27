@@ -19,7 +19,7 @@ class UpdateRedisDatabaseConfigurationRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'redisDatabaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -32,7 +32,7 @@ class UpdateRedisDatabaseConfigurationRequest
             ],
         ],
         'required' => [
-            'id',
+            'redisDatabaseId',
             'body',
         ],
     ];
@@ -40,7 +40,7 @@ class UpdateRedisDatabaseConfigurationRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $redisDatabaseId;
 
     /**
      * @var UpdateRedisDatabaseConfigurationRequestBody
@@ -52,21 +52,21 @@ class UpdateRedisDatabaseConfigurationRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $redisDatabaseId
      * @param UpdateRedisDatabaseConfigurationRequestBody $body
      */
-    public function __construct(string $id, UpdateRedisDatabaseConfigurationRequestBody $body)
+    public function __construct(string $redisDatabaseId, UpdateRedisDatabaseConfigurationRequestBody $body)
     {
-        $this->id = $id;
+        $this->redisDatabaseId = $redisDatabaseId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getRedisDatabaseId(): string
     {
-        return $this->id;
+        return $this->redisDatabaseId;
     }
 
     /**
@@ -78,19 +78,19 @@ class UpdateRedisDatabaseConfigurationRequest
     }
 
     /**
-     * @param string $id
+     * @param string $redisDatabaseId
      * @return self
      */
-    public function withId(string $id): self
+    public function withRedisDatabaseId(string $redisDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($redisDatabaseId, static::$schema['properties']['redisDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->redisDatabaseId = $redisDatabaseId;
 
         return $clone;
     }
@@ -122,10 +122,10 @@ class UpdateRedisDatabaseConfigurationRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $redisDatabaseId = $input->{'redisDatabaseId'};
         $body = UpdateRedisDatabaseConfigurationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id, $body);
+        $obj = new self($redisDatabaseId, $body);
 
         return $obj;
     }
@@ -138,7 +138,7 @@ class UpdateRedisDatabaseConfigurationRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['redisDatabaseId'] = $this->redisDatabaseId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -176,8 +176,8 @@ class UpdateRedisDatabaseConfigurationRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/redis-databases/' . $id . '/configuration';
+        $redisDatabaseId = urlencode($mapped['redisDatabaseId']);
+        return '/v2/redis-databases/' . $redisDatabaseId . '/configuration';
     }
 
     public function getQuery(): array

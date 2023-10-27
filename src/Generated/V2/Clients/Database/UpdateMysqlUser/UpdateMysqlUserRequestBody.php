@@ -278,8 +278,8 @@ class UpdateMysqlUserRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-users/' . $id;
+        $mysqlUserId = urlencode($mapped['mysqlUserId']);
+        return '/v2/mysql-users/' . $mysqlUserId;
     }
 
     public function getQuery(): array

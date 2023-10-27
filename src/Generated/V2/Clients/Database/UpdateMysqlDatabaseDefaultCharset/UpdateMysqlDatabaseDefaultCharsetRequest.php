@@ -19,7 +19,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'mysqlDatabaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -35,7 +35,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
             ],
         ],
         'required' => [
-            'id',
+            'mysqlDatabaseId',
             'body',
         ],
     ];
@@ -43,7 +43,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $mysqlDatabaseId;
 
     /**
      * @var UpdateMysqlDatabaseDefaultCharsetRequestBody
@@ -55,21 +55,21 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $mysqlDatabaseId
      * @param UpdateMysqlDatabaseDefaultCharsetRequestBody $body
      */
-    public function __construct(string $id, UpdateMysqlDatabaseDefaultCharsetRequestBody $body)
+    public function __construct(string $mysqlDatabaseId, UpdateMysqlDatabaseDefaultCharsetRequestBody $body)
     {
-        $this->id = $id;
+        $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getMysqlDatabaseId(): string
     {
-        return $this->id;
+        return $this->mysqlDatabaseId;
     }
 
     /**
@@ -81,19 +81,19 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
     }
 
     /**
-     * @param string $id
+     * @param string $mysqlDatabaseId
      * @return self
      */
-    public function withId(string $id): self
+    public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($mysqlDatabaseId, static::$schema['properties']['mysqlDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->mysqlDatabaseId = $mysqlDatabaseId;
 
         return $clone;
     }
@@ -125,10 +125,10 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $mysqlDatabaseId = $input->{'mysqlDatabaseId'};
         $body = UpdateMysqlDatabaseDefaultCharsetRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id, $body);
+        $obj = new self($mysqlDatabaseId, $body);
 
         return $obj;
     }
@@ -141,7 +141,7 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['mysqlDatabaseId'] = $this->mysqlDatabaseId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -179,8 +179,8 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-databases/' . $id . '/default-charset';
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/default-charset';
     }
 
     public function getQuery(): array

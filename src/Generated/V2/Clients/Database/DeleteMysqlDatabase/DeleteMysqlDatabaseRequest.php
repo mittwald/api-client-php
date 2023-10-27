@@ -19,55 +19,55 @@ class DeleteMysqlDatabaseRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'mysqlDatabaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'id',
+            'mysqlDatabaseId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $mysqlDatabaseId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $id
+     * @param string $mysqlDatabaseId
      */
-    public function __construct(string $id)
+    public function __construct(string $mysqlDatabaseId)
     {
-        $this->id = $id;
+        $this->mysqlDatabaseId = $mysqlDatabaseId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getMysqlDatabaseId(): string
     {
-        return $this->id;
+        return $this->mysqlDatabaseId;
     }
 
     /**
-     * @param string $id
+     * @param string $mysqlDatabaseId
      * @return self
      */
-    public function withId(string $id): self
+    public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($mysqlDatabaseId, static::$schema['properties']['mysqlDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->mysqlDatabaseId = $mysqlDatabaseId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class DeleteMysqlDatabaseRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $mysqlDatabaseId = $input->{'mysqlDatabaseId'};
 
-        $obj = new self($id);
+        $obj = new self($mysqlDatabaseId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class DeleteMysqlDatabaseRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['mysqlDatabaseId'] = $this->mysqlDatabaseId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class DeleteMysqlDatabaseRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/mysql-databases/' . $id;
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId;
     }
 
     public function getQuery(): array

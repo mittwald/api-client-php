@@ -19,55 +19,55 @@ class DeleteRedisDatabaseRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'redisDatabaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'id',
+            'redisDatabaseId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $redisDatabaseId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $id
+     * @param string $redisDatabaseId
      */
-    public function __construct(string $id)
+    public function __construct(string $redisDatabaseId)
     {
-        $this->id = $id;
+        $this->redisDatabaseId = $redisDatabaseId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getRedisDatabaseId(): string
     {
-        return $this->id;
+        return $this->redisDatabaseId;
     }
 
     /**
-     * @param string $id
+     * @param string $redisDatabaseId
      * @return self
      */
-    public function withId(string $id): self
+    public function withRedisDatabaseId(string $redisDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($redisDatabaseId, static::$schema['properties']['redisDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->redisDatabaseId = $redisDatabaseId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class DeleteRedisDatabaseRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $redisDatabaseId = $input->{'redisDatabaseId'};
 
-        $obj = new self($id);
+        $obj = new self($redisDatabaseId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class DeleteRedisDatabaseRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['redisDatabaseId'] = $this->redisDatabaseId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class DeleteRedisDatabaseRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/redis-databases/' . $id;
+        $redisDatabaseId = urlencode($mapped['redisDatabaseId']);
+        return '/v2/redis-databases/' . $redisDatabaseId;
     }
 
     public function getQuery(): array
