@@ -245,7 +245,7 @@ class ProjectFileSystemGetFileContentRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/filesystem-file-content';
+        return '/v2/projects/' . $projectId . '/filesystem/files/raw';
     }
 
     public function getQuery(): array

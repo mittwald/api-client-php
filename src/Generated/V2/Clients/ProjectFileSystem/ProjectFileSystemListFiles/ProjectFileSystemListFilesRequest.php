@@ -192,7 +192,7 @@ class ProjectFileSystemListFilesRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/filesystem-files';
+        return '/v2/projects/' . $projectId . '/filesystem/files';
     }
 
     public function getQuery(): array

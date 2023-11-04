@@ -458,7 +458,7 @@ class ProjectFileSystemGetDirectoriesRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/filesystem-directories';
+        return '/v2/projects/' . $projectId . '/filesystem/directories';
     }
 
     public function getQuery(): array

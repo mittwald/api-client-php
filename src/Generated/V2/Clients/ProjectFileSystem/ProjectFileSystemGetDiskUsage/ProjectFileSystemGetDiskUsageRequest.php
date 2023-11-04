@@ -192,7 +192,7 @@ class ProjectFileSystemGetDiskUsageRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/filesystem-disk-usage';
+        return '/v2/projects/' . $projectId . '/filesystem/usages/disk';
     }
 
     public function getQuery(): array
