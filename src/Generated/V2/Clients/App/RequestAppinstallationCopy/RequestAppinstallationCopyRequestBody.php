@@ -21,6 +21,10 @@ class RequestAppinstallationCopyRequestBody
             'description' => [
                 'type' => 'string',
             ],
+            'targetProjectId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'description',
@@ -32,6 +36,11 @@ class RequestAppinstallationCopyRequestBody
      * @var string
      */
     private string $description;
+
+    /**
+     * @var string|null
+     */
+    private ?string $targetProjectId = null;
 
     private array $headers = [
 
@@ -54,6 +63,14 @@ class RequestAppinstallationCopyRequestBody
     }
 
     /**
+     * @return string|null
+     */
+    public function getTargetProjectId(): ?string
+    {
+        return $this->targetProjectId ?? null;
+    }
+
+    /**
      * @param string $description
      * @return self
      */
@@ -67,6 +84,35 @@ class RequestAppinstallationCopyRequestBody
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    /**
+     * @param string $targetProjectId
+     * @return self
+     */
+    public function withTargetProjectId(string $targetProjectId): self
+    {
+        $validator = new Validator();
+        $validator->validate($targetProjectId, static::$schema['properties']['targetProjectId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->targetProjectId = $targetProjectId;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutTargetProjectId(): self
+    {
+        $clone = clone $this;
+        unset($clone->targetProjectId);
 
         return $clone;
     }
@@ -87,9 +133,13 @@ class RequestAppinstallationCopyRequestBody
         }
 
         $description = $input->{'description'};
+        $targetProjectId = null;
+        if (isset($input->{'targetProjectId'})) {
+            $targetProjectId = $input->{'targetProjectId'};
+        }
 
         $obj = new self($description);
-
+        $obj->targetProjectId = $targetProjectId;
         return $obj;
     }
 
@@ -102,6 +152,9 @@ class RequestAppinstallationCopyRequestBody
     {
         $output = [];
         $output['description'] = $this->description;
+        if (isset($this->targetProjectId)) {
+            $output['targetProjectId'] = $this->targetProjectId;
+        }
 
         return $output;
     }

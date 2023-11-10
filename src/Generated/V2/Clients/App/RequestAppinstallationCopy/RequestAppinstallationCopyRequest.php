@@ -28,6 +28,10 @@ class RequestAppinstallationCopyRequest
                     'description' => [
                         'type' => 'string',
                     ],
+                    'targetProjectId' => [
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
                 ],
                 'required' => [
                     'description',

@@ -103,7 +103,7 @@ class NotificationsCountUnreadNotificationsRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/notifications/unread-counts';
+        return '/v2/notification-unread-counts';
     }
 
     public function getQuery(): array

@@ -6,6 +6,7 @@ use Mittwald\ApiClient\Client\BaseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient;
@@ -15,8 +16,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
 
@@ -107,5 +110,20 @@ class Client extends BaseClient
     public function article(): ArticleClient
     {
         return new ArticleClient($this->client);
+    }
+
+    public function container(): ContainerClient
+    {
+        return new ContainerClient($this->client);
+    }
+
+    public function pageInsights(): PageInsightsClient
+    {
+        return new PageInsightsClient($this->client);
+    }
+
+    public function relocation(): RelocationClient
+    {
+        return new RelocationClient($this->client);
     }
 }

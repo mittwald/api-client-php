@@ -219,6 +219,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\Logout400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicy200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\Register201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\Register400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterDefaultResponse;
@@ -929,6 +932,27 @@ class UserClient
             400 => DeprecatedUserVerifyEmail400Response::fromResponse($httpResponse),
             404 => DeprecatedUserVerifyEmail404Response::fromResponse($httpResponse),
             default => DeprecatedUserVerifyEmailDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get a password policy.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy
+     * @throws GuzzleException
+     * @param PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest $request An object representing the request for this operation
+     * @return PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicy200Response|PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse The requested password policy
+     */
+    public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicy200Response|PasswordValidationGetPasswordPolicyDefaultResponse
+    {
+        $httpRequest = new Request(PasswordValidationGetPasswordPolicyRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => PasswordValidationGetPasswordPolicy200Response::fromResponse($httpResponse),
+            default => PasswordValidationGetPasswordPolicyDefaultResponse::fromResponse($httpResponse),
         };
     }
 
