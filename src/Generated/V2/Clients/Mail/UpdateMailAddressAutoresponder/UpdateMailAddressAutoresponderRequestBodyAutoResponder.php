@@ -10,7 +10,7 @@ use JsonSchema\Validator;
 
 class UpdateMailAddressAutoresponderRequestBodyAutoResponder
 {
-    public const method = 'put';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class

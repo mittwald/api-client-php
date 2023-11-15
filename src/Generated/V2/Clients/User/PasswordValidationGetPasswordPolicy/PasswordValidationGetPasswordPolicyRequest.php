@@ -19,54 +19,54 @@ class PasswordValidationGetPasswordPolicyRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'path' => [
+            'passwordPolicy' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'path',
+            'passwordPolicy',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $path;
+    private string $passwordPolicy;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $path
+     * @param string $passwordPolicy
      */
-    public function __construct(string $path)
+    public function __construct(string $passwordPolicy)
     {
-        $this->path = $path;
+        $this->passwordPolicy = $passwordPolicy;
     }
 
     /**
      * @return string
      */
-    public function getPath(): string
+    public function getPasswordPolicy(): string
     {
-        return $this->path;
+        return $this->passwordPolicy;
     }
 
     /**
-     * @param string $path
+     * @param string $passwordPolicy
      * @return self
      */
-    public function withPath(string $path): self
+    public function withPasswordPolicy(string $passwordPolicy): self
     {
         $validator = new Validator();
-        $validator->validate($path, static::$schema['properties']['path']);
+        $validator->validate($passwordPolicy, static::$schema['properties']['passwordPolicy']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->path = $path;
+        $clone->passwordPolicy = $passwordPolicy;
 
         return $clone;
     }
@@ -86,9 +86,9 @@ class PasswordValidationGetPasswordPolicyRequest
             static::validateInput($input);
         }
 
-        $path = $input->{'path'};
+        $passwordPolicy = $input->{'passwordPolicy'};
 
-        $obj = new self($path);
+        $obj = new self($passwordPolicy);
 
         return $obj;
     }
@@ -101,7 +101,7 @@ class PasswordValidationGetPasswordPolicyRequest
     public function toJson(): array
     {
         $output = [];
-        $output['path'] = $this->path;
+        $output['passwordPolicy'] = $this->passwordPolicy;
 
         return $output;
     }
@@ -137,8 +137,8 @@ class PasswordValidationGetPasswordPolicyRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $path = urlencode($mapped['path']);
-        return '/v2/password/policies/' . $path;
+        $passwordPolicy = urlencode($mapped['passwordPolicy']);
+        return '/v2/password-policies/' . $passwordPolicy;
     }
 
     public function getQuery(): array

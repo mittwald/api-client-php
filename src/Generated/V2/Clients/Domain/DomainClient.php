@@ -55,6 +55,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain400R
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomain404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZone201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZone400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneDefaultResponse;
@@ -112,40 +116,47 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainO
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2Deprecated200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomain200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomain404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomainDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetScreenshotForDomain\GetScreenshotForDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreate404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreateDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreate\IngressCreateRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDelete\IngressDelete404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDelete\IngressDeleteDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDelete\IngressDeleteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetSpecific\IngressGetSpecific200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetSpecific\IngressGetSpecific404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetSpecific\IngressGetSpecificDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetSpecific\IngressGetSpecificRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListAccessible\IngressListAccessible200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListAccessible\IngressListAccessible404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListAccessible\IngressListAccessibleDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListAccessible\IngressListAccessibleRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListForProject\IngressListForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListForProject\IngressListForProject404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListForProject\IngressListForProjectDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListForProject\IngressListForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPaths\IngressPaths404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPaths\IngressPathsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPaths\IngressPathsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuance400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuance404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuanceDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTls\IngressTls200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTls\IngressTls404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTls\IngressTlsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTls\IngressTlsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshot200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshot404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngress201Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngress404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDeleteIngress\IngressDeleteIngress404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDeleteIngress\IngressDeleteIngressDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDeleteIngress\IngressDeleteIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngress200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngress404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngresses200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngresses404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuance400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuance404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPaths404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTls200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTls404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnerships200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnerships400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsDefaultResponse;
@@ -874,29 +885,6 @@ class DomainClient
     }
 
     /**
-     * Get File Service Reference for a Screenshot of a domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-screenshot-for-domain
-     * @throws GuzzleException
-     * @param GetScreenshotForDomain\GetScreenshotForDomainRequest $request An object representing the request for this operation
-     * @return GetScreenshotForDomain\GetScreenshotForDomain200Response|GetScreenshotForDomain\GetScreenshotForDomain404Response|GetScreenshotForDomain\GetScreenshotForDomainDefaultResponse The References.
-     */
-    public function getScreenshotForDomain(GetScreenshotForDomainRequest $request): GetScreenshotForDomain200Response|GetScreenshotForDomain404Response|GetScreenshotForDomainDefaultResponse
-    {
-        $httpRequest = new Request(GetScreenshotForDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetScreenshotForDomain200Response::fromResponse($httpResponse),
-            404 => GetScreenshotForDomain404Response::fromResponse($httpResponse),
-            default => GetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
      * List the DomainOwnerships of a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domain-ownerships
@@ -1115,125 +1103,125 @@ class DomainClient
     /**
      * Create an Ingress.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-create
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-create-ingress
      * @throws GuzzleException
-     * @param IngressCreate\IngressCreateRequest $request An object representing the request for this operation
-     * @return IngressCreate\IngressCreate201Response|IngressCreate\IngressCreate404Response|IngressCreate\IngressCreateDefaultResponse Created
+     * @param IngressCreateIngress\IngressCreateIngressRequest $request An object representing the request for this operation
+     * @return IngressCreateIngress\IngressCreateIngress201Response|IngressCreateIngress\IngressCreateIngress404Response|IngressCreateIngress\IngressCreateIngressDefaultResponse Created
      */
-    public function ingressCreate(IngressCreateRequest $request): IngressCreate201Response|IngressCreate404Response|IngressCreateDefaultResponse
+    public function ingressCreateIngress(IngressCreateIngressRequest $request): IngressCreateIngress201Response|IngressCreateIngress404Response|IngressCreateIngressDefaultResponse
     {
-        $httpRequest = new Request(IngressCreateRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressCreateIngressRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            201 => IngressCreate201Response::fromResponse($httpResponse),
-            404 => IngressCreate404Response::fromResponse($httpResponse),
-            default => IngressCreateDefaultResponse::fromResponse($httpResponse),
+            201 => IngressCreateIngress201Response::fromResponse($httpResponse),
+            404 => IngressCreateIngress404Response::fromResponse($httpResponse),
+            default => IngressCreateIngressDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List Ingresses.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
+     * @throws GuzzleException
+     * @param IngressListIngresses\IngressListIngressesRequest $request An object representing the request for this operation
+     * @return IngressListIngresses\IngressListIngresses200Response|IngressListIngresses\IngressListIngresses404Response|IngressListIngresses\IngressListIngressesDefaultResponse OK
+     */
+    public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngresses200Response|IngressListIngresses404Response|IngressListIngressesDefaultResponse
+    {
+        $httpRequest = new Request(IngressListIngressesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => IngressListIngresses200Response::fromResponse($httpResponse),
+            404 => IngressListIngresses404Response::fromResponse($httpResponse),
+            default => IngressListIngressesDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * Delete an Ingress.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-delete
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-delete-ingress
      * @throws GuzzleException
-     * @param IngressDelete\IngressDeleteRequest $request An object representing the request for this operation
-     * @return EmptyResponse|IngressDelete\IngressDelete404Response|IngressDelete\IngressDeleteDefaultResponse No Content
+     * @param IngressDeleteIngress\IngressDeleteIngressRequest $request An object representing the request for this operation
+     * @return EmptyResponse|IngressDeleteIngress\IngressDeleteIngress404Response|IngressDeleteIngress\IngressDeleteIngressDefaultResponse No Content
      */
-    public function ingressDelete(IngressDeleteRequest $request): EmptyResponse|IngressDelete404Response|IngressDeleteDefaultResponse
+    public function ingressDeleteIngress(IngressDeleteIngressRequest $request): EmptyResponse|IngressDeleteIngress404Response|IngressDeleteIngressDefaultResponse
     {
-        $httpRequest = new Request(IngressDeleteRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressDeleteIngressRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            404 => IngressDelete404Response::fromResponse($httpResponse),
-            default => IngressDeleteDefaultResponse::fromResponse($httpResponse),
+            404 => IngressDeleteIngress404Response::fromResponse($httpResponse),
+            default => IngressDeleteIngressDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * Get an Ingress.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-get-specific
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-get-ingress
      * @throws GuzzleException
-     * @param IngressGetSpecific\IngressGetSpecificRequest $request An object representing the request for this operation
-     * @return IngressGetSpecific\IngressGetSpecific200Response|IngressGetSpecific\IngressGetSpecific404Response|IngressGetSpecific\IngressGetSpecificDefaultResponse OK
+     * @param IngressGetIngress\IngressGetIngressRequest $request An object representing the request for this operation
+     * @return IngressGetIngress\IngressGetIngress200Response|IngressGetIngress\IngressGetIngress404Response|IngressGetIngress\IngressGetIngressDefaultResponse OK
      */
-    public function ingressGetSpecific(IngressGetSpecificRequest $request): IngressGetSpecific200Response|IngressGetSpecific404Response|IngressGetSpecificDefaultResponse
+    public function ingressGetIngress(IngressGetIngressRequest $request): IngressGetIngress200Response|IngressGetIngress404Response|IngressGetIngressDefaultResponse
     {
-        $httpRequest = new Request(IngressGetSpecificRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressGetIngressRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => IngressGetSpecific200Response::fromResponse($httpResponse),
-            404 => IngressGetSpecific404Response::fromResponse($httpResponse),
-            default => IngressGetSpecificDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * List Ingresses the user has access to.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-accessible
-     * @throws GuzzleException
-     * @param IngressListAccessible\IngressListAccessibleRequest $request An object representing the request for this operation
-     * @return IngressListAccessible\IngressListAccessible200Response|IngressListAccessible\IngressListAccessible404Response|IngressListAccessible\IngressListAccessibleDefaultResponse OK
-     */
-    public function ingressListAccessible(IngressListAccessibleRequest $request): IngressListAccessible200Response|IngressListAccessible404Response|IngressListAccessibleDefaultResponse
-    {
-        $httpRequest = new Request(IngressListAccessibleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => IngressListAccessible200Response::fromResponse($httpResponse),
-            404 => IngressListAccessible404Response::fromResponse($httpResponse),
-            default => IngressListAccessibleDefaultResponse::fromResponse($httpResponse),
+            200 => IngressGetIngress200Response::fromResponse($httpResponse),
+            404 => IngressGetIngress404Response::fromResponse($httpResponse),
+            default => IngressGetIngressDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * List Ingresses belonging to a project.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-for-project
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
      * @throws GuzzleException
-     * @param IngressListForProject\IngressListForProjectRequest $request An object representing the request for this operation
-     * @return IngressListForProject\IngressListForProject200Response|IngressListForProject\IngressListForProject404Response|IngressListForProject\IngressListForProjectDefaultResponse OK
+     * @param IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
+     * @return IngressListIngressesV2Deprecated\IngressListIngressesV2Deprecated200Response|IngressListIngressesV2Deprecated\IngressListIngressesV2Deprecated404Response|IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedDefaultResponse OK
      */
-    public function ingressListForProject(IngressListForProjectRequest $request): IngressListForProject200Response|IngressListForProject404Response|IngressListForProjectDefaultResponse
+    public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2Deprecated200Response|IngressListIngressesV2Deprecated404Response|IngressListIngressesV2DeprecatedDefaultResponse
     {
-        $httpRequest = new Request(IngressListForProjectRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressListIngressesV2DeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => IngressListForProject200Response::fromResponse($httpResponse),
-            404 => IngressListForProject404Response::fromResponse($httpResponse),
-            default => IngressListForProjectDefaultResponse::fromResponse($httpResponse),
+            200 => IngressListIngressesV2Deprecated200Response::fromResponse($httpResponse),
+            404 => IngressListIngressesV2Deprecated404Response::fromResponse($httpResponse),
+            default => IngressListIngressesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * Update an Ingresses paths.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths-deprecated
      * @throws GuzzleException
-     * @param IngressPaths\IngressPathsRequest $request An object representing the request for this operation
-     * @return EmptyResponse|IngressPaths\IngressPaths404Response|IngressPaths\IngressPathsDefaultResponse No Content
+     * @param IngressPathsDeprecated\IngressPathsDeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|IngressPathsDeprecated\IngressPathsDeprecated404Response|IngressPathsDeprecated\IngressPathsDeprecatedDefaultResponse No Content
      */
-    public function ingressPaths(IngressPathsRequest $request): EmptyResponse|IngressPaths404Response|IngressPathsDefaultResponse
+    public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse|IngressPathsDeprecated404Response|IngressPathsDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(IngressPathsRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressPathsDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -1241,54 +1229,146 @@ class DomainClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             204 => new EmptyResponse($httpResponse),
-            404 => IngressPaths404Response::fromResponse($httpResponse),
-            default => IngressPathsDefaultResponse::fromResponse($httpResponse),
+            404 => IngressPathsDeprecated404Response::fromResponse($httpResponse),
+            default => IngressPathsDeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
-     * Request ACME certificate issuance
+     * Update the paths of an Ingress.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-acme-certificate-issuance
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-paths
      * @throws GuzzleException
-     * @param IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuanceRequest $request An object representing the request for this operation
-     * @return EmptyResponse|IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuance400Response|IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuance404Response|IngressRequestAcmeCertificateIssuance\IngressRequestAcmeCertificateIssuanceDefaultResponse OK
+     * @param IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest $request An object representing the request for this operation
+     * @return EmptyResponse|IngressUpdateIngressPaths\IngressUpdateIngressPaths404Response|IngressUpdateIngressPaths\IngressUpdateIngressPathsDefaultResponse No Content
      */
-    public function ingressRequestAcmeCertificateIssuance(IngressRequestAcmeCertificateIssuanceRequest $request): EmptyResponse|IngressRequestAcmeCertificateIssuance400Response|IngressRequestAcmeCertificateIssuance404Response|IngressRequestAcmeCertificateIssuanceDefaultResponse
+    public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse|IngressUpdateIngressPaths404Response|IngressUpdateIngressPathsDefaultResponse
     {
-        $httpRequest = new Request(IngressRequestAcmeCertificateIssuanceRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressUpdateIngressPathsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->toJson()['body'],
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            404 => IngressUpdateIngressPaths404Response::fromResponse($httpResponse),
+            default => IngressUpdateIngressPathsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Request the ACME certificate issuance of an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
+     * @throws GuzzleException
+     * @param IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest $request An object representing the request for this operation
+     * @return EmptyResponse|IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuance400Response|IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuance404Response|IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceDefaultResponse OK
+     */
+    public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse|IngressRequestIngressAcmeCertificateIssuance400Response|IngressRequestIngressAcmeCertificateIssuance404Response|IngressRequestIngressAcmeCertificateIssuanceDefaultResponse
+    {
+        $httpRequest = new Request(IngressRequestIngressAcmeCertificateIssuanceRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
             200 => new EmptyResponse($httpResponse),
-            400 => IngressRequestAcmeCertificateIssuance400Response::fromResponse($httpResponse),
-            404 => IngressRequestAcmeCertificateIssuance404Response::fromResponse($httpResponse),
-            default => IngressRequestAcmeCertificateIssuanceDefaultResponse::fromResponse($httpResponse),
+            400 => IngressRequestIngressAcmeCertificateIssuance400Response::fromResponse($httpResponse),
+            404 => IngressRequestIngressAcmeCertificateIssuance404Response::fromResponse($httpResponse),
+            default => IngressRequestIngressAcmeCertificateIssuanceDefaultResponse::fromResponse($httpResponse),
         };
     }
 
     /**
      * Update an Ingresses tls settings.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls-deprecated
      * @throws GuzzleException
-     * @param IngressTls\IngressTlsRequest $request An object representing the request for this operation
-     * @return IngressTls\IngressTls200Response|IngressTls\IngressTls404Response|IngressTls\IngressTlsDefaultResponse OK
+     * @param IngressTlsDeprecated\IngressTlsDeprecatedRequest $request An object representing the request for this operation
+     * @return IngressTlsDeprecated\IngressTlsDeprecated200Response|IngressTlsDeprecated\IngressTlsDeprecated404Response|IngressTlsDeprecated\IngressTlsDeprecatedDefaultResponse OK
      */
-    public function ingressTls(IngressTlsRequest $request): IngressTls200Response|IngressTls404Response|IngressTlsDefaultResponse
+    public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecated200Response|IngressTlsDeprecated404Response|IngressTlsDeprecatedDefaultResponse
     {
-        $httpRequest = new Request(IngressTlsRequest::method, $request->getUrl());
+        $httpRequest = new Request(IngressTlsDeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
             'json' => $request->getBody()->toJson(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => IngressTls200Response::fromResponse($httpResponse),
-            404 => IngressTls404Response::fromResponse($httpResponse),
-            default => IngressTlsDefaultResponse::fromResponse($httpResponse),
+            200 => IngressTlsDeprecated200Response::fromResponse($httpResponse),
+            404 => IngressTlsDeprecated404Response::fromResponse($httpResponse),
+            default => IngressTlsDeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the tls settings of an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-tls
+     * @throws GuzzleException
+     * @param IngressUpdateIngressTls\IngressUpdateIngressTlsRequest $request An object representing the request for this operation
+     * @return IngressUpdateIngressTls\IngressUpdateIngressTls200Response|IngressUpdateIngressTls\IngressUpdateIngressTls404Response|IngressUpdateIngressTls\IngressUpdateIngressTlsDefaultResponse OK
+     */
+    public function ingressUpdateIngressTls(IngressUpdateIngressTlsRequest $request): IngressUpdateIngressTls200Response|IngressUpdateIngressTls404Response|IngressUpdateIngressTlsDefaultResponse
+    {
+        $httpRequest = new Request(IngressUpdateIngressTlsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => IngressUpdateIngressTls200Response::fromResponse($httpResponse),
+            404 => IngressUpdateIngressTls404Response::fromResponse($httpResponse),
+            default => IngressUpdateIngressTlsDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get File Service Reference for a Screenshot of a domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
+     * @throws GuzzleException
+     * @param DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest $request An object representing the request for this operation
+     * @return DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain200Response|DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain404Response|DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainDefaultResponse The References.
+     */
+    public function deprecatedDomainGetScreenshotForDomain(DeprecatedDomainGetScreenshotForDomainRequest $request): DeprecatedDomainGetScreenshotForDomain200Response|DeprecatedDomainGetScreenshotForDomain404Response|DeprecatedDomainGetScreenshotForDomainDefaultResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainGetScreenshotForDomainRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DeprecatedDomainGetScreenshotForDomain200Response::fromResponse($httpResponse),
+            404 => DeprecatedDomainGetScreenshotForDomain404Response::fromResponse($httpResponse),
+            default => DeprecatedDomainGetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get the latest screenshot's FileReference belonging to a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-latest-screenshot
+     * @throws GuzzleException
+     * @param GetLatestScreenshot\GetLatestScreenshotRequest $request An object representing the request for this operation
+     * @return GetLatestScreenshot\GetLatestScreenshot200Response|GetLatestScreenshot\GetLatestScreenshot404Response|GetLatestScreenshot\GetLatestScreenshotDefaultResponse OK
+     */
+    public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshot200Response|GetLatestScreenshot404Response|GetLatestScreenshotDefaultResponse
+    {
+        $httpRequest = new Request(GetLatestScreenshotRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetLatestScreenshot200Response::fromResponse($httpResponse),
+            404 => GetLatestScreenshot404Response::fromResponse($httpResponse),
+            default => GetLatestScreenshotDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

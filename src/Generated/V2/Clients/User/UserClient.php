@@ -222,6 +222,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicy200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2Deprecated200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\Register201Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\Register400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterDefaultResponse;
@@ -936,12 +939,12 @@ class UserClient
     }
 
     /**
-     * Get a password policy.
+     * Get a PasswordPolicy.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy
      * @throws GuzzleException
      * @param PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest $request An object representing the request for this operation
-     * @return PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicy200Response|PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse The requested password policy
+     * @return PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicy200Response|PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse The PasswordPolicy to be retrieved.
      */
     public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicy200Response|PasswordValidationGetPasswordPolicyDefaultResponse
     {
@@ -953,6 +956,27 @@ class UserClient
         return match ($httpResponse->getStatusCode()) {
             200 => PasswordValidationGetPasswordPolicy200Response::fromResponse($httpResponse),
             default => PasswordValidationGetPasswordPolicyDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get a password policy.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy-v2-deprecated
+     * @throws GuzzleException
+     * @param PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request An object representing the request for this operation
+     * @return PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2Deprecated200Response|PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse The requested password policy
+     */
+    public function passwordValidationGetPasswordPolicyV2Deprecated(PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request): PasswordValidationGetPasswordPolicyV2Deprecated200Response|PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(PasswordValidationGetPasswordPolicyV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => PasswordValidationGetPasswordPolicyV2Deprecated200Response::fromResponse($httpResponse),
+            default => PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 

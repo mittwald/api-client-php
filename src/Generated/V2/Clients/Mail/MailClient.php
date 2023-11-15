@@ -109,13 +109,27 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponder503Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchall400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchall403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchall404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchall500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchall503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchallDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchall\UpdateMailAddressCatchallRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAll400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAll403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAll404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAll500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAll503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddresses400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddresses403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddresses404Response;
@@ -123,6 +137,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddress
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddresses503Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPassword400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPassword403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPassword404Response;
@@ -130,6 +151,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\Updat
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPassword503Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuota400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuota403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuota404Response;
@@ -137,6 +165,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMa
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuota503Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtection400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtection403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtection404Response;
@@ -144,6 +179,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtection503Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSetting400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSetting403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSetting404Response;
@@ -151,6 +193,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\Update
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSetting503Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated403Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated500Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedRequest;
 
 /**
  * Client for Mail API
@@ -623,16 +672,16 @@ class MailClient
     }
 
     /**
-     * Update the catchall of a MailAddress.
+     * Update the autoresponder of a MailAddress.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catchall
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-autoresponder-v2-deprecated
      * @throws GuzzleException
-     * @param UpdateMailAddressCatchall\UpdateMailAddressCatchallRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateMailAddressCatchall\UpdateMailAddressCatchall400Response|UpdateMailAddressCatchall\UpdateMailAddressCatchall403Response|UpdateMailAddressCatchall\UpdateMailAddressCatchall404Response|UpdateMailAddressCatchall\UpdateMailAddressCatchall500Response|UpdateMailAddressCatchall\UpdateMailAddressCatchall503Response|UpdateMailAddressCatchall\UpdateMailAddressCatchallDefaultResponse OK
+     * @param UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated400Response|UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated403Response|UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated404Response|UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated500Response|UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2Deprecated503Response|UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedDefaultResponse OK
      */
-    public function updateMailAddressCatchall(UpdateMailAddressCatchallRequest $request): EmptyResponse|UpdateMailAddressCatchall400Response|UpdateMailAddressCatchall403Response|UpdateMailAddressCatchall404Response|UpdateMailAddressCatchall500Response|UpdateMailAddressCatchall503Response|UpdateMailAddressCatchallDefaultResponse
+    public function updateMailAddressAutoresponderV2Deprecated(UpdateMailAddressAutoresponderV2DeprecatedRequest $request): EmptyResponse|UpdateMailAddressAutoresponderV2Deprecated400Response|UpdateMailAddressAutoresponderV2Deprecated403Response|UpdateMailAddressAutoresponderV2Deprecated404Response|UpdateMailAddressAutoresponderV2Deprecated500Response|UpdateMailAddressAutoresponderV2Deprecated503Response|UpdateMailAddressAutoresponderV2DeprecatedDefaultResponse
     {
-        $httpRequest = new Request(UpdateMailAddressCatchallRequest::method, $request->getUrl());
+        $httpRequest = new Request(UpdateMailAddressAutoresponderV2DeprecatedRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
@@ -640,12 +689,66 @@ class MailClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             200 => new EmptyResponse($httpResponse),
-            400 => UpdateMailAddressCatchall400Response::fromResponse($httpResponse),
-            403 => UpdateMailAddressCatchall403Response::fromResponse($httpResponse),
-            404 => UpdateMailAddressCatchall404Response::fromResponse($httpResponse),
-            500 => UpdateMailAddressCatchall500Response::fromResponse($httpResponse),
-            503 => UpdateMailAddressCatchall503Response::fromResponse($httpResponse),
-            default => UpdateMailAddressCatchallDefaultResponse::fromResponse($httpResponse),
+            400 => UpdateMailAddressAutoresponderV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressAutoresponderV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressAutoresponderV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressAutoresponderV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressAutoresponderV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressAutoresponderV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the catchall of a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catch-all
+     * @throws GuzzleException
+     * @param UpdateMailAddressCatchAll\UpdateMailAddressCatchAllRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressCatchAll\UpdateMailAddressCatchAll400Response|UpdateMailAddressCatchAll\UpdateMailAddressCatchAll403Response|UpdateMailAddressCatchAll\UpdateMailAddressCatchAll404Response|UpdateMailAddressCatchAll\UpdateMailAddressCatchAll500Response|UpdateMailAddressCatchAll\UpdateMailAddressCatchAll503Response|UpdateMailAddressCatchAll\UpdateMailAddressCatchAllDefaultResponse OK
+     */
+    public function updateMailAddressCatchAll(UpdateMailAddressCatchAllRequest $request): EmptyResponse|UpdateMailAddressCatchAll400Response|UpdateMailAddressCatchAll403Response|UpdateMailAddressCatchAll404Response|UpdateMailAddressCatchAll500Response|UpdateMailAddressCatchAll503Response|UpdateMailAddressCatchAllDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMailAddressCatchAllRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMailAddressCatchAll400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressCatchAll403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressCatchAll404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressCatchAll500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressCatchAll503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressCatchAllDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the catchall of a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catchall-v2-deprecated
+     * @throws GuzzleException
+     * @param UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated400Response|UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated403Response|UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated404Response|UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated500Response|UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2Deprecated503Response|UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedDefaultResponse OK
+     */
+    public function updateMailAddressCatchallV2Deprecated(UpdateMailAddressCatchallV2DeprecatedRequest $request): EmptyResponse|UpdateMailAddressCatchallV2Deprecated400Response|UpdateMailAddressCatchallV2Deprecated403Response|UpdateMailAddressCatchallV2Deprecated404Response|UpdateMailAddressCatchallV2Deprecated500Response|UpdateMailAddressCatchallV2Deprecated503Response|UpdateMailAddressCatchallV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMailAddressCatchallV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMailAddressCatchallV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressCatchallV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressCatchallV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressCatchallV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressCatchallV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressCatchallV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -677,6 +780,33 @@ class MailClient
     }
 
     /**
+     * Update the forward addresses of a MailAddresses.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-forward-addresses-v2-deprecated
+     * @throws GuzzleException
+     * @param UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated400Response|UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated403Response|UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated404Response|UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated500Response|UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2Deprecated503Response|UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedDefaultResponse OK
+     */
+    public function updateMailAddressForwardAddressesV2Deprecated(UpdateMailAddressForwardAddressesV2DeprecatedRequest $request): EmptyResponse|UpdateMailAddressForwardAddressesV2Deprecated400Response|UpdateMailAddressForwardAddressesV2Deprecated403Response|UpdateMailAddressForwardAddressesV2Deprecated404Response|UpdateMailAddressForwardAddressesV2Deprecated500Response|UpdateMailAddressForwardAddressesV2Deprecated503Response|UpdateMailAddressForwardAddressesV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMailAddressForwardAddressesV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMailAddressForwardAddressesV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressForwardAddressesV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressForwardAddressesV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressForwardAddressesV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressForwardAddressesV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressForwardAddressesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Update the password for a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-password
@@ -700,6 +830,33 @@ class MailClient
             500 => UpdateMailAddressPassword500Response::fromResponse($httpResponse),
             503 => UpdateMailAddressPassword503Response::fromResponse($httpResponse),
             default => UpdateMailAddressPasswordDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update the password for a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-password-v2-deprecated
+     * @throws GuzzleException
+     * @param UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated400Response|UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated403Response|UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated404Response|UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated500Response|UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2Deprecated503Response|UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedDefaultResponse OK
+     */
+    public function updateMailAddressPasswordV2Deprecated(UpdateMailAddressPasswordV2DeprecatedRequest $request): EmptyResponse|UpdateMailAddressPasswordV2Deprecated400Response|UpdateMailAddressPasswordV2Deprecated403Response|UpdateMailAddressPasswordV2Deprecated404Response|UpdateMailAddressPasswordV2Deprecated500Response|UpdateMailAddressPasswordV2Deprecated503Response|UpdateMailAddressPasswordV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMailAddressPasswordV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMailAddressPasswordV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressPasswordV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressPasswordV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressPasswordV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressPasswordV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressPasswordV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -731,6 +888,33 @@ class MailClient
     }
 
     /**
+     * Update the quota of a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-quota-v2-deprecated
+     * @throws GuzzleException
+     * @param UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated400Response|UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated403Response|UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated404Response|UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated500Response|UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2Deprecated503Response|UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedDefaultResponse OK
+     */
+    public function updateMailAddressQuotaV2Deprecated(UpdateMailAddressQuotaV2DeprecatedRequest $request): EmptyResponse|UpdateMailAddressQuotaV2Deprecated400Response|UpdateMailAddressQuotaV2Deprecated403Response|UpdateMailAddressQuotaV2Deprecated404Response|UpdateMailAddressQuotaV2Deprecated500Response|UpdateMailAddressQuotaV2Deprecated503Response|UpdateMailAddressQuotaV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMailAddressQuotaV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMailAddressQuotaV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressQuotaV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressQuotaV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressQuotaV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressQuotaV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressQuotaV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Update the spam protection of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-spam-protection
@@ -758,6 +942,33 @@ class MailClient
     }
 
     /**
+     * Update the spam protection of a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-spam-protection-v2-deprecated
+     * @throws GuzzleException
+     * @param UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated400Response|UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated403Response|UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated404Response|UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated500Response|UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2Deprecated503Response|UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedDefaultResponse OK
+     */
+    public function updateMailAddressSpamProtectionV2Deprecated(UpdateMailAddressSpamProtectionV2DeprecatedRequest $request): EmptyResponse|UpdateMailAddressSpamProtectionV2Deprecated400Response|UpdateMailAddressSpamProtectionV2Deprecated403Response|UpdateMailAddressSpamProtectionV2Deprecated404Response|UpdateMailAddressSpamProtectionV2Deprecated500Response|UpdateMailAddressSpamProtectionV2Deprecated503Response|UpdateMailAddressSpamProtectionV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(UpdateMailAddressSpamProtectionV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateMailAddressSpamProtectionV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateMailAddressSpamProtectionV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateMailAddressSpamProtectionV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateMailAddressSpamProtectionV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateMailAddressSpamProtectionV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateMailAddressSpamProtectionV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Update a mail setting of a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-project-mail-setting
@@ -781,6 +992,33 @@ class MailClient
             500 => UpdateProjectMailSetting500Response::fromResponse($httpResponse),
             503 => UpdateProjectMailSetting503Response::fromResponse($httpResponse),
             default => UpdateProjectMailSettingDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Update a mail setting of a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-project-mail-setting-v2-deprecated
+     * @throws GuzzleException
+     * @param UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedRequest $request An object representing the request for this operation
+     * @return EmptyResponse|UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated400Response|UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated403Response|UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated404Response|UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated500Response|UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2Deprecated503Response|UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedDefaultResponse OK
+     */
+    public function updateProjectMailSettingV2Deprecated(UpdateProjectMailSettingV2DeprecatedRequest $request): EmptyResponse|UpdateProjectMailSettingV2Deprecated400Response|UpdateProjectMailSettingV2Deprecated403Response|UpdateProjectMailSettingV2Deprecated404Response|UpdateProjectMailSettingV2Deprecated500Response|UpdateProjectMailSettingV2Deprecated503Response|UpdateProjectMailSettingV2DeprecatedDefaultResponse
+    {
+        $httpRequest = new Request(UpdateProjectMailSettingV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => new EmptyResponse($httpResponse),
+            400 => UpdateProjectMailSettingV2Deprecated400Response::fromResponse($httpResponse),
+            403 => UpdateProjectMailSettingV2Deprecated403Response::fromResponse($httpResponse),
+            404 => UpdateProjectMailSettingV2Deprecated404Response::fromResponse($httpResponse),
+            500 => UpdateProjectMailSettingV2Deprecated500Response::fromResponse($httpResponse),
+            503 => UpdateProjectMailSettingV2Deprecated503Response::fromResponse($httpResponse),
+            default => UpdateProjectMailSettingV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

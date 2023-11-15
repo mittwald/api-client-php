@@ -193,7 +193,7 @@ class UpdateSshUserRequest
     {
         $mapped = $this->toJson();
         $sshUserId = urlencode($mapped['sshUserId']);
-        return '/v2/sshusers/' . $sshUserId;
+        return '/v2/ssh-users/' . $sshUserId;
     }
 
     public function getQuery(): array
