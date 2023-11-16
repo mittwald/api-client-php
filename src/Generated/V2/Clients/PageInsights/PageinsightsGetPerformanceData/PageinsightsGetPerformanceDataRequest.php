@@ -229,7 +229,7 @@ class PageinsightsGetPerformanceDataRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/pageinsights';
+        return '/v2/page-insights';
     }
 
     public function getQuery(): array

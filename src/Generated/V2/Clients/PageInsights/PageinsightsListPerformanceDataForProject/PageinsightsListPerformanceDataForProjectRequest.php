@@ -19,7 +19,7 @@ class PageinsightsListPerformanceDataForProjectRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -28,14 +28,14 @@ class PageinsightsListPerformanceDataForProjectRequest
             ],
         ],
         'required' => [
-            'id',
+            'projectId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $projectId;
 
     /**
      * @var string|null
@@ -47,19 +47,19 @@ class PageinsightsListPerformanceDataForProjectRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $projectId
      */
-    public function __construct(string $id)
+    public function __construct(string $projectId)
     {
-        $this->id = $id;
+        $this->projectId = $projectId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getProjectId(): string
     {
-        return $this->id;
+        return $this->projectId;
     }
 
     /**
@@ -71,19 +71,19 @@ class PageinsightsListPerformanceDataForProjectRequest
     }
 
     /**
-     * @param string $id
+     * @param string $projectId
      * @return self
      */
-    public function withId(string $id): self
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->projectId = $projectId;
 
         return $clone;
     }
@@ -132,13 +132,13 @@ class PageinsightsListPerformanceDataForProjectRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $projectId = $input->{'projectId'};
         $domain = null;
         if (isset($input->{'domain'})) {
             $domain = $input->{'domain'};
         }
 
-        $obj = new self($id);
+        $obj = new self($projectId);
         $obj->domain = $domain;
         return $obj;
     }
@@ -151,7 +151,7 @@ class PageinsightsListPerformanceDataForProjectRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['projectId'] = $this->projectId;
         if (isset($this->domain)) {
             $output['domain'] = $this->domain;
         }
@@ -190,8 +190,8 @@ class PageinsightsListPerformanceDataForProjectRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/projects/' . $id . '/pageinsights';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/page-insights';
     }
 
     public function getQuery(): array
