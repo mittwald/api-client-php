@@ -191,7 +191,7 @@ class RequestAppinstallationCopyRequestBody
     {
         $mapped = $this->toJson();
         $id = urlencode($mapped['id']);
-        return '/v2/appinstallations/' . $id . '/actions/copy';
+        return '/v2/app-installations/' . $id . '/actions/copy';
     }
 
     public function getQuery(): array

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase;
+namespace Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UnlinkDatabaseRequest
+class DeprecatedAppLinkDatabaseRequestBody
 {
-    public const method = 'delete';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,53 +17,60 @@ class UnlinkDatabaseRequest
      * @var array
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'appInstallationId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
             'databaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'databaseUserIds' => [
+                'additionalProperties' => [
+                    'type' => 'string',
+                ],
+                'type' => 'object',
+            ],
+            'purpose' => [
+                'enum' => [
+                    'primary',
+                    'cache',
+                    'custom',
+                ],
+                'type' => 'string',
+            ],
         ],
         'required' => [
-            'appInstallationId',
             'databaseId',
+            'purpose',
         ],
+        'type' => 'object',
     ];
-
-    /**
-     * @var string
-     */
-    private string $appInstallationId;
 
     /**
      * @var string
      */
     private string $databaseId;
 
+    /**
+     * @var string[]|null
+     */
+    private ?array $databaseUserIds = null;
+
+    /**
+     * @var DeprecatedAppLinkDatabaseRequestBodyPurpose
+     */
+    private DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose;
+
     private array $headers = [
 
     ];
 
     /**
-     * @param string $appInstallationId
      * @param string $databaseId
+     * @param DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose
      */
-    public function __construct(string $appInstallationId, string $databaseId)
+    public function __construct(string $databaseId, DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose)
     {
-        $this->appInstallationId = $appInstallationId;
         $this->databaseId = $databaseId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAppInstallationId(): string
-    {
-        return $this->appInstallationId;
+        $this->purpose = $purpose;
     }
 
     /**
@@ -75,21 +82,19 @@ class UnlinkDatabaseRequest
     }
 
     /**
-     * @param string $appInstallationId
-     * @return self
+     * @return string[]|null
      */
-    public function withAppInstallationId(string $appInstallationId): self
+    public function getDatabaseUserIds(): ?array
     {
-        $validator = new Validator();
-        $validator->validate($appInstallationId, static::$schema['properties']['appInstallationId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
+        return $this->databaseUserIds ?? null;
+    }
 
-        $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
-
-        return $clone;
+    /**
+     * @return DeprecatedAppLinkDatabaseRequestBodyPurpose
+     */
+    public function getPurpose(): DeprecatedAppLinkDatabaseRequestBodyPurpose
+    {
+        return $this->purpose;
     }
 
     /**
@@ -111,25 +116,70 @@ class UnlinkDatabaseRequest
     }
 
     /**
+     * @param string[] $databaseUserIds
+     * @return self
+     */
+    public function withDatabaseUserIds(array $databaseUserIds): self
+    {
+        $validator = new Validator();
+        $validator->validate($databaseUserIds, static::$schema['properties']['databaseUserIds']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->databaseUserIds = $databaseUserIds;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutDatabaseUserIds(): self
+    {
+        $clone = clone $this;
+        unset($clone->databaseUserIds);
+
+        return $clone;
+    }
+
+    /**
+     * @param DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose
+     * @return self
+     */
+    public function withPurpose(DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose): self
+    {
+        $clone = clone $this;
+        $clone->purpose = $purpose;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UnlinkDatabaseRequest Created instance
+     * @return DeprecatedAppLinkDatabaseRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UnlinkDatabaseRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedAppLinkDatabaseRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appInstallationId = $input->{'appInstallationId'};
         $databaseId = $input->{'databaseId'};
+        $databaseUserIds = null;
+        if (isset($input->{'databaseUserIds'})) {
+            $databaseUserIds = (array)$input->{'databaseUserIds'};
+        }
+        $purpose = DeprecatedAppLinkDatabaseRequestBodyPurpose::from($input->{'purpose'});
 
-        $obj = new self($appInstallationId, $databaseId);
-
+        $obj = new self($databaseId, $purpose);
+        $obj->databaseUserIds = $databaseUserIds;
         return $obj;
     }
 
@@ -141,8 +191,11 @@ class UnlinkDatabaseRequest
     public function toJson(): array
     {
         $output = [];
-        $output['appInstallationId'] = $this->appInstallationId;
         $output['databaseId'] = $this->databaseId;
+        if (isset($this->databaseUserIds)) {
+            $output['databaseUserIds'] = $this->databaseUserIds;
+        }
+        $output['purpose'] = ($this->purpose)->value;
 
         return $output;
     }
@@ -179,8 +232,7 @@ class UnlinkDatabaseRequest
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
-        $databaseId = urlencode($mapped['databaseId']);
-        return '/v2/app-installations/' . $appInstallationId . '/databases/' . $databaseId;
+        return '/v2/appinstallations/' . $appInstallationId . '/databases';
     }
 
     public function getQuery(): array

@@ -179,7 +179,7 @@ class GetMissingDependenciesForAppinstallationRequest
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/appinstallations/' . $appInstallationId . '/missing-dependencies';
+        return '/v2/app-installations/' . $appInstallationId . '/missing-dependencies';
     }
 
     public function getQuery(): array

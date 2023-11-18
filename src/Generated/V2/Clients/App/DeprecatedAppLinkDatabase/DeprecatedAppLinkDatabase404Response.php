@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus;
+namespace Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class RetrieveStatusRequest
+class DeprecatedAppLinkDatabase404Response
 {
-    public const method = 'get';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,55 +18,47 @@ class RetrieveStatusRequest
      */
     private static array $schema = [
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'appInstallationId' => [
-                'type' => 'string',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'appInstallationId',
-        ],
     ];
 
     /**
-     * @var string
+     * @var Error
      */
-    private string $appInstallationId;
+    private Error $body;
 
-    private array $headers = [
-
-    ];
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param string $appInstallationId
+     * @param Error $body
      */
-    public function __construct(string $appInstallationId)
+    public function __construct(Error $body)
     {
-        $this->appInstallationId = $appInstallationId;
+        $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return Error
      */
-    public function getAppInstallationId(): string
+    public function getBody(): Error
     {
-        return $this->appInstallationId;
+        return $this->body;
     }
 
     /**
-     * @param string $appInstallationId
+     * @param Error $body
      * @return self
      */
-    public function withAppInstallationId(string $appInstallationId): self
+    public function withBody(Error $body): self
     {
-        $validator = new Validator();
-        $validator->validate($appInstallationId, static::$schema['properties']['appInstallationId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->appInstallationId = $appInstallationId;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -76,19 +68,19 @@ class RetrieveStatusRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RetrieveStatusRequest Created instance
+     * @return DeprecatedAppLinkDatabase404Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RetrieveStatusRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedAppLinkDatabase404Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $appInstallationId = $input->{'appInstallationId'};
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($appInstallationId);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -101,7 +93,7 @@ class RetrieveStatusRequest
     public function toJson(): array
     {
         $output = [];
-        $output['appInstallationId'] = $this->appInstallationId;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -134,29 +126,11 @@ class RetrieveStatusRequest
     {
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/app-installations/' . $appInstallationId . '/status';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 }

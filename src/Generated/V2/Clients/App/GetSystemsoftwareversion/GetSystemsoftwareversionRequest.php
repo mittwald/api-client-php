@@ -180,7 +180,7 @@ class GetSystemsoftwareversionRequest
         $mapped = $this->toJson();
         $systemSoftwareId = urlencode($mapped['systemSoftwareId']);
         $systemSoftwareVersionId = urlencode($mapped['systemSoftwareVersionId']);
-        return '/v2/systemsoftware/' . $systemSoftwareId . '/versions/' . $systemSoftwareVersionId;
+        return '/v2/system-software/' . $systemSoftwareId . '/versions/' . $systemSoftwareVersionId;
     }
 
     public function getQuery(): array

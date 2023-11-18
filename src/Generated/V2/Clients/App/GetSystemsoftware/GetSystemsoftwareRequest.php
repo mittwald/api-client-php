@@ -139,7 +139,7 @@ class GetSystemsoftwareRequest
     {
         $mapped = $this->toJson();
         $systemSoftwareId = urlencode($mapped['systemSoftwareId']);
-        return '/v2/systemsoftwares/' . $systemSoftwareId;
+        return '/v2/system-softwares/' . $systemSoftwareId;
     }
 
     public function getQuery(): array

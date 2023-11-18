@@ -9,7 +9,7 @@ use JsonSchema\Validator;
 
 class LinkDatabaseRequestBody
 {
-    public const method = 'put';
+    public const method = 'patch';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -232,7 +232,7 @@ class LinkDatabaseRequestBody
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/appinstallations/' . $appInstallationId . '/databases';
+        return '/v2/app-installations/' . $appInstallationId . '/database';
     }
 
     public function getQuery(): array

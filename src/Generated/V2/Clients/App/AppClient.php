@@ -6,6 +6,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabase404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteAction404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionRequest;
@@ -560,6 +563,29 @@ class AppClient
             204 => new EmptyResponse($httpResponse),
             404 => UnlinkDatabase404Response::fromResponse($httpResponse),
             default => UnlinkDatabaseDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Create linkage between an `AppInstallation` and a MySql-`Database`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-link-database
+     * @throws GuzzleException
+     * @param DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse|DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabase404Response|DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseDefaultResponse The database has been linked.
+     */
+    public function deprecatedAppLinkDatabase(DeprecatedAppLinkDatabaseRequest $request): EmptyResponse|DeprecatedAppLinkDatabase404Response|DeprecatedAppLinkDatabaseDefaultResponse
+    {
+        $httpRequest = new Request(DeprecatedAppLinkDatabaseRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
+            404 => DeprecatedAppLinkDatabase404Response::fromResponse($httpResponse),
+            default => DeprecatedAppLinkDatabaseDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

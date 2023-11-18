@@ -207,7 +207,7 @@ class ExecuteActionRequest
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
         $action = urlencode($mapped['action']);
-        return '/v2/appinstallations/' . $appInstallationId . '/actions/' . $action;
+        return '/v2/app-installations/' . $appInstallationId . '/actions/' . $action;
     }
 
     public function getQuery(): array

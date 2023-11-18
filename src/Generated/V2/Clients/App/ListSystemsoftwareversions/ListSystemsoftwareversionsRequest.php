@@ -191,7 +191,7 @@ class ListSystemsoftwareversionsRequest
     {
         $mapped = $this->toJson();
         $systemSoftwareId = urlencode($mapped['systemSoftwareId']);
-        return '/v2/systemsoftware/' . $systemSoftwareId . '/versions';
+        return '/v2/system-software/' . $systemSoftwareId . '/versions';
     }
 
     public function getQuery(): array

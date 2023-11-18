@@ -261,7 +261,7 @@ class ListSystemsoftwaresRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/systemsoftwares';
+        return '/v2/system-softwares';
     }
 
     public function getQuery(): array

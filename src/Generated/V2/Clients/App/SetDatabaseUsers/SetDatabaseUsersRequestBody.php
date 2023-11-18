@@ -142,7 +142,7 @@ class SetDatabaseUsersRequestBody
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
         $databaseId = urlencode($mapped['databaseId']);
-        return '/v2/appinstallations/' . $appInstallationId . '/databases/' . $databaseId;
+        return '/v2/app-installations/' . $appInstallationId . '/databases/' . $databaseId;
     }
 
     public function getQuery(): array

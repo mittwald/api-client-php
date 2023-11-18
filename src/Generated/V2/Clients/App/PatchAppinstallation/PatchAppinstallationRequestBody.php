@@ -417,7 +417,7 @@ class PatchAppinstallationRequestBody
     {
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/appinstallations/' . $appInstallationId;
+        return '/v2/app-installations/' . $appInstallationId;
     }
 
     public function getQuery(): array

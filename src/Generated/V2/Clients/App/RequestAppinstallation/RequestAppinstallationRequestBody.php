@@ -249,7 +249,7 @@ class RequestAppinstallationRequestBody
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/appinstallations';
+        return '/v2/projects/' . $projectId . '/app-installations';
     }
 
     public function getQuery(): array
