@@ -253,6 +253,30 @@ class ConversationClient
     }
 
     /**
+     * Request an access token for the File belonging to the Conversation.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-file-access-token
+     * @throws GuzzleException
+     * @param GetFileAccessToken\GetFileAccessTokenRequest $request An object representing the request for this operation
+     * @return GetFileAccessToken\GetFileAccessToken200Response|GetFileAccessToken\GetFileAccessToken400Response|GetFileAccessToken\GetFileAccessToken404Response|GetFileAccessToken\GetFileAccessTokenDefaultResponse The file access token required to access the file linked with the conversation.
+     */
+    public function getFileAccessToken(GetFileAccessTokenRequest $request): GetFileAccessToken200Response|GetFileAccessToken400Response|GetFileAccessToken404Response|GetFileAccessTokenDefaultResponse
+    {
+        $httpRequest = new Request(GetFileAccessTokenRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetFileAccessToken200Response::fromResponse($httpResponse),
+            400 => GetFileAccessToken400Response::fromResponse($httpResponse),
+            404 => GetFileAccessToken404Response::fromResponse($httpResponse),
+            default => GetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Get all conversation categories.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-categories
@@ -345,30 +369,6 @@ class ConversationClient
             403 => UpdateMessage403Response::fromResponse($httpResponse),
             404 => UpdateMessage404Response::fromResponse($httpResponse),
             default => UpdateMessageDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Request an access token for the File belonging to the Conversation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-file-access-token
-     * @throws GuzzleException
-     * @param GetFileAccessToken\GetFileAccessTokenRequest $request An object representing the request for this operation
-     * @return GetFileAccessToken\GetFileAccessToken200Response|GetFileAccessToken\GetFileAccessToken400Response|GetFileAccessToken\GetFileAccessToken404Response|GetFileAccessToken\GetFileAccessTokenDefaultResponse The file access token required to access the file linked with the conversation.
-     */
-    public function getFileAccessToken(GetFileAccessTokenRequest $request): GetFileAccessToken200Response|GetFileAccessToken400Response|GetFileAccessToken404Response|GetFileAccessTokenDefaultResponse
-    {
-        $httpRequest = new Request(GetFileAccessTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetFileAccessToken200Response::fromResponse($httpResponse),
-            400 => GetFileAccessToken400Response::fromResponse($httpResponse),
-            404 => GetFileAccessToken404Response::fromResponse($httpResponse),
-            default => GetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

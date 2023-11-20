@@ -221,6 +221,29 @@ class DomainClient
     }
 
     /**
+     * Get File Service Reference for a Screenshot of a domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
+     * @throws GuzzleException
+     * @param DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest $request An object representing the request for this operation
+     * @return DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain200Response|DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain404Response|DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainDefaultResponse The References.
+     */
+    public function deprecatedDomainGetScreenshotForDomain(DeprecatedDomainGetScreenshotForDomainRequest $request): DeprecatedDomainGetScreenshotForDomain200Response|DeprecatedDomainGetScreenshotForDomain404Response|DeprecatedDomainGetScreenshotForDomainDefaultResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainGetScreenshotForDomainRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DeprecatedDomainGetScreenshotForDomain200Response::fromResponse($httpResponse),
+            404 => DeprecatedDomainGetScreenshotForDomain404Response::fromResponse($httpResponse),
+            default => DeprecatedDomainGetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Create a DNSZone.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-dns-zone
@@ -885,6 +908,29 @@ class DomainClient
     }
 
     /**
+     * Get the latest screenshot's FileReference belonging to a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-latest-screenshot
+     * @throws GuzzleException
+     * @param GetLatestScreenshot\GetLatestScreenshotRequest $request An object representing the request for this operation
+     * @return GetLatestScreenshot\GetLatestScreenshot200Response|GetLatestScreenshot\GetLatestScreenshot404Response|GetLatestScreenshot\GetLatestScreenshotDefaultResponse OK
+     */
+    public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshot200Response|GetLatestScreenshot404Response|GetLatestScreenshotDefaultResponse
+    {
+        $httpRequest = new Request(GetLatestScreenshotRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => GetLatestScreenshot200Response::fromResponse($httpResponse),
+            404 => GetLatestScreenshot404Response::fromResponse($httpResponse),
+            default => GetLatestScreenshotDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * List the DomainOwnerships of a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domain-ownerships
@@ -1323,52 +1369,6 @@ class DomainClient
             200 => IngressUpdateIngressTls200Response::fromResponse($httpResponse),
             404 => IngressUpdateIngressTls404Response::fromResponse($httpResponse),
             default => IngressUpdateIngressTlsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get File Service Reference for a Screenshot of a domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
-     * @throws GuzzleException
-     * @param DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest $request An object representing the request for this operation
-     * @return DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain200Response|DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomain404Response|DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainDefaultResponse The References.
-     */
-    public function deprecatedDomainGetScreenshotForDomain(DeprecatedDomainGetScreenshotForDomainRequest $request): DeprecatedDomainGetScreenshotForDomain200Response|DeprecatedDomainGetScreenshotForDomain404Response|DeprecatedDomainGetScreenshotForDomainDefaultResponse
-    {
-        $httpRequest = new Request(DeprecatedDomainGetScreenshotForDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedDomainGetScreenshotForDomain200Response::fromResponse($httpResponse),
-            404 => DeprecatedDomainGetScreenshotForDomain404Response::fromResponse($httpResponse),
-            default => DeprecatedDomainGetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get the latest screenshot's FileReference belonging to a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-latest-screenshot
-     * @throws GuzzleException
-     * @param GetLatestScreenshot\GetLatestScreenshotRequest $request An object representing the request for this operation
-     * @return GetLatestScreenshot\GetLatestScreenshot200Response|GetLatestScreenshot\GetLatestScreenshot404Response|GetLatestScreenshot\GetLatestScreenshotDefaultResponse OK
-     */
-    public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshot200Response|GetLatestScreenshot404Response|GetLatestScreenshotDefaultResponse
-    {
-        $httpRequest = new Request(GetLatestScreenshotRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetLatestScreenshot200Response::fromResponse($httpResponse),
-            404 => GetLatestScreenshot404Response::fromResponse($httpResponse),
-            default => GetLatestScreenshotDefaultResponse::fromResponse($httpResponse),
         };
     }
 }
