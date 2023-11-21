@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateProjectMailSettingRequestBodyAlternative1
+class GetFileUploadTokenRulesRequest
 {
-    public const method = 'patch';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,60 +17,58 @@ class UpdateProjectMailSettingRequestBodyAlternative1
      * @var array
      */
     private static array $schema = [
+        'type' => 'object',
         'properties' => [
-            'blacklist' => [
-                'items' => [
-                    'format' => 'email',
-                    'type' => 'string',
-                ],
-                'type' => 'array',
+            'fileUploadToken' => [
+                'example' => '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'blacklist',
+            'fileUploadToken',
         ],
-        'type' => 'object',
     ];
 
     /**
-     * @var string[]
+     * @var string
      */
-    private array $blacklist;
+    private string $fileUploadToken;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string[] $blacklist
+     * @param string $fileUploadToken
      */
-    public function __construct(array $blacklist)
+    public function __construct(string $fileUploadToken)
     {
-        $this->blacklist = $blacklist;
+        $this->fileUploadToken = $fileUploadToken;
     }
 
     /**
-     * @return string[]
+     * @return string
      */
-    public function getBlacklist(): array
+    public function getFileUploadToken(): string
     {
-        return $this->blacklist;
+        return $this->fileUploadToken;
     }
 
     /**
-     * @param string[] $blacklist
+     * @param string $fileUploadToken
      * @return self
      */
-    public function withBlacklist(array $blacklist): self
+    public function withFileUploadToken(string $fileUploadToken): self
     {
         $validator = new Validator();
-        $validator->validate($blacklist, static::$schema['properties']['blacklist']);
+        $validator->validate($fileUploadToken, static::$schema['properties']['fileUploadToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->blacklist = $blacklist;
+        $clone->fileUploadToken = $fileUploadToken;
 
         return $clone;
     }
@@ -80,19 +78,19 @@ class UpdateProjectMailSettingRequestBodyAlternative1
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateProjectMailSettingRequestBodyAlternative1 Created instance
+     * @return GetFileUploadTokenRulesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectMailSettingRequestBodyAlternative1
+    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTokenRulesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $blacklist = $input->{'blacklist'};
+        $fileUploadToken = $input->{'fileUploadToken'};
 
-        $obj = new self($blacklist);
+        $obj = new self($fileUploadToken);
 
         return $obj;
     }
@@ -105,7 +103,7 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     public function toJson(): array
     {
         $output = [];
-        $output['blacklist'] = $this->blacklist;
+        $output['fileUploadToken'] = $this->fileUploadToken;
 
         return $output;
     }
@@ -141,9 +139,8 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        $mailSetting = urlencode($mapped['mailSetting']);
-        return '/v2/projects/' . $projectId . '/mail-settings/' . $mailSetting;
+        $fileUploadToken = urlencode($mapped['fileUploadToken']);
+        return '/v2/file-upload-tokens/' . $fileUploadToken . '/rules';
     }
 
     public function getQuery(): array

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
-use Psr\Http\Message\ResponseInterface;
 
-class GetFileTypeRules500Response
+class DeprecatedFileGetFileTokenRulesRequest
 {
+    public const method = 'get';
+
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,47 +18,57 @@ class GetFileTypeRules500Response
      */
     private static array $schema = [
         'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+            'token' => [
+                'example' => '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+                'format' => 'uuid',
+                'type' => 'string',
             ],
+        ],
+        'required' => [
+            'token',
         ],
     ];
 
     /**
-     * @var Error
+     * @var string
      */
-    private Error $body;
+    private string $token;
 
-    public ResponseInterface|null $httpResponse = null;
+    private array $headers = [
+
+    ];
 
     /**
-     * @param Error $body
+     * @param string $token
      */
-    public function __construct(Error $body)
+    public function __construct(string $token)
     {
-        $this->body = $body;
+        $this->token = $token;
     }
 
     /**
-     * @return Error
+     * @return string
      */
-    public function getBody(): Error
+    public function getToken(): string
     {
-        return $this->body;
+        return $this->token;
     }
 
     /**
-     * @param Error $body
+     * @param string $token
      * @return self
      */
-    public function withBody(Error $body): self
+    public function withToken(string $token): self
     {
+        $validator = new Validator();
+        $validator->validate($token, static::$schema['properties']['token']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->token = $token;
 
         return $clone;
     }
@@ -68,19 +78,19 @@ class GetFileTypeRules500Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileTypeRules500Response Created instance
+     * @return DeprecatedFileGetFileTokenRulesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileTypeRules500Response
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedFileGetFileTokenRulesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $token = $input->{'token'};
 
-        $obj = new self($body);
+        $obj = new self($token);
 
         return $obj;
     }
@@ -93,7 +103,7 @@ class GetFileTypeRules500Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['token'] = $this->token;
 
         return $output;
     }
@@ -126,11 +136,29 @@ class GetFileTypeRules500Response
     {
     }
 
-    public static function fromResponse(ResponseInterface $httpResponse): self
+    public function getUrl(): string
     {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
+        $mapped = $this->toJson();
+        $token = urlencode($mapped['token']);
+        return '/v2/file-token-rules/' . $token;
+    }
+
+    public function getQuery(): array
+    {
+        $mapped = $this->toJson();
+        $query = [];
+        return $query;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    public function withHeader(string $name, string|array $value): self
+    {
+        $clone = clone $this;
+        $clone->headers[$name] = $value;
+        return $clone;
     }
 }

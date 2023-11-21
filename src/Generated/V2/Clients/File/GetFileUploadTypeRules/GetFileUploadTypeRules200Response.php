@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileTokenRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\File\FileUploadRules;
+use Psr\Http\Message\ResponseInterface;
 
-class GetFileTokenRulesRequest
+class GetFileUploadTypeRules200Response
 {
-    public const method = 'get';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,57 +18,47 @@ class GetFileTokenRulesRequest
      */
     private static array $schema = [
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'token' => [
-                'example' => '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-                'format' => 'uuid',
-                'type' => 'string',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.file.FileUploadRules',
             ],
         ],
-        'required' => [
-            'token',
-        ],
     ];
 
     /**
-     * @var string
+     * @var FileUploadRules
      */
-    private string $token;
+    private FileUploadRules $body;
 
-    private array $headers = [
-
-    ];
+    public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param string $token
+     * @param FileUploadRules $body
      */
-    public function __construct(string $token)
+    public function __construct(FileUploadRules $body)
     {
-        $this->token = $token;
+        $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return FileUploadRules
      */
-    public function getToken(): string
+    public function getBody(): FileUploadRules
     {
-        return $this->token;
+        return $this->body;
     }
 
     /**
-     * @param string $token
+     * @param FileUploadRules $body
      * @return self
      */
-    public function withToken(string $token): self
+    public function withBody(FileUploadRules $body): self
     {
-        $validator = new Validator();
-        $validator->validate($token, static::$schema['properties']['token']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->token = $token;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -78,19 +68,19 @@ class GetFileTokenRulesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileTokenRulesRequest Created instance
+     * @return GetFileUploadTypeRules200Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileTokenRulesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTypeRules200Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $token = $input->{'token'};
+        $body = FileUploadRules::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($token);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -103,7 +93,7 @@ class GetFileTokenRulesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['token'] = $this->token;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -136,29 +126,11 @@ class GetFileTokenRulesRequest
     {
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        $token = urlencode($mapped['token']);
-        return '/v2/file-token-rules/' . $token;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetFileTypeRulesRequest
+class GetFileUploadTypeRulesRequest
 {
     public const method = 'get';
 
@@ -19,7 +19,7 @@ class GetFileTypeRulesRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'name' => [
+            'fileUploadType' => [
                 'enum' => [
                     'avatar',
                     'conversation',
@@ -29,43 +29,43 @@ class GetFileTypeRulesRequest
             ],
         ],
         'required' => [
-            'name',
+            'fileUploadType',
         ],
     ];
 
     /**
-     * @var GetFileTypeRulesRequestName
+     * @var GetFileUploadTypeRulesRequestFileUploadType
      */
-    private GetFileTypeRulesRequestName $name;
+    private GetFileUploadTypeRulesRequestFileUploadType $fileUploadType;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param GetFileTypeRulesRequestName $name
+     * @param GetFileUploadTypeRulesRequestFileUploadType $fileUploadType
      */
-    public function __construct(GetFileTypeRulesRequestName $name)
+    public function __construct(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType)
     {
-        $this->name = $name;
+        $this->fileUploadType = $fileUploadType;
     }
 
     /**
-     * @return GetFileTypeRulesRequestName
+     * @return GetFileUploadTypeRulesRequestFileUploadType
      */
-    public function getName(): GetFileTypeRulesRequestName
+    public function getFileUploadType(): GetFileUploadTypeRulesRequestFileUploadType
     {
-        return $this->name;
+        return $this->fileUploadType;
     }
 
     /**
-     * @param GetFileTypeRulesRequestName $name
+     * @param GetFileUploadTypeRulesRequestFileUploadType $fileUploadType
      * @return self
      */
-    public function withName(GetFileTypeRulesRequestName $name): self
+    public function withFileUploadType(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType): self
     {
         $clone = clone $this;
-        $clone->name = $name;
+        $clone->fileUploadType = $fileUploadType;
 
         return $clone;
     }
@@ -75,19 +75,19 @@ class GetFileTypeRulesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileTypeRulesRequest Created instance
+     * @return GetFileUploadTypeRulesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileTypeRulesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTypeRulesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $name = GetFileTypeRulesRequestName::from($input->{'name'});
+        $fileUploadType = GetFileUploadTypeRulesRequestFileUploadType::from($input->{'fileUploadType'});
 
-        $obj = new self($name);
+        $obj = new self($fileUploadType);
 
         return $obj;
     }
@@ -100,7 +100,7 @@ class GetFileTypeRulesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['name'] = ($this->name)->value;
+        $output['fileUploadType'] = ($this->fileUploadType)->value;
 
         return $output;
     }
@@ -136,8 +136,8 @@ class GetFileTypeRulesRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $name = urlencode($mapped['name']);
-        return '/v2/file-type-rules/' . $name;
+        $fileUploadType = urlencode($mapped['fileUploadType']);
+        return '/v2/file-upload-types/' . $fileUploadType . '/rules';
     }
 
     public function getQuery(): array

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetFileTypeRules404Response
+class GetFileUploadTypeRules500Response
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -68,10 +68,10 @@ class GetFileTypeRules404Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileTypeRules404Response Created instance
+     * @return GetFileUploadTypeRules500Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileTypeRules404Response
+    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTypeRules500Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

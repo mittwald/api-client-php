@@ -142,8 +142,8 @@ class UpdateProjectMailSettingRequestBodyAlternative2
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        $setting = urlencode($mapped['setting']);
-        return '/v2/projects/' . $projectId . '/mail-settings/' . $setting;
+        $mailSetting = urlencode($mapped['mailSetting']);
+        return '/v2/projects/' . $projectId . '/mail-settings/' . $mailSetting;
     }
 
     public function getQuery(): array

@@ -22,7 +22,7 @@ class UpdateProjectMailSettingRequest
             'projectId' => [
                 'type' => 'string',
             ],
-            'setting' => [
+            'mailSetting' => [
                 'enum' => [
                     'blacklist',
                     'whitelist',
@@ -66,7 +66,7 @@ class UpdateProjectMailSettingRequest
         ],
         'required' => [
             'projectId',
-            'setting',
+            'mailSetting',
             'body',
         ],
     ];
@@ -77,9 +77,9 @@ class UpdateProjectMailSettingRequest
     private string $projectId;
 
     /**
-     * @var UpdateProjectMailSettingRequestSetting
+     * @var UpdateProjectMailSettingRequestMailSetting
      */
-    private UpdateProjectMailSettingRequestSetting $setting;
+    private UpdateProjectMailSettingRequestMailSetting $mailSetting;
 
     /**
      * @var UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2
@@ -92,13 +92,13 @@ class UpdateProjectMailSettingRequest
 
     /**
      * @param string $projectId
-     * @param UpdateProjectMailSettingRequestSetting $setting
+     * @param UpdateProjectMailSettingRequestMailSetting $mailSetting
      * @param UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body
      */
-    public function __construct(string $projectId, UpdateProjectMailSettingRequestSetting $setting, UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body)
+    public function __construct(string $projectId, UpdateProjectMailSettingRequestMailSetting $mailSetting, UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body)
     {
         $this->projectId = $projectId;
-        $this->setting = $setting;
+        $this->mailSetting = $mailSetting;
         $this->body = $body;
     }
 
@@ -111,11 +111,11 @@ class UpdateProjectMailSettingRequest
     }
 
     /**
-     * @return UpdateProjectMailSettingRequestSetting
+     * @return UpdateProjectMailSettingRequestMailSetting
      */
-    public function getSetting(): UpdateProjectMailSettingRequestSetting
+    public function getMailSetting(): UpdateProjectMailSettingRequestMailSetting
     {
-        return $this->setting;
+        return $this->mailSetting;
     }
 
     /**
@@ -146,13 +146,13 @@ class UpdateProjectMailSettingRequest
     }
 
     /**
-     * @param UpdateProjectMailSettingRequestSetting $setting
+     * @param UpdateProjectMailSettingRequestMailSetting $mailSetting
      * @return self
      */
-    public function withSetting(UpdateProjectMailSettingRequestSetting $setting): self
+    public function withMailSetting(UpdateProjectMailSettingRequestMailSetting $mailSetting): self
     {
         $clone = clone $this;
-        $clone->setting = $setting;
+        $clone->mailSetting = $mailSetting;
 
         return $clone;
     }
@@ -185,13 +185,13 @@ class UpdateProjectMailSettingRequest
         }
 
         $projectId = $input->{'projectId'};
-        $setting = UpdateProjectMailSettingRequestSetting::from($input->{'setting'});
+        $mailSetting = UpdateProjectMailSettingRequestMailSetting::from($input->{'mailSetting'});
         $body = match (true) {
             UpdateProjectMailSettingRequestBodyAlternative1::validateInput($input->{'body'}, true) => UpdateProjectMailSettingRequestBodyAlternative1::buildFromInput($input->{'body'}, validate: $validate),
             UpdateProjectMailSettingRequestBodyAlternative2::validateInput($input->{'body'}, true) => UpdateProjectMailSettingRequestBodyAlternative2::buildFromInput($input->{'body'}, validate: $validate),
         };
 
-        $obj = new self($projectId, $setting, $body);
+        $obj = new self($projectId, $mailSetting, $body);
 
         return $obj;
     }
@@ -205,7 +205,7 @@ class UpdateProjectMailSettingRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        $output['setting'] = ($this->setting)->value;
+        $output['mailSetting'] = ($this->mailSetting)->value;
         $output['body'] = match (true) {
             $this->body instanceof UpdateProjectMailSettingRequestBodyAlternative1, $this->body instanceof UpdateProjectMailSettingRequestBodyAlternative2 => ($this->body)->toJson(),
         };
@@ -248,8 +248,8 @@ class UpdateProjectMailSettingRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        $setting = urlencode($mapped['setting']);
-        return '/v2/projects/' . $projectId . '/mail-settings/' . $setting;
+        $mailSetting = urlencode($mapped['mailSetting']);
+        return '/v2/projects/' . $projectId . '/mail-settings/' . $mailSetting;
     }
 
     public function getQuery(): array

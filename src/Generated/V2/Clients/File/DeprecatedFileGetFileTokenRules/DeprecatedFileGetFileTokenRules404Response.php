@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\File\FileUploadRules;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class GetFileTypeRules200Response
+class DeprecatedFileGetFileTokenRules404Response
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -23,39 +23,39 @@ class GetFileTypeRules200Response
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.file.FileUploadRules',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
     /**
-     * @var FileUploadRules
+     * @var Error
      */
-    private FileUploadRules $body;
+    private Error $body;
 
     public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param FileUploadRules $body
+     * @param Error $body
      */
-    public function __construct(FileUploadRules $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return FileUploadRules
+     * @return Error
      */
-    public function getBody(): FileUploadRules
+    public function getBody(): Error
     {
         return $this->body;
     }
 
     /**
-     * @param FileUploadRules $body
+     * @param Error $body
      * @return self
      */
-    public function withBody(FileUploadRules $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,17 +68,17 @@ class GetFileTypeRules200Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileTypeRules200Response Created instance
+     * @return DeprecatedFileGetFileTokenRules404Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileTypeRules200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedFileGetFileTokenRules404Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = FileUploadRules::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

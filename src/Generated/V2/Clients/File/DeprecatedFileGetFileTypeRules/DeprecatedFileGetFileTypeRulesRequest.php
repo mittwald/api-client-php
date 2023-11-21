@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateProjectMailSettingRequestBodyAlternative1
+class DeprecatedFileGetFileTypeRulesRequest
 {
-    public const method = 'patch';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,60 +17,55 @@ class UpdateProjectMailSettingRequestBodyAlternative1
      * @var array
      */
     private static array $schema = [
+        'type' => 'object',
         'properties' => [
-            'blacklist' => [
-                'items' => [
-                    'format' => 'email',
-                    'type' => 'string',
+            'name' => [
+                'enum' => [
+                    'avatar',
+                    'conversation',
                 ],
-                'type' => 'array',
+                'example' => 'avatar',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'blacklist',
+            'name',
         ],
-        'type' => 'object',
     ];
 
     /**
-     * @var string[]
+     * @var DeprecatedFileGetFileTypeRulesRequestName
      */
-    private array $blacklist;
+    private DeprecatedFileGetFileTypeRulesRequestName $name;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string[] $blacklist
+     * @param DeprecatedFileGetFileTypeRulesRequestName $name
      */
-    public function __construct(array $blacklist)
+    public function __construct(DeprecatedFileGetFileTypeRulesRequestName $name)
     {
-        $this->blacklist = $blacklist;
+        $this->name = $name;
     }
 
     /**
-     * @return string[]
+     * @return DeprecatedFileGetFileTypeRulesRequestName
      */
-    public function getBlacklist(): array
+    public function getName(): DeprecatedFileGetFileTypeRulesRequestName
     {
-        return $this->blacklist;
+        return $this->name;
     }
 
     /**
-     * @param string[] $blacklist
+     * @param DeprecatedFileGetFileTypeRulesRequestName $name
      * @return self
      */
-    public function withBlacklist(array $blacklist): self
+    public function withName(DeprecatedFileGetFileTypeRulesRequestName $name): self
     {
-        $validator = new Validator();
-        $validator->validate($blacklist, static::$schema['properties']['blacklist']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->blacklist = $blacklist;
+        $clone->name = $name;
 
         return $clone;
     }
@@ -80,19 +75,19 @@ class UpdateProjectMailSettingRequestBodyAlternative1
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateProjectMailSettingRequestBodyAlternative1 Created instance
+     * @return DeprecatedFileGetFileTypeRulesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateProjectMailSettingRequestBodyAlternative1
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedFileGetFileTypeRulesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $blacklist = $input->{'blacklist'};
+        $name = DeprecatedFileGetFileTypeRulesRequestName::from($input->{'name'});
 
-        $obj = new self($blacklist);
+        $obj = new self($name);
 
         return $obj;
     }
@@ -105,7 +100,7 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     public function toJson(): array
     {
         $output = [];
-        $output['blacklist'] = $this->blacklist;
+        $output['name'] = ($this->name)->value;
 
         return $output;
     }
@@ -141,9 +136,8 @@ class UpdateProjectMailSettingRequestBodyAlternative1
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        $mailSetting = urlencode($mapped['mailSetting']);
-        return '/v2/projects/' . $projectId . '/mail-settings/' . $mailSetting;
+        $name = urlencode($mapped['name']);
+        return '/v2/file-type-rules/' . $name;
     }
 
     public function getQuery(): array
