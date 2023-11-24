@@ -6,22 +6,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliverybox201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliverybox400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliverybox403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliverybox404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliverybox500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliverybox503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddress201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddress400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddress403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddress404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddress500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddress503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBox400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBox403Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBox404Response;
@@ -223,112 +207,6 @@ class MailClient
     }
 
     /**
-     * Create a DeliveryBox.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-create-deliverybox
-     * @throws GuzzleException
-     * @param CreateDeliverybox\CreateDeliveryboxRequest $request An object representing the request for this operation
-     * @return CreateDeliverybox\CreateDeliverybox201Response|CreateDeliverybox\CreateDeliverybox400Response|CreateDeliverybox\CreateDeliverybox403Response|CreateDeliverybox\CreateDeliverybox404Response|CreateDeliverybox\CreateDeliverybox500Response|CreateDeliverybox\CreateDeliverybox503Response|CreateDeliverybox\CreateDeliveryboxDefaultResponse OK
-     */
-    public function createDeliverybox(CreateDeliveryboxRequest $request): CreateDeliverybox201Response|CreateDeliverybox400Response|CreateDeliverybox403Response|CreateDeliverybox404Response|CreateDeliverybox500Response|CreateDeliverybox503Response|CreateDeliveryboxDefaultResponse
-    {
-        $httpRequest = new Request(CreateDeliveryboxRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateDeliverybox201Response::fromResponse($httpResponse),
-            400 => CreateDeliverybox400Response::fromResponse($httpResponse),
-            403 => CreateDeliverybox403Response::fromResponse($httpResponse),
-            404 => CreateDeliverybox404Response::fromResponse($httpResponse),
-            500 => CreateDeliverybox500Response::fromResponse($httpResponse),
-            503 => CreateDeliverybox503Response::fromResponse($httpResponse),
-            default => CreateDeliveryboxDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * List DeliveryBoxes belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
-     * @throws GuzzleException
-     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
-     * @return ListDeliveryBoxes\ListDeliveryBoxes200Response|ListDeliveryBoxes\ListDeliveryBoxes400Response|ListDeliveryBoxes\ListDeliveryBoxes403Response|ListDeliveryBoxes\ListDeliveryBoxes404Response|ListDeliveryBoxes\ListDeliveryBoxes500Response|ListDeliveryBoxes\ListDeliveryBoxes503Response|ListDeliveryBoxes\ListDeliveryBoxesDefaultResponse OK
-     */
-    public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxes200Response|ListDeliveryBoxes400Response|ListDeliveryBoxes403Response|ListDeliveryBoxes404Response|ListDeliveryBoxes500Response|ListDeliveryBoxes503Response|ListDeliveryBoxesDefaultResponse
-    {
-        $httpRequest = new Request(ListDeliveryBoxesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListDeliveryBoxes200Response::fromResponse($httpResponse),
-            400 => ListDeliveryBoxes400Response::fromResponse($httpResponse),
-            403 => ListDeliveryBoxes403Response::fromResponse($httpResponse),
-            404 => ListDeliveryBoxes404Response::fromResponse($httpResponse),
-            500 => ListDeliveryBoxes500Response::fromResponse($httpResponse),
-            503 => ListDeliveryBoxes503Response::fromResponse($httpResponse),
-            default => ListDeliveryBoxesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Create a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-create-mail-address
-     * @throws GuzzleException
-     * @param CreateMailAddress\CreateMailAddressRequest $request An object representing the request for this operation
-     * @return CreateMailAddress\CreateMailAddress201Response|CreateMailAddress\CreateMailAddress400Response|CreateMailAddress\CreateMailAddress403Response|CreateMailAddress\CreateMailAddress404Response|CreateMailAddress\CreateMailAddress500Response|CreateMailAddress\CreateMailAddress503Response|CreateMailAddress\CreateMailAddressDefaultResponse OK
-     */
-    public function createMailAddress(CreateMailAddressRequest $request): CreateMailAddress201Response|CreateMailAddress400Response|CreateMailAddress403Response|CreateMailAddress404Response|CreateMailAddress500Response|CreateMailAddress503Response|CreateMailAddressDefaultResponse
-    {
-        $httpRequest = new Request(CreateMailAddressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateMailAddress201Response::fromResponse($httpResponse),
-            400 => CreateMailAddress400Response::fromResponse($httpResponse),
-            403 => CreateMailAddress403Response::fromResponse($httpResponse),
-            404 => CreateMailAddress404Response::fromResponse($httpResponse),
-            500 => CreateMailAddress500Response::fromResponse($httpResponse),
-            503 => CreateMailAddress503Response::fromResponse($httpResponse),
-            default => CreateMailAddressDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * List MailAddresses belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
-     * @throws GuzzleException
-     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
-     * @return ListMailAddresses\ListMailAddresses200Response|ListMailAddresses\ListMailAddresses400Response|ListMailAddresses\ListMailAddresses403Response|ListMailAddresses\ListMailAddresses404Response|ListMailAddresses\ListMailAddresses500Response|ListMailAddresses\ListMailAddresses503Response|ListMailAddresses\ListMailAddressesDefaultResponse OK
-     */
-    public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddresses200Response|ListMailAddresses400Response|ListMailAddresses403Response|ListMailAddresses404Response|ListMailAddresses500Response|ListMailAddresses503Response|ListMailAddressesDefaultResponse
-    {
-        $httpRequest = new Request(ListMailAddressesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListMailAddresses200Response::fromResponse($httpResponse),
-            400 => ListMailAddresses400Response::fromResponse($httpResponse),
-            403 => ListMailAddresses403Response::fromResponse($httpResponse),
-            404 => ListMailAddresses404Response::fromResponse($httpResponse),
-            500 => ListMailAddresses500Response::fromResponse($httpResponse),
-            503 => ListMailAddresses503Response::fromResponse($httpResponse),
-            default => ListMailAddressesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
      * Delete a DeliveryBox.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-delete-delivery-box
@@ -471,6 +349,58 @@ class MailClient
         ]);
         return match ($httpResponse->getStatusCode()) {
             200, 403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List DeliveryBoxes belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
+     * @throws GuzzleException
+     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
+     * @return ListDeliveryBoxes\ListDeliveryBoxes200Response|ListDeliveryBoxes\ListDeliveryBoxes400Response|ListDeliveryBoxes\ListDeliveryBoxes403Response|ListDeliveryBoxes\ListDeliveryBoxes404Response|ListDeliveryBoxes\ListDeliveryBoxes500Response|ListDeliveryBoxes\ListDeliveryBoxes503Response|ListDeliveryBoxes\ListDeliveryBoxesDefaultResponse OK
+     */
+    public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxes200Response|ListDeliveryBoxes400Response|ListDeliveryBoxes403Response|ListDeliveryBoxes404Response|ListDeliveryBoxes500Response|ListDeliveryBoxes503Response|ListDeliveryBoxesDefaultResponse
+    {
+        $httpRequest = new Request(ListDeliveryBoxesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListDeliveryBoxes200Response::fromResponse($httpResponse),
+            400 => ListDeliveryBoxes400Response::fromResponse($httpResponse),
+            403 => ListDeliveryBoxes403Response::fromResponse($httpResponse),
+            404 => ListDeliveryBoxes404Response::fromResponse($httpResponse),
+            500 => ListDeliveryBoxes500Response::fromResponse($httpResponse),
+            503 => ListDeliveryBoxes503Response::fromResponse($httpResponse),
+            default => ListDeliveryBoxesDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * List MailAddresses belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
+     * @throws GuzzleException
+     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
+     * @return ListMailAddresses\ListMailAddresses200Response|ListMailAddresses\ListMailAddresses400Response|ListMailAddresses\ListMailAddresses403Response|ListMailAddresses\ListMailAddresses404Response|ListMailAddresses\ListMailAddresses500Response|ListMailAddresses\ListMailAddresses503Response|ListMailAddresses\ListMailAddressesDefaultResponse OK
+     */
+    public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddresses200Response|ListMailAddresses400Response|ListMailAddresses403Response|ListMailAddresses404Response|ListMailAddresses500Response|ListMailAddresses503Response|ListMailAddressesDefaultResponse
+    {
+        $httpRequest = new Request(ListMailAddressesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => ListMailAddresses200Response::fromResponse($httpResponse),
+            400 => ListMailAddresses400Response::fromResponse($httpResponse),
+            403 => ListMailAddresses403Response::fromResponse($httpResponse),
+            404 => ListMailAddresses404Response::fromResponse($httpResponse),
+            500 => ListMailAddresses500Response::fromResponse($httpResponse),
+            503 => ListMailAddresses503Response::fromResponse($httpResponse),
+            default => ListMailAddressesDefaultResponse::fromResponse($httpResponse),
         };
     }
 
