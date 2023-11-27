@@ -64,6 +64,52 @@ class FileClient
     }
 
     /**
+     * Get a Token's upload rules.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-token-rules
+     * @throws GuzzleException
+     * @param DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesRequest $request An object representing the request for this operation
+     * @return DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules200Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules404Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules500Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesDefaultResponse OK
+     */
+    public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRules200Response|DeprecatedFileGetFileTokenRules404Response|DeprecatedFileGetFileTokenRules500Response|DeprecatedFileGetFileTokenRulesDefaultResponse
+    {
+        $httpRequest = new Request(DeprecatedFileGetFileTokenRulesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DeprecatedFileGetFileTokenRules200Response::fromResponse($httpResponse),
+            404 => DeprecatedFileGetFileTokenRules404Response::fromResponse($httpResponse),
+            500 => DeprecatedFileGetFileTokenRules500Response::fromResponse($httpResponse),
+            default => DeprecatedFileGetFileTokenRulesDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Get a Type's upload rules.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-type-rules
+     * @throws GuzzleException
+     * @param DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesRequest $request An object representing the request for this operation
+     * @return DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules200Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules404Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules500Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesDefaultResponse OK
+     */
+    public function deprecatedFileGetFileTypeRules(DeprecatedFileGetFileTypeRulesRequest $request): DeprecatedFileGetFileTypeRules200Response|DeprecatedFileGetFileTypeRules404Response|DeprecatedFileGetFileTypeRules500Response|DeprecatedFileGetFileTypeRulesDefaultResponse
+    {
+        $httpRequest = new Request(DeprecatedFileGetFileTypeRulesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => DeprecatedFileGetFileTypeRules200Response::fromResponse($httpResponse),
+            404 => DeprecatedFileGetFileTypeRules404Response::fromResponse($httpResponse),
+            500 => DeprecatedFileGetFileTypeRules500Response::fromResponse($httpResponse),
+            default => DeprecatedFileGetFileTypeRulesDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
      * Create a File.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-create-file
@@ -105,30 +151,6 @@ class FileClient
             200 => GetFileMeta200Response::fromResponse($httpResponse),
             404 => GetFileMeta404Response::fromResponse($httpResponse),
             default => GetFileMetaDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a File.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
-     * @throws GuzzleException
-     * @param GetFile\GetFileRequest $request An object representing the request for this operation
-     * @return StringResponse|GetFile\GetFile400Response|GetFile\GetFile404Response|GetFile\GetFile500Response|GetFile\GetFileDefaultResponse OK
-     */
-    public function getFile(GetFileRequest $request): StringResponse|GetFile400Response|GetFile404Response|GetFile500Response|GetFileDefaultResponse
-    {
-        $httpRequest = new Request(GetFileRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => StringResponse::fromResponse($httpResponse),
-            400 => GetFile400Response::fromResponse($httpResponse),
-            404 => GetFile404Response::fromResponse($httpResponse),
-            500 => GetFile500Response::fromResponse($httpResponse),
-            default => GetFileDefaultResponse::fromResponse($httpResponse),
         };
     }
 
@@ -179,48 +201,26 @@ class FileClient
     }
 
     /**
-     * Get a Token's upload rules.
+     * Get a File.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-token-rules
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
      * @throws GuzzleException
-     * @param DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesRequest $request An object representing the request for this operation
-     * @return DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules200Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules404Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules500Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesDefaultResponse OK
+     * @param GetFile\GetFileRequest $request An object representing the request for this operation
+     * @return StringResponse|GetFile\GetFile400Response|GetFile\GetFile404Response|GetFile\GetFile500Response|GetFile\GetFileDefaultResponse OK
      */
-    public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRules200Response|DeprecatedFileGetFileTokenRules404Response|DeprecatedFileGetFileTokenRules500Response|DeprecatedFileGetFileTokenRulesDefaultResponse
+    public function getFile(GetFileRequest $request): StringResponse|GetFile400Response|GetFile404Response|GetFile500Response|GetFileDefaultResponse
     {
-        $httpRequest = new Request(DeprecatedFileGetFileTokenRulesRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetFileRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedFileGetFileTokenRules200Response::fromResponse($httpResponse),
-            404 => DeprecatedFileGetFileTokenRules404Response::fromResponse($httpResponse),
-            500 => DeprecatedFileGetFileTokenRules500Response::fromResponse($httpResponse),
-            default => DeprecatedFileGetFileTokenRulesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a Type's upload rules.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-type-rules
-     * @throws GuzzleException
-     * @param DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesRequest $request An object representing the request for this operation
-     * @return DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules200Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules404Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules500Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesDefaultResponse OK
-     */
-    public function deprecatedFileGetFileTypeRules(DeprecatedFileGetFileTypeRulesRequest $request): DeprecatedFileGetFileTypeRules200Response|DeprecatedFileGetFileTypeRules404Response|DeprecatedFileGetFileTypeRules500Response|DeprecatedFileGetFileTypeRulesDefaultResponse
-    {
-        $httpRequest = new Request(DeprecatedFileGetFileTypeRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedFileGetFileTypeRules200Response::fromResponse($httpResponse),
-            404 => DeprecatedFileGetFileTypeRules404Response::fromResponse($httpResponse),
-            500 => DeprecatedFileGetFileTypeRules500Response::fromResponse($httpResponse),
-            default => DeprecatedFileGetFileTypeRulesDefaultResponse::fromResponse($httpResponse),
+            200 => StringResponse::fromResponse($httpResponse),
+            400 => GetFile400Response::fromResponse($httpResponse),
+            404 => GetFile404Response::fromResponse($httpResponse),
+            500 => GetFile500Response::fromResponse($httpResponse),
+            default => GetFileDefaultResponse::fromResponse($httpResponse),
         };
     }
 }
