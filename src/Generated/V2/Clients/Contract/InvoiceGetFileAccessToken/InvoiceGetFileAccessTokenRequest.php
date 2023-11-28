@@ -2,105 +2,109 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Psr\Http\Message\ResponseInterface;
 
-class CheckDomainRegistrability200ResponseBody
+class InvoiceGetFileAccessTokenRequest
 {
+    public const method = 'get';
+
     /**
      * Schema used to validate input for creating instances of this class
      *
      * @var array
      */
     private static array $schema = [
+        'type' => 'object',
         'properties' => [
-            'isPremium' => [
-                'type' => 'boolean',
+            'customerId' => [
+                'type' => 'string',
             ],
-            'registrable' => [
-                'type' => 'boolean',
+            'invoiceId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'registrable',
-            'isPremium',
+            'customerId',
+            'invoiceId',
         ],
-        'type' => 'object',
     ];
 
     /**
-     * @var bool
+     * @var string
      */
-    private bool $isPremium;
+    private string $customerId;
 
     /**
-     * @var bool
+     * @var string
      */
-    private bool $registrable;
+    private string $invoiceId;
 
-    public ResponseInterface|null $httpResponse = null;
+    private array $headers = [
+
+    ];
 
     /**
-     * @param bool $isPremium
-     * @param bool $registrable
+     * @param string $customerId
+     * @param string $invoiceId
      */
-    public function __construct(bool $isPremium, bool $registrable)
+    public function __construct(string $customerId, string $invoiceId)
     {
-        $this->isPremium = $isPremium;
-        $this->registrable = $registrable;
+        $this->customerId = $customerId;
+        $this->invoiceId = $invoiceId;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getIsPremium(): bool
+    public function getCustomerId(): string
     {
-        return $this->isPremium;
+        return $this->customerId;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getRegistrable(): bool
+    public function getInvoiceId(): string
     {
-        return $this->registrable;
+        return $this->invoiceId;
     }
 
     /**
-     * @param bool $isPremium
+     * @param string $customerId
      * @return self
      */
-    public function withIsPremium(bool $isPremium): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($isPremium, static::$schema['properties']['isPremium']);
+        $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->isPremium = $isPremium;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
 
     /**
-     * @param bool $registrable
+     * @param string $invoiceId
      * @return self
      */
-    public function withRegistrable(bool $registrable): self
+    public function withInvoiceId(string $invoiceId): self
     {
         $validator = new Validator();
-        $validator->validate($registrable, static::$schema['properties']['registrable']);
+        $validator->validate($invoiceId, static::$schema['properties']['invoiceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->registrable = $registrable;
+        $clone->invoiceId = $invoiceId;
 
         return $clone;
     }
@@ -110,20 +114,20 @@ class CheckDomainRegistrability200ResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CheckDomainRegistrability200ResponseBody Created instance
+     * @return InvoiceGetFileAccessTokenRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainRegistrability200ResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceGetFileAccessTokenRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $isPremium = (bool)($input->{'isPremium'});
-        $registrable = (bool)($input->{'registrable'});
+        $customerId = $input->{'customerId'};
+        $invoiceId = $input->{'invoiceId'};
 
-        $obj = new self($isPremium, $registrable);
+        $obj = new self($customerId, $invoiceId);
 
         return $obj;
     }
@@ -136,8 +140,8 @@ class CheckDomainRegistrability200ResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['isPremium'] = $this->isPremium;
-        $output['registrable'] = $this->registrable;
+        $output['customerId'] = $this->customerId;
+        $output['invoiceId'] = $this->invoiceId;
 
         return $output;
     }
@@ -170,11 +174,30 @@ class CheckDomainRegistrability200ResponseBody
     {
     }
 
-    public static function fromResponse(ResponseInterface $httpResponse): self
+    public function getUrl(): string
     {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
+        $mapped = $this->toJson();
+        $customerId = urlencode($mapped['customerId']);
+        $invoiceId = urlencode($mapped['invoiceId']);
+        return '/v2/customers/' . $customerId . '/invoices/' . $invoiceId . '/file-access-token';
+    }
+
+    public function getQuery(): array
+    {
+        $mapped = $this->toJson();
+        $query = [];
+        return $query;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    public function withHeader(string $name, string|array $value): self
+    {
+        $clone = clone $this;
+        $clone->headers[$name] = $value;
+        return $clone;
     }
 }

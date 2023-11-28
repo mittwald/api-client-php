@@ -81,6 +81,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSe
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettings404Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessToken200Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessToken400Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessToken404Response;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoices200Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoices400Response;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoices404Response;
@@ -776,6 +781,29 @@ class ContractClient
             200 => OrderPreviewTariffChange200Response::fromResponse($httpResponse),
             400 => OrderPreviewTariffChange400Response::fromResponse($httpResponse),
             default => OrderPreviewTariffChangeDefaultResponse::fromResponse($httpResponse),
+        };
+    }
+
+    /**
+     * Request an Access Token for the Invoice file.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-get-file-access-token
+     * @throws GuzzleException
+     * @param InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenRequest $request An object representing the request for this operation
+     * @return InvoiceGetFileAccessToken\InvoiceGetFileAccessToken200Response|InvoiceGetFileAccessToken\InvoiceGetFileAccessToken400Response|InvoiceGetFileAccessToken\InvoiceGetFileAccessToken404Response|InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenDefaultResponse The File Access Token required to access the Invoice file.
+     */
+    public function invoiceGetFileAccessToken(InvoiceGetFileAccessTokenRequest $request): InvoiceGetFileAccessToken200Response|InvoiceGetFileAccessToken400Response|InvoiceGetFileAccessToken404Response|InvoiceGetFileAccessTokenDefaultResponse
+    {
+        $httpRequest = new Request(InvoiceGetFileAccessTokenRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        return match ($httpResponse->getStatusCode()) {
+            200 => InvoiceGetFileAccessToken200Response::fromResponse($httpResponse),
+            400 => InvoiceGetFileAccessToken400Response::fromResponse($httpResponse),
+            404 => InvoiceGetFileAccessToken404Response::fromResponse($httpResponse),
+            default => InvoiceGetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
         };
     }
 }

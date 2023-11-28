@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class CheckDomainRegistrability200Response
+class InvoiceGetFileAccessToken400Response
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,51 +23,39 @@ class CheckDomainRegistrability200Response
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'isPremium' => [
-                        'type' => 'boolean',
-                    ],
-                    'registrable' => [
-                        'type' => 'boolean',
-                    ],
-                ],
-                'required' => [
-                    'registrable',
-                    'isPremium',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
     /**
-     * @var CheckDomainRegistrability200ResponseBody
+     * @var ValidationErrors
      */
-    private CheckDomainRegistrability200ResponseBody $body;
+    private ValidationErrors $body;
 
     public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param CheckDomainRegistrability200ResponseBody $body
+     * @param ValidationErrors $body
      */
-    public function __construct(CheckDomainRegistrability200ResponseBody $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return CheckDomainRegistrability200ResponseBody
+     * @return ValidationErrors
      */
-    public function getBody(): CheckDomainRegistrability200ResponseBody
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
     /**
-     * @param CheckDomainRegistrability200ResponseBody $body
+     * @param ValidationErrors $body
      * @return self
      */
-    public function withBody(CheckDomainRegistrability200ResponseBody $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -79,17 +68,17 @@ class CheckDomainRegistrability200Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CheckDomainRegistrability200Response Created instance
+     * @return InvoiceGetFileAccessToken400Response Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainRegistrability200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceGetFileAccessToken400Response
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CheckDomainRegistrability200ResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -104,7 +93,7 @@ class CheckDomainRegistrability200Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -135,7 +124,6 @@ class CheckDomainRegistrability200Response
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

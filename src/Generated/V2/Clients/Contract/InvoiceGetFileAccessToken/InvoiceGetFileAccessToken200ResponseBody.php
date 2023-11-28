@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Psr\Http\Message\ResponseInterface;
 
-class CheckDomainRegistrability200Response
+class InvoiceGetFileAccessToken200ResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -16,60 +17,86 @@ class CheckDomainRegistrability200Response
      * @var array
      */
     private static array $schema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'isPremium' => [
-                        'type' => 'boolean',
-                    ],
-                    'registrable' => [
-                        'type' => 'boolean',
-                    ],
-                ],
-                'required' => [
-                    'registrable',
-                    'isPremium',
-                ],
-                'type' => 'object',
+            'accessToken' => [
+                'type' => 'string',
+            ],
+            'expiresAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
             ],
         ],
+        'required' => [
+            'accessToken',
+            'expiresAt',
+        ],
+        'type' => 'object',
     ];
 
     /**
-     * @var CheckDomainRegistrability200ResponseBody
+     * @var string
      */
-    private CheckDomainRegistrability200ResponseBody $body;
+    private string $accessToken;
+
+    /**
+     * @var DateTime
+     */
+    private DateTime $expiresAt;
 
     public ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param CheckDomainRegistrability200ResponseBody $body
+     * @param string $accessToken
+     * @param DateTime $expiresAt
      */
-    public function __construct(CheckDomainRegistrability200ResponseBody $body)
+    public function __construct(string $accessToken, DateTime $expiresAt)
     {
-        $this->body = $body;
+        $this->accessToken = $accessToken;
+        $this->expiresAt = $expiresAt;
     }
 
     /**
-     * @return CheckDomainRegistrability200ResponseBody
+     * @return string
      */
-    public function getBody(): CheckDomainRegistrability200ResponseBody
+    public function getAccessToken(): string
     {
-        return $this->body;
+        return $this->accessToken;
     }
 
     /**
-     * @param CheckDomainRegistrability200ResponseBody $body
+     * @return DateTime
+     */
+    public function getExpiresAt(): DateTime
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @param string $accessToken
      * @return self
      */
-    public function withBody(CheckDomainRegistrability200ResponseBody $body): self
+    public function withAccessToken(string $accessToken): self
+    {
+        $validator = new Validator();
+        $validator->validate($accessToken, static::$schema['properties']['accessToken']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->accessToken = $accessToken;
+
+        return $clone;
+    }
+
+    /**
+     * @param DateTime $expiresAt
+     * @return self
+     */
+    public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->expiresAt = $expiresAt;
 
         return $clone;
     }
@@ -79,19 +106,20 @@ class CheckDomainRegistrability200Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CheckDomainRegistrability200Response Created instance
+     * @return InvoiceGetFileAccessToken200ResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CheckDomainRegistrability200Response
+    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceGetFileAccessToken200ResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CheckDomainRegistrability200ResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $accessToken = $input->{'accessToken'};
+        $expiresAt = new DateTime($input->{'expiresAt'});
 
-        $obj = new self($body);
+        $obj = new self($accessToken, $expiresAt);
 
         return $obj;
     }
@@ -104,7 +132,8 @@ class CheckDomainRegistrability200Response
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['accessToken'] = $this->accessToken;
+        $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -135,7 +164,7 @@ class CheckDomainRegistrability200Response
 
     public function __clone()
     {
-        $this->body = clone $this->body;
+        $this->expiresAt = clone $this->expiresAt;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self
