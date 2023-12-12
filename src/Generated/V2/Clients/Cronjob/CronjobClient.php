@@ -2,52 +2,27 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecution200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecution404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjob201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjob400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjob412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecution201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecution404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecution412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjob400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjob412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjob200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjob404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecution200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecution404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobs200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutions200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjob200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjob400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjob404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjob412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppId201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppId400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppId412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdRequest;
 
 /**
@@ -62,242 +37,106 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCro
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class CronjobClient
+interface CronjobClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Abort a CronjobExecution.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-abort-execution
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param AbortExecution\AbortExecutionRequest $request An object representing the request for this operation
-     * @return AbortExecution\AbortExecution200Response|AbortExecution\AbortExecution404Response|AbortExecution\AbortExecutionDefaultResponse OK
+     * @return AbortExecution\AbortExecutionOKResponse OK
      */
-    public function abortExecution(AbortExecutionRequest $request): AbortExecution200Response|AbortExecution404Response|AbortExecutionDefaultResponse
-    {
-        $httpRequest = new Request(AbortExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => AbortExecution200Response::fromResponse($httpResponse),
-            404 => AbortExecution404Response::fromResponse($httpResponse),
-            default => AbortExecutionDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function abortExecution(AbortExecutionRequest $request): AbortExecutionOKResponse;
     /**
      * Create a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-create-cronjob
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateCronjob\CreateCronjobRequest $request An object representing the request for this operation
-     * @return CreateCronjob\CreateCronjob201Response|CreateCronjob\CreateCronjob400Response|CreateCronjob\CreateCronjob412Response|CreateCronjob\CreateCronjobDefaultResponse OK
+     * @return CreateCronjob\CreateCronjobCreatedResponse OK
      */
-    public function createCronjob(CreateCronjobRequest $request): CreateCronjob201Response|CreateCronjob400Response|CreateCronjob412Response|CreateCronjobDefaultResponse
-    {
-        $httpRequest = new Request(CreateCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateCronjob201Response::fromResponse($httpResponse),
-            400 => CreateCronjob400Response::fromResponse($httpResponse),
-            412 => CreateCronjob412Response::fromResponse($httpResponse),
-            default => CreateCronjobDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createCronjob(CreateCronjobRequest $request): CreateCronjobCreatedResponse;
     /**
      * List Cronjobs belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-cronjobs
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListCronjobs\ListCronjobsRequest $request An object representing the request for this operation
-     * @return ListCronjobs\ListCronjobs200Response|ListCronjobs\ListCronjobsDefaultResponse OK
+     * @return ListCronjobs\ListCronjobsOKResponse OK
      */
-    public function listCronjobs(ListCronjobsRequest $request): ListCronjobs200Response|ListCronjobsDefaultResponse
-    {
-        $httpRequest = new Request(ListCronjobsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListCronjobs200Response::fromResponse($httpResponse),
-            default => ListCronjobsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse;
     /**
      * Trigger a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-create-execution
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateExecution\CreateExecutionRequest $request An object representing the request for this operation
-     * @return CreateExecution\CreateExecution201Response|CreateExecution\CreateExecution404Response|CreateExecution\CreateExecution412Response|CreateExecution\CreateExecutionDefaultResponse OK
+     * @return CreateExecution\CreateExecutionCreatedResponse OK
      */
-    public function createExecution(CreateExecutionRequest $request): CreateExecution201Response|CreateExecution404Response|CreateExecution412Response|CreateExecutionDefaultResponse
-    {
-        $httpRequest = new Request(CreateExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateExecution201Response::fromResponse($httpResponse),
-            404 => CreateExecution404Response::fromResponse($httpResponse),
-            412 => CreateExecution412Response::fromResponse($httpResponse),
-            default => CreateExecutionDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createExecution(CreateExecutionRequest $request): CreateExecutionCreatedResponse;
     /**
      * List CronjobExecutions belonging to a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-executions
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListExecutions\ListExecutionsRequest $request An object representing the request for this operation
-     * @return ListExecutions\ListExecutions200Response|ListExecutions\ListExecutionsDefaultResponse OK
+     * @return ListExecutions\ListExecutionsOKResponse OK
      */
-    public function listExecutions(ListExecutionsRequest $request): ListExecutions200Response|ListExecutionsDefaultResponse
-    {
-        $httpRequest = new Request(ListExecutionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListExecutions200Response::fromResponse($httpResponse),
-            default => ListExecutionsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse;
     /**
      * Delete a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-delete-cronjob
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteCronjob\DeleteCronjobRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteCronjob\DeleteCronjob400Response|DeleteCronjob\DeleteCronjob412Response|DeleteCronjob\DeleteCronjobDefaultResponse NoContent
+     * @return EmptyResponse The Cronjob has been deleted.
      */
-    public function deleteCronjob(DeleteCronjobRequest $request): EmptyResponse|DeleteCronjob400Response|DeleteCronjob412Response|DeleteCronjobDefaultResponse
-    {
-        $httpRequest = new Request(DeleteCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200, 204 => new EmptyResponse($httpResponse),
-            400 => DeleteCronjob400Response::fromResponse($httpResponse),
-            412 => DeleteCronjob412Response::fromResponse($httpResponse),
-            default => DeleteCronjobDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteCronjob(DeleteCronjobRequest $request): EmptyResponse;
     /**
      * Get a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-cronjob
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetCronjob\GetCronjobRequest $request An object representing the request for this operation
-     * @return GetCronjob\GetCronjob200Response|GetCronjob\GetCronjob404Response|GetCronjob\GetCronjobDefaultResponse OK
+     * @return GetCronjob\GetCronjobOKResponse OK
      */
-    public function getCronjob(GetCronjobRequest $request): GetCronjob200Response|GetCronjob404Response|GetCronjobDefaultResponse
-    {
-        $httpRequest = new Request(GetCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetCronjob200Response::fromResponse($httpResponse),
-            404 => GetCronjob404Response::fromResponse($httpResponse),
-            default => GetCronjobDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getCronjob(GetCronjobRequest $request): GetCronjobOKResponse;
     /**
      * Update a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateCronjob\UpdateCronjobRequest $request An object representing the request for this operation
-     * @return UpdateCronjob\UpdateCronjob200Response|UpdateCronjob\UpdateCronjob400Response|UpdateCronjob\UpdateCronjob404Response|UpdateCronjob\UpdateCronjob412Response|UpdateCronjob\UpdateCronjobDefaultResponse OK
+     * @return UpdateCronjob\UpdateCronjobOKResponse OK
      */
-    public function updateCronjob(UpdateCronjobRequest $request): UpdateCronjob200Response|UpdateCronjob400Response|UpdateCronjob404Response|UpdateCronjob412Response|UpdateCronjobDefaultResponse
-    {
-        $httpRequest = new Request(UpdateCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => UpdateCronjob200Response::fromResponse($httpResponse),
-            400 => UpdateCronjob400Response::fromResponse($httpResponse),
-            404 => UpdateCronjob404Response::fromResponse($httpResponse),
-            412 => UpdateCronjob412Response::fromResponse($httpResponse),
-            default => UpdateCronjobDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function updateCronjob(UpdateCronjobRequest $request): UpdateCronjobOKResponse;
     /**
      * Get a CronjobExecution.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetExecution\GetExecutionRequest $request An object representing the request for this operation
-     * @return GetExecution\GetExecution200Response|GetExecution\GetExecution404Response|GetExecution\GetExecutionDefaultResponse OK
+     * @return GetExecution\GetExecutionOKResponse OK
      */
-    public function getExecution(GetExecutionRequest $request): GetExecution200Response|GetExecution404Response|GetExecutionDefaultResponse
-    {
-        $httpRequest = new Request(GetExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetExecution200Response::fromResponse($httpResponse),
-            404 => GetExecution404Response::fromResponse($httpResponse),
-            default => GetExecutionDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse;
     /**
      * Update a Cronjob's app id.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateCronjobAppId\UpdateCronjobAppIdRequest $request An object representing the request for this operation
-     * @return UpdateCronjobAppId\UpdateCronjobAppId201Response|EmptyResponse|UpdateCronjobAppId\UpdateCronjobAppId400Response|UpdateCronjobAppId\UpdateCronjobAppId412Response|UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse OK
+     * @return UpdateCronjobAppId\UpdateCronjobAppIdCreatedResponse OK
      */
-    public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): EmptyResponse|UpdateCronjobAppId201Response|UpdateCronjobAppId400Response|UpdateCronjobAppId412Response|UpdateCronjobAppIdDefaultResponse
-    {
-        $httpRequest = new Request(UpdateCronjobAppIdRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => UpdateCronjobAppId201Response::fromResponse($httpResponse),
-            204 => new EmptyResponse($httpResponse),
-            400 => UpdateCronjobAppId400Response::fromResponse($httpResponse),
-            412 => UpdateCronjobAppId412Response::fromResponse($httpResponse),
-            default => UpdateCronjobAppIdDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): UpdateCronjobAppIdCreatedResponse;
 }

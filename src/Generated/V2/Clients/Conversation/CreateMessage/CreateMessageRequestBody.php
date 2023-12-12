@@ -26,6 +26,7 @@ class CreateMessageRequestBody
                 'type' => 'array',
             ],
             'messageContent' => [
+                'maxLength' => 8000,
                 'type' => 'string',
             ],
         ],

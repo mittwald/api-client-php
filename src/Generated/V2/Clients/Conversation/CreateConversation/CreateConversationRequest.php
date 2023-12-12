@@ -24,11 +24,15 @@ class CreateConversationRequest
                     'categoryId' => [
                         'type' => 'string',
                     ],
+                    'mainUserId' => [
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
                     'relatedTo' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
                     ],
                     'sharedWith' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ShareableAggregateReference',
                     ],
                     'title' => [
                         'type' => 'string',

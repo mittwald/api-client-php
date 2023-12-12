@@ -7,6 +7,10 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversatio
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4;
 
 class CreateConversationRequestBody
 {
@@ -22,11 +26,15 @@ class CreateConversationRequestBody
             'categoryId' => [
                 'type' => 'string',
             ],
+            'mainUserId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'relatedTo' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
             ],
             'sharedWith' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ShareableAggregateReference',
             ],
             'title' => [
                 'type' => 'string',
@@ -41,14 +49,19 @@ class CreateConversationRequestBody
     private ?string $categoryId = null;
 
     /**
+     * @var string|null
+     */
+    private ?string $mainUserId = null;
+
+    /**
      * @var AggregateReference|null
      */
     private ?AggregateReference $relatedTo = null;
 
     /**
-     * @var AggregateReference|null
+     * @var ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
      */
-    private ?AggregateReference $sharedWith = null;
+    private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null $sharedWith = null;
 
     /**
      * @var string|null
@@ -75,6 +88,14 @@ class CreateConversationRequestBody
     }
 
     /**
+     * @return string|null
+     */
+    public function getMainUserId(): ?string
+    {
+        return $this->mainUserId ?? null;
+    }
+
+    /**
      * @return
      * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
      */
@@ -85,11 +106,11 @@ class CreateConversationRequestBody
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4|null
      */
-    public function getSharedWith(): ?AggregateReference
+    public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
     {
-        return $this->sharedWith ?? null;
+        return $this->sharedWith;
     }
 
     /**
@@ -130,6 +151,35 @@ class CreateConversationRequestBody
     }
 
     /**
+     * @param string $mainUserId
+     * @return self
+     */
+    public function withMainUserId(string $mainUserId): self
+    {
+        $validator = new Validator();
+        $validator->validate($mainUserId, static::$schema['properties']['mainUserId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->mainUserId = $mainUserId;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutMainUserId(): self
+    {
+        $clone = clone $this;
+        unset($clone->mainUserId);
+
+        return $clone;
+    }
+
+    /**
      * @param AggregateReference $relatedTo
      * @return self
      */
@@ -153,10 +203,10 @@ class CreateConversationRequestBody
     }
 
     /**
-     * @param AggregateReference $sharedWith
+     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith
      * @return self
      */
-    public function withSharedWith(AggregateReference $sharedWith): self
+    public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith): self
     {
         $clone = clone $this;
         $clone->sharedWith = $sharedWith;
@@ -223,13 +273,23 @@ class CreateConversationRequestBody
         if (isset($input->{'categoryId'})) {
             $categoryId = $input->{'categoryId'};
         }
+        $mainUserId = null;
+        if (isset($input->{'mainUserId'})) {
+            $mainUserId = $input->{'mainUserId'};
+        }
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
             $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
         }
         $sharedWith = null;
         if (isset($input->{'sharedWith'})) {
-            $sharedWith = AggregateReference::buildFromInput($input->{'sharedWith'}, validate: $validate);
+            $sharedWith = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ShareableAggregateReferenceAlternative1::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative1::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative2::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative2::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative3::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative3::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative4::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative4::buildFromInput($input->{'sharedWith'}, validate: $validate),
+            };
         }
         $title = null;
         if (isset($input->{'title'})) {
@@ -238,6 +298,7 @@ class CreateConversationRequestBody
 
         $obj = new self();
         $obj->categoryId = $categoryId;
+        $obj->mainUserId = $mainUserId;
         $obj->relatedTo = $relatedTo;
         $obj->sharedWith = $sharedWith;
         $obj->title = $title;
@@ -255,11 +316,17 @@ class CreateConversationRequestBody
         if (isset($this->categoryId)) {
             $output['categoryId'] = $this->categoryId;
         }
+        if (isset($this->mainUserId)) {
+            $output['mainUserId'] = $this->mainUserId;
+        }
         if (isset($this->relatedTo)) {
             $output['relatedTo'] = $this->relatedTo->toJson();
         }
         if (isset($this->sharedWith)) {
-            $output['sharedWith'] = $this->sharedWith->toJson();
+            $output['sharedWith'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative1, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative2, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative3, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative4 => $this->sharedWith->toJson(),
+            };
         }
         if (isset($this->title)) {
             $output['title'] = $this->title;

@@ -2,121 +2,53 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInvite400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInvite403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInvite412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProject412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInvite201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInvite400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInvite409Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject412Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProject500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatar400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatar403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatar400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatar403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProject403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInvite200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInvite404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembership200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembership404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInvite200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInvite404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProject404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServer200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServer403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServer404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProject404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProject404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvites200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvites404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMemberships200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMemberships404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServers200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServers403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUpload403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUpload200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUpload400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUpload403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMail403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescription400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescription403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescription400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescription403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
 
 /**
@@ -132,649 +64,286 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\Upda
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class ProjectClient
+interface ProjectClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Accept a ProjectInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-accept-project-invite
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param AcceptProjectInvite\AcceptProjectInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse|AcceptProjectInvite\AcceptProjectInvite400Response|AcceptProjectInvite\AcceptProjectInvite403Response|AcceptProjectInvite\AcceptProjectInvite412Response|AcceptProjectInvite\AcceptProjectInviteDefaultResponse
+     * @return EmptyResponse
      */
-    public function acceptProjectInvite(AcceptProjectInviteRequest $request): EmptyResponse|AcceptProjectInvite400Response|AcceptProjectInvite403Response|AcceptProjectInvite412Response|AcceptProjectInviteDefaultResponse
-    {
-        $httpRequest = new Request(AcceptProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => AcceptProjectInvite400Response::fromResponse($httpResponse),
-            403 => AcceptProjectInvite403Response::fromResponse($httpResponse),
-            412 => AcceptProjectInvite412Response::fromResponse($httpResponse),
-            default => AcceptProjectInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function acceptProjectInvite(AcceptProjectInviteRequest $request): EmptyResponse;
     /**
      * Create a ProjectInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project-invite
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateProjectInvite\CreateProjectInviteRequest $request An object representing the request for this operation
-     * @return CreateProjectInvite\CreateProjectInvite201Response|CreateProjectInvite\CreateProjectInvite400Response|CreateProjectInvite\CreateProjectInvite409Response|CreateProjectInvite\CreateProjectInviteDefaultResponse Created
+     * @return CreateProjectInvite\CreateProjectInviteCreatedResponse Created
      */
-    public function createProjectInvite(CreateProjectInviteRequest $request): CreateProjectInvite201Response|CreateProjectInvite400Response|CreateProjectInvite409Response|CreateProjectInviteDefaultResponse
-    {
-        $httpRequest = new Request(CreateProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateProjectInvite201Response::fromResponse($httpResponse),
-            400 => CreateProjectInvite400Response::fromResponse($httpResponse),
-            409 => CreateProjectInvite409Response::fromResponse($httpResponse),
-            default => CreateProjectInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createProjectInvite(CreateProjectInviteRequest $request): CreateProjectInviteCreatedResponse;
     /**
      * Create a Project belonging to a Server.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateProject\CreateProjectRequest $request An object representing the request for this operation
-     * @return CreateProject\CreateProject201Response|CreateProject\CreateProject400Response|CreateProject\CreateProject403Response|CreateProject\CreateProject412Response|CreateProject\CreateProjectDefaultResponse Created
+     * @return CreateProject\CreateProjectCreatedResponse Created
      */
-    public function createProject(CreateProjectRequest $request): CreateProject201Response|CreateProject400Response|CreateProject403Response|CreateProject412Response|CreateProjectDefaultResponse
-    {
-        $httpRequest = new Request(CreateProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateProject201Response::fromResponse($httpResponse),
-            400 => CreateProject400Response::fromResponse($httpResponse),
-            403 => CreateProject403Response::fromResponse($httpResponse),
-            412 => CreateProject412Response::fromResponse($httpResponse),
-            default => CreateProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createProject(CreateProjectRequest $request): CreateProjectCreatedResponse;
     /**
      * Decline a ProjectInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-decline-project-invite
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeclineProjectInvite\DeclineProjectInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeclineProjectInvite\DeclineProjectInviteDefaultResponse
+     * @return EmptyResponse
      */
-    public function declineProjectInvite(DeclineProjectInviteRequest $request): EmptyResponse|DeclineProjectInviteDefaultResponse
-    {
-        $httpRequest = new Request(DeclineProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => DeclineProjectInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function declineProjectInvite(DeclineProjectInviteRequest $request): EmptyResponse;
     /**
      * Delete a Project's avatar.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-avatar
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteProjectAvatar\DeleteProjectAvatar400Response|DeleteProjectAvatar\DeleteProjectAvatar403Response|DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse|DeleteProjectAvatar400Response|DeleteProjectAvatar403Response|DeleteProjectAvatarDefaultResponse
-    {
-        $httpRequest = new Request(DeleteProjectAvatarRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => DeleteProjectAvatar400Response::fromResponse($httpResponse),
-            403 => DeleteProjectAvatar403Response::fromResponse($httpResponse),
-            default => DeleteProjectAvatarDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse;
     /**
      * Request a Project avatar upload.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-request-project-avatar-upload
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestProjectAvatarUpload\RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload\RequestProjectAvatarUpload403Response|RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse OK
+     * @return RequestProjectAvatarUpload\RequestProjectAvatarUploadOKResponse OK
      */
-    public function requestProjectAvatarUpload(RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUpload200Response|RequestProjectAvatarUpload400Response|RequestProjectAvatarUpload403Response|RequestProjectAvatarUploadDefaultResponse
-    {
-        $httpRequest = new Request(RequestProjectAvatarUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => RequestProjectAvatarUpload200Response::fromResponse($httpResponse),
-            400 => RequestProjectAvatarUpload400Response::fromResponse($httpResponse),
-            403 => RequestProjectAvatarUpload403Response::fromResponse($httpResponse),
-            default => RequestProjectAvatarUploadDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function requestProjectAvatarUpload(RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUploadOKResponse;
     /**
      * Delete a ProjectInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-invite
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteProjectInvite\DeleteProjectInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteProjectInvite\DeleteProjectInviteDefaultResponse
+     * @return EmptyResponse
      */
-    public function deleteProjectInvite(DeleteProjectInviteRequest $request): EmptyResponse|DeleteProjectInviteDefaultResponse
-    {
-        $httpRequest = new Request(DeleteProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => DeleteProjectInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteProjectInvite(DeleteProjectInviteRequest $request): EmptyResponse;
     /**
      * Get a ProjectInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-invite
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetProjectInvite\GetProjectInviteRequest $request An object representing the request for this operation
-     * @return GetProjectInvite\GetProjectInvite200Response|GetProjectInvite\GetProjectInvite404Response|GetProjectInvite\GetProjectInviteDefaultResponse OK
+     * @return GetProjectInvite\GetProjectInviteOKResponse OK
      */
-    public function getProjectInvite(GetProjectInviteRequest $request): GetProjectInvite200Response|GetProjectInvite404Response|GetProjectInviteDefaultResponse
-    {
-        $httpRequest = new Request(GetProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetProjectInvite200Response::fromResponse($httpResponse),
-            404 => GetProjectInvite404Response::fromResponse($httpResponse),
-            default => GetProjectInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getProjectInvite(GetProjectInviteRequest $request): GetProjectInviteOKResponse;
     /**
      * Delete a ProjectMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-membership
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteProjectMembership\DeleteProjectMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteProjectMembership\DeleteProjectMembershipDefaultResponse OK
+     * @return EmptyResponse OK
      */
-    public function deleteProjectMembership(DeleteProjectMembershipRequest $request): EmptyResponse|DeleteProjectMembershipDefaultResponse
-    {
-        $httpRequest = new Request(DeleteProjectMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => DeleteProjectMembershipDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteProjectMembership(DeleteProjectMembershipRequest $request): EmptyResponse;
     /**
      * Get a ProjectMembership
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-membership
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetProjectMembership\GetProjectMembershipRequest $request An object representing the request for this operation
-     * @return GetProjectMembership\GetProjectMembership200Response|GetProjectMembership\GetProjectMembership404Response|GetProjectMembership\GetProjectMembershipDefaultResponse
+     * @return GetProjectMembership\GetProjectMembershipOKResponse
      */
-    public function getProjectMembership(GetProjectMembershipRequest $request): GetProjectMembership200Response|GetProjectMembership404Response|GetProjectMembershipDefaultResponse
-    {
-        $httpRequest = new Request(GetProjectMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetProjectMembership200Response::fromResponse($httpResponse),
-            404 => GetProjectMembership404Response::fromResponse($httpResponse),
-            default => GetProjectMembershipDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getProjectMembership(GetProjectMembershipRequest $request): GetProjectMembershipOKResponse;
     /**
      * Update a ProjectMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-membership
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateProjectMembership\UpdateProjectMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateProjectMembership\UpdateProjectMembershipDefaultResponse
+     * @return EmptyResponse
      */
-    public function updateProjectMembership(UpdateProjectMembershipRequest $request): EmptyResponse|UpdateProjectMembershipDefaultResponse
-    {
-        $httpRequest = new Request(UpdateProjectMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => UpdateProjectMembershipDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function updateProjectMembership(UpdateProjectMembershipRequest $request): EmptyResponse;
     /**
      * Delete a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
-     * @return DeleteProject\DeleteProject200Response|EmptyResponse|DeleteProject\DeleteProject400Response|DeleteProject\DeleteProject403Response|DeleteProject\DeleteProject412Response|DeleteProject\DeleteProject500Response|DeleteProject\DeleteProjectDefaultResponse NoContent
+     * @return DeleteProject\DeleteProjectOKResponse Deleted
      */
-    public function deleteProject(DeleteProjectRequest $request): EmptyResponse|DeleteProject200Response|DeleteProject400Response|DeleteProject403Response|DeleteProject412Response|DeleteProject500Response|DeleteProjectDefaultResponse
-    {
-        $httpRequest = new Request(DeleteProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeleteProject200Response::fromResponse($httpResponse),
-            204 => new EmptyResponse($httpResponse),
-            400 => DeleteProject400Response::fromResponse($httpResponse),
-            403 => DeleteProject403Response::fromResponse($httpResponse),
-            412 => DeleteProject412Response::fromResponse($httpResponse),
-            500 => DeleteProject500Response::fromResponse($httpResponse),
-            default => DeleteProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteProject(DeleteProjectRequest $request): DeleteProjectOKResponse;
     /**
      * Get a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetProject\GetProjectRequest $request An object representing the request for this operation
-     * @return GetProject\GetProject200Response|GetProject\GetProject403Response|GetProject\GetProjectDefaultResponse OK
+     * @return GetProject\GetProjectOKResponse OK
      */
-    public function getProject(GetProjectRequest $request): GetProject200Response|GetProject403Response|GetProjectDefaultResponse
-    {
-        $httpRequest = new Request(GetProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetProject200Response::fromResponse($httpResponse),
-            403 => GetProject403Response::fromResponse($httpResponse),
-            default => GetProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getProject(GetProjectRequest $request): GetProjectOKResponse;
     /**
      * Delete a Server's avatar.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-server-avatar
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteServerAvatar\DeleteServerAvatar400Response|DeleteServerAvatar\DeleteServerAvatar403Response|DeleteServerAvatar\DeleteServerAvatarDefaultResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse|DeleteServerAvatar400Response|DeleteServerAvatar403Response|DeleteServerAvatarDefaultResponse
-    {
-        $httpRequest = new Request(DeleteServerAvatarRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => DeleteServerAvatar400Response::fromResponse($httpResponse),
-            403 => DeleteServerAvatar403Response::fromResponse($httpResponse),
-            default => DeleteServerAvatarDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse;
     /**
      * Request a Server avatar upload.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-request-server-avatar-upload
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param RequestServerAvatarUpload\RequestServerAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestServerAvatarUpload\RequestServerAvatarUpload200Response|RequestServerAvatarUpload\RequestServerAvatarUpload400Response|RequestServerAvatarUpload\RequestServerAvatarUpload403Response|RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse OK
+     * @return RequestServerAvatarUpload\RequestServerAvatarUploadOKResponse OK
      */
-    public function requestServerAvatarUpload(RequestServerAvatarUploadRequest $request): RequestServerAvatarUpload200Response|RequestServerAvatarUpload400Response|RequestServerAvatarUpload403Response|RequestServerAvatarUploadDefaultResponse
-    {
-        $httpRequest = new Request(RequestServerAvatarUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => RequestServerAvatarUpload200Response::fromResponse($httpResponse),
-            400 => RequestServerAvatarUpload400Response::fromResponse($httpResponse),
-            403 => RequestServerAvatarUpload403Response::fromResponse($httpResponse),
-            default => RequestServerAvatarUploadDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function requestServerAvatarUpload(RequestServerAvatarUploadRequest $request): RequestServerAvatarUploadOKResponse;
     /**
      * Get a ProjectInvite by token.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-token-invite
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetProjectTokenInvite\GetProjectTokenInviteRequest $request An object representing the request for this operation
-     * @return GetProjectTokenInvite\GetProjectTokenInvite200Response|GetProjectTokenInvite\GetProjectTokenInvite404Response|GetProjectTokenInvite\GetProjectTokenInviteDefaultResponse OK
+     * @return GetProjectTokenInvite\GetProjectTokenInviteOKResponse OK
      */
-    public function getProjectTokenInvite(GetProjectTokenInviteRequest $request): GetProjectTokenInvite200Response|GetProjectTokenInvite404Response|GetProjectTokenInviteDefaultResponse
-    {
-        $httpRequest = new Request(GetProjectTokenInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetProjectTokenInvite200Response::fromResponse($httpResponse),
-            404 => GetProjectTokenInvite404Response::fromResponse($httpResponse),
-            default => GetProjectTokenInviteDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getProjectTokenInvite(GetProjectTokenInviteRequest $request): GetProjectTokenInviteOKResponse;
     /**
      * Get the executing user's membership in a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-self-membership-for-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetSelfMembershipForProject\GetSelfMembershipForProjectRequest $request An object representing the request for this operation
-     * @return GetSelfMembershipForProject\GetSelfMembershipForProject200Response|GetSelfMembershipForProject\GetSelfMembershipForProject404Response|GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse OK
+     * @return GetSelfMembershipForProject\GetSelfMembershipForProjectOKResponse OK
      */
-    public function getSelfMembershipForProject(GetSelfMembershipForProjectRequest $request): GetSelfMembershipForProject200Response|GetSelfMembershipForProject404Response|GetSelfMembershipForProjectDefaultResponse
-    {
-        $httpRequest = new Request(GetSelfMembershipForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetSelfMembershipForProject200Response::fromResponse($httpResponse),
-            404 => GetSelfMembershipForProject404Response::fromResponse($httpResponse),
-            default => GetSelfMembershipForProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getSelfMembershipForProject(GetSelfMembershipForProjectRequest $request): GetSelfMembershipForProjectOKResponse;
     /**
      * Get a Server.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetServer\GetServerRequest $request An object representing the request for this operation
-     * @return GetServer\GetServer200Response|GetServer\GetServer403Response|GetServer\GetServer404Response|GetServer\GetServerDefaultResponse OK
+     * @return GetServer\GetServerOKResponse OK
      */
-    public function getServer(GetServerRequest $request): GetServer200Response|GetServer403Response|GetServer404Response|GetServerDefaultResponse
-    {
-        $httpRequest = new Request(GetServerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetServer200Response::fromResponse($httpResponse),
-            403 => GetServer403Response::fromResponse($httpResponse),
-            404 => GetServer404Response::fromResponse($httpResponse),
-            default => GetServerDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getServer(GetServerRequest $request): GetServerOKResponse;
     /**
      * Leave a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-leave-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param LeaveProject\LeaveProjectRequest $request An object representing the request for this operation
-     * @return EmptyResponse|LeaveProject\LeaveProjectDefaultResponse
+     * @return EmptyResponse
      */
-    public function leaveProject(LeaveProjectRequest $request): EmptyResponse|LeaveProjectDefaultResponse
-    {
-        $httpRequest = new Request(LeaveProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => LeaveProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function leaveProject(LeaveProjectRequest $request): EmptyResponse;
     /**
      * List Invites belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListInvitesForProject\ListInvitesForProjectRequest $request An object representing the request for this operation
-     * @return ListInvitesForProject\ListInvitesForProject200Response|ListInvitesForProject\ListInvitesForProject404Response|ListInvitesForProject\ListInvitesForProjectDefaultResponse OK
+     * @return ListInvitesForProject\ListInvitesForProjectOKResponse OK
      */
-    public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProject200Response|ListInvitesForProject404Response|ListInvitesForProjectDefaultResponse
-    {
-        $httpRequest = new Request(ListInvitesForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListInvitesForProject200Response::fromResponse($httpResponse),
-            404 => ListInvitesForProject404Response::fromResponse($httpResponse),
-            default => ListInvitesForProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse;
     /**
      * List Memberships belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-memberships-for-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListMembershipsForProject\ListMembershipsForProjectRequest $request An object representing the request for this operation
-     * @return ListMembershipsForProject\ListMembershipsForProject200Response|ListMembershipsForProject\ListMembershipsForProject404Response|ListMembershipsForProject\ListMembershipsForProjectDefaultResponse OK
+     * @return ListMembershipsForProject\ListMembershipsForProjectOKResponse OK
      */
-    public function listMembershipsForProject(ListMembershipsForProjectRequest $request): ListMembershipsForProject200Response|ListMembershipsForProject404Response|ListMembershipsForProjectDefaultResponse
-    {
-        $httpRequest = new Request(ListMembershipsForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListMembershipsForProject200Response::fromResponse($httpResponse),
-            404 => ListMembershipsForProject404Response::fromResponse($httpResponse),
-            default => ListMembershipsForProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listMembershipsForProject(ListMembershipsForProjectRequest $request): ListMembershipsForProjectOKResponse;
     /**
      * List ProjectInvites belonging to the executing user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-project-invites
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListProjectInvites\ListProjectInvitesRequest $request An object representing the request for this operation
-     * @return ListProjectInvites\ListProjectInvites200Response|ListProjectInvites\ListProjectInvites404Response|ListProjectInvites\ListProjectInvitesDefaultResponse OK
+     * @return ListProjectInvites\ListProjectInvitesOKResponse OK
      */
-    public function listProjectInvites(ListProjectInvitesRequest $request): ListProjectInvites200Response|ListProjectInvites404Response|ListProjectInvitesDefaultResponse
-    {
-        $httpRequest = new Request(ListProjectInvitesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListProjectInvites200Response::fromResponse($httpResponse),
-            404 => ListProjectInvites404Response::fromResponse($httpResponse),
-            default => ListProjectInvitesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listProjectInvites(ListProjectInvitesRequest $request): ListProjectInvitesOKResponse;
     /**
      * List ProjectMemberships belonging to the executing user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-project-memberships
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListProjectMemberships\ListProjectMembershipsRequest $request An object representing the request for this operation
-     * @return ListProjectMemberships\ListProjectMemberships200Response|ListProjectMemberships\ListProjectMemberships404Response|ListProjectMemberships\ListProjectMembershipsDefaultResponse OK
+     * @return ListProjectMemberships\ListProjectMembershipsOKResponse OK
      */
-    public function listProjectMemberships(ListProjectMembershipsRequest $request): ListProjectMemberships200Response|ListProjectMemberships404Response|ListProjectMembershipsDefaultResponse
-    {
-        $httpRequest = new Request(ListProjectMembershipsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListProjectMemberships200Response::fromResponse($httpResponse),
-            404 => ListProjectMemberships404Response::fromResponse($httpResponse),
-            default => ListProjectMembershipsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listProjectMemberships(ListProjectMembershipsRequest $request): ListProjectMembershipsOKResponse;
     /**
      * List Projects belonging to the executing user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-projects
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListProjects\ListProjectsRequest $request An object representing the request for this operation
-     * @return ListProjects\ListProjects200Response|ListProjects\ListProjects400Response|ListProjects\ListProjects403Response|ListProjects\ListProjectsDefaultResponse OK
+     * @return ListProjects\ListProjectsOKResponse OK
      */
-    public function listProjects(ListProjectsRequest $request): ListProjects200Response|ListProjects400Response|ListProjects403Response|ListProjectsDefaultResponse
-    {
-        $httpRequest = new Request(ListProjectsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListProjects200Response::fromResponse($httpResponse),
-            400 => ListProjects400Response::fromResponse($httpResponse),
-            403 => ListProjects403Response::fromResponse($httpResponse),
-            default => ListProjectsDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listProjects(ListProjectsRequest $request): ListProjectsOKResponse;
     /**
      * List Servers belonging to the executing user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-servers
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListServers\ListServersRequest $request An object representing the request for this operation
-     * @return ListServers\ListServers200Response|ListServers\ListServers403Response|ListServers\ListServersDefaultResponse OK
+     * @return ListServers\ListServersOKResponse OK
      */
-    public function listServers(ListServersRequest $request): ListServers200Response|ListServers403Response|ListServersDefaultResponse
-    {
-        $httpRequest = new Request(ListServersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListServers200Response::fromResponse($httpResponse),
-            403 => ListServers403Response::fromResponse($httpResponse),
-            default => ListServersDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listServers(ListServersRequest $request): ListServersOKResponse;
     /**
      * Resend the mail for a ProjectInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-resend-project-invite-mail
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ResendProjectInviteMail\ResendProjectInviteMailRequest $request An object representing the request for this operation
-     * @return EmptyResponse|ResendProjectInviteMail\ResendProjectInviteMail403Response|ResendProjectInviteMail\ResendProjectInviteMailDefaultResponse
+     * @return EmptyResponse
      */
-    public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse|ResendProjectInviteMail403Response|ResendProjectInviteMailDefaultResponse
-    {
-        $httpRequest = new Request(ResendProjectInviteMailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            403 => ResendProjectInviteMail403Response::fromResponse($httpResponse),
-            default => ResendProjectInviteMailDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse;
     /**
      * Update a Project's description.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateProjectDescription\UpdateProjectDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateProjectDescription\UpdateProjectDescription400Response|UpdateProjectDescription\UpdateProjectDescription403Response|UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse OK
+     * @return EmptyResponse OK
      */
-    public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse|UpdateProjectDescription400Response|UpdateProjectDescription403Response|UpdateProjectDescriptionDefaultResponse
-    {
-        $httpRequest = new Request(UpdateProjectDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => new EmptyResponse($httpResponse),
-            400 => UpdateProjectDescription400Response::fromResponse($httpResponse),
-            403 => UpdateProjectDescription403Response::fromResponse($httpResponse),
-            default => UpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse;
     /**
      * Update a Servers's description.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server-description
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateServerDescription\UpdateServerDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateServerDescription\UpdateServerDescription400Response|UpdateServerDescription\UpdateServerDescription403Response|UpdateServerDescription\UpdateServerDescriptionDefaultResponse OK
+     * @return EmptyResponse OK
      */
-    public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse|UpdateServerDescription400Response|UpdateServerDescription403Response|UpdateServerDescriptionDefaultResponse
-    {
-        $httpRequest = new Request(UpdateServerDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => new EmptyResponse($httpResponse),
-            400 => UpdateServerDescription400Response::fromResponse($httpResponse),
-            403 => UpdateServerDescription403Response::fromResponse($httpResponse),
-            default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse;
 }

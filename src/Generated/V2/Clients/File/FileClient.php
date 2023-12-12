@@ -2,43 +2,21 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\File;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\StringResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFile201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFile400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFile500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFile400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFile404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFile500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMeta200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMeta404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRules200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRules404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRules500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRules200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRules404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRules500Response;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesRequest;
 
 /**
@@ -54,173 +32,78 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileU
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class FileClient
+interface FileClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * Create a File.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-create-file
-     * @throws GuzzleException
-     * @param CreateFile\CreateFileRequest $request An object representing the request for this operation
-     * @return CreateFile\CreateFile201Response|CreateFile\CreateFile400Response|CreateFile\CreateFile500Response|CreateFile\CreateFileDefaultResponse Created
-     */
-    public function createFile(CreateFileRequest $request): CreateFile201Response|CreateFile400Response|CreateFile500Response|CreateFileDefaultResponse
-    {
-        $httpRequest = new Request(CreateFileRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateFile201Response::fromResponse($httpResponse),
-            400 => CreateFile400Response::fromResponse($httpResponse),
-            500 => CreateFile500Response::fromResponse($httpResponse),
-            default => CreateFileDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a File's meta.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-meta
-     * @throws GuzzleException
-     * @param GetFileMeta\GetFileMetaRequest $request An object representing the request for this operation
-     * @return GetFileMeta\GetFileMeta200Response|GetFileMeta\GetFileMeta404Response|GetFileMeta\GetFileMetaDefaultResponse OK
-     */
-    public function getFileMeta(GetFileMetaRequest $request): GetFileMeta200Response|GetFileMeta404Response|GetFileMetaDefaultResponse
-    {
-        $httpRequest = new Request(GetFileMetaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetFileMeta200Response::fromResponse($httpResponse),
-            404 => GetFileMeta404Response::fromResponse($httpResponse),
-            default => GetFileMetaDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a File.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
-     * @throws GuzzleException
-     * @param GetFile\GetFileRequest $request An object representing the request for this operation
-     * @return StringResponse|GetFile\GetFile400Response|GetFile\GetFile404Response|GetFile\GetFile500Response|GetFile\GetFileDefaultResponse OK
-     */
-    public function getFile(GetFileRequest $request): StringResponse|GetFile400Response|GetFile404Response|GetFile500Response|GetFileDefaultResponse
-    {
-        $httpRequest = new Request(GetFileRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => StringResponse::fromResponse($httpResponse),
-            400 => GetFile400Response::fromResponse($httpResponse),
-            404 => GetFile404Response::fromResponse($httpResponse),
-            500 => GetFile500Response::fromResponse($httpResponse),
-            default => GetFileDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a FileUploadToken's rules.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-upload-token-rules
-     * @throws GuzzleException
-     * @param GetFileUploadTokenRules\GetFileUploadTokenRulesRequest $request An object representing the request for this operation
-     * @return GetFileUploadTokenRules\GetFileUploadTokenRules200Response|GetFileUploadTokenRules\GetFileUploadTokenRules404Response|GetFileUploadTokenRules\GetFileUploadTokenRules500Response|GetFileUploadTokenRules\GetFileUploadTokenRulesDefaultResponse OK
-     */
-    public function getFileUploadTokenRules(GetFileUploadTokenRulesRequest $request): GetFileUploadTokenRules200Response|GetFileUploadTokenRules404Response|GetFileUploadTokenRules500Response|GetFileUploadTokenRulesDefaultResponse
-    {
-        $httpRequest = new Request(GetFileUploadTokenRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetFileUploadTokenRules200Response::fromResponse($httpResponse),
-            404 => GetFileUploadTokenRules404Response::fromResponse($httpResponse),
-            500 => GetFileUploadTokenRules500Response::fromResponse($httpResponse),
-            default => GetFileUploadTokenRulesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
-    /**
-     * Get a FileUploadType's rules.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-upload-type-rules
-     * @throws GuzzleException
-     * @param GetFileUploadTypeRules\GetFileUploadTypeRulesRequest $request An object representing the request for this operation
-     * @return GetFileUploadTypeRules\GetFileUploadTypeRules200Response|GetFileUploadTypeRules\GetFileUploadTypeRules404Response|GetFileUploadTypeRules\GetFileUploadTypeRules500Response|GetFileUploadTypeRules\GetFileUploadTypeRulesDefaultResponse OK
-     */
-    public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRules200Response|GetFileUploadTypeRules404Response|GetFileUploadTypeRules500Response|GetFileUploadTypeRulesDefaultResponse
-    {
-        $httpRequest = new Request(GetFileUploadTypeRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetFileUploadTypeRules200Response::fromResponse($httpResponse),
-            404 => GetFileUploadTypeRules404Response::fromResponse($httpResponse),
-            500 => GetFileUploadTypeRules500Response::fromResponse($httpResponse),
-            default => GetFileUploadTypeRulesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
     /**
      * Get a Token's upload rules.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-token-rules
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesRequest $request An object representing the request for this operation
-     * @return DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules200Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules404Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRules500Response|DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesDefaultResponse OK
+     * @deprecated
+     * @return DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesOKResponse OK
      */
-    public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRules200Response|DeprecatedFileGetFileTokenRules404Response|DeprecatedFileGetFileTokenRules500Response|DeprecatedFileGetFileTokenRulesDefaultResponse
-    {
-        $httpRequest = new Request(DeprecatedFileGetFileTokenRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedFileGetFileTokenRules200Response::fromResponse($httpResponse),
-            404 => DeprecatedFileGetFileTokenRules404Response::fromResponse($httpResponse),
-            500 => DeprecatedFileGetFileTokenRules500Response::fromResponse($httpResponse),
-            default => DeprecatedFileGetFileTokenRulesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRulesOKResponse;
     /**
      * Get a Type's upload rules.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-type-rules
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesRequest $request An object representing the request for this operation
-     * @return DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules200Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules404Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRules500Response|DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesDefaultResponse OK
+     * @deprecated
+     * @return DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesOKResponse OK
      */
-    public function deprecatedFileGetFileTypeRules(DeprecatedFileGetFileTypeRulesRequest $request): DeprecatedFileGetFileTypeRules200Response|DeprecatedFileGetFileTypeRules404Response|DeprecatedFileGetFileTypeRules500Response|DeprecatedFileGetFileTypeRulesDefaultResponse
-    {
-        $httpRequest = new Request(DeprecatedFileGetFileTypeRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => DeprecatedFileGetFileTypeRules200Response::fromResponse($httpResponse),
-            404 => DeprecatedFileGetFileTypeRules404Response::fromResponse($httpResponse),
-            500 => DeprecatedFileGetFileTypeRules500Response::fromResponse($httpResponse),
-            default => DeprecatedFileGetFileTypeRulesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function deprecatedFileGetFileTypeRules(DeprecatedFileGetFileTypeRulesRequest $request): DeprecatedFileGetFileTypeRulesOKResponse;
+    /**
+     * Create a File.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-create-file
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateFile\CreateFileRequest $request An object representing the request for this operation
+     * @return CreateFile\CreateFileCreatedResponse Created
+     */
+    public function createFile(CreateFileRequest $request): CreateFileCreatedResponse;
+    /**
+     * Get a File's meta.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-meta
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFileMeta\GetFileMetaRequest $request An object representing the request for this operation
+     * @return GetFileMeta\GetFileMetaOKResponse OK
+     */
+    public function getFileMeta(GetFileMetaRequest $request): GetFileMetaOKResponse;
+    /**
+     * Get a FileUploadToken's rules.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-upload-token-rules
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFileUploadTokenRules\GetFileUploadTokenRulesRequest $request An object representing the request for this operation
+     * @return GetFileUploadTokenRules\GetFileUploadTokenRulesOKResponse OK
+     */
+    public function getFileUploadTokenRules(GetFileUploadTokenRulesRequest $request): GetFileUploadTokenRulesOKResponse;
+    /**
+     * Get a FileUploadType's rules.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-upload-type-rules
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFileUploadTypeRules\GetFileUploadTypeRulesRequest $request An object representing the request for this operation
+     * @return GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse OK
+     */
+    public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRulesOKResponse;
+    /**
+     * Get a File.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFile\GetFileRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getFile(GetFileRequest $request): StringResponse;
 }

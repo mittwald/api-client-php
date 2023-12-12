@@ -2,43 +2,24 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUser201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUser400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUser201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUser400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSftpUser\DeleteSftpUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSftpUser\DeleteSftpUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSshUser\DeleteSshUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSshUser\DeleteSshUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUser200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUser404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUser200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUser404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsers200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsers404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsers200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsers404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUser400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUser400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest;
 
 /**
@@ -53,234 +34,106 @@ use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshU
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class SSHSFTPUserClient
+interface SSHSFTPUserClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Create an SFTPUser for a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-create-sftp-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateSftpUser\CreateSftpUserRequest $request An object representing the request for this operation
-     * @return CreateSftpUser\CreateSftpUser201Response|CreateSftpUser\CreateSftpUser400Response|CreateSftpUser\CreateSftpUserDefaultResponse Created
+     * @return CreateSftpUser\CreateSftpUserCreatedResponse Created
      */
-    public function createSftpUser(CreateSftpUserRequest $request): CreateSftpUser201Response|CreateSftpUser400Response|CreateSftpUserDefaultResponse
-    {
-        $httpRequest = new Request(CreateSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateSftpUser201Response::fromResponse($httpResponse),
-            400 => CreateSftpUser400Response::fromResponse($httpResponse),
-            default => CreateSftpUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createSftpUser(CreateSftpUserRequest $request): CreateSftpUserCreatedResponse;
     /**
      * Get all SFTPUsers for a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-list-sftp-users
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListSftpUsers\ListSftpUsersRequest $request An object representing the request for this operation
-     * @return ListSftpUsers\ListSftpUsers200Response|ListSftpUsers\ListSftpUsers404Response|ListSftpUsers\ListSftpUsersDefaultResponse OK
+     * @return ListSftpUsers\ListSftpUsersOKResponse OK
      */
-    public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsers200Response|ListSftpUsers404Response|ListSftpUsersDefaultResponse
-    {
-        $httpRequest = new Request(ListSftpUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListSftpUsers200Response::fromResponse($httpResponse),
-            404 => ListSftpUsers404Response::fromResponse($httpResponse),
-            default => ListSftpUsersDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse;
     /**
      * Delete an SFTPUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-delete-sftp-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteSftpUser\DeleteSftpUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteSftpUser\DeleteSftpUserDefaultResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function deleteSftpUser(DeleteSftpUserRequest $request): EmptyResponse|DeleteSftpUserDefaultResponse
-    {
-        $httpRequest = new Request(DeleteSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => DeleteSftpUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteSftpUser(DeleteSftpUserRequest $request): EmptyResponse;
     /**
      * Get an SFTPUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-get-sftp-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetSftpUser\GetSftpUserRequest $request An object representing the request for this operation
-     * @return GetSftpUser\GetSftpUser200Response|GetSftpUser\GetSftpUser404Response|GetSftpUser\GetSftpUserDefaultResponse OK
+     * @return GetSftpUser\GetSftpUserOKResponse OK
      */
-    public function getSftpUser(GetSftpUserRequest $request): GetSftpUser200Response|GetSftpUser404Response|GetSftpUserDefaultResponse
-    {
-        $httpRequest = new Request(GetSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetSftpUser200Response::fromResponse($httpResponse),
-            404 => GetSftpUser404Response::fromResponse($httpResponse),
-            default => GetSftpUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getSftpUser(GetSftpUserRequest $request): GetSftpUserOKResponse;
     /**
      * Update an SFTPUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-update-sftp-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateSftpUser\UpdateSftpUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateSftpUser\UpdateSftpUser400Response|UpdateSftpUser\UpdateSftpUserDefaultResponse
+     * @return EmptyResponse
      */
-    public function updateSftpUser(UpdateSftpUserRequest $request): EmptyResponse|UpdateSftpUser400Response|UpdateSftpUserDefaultResponse
-    {
-        $httpRequest = new Request(UpdateSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => UpdateSftpUser400Response::fromResponse($httpResponse),
-            default => UpdateSftpUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function updateSftpUser(UpdateSftpUserRequest $request): EmptyResponse;
     /**
      * Create an SSHUser for a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-create-ssh-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateSshUser\CreateSshUserRequest $request An object representing the request for this operation
-     * @return CreateSshUser\CreateSshUser201Response|CreateSshUser\CreateSshUser400Response|CreateSshUser\CreateSshUserDefaultResponse Created
+     * @return CreateSshUser\CreateSshUserCreatedResponse Created
      */
-    public function createSshUser(CreateSshUserRequest $request): CreateSshUser201Response|CreateSshUser400Response|CreateSshUserDefaultResponse
-    {
-        $httpRequest = new Request(CreateSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateSshUser201Response::fromResponse($httpResponse),
-            400 => CreateSshUser400Response::fromResponse($httpResponse),
-            default => CreateSshUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createSshUser(CreateSshUserRequest $request): CreateSshUserCreatedResponse;
     /**
      * Get all SSHUsers for a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-list-ssh-users
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ListSshUsers\ListSshUsersRequest $request An object representing the request for this operation
-     * @return ListSshUsers\ListSshUsers200Response|ListSshUsers\ListSshUsers404Response|ListSshUsers\ListSshUsersDefaultResponse OK
+     * @return ListSshUsers\ListSshUsersOKResponse OK
      */
-    public function listSshUsers(ListSshUsersRequest $request): ListSshUsers200Response|ListSshUsers404Response|ListSshUsersDefaultResponse
-    {
-        $httpRequest = new Request(ListSshUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ListSshUsers200Response::fromResponse($httpResponse),
-            404 => ListSshUsers404Response::fromResponse($httpResponse),
-            default => ListSshUsersDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse;
     /**
      * Delete an SSHUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-delete-ssh-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param DeleteSshUser\DeleteSshUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse|DeleteSshUser\DeleteSshUserDefaultResponse
+     * @return EmptyResponse
      */
-    public function deleteSshUser(DeleteSshUserRequest $request): EmptyResponse|DeleteSshUserDefaultResponse
-    {
-        $httpRequest = new Request(DeleteSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            default => DeleteSshUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function deleteSshUser(DeleteSshUserRequest $request): EmptyResponse;
     /**
      * Get an SSHUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-get-ssh-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param GetSshUser\GetSshUserRequest $request An object representing the request for this operation
-     * @return GetSshUser\GetSshUser200Response|GetSshUser\GetSshUser404Response|GetSshUser\GetSshUserDefaultResponse OK
+     * @return GetSshUser\GetSshUserOKResponse OK
      */
-    public function getSshUser(GetSshUserRequest $request): GetSshUser200Response|GetSshUser404Response|GetSshUserDefaultResponse
-    {
-        $httpRequest = new Request(GetSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => GetSshUser200Response::fromResponse($httpResponse),
-            404 => GetSshUser404Response::fromResponse($httpResponse),
-            default => GetSshUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function getSshUser(GetSshUserRequest $request): GetSshUserOKResponse;
     /**
      * Update an SSHUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-update-ssh-user
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param UpdateSshUser\UpdateSshUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse|UpdateSshUser\UpdateSshUser400Response|UpdateSshUser\UpdateSshUserDefaultResponse
+     * @return EmptyResponse
      */
-    public function updateSshUser(UpdateSshUserRequest $request): EmptyResponse|UpdateSshUser400Response|UpdateSshUserDefaultResponse
-    {
-        $httpRequest = new Request(UpdateSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => UpdateSshUser400Response::fromResponse($httpResponse),
-            default => UpdateSshUserDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function updateSshUser(UpdateSshUserRequest $request): EmptyResponse;
 }

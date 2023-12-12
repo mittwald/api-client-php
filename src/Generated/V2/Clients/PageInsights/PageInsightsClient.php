@@ -2,18 +2,11 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\PageInsights;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceData200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceData400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceData403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProject200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProject400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProject403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectRequest;
 
 /**
@@ -28,58 +21,26 @@ use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerform
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class PageInsightsClient
+interface PageInsightsClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Get detailed performance data for a given domain and path.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-get-performance-data
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataRequest $request An object representing the request for this operation
-     * @return PageinsightsGetPerformanceData\PageinsightsGetPerformanceData200Response|PageinsightsGetPerformanceData\PageinsightsGetPerformanceData400Response|PageinsightsGetPerformanceData\PageinsightsGetPerformanceData403Response|PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataDefaultResponse OK
+     * @return PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataOKResponse OK
      */
-    public function pageinsightsGetPerformanceData(PageinsightsGetPerformanceDataRequest $request): PageinsightsGetPerformanceData200Response|PageinsightsGetPerformanceData400Response|PageinsightsGetPerformanceData403Response|PageinsightsGetPerformanceDataDefaultResponse
-    {
-        $httpRequest = new Request(PageinsightsGetPerformanceDataRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => PageinsightsGetPerformanceData200Response::fromResponse($httpResponse),
-            400 => PageinsightsGetPerformanceData400Response::fromResponse($httpResponse),
-            403 => PageinsightsGetPerformanceData403Response::fromResponse($httpResponse),
-            default => PageinsightsGetPerformanceDataDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function pageinsightsGetPerformanceData(PageinsightsGetPerformanceDataRequest $request): PageinsightsGetPerformanceDataOKResponse;
     /**
      * List websites (specified as domain and path) from a project where performance data is available.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-list-performance-data-for-project
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectRequest $request An object representing the request for this operation
-     * @return PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProject200Response|PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProject400Response|PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProject403Response|PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectDefaultResponse OK
+     * @return PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse OK
      */
-    public function pageinsightsListPerformanceDataForProject(PageinsightsListPerformanceDataForProjectRequest $request): PageinsightsListPerformanceDataForProject200Response|PageinsightsListPerformanceDataForProject400Response|PageinsightsListPerformanceDataForProject403Response|PageinsightsListPerformanceDataForProjectDefaultResponse
-    {
-        $httpRequest = new Request(PageinsightsListPerformanceDataForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => PageinsightsListPerformanceDataForProject200Response::fromResponse($httpResponse),
-            400 => PageinsightsListPerformanceDataForProject400Response::fromResponse($httpResponse),
-            403 => PageinsightsListPerformanceDataForProject403Response::fromResponse($httpResponse),
-            default => PageinsightsListPerformanceDataForProjectDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function pageinsightsListPerformanceDataForProject(PageinsightsListPerformanceDataForProjectRequest $request): PageinsightsListPerformanceDataForProjectOKResponse;
 }

@@ -39,15 +39,12 @@ on how to obtain an API token and how to get started with the API.
 
 ```php
 use \Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
-use \Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjects200Response;
 
 $listProjectRequest = new ListProjectsRequest();
 $listProjectResponse = $client->project()->listProjects($listProjectRequest);
 
-if ($listProjectResponse instanceof ListProjects200Response) {
-    foreach ($listProjectResponse->getBody() as $project) {
-        echo $project->getShortId() . PHP_EOL;
-    }
+foreach ($listProjectResponse->getBody() as $project) {
+    echo $project->getShortId() . PHP_EOL;
 }
 ```
 

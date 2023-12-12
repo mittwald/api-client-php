@@ -48,6 +48,9 @@ class Conversation
             'lastMessageBy' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
             ],
+            'mainUser' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
+            ],
             'relatedTo' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
             ],
@@ -74,6 +77,13 @@ class Conversation
             'title' => [
                 'type' => 'string',
             ],
+            'visibility' => [
+                'enum' => [
+                    'shared',
+                    'private',
+                ],
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'conversationId',
@@ -81,6 +91,8 @@ class Conversation
             'title',
             'createdAt',
             'status',
+            'visibility',
+            'mainUser',
         ],
         'type' => 'object',
     ];
@@ -116,6 +128,11 @@ class Conversation
     private ?User $lastMessageBy = null;
 
     /**
+     * @var User
+     */
+    private User $mainUser;
+
+    /**
      * @var AggregateReference|null
      */
     private ?AggregateReference $relatedTo = null;
@@ -146,19 +163,28 @@ class Conversation
     private string $title;
 
     /**
+     * @var ConversationVisibility
+     */
+    private ConversationVisibility $visibility;
+
+    /**
      * @param string $conversationId
      * @param DateTime $createdAt
+     * @param User $mainUser
      * @param string $shortId
      * @param ConversationStatus $status
      * @param string $title
+     * @param ConversationVisibility $visibility
      */
-    public function __construct(string $conversationId, DateTime $createdAt, string $shortId, ConversationStatus $status, string $title)
+    public function __construct(string $conversationId, DateTime $createdAt, User $mainUser, string $shortId, ConversationStatus $status, string $title, ConversationVisibility $visibility)
     {
         $this->conversationId = $conversationId;
         $this->createdAt = $createdAt;
+        $this->mainUser = $mainUser;
         $this->shortId = $shortId;
         $this->status = $status;
         $this->title = $title;
+        $this->visibility = $visibility;
     }
 
     /**
@@ -210,6 +236,14 @@ class Conversation
     }
 
     /**
+     * @return User
+     */
+    public function getMainUser(): User
+    {
+        return $this->mainUser;
+    }
+
+    /**
      * @return
      * AggregateReference|null
      */
@@ -258,6 +292,14 @@ class Conversation
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * @return ConversationVisibility
+     */
+    public function getVisibility(): ConversationVisibility
+    {
+        return $this->visibility;
     }
 
     /**
@@ -383,6 +425,18 @@ class Conversation
     }
 
     /**
+     * @param User $mainUser
+     * @return self
+     */
+    public function withMainUser(User $mainUser): self
+    {
+        $clone = clone $this;
+        $clone->mainUser = $mainUser;
+
+        return $clone;
+    }
+
+    /**
      * @param AggregateReference $relatedTo
      * @return self
      */
@@ -500,6 +554,18 @@ class Conversation
     }
 
     /**
+     * @param ConversationVisibility $visibility
+     * @return self
+     */
+    public function withVisibility(ConversationVisibility $visibility): self
+    {
+        $clone = clone $this;
+        $clone->visibility = $visibility;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -532,6 +598,7 @@ class Conversation
         if (isset($input->{'lastMessageBy'})) {
             $lastMessageBy = User::buildFromInput($input->{'lastMessageBy'}, validate: $validate);
         }
+        $mainUser = User::buildFromInput($input->{'mainUser'}, validate: $validate);
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
             $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
@@ -547,8 +614,9 @@ class Conversation
         $shortId = $input->{'shortId'};
         $status = ConversationStatus::from($input->{'status'});
         $title = $input->{'title'};
+        $visibility = ConversationVisibility::from($input->{'visibility'});
 
-        $obj = new self($conversationId, $createdAt, $shortId, $status, $title);
+        $obj = new self($conversationId, $createdAt, $mainUser, $shortId, $status, $title, $visibility);
         $obj->category = $category;
         $obj->createdBy = $createdBy;
         $obj->lastMessageAt = $lastMessageAt;
@@ -581,6 +649,7 @@ class Conversation
         if (isset($this->lastMessageBy)) {
             $output['lastMessageBy'] = $this->lastMessageBy->toJson();
         }
+        $output['mainUser'] = $this->mainUser->toJson();
         if (isset($this->relatedTo)) {
             $output['relatedTo'] = $this->relatedTo->toJson();
         }
@@ -593,6 +662,7 @@ class Conversation
         $output['shortId'] = $this->shortId;
         $output['status'] = ($this->status)->value;
         $output['title'] = $this->title;
+        $output['visibility'] = ($this->visibility)->value;
 
         return $output;
     }

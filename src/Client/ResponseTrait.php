@@ -11,7 +11,7 @@ trait ResponseTrait
     /**
      * Returns the underlying PSR-7 HTTP response object.
      */
-    public function getResponse(): ResponseInterface
+    public function getResponse(): ?ResponseInterface
     {
         return $this->response;
     }

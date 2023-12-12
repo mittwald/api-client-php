@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * String models an HTTP response with a raw string body
  */
-readonly class StringResponse
+readonly class StringResponse implements ResponseContainer
 {
     use ResponseTrait;
 

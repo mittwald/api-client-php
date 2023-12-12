@@ -2,9 +2,6 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Container;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
-
 /**
  * Client for Container API
  *
@@ -18,12 +15,6 @@ use GuzzleHttp\Psr7\Request;
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class ContainerClient
+interface ContainerClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
 }

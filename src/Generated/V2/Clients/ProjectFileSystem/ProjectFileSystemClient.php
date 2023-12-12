@@ -2,37 +2,17 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\StringResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContent403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContent404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContent503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwt200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwt403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwt404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwt503Response;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFiles200Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFiles403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFiles404Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFiles503Response;
-use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesRequest;
 
 /**
@@ -47,131 +27,56 @@ use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemL
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class ProjectFileSystemClient
+interface ProjectFileSystemClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * List directories belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-directories
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories200Response|ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories403Response|ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories404Response|ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectories503Response|ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesDefaultResponse OK
+     * @return ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesOKResponse OK
      */
-    public function projectFileSystemGetDirectories(ProjectFileSystemGetDirectoriesRequest $request): ProjectFileSystemGetDirectories200Response|ProjectFileSystemGetDirectories403Response|ProjectFileSystemGetDirectories404Response|ProjectFileSystemGetDirectories503Response|ProjectFileSystemGetDirectoriesDefaultResponse
-    {
-        $httpRequest = new Request(ProjectFileSystemGetDirectoriesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ProjectFileSystemGetDirectories200Response::fromResponse($httpResponse),
-            403 => ProjectFileSystemGetDirectories403Response::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetDirectories404Response::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetDirectories503Response::fromResponse($httpResponse),
-            default => ProjectFileSystemGetDirectoriesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function projectFileSystemGetDirectories(ProjectFileSystemGetDirectoriesRequest $request): ProjectFileSystemGetDirectoriesOKResponse;
     /**
      * Get a Project directory filesystem usage.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-disk-usage
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage200Response|ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage403Response|ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage404Response|ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsage503Response|ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageDefaultResponse OK
+     * @return ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageOKResponse OK
      */
-    public function projectFileSystemGetDiskUsage(ProjectFileSystemGetDiskUsageRequest $request): ProjectFileSystemGetDiskUsage200Response|ProjectFileSystemGetDiskUsage403Response|ProjectFileSystemGetDiskUsage404Response|ProjectFileSystemGetDiskUsage503Response|ProjectFileSystemGetDiskUsageDefaultResponse
-    {
-        $httpRequest = new Request(ProjectFileSystemGetDiskUsageRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ProjectFileSystemGetDiskUsage200Response::fromResponse($httpResponse),
-            403 => ProjectFileSystemGetDiskUsage403Response::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetDiskUsage404Response::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetDiskUsage503Response::fromResponse($httpResponse),
-            default => ProjectFileSystemGetDiskUsageDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function projectFileSystemGetDiskUsage(ProjectFileSystemGetDiskUsageRequest $request): ProjectFileSystemGetDiskUsageOKResponse;
     /**
      * Get a Project file's content.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-file-content
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentRequest $request An object representing the request for this operation
-     * @return StringResponse|ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContent403Response|ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContent404Response|ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContent503Response|ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentDefaultResponse OK
+     * @return StringResponse OK
      */
-    public function projectFileSystemGetFileContent(ProjectFileSystemGetFileContentRequest $request): StringResponse|ProjectFileSystemGetFileContent403Response|ProjectFileSystemGetFileContent404Response|ProjectFileSystemGetFileContent503Response|ProjectFileSystemGetFileContentDefaultResponse
-    {
-        $httpRequest = new Request(ProjectFileSystemGetFileContentRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => StringResponse::fromResponse($httpResponse),
-            403 => ProjectFileSystemGetFileContent403Response::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetFileContent404Response::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetFileContent503Response::fromResponse($httpResponse),
-            default => ProjectFileSystemGetFileContentDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function projectFileSystemGetFileContent(ProjectFileSystemGetFileContentRequest $request): StringResponse;
     /**
      * Get a Project's file/filesystem authorization token.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-jwt
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetJwt\ProjectFileSystemGetJwt200Response|ProjectFileSystemGetJwt\ProjectFileSystemGetJwt403Response|ProjectFileSystemGetJwt\ProjectFileSystemGetJwt404Response|ProjectFileSystemGetJwt\ProjectFileSystemGetJwt503Response OK
+     * @return ProjectFileSystemGetJwt\ProjectFileSystemGetJwtOKResponse OK
      */
-    public function projectFileSystemGetJwt(ProjectFileSystemGetJwtRequest $request): ProjectFileSystemGetJwt200Response|ProjectFileSystemGetJwt403Response|ProjectFileSystemGetJwt404Response|ProjectFileSystemGetJwt503Response
-    {
-        $httpRequest = new Request(ProjectFileSystemGetJwtRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ProjectFileSystemGetJwt200Response::fromResponse($httpResponse),
-            403 => ProjectFileSystemGetJwt403Response::fromResponse($httpResponse),
-            404 => ProjectFileSystemGetJwt404Response::fromResponse($httpResponse),
-            503 => ProjectFileSystemGetJwt503Response::fromResponse($httpResponse),
-        };
-    }
-
+    public function projectFileSystemGetJwt(ProjectFileSystemGetJwtRequest $request): ProjectFileSystemGetJwtOKResponse;
     /**
      * Get a Project file's information.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-list-files
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param ProjectFileSystemListFiles\ProjectFileSystemListFilesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemListFiles\ProjectFileSystemListFiles200Response|ProjectFileSystemListFiles\ProjectFileSystemListFiles403Response|ProjectFileSystemListFiles\ProjectFileSystemListFiles404Response|ProjectFileSystemListFiles\ProjectFileSystemListFiles503Response|ProjectFileSystemListFiles\ProjectFileSystemListFilesDefaultResponse OK
+     * @return ProjectFileSystemListFiles\ProjectFileSystemListFilesOKResponse OK
      */
-    public function projectFileSystemListFiles(ProjectFileSystemListFilesRequest $request): ProjectFileSystemListFiles200Response|ProjectFileSystemListFiles403Response|ProjectFileSystemListFiles404Response|ProjectFileSystemListFiles503Response|ProjectFileSystemListFilesDefaultResponse
-    {
-        $httpRequest = new Request(ProjectFileSystemListFilesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            200 => ProjectFileSystemListFiles200Response::fromResponse($httpResponse),
-            403 => ProjectFileSystemListFiles403Response::fromResponse($httpResponse),
-            404 => ProjectFileSystemListFiles404Response::fromResponse($httpResponse),
-            503 => ProjectFileSystemListFiles503Response::fromResponse($httpResponse),
-            default => ProjectFileSystemListFilesDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function projectFileSystemListFiles(ProjectFileSystemListFilesRequest $request): ProjectFileSystemListFilesOKResponse;
 }

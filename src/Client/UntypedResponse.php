@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * UntypedResponse models an HTTP response with an arbitrary body.
  */
-readonly class UntypedResponse
+readonly class UntypedResponse implements ResponseContainer
 {
     use ResponseTrait;
 

@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
  * EmptyResponse models an empty HTTP response (typically accompanying a
  * "204 No Content" response).
  */
-readonly class EmptyResponse
+readonly class EmptyResponse implements ResponseContainer
 {
     use ResponseTrait;
 

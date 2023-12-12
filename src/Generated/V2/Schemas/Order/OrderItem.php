@@ -39,6 +39,10 @@ class OrderItem
                 'example' => 'PS23-PLUS-0004',
                 'type' => 'string',
             ],
+            'articleName' => [
+                'example' => 'proSpace',
+                'type' => 'string',
+            ],
             'articleTemplateName' => [
                 'example' => 'Pro-Space-Hosting',
                 'type' => 'string',
@@ -92,6 +96,11 @@ class OrderItem
      * @var string
      */
     private string $articleId;
+
+    /**
+     * @var string|null
+     */
+    private ?string $articleName = null;
 
     /**
      * @var string|null
@@ -166,6 +175,14 @@ class OrderItem
     public function getArticleId(): string
     {
         return $this->articleId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getArticleName(): ?string
+    {
+        return $this->articleName ?? null;
     }
 
     /**
@@ -280,6 +297,35 @@ class OrderItem
 
         $clone = clone $this;
         $clone->articleId = $articleId;
+
+        return $clone;
+    }
+
+    /**
+     * @param string $articleName
+     * @return self
+     */
+    public function withArticleName(string $articleName): self
+    {
+        $validator = new Validator();
+        $validator->validate($articleName, static::$schema['properties']['articleName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->articleName = $articleName;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutArticleName(): self
+    {
+        $clone = clone $this;
+        unset($clone->articleName);
 
         return $clone;
     }
@@ -463,6 +509,10 @@ class OrderItem
         }
         $amount = str_contains($input->{'amount'}, '.') ? (float)($input->{'amount'}) : (int)($input->{'amount'});
         $articleId = $input->{'articleId'};
+        $articleName = null;
+        if (isset($input->{'articleName'})) {
+            $articleName = $input->{'articleName'};
+        }
         $articleTemplateName = null;
         if (isset($input->{'articleTemplateName'})) {
             $articleTemplateName = $input->{'articleTemplateName'};
@@ -485,6 +535,7 @@ class OrderItem
 
         $obj = new self($amount, $articleId, $isInclusive, $orderItemId, $price);
         $obj->addons = $addons;
+        $obj->articleName = $articleName;
         $obj->articleTemplateName = $articleTemplateName;
         $obj->attributeConfiguration = $attributeConfiguration;
         $obj->predefinedDomainAggregateId = $predefinedDomainAggregateId;
@@ -505,6 +556,9 @@ class OrderItem
         }
         $output['amount'] = $this->amount;
         $output['articleId'] = $this->articleId;
+        if (isset($this->articleName)) {
+            $output['articleName'] = $this->articleName;
+        }
         if (isset($this->articleTemplateName)) {
             $output['articleTemplateName'] = $this->articleTemplateName;
         }

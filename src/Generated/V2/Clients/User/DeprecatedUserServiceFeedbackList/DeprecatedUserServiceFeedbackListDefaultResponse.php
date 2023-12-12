@@ -6,10 +6,11 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeed
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedUserServiceFeedbackListDefaultResponse
+class DeprecatedUserServiceFeedbackListDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -33,7 +34,7 @@ class DeprecatedUserServiceFeedbackListDefaultResponse
      */
     private Error $body;
 
-    public ResponseInterface|null $httpResponse = null;
+    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param Error $body
@@ -132,5 +133,10 @@ class DeprecatedUserServiceFeedbackListDefaultResponse
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
         $response->httpResponse = $httpResponse;
         return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

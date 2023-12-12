@@ -26,6 +26,9 @@ class User
      */
     private static array $schema = [
         'properties' => [
+            'active' => [
+                'type' => 'boolean',
+            ],
             'avatarRefId' => [
                 'type' => 'string',
             ],
@@ -44,6 +47,11 @@ class User
         ],
         'type' => 'object',
     ];
+
+    /**
+     * @var bool|null
+     */
+    private ?bool $active = null;
 
     /**
      * @var string|null
@@ -71,6 +79,14 @@ class User
     public function __construct(string $userId)
     {
         $this->userId = $userId;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getActive(): ?bool
+    {
+        return $this->active ?? null;
     }
 
     /**
@@ -103,6 +119,35 @@ class User
     public function getUserId(): string
     {
         return $this->userId;
+    }
+
+    /**
+     * @param bool $active
+     * @return self
+     */
+    public function withActive(bool $active): self
+    {
+        $validator = new Validator();
+        $validator->validate($active, static::$schema['properties']['active']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->active = $active;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutActive(): self
+    {
+        $clone = clone $this;
+        unset($clone->active);
+
+        return $clone;
     }
 
     /**
@@ -219,6 +264,10 @@ class User
             static::validateInput($input);
         }
 
+        $active = null;
+        if (isset($input->{'active'})) {
+            $active = (bool)($input->{'active'});
+        }
         $avatarRefId = null;
         if (isset($input->{'avatarRefId'})) {
             $avatarRefId = $input->{'avatarRefId'};
@@ -234,6 +283,7 @@ class User
         $userId = $input->{'userId'};
 
         $obj = new self($userId);
+        $obj->active = $active;
         $obj->avatarRefId = $avatarRefId;
         $obj->clearName = $clearName;
         $obj->department = $department;
@@ -248,6 +298,9 @@ class User
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->active)) {
+            $output['active'] = $this->active;
+        }
         if (isset($this->avatarRefId)) {
             $output['avatarRefId'] = $this->avatarRefId;
         }

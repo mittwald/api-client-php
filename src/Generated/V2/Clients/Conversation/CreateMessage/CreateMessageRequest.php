@@ -33,6 +33,7 @@ class CreateMessageRequest
                         'type' => 'array',
                     ],
                     'messageContent' => [
+                        'maxLength' => 8000,
                         'type' => 'string',
                     ],
                 ],

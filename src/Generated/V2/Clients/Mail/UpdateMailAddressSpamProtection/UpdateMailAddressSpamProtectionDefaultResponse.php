@@ -6,10 +6,11 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProt
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateMailAddressSpamProtectionDefaultResponse
+class UpdateMailAddressSpamProtectionDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -33,7 +34,7 @@ class UpdateMailAddressSpamProtectionDefaultResponse
      */
     private Error $body;
 
-    public ResponseInterface|null $httpResponse = null;
+    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param Error $body
@@ -132,5 +133,10 @@ class UpdateMailAddressSpamProtectionDefaultResponse
         $response = static::buildFromInput(['body' => $parsedBody], validate: false);
         $response->httpResponse = $httpResponse;
         return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Mittwald\ApiClient\Generated\V2;
 
-use Mittwald\ApiClient\Client\BaseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
@@ -30,100 +29,25 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
  * (https://github.com/mittwald/api-client-php-builder). Please make any changes
  * there.
  */
-class Client extends BaseClient
+interface Client
 {
-    public function project(): ProjectClient
-    {
-        return new ProjectClient($this->client);
-    }
-
-    public function backup(): BackupClient
-    {
-        return new BackupClient($this->client);
-    }
-
-    public function sSHSFTPUser(): SSHSFTPUserClient
-    {
-        return new SSHSFTPUserClient($this->client);
-    }
-
-    public function cronjob(): CronjobClient
-    {
-        return new CronjobClient($this->client);
-    }
-
-    public function app(): AppClient
-    {
-        return new AppClient($this->client);
-    }
-
-    public function projectFileSystem(): ProjectFileSystemClient
-    {
-        return new ProjectFileSystemClient($this->client);
-    }
-
-    public function contract(): ContractClient
-    {
-        return new ContractClient($this->client);
-    }
-
-    public function database(): DatabaseClient
-    {
-        return new DatabaseClient($this->client);
-    }
-
-    public function domain(): DomainClient
-    {
-        return new DomainClient($this->client);
-    }
-
-    public function conversation(): ConversationClient
-    {
-        return new ConversationClient($this->client);
-    }
-
-    public function customer(): CustomerClient
-    {
-        return new CustomerClient($this->client);
-    }
-
-    public function user(): UserClient
-    {
-        return new UserClient($this->client);
-    }
-
-    public function notification(): NotificationClient
-    {
-        return new NotificationClient($this->client);
-    }
-
-    public function file(): FileClient
-    {
-        return new FileClient($this->client);
-    }
-
-    public function mail(): MailClient
-    {
-        return new MailClient($this->client);
-    }
-
-    public function article(): ArticleClient
-    {
-        return new ArticleClient($this->client);
-    }
-
-    public function container(): ContainerClient
-    {
-        return new ContainerClient($this->client);
-    }
-
-    public function pageInsights(): PageInsightsClient
-    {
-        return new PageInsightsClient($this->client);
-    }
-
-    public function relocation(): RelocationClient
-    {
-        return new RelocationClient($this->client);
-    }
+    public function project(): ProjectClient;
+    public function backup(): BackupClient;
+    public function sshSFTPUser(): SSHSFTPUserClient;
+    public function cronjob(): CronjobClient;
+    public function app(): AppClient;
+    public function projectFileSystem(): ProjectFileSystemClient;
+    public function contract(): ContractClient;
+    public function database(): DatabaseClient;
+    public function domain(): DomainClient;
+    public function conversation(): ConversationClient;
+    public function customer(): CustomerClient;
+    public function user(): UserClient;
+    public function notification(): NotificationClient;
+    public function file(): FileClient;
+    public function mail(): MailClient;
+    public function article(): ArticleClient;
+    public function container(): ContainerClient;
+    public function pageInsights(): PageInsightsClient;
+    public function relocation(): RelocationClient;
 }

@@ -2,16 +2,11 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Relocation;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChange201Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChange403Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeDefaultResponse;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocation400Response;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationRequest;
 
 /**
@@ -26,38 +21,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRe
  * @generated
  * @see https://github.com/mittwald/api-client-php-builder
  */
-class RelocationClient
+interface RelocationClient
 {
-    private Client $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
-
     /**
      * Register a tariff change for a legacy tariff.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Relocation/operation/relocation-create-legacy-tariff-change
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateLegacyTariffChange\CreateLegacyTariffChangeRequest $request An object representing the request for this operation
-     * @return CreateLegacyTariffChange\CreateLegacyTariffChange201Response|CreateLegacyTariffChange\CreateLegacyTariffChange403Response|CreateLegacyTariffChange\CreateLegacyTariffChangeDefaultResponse
+     * @return CreateLegacyTariffChange\CreateLegacyTariffChangeCreatedResponse
      */
-    public function createLegacyTariffChange(CreateLegacyTariffChangeRequest $request): CreateLegacyTariffChange201Response|CreateLegacyTariffChange403Response|CreateLegacyTariffChangeDefaultResponse
-    {
-        $httpRequest = new Request(CreateLegacyTariffChangeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            201 => CreateLegacyTariffChange201Response::fromResponse($httpResponse),
-            403 => CreateLegacyTariffChange403Response::fromResponse($httpResponse),
-            default => CreateLegacyTariffChangeDefaultResponse::fromResponse($httpResponse),
-        };
-    }
-
+    public function createLegacyTariffChange(CreateLegacyTariffChangeRequest $request): CreateLegacyTariffChangeCreatedResponse;
     /**
      * Relocate an external Project to mittwald.
      *
@@ -65,21 +40,9 @@ class RelocationClient
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Relocation/operation/relocation-create-relocation
      * @throws GuzzleException
+     * @throws UnexpectedResponseException
      * @param CreateRelocation\CreateRelocationRequest $request An object representing the request for this operation
-     * @return EmptyResponse|CreateRelocation\CreateRelocation400Response|CreateRelocation\CreateRelocationDefaultResponse No content
+     * @return EmptyResponse No content
      */
-    public function createRelocation(CreateRelocationRequest $request): EmptyResponse|CreateRelocation400Response|CreateRelocationDefaultResponse
-    {
-        $httpRequest = new Request(CreateRelocationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        return match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
-            400 => CreateRelocation400Response::fromResponse($httpResponse),
-            default => CreateRelocationDefaultResponse::fromResponse($httpResponse),
-        };
-    }
+    public function createRelocation(CreateRelocationRequest $request): EmptyResponse;
 }
