@@ -48,6 +48,10 @@ class Address
                 'example' => 'DE',
                 'description' => 'ISO 3166-1 alpha-2 country code',
             ],
+            'addressPrefix' => [
+                'type' => 'string',
+                'example' => 'c/o Ada Lovelace',
+            ],
         ],
         'required' => [
             'street',
@@ -84,6 +88,11 @@ class Address
      * @var string
      */
     private string $countryCode;
+
+    /**
+     * @var string|null
+     */
+    private ?string $addressPrefix = null;
 
     /**
      * @param string $street
@@ -139,6 +148,14 @@ class Address
     public function getCountryCode(): string
     {
         return $this->countryCode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddressPrefix(): ?string
+    {
+        return $this->addressPrefix ?? null;
     }
 
     /**
@@ -232,6 +249,35 @@ class Address
     }
 
     /**
+     * @param string $addressPrefix
+     * @return self
+     */
+    public function withAddressPrefix(string $addressPrefix): self
+    {
+        $validator = new Validator();
+        $validator->validate($addressPrefix, static::$schema['properties']['addressPrefix']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->addressPrefix = $addressPrefix;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutAddressPrefix(): self
+    {
+        $clone = clone $this;
+        unset($clone->addressPrefix);
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -251,9 +297,13 @@ class Address
         $city = $input->{'city'};
         $zip = $input->{'zip'};
         $countryCode = $input->{'countryCode'};
+        $addressPrefix = null;
+        if (isset($input->{'addressPrefix'})) {
+            $addressPrefix = $input->{'addressPrefix'};
+        }
 
         $obj = new self($street, $houseNumber, $city, $zip, $countryCode);
-
+        $obj->addressPrefix = $addressPrefix;
         return $obj;
     }
 
@@ -270,6 +320,9 @@ class Address
         $output['city'] = $this->city;
         $output['zip'] = $this->zip;
         $output['countryCode'] = $this->countryCode;
+        if (isset($this->addressPrefix)) {
+            $output['addressPrefix'] = $this->addressPrefix;
+        }
 
         return $output;
     }

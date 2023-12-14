@@ -198,6 +198,31 @@ class ProjectClientImpl implements ProjectClient
     }
 
     /**
+     * List Invites belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListInvitesForProject\ListInvitesForProjectRequest $request An object representing the request for this operation
+     * @return ListInvitesForProject\ListInvitesForProjectOKResponse OK
+     */
+    public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse
+    {
+        $httpRequest = new Request(ListInvitesForProjectRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListInvitesForProjectOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ListInvitesForProjectNotFoundResponse::fromResponse($httpResponse),
+            default => ListInvitesForProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Create a Project belonging to a Server.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project
@@ -629,31 +654,6 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => LeaveProjectDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List Invites belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListInvitesForProject\ListInvitesForProjectRequest $request An object representing the request for this operation
-     * @return ListInvitesForProject\ListInvitesForProjectOKResponse OK
-     */
-    public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse
-    {
-        $httpRequest = new Request(ListInvitesForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListInvitesForProjectOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ListInvitesForProjectNotFoundResponse::fromResponse($httpResponse),
-            default => ListInvitesForProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
 

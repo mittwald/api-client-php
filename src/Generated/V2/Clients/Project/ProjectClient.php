@@ -87,6 +87,16 @@ interface ProjectClient
      */
     public function createProjectInvite(CreateProjectInviteRequest $request): CreateProjectInviteCreatedResponse;
     /**
+     * List Invites belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListInvitesForProject\ListInvitesForProjectRequest $request An object representing the request for this operation
+     * @return ListInvitesForProject\ListInvitesForProjectOKResponse OK
+     */
+    public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse;
+    /**
      * Create a Project belonging to a Server.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project
@@ -256,16 +266,6 @@ interface ProjectClient
      * @return EmptyResponse
      */
     public function leaveProject(LeaveProjectRequest $request): EmptyResponse;
-    /**
-     * List Invites belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListInvitesForProject\ListInvitesForProjectRequest $request An object representing the request for this operation
-     * @return ListInvitesForProject\ListInvitesForProjectOKResponse OK
-     */
-    public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse;
     /**
      * List Memberships belonging to a Project.
      *
