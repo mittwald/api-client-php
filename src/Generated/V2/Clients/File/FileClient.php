@@ -67,6 +67,16 @@ interface FileClient
      */
     public function createFile(CreateFileRequest $request): CreateFileCreatedResponse;
     /**
+     * Get a File.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFile\GetFileRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getFile(GetFileRequest $request): StringResponse;
+    /**
      * Get a File's meta.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-meta
@@ -96,14 +106,4 @@ interface FileClient
      * @return GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse OK
      */
     public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRulesOKResponse;
-    /**
-     * Get a File.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetFile\GetFileRequest $request An object representing the request for this operation
-     * @return StringResponse OK
-     */
-    public function getFile(GetFileRequest $request): StringResponse;
 }

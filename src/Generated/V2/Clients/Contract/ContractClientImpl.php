@@ -171,33 +171,6 @@ class ContractClientImpl implements ContractClient
     }
 
     /**
-     * Schedule the Termination of a ContractItem.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract-item
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param TerminateContractItem\TerminateContractItemRequest $request An object representing the request for this operation
-     * @return TerminateContractItem\TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
-     */
-    public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse
-    {
-        $httpRequest = new Request(TerminateContractItemRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 201) {
-            return TerminateContractItemCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => TerminateContractItemBadRequestResponse::fromResponse($httpResponse),
-            404 => TerminateContractItemNotFoundResponse::fromResponse($httpResponse),
-            default => TerminateContractItemDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Cancel the TariffChange for the referred ContractItem.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-cancel-contract-tariff-change
@@ -252,33 +225,6 @@ class ContractClientImpl implements ContractClient
     }
 
     /**
-     * Schedule the Termination of a Contract.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param TerminateContract\TerminateContractRequest $request An object representing the request for this operation
-     * @return TerminateContract\TerminateContractCreatedResponse Returns the contractId, the date on which the Termination will take place and the list of affected ContractItems.
-     */
-    public function terminateContract(TerminateContractRequest $request): TerminateContractCreatedResponse
-    {
-        $httpRequest = new Request(TerminateContractRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 201) {
-            return TerminateContractCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => TerminateContractBadRequestResponse::fromResponse($httpResponse),
-            404 => TerminateContractNotFoundResponse::fromResponse($httpResponse),
-            default => TerminateContractDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Return the BaseItem of the Contract with the given ID.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-base-item-of-contract
@@ -301,6 +247,32 @@ class ContractClientImpl implements ContractClient
             400 => GetBaseItemOfContractBadRequestResponse::fromResponse($httpResponse),
             404 => GetBaseItemOfContractNotFoundResponse::fromResponse($httpResponse),
             default => GetBaseItemOfContractDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Returns the Contract with the given ID.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContract\GetDetailOfContractRequest $request An object representing the request for this operation
+     * @return GetDetailOfContract\GetDetailOfContractOKResponse
+     */
+    public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse
+    {
+        $httpRequest = new Request(GetDetailOfContractRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDetailOfContractOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDetailOfContractBadRequestResponse::fromResponse($httpResponse),
+            404 => GetDetailOfContractNotFoundResponse::fromResponse($httpResponse),
+            default => GetDetailOfContractDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -409,32 +381,6 @@ class ContractClientImpl implements ContractClient
     }
 
     /**
-     * Returns the Contract with the given ID.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetDetailOfContract\GetDetailOfContractRequest $request An object representing the request for this operation
-     * @return GetDetailOfContract\GetDetailOfContractOKResponse
-     */
-    public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse
-    {
-        $httpRequest = new Request(GetDetailOfContractRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetDetailOfContractOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetDetailOfContractBadRequestResponse::fromResponse($httpResponse),
-            404 => GetDetailOfContractNotFoundResponse::fromResponse($httpResponse),
-            default => GetDetailOfContractDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Return the next TerminationDate for the ContractItem with the given ID.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-next-termination-date-for-item
@@ -483,6 +429,60 @@ class ContractClientImpl implements ContractClient
             400 => ListContractsBadRequestResponse::fromResponse($httpResponse),
             404 => ListContractsNotFoundResponse::fromResponse($httpResponse),
             default => ListContractsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Schedule the Termination of a Contract.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateContract\TerminateContractRequest $request An object representing the request for this operation
+     * @return TerminateContract\TerminateContractCreatedResponse Returns the contractId, the date on which the Termination will take place and the list of affected ContractItems.
+     */
+    public function terminateContract(TerminateContractRequest $request): TerminateContractCreatedResponse
+    {
+        $httpRequest = new Request(TerminateContractRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 201) {
+            return TerminateContractCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => TerminateContractBadRequestResponse::fromResponse($httpResponse),
+            404 => TerminateContractNotFoundResponse::fromResponse($httpResponse),
+            default => TerminateContractDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Schedule the Termination of a ContractItem.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract-item
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateContractItem\TerminateContractItemRequest $request An object representing the request for this operation
+     * @return TerminateContractItem\TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
+     */
+    public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse
+    {
+        $httpRequest = new Request(TerminateContractItemRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 201) {
+            return TerminateContractItemCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => TerminateContractItemBadRequestResponse::fromResponse($httpResponse),
+            404 => TerminateContractItemNotFoundResponse::fromResponse($httpResponse),
+            default => TerminateContractItemDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -539,33 +539,6 @@ class ContractClientImpl implements ContractClient
     }
 
     /**
-     * Update InvoiceSettings of a Customer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-update-invoice-settings
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
-     * @return InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse
-     */
-    public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse
-    {
-        $httpRequest = new Request(InvoiceUpdateInvoiceSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return InvoiceUpdateInvoiceSettingsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => InvoiceUpdateInvoiceSettingsBadRequestResponse::fromResponse($httpResponse),
-            404 => InvoiceUpdateInvoiceSettingsNotFoundResponse::fromResponse($httpResponse),
-            default => InvoiceUpdateInvoiceSettingsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Request an Access Token for the Invoice file.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-get-file-access-token
@@ -614,6 +587,33 @@ class ContractClientImpl implements ContractClient
             400 => InvoiceListCustomerInvoicesBadRequestResponse::fromResponse($httpResponse),
             404 => InvoiceListCustomerInvoicesNotFoundResponse::fromResponse($httpResponse),
             default => InvoiceListCustomerInvoicesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update InvoiceSettings of a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-update-invoice-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
+     * @return InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse
+     */
+    public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse
+    {
+        $httpRequest = new Request(InvoiceUpdateInvoiceSettingsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return InvoiceUpdateInvoiceSettingsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => InvoiceUpdateInvoiceSettingsBadRequestResponse::fromResponse($httpResponse),
+            404 => InvoiceUpdateInvoiceSettingsNotFoundResponse::fromResponse($httpResponse),
+            default => InvoiceUpdateInvoiceSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

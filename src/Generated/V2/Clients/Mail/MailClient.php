@@ -69,16 +69,6 @@ interface MailClient
      */
     public function createDeliverybox(CreateDeliveryboxRequest $request): CreateDeliveryboxCreatedResponse;
     /**
-     * List DeliveryBoxes belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
-     * @return ListDeliveryBoxes\ListDeliveryBoxesOKResponse OK
-     */
-    public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxesOKResponse;
-    /**
      * Create a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-create-mail-address
@@ -88,16 +78,6 @@ interface MailClient
      * @return CreateMailAddress\CreateMailAddressCreatedResponse OK
      */
     public function createMailAddress(CreateMailAddressRequest $request): CreateMailAddressCreatedResponse;
-    /**
-     * List MailAddresses belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
-     * @return ListMailAddresses\ListMailAddressesOKResponse OK
-     */
-    public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse;
     /**
      * Delete a DeliveryBox.
      *
@@ -109,16 +89,6 @@ interface MailClient
      */
     public function deleteDeliveryBox(DeleteDeliveryBoxRequest $request): EmptyResponse;
     /**
-     * Get a DeliveryBox.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-delivery-box
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetDeliveryBox\GetDeliveryBoxRequest $request An object representing the request for this operation
-     * @return GetDeliveryBox\GetDeliveryBoxOKResponse OK
-     */
-    public function getDeliveryBox(GetDeliveryBoxRequest $request): GetDeliveryBoxOKResponse;
-    /**
      * Delete a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-delete-mail-address
@@ -128,16 +98,6 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse;
-    /**
-     * Get a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-address
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetMailAddress\GetMailAddressRequest $request An object representing the request for this operation
-     * @return GetMailAddress\GetMailAddressOKResponse OK
-     */
-    public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse;
     /**
      * Update the description of an deliverybox
      *
@@ -160,6 +120,46 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function deliveryboxUpdatePasswordDeprecated(DeliveryboxUpdatePasswordDeprecatedRequest $request): EmptyResponse;
+    /**
+     * Get a DeliveryBox.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-delivery-box
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDeliveryBox\GetDeliveryBoxRequest $request An object representing the request for this operation
+     * @return GetDeliveryBox\GetDeliveryBoxOKResponse OK
+     */
+    public function getDeliveryBox(GetDeliveryBoxRequest $request): GetDeliveryBoxOKResponse;
+    /**
+     * Get a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMailAddress\GetMailAddressRequest $request An object representing the request for this operation
+     * @return GetMailAddress\GetMailAddressOKResponse OK
+     */
+    public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse;
+    /**
+     * List DeliveryBoxes belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
+     * @return ListDeliveryBoxes\ListDeliveryBoxesOKResponse OK
+     */
+    public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxesOKResponse;
+    /**
+     * List MailAddresses belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
+     * @return ListMailAddresses\ListMailAddressesOKResponse OK
+     */
+    public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse;
     /**
      * List mail settings of a Project.
      *

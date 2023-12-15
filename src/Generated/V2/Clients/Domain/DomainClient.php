@@ -309,6 +309,16 @@ interface DomainClient
      */
     public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2DeprecatedOKResponse;
     /**
+     * Create an auth code for a Domains transfer-out process.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse Created
+     */
+    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse;
+    /**
      * Create an auth code 2.
      *
      * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
@@ -321,16 +331,6 @@ interface DomainClient
      */
     public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse;
     /**
-     * Create an auth code for a Domains transfer-out process.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
-     * @return CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse Created
-     */
-    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse;
-    /**
      * Change all nameservers of a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers-v2-deprecated
@@ -341,16 +341,6 @@ interface DomainClient
      * @return EmptyResponse No Content
      */
     public function declareNameserversV2Deprecated(DeclareNameserversV2DeprecatedRequest $request): EmptyResponse;
-    /**
-     * Update the nameservers of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-nameservers
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateDomainNameservers\UpdateDomainNameserversRequest $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse;
     /**
      * Update an AuthCode.
      *
@@ -509,6 +499,16 @@ interface DomainClient
      */
     public function updateDomainContact(UpdateDomainContactRequest $request): UpdateDomainContactOKResponse;
     /**
+     * Update the nameservers of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-nameservers
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateDomainNameservers\UpdateDomainNameserversRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse;
+    /**
      * Update a Domain's project id.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-project-id
@@ -541,16 +541,6 @@ interface DomainClient
      */
     public function ingressCreateIngress(IngressCreateIngressRequest $request): IngressCreateIngressCreatedResponse;
     /**
-     * List Ingresses.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressListIngresses\IngressListIngressesRequest $request An object representing the request for this operation
-     * @return IngressListIngresses\IngressListIngressesOKResponse OK
-     */
-    public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse;
-    /**
      * Delete an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-delete-ingress
@@ -570,6 +560,16 @@ interface DomainClient
      * @return IngressGetIngress\IngressGetIngressOKResponse OK
      */
     public function ingressGetIngress(IngressGetIngressRequest $request): IngressGetIngressOKResponse;
+    /**
+     * List Ingresses.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressListIngresses\IngressListIngressesRequest $request An object representing the request for this operation
+     * @return IngressListIngresses\IngressListIngressesOKResponse OK
+     */
+    public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse;
     /**
      * List Ingresses belonging to a project.
      *
@@ -593,16 +593,6 @@ interface DomainClient
      */
     public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse;
     /**
-     * Update the paths of an Ingress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-paths
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse;
-    /**
      * Request the ACME certificate issuance of an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
@@ -623,6 +613,16 @@ interface DomainClient
      * @return IngressTlsDeprecated\IngressTlsDeprecatedOKResponse OK
      */
     public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse;
+    /**
+     * Update the paths of an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-paths
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse;
     /**
      * Update the tls settings of an Ingress.
      *

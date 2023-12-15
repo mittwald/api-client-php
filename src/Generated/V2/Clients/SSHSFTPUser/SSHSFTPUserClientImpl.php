@@ -90,31 +90,6 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
     }
 
     /**
-     * Get all SFTPUsers for a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-list-sftp-users
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListSftpUsers\ListSftpUsersRequest $request An object representing the request for this operation
-     * @return ListSftpUsers\ListSftpUsersOKResponse OK
-     */
-    public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse
-    {
-        $httpRequest = new Request(ListSftpUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListSftpUsersOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ListSftpUsersNotFoundResponse::fromResponse($httpResponse),
-            default => ListSftpUsersDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete an SFTPUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-delete-sftp-user
@@ -160,6 +135,31 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetSftpUserNotFoundResponse::fromResponse($httpResponse),
             default => GetSftpUserDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all SFTPUsers for a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-list-sftp-users
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListSftpUsers\ListSftpUsersRequest $request An object representing the request for this operation
+     * @return ListSftpUsers\ListSftpUsersOKResponse OK
+     */
+    public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse
+    {
+        $httpRequest = new Request(ListSftpUsersRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListSftpUsersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ListSftpUsersNotFoundResponse::fromResponse($httpResponse),
+            default => ListSftpUsersDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -216,31 +216,6 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
     }
 
     /**
-     * Get all SSHUsers for a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-list-ssh-users
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListSshUsers\ListSshUsersRequest $request An object representing the request for this operation
-     * @return ListSshUsers\ListSshUsersOKResponse OK
-     */
-    public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse
-    {
-        $httpRequest = new Request(ListSshUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListSshUsersOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ListSshUsersNotFoundResponse::fromResponse($httpResponse),
-            default => ListSshUsersDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete an SSHUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-delete-ssh-user
@@ -286,6 +261,31 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetSshUserNotFoundResponse::fromResponse($httpResponse),
             default => GetSshUserDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all SSHUsers for a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-list-ssh-users
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListSshUsers\ListSshUsersRequest $request An object representing the request for this operation
+     * @return ListSshUsers\ListSshUsersOKResponse OK
+     */
+    public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse
+    {
+        $httpRequest = new Request(ListSshUsersRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListSshUsersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ListSshUsersNotFoundResponse::fromResponse($httpResponse),
+            default => ListSshUsersDefaultResponse::fromResponse($httpResponse),
         });
     }
 

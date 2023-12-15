@@ -47,16 +47,6 @@ interface SSHSFTPUserClient
      */
     public function createSftpUser(CreateSftpUserRequest $request): CreateSftpUserCreatedResponse;
     /**
-     * Get all SFTPUsers for a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-list-sftp-users
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListSftpUsers\ListSftpUsersRequest $request An object representing the request for this operation
-     * @return ListSftpUsers\ListSftpUsersOKResponse OK
-     */
-    public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse;
-    /**
      * Delete an SFTPUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-delete-sftp-user
@@ -76,6 +66,16 @@ interface SSHSFTPUserClient
      * @return GetSftpUser\GetSftpUserOKResponse OK
      */
     public function getSftpUser(GetSftpUserRequest $request): GetSftpUserOKResponse;
+    /**
+     * Get all SFTPUsers for a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-list-sftp-users
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListSftpUsers\ListSftpUsersRequest $request An object representing the request for this operation
+     * @return ListSftpUsers\ListSftpUsersOKResponse OK
+     */
+    public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse;
     /**
      * Update an SFTPUser.
      *
@@ -97,16 +97,6 @@ interface SSHSFTPUserClient
      */
     public function createSshUser(CreateSshUserRequest $request): CreateSshUserCreatedResponse;
     /**
-     * Get all SSHUsers for a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-list-ssh-users
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListSshUsers\ListSshUsersRequest $request An object representing the request for this operation
-     * @return ListSshUsers\ListSshUsersOKResponse OK
-     */
-    public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse;
-    /**
      * Delete an SSHUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-delete-ssh-user
@@ -126,6 +116,16 @@ interface SSHSFTPUserClient
      * @return GetSshUser\GetSshUserOKResponse OK
      */
     public function getSshUser(GetSshUserRequest $request): GetSshUserOKResponse;
+    /**
+     * Get all SSHUsers for a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-list-ssh-users
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListSshUsers\ListSshUsersRequest $request An object representing the request for this operation
+     * @return ListSshUsers\ListSshUsersOKResponse OK
+     */
+    public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse;
     /**
      * Update an SSHUser.
      *

@@ -36,16 +36,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotifi
 interface NotificationClient
 {
     /**
-     * Subscribe a user to the mStudio newsletter.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-subscribe-user
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param NewsletterSubscribeUser\NewsletterSubscribeUserRequest $request An object representing the request for this operation
-     * @return NewsletterSubscribeUser\NewsletterSubscribeUserOKResponse Subscription information email has been sent.
-     */
-    public function newsletterSubscribeUser(NewsletterSubscribeUserRequest $request): NewsletterSubscribeUserOKResponse;
-    /**
      * Getting the subscription status of the subscription.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-get-info
@@ -55,6 +45,16 @@ interface NotificationClient
      * @return NewsletterGetInfo\NewsletterGetInfoOKResponse Status information about the subscription.
      */
     public function newsletterGetInfo(NewsletterGetInfoRequest $request): NewsletterGetInfoOKResponse;
+    /**
+     * Subscribe a user to the mStudio newsletter.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-subscribe-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NewsletterSubscribeUser\NewsletterSubscribeUserRequest $request An object representing the request for this operation
+     * @return NewsletterSubscribeUser\NewsletterSubscribeUserOKResponse Subscription information email has been sent.
+     */
+    public function newsletterSubscribeUser(NewsletterSubscribeUserRequest $request): NewsletterSubscribeUserOKResponse;
     /**
      * Unsubscribe a user from the mStudio newsletter.
      *
@@ -90,6 +90,18 @@ interface NotificationClient
      */
     public function notificationsListNotifications(NotificationsListNotificationsRequest $request): NotificationsListNotificationsOKResponse;
     /**
+     * Mark all notifications as read.
+     *
+     * Mark all notifications for the authenticated user as read.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest $request An object representing the request for this operation
+     * @return NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse OK
+     */
+    public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse;
+    /**
      * Mark all notifications as read (deprecated).
      *
      * Deprecated route. Please use /v2/notifications/actions/read-all instead.
@@ -102,18 +114,6 @@ interface NotificationClient
      * @return NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedOKResponse OK
      */
     public function notificationsReadAllNotificationsDeprecated(NotificationsReadAllNotificationsDeprecatedRequest $request): NotificationsReadAllNotificationsDeprecatedOKResponse;
-    /**
-     * Mark all notifications as read.
-     *
-     * Mark all notifications for the authenticated user as read.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest $request An object representing the request for this operation
-     * @return NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse OK
-     */
-    public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse;
     /**
      * Mark notification as read.
      *

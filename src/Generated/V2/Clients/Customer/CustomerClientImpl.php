@@ -187,26 +187,28 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
-     * Get all customer categories.
+     * Create a new customer profile.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-customer
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListOfCustomerCategories\ListOfCustomerCategoriesRequest $request An object representing the request for this operation
-     * @return ListOfCustomerCategories\ListOfCustomerCategoriesOKResponse Object containing the list of customer categories
+     * @param CreateCustomer\CreateCustomerRequest $request An object representing the request for this operation
+     * @return CreateCustomer\CreateCustomerCreatedResponse The new customer
      */
-    public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse
+    public function createCustomer(CreateCustomerRequest $request): CreateCustomerCreatedResponse
     {
-        $httpRequest = new Request(ListOfCustomerCategoriesRequest::method, $request->getUrl());
+        $httpRequest = new Request(CreateCustomerRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
         ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListOfCustomerCategoriesOKResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateCustomerCreatedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListOfCustomerCategoriesDefaultResponse::fromResponse($httpResponse),
+            400 => CreateCustomerBadRequestResponse::fromResponse($httpResponse),
+            default => CreateCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -234,56 +236,6 @@ class CustomerClientImpl implements CustomerClient
             400 => CreateCustomerInviteBadRequestResponse::fromResponse($httpResponse),
             409 => CreateCustomerInviteConflictResponse::fromResponse($httpResponse),
             default => CreateCustomerInviteDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Create a new customer profile.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-customer
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateCustomer\CreateCustomerRequest $request An object representing the request for this operation
-     * @return CreateCustomer\CreateCustomerCreatedResponse The new customer
-     */
-    public function createCustomer(CreateCustomerRequest $request): CreateCustomerCreatedResponse
-    {
-        $httpRequest = new Request(CreateCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateCustomerCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CreateCustomerBadRequestResponse::fromResponse($httpResponse),
-            default => CreateCustomerDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get all customer profiles the authenticated user has access to.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-customers
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListCustomers\ListCustomersRequest $request An object representing the request for this operation
-     * @return ListCustomers\ListCustomersOKResponse The list of customers the user is a member for
-     */
-    public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse
-    {
-        $httpRequest = new Request(ListCustomersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListCustomersOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListCustomersDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -337,53 +289,27 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
-     * Get a customer category.
+     * Delete a customer profile.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-category
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-customer
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetCustomerCategory\GetCustomerCategoryRequest $request An object representing the request for this operation
-     * @return GetCustomerCategory\GetCustomerCategoryOKResponse Returns the customer category
+     * @param DeleteCustomer\DeleteCustomerRequest $request An object representing the request for this operation
+     * @return DeleteCustomer\DeleteCustomerOKResponse
      */
-    public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse
+    public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse
     {
-        $httpRequest = new Request(GetCustomerCategoryRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeleteCustomerRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         if ($httpResponse->getStatusCode() === 200) {
-            return GetCustomerCategoryOKResponse::fromResponse($httpResponse);
+            return DeleteCustomerOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => GetCustomerCategoryDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCategory\UpdateCategoryRequest $request An object representing the request for this operation
-     * @return UpdateCategory\UpdateCategoryOKResponse The updated customer category
-     */
-    public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse
-    {
-        $httpRequest = new Request(UpdateCategoryRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return UpdateCategoryOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateCategoryBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateCategoryNotFoundResponse::fromResponse($httpResponse),
-            default => UpdateCategoryDefaultResponse::fromResponse($httpResponse),
+            404 => DeleteCustomerNotFoundResponse::fromResponse($httpResponse),
+            default => DeleteCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -412,31 +338,6 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
-     * Get a CustomerInvite.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-invite
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetCustomerInvite\GetCustomerInviteRequest $request An object representing the request for this operation
-     * @return GetCustomerInvite\GetCustomerInviteOKResponse OK
-     */
-    public function getCustomerInvite(GetCustomerInviteRequest $request): GetCustomerInviteOKResponse
-    {
-        $httpRequest = new Request(GetCustomerInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetCustomerInviteOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetCustomerInviteNotFoundResponse::fromResponse($httpResponse),
-            default => GetCustomerInviteDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete a CustomerMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-customer-membership
@@ -457,81 +358,6 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => DeleteCustomerMembershipDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a CustomerMembership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-membership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetCustomerMembership\GetCustomerMembershipRequest $request An object representing the request for this operation
-     * @return GetCustomerMembership\GetCustomerMembershipOKResponse OK
-     */
-    public function getCustomerMembership(GetCustomerMembershipRequest $request): GetCustomerMembershipOKResponse
-    {
-        $httpRequest = new Request(GetCustomerMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetCustomerMembershipOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetCustomerMembershipNotFoundResponse::fromResponse($httpResponse),
-            default => GetCustomerMembershipDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a CustomerMembership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer-membership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCustomerMembership\UpdateCustomerMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse
-     */
-    public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateCustomerMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => UpdateCustomerMembershipDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Delete a customer profile.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-customer
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteCustomer\DeleteCustomerRequest $request An object representing the request for this operation
-     * @return DeleteCustomer\DeleteCustomerOKResponse
-     */
-    public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse
-    {
-        $httpRequest = new Request(DeleteCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return DeleteCustomerOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => DeleteCustomerNotFoundResponse::fromResponse($httpResponse),
-            default => DeleteCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -561,29 +387,76 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
-     * Update a customer profile.
+     * Get a customer category.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-category
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateCustomer\UpdateCustomerRequest $request An object representing the request for this operation
-     * @return UpdateCustomer\UpdateCustomerOKResponse Name and id of the updated customer
+     * @param GetCustomerCategory\GetCustomerCategoryRequest $request An object representing the request for this operation
+     * @return GetCustomerCategory\GetCustomerCategoryOKResponse Returns the customer category
      */
-    public function updateCustomer(UpdateCustomerRequest $request): UpdateCustomerOKResponse
+    public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse
     {
-        $httpRequest = new Request(UpdateCustomerRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetCustomerCategoryRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
         ]);
         if ($httpResponse->getStatusCode() === 200) {
-            return UpdateCustomerOKResponse::fromResponse($httpResponse);
+            return GetCustomerCategoryOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateCustomerBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateCustomerNotFoundResponse::fromResponse($httpResponse),
-            default => UpdateCustomerDefaultResponse::fromResponse($httpResponse),
+            default => GetCustomerCategoryDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a CustomerInvite.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-invite
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetCustomerInvite\GetCustomerInviteRequest $request An object representing the request for this operation
+     * @return GetCustomerInvite\GetCustomerInviteOKResponse OK
+     */
+    public function getCustomerInvite(GetCustomerInviteRequest $request): GetCustomerInviteOKResponse
+    {
+        $httpRequest = new Request(GetCustomerInviteRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetCustomerInviteOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetCustomerInviteNotFoundResponse::fromResponse($httpResponse),
+            default => GetCustomerInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a CustomerMembership.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-membership
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetCustomerMembership\GetCustomerMembershipRequest $request An object representing the request for this operation
+     * @return GetCustomerMembership\GetCustomerMembershipOKResponse OK
+     */
+    public function getCustomerMembership(GetCustomerMembershipRequest $request): GetCustomerMembershipOKResponse
+    {
+        $httpRequest = new Request(GetCustomerMembershipRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetCustomerMembershipOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetCustomerMembershipNotFoundResponse::fromResponse($httpResponse),
+            default => GetCustomerMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -714,6 +587,30 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
+     * Get all customer profiles the authenticated user has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-customers
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListCustomers\ListCustomersRequest $request An object representing the request for this operation
+     * @return ListCustomers\ListCustomersOKResponse The list of customers the user is a member for
+     */
+    public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse
+    {
+        $httpRequest = new Request(ListCustomersRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListCustomersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListCustomersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List Invites belonging to a Customer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-invites-for-customer
@@ -760,6 +657,30 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ListMembershipsForCustomerNotFoundResponse::fromResponse($httpResponse),
             default => ListMembershipsForCustomerDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all customer categories.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListOfCustomerCategories\ListOfCustomerCategoriesRequest $request An object representing the request for this operation
+     * @return ListOfCustomerCategories\ListOfCustomerCategoriesOKResponse Object containing the list of customer categories
+     */
+    public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse
+    {
+        $httpRequest = new Request(ListOfCustomerCategoriesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListOfCustomerCategoriesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListOfCustomerCategoriesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -839,6 +760,85 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ResendCustomerInviteMailForbiddenResponse::fromResponse($httpResponse),
             default => ResendCustomerInviteMailDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a customer category.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCategory\UpdateCategoryRequest $request An object representing the request for this operation
+     * @return UpdateCategory\UpdateCategoryOKResponse The updated customer category
+     */
+    public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse
+    {
+        $httpRequest = new Request(UpdateCategoryRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return UpdateCategoryOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateCategoryBadRequestResponse::fromResponse($httpResponse),
+            404 => UpdateCategoryNotFoundResponse::fromResponse($httpResponse),
+            default => UpdateCategoryDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a customer profile.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCustomer\UpdateCustomerRequest $request An object representing the request for this operation
+     * @return UpdateCustomer\UpdateCustomerOKResponse Name and id of the updated customer
+     */
+    public function updateCustomer(UpdateCustomerRequest $request): UpdateCustomerOKResponse
+    {
+        $httpRequest = new Request(UpdateCustomerRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return UpdateCustomerOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateCustomerBadRequestResponse::fromResponse($httpResponse),
+            404 => UpdateCustomerNotFoundResponse::fromResponse($httpResponse),
+            default => UpdateCustomerDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a CustomerMembership.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer-membership
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCustomerMembership\UpdateCustomerMembershipRequest $request An object representing the request for this operation
+     * @return EmptyResponse
+     */
+    public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateCustomerMembershipRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => UpdateCustomerMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

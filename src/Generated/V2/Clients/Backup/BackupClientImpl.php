@@ -83,6 +83,33 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
+     * Create a Backup of a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-create-project-backup
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateProjectBackup\CreateProjectBackupRequest $request An object representing the request for this operation
+     * @return CreateProjectBackup\CreateProjectBackupCreatedResponse Created
+     */
+    public function createProjectBackup(CreateProjectBackupRequest $request): CreateProjectBackupCreatedResponse
+    {
+        $httpRequest = new Request(CreateProjectBackupRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateProjectBackupCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateProjectBackupBadRequestResponse::fromResponse($httpResponse),
+            404 => CreateProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            default => CreateProjectBackupDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Export a ProjectBackup for download.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-create-project-backup-export
@@ -107,32 +134,6 @@ class BackupClientImpl implements BackupClient
             403 => CreateProjectBackupExportForbiddenResponse::fromResponse($httpResponse),
             404 => CreateProjectBackupExportNotFoundResponse::fromResponse($httpResponse),
             default => CreateProjectBackupExportDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Delete a ProjectBackupExport.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup-export
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteProjectBackupExport\DeleteProjectBackupExportRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function deleteProjectBackupExport(DeleteProjectBackupExportRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeleteProjectBackupExportRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => DeleteProjectBackupExportForbiddenResponse::fromResponse($httpResponse),
-            404 => DeleteProjectBackupExportNotFoundResponse::fromResponse($httpResponse),
-            default => DeleteProjectBackupExportDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -164,77 +165,54 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
-     * List BackupSchedules belonging to a Project.
+     * Delete a ProjectBackup.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-list-project-backup-schedules
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjectBackupSchedules\ListProjectBackupSchedulesRequest $request An object representing the request for this operation
-     * @return ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse OK
+     * @param DeleteProjectBackup\DeleteProjectBackupRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
      */
-    public function listProjectBackupSchedules(ListProjectBackupSchedulesRequest $request): ListProjectBackupSchedulesOKResponse
+    public function deleteProjectBackup(DeleteProjectBackupRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ListProjectBackupSchedulesRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeleteProjectBackupRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListProjectBackupSchedulesOKResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListProjectBackupSchedulesDefaultResponse::fromResponse($httpResponse),
+            403 => DeleteProjectBackupForbiddenResponse::fromResponse($httpResponse),
+            404 => DeleteProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            default => DeleteProjectBackupDefaultResponse::fromResponse($httpResponse),
         });
     }
 
     /**
-     * Create a Backup of a Project.
+     * Delete a ProjectBackupExport.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-create-project-backup
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup-export
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateProjectBackup\CreateProjectBackupRequest $request An object representing the request for this operation
-     * @return CreateProjectBackup\CreateProjectBackupCreatedResponse Created
+     * @param DeleteProjectBackupExport\DeleteProjectBackupExportRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
      */
-    public function createProjectBackup(CreateProjectBackupRequest $request): CreateProjectBackupCreatedResponse
+    public function deleteProjectBackupExport(DeleteProjectBackupExportRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(CreateProjectBackupRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateProjectBackupCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CreateProjectBackupBadRequestResponse::fromResponse($httpResponse),
-            404 => CreateProjectBackupNotFoundResponse::fromResponse($httpResponse),
-            default => CreateProjectBackupDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List Backups belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-list-project-backups
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListProjectBackups\ListProjectBackupsRequest $request An object representing the request for this operation
-     * @return ListProjectBackups\ListProjectBackupsOKResponse OK
-     */
-    public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse
-    {
-        $httpRequest = new Request(ListProjectBackupsRequest::method, $request->getUrl());
+        $httpRequest = new Request(DeleteProjectBackupExportRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListProjectBackupsOKResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListProjectBackupsDefaultResponse::fromResponse($httpResponse),
+            403 => DeleteProjectBackupExportForbiddenResponse::fromResponse($httpResponse),
+            404 => DeleteProjectBackupExportNotFoundResponse::fromResponse($httpResponse),
+            default => DeleteProjectBackupExportDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -265,6 +243,32 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
+     * Get a ProjectBackup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetProjectBackup\GetProjectBackupRequest $request An object representing the request for this operation
+     * @return GetProjectBackup\GetProjectBackupOKResponse OK
+     */
+    public function getProjectBackup(GetProjectBackupRequest $request): GetProjectBackupOKResponse
+    {
+        $httpRequest = new Request(GetProjectBackupRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetProjectBackupOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetProjectBackupForbiddenResponse::fromResponse($httpResponse),
+            404 => GetProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            default => GetProjectBackupDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a ProjectBackupSchedule.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-schedule
@@ -291,82 +295,50 @@ class BackupClientImpl implements BackupClient
     }
 
     /**
-     * Update a ProjectBackupSchedule.
+     * List BackupSchedules belonging to a Project.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-schedule
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-list-project-backup-schedules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @param ListProjectBackupSchedules\ListProjectBackupSchedulesRequest $request An object representing the request for this operation
+     * @return ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse OK
      */
-    public function updateProjectBackupSchedule(UpdateProjectBackupScheduleRequest $request): EmptyResponse
+    public function listProjectBackupSchedules(ListProjectBackupSchedulesRequest $request): ListProjectBackupSchedulesOKResponse
     {
-        $httpRequest = new Request(UpdateProjectBackupScheduleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateProjectBackupScheduleBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
-            412 => UpdateProjectBackupSchedulePreconditionFailedResponse::fromResponse($httpResponse),
-            default => UpdateProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Delete a ProjectBackup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteProjectBackup\DeleteProjectBackupRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
-     */
-    public function deleteProjectBackup(DeleteProjectBackupRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeleteProjectBackupRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => DeleteProjectBackupForbiddenResponse::fromResponse($httpResponse),
-            404 => DeleteProjectBackupNotFoundResponse::fromResponse($httpResponse),
-            default => DeleteProjectBackupDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a ProjectBackup.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetProjectBackup\GetProjectBackupRequest $request An object representing the request for this operation
-     * @return GetProjectBackup\GetProjectBackupOKResponse OK
-     */
-    public function getProjectBackup(GetProjectBackupRequest $request): GetProjectBackupOKResponse
-    {
-        $httpRequest = new Request(GetProjectBackupRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListProjectBackupSchedulesRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
         if ($httpResponse->getStatusCode() === 200) {
-            return GetProjectBackupOKResponse::fromResponse($httpResponse);
+            return ListProjectBackupSchedulesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => GetProjectBackupForbiddenResponse::fromResponse($httpResponse),
-            404 => GetProjectBackupNotFoundResponse::fromResponse($httpResponse),
-            default => GetProjectBackupDefaultResponse::fromResponse($httpResponse),
+            default => ListProjectBackupSchedulesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Backups belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-list-project-backups
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListProjectBackups\ListProjectBackupsRequest $request An object representing the request for this operation
+     * @return ListProjectBackups\ListProjectBackupsOKResponse OK
+     */
+    public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse
+    {
+        $httpRequest = new Request(ListProjectBackupsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListProjectBackupsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListProjectBackupsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -395,6 +367,34 @@ class BackupClientImpl implements BackupClient
             403 => UpdateProjectBackupDescriptionForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateProjectBackupDescriptionNotFoundResponse::fromResponse($httpResponse),
             default => UpdateProjectBackupDescriptionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a ProjectBackupSchedule.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-schedule
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function updateProjectBackupSchedule(UpdateProjectBackupScheduleRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateProjectBackupScheduleRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateProjectBackupScheduleBadRequestResponse::fromResponse($httpResponse),
+            404 => UpdateProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
+            412 => UpdateProjectBackupSchedulePreconditionFailedResponse::fromResponse($httpResponse),
+            default => UpdateProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

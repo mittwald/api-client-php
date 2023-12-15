@@ -734,6 +734,33 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * Create an auth code for a Domains transfer-out process.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse Created
+     */
+    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse
+    {
+        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateDomainAuthCodeCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateDomainAuthCodeBadRequestResponse::fromResponse($httpResponse),
+            404 => CreateDomainAuthCodeNotFoundResponse::fromResponse($httpResponse),
+            default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Create an auth code 2.
      *
      * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
@@ -763,33 +790,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * Create an auth code for a Domains transfer-out process.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
-     * @return CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse Created
-     */
-    public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse
-    {
-        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateDomainAuthCodeCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CreateDomainAuthCodeBadRequestResponse::fromResponse($httpResponse),
-            404 => CreateDomainAuthCodeNotFoundResponse::fromResponse($httpResponse),
-            default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Change all nameservers of a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers-v2-deprecated
@@ -814,33 +814,6 @@ class DomainClientImpl implements DomainClient
             400 => DeclareNameserversV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             404 => DeclareNameserversV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
             default => DeclareNameserversV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update the nameservers of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-nameservers
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateDomainNameservers\UpdateDomainNameserversRequest $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateDomainNameserversRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateDomainNameserversBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateDomainNameserversNotFoundResponse::fromResponse($httpResponse),
-            default => UpdateDomainNameserversDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1224,6 +1197,33 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * Update the nameservers of a Domain.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-nameservers
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateDomainNameservers\UpdateDomainNameserversRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateDomainNameserversRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateDomainNameserversBadRequestResponse::fromResponse($httpResponse),
+            404 => UpdateDomainNameserversNotFoundResponse::fromResponse($httpResponse),
+            default => UpdateDomainNameserversDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Update a Domain's project id.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-project-id
@@ -1306,31 +1306,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * List Ingresses.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressListIngresses\IngressListIngressesRequest $request An object representing the request for this operation
-     * @return IngressListIngresses\IngressListIngressesOKResponse OK
-     */
-    public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse
-    {
-        $httpRequest = new Request(IngressListIngressesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return IngressListIngressesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressListIngressesNotFoundResponse::fromResponse($httpResponse),
-            default => IngressListIngressesDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-delete-ingress
@@ -1377,6 +1352,31 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => IngressGetIngressNotFoundResponse::fromResponse($httpResponse),
             default => IngressGetIngressDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Ingresses.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressListIngresses\IngressListIngressesRequest $request An object representing the request for this operation
+     * @return IngressListIngresses\IngressListIngressesOKResponse OK
+     */
+    public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse
+    {
+        $httpRequest = new Request(IngressListIngressesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return IngressListIngressesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => IngressListIngressesNotFoundResponse::fromResponse($httpResponse),
+            default => IngressListIngressesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1434,32 +1434,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * Update the paths of an Ingress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-paths
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(IngressUpdateIngressPathsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->toJson()['body'],
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressUpdateIngressPathsNotFoundResponse::fromResponse($httpResponse),
-            default => IngressUpdateIngressPathsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Request the ACME certificate issuance of an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
@@ -1509,6 +1483,32 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => IngressTlsDeprecatedNotFoundResponse::fromResponse($httpResponse),
             default => IngressTlsDeprecatedDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update the paths of an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-paths
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(IngressUpdateIngressPathsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->toJson()['body'],
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => IngressUpdateIngressPathsNotFoundResponse::fromResponse($httpResponse),
+            default => IngressUpdateIngressPathsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

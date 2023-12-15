@@ -60,16 +60,6 @@ interface CronjobClient
      */
     public function createCronjob(CreateCronjobRequest $request): CreateCronjobCreatedResponse;
     /**
-     * List Cronjobs belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-cronjobs
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListCronjobs\ListCronjobsRequest $request An object representing the request for this operation
-     * @return ListCronjobs\ListCronjobsOKResponse OK
-     */
-    public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse;
-    /**
      * Trigger a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-create-execution
@@ -79,16 +69,6 @@ interface CronjobClient
      * @return CreateExecution\CreateExecutionCreatedResponse OK
      */
     public function createExecution(CreateExecutionRequest $request): CreateExecutionCreatedResponse;
-    /**
-     * List CronjobExecutions belonging to a Cronjob.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-executions
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListExecutions\ListExecutionsRequest $request An object representing the request for this operation
-     * @return ListExecutions\ListExecutionsOKResponse OK
-     */
-    public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse;
     /**
      * Delete a Cronjob.
      *
@@ -110,16 +90,6 @@ interface CronjobClient
      */
     public function getCronjob(GetCronjobRequest $request): GetCronjobOKResponse;
     /**
-     * Update a Cronjob.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCronjob\UpdateCronjobRequest $request An object representing the request for this operation
-     * @return UpdateCronjob\UpdateCronjobOKResponse OK
-     */
-    public function updateCronjob(UpdateCronjobRequest $request): UpdateCronjobOKResponse;
-    /**
      * Get a CronjobExecution.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution
@@ -129,6 +99,36 @@ interface CronjobClient
      * @return GetExecution\GetExecutionOKResponse OK
      */
     public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse;
+    /**
+     * List Cronjobs belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-cronjobs
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListCronjobs\ListCronjobsRequest $request An object representing the request for this operation
+     * @return ListCronjobs\ListCronjobsOKResponse OK
+     */
+    public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse;
+    /**
+     * List CronjobExecutions belonging to a Cronjob.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-executions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListExecutions\ListExecutionsRequest $request An object representing the request for this operation
+     * @return ListExecutions\ListExecutionsOKResponse OK
+     */
+    public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse;
+    /**
+     * Update a Cronjob.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCronjob\UpdateCronjobRequest $request An object representing the request for this operation
+     * @return UpdateCronjob\UpdateCronjobOKResponse OK
+     */
+    public function updateCronjob(UpdateCronjobRequest $request): UpdateCronjobOKResponse;
     /**
      * Update a Cronjob's app id.
      *

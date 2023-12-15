@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class GetProjectInviteRequest
+class GetFileMetaForbiddenResponse implements ResponseContainer
 {
-    public const method = 'get';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,55 +19,47 @@ class GetProjectInviteRequest
      */
     private static array $schema = [
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'projectInviteId' => [
-                'type' => 'string',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'projectInviteId',
-        ],
     ];
 
     /**
-     * @var string
+     * @var Error
      */
-    private string $projectInviteId;
+    private Error $body;
 
-    private array $headers = [
-
-    ];
+    private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param string $projectInviteId
+     * @param Error $body
      */
-    public function __construct(string $projectInviteId)
+    public function __construct(Error $body)
     {
-        $this->projectInviteId = $projectInviteId;
+        $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return Error
      */
-    public function getProjectInviteId(): string
+    public function getBody(): Error
     {
-        return $this->projectInviteId;
+        return $this->body;
     }
 
     /**
-     * @param string $projectInviteId
+     * @param Error $body
      * @return self
      */
-    public function withProjectInviteId(string $projectInviteId): self
+    public function withBody(Error $body): self
     {
-        $validator = new Validator();
-        $validator->validate($projectInviteId, static::$schema['properties']['projectInviteId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->projectInviteId = $projectInviteId;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -76,19 +69,19 @@ class GetProjectInviteRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetProjectInviteRequest Created instance
+     * @return GetFileMetaForbiddenResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetProjectInviteRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetFileMetaForbiddenResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectInviteId = $input->{'projectInviteId'};
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectInviteId);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -101,7 +94,7 @@ class GetProjectInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectInviteId'] = $this->projectInviteId;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -134,29 +127,16 @@ class GetProjectInviteRequest
     {
     }
 
-    public function getUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        $projectInviteId = urlencode($mapped['projectInviteId']);
-        return '/v2/project-invites/' . $projectInviteId;
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 
-    public function getQuery(): array
+    public function getResponse(): ResponseInterface|null
     {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        return $this->httpResponse;
     }
 }

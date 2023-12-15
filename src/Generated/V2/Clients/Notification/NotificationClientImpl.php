@@ -57,6 +57,30 @@ class NotificationClientImpl implements NotificationClient
     }
 
     /**
+     * Getting the subscription status of the subscription.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-get-info
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NewsletterGetInfo\NewsletterGetInfoRequest $request An object representing the request for this operation
+     * @return NewsletterGetInfo\NewsletterGetInfoOKResponse Status information about the subscription.
+     */
+    public function newsletterGetInfo(NewsletterGetInfoRequest $request): NewsletterGetInfoOKResponse
+    {
+        $httpRequest = new Request(NewsletterGetInfoRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return NewsletterGetInfoOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => NewsletterGetInfoDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Subscribe a user to the mStudio newsletter.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-subscribe-user
@@ -79,30 +103,6 @@ class NotificationClientImpl implements NotificationClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => NewsletterSubscribeUserBadRequestResponse::fromResponse($httpResponse),
             default => NewsletterSubscribeUserDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Getting the subscription status of the subscription.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-get-info
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param NewsletterGetInfo\NewsletterGetInfoRequest $request An object representing the request for this operation
-     * @return NewsletterGetInfo\NewsletterGetInfoOKResponse Status information about the subscription.
-     */
-    public function newsletterGetInfo(NewsletterGetInfoRequest $request): NewsletterGetInfoOKResponse
-    {
-        $httpRequest = new Request(NewsletterGetInfoRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return NewsletterGetInfoOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => NewsletterGetInfoDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -183,6 +183,34 @@ class NotificationClientImpl implements NotificationClient
     }
 
     /**
+     * Mark all notifications as read.
+     *
+     * Mark all notifications for the authenticated user as read.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest $request An object representing the request for this operation
+     * @return NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse OK
+     */
+    public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse
+    {
+        $httpRequest = new Request(NotificationsReadAllNotificationsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return NotificationsReadAllNotificationsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => NotificationsReadAllNotificationsForbiddenResponse::fromResponse($httpResponse),
+            default => NotificationsReadAllNotificationsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Mark all notifications as read (deprecated).
      *
      * Deprecated route. Please use /v2/notifications/actions/read-all instead.
@@ -208,34 +236,6 @@ class NotificationClientImpl implements NotificationClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => NotificationsReadAllNotificationsDeprecatedForbiddenResponse::fromResponse($httpResponse),
             default => NotificationsReadAllNotificationsDeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Mark all notifications as read.
-     *
-     * Mark all notifications for the authenticated user as read.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest $request An object representing the request for this operation
-     * @return NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse OK
-     */
-    public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse
-    {
-        $httpRequest = new Request(NotificationsReadAllNotificationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return NotificationsReadAllNotificationsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => NotificationsReadAllNotificationsForbiddenResponse::fromResponse($httpResponse),
-            default => NotificationsReadAllNotificationsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -182,57 +182,6 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Patch desired properties of a specific `AppInstallation`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param PatchAppinstallation\PatchAppinstallationRequest $request An object representing the request for this operation
-     * @return EmptyResponse The AppInstallation has been patched.
-     */
-    public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(PatchAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => PatchAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            default => PatchAppinstallationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Start uninstallation process for a specific `AppInstallation`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UninstallAppinstallation\UninstallAppinstallationRequest $request An object representing the request for this operation
-     * @return EmptyResponse The app installation is going to be deleted.
-     */
-    public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UninstallAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => UninstallAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            default => UninstallAppinstallationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get a specific `AppVersion`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appversion
@@ -383,32 +332,6 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Request a new `AppInstallation`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param RequestAppinstallation\RequestAppinstallationRequest $request An object representing the request for this operation
-     * @return RequestAppinstallation\RequestAppinstallationCreatedResponse The AppInstallation has been requested.
-     */
-    public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse
-    {
-        $httpRequest = new Request(RequestAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 201) {
-            return RequestAppinstallationCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => RequestAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            default => RequestAppinstallationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get all available `Apps`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-apps
@@ -529,6 +452,58 @@ class AppClientImpl implements AppClient
     }
 
     /**
+     * Patch desired properties of a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PatchAppinstallation\PatchAppinstallationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The AppInstallation has been patched.
+     */
+    public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(PatchAppinstallationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => PatchAppinstallationNotFoundResponse::fromResponse($httpResponse),
+            default => PatchAppinstallationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Request a new `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestAppinstallation\RequestAppinstallationRequest $request An object representing the request for this operation
+     * @return RequestAppinstallation\RequestAppinstallationCreatedResponse The AppInstallation has been requested.
+     */
+    public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse
+    {
+        $httpRequest = new Request(RequestAppinstallationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 201) {
+            return RequestAppinstallationCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => RequestAppinstallationNotFoundResponse::fromResponse($httpResponse),
+            default => RequestAppinstallationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Request a copy of an `AppInstallation`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-copy
@@ -602,6 +577,31 @@ class AppClientImpl implements AppClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => SetDatabaseUsersNotFoundResponse::fromResponse($httpResponse),
             default => SetDatabaseUsersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Start uninstallation process for a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UninstallAppinstallation\UninstallAppinstallationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The app installation is going to be deleted.
+     */
+    public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UninstallAppinstallationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => UninstallAppinstallationNotFoundResponse::fromResponse($httpResponse),
+            default => UninstallAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
 

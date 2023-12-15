@@ -173,32 +173,6 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
-     * List MySQLDatabases belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-databases
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListMysqlDatabases\ListMysqlDatabasesRequest $request An object representing the request for this operation
-     * @return ListMysqlDatabases\ListMysqlDatabasesOKResponse OK
-     */
-    public function listMysqlDatabases(ListMysqlDatabasesRequest $request): ListMysqlDatabasesOKResponse
-    {
-        $httpRequest = new Request(ListMysqlDatabasesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListMysqlDatabasesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListMysqlDatabasesBadRequestResponse::fromResponse($httpResponse),
-            404 => ListMysqlDatabasesNotFoundResponse::fromResponse($httpResponse),
-            default => ListMysqlDatabasesDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Create a MySQLUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-create-mysql-user
@@ -226,32 +200,6 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
-     * List MySQLUsers belonging to a Database.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-users
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListMysqlUsers\ListMysqlUsersRequest $request An object representing the request for this operation
-     * @return ListMysqlUsers\ListMysqlUsersOKResponse OK
-     */
-    public function listMysqlUsers(ListMysqlUsersRequest $request): ListMysqlUsersOKResponse
-    {
-        $httpRequest = new Request(ListMysqlUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListMysqlUsersOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListMysqlUsersBadRequestResponse::fromResponse($httpResponse),
-            404 => ListMysqlUsersNotFoundResponse::fromResponse($httpResponse),
-            default => ListMysqlUsersDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Create a RedisDatabase.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-create-redis-database
@@ -275,32 +223,6 @@ class DatabaseClientImpl implements DatabaseClient
             400 => CreateRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => CreateRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
             default => CreateRedisDatabaseDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List RedisDatabases belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-redis-databases
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListRedisDatabases\ListRedisDatabasesRequest $request An object representing the request for this operation
-     * @return ListRedisDatabases\ListRedisDatabasesOKResponse OK
-     */
-    public function listRedisDatabases(ListRedisDatabasesRequest $request): ListRedisDatabasesOKResponse
-    {
-        $httpRequest = new Request(ListRedisDatabasesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListRedisDatabasesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListRedisDatabasesBadRequestResponse::fromResponse($httpResponse),
-            404 => ListRedisDatabasesNotFoundResponse::fromResponse($httpResponse),
-            default => ListRedisDatabasesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -334,33 +256,6 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
-     * Get a MySQLDatabase.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-database
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetMysqlDatabase\GetMysqlDatabaseRequest $request An object representing the request for this operation
-     * @return GetMysqlDatabase\GetMysqlDatabaseOKResponse OK
-     */
-    public function getMysqlDatabase(GetMysqlDatabaseRequest $request): GetMysqlDatabaseOKResponse
-    {
-        $httpRequest = new Request(GetMysqlDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetMysqlDatabaseOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
-            404 => GetMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
-            500 => GetMysqlDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
-            default => GetMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete a MySQLUser.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-delete-mysql-user
@@ -384,59 +279,6 @@ class DatabaseClientImpl implements DatabaseClient
             400 => DeleteMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => DeleteMysqlUserNotFoundResponse::fromResponse($httpResponse),
             default => DeleteMysqlUserDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a MySQLUser.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-user
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetMysqlUser\GetMysqlUserRequest $request An object representing the request for this operation
-     * @return GetMysqlUser\GetMysqlUserOKResponse OK
-     */
-    public function getMysqlUser(GetMysqlUserRequest $request): GetMysqlUserOKResponse
-    {
-        $httpRequest = new Request(GetMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetMysqlUserOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetMysqlUserBadRequestResponse::fromResponse($httpResponse),
-            404 => GetMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            default => GetMysqlUserDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a MySQLUser.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMysqlUser\UpdateMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
-     */
-    public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdateMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateMysqlUserBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            default => UpdateMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -466,33 +308,6 @@ class DatabaseClientImpl implements DatabaseClient
             500 => DeleteRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteRedisDatabaseServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteRedisDatabaseDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a RedisDatabase.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-redis-database
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetRedisDatabase\GetRedisDatabaseRequest $request An object representing the request for this operation
-     * @return GetRedisDatabase\GetRedisDatabaseOKResponse OK
-     */
-    public function getRedisDatabase(GetRedisDatabaseRequest $request): GetRedisDatabaseOKResponse
-    {
-        $httpRequest = new Request(GetRedisDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetRedisDatabaseOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
-            404 => GetRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
-            500 => GetRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
-            default => GetRedisDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -551,6 +366,59 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
+     * Get a MySQLDatabase.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMysqlDatabase\GetMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return GetMysqlDatabase\GetMysqlDatabaseOKResponse OK
+     */
+    public function getMysqlDatabase(GetMysqlDatabaseRequest $request): GetMysqlDatabaseOKResponse
+    {
+        $httpRequest = new Request(GetMysqlDatabaseRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetMysqlDatabaseOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => GetMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
+            500 => GetMysqlDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
+            default => GetMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a MySQLUser.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMysqlUser\GetMysqlUserRequest $request An object representing the request for this operation
+     * @return GetMysqlUser\GetMysqlUserOKResponse OK
+     */
+    public function getMysqlUser(GetMysqlUserRequest $request): GetMysqlUserOKResponse
+    {
+        $httpRequest = new Request(GetMysqlUserRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetMysqlUserOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetMysqlUserBadRequestResponse::fromResponse($httpResponse),
+            404 => GetMysqlUserNotFoundResponse::fromResponse($httpResponse),
+            default => GetMysqlUserDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get a MySQLUser's PhpMyAdmin-URL.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-user-php-my-admin-url
@@ -573,6 +441,33 @@ class DatabaseClientImpl implements DatabaseClient
             400 => GetMysqlUserPhpMyAdminUrlBadRequestResponse::fromResponse($httpResponse),
             404 => GetMysqlUserPhpMyAdminUrlNotFoundResponse::fromResponse($httpResponse),
             default => GetMysqlUserPhpMyAdminUrlDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a RedisDatabase.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-redis-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetRedisDatabase\GetRedisDatabaseRequest $request An object representing the request for this operation
+     * @return GetRedisDatabase\GetRedisDatabaseOKResponse OK
+     */
+    public function getRedisDatabase(GetRedisDatabaseRequest $request): GetRedisDatabaseOKResponse
+    {
+        $httpRequest = new Request(GetRedisDatabaseRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetRedisDatabaseOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => GetRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
+            500 => GetRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
+            default => GetRedisDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -603,6 +498,58 @@ class DatabaseClientImpl implements DatabaseClient
     }
 
     /**
+     * List MySQLDatabases belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-databases
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMysqlDatabases\ListMysqlDatabasesRequest $request An object representing the request for this operation
+     * @return ListMysqlDatabases\ListMysqlDatabasesOKResponse OK
+     */
+    public function listMysqlDatabases(ListMysqlDatabasesRequest $request): ListMysqlDatabasesOKResponse
+    {
+        $httpRequest = new Request(ListMysqlDatabasesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListMysqlDatabasesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListMysqlDatabasesBadRequestResponse::fromResponse($httpResponse),
+            404 => ListMysqlDatabasesNotFoundResponse::fromResponse($httpResponse),
+            default => ListMysqlDatabasesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List MySQLUsers belonging to a Database.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-users
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMysqlUsers\ListMysqlUsersRequest $request An object representing the request for this operation
+     * @return ListMysqlUsers\ListMysqlUsersOKResponse OK
+     */
+    public function listMysqlUsers(ListMysqlUsersRequest $request): ListMysqlUsersOKResponse
+    {
+        $httpRequest = new Request(ListMysqlUsersRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListMysqlUsersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListMysqlUsersBadRequestResponse::fromResponse($httpResponse),
+            404 => ListMysqlUsersNotFoundResponse::fromResponse($httpResponse),
+            default => ListMysqlUsersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List MySQLVersions.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-versions
@@ -625,6 +572,32 @@ class DatabaseClientImpl implements DatabaseClient
             400 => ListMysqlVersionsBadRequestResponse::fromResponse($httpResponse),
             404 => ListMysqlVersionsNotFoundResponse::fromResponse($httpResponse),
             default => ListMysqlVersionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List RedisDatabases belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-redis-databases
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListRedisDatabases\ListRedisDatabasesRequest $request An object representing the request for this operation
+     * @return ListRedisDatabases\ListRedisDatabasesOKResponse OK
+     */
+    public function listRedisDatabases(ListRedisDatabasesRequest $request): ListRedisDatabasesOKResponse
+    {
+        $httpRequest = new Request(ListRedisDatabasesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListRedisDatabasesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListRedisDatabasesBadRequestResponse::fromResponse($httpResponse),
+            404 => ListRedisDatabasesNotFoundResponse::fromResponse($httpResponse),
+            default => ListRedisDatabasesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -705,6 +678,33 @@ class DatabaseClientImpl implements DatabaseClient
             400 => UpdateMysqlDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateMysqlDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
             default => UpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a MySQLUser.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateMysqlUser\UpdateMysqlUserRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateMysqlUserRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateMysqlUserBadRequestResponse::fromResponse($httpResponse),
+            404 => UpdateMysqlUserNotFoundResponse::fromResponse($httpResponse),
+            default => UpdateMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -89,26 +89,6 @@ interface AppClient
      */
     public function getAppinstallation(GetAppinstallationRequest $request): GetAppinstallationOKResponse;
     /**
-     * Patch desired properties of a specific `AppInstallation`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param PatchAppinstallation\PatchAppinstallationRequest $request An object representing the request for this operation
-     * @return EmptyResponse The AppInstallation has been patched.
-     */
-    public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse;
-    /**
-     * Start uninstallation process for a specific `AppInstallation`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UninstallAppinstallation\UninstallAppinstallationRequest $request An object representing the request for this operation
-     * @return EmptyResponse The app installation is going to be deleted.
-     */
-    public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse;
-    /**
      * Get a specific `AppVersion`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appversion
@@ -169,16 +149,6 @@ interface AppClient
      */
     public function listAppinstallations(ListAppinstallationsRequest $request): ListAppinstallationsOKResponse;
     /**
-     * Request a new `AppInstallation`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param RequestAppinstallation\RequestAppinstallationRequest $request An object representing the request for this operation
-     * @return RequestAppinstallation\RequestAppinstallationCreatedResponse The AppInstallation has been requested.
-     */
-    public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse;
-    /**
      * Get all available `Apps`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-apps
@@ -229,6 +199,26 @@ interface AppClient
      */
     public function listUpdateCandidatesForAppversion(ListUpdateCandidatesForAppversionRequest $request): ListUpdateCandidatesForAppversionOKResponse;
     /**
+     * Patch desired properties of a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PatchAppinstallation\PatchAppinstallationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The AppInstallation has been patched.
+     */
+    public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse;
+    /**
+     * Request a new `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RequestAppinstallation\RequestAppinstallationRequest $request An object representing the request for this operation
+     * @return RequestAppinstallation\RequestAppinstallationCreatedResponse The AppInstallation has been requested.
+     */
+    public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse;
+    /**
      * Request a copy of an `AppInstallation`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-copy
@@ -258,6 +248,16 @@ interface AppClient
      * @return EmptyResponse The database users have been set.
      */
     public function setDatabaseUsers(SetDatabaseUsersRequest $request): EmptyResponse;
+    /**
+     * Start uninstallation process for a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UninstallAppinstallation\UninstallAppinstallationRequest $request An object representing the request for this operation
+     * @return EmptyResponse The app installation is going to be deleted.
+     */
+    public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse;
     /**
      * Remove linkage between an `AppInstallation` and a `Database`.
      *

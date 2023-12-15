@@ -126,30 +126,6 @@ class CronjobClientImpl implements CronjobClient
     }
 
     /**
-     * List Cronjobs belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-cronjobs
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListCronjobs\ListCronjobsRequest $request An object representing the request for this operation
-     * @return ListCronjobs\ListCronjobsOKResponse OK
-     */
-    public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse
-    {
-        $httpRequest = new Request(ListCronjobsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListCronjobsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListCronjobsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Trigger a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-create-execution
@@ -173,30 +149,6 @@ class CronjobClientImpl implements CronjobClient
             404 => CreateExecutionNotFoundResponse::fromResponse($httpResponse),
             412 => CreateExecutionPreconditionFailedResponse::fromResponse($httpResponse),
             default => CreateExecutionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List CronjobExecutions belonging to a Cronjob.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-executions
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListExecutions\ListExecutionsRequest $request An object representing the request for this operation
-     * @return ListExecutions\ListExecutionsOKResponse OK
-     */
-    public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse
-    {
-        $httpRequest = new Request(ListExecutionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListExecutionsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListExecutionsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -253,6 +205,79 @@ class CronjobClientImpl implements CronjobClient
     }
 
     /**
+     * Get a CronjobExecution.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetExecution\GetExecutionRequest $request An object representing the request for this operation
+     * @return GetExecution\GetExecutionOKResponse OK
+     */
+    public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse
+    {
+        $httpRequest = new Request(GetExecutionRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetExecutionOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetExecutionNotFoundResponse::fromResponse($httpResponse),
+            default => GetExecutionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Cronjobs belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-cronjobs
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListCronjobs\ListCronjobsRequest $request An object representing the request for this operation
+     * @return ListCronjobs\ListCronjobsOKResponse OK
+     */
+    public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse
+    {
+        $httpRequest = new Request(ListCronjobsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListCronjobsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListCronjobsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List CronjobExecutions belonging to a Cronjob.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-executions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListExecutions\ListExecutionsRequest $request An object representing the request for this operation
+     * @return ListExecutions\ListExecutionsOKResponse OK
+     */
+    public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse
+    {
+        $httpRequest = new Request(ListExecutionsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListExecutionsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListExecutionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Update a Cronjob.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
@@ -277,31 +302,6 @@ class CronjobClientImpl implements CronjobClient
             404 => UpdateCronjobNotFoundResponse::fromResponse($httpResponse),
             412 => UpdateCronjobPreconditionFailedResponse::fromResponse($httpResponse),
             default => UpdateCronjobDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a CronjobExecution.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetExecution\GetExecutionRequest $request An object representing the request for this operation
-     * @return GetExecution\GetExecutionOKResponse OK
-     */
-    public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse
-    {
-        $httpRequest = new Request(GetExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetExecutionOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetExecutionNotFoundResponse::fromResponse($httpResponse),
-            default => GetExecutionDefaultResponse::fromResponse($httpResponse),
         });
     }
 

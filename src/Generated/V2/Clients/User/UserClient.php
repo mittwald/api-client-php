@@ -179,17 +179,6 @@ interface UserClient
      */
     public function deprecatedUserDeleteApiToken(DeprecatedUserDeleteApiTokenRequest $request): EmptyResponse;
     /**
-     * Update an existing `ApiToken`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse ApiToken was updated.
-     */
-    public function deprecatedUserEditApiToken(DeprecatedUserEditApiTokenRequest $request): EmptyResponse;
-    /**
      * Remove a ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-ssh-key
@@ -201,17 +190,6 @@ interface UserClient
      */
     public function deprecatedUserDeleteSshKey(DeprecatedUserDeleteSshKeyRequest $request): EmptyResponse;
     /**
-     * Edit a stored ssh-key.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse The ssh-key has been edited.
-     */
-    public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse;
-    /**
      * Disable Multi Factor Authentication.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-disable-mfa
@@ -222,6 +200,28 @@ interface UserClient
      * @return EmptyResponse Multi Factor Authentication was disabled.
      */
     public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): EmptyResponse;
+    /**
+     * Update an existing `ApiToken`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse ApiToken was updated.
+     */
+    public function deprecatedUserEditApiToken(DeprecatedUserEditApiTokenRequest $request): EmptyResponse;
+    /**
+     * Edit a stored ssh-key.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse The ssh-key has been edited.
+     */
+    public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse;
     /**
      * Initialize password reset process.
      *
@@ -322,17 +322,6 @@ interface UserClient
      */
     public function deprecatedUserServicePersonalInformationUpdate(DeprecatedUserServicePersonalInformationUpdateRequest $request): EmptyResponse;
     /**
-     * Get profile information for the specified user if the user is related to the executing user
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetOKResponse The Profile
-     */
-    public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse;
-    /**
      * Get personalized settings for the user executing the request
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-get
@@ -387,6 +376,17 @@ interface UserClient
      * @return EmptyResponse The PhoneNumber has been verified
      */
     public function deprecatedUserServicePhoneNumberVerify(DeprecatedUserServicePhoneNumberVerifyRequest $request): EmptyResponse;
+    /**
+     * Get profile information for the specified user if the user is related to the executing user
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetOKResponse The Profile
+     */
+    public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse;
     /**
      * Get profile information for the executing user
      *
@@ -474,15 +474,15 @@ interface UserClient
      */
     public function addPhoneNumber(AddPhoneNumberRequest $request): EmptyResponse;
     /**
-     * Remove phone number.
+     * Authenticate yourself to get an access token.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-remove-phone-number
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RemovePhoneNumber\RemovePhoneNumberRequest $request An object representing the request for this operation
-     * @return EmptyResponse PhoneNumber removal was successful
+     * @param Authenticate\AuthenticateRequest $request An object representing the request for this operation
+     * @return Authenticate\AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
      */
-    public function removePhoneNumber(RemovePhoneNumberRequest $request): EmptyResponse;
+    public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse;
     /**
      * Validate your second factor.
      *
@@ -494,16 +494,6 @@ interface UserClient
      */
     public function authenticateMfa(AuthenticateMfaRequest $request): AuthenticateMfaOKResponse;
     /**
-     * Authenticate yourself to get an access token.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param Authenticate\AuthenticateRequest $request An object representing the request for this operation
-     * @return Authenticate\AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
-     */
-    public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse;
-    /**
      * Change your Email-Address.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-email
@@ -514,16 +504,6 @@ interface UserClient
      * call /email/verify with the verification code sent with the mail.
      */
     public function changeEmail(ChangeEmailRequest $request): EmptyResponse;
-    /**
-     * Get your verified Email-Address.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-email
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetOwnEmail\GetOwnEmailRequest $request An object representing the request for this operation
-     * @return GetOwnEmail\GetOwnEmailOKResponse Your Email-Address.
-     */
-    public function getOwnEmail(GetOwnEmailRequest $request): GetOwnEmailOKResponse;
     /**
      * Change your password.
      *
@@ -555,36 +535,6 @@ interface UserClient
      */
     public function confirmMfa(ConfirmMfaRequest $request): ConfirmMfaOKResponse;
     /**
-     * Disable Multi Factor Authentication.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DisableMfa\DisableMfaRequest $request An object representing the request for this operation
-     * @return EmptyResponse Multi Factor Authentication was disabled.
-     */
-    public function disableMfa(DisableMfaRequest $request): EmptyResponse;
-    /**
-     * Get your current multi factor auth status.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetMfaStatus\GetMfaStatusRequest $request An object representing the request for this operation
-     * @return GetMfaStatus\GetMfaStatusOKResponse Multi factor auth status
-     */
-    public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse;
-    /**
-     * Reset RecoveryCodes for MFA.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ResetRecoverycodes\ResetRecoverycodesRequest $request An object representing the request for this operation
-     * @return ResetRecoverycodes\ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
-     */
-    public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse;
-    /**
      * Confirm password reset.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-confirm-password-reset
@@ -604,16 +554,6 @@ interface UserClient
      * @return CreateApiToken\CreateApiTokenCreatedResponse ApiToken was added.
      */
     public function createApiToken(CreateApiTokenRequest $request): CreateApiTokenCreatedResponse;
-    /**
-     * List all of your ApiTokens.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-api-tokens
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListApiTokens\ListApiTokensRequest $request An object representing the request for this operation
-     * @return ListApiTokens\ListApiTokensOKResponse A list of ApiTokens.
-     */
-    public function listApiTokens(ListApiTokensRequest $request): ListApiTokensOKResponse;
     /**
      * Submit your user feedback.
      *
@@ -635,16 +575,6 @@ interface UserClient
      */
     public function createSshKey(CreateSshKeyRequest $request): EmptyResponse;
     /**
-     * Get your stored ssh-keys.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-ssh-keys
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListSshKeys\ListSshKeysRequest $request An object representing the request for this operation
-     * @return ListSshKeys\ListSshKeysOKResponse The list of stored ssh-keys.
-     */
-    public function listSshKeys(ListSshKeysRequest $request): ListSshKeysOKResponse;
-    /**
      * Deletes an ApiToken.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-api-token
@@ -654,26 +584,6 @@ interface UserClient
      * @return EmptyResponse The `ApiToken` has been deleted.
      */
     public function deleteApiToken(DeleteApiTokenRequest $request): EmptyResponse;
-    /**
-     * Update an existing `ApiToken`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-api-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param EditApiToken\EditApiTokenRequest $request An object representing the request for this operation
-     * @return EmptyResponse ApiToken was updated.
-     */
-    public function editApiToken(EditApiTokenRequest $request): EmptyResponse;
-    /**
-     * Get a specific ApiToken.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-api-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetApiToken\GetApiTokenRequest $request An object representing the request for this operation
-     * @return GetApiToken\GetApiTokenOKResponse The ApiToken.
-     */
-    public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse;
     /**
      * Remove a ssh-key.
      *
@@ -685,6 +595,36 @@ interface UserClient
      */
     public function deleteSshKey(DeleteSshKeyRequest $request): EmptyResponse;
     /**
+     * Delete your account and all your personal data.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeleteUser\DeleteUserRequest $request An object representing the request for this operation
+     * @return EmptyResponse Your user has been deleted.
+     */
+    public function deleteUser(DeleteUserRequest $request): EmptyResponse;
+    /**
+     * Disable Multi Factor Authentication.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DisableMfa\DisableMfaRequest $request An object representing the request for this operation
+     * @return EmptyResponse Multi Factor Authentication was disabled.
+     */
+    public function disableMfa(DisableMfaRequest $request): EmptyResponse;
+    /**
+     * Update an existing `ApiToken`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-api-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param EditApiToken\EditApiTokenRequest $request An object representing the request for this operation
+     * @return EmptyResponse ApiToken was updated.
+     */
+    public function editApiToken(EditApiTokenRequest $request): EmptyResponse;
+    /**
      * Edit a stored ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-ssh-key
@@ -695,25 +635,25 @@ interface UserClient
      */
     public function editSshKey(EditSshKeyRequest $request): EmptyResponse;
     /**
-     * Get a specific stored ssh-key.
+     * Get a specific ApiToken.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSshKey\GetSshKeyRequest $request An object representing the request for this operation
-     * @return GetSshKey\GetSshKeyOKResponse The requested ssh-key.
+     * @param GetApiToken\GetApiTokenRequest $request An object representing the request for this operation
+     * @return GetApiToken\GetApiTokenOKResponse The ApiToken.
      */
-    public function getSshKey(GetSshKeyRequest $request): GetSshKeyOKResponse;
+    public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse;
     /**
-     * Delete your account and all your personal data.
+     * Get your current multi factor auth status.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-user
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteUser\DeleteUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse Your user has been deleted.
+     * @param GetMfaStatus\GetMfaStatusRequest $request An object representing the request for this operation
+     * @return GetMfaStatus\GetMfaStatusOKResponse Multi factor auth status
      */
-    public function deleteUser(DeleteUserRequest $request): EmptyResponse;
+    public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse;
     /**
      * Get your account information.
      *
@@ -725,15 +665,15 @@ interface UserClient
      */
     public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse;
     /**
-     * Update your account information.
+     * Get your verified Email-Address.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-account
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateAccount\UpdateAccountRequest $request An object representing the request for this operation
-     * @return EmptyResponse Account has been updated.
+     * @param GetOwnEmail\GetOwnEmailRequest $request An object representing the request for this operation
+     * @return GetOwnEmail\GetOwnEmailOKResponse Your Email-Address.
      */
-    public function updateAccount(UpdateAccountRequest $request): EmptyResponse;
+    public function getOwnEmail(GetOwnEmailRequest $request): GetOwnEmailOKResponse;
     /**
      * The timestamp of your latest password change.
      *
@@ -755,16 +695,6 @@ interface UserClient
      */
     public function getPersonalizedSettings(GetPersonalizedSettingsRequest $request): GetPersonalizedSettingsOKResponse;
     /**
-     * Update personalized GUI settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personalized-settings
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request An object representing the request for this operation
-     * @return EmptyResponse PersonalSettings have been updated
-     */
-    public function updatePersonalizedSettings(UpdatePersonalizedSettingsRequest $request): EmptyResponse;
-    /**
      * Get a specific session.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-session
@@ -775,15 +705,15 @@ interface UserClient
      */
     public function getSession(GetSessionRequest $request): GetSessionOKResponse;
     /**
-     * Terminate a specific Session.
+     * Get a specific stored ssh-key.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-session
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateSession\TerminateSessionRequest $request An object representing the request for this operation
-     * @return EmptyResponse Session terminated.
+     * @param GetSshKey\GetSshKeyRequest $request An object representing the request for this operation
+     * @return GetSshKey\GetSshKeyOKResponse The requested ssh-key.
      */
-    public function terminateSession(TerminateSessionRequest $request): EmptyResponse;
+    public function getSshKey(GetSshKeyRequest $request): GetSshKeyOKResponse;
     /**
      * Get profile information for a user.
      *
@@ -794,16 +724,6 @@ interface UserClient
      * @return GetUser\GetUserOKResponse The user profile.
      */
     public function getUser(GetUserRequest $request): GetUserOKResponse;
-    /**
-     * Change personal information.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personal-information
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdatePersonalInformation\UpdatePersonalInformationRequest $request An object representing the request for this operation
-     * @return EmptyResponse Your personal information has been changed
-     */
-    public function updatePersonalInformation(UpdatePersonalInformationRequest $request): EmptyResponse;
     /**
      * Initialize Multi Factor Authentication. If successful, it needs to be confirmed, before usage of mfa.
      *
@@ -825,6 +745,16 @@ interface UserClient
      */
     public function initPasswordReset(InitPasswordResetRequest $request): EmptyResponse;
     /**
+     * List all of your ApiTokens.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-api-tokens
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListApiTokens\ListApiTokensRequest $request An object representing the request for this operation
+     * @return ListApiTokens\ListApiTokensOKResponse A list of ApiTokens.
+     */
+    public function listApiTokens(ListApiTokensRequest $request): ListApiTokensOKResponse;
+    /**
      * Submitted feedback of the given user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-feedback
@@ -845,15 +775,15 @@ interface UserClient
      */
     public function listSessions(ListSessionsRequest $request): ListSessionsOKResponse;
     /**
-     * Terminate all sessions, except the current session.
+     * Get your stored ssh-keys.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-all-sessions
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-ssh-keys
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateAllSessions\TerminateAllSessionsRequest $request An object representing the request for this operation
-     * @return EmptyResponse All sessions terminated.
+     * @param ListSshKeys\ListSshKeysRequest $request An object representing the request for this operation
+     * @return ListSshKeys\ListSshKeysOKResponse The list of stored ssh-keys.
      */
-    public function terminateAllSessions(TerminateAllSessionsRequest $request): EmptyResponse;
+    public function listSshKeys(ListSshKeysRequest $request): ListSshKeysOKResponse;
     /**
      * Terminate session and invalidate access token.
      *
@@ -886,6 +816,16 @@ interface UserClient
      */
     public function removeAvatar(RemoveAvatarRequest $request): EmptyResponse;
     /**
+     * Remove phone number.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-remove-phone-number
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RemovePhoneNumber\RemovePhoneNumberRequest $request An object representing the request for this operation
+     * @return EmptyResponse PhoneNumber removal was successful
+     */
+    public function removePhoneNumber(RemovePhoneNumberRequest $request): EmptyResponse;
+    /**
      * Request a new avatar image upload.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-request-avatar-upload
@@ -906,6 +846,16 @@ interface UserClient
      */
     public function resendVerificationEmail(ResendVerificationEmailRequest $request): EmptyResponse;
     /**
+     * Reset RecoveryCodes for MFA.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ResetRecoverycodes\ResetRecoverycodesRequest $request An object representing the request for this operation
+     * @return ResetRecoverycodes\ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
+     */
+    public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse;
+    /**
      * Request a support code.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-support-code-request
@@ -915,6 +865,56 @@ interface UserClient
      * @return SupportCodeRequest\SupportCodeRequestOKResponse The requested support code and the expiry.
      */
     public function supportCodeRequest(SupportCodeRequestRequest $request): SupportCodeRequestOKResponse;
+    /**
+     * Terminate all sessions, except the current session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-all-sessions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateAllSessions\TerminateAllSessionsRequest $request An object representing the request for this operation
+     * @return EmptyResponse All sessions terminated.
+     */
+    public function terminateAllSessions(TerminateAllSessionsRequest $request): EmptyResponse;
+    /**
+     * Terminate a specific Session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-session
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateSession\TerminateSessionRequest $request An object representing the request for this operation
+     * @return EmptyResponse Session terminated.
+     */
+    public function terminateSession(TerminateSessionRequest $request): EmptyResponse;
+    /**
+     * Update your account information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateAccount\UpdateAccountRequest $request An object representing the request for this operation
+     * @return EmptyResponse Account has been updated.
+     */
+    public function updateAccount(UpdateAccountRequest $request): EmptyResponse;
+    /**
+     * Change personal information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personal-information
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdatePersonalInformation\UpdatePersonalInformationRequest $request An object representing the request for this operation
+     * @return EmptyResponse Your personal information has been changed
+     */
+    public function updatePersonalInformation(UpdatePersonalInformationRequest $request): EmptyResponse;
+    /**
+     * Update personalized GUI settings.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personalized-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request An object representing the request for this operation
+     * @return EmptyResponse PersonalSettings have been updated
+     */
+    public function updatePersonalizedSettings(UpdatePersonalizedSettingsRequest $request): EmptyResponse;
     /**
      * Verify an added Email-Address.
      *

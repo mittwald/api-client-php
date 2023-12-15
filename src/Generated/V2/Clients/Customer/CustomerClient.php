@@ -89,26 +89,6 @@ interface CustomerClient
      */
     public function createCategory(CreateCategoryRequest $request): CreateCategoryCreatedResponse;
     /**
-     * Get all customer categories.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListOfCustomerCategories\ListOfCustomerCategoriesRequest $request An object representing the request for this operation
-     * @return ListOfCustomerCategories\ListOfCustomerCategoriesOKResponse Object containing the list of customer categories
-     */
-    public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse;
-    /**
-     * Create a CustomerInvite.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-customer-invite
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateCustomerInvite\CreateCustomerInviteRequest $request An object representing the request for this operation
-     * @return CreateCustomerInvite\CreateCustomerInviteCreatedResponse
-     */
-    public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse;
-    /**
      * Create a new customer profile.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-customer
@@ -119,15 +99,15 @@ interface CustomerClient
      */
     public function createCustomer(CreateCustomerRequest $request): CreateCustomerCreatedResponse;
     /**
-     * Get all customer profiles the authenticated user has access to.
+     * Create a CustomerInvite.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-customers
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-customer-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListCustomers\ListCustomersRequest $request An object representing the request for this operation
-     * @return ListCustomers\ListCustomersOKResponse The list of customers the user is a member for
+     * @param CreateCustomerInvite\CreateCustomerInviteRequest $request An object representing the request for this operation
+     * @return CreateCustomerInvite\CreateCustomerInviteCreatedResponse
      */
-    public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse;
+    public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse;
     /**
      * Decline a CustomerInvite.
      *
@@ -149,25 +129,15 @@ interface CustomerClient
      */
     public function deleteCategory(DeleteCategoryRequest $request): DeleteCategoryOKResponse;
     /**
-     * Get a customer category.
+     * Delete a customer profile.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-category
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-customer
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetCustomerCategory\GetCustomerCategoryRequest $request An object representing the request for this operation
-     * @return GetCustomerCategory\GetCustomerCategoryOKResponse Returns the customer category
+     * @param DeleteCustomer\DeleteCustomerRequest $request An object representing the request for this operation
+     * @return DeleteCustomer\DeleteCustomerOKResponse
      */
-    public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse;
-    /**
-     * Update a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCategory\UpdateCategoryRequest $request An object representing the request for this operation
-     * @return UpdateCategory\UpdateCategoryOKResponse The updated customer category
-     */
-    public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse;
+    public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse;
     /**
      * Delete a CustomerInvite.
      *
@@ -179,16 +149,6 @@ interface CustomerClient
      */
     public function deleteCustomerInvite(DeleteCustomerInviteRequest $request): EmptyResponse;
     /**
-     * Get a CustomerInvite.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-invite
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetCustomerInvite\GetCustomerInviteRequest $request An object representing the request for this operation
-     * @return GetCustomerInvite\GetCustomerInviteOKResponse OK
-     */
-    public function getCustomerInvite(GetCustomerInviteRequest $request): GetCustomerInviteOKResponse;
-    /**
      * Delete a CustomerMembership.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-customer-membership
@@ -198,36 +158,6 @@ interface CustomerClient
      * @return EmptyResponse
      */
     public function deleteCustomerMembership(DeleteCustomerMembershipRequest $request): EmptyResponse;
-    /**
-     * Get a CustomerMembership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-membership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetCustomerMembership\GetCustomerMembershipRequest $request An object representing the request for this operation
-     * @return GetCustomerMembership\GetCustomerMembershipOKResponse OK
-     */
-    public function getCustomerMembership(GetCustomerMembershipRequest $request): GetCustomerMembershipOKResponse;
-    /**
-     * Update a CustomerMembership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer-membership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCustomerMembership\UpdateCustomerMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse
-     */
-    public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse;
-    /**
-     * Delete a customer profile.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-customer
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteCustomer\DeleteCustomerRequest $request An object representing the request for this operation
-     * @return DeleteCustomer\DeleteCustomerOKResponse
-     */
-    public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse;
     /**
      * Get a customer profile.
      *
@@ -239,15 +169,35 @@ interface CustomerClient
      */
     public function getCustomer(GetCustomerRequest $request): GetCustomerOKResponse;
     /**
-     * Update a customer profile.
+     * Get a customer category.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-category
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateCustomer\UpdateCustomerRequest $request An object representing the request for this operation
-     * @return UpdateCustomer\UpdateCustomerOKResponse Name and id of the updated customer
+     * @param GetCustomerCategory\GetCustomerCategoryRequest $request An object representing the request for this operation
+     * @return GetCustomerCategory\GetCustomerCategoryOKResponse Returns the customer category
      */
-    public function updateCustomer(UpdateCustomerRequest $request): UpdateCustomerOKResponse;
+    public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse;
+    /**
+     * Get a CustomerInvite.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-invite
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetCustomerInvite\GetCustomerInviteRequest $request An object representing the request for this operation
+     * @return GetCustomerInvite\GetCustomerInviteOKResponse OK
+     */
+    public function getCustomerInvite(GetCustomerInviteRequest $request): GetCustomerInviteOKResponse;
+    /**
+     * Get a CustomerMembership.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-membership
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetCustomerMembership\GetCustomerMembershipRequest $request An object representing the request for this operation
+     * @return GetCustomerMembership\GetCustomerMembershipOKResponse OK
+     */
+    public function getCustomerMembership(GetCustomerMembershipRequest $request): GetCustomerMembershipOKResponse;
     /**
      * Get a CustomerInvite by token.
      *
@@ -299,6 +249,16 @@ interface CustomerClient
      */
     public function listCustomerMemberships(ListCustomerMembershipsRequest $request): ListCustomerMembershipsOKResponse;
     /**
+     * Get all customer profiles the authenticated user has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-customers
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListCustomers\ListCustomersRequest $request An object representing the request for this operation
+     * @return ListCustomers\ListCustomersOKResponse The list of customers the user is a member for
+     */
+    public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse;
+    /**
      * List Invites belonging to a Customer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-invites-for-customer
@@ -318,6 +278,16 @@ interface CustomerClient
      * @return ListMembershipsForCustomer\ListMembershipsForCustomerOKResponse OK
      */
     public function listMembershipsForCustomer(ListMembershipsForCustomerRequest $request): ListMembershipsForCustomerOKResponse;
+    /**
+     * Get all customer categories.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListOfCustomerCategories\ListOfCustomerCategoriesRequest $request An object representing the request for this operation
+     * @return ListOfCustomerCategories\ListOfCustomerCategoriesOKResponse Object containing the list of customer categories
+     */
+    public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse;
     /**
      * Remove the avatar picture of the customer profile.
      *
@@ -348,4 +318,34 @@ interface CustomerClient
      * @return EmptyResponse
      */
     public function resendCustomerInviteMail(ResendCustomerInviteMailRequest $request): EmptyResponse;
+    /**
+     * Update a customer category.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCategory\UpdateCategoryRequest $request An object representing the request for this operation
+     * @return UpdateCategory\UpdateCategoryOKResponse The updated customer category
+     */
+    public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse;
+    /**
+     * Update a customer profile.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCustomer\UpdateCustomerRequest $request An object representing the request for this operation
+     * @return UpdateCustomer\UpdateCustomerOKResponse Name and id of the updated customer
+     */
+    public function updateCustomer(UpdateCustomerRequest $request): UpdateCustomerOKResponse;
+    /**
+     * Update a CustomerMembership.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-customer-membership
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateCustomerMembership\UpdateCustomerMembershipRequest $request An object representing the request for this operation
+     * @return EmptyResponse
+     */
+    public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse;
 }

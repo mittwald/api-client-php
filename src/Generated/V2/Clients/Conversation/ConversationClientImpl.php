@@ -120,30 +120,6 @@ class ConversationClientImpl implements ConversationClient
     }
 
     /**
-     * Get all conversation the authenticated user has created or has access to.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-conversations
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListConversations\ListConversationsRequest $request An object representing the request for this operation
-     * @return ListConversations\ListConversationsOKResponse The conversations list ordered by creation date
-     */
-    public function listConversations(ListConversationsRequest $request): ListConversationsOKResponse
-    {
-        $httpRequest = new Request(ListConversationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListConversationsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListConversationsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Send a new message in the conversation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-create-message
@@ -172,32 +148,6 @@ class ConversationClientImpl implements ConversationClient
     }
 
     /**
-     * Get all message of the conversation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-messages-by-conversation
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListMessagesByConversation\ListMessagesByConversationRequest $request An object representing the request for this operation
-     * @return UntypedResponse
-     */
-    public function listMessagesByConversation(ListMessagesByConversationRequest $request): UntypedResponse
-    {
-        $httpRequest = new Request(ListMessagesByConversationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return UntypedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => ListMessagesByConversationForbiddenResponse::fromResponse($httpResponse),
-            404 => ListMessagesByConversationNotFoundResponse::fromResponse($httpResponse),
-            default => ListMessagesByConversationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get a specific conversation category.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-category
@@ -220,33 +170,6 @@ class ConversationClientImpl implements ConversationClient
             400 => GetCategoryBadRequestResponse::fromResponse($httpResponse),
             404 => GetCategoryNotFoundResponse::fromResponse($httpResponse),
             default => GetCategoryDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get members of a support conversation.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-conversation-members
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetConversationMembers\GetConversationMembersRequest $request An object representing the request for this operation
-     * @return GetConversationMembers\GetConversationMembersOKResponse The members of the conversation.
-     */
-    public function getConversationMembers(GetConversationMembersRequest $request): GetConversationMembersOKResponse
-    {
-        $httpRequest = new Request(GetConversationMembersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetConversationMembersOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetConversationMembersBadRequestResponse::fromResponse($httpResponse),
-            403 => GetConversationMembersForbiddenResponse::fromResponse($httpResponse),
-            404 => GetConversationMembersNotFoundResponse::fromResponse($httpResponse),
-            default => GetConversationMembersDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -280,30 +203,29 @@ class ConversationClientImpl implements ConversationClient
     }
 
     /**
-     * Update the basic properties of the conversation.
+     * Get members of a support conversation.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-update-conversation
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-conversation-members
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateConversation\UpdateConversationRequest $request An object representing the request for this operation
-     * @return UpdateConversation\UpdateConversationOKResponse
+     * @param GetConversationMembers\GetConversationMembersRequest $request An object representing the request for this operation
+     * @return GetConversationMembers\GetConversationMembersOKResponse The members of the conversation.
      */
-    public function updateConversation(UpdateConversationRequest $request): UpdateConversationOKResponse
+    public function getConversationMembers(GetConversationMembersRequest $request): GetConversationMembersOKResponse
     {
-        $httpRequest = new Request(UpdateConversationRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetConversationMembersRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
         ]);
         if ($httpResponse->getStatusCode() === 200) {
-            return UpdateConversationOKResponse::fromResponse($httpResponse);
+            return GetConversationMembersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateConversationBadRequestResponse::fromResponse($httpResponse),
-            403 => UpdateConversationForbiddenResponse::fromResponse($httpResponse),
-            404 => UpdateConversationNotFoundResponse::fromResponse($httpResponse),
-            default => UpdateConversationDefaultResponse::fromResponse($httpResponse),
+            400 => GetConversationMembersBadRequestResponse::fromResponse($httpResponse),
+            403 => GetConversationMembersForbiddenResponse::fromResponse($httpResponse),
+            404 => GetConversationMembersNotFoundResponse::fromResponse($httpResponse),
+            default => GetConversationMembersDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -355,6 +277,56 @@ class ConversationClientImpl implements ConversationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => ListCategoriesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all conversation the authenticated user has created or has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-conversations
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListConversations\ListConversationsRequest $request An object representing the request for this operation
+     * @return ListConversations\ListConversationsOKResponse The conversations list ordered by creation date
+     */
+    public function listConversations(ListConversationsRequest $request): ListConversationsOKResponse
+    {
+        $httpRequest = new Request(ListConversationsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListConversationsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListConversationsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all message of the conversation.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-messages-by-conversation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMessagesByConversation\ListMessagesByConversationRequest $request An object representing the request for this operation
+     * @return UntypedResponse
+     */
+    public function listMessagesByConversation(ListMessagesByConversationRequest $request): UntypedResponse
+    {
+        $httpRequest = new Request(ListMessagesByConversationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return UntypedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListMessagesByConversationForbiddenResponse::fromResponse($httpResponse),
+            404 => ListMessagesByConversationNotFoundResponse::fromResponse($httpResponse),
+            default => ListMessagesByConversationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -411,6 +383,34 @@ class ConversationClientImpl implements ConversationClient
             403 => SetConversationStatusForbiddenResponse::fromResponse($httpResponse),
             404 => SetConversationStatusNotFoundResponse::fromResponse($httpResponse),
             default => SetConversationStatusDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update the basic properties of the conversation.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-update-conversation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateConversation\UpdateConversationRequest $request An object representing the request for this operation
+     * @return UpdateConversation\UpdateConversationOKResponse
+     */
+    public function updateConversation(UpdateConversationRequest $request): UpdateConversationOKResponse
+    {
+        $httpRequest = new Request(UpdateConversationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return UpdateConversationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateConversationBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateConversationForbiddenResponse::fromResponse($httpResponse),
+            404 => UpdateConversationNotFoundResponse::fromResponse($httpResponse),
+            default => UpdateConversationDefaultResponse::fromResponse($httpResponse),
         });
     }
 

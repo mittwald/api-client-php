@@ -80,16 +80,6 @@ interface ContractClient
      */
     public function cancelContractItemTermination(CancelContractItemTerminationRequest $request): CancelContractItemTerminationOKResponse;
     /**
-     * Schedule the Termination of a ContractItem.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract-item
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param TerminateContractItem\TerminateContractItemRequest $request An object representing the request for this operation
-     * @return TerminateContractItem\TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
-     */
-    public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse;
-    /**
      * Cancel the TariffChange for the referred ContractItem.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-cancel-contract-tariff-change
@@ -110,16 +100,6 @@ interface ContractClient
      */
     public function cancelContractTermination(CancelContractTerminationRequest $request): CancelContractTerminationOKResponse;
     /**
-     * Schedule the Termination of a Contract.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param TerminateContract\TerminateContractRequest $request An object representing the request for this operation
-     * @return TerminateContract\TerminateContractCreatedResponse Returns the contractId, the date on which the Termination will take place and the list of affected ContractItems.
-     */
-    public function terminateContract(TerminateContractRequest $request): TerminateContractCreatedResponse;
-    /**
      * Return the BaseItem of the Contract with the given ID.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-base-item-of-contract
@@ -129,6 +109,16 @@ interface ContractClient
      * @return GetBaseItemOfContract\GetBaseItemOfContractOKResponse The BaseItem of the Contract.
      */
     public function getBaseItemOfContract(GetBaseItemOfContractRequest $request): GetBaseItemOfContractOKResponse;
+    /**
+     * Returns the Contract with the given ID.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContract\GetDetailOfContractRequest $request An object representing the request for this operation
+     * @return GetDetailOfContract\GetDetailOfContractOKResponse
+     */
+    public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse;
     /**
      * Return the Contract for the given Domain.
      *
@@ -170,16 +160,6 @@ interface ContractClient
      */
     public function getDetailOfContractItem(GetDetailOfContractItemRequest $request): GetDetailOfContractItemOKResponse;
     /**
-     * Returns the Contract with the given ID.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetDetailOfContract\GetDetailOfContractRequest $request An object representing the request for this operation
-     * @return GetDetailOfContract\GetDetailOfContractOKResponse
-     */
-    public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse;
-    /**
      * Return the next TerminationDate for the ContractItem with the given ID.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-next-termination-date-for-item
@@ -199,6 +179,26 @@ interface ContractClient
      * @return ListContracts\ListContractsOKResponse Return the Contracts that belong to the Customer.
      */
     public function listContracts(ListContractsRequest $request): ListContractsOKResponse;
+    /**
+     * Schedule the Termination of a Contract.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateContract\TerminateContractRequest $request An object representing the request for this operation
+     * @return TerminateContract\TerminateContractCreatedResponse Returns the contractId, the date on which the Termination will take place and the list of affected ContractItems.
+     */
+    public function terminateContract(TerminateContractRequest $request): TerminateContractCreatedResponse;
+    /**
+     * Schedule the Termination of a ContractItem.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract-item
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateContractItem\TerminateContractItemRequest $request An object representing the request for this operation
+     * @return TerminateContractItem\TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
+     */
+    public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse;
     /**
      * Get details of an Invoice.
      *
@@ -220,16 +220,6 @@ interface ContractClient
      */
     public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettingsRequest $request): InvoiceGetDetailOfInvoiceSettingsOKResponse;
     /**
-     * Update InvoiceSettings of a Customer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-update-invoice-settings
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
-     * @return InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse
-     */
-    public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse;
-    /**
      * Request an Access Token for the Invoice file.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-get-file-access-token
@@ -249,6 +239,16 @@ interface ContractClient
      * @return InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesOKResponse
      */
     public function invoiceListCustomerInvoices(InvoiceListCustomerInvoicesRequest $request): InvoiceListCustomerInvoicesOKResponse;
+    /**
+     * Update InvoiceSettings of a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-update-invoice-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
+     * @return InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse
+     */
+    public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse;
     /**
      * Create an Order.
      *

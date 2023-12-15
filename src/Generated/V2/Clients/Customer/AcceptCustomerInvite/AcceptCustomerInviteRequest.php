@@ -19,7 +19,7 @@ class AcceptCustomerInviteRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'inviteId' => [
+            'customerInviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -34,7 +34,7 @@ class AcceptCustomerInviteRequest
             ],
         ],
         'required' => [
-            'inviteId',
+            'customerInviteId',
             'body',
         ],
     ];
@@ -42,7 +42,7 @@ class AcceptCustomerInviteRequest
     /**
      * @var string
      */
-    private string $inviteId;
+    private string $customerInviteId;
 
     /**
      * @var AcceptCustomerInviteRequestBody
@@ -54,21 +54,21 @@ class AcceptCustomerInviteRequest
     ];
 
     /**
-     * @param string $inviteId
+     * @param string $customerInviteId
      * @param AcceptCustomerInviteRequestBody $body
      */
-    public function __construct(string $inviteId, AcceptCustomerInviteRequestBody $body)
+    public function __construct(string $customerInviteId, AcceptCustomerInviteRequestBody $body)
     {
-        $this->inviteId = $inviteId;
+        $this->customerInviteId = $customerInviteId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getInviteId(): string
+    public function getCustomerInviteId(): string
     {
-        return $this->inviteId;
+        return $this->customerInviteId;
     }
 
     /**
@@ -80,19 +80,19 @@ class AcceptCustomerInviteRequest
     }
 
     /**
-     * @param string $inviteId
+     * @param string $customerInviteId
      * @return self
      */
-    public function withInviteId(string $inviteId): self
+    public function withCustomerInviteId(string $customerInviteId): self
     {
         $validator = new Validator();
-        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
+        $validator->validate($customerInviteId, static::$schema['properties']['customerInviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->inviteId = $inviteId;
+        $clone->customerInviteId = $customerInviteId;
 
         return $clone;
     }
@@ -124,10 +124,10 @@ class AcceptCustomerInviteRequest
             static::validateInput($input);
         }
 
-        $inviteId = $input->{'inviteId'};
+        $customerInviteId = $input->{'customerInviteId'};
         $body = AcceptCustomerInviteRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($inviteId, $body);
+        $obj = new self($customerInviteId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class AcceptCustomerInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['inviteId'] = $this->inviteId;
+        $output['customerInviteId'] = $this->customerInviteId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -178,8 +178,8 @@ class AcceptCustomerInviteRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $inviteId = urlencode($mapped['inviteId']);
-        return '/v2/customer-invites/' . $inviteId . '/actions/accept';
+        $customerInviteId = urlencode($mapped['customerInviteId']);
+        return '/v2/customer-invites/' . $customerInviteId . '/actions/accept';
     }
 
     public function getQuery(): array

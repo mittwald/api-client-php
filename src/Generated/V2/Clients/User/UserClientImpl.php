@@ -411,33 +411,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Update an existing `ApiToken`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse ApiToken was updated.
-     */
-    public function deprecatedUserEditApiToken(DeprecatedUserEditApiTokenRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeprecatedUserEditApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => DeprecatedUserEditApiTokenBadRequestResponse::fromResponse($httpResponse),
-            default => DeprecatedUserEditApiTokenDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Remove a ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-ssh-key
@@ -459,33 +432,6 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => DeprecatedUserDeleteSshKeyDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Edit a stored ssh-key.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse The ssh-key has been edited.
-     */
-    public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeprecatedUserEditSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => DeprecatedUserEditSshKeyBadRequestResponse::fromResponse($httpResponse),
-            default => DeprecatedUserEditSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -513,6 +459,60 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserDisableMfaBadRequestResponse::fromResponse($httpResponse),
             default => DeprecatedUserDisableMfaDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an existing `ApiToken`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse ApiToken was updated.
+     */
+    public function deprecatedUserEditApiToken(DeprecatedUserEditApiTokenRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedUserEditApiTokenRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedUserEditApiTokenBadRequestResponse::fromResponse($httpResponse),
+            default => DeprecatedUserEditApiTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Edit a stored ssh-key.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse The ssh-key has been edited.
+     */
+    public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedUserEditSshKeyRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedUserEditSshKeyBadRequestResponse::fromResponse($httpResponse),
+            default => DeprecatedUserEditSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -758,34 +758,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Get profile information for the specified user if the user is related to the executing user
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetOKResponse The Profile
-     */
-    public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse
-    {
-        $httpRequest = new Request(DeprecatedUserServiceUserGetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return DeprecatedUserServiceUserGetOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => DeprecatedUserServiceUserGetForbiddenResponse::fromResponse($httpResponse),
-            404 => DeprecatedUserServiceUserGetNotFoundResponse::fromResponse($httpResponse),
-            412 => DeprecatedUserServiceUserGetPreconditionFailedResponse::fromResponse($httpResponse),
-            default => DeprecatedUserServiceUserGetDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get personalized settings for the user executing the request
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-get
@@ -917,6 +889,34 @@ class UserClientImpl implements UserClient
             404 => DeprecatedUserServicePhoneNumberVerifyNotFoundResponse::fromResponse($httpResponse),
             409 => DeprecatedUserServicePhoneNumberVerifyConflictResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePhoneNumberVerifyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get profile information for the specified user if the user is related to the executing user
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetOKResponse The Profile
+     */
+    public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse
+    {
+        $httpRequest = new Request(DeprecatedUserServiceUserGetRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedUserServiceUserGetOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => DeprecatedUserServiceUserGetForbiddenResponse::fromResponse($httpResponse),
+            404 => DeprecatedUserServiceUserGetNotFoundResponse::fromResponse($httpResponse),
+            412 => DeprecatedUserServiceUserGetPreconditionFailedResponse::fromResponse($httpResponse),
+            default => DeprecatedUserServiceUserGetDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1129,27 +1129,30 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Remove phone number.
+     * Authenticate yourself to get an access token.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-remove-phone-number
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RemovePhoneNumber\RemovePhoneNumberRequest $request An object representing the request for this operation
-     * @return EmptyResponse PhoneNumber removal was successful
+     * @param Authenticate\AuthenticateRequest $request An object representing the request for this operation
+     * @return Authenticate\AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
      */
-    public function removePhoneNumber(RemovePhoneNumberRequest $request): EmptyResponse
+    public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse
     {
-        $httpRequest = new Request(RemovePhoneNumberRequest::method, $request->getUrl());
+        $httpRequest = new Request(AuthenticateRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
         ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 200) {
+            return AuthenticateOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => RemovePhoneNumberBadRequestResponse::fromResponse($httpResponse),
-            default => RemovePhoneNumberDefaultResponse::fromResponse($httpResponse),
+            202 => AuthenticateAcceptedResponse::fromResponse($httpResponse),
+            400 => AuthenticateBadRequestResponse::fromResponse($httpResponse),
+            401 => AuthenticateUnauthorizedResponse::fromResponse($httpResponse),
+            default => AuthenticateDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1181,34 +1184,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Authenticate yourself to get an access token.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param Authenticate\AuthenticateRequest $request An object representing the request for this operation
-     * @return Authenticate\AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
-     */
-    public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse
-    {
-        $httpRequest = new Request(AuthenticateRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return AuthenticateOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            202 => AuthenticateAcceptedResponse::fromResponse($httpResponse),
-            400 => AuthenticateBadRequestResponse::fromResponse($httpResponse),
-            401 => AuthenticateUnauthorizedResponse::fromResponse($httpResponse),
-            default => AuthenticateDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Change your Email-Address.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-email
@@ -1232,31 +1207,6 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ChangeEmailBadRequestResponse::fromResponse($httpResponse),
             default => ChangeEmailDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get your verified Email-Address.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-email
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetOwnEmail\GetOwnEmailRequest $request An object representing the request for this operation
-     * @return GetOwnEmail\GetOwnEmailOKResponse Your Email-Address.
-     */
-    public function getOwnEmail(GetOwnEmailRequest $request): GetOwnEmailOKResponse
-    {
-        $httpRequest = new Request(GetOwnEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetOwnEmailOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetOwnEmailNotFoundResponse::fromResponse($httpResponse),
-            default => GetOwnEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1339,82 +1289,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Disable Multi Factor Authentication.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DisableMfa\DisableMfaRequest $request An object representing the request for this operation
-     * @return EmptyResponse Multi Factor Authentication was disabled.
-     */
-    public function disableMfa(DisableMfaRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DisableMfaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => DisableMfaBadRequestResponse::fromResponse($httpResponse),
-            default => DisableMfaDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get your current multi factor auth status.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetMfaStatus\GetMfaStatusRequest $request An object representing the request for this operation
-     * @return GetMfaStatus\GetMfaStatusOKResponse Multi factor auth status
-     */
-    public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse
-    {
-        $httpRequest = new Request(GetMfaStatusRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetMfaStatusOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => GetMfaStatusDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Reset RecoveryCodes for MFA.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ResetRecoverycodes\ResetRecoverycodesRequest $request An object representing the request for this operation
-     * @return ResetRecoverycodes\ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
-     */
-    public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse
-    {
-        $httpRequest = new Request(ResetRecoverycodesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ResetRecoverycodesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ResetRecoverycodesBadRequestResponse::fromResponse($httpResponse),
-            default => ResetRecoverycodesDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Confirm password reset.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-confirm-password-reset
@@ -1463,30 +1337,6 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateApiTokenBadRequestResponse::fromResponse($httpResponse),
             default => CreateApiTokenDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List all of your ApiTokens.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-api-tokens
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListApiTokens\ListApiTokensRequest $request An object representing the request for this operation
-     * @return ListApiTokens\ListApiTokensOKResponse A list of ApiTokens.
-     */
-    public function listApiTokens(ListApiTokensRequest $request): ListApiTokensOKResponse
-    {
-        $httpRequest = new Request(ListApiTokensRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListApiTokensOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListApiTokensDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1544,30 +1394,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Get your stored ssh-keys.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-ssh-keys
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListSshKeys\ListSshKeysRequest $request An object representing the request for this operation
-     * @return ListSshKeys\ListSshKeysOKResponse The list of stored ssh-keys.
-     */
-    public function listSshKeys(ListSshKeysRequest $request): ListSshKeysOKResponse
-    {
-        $httpRequest = new Request(ListSshKeysRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListSshKeysOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListSshKeysDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Deletes an ApiToken.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-api-token
@@ -1593,57 +1419,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Update an existing `ApiToken`.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-api-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param EditApiToken\EditApiTokenRequest $request An object representing the request for this operation
-     * @return EmptyResponse ApiToken was updated.
-     */
-    public function editApiToken(EditApiTokenRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(EditApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => EditApiTokenBadRequestResponse::fromResponse($httpResponse),
-            default => EditApiTokenDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a specific ApiToken.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-api-token
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetApiToken\GetApiTokenRequest $request An object representing the request for this operation
-     * @return GetApiToken\GetApiTokenOKResponse The ApiToken.
-     */
-    public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse
-    {
-        $httpRequest = new Request(GetApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetApiTokenOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetApiTokenNotFoundResponse::fromResponse($httpResponse),
-            default => GetApiTokenDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Remove a ssh-key.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-ssh-key
@@ -1664,57 +1439,6 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => DeleteSshKeyDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Edit a stored ssh-key.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-ssh-key
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param EditSshKey\EditSshKeyRequest $request An object representing the request for this operation
-     * @return EmptyResponse The ssh-key has been edited.
-     */
-    public function editSshKey(EditSshKeyRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(EditSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => EditSshKeyBadRequestResponse::fromResponse($httpResponse),
-            default => EditSshKeyDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a specific stored ssh-key.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetSshKey\GetSshKeyRequest $request An object representing the request for this operation
-     * @return GetSshKey\GetSshKeyOKResponse The requested ssh-key.
-     */
-    public function getSshKey(GetSshKeyRequest $request): GetSshKeyOKResponse
-    {
-        $httpRequest = new Request(GetSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetSshKeyOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetSshKeyNotFoundResponse::fromResponse($httpResponse),
-            default => GetSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1747,6 +1471,133 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Disable Multi Factor Authentication.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DisableMfa\DisableMfaRequest $request An object representing the request for this operation
+     * @return EmptyResponse Multi Factor Authentication was disabled.
+     */
+    public function disableMfa(DisableMfaRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DisableMfaRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DisableMfaBadRequestResponse::fromResponse($httpResponse),
+            default => DisableMfaDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an existing `ApiToken`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-api-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param EditApiToken\EditApiTokenRequest $request An object representing the request for this operation
+     * @return EmptyResponse ApiToken was updated.
+     */
+    public function editApiToken(EditApiTokenRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(EditApiTokenRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => EditApiTokenBadRequestResponse::fromResponse($httpResponse),
+            default => EditApiTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Edit a stored ssh-key.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-ssh-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param EditSshKey\EditSshKeyRequest $request An object representing the request for this operation
+     * @return EmptyResponse The ssh-key has been edited.
+     */
+    public function editSshKey(EditSshKeyRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(EditSshKeyRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => EditSshKeyBadRequestResponse::fromResponse($httpResponse),
+            default => EditSshKeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a specific ApiToken.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-api-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetApiToken\GetApiTokenRequest $request An object representing the request for this operation
+     * @return GetApiToken\GetApiTokenOKResponse The ApiToken.
+     */
+    public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse
+    {
+        $httpRequest = new Request(GetApiTokenRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetApiTokenOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetApiTokenNotFoundResponse::fromResponse($httpResponse),
+            default => GetApiTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get your current multi factor auth status.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMfaStatus\GetMfaStatusRequest $request An object representing the request for this operation
+     * @return GetMfaStatus\GetMfaStatusOKResponse Multi factor auth status
+     */
+    public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse
+    {
+        $httpRequest = new Request(GetMfaStatusRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetMfaStatusOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => GetMfaStatusDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get your account information.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-account
@@ -1772,28 +1623,27 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Update your account information.
+     * Get your verified Email-Address.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-account
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateAccount\UpdateAccountRequest $request An object representing the request for this operation
-     * @return EmptyResponse Account has been updated.
+     * @param GetOwnEmail\GetOwnEmailRequest $request An object representing the request for this operation
+     * @return GetOwnEmail\GetOwnEmailOKResponse Your Email-Address.
      */
-    public function updateAccount(UpdateAccountRequest $request): EmptyResponse
+    public function getOwnEmail(GetOwnEmailRequest $request): GetOwnEmailOKResponse
     {
-        $httpRequest = new Request(UpdateAccountRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetOwnEmailRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
         ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetOwnEmailOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateAccountBadRequestResponse::fromResponse($httpResponse),
-            default => UpdateAccountDefaultResponse::fromResponse($httpResponse),
+            404 => GetOwnEmailNotFoundResponse::fromResponse($httpResponse),
+            default => GetOwnEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1847,32 +1697,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Update personalized GUI settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personalized-settings
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request An object representing the request for this operation
-     * @return EmptyResponse PersonalSettings have been updated
-     */
-    public function updatePersonalizedSettings(UpdatePersonalizedSettingsRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdatePersonalizedSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdatePersonalizedSettingsBadRequestResponse::fromResponse($httpResponse),
-            default => UpdatePersonalizedSettingsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get a specific session.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-session
@@ -1898,27 +1722,27 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Terminate a specific Session.
+     * Get a specific stored ssh-key.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-session
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateSession\TerminateSessionRequest $request An object representing the request for this operation
-     * @return EmptyResponse Session terminated.
+     * @param GetSshKey\GetSshKeyRequest $request An object representing the request for this operation
+     * @return GetSshKey\GetSshKeyOKResponse The requested ssh-key.
      */
-    public function terminateSession(TerminateSessionRequest $request): EmptyResponse
+    public function getSshKey(GetSshKeyRequest $request): GetSshKeyOKResponse
     {
-        $httpRequest = new Request(TerminateSessionRequest::method, $request->getUrl());
+        $httpRequest = new Request(GetSshKeyRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetSshKeyOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => TerminateSessionNotFoundResponse::fromResponse($httpResponse),
-            default => TerminateSessionDefaultResponse::fromResponse($httpResponse),
+            404 => GetSshKeyNotFoundResponse::fromResponse($httpResponse),
+            default => GetSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1946,32 +1770,6 @@ class UserClientImpl implements UserClient
             404 => GetUserNotFoundResponse::fromResponse($httpResponse),
             412 => GetUserPreconditionFailedResponse::fromResponse($httpResponse),
             default => GetUserDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Change personal information.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personal-information
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdatePersonalInformation\UpdatePersonalInformationRequest $request An object representing the request for this operation
-     * @return EmptyResponse Your personal information has been changed
-     */
-    public function updatePersonalInformation(UpdatePersonalInformationRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(UpdatePersonalInformationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdatePersonalInformationBadRequestResponse::fromResponse($httpResponse),
-            default => UpdatePersonalInformationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -2028,6 +1826,30 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * List all of your ApiTokens.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-api-tokens
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListApiTokens\ListApiTokensRequest $request An object representing the request for this operation
+     * @return ListApiTokens\ListApiTokensOKResponse A list of ApiTokens.
+     */
+    public function listApiTokens(ListApiTokensRequest $request): ListApiTokensOKResponse
+    {
+        $httpRequest = new Request(ListApiTokensRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListApiTokensOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListApiTokensDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Submitted feedback of the given user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-feedback
@@ -2076,26 +1898,26 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Terminate all sessions, except the current session.
+     * Get your stored ssh-keys.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-all-sessions
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-ssh-keys
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateAllSessions\TerminateAllSessionsRequest $request An object representing the request for this operation
-     * @return EmptyResponse All sessions terminated.
+     * @param ListSshKeys\ListSshKeysRequest $request An object representing the request for this operation
+     * @return ListSshKeys\ListSshKeysOKResponse The list of stored ssh-keys.
      */
-    public function terminateAllSessions(TerminateAllSessionsRequest $request): EmptyResponse
+    public function listSshKeys(ListSshKeysRequest $request): ListSshKeysOKResponse
     {
-        $httpRequest = new Request(TerminateAllSessionsRequest::method, $request->getUrl());
+        $httpRequest = new Request(ListSshKeysRequest::method, $request->getUrl());
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
         ]);
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListSshKeysOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => TerminateAllSessionsDefaultResponse::fromResponse($httpResponse),
+            default => ListSshKeysDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -2178,6 +2000,31 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Remove phone number.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-remove-phone-number
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RemovePhoneNumber\RemovePhoneNumberRequest $request An object representing the request for this operation
+     * @return EmptyResponse PhoneNumber removal was successful
+     */
+    public function removePhoneNumber(RemovePhoneNumberRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(RemovePhoneNumberRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RemovePhoneNumberBadRequestResponse::fromResponse($httpResponse),
+            default => RemovePhoneNumberDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Request a new avatar image upload.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-request-avatar-upload
@@ -2231,6 +2078,32 @@ class UserClientImpl implements UserClient
     }
 
     /**
+     * Reset RecoveryCodes for MFA.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ResetRecoverycodes\ResetRecoverycodesRequest $request An object representing the request for this operation
+     * @return ResetRecoverycodes\ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
+     */
+    public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse
+    {
+        $httpRequest = new Request(ResetRecoverycodesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ResetRecoverycodesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ResetRecoverycodesBadRequestResponse::fromResponse($httpResponse),
+            default => ResetRecoverycodesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Request a support code.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-support-code-request
@@ -2251,6 +2124,133 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => SupportCodeRequestDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Terminate all sessions, except the current session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-all-sessions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateAllSessions\TerminateAllSessionsRequest $request An object representing the request for this operation
+     * @return EmptyResponse All sessions terminated.
+     */
+    public function terminateAllSessions(TerminateAllSessionsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(TerminateAllSessionsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => TerminateAllSessionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Terminate a specific Session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-session
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param TerminateSession\TerminateSessionRequest $request An object representing the request for this operation
+     * @return EmptyResponse Session terminated.
+     */
+    public function terminateSession(TerminateSessionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(TerminateSessionRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => TerminateSessionNotFoundResponse::fromResponse($httpResponse),
+            default => TerminateSessionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update your account information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdateAccount\UpdateAccountRequest $request An object representing the request for this operation
+     * @return EmptyResponse Account has been updated.
+     */
+    public function updateAccount(UpdateAccountRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdateAccountRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdateAccountBadRequestResponse::fromResponse($httpResponse),
+            default => UpdateAccountDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Change personal information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personal-information
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdatePersonalInformation\UpdatePersonalInformationRequest $request An object representing the request for this operation
+     * @return EmptyResponse Your personal information has been changed
+     */
+    public function updatePersonalInformation(UpdatePersonalInformationRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdatePersonalInformationRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdatePersonalInformationBadRequestResponse::fromResponse($httpResponse),
+            default => UpdatePersonalInformationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update personalized GUI settings.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personalized-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request An object representing the request for this operation
+     * @return EmptyResponse PersonalSettings have been updated
+     */
+    public function updatePersonalizedSettings(UpdatePersonalizedSettingsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(UpdatePersonalizedSettingsRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+            'json' => $request->getBody()->toJson(),
+        ]);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => UpdatePersonalizedSettingsBadRequestResponse::fromResponse($httpResponse),
+            default => UpdatePersonalizedSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

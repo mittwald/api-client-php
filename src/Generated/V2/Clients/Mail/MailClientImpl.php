@@ -254,35 +254,6 @@ class MailClientImpl implements MailClient
     }
 
     /**
-     * List DeliveryBoxes belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
-     * @return ListDeliveryBoxes\ListDeliveryBoxesOKResponse OK
-     */
-    public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxesOKResponse
-    {
-        $httpRequest = new Request(ListDeliveryBoxesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListDeliveryBoxesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListDeliveryBoxesBadRequestResponse::fromResponse($httpResponse),
-            403 => ListDeliveryBoxesForbiddenResponse::fromResponse($httpResponse),
-            404 => ListDeliveryBoxesNotFoundResponse::fromResponse($httpResponse),
-            500 => ListDeliveryBoxesInternalServerErrorResponse::fromResponse($httpResponse),
-            503 => ListDeliveryBoxesServiceUnavailableResponse::fromResponse($httpResponse),
-            default => ListDeliveryBoxesDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Create a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-create-mail-address
@@ -309,35 +280,6 @@ class MailClientImpl implements MailClient
             500 => CreateMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => CreateMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => CreateMailAddressDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List MailAddresses belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
-     * @return ListMailAddresses\ListMailAddressesOKResponse OK
-     */
-    public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse
-    {
-        $httpRequest = new Request(ListMailAddressesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListMailAddressesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListMailAddressesBadRequestResponse::fromResponse($httpResponse),
-            403 => ListMailAddressesForbiddenResponse::fromResponse($httpResponse),
-            404 => ListMailAddressesNotFoundResponse::fromResponse($httpResponse),
-            500 => ListMailAddressesInternalServerErrorResponse::fromResponse($httpResponse),
-            503 => ListMailAddressesServiceUnavailableResponse::fromResponse($httpResponse),
-            default => ListMailAddressesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -371,35 +313,6 @@ class MailClientImpl implements MailClient
     }
 
     /**
-     * Get a DeliveryBox.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-delivery-box
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetDeliveryBox\GetDeliveryBoxRequest $request An object representing the request for this operation
-     * @return GetDeliveryBox\GetDeliveryBoxOKResponse OK
-     */
-    public function getDeliveryBox(GetDeliveryBoxRequest $request): GetDeliveryBoxOKResponse
-    {
-        $httpRequest = new Request(GetDeliveryBoxRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetDeliveryBoxOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetDeliveryBoxBadRequestResponse::fromResponse($httpResponse),
-            403 => GetDeliveryBoxForbiddenResponse::fromResponse($httpResponse),
-            404 => GetDeliveryBoxNotFoundResponse::fromResponse($httpResponse),
-            500 => GetDeliveryBoxInternalServerErrorResponse::fromResponse($httpResponse),
-            503 => GetDeliveryBoxServiceUnavailableResponse::fromResponse($httpResponse),
-            default => GetDeliveryBoxDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-delete-mail-address
@@ -425,35 +338,6 @@ class MailClientImpl implements MailClient
             500 => DeleteMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteMailAddressDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-address
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetMailAddress\GetMailAddressRequest $request An object representing the request for this operation
-     * @return GetMailAddress\GetMailAddressOKResponse OK
-     */
-    public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse
-    {
-        $httpRequest = new Request(GetMailAddressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetMailAddressOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetMailAddressBadRequestResponse::fromResponse($httpResponse),
-            403 => GetMailAddressForbiddenResponse::fromResponse($httpResponse),
-            404 => GetMailAddressNotFoundResponse::fromResponse($httpResponse),
-            500 => GetMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
-            503 => GetMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
-            default => GetMailAddressDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -506,6 +390,122 @@ class MailClientImpl implements MailClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a DeliveryBox.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-delivery-box
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDeliveryBox\GetDeliveryBoxRequest $request An object representing the request for this operation
+     * @return GetDeliveryBox\GetDeliveryBoxOKResponse OK
+     */
+    public function getDeliveryBox(GetDeliveryBoxRequest $request): GetDeliveryBoxOKResponse
+    {
+        $httpRequest = new Request(GetDeliveryBoxRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDeliveryBoxOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDeliveryBoxBadRequestResponse::fromResponse($httpResponse),
+            403 => GetDeliveryBoxForbiddenResponse::fromResponse($httpResponse),
+            404 => GetDeliveryBoxNotFoundResponse::fromResponse($httpResponse),
+            500 => GetDeliveryBoxInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetDeliveryBoxServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetDeliveryBoxDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetMailAddress\GetMailAddressRequest $request An object representing the request for this operation
+     * @return GetMailAddress\GetMailAddressOKResponse OK
+     */
+    public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse
+    {
+        $httpRequest = new Request(GetMailAddressRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetMailAddressOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetMailAddressBadRequestResponse::fromResponse($httpResponse),
+            403 => GetMailAddressForbiddenResponse::fromResponse($httpResponse),
+            404 => GetMailAddressNotFoundResponse::fromResponse($httpResponse),
+            500 => GetMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => GetMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
+            default => GetMailAddressDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List DeliveryBoxes belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
+     * @return ListDeliveryBoxes\ListDeliveryBoxesOKResponse OK
+     */
+    public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxesOKResponse
+    {
+        $httpRequest = new Request(ListDeliveryBoxesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListDeliveryBoxesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListDeliveryBoxesBadRequestResponse::fromResponse($httpResponse),
+            403 => ListDeliveryBoxesForbiddenResponse::fromResponse($httpResponse),
+            404 => ListDeliveryBoxesNotFoundResponse::fromResponse($httpResponse),
+            500 => ListDeliveryBoxesInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => ListDeliveryBoxesServiceUnavailableResponse::fromResponse($httpResponse),
+            default => ListDeliveryBoxesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List MailAddresses belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
+     * @return ListMailAddresses\ListMailAddressesOKResponse OK
+     */
+    public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse
+    {
+        $httpRequest = new Request(ListMailAddressesRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListMailAddressesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListMailAddressesBadRequestResponse::fromResponse($httpResponse),
+            403 => ListMailAddressesForbiddenResponse::fromResponse($httpResponse),
+            404 => ListMailAddressesNotFoundResponse::fromResponse($httpResponse),
+            500 => ListMailAddressesInternalServerErrorResponse::fromResponse($httpResponse),
+            503 => ListMailAddressesServiceUnavailableResponse::fromResponse($httpResponse),
+            default => ListMailAddressesDefaultResponse::fromResponse($httpResponse),
         });
     }
 
