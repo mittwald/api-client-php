@@ -11,10 +11,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileBadRequest
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileNotAcceptableResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileUnauthorizedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\CreateFile\CreateFileUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesNotFoundResponse;
@@ -27,28 +24,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\
 use Mittwald\ApiClient\Generated\V2\Clients\File\DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileUnauthorizedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFile\GetFileUnprocessableEntityResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaForbiddenResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaUnauthorizedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileMeta\GetFileMetaUnprocessableEntityResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesNotFoundResponse;
@@ -152,9 +139,6 @@ class FileClientImpl implements FileClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateFileBadRequestResponse::fromResponse($httpResponse),
-            401 => CreateFileUnauthorizedResponse::fromResponse($httpResponse),
-            406 => CreateFileNotAcceptableResponse::fromResponse($httpResponse),
-            422 => CreateFileUnprocessableEntityResponse::fromResponse($httpResponse),
             500 => CreateFileInternalServerErrorResponse::fromResponse($httpResponse),
             default => CreateFileDefaultResponse::fromResponse($httpResponse),
         });
@@ -181,10 +165,7 @@ class FileClientImpl implements FileClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetFileBadRequestResponse::fromResponse($httpResponse),
-            401 => GetFileUnauthorizedResponse::fromResponse($httpResponse),
-            403 => GetFileForbiddenResponse::fromResponse($httpResponse),
             404 => GetFileNotFoundResponse::fromResponse($httpResponse),
-            422 => GetFileUnprocessableEntityResponse::fromResponse($httpResponse),
             500 => GetFileInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetFileDefaultResponse::fromResponse($httpResponse),
         });
@@ -210,12 +191,7 @@ class FileClientImpl implements FileClient
             return GetFileMetaOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetFileMetaBadRequestResponse::fromResponse($httpResponse),
-            401 => GetFileMetaUnauthorizedResponse::fromResponse($httpResponse),
-            403 => GetFileMetaForbiddenResponse::fromResponse($httpResponse),
             404 => GetFileMetaNotFoundResponse::fromResponse($httpResponse),
-            422 => GetFileMetaUnprocessableEntityResponse::fromResponse($httpResponse),
-            500 => GetFileMetaInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetFileMetaDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -240,7 +216,6 @@ class FileClientImpl implements FileClient
             return GetFileUploadTokenRulesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetFileUploadTokenRulesBadRequestResponse::fromResponse($httpResponse),
             404 => GetFileUploadTokenRulesNotFoundResponse::fromResponse($httpResponse),
             500 => GetFileUploadTokenRulesInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetFileUploadTokenRulesDefaultResponse::fromResponse($httpResponse),
@@ -267,7 +242,6 @@ class FileClientImpl implements FileClient
             return GetFileUploadTypeRulesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetFileUploadTypeRulesBadRequestResponse::fromResponse($httpResponse),
             404 => GetFileUploadTypeRulesNotFoundResponse::fromResponse($httpResponse),
             500 => GetFileUploadTypeRulesInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetFileUploadTypeRulesDefaultResponse::fromResponse($httpResponse),

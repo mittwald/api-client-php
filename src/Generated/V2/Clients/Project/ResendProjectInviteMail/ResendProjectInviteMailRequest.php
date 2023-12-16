@@ -19,7 +19,7 @@ class ResendProjectInviteMailRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectInviteId' => [
+            'inviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -28,7 +28,7 @@ class ResendProjectInviteMailRequest
             ],
         ],
         'required' => [
-            'projectInviteId',
+            'inviteId',
             'body',
         ],
     ];
@@ -36,7 +36,7 @@ class ResendProjectInviteMailRequest
     /**
      * @var string
      */
-    private string $projectInviteId;
+    private string $inviteId;
 
     /**
      * @var mixed
@@ -48,21 +48,21 @@ class ResendProjectInviteMailRequest
     ];
 
     /**
-     * @param string $projectInviteId
+     * @param string $inviteId
      * @param mixed $body
      */
-    public function __construct(string $projectInviteId, $body)
+    public function __construct(string $inviteId, $body)
     {
-        $this->projectInviteId = $projectInviteId;
+        $this->inviteId = $inviteId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getProjectInviteId(): string
+    public function getInviteId(): string
     {
-        return $this->projectInviteId;
+        return $this->inviteId;
     }
 
     /**
@@ -74,19 +74,19 @@ class ResendProjectInviteMailRequest
     }
 
     /**
-     * @param string $projectInviteId
+     * @param string $inviteId
      * @return self
      */
-    public function withProjectInviteId(string $projectInviteId): self
+    public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($projectInviteId, static::$schema['properties']['projectInviteId']);
+        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectInviteId = $projectInviteId;
+        $clone->inviteId = $inviteId;
 
         return $clone;
     }
@@ -124,10 +124,10 @@ class ResendProjectInviteMailRequest
             static::validateInput($input);
         }
 
-        $projectInviteId = $input->{'projectInviteId'};
+        $inviteId = $input->{'inviteId'};
         $body = $input->{'body'};
 
-        $obj = new self($projectInviteId, $body);
+        $obj = new self($inviteId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class ResendProjectInviteMailRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectInviteId'] = $this->projectInviteId;
+        $output['inviteId'] = $this->inviteId;
         $output['body'] = $this->body;
 
         return $output;
@@ -177,8 +177,8 @@ class ResendProjectInviteMailRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectInviteId = urlencode($mapped['projectInviteId']);
-        return '/v2/project-invites/' . $projectInviteId . '/actions/resend';
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/project-invites/' . $inviteId . '/actions/resend';
     }
 
     public function getQuery(): array

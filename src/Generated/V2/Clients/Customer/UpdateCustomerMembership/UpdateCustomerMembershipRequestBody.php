@@ -186,8 +186,8 @@ class UpdateCustomerMembershipRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $customerMembershipId = urlencode($mapped['customerMembershipId']);
-        return '/v2/customer-memberships/' . $customerMembershipId;
+        $membershipId = urlencode($mapped['membershipId']);
+        return '/v2/customer-memberships/' . $membershipId;
     }
 
     public function getQuery(): array

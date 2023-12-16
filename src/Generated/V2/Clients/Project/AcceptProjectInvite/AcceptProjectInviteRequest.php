@@ -19,7 +19,7 @@ class AcceptProjectInviteRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectInviteId' => [
+            'inviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -34,7 +34,7 @@ class AcceptProjectInviteRequest
             ],
         ],
         'required' => [
-            'projectInviteId',
+            'inviteId',
             'body',
         ],
     ];
@@ -42,7 +42,7 @@ class AcceptProjectInviteRequest
     /**
      * @var string
      */
-    private string $projectInviteId;
+    private string $inviteId;
 
     /**
      * @var AcceptProjectInviteRequestBody
@@ -54,21 +54,21 @@ class AcceptProjectInviteRequest
     ];
 
     /**
-     * @param string $projectInviteId
+     * @param string $inviteId
      * @param AcceptProjectInviteRequestBody $body
      */
-    public function __construct(string $projectInviteId, AcceptProjectInviteRequestBody $body)
+    public function __construct(string $inviteId, AcceptProjectInviteRequestBody $body)
     {
-        $this->projectInviteId = $projectInviteId;
+        $this->inviteId = $inviteId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getProjectInviteId(): string
+    public function getInviteId(): string
     {
-        return $this->projectInviteId;
+        return $this->inviteId;
     }
 
     /**
@@ -80,19 +80,19 @@ class AcceptProjectInviteRequest
     }
 
     /**
-     * @param string $projectInviteId
+     * @param string $inviteId
      * @return self
      */
-    public function withProjectInviteId(string $projectInviteId): self
+    public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($projectInviteId, static::$schema['properties']['projectInviteId']);
+        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectInviteId = $projectInviteId;
+        $clone->inviteId = $inviteId;
 
         return $clone;
     }
@@ -124,10 +124,10 @@ class AcceptProjectInviteRequest
             static::validateInput($input);
         }
 
-        $projectInviteId = $input->{'projectInviteId'};
+        $inviteId = $input->{'inviteId'};
         $body = AcceptProjectInviteRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectInviteId, $body);
+        $obj = new self($inviteId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class AcceptProjectInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectInviteId'] = $this->projectInviteId;
+        $output['inviteId'] = $this->inviteId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -178,8 +178,8 @@ class AcceptProjectInviteRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectInviteId = urlencode($mapped['projectInviteId']);
-        return '/v2/project-invites/' . $projectInviteId . '/actions/accept';
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/project-invites/' . $inviteId . '/actions/accept';
     }
 
     public function getQuery(): array

@@ -19,7 +19,7 @@ class UpdateProjectMembershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectMembershipId' => [
+            'membershipId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -41,7 +41,7 @@ class UpdateProjectMembershipRequest
             ],
         ],
         'required' => [
-            'projectMembershipId',
+            'membershipId',
             'body',
         ],
     ];
@@ -49,7 +49,7 @@ class UpdateProjectMembershipRequest
     /**
      * @var string
      */
-    private string $projectMembershipId;
+    private string $membershipId;
 
     /**
      * @var UpdateProjectMembershipRequestBody
@@ -61,21 +61,21 @@ class UpdateProjectMembershipRequest
     ];
 
     /**
-     * @param string $projectMembershipId
+     * @param string $membershipId
      * @param UpdateProjectMembershipRequestBody $body
      */
-    public function __construct(string $projectMembershipId, UpdateProjectMembershipRequestBody $body)
+    public function __construct(string $membershipId, UpdateProjectMembershipRequestBody $body)
     {
-        $this->projectMembershipId = $projectMembershipId;
+        $this->membershipId = $membershipId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getProjectMembershipId(): string
+    public function getMembershipId(): string
     {
-        return $this->projectMembershipId;
+        return $this->membershipId;
     }
 
     /**
@@ -87,19 +87,19 @@ class UpdateProjectMembershipRequest
     }
 
     /**
-     * @param string $projectMembershipId
+     * @param string $membershipId
      * @return self
      */
-    public function withProjectMembershipId(string $projectMembershipId): self
+    public function withMembershipId(string $membershipId): self
     {
         $validator = new Validator();
-        $validator->validate($projectMembershipId, static::$schema['properties']['projectMembershipId']);
+        $validator->validate($membershipId, static::$schema['properties']['membershipId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectMembershipId = $projectMembershipId;
+        $clone->membershipId = $membershipId;
 
         return $clone;
     }
@@ -131,10 +131,10 @@ class UpdateProjectMembershipRequest
             static::validateInput($input);
         }
 
-        $projectMembershipId = $input->{'projectMembershipId'};
+        $membershipId = $input->{'membershipId'};
         $body = UpdateProjectMembershipRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectMembershipId, $body);
+        $obj = new self($membershipId, $body);
 
         return $obj;
     }
@@ -147,7 +147,7 @@ class UpdateProjectMembershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectMembershipId'] = $this->projectMembershipId;
+        $output['membershipId'] = $this->membershipId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -185,8 +185,8 @@ class UpdateProjectMembershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectMembershipId = urlencode($mapped['projectMembershipId']);
-        return '/v2/project-memberships/' . $projectMembershipId;
+        $membershipId = urlencode($mapped['membershipId']);
+        return '/v2/project-memberships/' . $membershipId;
     }
 
     public function getQuery(): array

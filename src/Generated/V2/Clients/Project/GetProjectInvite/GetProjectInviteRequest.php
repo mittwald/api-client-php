@@ -19,54 +19,54 @@ class GetProjectInviteRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectInviteId' => [
+            'inviteId' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'projectInviteId',
+            'inviteId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $projectInviteId;
+    private string $inviteId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $projectInviteId
+     * @param string $inviteId
      */
-    public function __construct(string $projectInviteId)
+    public function __construct(string $inviteId)
     {
-        $this->projectInviteId = $projectInviteId;
+        $this->inviteId = $inviteId;
     }
 
     /**
      * @return string
      */
-    public function getProjectInviteId(): string
+    public function getInviteId(): string
     {
-        return $this->projectInviteId;
+        return $this->inviteId;
     }
 
     /**
-     * @param string $projectInviteId
+     * @param string $inviteId
      * @return self
      */
-    public function withProjectInviteId(string $projectInviteId): self
+    public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($projectInviteId, static::$schema['properties']['projectInviteId']);
+        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectInviteId = $projectInviteId;
+        $clone->inviteId = $inviteId;
 
         return $clone;
     }
@@ -86,9 +86,9 @@ class GetProjectInviteRequest
             static::validateInput($input);
         }
 
-        $projectInviteId = $input->{'projectInviteId'};
+        $inviteId = $input->{'inviteId'};
 
-        $obj = new self($projectInviteId);
+        $obj = new self($inviteId);
 
         return $obj;
     }
@@ -101,7 +101,7 @@ class GetProjectInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectInviteId'] = $this->projectInviteId;
+        $output['inviteId'] = $this->inviteId;
 
         return $output;
     }
@@ -137,8 +137,8 @@ class GetProjectInviteRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectInviteId = urlencode($mapped['projectInviteId']);
-        return '/v2/project-invites/' . $projectInviteId;
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/project-invites/' . $inviteId;
     }
 
     public function getQuery(): array

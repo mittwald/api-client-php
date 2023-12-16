@@ -19,54 +19,54 @@ class GetCustomerMembershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'customerMembershipId' => [
+            'membershipId' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'customerMembershipId',
+            'membershipId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $customerMembershipId;
+    private string $membershipId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $customerMembershipId
+     * @param string $membershipId
      */
-    public function __construct(string $customerMembershipId)
+    public function __construct(string $membershipId)
     {
-        $this->customerMembershipId = $customerMembershipId;
+        $this->membershipId = $membershipId;
     }
 
     /**
      * @return string
      */
-    public function getCustomerMembershipId(): string
+    public function getMembershipId(): string
     {
-        return $this->customerMembershipId;
+        return $this->membershipId;
     }
 
     /**
-     * @param string $customerMembershipId
+     * @param string $membershipId
      * @return self
      */
-    public function withCustomerMembershipId(string $customerMembershipId): self
+    public function withMembershipId(string $membershipId): self
     {
         $validator = new Validator();
-        $validator->validate($customerMembershipId, static::$schema['properties']['customerMembershipId']);
+        $validator->validate($membershipId, static::$schema['properties']['membershipId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->customerMembershipId = $customerMembershipId;
+        $clone->membershipId = $membershipId;
 
         return $clone;
     }
@@ -86,9 +86,9 @@ class GetCustomerMembershipRequest
             static::validateInput($input);
         }
 
-        $customerMembershipId = $input->{'customerMembershipId'};
+        $membershipId = $input->{'membershipId'};
 
-        $obj = new self($customerMembershipId);
+        $obj = new self($membershipId);
 
         return $obj;
     }
@@ -101,7 +101,7 @@ class GetCustomerMembershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['customerMembershipId'] = $this->customerMembershipId;
+        $output['membershipId'] = $this->membershipId;
 
         return $output;
     }
@@ -137,8 +137,8 @@ class GetCustomerMembershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $customerMembershipId = urlencode($mapped['customerMembershipId']);
-        return '/v2/customer-memberships/' . $customerMembershipId;
+        $membershipId = urlencode($mapped['membershipId']);
+        return '/v2/customer-memberships/' . $membershipId;
     }
 
     public function getQuery(): array
