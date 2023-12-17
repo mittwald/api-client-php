@@ -19,7 +19,7 @@ class UpdateCustomerMembershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'membershipId' => [
+            'customerMembershipId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -41,7 +41,7 @@ class UpdateCustomerMembershipRequest
             ],
         ],
         'required' => [
-            'membershipId',
+            'customerMembershipId',
             'body',
         ],
     ];
@@ -49,7 +49,7 @@ class UpdateCustomerMembershipRequest
     /**
      * @var string
      */
-    private string $membershipId;
+    private string $customerMembershipId;
 
     /**
      * @var UpdateCustomerMembershipRequestBody
@@ -61,21 +61,21 @@ class UpdateCustomerMembershipRequest
     ];
 
     /**
-     * @param string $membershipId
+     * @param string $customerMembershipId
      * @param UpdateCustomerMembershipRequestBody $body
      */
-    public function __construct(string $membershipId, UpdateCustomerMembershipRequestBody $body)
+    public function __construct(string $customerMembershipId, UpdateCustomerMembershipRequestBody $body)
     {
-        $this->membershipId = $membershipId;
+        $this->customerMembershipId = $customerMembershipId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getMembershipId(): string
+    public function getCustomerMembershipId(): string
     {
-        return $this->membershipId;
+        return $this->customerMembershipId;
     }
 
     /**
@@ -87,19 +87,19 @@ class UpdateCustomerMembershipRequest
     }
 
     /**
-     * @param string $membershipId
+     * @param string $customerMembershipId
      * @return self
      */
-    public function withMembershipId(string $membershipId): self
+    public function withCustomerMembershipId(string $customerMembershipId): self
     {
         $validator = new Validator();
-        $validator->validate($membershipId, static::$schema['properties']['membershipId']);
+        $validator->validate($customerMembershipId, static::$schema['properties']['customerMembershipId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->membershipId = $membershipId;
+        $clone->customerMembershipId = $customerMembershipId;
 
         return $clone;
     }
@@ -131,10 +131,10 @@ class UpdateCustomerMembershipRequest
             static::validateInput($input);
         }
 
-        $membershipId = $input->{'membershipId'};
+        $customerMembershipId = $input->{'customerMembershipId'};
         $body = UpdateCustomerMembershipRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($membershipId, $body);
+        $obj = new self($customerMembershipId, $body);
 
         return $obj;
     }
@@ -147,7 +147,7 @@ class UpdateCustomerMembershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['membershipId'] = $this->membershipId;
+        $output['customerMembershipId'] = $this->customerMembershipId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -185,8 +185,8 @@ class UpdateCustomerMembershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $membershipId = urlencode($mapped['membershipId']);
-        return '/v2/customer-memberships/' . $membershipId;
+        $customerMembershipId = urlencode($mapped['customerMembershipId']);
+        return '/v2/customer-memberships/' . $customerMembershipId;
     }
 
     public function getQuery(): array

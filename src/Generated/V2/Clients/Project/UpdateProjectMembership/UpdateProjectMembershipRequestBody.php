@@ -186,8 +186,8 @@ class UpdateProjectMembershipRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $membershipId = urlencode($mapped['membershipId']);
-        return '/v2/project-memberships/' . $membershipId;
+        $projectMembershipId = urlencode($mapped['projectMembershipId']);
+        return '/v2/project-memberships/' . $projectMembershipId;
     }
 
     public function getQuery(): array

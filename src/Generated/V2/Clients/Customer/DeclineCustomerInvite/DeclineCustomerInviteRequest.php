@@ -19,7 +19,7 @@ class DeclineCustomerInviteRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'inviteId' => [
+            'customerInviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -28,7 +28,7 @@ class DeclineCustomerInviteRequest
             ],
         ],
         'required' => [
-            'inviteId',
+            'customerInviteId',
             'body',
         ],
     ];
@@ -36,7 +36,7 @@ class DeclineCustomerInviteRequest
     /**
      * @var string
      */
-    private string $inviteId;
+    private string $customerInviteId;
 
     /**
      * @var mixed
@@ -48,21 +48,21 @@ class DeclineCustomerInviteRequest
     ];
 
     /**
-     * @param string $inviteId
+     * @param string $customerInviteId
      * @param mixed $body
      */
-    public function __construct(string $inviteId, $body)
+    public function __construct(string $customerInviteId, $body)
     {
-        $this->inviteId = $inviteId;
+        $this->customerInviteId = $customerInviteId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getInviteId(): string
+    public function getCustomerInviteId(): string
     {
-        return $this->inviteId;
+        return $this->customerInviteId;
     }
 
     /**
@@ -74,19 +74,19 @@ class DeclineCustomerInviteRequest
     }
 
     /**
-     * @param string $inviteId
+     * @param string $customerInviteId
      * @return self
      */
-    public function withInviteId(string $inviteId): self
+    public function withCustomerInviteId(string $customerInviteId): self
     {
         $validator = new Validator();
-        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
+        $validator->validate($customerInviteId, static::$schema['properties']['customerInviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->inviteId = $inviteId;
+        $clone->customerInviteId = $customerInviteId;
 
         return $clone;
     }
@@ -124,10 +124,10 @@ class DeclineCustomerInviteRequest
             static::validateInput($input);
         }
 
-        $inviteId = $input->{'inviteId'};
+        $customerInviteId = $input->{'customerInviteId'};
         $body = $input->{'body'};
 
-        $obj = new self($inviteId, $body);
+        $obj = new self($customerInviteId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class DeclineCustomerInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['inviteId'] = $this->inviteId;
+        $output['customerInviteId'] = $this->customerInviteId;
         $output['body'] = $this->body;
 
         return $output;
@@ -177,8 +177,8 @@ class DeclineCustomerInviteRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $inviteId = urlencode($mapped['inviteId']);
-        return '/v2/customer-invites/' . $inviteId . '/actions/decline';
+        $customerInviteId = urlencode($mapped['customerInviteId']);
+        return '/v2/customer-invites/' . $customerInviteId . '/actions/decline';
     }
 
     public function getQuery(): array

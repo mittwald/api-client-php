@@ -19,55 +19,55 @@ class DeleteCustomerMembershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'membershipId' => [
+            'customerMembershipId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'membershipId',
+            'customerMembershipId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $membershipId;
+    private string $customerMembershipId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $membershipId
+     * @param string $customerMembershipId
      */
-    public function __construct(string $membershipId)
+    public function __construct(string $customerMembershipId)
     {
-        $this->membershipId = $membershipId;
+        $this->customerMembershipId = $customerMembershipId;
     }
 
     /**
      * @return string
      */
-    public function getMembershipId(): string
+    public function getCustomerMembershipId(): string
     {
-        return $this->membershipId;
+        return $this->customerMembershipId;
     }
 
     /**
-     * @param string $membershipId
+     * @param string $customerMembershipId
      * @return self
      */
-    public function withMembershipId(string $membershipId): self
+    public function withCustomerMembershipId(string $customerMembershipId): self
     {
         $validator = new Validator();
-        $validator->validate($membershipId, static::$schema['properties']['membershipId']);
+        $validator->validate($customerMembershipId, static::$schema['properties']['customerMembershipId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->membershipId = $membershipId;
+        $clone->customerMembershipId = $customerMembershipId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class DeleteCustomerMembershipRequest
             static::validateInput($input);
         }
 
-        $membershipId = $input->{'membershipId'};
+        $customerMembershipId = $input->{'customerMembershipId'};
 
-        $obj = new self($membershipId);
+        $obj = new self($customerMembershipId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class DeleteCustomerMembershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['membershipId'] = $this->membershipId;
+        $output['customerMembershipId'] = $this->customerMembershipId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class DeleteCustomerMembershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $membershipId = urlencode($mapped['membershipId']);
-        return '/v2/customer-memberships/' . $membershipId;
+        $customerMembershipId = urlencode($mapped['customerMembershipId']);
+        return '/v2/customer-memberships/' . $customerMembershipId;
     }
 
     public function getQuery(): array

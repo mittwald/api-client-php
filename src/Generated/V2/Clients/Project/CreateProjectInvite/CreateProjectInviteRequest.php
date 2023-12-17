@@ -196,7 +196,7 @@ class CreateProjectInviteRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/project/' . $projectId . '/invites';
+        return '/v2/projects/' . $projectId . '/invites';
     }
 
     public function getQuery(): array

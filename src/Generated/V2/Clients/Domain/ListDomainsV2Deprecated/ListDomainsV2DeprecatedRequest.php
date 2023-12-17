@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListDomainsRequest
+class ListDomainsV2DeprecatedRequest
 {
     public const method = 'get';
 
@@ -36,14 +36,14 @@ class ListDomainsRequest
             ],
         ],
         'required' => [
-
+            'projectId',
         ],
     ];
 
     /**
-     * @var string|null
+     * @var string
      */
-    private ?string $projectId = null;
+    private string $projectId;
 
     /**
      * @var int|null
@@ -65,18 +65,19 @@ class ListDomainsRequest
     ];
 
     /**
-     *
+     * @param string $projectId
      */
-    public function __construct()
+    public function __construct(string $projectId)
     {
+        $this->projectId = $projectId;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getProjectId(): ?string
+    public function getProjectId(): string
     {
-        return $this->projectId ?? null;
+        return $this->projectId;
     }
 
     /**
@@ -117,17 +118,6 @@ class ListDomainsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutProjectId(): self
-    {
-        $clone = clone $this;
-        unset($clone->projectId);
 
         return $clone;
     }
@@ -224,20 +214,17 @@ class ListDomainsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListDomainsRequest Created instance
+     * @return ListDomainsV2DeprecatedRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListDomainsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ListDomainsV2DeprecatedRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = null;
-        if (isset($input->{'projectId'})) {
-            $projectId = $input->{'projectId'};
-        }
+        $projectId = $input->{'projectId'};
         $page = null;
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
@@ -251,8 +238,7 @@ class ListDomainsRequest
             $domainSearchName = $input->{'domainSearchName'};
         }
 
-        $obj = new self();
-        $obj->projectId = $projectId;
+        $obj = new self($projectId);
         $obj->page = $page;
         $obj->limit = $limit;
         $obj->domainSearchName = $domainSearchName;
@@ -267,9 +253,7 @@ class ListDomainsRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->projectId)) {
-            $output['projectId'] = $this->projectId;
-        }
+        $output['projectId'] = $this->projectId;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
@@ -314,16 +298,14 @@ class ListDomainsRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/domains';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/domains';
     }
 
     public function getQuery(): array
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['projectId'])) {
-            $query['projectId'] = $mapped['projectId'];
-        }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
         }
