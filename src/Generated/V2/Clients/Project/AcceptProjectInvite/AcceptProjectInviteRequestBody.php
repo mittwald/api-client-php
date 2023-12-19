@@ -152,8 +152,8 @@ class AcceptProjectInviteRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectInviteId = urlencode($mapped['projectInviteId']);
-        return '/v2/project-invites/' . $projectInviteId . '/actions/accept';
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/project-invites/' . $inviteId . '/actions/accept';
     }
 
     public function getQuery(): array

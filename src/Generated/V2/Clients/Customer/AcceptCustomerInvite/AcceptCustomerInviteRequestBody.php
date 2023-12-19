@@ -152,8 +152,8 @@ class AcceptCustomerInviteRequestBody
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $customerInviteId = urlencode($mapped['customerInviteId']);
-        return '/v2/customer-invites/' . $customerInviteId . '/actions/accept';
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/customer-invites/' . $inviteId . '/actions/accept';
     }
 
     public function getQuery(): array

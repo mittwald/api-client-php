@@ -19,55 +19,55 @@ class DeleteProjectMembershipRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectMembershipId' => [
+            'membershipId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'projectMembershipId',
+            'membershipId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $projectMembershipId;
+    private string $membershipId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $projectMembershipId
+     * @param string $membershipId
      */
-    public function __construct(string $projectMembershipId)
+    public function __construct(string $membershipId)
     {
-        $this->projectMembershipId = $projectMembershipId;
+        $this->membershipId = $membershipId;
     }
 
     /**
      * @return string
      */
-    public function getProjectMembershipId(): string
+    public function getMembershipId(): string
     {
-        return $this->projectMembershipId;
+        return $this->membershipId;
     }
 
     /**
-     * @param string $projectMembershipId
+     * @param string $membershipId
      * @return self
      */
-    public function withProjectMembershipId(string $projectMembershipId): self
+    public function withMembershipId(string $membershipId): self
     {
         $validator = new Validator();
-        $validator->validate($projectMembershipId, static::$schema['properties']['projectMembershipId']);
+        $validator->validate($membershipId, static::$schema['properties']['membershipId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectMembershipId = $projectMembershipId;
+        $clone->membershipId = $membershipId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class DeleteProjectMembershipRequest
             static::validateInput($input);
         }
 
-        $projectMembershipId = $input->{'projectMembershipId'};
+        $membershipId = $input->{'membershipId'};
 
-        $obj = new self($projectMembershipId);
+        $obj = new self($membershipId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class DeleteProjectMembershipRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectMembershipId'] = $this->projectMembershipId;
+        $output['membershipId'] = $this->membershipId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class DeleteProjectMembershipRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $projectMembershipId = urlencode($mapped['projectMembershipId']);
-        return '/v2/project-memberships/' . $projectMembershipId;
+        $membershipId = urlencode($mapped['membershipId']);
+        return '/v2/project-memberships/' . $membershipId;
     }
 
     public function getQuery(): array

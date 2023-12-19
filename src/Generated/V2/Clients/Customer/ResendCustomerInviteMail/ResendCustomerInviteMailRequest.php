@@ -19,7 +19,7 @@ class ResendCustomerInviteMailRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'customerInviteId' => [
+            'inviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -28,7 +28,7 @@ class ResendCustomerInviteMailRequest
             ],
         ],
         'required' => [
-            'customerInviteId',
+            'inviteId',
             'body',
         ],
     ];
@@ -36,7 +36,7 @@ class ResendCustomerInviteMailRequest
     /**
      * @var string
      */
-    private string $customerInviteId;
+    private string $inviteId;
 
     /**
      * @var mixed
@@ -48,21 +48,21 @@ class ResendCustomerInviteMailRequest
     ];
 
     /**
-     * @param string $customerInviteId
+     * @param string $inviteId
      * @param mixed $body
      */
-    public function __construct(string $customerInviteId, $body)
+    public function __construct(string $inviteId, $body)
     {
-        $this->customerInviteId = $customerInviteId;
+        $this->inviteId = $inviteId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getCustomerInviteId(): string
+    public function getInviteId(): string
     {
-        return $this->customerInviteId;
+        return $this->inviteId;
     }
 
     /**
@@ -74,19 +74,19 @@ class ResendCustomerInviteMailRequest
     }
 
     /**
-     * @param string $customerInviteId
+     * @param string $inviteId
      * @return self
      */
-    public function withCustomerInviteId(string $customerInviteId): self
+    public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($customerInviteId, static::$schema['properties']['customerInviteId']);
+        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->customerInviteId = $customerInviteId;
+        $clone->inviteId = $inviteId;
 
         return $clone;
     }
@@ -124,10 +124,10 @@ class ResendCustomerInviteMailRequest
             static::validateInput($input);
         }
 
-        $customerInviteId = $input->{'customerInviteId'};
+        $inviteId = $input->{'inviteId'};
         $body = $input->{'body'};
 
-        $obj = new self($customerInviteId, $body);
+        $obj = new self($inviteId, $body);
 
         return $obj;
     }
@@ -140,7 +140,7 @@ class ResendCustomerInviteMailRequest
     public function toJson(): array
     {
         $output = [];
-        $output['customerInviteId'] = $this->customerInviteId;
+        $output['inviteId'] = $this->inviteId;
         $output['body'] = $this->body;
 
         return $output;
@@ -177,8 +177,8 @@ class ResendCustomerInviteMailRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $customerInviteId = urlencode($mapped['customerInviteId']);
-        return '/v2/customer-invites/' . $customerInviteId . '/actions/resend';
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/customer-invites/' . $inviteId . '/actions/resend';
     }
 
     public function getQuery(): array

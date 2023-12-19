@@ -71,8 +71,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDoma
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsOKResponse;
@@ -433,7 +431,7 @@ interface DomainClient
      */
     public function listDomainOwnerships(ListDomainOwnershipsRequest $request): ListDomainOwnershipsOKResponse;
     /**
-     * List Domains
+     * List Domains belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains
      * @throws GuzzleException
@@ -442,17 +440,6 @@ interface DomainClient
      * @return ListDomains\ListDomainsOKResponse OK
      */
     public function listDomains(ListDomainsRequest $request): ListDomainsOKResponse;
-    /**
-     * List Domains belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse OK
-     */
-    public function listDomainsV2Deprecated(ListDomainsV2DeprecatedRequest $request): ListDomainsV2DeprecatedOKResponse;
     /**
      * List the contact schemas for a TLD.
      *

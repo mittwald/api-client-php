@@ -19,55 +19,55 @@ class DeleteCustomerInviteRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'customerInviteId' => [
+            'inviteId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'customerInviteId',
+            'inviteId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $customerInviteId;
+    private string $inviteId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $customerInviteId
+     * @param string $inviteId
      */
-    public function __construct(string $customerInviteId)
+    public function __construct(string $inviteId)
     {
-        $this->customerInviteId = $customerInviteId;
+        $this->inviteId = $inviteId;
     }
 
     /**
      * @return string
      */
-    public function getCustomerInviteId(): string
+    public function getInviteId(): string
     {
-        return $this->customerInviteId;
+        return $this->inviteId;
     }
 
     /**
-     * @param string $customerInviteId
+     * @param string $inviteId
      * @return self
      */
-    public function withCustomerInviteId(string $customerInviteId): self
+    public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($customerInviteId, static::$schema['properties']['customerInviteId']);
+        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->customerInviteId = $customerInviteId;
+        $clone->inviteId = $inviteId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class DeleteCustomerInviteRequest
             static::validateInput($input);
         }
 
-        $customerInviteId = $input->{'customerInviteId'};
+        $inviteId = $input->{'inviteId'};
 
-        $obj = new self($customerInviteId);
+        $obj = new self($inviteId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class DeleteCustomerInviteRequest
     public function toJson(): array
     {
         $output = [];
-        $output['customerInviteId'] = $this->customerInviteId;
+        $output['inviteId'] = $this->inviteId;
 
         return $output;
     }
@@ -138,8 +138,8 @@ class DeleteCustomerInviteRequest
     public function getUrl(): string
     {
         $mapped = $this->toJson();
-        $customerInviteId = urlencode($mapped['customerInviteId']);
-        return '/v2/customer-invites/' . $customerInviteId;
+        $inviteId = urlencode($mapped['inviteId']);
+        return '/v2/customer-invites/' . $inviteId;
     }
 
     public function getQuery(): array
