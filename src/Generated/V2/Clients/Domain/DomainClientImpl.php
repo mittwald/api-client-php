@@ -166,6 +166,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsBadReq
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasRequest;
@@ -748,7 +752,6 @@ class DomainClientImpl implements DomainClient
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
         ]);
         if ($httpResponse->getStatusCode() === 201) {
             return CreateDomainAuthCodeCreatedResponse::fromResponse($httpResponse);
@@ -1035,7 +1038,7 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * List Domains belonging to a Project.
+     * List Domains
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains
      * @throws GuzzleException
@@ -1056,6 +1059,32 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListDomainsBadRequestResponse::fromResponse($httpResponse),
             default => ListDomainsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Domains belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains-v2-deprecated
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse OK
+     */
+    public function listDomainsV2Deprecated(ListDomainsV2DeprecatedRequest $request): ListDomainsV2DeprecatedOKResponse
+    {
+        $httpRequest = new Request(ListDomainsV2DeprecatedRequest::method, $request->getUrl());
+        $httpResponse = $this->client->send($httpRequest, [
+            'query' => $request->getQuery(),
+            'headers' => $request->getHeaders(),
+        ]);
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListDomainsV2DeprecatedOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListDomainsV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
+            default => ListDomainsV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1128,7 +1157,6 @@ class DomainClientImpl implements DomainClient
         $httpResponse = $this->client->send($httpRequest, [
             'query' => $request->getQuery(),
             'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
         ]);
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);

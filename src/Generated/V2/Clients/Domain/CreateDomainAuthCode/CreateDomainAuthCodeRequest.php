@@ -23,13 +23,9 @@ class CreateDomainAuthCodeRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-
-            ],
         ],
         'required' => [
             'domainId',
-            'body',
         ],
     ];
 
@@ -38,23 +34,16 @@ class CreateDomainAuthCodeRequest
      */
     private string $domainId;
 
-    /**
-     * @var mixed
-     */
-    private $body;
-
     private array $headers = [
 
     ];
 
     /**
      * @param string $domainId
-     * @param mixed $body
      */
-    public function __construct(string $domainId, $body)
+    public function __construct(string $domainId)
     {
         $this->domainId = $domainId;
-        $this->body = $body;
     }
 
     /**
@@ -63,14 +52,6 @@ class CreateDomainAuthCodeRequest
     public function getDomainId(): string
     {
         return $this->domainId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -92,24 +73,6 @@ class CreateDomainAuthCodeRequest
     }
 
     /**
-     * @param mixed $body
-     * @return self
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
-
-        return $clone;
-    }
-
-    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -125,9 +88,8 @@ class CreateDomainAuthCodeRequest
         }
 
         $domainId = $input->{'domainId'};
-        $body = $input->{'body'};
 
-        $obj = new self($domainId, $body);
+        $obj = new self($domainId);
 
         return $obj;
     }
@@ -141,7 +103,6 @@ class CreateDomainAuthCodeRequest
     {
         $output = [];
         $output['domainId'] = $this->domainId;
-        $output['body'] = $this->body;
 
         return $output;
     }
