@@ -43,27 +43,31 @@ class CombinedAManaged
                 ],
             ],
         ],
+        'required' => [
+            'managedBy',
+        ],
         'type' => 'object',
     ];
 
     /**
-     * @var CombinedAManagedManagedByAlternative1|null
+     * @var CombinedAManagedManagedByAlternative1
      */
-    private ?CombinedAManagedManagedByAlternative1 $managedBy = null;
+    private CombinedAManagedManagedByAlternative1 $managedBy;
 
     /**
-     *
+     * @param CombinedAManagedManagedByAlternative1 $managedBy
      */
-    public function __construct()
+    public function __construct(CombinedAManagedManagedByAlternative1 $managedBy)
     {
+        $this->managedBy = $managedBy;
     }
 
     /**
-     * @return CombinedAManagedManagedByAlternative1|null
+     * @return CombinedAManagedManagedByAlternative1
      */
-    public function getManagedBy(): ?CombinedAManagedManagedByAlternative1
+    public function getManagedBy(): CombinedAManagedManagedByAlternative1
     {
-        return $this->managedBy ?? null;
+        return $this->managedBy;
     }
 
     /**
@@ -74,17 +78,6 @@ class CombinedAManaged
     {
         $clone = clone $this;
         $clone->managedBy = $managedBy;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutManagedBy(): self
-    {
-        $clone = clone $this;
-        unset($clone->managedBy);
 
         return $clone;
     }
@@ -104,15 +97,12 @@ class CombinedAManaged
             static::validateInput($input);
         }
 
-        $managedBy = null;
-        if (isset($input->{'managedBy'})) {
-            $managedBy = match (true) {
-                CombinedAManagedManagedByAlternative1::validateInput($input->{'managedBy'}, true) => CombinedAManagedManagedByAlternative1::buildFromInput($input->{'managedBy'}, validate: $validate),
-            };
-        }
+        $managedBy = match (true) {
+            CombinedAManagedManagedByAlternative1::validateInput($input->{'managedBy'}, true) => CombinedAManagedManagedByAlternative1::buildFromInput($input->{'managedBy'}, validate: $validate),
+        };
 
-        $obj = new self();
-        $obj->managedBy = $managedBy;
+        $obj = new self($managedBy);
+
         return $obj;
     }
 
@@ -124,11 +114,9 @@ class CombinedAManaged
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->managedBy)) {
-            $output['managedBy'] = match (true) {
-                $this->managedBy instanceof CombinedAManagedManagedByAlternative1 => ($this->managedBy)->toJson(),
-            };
-        }
+        $output['managedBy'] = match (true) {
+            $this->managedBy instanceof CombinedAManagedManagedByAlternative1 => ($this->managedBy)->toJson(),
+        };
 
         return $output;
     }
@@ -159,10 +147,8 @@ class CombinedAManaged
 
     public function __clone()
     {
-        if (isset($this->managedBy)) {
-            $this->managedBy = match (true) {
-                $this->managedBy instanceof CombinedAManagedManagedByAlternative1 => clone $this->managedBy,
-            };
-        }
+        $this->managedBy = match (true) {
+            $this->managedBy instanceof CombinedAManagedManagedByAlternative1 => clone $this->managedBy,
+        };
     }
 }
