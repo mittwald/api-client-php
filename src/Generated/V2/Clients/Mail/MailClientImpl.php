@@ -234,12 +234,8 @@ class MailClientImpl implements MailClient
      */
     public function createDeliverybox(CreateDeliveryboxRequest $request): CreateDeliveryboxCreatedResponse
     {
-        $httpRequest = new Request(CreateDeliveryboxRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateDeliveryboxRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateDeliveryboxCreatedResponse::fromResponse($httpResponse);
         }
@@ -264,12 +260,8 @@ class MailClientImpl implements MailClient
      */
     public function createMailAddress(CreateMailAddressRequest $request): CreateMailAddressCreatedResponse
     {
-        $httpRequest = new Request(CreateMailAddressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateMailAddressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateMailAddressCreatedResponse::fromResponse($httpResponse);
         }
@@ -294,11 +286,8 @@ class MailClientImpl implements MailClient
      */
     public function deleteDeliveryBox(DeleteDeliveryBoxRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteDeliveryBoxRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteDeliveryBoxRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -323,11 +312,8 @@ class MailClientImpl implements MailClient
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteMailAddressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteMailAddressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -353,12 +339,8 @@ class MailClientImpl implements MailClient
      */
     public function deliveryboxUpdateDescriptionDeprecated(DeliveryboxUpdateDescriptionDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeliveryboxUpdateDescriptionDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeliveryboxUpdateDescriptionDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -379,12 +361,8 @@ class MailClientImpl implements MailClient
      */
     public function deliveryboxUpdatePasswordDeprecated(DeliveryboxUpdatePasswordDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeliveryboxUpdatePasswordDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeliveryboxUpdatePasswordDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -404,11 +382,8 @@ class MailClientImpl implements MailClient
      */
     public function getDeliveryBox(GetDeliveryBoxRequest $request): GetDeliveryBoxOKResponse
     {
-        $httpRequest = new Request(GetDeliveryBoxRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDeliveryBoxRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDeliveryBoxOKResponse::fromResponse($httpResponse);
         }
@@ -433,11 +408,8 @@ class MailClientImpl implements MailClient
      */
     public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse
     {
-        $httpRequest = new Request(GetMailAddressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetMailAddressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetMailAddressOKResponse::fromResponse($httpResponse);
         }
@@ -462,11 +434,8 @@ class MailClientImpl implements MailClient
      */
     public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxesOKResponse
     {
-        $httpRequest = new Request(ListDeliveryBoxesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListDeliveryBoxesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListDeliveryBoxesOKResponse::fromResponse($httpResponse);
         }
@@ -491,11 +460,8 @@ class MailClientImpl implements MailClient
      */
     public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse
     {
-        $httpRequest = new Request(ListMailAddressesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMailAddressesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMailAddressesOKResponse::fromResponse($httpResponse);
         }
@@ -520,11 +486,8 @@ class MailClientImpl implements MailClient
      */
     public function listProjectMailSettings(ListProjectMailSettingsRequest $request): ListProjectMailSettingsOKResponse
     {
-        $httpRequest = new Request(ListProjectMailSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListProjectMailSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListProjectMailSettingsOKResponse::fromResponse($httpResponse);
         }
@@ -550,12 +513,8 @@ class MailClientImpl implements MailClient
      */
     public function mailaddressUpdateAddressDeprecated(MailaddressUpdateAddressDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(MailaddressUpdateAddressDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(MailaddressUpdateAddressDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -576,12 +535,8 @@ class MailClientImpl implements MailClient
      */
     public function projectsettingUpdateBlacklistDeprecated(ProjectsettingUpdateBlacklistDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ProjectsettingUpdateBlacklistDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ProjectsettingUpdateBlacklistDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -602,12 +557,8 @@ class MailClientImpl implements MailClient
      */
     public function projectsettingUpdateWhitelistDeprecated(ProjectsettingUpdateWhitelistDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ProjectsettingUpdateWhitelistDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ProjectsettingUpdateWhitelistDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -627,12 +578,8 @@ class MailClientImpl implements MailClient
      */
     public function updateDeliveryBoxDescription(UpdateDeliveryBoxDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateDeliveryBoxDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateDeliveryBoxDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -657,12 +604,8 @@ class MailClientImpl implements MailClient
      */
     public function updateDeliveryBoxPassword(UpdateDeliveryBoxPasswordRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateDeliveryBoxPasswordRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateDeliveryBoxPasswordRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -687,12 +630,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressAddress(UpdateMailAddressAddressRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressAddressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressAddressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -717,12 +656,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressAutoresponder(UpdateMailAddressAutoresponderRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressAutoresponderRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressAutoresponderRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -748,12 +683,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressAutoresponderV2Deprecated(UpdateMailAddressAutoresponderV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressAutoresponderV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressAutoresponderV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -778,12 +709,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressCatchAll(UpdateMailAddressCatchAllRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressCatchAllRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressCatchAllRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -809,12 +736,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressCatchallV2Deprecated(UpdateMailAddressCatchallV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressCatchallV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressCatchallV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -839,12 +762,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressForwardAddresses(UpdateMailAddressForwardAddressesRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressForwardAddressesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressForwardAddressesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -870,12 +789,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressForwardAddressesV2Deprecated(UpdateMailAddressForwardAddressesV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressForwardAddressesV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressForwardAddressesV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -900,12 +815,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressPassword(UpdateMailAddressPasswordRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressPasswordRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressPasswordRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -931,12 +842,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressPasswordV2Deprecated(UpdateMailAddressPasswordV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressPasswordV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressPasswordV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -961,12 +868,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressQuota(UpdateMailAddressQuotaRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressQuotaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressQuotaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -992,12 +895,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressQuotaV2Deprecated(UpdateMailAddressQuotaV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressQuotaV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressQuotaV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1022,12 +921,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressSpamProtection(UpdateMailAddressSpamProtectionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressSpamProtectionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressSpamProtectionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1053,12 +948,8 @@ class MailClientImpl implements MailClient
      */
     public function updateMailAddressSpamProtectionV2Deprecated(UpdateMailAddressSpamProtectionV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMailAddressSpamProtectionV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMailAddressSpamProtectionV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1083,12 +974,8 @@ class MailClientImpl implements MailClient
      */
     public function updateProjectMailSetting(UpdateProjectMailSettingRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateProjectMailSettingRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateProjectMailSettingRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1114,12 +1001,8 @@ class MailClientImpl implements MailClient
      */
     public function updateProjectMailSettingV2Deprecated(UpdateProjectMailSettingV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateProjectMailSettingV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateProjectMailSettingV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }

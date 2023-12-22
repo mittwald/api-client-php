@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DnsSetRecordSetManagedRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -22,10 +20,6 @@ class DnsSetRecordSetManagedRequestBody
 
         ],
         'type' => 'object',
-    ];
-
-    private array $headers = [
-
     ];
 
     /**
@@ -96,32 +90,5 @@ class DnsSetRecordSetManagedRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $dnsZoneId = urlencode($mapped['dnsZoneId']);
-        $recordSet = urlencode($mapped['recordSet']);
-        return '/v2/dns-zones/' . $dnsZoneId . '/record-sets/' . $recordSet . '/actions/set-managed';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

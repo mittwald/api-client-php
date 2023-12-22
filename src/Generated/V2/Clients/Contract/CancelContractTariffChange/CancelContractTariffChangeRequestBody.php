@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class CancelContractTariffChangeRequestBody
 {
-    public const method = 'delete';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -18,10 +16,6 @@ class CancelContractTariffChangeRequestBody
      */
     private static array $schema = [
         'type' => 'object',
-    ];
-
-    private array $headers = [
-
     ];
 
     /**
@@ -92,32 +86,5 @@ class CancelContractTariffChangeRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $contractId = urlencode($mapped['contractId']);
-        $contractItemId = urlencode($mapped['contractItemId']);
-        return '/v2/contracts/' . $contractId . '/items/' . $contractItemId . '/tariff-change';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

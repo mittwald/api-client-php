@@ -10,8 +10,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy;
 
 class PatchAppinstallationRequestBodySystemSoftwareItem
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -38,10 +36,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
      * @var SystemSoftwareUpdatePolicy|null
      */
     private ?SystemSoftwareUpdatePolicy $updatePolicy = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -193,31 +187,5 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        return '/v2/app-installations/' . $appInstallationId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

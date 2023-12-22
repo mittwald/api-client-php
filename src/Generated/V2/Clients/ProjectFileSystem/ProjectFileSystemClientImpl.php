@@ -68,11 +68,8 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      */
     public function projectFileSystemGetDirectories(ProjectFileSystemGetDirectoriesRequest $request): ProjectFileSystemGetDirectoriesOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetDirectoriesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ProjectFileSystemGetDirectoriesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ProjectFileSystemGetDirectoriesOKResponse::fromResponse($httpResponse);
         }
@@ -95,11 +92,8 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      */
     public function projectFileSystemGetDiskUsage(ProjectFileSystemGetDiskUsageRequest $request): ProjectFileSystemGetDiskUsageOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetDiskUsageRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ProjectFileSystemGetDiskUsageRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ProjectFileSystemGetDiskUsageOKResponse::fromResponse($httpResponse);
         }
@@ -122,11 +116,8 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      */
     public function projectFileSystemGetFileContent(ProjectFileSystemGetFileContentRequest $request): StringResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetFileContentRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ProjectFileSystemGetFileContentRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return StringResponse::fromResponse($httpResponse);
         }
@@ -149,11 +140,8 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      */
     public function projectFileSystemGetJwt(ProjectFileSystemGetJwtRequest $request): ProjectFileSystemGetJwtOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemGetJwtRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ProjectFileSystemGetJwtRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ProjectFileSystemGetJwtOKResponse::fromResponse($httpResponse);
         }
@@ -175,11 +163,8 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
      */
     public function projectFileSystemListFiles(ProjectFileSystemListFilesRequest $request): ProjectFileSystemListFilesOKResponse
     {
-        $httpRequest = new Request(ProjectFileSystemListFilesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ProjectFileSystemListFilesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ProjectFileSystemListFilesOKResponse::fromResponse($httpResponse);
         }

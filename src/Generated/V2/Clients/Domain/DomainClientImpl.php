@@ -237,12 +237,8 @@ class DomainClientImpl implements DomainClient
      */
     public function deprecatedDomainGetScreenshotForDomain(DeprecatedDomainGetScreenshotForDomainRequest $request): DeprecatedDomainGetScreenshotForDomainOKResponse
     {
-        $httpRequest = new Request(DeprecatedDomainGetScreenshotForDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedDomainGetScreenshotForDomainRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedDomainGetScreenshotForDomainOKResponse::fromResponse($httpResponse);
         }
@@ -263,12 +259,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsCreateDnsZone(DnsCreateDnsZoneRequest $request): DnsCreateDnsZoneCreatedResponse
     {
-        $httpRequest = new Request(DnsCreateDnsZoneRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsCreateDnsZoneRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return DnsCreateDnsZoneCreatedResponse::fromResponse($httpResponse);
         }
@@ -289,11 +281,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsDeleteDnsZone(DnsDeleteDnsZoneRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsDeleteDnsZoneRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DnsDeleteDnsZoneRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -314,11 +303,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZoneOKResponse
     {
-        $httpRequest = new Request(DnsGetDnsZoneRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DnsGetDnsZoneRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DnsGetDnsZoneOKResponse::fromResponse($httpResponse);
         }
@@ -339,11 +325,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsListDnsZones(DnsListDnsZonesRequest $request): DnsListDnsZonesOKResponse
     {
-        $httpRequest = new Request(DnsListDnsZonesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DnsListDnsZonesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DnsListDnsZonesOKResponse::fromResponse($httpResponse);
         }
@@ -365,12 +348,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordASetCustomDeprecated(DnsRecordASetCustomDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsRecordASetCustomDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordASetCustomDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -392,12 +371,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordASetManagedByIngressDeprecated(DnsRecordASetManagedByIngressDeprecatedRequest $request): DnsRecordASetManagedByIngressDeprecatedNoContentResponse
     {
-        $httpRequest = new Request(DnsRecordASetManagedByIngressDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordASetManagedByIngressDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return DnsRecordASetManagedByIngressDeprecatedNoContentResponse::fromResponse($httpResponse);
         }
@@ -419,12 +394,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordCnameSetDeprecated(DnsRecordCnameSetDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsRecordCnameSetDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordCnameSetDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -446,12 +417,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordMxSetCustomDeprecated(DnsRecordMxSetCustomDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsRecordMxSetCustomDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordMxSetCustomDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -473,12 +440,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordMxSetManagedDeprecated(DnsRecordMxSetManagedDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsRecordMxSetManagedDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordMxSetManagedDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -500,12 +463,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordSrvSetDeprecated(DnsRecordSrvSetDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsRecordSrvSetDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordSrvSetDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -527,12 +486,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsRecordTxtSetDeprecated(DnsRecordTxtSetDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsRecordTxtSetDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsRecordTxtSetDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -553,12 +508,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsSetRecordSetManaged(DnsSetRecordSetManagedRequest $request): DnsSetRecordSetManagedNoContentResponse
     {
-        $httpRequest = new Request(DnsSetRecordSetManagedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsSetRecordSetManagedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return DnsSetRecordSetManagedNoContentResponse::fromResponse($httpResponse);
         }
@@ -579,12 +530,8 @@ class DomainClientImpl implements DomainClient
      */
     public function dnsUpdateRecordSet(DnsUpdateRecordSetRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DnsUpdateRecordSetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DnsUpdateRecordSetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -607,11 +554,8 @@ class DomainClientImpl implements DomainClient
      */
     public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(AbortDomainDeclarationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(AbortDomainDeclarationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -636,12 +580,8 @@ class DomainClientImpl implements DomainClient
      */
     public function changeOwnercOfDomainV2Deprecated(ChangeOwnercOfDomainV2DeprecatedRequest $request): ChangeOwnercOfDomainV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(ChangeOwnercOfDomainV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ChangeOwnercOfDomainV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ChangeOwnercOfDomainV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -664,12 +604,8 @@ class DomainClientImpl implements DomainClient
      */
     public function changeProjectOfDomainV2Deprecated(ChangeProjectOfDomainV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ChangeProjectOfDomainV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ChangeProjectOfDomainV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -693,12 +629,8 @@ class DomainClientImpl implements DomainClient
      */
     public function checkDomainRegistrability(CheckDomainRegistrabilityRequest $request): CheckDomainRegistrabilityOKResponse
     {
-        $httpRequest = new Request(CheckDomainRegistrabilityRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CheckDomainRegistrabilityRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return CheckDomainRegistrabilityOKResponse::fromResponse($httpResponse);
         }
@@ -722,12 +654,8 @@ class DomainClientImpl implements DomainClient
      */
     public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(CheckDomainRegistrabilityV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CheckDomainRegistrabilityV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return CheckDomainRegistrabilityV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -748,11 +676,8 @@ class DomainClientImpl implements DomainClient
      */
     public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse
     {
-        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(CreateDomainAuthCodeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateDomainAuthCodeCreatedResponse::fromResponse($httpResponse);
         }
@@ -776,12 +701,8 @@ class DomainClientImpl implements DomainClient
      */
     public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse
     {
-        $httpRequest = new Request(CreateDomainAuthCode2Request::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateDomainAuthCode2Request::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -804,12 +725,8 @@ class DomainClientImpl implements DomainClient
      */
     public function declareNameserversV2Deprecated(DeclareNameserversV2DeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeclareNameserversV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeclareNameserversV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -834,12 +751,8 @@ class DomainClientImpl implements DomainClient
      */
     public function declareProcessChangeAuthcodeV2Deprecated(DeclareProcessChangeAuthcodeV2DeprecatedRequest $request): DeclareProcessChangeAuthcodeV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(DeclareProcessChangeAuthcodeV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeclareProcessChangeAuthcodeV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeclareProcessChangeAuthcodeV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -864,12 +777,8 @@ class DomainClientImpl implements DomainClient
      */
     public function declareProcessChangeHandlesV2Deprecated(DeclareProcessChangeHandlesV2DeprecatedRequest $request): DeclareProcessChangeHandlesV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(DeclareProcessChangeHandlesV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeclareProcessChangeHandlesV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeclareProcessChangeHandlesV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -891,12 +800,8 @@ class DomainClientImpl implements DomainClient
      */
     public function deleteDomain(DeleteDomainRequest $request): DeleteDomainOKResponse
     {
-        $httpRequest = new Request(DeleteDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeleteDomainRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeleteDomainOKResponse::fromResponse($httpResponse);
         }
@@ -918,11 +823,8 @@ class DomainClientImpl implements DomainClient
      */
     public function getDomain(GetDomainRequest $request): GetDomainOKResponse
     {
-        $httpRequest = new Request(GetDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDomainRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDomainOKResponse::fromResponse($httpResponse);
         }
@@ -944,11 +846,8 @@ class DomainClientImpl implements DomainClient
      */
     public function getDomainOwnership(GetDomainOwnershipRequest $request): GetDomainOwnershipOKResponse
     {
-        $httpRequest = new Request(GetDomainOwnershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDomainOwnershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDomainOwnershipOKResponse::fromResponse($httpResponse);
         }
@@ -973,11 +872,8 @@ class DomainClientImpl implements DomainClient
      */
     public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(GetHandleFieldsV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetHandleFieldsV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetHandleFieldsV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -997,12 +893,8 @@ class DomainClientImpl implements DomainClient
      */
     public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshotOKResponse
     {
-        $httpRequest = new Request(GetLatestScreenshotRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(GetLatestScreenshotRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetLatestScreenshotOKResponse::fromResponse($httpResponse);
         }
@@ -1023,11 +915,8 @@ class DomainClientImpl implements DomainClient
      */
     public function listDomainOwnerships(ListDomainOwnershipsRequest $request): ListDomainOwnershipsOKResponse
     {
-        $httpRequest = new Request(ListDomainOwnershipsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListDomainOwnershipsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListDomainOwnershipsOKResponse::fromResponse($httpResponse);
         }
@@ -1048,11 +937,8 @@ class DomainClientImpl implements DomainClient
      */
     public function listDomains(ListDomainsRequest $request): ListDomainsOKResponse
     {
-        $httpRequest = new Request(ListDomainsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListDomainsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListDomainsOKResponse::fromResponse($httpResponse);
         }
@@ -1074,11 +960,8 @@ class DomainClientImpl implements DomainClient
      */
     public function listDomainsV2Deprecated(ListDomainsV2DeprecatedRequest $request): ListDomainsV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(ListDomainsV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListDomainsV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListDomainsV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -1101,11 +984,8 @@ class DomainClientImpl implements DomainClient
      */
     public function listTldContactSchemas(ListTldContactSchemasRequest $request): ListTldContactSchemasOKResponse
     {
-        $httpRequest = new Request(ListTldContactSchemasRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListTldContactSchemasRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListTldContactSchemasOKResponse::fromResponse($httpResponse);
         }
@@ -1127,11 +1007,8 @@ class DomainClientImpl implements DomainClient
      */
     public function listTlds(ListTldsRequest $request): ListTldsOKResponse
     {
-        $httpRequest = new Request(ListTldsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListTldsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListTldsOKResponse::fromResponse($httpResponse);
         }
@@ -1153,11 +1030,8 @@ class DomainClientImpl implements DomainClient
      */
     public function resendDomainEmail(ResendDomainEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ResendDomainEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ResendDomainEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1181,12 +1055,8 @@ class DomainClientImpl implements DomainClient
      */
     public function updateDomainAuthCode(UpdateDomainAuthCodeRequest $request): UpdateDomainAuthCodeOKResponse
     {
-        $httpRequest = new Request(UpdateDomainAuthCodeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateDomainAuthCodeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateDomainAuthCodeOKResponse::fromResponse($httpResponse);
         }
@@ -1208,12 +1078,8 @@ class DomainClientImpl implements DomainClient
      */
     public function updateDomainContact(UpdateDomainContactRequest $request): UpdateDomainContactOKResponse
     {
-        $httpRequest = new Request(UpdateDomainContactRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateDomainContactRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateDomainContactOKResponse::fromResponse($httpResponse);
         }
@@ -1235,12 +1101,8 @@ class DomainClientImpl implements DomainClient
      */
     public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateDomainNameserversRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateDomainNameserversRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1262,12 +1124,8 @@ class DomainClientImpl implements DomainClient
      */
     public function updateDomainProjectId(UpdateDomainProjectIdRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateDomainProjectIdRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateDomainProjectIdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1291,12 +1149,8 @@ class DomainClientImpl implements DomainClient
      */
     public function verifyDomainOwnership(VerifyDomainOwnershipRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(VerifyDomainOwnershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(VerifyDomainOwnershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1318,12 +1172,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressCreateIngress(IngressCreateIngressRequest $request): IngressCreateIngressCreatedResponse
     {
-        $httpRequest = new Request(IngressCreateIngressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(IngressCreateIngressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return IngressCreateIngressCreatedResponse::fromResponse($httpResponse);
         }
@@ -1344,11 +1194,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressDeleteIngress(IngressDeleteIngressRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(IngressDeleteIngressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(IngressDeleteIngressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1369,11 +1216,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressGetIngress(IngressGetIngressRequest $request): IngressGetIngressOKResponse
     {
-        $httpRequest = new Request(IngressGetIngressRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(IngressGetIngressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return IngressGetIngressOKResponse::fromResponse($httpResponse);
         }
@@ -1394,11 +1238,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse
     {
-        $httpRequest = new Request(IngressListIngressesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(IngressListIngressesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return IngressListIngressesOKResponse::fromResponse($httpResponse);
         }
@@ -1420,11 +1261,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(IngressListIngressesV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(IngressListIngressesV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return IngressListIngressesV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -1446,12 +1284,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(IngressPathsDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->toJson()['body'],
-        ]);
+        $httpRequest = new Request(IngressPathsDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1472,11 +1306,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(IngressRequestIngressAcmeCertificateIssuanceRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(IngressRequestIngressAcmeCertificateIssuanceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1499,12 +1330,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse
     {
-        $httpRequest = new Request(IngressTlsDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(IngressTlsDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return IngressTlsDeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -1525,12 +1352,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(IngressUpdateIngressPathsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->toJson()['body'],
-        ]);
+        $httpRequest = new Request(IngressUpdateIngressPathsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1551,12 +1374,8 @@ class DomainClientImpl implements DomainClient
      */
     public function ingressUpdateIngressTls(IngressUpdateIngressTlsRequest $request): IngressUpdateIngressTlsOKResponse
     {
-        $httpRequest = new Request(IngressUpdateIngressTlsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(IngressUpdateIngressTlsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return IngressUpdateIngressTlsOKResponse::fromResponse($httpResponse);
         }

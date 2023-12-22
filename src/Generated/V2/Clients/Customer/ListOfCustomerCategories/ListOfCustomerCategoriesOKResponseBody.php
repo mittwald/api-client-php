@@ -6,11 +6,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategor
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Category;
-use Psr\Http\Message\ResponseInterface;
 
-class ListOfCustomerCategoriesOKResponseBody implements ResponseContainer
+class ListOfCustomerCategoriesOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -32,8 +30,6 @@ class ListOfCustomerCategoriesOKResponseBody implements ResponseContainer
      * @var Category[]|null
      */
     private ?array $categories = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -139,18 +135,5 @@ class ListOfCustomerCategoriesOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

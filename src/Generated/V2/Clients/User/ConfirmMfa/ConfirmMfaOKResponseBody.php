@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class ConfirmMfaOKResponseBody implements ResponseContainer
+class ConfirmMfaOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -40,8 +38,6 @@ class ConfirmMfaOKResponseBody implements ResponseContainer
      * @var string[]
      */
     private array $recoveryCodesList;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string[] $recoveryCodesList
@@ -138,18 +134,5 @@ class ConfirmMfaOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

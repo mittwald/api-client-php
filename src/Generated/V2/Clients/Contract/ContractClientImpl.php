@@ -154,12 +154,8 @@ class ContractClientImpl implements ContractClient
      */
     public function cancelContractItemTermination(CancelContractItemTerminationRequest $request): CancelContractItemTerminationOKResponse
     {
-        $httpRequest = new Request(CancelContractItemTerminationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CancelContractItemTerminationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return CancelContractItemTerminationOKResponse::fromResponse($httpResponse);
         }
@@ -181,12 +177,8 @@ class ContractClientImpl implements ContractClient
      */
     public function cancelContractTariffChange(CancelContractTariffChangeRequest $request): CancelContractTariffChangeOKResponse
     {
-        $httpRequest = new Request(CancelContractTariffChangeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CancelContractTariffChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return CancelContractTariffChangeOKResponse::fromResponse($httpResponse);
         }
@@ -208,12 +200,8 @@ class ContractClientImpl implements ContractClient
      */
     public function cancelContractTermination(CancelContractTerminationRequest $request): CancelContractTerminationOKResponse
     {
-        $httpRequest = new Request(CancelContractTerminationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CancelContractTerminationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return CancelContractTerminationOKResponse::fromResponse($httpResponse);
         }
@@ -235,11 +223,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getBaseItemOfContract(GetBaseItemOfContractRequest $request): GetBaseItemOfContractOKResponse
     {
-        $httpRequest = new Request(GetBaseItemOfContractRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetBaseItemOfContractRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetBaseItemOfContractOKResponse::fromResponse($httpResponse);
         }
@@ -261,11 +246,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse
     {
-        $httpRequest = new Request(GetDetailOfContractRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDetailOfContractRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDetailOfContractOKResponse::fromResponse($httpResponse);
         }
@@ -287,11 +269,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getDetailOfContractByDomain(GetDetailOfContractByDomainRequest $request): GetDetailOfContractByDomainOKResponse
     {
-        $httpRequest = new Request(GetDetailOfContractByDomainRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDetailOfContractByDomainRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDetailOfContractByDomainOKResponse::fromResponse($httpResponse);
         }
@@ -313,11 +292,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getDetailOfContractByProject(GetDetailOfContractByProjectRequest $request): GetDetailOfContractByProjectOKResponse
     {
-        $httpRequest = new Request(GetDetailOfContractByProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDetailOfContractByProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDetailOfContractByProjectOKResponse::fromResponse($httpResponse);
         }
@@ -339,11 +315,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getDetailOfContractByServer(GetDetailOfContractByServerRequest $request): GetDetailOfContractByServerOKResponse
     {
-        $httpRequest = new Request(GetDetailOfContractByServerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDetailOfContractByServerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDetailOfContractByServerOKResponse::fromResponse($httpResponse);
         }
@@ -365,11 +338,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getDetailOfContractItem(GetDetailOfContractItemRequest $request): GetDetailOfContractItemOKResponse
     {
-        $httpRequest = new Request(GetDetailOfContractItemRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetDetailOfContractItemRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetDetailOfContractItemOKResponse::fromResponse($httpResponse);
         }
@@ -391,11 +361,8 @@ class ContractClientImpl implements ContractClient
      */
     public function getNextTerminationDateForItem(GetNextTerminationDateForItemRequest $request): GetNextTerminationDateForItemOKResponse
     {
-        $httpRequest = new Request(GetNextTerminationDateForItemRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetNextTerminationDateForItemRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetNextTerminationDateForItemOKResponse::fromResponse($httpResponse);
         }
@@ -417,11 +384,8 @@ class ContractClientImpl implements ContractClient
      */
     public function listContracts(ListContractsRequest $request): ListContractsOKResponse
     {
-        $httpRequest = new Request(ListContractsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListContractsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListContractsOKResponse::fromResponse($httpResponse);
         }
@@ -443,12 +407,8 @@ class ContractClientImpl implements ContractClient
      */
     public function terminateContract(TerminateContractRequest $request): TerminateContractCreatedResponse
     {
-        $httpRequest = new Request(TerminateContractRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(TerminateContractRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return TerminateContractCreatedResponse::fromResponse($httpResponse);
         }
@@ -470,12 +430,8 @@ class ContractClientImpl implements ContractClient
      */
     public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse
     {
-        $httpRequest = new Request(TerminateContractItemRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(TerminateContractItemRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return TerminateContractItemCreatedResponse::fromResponse($httpResponse);
         }
@@ -497,11 +453,8 @@ class ContractClientImpl implements ContractClient
      */
     public function invoiceDetailOfInvoice(InvoiceDetailOfInvoiceRequest $request): InvoiceDetailOfInvoiceOKResponse
     {
-        $httpRequest = new Request(InvoiceDetailOfInvoiceRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(InvoiceDetailOfInvoiceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return InvoiceDetailOfInvoiceOKResponse::fromResponse($httpResponse);
         }
@@ -523,11 +476,8 @@ class ContractClientImpl implements ContractClient
      */
     public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettingsRequest $request): InvoiceGetDetailOfInvoiceSettingsOKResponse
     {
-        $httpRequest = new Request(InvoiceGetDetailOfInvoiceSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(InvoiceGetDetailOfInvoiceSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return InvoiceGetDetailOfInvoiceSettingsOKResponse::fromResponse($httpResponse);
         }
@@ -549,11 +499,8 @@ class ContractClientImpl implements ContractClient
      */
     public function invoiceGetFileAccessToken(InvoiceGetFileAccessTokenRequest $request): InvoiceGetFileAccessTokenOKResponse
     {
-        $httpRequest = new Request(InvoiceGetFileAccessTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(InvoiceGetFileAccessTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return InvoiceGetFileAccessTokenOKResponse::fromResponse($httpResponse);
         }
@@ -575,11 +522,8 @@ class ContractClientImpl implements ContractClient
      */
     public function invoiceListCustomerInvoices(InvoiceListCustomerInvoicesRequest $request): InvoiceListCustomerInvoicesOKResponse
     {
-        $httpRequest = new Request(InvoiceListCustomerInvoicesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(InvoiceListCustomerInvoicesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return InvoiceListCustomerInvoicesOKResponse::fromResponse($httpResponse);
         }
@@ -601,12 +545,8 @@ class ContractClientImpl implements ContractClient
      */
     public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse
     {
-        $httpRequest = new Request(InvoiceUpdateInvoiceSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(InvoiceUpdateInvoiceSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return InvoiceUpdateInvoiceSettingsOKResponse::fromResponse($httpResponse);
         }
@@ -628,12 +568,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderCreateOrder(OrderCreateOrderRequest $request): OrderCreateOrderCreatedResponse
     {
-        $httpRequest = new Request(OrderCreateOrderRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(OrderCreateOrderRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return OrderCreateOrderCreatedResponse::fromResponse($httpResponse);
         }
@@ -654,12 +590,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderCreateTariffChange(OrderCreateTariffChangeRequest $request): OrderCreateTariffChangeCreatedResponse
     {
-        $httpRequest = new Request(OrderCreateTariffChangeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(OrderCreateTariffChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return OrderCreateTariffChangeCreatedResponse::fromResponse($httpResponse);
         }
@@ -682,11 +614,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderGetOrder(OrderGetOrderRequest $request): OrderGetOrderOKResponse
     {
-        $httpRequest = new Request(OrderGetOrderRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(OrderGetOrderRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return OrderGetOrderOKResponse::fromResponse($httpResponse);
         }
@@ -708,11 +637,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderListCustomerOrders(OrderListCustomerOrdersRequest $request): OrderListCustomerOrdersOKResponse
     {
-        $httpRequest = new Request(OrderListCustomerOrdersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(OrderListCustomerOrdersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return OrderListCustomerOrdersOKResponse::fromResponse($httpResponse);
         }
@@ -734,11 +660,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderListProjectOrders(OrderListProjectOrdersRequest $request): OrderListProjectOrdersOKResponse
     {
-        $httpRequest = new Request(OrderListProjectOrdersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(OrderListProjectOrdersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return OrderListProjectOrdersOKResponse::fromResponse($httpResponse);
         }
@@ -758,12 +681,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderPreviewOrder(OrderPreviewOrderRequest $request): UntypedResponse
     {
-        $httpRequest = new Request(OrderPreviewOrderRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(OrderPreviewOrderRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UntypedResponse::fromResponse($httpResponse);
         }
@@ -784,12 +703,8 @@ class ContractClientImpl implements ContractClient
      */
     public function orderPreviewTariffChange(OrderPreviewTariffChangeRequest $request): OrderPreviewTariffChangeOKResponse
     {
-        $httpRequest = new Request(OrderPreviewTariffChangeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(OrderPreviewTariffChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return OrderPreviewTariffChangeOKResponse::fromResponse($httpResponse);
         }

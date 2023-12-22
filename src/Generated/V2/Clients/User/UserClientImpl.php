@@ -184,6 +184,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswor
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
@@ -226,6 +230,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterDefaultResponse;
@@ -314,12 +322,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserChangeEmail(DeprecatedUserChangeEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserChangeEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserChangeEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -341,12 +345,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserConfirmPasswordReset(DeprecatedUserConfirmPasswordResetRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserConfirmPasswordResetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserConfirmPasswordResetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -368,12 +368,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserCreateIssue(DeprecatedUserCreateIssueRequest $request): DeprecatedUserCreateIssueCreatedResponse
     {
-        $httpRequest = new Request(DeprecatedUserCreateIssueRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserCreateIssueRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return DeprecatedUserCreateIssueCreatedResponse::fromResponse($httpResponse);
         }
@@ -396,11 +392,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserDeleteApiToken(DeprecatedUserDeleteApiTokenRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserDeleteApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserDeleteApiTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -422,11 +415,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserDeleteSshKey(DeprecatedUserDeleteSshKeyRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserDeleteSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserDeleteSshKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -447,12 +437,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserDisableMfaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserDisableMfaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -474,12 +460,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserEditApiToken(DeprecatedUserEditApiTokenRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserEditApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserEditApiTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -501,12 +483,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserEditSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserEditSshKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -528,12 +506,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserInitPasswordReset(DeprecatedUserInitPasswordResetRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserInitPasswordResetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserInitPasswordResetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -555,12 +529,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserLogout(DeprecatedUserLogoutRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserLogoutRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserLogoutRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -582,12 +552,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserResendVerificationEmail(DeprecatedUserResendVerificationEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserResendVerificationEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserResendVerificationEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -610,11 +576,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceAvatarRemove(DeprecatedUserServiceAvatarRemoveRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceAvatarRemoveRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceAvatarRemoveRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -636,12 +599,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceAvatarRequestUpload(DeprecatedUserServiceAvatarRequestUploadRequest $request): DeprecatedUserServiceAvatarRequestUploadOKResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceAvatarRequestUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceAvatarRequestUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedUserServiceAvatarRequestUploadOKResponse::fromResponse($httpResponse);
         }
@@ -663,12 +622,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceFeedbackCreate(DeprecatedUserServiceFeedbackCreateRequest $request): DeprecatedUserServiceFeedbackCreateCreatedResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceFeedbackCreateRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceFeedbackCreateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return DeprecatedUserServiceFeedbackCreateCreatedResponse::fromResponse($httpResponse);
         }
@@ -691,11 +646,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceFeedbackList(DeprecatedUserServiceFeedbackListRequest $request): DeprecatedUserServiceFeedbackListOKResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceFeedbackListRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceFeedbackListRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedUserServiceFeedbackListOKResponse::fromResponse($httpResponse);
         }
@@ -716,12 +668,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceIssueNew(DeprecatedUserServiceIssueNewRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceIssueNewRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceIssueNewRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return new EmptyResponse($httpResponse);
         }
@@ -742,12 +690,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServicePersonalInformationUpdate(DeprecatedUserServicePersonalInformationUpdateRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServicePersonalInformationUpdateRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServicePersonalInformationUpdateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -769,11 +713,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServicePersonalizedSettingsGet(DeprecatedUserServicePersonalizedSettingsGetRequest $request): DeprecatedUserServicePersonalizedSettingsGetOKResponse
     {
-        $httpRequest = new Request(DeprecatedUserServicePersonalizedSettingsGetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServicePersonalizedSettingsGetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedUserServicePersonalizedSettingsGetOKResponse::fromResponse($httpResponse);
         }
@@ -794,12 +735,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServicePersonalizedSettingsUpdate(DeprecatedUserServicePersonalizedSettingsUpdateRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServicePersonalizedSettingsUpdateRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServicePersonalizedSettingsUpdateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -821,12 +758,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServicePhoneNumberAdd(DeprecatedUserServicePhoneNumberAddRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServicePhoneNumberAddRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServicePhoneNumberAddRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -849,11 +782,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServicePhoneNumberRemove(DeprecatedUserServicePhoneNumberRemoveRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServicePhoneNumberRemoveRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServicePhoneNumberRemoveRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -875,12 +805,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServicePhoneNumberVerify(DeprecatedUserServicePhoneNumberVerifyRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserServicePhoneNumberVerifyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServicePhoneNumberVerifyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -904,11 +830,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceUserGetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceUserGetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedUserServiceUserGetOKResponse::fromResponse($httpResponse);
         }
@@ -932,11 +855,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserServiceUserGetOwn(DeprecatedUserServiceUserGetOwnRequest $request): DeprecatedUserServiceUserGetOwnOKResponse
     {
-        $httpRequest = new Request(DeprecatedUserServiceUserGetOwnRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserServiceUserGetOwnRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedUserServiceUserGetOwnOKResponse::fromResponse($httpResponse);
         }
@@ -957,11 +877,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserTerminateAllSessions(DeprecatedUserTerminateAllSessionsRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserTerminateAllSessionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserTerminateAllSessionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -982,11 +899,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserTerminateSession(DeprecatedUserTerminateSessionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserTerminateSessionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserTerminateSessionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1008,12 +922,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserUpdateAccount(DeprecatedUserUpdateAccountRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserUpdateAccountRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserUpdateAccountRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1035,12 +945,8 @@ class UserClientImpl implements UserClient
      */
     public function deprecatedUserVerifyEmail(DeprecatedUserVerifyEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedUserVerifyEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedUserVerifyEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1062,11 +968,8 @@ class UserClientImpl implements UserClient
      */
     public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicyOKResponse
     {
-        $httpRequest = new Request(PasswordValidationGetPasswordPolicyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(PasswordValidationGetPasswordPolicyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return PasswordValidationGetPasswordPolicyOKResponse::fromResponse($httpResponse);
         }
@@ -1087,11 +990,8 @@ class UserClientImpl implements UserClient
      */
     public function passwordValidationGetPasswordPolicyV2Deprecated(PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request): PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse
     {
-        $httpRequest = new Request(PasswordValidationGetPasswordPolicyV2DeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(PasswordValidationGetPasswordPolicyV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -1111,12 +1011,8 @@ class UserClientImpl implements UserClient
      */
     public function addPhoneNumber(AddPhoneNumberRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(AddPhoneNumberRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(AddPhoneNumberRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1139,12 +1035,8 @@ class UserClientImpl implements UserClient
      */
     public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse
     {
-        $httpRequest = new Request(AuthenticateRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(AuthenticateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return AuthenticateOKResponse::fromResponse($httpResponse);
         }
@@ -1167,12 +1059,8 @@ class UserClientImpl implements UserClient
      */
     public function authenticateMfa(AuthenticateMfaRequest $request): AuthenticateMfaOKResponse
     {
-        $httpRequest = new Request(AuthenticateMfaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(AuthenticateMfaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return AuthenticateMfaOKResponse::fromResponse($httpResponse);
         }
@@ -1195,12 +1083,8 @@ class UserClientImpl implements UserClient
      */
     public function changeEmail(ChangeEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ChangeEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ChangeEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1221,12 +1105,8 @@ class UserClientImpl implements UserClient
      */
     public function changePassword(ChangePasswordRequest $request): ChangePasswordOKResponse
     {
-        $httpRequest = new Request(ChangePasswordRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ChangePasswordRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ChangePasswordOKResponse::fromResponse($httpResponse);
         }
@@ -1248,12 +1128,8 @@ class UserClientImpl implements UserClient
      */
     public function checkToken(CheckTokenRequest $request): CheckTokenOKResponse
     {
-        $httpRequest = new Request(CheckTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CheckTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return CheckTokenOKResponse::fromResponse($httpResponse);
         }
@@ -1273,12 +1149,8 @@ class UserClientImpl implements UserClient
      */
     public function confirmMfa(ConfirmMfaRequest $request): ConfirmMfaOKResponse
     {
-        $httpRequest = new Request(ConfirmMfaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ConfirmMfaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ConfirmMfaOKResponse::fromResponse($httpResponse);
         }
@@ -1299,12 +1171,8 @@ class UserClientImpl implements UserClient
      */
     public function confirmPasswordReset(ConfirmPasswordResetRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ConfirmPasswordResetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ConfirmPasswordResetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1325,12 +1193,8 @@ class UserClientImpl implements UserClient
      */
     public function createApiToken(CreateApiTokenRequest $request): CreateApiTokenCreatedResponse
     {
-        $httpRequest = new Request(CreateApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateApiTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateApiTokenCreatedResponse::fromResponse($httpResponse);
         }
@@ -1351,12 +1215,8 @@ class UserClientImpl implements UserClient
      */
     public function createFeedback(CreateFeedbackRequest $request): CreateFeedbackCreatedResponse
     {
-        $httpRequest = new Request(CreateFeedbackRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateFeedbackRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateFeedbackCreatedResponse::fromResponse($httpResponse);
         }
@@ -1378,12 +1238,8 @@ class UserClientImpl implements UserClient
      */
     public function createSshKey(CreateSshKeyRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(CreateSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateSshKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return new EmptyResponse($httpResponse);
         }
@@ -1404,11 +1260,8 @@ class UserClientImpl implements UserClient
      */
     public function deleteApiToken(DeleteApiTokenRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteApiTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1429,11 +1282,8 @@ class UserClientImpl implements UserClient
      */
     public function deleteSshKey(DeleteSshKeyRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteSshKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1453,12 +1303,8 @@ class UserClientImpl implements UserClient
      */
     public function deleteUser(DeleteUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeleteUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -1481,12 +1327,8 @@ class UserClientImpl implements UserClient
      */
     public function disableMfa(DisableMfaRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DisableMfaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DisableMfaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1507,12 +1349,8 @@ class UserClientImpl implements UserClient
      */
     public function editApiToken(EditApiTokenRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(EditApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(EditApiTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1533,12 +1371,8 @@ class UserClientImpl implements UserClient
      */
     public function editSshKey(EditSshKeyRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(EditSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(EditSshKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -1559,11 +1393,8 @@ class UserClientImpl implements UserClient
      */
     public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse
     {
-        $httpRequest = new Request(GetApiTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetApiTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetApiTokenOKResponse::fromResponse($httpResponse);
         }
@@ -1584,11 +1415,8 @@ class UserClientImpl implements UserClient
      */
     public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse
     {
-        $httpRequest = new Request(GetMfaStatusRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetMfaStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetMfaStatusOKResponse::fromResponse($httpResponse);
         }
@@ -1608,12 +1436,8 @@ class UserClientImpl implements UserClient
      */
     public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse
     {
-        $httpRequest = new Request(GetOwnAccountRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(GetOwnAccountRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetOwnAccountOKResponse::fromResponse($httpResponse);
         }
@@ -1633,11 +1457,8 @@ class UserClientImpl implements UserClient
      */
     public function getOwnEmail(GetOwnEmailRequest $request): GetOwnEmailOKResponse
     {
-        $httpRequest = new Request(GetOwnEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetOwnEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetOwnEmailOKResponse::fromResponse($httpResponse);
         }
@@ -1658,12 +1479,8 @@ class UserClientImpl implements UserClient
      */
     public function getPasswordUpdatedAt(GetPasswordUpdatedAtRequest $request): GetPasswordUpdatedAtOKResponse
     {
-        $httpRequest = new Request(GetPasswordUpdatedAtRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(GetPasswordUpdatedAtRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetPasswordUpdatedAtOKResponse::fromResponse($httpResponse);
         }
@@ -1683,16 +1500,36 @@ class UserClientImpl implements UserClient
      */
     public function getPersonalizedSettings(GetPersonalizedSettingsRequest $request): GetPersonalizedSettingsOKResponse
     {
-        $httpRequest = new Request(GetPersonalizedSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetPersonalizedSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetPersonalizedSettingsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => GetPersonalizedSettingsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get poll settings for the specified user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-poll-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetPollStatus\GetPollStatusRequest $request An object representing the request for this operation
+     * @return UntypedResponse
+     */
+    public function getPollStatus(GetPollStatusRequest $request): UntypedResponse
+    {
+        $httpRequest = new Request(GetPollStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return UntypedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetPollStatusBadRequestResponse::fromResponse($httpResponse),
+            404 => GetPollStatusNotFoundResponse::fromResponse($httpResponse),
+            default => GetPollStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1707,11 +1544,8 @@ class UserClientImpl implements UserClient
      */
     public function getSession(GetSessionRequest $request): GetSessionOKResponse
     {
-        $httpRequest = new Request(GetSessionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSessionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSessionOKResponse::fromResponse($httpResponse);
         }
@@ -1732,11 +1566,8 @@ class UserClientImpl implements UserClient
      */
     public function getSshKey(GetSshKeyRequest $request): GetSshKeyOKResponse
     {
-        $httpRequest = new Request(GetSshKeyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSshKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSshKeyOKResponse::fromResponse($httpResponse);
         }
@@ -1757,11 +1588,8 @@ class UserClientImpl implements UserClient
      */
     public function getUser(GetUserRequest $request): GetUserOKResponse
     {
-        $httpRequest = new Request(GetUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetUserOKResponse::fromResponse($httpResponse);
         }
@@ -1784,12 +1612,8 @@ class UserClientImpl implements UserClient
      */
     public function initMfa(InitMfaRequest $request): InitMfaOKResponse
     {
-        $httpRequest = new Request(InitMfaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(InitMfaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return InitMfaOKResponse::fromResponse($httpResponse);
         }
@@ -1810,12 +1634,8 @@ class UserClientImpl implements UserClient
      */
     public function initPasswordReset(InitPasswordResetRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(InitPasswordResetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(InitPasswordResetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return new EmptyResponse($httpResponse);
         }
@@ -1836,11 +1656,8 @@ class UserClientImpl implements UserClient
      */
     public function listApiTokens(ListApiTokensRequest $request): ListApiTokensOKResponse
     {
-        $httpRequest = new Request(ListApiTokensRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListApiTokensRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListApiTokensOKResponse::fromResponse($httpResponse);
         }
@@ -1860,11 +1677,8 @@ class UserClientImpl implements UserClient
      */
     public function listFeedback(ListFeedbackRequest $request): ListFeedbackOKResponse
     {
-        $httpRequest = new Request(ListFeedbackRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListFeedbackRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListFeedbackOKResponse::fromResponse($httpResponse);
         }
@@ -1884,11 +1698,8 @@ class UserClientImpl implements UserClient
      */
     public function listSessions(ListSessionsRequest $request): ListSessionsOKResponse
     {
-        $httpRequest = new Request(ListSessionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListSessionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListSessionsOKResponse::fromResponse($httpResponse);
         }
@@ -1908,11 +1719,8 @@ class UserClientImpl implements UserClient
      */
     public function listSshKeys(ListSshKeysRequest $request): ListSshKeysOKResponse
     {
-        $httpRequest = new Request(ListSshKeysRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListSshKeysRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListSshKeysOKResponse::fromResponse($httpResponse);
         }
@@ -1932,18 +1740,37 @@ class UserClientImpl implements UserClient
      */
     public function logout(LogoutRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(LogoutRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(LogoutRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => LogoutBadRequestResponse::fromResponse($httpResponse),
             default => LogoutDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Store new or update poll settings.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-post-poll-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PostPollStatus\PostPollStatusRequest $request An object representing the request for this operation
+     * @return UntypedResponse The updated poll settings.
+     */
+    public function postPollStatus(PostPollStatusRequest $request): UntypedResponse
+    {
+        $httpRequest = new Request(PostPollStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return UntypedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PostPollStatusBadRequestResponse::fromResponse($httpResponse),
+            403 => PostPollStatusForbiddenResponse::fromResponse($httpResponse),
+            default => PostPollStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1959,12 +1786,8 @@ class UserClientImpl implements UserClient
      */
     public function register(RegisterRequest $request): RegisterCreatedResponse
     {
-        $httpRequest = new Request(RegisterRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(RegisterRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return RegisterCreatedResponse::fromResponse($httpResponse);
         }
@@ -1985,11 +1808,8 @@ class UserClientImpl implements UserClient
      */
     public function removeAvatar(RemoveAvatarRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(RemoveAvatarRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(RemoveAvatarRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2010,11 +1830,8 @@ class UserClientImpl implements UserClient
      */
     public function removePhoneNumber(RemovePhoneNumberRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(RemovePhoneNumberRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(RemovePhoneNumberRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2035,12 +1852,8 @@ class UserClientImpl implements UserClient
      */
     public function requestAvatarUpload(RequestAvatarUploadRequest $request): RequestAvatarUploadOKResponse
     {
-        $httpRequest = new Request(RequestAvatarUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(RequestAvatarUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return RequestAvatarUploadOKResponse::fromResponse($httpResponse);
         }
@@ -2061,12 +1874,8 @@ class UserClientImpl implements UserClient
      */
     public function resendVerificationEmail(ResendVerificationEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ResendVerificationEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ResendVerificationEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2088,12 +1897,8 @@ class UserClientImpl implements UserClient
      */
     public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse
     {
-        $httpRequest = new Request(ResetRecoverycodesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ResetRecoverycodesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ResetRecoverycodesOKResponse::fromResponse($httpResponse);
         }
@@ -2114,11 +1919,8 @@ class UserClientImpl implements UserClient
      */
     public function supportCodeRequest(SupportCodeRequestRequest $request): SupportCodeRequestOKResponse
     {
-        $httpRequest = new Request(SupportCodeRequestRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(SupportCodeRequestRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return SupportCodeRequestOKResponse::fromResponse($httpResponse);
         }
@@ -2138,11 +1940,8 @@ class UserClientImpl implements UserClient
      */
     public function terminateAllSessions(TerminateAllSessionsRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(TerminateAllSessionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(TerminateAllSessionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2162,11 +1961,8 @@ class UserClientImpl implements UserClient
      */
     public function terminateSession(TerminateSessionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(TerminateSessionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(TerminateSessionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2187,12 +1983,8 @@ class UserClientImpl implements UserClient
      */
     public function updateAccount(UpdateAccountRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateAccountRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateAccountRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2213,12 +2005,8 @@ class UserClientImpl implements UserClient
      */
     public function updatePersonalInformation(UpdatePersonalInformationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdatePersonalInformationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdatePersonalInformationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2239,12 +2027,8 @@ class UserClientImpl implements UserClient
      */
     public function updatePersonalizedSettings(UpdatePersonalizedSettingsRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdatePersonalizedSettingsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdatePersonalizedSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2265,12 +2049,8 @@ class UserClientImpl implements UserClient
      */
     public function verifyEmail(VerifyEmailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(VerifyEmailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(VerifyEmailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2292,12 +2072,8 @@ class UserClientImpl implements UserClient
      */
     public function verifyPhoneNumber(VerifyPhoneNumberRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(VerifyPhoneNumberRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(VerifyPhoneNumberRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -2320,12 +2096,8 @@ class UserClientImpl implements UserClient
      */
     public function verifyRegistration(VerifyRegistrationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(VerifyRegistrationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(VerifyRegistrationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }

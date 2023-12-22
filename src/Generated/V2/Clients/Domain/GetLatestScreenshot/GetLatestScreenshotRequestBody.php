@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class GetLatestScreenshotRequestBody
 {
-    public const method = 'get';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -43,10 +41,6 @@ class GetLatestScreenshotRequestBody
      * @var string
      */
     private string $path;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $domainName
@@ -173,31 +167,5 @@ class GetLatestScreenshotRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $domainId = urlencode($mapped['domainId']);
-        return '/v2/domains/' . $domainId . '/latest-screenshot';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

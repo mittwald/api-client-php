@@ -10,8 +10,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Database\CharacterSettings;
 
 class UpdateMysqlDatabaseDefaultCharsetRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -32,10 +30,6 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
      * @var CharacterSettings
      */
     private CharacterSettings $characterSettings;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param CharacterSettings $characterSettings
@@ -126,31 +120,5 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
-        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/default-charset';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

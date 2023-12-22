@@ -143,12 +143,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function acceptCustomerInvite(AcceptCustomerInviteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(AcceptCustomerInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(AcceptCustomerInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -171,12 +167,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function createCategory(CreateCategoryRequest $request): CreateCategoryCreatedResponse
     {
-        $httpRequest = new Request(CreateCategoryRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateCategoryRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateCategoryCreatedResponse::fromResponse($httpResponse);
         }
@@ -197,12 +189,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function createCustomer(CreateCustomerRequest $request): CreateCustomerCreatedResponse
     {
-        $httpRequest = new Request(CreateCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateCustomerCreatedResponse::fromResponse($httpResponse);
         }
@@ -223,12 +211,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse
     {
-        $httpRequest = new Request(CreateCustomerInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateCustomerInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateCustomerInviteCreatedResponse::fromResponse($httpResponse);
         }
@@ -250,12 +234,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function declineCustomerInvite(DeclineCustomerInviteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeclineCustomerInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeclineCustomerInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -275,11 +255,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function deleteCategory(DeleteCategoryRequest $request): DeleteCategoryOKResponse
     {
-        $httpRequest = new Request(DeleteCategoryRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteCategoryRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeleteCategoryOKResponse::fromResponse($httpResponse);
         }
@@ -299,11 +276,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse
     {
-        $httpRequest = new Request(DeleteCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeleteCustomerOKResponse::fromResponse($httpResponse);
         }
@@ -324,11 +298,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function deleteCustomerInvite(DeleteCustomerInviteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteCustomerInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteCustomerInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -348,11 +319,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function deleteCustomerMembership(DeleteCustomerMembershipRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteCustomerMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteCustomerMembershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -372,11 +340,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function getCustomer(GetCustomerRequest $request): GetCustomerOKResponse
     {
-        $httpRequest = new Request(GetCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCustomerOKResponse::fromResponse($httpResponse);
         }
@@ -397,11 +362,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse
     {
-        $httpRequest = new Request(GetCustomerCategoryRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCustomerCategoryRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCustomerCategoryOKResponse::fromResponse($httpResponse);
         }
@@ -421,11 +383,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function getCustomerInvite(GetCustomerInviteRequest $request): GetCustomerInviteOKResponse
     {
-        $httpRequest = new Request(GetCustomerInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCustomerInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCustomerInviteOKResponse::fromResponse($httpResponse);
         }
@@ -446,11 +405,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function getCustomerMembership(GetCustomerMembershipRequest $request): GetCustomerMembershipOKResponse
     {
-        $httpRequest = new Request(GetCustomerMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCustomerMembershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCustomerMembershipOKResponse::fromResponse($httpResponse);
         }
@@ -471,11 +427,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function getCustomerTokenInvite(GetCustomerTokenInviteRequest $request): GetCustomerTokenInviteOKResponse
     {
-        $httpRequest = new Request(GetCustomerTokenInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCustomerTokenInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCustomerTokenInviteOKResponse::fromResponse($httpResponse);
         }
@@ -496,11 +449,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function isCustomerLegallyCompetent(IsCustomerLegallyCompetentRequest $request): IsCustomerLegallyCompetentOKResponse
     {
-        $httpRequest = new Request(IsCustomerLegallyCompetentRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(IsCustomerLegallyCompetentRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return IsCustomerLegallyCompetentOKResponse::fromResponse($httpResponse);
         }
@@ -522,12 +472,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function leaveCustomer(LeaveCustomerRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(LeaveCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(LeaveCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -547,11 +493,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function listCustomerInvites(ListCustomerInvitesRequest $request): ListCustomerInvitesOKResponse
     {
-        $httpRequest = new Request(ListCustomerInvitesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListCustomerInvitesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListCustomerInvitesOKResponse::fromResponse($httpResponse);
         }
@@ -572,11 +515,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function listCustomerMemberships(ListCustomerMembershipsRequest $request): ListCustomerMembershipsOKResponse
     {
-        $httpRequest = new Request(ListCustomerMembershipsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListCustomerMembershipsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListCustomerMembershipsOKResponse::fromResponse($httpResponse);
         }
@@ -597,11 +537,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse
     {
-        $httpRequest = new Request(ListCustomersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListCustomersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListCustomersOKResponse::fromResponse($httpResponse);
         }
@@ -621,11 +558,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function listInvitesForCustomer(ListInvitesForCustomerRequest $request): ListInvitesForCustomerOKResponse
     {
-        $httpRequest = new Request(ListInvitesForCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListInvitesForCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListInvitesForCustomerOKResponse::fromResponse($httpResponse);
         }
@@ -646,11 +580,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function listMembershipsForCustomer(ListMembershipsForCustomerRequest $request): ListMembershipsForCustomerOKResponse
     {
-        $httpRequest = new Request(ListMembershipsForCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMembershipsForCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMembershipsForCustomerOKResponse::fromResponse($httpResponse);
         }
@@ -671,11 +602,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse
     {
-        $httpRequest = new Request(ListOfCustomerCategoriesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListOfCustomerCategoriesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListOfCustomerCategoriesOKResponse::fromResponse($httpResponse);
         }
@@ -695,11 +623,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function removeAvatar(RemoveAvatarRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(RemoveAvatarRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(RemoveAvatarRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -721,12 +646,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function requestAvatarUpload(RequestAvatarUploadRequest $request): RequestAvatarUploadOKResponse
     {
-        $httpRequest = new Request(RequestAvatarUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(RequestAvatarUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return RequestAvatarUploadOKResponse::fromResponse($httpResponse);
         }
@@ -748,12 +669,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function resendCustomerInviteMail(ResendCustomerInviteMailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ResendCustomerInviteMailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ResendCustomerInviteMailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -774,12 +691,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse
     {
-        $httpRequest = new Request(UpdateCategoryRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateCategoryRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateCategoryOKResponse::fromResponse($httpResponse);
         }
@@ -801,12 +714,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function updateCustomer(UpdateCustomerRequest $request): UpdateCustomerOKResponse
     {
-        $httpRequest = new Request(UpdateCustomerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateCustomerOKResponse::fromResponse($httpResponse);
         }
@@ -828,12 +737,8 @@ class CustomerClientImpl implements CustomerClient
      */
     public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateCustomerMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateCustomerMembershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }

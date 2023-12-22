@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePers
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedUserServicePersonalizedSettingsGetOKResponseBody implements ResponseContainer
+class DeprecatedUserServicePersonalizedSettingsGetOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -29,8 +27,6 @@ class DeprecatedUserServicePersonalizedSettingsGetOKResponseBody implements Resp
      * @var string|null
      */
     private ?string $settingsString = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -142,18 +138,5 @@ class DeprecatedUserServicePersonalizedSettingsGetOKResponseBody implements Resp
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

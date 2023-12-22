@@ -46,11 +46,8 @@ class ArticleClientImpl implements ArticleClient
      */
     public function getArticle(GetArticleRequest $request): GetArticleOKResponse
     {
-        $httpRequest = new Request(GetArticleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetArticleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetArticleOKResponse::fromResponse($httpResponse);
         }
@@ -71,11 +68,8 @@ class ArticleClientImpl implements ArticleClient
      */
     public function listArticles(ListArticlesRequest $request): ListArticlesOKResponse
     {
-        $httpRequest = new Request(ListArticlesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListArticlesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListArticlesOKResponse::fromResponse($httpResponse);
         }

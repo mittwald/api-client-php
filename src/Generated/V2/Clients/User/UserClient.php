@@ -4,6 +4,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
@@ -76,6 +77,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswor
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyOKResponse;
@@ -98,6 +100,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarRequest;
@@ -695,6 +698,16 @@ interface UserClient
      */
     public function getPersonalizedSettings(GetPersonalizedSettingsRequest $request): GetPersonalizedSettingsOKResponse;
     /**
+     * Get poll settings for the specified user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-poll-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetPollStatus\GetPollStatusRequest $request An object representing the request for this operation
+     * @return UntypedResponse
+     */
+    public function getPollStatus(GetPollStatusRequest $request): UntypedResponse;
+    /**
      * Get a specific session.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-session
@@ -794,6 +807,16 @@ interface UserClient
      * @return EmptyResponse You've been logged out. The access token has been removed and invalidated.
      */
     public function logout(LogoutRequest $request): EmptyResponse;
+    /**
+     * Store new or update poll settings.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-post-poll-status
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PostPollStatus\PostPollStatusRequest $request An object representing the request for this operation
+     * @return UntypedResponse The updated poll settings.
+     */
+    public function postPollStatus(PostPollStatusRequest $request): UntypedResponse;
     /**
      * Register with email and password.
      *

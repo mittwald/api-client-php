@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class AddPhoneNumberForbiddenResponseBody implements ResponseContainer
+class AddPhoneNumberForbiddenResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -39,8 +37,6 @@ class AddPhoneNumberForbiddenResponseBody implements ResponseContainer
      * @var string|null
      */
     private ?string $type = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -197,18 +193,5 @@ class AddPhoneNumberForbiddenResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

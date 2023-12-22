@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class ListProjectsOKResponseBodyItemCustomerMeta implements ResponseContainer
+class ListProjectsOKResponseBodyItemCustomerMeta
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -32,8 +30,6 @@ class ListProjectsOKResponseBodyItemCustomerMeta implements ResponseContainer
      * @var string
      */
     private string $id;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $id
@@ -130,18 +126,5 @@ class ListProjectsOKResponseBodyItemCustomerMeta implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

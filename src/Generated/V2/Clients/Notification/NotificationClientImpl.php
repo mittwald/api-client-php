@@ -67,11 +67,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function newsletterGetInfo(NewsletterGetInfoRequest $request): NewsletterGetInfoOKResponse
     {
-        $httpRequest = new Request(NewsletterGetInfoRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(NewsletterGetInfoRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NewsletterGetInfoOKResponse::fromResponse($httpResponse);
         }
@@ -91,12 +88,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function newsletterSubscribeUser(NewsletterSubscribeUserRequest $request): NewsletterSubscribeUserOKResponse
     {
-        $httpRequest = new Request(NewsletterSubscribeUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(NewsletterSubscribeUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NewsletterSubscribeUserOKResponse::fromResponse($httpResponse);
         }
@@ -117,11 +110,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function newsletterUnsubscribeUser(NewsletterUnsubscribeUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(NewsletterUnsubscribeUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(NewsletterUnsubscribeUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -145,11 +135,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function notificationsCountUnreadNotifications(NotificationsCountUnreadNotificationsRequest $request): NotificationsCountUnreadNotificationsOKResponse
     {
-        $httpRequest = new Request(NotificationsCountUnreadNotificationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(NotificationsCountUnreadNotificationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NotificationsCountUnreadNotificationsOKResponse::fromResponse($httpResponse);
         }
@@ -169,11 +156,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function notificationsListNotifications(NotificationsListNotificationsRequest $request): NotificationsListNotificationsOKResponse
     {
-        $httpRequest = new Request(NotificationsListNotificationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(NotificationsListNotificationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NotificationsListNotificationsOKResponse::fromResponse($httpResponse);
         }
@@ -195,12 +179,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse
     {
-        $httpRequest = new Request(NotificationsReadAllNotificationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(NotificationsReadAllNotificationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NotificationsReadAllNotificationsOKResponse::fromResponse($httpResponse);
         }
@@ -224,12 +204,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function notificationsReadAllNotificationsDeprecated(NotificationsReadAllNotificationsDeprecatedRequest $request): NotificationsReadAllNotificationsDeprecatedOKResponse
     {
-        $httpRequest = new Request(NotificationsReadAllNotificationsDeprecatedRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(NotificationsReadAllNotificationsDeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NotificationsReadAllNotificationsDeprecatedOKResponse::fromResponse($httpResponse);
         }
@@ -250,12 +226,8 @@ class NotificationClientImpl implements NotificationClient
      */
     public function notificationsReadNotification(NotificationsReadNotificationRequest $request): NotificationsReadNotificationOKResponse
     {
-        $httpRequest = new Request(NotificationsReadNotificationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(NotificationsReadNotificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return NotificationsReadNotificationOKResponse::fromResponse($httpResponse);
         }

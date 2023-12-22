@@ -11,11 +11,21 @@ use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerforma
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceAcceptedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest;
 
 /**
  * Client for Page Insights API
@@ -49,11 +59,8 @@ class PageInsightsClientImpl implements PageInsightsClient
      */
     public function pageinsightsGetPerformanceData(PageinsightsGetPerformanceDataRequest $request): PageinsightsGetPerformanceDataOKResponse
     {
-        $httpRequest = new Request(PageinsightsGetPerformanceDataRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(PageinsightsGetPerformanceDataRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return PageinsightsGetPerformanceDataOKResponse::fromResponse($httpResponse);
         }
@@ -61,6 +68,29 @@ class PageInsightsClientImpl implements PageInsightsClient
             400 => PageinsightsGetPerformanceDataBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsGetPerformanceDataForbiddenResponse::fromResponse($httpResponse),
             default => PageinsightsGetPerformanceDataDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get all data for a given strace.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-get-strace-data
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PageinsightsGetStraceData\PageinsightsGetStraceDataRequest $request An object representing the request for this operation
+     * @return PageinsightsGetStraceData\PageinsightsGetStraceDataOKResponse OK
+     */
+    public function pageinsightsGetStraceData(PageinsightsGetStraceDataRequest $request): PageinsightsGetStraceDataOKResponse
+    {
+        $httpRequest = new Request(PageinsightsGetStraceDataRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return PageinsightsGetStraceDataOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PageinsightsGetStraceDataBadRequestResponse::fromResponse($httpResponse),
+            403 => PageinsightsGetStraceDataForbiddenResponse::fromResponse($httpResponse),
+            default => PageinsightsGetStraceDataDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -75,11 +105,8 @@ class PageInsightsClientImpl implements PageInsightsClient
      */
     public function pageinsightsListPerformanceDataForProject(PageinsightsListPerformanceDataForProjectRequest $request): PageinsightsListPerformanceDataForProjectOKResponse
     {
-        $httpRequest = new Request(PageinsightsListPerformanceDataForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(PageinsightsListPerformanceDataForProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return PageinsightsListPerformanceDataForProjectOKResponse::fromResponse($httpResponse);
         }
@@ -87,6 +114,29 @@ class PageInsightsClientImpl implements PageInsightsClient
             400 => PageinsightsListPerformanceDataForProjectBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsListPerformanceDataForProjectForbiddenResponse::fromResponse($httpResponse),
             default => PageinsightsListPerformanceDataForProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Schedule a strace measurement for a single http request.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-schedule-strace
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest $request An object representing the request for this operation
+     * @return PageinsightsScheduleStrace\PageinsightsScheduleStraceAcceptedResponse Scheduled
+     */
+    public function pageinsightsScheduleStrace(PageinsightsScheduleStraceRequest $request): PageinsightsScheduleStraceAcceptedResponse
+    {
+        $httpRequest = new Request(PageinsightsScheduleStraceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 202) {
+            return PageinsightsScheduleStraceAcceptedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PageinsightsScheduleStraceBadRequestResponse::fromResponse($httpResponse),
+            403 => PageinsightsScheduleStraceForbiddenResponse::fromResponse($httpResponse),
+            default => PageinsightsScheduleStraceDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

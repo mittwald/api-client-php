@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DeliveryboxUpdateDescriptionDeprecatedRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -31,10 +29,6 @@ class DeliveryboxUpdateDescriptionDeprecatedRequestBody
      * @var string
      */
     private string $description;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $description
@@ -131,31 +125,5 @@ class DeliveryboxUpdateDescriptionDeprecatedRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/deliveryboxes/' . $id . '/description';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

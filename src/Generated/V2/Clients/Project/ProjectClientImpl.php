@@ -153,12 +153,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function acceptProjectInvite(AcceptProjectInviteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(AcceptProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(AcceptProjectInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -181,12 +177,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function createProject(CreateProjectRequest $request): CreateProjectCreatedResponse
     {
-        $httpRequest = new Request(CreateProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateProjectCreatedResponse::fromResponse($httpResponse);
         }
@@ -209,12 +201,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function createProjectInvite(CreateProjectInviteRequest $request): CreateProjectInviteCreatedResponse
     {
-        $httpRequest = new Request(CreateProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateProjectInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateProjectInviteCreatedResponse::fromResponse($httpResponse);
         }
@@ -236,12 +224,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function declineProjectInvite(DeclineProjectInviteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeclineProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeclineProjectInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -261,11 +245,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function deleteProject(DeleteProjectRequest $request): DeleteProjectOKResponse
     {
-        $httpRequest = new Request(DeleteProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeleteProjectOKResponse::fromResponse($httpResponse);
         }
@@ -290,11 +271,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteProjectAvatarRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectAvatarRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -316,11 +294,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function deleteProjectInvite(DeleteProjectInviteRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -340,11 +315,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function deleteProjectMembership(DeleteProjectMembershipRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteProjectMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectMembershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -364,11 +336,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteServerAvatarRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteServerAvatarRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -390,11 +359,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function getProject(GetProjectRequest $request): GetProjectOKResponse
     {
-        $httpRequest = new Request(GetProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetProjectOKResponse::fromResponse($httpResponse);
         }
@@ -415,11 +381,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function getProjectInvite(GetProjectInviteRequest $request): GetProjectInviteOKResponse
     {
-        $httpRequest = new Request(GetProjectInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetProjectInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetProjectInviteOKResponse::fromResponse($httpResponse);
         }
@@ -440,11 +403,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function getProjectMembership(GetProjectMembershipRequest $request): GetProjectMembershipOKResponse
     {
-        $httpRequest = new Request(GetProjectMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetProjectMembershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetProjectMembershipOKResponse::fromResponse($httpResponse);
         }
@@ -465,11 +425,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function getProjectTokenInvite(GetProjectTokenInviteRequest $request): GetProjectTokenInviteOKResponse
     {
-        $httpRequest = new Request(GetProjectTokenInviteRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetProjectTokenInviteRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetProjectTokenInviteOKResponse::fromResponse($httpResponse);
         }
@@ -490,11 +447,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function getSelfMembershipForProject(GetSelfMembershipForProjectRequest $request): GetSelfMembershipForProjectOKResponse
     {
-        $httpRequest = new Request(GetSelfMembershipForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSelfMembershipForProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSelfMembershipForProjectOKResponse::fromResponse($httpResponse);
         }
@@ -515,11 +469,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function getServer(GetServerRequest $request): GetServerOKResponse
     {
-        $httpRequest = new Request(GetServerRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetServerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetServerOKResponse::fromResponse($httpResponse);
         }
@@ -541,12 +492,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function leaveProject(LeaveProjectRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(LeaveProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(LeaveProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -566,11 +513,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse
     {
-        $httpRequest = new Request(ListInvitesForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListInvitesForProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListInvitesForProjectOKResponse::fromResponse($httpResponse);
         }
@@ -591,11 +535,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function listMembershipsForProject(ListMembershipsForProjectRequest $request): ListMembershipsForProjectOKResponse
     {
-        $httpRequest = new Request(ListMembershipsForProjectRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMembershipsForProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMembershipsForProjectOKResponse::fromResponse($httpResponse);
         }
@@ -616,11 +557,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function listProjectInvites(ListProjectInvitesRequest $request): ListProjectInvitesOKResponse
     {
-        $httpRequest = new Request(ListProjectInvitesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListProjectInvitesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListProjectInvitesOKResponse::fromResponse($httpResponse);
         }
@@ -641,11 +579,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function listProjectMemberships(ListProjectMembershipsRequest $request): ListProjectMembershipsOKResponse
     {
-        $httpRequest = new Request(ListProjectMembershipsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListProjectMembershipsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListProjectMembershipsOKResponse::fromResponse($httpResponse);
         }
@@ -666,11 +601,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function listProjects(ListProjectsRequest $request): ListProjectsOKResponse
     {
-        $httpRequest = new Request(ListProjectsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListProjectsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListProjectsOKResponse::fromResponse($httpResponse);
         }
@@ -692,11 +624,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function listServers(ListServersRequest $request): ListServersOKResponse
     {
-        $httpRequest = new Request(ListServersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListServersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListServersOKResponse::fromResponse($httpResponse);
         }
@@ -717,11 +646,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function requestProjectAvatarUpload(RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUploadOKResponse
     {
-        $httpRequest = new Request(RequestProjectAvatarUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(RequestProjectAvatarUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return RequestProjectAvatarUploadOKResponse::fromResponse($httpResponse);
         }
@@ -743,11 +669,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function requestServerAvatarUpload(RequestServerAvatarUploadRequest $request): RequestServerAvatarUploadOKResponse
     {
-        $httpRequest = new Request(RequestServerAvatarUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(RequestServerAvatarUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return RequestServerAvatarUploadOKResponse::fromResponse($httpResponse);
         }
@@ -769,12 +692,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ResendProjectInviteMailRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ResendProjectInviteMailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -795,12 +714,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateProjectDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateProjectDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -822,12 +737,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function updateProjectMembership(UpdateProjectMembershipRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateProjectMembershipRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateProjectMembershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -847,12 +758,8 @@ class ProjectClientImpl implements ProjectClient
      */
     public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateServerDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateServerDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }

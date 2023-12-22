@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions implements ResponseContainer
+class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -53,8 +51,6 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions impleme
      * @var RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin|null
      */
     private ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin $min = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -207,18 +203,5 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions impleme
         if (isset($this->min)) {
             $this->min = clone $this->min;
         }
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

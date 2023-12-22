@@ -7,10 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class TerminateContractItemCreatedResponseBody implements ResponseContainer
+class TerminateContractItemCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -57,8 +55,6 @@ class TerminateContractItemCreatedResponseBody implements ResponseContainer
      * @var DateTime|null
      */
     private ?DateTime $terminationTargetDate = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -302,18 +298,5 @@ class TerminateContractItemCreatedResponseBody implements ResponseContainer
         if (isset($this->terminationTargetDate)) {
             $this->terminationTargetDate = clone $this->terminationTargetDate;
         }
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

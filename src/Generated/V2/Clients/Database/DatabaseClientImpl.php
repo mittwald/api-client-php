@@ -156,12 +156,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function createMysqlDatabase(CreateMysqlDatabaseRequest $request): CreateMysqlDatabaseCreatedResponse
     {
-        $httpRequest = new Request(CreateMysqlDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateMysqlDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateMysqlDatabaseCreatedResponse::fromResponse($httpResponse);
         }
@@ -183,12 +179,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function createMysqlUser(CreateMysqlUserRequest $request): CreateMysqlUserCreatedResponse
     {
-        $httpRequest = new Request(CreateMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateMysqlUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateMysqlUserCreatedResponse::fromResponse($httpResponse);
         }
@@ -210,12 +202,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function createRedisDatabase(CreateRedisDatabaseRequest $request): CreateRedisDatabaseCreatedResponse
     {
-        $httpRequest = new Request(CreateRedisDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateRedisDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateRedisDatabaseCreatedResponse::fromResponse($httpResponse);
         }
@@ -237,11 +225,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function deleteMysqlDatabase(DeleteMysqlDatabaseRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteMysqlDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteMysqlDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -266,11 +251,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function deleteMysqlUser(DeleteMysqlUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteMysqlUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -293,11 +275,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function deleteRedisDatabase(DeleteRedisDatabaseRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteRedisDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteRedisDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -322,12 +301,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function disableMysqlUser(DisableMysqlUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DisableMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DisableMysqlUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -349,12 +324,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function enableMysqlUser(EnableMysqlUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(EnableMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(EnableMysqlUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -376,11 +347,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function getMysqlDatabase(GetMysqlDatabaseRequest $request): GetMysqlDatabaseOKResponse
     {
-        $httpRequest = new Request(GetMysqlDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetMysqlDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetMysqlDatabaseOKResponse::fromResponse($httpResponse);
         }
@@ -403,11 +371,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function getMysqlUser(GetMysqlUserRequest $request): GetMysqlUserOKResponse
     {
-        $httpRequest = new Request(GetMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetMysqlUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetMysqlUserOKResponse::fromResponse($httpResponse);
         }
@@ -429,11 +394,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function getMysqlUserPhpMyAdminUrl(GetMysqlUserPhpMyAdminUrlRequest $request): GetMysqlUserPhpMyAdminUrlOKResponse
     {
-        $httpRequest = new Request(GetMysqlUserPhpMyAdminUrlRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetMysqlUserPhpMyAdminUrlRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetMysqlUserPhpMyAdminUrlOKResponse::fromResponse($httpResponse);
         }
@@ -455,11 +417,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function getRedisDatabase(GetRedisDatabaseRequest $request): GetRedisDatabaseOKResponse
     {
-        $httpRequest = new Request(GetRedisDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetRedisDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetRedisDatabaseOKResponse::fromResponse($httpResponse);
         }
@@ -482,11 +441,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function listMysqlCharsets(ListMysqlCharsetsRequest $request): ListMysqlCharsetsOKResponse
     {
-        $httpRequest = new Request(ListMysqlCharsetsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMysqlCharsetsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMysqlCharsetsOKResponse::fromResponse($httpResponse);
         }
@@ -508,11 +464,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function listMysqlDatabases(ListMysqlDatabasesRequest $request): ListMysqlDatabasesOKResponse
     {
-        $httpRequest = new Request(ListMysqlDatabasesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMysqlDatabasesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMysqlDatabasesOKResponse::fromResponse($httpResponse);
         }
@@ -534,11 +487,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function listMysqlUsers(ListMysqlUsersRequest $request): ListMysqlUsersOKResponse
     {
-        $httpRequest = new Request(ListMysqlUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMysqlUsersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMysqlUsersOKResponse::fromResponse($httpResponse);
         }
@@ -560,11 +510,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function listMysqlVersions(ListMysqlVersionsRequest $request): ListMysqlVersionsOKResponse
     {
-        $httpRequest = new Request(ListMysqlVersionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMysqlVersionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListMysqlVersionsOKResponse::fromResponse($httpResponse);
         }
@@ -586,11 +533,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function listRedisDatabases(ListRedisDatabasesRequest $request): ListRedisDatabasesOKResponse
     {
-        $httpRequest = new Request(ListRedisDatabasesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListRedisDatabasesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListRedisDatabasesOKResponse::fromResponse($httpResponse);
         }
@@ -612,11 +556,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function listRedisVersions(ListRedisVersionsRequest $request): ListRedisVersionsOKResponse
     {
-        $httpRequest = new Request(ListRedisVersionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListRedisVersionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListRedisVersionsOKResponse::fromResponse($httpResponse);
         }
@@ -638,12 +579,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -665,12 +602,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMysqlDatabaseDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMysqlDatabaseDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -692,12 +625,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMysqlUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMysqlUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -719,12 +648,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateMysqlUserPasswordRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMysqlUserPasswordRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -746,12 +671,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateRedisDatabaseConfigurationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateRedisDatabaseConfigurationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -773,12 +694,8 @@ class DatabaseClientImpl implements DatabaseClient
      */
     public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateRedisDatabaseDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateRedisDatabaseDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }

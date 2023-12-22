@@ -89,11 +89,8 @@ class FileClientImpl implements FileClient
      */
     public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRulesOKResponse
     {
-        $httpRequest = new Request(DeprecatedFileGetFileTokenRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedFileGetFileTokenRulesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedFileGetFileTokenRulesOKResponse::fromResponse($httpResponse);
         }
@@ -116,11 +113,8 @@ class FileClientImpl implements FileClient
      */
     public function deprecatedFileGetFileTypeRules(DeprecatedFileGetFileTypeRulesRequest $request): DeprecatedFileGetFileTypeRulesOKResponse
     {
-        $httpRequest = new Request(DeprecatedFileGetFileTypeRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeprecatedFileGetFileTypeRulesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return DeprecatedFileGetFileTypeRulesOKResponse::fromResponse($httpResponse);
         }
@@ -142,11 +136,8 @@ class FileClientImpl implements FileClient
      */
     public function createFile(CreateFileRequest $request): CreateFileCreatedResponse
     {
-        $httpRequest = new Request(CreateFileRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(CreateFileRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateFileCreatedResponse::fromResponse($httpResponse);
         }
@@ -171,11 +162,8 @@ class FileClientImpl implements FileClient
      */
     public function getFile(GetFileRequest $request): StringResponse
     {
-        $httpRequest = new Request(GetFileRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetFileRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return StringResponse::fromResponse($httpResponse);
         }
@@ -201,11 +189,8 @@ class FileClientImpl implements FileClient
      */
     public function getFileMeta(GetFileMetaRequest $request): GetFileMetaOKResponse
     {
-        $httpRequest = new Request(GetFileMetaRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetFileMetaRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetFileMetaOKResponse::fromResponse($httpResponse);
         }
@@ -231,11 +216,8 @@ class FileClientImpl implements FileClient
      */
     public function getFileUploadTokenRules(GetFileUploadTokenRulesRequest $request): GetFileUploadTokenRulesOKResponse
     {
-        $httpRequest = new Request(GetFileUploadTokenRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetFileUploadTokenRulesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetFileUploadTokenRulesOKResponse::fromResponse($httpResponse);
         }
@@ -258,11 +240,8 @@ class FileClientImpl implements FileClient
      */
     public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRulesOKResponse
     {
-        $httpRequest = new Request(GetFileUploadTypeRulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetFileUploadTypeRulesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetFileUploadTypeRulesOKResponse::fromResponse($httpResponse);
         }

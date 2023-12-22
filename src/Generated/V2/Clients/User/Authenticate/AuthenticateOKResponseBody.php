@@ -7,10 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class AuthenticateOKResponseBody implements ResponseContainer
+class AuthenticateOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -49,8 +47,6 @@ class AuthenticateOKResponseBody implements ResponseContainer
      * @var string
      */
     private string $token;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param DateTime $expires
@@ -172,18 +168,5 @@ class AuthenticateOKResponseBody implements ResponseContainer
     public function __clone()
     {
         $this->expires = clone $this->expires;
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

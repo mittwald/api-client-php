@@ -11,8 +11,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\PublicKey;
 
 class UpdateSshUserRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -67,10 +65,6 @@ class UpdateSshUserRequestBody
      * @var PublicKey[]|null
      */
     private ?array $publicKeys = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -353,31 +347,5 @@ class UpdateSshUserRequestBody
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $sshUserId = urlencode($mapped['sshUserId']);
-        return '/v2/ssh-users/' . $sshUserId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

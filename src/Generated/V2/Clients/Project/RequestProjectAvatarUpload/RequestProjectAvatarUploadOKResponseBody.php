@@ -6,11 +6,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUp
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\AvatarRules;
-use Psr\Http\Message\ResponseInterface;
 
-class RequestProjectAvatarUploadOKResponseBody implements ResponseContainer
+class RequestProjectAvatarUploadOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -43,8 +41,6 @@ class RequestProjectAvatarUploadOKResponseBody implements ResponseContainer
      * @var AvatarRules
      */
     private AvatarRules $rules;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $refId
@@ -165,18 +161,5 @@ class RequestProjectAvatarUploadOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

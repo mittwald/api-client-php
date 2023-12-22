@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScre
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedDomainGetScreenshotForDomainOKResponseBody implements ResponseContainer
+class DeprecatedDomainGetScreenshotForDomainOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -32,8 +30,6 @@ class DeprecatedDomainGetScreenshotForDomainOKResponseBody implements ResponseCo
      * @var string[]|null
      */
     private ?array $references = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -145,18 +141,5 @@ class DeprecatedDomainGetScreenshotForDomainOKResponseBody implements ResponseCo
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

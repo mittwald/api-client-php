@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DeleteDomainOKResponseBody implements ResponseContainer
+class DeleteDomainOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -37,8 +35,6 @@ class DeleteDomainOKResponseBody implements ResponseContainer
      * @var string|null
      */
     private ?string $transactionId = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -195,18 +191,5 @@ class DeleteDomainOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

@@ -10,8 +10,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration;
 
 class CreateRedisDatabaseRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -60,10 +58,6 @@ class CreateRedisDatabaseRequestBody
      * @var string
      */
     private string $version;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $description
@@ -229,31 +223,5 @@ class CreateRedisDatabaseRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/redis-databases';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

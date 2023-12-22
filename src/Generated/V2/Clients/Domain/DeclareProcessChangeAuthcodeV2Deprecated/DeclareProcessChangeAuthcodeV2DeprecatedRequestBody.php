@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DeclareProcessChangeAuthcodeV2DeprecatedRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -32,10 +30,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedRequestBody
      * @var string
      */
     private string $authCode;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $authCode
@@ -132,31 +126,5 @@ class DeclareProcessChangeAuthcodeV2DeprecatedRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $domainId = urlencode($mapped['domainId']);
-        return '/v2/domains/' . $domainId . '/declarations/authcode';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

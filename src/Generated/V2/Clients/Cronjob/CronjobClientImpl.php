@@ -83,12 +83,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function abortExecution(AbortExecutionRequest $request): AbortExecutionOKResponse
     {
-        $httpRequest = new Request(AbortExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(AbortExecutionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return AbortExecutionOKResponse::fromResponse($httpResponse);
         }
@@ -109,12 +105,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function createCronjob(CreateCronjobRequest $request): CreateCronjobCreatedResponse
     {
-        $httpRequest = new Request(CreateCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateCronjobRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateCronjobCreatedResponse::fromResponse($httpResponse);
         }
@@ -136,12 +128,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function createExecution(CreateExecutionRequest $request): CreateExecutionCreatedResponse
     {
-        $httpRequest = new Request(CreateExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateExecutionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateExecutionCreatedResponse::fromResponse($httpResponse);
         }
@@ -163,11 +151,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function deleteCronjob(DeleteCronjobRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteCronjobRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
@@ -190,11 +175,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function getCronjob(GetCronjobRequest $request): GetCronjobOKResponse
     {
-        $httpRequest = new Request(GetCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCronjobRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCronjobOKResponse::fromResponse($httpResponse);
         }
@@ -215,11 +197,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse
     {
-        $httpRequest = new Request(GetExecutionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetExecutionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetExecutionOKResponse::fromResponse($httpResponse);
         }
@@ -240,11 +219,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse
     {
-        $httpRequest = new Request(ListCronjobsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListCronjobsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListCronjobsOKResponse::fromResponse($httpResponse);
         }
@@ -264,11 +240,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse
     {
-        $httpRequest = new Request(ListExecutionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListExecutionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListExecutionsOKResponse::fromResponse($httpResponse);
         }
@@ -288,12 +261,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function updateCronjob(UpdateCronjobRequest $request): UpdateCronjobOKResponse
     {
-        $httpRequest = new Request(UpdateCronjobRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateCronjobRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateCronjobOKResponse::fromResponse($httpResponse);
         }
@@ -316,12 +285,8 @@ class CronjobClientImpl implements CronjobClient
      */
     public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): UpdateCronjobAppIdCreatedResponse
     {
-        $httpRequest = new Request(UpdateCronjobAppIdRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateCronjobAppIdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return UpdateCronjobAppIdCreatedResponse::fromResponse($httpResponse);
         }

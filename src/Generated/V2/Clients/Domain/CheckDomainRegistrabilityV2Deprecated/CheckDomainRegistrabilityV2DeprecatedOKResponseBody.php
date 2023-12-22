@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabili
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class CheckDomainRegistrabilityV2DeprecatedOKResponseBody implements ResponseContainer
+class CheckDomainRegistrabilityV2DeprecatedOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -32,8 +30,6 @@ class CheckDomainRegistrabilityV2DeprecatedOKResponseBody implements ResponseCon
      * @var bool
      */
     private bool $available;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param bool $available
@@ -130,18 +126,5 @@ class CheckDomainRegistrabilityV2DeprecatedOKResponseBody implements ResponseCon
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

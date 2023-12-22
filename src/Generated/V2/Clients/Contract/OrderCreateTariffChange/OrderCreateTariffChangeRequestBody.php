@@ -11,8 +11,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange;
 
 class OrderCreateTariffChangeRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -50,10 +48,6 @@ class OrderCreateTariffChangeRequestBody
      * @var OrderCreateTariffChangeRequestBodyTariffChangeType|null
      */
     private ?OrderCreateTariffChangeRequestBodyTariffChangeType $tariffChangeType = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -209,30 +203,5 @@ class OrderCreateTariffChangeRequestBody
                 ($this->tariffChangeData) instanceof ProjectHostingTariffChange, ($this->tariffChangeData) instanceof ServerTariffChange => $this->tariffChangeData,
             };
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/tariff-changes';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

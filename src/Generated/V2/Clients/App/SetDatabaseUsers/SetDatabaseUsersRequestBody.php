@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class SetDatabaseUsersRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -35,10 +33,6 @@ class SetDatabaseUsersRequestBody
      * @var string[]
      */
     private array $databaseUserIds;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string[] $databaseUserIds
@@ -135,32 +129,5 @@ class SetDatabaseUsersRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $appInstallationId = urlencode($mapped['appInstallationId']);
-        $databaseId = urlencode($mapped['databaseId']);
-        return '/v2/app-installations/' . $appInstallationId . '/databases/' . $databaseId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

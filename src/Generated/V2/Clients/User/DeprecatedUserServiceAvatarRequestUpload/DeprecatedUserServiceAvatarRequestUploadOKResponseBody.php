@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvat
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedUserServiceAvatarRequestUploadOKResponseBody implements ResponseContainer
+class DeprecatedUserServiceAvatarRequestUploadOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -89,8 +87,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBody implements Response
      * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
      */
     private DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules $rules;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $refId
@@ -212,18 +208,5 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBody implements Response
     public function __clone()
     {
         $this->rules = clone $this->rules;
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

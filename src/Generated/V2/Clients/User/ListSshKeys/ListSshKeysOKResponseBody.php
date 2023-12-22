@@ -6,11 +6,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Signup\SshKey;
-use Psr\Http\Message\ResponseInterface;
 
-class ListSshKeysOKResponseBody implements ResponseContainer
+class ListSshKeysOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -33,8 +31,6 @@ class ListSshKeysOKResponseBody implements ResponseContainer
      * @var SshKey[]|null
      */
     private ?array $sshKeys = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -140,18 +136,5 @@ class ListSshKeysOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

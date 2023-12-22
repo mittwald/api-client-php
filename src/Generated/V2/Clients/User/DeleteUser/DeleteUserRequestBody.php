@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DeleteUserRequestBody
 {
-    public const method = 'delete';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -46,10 +44,6 @@ class DeleteUserRequestBody
      * @var string
      */
     private string $password;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $password
@@ -190,30 +184,5 @@ class DeleteUserRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/users/self';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateMailAddressQuotaV2DeprecatedRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -32,10 +30,6 @@ class UpdateMailAddressQuotaV2DeprecatedRequestBody
      * @var int|float
      */
     private int|float $quotaInBytes;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param int|float $quotaInBytes
@@ -132,31 +126,5 @@ class UpdateMailAddressQuotaV2DeprecatedRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $mailAddressId = urlencode($mapped['mailAddressId']);
-        return '/v2/mail-addresses/' . $mailAddressId . '/quota';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

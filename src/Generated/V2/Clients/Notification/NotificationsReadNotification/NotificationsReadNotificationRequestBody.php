@@ -10,8 +10,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus;
 
 class NotificationsReadNotificationRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -33,10 +31,6 @@ class NotificationsReadNotificationRequestBody
      * @var NotificationStatus
      */
     private NotificationStatus $status;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param NotificationStatus $status
@@ -127,31 +121,5 @@ class NotificationsReadNotificationRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $notificationId = urlencode($mapped['notificationId']);
-        return '/v2/notifications/' . $notificationId . '/status';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

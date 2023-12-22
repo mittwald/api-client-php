@@ -6,12 +6,10 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForA
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency;
 use Mittwald\ApiClient\Generated\V2\Schemas\App\UserInput;
-use Psr\Http\Message\ResponseInterface;
 
-class GetMissingDependenciesForAppinstallationOKResponseBody implements ResponseContainer
+class GetMissingDependenciesForAppinstallationOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -45,8 +43,6 @@ class GetMissingDependenciesForAppinstallationOKResponseBody implements Response
      * @var UserInput[]|null
      */
     private ?array $missingUserInputs = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -192,18 +188,5 @@ class GetMissingDependenciesForAppinstallationOKResponseBody implements Response
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

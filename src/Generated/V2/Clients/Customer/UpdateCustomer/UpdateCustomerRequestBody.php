@@ -10,8 +10,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Customer\Contact;
 
 class UpdateCustomerRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -66,10 +64,6 @@ class UpdateCustomerRequestBody
      * @var string|null
      */
     private ?string $vatId = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $customerId
@@ -324,31 +318,5 @@ class UpdateCustomerRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $customerId = urlencode($mapped['customerId']);
-        return '/v2/customers/' . $customerId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

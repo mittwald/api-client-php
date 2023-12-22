@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateMailAddressSpamProtectionV2DeprecatedRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -56,10 +54,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBody
      * @var UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
      */
     private UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection $spamProtection;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection $spamProtection
@@ -151,31 +145,5 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBody
     public function __clone()
     {
         $this->spamProtection = clone $this->spamProtection;
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $mailAddressId = urlencode($mapped['mailAddressId']);
-        return '/v2/mail-addresses/' . $mailAddressId . '/spam-protection';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

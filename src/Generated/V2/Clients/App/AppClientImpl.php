@@ -116,12 +116,8 @@ class AppClientImpl implements AppClient
      */
     public function executeAction(ExecuteActionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(ExecuteActionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(ExecuteActionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -142,11 +138,8 @@ class AppClientImpl implements AppClient
      */
     public function getApp(GetAppRequest $request): GetAppOKResponse
     {
-        $httpRequest = new Request(GetAppRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetAppRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetAppOKResponse::fromResponse($httpResponse);
         }
@@ -167,11 +160,8 @@ class AppClientImpl implements AppClient
      */
     public function getAppinstallation(GetAppinstallationRequest $request): GetAppinstallationOKResponse
     {
-        $httpRequest = new Request(GetAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetAppinstallationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetAppinstallationOKResponse::fromResponse($httpResponse);
         }
@@ -192,11 +182,8 @@ class AppClientImpl implements AppClient
      */
     public function getAppversion(GetAppversionRequest $request): GetAppversionOKResponse
     {
-        $httpRequest = new Request(GetAppversionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetAppversionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetAppversionOKResponse::fromResponse($httpResponse);
         }
@@ -217,11 +204,8 @@ class AppClientImpl implements AppClient
      */
     public function getMissingDependenciesForAppinstallation(GetMissingDependenciesForAppinstallationRequest $request): GetMissingDependenciesForAppinstallationOKResponse
     {
-        $httpRequest = new Request(GetMissingDependenciesForAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetMissingDependenciesForAppinstallationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetMissingDependenciesForAppinstallationOKResponse::fromResponse($httpResponse);
         }
@@ -242,11 +226,8 @@ class AppClientImpl implements AppClient
      */
     public function getSystemsoftware(GetSystemsoftwareRequest $request): GetSystemsoftwareOKResponse
     {
-        $httpRequest = new Request(GetSystemsoftwareRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSystemsoftwareRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSystemsoftwareOKResponse::fromResponse($httpResponse);
         }
@@ -267,11 +248,8 @@ class AppClientImpl implements AppClient
      */
     public function getSystemsoftwareversion(GetSystemsoftwareversionRequest $request): GetSystemsoftwareversionOKResponse
     {
-        $httpRequest = new Request(GetSystemsoftwareversionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSystemsoftwareversionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSystemsoftwareversionOKResponse::fromResponse($httpResponse);
         }
@@ -292,12 +270,8 @@ class AppClientImpl implements AppClient
      */
     public function linkDatabase(LinkDatabaseRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(LinkDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(LinkDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -318,11 +292,8 @@ class AppClientImpl implements AppClient
      */
     public function listAppinstallations(ListAppinstallationsRequest $request): ListAppinstallationsOKResponse
     {
-        $httpRequest = new Request(ListAppinstallationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListAppinstallationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListAppinstallationsOKResponse::fromResponse($httpResponse);
         }
@@ -342,11 +313,8 @@ class AppClientImpl implements AppClient
      */
     public function listApps(ListAppsRequest $request): ListAppsOKResponse
     {
-        $httpRequest = new Request(ListAppsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListAppsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListAppsOKResponse::fromResponse($httpResponse);
         }
@@ -366,11 +334,8 @@ class AppClientImpl implements AppClient
      */
     public function listAppversions(ListAppversionsRequest $request): ListAppversionsOKResponse
     {
-        $httpRequest = new Request(ListAppversionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListAppversionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListAppversionsOKResponse::fromResponse($httpResponse);
         }
@@ -390,11 +355,8 @@ class AppClientImpl implements AppClient
      */
     public function listSystemsoftwares(ListSystemsoftwaresRequest $request): ListSystemsoftwaresOKResponse
     {
-        $httpRequest = new Request(ListSystemsoftwaresRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListSystemsoftwaresRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListSystemsoftwaresOKResponse::fromResponse($httpResponse);
         }
@@ -414,11 +376,8 @@ class AppClientImpl implements AppClient
      */
     public function listSystemsoftwareversions(ListSystemsoftwareversionsRequest $request): ListSystemsoftwareversionsOKResponse
     {
-        $httpRequest = new Request(ListSystemsoftwareversionsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListSystemsoftwareversionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListSystemsoftwareversionsOKResponse::fromResponse($httpResponse);
         }
@@ -438,11 +397,8 @@ class AppClientImpl implements AppClient
      */
     public function listUpdateCandidatesForAppversion(ListUpdateCandidatesForAppversionRequest $request): ListUpdateCandidatesForAppversionOKResponse
     {
-        $httpRequest = new Request(ListUpdateCandidatesForAppversionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListUpdateCandidatesForAppversionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListUpdateCandidatesForAppversionOKResponse::fromResponse($httpResponse);
         }
@@ -462,12 +418,8 @@ class AppClientImpl implements AppClient
      */
     public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(PatchAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(PatchAppinstallationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -488,12 +440,8 @@ class AppClientImpl implements AppClient
      */
     public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse
     {
-        $httpRequest = new Request(RequestAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(RequestAppinstallationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return RequestAppinstallationCreatedResponse::fromResponse($httpResponse);
         }
@@ -514,12 +462,8 @@ class AppClientImpl implements AppClient
      */
     public function requestAppinstallationCopy(RequestAppinstallationCopyRequest $request): RequestAppinstallationCopyCreatedResponse
     {
-        $httpRequest = new Request(RequestAppinstallationCopyRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(RequestAppinstallationCopyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return RequestAppinstallationCopyCreatedResponse::fromResponse($httpResponse);
         }
@@ -540,11 +484,8 @@ class AppClientImpl implements AppClient
      */
     public function retrieveStatus(RetrieveStatusRequest $request): RetrieveStatusOKResponse
     {
-        $httpRequest = new Request(RetrieveStatusRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(RetrieveStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return RetrieveStatusOKResponse::fromResponse($httpResponse);
         }
@@ -565,12 +506,8 @@ class AppClientImpl implements AppClient
      */
     public function setDatabaseUsers(SetDatabaseUsersRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(SetDatabaseUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(SetDatabaseUsersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -591,11 +528,8 @@ class AppClientImpl implements AppClient
      */
     public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UninstallAppinstallationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(UninstallAppinstallationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -616,11 +550,8 @@ class AppClientImpl implements AppClient
      */
     public function unlinkDatabase(UnlinkDatabaseRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UnlinkDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(UnlinkDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -642,12 +573,8 @@ class AppClientImpl implements AppClient
      */
     public function deprecatedAppLinkDatabase(DeprecatedAppLinkDatabaseRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeprecatedAppLinkDatabaseRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(DeprecatedAppLinkDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }

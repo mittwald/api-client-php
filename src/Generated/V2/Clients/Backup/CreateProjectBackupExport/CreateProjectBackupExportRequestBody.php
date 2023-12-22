@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class CreateProjectBackupExportRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -52,10 +50,6 @@ class CreateProjectBackupExportRequestBody
      * @var string|null
      */
     private ?string $password = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param CreateProjectBackupExportRequestBodyFormat $format
@@ -190,31 +184,5 @@ class CreateProjectBackupExportRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectBackupId = urlencode($mapped['projectBackupId']);
-        return '/v2/project-backups/' . $projectBackupId . '/export';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

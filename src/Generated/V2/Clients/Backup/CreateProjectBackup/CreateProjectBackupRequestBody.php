@@ -10,8 +10,6 @@ use JsonSchema\Validator;
 
 class CreateProjectBackupRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -49,10 +47,6 @@ class CreateProjectBackupRequestBody
      * @var DateTime
      */
     private DateTime $expirationTime;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param DateTime $expirationTime
@@ -188,31 +182,5 @@ class CreateProjectBackupRequestBody
     public function __clone()
     {
         $this->expirationTime = clone $this->expirationTime;
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/backups';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

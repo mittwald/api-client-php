@@ -7,12 +7,10 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects;
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus;
-use Psr\Http\Message\ResponseInterface;
 
-class ListProjectsOKResponseBodyItem implements ResponseContainer
+class ListProjectsOKResponseBodyItem
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -152,8 +150,6 @@ class ListProjectsOKResponseBodyItem implements ResponseContainer
      * @var string
      */
     private string $shortId;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param DateTime $createdAt
@@ -647,18 +643,5 @@ class ListProjectsOKResponseBodyItem implements ResponseContainer
     {
         $this->createdAt = clone $this->createdAt;
         $this->customerMeta = clone $this->customerMeta;
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

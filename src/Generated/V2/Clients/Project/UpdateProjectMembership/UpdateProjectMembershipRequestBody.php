@@ -11,8 +11,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles;
 
 class UpdateProjectMembershipRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -46,10 +44,6 @@ class UpdateProjectMembershipRequestBody
      * @var ProjectRoles
      */
     private ProjectRoles $role;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param ProjectRoles $role
@@ -181,31 +175,5 @@ class UpdateProjectMembershipRequestBody
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectMembershipId = urlencode($mapped['projectMembershipId']);
-        return '/v2/project-memberships/' . $projectMembershipId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

@@ -11,8 +11,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Membership\ProjectRoles;
 
 class CreateProjectInviteRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -70,10 +68,6 @@ class CreateProjectInviteRequestBody
      * @var ProjectRoles
      */
     private ProjectRoles $role;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $mailAddress
@@ -280,31 +274,5 @@ class CreateProjectInviteRequestBody
         if (isset($this->membershipExpiresAt)) {
             $this->membershipExpiresAt = clone $this->membershipExpiresAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/invites';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

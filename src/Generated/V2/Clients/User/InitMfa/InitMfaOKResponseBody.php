@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class InitMfaOKResponseBody implements ResponseContainer
+class InitMfaOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -54,8 +52,6 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * @var string
      */
     private string $url;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $barcode
@@ -182,18 +178,5 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

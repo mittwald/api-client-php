@@ -12,8 +12,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder;
 
 class OrderCreateOrderRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -55,10 +53,6 @@ class OrderCreateOrderRequestBody
      * @var OrderCreateOrderRequestBodyOrderType|null
      */
     private ?OrderCreateOrderRequestBodyOrderType $orderType = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -215,30 +209,5 @@ class OrderCreateOrderRequestBody
                 ($this->orderData) instanceof ProjectHostingOrder, ($this->orderData) instanceof ServerOrder, ($this->orderData) instanceof DomainOrder => $this->orderData,
             };
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/orders';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHan
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DeclareProcessChangeHandlesV2DeprecatedOKResponseBody implements ResponseContainer
+class DeclareProcessChangeHandlesV2DeprecatedOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -37,8 +35,6 @@ class DeclareProcessChangeHandlesV2DeprecatedOKResponseBody implements ResponseC
      * @var string|null
      */
     private ?string $transactionId = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -195,18 +191,5 @@ class DeclareProcessChangeHandlesV2DeprecatedOKResponseBody implements ResponseC
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

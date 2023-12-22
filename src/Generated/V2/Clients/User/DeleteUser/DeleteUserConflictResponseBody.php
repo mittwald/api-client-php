@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DeleteUserConflictResponseBody implements ResponseContainer
+class DeleteUserConflictResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -63,8 +61,6 @@ class DeleteUserConflictResponseBody implements ResponseContainer
      * @var DeleteUserConflictResponseBodyName
      */
     private DeleteUserConflictResponseBodyName $name;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $message
@@ -226,18 +222,5 @@ class DeleteUserConflictResponseBody implements ResponseContainer
         if (isset($this->info)) {
             $this->info = clone $this->info;
         }
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

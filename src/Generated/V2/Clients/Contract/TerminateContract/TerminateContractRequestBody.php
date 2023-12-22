@@ -10,8 +10,6 @@ use JsonSchema\Validator;
 
 class TerminateContractRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -45,10 +43,6 @@ class TerminateContractRequestBody
      * @var DateTime|null
      */
     private ?DateTime $terminationTargetDate = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -202,31 +196,5 @@ class TerminateContractRequestBody
         if (isset($this->terminationTargetDate)) {
             $this->terminationTargetDate = clone $this->terminationTargetDate;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $contractId = urlencode($mapped['contractId']);
-        return '/v2/contracts/' . $contractId . '/termination';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

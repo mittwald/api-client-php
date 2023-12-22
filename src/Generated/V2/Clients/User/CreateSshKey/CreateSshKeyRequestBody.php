@@ -10,8 +10,6 @@ use JsonSchema\Validator;
 
 class CreateSshKeyRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -43,10 +41,6 @@ class CreateSshKeyRequestBody
      * @var string
      */
     private string $publicKey;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $publicKey
@@ -184,30 +178,5 @@ class CreateSshKeyRequestBody
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/users/self/ssh-keys';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

@@ -74,12 +74,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function createSftpUser(CreateSftpUserRequest $request): CreateSftpUserCreatedResponse
     {
-        $httpRequest = new Request(CreateSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateSftpUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateSftpUserCreatedResponse::fromResponse($httpResponse);
         }
@@ -100,11 +96,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function deleteSftpUser(DeleteSftpUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteSftpUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -124,11 +117,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function getSftpUser(GetSftpUserRequest $request): GetSftpUserOKResponse
     {
-        $httpRequest = new Request(GetSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSftpUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSftpUserOKResponse::fromResponse($httpResponse);
         }
@@ -149,11 +139,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse
     {
-        $httpRequest = new Request(ListSftpUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListSftpUsersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListSftpUsersOKResponse::fromResponse($httpResponse);
         }
@@ -174,12 +161,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function updateSftpUser(UpdateSftpUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateSftpUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateSftpUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -200,12 +183,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function createSshUser(CreateSshUserRequest $request): CreateSshUserCreatedResponse
     {
-        $httpRequest = new Request(CreateSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateSshUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateSshUserCreatedResponse::fromResponse($httpResponse);
         }
@@ -226,11 +205,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function deleteSshUser(DeleteSshUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteSshUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -250,11 +226,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function getSshUser(GetSshUserRequest $request): GetSshUserOKResponse
     {
-        $httpRequest = new Request(GetSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetSshUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetSshUserOKResponse::fromResponse($httpResponse);
         }
@@ -275,11 +248,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse
     {
-        $httpRequest = new Request(ListSshUsersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListSshUsersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListSshUsersOKResponse::fromResponse($httpResponse);
         }
@@ -300,12 +270,8 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      */
     public function updateSshUser(UpdateSshUserRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateSshUserRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateSshUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }

@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateMysqlUserPasswordRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -31,10 +29,6 @@ class UpdateMysqlUserPasswordRequestBody
      * @var string
      */
     private string $password;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $password
@@ -131,31 +125,5 @@ class UpdateMysqlUserPasswordRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $mysqlUserId = urlencode($mapped['mysqlUserId']);
-        return '/v2/mysql-users/' . $mysqlUserId . '/password';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

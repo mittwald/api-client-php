@@ -12,8 +12,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview;
 
 class OrderPreviewOrderRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -55,10 +53,6 @@ class OrderPreviewOrderRequestBody
      * @var OrderPreviewOrderRequestBodyOrderType|null
      */
     private ?OrderPreviewOrderRequestBodyOrderType $orderType = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -215,30 +209,5 @@ class OrderPreviewOrderRequestBody
                 ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview => $this->orderData,
             };
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/order-previews';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

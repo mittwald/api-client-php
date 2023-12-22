@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateCronjobAppIdRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -33,10 +31,6 @@ class UpdateCronjobAppIdRequestBody
      * @var string
      */
     private string $appId;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $appId
@@ -133,31 +127,5 @@ class UpdateCronjobAppIdRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId . '/app-id';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

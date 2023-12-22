@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DeprecatedUserServicePhoneNumberAddRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -33,10 +31,6 @@ class DeprecatedUserServicePhoneNumberAddRequestBody
      * @var string
      */
     private string $phoneNumber;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $phoneNumber
@@ -133,31 +127,5 @@ class DeprecatedUserServicePhoneNumberAddRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $userId = urlencode($mapped['userId']);
-        return '/v2/user/' . $userId . '/phone';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class CreateDeliveryboxRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -41,10 +39,6 @@ class CreateDeliveryboxRequestBody
      * @var string
      */
     private string $password;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $description
@@ -171,31 +165,5 @@ class CreateDeliveryboxRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/delivery-boxes';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

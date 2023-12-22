@@ -10,8 +10,6 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Domain\HandleField;
 
 class UpdateDomainContactRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -36,10 +34,6 @@ class UpdateDomainContactRequestBody
      * @var HandleField[]
      */
     private array $contact;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param HandleField[] $contact
@@ -130,32 +124,5 @@ class UpdateDomainContactRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $domainId = urlencode($mapped['domainId']);
-        $contact = urlencode($mapped['contact']);
-        return '/v2/domains/' . $domainId . '/contacts/' . $contact;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

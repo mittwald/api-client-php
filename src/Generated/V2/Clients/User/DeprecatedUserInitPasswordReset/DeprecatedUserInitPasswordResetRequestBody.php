@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DeprecatedUserInitPasswordResetRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -37,10 +35,6 @@ class DeprecatedUserInitPasswordResetRequestBody
      * @var string
      */
     private string $email;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $email
@@ -137,30 +131,5 @@ class DeprecatedUserInitPasswordResetRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/signup/password/reset';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

@@ -6,11 +6,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsRead
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Messaging\NotificationStatus;
-use Psr\Http\Message\ResponseInterface;
 
-class NotificationsReadNotificationOKResponseBody implements ResponseContainer
+class NotificationsReadNotificationOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -33,8 +31,6 @@ class NotificationsReadNotificationOKResponseBody implements ResponseContainer
      * @var NotificationStatus
      */
     private NotificationStatus $status;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param NotificationStatus $status
@@ -125,18 +121,5 @@ class NotificationsReadNotificationOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

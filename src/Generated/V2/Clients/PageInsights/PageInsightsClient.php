@@ -6,8 +6,12 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceAcceptedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest;
 
 /**
  * Client for Page Insights API
@@ -34,6 +38,16 @@ interface PageInsightsClient
      */
     public function pageinsightsGetPerformanceData(PageinsightsGetPerformanceDataRequest $request): PageinsightsGetPerformanceDataOKResponse;
     /**
+     * Get all data for a given strace.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-get-strace-data
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PageinsightsGetStraceData\PageinsightsGetStraceDataRequest $request An object representing the request for this operation
+     * @return PageinsightsGetStraceData\PageinsightsGetStraceDataOKResponse OK
+     */
+    public function pageinsightsGetStraceData(PageinsightsGetStraceDataRequest $request): PageinsightsGetStraceDataOKResponse;
+    /**
      * List websites (specified as domain and path) from a project where performance data is available.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-list-performance-data-for-project
@@ -43,4 +57,14 @@ interface PageInsightsClient
      * @return PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse OK
      */
     public function pageinsightsListPerformanceDataForProject(PageinsightsListPerformanceDataForProjectRequest $request): PageinsightsListPerformanceDataForProjectOKResponse;
+    /**
+     * Schedule a strace measurement for a single http request.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-schedule-strace
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest $request An object representing the request for this operation
+     * @return PageinsightsScheduleStrace\PageinsightsScheduleStraceAcceptedResponse Scheduled
+     */
+    public function pageinsightsScheduleStrace(PageinsightsScheduleStraceRequest $request): PageinsightsScheduleStraceAcceptedResponse;
 }

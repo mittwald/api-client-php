@@ -7,10 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt;
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class GetPasswordUpdatedAtOKResponseBody implements ResponseContainer
+class GetPasswordUpdatedAtOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -34,8 +32,6 @@ class GetPasswordUpdatedAtOKResponseBody implements ResponseContainer
      * @var DateTime
      */
     private DateTime $passwordUpdatedAt;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param DateTime $passwordUpdatedAt
@@ -127,18 +123,5 @@ class GetPasswordUpdatedAtOKResponseBody implements ResponseContainer
     public function __clone()
     {
         $this->passwordUpdatedAt = clone $this->passwordUpdatedAt;
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyComp
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class IsCustomerLegallyCompetentOKResponseBody implements ResponseContainer
+class IsCustomerLegallyCompetentOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -29,8 +27,6 @@ class IsCustomerLegallyCompetentOKResponseBody implements ResponseContainer
      * @var bool|null
      */
     private ?bool $isLegallyCompetent = null;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      *
@@ -142,18 +138,5 @@ class IsCustomerLegallyCompetentOKResponseBody implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

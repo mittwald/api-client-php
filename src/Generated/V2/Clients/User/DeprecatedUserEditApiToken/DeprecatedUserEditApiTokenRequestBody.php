@@ -10,8 +10,6 @@ use JsonSchema\Validator;
 
 class DeprecatedUserEditApiTokenRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -43,10 +41,6 @@ class DeprecatedUserEditApiTokenRequestBody
      * @var DateTime|null
      */
     private ?DateTime $expiresAt = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $description
@@ -184,31 +178,5 @@ class DeprecatedUserEditApiTokenRequestBody
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $apiTokenId = urlencode($mapped['apiTokenId']);
-        return '/v2/signup/token/api/' . $apiTokenId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

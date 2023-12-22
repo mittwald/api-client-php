@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateServerDescriptionRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -32,10 +30,6 @@ class UpdateServerDescriptionRequestBody
      * @var string
      */
     private string $description;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $description
@@ -132,31 +126,5 @@ class UpdateServerDescriptionRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $serverId = urlencode($mapped['serverId']);
-        return '/v2/servers/' . $serverId . '/description';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

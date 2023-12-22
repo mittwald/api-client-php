@@ -10,8 +10,6 @@ use JsonSchema\Validator;
 
 class UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -61,10 +59,6 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder
      * @var DateTime|null
      */
     private ?DateTime $startsAt = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param bool $active
@@ -274,31 +268,5 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder
         if (isset($this->startsAt)) {
             $this->startsAt = clone $this->startsAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $mailAddressId = urlencode($mapped['mailAddressId']);
-        return '/v2/mail-addresses/' . $mailAddressId . '/autoresponder';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

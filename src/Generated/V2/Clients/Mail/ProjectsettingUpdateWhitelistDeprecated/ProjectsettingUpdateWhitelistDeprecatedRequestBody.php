@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class ProjectsettingUpdateWhitelistDeprecatedRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -36,10 +34,6 @@ class ProjectsettingUpdateWhitelistDeprecatedRequestBody
      * @var string[]
      */
     private array $whitelist;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string[] $whitelist
@@ -136,31 +130,5 @@ class ProjectsettingUpdateWhitelistDeprecatedRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/mailsettings/whitelist';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

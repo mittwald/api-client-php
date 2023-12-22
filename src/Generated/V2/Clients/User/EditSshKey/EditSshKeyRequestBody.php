@@ -10,8 +10,6 @@ use JsonSchema\Validator;
 
 class EditSshKeyRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -43,10 +41,6 @@ class EditSshKeyRequestBody
      * @var DateTime|null
      */
     private ?DateTime $expiresAt = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $comment
@@ -184,31 +178,5 @@ class EditSshKeyRequestBody
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $sshKeyId = urlencode($mapped['sshKeyId']);
-        return '/v2/users/self/ssh-keys/' . $sshKeyId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

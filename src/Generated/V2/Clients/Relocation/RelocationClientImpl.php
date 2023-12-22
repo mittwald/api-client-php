@@ -47,12 +47,8 @@ class RelocationClientImpl implements RelocationClient
      */
     public function createLegacyTariffChange(CreateLegacyTariffChangeRequest $request): CreateLegacyTariffChangeCreatedResponse
     {
-        $httpRequest = new Request(CreateLegacyTariffChangeRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateLegacyTariffChangeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateLegacyTariffChangeCreatedResponse::fromResponse($httpResponse);
         }
@@ -75,12 +71,8 @@ class RelocationClientImpl implements RelocationClient
      */
     public function createRelocation(CreateRelocationRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(CreateRelocationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateRelocationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }

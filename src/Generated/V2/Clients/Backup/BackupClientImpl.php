@@ -93,12 +93,8 @@ class BackupClientImpl implements BackupClient
      */
     public function createProjectBackup(CreateProjectBackupRequest $request): CreateProjectBackupCreatedResponse
     {
-        $httpRequest = new Request(CreateProjectBackupRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateProjectBackupRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateProjectBackupCreatedResponse::fromResponse($httpResponse);
         }
@@ -120,12 +116,8 @@ class BackupClientImpl implements BackupClient
      */
     public function createProjectBackupExport(CreateProjectBackupExportRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(CreateProjectBackupExportRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateProjectBackupExportRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -148,12 +140,8 @@ class BackupClientImpl implements BackupClient
      */
     public function createProjectBackupSchedule(CreateProjectBackupScheduleRequest $request): CreateProjectBackupScheduleCreatedResponse
     {
-        $httpRequest = new Request(CreateProjectBackupScheduleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateProjectBackupScheduleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateProjectBackupScheduleCreatedResponse::fromResponse($httpResponse);
         }
@@ -175,11 +163,8 @@ class BackupClientImpl implements BackupClient
      */
     public function deleteProjectBackup(DeleteProjectBackupRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteProjectBackupRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectBackupRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -201,11 +186,8 @@ class BackupClientImpl implements BackupClient
      */
     public function deleteProjectBackupExport(DeleteProjectBackupExportRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteProjectBackupExportRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectBackupExportRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -227,11 +209,8 @@ class BackupClientImpl implements BackupClient
      */
     public function deleteProjectBackupSchedule(DeleteProjectBackupScheduleRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(DeleteProjectBackupScheduleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(DeleteProjectBackupScheduleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -253,11 +232,8 @@ class BackupClientImpl implements BackupClient
      */
     public function getProjectBackup(GetProjectBackupRequest $request): GetProjectBackupOKResponse
     {
-        $httpRequest = new Request(GetProjectBackupRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetProjectBackupRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetProjectBackupOKResponse::fromResponse($httpResponse);
         }
@@ -279,11 +255,8 @@ class BackupClientImpl implements BackupClient
      */
     public function getProjectBackupSchedule(GetProjectBackupScheduleRequest $request): GetProjectBackupScheduleOKResponse
     {
-        $httpRequest = new Request(GetProjectBackupScheduleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetProjectBackupScheduleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetProjectBackupScheduleOKResponse::fromResponse($httpResponse);
         }
@@ -305,11 +278,8 @@ class BackupClientImpl implements BackupClient
      */
     public function listProjectBackupSchedules(ListProjectBackupSchedulesRequest $request): ListProjectBackupSchedulesOKResponse
     {
-        $httpRequest = new Request(ListProjectBackupSchedulesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListProjectBackupSchedulesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListProjectBackupSchedulesOKResponse::fromResponse($httpResponse);
         }
@@ -329,11 +299,8 @@ class BackupClientImpl implements BackupClient
      */
     public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse
     {
-        $httpRequest = new Request(ListProjectBackupsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListProjectBackupsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListProjectBackupsOKResponse::fromResponse($httpResponse);
         }
@@ -353,12 +320,8 @@ class BackupClientImpl implements BackupClient
      */
     public function updateProjectBackupDescription(UpdateProjectBackupDescriptionRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateProjectBackupDescriptionRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateProjectBackupDescriptionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
@@ -381,12 +344,8 @@ class BackupClientImpl implements BackupClient
      */
     public function updateProjectBackupSchedule(UpdateProjectBackupScheduleRequest $request): EmptyResponse
     {
-        $httpRequest = new Request(UpdateProjectBackupScheduleRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateProjectBackupScheduleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }

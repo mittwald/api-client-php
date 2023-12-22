@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateProjectBackupScheduleRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -57,10 +55,6 @@ class UpdateProjectBackupScheduleRequestBody
      * @var string|null
      */
     private ?string $ttl = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -262,31 +256,5 @@ class UpdateProjectBackupScheduleRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $projectBackupScheduleId = urlencode($mapped['projectBackupScheduleId']);
-        return '/v2/project-backup-schedules/' . $projectBackupScheduleId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

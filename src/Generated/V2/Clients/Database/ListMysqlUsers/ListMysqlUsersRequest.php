@@ -135,25 +135,50 @@ class ListMysqlUsersRequest
     {
     }
 
-    public function getUrl(): string
+    /**
+     * Builds the URL for this request
+     *
+     * This method is used internally by the client to build the URL for this request.
+     * You should not need to call this method directly.
+     *
+     * @internal
+     * @return string The URL for this request
+     */
+    public function buildUrl(): string
     {
         $mapped = $this->toJson();
         $databaseId = urlencode($mapped['databaseId']);
         return '/v2/mysql-databases/' . $databaseId . '/users';
     }
 
-    public function getQuery(): array
+    /**
+     * Builds the request options for this request
+     *
+     * This method is used internally by the client to build the Guzzle request options
+     * for this request. You should not need to call this method directly.
+     *
+     * @internal
+     * @return array The Guzzle request options for this request
+     */
+    public function buildRequestOptions(): array
     {
         $mapped = $this->toJson();
         $query = [];
-        return $query;
+        return [
+            'query' => $query,
+            'headers' => $this->headers,
+        ];
     }
 
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
+    /**
+     * Adds a header to this request
+     *
+     * You can use this method to add custom HTTP headers to the request.
+     *
+     * @param string $name The name of the header to add
+     * @param string|array $value The value of the header to add
+     * @return self A clone of this request with the header added
+     */
     public function withHeader(string $name, string|array $value): self
     {
         $clone = clone $this;

@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateMysqlUserRequestBody
 {
-    public const method = 'put';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -60,10 +58,6 @@ class UpdateMysqlUserRequestBody
      * @var bool|null
      */
     private ?bool $externalAccess = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param UpdateMysqlUserRequestBodyAccessLevel $accessLevel
@@ -273,31 +267,5 @@ class UpdateMysqlUserRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $mysqlUserId = urlencode($mapped['mysqlUserId']);
-        return '/v2/mysql-users/' . $mysqlUserId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

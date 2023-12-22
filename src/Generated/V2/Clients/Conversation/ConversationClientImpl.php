@@ -104,12 +104,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function createConversation(CreateConversationRequest $request): CreateConversationCreatedResponse
     {
-        $httpRequest = new Request(CreateConversationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateConversationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateConversationCreatedResponse::fromResponse($httpResponse);
         }
@@ -130,12 +126,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function createMessage(CreateMessageRequest $request): CreateMessageCreatedResponse
     {
-        $httpRequest = new Request(CreateMessageRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(CreateMessageRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return CreateMessageCreatedResponse::fromResponse($httpResponse);
         }
@@ -158,11 +150,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function getCategory(GetCategoryRequest $request): GetCategoryOKResponse
     {
-        $httpRequest = new Request(GetCategoryRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetCategoryRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetCategoryOKResponse::fromResponse($httpResponse);
         }
@@ -186,11 +175,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function getConversation(GetConversationRequest $request): GetConversationOKResponse
     {
-        $httpRequest = new Request(GetConversationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetConversationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetConversationOKResponse::fromResponse($httpResponse);
         }
@@ -213,11 +199,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function getConversationMembers(GetConversationMembersRequest $request): GetConversationMembersOKResponse
     {
-        $httpRequest = new Request(GetConversationMembersRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(GetConversationMembersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetConversationMembersOKResponse::fromResponse($httpResponse);
         }
@@ -240,12 +223,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function getFileAccessToken(GetFileAccessTokenRequest $request): GetFileAccessTokenOKResponse
     {
-        $httpRequest = new Request(GetFileAccessTokenRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(GetFileAccessTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return GetFileAccessTokenOKResponse::fromResponse($httpResponse);
         }
@@ -267,11 +246,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function listCategories(ListCategoriesRequest $request): ListCategoriesOKResponse
     {
-        $httpRequest = new Request(ListCategoriesRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListCategoriesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListCategoriesOKResponse::fromResponse($httpResponse);
         }
@@ -291,11 +267,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function listConversations(ListConversationsRequest $request): ListConversationsOKResponse
     {
-        $httpRequest = new Request(ListConversationsRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListConversationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return ListConversationsOKResponse::fromResponse($httpResponse);
         }
@@ -315,11 +288,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function listMessagesByConversation(ListMessagesByConversationRequest $request): UntypedResponse
     {
-        $httpRequest = new Request(ListMessagesByConversationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-        ]);
+        $httpRequest = new Request(ListMessagesByConversationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UntypedResponse::fromResponse($httpResponse);
         }
@@ -343,12 +313,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function requestFileUpload(RequestFileUploadRequest $request): RequestFileUploadCreatedResponse
     {
-        $httpRequest = new Request(RequestFileUploadRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(RequestFileUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
             return RequestFileUploadCreatedResponse::fromResponse($httpResponse);
         }
@@ -369,12 +335,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function setConversationStatus(SetConversationStatusRequest $request): SetConversationStatusOKResponse
     {
-        $httpRequest = new Request(SetConversationStatusRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(SetConversationStatusRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return SetConversationStatusOKResponse::fromResponse($httpResponse);
         }
@@ -397,12 +359,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function updateConversation(UpdateConversationRequest $request): UpdateConversationOKResponse
     {
-        $httpRequest = new Request(UpdateConversationRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateConversationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateConversationOKResponse::fromResponse($httpResponse);
         }
@@ -425,12 +383,8 @@ class ConversationClientImpl implements ConversationClient
      */
     public function updateMessage(UpdateMessageRequest $request): UpdateMessageOKResponse
     {
-        $httpRequest = new Request(UpdateMessageRequest::method, $request->getUrl());
-        $httpResponse = $this->client->send($httpRequest, [
-            'query' => $request->getQuery(),
-            'headers' => $request->getHeaders(),
-            'json' => $request->getBody()->toJson(),
-        ]);
+        $httpRequest = new Request(UpdateMessageRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
             return UpdateMessageOKResponse::fromResponse($httpResponse);
         }

@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class DeprecatedUserServiceFeedbackCreateRequestBody
 {
-    public const method = 'post';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -64,10 +62,6 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
      * @var int|float
      */
     private int|float $vote;
-
-    private array $headers = [
-
-    ];
 
     /**
      * @param string $origin
@@ -268,30 +262,5 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        return '/v2/user/feedback';
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }

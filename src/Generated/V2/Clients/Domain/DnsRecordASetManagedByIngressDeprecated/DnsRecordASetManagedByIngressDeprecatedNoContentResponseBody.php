@@ -6,10 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByI
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody implements ResponseContainer
+class DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -33,8 +31,6 @@ class DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody implements Re
      * @var string
      */
     private string $ingressId;
-
-    private ResponseInterface|null $httpResponse = null;
 
     /**
      * @param string $ingressId
@@ -131,18 +127,5 @@ class DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody implements Re
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

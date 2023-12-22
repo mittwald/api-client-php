@@ -9,8 +9,6 @@ use JsonSchema\Validator;
 
 class UpdateMessageRequestBody
 {
-    public const method = 'patch';
-
     /**
      * Schema used to validate input for creating instances of this class
      *
@@ -28,10 +26,6 @@ class UpdateMessageRequestBody
      * @var string|null
      */
     private ?string $messageContent = null;
-
-    private array $headers = [
-
-    ];
 
     /**
      *
@@ -143,32 +137,5 @@ class UpdateMessageRequestBody
 
     public function __clone()
     {
-    }
-
-    public function getUrl(): string
-    {
-        $mapped = $this->toJson();
-        $conversationId = urlencode($mapped['conversationId']);
-        $messageId = urlencode($mapped['messageId']);
-        return '/v2/conversations/' . $conversationId . '/messages/' . $messageId;
-    }
-
-    public function getQuery(): array
-    {
-        $mapped = $this->toJson();
-        $query = [];
-        return $query;
-    }
-
-    public function getHeaders(): array
-    {
-        return $this->headers;
-    }
-
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
     }
 }
