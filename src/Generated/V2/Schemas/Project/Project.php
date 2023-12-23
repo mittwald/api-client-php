@@ -72,6 +72,7 @@ class Project
                 'type' => 'string',
             ],
             'isReady' => [
+                'deprecated' => true,
                 'description' => 'deprecated',
                 'type' => 'boolean',
             ],
@@ -80,7 +81,7 @@ class Project
                 'type' => 'string',
             ],
             'readiness' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectReadinessStatus',
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedProjectReadinessStatus',
             ],
             'serverId' => [
                 'format' => 'uuid',
@@ -108,6 +109,9 @@ class Project
                 'format' => 'hostname',
                 'type' => 'string',
             ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectStatus',
+            ],
         ],
         'required' => [
             'id',
@@ -119,6 +123,7 @@ class Project
             'createdAt',
             'isReady',
             'readiness',
+            'status',
         ],
         'type' => 'object',
     ];
@@ -186,9 +191,9 @@ class Project
     private ?string $projectHostingId = null;
 
     /**
-     * @var ProjectReadinessStatus
+     * @var DeprecatedProjectReadinessStatus
      */
-    private ProjectReadinessStatus $readiness;
+    private DeprecatedProjectReadinessStatus $readiness;
 
     /**
      * @var string|null
@@ -216,6 +221,11 @@ class Project
     private ?string $statisticsBaseDomain = null;
 
     /**
+     * @var ProjectStatus
+     */
+    private ProjectStatus $status;
+
+    /**
      * @param DateTime $createdAt
      * @param string $customerId
      * @param string $description
@@ -223,10 +233,11 @@ class Project
      * @param bool $enabled
      * @param string $id
      * @param bool $isReady
-     * @param ProjectReadinessStatus $readiness
+     * @param DeprecatedProjectReadinessStatus $readiness
      * @param string $shortId
+     * @param ProjectStatus $status
      */
-    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, ProjectReadinessStatus $readiness, string $shortId)
+    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status)
     {
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
@@ -237,6 +248,7 @@ class Project
         $this->isReady = $isReady;
         $this->readiness = $readiness;
         $this->shortId = $shortId;
+        $this->status = $status;
     }
 
     /**
@@ -336,9 +348,10 @@ class Project
     }
 
     /**
-     * @return ProjectReadinessStatus
+     * @return
+     * DeprecatedProjectReadinessStatus
      */
-    public function getReadiness(): ProjectReadinessStatus
+    public function getReadiness(): DeprecatedProjectReadinessStatus
     {
         return $this->readiness;
     }
@@ -382,6 +395,14 @@ class Project
     public function getStatisticsBaseDomain(): ?string
     {
         return $this->statisticsBaseDomain ?? null;
+    }
+
+    /**
+     * @return ProjectStatus
+     */
+    public function getStatus(): ProjectStatus
+    {
+        return $this->status;
     }
 
     /**
@@ -644,10 +665,10 @@ class Project
     }
 
     /**
-     * @param ProjectReadinessStatus $readiness
+     * @param DeprecatedProjectReadinessStatus $readiness
      * @return self
      */
-    public function withReadiness(ProjectReadinessStatus $readiness): self
+    public function withReadiness(DeprecatedProjectReadinessStatus $readiness): self
     {
         $clone = clone $this;
         $clone->readiness = $readiness;
@@ -784,6 +805,18 @@ class Project
     }
 
     /**
+     * @param ProjectStatus $status
+     * @return self
+     */
+    public function withStatus(ProjectStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -825,7 +858,7 @@ class Project
         if (isset($input->{'projectHostingId'})) {
             $projectHostingId = $input->{'projectHostingId'};
         }
-        $readiness = ProjectReadinessStatus::from($input->{'readiness'});
+        $readiness = DeprecatedProjectReadinessStatus::from($input->{'readiness'});
         $serverId = null;
         if (isset($input->{'serverId'})) {
             $serverId = $input->{'serverId'};
@@ -846,8 +879,9 @@ class Project
         if (isset($input->{'statisticsBaseDomain'})) {
             $statisticsBaseDomain = $input->{'statisticsBaseDomain'};
         }
+        $status = ProjectStatus::from($input->{'status'});
 
-        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId);
+        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status);
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
         $obj->disableReason = $disableReason;
@@ -906,6 +940,7 @@ class Project
         if (isset($this->statisticsBaseDomain)) {
             $output['statisticsBaseDomain'] = $this->statisticsBaseDomain;
         }
+        $output['status'] = $this->status->value;
 
         return $output;
     }

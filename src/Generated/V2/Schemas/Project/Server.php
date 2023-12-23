@@ -60,7 +60,7 @@ class Server
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.MachineType',
             ],
             'readiness' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectReadinessStatus',
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.ServerReadinessStatus',
             ],
             'shortId' => [
                 'example' => 's-4e7tz3',
@@ -137,9 +137,9 @@ class Server
     private MachineType $machineType;
 
     /**
-     * @var ProjectReadinessStatus
+     * @var ServerReadinessStatus
      */
-    private ProjectReadinessStatus $readiness;
+    private ServerReadinessStatus $readiness;
 
     /**
      * @var string
@@ -164,11 +164,11 @@ class Server
      * @param string $id
      * @param bool $isReady
      * @param MachineType $machineType
-     * @param ProjectReadinessStatus $readiness
+     * @param ServerReadinessStatus $readiness
      * @param string $shortId
      * @param string $storage
      */
-    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, ProjectReadinessStatus $readiness, string $shortId, string $storage)
+    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, ServerReadinessStatus $readiness, string $shortId, string $storage)
     {
         $this->clusterName = $clusterName;
         $this->createdAt = $createdAt;
@@ -256,9 +256,9 @@ class Server
     }
 
     /**
-     * @return ProjectReadinessStatus
+     * @return ServerReadinessStatus
      */
-    public function getReadiness(): ProjectReadinessStatus
+    public function getReadiness(): ServerReadinessStatus
     {
         return $this->readiness;
     }
@@ -454,10 +454,10 @@ class Server
     }
 
     /**
-     * @param ProjectReadinessStatus $readiness
+     * @param ServerReadinessStatus $readiness
      * @return self
      */
-    public function withReadiness(ProjectReadinessStatus $readiness): self
+    public function withReadiness(ServerReadinessStatus $readiness): self
     {
         $clone = clone $this;
         $clone->readiness = $readiness;
@@ -560,7 +560,7 @@ class Server
         }
         $isReady = (bool)($input->{'isReady'});
         $machineType = MachineType::buildFromInput($input->{'machineType'}, validate: $validate);
-        $readiness = ProjectReadinessStatus::from($input->{'readiness'});
+        $readiness = ServerReadinessStatus::from($input->{'readiness'});
         $shortId = $input->{'shortId'};
         $statisticsBaseDomain = null;
         if (isset($input->{'statisticsBaseDomain'})) {

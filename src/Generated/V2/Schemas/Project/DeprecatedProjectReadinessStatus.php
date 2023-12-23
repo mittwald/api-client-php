@@ -2,7 +2,7 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
-enum ProjectReadinessStatus: string
+enum DeprecatedProjectReadinessStatus: string
 {
     case creating = 'creating';
     case ready = 'ready';

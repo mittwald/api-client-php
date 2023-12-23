@@ -7,8 +7,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects;
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessStatus;
 use Mittwald\ApiClient\Generated\V2\Schemas\Project\DisableReason;
-use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectReadinessStatus;
+use Mittwald\ApiClient\Generated\V2\Schemas\Project\ProjectStatus;
 
 class ListProjectsOKResponseBodyItem
 {
@@ -53,6 +54,7 @@ class ListProjectsOKResponseBodyItem
                 'type' => 'string',
             ],
             'isReady' => [
+                'deprecated' => true,
                 'description' => 'deprecated',
                 'type' => 'boolean',
             ],
@@ -61,13 +63,16 @@ class ListProjectsOKResponseBodyItem
                 'type' => 'string',
             ],
             'readiness' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectReadinessStatus',
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedProjectReadinessStatus',
             ],
             'serverId' => [
                 'type' => 'string',
             ],
             'shortId' => [
                 'type' => 'string',
+            ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectStatus',
             ],
         ],
         'required' => [
@@ -80,6 +85,7 @@ class ListProjectsOKResponseBodyItem
             'createdAt',
             'isReady',
             'readiness',
+            'status',
         ],
         'type' => 'object',
     ];
@@ -137,9 +143,9 @@ class ListProjectsOKResponseBodyItem
     private ?string $projectHostingId = null;
 
     /**
-     * @var ProjectReadinessStatus
+     * @var DeprecatedProjectReadinessStatus
      */
-    private ProjectReadinessStatus $readiness;
+    private DeprecatedProjectReadinessStatus $readiness;
 
     /**
      * @var string|null
@@ -152,6 +158,11 @@ class ListProjectsOKResponseBodyItem
     private string $shortId;
 
     /**
+     * @var ProjectStatus
+     */
+    private ProjectStatus $status;
+
+    /**
      * @param DateTime $createdAt
      * @param string $customerId
      * @param ListProjectsOKResponseBodyItemCustomerMeta $customerMeta
@@ -159,10 +170,11 @@ class ListProjectsOKResponseBodyItem
      * @param bool $enabled
      * @param string $id
      * @param bool $isReady
-     * @param ProjectReadinessStatus $readiness
+     * @param DeprecatedProjectReadinessStatus $readiness
      * @param string $shortId
+     * @param ProjectStatus $status
      */
-    public function __construct(DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, ProjectReadinessStatus $readiness, string $shortId)
+    public function __construct(DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status)
     {
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
@@ -173,6 +185,7 @@ class ListProjectsOKResponseBodyItem
         $this->isReady = $isReady;
         $this->readiness = $readiness;
         $this->shortId = $shortId;
+        $this->status = $status;
     }
 
     /**
@@ -256,9 +269,10 @@ class ListProjectsOKResponseBodyItem
     }
 
     /**
-     * @return ProjectReadinessStatus
+     * @return
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessStatus
      */
-    public function getReadiness(): ProjectReadinessStatus
+    public function getReadiness(): DeprecatedProjectReadinessStatus
     {
         return $this->readiness;
     }
@@ -277,6 +291,14 @@ class ListProjectsOKResponseBodyItem
     public function getShortId(): string
     {
         return $this->shortId;
+    }
+
+    /**
+     * @return ProjectStatus
+     */
+    public function getStatus(): ProjectStatus
+    {
+        return $this->status;
     }
 
     /**
@@ -475,10 +497,10 @@ class ListProjectsOKResponseBodyItem
     }
 
     /**
-     * @param ProjectReadinessStatus $readiness
+     * @param DeprecatedProjectReadinessStatus $readiness
      * @return self
      */
-    public function withReadiness(ProjectReadinessStatus $readiness): self
+    public function withReadiness(DeprecatedProjectReadinessStatus $readiness): self
     {
         $clone = clone $this;
         $clone->readiness = $readiness;
@@ -534,6 +556,18 @@ class ListProjectsOKResponseBodyItem
     }
 
     /**
+     * @param ProjectStatus $status
+     * @return self
+     */
+    public function withStatus(ProjectStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -567,14 +601,15 @@ class ListProjectsOKResponseBodyItem
         if (isset($input->{'projectHostingId'})) {
             $projectHostingId = $input->{'projectHostingId'};
         }
-        $readiness = ProjectReadinessStatus::from($input->{'readiness'});
+        $readiness = DeprecatedProjectReadinessStatus::from($input->{'readiness'});
         $serverId = null;
         if (isset($input->{'serverId'})) {
             $serverId = $input->{'serverId'};
         }
         $shortId = $input->{'shortId'};
+        $status = ProjectStatus::from($input->{'status'});
 
-        $obj = new self($createdAt, $customerId, $customerMeta, $description, $enabled, $id, $isReady, $readiness, $shortId);
+        $obj = new self($createdAt, $customerId, $customerMeta, $description, $enabled, $id, $isReady, $readiness, $shortId, $status);
         $obj->disableReason = $disableReason;
         $obj->imageRefId = $imageRefId;
         $obj->projectHostingId = $projectHostingId;
@@ -611,6 +646,7 @@ class ListProjectsOKResponseBodyItem
             $output['serverId'] = $this->serverId;
         }
         $output['shortId'] = $this->shortId;
+        $output['status'] = $this->status->value;
 
         return $output;
     }

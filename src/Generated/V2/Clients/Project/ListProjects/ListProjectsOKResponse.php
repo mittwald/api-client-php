@@ -59,6 +59,7 @@ class ListProjectsOKResponse implements ResponseContainer
                             'type' => 'string',
                         ],
                         'isReady' => [
+                            'deprecated' => true,
                             'description' => 'deprecated',
                             'type' => 'boolean',
                         ],
@@ -67,13 +68,16 @@ class ListProjectsOKResponse implements ResponseContainer
                             'type' => 'string',
                         ],
                         'readiness' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectReadinessStatus',
+                            '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedProjectReadinessStatus',
                         ],
                         'serverId' => [
                             'type' => 'string',
                         ],
                         'shortId' => [
                             'type' => 'string',
+                        ],
+                        'status' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectStatus',
                         ],
                     ],
                     'required' => [
@@ -86,6 +90,7 @@ class ListProjectsOKResponse implements ResponseContainer
                         'createdAt',
                         'isReady',
                         'readiness',
+                        'status',
                     ],
                     'type' => 'object',
                 ],
