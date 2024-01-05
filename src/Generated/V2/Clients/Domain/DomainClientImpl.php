@@ -33,10 +33,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDo
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2BadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2DefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2NotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2Request;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedNotFoundResponse;
@@ -685,31 +681,6 @@ class DomainClientImpl implements DomainClient
             400 => CreateDomainAuthCodeBadRequestResponse::fromResponse($httpResponse),
             404 => CreateDomainAuthCodeNotFoundResponse::fromResponse($httpResponse),
             default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Create an auth code 2.
-     *
-     * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code-2
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateDomainAuthCode2\CreateDomainAuthCode2Request $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse
-    {
-        $httpRequest = new Request(CreateDomainAuthCode2Request::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CreateDomainAuthCode2BadRequestResponse::fromResponse($httpResponse),
-            404 => CreateDomainAuthCode2NotFoundResponse::fromResponse($httpResponse),
-            default => CreateDomainAuthCode2DefaultResponse::fromResponse($httpResponse),
         });
     }
 

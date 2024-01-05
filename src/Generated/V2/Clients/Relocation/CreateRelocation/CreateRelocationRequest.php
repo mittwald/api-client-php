@@ -130,11 +130,11 @@ class CreateRelocationRequest
                                     ],
                                     [
                                         'enum' => [
-                                            'spaceServer',
+                                            'Space-Server',
                                             'proSpace',
-                                            'agencyServer',
-                                            'cmsHosting',
-                                            'shopHosting',
+                                            'Agentur-Server',
+                                            'CMS-Hosting',
+                                            'Shop-Hosting',
                                         ],
                                         'type' => 'string',
                                     ],

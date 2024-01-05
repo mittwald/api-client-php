@@ -19,7 +19,7 @@ class PostPollStatusRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'userId' => [
                 'type' => 'string',
             ],
             'body' => [
@@ -44,7 +44,7 @@ class PostPollStatusRequest
             ],
         ],
         'required' => [
-            'id',
+            'userId',
             'body',
         ],
     ];
@@ -52,7 +52,7 @@ class PostPollStatusRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $userId;
 
     /**
      * @var PostPollStatusRequestBody
@@ -64,21 +64,21 @@ class PostPollStatusRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $userId
      * @param PostPollStatusRequestBody $body
      */
-    public function __construct(string $id, PostPollStatusRequestBody $body)
+    public function __construct(string $userId, PostPollStatusRequestBody $body)
     {
-        $this->id = $id;
+        $this->userId = $userId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getUserId(): string
     {
-        return $this->id;
+        return $this->userId;
     }
 
     /**
@@ -90,19 +90,19 @@ class PostPollStatusRequest
     }
 
     /**
-     * @param string $id
+     * @param string $userId
      * @return self
      */
-    public function withId(string $id): self
+    public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->userId = $userId;
 
         return $clone;
     }
@@ -134,10 +134,10 @@ class PostPollStatusRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $userId = $input->{'userId'};
         $body = PostPollStatusRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id, $body);
+        $obj = new self($userId, $body);
 
         return $obj;
     }
@@ -150,7 +150,7 @@ class PostPollStatusRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['userId'] = $this->userId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -197,8 +197,8 @@ class PostPollStatusRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/poll-settings/' . $id;
+        $userId = urlencode($mapped['userId']);
+        return '/v2/poll-settings/' . $userId;
     }
 
     /**

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Mittwald\ApiClient\Generated\V2\Schemas\Poll\UserPollSettings;
 use Psr\Http\Message\ResponseInterface;
 
-class CreateDomainAuthCode2DefaultResponse implements ResponseContainer
+class GetPollStatusOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -24,39 +24,39 @@ class CreateDomainAuthCode2DefaultResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                '$ref' => '#/components/schemas/de.mittwald.v1.poll.UserPollSettings',
             ],
         ],
     ];
 
     /**
-     * @var Error
+     * @var UserPollSettings
      */
-    private Error $body;
+    private UserPollSettings $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param Error $body
+     * @param UserPollSettings $body
      */
-    public function __construct(Error $body)
+    public function __construct(UserPollSettings $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return Error
+     * @return UserPollSettings
      */
-    public function getBody(): Error
+    public function getBody(): UserPollSettings
     {
         return $this->body;
     }
 
     /**
-     * @param Error $body
+     * @param UserPollSettings $body
      * @return self
      */
-    public function withBody(Error $body): self
+    public function withBody(UserPollSettings $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -69,17 +69,17 @@ class CreateDomainAuthCode2DefaultResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CreateDomainAuthCode2DefaultResponse Created instance
+     * @return GetPollStatusOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CreateDomainAuthCode2DefaultResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): GetPollStatusOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = UserPollSettings::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

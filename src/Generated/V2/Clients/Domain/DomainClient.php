@@ -15,7 +15,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2De
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode2\CreateDomainAuthCode2Request;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedRequest;
@@ -320,18 +319,6 @@ interface DomainClient
      * @return CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse Created
      */
     public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse;
-    /**
-     * Create an auth code 2.
-     *
-     * Start an auth code 2 process for a DENIC Domain. You will receive a letter from DENIC.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code-2
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateDomainAuthCode2\CreateDomainAuthCode2Request $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function createDomainAuthCode2(CreateDomainAuthCode2Request $request): EmptyResponse;
     /**
      * Change all nameservers of a Domain.
      *

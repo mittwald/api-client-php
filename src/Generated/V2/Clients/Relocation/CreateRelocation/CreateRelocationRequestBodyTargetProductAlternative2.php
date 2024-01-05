@@ -4,9 +4,9 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation;
 
 enum CreateRelocationRequestBodyTargetProductAlternative2: string
 {
-    case spaceServer = 'spaceServer';
+    case SpaceServer = 'Space-Server';
     case proSpace = 'proSpace';
-    case agencyServer = 'agencyServer';
-    case cmsHosting = 'cmsHosting';
-    case shopHosting = 'shopHosting';
+    case AgenturServer = 'Agentur-Server';
+    case CMSHosting = 'CMS-Hosting';
+    case ShopHosting = 'Shop-Hosting';
 }

@@ -19,55 +19,55 @@ class ListMysqlUsersRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'databaseId' => [
+            'mysqlDatabaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'databaseId',
+            'mysqlDatabaseId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $databaseId;
+    private string $mysqlDatabaseId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $databaseId
+     * @param string $mysqlDatabaseId
      */
-    public function __construct(string $databaseId)
+    public function __construct(string $mysqlDatabaseId)
     {
-        $this->databaseId = $databaseId;
+        $this->mysqlDatabaseId = $mysqlDatabaseId;
     }
 
     /**
      * @return string
      */
-    public function getDatabaseId(): string
+    public function getMysqlDatabaseId(): string
     {
-        return $this->databaseId;
+        return $this->mysqlDatabaseId;
     }
 
     /**
-     * @param string $databaseId
+     * @param string $mysqlDatabaseId
      * @return self
      */
-    public function withDatabaseId(string $databaseId): self
+    public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, static::$schema['properties']['databaseId']);
+        $validator->validate($mysqlDatabaseId, static::$schema['properties']['mysqlDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->databaseId = $databaseId;
+        $clone->mysqlDatabaseId = $mysqlDatabaseId;
 
         return $clone;
     }
@@ -87,9 +87,9 @@ class ListMysqlUsersRequest
             static::validateInput($input);
         }
 
-        $databaseId = $input->{'databaseId'};
+        $mysqlDatabaseId = $input->{'mysqlDatabaseId'};
 
-        $obj = new self($databaseId);
+        $obj = new self($mysqlDatabaseId);
 
         return $obj;
     }
@@ -102,7 +102,7 @@ class ListMysqlUsersRequest
     public function toJson(): array
     {
         $output = [];
-        $output['databaseId'] = $this->databaseId;
+        $output['mysqlDatabaseId'] = $this->mysqlDatabaseId;
 
         return $output;
     }
@@ -147,8 +147,8 @@ class ListMysqlUsersRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $databaseId = urlencode($mapped['databaseId']);
-        return '/v2/mysql-databases/' . $databaseId . '/users';
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/users';
     }
 
     /**

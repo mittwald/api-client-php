@@ -211,7 +211,7 @@ class VerifyPhoneNumberRequest
     {
         $mapped = $this->toJson();
         $userId = urlencode($mapped['userId']);
-        return '/v2/users/' . $userId . '/phone/verify';
+        return '/v2/users/' . $userId . '/actions/verify-phone';
     }
 
     /**

@@ -20,7 +20,7 @@ class CreateMysqlUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'databaseId' => [
+            'mysqlDatabaseId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -29,7 +29,7 @@ class CreateMysqlUserRequest
             ],
         ],
         'required' => [
-            'databaseId',
+            'mysqlDatabaseId',
             'body',
         ],
     ];
@@ -37,7 +37,7 @@ class CreateMysqlUserRequest
     /**
      * @var string
      */
-    private string $databaseId;
+    private string $mysqlDatabaseId;
 
     /**
      * @var CreateMySqlUser
@@ -49,21 +49,21 @@ class CreateMysqlUserRequest
     ];
 
     /**
-     * @param string $databaseId
+     * @param string $mysqlDatabaseId
      * @param CreateMySqlUser $body
      */
-    public function __construct(string $databaseId, CreateMySqlUser $body)
+    public function __construct(string $mysqlDatabaseId, CreateMySqlUser $body)
     {
-        $this->databaseId = $databaseId;
+        $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getDatabaseId(): string
+    public function getMysqlDatabaseId(): string
     {
-        return $this->databaseId;
+        return $this->mysqlDatabaseId;
     }
 
     /**
@@ -75,19 +75,19 @@ class CreateMysqlUserRequest
     }
 
     /**
-     * @param string $databaseId
+     * @param string $mysqlDatabaseId
      * @return self
      */
-    public function withDatabaseId(string $databaseId): self
+    public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, static::$schema['properties']['databaseId']);
+        $validator->validate($mysqlDatabaseId, static::$schema['properties']['mysqlDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->databaseId = $databaseId;
+        $clone->mysqlDatabaseId = $mysqlDatabaseId;
 
         return $clone;
     }
@@ -119,10 +119,10 @@ class CreateMysqlUserRequest
             static::validateInput($input);
         }
 
-        $databaseId = $input->{'databaseId'};
+        $mysqlDatabaseId = $input->{'mysqlDatabaseId'};
         $body = CreateMySqlUser::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($databaseId, $body);
+        $obj = new self($mysqlDatabaseId, $body);
 
         return $obj;
     }
@@ -135,7 +135,7 @@ class CreateMysqlUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['databaseId'] = $this->databaseId;
+        $output['mysqlDatabaseId'] = $this->mysqlDatabaseId;
         $output['body'] = $this->body->toJson();
 
         return $output;
@@ -181,8 +181,8 @@ class CreateMysqlUserRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $databaseId = urlencode($mapped['databaseId']);
-        return '/v2/mysql-databases/' . $databaseId . '/users';
+        $mysqlDatabaseId = urlencode($mapped['mysqlDatabaseId']);
+        return '/v2/mysql-databases/' . $mysqlDatabaseId . '/users';
     }
 
     /**

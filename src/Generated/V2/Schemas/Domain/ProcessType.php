@@ -11,7 +11,7 @@ enum ProcessType: string
     case TRANSIT = 'TRANSIT';
     case RESTORE = 'RESTORE';
     case UPDATE = 'UPDATE';
-    case TRANSFER_OUT = 'TRANSFER_OUT';
-    case OWNER_CHANGE = 'OWNER_CHANGE';
-    case DECLARE_REQUESTED = 'DECLARE_REQUESTED';
+    case TRANSFEROUT = 'TRANSFER_OUT';
+    case OWNERCHANGE = 'OWNER_CHANGE';
+    case DECLAREREQUESTED = 'DECLARE_REQUESTED';
 }

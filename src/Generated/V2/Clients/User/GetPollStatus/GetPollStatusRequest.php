@@ -19,54 +19,54 @@ class GetPollStatusRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'userId' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'id',
+            'userId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $id;
+    private string $userId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $id
+     * @param string $userId
      */
-    public function __construct(string $id)
+    public function __construct(string $userId)
     {
-        $this->id = $id;
+        $this->userId = $userId;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getUserId(): string
     {
-        return $this->id;
+        return $this->userId;
     }
 
     /**
-     * @param string $id
+     * @param string $userId
      * @return self
      */
-    public function withId(string $id): self
+    public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($userId, static::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->userId = $userId;
 
         return $clone;
     }
@@ -86,9 +86,9 @@ class GetPollStatusRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $userId = $input->{'userId'};
 
-        $obj = new self($id);
+        $obj = new self($userId);
 
         return $obj;
     }
@@ -101,7 +101,7 @@ class GetPollStatusRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['userId'] = $this->userId;
 
         return $output;
     }
@@ -146,8 +146,8 @@ class GetPollStatusRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/poll-settings/' . $id;
+        $userId = urlencode($mapped['userId']);
+        return '/v2/poll-settings/' . $userId;
     }
 
     /**

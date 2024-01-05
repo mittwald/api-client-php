@@ -8,5 +8,5 @@ enum ArticleTemplateType: string
     case base = 'base';
     case additional = 'additional';
     case modifier = 'modifier';
-    case setup_fee = 'setup_fee';
+    case setupfee = 'setup_fee';
 }

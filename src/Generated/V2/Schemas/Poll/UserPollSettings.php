@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Poll;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -27,15 +28,15 @@ class UserPollSettings
     private static array $schema = [
         'properties' => [
             'completedAt' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'dontShowUntil' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'ignoredAt' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'shouldShow' => [
@@ -63,19 +64,19 @@ class UserPollSettings
     ];
 
     /**
-     * @var string|null
+     * @var DateTime|null
      */
-    private ?string $completedAt = null;
+    private ?DateTime $completedAt = null;
 
     /**
-     * @var string|null
+     * @var DateTime|null
      */
-    private ?string $dontShowUntil = null;
+    private ?DateTime $dontShowUntil = null;
 
     /**
-     * @var string|null
+     * @var DateTime|null
      */
-    private ?string $ignoredAt = null;
+    private ?DateTime $ignoredAt = null;
 
     /**
      * @var bool
@@ -105,25 +106,25 @@ class UserPollSettings
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getCompletedAt(): ?string
+    public function getCompletedAt(): ?DateTime
     {
         return $this->completedAt ?? null;
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getDontShowUntil(): ?string
+    public function getDontShowUntil(): ?DateTime
     {
         return $this->dontShowUntil ?? null;
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getIgnoredAt(): ?string
+    public function getIgnoredAt(): ?DateTime
     {
         return $this->ignoredAt ?? null;
     }
@@ -153,17 +154,11 @@ class UserPollSettings
     }
 
     /**
-     * @param string $completedAt
+     * @param DateTime $completedAt
      * @return self
      */
-    public function withCompletedAt(string $completedAt): self
+    public function withCompletedAt(DateTime $completedAt): self
     {
-        $validator = new Validator();
-        $validator->validate($completedAt, static::$schema['properties']['completedAt']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->completedAt = $completedAt;
 
@@ -182,17 +177,11 @@ class UserPollSettings
     }
 
     /**
-     * @param string $dontShowUntil
+     * @param DateTime $dontShowUntil
      * @return self
      */
-    public function withDontShowUntil(string $dontShowUntil): self
+    public function withDontShowUntil(DateTime $dontShowUntil): self
     {
-        $validator = new Validator();
-        $validator->validate($dontShowUntil, static::$schema['properties']['dontShowUntil']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->dontShowUntil = $dontShowUntil;
 
@@ -211,17 +200,11 @@ class UserPollSettings
     }
 
     /**
-     * @param string $ignoredAt
+     * @param DateTime $ignoredAt
      * @return self
      */
-    public function withIgnoredAt(string $ignoredAt): self
+    public function withIgnoredAt(DateTime $ignoredAt): self
     {
-        $validator = new Validator();
-        $validator->validate($ignoredAt, static::$schema['properties']['ignoredAt']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->ignoredAt = $ignoredAt;
 
@@ -304,15 +287,15 @@ class UserPollSettings
 
         $completedAt = null;
         if (isset($input->{'completedAt'})) {
-            $completedAt = $input->{'completedAt'};
+            $completedAt = new DateTime($input->{'completedAt'});
         }
         $dontShowUntil = null;
         if (isset($input->{'dontShowUntil'})) {
-            $dontShowUntil = $input->{'dontShowUntil'};
+            $dontShowUntil = new DateTime($input->{'dontShowUntil'});
         }
         $ignoredAt = null;
         if (isset($input->{'ignoredAt'})) {
-            $ignoredAt = $input->{'ignoredAt'};
+            $ignoredAt = new DateTime($input->{'ignoredAt'});
         }
         $shouldShow = (bool)($input->{'shouldShow'});
         $status = UserPollSettingsStatus::from($input->{'status'});
@@ -334,13 +317,13 @@ class UserPollSettings
     {
         $output = [];
         if (isset($this->completedAt)) {
-            $output['completedAt'] = $this->completedAt;
+            $output['completedAt'] = ($this->completedAt)->format(DateTime::ATOM);
         }
         if (isset($this->dontShowUntil)) {
-            $output['dontShowUntil'] = $this->dontShowUntil;
+            $output['dontShowUntil'] = ($this->dontShowUntil)->format(DateTime::ATOM);
         }
         if (isset($this->ignoredAt)) {
-            $output['ignoredAt'] = $this->ignoredAt;
+            $output['ignoredAt'] = ($this->ignoredAt)->format(DateTime::ATOM);
         }
         $output['shouldShow'] = $this->shouldShow;
         $output['status'] = ($this->status)->value;
@@ -375,5 +358,14 @@ class UserPollSettings
 
     public function __clone()
     {
+        if (isset($this->completedAt)) {
+            $this->completedAt = clone $this->completedAt;
+        }
+        if (isset($this->dontShowUntil)) {
+            $this->dontShowUntil = clone $this->dontShowUntil;
+        }
+        if (isset($this->ignoredAt)) {
+            $this->ignoredAt = clone $this->ignoredAt;
+        }
     }
 }

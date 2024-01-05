@@ -6,7 +6,7 @@ enum ReadableArticleOrderable: string
 {
     case forbidden = 'forbidden';
     case internal = 'internal';
-    case beta_testing = 'beta_testing';
+    case betatesting = 'beta_testing';
     case full = 'full';
     case deprecated = 'deprecated';
 }

@@ -187,6 +187,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPers
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionNotFoundResponse;
@@ -233,6 +234,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
@@ -1007,7 +1009,7 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AddPhoneNumber\AddPhoneNumberRequest $request An object representing the request for this operation
-     * @return EmptyResponse Phone number was added successfully. Now, it can be verified via /v2/users/:userId/phone/verify.
+     * @return EmptyResponse Phone number was added successfully. Now, it can be verified via /v2/users/:userId/actions/verify-phone.
      */
     public function addPhoneNumber(AddPhoneNumberRequest $request): EmptyResponse
     {
@@ -1517,14 +1519,14 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetPollStatus\GetPollStatusRequest $request An object representing the request for this operation
-     * @return UntypedResponse
+     * @return GetPollStatus\GetPollStatusOKResponse
      */
-    public function getPollStatus(GetPollStatusRequest $request): UntypedResponse
+    public function getPollStatus(GetPollStatusRequest $request): GetPollStatusOKResponse
     {
         $httpRequest = new Request(GetPollStatusRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return UntypedResponse::fromResponse($httpResponse);
+            return GetPollStatusOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetPollStatusBadRequestResponse::fromResponse($httpResponse),
@@ -1758,14 +1760,14 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param PostPollStatus\PostPollStatusRequest $request An object representing the request for this operation
-     * @return UntypedResponse The updated poll settings.
+     * @return PostPollStatus\PostPollStatusOKResponse The updated poll settings.
      */
-    public function postPollStatus(PostPollStatusRequest $request): UntypedResponse
+    public function postPollStatus(PostPollStatusRequest $request): PostPollStatusOKResponse
     {
         $httpRequest = new Request(PostPollStatusRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return UntypedResponse::fromResponse($httpResponse);
+            return PostPollStatusOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PostPollStatusBadRequestResponse::fromResponse($httpResponse),

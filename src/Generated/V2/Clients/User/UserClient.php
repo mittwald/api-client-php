@@ -4,7 +4,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\User;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
-use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
@@ -77,6 +76,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswor
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionRequest;
@@ -100,6 +100,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterRequest;
@@ -473,7 +474,7 @@ interface UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AddPhoneNumber\AddPhoneNumberRequest $request An object representing the request for this operation
-     * @return EmptyResponse Phone number was added successfully. Now, it can be verified via /v2/users/:userId/phone/verify.
+     * @return EmptyResponse Phone number was added successfully. Now, it can be verified via /v2/users/:userId/actions/verify-phone.
      */
     public function addPhoneNumber(AddPhoneNumberRequest $request): EmptyResponse;
     /**
@@ -704,9 +705,9 @@ interface UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetPollStatus\GetPollStatusRequest $request An object representing the request for this operation
-     * @return UntypedResponse
+     * @return GetPollStatus\GetPollStatusOKResponse
      */
-    public function getPollStatus(GetPollStatusRequest $request): UntypedResponse;
+    public function getPollStatus(GetPollStatusRequest $request): GetPollStatusOKResponse;
     /**
      * Get a specific session.
      *
@@ -814,9 +815,9 @@ interface UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param PostPollStatus\PostPollStatusRequest $request An object representing the request for this operation
-     * @return UntypedResponse The updated poll settings.
+     * @return PostPollStatus\PostPollStatusOKResponse The updated poll settings.
      */
-    public function postPollStatus(PostPollStatusRequest $request): UntypedResponse;
+    public function postPollStatus(PostPollStatusRequest $request): PostPollStatusOKResponse;
     /**
      * Register with email and password.
      *
