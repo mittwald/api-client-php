@@ -10,6 +10,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResp
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordRequest;
@@ -18,6 +20,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackCreatedResponse;
@@ -96,6 +100,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsReques
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
@@ -498,6 +506,16 @@ interface UserClient
      */
     public function authenticateMfa(AuthenticateMfaRequest $request): AuthenticateMfaOKResponse;
     /**
+     * Authenticate an user with an access token retrieval key.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-with-access-token-retrieval-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
+     * @return AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyOKResponse Your authentication request was successful and you've got an access token.
+     */
+    public function authenticateWithAccessTokenRetrievalKey(AuthenticateWithAccessTokenRetrievalKeyRequest $request): AuthenticateWithAccessTokenRetrievalKeyOKResponse;
+    /**
      * Change your Email-Address.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-email
@@ -548,6 +566,16 @@ interface UserClient
      * @return EmptyResponse Password reset was successful.
      */
     public function confirmPasswordReset(ConfirmPasswordResetRequest $request): EmptyResponse;
+    /**
+     * Create an access token retrieval key to acquire an access token for your user.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-access-token-retrieval-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
+     * @return CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyCreatedResponse You got an access token retrieval key use it as a one time password to get an actual access token.
+     */
+    public function createAccessTokenRetrievalKey(CreateAccessTokenRetrievalKeyRequest $request): CreateAccessTokenRetrievalKeyCreatedResponse;
     /**
      * Store a new ApiToken.
      *
@@ -808,6 +836,37 @@ interface UserClient
      * @return EmptyResponse You've been logged out. The access token has been removed and invalidated.
      */
     public function logout(LogoutRequest $request): EmptyResponse;
+    /**
+     * Obtain authorization from the resource owner.
+     *
+     * The OAuth 2.0 client requests authorization from the resource owner according to
+     * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749). The
+     * authorization request is made indirectly via the authorization
+     * server as an intermediary.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-oauth-get-authorization
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param OauthGetAuthorization\OauthGetAuthorizationRequest $request An object representing the request for this operation
+     * @return OauthGetAuthorization\OauthGetAuthorizationDefaultResponse An unexpected Error that occurred while handling the request
+     */
+    public function oauthGetAuthorization(OauthGetAuthorizationRequest $request): OauthGetAuthorizationDefaultResponse;
+    /**
+     * Retrieve Access Token from Authorization Code.
+     *
+     * The OAuth 2.0 client retrieves an Access Token from an existing authorization code according to
+     * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749).
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-oauth-retrieve-access-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param OauthRetrieveAccessToken\OauthRetrieveAccessTokenRequest $request An object representing the request for this operation
+     * @return OauthRetrieveAccessToken\OauthRetrieveAccessTokenOKResponse The authorization server issues an access token as described in
+     * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-5.1).
+     */
+    public function oauthRetrieveAccessToken(OauthRetrieveAccessTokenRequest $request): OauthRetrieveAccessTokenOKResponse;
     /**
      * Store new or update poll settings.
      *
