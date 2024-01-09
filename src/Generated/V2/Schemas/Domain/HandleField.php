@@ -30,7 +30,7 @@ class HandleField
                 'type' => 'string',
             ],
             'value' => [
-                'pattern' => '^[0-9a-zA-ZäöüÄÖÜß &()+,.-]+$',
+                'pattern' => '^[0-9a-zA-ZÀ-ÖØ-öø-ÿ /&()+,.@_-]+$',
                 'type' => 'string',
             ],
         ],
