@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -31,7 +32,7 @@ class Cancellation
                 'type' => 'string',
             ],
             'cancelledAt' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'correctionNumber' => [
@@ -62,9 +63,9 @@ class Cancellation
     private string $cancellationId;
 
     /**
-     * @var string
+     * @var DateTime
      */
-    private string $cancelledAt;
+    private DateTime $cancelledAt;
 
     /**
      * @var string
@@ -83,11 +84,11 @@ class Cancellation
 
     /**
      * @param string $cancellationId
-     * @param string $cancelledAt
+     * @param DateTime $cancelledAt
      * @param string $correctionNumber
      * @param string $pdfId
      */
-    public function __construct(string $cancellationId, string $cancelledAt, string $correctionNumber, string $pdfId)
+    public function __construct(string $cancellationId, DateTime $cancelledAt, string $correctionNumber, string $pdfId)
     {
         $this->cancellationId = $cancellationId;
         $this->cancelledAt = $cancelledAt;
@@ -104,9 +105,9 @@ class Cancellation
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getCancelledAt(): string
+    public function getCancelledAt(): DateTime
     {
         return $this->cancelledAt;
     }
@@ -154,17 +155,11 @@ class Cancellation
     }
 
     /**
-     * @param string $cancelledAt
+     * @param DateTime $cancelledAt
      * @return self
      */
-    public function withCancelledAt(string $cancelledAt): self
+    public function withCancelledAt(DateTime $cancelledAt): self
     {
-        $validator = new Validator();
-        $validator->validate($cancelledAt, static::$schema['properties']['cancelledAt']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->cancelledAt = $cancelledAt;
 
@@ -252,7 +247,7 @@ class Cancellation
         }
 
         $cancellationId = $input->{'cancellationId'};
-        $cancelledAt = $input->{'cancelledAt'};
+        $cancelledAt = new DateTime($input->{'cancelledAt'});
         $correctionNumber = $input->{'correctionNumber'};
         $pdfId = $input->{'pdfId'};
         $reason = null;
@@ -274,7 +269,7 @@ class Cancellation
     {
         $output = [];
         $output['cancellationId'] = $this->cancellationId;
-        $output['cancelledAt'] = $this->cancelledAt;
+        $output['cancelledAt'] = ($this->cancelledAt)->format(DateTime::ATOM);
         $output['correctionNumber'] = $this->correctionNumber;
         $output['pdfId'] = $this->pdfId;
         if (isset($this->reason)) {
@@ -310,5 +305,6 @@ class Cancellation
 
     public function __clone()
     {
+        $this->cancelledAt = clone $this->cancelledAt;
     }
 }

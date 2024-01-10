@@ -79,6 +79,11 @@ class Cronjob
                 'example' => 'cron-bd26li',
                 'type' => 'string',
             ],
+            'timeout' => [
+                'maximum' => 86400,
+                'minimum' => 1,
+                'type' => 'number',
+            ],
             'updatedAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -94,6 +99,7 @@ class Cronjob
             'updatedAt',
             'description',
             'destination',
+            'timeout',
         ],
         'type' => 'object',
     ];
@@ -159,6 +165,11 @@ class Cronjob
     private string $shortId;
 
     /**
+     * @var int|float
+     */
+    private int|float $timeout;
+
+    /**
      * @var DateTime
      */
     private DateTime $updatedAt;
@@ -172,9 +183,10 @@ class Cronjob
      * @param string $id
      * @param string $interval
      * @param string $shortId
+     * @param int|float $timeout
      * @param DateTime $updatedAt
      */
-    public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, DateTime $updatedAt)
+    public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, int|float $timeout, DateTime $updatedAt)
     {
         $this->active = $active;
         $this->appId = $appId;
@@ -184,6 +196,7 @@ class Cronjob
         $this->id = $id;
         $this->interval = $interval;
         $this->shortId = $shortId;
+        $this->timeout = $timeout;
         $this->updatedAt = $updatedAt;
     }
 
@@ -282,6 +295,14 @@ class Cronjob
     public function getShortId(): string
     {
         return $this->shortId;
+    }
+
+    /**
+     * @return int|float
+     */
+    public function getTimeout(): int|float
+    {
+        return $this->timeout;
     }
 
     /**
@@ -529,6 +550,24 @@ class Cronjob
     }
 
     /**
+     * @param int|float $timeout
+     * @return self
+     */
+    public function withTimeout(int|float $timeout): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeout, static::$schema['properties']['timeout']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeout = $timeout;
+
+        return $clone;
+    }
+
+    /**
      * @param DateTime $updatedAt
      * @return self
      */
@@ -582,9 +621,10 @@ class Cronjob
             $projectId = $input->{'projectId'};
         }
         $shortId = $input->{'shortId'};
+        $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
-        $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $updatedAt);
+        $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $timeout, $updatedAt);
         $obj->email = $email;
         $obj->latestExecution = $latestExecution;
         $obj->nextExecutionTime = $nextExecutionTime;
@@ -622,6 +662,7 @@ class Cronjob
             $output['projectId'] = $this->projectId;
         }
         $output['shortId'] = $this->shortId;
+        $output['timeout'] = $this->timeout;
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;

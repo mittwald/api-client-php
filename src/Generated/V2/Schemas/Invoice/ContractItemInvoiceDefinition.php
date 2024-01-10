@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -34,7 +35,8 @@ class ContractItemInvoiceDefinition
                 'type' => 'boolean',
             ],
             'serviceDate' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.invoice.ServiceDate',
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'servicePeriod' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.invoice.DatePeriod',
@@ -63,9 +65,9 @@ class ContractItemInvoiceDefinition
     private ?bool $isDue = null;
 
     /**
-     * @var string|null
+     * @var DateTime|null
      */
-    private ?string $serviceDate = null;
+    private ?DateTime $serviceDate = null;
 
     /**
      * @var DatePeriod
@@ -106,9 +108,9 @@ class ContractItemInvoiceDefinition
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getServiceDate(): ?string
+    public function getServiceDate(): ?DateTime
     {
         return $this->serviceDate ?? null;
     }
@@ -177,10 +179,10 @@ class ContractItemInvoiceDefinition
     }
 
     /**
-     * @param string $serviceDate
+     * @param DateTime $serviceDate
      * @return self
      */
-    public function withServiceDate(string $serviceDate): self
+    public function withServiceDate(DateTime $serviceDate): self
     {
         $clone = clone $this;
         $clone->serviceDate = $serviceDate;
@@ -251,7 +253,7 @@ class ContractItemInvoiceDefinition
         }
         $serviceDate = null;
         if (isset($input->{'serviceDate'})) {
-            $serviceDate = $input->{'serviceDate'};
+            $serviceDate = new DateTime($input->{'serviceDate'});
         }
         $servicePeriod = DatePeriod::buildFromInput($input->{'servicePeriod'}, validate: $validate);
         $vatRate = (int)($input->{'vatRate'});
@@ -275,7 +277,7 @@ class ContractItemInvoiceDefinition
             $output['isDue'] = $this->isDue;
         }
         if (isset($this->serviceDate)) {
-            $output['serviceDate'] = $this->serviceDate;
+            $output['serviceDate'] = ($this->serviceDate)->format(DateTime::ATOM);
         }
         $output['servicePeriod'] = $this->servicePeriod->toJson();
         $output['vatRate'] = $this->vatRate;
@@ -309,5 +311,8 @@ class ContractItemInvoiceDefinition
 
     public function __clone()
     {
+        if (isset($this->serviceDate)) {
+            $this->serviceDate = clone $this->serviceDate;
+        }
     }
 }

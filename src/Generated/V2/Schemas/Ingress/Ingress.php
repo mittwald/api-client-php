@@ -69,6 +69,9 @@ class Ingress
             'isEnabled' => [
                 'type' => 'boolean',
             ],
+            'ownership' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.ingress.Ownership',
+            ],
             'paths' => [
                 'description' => 'A list of paths. The default path `/` is always present and cannot be removed.',
                 'items' => [
@@ -101,6 +104,7 @@ class Ingress
             'isEnabled',
             'ips',
             'dnsValidationErrors',
+            'ownership',
         ],
         'type' => 'object',
     ];
@@ -140,6 +144,11 @@ class Ingress
     private bool $isEnabled;
 
     /**
+     * @var Ownership
+     */
+    private Ownership $ownership;
+
+    /**
      * A list of paths. The default path `/` is always present and cannot be removed.
      *
      * @var Path[]
@@ -163,11 +172,12 @@ class Ingress
      * @param IngressIps $ips
      * @param bool $isDefault
      * @param bool $isEnabled
+     * @param Ownership $ownership
      * @param Path[] $paths
      * @param string $projectId
      * @param TlsAcme|TlsCertificate $tls
      */
-    public function __construct(array $dnsValidationErrors, string $hostname, string $id, IngressIps $ips, bool $isDefault, bool $isEnabled, array $paths, string $projectId, TlsAcme|TlsCertificate $tls)
+    public function __construct(array $dnsValidationErrors, string $hostname, string $id, IngressIps $ips, bool $isDefault, bool $isEnabled, Ownership $ownership, array $paths, string $projectId, TlsAcme|TlsCertificate $tls)
     {
         $this->dnsValidationErrors = $dnsValidationErrors;
         $this->hostname = $hostname;
@@ -175,6 +185,7 @@ class Ingress
         $this->ips = $ips;
         $this->isDefault = $isDefault;
         $this->isEnabled = $isEnabled;
+        $this->ownership = $ownership;
         $this->paths = $paths;
         $this->projectId = $projectId;
         $this->tls = $tls;
@@ -226,6 +237,14 @@ class Ingress
     public function getIsEnabled(): bool
     {
         return $this->isEnabled;
+    }
+
+    /**
+     * @return Ownership
+     */
+    public function getOwnership(): Ownership
+    {
+        return $this->ownership;
     }
 
     /**
@@ -356,6 +375,18 @@ class Ingress
     }
 
     /**
+     * @param Ownership $ownership
+     * @return self
+     */
+    public function withOwnership(Ownership $ownership): self
+    {
+        $clone = clone $this;
+        $clone->ownership = $ownership;
+
+        return $clone;
+    }
+
+    /**
      * @param Path[] $paths
      * @return self
      */
@@ -418,6 +449,7 @@ class Ingress
         $ips = IngressIps::buildFromInput($input->{'ips'}, validate: $validate);
         $isDefault = (bool)($input->{'isDefault'});
         $isEnabled = (bool)($input->{'isEnabled'});
+        $ownership = Ownership::buildFromInput($input->{'ownership'}, validate: $validate);
         $paths = array_map(fn (array|object $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
         $projectId = $input->{'projectId'};
         $tls = match (true) {
@@ -425,7 +457,7 @@ class Ingress
             TlsCertificate::validateInput($input->{'tls'}, true) => TlsCertificate::buildFromInput($input->{'tls'}, validate: $validate),
         };
 
-        $obj = new self($dnsValidationErrors, $hostname, $id, $ips, $isDefault, $isEnabled, $paths, $projectId, $tls);
+        $obj = new self($dnsValidationErrors, $hostname, $id, $ips, $isDefault, $isEnabled, $ownership, $paths, $projectId, $tls);
 
         return $obj;
     }
@@ -444,6 +476,7 @@ class Ingress
         $output['ips'] = ($this->ips)->toJson();
         $output['isDefault'] = $this->isDefault;
         $output['isEnabled'] = $this->isEnabled;
+        $output['ownership'] = $this->ownership->toJson();
         $output['paths'] = array_map(fn (Path $i): array => $i->toJson(), $this->paths);
         $output['projectId'] = $this->projectId;
         $output['tls'] = match (true) {

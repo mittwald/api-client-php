@@ -9,7 +9,6 @@ use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobCreatedResponse;
@@ -42,11 +41,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecution
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdRequest;
@@ -79,14 +76,14 @@ class CronjobClientImpl implements CronjobClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AbortExecution\AbortExecutionRequest $request An object representing the request for this operation
-     * @return AbortExecution\AbortExecutionOKResponse OK
+     * @return EmptyResponse NoContent
      */
-    public function abortExecution(AbortExecutionRequest $request): AbortExecutionOKResponse
+    public function abortExecution(AbortExecutionRequest $request): EmptyResponse
     {
         $httpRequest = new Request(AbortExecutionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return AbortExecutionOKResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => AbortExecutionNotFoundResponse::fromResponse($httpResponse),
@@ -101,7 +98,7 @@ class CronjobClientImpl implements CronjobClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateCronjob\CreateCronjobRequest $request An object representing the request for this operation
-     * @return CreateCronjob\CreateCronjobCreatedResponse OK
+     * @return CreateCronjob\CreateCronjobCreatedResponse Created
      */
     public function createCronjob(CreateCronjobRequest $request): CreateCronjobCreatedResponse
     {
@@ -124,7 +121,7 @@ class CronjobClientImpl implements CronjobClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateExecution\CreateExecutionRequest $request An object representing the request for this operation
-     * @return CreateExecution\CreateExecutionCreatedResponse OK
+     * @return CreateExecution\CreateExecutionCreatedResponse Created
      */
     public function createExecution(CreateExecutionRequest $request): CreateExecutionCreatedResponse
     {
@@ -147,17 +144,16 @@ class CronjobClientImpl implements CronjobClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteCronjob\DeleteCronjobRequest $request An object representing the request for this operation
-     * @return EmptyResponse The Cronjob has been deleted.
+     * @return EmptyResponse NoContent
      */
     public function deleteCronjob(DeleteCronjobRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteCronjobRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteCronjobBadRequestResponse::fromResponse($httpResponse),
             412 => DeleteCronjobPreconditionFailedResponse::fromResponse($httpResponse),
             default => DeleteCronjobDefaultResponse::fromResponse($httpResponse),
@@ -257,14 +253,14 @@ class CronjobClientImpl implements CronjobClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateCronjob\UpdateCronjobRequest $request An object representing the request for this operation
-     * @return UpdateCronjob\UpdateCronjobOKResponse OK
+     * @return EmptyResponse NoContent
      */
-    public function updateCronjob(UpdateCronjobRequest $request): UpdateCronjobOKResponse
+    public function updateCronjob(UpdateCronjobRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateCronjobRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return UpdateCronjobOKResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateCronjobBadRequestResponse::fromResponse($httpResponse),
@@ -281,17 +277,16 @@ class CronjobClientImpl implements CronjobClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateCronjobAppId\UpdateCronjobAppIdRequest $request An object representing the request for this operation
-     * @return UpdateCronjobAppId\UpdateCronjobAppIdCreatedResponse OK
+     * @return EmptyResponse NoContent
      */
-    public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): UpdateCronjobAppIdCreatedResponse
+    public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateCronjobAppIdRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return UpdateCronjobAppIdCreatedResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => UpdateCronjobAppIdBadRequestResponse::fromResponse($httpResponse),
             412 => UpdateCronjobAppIdPreconditionFailedResponse::fromResponse($httpResponse),
             default => UpdateCronjobAppIdDefaultResponse::fromResponse($httpResponse),

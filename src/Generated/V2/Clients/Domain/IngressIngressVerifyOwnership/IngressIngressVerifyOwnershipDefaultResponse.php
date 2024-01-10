@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class AbortExecutionOKResponseBody
+class IngressIngressVerifyOwnershipDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -16,13 +19,49 @@ class AbortExecutionOKResponseBody
      */
     private static array $schema = [
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
+        'properties' => [
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+            ],
+        ],
     ];
 
     /**
-     *
+     * @var Error
      */
-    public function __construct()
+    private Error $body;
+
+    private ResponseInterface|null $httpResponse = null;
+
+    /**
+     * @param Error $body
+     */
+    public function __construct(Error $body)
     {
+        $this->body = $body;
+    }
+
+    /**
+     * @return Error
+     */
+    public function getBody(): Error
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param Error $body
+     * @return self
+     */
+    public function withBody(Error $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
     }
 
     /**
@@ -30,19 +69,19 @@ class AbortExecutionOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AbortExecutionOKResponseBody Created instance
+     * @return IngressIngressVerifyOwnershipDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AbortExecutionOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): IngressIngressVerifyOwnershipDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-
-        $obj = new self();
+        $obj = new self($body);
 
         return $obj;
     }
@@ -55,7 +94,7 @@ class AbortExecutionOKResponseBody
     public function toJson(): array
     {
         $output = [];
-
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -86,5 +125,18 @@ class AbortExecutionOKResponseBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

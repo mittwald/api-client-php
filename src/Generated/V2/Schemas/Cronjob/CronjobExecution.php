@@ -75,6 +75,7 @@ class CronjobExecution
                     'Pending',
                     'Running',
                     'AbortedByUser',
+                    'TimedOut',
                 ],
                 'type' => 'string',
             ],
@@ -93,7 +94,6 @@ class CronjobExecution
         ],
         'required' => [
             'id',
-            'shortId',
             'status',
             'durationInMilliseconds',
             'successful',

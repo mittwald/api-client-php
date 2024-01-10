@@ -18,7 +18,6 @@ class CreateExecutionCreatedResponseBody
         'properties' => [
             'id' => [
                 'description' => 'execution-id',
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

@@ -55,6 +55,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressC
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressDeleteIngress\IngressDeleteIngressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
@@ -561,6 +563,16 @@ interface DomainClient
      */
     public function ingressGetIngress(IngressGetIngressRequest $request): IngressGetIngressOKResponse;
     /**
+     * Verifiy the ownership of an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-ingress-verify-ownership
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest $request An object representing the request for this operation
+     * @return IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipOKResponse OK
+     */
+    public function ingressIngressVerifyOwnership(IngressIngressVerifyOwnershipRequest $request): IngressIngressVerifyOwnershipOKResponse;
+    /**
      * List Ingresses.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
@@ -599,7 +611,7 @@ interface DomainClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse No Content
      */
     public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse;
     /**

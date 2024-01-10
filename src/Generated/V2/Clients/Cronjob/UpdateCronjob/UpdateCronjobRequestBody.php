@@ -43,6 +43,11 @@ class UpdateCronjobRequestBody
                 'example' => '*/5 * * * *',
                 'type' => 'string',
             ],
+            'timeout' => [
+                'maximum' => 86400,
+                'minimum' => 1,
+                'type' => 'number',
+            ],
         ],
         'type' => 'object',
     ];
@@ -71,6 +76,11 @@ class UpdateCronjobRequestBody
      * @var string|null
      */
     private ?string $interval = null;
+
+    /**
+     * @var int|float|null
+     */
+    private int|float|null $timeout = null;
 
     /**
      *
@@ -118,6 +128,14 @@ class UpdateCronjobRequestBody
     public function getInterval(): ?string
     {
         return $this->interval ?? null;
+    }
+
+    /**
+     * @return int|float|null
+     */
+    public function getTimeout(): int|float|null
+    {
+        return $this->timeout;
     }
 
     /**
@@ -260,6 +278,35 @@ class UpdateCronjobRequestBody
     }
 
     /**
+     * @param int|float $timeout
+     * @return self
+     */
+    public function withTimeout(int|float $timeout): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeout, static::$schema['properties']['timeout']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeout = $timeout;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutTimeout(): self
+    {
+        $clone = clone $this;
+        unset($clone->timeout);
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -297,6 +344,10 @@ class UpdateCronjobRequestBody
         if (isset($input->{'interval'})) {
             $interval = $input->{'interval'};
         }
+        $timeout = null;
+        if (isset($input->{'timeout'})) {
+            $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+        }
 
         $obj = new self();
         $obj->active = $active;
@@ -304,6 +355,7 @@ class UpdateCronjobRequestBody
         $obj->destination = $destination;
         $obj->email = $email;
         $obj->interval = $interval;
+        $obj->timeout = $timeout;
         return $obj;
     }
 
@@ -331,6 +383,9 @@ class UpdateCronjobRequestBody
         }
         if (isset($this->interval)) {
             $output['interval'] = $this->interval;
+        }
+        if (isset($this->timeout)) {
+            $output['timeout'] = $this->timeout;
         }
 
         return $output;

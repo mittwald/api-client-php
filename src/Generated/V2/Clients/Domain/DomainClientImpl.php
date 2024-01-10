@@ -128,6 +128,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetI
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressGetIngress\IngressGetIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesOKResponse;
@@ -1199,6 +1204,29 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * Verifiy the ownership of an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-ingress-verify-ownership
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest $request An object representing the request for this operation
+     * @return IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipOKResponse OK
+     */
+    public function ingressIngressVerifyOwnership(IngressIngressVerifyOwnershipRequest $request): IngressIngressVerifyOwnershipOKResponse
+    {
+        $httpRequest = new Request(IngressIngressVerifyOwnershipRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return IngressIngressVerifyOwnershipOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => IngressIngressVerifyOwnershipBadRequestResponse::fromResponse($httpResponse),
+            404 => IngressIngressVerifyOwnershipNotFoundResponse::fromResponse($httpResponse),
+            default => IngressIngressVerifyOwnershipDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List Ingresses.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
@@ -1273,13 +1301,13 @@ class DomainClientImpl implements DomainClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse No Content
      */
     public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse
     {
         $httpRequest = new Request(IngressRequestIngressAcmeCertificateIssuanceRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {

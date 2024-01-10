@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -38,10 +39,6 @@ class InvoiceItem
                 'example' => 'Space-Server: "Mein Space-Server"',
                 'type' => 'string',
             ],
-            'id' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
             'itemCancelledOrCorrectedBy' => [
                 'items' => [
                     'properties' => [
@@ -57,6 +54,10 @@ class InvoiceItem
                     'type' => 'object',
                 ],
                 'type' => 'array',
+            ],
+            'itemId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
             'price' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.invoice.Price',
@@ -79,7 +80,8 @@ class InvoiceItem
                 'type' => 'object',
             ],
             'serviceDate' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.invoice.ServiceDate',
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'servicePeriod' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.invoice.DatePeriod',
@@ -90,7 +92,7 @@ class InvoiceItem
             ],
         ],
         'required' => [
-            'id',
+            'itemId',
             'price',
             'vatRate',
             'contractItemId',
@@ -115,14 +117,14 @@ class InvoiceItem
     private string $description;
 
     /**
-     * @var string
-     */
-    private string $id;
-
-    /**
      * @var InvoiceItemItemCancelledOrCorrectedByItem[]|null
      */
     private ?array $itemCancelledOrCorrectedBy = null;
+
+    /**
+     * @var string
+     */
+    private string $itemId;
 
     /**
      * @var Price
@@ -135,9 +137,9 @@ class InvoiceItem
     private ?InvoiceItemReference $reference = null;
 
     /**
-     * @var string|null
+     * @var DateTime|null
      */
-    private ?string $serviceDate = null;
+    private ?DateTime $serviceDate = null;
 
     /**
      * @var DatePeriod|null
@@ -152,15 +154,15 @@ class InvoiceItem
     /**
      * @param string $contractItemId
      * @param string $description
-     * @param string $id
+     * @param string $itemId
      * @param Price $price
      * @param int|float $vatRate
      */
-    public function __construct(string $contractItemId, string $description, string $id, Price $price, int|float $vatRate)
+    public function __construct(string $contractItemId, string $description, string $itemId, Price $price, int|float $vatRate)
     {
         $this->contractItemId = $contractItemId;
         $this->description = $description;
-        $this->id = $id;
+        $this->itemId = $itemId;
         $this->price = $price;
         $this->vatRate = $vatRate;
     }
@@ -190,19 +192,19 @@ class InvoiceItem
     }
 
     /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
      * @return InvoiceItemItemCancelledOrCorrectedByItem[]|null
      */
     public function getItemCancelledOrCorrectedBy(): ?array
     {
         return $this->itemCancelledOrCorrectedBy ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getItemId(): string
+    {
+        return $this->itemId;
     }
 
     /**
@@ -222,9 +224,9 @@ class InvoiceItem
     }
 
     /**
-     * @return string|null
+     * @return DateTime|null
      */
-    public function getServiceDate(): ?string
+    public function getServiceDate(): ?DateTime
     {
         return $this->serviceDate ?? null;
     }
@@ -311,24 +313,6 @@ class InvoiceItem
     }
 
     /**
-     * @param string $id
-     * @return self
-     */
-    public function withId(string $id): self
-    {
-        $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->id = $id;
-
-        return $clone;
-    }
-
-    /**
      * @param InvoiceItemItemCancelledOrCorrectedByItem[] $itemCancelledOrCorrectedBy
      * @return self
      */
@@ -347,6 +331,24 @@ class InvoiceItem
     {
         $clone = clone $this;
         unset($clone->itemCancelledOrCorrectedBy);
+
+        return $clone;
+    }
+
+    /**
+     * @param string $itemId
+     * @return self
+     */
+    public function withItemId(string $itemId): self
+    {
+        $validator = new Validator();
+        $validator->validate($itemId, static::$schema['properties']['itemId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->itemId = $itemId;
 
         return $clone;
     }
@@ -387,10 +389,10 @@ class InvoiceItem
     }
 
     /**
-     * @param string $serviceDate
+     * @param DateTime $serviceDate
      * @return self
      */
-    public function withServiceDate(string $serviceDate): self
+    public function withServiceDate(DateTime $serviceDate): self
     {
         $clone = clone $this;
         $clone->serviceDate = $serviceDate;
@@ -471,11 +473,11 @@ class InvoiceItem
         }
         $contractItemId = $input->{'contractItemId'};
         $description = $input->{'description'};
-        $id = $input->{'id'};
         $itemCancelledOrCorrectedBy = null;
         if (isset($input->{'itemCancelledOrCorrectedBy'})) {
             $itemCancelledOrCorrectedBy = array_map(fn (array|object $i): InvoiceItemItemCancelledOrCorrectedByItem => InvoiceItemItemCancelledOrCorrectedByItem::buildFromInput($i, validate: $validate), $input->{'itemCancelledOrCorrectedBy'});
         }
+        $itemId = $input->{'itemId'};
         $price = Price::buildFromInput($input->{'price'}, validate: $validate);
         $reference = null;
         if (isset($input->{'reference'})) {
@@ -483,7 +485,7 @@ class InvoiceItem
         }
         $serviceDate = null;
         if (isset($input->{'serviceDate'})) {
-            $serviceDate = $input->{'serviceDate'};
+            $serviceDate = new DateTime($input->{'serviceDate'});
         }
         $servicePeriod = null;
         if (isset($input->{'servicePeriod'})) {
@@ -491,7 +493,7 @@ class InvoiceItem
         }
         $vatRate = str_contains($input->{'vatRate'}, '.') ? (float)($input->{'vatRate'}) : (int)($input->{'vatRate'});
 
-        $obj = new self($contractItemId, $description, $id, $price, $vatRate);
+        $obj = new self($contractItemId, $description, $itemId, $price, $vatRate);
         $obj->additionalDescription = $additionalDescription;
         $obj->itemCancelledOrCorrectedBy = $itemCancelledOrCorrectedBy;
         $obj->reference = $reference;
@@ -513,16 +515,16 @@ class InvoiceItem
         }
         $output['contractItemId'] = $this->contractItemId;
         $output['description'] = $this->description;
-        $output['id'] = $this->id;
         if (isset($this->itemCancelledOrCorrectedBy)) {
             $output['itemCancelledOrCorrectedBy'] = array_map(fn (InvoiceItemItemCancelledOrCorrectedByItem $i) => $i->toJson(), $this->itemCancelledOrCorrectedBy);
         }
+        $output['itemId'] = $this->itemId;
         $output['price'] = $this->price->toJson();
         if (isset($this->reference)) {
             $output['reference'] = ($this->reference)->toJson();
         }
         if (isset($this->serviceDate)) {
-            $output['serviceDate'] = $this->serviceDate;
+            $output['serviceDate'] = ($this->serviceDate)->format(DateTime::ATOM);
         }
         if (isset($this->servicePeriod)) {
             $output['servicePeriod'] = $this->servicePeriod->toJson();
@@ -563,6 +565,9 @@ class InvoiceItem
         }
         if (isset($this->reference)) {
             $this->reference = clone $this->reference;
+        }
+        if (isset($this->serviceDate)) {
+            $this->serviceDate = clone $this->serviceDate;
         }
     }
 }

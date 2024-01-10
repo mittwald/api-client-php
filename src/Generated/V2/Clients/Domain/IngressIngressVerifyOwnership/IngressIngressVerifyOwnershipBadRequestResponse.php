@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class AbortExecutionOKResponse implements ResponseContainer
+class IngressIngressVerifyOwnershipBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -23,39 +24,39 @@ class AbortExecutionOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
     /**
-     * @var AbortExecutionOKResponseBody
+     * @var ValidationErrors
      */
-    private AbortExecutionOKResponseBody $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param AbortExecutionOKResponseBody $body
+     * @param ValidationErrors $body
      */
-    public function __construct(AbortExecutionOKResponseBody $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return AbortExecutionOKResponseBody
+     * @return ValidationErrors
      */
-    public function getBody(): AbortExecutionOKResponseBody
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
     /**
-     * @param AbortExecutionOKResponseBody $body
+     * @param ValidationErrors $body
      * @return self
      */
-    public function withBody(AbortExecutionOKResponseBody $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,17 +69,17 @@ class AbortExecutionOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AbortExecutionOKResponse Created instance
+     * @return IngressIngressVerifyOwnershipBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AbortExecutionOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): IngressIngressVerifyOwnershipBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = AbortExecutionOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -93,7 +94,7 @@ class AbortExecutionOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -124,7 +125,6 @@ class AbortExecutionOKResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

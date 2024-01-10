@@ -28,9 +28,13 @@ class IngressCreateIngressCreatedResponse implements ResponseContainer
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'ownership' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.Ownership',
+                    ],
                 ],
                 'required' => [
                     'id',
+                    'ownership',
                 ],
                 'type' => 'object',
             ],

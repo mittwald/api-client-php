@@ -26,7 +26,6 @@ class CreateExecutionCreatedResponse implements ResponseContainer
                 'properties' => [
                     'id' => [
                         'description' => 'execution-id',
-                        'format' => 'uuid',
                         'type' => 'string',
                     ],
                 ],

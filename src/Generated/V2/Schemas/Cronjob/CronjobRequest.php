@@ -55,6 +55,11 @@ class CronjobRequest
                 'example' => '*/5 * * * *',
                 'type' => 'string',
             ],
+            'timeout' => [
+                'maximum' => 86400,
+                'minimum' => 1,
+                'type' => 'number',
+            ],
         ],
         'required' => [
             'appId',
@@ -62,6 +67,7 @@ class CronjobRequest
             'destination',
             'interval',
             'active',
+            'timeout',
         ],
         'type' => 'object',
     ];
@@ -97,19 +103,26 @@ class CronjobRequest
     private string $interval;
 
     /**
+     * @var int|float
+     */
+    private int|float $timeout;
+
+    /**
      * @param bool $active
      * @param string $appId
      * @param string $description
      * @param CronjobUrl|CronjobCommand $destination
      * @param string $interval
+     * @param int|float $timeout
      */
-    public function __construct(bool $active, string $appId, string $description, CronjobCommand|CronjobUrl $destination, string $interval)
+    public function __construct(bool $active, string $appId, string $description, CronjobCommand|CronjobUrl $destination, string $interval, int|float $timeout)
     {
         $this->active = $active;
         $this->appId = $appId;
         $this->description = $description;
         $this->destination = $destination;
         $this->interval = $interval;
+        $this->timeout = $timeout;
     }
 
     /**
@@ -159,6 +172,14 @@ class CronjobRequest
     public function getInterval(): string
     {
         return $this->interval;
+    }
+
+    /**
+     * @return int|float
+     */
+    public function getTimeout(): int|float
+    {
+        return $this->timeout;
     }
 
     /**
@@ -275,6 +296,24 @@ class CronjobRequest
     }
 
     /**
+     * @param int|float $timeout
+     * @return self
+     */
+    public function withTimeout(int|float $timeout): self
+    {
+        $validator = new Validator();
+        $validator->validate($timeout, static::$schema['properties']['timeout']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->timeout = $timeout;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -301,8 +340,9 @@ class CronjobRequest
             $email = $input->{'email'};
         }
         $interval = $input->{'interval'};
+        $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
 
-        $obj = new self($active, $appId, $description, $destination, $interval);
+        $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
         $obj->email = $email;
         return $obj;
     }
@@ -325,6 +365,7 @@ class CronjobRequest
             $output['email'] = $this->email;
         }
         $output['interval'] = $this->interval;
+        $output['timeout'] = $this->timeout;
 
         return $output;
     }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class UpdateCronjobRequest
+class IngressIngressVerifyOwnershipRequest
 {
-    public const method = 'patch';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -19,118 +19,55 @@ class UpdateCronjobRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
+            'ingressId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'active' => [
-                        'type' => 'boolean',
-                    ],
-                    'description' => [
-                        'example' => 'i am a cronjob',
-                        'type' => 'string',
-                    ],
-                    'destination' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand',
-                            ],
-                        ],
-                    ],
-                    'email' => [
-                        'format' => 'email',
-                        'type' => 'string',
-                    ],
-                    'interval' => [
-                        'example' => '*/5 * * * *',
-                        'type' => 'string',
-                    ],
-                    'timeout' => [
-                        'maximum' => 86400,
-                        'minimum' => 1,
-                        'type' => 'number',
-                    ],
-                ],
-                'type' => 'object',
-            ],
         ],
         'required' => [
-            'cronjobId',
-            'body',
+            'ingressId',
         ],
     ];
 
     /**
      * @var string
      */
-    private string $cronjobId;
-
-    /**
-     * @var UpdateCronjobRequestBody
-     */
-    private UpdateCronjobRequestBody $body;
+    private string $ingressId;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param string $cronjobId
-     * @param UpdateCronjobRequestBody $body
+     * @param string $ingressId
      */
-    public function __construct(string $cronjobId, UpdateCronjobRequestBody $body)
+    public function __construct(string $ingressId)
     {
-        $this->cronjobId = $cronjobId;
-        $this->body = $body;
+        $this->ingressId = $ingressId;
     }
 
     /**
      * @return string
      */
-    public function getCronjobId(): string
+    public function getIngressId(): string
     {
-        return $this->cronjobId;
+        return $this->ingressId;
     }
 
     /**
-     * @return UpdateCronjobRequestBody
-     */
-    public function getBody(): UpdateCronjobRequestBody
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $cronjobId
+     * @param string $ingressId
      * @return self
      */
-    public function withCronjobId(string $cronjobId): self
+    public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
+        $validator->validate($ingressId, static::$schema['properties']['ingressId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
-
-        return $clone;
-    }
-
-    /**
-     * @param UpdateCronjobRequestBody $body
-     * @return self
-     */
-    public function withBody(UpdateCronjobRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->ingressId = $ingressId;
 
         return $clone;
     }
@@ -140,20 +77,19 @@ class UpdateCronjobRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobRequest Created instance
+     * @return IngressIngressVerifyOwnershipRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): IngressIngressVerifyOwnershipRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $body = UpdateCronjobRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $ingressId = $input->{'ingressId'};
 
-        $obj = new self($cronjobId, $body);
+        $obj = new self($ingressId);
 
         return $obj;
     }
@@ -166,8 +102,7 @@ class UpdateCronjobRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
-        $output['body'] = ($this->body)->toJson();
+        $output['ingressId'] = $this->ingressId;
 
         return $output;
     }
@@ -198,7 +133,6 @@ class UpdateCronjobRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -213,8 +147,8 @@ class UpdateCronjobRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        return '/v2/cronjobs/' . $cronjobId;
+        $ingressId = urlencode($mapped['ingressId']);
+        return '/v2/ingresses/' . $ingressId . '/actions/verify-ownership';
     }
 
     /**
@@ -233,7 +167,6 @@ class UpdateCronjobRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

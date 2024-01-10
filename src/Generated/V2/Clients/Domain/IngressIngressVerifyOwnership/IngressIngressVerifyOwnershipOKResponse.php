@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateCronjobOKResponse implements ResponseContainer
+class IngressIngressVerifyOwnershipOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -29,33 +29,33 @@ class UpdateCronjobOKResponse implements ResponseContainer
     ];
 
     /**
-     * @var UpdateCronjobOKResponseBody
+     * @var IngressIngressVerifyOwnershipOKResponseBody
      */
-    private UpdateCronjobOKResponseBody $body;
+    private IngressIngressVerifyOwnershipOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param UpdateCronjobOKResponseBody $body
+     * @param IngressIngressVerifyOwnershipOKResponseBody $body
      */
-    public function __construct(UpdateCronjobOKResponseBody $body)
+    public function __construct(IngressIngressVerifyOwnershipOKResponseBody $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return UpdateCronjobOKResponseBody
+     * @return IngressIngressVerifyOwnershipOKResponseBody
      */
-    public function getBody(): UpdateCronjobOKResponseBody
+    public function getBody(): IngressIngressVerifyOwnershipOKResponseBody
     {
         return $this->body;
     }
 
     /**
-     * @param UpdateCronjobOKResponseBody $body
+     * @param IngressIngressVerifyOwnershipOKResponseBody $body
      * @return self
      */
-    public function withBody(UpdateCronjobOKResponseBody $body): self
+    public function withBody(IngressIngressVerifyOwnershipOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,17 +68,17 @@ class UpdateCronjobOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobOKResponse Created instance
+     * @return IngressIngressVerifyOwnershipOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): IngressIngressVerifyOwnershipOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = UpdateCronjobOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = IngressIngressVerifyOwnershipOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

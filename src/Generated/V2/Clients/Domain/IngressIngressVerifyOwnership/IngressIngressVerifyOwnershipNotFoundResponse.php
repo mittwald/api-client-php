@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class UpdateCronjobAppIdCreatedResponse implements ResponseContainer
+class IngressIngressVerifyOwnershipNotFoundResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -23,39 +24,39 @@ class UpdateCronjobAppIdCreatedResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
     /**
-     * @var UpdateCronjobAppIdCreatedResponseBody
+     * @var ValidationErrors
      */
-    private UpdateCronjobAppIdCreatedResponseBody $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param UpdateCronjobAppIdCreatedResponseBody $body
+     * @param ValidationErrors $body
      */
-    public function __construct(UpdateCronjobAppIdCreatedResponseBody $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return UpdateCronjobAppIdCreatedResponseBody
+     * @return ValidationErrors
      */
-    public function getBody(): UpdateCronjobAppIdCreatedResponseBody
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
     /**
-     * @param UpdateCronjobAppIdCreatedResponseBody $body
+     * @param ValidationErrors $body
      * @return self
      */
-    public function withBody(UpdateCronjobAppIdCreatedResponseBody $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,17 +69,17 @@ class UpdateCronjobAppIdCreatedResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return UpdateCronjobAppIdCreatedResponse Created instance
+     * @return IngressIngressVerifyOwnershipNotFoundResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): UpdateCronjobAppIdCreatedResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): IngressIngressVerifyOwnershipNotFoundResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = UpdateCronjobAppIdCreatedResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -93,7 +94,7 @@ class UpdateCronjobAppIdCreatedResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -124,7 +125,6 @@ class UpdateCronjobAppIdCreatedResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self
