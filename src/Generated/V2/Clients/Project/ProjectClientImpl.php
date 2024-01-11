@@ -241,7 +241,7 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
-     * @return DeleteProject\DeleteProjectOKResponse Deleted
+     * @return DeleteProject\DeleteProjectOKResponse OK
      */
     public function deleteProject(DeleteProjectRequest $request): DeleteProjectOKResponse
     {
@@ -267,16 +267,17 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse OK
      */
     public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteProjectAvatarRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
+        if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
             400 => DeleteProjectAvatarBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteProjectAvatarForbiddenResponse::fromResponse($httpResponse),
             default => DeleteProjectAvatarDefaultResponse::fromResponse($httpResponse),
@@ -332,16 +333,17 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse OK
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteServerAvatarRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
+        if ($httpResponse->getStatusCode() === 200) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
             400 => DeleteServerAvatarBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteServerAvatarForbiddenResponse::fromResponse($httpResponse),
             default => DeleteServerAvatarDefaultResponse::fromResponse($httpResponse),
@@ -720,6 +722,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
             400 => UpdateProjectDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateProjectDescriptionForbiddenResponse::fromResponse($httpResponse),
             default => UpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
@@ -764,6 +767,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            204 => new EmptyResponse($httpResponse),
             400 => UpdateServerDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateServerDescriptionForbiddenResponse::fromResponse($httpResponse),
             default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),

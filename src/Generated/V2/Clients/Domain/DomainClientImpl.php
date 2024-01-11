@@ -132,6 +132,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesNotFoundResponse;
@@ -1222,6 +1223,7 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => IngressIngressVerifyOwnershipBadRequestResponse::fromResponse($httpResponse),
             404 => IngressIngressVerifyOwnershipNotFoundResponse::fromResponse($httpResponse),
+            412 => IngressIngressVerifyOwnershipPreconditionFailedResponse::fromResponse($httpResponse),
             default => IngressIngressVerifyOwnershipDefaultResponse::fromResponse($httpResponse),
         });
     }

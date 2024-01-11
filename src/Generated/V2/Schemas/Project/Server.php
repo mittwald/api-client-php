@@ -54,13 +54,15 @@ class Server
                 'type' => 'string',
             ],
             'isReady' => [
+                'deprecated' => true,
+                'description' => 'deprecated',
                 'type' => 'boolean',
             ],
             'machineType' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.MachineType',
             ],
             'readiness' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.project.ServerReadinessStatus',
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.DeprecatedServerReadinessStatus',
             ],
             'shortId' => [
                 'example' => 's-4e7tz3',
@@ -70,6 +72,9 @@ class Server
                 'example' => 'pe-prod.staging.mcloud.services',
                 'format' => 'hostname',
                 'type' => 'string',
+            ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.project.ServerStatus',
             ],
             'storage' => [
                 'example' => '50Gi',
@@ -87,6 +92,7 @@ class Server
             'readiness',
             'createdAt',
             'clusterName',
+            'status',
         ],
         'type' => 'object',
     ];
@@ -127,6 +133,8 @@ class Server
     private ?string $imageRefId = null;
 
     /**
+     * deprecated
+     *
      * @var bool
      */
     private bool $isReady;
@@ -137,9 +145,9 @@ class Server
     private MachineType $machineType;
 
     /**
-     * @var ServerReadinessStatus
+     * @var DeprecatedServerReadinessStatus
      */
-    private ServerReadinessStatus $readiness;
+    private DeprecatedServerReadinessStatus $readiness;
 
     /**
      * @var string
@@ -150,6 +158,11 @@ class Server
      * @var string|null
      */
     private ?string $statisticsBaseDomain = null;
+
+    /**
+     * @var ServerStatus
+     */
+    private ServerStatus $status;
 
     /**
      * @var string
@@ -164,11 +177,12 @@ class Server
      * @param string $id
      * @param bool $isReady
      * @param MachineType $machineType
-     * @param ServerReadinessStatus $readiness
+     * @param DeprecatedServerReadinessStatus $readiness
      * @param string $shortId
+     * @param ServerStatus $status
      * @param string $storage
      */
-    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, ServerReadinessStatus $readiness, string $shortId, string $storage)
+    public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, DeprecatedServerReadinessStatus $readiness, string $shortId, ServerStatus $status, string $storage)
     {
         $this->clusterName = $clusterName;
         $this->createdAt = $createdAt;
@@ -179,6 +193,7 @@ class Server
         $this->machineType = $machineType;
         $this->readiness = $readiness;
         $this->shortId = $shortId;
+        $this->status = $status;
         $this->storage = $storage;
     }
 
@@ -256,9 +271,10 @@ class Server
     }
 
     /**
-     * @return ServerReadinessStatus
+     * @return
+     * DeprecatedServerReadinessStatus
      */
-    public function getReadiness(): ServerReadinessStatus
+    public function getReadiness(): DeprecatedServerReadinessStatus
     {
         return $this->readiness;
     }
@@ -277,6 +293,14 @@ class Server
     public function getStatisticsBaseDomain(): ?string
     {
         return $this->statisticsBaseDomain ?? null;
+    }
+
+    /**
+     * @return ServerStatus
+     */
+    public function getStatus(): ServerStatus
+    {
+        return $this->status;
     }
 
     /**
@@ -454,10 +478,10 @@ class Server
     }
 
     /**
-     * @param ServerReadinessStatus $readiness
+     * @param DeprecatedServerReadinessStatus $readiness
      * @return self
      */
-    public function withReadiness(ServerReadinessStatus $readiness): self
+    public function withReadiness(DeprecatedServerReadinessStatus $readiness): self
     {
         $clone = clone $this;
         $clone->readiness = $readiness;
@@ -513,6 +537,18 @@ class Server
     }
 
     /**
+     * @param ServerStatus $status
+     * @return self
+     */
+    public function withStatus(ServerStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    /**
      * @param string $storage
      * @return self
      */
@@ -560,15 +596,16 @@ class Server
         }
         $isReady = (bool)($input->{'isReady'});
         $machineType = MachineType::buildFromInput($input->{'machineType'}, validate: $validate);
-        $readiness = ServerReadinessStatus::from($input->{'readiness'});
+        $readiness = DeprecatedServerReadinessStatus::from($input->{'readiness'});
         $shortId = $input->{'shortId'};
         $statisticsBaseDomain = null;
         if (isset($input->{'statisticsBaseDomain'})) {
             $statisticsBaseDomain = $input->{'statisticsBaseDomain'};
         }
+        $status = ServerStatus::from($input->{'status'});
         $storage = $input->{'storage'};
 
-        $obj = new self($clusterName, $createdAt, $customerId, $description, $id, $isReady, $machineType, $readiness, $shortId, $storage);
+        $obj = new self($clusterName, $createdAt, $customerId, $description, $id, $isReady, $machineType, $readiness, $shortId, $status, $storage);
         $obj->disabledReason = $disabledReason;
         $obj->imageRefId = $imageRefId;
         $obj->statisticsBaseDomain = $statisticsBaseDomain;
@@ -601,6 +638,7 @@ class Server
         if (isset($this->statisticsBaseDomain)) {
             $output['statisticsBaseDomain'] = $this->statisticsBaseDomain;
         }
+        $output['status'] = $this->status->value;
         $output['storage'] = $this->storage;
 
         return $output;

@@ -60,6 +60,10 @@ class Project
             'disableReason' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.DisableReason',
             ],
+            'disabledAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'enabled' => [
                 'type' => 'boolean',
             ],
@@ -112,6 +116,10 @@ class Project
             'status' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectStatus',
             ],
+            'statusSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -124,6 +132,7 @@ class Project
             'isReady',
             'readiness',
             'status',
+            'statusSetAt',
         ],
         'type' => 'object',
     ];
@@ -162,6 +171,11 @@ class Project
      * @var DisableReason|null
      */
     private ?DisableReason $disableReason = null;
+
+    /**
+     * @var DateTime|null
+     */
+    private ?DateTime $disabledAt = null;
 
     /**
      * @var bool
@@ -226,6 +240,11 @@ class Project
     private ProjectStatus $status;
 
     /**
+     * @var DateTime
+     */
+    private DateTime $statusSetAt;
+
+    /**
      * @param DateTime $createdAt
      * @param string $customerId
      * @param string $description
@@ -236,8 +255,9 @@ class Project
      * @param DeprecatedProjectReadinessStatus $readiness
      * @param string $shortId
      * @param ProjectStatus $status
+     * @param DateTime $statusSetAt
      */
-    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status)
+    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt)
     {
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
@@ -249,6 +269,7 @@ class Project
         $this->readiness = $readiness;
         $this->shortId = $shortId;
         $this->status = $status;
+        $this->statusSetAt = $statusSetAt;
     }
 
     /**
@@ -305,6 +326,14 @@ class Project
     public function getDisableReason(): ?DisableReason
     {
         return $this->disableReason ?? null;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getDisabledAt(): ?DateTime
+    {
+        return $this->disabledAt ?? null;
     }
 
     /**
@@ -403,6 +432,14 @@ class Project
     public function getStatus(): ProjectStatus
     {
         return $this->status;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getStatusSetAt(): DateTime
+    {
+        return $this->statusSetAt;
     }
 
     /**
@@ -548,6 +585,29 @@ class Project
     {
         $clone = clone $this;
         unset($clone->disableReason);
+
+        return $clone;
+    }
+
+    /**
+     * @param DateTime $disabledAt
+     * @return self
+     */
+    public function withDisabledAt(DateTime $disabledAt): self
+    {
+        $clone = clone $this;
+        $clone->disabledAt = $disabledAt;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutDisabledAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->disabledAt);
 
         return $clone;
     }
@@ -817,6 +877,18 @@ class Project
     }
 
     /**
+     * @param DateTime $statusSetAt
+     * @return self
+     */
+    public function withStatusSetAt(DateTime $statusSetAt): self
+    {
+        $clone = clone $this;
+        $clone->statusSetAt = $statusSetAt;
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -846,6 +918,10 @@ class Project
         $disableReason = null;
         if (isset($input->{'disableReason'})) {
             $disableReason = DisableReason::from($input->{'disableReason'});
+        }
+        $disabledAt = null;
+        if (isset($input->{'disabledAt'})) {
+            $disabledAt = new DateTime($input->{'disabledAt'});
         }
         $enabled = (bool)($input->{'enabled'});
         $id = $input->{'id'};
@@ -880,11 +956,13 @@ class Project
             $statisticsBaseDomain = $input->{'statisticsBaseDomain'};
         }
         $status = ProjectStatus::from($input->{'status'});
+        $statusSetAt = new DateTime($input->{'statusSetAt'});
 
-        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status);
+        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt);
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
         $obj->disableReason = $disableReason;
+        $obj->disabledAt = $disabledAt;
         $obj->imageRefId = $imageRefId;
         $obj->projectHostingId = $projectHostingId;
         $obj->serverId = $serverId;
@@ -915,6 +993,9 @@ class Project
         if (isset($this->disableReason)) {
             $output['disableReason'] = $this->disableReason->value;
         }
+        if (isset($this->disabledAt)) {
+            $output['disabledAt'] = ($this->disabledAt)->format(DateTime::ATOM);
+        }
         $output['enabled'] = $this->enabled;
         $output['id'] = $this->id;
         if (isset($this->imageRefId)) {
@@ -941,6 +1022,7 @@ class Project
             $output['statisticsBaseDomain'] = $this->statisticsBaseDomain;
         }
         $output['status'] = $this->status->value;
+        $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -972,10 +1054,14 @@ class Project
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
+        if (isset($this->disabledAt)) {
+            $this->disabledAt = clone $this->disabledAt;
+        }
         if (isset($this->spec)) {
             $this->spec = match (true) {
                 ($this->spec) instanceof VisitorSpec, ($this->spec) instanceof HardwareSpec => $this->spec,
             };
         }
+        $this->statusSetAt = clone $this->statusSetAt;
     }
 }

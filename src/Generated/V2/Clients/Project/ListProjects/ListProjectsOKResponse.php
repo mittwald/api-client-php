@@ -49,6 +49,10 @@ class ListProjectsOKResponse implements ResponseContainer
                         'disableReason' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.project.DisableReason',
                         ],
+                        'disabledAt' => [
+                            'format' => 'date-time',
+                            'type' => 'string',
+                        ],
                         'enabled' => [
                             'type' => 'boolean',
                         ],
@@ -79,6 +83,10 @@ class ListProjectsOKResponse implements ResponseContainer
                         'status' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.project.ProjectStatus',
                         ],
+                        'statusSetAt' => [
+                            'format' => 'date-time',
+                            'type' => 'string',
+                        ],
                     ],
                     'required' => [
                         'id',
@@ -91,6 +99,7 @@ class ListProjectsOKResponse implements ResponseContainer
                         'isReady',
                         'readiness',
                         'status',
+                        'statusSetAt',
                     ],
                     'type' => 'object',
                 ],

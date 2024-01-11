@@ -2,9 +2,8 @@
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Project;
 
-enum ServerReadinessStatus: string
+enum ServerStatus: string
 {
-    case creating = 'creating';
+    case pending = 'pending';
     case ready = 'ready';
-    case unready = 'unready';
 }

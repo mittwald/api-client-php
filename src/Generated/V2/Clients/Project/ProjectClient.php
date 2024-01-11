@@ -113,7 +113,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
-     * @return DeleteProject\DeleteProjectOKResponse Deleted
+     * @return DeleteProject\DeleteProjectOKResponse OK
      */
     public function deleteProject(DeleteProjectRequest $request): DeleteProjectOKResponse;
     /**
@@ -123,7 +123,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse OK
      */
     public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse;
     /**
@@ -153,7 +153,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse NoContent
+     * @return EmptyResponse OK
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse;
     /**
