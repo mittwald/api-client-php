@@ -47,15 +47,6 @@ class Contract
                 'example' => '3a201faa-5160-47e0-a758-325ba794b543',
                 'type' => 'string',
             ],
-            'isInvoicingDeactivated' => [
-                'type' => 'boolean',
-            ],
-            'isInvoicingPaused' => [
-                'type' => 'boolean',
-            ],
-            'owner' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.contract.Contact',
-            ],
             'termination' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.contract.Termination',
             ],
@@ -64,7 +55,6 @@ class Contract
             'contractId',
             'contractNumber',
             'customerId',
-            'owner',
             'baseItem',
         ],
         'type' => 'object',
@@ -96,21 +86,6 @@ class Contract
     private string $customerId;
 
     /**
-     * @var bool|null
-     */
-    private ?bool $isInvoicingDeactivated = null;
-
-    /**
-     * @var bool|null
-     */
-    private ?bool $isInvoicingPaused = null;
-
-    /**
-     * @var Contact
-     */
-    private Contact $owner;
-
-    /**
      * @var Termination|null
      */
     private ?Termination $termination = null;
@@ -120,15 +95,13 @@ class Contract
      * @param string $contractId
      * @param string $contractNumber
      * @param string $customerId
-     * @param Contact $owner
      */
-    public function __construct(ContractItem $baseItem, string $contractId, string $contractNumber, string $customerId, Contact $owner)
+    public function __construct(ContractItem $baseItem, string $contractId, string $contractNumber, string $customerId)
     {
         $this->baseItem = $baseItem;
         $this->contractId = $contractId;
         $this->contractNumber = $contractNumber;
         $this->customerId = $customerId;
-        $this->owner = $owner;
     }
 
     /**
@@ -169,30 +142,6 @@ class Contract
     public function getCustomerId(): string
     {
         return $this->customerId;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsInvoicingDeactivated(): ?bool
-    {
-        return $this->isInvoicingDeactivated ?? null;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsInvoicingPaused(): ?bool
-    {
-        return $this->isInvoicingPaused ?? null;
-    }
-
-    /**
-     * @return Contact
-     */
-    public function getOwner(): Contact
-    {
-        return $this->owner;
     }
 
     /**
@@ -293,76 +242,6 @@ class Contract
     }
 
     /**
-     * @param bool $isInvoicingDeactivated
-     * @return self
-     */
-    public function withIsInvoicingDeactivated(bool $isInvoicingDeactivated): self
-    {
-        $validator = new Validator();
-        $validator->validate($isInvoicingDeactivated, static::$schema['properties']['isInvoicingDeactivated']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->isInvoicingDeactivated = $isInvoicingDeactivated;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutIsInvoicingDeactivated(): self
-    {
-        $clone = clone $this;
-        unset($clone->isInvoicingDeactivated);
-
-        return $clone;
-    }
-
-    /**
-     * @param bool $isInvoicingPaused
-     * @return self
-     */
-    public function withIsInvoicingPaused(bool $isInvoicingPaused): self
-    {
-        $validator = new Validator();
-        $validator->validate($isInvoicingPaused, static::$schema['properties']['isInvoicingPaused']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->isInvoicingPaused = $isInvoicingPaused;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutIsInvoicingPaused(): self
-    {
-        $clone = clone $this;
-        unset($clone->isInvoicingPaused);
-
-        return $clone;
-    }
-
-    /**
-     * @param Contact $owner
-     * @return self
-     */
-    public function withOwner(Contact $owner): self
-    {
-        $clone = clone $this;
-        $clone->owner = $owner;
-
-        return $clone;
-    }
-
-    /**
      * @param Termination $termination
      * @return self
      */
@@ -408,24 +287,13 @@ class Contract
         $contractId = $input->{'contractId'};
         $contractNumber = $input->{'contractNumber'};
         $customerId = $input->{'customerId'};
-        $isInvoicingDeactivated = null;
-        if (isset($input->{'isInvoicingDeactivated'})) {
-            $isInvoicingDeactivated = (bool)($input->{'isInvoicingDeactivated'});
-        }
-        $isInvoicingPaused = null;
-        if (isset($input->{'isInvoicingPaused'})) {
-            $isInvoicingPaused = (bool)($input->{'isInvoicingPaused'});
-        }
-        $owner = Contact::buildFromInput($input->{'owner'}, validate: $validate);
         $termination = null;
         if (isset($input->{'termination'})) {
             $termination = Termination::buildFromInput($input->{'termination'}, validate: $validate);
         }
 
-        $obj = new self($baseItem, $contractId, $contractNumber, $customerId, $owner);
+        $obj = new self($baseItem, $contractId, $contractNumber, $customerId);
         $obj->additionalItems = $additionalItems;
-        $obj->isInvoicingDeactivated = $isInvoicingDeactivated;
-        $obj->isInvoicingPaused = $isInvoicingPaused;
         $obj->termination = $termination;
         return $obj;
     }
@@ -445,13 +313,6 @@ class Contract
         $output['contractId'] = $this->contractId;
         $output['contractNumber'] = $this->contractNumber;
         $output['customerId'] = $this->customerId;
-        if (isset($this->isInvoicingDeactivated)) {
-            $output['isInvoicingDeactivated'] = $this->isInvoicingDeactivated;
-        }
-        if (isset($this->isInvoicingPaused)) {
-            $output['isInvoicingPaused'] = $this->isInvoicingPaused;
-        }
-        $output['owner'] = $this->owner->toJson();
         if (isset($this->termination)) {
             $output['termination'] = $this->termination->toJson();
         }

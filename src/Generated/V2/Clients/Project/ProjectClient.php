@@ -11,7 +11,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectR
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteRequest;
@@ -113,9 +112,9 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
-     * @return DeleteProject\DeleteProjectOKResponse OK
+     * @return EmptyResponse NoContent
      */
-    public function deleteProject(DeleteProjectRequest $request): DeleteProjectOKResponse;
+    public function deleteProject(DeleteProjectRequest $request): EmptyResponse;
     /**
      * Delete a Project's avatar.
      *
@@ -123,7 +122,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse;
     /**
@@ -153,7 +152,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse;
     /**
@@ -323,7 +322,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateProjectDescription\UpdateProjectDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse;
     /**
@@ -343,7 +342,7 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateServerDescription\UpdateServerDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse;
 }

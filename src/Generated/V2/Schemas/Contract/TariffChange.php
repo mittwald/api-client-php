@@ -43,7 +43,6 @@ class TariffChange
                 'type' => 'string',
             ],
             'scheduledByUserId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'targetDate' => [

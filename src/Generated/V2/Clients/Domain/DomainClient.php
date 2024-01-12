@@ -44,8 +44,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSet
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotOKResponse;
@@ -68,8 +66,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressT
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse;
@@ -85,7 +81,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDom
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContactRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainNameservers\UpdateDomainNameserversRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectIdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnershipRequest;
 
 /**
  * Client for Domain API
@@ -379,16 +374,6 @@ interface DomainClient
      */
     public function getDomain(GetDomainRequest $request): GetDomainOKResponse;
     /**
-     * Get a DomainOwnership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain-ownership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetDomainOwnership\GetDomainOwnershipRequest $request An object representing the request for this operation
-     * @return GetDomainOwnership\GetDomainOwnershipOKResponse OK
-     */
-    public function getDomainOwnership(GetDomainOwnershipRequest $request): GetDomainOwnershipOKResponse;
-    /**
      * Get a HandleSchema.
      *
      * Get required handle fields of a registrar for your domain process (transfer/registration).
@@ -411,16 +396,6 @@ interface DomainClient
      * @return GetLatestScreenshot\GetLatestScreenshotOKResponse OK
      */
     public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshotOKResponse;
-    /**
-     * List the DomainOwnerships of a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domain-ownerships
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDomainOwnerships\ListDomainOwnershipsRequest $request An object representing the request for this operation
-     * @return ListDomainOwnerships\ListDomainOwnershipsOKResponse OK
-     */
-    public function listDomainOwnerships(ListDomainOwnershipsRequest $request): ListDomainOwnershipsOKResponse;
     /**
      * List Domains
      *
@@ -520,18 +495,6 @@ interface DomainClient
      * @return EmptyResponse No Content
      */
     public function updateDomainProjectId(UpdateDomainProjectIdRequest $request): EmptyResponse;
-    /**
-     * Verify a DomainOwnership.
-     *
-     * Verify your access to a Domain with an already set TXT Record. On success, the domain will be linked with the webserver.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-verify-domain-ownership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param VerifyDomainOwnership\VerifyDomainOwnershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function verifyDomainOwnership(VerifyDomainOwnershipRequest $request): EmptyResponse;
     /**
      * Create an Ingress.
      *

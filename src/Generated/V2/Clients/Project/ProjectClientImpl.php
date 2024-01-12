@@ -29,7 +29,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectB
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectInternalServerErrorResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarBadRequestResponse;
@@ -241,17 +240,16 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
-     * @return DeleteProject\DeleteProjectOKResponse OK
+     * @return EmptyResponse NoContent
      */
-    public function deleteProject(DeleteProjectRequest $request): DeleteProjectOKResponse
+    public function deleteProject(DeleteProjectRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteProjectRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return DeleteProjectOKResponse::fromResponse($httpResponse);
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteProjectBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteProjectForbiddenResponse::fromResponse($httpResponse),
             412 => DeleteProjectPreconditionFailedResponse::fromResponse($httpResponse),
@@ -267,17 +265,16 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteProjectAvatarRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteProjectAvatarBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteProjectAvatarForbiddenResponse::fromResponse($httpResponse),
             default => DeleteProjectAvatarDefaultResponse::fromResponse($httpResponse),
@@ -333,17 +330,16 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteServerAvatarRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteServerAvatarBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteServerAvatarForbiddenResponse::fromResponse($httpResponse),
             default => DeleteServerAvatarDefaultResponse::fromResponse($httpResponse),
@@ -712,17 +708,16 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateProjectDescription\UpdateProjectDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateProjectDescriptionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => UpdateProjectDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateProjectDescriptionForbiddenResponse::fromResponse($httpResponse),
             default => UpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
@@ -757,17 +752,16 @@ class ProjectClientImpl implements ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateServerDescription\UpdateServerDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateServerDescriptionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => UpdateServerDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateServerDescriptionForbiddenResponse::fromResponse($httpResponse),
             default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),

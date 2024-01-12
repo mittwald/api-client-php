@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Contract;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -31,15 +32,14 @@ class Termination
                 'type' => 'string',
             ],
             'scheduledAtDate' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'scheduledByUserId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'targetDate' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
         ],
@@ -56,9 +56,9 @@ class Termination
     private ?string $reason = null;
 
     /**
-     * @var string
+     * @var DateTime
      */
-    private string $scheduledAtDate;
+    private DateTime $scheduledAtDate;
 
     /**
      * @var string|null
@@ -66,15 +66,15 @@ class Termination
     private ?string $scheduledByUserId = null;
 
     /**
-     * @var string
+     * @var DateTime
      */
-    private string $targetDate;
+    private DateTime $targetDate;
 
     /**
-     * @param string $scheduledAtDate
-     * @param string $targetDate
+     * @param DateTime $scheduledAtDate
+     * @param DateTime $targetDate
      */
-    public function __construct(string $scheduledAtDate, string $targetDate)
+    public function __construct(DateTime $scheduledAtDate, DateTime $targetDate)
     {
         $this->scheduledAtDate = $scheduledAtDate;
         $this->targetDate = $targetDate;
@@ -89,9 +89,9 @@ class Termination
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getScheduledAtDate(): string
+    public function getScheduledAtDate(): DateTime
     {
         return $this->scheduledAtDate;
     }
@@ -105,9 +105,9 @@ class Termination
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getTargetDate(): string
+    public function getTargetDate(): DateTime
     {
         return $this->targetDate;
     }
@@ -142,17 +142,11 @@ class Termination
     }
 
     /**
-     * @param string $scheduledAtDate
+     * @param DateTime $scheduledAtDate
      * @return self
      */
-    public function withScheduledAtDate(string $scheduledAtDate): self
+    public function withScheduledAtDate(DateTime $scheduledAtDate): self
     {
-        $validator = new Validator();
-        $validator->validate($scheduledAtDate, static::$schema['properties']['scheduledAtDate']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->scheduledAtDate = $scheduledAtDate;
 
@@ -189,17 +183,11 @@ class Termination
     }
 
     /**
-     * @param string $targetDate
+     * @param DateTime $targetDate
      * @return self
      */
-    public function withTargetDate(string $targetDate): self
+    public function withTargetDate(DateTime $targetDate): self
     {
-        $validator = new Validator();
-        $validator->validate($targetDate, static::$schema['properties']['targetDate']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->targetDate = $targetDate;
 
@@ -225,12 +213,12 @@ class Termination
         if (isset($input->{'reason'})) {
             $reason = $input->{'reason'};
         }
-        $scheduledAtDate = $input->{'scheduledAtDate'};
+        $scheduledAtDate = new DateTime($input->{'scheduledAtDate'});
         $scheduledByUserId = null;
         if (isset($input->{'scheduledByUserId'})) {
             $scheduledByUserId = $input->{'scheduledByUserId'};
         }
-        $targetDate = $input->{'targetDate'};
+        $targetDate = new DateTime($input->{'targetDate'});
 
         $obj = new self($scheduledAtDate, $targetDate);
         $obj->reason = $reason;
@@ -249,11 +237,11 @@ class Termination
         if (isset($this->reason)) {
             $output['reason'] = $this->reason;
         }
-        $output['scheduledAtDate'] = $this->scheduledAtDate;
+        $output['scheduledAtDate'] = ($this->scheduledAtDate)->format(DateTime::ATOM);
         if (isset($this->scheduledByUserId)) {
             $output['scheduledByUserId'] = $this->scheduledByUserId;
         }
-        $output['targetDate'] = $this->targetDate;
+        $output['targetDate'] = ($this->targetDate)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -284,5 +272,7 @@ class Termination
 
     public function __clone()
     {
+        $this->scheduledAtDate = clone $this->scheduledAtDate;
+        $this->targetDate = clone $this->targetDate;
     }
 }

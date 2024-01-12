@@ -288,7 +288,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(DeleteDeliveryBoxRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -314,7 +314,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(DeleteMailAddressRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -580,7 +580,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateDeliveryBoxDescriptionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -606,7 +606,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateDeliveryBoxPasswordRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -632,7 +632,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressAddressRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -658,7 +658,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressAutoresponderRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -711,7 +711,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressCatchAllRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -764,7 +764,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressForwardAddressesRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -817,7 +817,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressPasswordRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -870,7 +870,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressQuotaRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -923,7 +923,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateMailAddressSpamProtectionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -976,7 +976,7 @@ class MailClientImpl implements MailClient
     {
         $httpRequest = new Request(UpdateProjectMailSettingRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {

@@ -105,11 +105,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainDefaultRes
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomainOwnership\GetDomainOwnershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest;
@@ -160,10 +155,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\Ingre
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainOwnerships\ListDomainOwnershipsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
@@ -200,10 +191,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateD
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectIdDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectIdNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateDomainProjectIdRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnershipBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnershipDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnershipNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\VerifyDomainOwnership\VerifyDomainOwnershipRequest;
 
 /**
  * Client for Domain API
@@ -813,29 +800,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * Get a DomainOwnership.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain-ownership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetDomainOwnership\GetDomainOwnershipRequest $request An object representing the request for this operation
-     * @return GetDomainOwnership\GetDomainOwnershipOKResponse OK
-     */
-    public function getDomainOwnership(GetDomainOwnershipRequest $request): GetDomainOwnershipOKResponse
-    {
-        $httpRequest = new Request(GetDomainOwnershipRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetDomainOwnershipOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetDomainOwnershipBadRequestResponse::fromResponse($httpResponse),
-            404 => GetDomainOwnershipNotFoundResponse::fromResponse($httpResponse),
-            default => GetDomainOwnershipDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get a HandleSchema.
      *
      * Get required handle fields of a registrar for your domain process (transfer/registration).
@@ -878,28 +842,6 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetLatestScreenshotNotFoundResponse::fromResponse($httpResponse),
             default => GetLatestScreenshotDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List the DomainOwnerships of a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domain-ownerships
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDomainOwnerships\ListDomainOwnershipsRequest $request An object representing the request for this operation
-     * @return ListDomainOwnerships\ListDomainOwnershipsOKResponse OK
-     */
-    public function listDomainOwnerships(ListDomainOwnershipsRequest $request): ListDomainOwnershipsOKResponse
-    {
-        $httpRequest = new Request(ListDomainOwnershipsRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListDomainOwnershipsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListDomainOwnershipsBadRequestResponse::fromResponse($httpResponse),
-            default => ListDomainOwnershipsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1110,31 +1052,6 @@ class DomainClientImpl implements DomainClient
             400 => UpdateDomainProjectIdBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateDomainProjectIdNotFoundResponse::fromResponse($httpResponse),
             default => UpdateDomainProjectIdDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Verify a DomainOwnership.
-     *
-     * Verify your access to a Domain with an already set TXT Record. On success, the domain will be linked with the webserver.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-verify-domain-ownership
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param VerifyDomainOwnership\VerifyDomainOwnershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse No Content
-     */
-    public function verifyDomainOwnership(VerifyDomainOwnershipRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(VerifyDomainOwnershipRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => VerifyDomainOwnershipBadRequestResponse::fromResponse($httpResponse),
-            404 => VerifyDomainOwnershipNotFoundResponse::fromResponse($httpResponse),
-            default => VerifyDomainOwnershipDefaultResponse::fromResponse($httpResponse),
         });
     }
 
