@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -27,9 +28,11 @@ class Message
     private static array $schema = [
         'properties' => [
             'conversationId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'createdAt' => [
+                'format' => 'date-time',
                 'type' => 'string',
             ],
             'createdBy' => [
@@ -38,12 +41,6 @@ class Message
             'files' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.conversation.File',
-                ],
-                'type' => 'array',
-            ],
-            'history' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.conversation.MessageHistoryItem',
                 ],
                 'type' => 'array',
             ],
@@ -68,7 +65,6 @@ class Message
             'messageId',
             'conversationId',
             'createdAt',
-            'history',
             'type',
         ],
         'type' => 'object',
@@ -80,9 +76,9 @@ class Message
     private string $conversationId;
 
     /**
-     * @var string
+     * @var DateTime
      */
-    private string $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var User|null
@@ -93,11 +89,6 @@ class Message
      * @var (RequestedFile|UploadedFile)[]|null
      */
     private ?array $files = null;
-
-    /**
-     * @var MessageHistoryItem[]
-     */
-    private array $history;
 
     /**
      * @var bool|null
@@ -121,16 +112,14 @@ class Message
 
     /**
      * @param string $conversationId
-     * @param string $createdAt
-     * @param MessageHistoryItem[] $history
+     * @param DateTime $createdAt
      * @param string $messageId
      * @param MessageType $type
      */
-    public function __construct(string $conversationId, string $createdAt, array $history, string $messageId, MessageType $type)
+    public function __construct(string $conversationId, DateTime $createdAt, string $messageId, MessageType $type)
     {
         $this->conversationId = $conversationId;
         $this->createdAt = $createdAt;
-        $this->history = $history;
         $this->messageId = $messageId;
         $this->type = $type;
     }
@@ -144,9 +133,9 @@ class Message
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getCreatedAt(): string
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -166,15 +155,6 @@ class Message
     public function getFiles(): ?array
     {
         return $this->files ?? null;
-    }
-
-    /**
-     * @return
-     * MessageHistoryItem[]
-     */
-    public function getHistory(): array
-    {
-        return $this->history;
     }
 
     /**
@@ -228,17 +208,11 @@ class Message
     }
 
     /**
-     * @param string $createdAt
+     * @param DateTime $createdAt
      * @return self
      */
-    public function withCreatedAt(string $createdAt): self
+    public function withCreatedAt(DateTime $createdAt): self
     {
-        $validator = new Validator();
-        $validator->validate($createdAt, static::$schema['properties']['createdAt']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->createdAt = $createdAt;
 
@@ -287,18 +261,6 @@ class Message
     {
         $clone = clone $this;
         unset($clone->files);
-
-        return $clone;
-    }
-
-    /**
-     * @param MessageHistoryItem[] $history
-     * @return self
-     */
-    public function withHistory(array $history): self
-    {
-        $clone = clone $this;
-        $clone->history = $history;
 
         return $clone;
     }
@@ -407,7 +369,7 @@ class Message
         }
 
         $conversationId = $input->{'conversationId'};
-        $createdAt = $input->{'createdAt'};
+        $createdAt = new DateTime($input->{'createdAt'});
         $createdBy = null;
         if (isset($input->{'createdBy'})) {
             $createdBy = User::buildFromInput($input->{'createdBy'}, validate: $validate);
@@ -420,7 +382,6 @@ class Message
                 UploadedFile::validateInput($i, true) => UploadedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
-        $history = array_map(fn (array|object $i): MessageHistoryItem => MessageHistoryItem::buildFromInput($i, validate: $validate), $input->{'history'});
         $internal = null;
         if (isset($input->{'internal'})) {
             $internal = (bool)($input->{'internal'});
@@ -432,7 +393,7 @@ class Message
         $messageId = $input->{'messageId'};
         $type = MessageType::from($input->{'type'});
 
-        $obj = new self($conversationId, $createdAt, $history, $messageId, $type);
+        $obj = new self($conversationId, $createdAt, $messageId, $type);
         $obj->createdBy = $createdBy;
         $obj->files = $files;
         $obj->internal = $internal;
@@ -449,7 +410,7 @@ class Message
     {
         $output = [];
         $output['conversationId'] = $this->conversationId;
-        $output['createdAt'] = $this->createdAt;
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->createdBy)) {
             $output['createdBy'] = $this->createdBy->toJson();
         }
@@ -459,7 +420,6 @@ class Message
                 ($i) instanceof RequestedFile, ($i) instanceof UploadedFile => $i->toJson(),
             }, $this->files);
         }
-        $output['history'] = array_map(fn (MessageHistoryItem $i): array => $i->toJson(), $this->history);
         if (isset($this->internal)) {
             $output['internal'] = $this->internal;
         }
@@ -498,5 +458,6 @@ class Message
 
     public function __clone()
     {
+        $this->createdAt = clone $this->createdAt;
     }
 }

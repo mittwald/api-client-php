@@ -31,7 +31,6 @@ class UpdateConversationOKResponse implements ResponseContainer
                 ],
                 'required' => [
                     'conversationId',
-                    'status',
                 ],
                 'type' => 'object',
             ],

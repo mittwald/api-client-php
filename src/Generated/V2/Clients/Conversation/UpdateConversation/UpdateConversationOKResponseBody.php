@@ -23,7 +23,6 @@ class UpdateConversationOKResponseBody
         ],
         'required' => [
             'conversationId',
-            'status',
         ],
         'type' => 'object',
     ];
