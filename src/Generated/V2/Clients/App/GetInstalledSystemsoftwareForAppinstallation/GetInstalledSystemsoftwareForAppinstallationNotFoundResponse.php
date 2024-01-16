@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation;
+namespace Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class RequestAppinstallationCreatedResponseBody
+class GetInstalledSystemsoftwareForAppinstallationNotFoundResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -15,53 +18,48 @@ class RequestAppinstallationCreatedResponseBody
      * @var array
      */
     private static array $schema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'id' => [
-                'format' => 'uuid',
-                'type' => 'string',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'id',
-        ],
-        'type' => 'object',
     ];
 
     /**
-     * @var string
+     * @var Error
      */
-    private string $id;
+    private Error $body;
+
+    private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param string $id
+     * @param Error $body
      */
-    public function __construct(string $id)
+    public function __construct(Error $body)
     {
-        $this->id = $id;
+        $this->body = $body;
     }
 
     /**
-     * @return string
+     * @return Error
      */
-    public function getId(): string
+    public function getBody(): Error
     {
-        return $this->id;
+        return $this->body;
     }
 
     /**
-     * @param string $id
+     * @param Error $body
      * @return self
      */
-    public function withId(string $id): self
+    public function withBody(Error $body): self
     {
-        $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -71,19 +69,19 @@ class RequestAppinstallationCreatedResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return RequestAppinstallationCreatedResponseBody Created instance
+     * @return GetInstalledSystemsoftwareForAppinstallationNotFoundResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): RequestAppinstallationCreatedResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetInstalledSystemsoftwareForAppinstallationNotFoundResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -96,7 +94,7 @@ class RequestAppinstallationCreatedResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -127,5 +125,18 @@ class RequestAppinstallationCreatedResponseBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

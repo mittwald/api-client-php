@@ -28,14 +28,9 @@ class RequestAppinstallationCreatedResponse implements ResponseContainer
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
-                    'processId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
                 ],
                 'required' => [
                     'id',
-                    'processId',
                 ],
                 'type' => 'object',
             ],

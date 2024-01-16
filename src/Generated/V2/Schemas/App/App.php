@@ -49,7 +49,6 @@ class App
             'id',
             'name',
             'tags',
-            'images',
         ],
         'type' => 'object',
     ];

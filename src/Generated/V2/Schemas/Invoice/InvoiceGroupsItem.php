@@ -42,7 +42,6 @@ class InvoiceGroupsItem
             ],
         ],
         'required' => [
-            'description',
             'items',
         ],
         'type' => 'object',
@@ -54,9 +53,9 @@ class InvoiceGroupsItem
     private ?string $contractId = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $description;
+    private ?string $description = null;
 
     /**
      * @var InvoiceItem[]
@@ -64,12 +63,10 @@ class InvoiceGroupsItem
     private array $items;
 
     /**
-     * @param string $description
      * @param InvoiceItem[] $items
      */
-    public function __construct(string $description, array $items)
+    public function __construct(array $items)
     {
-        $this->description = $description;
         $this->items = $items;
     }
 
@@ -82,11 +79,11 @@ class InvoiceGroupsItem
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
     /**
@@ -145,6 +142,17 @@ class InvoiceGroupsItem
     }
 
     /**
+     * @return self
+     */
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
+    /**
      * @param InvoiceItem[] $items
      * @return self
      */
@@ -175,11 +183,15 @@ class InvoiceGroupsItem
         if (isset($input->{'contractId'})) {
             $contractId = $input->{'contractId'};
         }
-        $description = $input->{'description'};
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $items = array_map(fn (array|object $i): InvoiceItem => InvoiceItem::buildFromInput($i, validate: $validate), $input->{'items'});
 
-        $obj = new self($description, $items);
+        $obj = new self($items);
         $obj->contractId = $contractId;
+        $obj->description = $description;
         return $obj;
     }
 
@@ -194,7 +206,9 @@ class InvoiceGroupsItem
         if (isset($this->contractId)) {
             $output['contractId'] = $this->contractId;
         }
-        $output['description'] = $this->description;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         $output['items'] = array_map(fn (InvoiceItem $i): array => $i->toJson(), $this->items);
 
         return $output;

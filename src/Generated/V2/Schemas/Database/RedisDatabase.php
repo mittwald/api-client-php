@@ -100,7 +100,6 @@ class RedisDatabase
             'hostname',
             'port',
             'description',
-            'finalizers',
             'createdAt',
             'updatedAt',
             'name',
@@ -124,9 +123,9 @@ class RedisDatabase
     private string $description;
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    private array $finalizers;
+    private ?array $finalizers = null;
 
     /**
      * @var string
@@ -166,7 +165,6 @@ class RedisDatabase
     /**
      * @param DateTime $createdAt
      * @param string $description
-     * @param string[] $finalizers
      * @param string $hostname
      * @param string $id
      * @param string $name
@@ -175,11 +173,10 @@ class RedisDatabase
      * @param DateTime $updatedAt
      * @param string $version
      */
-    public function __construct(DateTime $createdAt, string $description, array $finalizers, string $hostname, string $id, string $name, int $port, string $projectId, DateTime $updatedAt, string $version)
+    public function __construct(DateTime $createdAt, string $description, string $hostname, string $id, string $name, int $port, string $projectId, DateTime $updatedAt, string $version)
     {
         $this->createdAt = $createdAt;
         $this->description = $description;
-        $this->finalizers = $finalizers;
         $this->hostname = $hostname;
         $this->id = $id;
         $this->name = $name;
@@ -215,11 +212,11 @@ class RedisDatabase
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getFinalizers(): array
+    public function getFinalizers(): ?array
     {
-        return $this->finalizers;
+        return $this->finalizers ?? null;
     }
 
     /**
@@ -345,6 +342,17 @@ class RedisDatabase
 
         $clone = clone $this;
         $clone->finalizers = $finalizers;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutFinalizers(): self
+    {
+        $clone = clone $this;
+        unset($clone->finalizers);
 
         return $clone;
     }
@@ -490,7 +498,10 @@ class RedisDatabase
         }
         $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
-        $finalizers = $input->{'finalizers'};
+        $finalizers = null;
+        if (isset($input->{'finalizers'})) {
+            $finalizers = $input->{'finalizers'};
+        }
         $hostname = $input->{'hostname'};
         $id = $input->{'id'};
         $name = $input->{'name'};
@@ -499,8 +510,9 @@ class RedisDatabase
         $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
-        $obj = new self($createdAt, $description, $finalizers, $hostname, $id, $name, $port, $projectId, $updatedAt, $version);
+        $obj = new self($createdAt, $description, $hostname, $id, $name, $port, $projectId, $updatedAt, $version);
         $obj->configuration = $configuration;
+        $obj->finalizers = $finalizers;
         return $obj;
     }
 
@@ -517,7 +529,9 @@ class RedisDatabase
         }
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
-        $output['finalizers'] = $this->finalizers;
+        if (isset($this->finalizers)) {
+            $output['finalizers'] = $this->finalizers;
+        }
         $output['hostname'] = $this->hostname;
         $output['id'] = $this->id;
         $output['name'] = $this->name;

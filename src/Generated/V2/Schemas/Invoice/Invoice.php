@@ -70,7 +70,6 @@ class Invoice
                         ],
                     ],
                     'required' => [
-                        'description',
                         'items',
                     ],
                     'type' => 'object',

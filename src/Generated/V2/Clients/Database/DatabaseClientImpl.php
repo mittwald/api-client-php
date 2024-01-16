@@ -221,17 +221,16 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteMysqlDatabase\DeleteMysqlDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteMysqlDatabase(DeleteMysqlDatabaseRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteMysqlDatabaseRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
             412 => DeleteMysqlDatabasePreconditionFailedResponse::fromResponse($httpResponse),
             500 => DeleteMysqlDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
@@ -247,17 +246,16 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteMysqlUser\DeleteMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteMysqlUser(DeleteMysqlUserRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteMysqlUserRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => DeleteMysqlUserNotFoundResponse::fromResponse($httpResponse),
             default => DeleteMysqlUserDefaultResponse::fromResponse($httpResponse),
@@ -271,17 +269,16 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteRedisDatabase\DeleteRedisDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteRedisDatabase(DeleteRedisDatabaseRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DeleteRedisDatabaseRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            204 => new EmptyResponse($httpResponse),
             400 => DeleteRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
             412 => DeleteRedisDatabasePreconditionFailedResponse::fromResponse($httpResponse),
             500 => DeleteRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
@@ -297,13 +294,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DisableMysqlUser\DisableMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function disableMysqlUser(DisableMysqlUserRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DisableMysqlUserRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -320,13 +317,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param EnableMysqlUser\EnableMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function enableMysqlUser(EnableMysqlUserRequest $request): EmptyResponse
     {
         $httpRequest = new Request(EnableMysqlUserRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -575,13 +572,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateMysqlDatabaseDefaultCharsetRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -598,13 +595,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateMysqlDatabaseDescriptionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -621,13 +618,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlUser\UpdateMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateMysqlUserRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -644,13 +641,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateMysqlUserPasswordRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -667,13 +664,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateRedisDatabaseConfigurationRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
@@ -690,13 +687,13 @@ class DatabaseClientImpl implements DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateRedisDatabaseDescriptionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {

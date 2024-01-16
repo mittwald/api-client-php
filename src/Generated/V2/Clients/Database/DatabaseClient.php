@@ -95,7 +95,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteMysqlDatabase\DeleteMysqlDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteMysqlDatabase(DeleteMysqlDatabaseRequest $request): EmptyResponse;
     /**
@@ -105,7 +105,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteMysqlUser\DeleteMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteMysqlUser(DeleteMysqlUserRequest $request): EmptyResponse;
     /**
@@ -115,7 +115,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteRedisDatabase\DeleteRedisDatabaseRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function deleteRedisDatabase(DeleteRedisDatabaseRequest $request): EmptyResponse;
     /**
@@ -125,7 +125,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DisableMysqlUser\DisableMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function disableMysqlUser(DisableMysqlUserRequest $request): EmptyResponse;
     /**
@@ -135,7 +135,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param EnableMysqlUser\EnableMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function enableMysqlUser(EnableMysqlUserRequest $request): EmptyResponse;
     /**
@@ -245,7 +245,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse;
     /**
@@ -255,7 +255,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse;
     /**
@@ -265,7 +265,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlUser\UpdateMysqlUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse;
     /**
@@ -275,7 +275,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse;
     /**
@@ -285,7 +285,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse;
     /**
@@ -295,7 +295,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse;
 }

@@ -25,6 +25,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionDefau
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse;
@@ -190,6 +194,28 @@ class AppClientImpl implements AppClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetAppversionNotFoundResponse::fromResponse($httpResponse),
             default => GetAppversionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get the installed `SystemSoftware' for a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-installed-systemsoftware-for-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationRequest $request An object representing the request for this operation
+     * @return GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationOKResponse The list of installed 'SystemSoftware'.
+     */
+    public function getInstalledSystemsoftwareForAppinstallation(GetInstalledSystemsoftwareForAppinstallationRequest $request): GetInstalledSystemsoftwareForAppinstallationOKResponse
+    {
+        $httpRequest = new Request(GetInstalledSystemsoftwareForAppinstallationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetInstalledSystemsoftwareForAppinstallationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => GetInstalledSystemsoftwareForAppinstallationNotFoundResponse::fromResponse($httpResponse),
+            default => GetInstalledSystemsoftwareForAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
 

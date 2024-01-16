@@ -31,6 +31,12 @@ class SystemSoftware
             'id' => [
                 'type' => 'string',
             ],
+            'meta' => [
+                'additionalProperties' => [
+                    'type' => 'string',
+                ],
+                'type' => 'object',
+            ],
             'name' => [
                 'type' => 'string',
             ],
@@ -53,6 +59,11 @@ class SystemSoftware
      * @var string
      */
     private string $id;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $meta = null;
 
     /**
      * @var string
@@ -85,6 +96,14 @@ class SystemSoftware
     }
 
     /**
+     * @return string[]|null
+     */
+    public function getMeta(): ?array
+    {
+        return $this->meta ?? null;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -114,6 +133,35 @@ class SystemSoftware
 
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $meta
+     * @return self
+     */
+    public function withMeta(array $meta): self
+    {
+        $validator = new Validator();
+        $validator->validate($meta, static::$schema['properties']['meta']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->meta = $meta;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutMeta(): self
+    {
+        $clone = clone $this;
+        unset($clone->meta);
 
         return $clone;
     }
@@ -170,11 +218,15 @@ class SystemSoftware
         }
 
         $id = $input->{'id'};
+        $meta = null;
+        if (isset($input->{'meta'})) {
+            $meta = (array)$input->{'meta'};
+        }
         $name = $input->{'name'};
         $tags = $input->{'tags'};
 
         $obj = new self($id, $name, $tags);
-
+        $obj->meta = $meta;
         return $obj;
     }
 
@@ -187,6 +239,9 @@ class SystemSoftware
     {
         $output = [];
         $output['id'] = $this->id;
+        if (isset($this->meta)) {
+            $output['meta'] = $this->meta;
+        }
         $output['name'] = $this->name;
         $output['tags'] = $this->tags;
 

@@ -13,6 +13,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstall
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareOKResponse;
@@ -98,6 +100,16 @@ interface AppClient
      * @return GetAppversion\GetAppversionOKResponse The appVersion object.
      */
     public function getAppversion(GetAppversionRequest $request): GetAppversionOKResponse;
+    /**
+     * Get the installed `SystemSoftware' for a specific `AppInstallation`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-installed-systemsoftware-for-appinstallation
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationRequest $request An object representing the request for this operation
+     * @return GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationOKResponse The list of installed 'SystemSoftware'.
+     */
+    public function getInstalledSystemsoftwareForAppinstallation(GetInstalledSystemsoftwareForAppinstallationRequest $request): GetInstalledSystemsoftwareForAppinstallationOKResponse;
     /**
      * Get the missing requirements of an appInstallation for a specific target AppVersion.
      *
