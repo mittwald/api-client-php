@@ -83,7 +83,7 @@ interface SSHSFTPUserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateSftpUser\UpdateSftpUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse
+     * @return EmptyResponse NoContent
      */
     public function updateSftpUser(UpdateSftpUserRequest $request): EmptyResponse;
     /**

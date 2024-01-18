@@ -30,7 +30,7 @@ class RecordMXCustom
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordMXRecord',
                 ],
-                'maxItems' => 5,
+                'maxItems' => 10,
                 'minItems' => 1,
                 'type' => 'array',
                 'uniqueItems' => true,

@@ -26,12 +26,6 @@ class ReadableArticle
      */
     private static array $schema = [
         'properties' => [
-            'additionalArticles' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.article.ReadableBookableArticleOptions',
-                ],
-                'type' => 'array',
-            ],
             'addons' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.article.ArticleAddons',
@@ -117,11 +111,6 @@ class ReadableArticle
                 ],
                 'type' => 'string',
             ],
-            'picture' => [
-                'example' => 'https://mittwald.example/picture.png',
-                'format' => 'uri',
-                'type' => 'string',
-            ],
             'possibleArticleChanges' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.article.ReadableChangeArticleOptions',
@@ -152,11 +141,6 @@ class ReadableArticle
         ],
         'type' => 'object',
     ];
-
-    /**
-     * @var ReadableBookableArticleOptions[]|null
-     */
-    private ?array $additionalArticles = null;
 
     /**
      * @var ArticleAddons[]|null
@@ -224,11 +208,6 @@ class ReadableArticle
     private ReadableArticleOrderable $orderable;
 
     /**
-     * @var string|null
-     */
-    private ?string $picture = null;
-
-    /**
      * @var ReadableChangeArticleOptions[]|null
      */
     private ?array $possibleArticleChanges = null;
@@ -264,15 +243,6 @@ class ReadableArticle
         $this->name = $name;
         $this->orderable = $orderable;
         $this->template = $template;
-    }
-
-    /**
-     * @return
-     * ReadableBookableArticleOptions[]|null
-     */
-    public function getAdditionalArticles(): ?array
-    {
-        return $this->additionalArticles ?? null;
     }
 
     /**
@@ -382,14 +352,6 @@ class ReadableArticle
     }
 
     /**
-     * @return string|null
-     */
-    public function getPicture(): ?string
-    {
-        return $this->picture ?? null;
-    }
-
-    /**
      * @return
      * ReadableChangeArticleOptions[]|null
      */
@@ -420,29 +382,6 @@ class ReadableArticle
     public function getTemplate(): ArticleTemplate
     {
         return $this->template;
-    }
-
-    /**
-     * @param ReadableBookableArticleOptions[] $additionalArticles
-     * @return self
-     */
-    public function withAdditionalArticles(array $additionalArticles): self
-    {
-        $clone = clone $this;
-        $clone->additionalArticles = $additionalArticles;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutAdditionalArticles(): self
-    {
-        $clone = clone $this;
-        unset($clone->additionalArticles);
-
-        return $clone;
     }
 
     /**
@@ -738,35 +677,6 @@ class ReadableArticle
     }
 
     /**
-     * @param string $picture
-     * @return self
-     */
-    public function withPicture(string $picture): self
-    {
-        $validator = new Validator();
-        $validator->validate($picture, static::$schema['properties']['picture']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->picture = $picture;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutPicture(): self
-    {
-        $clone = clone $this;
-        unset($clone->picture);
-
-        return $clone;
-    }
-
-    /**
      * @param ReadableChangeArticleOptions[] $possibleArticleChanges
      * @return self
      */
@@ -868,10 +778,6 @@ class ReadableArticle
             static::validateInput($input);
         }
 
-        $additionalArticles = null;
-        if (isset($input->{'additionalArticles'})) {
-            $additionalArticles = array_map(fn (array|object $i): ReadableBookableArticleOptions => ReadableBookableArticleOptions::buildFromInput($i, validate: $validate), $input->{'additionalArticles'});
-        }
         $addons = null;
         if (isset($input->{'addons'})) {
             $addons = array_map(fn (array|object $i): ArticleAddons => ArticleAddons::buildFromInput($i, validate: $validate), $input->{'addons'});
@@ -909,10 +815,6 @@ class ReadableArticle
         }
         $name = $input->{'name'};
         $orderable = ReadableArticleOrderable::from($input->{'orderable'});
-        $picture = null;
-        if (isset($input->{'picture'})) {
-            $picture = $input->{'picture'};
-        }
         $possibleArticleChanges = null;
         if (isset($input->{'possibleArticleChanges'})) {
             $possibleArticleChanges = array_map(fn (array|object $i): ReadableChangeArticleOptions => ReadableChangeArticleOptions::buildFromInput($i, validate: $validate), $input->{'possibleArticleChanges'});
@@ -928,7 +830,6 @@ class ReadableArticle
         $template = ArticleTemplate::buildFromInput($input->{'template'}, validate: $validate);
 
         $obj = new self($articleId, $contractDurationInMonth, $description, $name, $orderable, $template);
-        $obj->additionalArticles = $additionalArticles;
         $obj->addons = $addons;
         $obj->attributes = $attributes;
         $obj->balanceAddonKey = $balanceAddonKey;
@@ -937,7 +838,6 @@ class ReadableArticle
         $obj->hideOnInvoice = $hideOnInvoice;
         $obj->machineType = $machineType;
         $obj->modifierArticles = $modifierArticles;
-        $obj->picture = $picture;
         $obj->possibleArticleChanges = $possibleArticleChanges;
         $obj->price = $price;
         $obj->tags = $tags;
@@ -952,9 +852,6 @@ class ReadableArticle
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->additionalArticles)) {
-            $output['additionalArticles'] = array_map(fn (ReadableBookableArticleOptions $i): array => $i->toJson(), $this->additionalArticles);
-        }
         if (isset($this->addons)) {
             $output['addons'] = array_map(fn (ArticleAddons $i): array => $i->toJson(), $this->addons);
         }
@@ -984,9 +881,6 @@ class ReadableArticle
         }
         $output['name'] = $this->name;
         $output['orderable'] = ($this->orderable)->value;
-        if (isset($this->picture)) {
-            $output['picture'] = $this->picture;
-        }
         if (isset($this->possibleArticleChanges)) {
             $output['possibleArticleChanges'] = array_map(fn (ReadableChangeArticleOptions $i): array => $i->toJson(), $this->possibleArticleChanges);
         }

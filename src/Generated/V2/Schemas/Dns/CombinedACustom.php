@@ -30,14 +30,14 @@ class CombinedACustom
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.dns.CombinedAManagedARecord',
                 ],
-                'maxItems' => 6,
+                'maxItems' => 10,
                 'type' => 'array',
             ],
             'aaaa' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.dns.CombinedAManagedAAAARecord',
                 ],
-                'maxItems' => 6,
+                'maxItems' => 10,
                 'type' => 'array',
             ],
             'settings' => [

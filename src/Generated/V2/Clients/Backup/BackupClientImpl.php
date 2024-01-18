@@ -340,13 +340,13 @@ class BackupClientImpl implements BackupClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateProjectBackupSchedule(UpdateProjectBackupScheduleRequest $request): EmptyResponse
     {
         $httpRequest = new Request(UpdateProjectBackupScheduleRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {

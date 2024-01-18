@@ -155,7 +155,7 @@ interface BackupClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse NoContent
      */
     public function updateProjectBackupSchedule(UpdateProjectBackupScheduleRequest $request): EmptyResponse;
 }
