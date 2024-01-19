@@ -29,7 +29,7 @@ class GetNextTerminationDateForItemOKResponse implements ResponseContainer
                         'type' => 'string',
                     ],
                     'nextTerminationDate' => [
-                        'format' => 'date',
+                        'format' => 'date-time',
                         'type' => 'string',
                     ],
                 ],

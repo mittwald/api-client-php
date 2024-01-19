@@ -27,11 +27,6 @@ class TariffChange
      */
     private static array $schema = [
         'properties' => [
-            'executedAtDate' => [
-                'description' => 'This is only set if the tariff change has already been carried out.',
-                'format' => 'date-time',
-                'type' => 'string',
-            ],
             'newArticles' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.contract.Article',
@@ -57,13 +52,6 @@ class TariffChange
         ],
         'type' => 'object',
     ];
-
-    /**
-     * This is only set if the tariff change has already been carried out.
-     *
-     * @var DateTime|null
-     */
-    private ?DateTime $executedAtDate = null;
 
     /**
      * @var Article[]
@@ -98,14 +86,6 @@ class TariffChange
     }
 
     /**
-     * @return DateTime|null
-     */
-    public function getExecutedAtDate(): ?DateTime
-    {
-        return $this->executedAtDate ?? null;
-    }
-
-    /**
      * @return Article[]
      */
     public function getNewArticles(): array
@@ -135,29 +115,6 @@ class TariffChange
     public function getTargetDate(): DateTime
     {
         return $this->targetDate;
-    }
-
-    /**
-     * @param DateTime $executedAtDate
-     * @return self
-     */
-    public function withExecutedAtDate(DateTime $executedAtDate): self
-    {
-        $clone = clone $this;
-        $clone->executedAtDate = $executedAtDate;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutExecutedAtDate(): self
-    {
-        $clone = clone $this;
-        unset($clone->executedAtDate);
-
-        return $clone;
     }
 
     /**
@@ -240,10 +197,6 @@ class TariffChange
             static::validateInput($input);
         }
 
-        $executedAtDate = null;
-        if (isset($input->{'executedAtDate'})) {
-            $executedAtDate = new DateTime($input->{'executedAtDate'});
-        }
         $newArticles = array_map(fn (array|object $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'newArticles'});
         $scheduledAtDate = new DateTime($input->{'scheduledAtDate'});
         $scheduledByUserId = null;
@@ -253,7 +206,6 @@ class TariffChange
         $targetDate = new DateTime($input->{'targetDate'});
 
         $obj = new self($newArticles, $scheduledAtDate, $targetDate);
-        $obj->executedAtDate = $executedAtDate;
         $obj->scheduledByUserId = $scheduledByUserId;
         return $obj;
     }
@@ -266,9 +218,6 @@ class TariffChange
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->executedAtDate)) {
-            $output['executedAtDate'] = ($this->executedAtDate)->format(DateTime::ATOM);
-        }
         $output['newArticles'] = array_map(fn (Article $i): array => $i->toJson(), $this->newArticles);
         $output['scheduledAtDate'] = ($this->scheduledAtDate)->format(DateTime::ATOM);
         if (isset($this->scheduledByUserId)) {
@@ -305,9 +254,6 @@ class TariffChange
 
     public function __clone()
     {
-        if (isset($this->executedAtDate)) {
-            $this->executedAtDate = clone $this->executedAtDate;
-        }
         $this->scheduledAtDate = clone $this->scheduledAtDate;
         $this->targetDate = clone $this->targetDate;
     }

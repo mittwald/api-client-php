@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -21,7 +22,7 @@ class GetNextTerminationDateForItemOKResponseBody
                 'type' => 'string',
             ],
             'nextTerminationDate' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
         ],
@@ -37,15 +38,15 @@ class GetNextTerminationDateForItemOKResponseBody
     private string $contractItemId;
 
     /**
-     * @var string
+     * @var DateTime
      */
-    private string $nextTerminationDate;
+    private DateTime $nextTerminationDate;
 
     /**
      * @param string $contractItemId
-     * @param string $nextTerminationDate
+     * @param DateTime $nextTerminationDate
      */
-    public function __construct(string $contractItemId, string $nextTerminationDate)
+    public function __construct(string $contractItemId, DateTime $nextTerminationDate)
     {
         $this->contractItemId = $contractItemId;
         $this->nextTerminationDate = $nextTerminationDate;
@@ -60,9 +61,9 @@ class GetNextTerminationDateForItemOKResponseBody
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getNextTerminationDate(): string
+    public function getNextTerminationDate(): DateTime
     {
         return $this->nextTerminationDate;
     }
@@ -86,17 +87,11 @@ class GetNextTerminationDateForItemOKResponseBody
     }
 
     /**
-     * @param string $nextTerminationDate
+     * @param DateTime $nextTerminationDate
      * @return self
      */
-    public function withNextTerminationDate(string $nextTerminationDate): self
+    public function withNextTerminationDate(DateTime $nextTerminationDate): self
     {
-        $validator = new Validator();
-        $validator->validate($nextTerminationDate, static::$schema['properties']['nextTerminationDate']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->nextTerminationDate = $nextTerminationDate;
 
@@ -119,7 +114,7 @@ class GetNextTerminationDateForItemOKResponseBody
         }
 
         $contractItemId = $input->{'contractItemId'};
-        $nextTerminationDate = $input->{'nextTerminationDate'};
+        $nextTerminationDate = new DateTime($input->{'nextTerminationDate'});
 
         $obj = new self($contractItemId, $nextTerminationDate);
 
@@ -135,7 +130,7 @@ class GetNextTerminationDateForItemOKResponseBody
     {
         $output = [];
         $output['contractItemId'] = $this->contractItemId;
-        $output['nextTerminationDate'] = $this->nextTerminationDate;
+        $output['nextTerminationDate'] = ($this->nextTerminationDate)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -166,5 +161,6 @@ class GetNextTerminationDateForItemOKResponseBody
 
     public function __clone()
     {
+        $this->nextTerminationDate = clone $this->nextTerminationDate;
     }
 }
