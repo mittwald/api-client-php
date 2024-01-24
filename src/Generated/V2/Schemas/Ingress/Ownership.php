@@ -36,15 +36,14 @@ class Ownership
         ],
         'required' => [
             'verified',
-            'txtRecord',
         ],
         'type' => 'object',
     ];
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $txtRecord;
+    private ?string $txtRecord = null;
 
     /**
      * Whether the domain ownership is verified or not.
@@ -54,21 +53,19 @@ class Ownership
     private bool $verified;
 
     /**
-     * @param string $txtRecord
      * @param bool $verified
      */
-    public function __construct(string $txtRecord, bool $verified)
+    public function __construct(bool $verified)
     {
-        $this->txtRecord = $txtRecord;
         $this->verified = $verified;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTxtRecord(): string
+    public function getTxtRecord(): ?string
     {
-        return $this->txtRecord;
+        return $this->txtRecord ?? null;
     }
 
     /**
@@ -93,6 +90,17 @@ class Ownership
 
         $clone = clone $this;
         $clone->txtRecord = $txtRecord;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutTxtRecord(): self
+    {
+        $clone = clone $this;
+        unset($clone->txtRecord);
 
         return $clone;
     }
@@ -130,11 +138,14 @@ class Ownership
             static::validateInput($input);
         }
 
-        $txtRecord = $input->{'txtRecord'};
+        $txtRecord = null;
+        if (isset($input->{'txtRecord'})) {
+            $txtRecord = $input->{'txtRecord'};
+        }
         $verified = (bool)($input->{'verified'});
 
-        $obj = new self($txtRecord, $verified);
-
+        $obj = new self($verified);
+        $obj->txtRecord = $txtRecord;
         return $obj;
     }
 
@@ -146,7 +157,9 @@ class Ownership
     public function toJson(): array
     {
         $output = [];
-        $output['txtRecord'] = $this->txtRecord;
+        if (isset($this->txtRecord)) {
+            $output['txtRecord'] = $this->txtRecord;
+        }
         $output['verified'] = $this->verified;
 
         return $output;

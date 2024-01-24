@@ -66,6 +66,9 @@ class Ingress
                 'description' => 'Whether this ingress is the default ingress or not. A default ingress is automatically created, it cannot be deleted. There can be only one default ingress per project.',
                 'type' => 'boolean',
             ],
+            'isDomain' => [
+                'type' => 'boolean',
+            ],
             'isEnabled' => [
                 'type' => 'boolean',
             ],
@@ -137,6 +140,11 @@ class Ingress
      * @var bool
      */
     private bool $isDefault;
+
+    /**
+     * @var bool|null
+     */
+    private ?bool $isDomain = null;
 
     /**
      * @var bool
@@ -229,6 +237,14 @@ class Ingress
     public function getIsDefault(): bool
     {
         return $this->isDefault;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsDomain(): ?bool
+    {
+        return $this->isDomain ?? null;
     }
 
     /**
@@ -357,6 +373,35 @@ class Ingress
     }
 
     /**
+     * @param bool $isDomain
+     * @return self
+     */
+    public function withIsDomain(bool $isDomain): self
+    {
+        $validator = new Validator();
+        $validator->validate($isDomain, static::$schema['properties']['isDomain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isDomain = $isDomain;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutIsDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->isDomain);
+
+        return $clone;
+    }
+
+    /**
      * @param bool $isEnabled
      * @return self
      */
@@ -448,6 +493,10 @@ class Ingress
         $id = $input->{'id'};
         $ips = IngressIps::buildFromInput($input->{'ips'}, validate: $validate);
         $isDefault = (bool)($input->{'isDefault'});
+        $isDomain = null;
+        if (isset($input->{'isDomain'})) {
+            $isDomain = (bool)($input->{'isDomain'});
+        }
         $isEnabled = (bool)($input->{'isEnabled'});
         $ownership = Ownership::buildFromInput($input->{'ownership'}, validate: $validate);
         $paths = array_map(fn (array|object $i): Path => Path::buildFromInput($i, validate: $validate), $input->{'paths'});
@@ -458,7 +507,7 @@ class Ingress
         };
 
         $obj = new self($dnsValidationErrors, $hostname, $id, $ips, $isDefault, $isEnabled, $ownership, $paths, $projectId, $tls);
-
+        $obj->isDomain = $isDomain;
         return $obj;
     }
 
@@ -475,6 +524,9 @@ class Ingress
         $output['id'] = $this->id;
         $output['ips'] = ($this->ips)->toJson();
         $output['isDefault'] = $this->isDefault;
+        if (isset($this->isDomain)) {
+            $output['isDomain'] = $this->isDomain;
+        }
         $output['isEnabled'] = $this->isEnabled;
         $output['ownership'] = $this->ownership->toJson();
         $output['paths'] = array_map(fn (Path $i): array => $i->toJson(), $this->paths);
