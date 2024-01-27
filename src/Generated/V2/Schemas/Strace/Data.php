@@ -108,10 +108,21 @@ class Data
                             'enum' => [
                                 'UNKNOWN',
                                 'PRIVATE',
-                                'INTERNAL',
                                 'EXTERNAL',
                             ],
                             'type' => 'string',
+                        ],
+                        'description' => [
+                            'description' => 'A short description of the network connection to provide additional context.',
+                            'type' => 'string',
+                        ],
+                        'ip' => [
+                            'description' => 'IP address to which a connection was established.',
+                            'type' => 'string',
+                        ],
+                        'port' => [
+                            'description' => 'Port to which a connection was established.',
+                            'type' => 'integer',
                         ],
                         'stats' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.strace.Statistics',
@@ -132,6 +143,9 @@ class Data
                     ],
                     'required' => [
                         'url',
+                        'ip',
+                        'port',
+                        'description',
                         'connectionType',
                         'stats',
                         'warnLevel',

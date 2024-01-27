@@ -41,6 +41,11 @@ class Statistics
                 'example' => 25,
                 'type' => 'integer',
             ],
+            'syscallCount' => [
+                'description' => 'Syscall count.',
+                'example' => 4321,
+                'type' => 'integer',
+            ],
             'userspaceMs' => [
                 'description' => 'Elapsed user space time in milliseconds.',
                 'example' => 1.2345,
@@ -51,6 +56,7 @@ class Statistics
             'kernelMs',
             'userspaceMs',
             'count',
+            'syscallCount',
             'occurrences',
         ],
         'type' => 'object',
@@ -78,6 +84,13 @@ class Statistics
     private int $occurrences;
 
     /**
+     * Syscall count.
+     *
+     * @var int
+     */
+    private int $syscallCount;
+
+    /**
      * Elapsed user space time in milliseconds.
      *
      * @var int|float
@@ -88,13 +101,15 @@ class Statistics
      * @param int $count
      * @param int|float $kernelMs
      * @param int $occurrences
+     * @param int $syscallCount
      * @param int|float $userspaceMs
      */
-    public function __construct(int $count, int|float $kernelMs, int $occurrences, int|float $userspaceMs)
+    public function __construct(int $count, int|float $kernelMs, int $occurrences, int $syscallCount, int|float $userspaceMs)
     {
         $this->count = $count;
         $this->kernelMs = $kernelMs;
         $this->occurrences = $occurrences;
+        $this->syscallCount = $syscallCount;
         $this->userspaceMs = $userspaceMs;
     }
 
@@ -120,6 +135,14 @@ class Statistics
     public function getOccurrences(): int
     {
         return $this->occurrences;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSyscallCount(): int
+    {
+        return $this->syscallCount;
     }
 
     /**
@@ -185,6 +208,24 @@ class Statistics
     }
 
     /**
+     * @param int $syscallCount
+     * @return self
+     */
+    public function withSyscallCount(int $syscallCount): self
+    {
+        $validator = new Validator();
+        $validator->validate($syscallCount, static::$schema['properties']['syscallCount']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->syscallCount = $syscallCount;
+
+        return $clone;
+    }
+
+    /**
      * @param int|float $userspaceMs
      * @return self
      */
@@ -220,9 +261,10 @@ class Statistics
         $count = (int)($input->{'count'});
         $kernelMs = str_contains($input->{'kernelMs'}, '.') ? (float)($input->{'kernelMs'}) : (int)($input->{'kernelMs'});
         $occurrences = (int)($input->{'occurrences'});
+        $syscallCount = (int)($input->{'syscallCount'});
         $userspaceMs = str_contains($input->{'userspaceMs'}, '.') ? (float)($input->{'userspaceMs'}) : (int)($input->{'userspaceMs'});
 
-        $obj = new self($count, $kernelMs, $occurrences, $userspaceMs);
+        $obj = new self($count, $kernelMs, $occurrences, $syscallCount, $userspaceMs);
 
         return $obj;
     }
@@ -238,6 +280,7 @@ class Statistics
         $output['count'] = $this->count;
         $output['kernelMs'] = $this->kernelMs;
         $output['occurrences'] = $this->occurrences;
+        $output['syscallCount'] = $this->syscallCount;
         $output['userspaceMs'] = $this->userspaceMs;
 
         return $output;

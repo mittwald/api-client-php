@@ -30,10 +30,21 @@ class DataNetworkingOpsItem
                 'enum' => [
                     'UNKNOWN',
                     'PRIVATE',
-                    'INTERNAL',
                     'EXTERNAL',
                 ],
                 'type' => 'string',
+            ],
+            'description' => [
+                'description' => 'A short description of the network connection to provide additional context.',
+                'type' => 'string',
+            ],
+            'ip' => [
+                'description' => 'IP address to which a connection was established.',
+                'type' => 'string',
+            ],
+            'port' => [
+                'description' => 'Port to which a connection was established.',
+                'type' => 'integer',
             ],
             'stats' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.strace.Statistics',
@@ -54,6 +65,9 @@ class DataNetworkingOpsItem
         ],
         'required' => [
             'url',
+            'ip',
+            'port',
+            'description',
             'connectionType',
             'stats',
             'warnLevel',
@@ -65,6 +79,27 @@ class DataNetworkingOpsItem
      * @var DataNetworkingOpsItemConnectionType
      */
     private DataNetworkingOpsItemConnectionType $connectionType;
+
+    /**
+     * A short description of the network connection to provide additional context.
+     *
+     * @var string
+     */
+    private string $description;
+
+    /**
+     * IP address to which a connection was established.
+     *
+     * @var string
+     */
+    private string $ip;
+
+    /**
+     * Port to which a connection was established.
+     *
+     * @var int
+     */
+    private int $port;
 
     /**
      * @var Statistics
@@ -87,13 +122,19 @@ class DataNetworkingOpsItem
 
     /**
      * @param DataNetworkingOpsItemConnectionType $connectionType
+     * @param string $description
+     * @param string $ip
+     * @param int $port
      * @param Statistics $stats
      * @param string $url
      * @param DataNetworkingOpsItemWarnLevel $warnLevel
      */
-    public function __construct(DataNetworkingOpsItemConnectionType $connectionType, Statistics $stats, string $url, DataNetworkingOpsItemWarnLevel $warnLevel)
+    public function __construct(DataNetworkingOpsItemConnectionType $connectionType, string $description, string $ip, int $port, Statistics $stats, string $url, DataNetworkingOpsItemWarnLevel $warnLevel)
     {
         $this->connectionType = $connectionType;
+        $this->description = $description;
+        $this->ip = $ip;
+        $this->port = $port;
         $this->stats = $stats;
         $this->url = $url;
         $this->warnLevel = $warnLevel;
@@ -105,6 +146,30 @@ class DataNetworkingOpsItem
     public function getConnectionType(): DataNetworkingOpsItemConnectionType
     {
         return $this->connectionType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp(): string
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPort(): int
+    {
+        return $this->port;
     }
 
     /**
@@ -139,6 +204,60 @@ class DataNetworkingOpsItem
     {
         $clone = clone $this;
         $clone->connectionType = $connectionType;
+
+        return $clone;
+    }
+
+    /**
+     * @param string $description
+     * @return self
+     */
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, static::$schema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    /**
+     * @param string $ip
+     * @return self
+     */
+    public function withIp(string $ip): self
+    {
+        $validator = new Validator();
+        $validator->validate($ip, static::$schema['properties']['ip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->ip = $ip;
+
+        return $clone;
+    }
+
+    /**
+     * @param int $port
+     * @return self
+     */
+    public function withPort(int $port): self
+    {
+        $validator = new Validator();
+        $validator->validate($port, static::$schema['properties']['port']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->port = $port;
 
         return $clone;
     }
@@ -201,11 +320,14 @@ class DataNetworkingOpsItem
         }
 
         $connectionType = DataNetworkingOpsItemConnectionType::from($input->{'connectionType'});
+        $description = $input->{'description'};
+        $ip = $input->{'ip'};
+        $port = (int)($input->{'port'});
         $stats = Statistics::buildFromInput($input->{'stats'}, validate: $validate);
         $url = $input->{'url'};
         $warnLevel = DataNetworkingOpsItemWarnLevel::from($input->{'warnLevel'});
 
-        $obj = new self($connectionType, $stats, $url, $warnLevel);
+        $obj = new self($connectionType, $description, $ip, $port, $stats, $url, $warnLevel);
 
         return $obj;
     }
@@ -219,6 +341,9 @@ class DataNetworkingOpsItem
     {
         $output = [];
         $output['connectionType'] = ($this->connectionType)->value;
+        $output['description'] = $this->description;
+        $output['ip'] = $this->ip;
+        $output['port'] = $this->port;
         $output['stats'] = $this->stats->toJson();
         $output['url'] = $this->url;
         $output['warnLevel'] = ($this->warnLevel)->value;

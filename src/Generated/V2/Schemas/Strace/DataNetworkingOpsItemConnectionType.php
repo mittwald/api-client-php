@@ -6,6 +6,5 @@ enum DataNetworkingOpsItemConnectionType: string
 {
     case UNKNOWN = 'UNKNOWN';
     case PRIVATE = 'PRIVATE';
-    case INTERNAL = 'INTERNAL';
     case EXTERNAL = 'EXTERNAL';
 }
