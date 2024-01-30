@@ -49,10 +49,6 @@ class DataNetworkingOpsItem
             'stats' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.strace.Statistics',
             ],
-            'url' => [
-                'description' => 'Hostname and port to which a connection was established. Can be empty.',
-                'type' => 'string',
-            ],
             'warnLevel' => [
                 'description' => 'Alerts when the time, syscall count or occurrence count of this group are abnormal.',
                 'enum' => [
@@ -64,7 +60,6 @@ class DataNetworkingOpsItem
             ],
         ],
         'required' => [
-            'url',
             'ip',
             'port',
             'description',
@@ -107,13 +102,6 @@ class DataNetworkingOpsItem
     private Statistics $stats;
 
     /**
-     * Hostname and port to which a connection was established. Can be empty.
-     *
-     * @var string
-     */
-    private string $url;
-
-    /**
      * Alerts when the time, syscall count or occurrence count of this group are abnormal.
      *
      * @var DataNetworkingOpsItemWarnLevel
@@ -126,17 +114,15 @@ class DataNetworkingOpsItem
      * @param string $ip
      * @param int $port
      * @param Statistics $stats
-     * @param string $url
      * @param DataNetworkingOpsItemWarnLevel $warnLevel
      */
-    public function __construct(DataNetworkingOpsItemConnectionType $connectionType, string $description, string $ip, int $port, Statistics $stats, string $url, DataNetworkingOpsItemWarnLevel $warnLevel)
+    public function __construct(DataNetworkingOpsItemConnectionType $connectionType, string $description, string $ip, int $port, Statistics $stats, DataNetworkingOpsItemWarnLevel $warnLevel)
     {
         $this->connectionType = $connectionType;
         $this->description = $description;
         $this->ip = $ip;
         $this->port = $port;
         $this->stats = $stats;
-        $this->url = $url;
         $this->warnLevel = $warnLevel;
     }
 
@@ -178,14 +164,6 @@ class DataNetworkingOpsItem
     public function getStats(): Statistics
     {
         return $this->stats;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
     }
 
     /**
@@ -275,24 +253,6 @@ class DataNetworkingOpsItem
     }
 
     /**
-     * @param string $url
-     * @return self
-     */
-    public function withUrl(string $url): self
-    {
-        $validator = new Validator();
-        $validator->validate($url, static::$schema['properties']['url']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->url = $url;
-
-        return $clone;
-    }
-
-    /**
      * @param DataNetworkingOpsItemWarnLevel $warnLevel
      * @return self
      */
@@ -324,10 +284,9 @@ class DataNetworkingOpsItem
         $ip = $input->{'ip'};
         $port = (int)($input->{'port'});
         $stats = Statistics::buildFromInput($input->{'stats'}, validate: $validate);
-        $url = $input->{'url'};
         $warnLevel = DataNetworkingOpsItemWarnLevel::from($input->{'warnLevel'});
 
-        $obj = new self($connectionType, $description, $ip, $port, $stats, $url, $warnLevel);
+        $obj = new self($connectionType, $description, $ip, $port, $stats, $warnLevel);
 
         return $obj;
     }
@@ -345,7 +304,6 @@ class DataNetworkingOpsItem
         $output['ip'] = $this->ip;
         $output['port'] = $this->port;
         $output['stats'] = $this->stats->toJson();
-        $output['url'] = $this->url;
         $output['warnLevel'] = ($this->warnLevel)->value;
 
         return $output;

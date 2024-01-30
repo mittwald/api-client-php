@@ -65,7 +65,7 @@ interface DatabaseClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateMysqlDatabase\CreateMysqlDatabaseRequest $request An object representing the request for this operation
-     * @return CreateMysqlDatabase\CreateMysqlDatabaseCreatedResponse Accepted
+     * @return CreateMysqlDatabase\CreateMysqlDatabaseCreatedResponse Created
      */
     public function createMysqlDatabase(CreateMysqlDatabaseRequest $request): CreateMysqlDatabaseCreatedResponse;
     /**

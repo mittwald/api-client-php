@@ -26,11 +26,6 @@ class Statistics
      */
     private static array $schema = [
         'properties' => [
-            'count' => [
-                'description' => 'Syscall count.',
-                'example' => 4321,
-                'type' => 'integer',
-            ],
             'kernelMs' => [
                 'description' => 'Elapsed kernel space time in milliseconds.',
                 'example' => 1.2345,
@@ -55,19 +50,11 @@ class Statistics
         'required' => [
             'kernelMs',
             'userspaceMs',
-            'count',
             'syscallCount',
             'occurrences',
         ],
         'type' => 'object',
     ];
-
-    /**
-     * Syscall count.
-     *
-     * @var int
-     */
-    private int $count;
 
     /**
      * Elapsed kernel space time in milliseconds.
@@ -98,27 +85,17 @@ class Statistics
     private int|float $userspaceMs;
 
     /**
-     * @param int $count
      * @param int|float $kernelMs
      * @param int $occurrences
      * @param int $syscallCount
      * @param int|float $userspaceMs
      */
-    public function __construct(int $count, int|float $kernelMs, int $occurrences, int $syscallCount, int|float $userspaceMs)
+    public function __construct(int|float $kernelMs, int $occurrences, int $syscallCount, int|float $userspaceMs)
     {
-        $this->count = $count;
         $this->kernelMs = $kernelMs;
         $this->occurrences = $occurrences;
         $this->syscallCount = $syscallCount;
         $this->userspaceMs = $userspaceMs;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCount(): int
-    {
-        return $this->count;
     }
 
     /**
@@ -151,24 +128,6 @@ class Statistics
     public function getUserspaceMs(): int|float
     {
         return $this->userspaceMs;
-    }
-
-    /**
-     * @param int $count
-     * @return self
-     */
-    public function withCount(int $count): self
-    {
-        $validator = new Validator();
-        $validator->validate($count, static::$schema['properties']['count']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->count = $count;
-
-        return $clone;
     }
 
     /**
@@ -258,13 +217,12 @@ class Statistics
             static::validateInput($input);
         }
 
-        $count = (int)($input->{'count'});
         $kernelMs = str_contains($input->{'kernelMs'}, '.') ? (float)($input->{'kernelMs'}) : (int)($input->{'kernelMs'});
         $occurrences = (int)($input->{'occurrences'});
         $syscallCount = (int)($input->{'syscallCount'});
         $userspaceMs = str_contains($input->{'userspaceMs'}, '.') ? (float)($input->{'userspaceMs'}) : (int)($input->{'userspaceMs'});
 
-        $obj = new self($count, $kernelMs, $occurrences, $syscallCount, $userspaceMs);
+        $obj = new self($kernelMs, $occurrences, $syscallCount, $userspaceMs);
 
         return $obj;
     }
@@ -277,7 +235,6 @@ class Statistics
     public function toJson(): array
     {
         $output = [];
-        $output['count'] = $this->count;
         $output['kernelMs'] = $this->kernelMs;
         $output['occurrences'] = $this->occurrences;
         $output['syscallCount'] = $this->syscallCount;

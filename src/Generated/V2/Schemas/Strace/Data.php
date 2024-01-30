@@ -127,10 +127,6 @@ class Data
                         'stats' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.strace.Statistics',
                         ],
-                        'url' => [
-                            'description' => 'Hostname and port to which a connection was established. Can be empty.',
-                            'type' => 'string',
-                        ],
                         'warnLevel' => [
                             'description' => 'Alerts when the time, syscall count or occurrence count of this group are abnormal.',
                             'enum' => [
@@ -142,7 +138,6 @@ class Data
                         ],
                     ],
                     'required' => [
-                        'url',
                         'ip',
                         'port',
                         'description',
