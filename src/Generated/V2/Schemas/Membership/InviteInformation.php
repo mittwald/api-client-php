@@ -42,8 +42,6 @@ class InviteInformation
             ],
         ],
         'required' => [
-            'userId',
-            'invitationToken',
             'invitedBy',
         ],
         'type' => 'object',
@@ -52,9 +50,9 @@ class InviteInformation
     /**
      * Token for authentication purposes.
      *
-     * @var string
+     * @var string|null
      */
-    private string $invitationToken;
+    private ?string $invitationToken = null;
 
     /**
      * ID of the user that created the invite.
@@ -66,28 +64,24 @@ class InviteInformation
     /**
      * ID of the user this invite is for.
      *
-     * @var string
+     * @var string|null
      */
-    private string $userId;
+    private ?string $userId = null;
 
     /**
-     * @param string $invitationToken
      * @param string $invitedBy
-     * @param string $userId
      */
-    public function __construct(string $invitationToken, string $invitedBy, string $userId)
+    public function __construct(string $invitedBy)
     {
-        $this->invitationToken = $invitationToken;
         $this->invitedBy = $invitedBy;
-        $this->userId = $userId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInvitationToken(): string
+    public function getInvitationToken(): ?string
     {
-        return $this->invitationToken;
+        return $this->invitationToken ?? null;
     }
 
     /**
@@ -99,11 +93,11 @@ class InviteInformation
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUserId(): string
+    public function getUserId(): ?string
     {
-        return $this->userId;
+        return $this->userId ?? null;
     }
 
     /**
@@ -120,6 +114,17 @@ class InviteInformation
 
         $clone = clone $this;
         $clone->invitationToken = $invitationToken;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutInvitationToken(): self
+    {
+        $clone = clone $this;
+        unset($clone->invitationToken);
 
         return $clone;
     }
@@ -161,6 +166,17 @@ class InviteInformation
     }
 
     /**
+     * @return self
+     */
+    public function withoutUserId(): self
+    {
+        $clone = clone $this;
+        unset($clone->userId);
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -175,12 +191,19 @@ class InviteInformation
             static::validateInput($input);
         }
 
-        $invitationToken = $input->{'invitationToken'};
+        $invitationToken = null;
+        if (isset($input->{'invitationToken'})) {
+            $invitationToken = $input->{'invitationToken'};
+        }
         $invitedBy = $input->{'invitedBy'};
-        $userId = $input->{'userId'};
+        $userId = null;
+        if (isset($input->{'userId'})) {
+            $userId = $input->{'userId'};
+        }
 
-        $obj = new self($invitationToken, $invitedBy, $userId);
-
+        $obj = new self($invitedBy);
+        $obj->invitationToken = $invitationToken;
+        $obj->userId = $userId;
         return $obj;
     }
 
@@ -192,9 +215,13 @@ class InviteInformation
     public function toJson(): array
     {
         $output = [];
-        $output['invitationToken'] = $this->invitationToken;
+        if (isset($this->invitationToken)) {
+            $output['invitationToken'] = $this->invitationToken;
+        }
         $output['invitedBy'] = $this->invitedBy;
-        $output['userId'] = $this->userId;
+        if (isset($this->userId)) {
+            $output['userId'] = $this->userId;
+        }
 
         return $output;
     }

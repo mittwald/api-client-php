@@ -24,6 +24,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\Create
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
@@ -218,6 +219,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateCustomerInviteBadRequestResponse::fromResponse($httpResponse),
+            403 => CreateCustomerInviteForbiddenResponse::fromResponse($httpResponse),
             409 => CreateCustomerInviteConflictResponse::fromResponse($httpResponse),
             default => CreateCustomerInviteDefaultResponse::fromResponse($httpResponse),
         });

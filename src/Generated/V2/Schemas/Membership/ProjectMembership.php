@@ -70,7 +70,6 @@ class ProjectMembership
             'projectId',
             'userId',
             'role',
-            'inviteId',
             'inherited',
         ],
         'type' => 'object',
@@ -100,9 +99,9 @@ class ProjectMembership
     /**
      * ID of the ProjectInvite the membership was created from.
      *
-     * @var string
+     * @var string|null
      */
-    private string $inviteId;
+    private ?string $inviteId = null;
 
     /**
      * Date the projectMembership was created at.
@@ -133,16 +132,14 @@ class ProjectMembership
     /**
      * @param string $id
      * @param bool $inherited
-     * @param string $inviteId
      * @param string $projectId
      * @param ProjectRoles $role
      * @param string $userId
      */
-    public function __construct(string $id, bool $inherited, string $inviteId, string $projectId, ProjectRoles $role, string $userId)
+    public function __construct(string $id, bool $inherited, string $projectId, ProjectRoles $role, string $userId)
     {
         $this->id = $id;
         $this->inherited = $inherited;
-        $this->inviteId = $inviteId;
         $this->projectId = $projectId;
         $this->role = $role;
         $this->userId = $userId;
@@ -173,11 +170,11 @@ class ProjectMembership
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInviteId(): string
+    public function getInviteId(): ?string
     {
-        return $this->inviteId;
+        return $this->inviteId ?? null;
     }
 
     /**
@@ -290,6 +287,17 @@ class ProjectMembership
     }
 
     /**
+     * @return self
+     */
+    public function withoutInviteId(): self
+    {
+        $clone = clone $this;
+        unset($clone->inviteId);
+
+        return $clone;
+    }
+
+    /**
      * @param DateTime $memberSince
      * @return self
      */
@@ -381,7 +389,10 @@ class ProjectMembership
         }
         $id = $input->{'id'};
         $inherited = (bool)($input->{'inherited'});
-        $inviteId = $input->{'inviteId'};
+        $inviteId = null;
+        if (isset($input->{'inviteId'})) {
+            $inviteId = $input->{'inviteId'};
+        }
         $memberSince = null;
         if (isset($input->{'memberSince'})) {
             $memberSince = new DateTime($input->{'memberSince'});
@@ -390,8 +401,9 @@ class ProjectMembership
         $role = ProjectRoles::from($input->{'role'});
         $userId = $input->{'userId'};
 
-        $obj = new self($id, $inherited, $inviteId, $projectId, $role, $userId);
+        $obj = new self($id, $inherited, $projectId, $role, $userId);
         $obj->expiresAt = $expiresAt;
+        $obj->inviteId = $inviteId;
         $obj->memberSince = $memberSince;
         return $obj;
     }
@@ -409,7 +421,9 @@ class ProjectMembership
         }
         $output['id'] = $this->id;
         $output['inherited'] = $this->inherited;
-        $output['inviteId'] = $this->inviteId;
+        if (isset($this->inviteId)) {
+            $output['inviteId'] = $this->inviteId;
+        }
         if (isset($this->memberSince)) {
             $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }

@@ -74,7 +74,6 @@ class CustomerInvite
             'accepted',
             'information',
             'customerName',
-            'avatarRefId',
         ],
         'type' => 'object',
     ];
@@ -82,9 +81,9 @@ class CustomerInvite
     /**
      * Reference to the Customer's avatar.
      *
-     * @var string
+     * @var string|null
      */
-    private string $avatarRefId;
+    private ?string $avatarRefId = null;
 
     /**
      * ID of the Customer the invite is for.
@@ -139,7 +138,6 @@ class CustomerInvite
     private CustomerRoles $role;
 
     /**
-     * @param string $avatarRefId
      * @param string $customerId
      * @param string $customerName
      * @param string $id
@@ -147,9 +145,8 @@ class CustomerInvite
      * @param string $mailAddress
      * @param CustomerRoles $role
      */
-    public function __construct(string $avatarRefId, string $customerId, string $customerName, string $id, InviteInformation $information, string $mailAddress, CustomerRoles $role)
+    public function __construct(string $customerId, string $customerName, string $id, InviteInformation $information, string $mailAddress, CustomerRoles $role)
     {
-        $this->avatarRefId = $avatarRefId;
         $this->customerId = $customerId;
         $this->customerName = $customerName;
         $this->id = $id;
@@ -159,11 +156,11 @@ class CustomerInvite
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAvatarRefId(): string
+    public function getAvatarRefId(): ?string
     {
-        return $this->avatarRefId;
+        return $this->avatarRefId ?? null;
     }
 
     /**
@@ -244,6 +241,17 @@ class CustomerInvite
 
         $clone = clone $this;
         $clone->avatarRefId = $avatarRefId;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutAvatarRefId(): self
+    {
+        $clone = clone $this;
+        unset($clone->avatarRefId);
 
         return $clone;
     }
@@ -411,7 +419,10 @@ class CustomerInvite
             static::validateInput($input);
         }
 
-        $avatarRefId = $input->{'avatarRefId'};
+        $avatarRefId = null;
+        if (isset($input->{'avatarRefId'})) {
+            $avatarRefId = $input->{'avatarRefId'};
+        }
         $customerId = $input->{'customerId'};
         $customerName = $input->{'customerName'};
         $id = $input->{'id'};
@@ -427,7 +438,8 @@ class CustomerInvite
         }
         $role = CustomerRoles::from($input->{'role'});
 
-        $obj = new self($avatarRefId, $customerId, $customerName, $id, $information, $mailAddress, $role);
+        $obj = new self($customerId, $customerName, $id, $information, $mailAddress, $role);
+        $obj->avatarRefId = $avatarRefId;
         $obj->membershipExpiresAt = $membershipExpiresAt;
         $obj->message = $message;
         return $obj;
@@ -441,7 +453,9 @@ class CustomerInvite
     public function toJson(): array
     {
         $output = [];
-        $output['avatarRefId'] = $this->avatarRefId;
+        if (isset($this->avatarRefId)) {
+            $output['avatarRefId'] = $this->avatarRefId;
+        }
         $output['customerId'] = $this->customerId;
         $output['customerName'] = $this->customerName;
         $output['id'] = $this->id;

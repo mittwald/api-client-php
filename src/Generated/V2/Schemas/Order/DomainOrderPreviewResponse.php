@@ -39,51 +39,61 @@ class DomainOrderPreviewResponse
                 'type' => 'number',
             ],
         ],
+        'required' => [
+            'totalPrice',
+            'domainPrice',
+            'feePrice',
+        ],
         'type' => 'object',
     ];
 
     /**
-     * @var int|float|null
+     * @var int|float
      */
-    private int|float|null $domainPrice = null;
+    private int|float $domainPrice;
 
     /**
-     * @var int|float|null
+     * @var int|float
      */
-    private int|float|null $feePrice = null;
+    private int|float $feePrice;
 
     /**
-     * @var int|float|null
+     * @var int|float
      */
-    private int|float|null $totalPrice = null;
+    private int|float $totalPrice;
 
     /**
-     *
+     * @param int|float $domainPrice
+     * @param int|float $feePrice
+     * @param int|float $totalPrice
      */
-    public function __construct()
+    public function __construct(int|float $domainPrice, int|float $feePrice, int|float $totalPrice)
     {
+        $this->domainPrice = $domainPrice;
+        $this->feePrice = $feePrice;
+        $this->totalPrice = $totalPrice;
     }
 
     /**
-     * @return int|float|null
+     * @return int|float
      */
-    public function getDomainPrice(): int|float|null
+    public function getDomainPrice(): int|float
     {
         return $this->domainPrice;
     }
 
     /**
-     * @return int|float|null
+     * @return int|float
      */
-    public function getFeePrice(): int|float|null
+    public function getFeePrice(): int|float
     {
         return $this->feePrice;
     }
 
     /**
-     * @return int|float|null
+     * @return int|float
      */
-    public function getTotalPrice(): int|float|null
+    public function getTotalPrice(): int|float
     {
         return $this->totalPrice;
     }
@@ -107,17 +117,6 @@ class DomainOrderPreviewResponse
     }
 
     /**
-     * @return self
-     */
-    public function withoutDomainPrice(): self
-    {
-        $clone = clone $this;
-        unset($clone->domainPrice);
-
-        return $clone;
-    }
-
-    /**
      * @param int|float $feePrice
      * @return self
      */
@@ -131,17 +130,6 @@ class DomainOrderPreviewResponse
 
         $clone = clone $this;
         $clone->feePrice = $feePrice;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutFeePrice(): self
-    {
-        $clone = clone $this;
-        unset($clone->feePrice);
 
         return $clone;
     }
@@ -165,17 +153,6 @@ class DomainOrderPreviewResponse
     }
 
     /**
-     * @return self
-     */
-    public function withoutTotalPrice(): self
-    {
-        $clone = clone $this;
-        unset($clone->totalPrice);
-
-        return $clone;
-    }
-
-    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -190,23 +167,12 @@ class DomainOrderPreviewResponse
             static::validateInput($input);
         }
 
-        $domainPrice = null;
-        if (isset($input->{'domainPrice'})) {
-            $domainPrice = str_contains($input->{'domainPrice'}, '.') ? (float)($input->{'domainPrice'}) : (int)($input->{'domainPrice'});
-        }
-        $feePrice = null;
-        if (isset($input->{'feePrice'})) {
-            $feePrice = str_contains($input->{'feePrice'}, '.') ? (float)($input->{'feePrice'}) : (int)($input->{'feePrice'});
-        }
-        $totalPrice = null;
-        if (isset($input->{'totalPrice'})) {
-            $totalPrice = str_contains($input->{'totalPrice'}, '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
-        }
+        $domainPrice = str_contains($input->{'domainPrice'}, '.') ? (float)($input->{'domainPrice'}) : (int)($input->{'domainPrice'});
+        $feePrice = str_contains($input->{'feePrice'}, '.') ? (float)($input->{'feePrice'}) : (int)($input->{'feePrice'});
+        $totalPrice = str_contains($input->{'totalPrice'}, '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
 
-        $obj = new self();
-        $obj->domainPrice = $domainPrice;
-        $obj->feePrice = $feePrice;
-        $obj->totalPrice = $totalPrice;
+        $obj = new self($domainPrice, $feePrice, $totalPrice);
+
         return $obj;
     }
 
@@ -218,15 +184,9 @@ class DomainOrderPreviewResponse
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->domainPrice)) {
-            $output['domainPrice'] = $this->domainPrice;
-        }
-        if (isset($this->feePrice)) {
-            $output['feePrice'] = $this->feePrice;
-        }
-        if (isset($this->totalPrice)) {
-            $output['totalPrice'] = $this->totalPrice;
-        }
+        $output['domainPrice'] = $this->domainPrice;
+        $output['feePrice'] = $this->feePrice;
+        $output['totalPrice'] = $this->totalPrice;
 
         return $output;
     }

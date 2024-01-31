@@ -95,7 +95,6 @@ class CronjobExecution
         'required' => [
             'id',
             'status',
-            'durationInMilliseconds',
             'successful',
         ],
         'type' => 'object',
@@ -107,9 +106,9 @@ class CronjobExecution
     private ?CronjobExecutionAbortedBy $abortedBy = null;
 
     /**
-     * @var int
+     * @var int|null
      */
-    private int $durationInMilliseconds;
+    private ?int $durationInMilliseconds = null;
 
     /**
      * @var DateTime|null
@@ -157,14 +156,12 @@ class CronjobExecution
     private ?CronjobExecutionTriggeredBy $triggeredBy = null;
 
     /**
-     * @param int $durationInMilliseconds
      * @param string $id
      * @param CronjobExecutionStatus $status
      * @param bool $successful
      */
-    public function __construct(int $durationInMilliseconds, string $id, CronjobExecutionStatus $status, bool $successful)
+    public function __construct(string $id, CronjobExecutionStatus $status, bool $successful)
     {
-        $this->durationInMilliseconds = $durationInMilliseconds;
         $this->id = $id;
         $this->status = $status;
         $this->successful = $successful;
@@ -179,11 +176,11 @@ class CronjobExecution
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getDurationInMilliseconds(): int
+    public function getDurationInMilliseconds(): ?int
     {
-        return $this->durationInMilliseconds;
+        return $this->durationInMilliseconds ?? null;
     }
 
     /**
@@ -295,6 +292,17 @@ class CronjobExecution
 
         $clone = clone $this;
         $clone->durationInMilliseconds = $durationInMilliseconds;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutDurationInMilliseconds(): self
+    {
+        $clone = clone $this;
+        unset($clone->durationInMilliseconds);
 
         return $clone;
     }
@@ -510,7 +518,10 @@ class CronjobExecution
         if (isset($input->{'abortedBy'})) {
             $abortedBy = CronjobExecutionAbortedBy::buildFromInput($input->{'abortedBy'}, validate: $validate);
         }
-        $durationInMilliseconds = (int)($input->{'durationInMilliseconds'});
+        $durationInMilliseconds = null;
+        if (isset($input->{'durationInMilliseconds'})) {
+            $durationInMilliseconds = (int)($input->{'durationInMilliseconds'});
+        }
         $end = null;
         if (isset($input->{'end'})) {
             $end = new DateTime($input->{'end'});
@@ -539,8 +550,9 @@ class CronjobExecution
             $triggeredBy = CronjobExecutionTriggeredBy::buildFromInput($input->{'triggeredBy'}, validate: $validate);
         }
 
-        $obj = new self($durationInMilliseconds, $id, $status, $successful);
+        $obj = new self($id, $status, $successful);
         $obj->abortedBy = $abortedBy;
+        $obj->durationInMilliseconds = $durationInMilliseconds;
         $obj->end = $end;
         $obj->executionEnd = $executionEnd;
         $obj->executionStart = $executionStart;
@@ -561,7 +573,9 @@ class CronjobExecution
         if (isset($this->abortedBy)) {
             $output['abortedBy'] = ($this->abortedBy)->toJson();
         }
-        $output['durationInMilliseconds'] = $this->durationInMilliseconds;
+        if (isset($this->durationInMilliseconds)) {
+            $output['durationInMilliseconds'] = $this->durationInMilliseconds;
+        }
         if (isset($this->end)) {
             $output['end'] = ($this->end)->format(DateTime::ATOM);
         }

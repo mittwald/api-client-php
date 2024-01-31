@@ -66,7 +66,6 @@ class CustomerMembership
             'customerId',
             'userId',
             'role',
-            'inviteId',
         ],
         'type' => 'object',
     ];
@@ -95,9 +94,9 @@ class CustomerMembership
     /**
      * ID of the CustomerInvite the membership was created from.
      *
-     * @var string
+     * @var string|null
      */
-    private string $inviteId;
+    private ?string $inviteId = null;
 
     /**
      * Date the CustomerMembership was created at.
@@ -121,15 +120,13 @@ class CustomerMembership
     /**
      * @param string $customerId
      * @param string $id
-     * @param string $inviteId
      * @param CustomerRoles $role
      * @param string $userId
      */
-    public function __construct(string $customerId, string $id, string $inviteId, CustomerRoles $role, string $userId)
+    public function __construct(string $customerId, string $id, CustomerRoles $role, string $userId)
     {
         $this->customerId = $customerId;
         $this->id = $id;
-        $this->inviteId = $inviteId;
         $this->role = $role;
         $this->userId = $userId;
     }
@@ -159,11 +156,11 @@ class CustomerMembership
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInviteId(): string
+    public function getInviteId(): ?string
     {
-        return $this->inviteId;
+        return $this->inviteId ?? null;
     }
 
     /**
@@ -268,6 +265,17 @@ class CustomerMembership
     }
 
     /**
+     * @return self
+     */
+    public function withoutInviteId(): self
+    {
+        $clone = clone $this;
+        unset($clone->inviteId);
+
+        return $clone;
+    }
+
+    /**
      * @param DateTime $memberSince
      * @return self
      */
@@ -341,7 +349,10 @@ class CustomerMembership
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
         $id = $input->{'id'};
-        $inviteId = $input->{'inviteId'};
+        $inviteId = null;
+        if (isset($input->{'inviteId'})) {
+            $inviteId = $input->{'inviteId'};
+        }
         $memberSince = null;
         if (isset($input->{'memberSince'})) {
             $memberSince = new DateTime($input->{'memberSince'});
@@ -349,8 +360,9 @@ class CustomerMembership
         $role = CustomerRoles::from($input->{'role'});
         $userId = $input->{'userId'};
 
-        $obj = new self($customerId, $id, $inviteId, $role, $userId);
+        $obj = new self($customerId, $id, $role, $userId);
         $obj->expiresAt = $expiresAt;
+        $obj->inviteId = $inviteId;
         $obj->memberSince = $memberSince;
         return $obj;
     }
@@ -368,7 +380,9 @@ class CustomerMembership
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
         $output['id'] = $this->id;
-        $output['inviteId'] = $this->inviteId;
+        if (isset($this->inviteId)) {
+            $output['inviteId'] = $this->inviteId;
+        }
         if (isset($this->memberSince)) {
             $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }

@@ -7,7 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
 class CreateCustomerInviteConflictResponse implements ResponseContainer
@@ -24,39 +24,39 @@ class CreateCustomerInviteConflictResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
     /**
-     * @var ValidationErrors
+     * @var Error
      */
-    private ValidationErrors $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param ValidationErrors $body
+     * @param Error $body
      */
-    public function __construct(ValidationErrors $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return ValidationErrors
+     * @return Error
      */
-    public function getBody(): ValidationErrors
+    public function getBody(): Error
     {
         return $this->body;
     }
 
     /**
-     * @param ValidationErrors $body
+     * @param Error $body
      * @return self
      */
-    public function withBody(ValidationErrors $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -79,7 +79,7 @@ class CreateCustomerInviteConflictResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

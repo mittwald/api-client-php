@@ -32,9 +32,6 @@ class OrderItem
                 ],
                 'type' => 'array',
             ],
-            'amount' => [
-                'type' => 'number',
-            ],
             'articleId' => [
                 'example' => 'PS23-PLUS-0004',
                 'type' => 'string',
@@ -77,7 +74,6 @@ class OrderItem
             'articleId',
             'price',
             'isInclusive',
-            'amount',
         ],
         'type' => 'object',
     ];
@@ -86,11 +82,6 @@ class OrderItem
      * @var Addons[]|null
      */
     private ?array $addons = null;
-
-    /**
-     * @var int|float
-     */
-    private int|float $amount;
 
     /**
      * @var string
@@ -138,15 +129,13 @@ class OrderItem
     private ?Reference $reference = null;
 
     /**
-     * @param int|float $amount
      * @param string $articleId
      * @param bool $isInclusive
      * @param string $orderItemId
      * @param int|float $price
      */
-    public function __construct(int|float $amount, string $articleId, bool $isInclusive, string $orderItemId, int|float $price)
+    public function __construct(string $articleId, bool $isInclusive, string $orderItemId, int|float $price)
     {
-        $this->amount = $amount;
         $this->articleId = $articleId;
         $this->isInclusive = $isInclusive;
         $this->orderItemId = $orderItemId;
@@ -159,14 +148,6 @@ class OrderItem
     public function getAddons(): ?array
     {
         return $this->addons ?? null;
-    }
-
-    /**
-     * @return int|float
-     */
-    public function getAmount(): int|float
-    {
-        return $this->amount;
     }
 
     /**
@@ -261,24 +242,6 @@ class OrderItem
     {
         $clone = clone $this;
         unset($clone->addons);
-
-        return $clone;
-    }
-
-    /**
-     * @param int|float $amount
-     * @return self
-     */
-    public function withAmount(int|float $amount): self
-    {
-        $validator = new Validator();
-        $validator->validate($amount, static::$schema['properties']['amount']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->amount = $amount;
 
         return $clone;
     }
@@ -507,7 +470,6 @@ class OrderItem
         if (isset($input->{'addons'})) {
             $addons = array_map(fn (array|object $i): Addons => Addons::buildFromInput($i, validate: $validate), $input->{'addons'});
         }
-        $amount = str_contains($input->{'amount'}, '.') ? (float)($input->{'amount'}) : (int)($input->{'amount'});
         $articleId = $input->{'articleId'};
         $articleName = null;
         if (isset($input->{'articleName'})) {
@@ -533,7 +495,7 @@ class OrderItem
             $reference = Reference::buildFromInput($input->{'reference'}, validate: $validate);
         }
 
-        $obj = new self($amount, $articleId, $isInclusive, $orderItemId, $price);
+        $obj = new self($articleId, $isInclusive, $orderItemId, $price);
         $obj->addons = $addons;
         $obj->articleName = $articleName;
         $obj->articleTemplateName = $articleTemplateName;
@@ -554,7 +516,6 @@ class OrderItem
         if (isset($this->addons)) {
             $output['addons'] = array_map(fn (Addons $i): array => $i->toJson(), $this->addons);
         }
-        $output['amount'] = $this->amount;
         $output['articleId'] = $this->articleId;
         if (isset($this->articleName)) {
             $output['articleName'] = $this->articleName;
