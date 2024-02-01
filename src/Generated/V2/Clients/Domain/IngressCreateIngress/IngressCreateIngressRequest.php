@@ -22,7 +22,7 @@ class IngressCreateIngressRequest
             'body' => [
                 'properties' => [
                     'hostname' => [
-                        'format' => 'hostname',
+                        'format' => 'idn-hostname',
                         'type' => 'string',
                     ],
                     'paths' => [

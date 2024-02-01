@@ -110,7 +110,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Execute a runtime concerning action on a specific `AppInstallation`.
+     * Trigger a runtime action belonging to an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-execute-action
      * @throws GuzzleException
@@ -132,7 +132,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get a specific `App`.
+     * Get an App.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-app
      * @throws GuzzleException
@@ -154,13 +154,13 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get a specific `AppInstallation`.
+     * Get an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetAppinstallation\GetAppinstallationRequest $request An object representing the request for this operation
-     * @return GetAppinstallation\GetAppinstallationOKResponse The appInstallation object.
+     * @return GetAppinstallation\GetAppinstallationOKResponse The AppInstallation.
      */
     public function getAppinstallation(GetAppinstallationRequest $request): GetAppinstallationOKResponse
     {
@@ -176,7 +176,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get a specific `AppVersion`.
+     * Get an AppVersion.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appversion
      * @throws GuzzleException
@@ -226,7 +226,7 @@ class AppClientImpl implements AppClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest $request An object representing the request for this operation
-     * @return GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse The missing dependencies of the appInstallation for the target AppVersion.
+     * @return GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse The missing dependencies of the AppInstallation for the target AppVersion.
      */
     public function getMissingDependenciesForAppinstallation(GetMissingDependenciesForAppinstallationRequest $request): GetMissingDependenciesForAppinstallationOKResponse
     {
@@ -242,13 +242,13 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get a specific `SystemSoftware`.
+     * Get a SystemSoftware.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-systemsoftware
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetSystemsoftware\GetSystemsoftwareRequest $request An object representing the request for this operation
-     * @return GetSystemsoftware\GetSystemsoftwareOKResponse The systemSoftware object.
+     * @return GetSystemsoftware\GetSystemsoftwareOKResponse The SystemSoftware.
      */
     public function getSystemsoftware(GetSystemsoftwareRequest $request): GetSystemsoftwareOKResponse
     {
@@ -264,7 +264,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get a specific `SystemSoftwareVersion`.
+     * Get a SystemSoftwareVersion.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-systemsoftwareversion
      * @throws GuzzleException
@@ -286,7 +286,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Create linkage between an `AppInstallation` and a MySql-`Database`.
+     * Create linkage between an AppInstallation and a MySQLDatabase.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-link-database
      * @throws GuzzleException
@@ -308,7 +308,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get all `AppInstallations` inside a specific `Project`.
+     * List AppInstallations belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appinstallations
      * @throws GuzzleException
@@ -329,7 +329,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get all available `Apps`.
+     * List Apps.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-apps
      * @throws GuzzleException
@@ -350,7 +350,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get all `AppVersions` of a specific `App`.
+     * List AppVersions belonging to an App.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appversions
      * @throws GuzzleException
@@ -371,7 +371,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get all available `SystemSoftware`.
+     * List SystemSoftwares.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-systemsoftwares
      * @throws GuzzleException
@@ -392,7 +392,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get all available `SystemSoftwareVersions` of a specific `SystemSoftware`.
+     * List SystemSoftwareVersions belonging to a SystemSoftware.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-systemsoftwareversions
      * @throws GuzzleException
@@ -413,7 +413,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get all update candidates for a specific `AppVersion`.
+     * List update candidates belonging to an AppVersion.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-update-candidates-for-appversion
      * @throws GuzzleException
@@ -434,7 +434,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Patch desired properties of a specific `AppInstallation`.
+     * Update properties belonging to an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
      * @throws GuzzleException
@@ -456,7 +456,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Request a new `AppInstallation`.
+     * Request an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
      * @throws GuzzleException
@@ -478,7 +478,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Request a copy of an `AppInstallation`.
+     * Request a copy of an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-copy
      * @throws GuzzleException
@@ -500,7 +500,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Get runtime status of a specific `AppInstallation`.
+     * Get runtime status belonging to an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-retrieve-status
      * @throws GuzzleException
@@ -522,7 +522,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Create linkage between an `AppInstallation` and `DatabaseUsers`.
+     * Create linkage between an AppInstallation and DatabaseUsers.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-set-database-users
      * @throws GuzzleException
@@ -544,7 +544,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Start uninstallation process for a specific `AppInstallation`.
+     * Trigger an uninstallation process for an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
      * @throws GuzzleException
@@ -566,7 +566,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Remove linkage between an `AppInstallation` and a `Database`.
+     * Remove linkage between an AppInstallation and a Database.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-unlink-database
      * @throws GuzzleException
@@ -588,7 +588,7 @@ class AppClientImpl implements AppClient
     }
 
     /**
-     * Create linkage between an `AppInstallation` and a MySql-`Database`.
+     * Create linkage between an AppInstallation and a MySql-Database.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-link-database
      * @throws GuzzleException

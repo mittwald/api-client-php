@@ -18,7 +18,7 @@ class IngressCreateIngressRequestBody
     private static array $schema = [
         'properties' => [
             'hostname' => [
-                'format' => 'hostname',
+                'format' => 'idn-hostname',
                 'type' => 'string',
             ],
             'paths' => [

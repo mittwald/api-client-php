@@ -234,7 +234,7 @@ class SetDatabaseUsersRequest
         $mapped = $this->toJson();
         $appInstallationId = urlencode($mapped['appInstallationId']);
         $databaseId = urlencode($mapped['databaseId']);
-        return '/v2/app-installations/' . $appInstallationId . '/databases/' . $databaseId;
+        return '/v2/app-installations/' . $appInstallationId . '/databases/' . $databaseId . '/users';
     }
 
     /**

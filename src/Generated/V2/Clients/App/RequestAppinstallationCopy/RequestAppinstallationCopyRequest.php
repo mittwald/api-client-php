@@ -19,7 +19,7 @@ class RequestAppinstallationCopyRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'id' => [
+            'appInstallationId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
@@ -40,7 +40,7 @@ class RequestAppinstallationCopyRequest
             ],
         ],
         'required' => [
-            'id',
+            'appInstallationId',
             'body',
         ],
     ];
@@ -48,7 +48,7 @@ class RequestAppinstallationCopyRequest
     /**
      * @var string
      */
-    private string $id;
+    private string $appInstallationId;
 
     /**
      * @var RequestAppinstallationCopyRequestBody
@@ -60,21 +60,21 @@ class RequestAppinstallationCopyRequest
     ];
 
     /**
-     * @param string $id
+     * @param string $appInstallationId
      * @param RequestAppinstallationCopyRequestBody $body
      */
-    public function __construct(string $id, RequestAppinstallationCopyRequestBody $body)
+    public function __construct(string $appInstallationId, RequestAppinstallationCopyRequestBody $body)
     {
-        $this->id = $id;
+        $this->appInstallationId = $appInstallationId;
         $this->body = $body;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getAppInstallationId(): string
     {
-        return $this->id;
+        return $this->appInstallationId;
     }
 
     /**
@@ -86,19 +86,19 @@ class RequestAppinstallationCopyRequest
     }
 
     /**
-     * @param string $id
+     * @param string $appInstallationId
      * @return self
      */
-    public function withId(string $id): self
+    public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($appInstallationId, static::$schema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->id = $id;
+        $clone->appInstallationId = $appInstallationId;
 
         return $clone;
     }
@@ -130,10 +130,10 @@ class RequestAppinstallationCopyRequest
             static::validateInput($input);
         }
 
-        $id = $input->{'id'};
+        $appInstallationId = $input->{'appInstallationId'};
         $body = RequestAppinstallationCopyRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($id, $body);
+        $obj = new self($appInstallationId, $body);
 
         return $obj;
     }
@@ -146,7 +146,7 @@ class RequestAppinstallationCopyRequest
     public function toJson(): array
     {
         $output = [];
-        $output['id'] = $this->id;
+        $output['appInstallationId'] = $this->appInstallationId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -193,8 +193,8 @@ class RequestAppinstallationCopyRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $id = urlencode($mapped['id']);
-        return '/v2/app-installations/' . $id . '/actions/copy';
+        $appInstallationId = urlencode($mapped['appInstallationId']);
+        return '/v2/app-installations/' . $appInstallationId . '/actions/copy';
     }
 
     /**

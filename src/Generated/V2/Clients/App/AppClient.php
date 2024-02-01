@@ -61,7 +61,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseReq
 interface AppClient
 {
     /**
-     * Execute a runtime concerning action on a specific `AppInstallation`.
+     * Trigger a runtime action belonging to an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-execute-action
      * @throws GuzzleException
@@ -71,7 +71,7 @@ interface AppClient
      */
     public function executeAction(ExecuteActionRequest $request): EmptyResponse;
     /**
-     * Get a specific `App`.
+     * Get an App.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-app
      * @throws GuzzleException
@@ -81,17 +81,17 @@ interface AppClient
      */
     public function getApp(GetAppRequest $request): GetAppOKResponse;
     /**
-     * Get a specific `AppInstallation`.
+     * Get an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetAppinstallation\GetAppinstallationRequest $request An object representing the request for this operation
-     * @return GetAppinstallation\GetAppinstallationOKResponse The appInstallation object.
+     * @return GetAppinstallation\GetAppinstallationOKResponse The AppInstallation.
      */
     public function getAppinstallation(GetAppinstallationRequest $request): GetAppinstallationOKResponse;
     /**
-     * Get a specific `AppVersion`.
+     * Get an AppVersion.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appversion
      * @throws GuzzleException
@@ -117,21 +117,21 @@ interface AppClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest $request An object representing the request for this operation
-     * @return GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse The missing dependencies of the appInstallation for the target AppVersion.
+     * @return GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse The missing dependencies of the AppInstallation for the target AppVersion.
      */
     public function getMissingDependenciesForAppinstallation(GetMissingDependenciesForAppinstallationRequest $request): GetMissingDependenciesForAppinstallationOKResponse;
     /**
-     * Get a specific `SystemSoftware`.
+     * Get a SystemSoftware.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-systemsoftware
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetSystemsoftware\GetSystemsoftwareRequest $request An object representing the request for this operation
-     * @return GetSystemsoftware\GetSystemsoftwareOKResponse The systemSoftware object.
+     * @return GetSystemsoftware\GetSystemsoftwareOKResponse The SystemSoftware.
      */
     public function getSystemsoftware(GetSystemsoftwareRequest $request): GetSystemsoftwareOKResponse;
     /**
-     * Get a specific `SystemSoftwareVersion`.
+     * Get a SystemSoftwareVersion.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-systemsoftwareversion
      * @throws GuzzleException
@@ -141,7 +141,7 @@ interface AppClient
      */
     public function getSystemsoftwareversion(GetSystemsoftwareversionRequest $request): GetSystemsoftwareversionOKResponse;
     /**
-     * Create linkage between an `AppInstallation` and a MySql-`Database`.
+     * Create linkage between an AppInstallation and a MySQLDatabase.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-link-database
      * @throws GuzzleException
@@ -151,7 +151,7 @@ interface AppClient
      */
     public function linkDatabase(LinkDatabaseRequest $request): EmptyResponse;
     /**
-     * Get all `AppInstallations` inside a specific `Project`.
+     * List AppInstallations belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appinstallations
      * @throws GuzzleException
@@ -161,7 +161,7 @@ interface AppClient
      */
     public function listAppinstallations(ListAppinstallationsRequest $request): ListAppinstallationsOKResponse;
     /**
-     * Get all available `Apps`.
+     * List Apps.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-apps
      * @throws GuzzleException
@@ -171,7 +171,7 @@ interface AppClient
      */
     public function listApps(ListAppsRequest $request): ListAppsOKResponse;
     /**
-     * Get all `AppVersions` of a specific `App`.
+     * List AppVersions belonging to an App.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appversions
      * @throws GuzzleException
@@ -181,7 +181,7 @@ interface AppClient
      */
     public function listAppversions(ListAppversionsRequest $request): ListAppversionsOKResponse;
     /**
-     * Get all available `SystemSoftware`.
+     * List SystemSoftwares.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-systemsoftwares
      * @throws GuzzleException
@@ -191,7 +191,7 @@ interface AppClient
      */
     public function listSystemsoftwares(ListSystemsoftwaresRequest $request): ListSystemsoftwaresOKResponse;
     /**
-     * Get all available `SystemSoftwareVersions` of a specific `SystemSoftware`.
+     * List SystemSoftwareVersions belonging to a SystemSoftware.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-systemsoftwareversions
      * @throws GuzzleException
@@ -201,7 +201,7 @@ interface AppClient
      */
     public function listSystemsoftwareversions(ListSystemsoftwareversionsRequest $request): ListSystemsoftwareversionsOKResponse;
     /**
-     * Get all update candidates for a specific `AppVersion`.
+     * List update candidates belonging to an AppVersion.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-update-candidates-for-appversion
      * @throws GuzzleException
@@ -211,7 +211,7 @@ interface AppClient
      */
     public function listUpdateCandidatesForAppversion(ListUpdateCandidatesForAppversionRequest $request): ListUpdateCandidatesForAppversionOKResponse;
     /**
-     * Patch desired properties of a specific `AppInstallation`.
+     * Update properties belonging to an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
      * @throws GuzzleException
@@ -221,7 +221,7 @@ interface AppClient
      */
     public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse;
     /**
-     * Request a new `AppInstallation`.
+     * Request an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
      * @throws GuzzleException
@@ -231,7 +231,7 @@ interface AppClient
      */
     public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse;
     /**
-     * Request a copy of an `AppInstallation`.
+     * Request a copy of an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-copy
      * @throws GuzzleException
@@ -241,7 +241,7 @@ interface AppClient
      */
     public function requestAppinstallationCopy(RequestAppinstallationCopyRequest $request): RequestAppinstallationCopyCreatedResponse;
     /**
-     * Get runtime status of a specific `AppInstallation`.
+     * Get runtime status belonging to an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-retrieve-status
      * @throws GuzzleException
@@ -251,7 +251,7 @@ interface AppClient
      */
     public function retrieveStatus(RetrieveStatusRequest $request): RetrieveStatusOKResponse;
     /**
-     * Create linkage between an `AppInstallation` and `DatabaseUsers`.
+     * Create linkage between an AppInstallation and DatabaseUsers.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-set-database-users
      * @throws GuzzleException
@@ -261,7 +261,7 @@ interface AppClient
      */
     public function setDatabaseUsers(SetDatabaseUsersRequest $request): EmptyResponse;
     /**
-     * Start uninstallation process for a specific `AppInstallation`.
+     * Trigger an uninstallation process for an AppInstallation.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
      * @throws GuzzleException
@@ -271,7 +271,7 @@ interface AppClient
      */
     public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse;
     /**
-     * Remove linkage between an `AppInstallation` and a `Database`.
+     * Remove linkage between an AppInstallation and a Database.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-unlink-database
      * @throws GuzzleException
@@ -281,7 +281,7 @@ interface AppClient
      */
     public function unlinkDatabase(UnlinkDatabaseRequest $request): EmptyResponse;
     /**
-     * Create linkage between an `AppInstallation` and a MySql-`Database`.
+     * Create linkage between an AppInstallation and a MySql-Database.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-link-database
      * @throws GuzzleException

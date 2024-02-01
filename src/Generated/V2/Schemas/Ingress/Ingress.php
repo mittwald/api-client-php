@@ -40,7 +40,7 @@ class Ingress
                 'type' => 'array',
             ],
             'hostname' => [
-                'format' => 'hostname',
+                'format' => 'idn-hostname',
                 'type' => 'string',
             ],
             'id' => [

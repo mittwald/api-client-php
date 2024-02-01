@@ -23,6 +23,9 @@ class ListAppversionsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'recommended' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'appId',
@@ -33,6 +36,11 @@ class ListAppversionsRequest
      * @var string
      */
     private string $appId;
+
+    /**
+     * @var bool|null
+     */
+    private ?bool $recommended = null;
 
     private array $headers = [
 
@@ -55,6 +63,14 @@ class ListAppversionsRequest
     }
 
     /**
+     * @return bool|null
+     */
+    public function getRecommended(): ?bool
+    {
+        return $this->recommended ?? null;
+    }
+
+    /**
      * @param string $appId
      * @return self
      */
@@ -68,6 +84,35 @@ class ListAppversionsRequest
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    /**
+     * @param bool $recommended
+     * @return self
+     */
+    public function withRecommended(bool $recommended): self
+    {
+        $validator = new Validator();
+        $validator->validate($recommended, static::$schema['properties']['recommended']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recommended = $recommended;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutRecommended(): self
+    {
+        $clone = clone $this;
+        unset($clone->recommended);
 
         return $clone;
     }
@@ -88,9 +133,13 @@ class ListAppversionsRequest
         }
 
         $appId = $input->{'appId'};
+        $recommended = null;
+        if (isset($input->{'recommended'})) {
+            $recommended = (bool)($input->{'recommended'});
+        }
 
         $obj = new self($appId);
-
+        $obj->recommended = $recommended;
         return $obj;
     }
 
@@ -103,6 +152,9 @@ class ListAppversionsRequest
     {
         $output = [];
         $output['appId'] = $this->appId;
+        if (isset($this->recommended)) {
+            $output['recommended'] = $this->recommended;
+        }
 
         return $output;
     }
@@ -164,6 +216,9 @@ class ListAppversionsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['recommended'])) {
+            $query['recommended'] = $mapped['recommended'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
