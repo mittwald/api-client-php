@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class InvoiceDetailOfInvoiceRequest
+class DeprecatedInvoiceDetailOfInvoiceRequest
 {
     public const method = 'get';
 
@@ -114,10 +114,10 @@ class InvoiceDetailOfInvoiceRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return InvoiceDetailOfInvoiceRequest Created instance
+     * @return DeprecatedInvoiceDetailOfInvoiceRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceDetailOfInvoiceRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedInvoiceDetailOfInvoiceRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

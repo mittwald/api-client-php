@@ -22,6 +22,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\C
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractNotFoundResponse;
@@ -57,11 +62,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForIt
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsNotFoundResponse;
@@ -445,23 +450,47 @@ class ContractClientImpl implements ContractClient
     /**
      * Get details of an Invoice.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-detail-of-invoice
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-invoice-detail-of-invoice
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
-     * @return InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceOKResponse
+     * @param DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse
      */
-    public function invoiceDetailOfInvoice(InvoiceDetailOfInvoiceRequest $request): InvoiceDetailOfInvoiceOKResponse
+    public function deprecatedInvoiceDetailOfInvoice(DeprecatedInvoiceDetailOfInvoiceRequest $request): DeprecatedInvoiceDetailOfInvoiceOKResponse
     {
-        $httpRequest = new Request(InvoiceDetailOfInvoiceRequest::method, $request->buildUrl());
+        $httpRequest = new Request(DeprecatedInvoiceDetailOfInvoiceRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return InvoiceDetailOfInvoiceOKResponse::fromResponse($httpResponse);
+            return DeprecatedInvoiceDetailOfInvoiceOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => InvoiceDetailOfInvoiceBadRequestResponse::fromResponse($httpResponse),
-            404 => InvoiceDetailOfInvoiceNotFoundResponse::fromResponse($httpResponse),
-            default => InvoiceDetailOfInvoiceDefaultResponse::fromResponse($httpResponse),
+            400 => DeprecatedInvoiceDetailOfInvoiceBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedInvoiceDetailOfInvoiceNotFoundResponse::fromResponse($httpResponse),
+            default => DeprecatedInvoiceDetailOfInvoiceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get details of an Invoice.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-detail
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param InvoiceDetail\InvoiceDetailRequest $request An object representing the request for this operation
+     * @return InvoiceDetail\InvoiceDetailOKResponse
+     */
+    public function invoiceDetail(InvoiceDetailRequest $request): InvoiceDetailOKResponse
+    {
+        $httpRequest = new Request(InvoiceDetailRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return InvoiceDetailOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => InvoiceDetailBadRequestResponse::fromResponse($httpResponse),
+            404 => InvoiceDetailNotFoundResponse::fromResponse($httpResponse),
+            default => InvoiceDetailDefaultResponse::fromResponse($httpResponse),
         });
     }
 

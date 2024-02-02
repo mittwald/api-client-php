@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
 use Psr\Http\Message\ResponseInterface;
 
-class InvoiceDetailOfInvoiceNotFoundResponse implements ResponseContainer
+class DeprecatedInvoiceDetailOfInvoiceBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -24,39 +24,39 @@ class InvoiceDetailOfInvoiceNotFoundResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
             ],
         ],
     ];
 
     /**
-     * @var Error
+     * @var ValidationErrors
      */
-    private Error $body;
+    private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param Error $body
+     * @param ValidationErrors $body
      */
-    public function __construct(Error $body)
+    public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return Error
+     * @return ValidationErrors
      */
-    public function getBody(): Error
+    public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
     /**
-     * @param Error $body
+     * @param ValidationErrors $body
      * @return self
      */
-    public function withBody(Error $body): self
+    public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -69,17 +69,17 @@ class InvoiceDetailOfInvoiceNotFoundResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return InvoiceDetailOfInvoiceNotFoundResponse Created instance
+     * @return DeprecatedInvoiceDetailOfInvoiceBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceDetailOfInvoiceNotFoundResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedInvoiceDetailOfInvoiceBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

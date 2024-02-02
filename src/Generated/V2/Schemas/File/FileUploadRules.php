@@ -26,12 +26,6 @@ class FileUploadRules
      */
     private static array $schema = [
         'properties' => [
-            'fileTypes' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.file.FileType',
-                ],
-                'type' => 'array',
-            ],
             'maxSizeInKB' => [
                 'example' => 3000,
                 'type' => 'integer',
@@ -39,8 +33,8 @@ class FileUploadRules
             'mimeTypes' => [
                 'items' => [
                     'example' => [
-                        'image/png',
                         'image/jpeg',
+                        'image/png',
                     ],
                     'type' => 'string',
                 ],
@@ -80,17 +74,11 @@ class FileUploadRules
             ],
         ],
         'required' => [
-            'maxSizeInKB',
             'mimeTypes',
-            'fileTypes',
+            'maxSizeInKB',
         ],
         'type' => 'object',
     ];
-
-    /**
-     * @var FileType[]
-     */
-    private array $fileTypes;
 
     /**
      * @var int
@@ -108,23 +96,13 @@ class FileUploadRules
     private ?FileUploadRulesProperties $properties = null;
 
     /**
-     * @param FileType[] $fileTypes
      * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
-    public function __construct(array $fileTypes, int $maxSizeInKB, array $mimeTypes)
+    public function __construct(int $maxSizeInKB, array $mimeTypes)
     {
-        $this->fileTypes = $fileTypes;
         $this->maxSizeInKB = $maxSizeInKB;
         $this->mimeTypes = $mimeTypes;
-    }
-
-    /**
-     * @return FileType[]
-     */
-    public function getFileTypes(): array
-    {
-        return $this->fileTypes;
     }
 
     /**
@@ -149,18 +127,6 @@ class FileUploadRules
     public function getProperties(): ?FileUploadRulesProperties
     {
         return $this->properties ?? null;
-    }
-
-    /**
-     * @param FileType[] $fileTypes
-     * @return self
-     */
-    public function withFileTypes(array $fileTypes): self
-    {
-        $clone = clone $this;
-        $clone->fileTypes = $fileTypes;
-
-        return $clone;
     }
 
     /**
@@ -237,7 +203,6 @@ class FileUploadRules
             static::validateInput($input);
         }
 
-        $fileTypes = array_map(fn (array|object $i): FileType => FileType::buildFromInput($i, validate: $validate), $input->{'fileTypes'});
         $maxSizeInKB = (int)($input->{'maxSizeInKB'});
         $mimeTypes = $input->{'mimeTypes'};
         $properties = null;
@@ -245,7 +210,7 @@ class FileUploadRules
             $properties = FileUploadRulesProperties::buildFromInput($input->{'properties'}, validate: $validate);
         }
 
-        $obj = new self($fileTypes, $maxSizeInKB, $mimeTypes);
+        $obj = new self($maxSizeInKB, $mimeTypes);
         $obj->properties = $properties;
         return $obj;
     }
@@ -258,7 +223,6 @@ class FileUploadRules
     public function toJson(): array
     {
         $output = [];
-        $output['fileTypes'] = array_map(fn (FileType $i): array => $i->toJson(), $this->fileTypes);
         $output['maxSizeInKB'] = $this->maxSizeInKB;
         $output['mimeTypes'] = $this->mimeTypes;
         if (isset($this->properties)) {

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Invoice\Invoice;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class InvoiceDetailOfInvoiceOKResponse implements ResponseContainer
+class DeprecatedInvoiceDetailOfInvoiceDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -24,39 +24,39 @@ class InvoiceDetailOfInvoiceOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.invoice.Invoice',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
     /**
-     * @var Invoice
+     * @var Error
      */
-    private Invoice $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param Invoice $body
+     * @param Error $body
      */
-    public function __construct(Invoice $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return Invoice
+     * @return Error
      */
-    public function getBody(): Invoice
+    public function getBody(): Error
     {
         return $this->body;
     }
 
     /**
-     * @param Invoice $body
+     * @param Error $body
      * @return self
      */
-    public function withBody(Invoice $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -69,17 +69,17 @@ class InvoiceDetailOfInvoiceOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return InvoiceDetailOfInvoiceOKResponse Created instance
+     * @return DeprecatedInvoiceDetailOfInvoiceDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): InvoiceDetailOfInvoiceOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedInvoiceDetailOfInvoiceDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Invoice::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

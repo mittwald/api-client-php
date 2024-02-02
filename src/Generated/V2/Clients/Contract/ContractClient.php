@@ -11,6 +11,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
@@ -25,8 +27,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\Get
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenOKResponse;
@@ -202,13 +204,24 @@ interface ContractClient
     /**
      * Get details of an Invoice.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-detail-of-invoice
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-invoice-detail-of-invoice
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
-     * @return InvoiceDetailOfInvoice\InvoiceDetailOfInvoiceOKResponse
+     * @param DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse
      */
-    public function invoiceDetailOfInvoice(InvoiceDetailOfInvoiceRequest $request): InvoiceDetailOfInvoiceOKResponse;
+    public function deprecatedInvoiceDetailOfInvoice(DeprecatedInvoiceDetailOfInvoiceRequest $request): DeprecatedInvoiceDetailOfInvoiceOKResponse;
+    /**
+     * Get details of an Invoice.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-detail
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param InvoiceDetail\InvoiceDetailRequest $request An object representing the request for this operation
+     * @return InvoiceDetail\InvoiceDetailOKResponse
+     */
+    public function invoiceDetail(InvoiceDetailRequest $request): InvoiceDetailOKResponse;
     /**
      * Get InvoiceSettings of a Customer.
      *
