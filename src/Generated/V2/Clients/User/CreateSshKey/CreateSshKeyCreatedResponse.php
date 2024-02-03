@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ChangePasswordOKResponse implements ResponseContainer
+class CreateSshKeyCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -23,53 +23,39 @@ class ChangePasswordOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'expires' => [
-                        'description' => 'Expiration unix timestamp.',
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'token' => [
-                        'description' => 'Public token to identify yourself against the api gateway.',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'token',
-                ],
                 'type' => 'object',
             ],
         ],
     ];
 
     /**
-     * @var ChangePasswordOKResponseBody
+     * @var CreateSshKeyCreatedResponseBody
      */
-    private ChangePasswordOKResponseBody $body;
+    private CreateSshKeyCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param ChangePasswordOKResponseBody $body
+     * @param CreateSshKeyCreatedResponseBody $body
      */
-    public function __construct(ChangePasswordOKResponseBody $body)
+    public function __construct(CreateSshKeyCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return ChangePasswordOKResponseBody
+     * @return CreateSshKeyCreatedResponseBody
      */
-    public function getBody(): ChangePasswordOKResponseBody
+    public function getBody(): CreateSshKeyCreatedResponseBody
     {
         return $this->body;
     }
 
     /**
-     * @param ChangePasswordOKResponseBody $body
+     * @param CreateSshKeyCreatedResponseBody $body
      * @return self
      */
-    public function withBody(ChangePasswordOKResponseBody $body): self
+    public function withBody(CreateSshKeyCreatedResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -82,17 +68,17 @@ class ChangePasswordOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ChangePasswordOKResponse Created instance
+     * @return CreateSshKeyCreatedResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ChangePasswordOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateSshKeyCreatedResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ChangePasswordOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = CreateSshKeyCreatedResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

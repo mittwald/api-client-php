@@ -29,8 +29,8 @@ class SupportCodeRequestOKResponseBody
             ],
         ],
         'required' => [
-            'token',
-            'expires',
+            'supportCode',
+            'expiresAt',
         ],
         'type' => 'object',
     ];
@@ -38,38 +38,41 @@ class SupportCodeRequestOKResponseBody
     /**
      * Expiration of the support code
      *
-     * @var DateTime|null
+     * @var DateTime
      */
-    private ?DateTime $expiresAt = null;
+    private DateTime $expiresAt;
 
     /**
      * support code to authenticate yourself against the mittwald support via telephone
      *
-     * @var string|null
+     * @var string
      */
-    private ?string $supportCode = null;
+    private string $supportCode;
 
     /**
-     *
+     * @param DateTime $expiresAt
+     * @param string $supportCode
      */
-    public function __construct()
+    public function __construct(DateTime $expiresAt, string $supportCode)
     {
+        $this->expiresAt = $expiresAt;
+        $this->supportCode = $supportCode;
     }
 
     /**
-     * @return DateTime|null
+     * @return DateTime
      */
-    public function getExpiresAt(): ?DateTime
+    public function getExpiresAt(): DateTime
     {
-        return $this->expiresAt ?? null;
+        return $this->expiresAt;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getSupportCode(): ?string
+    public function getSupportCode(): string
     {
-        return $this->supportCode ?? null;
+        return $this->supportCode;
     }
 
     /**
@@ -80,17 +83,6 @@ class SupportCodeRequestOKResponseBody
     {
         $clone = clone $this;
         $clone->expiresAt = $expiresAt;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutExpiresAt(): self
-    {
-        $clone = clone $this;
-        unset($clone->expiresAt);
 
         return $clone;
     }
@@ -114,17 +106,6 @@ class SupportCodeRequestOKResponseBody
     }
 
     /**
-     * @return self
-     */
-    public function withoutSupportCode(): self
-    {
-        $clone = clone $this;
-        unset($clone->supportCode);
-
-        return $clone;
-    }
-
-    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -139,18 +120,11 @@ class SupportCodeRequestOKResponseBody
             static::validateInput($input);
         }
 
-        $expiresAt = null;
-        if (isset($input->{'expiresAt'})) {
-            $expiresAt = new DateTime($input->{'expiresAt'});
-        }
-        $supportCode = null;
-        if (isset($input->{'supportCode'})) {
-            $supportCode = $input->{'supportCode'};
-        }
+        $expiresAt = new DateTime($input->{'expiresAt'});
+        $supportCode = $input->{'supportCode'};
 
-        $obj = new self();
-        $obj->expiresAt = $expiresAt;
-        $obj->supportCode = $supportCode;
+        $obj = new self($expiresAt, $supportCode);
+
         return $obj;
     }
 
@@ -162,12 +136,8 @@ class SupportCodeRequestOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->expiresAt)) {
-            $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
-        }
-        if (isset($this->supportCode)) {
-            $output['supportCode'] = $this->supportCode;
-        }
+        $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
+        $output['supportCode'] = $this->supportCode;
 
         return $output;
     }
@@ -198,8 +168,6 @@ class SupportCodeRequestOKResponseBody
 
     public function __clone()
     {
-        if (isset($this->expiresAt)) {
-            $this->expiresAt = clone $this->expiresAt;
-        }
+        $this->expiresAt = clone $this->expiresAt;
     }
 }

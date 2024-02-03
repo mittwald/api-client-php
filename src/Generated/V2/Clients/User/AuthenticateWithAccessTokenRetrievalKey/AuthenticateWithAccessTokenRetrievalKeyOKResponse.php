@@ -35,7 +35,6 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponse implements ResponseConta
                 ],
                 'required' => [
                     'token',
-                    'expires',
                 ],
                 'type' => 'object',
             ],

@@ -35,6 +35,10 @@ class FileMeta
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'mimeType' => [
+                'example' => 'image/jpeg',
+                'type' => 'string',
+            ],
             'name' => [
                 'example' => 'me.jpeg',
                 'type' => 'string',
@@ -44,6 +48,8 @@ class FileMeta
                 'type' => 'integer',
             ],
             'type' => [
+                'deprecated' => true,
+                'description' => 'deprecated, see mimeType',
                 'example' => 'image/jpeg',
                 'type' => 'string',
             ],
@@ -54,6 +60,7 @@ class FileMeta
             'type',
             'friendlyURL',
             'sizeInBytes',
+            'mimeType',
         ],
         'type' => 'object',
     ];
@@ -71,6 +78,11 @@ class FileMeta
     /**
      * @var string
      */
+    private string $mimeType;
+
+    /**
+     * @var string
+     */
     private string $name;
 
     /**
@@ -79,6 +91,8 @@ class FileMeta
     private int $sizeInBytes;
 
     /**
+     * deprecated, see mimeType
+     *
      * @var string
      */
     private string $type;
@@ -86,14 +100,16 @@ class FileMeta
     /**
      * @param string $friendlyURL
      * @param string $id
+     * @param string $mimeType
      * @param string $name
      * @param int $sizeInBytes
      * @param string $type
      */
-    public function __construct(string $friendlyURL, string $id, string $name, int $sizeInBytes, string $type)
+    public function __construct(string $friendlyURL, string $id, string $mimeType, string $name, int $sizeInBytes, string $type)
     {
         $this->friendlyURL = $friendlyURL;
         $this->id = $id;
+        $this->mimeType = $mimeType;
         $this->name = $name;
         $this->sizeInBytes = $sizeInBytes;
         $this->type = $type;
@@ -113,6 +129,14 @@ class FileMeta
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMimeType(): string
+    {
+        return $this->mimeType;
     }
 
     /**
@@ -171,6 +195,24 @@ class FileMeta
 
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    /**
+     * @param string $mimeType
+     * @return self
+     */
+    public function withMimeType(string $mimeType): self
+    {
+        $validator = new Validator();
+        $validator->validate($mimeType, static::$schema['properties']['mimeType']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->mimeType = $mimeType;
 
         return $clone;
     }
@@ -246,11 +288,12 @@ class FileMeta
 
         $friendlyURL = $input->{'friendlyURL'};
         $id = $input->{'id'};
+        $mimeType = $input->{'mimeType'};
         $name = $input->{'name'};
         $sizeInBytes = (int)($input->{'sizeInBytes'});
         $type = $input->{'type'};
 
-        $obj = new self($friendlyURL, $id, $name, $sizeInBytes, $type);
+        $obj = new self($friendlyURL, $id, $mimeType, $name, $sizeInBytes, $type);
 
         return $obj;
     }
@@ -265,6 +308,7 @@ class FileMeta
         $output = [];
         $output['friendlyURL'] = $this->friendlyURL;
         $output['id'] = $this->id;
+        $output['mimeType'] = $this->mimeType;
         $output['name'] = $this->name;
         $output['sizeInBytes'] = $this->sizeInBytes;
         $output['type'] = $this->type;

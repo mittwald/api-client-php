@@ -2,15 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
-use Psr\Http\Message\ResponseInterface;
 
-class AuthenticateBadRequestResponse implements ResponseContainer
+class VerifyRegistrationOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -19,49 +16,13 @@ class AuthenticateBadRequestResponse implements ResponseContainer
      */
     private static array $schema = [
         'type' => 'object',
-        'required' => [
-            'body',
-        ],
-        'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
-            ],
-        ],
     ];
 
     /**
-     * @var Error
+     *
      */
-    private Error $body;
-
-    private ResponseInterface|null $httpResponse = null;
-
-    /**
-     * @param Error $body
-     */
-    public function __construct(Error $body)
+    public function __construct()
     {
-        $this->body = $body;
-    }
-
-    /**
-     * @return Error
-     */
-    public function getBody(): Error
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param Error $body
-     * @return self
-     */
-    public function withBody(Error $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
-
-        return $clone;
     }
 
     /**
@@ -69,19 +30,19 @@ class AuthenticateBadRequestResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateBadRequestResponse Created instance
+     * @return VerifyRegistrationOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateBadRequestResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): VerifyRegistrationOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+
+        $obj = new self();
 
         return $obj;
     }
@@ -94,7 +55,7 @@ class AuthenticateBadRequestResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+
 
         return $output;
     }
@@ -125,18 +86,5 @@ class AuthenticateBadRequestResponse implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

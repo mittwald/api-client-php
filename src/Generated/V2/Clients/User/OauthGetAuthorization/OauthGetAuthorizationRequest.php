@@ -22,6 +22,12 @@ class OauthGetAuthorizationRequest
             'grant_consent' => [
                 'type' => 'boolean',
             ],
+            'grant_type' => [
+                'enum' => [
+                    'authorization_code',
+                ],
+                'type' => 'string',
+            ],
             'response_type' => [
                 'enum' => [
                     'code',
@@ -61,6 +67,11 @@ class OauthGetAuthorizationRequest
      * @var bool|null
      */
     private ?bool $grant_consent = null;
+
+    /**
+     * @var OauthGetAuthorizationRequestGrant_type|null
+     */
+    private ?OauthGetAuthorizationRequestGrant_type $grant_type = null;
 
     /**
      * @var OauthGetAuthorizationRequestResponse_type
@@ -117,6 +128,14 @@ class OauthGetAuthorizationRequest
     public function getGrantConsent(): ?bool
     {
         return $this->grant_consent ?? null;
+    }
+
+    /**
+     * @return OauthGetAuthorizationRequestGrant_type|null
+     */
+    public function getGrantType(): ?OauthGetAuthorizationRequestGrant_type
+    {
+        return $this->grant_type ?? null;
     }
 
     /**
@@ -200,6 +219,29 @@ class OauthGetAuthorizationRequest
     {
         $clone = clone $this;
         unset($clone->grant_consent);
+
+        return $clone;
+    }
+
+    /**
+     * @param OauthGetAuthorizationRequestGrant_type $grant_type
+     * @return self
+     */
+    public function withGrantType(OauthGetAuthorizationRequestGrant_type $grant_type): self
+    {
+        $clone = clone $this;
+        $clone->grant_type = $grant_type;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutGrantType(): self
+    {
+        $clone = clone $this;
+        unset($clone->grant_type);
 
         return $clone;
     }
@@ -392,6 +434,10 @@ class OauthGetAuthorizationRequest
         if (isset($input->{'grant_consent'})) {
             $grant_consent = (bool)($input->{'grant_consent'});
         }
+        $grant_type = null;
+        if (isset($input->{'grant_type'})) {
+            $grant_type = OauthGetAuthorizationRequestGrant_type::from($input->{'grant_type'});
+        }
         $response_type = OauthGetAuthorizationRequestResponse_type::from($input->{'response_type'});
         $client_id = $input->{'client_id'};
         $redirect_uri = null;
@@ -417,6 +463,7 @@ class OauthGetAuthorizationRequest
 
         $obj = new self($response_type, $client_id);
         $obj->grant_consent = $grant_consent;
+        $obj->grant_type = $grant_type;
         $obj->redirect_uri = $redirect_uri;
         $obj->scope = $scope;
         $obj->state = $state;
@@ -435,6 +482,9 @@ class OauthGetAuthorizationRequest
         $output = [];
         if (isset($this->grant_consent)) {
             $output['grant_consent'] = $this->grant_consent;
+        }
+        if (isset($this->grant_type)) {
+            $output['grant_type'] = ($this->grant_type)->value;
         }
         $output['response_type'] = ($this->response_type)->value;
         $output['client_id'] = $this->client_id;
@@ -515,6 +565,9 @@ class OauthGetAuthorizationRequest
         $query = [];
         if (isset($mapped['grant_consent'])) {
             $query['grant_consent'] = $mapped['grant_consent'];
+        }
+        if (isset($mapped['grant_type'])) {
+            $query['grant_type'] = $mapped['grant_type'];
         }
         if (isset($mapped['response_type'])) {
             $query['response_type'] = $mapped['response_type'];

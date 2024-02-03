@@ -29,7 +29,6 @@ class ChangePasswordOKResponseBody
         ],
         'required' => [
             'token',
-            'expires',
         ],
         'type' => 'object',
     ];
@@ -37,9 +36,9 @@ class ChangePasswordOKResponseBody
     /**
      * Expiration unix timestamp.
      *
-     * @var DateTime
+     * @var DateTime|null
      */
-    private DateTime $expires;
+    private ?DateTime $expires = null;
 
     /**
      * Public token to identify yourself against the api gateway.
@@ -49,21 +48,19 @@ class ChangePasswordOKResponseBody
     private string $token;
 
     /**
-     * @param DateTime $expires
      * @param string $token
      */
-    public function __construct(DateTime $expires, string $token)
+    public function __construct(string $token)
     {
-        $this->expires = $expires;
         $this->token = $token;
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getExpires(): DateTime
+    public function getExpires(): ?DateTime
     {
-        return $this->expires;
+        return $this->expires ?? null;
     }
 
     /**
@@ -82,6 +79,17 @@ class ChangePasswordOKResponseBody
     {
         $clone = clone $this;
         $clone->expires = $expires;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutExpires(): self
+    {
+        $clone = clone $this;
+        unset($clone->expires);
 
         return $clone;
     }
@@ -119,11 +127,14 @@ class ChangePasswordOKResponseBody
             static::validateInput($input);
         }
 
-        $expires = new DateTime($input->{'expires'});
+        $expires = null;
+        if (isset($input->{'expires'})) {
+            $expires = new DateTime($input->{'expires'});
+        }
         $token = $input->{'token'};
 
-        $obj = new self($expires, $token);
-
+        $obj = new self($token);
+        $obj->expires = $expires;
         return $obj;
     }
 
@@ -135,7 +146,9 @@ class ChangePasswordOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['expires'] = ($this->expires)->format(DateTime::ATOM);
+        if (isset($this->expires)) {
+            $output['expires'] = ($this->expires)->format(DateTime::ATOM);
+        }
         $output['token'] = $this->token;
 
         return $output;
@@ -167,6 +180,8 @@ class ChangePasswordOKResponseBody
 
     public function __clone()
     {
-        $this->expires = clone $this->expires;
+        if (isset($this->expires)) {
+            $this->expires = clone $this->expires;
+        }
     }
 }

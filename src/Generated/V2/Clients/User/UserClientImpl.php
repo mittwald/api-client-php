@@ -57,6 +57,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackNo
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenBadRequestResponse;
@@ -86,6 +87,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteSshKey\Depr
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenDefaultResponse;
@@ -215,6 +217,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensDefaultResponse;
@@ -301,6 +304,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNu
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationRequest;
 
 /**
@@ -449,14 +453,14 @@ class UserClientImpl implements UserClient
      * @throws UnexpectedResponseException
      * @param DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest $request An object representing the request for this operation
      * @deprecated
-     * @return EmptyResponse Multi Factor Authentication was disabled.
+     * @return DeprecatedUserDisableMfa\DeprecatedUserDisableMfaOKResponse Multi Factor Authentication was disabled.
      */
-    public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): EmptyResponse
+    public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): DeprecatedUserDisableMfaOKResponse
     {
         $httpRequest = new Request(DeprecatedUserDisableMfaRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return new EmptyResponse($httpResponse);
+            return DeprecatedUserDisableMfaOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserDisableMfaBadRequestResponse::fromResponse($httpResponse),
@@ -1293,14 +1297,14 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateSshKey\CreateSshKeyRequest $request An object representing the request for this operation
-     * @return EmptyResponse The ssh-key was stored.
+     * @return CreateSshKey\CreateSshKeyCreatedResponse The ssh-key was stored.
      */
-    public function createSshKey(CreateSshKeyRequest $request): EmptyResponse
+    public function createSshKey(CreateSshKeyRequest $request): CreateSshKeyCreatedResponse
     {
         $httpRequest = new Request(CreateSshKeyRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
-            return new EmptyResponse($httpResponse);
+            return CreateSshKeyCreatedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateSshKeyBadRequestResponse::fromResponse($httpResponse),
@@ -1689,14 +1693,14 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InitPasswordReset\InitPasswordResetRequest $request An object representing the request for this operation
-     * @return EmptyResponse The password reset process has been initialized and an email with confirmation code has been sent.
+     * @return InitPasswordReset\InitPasswordResetCreatedResponse The password reset process has been initialized and an email with confirmation code has been sent.
      */
-    public function initPasswordReset(InitPasswordResetRequest $request): EmptyResponse
+    public function initPasswordReset(InitPasswordResetRequest $request): InitPasswordResetCreatedResponse
     {
         $httpRequest = new Request(InitPasswordResetRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 201) {
-            return new EmptyResponse($httpResponse);
+            return InitPasswordResetCreatedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InitPasswordResetBadRequestResponse::fromResponse($httpResponse),
@@ -2206,14 +2210,14 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param VerifyRegistration\VerifyRegistrationRequest $request An object representing the request for this operation
-     * @return EmptyResponse User is verified and you can now login to your user account.
+     * @return VerifyRegistration\VerifyRegistrationOKResponse User is verified and you can now login to your user account.
      */
-    public function verifyRegistration(VerifyRegistrationRequest $request): EmptyResponse
+    public function verifyRegistration(VerifyRegistrationRequest $request): VerifyRegistrationOKResponse
     {
         $httpRequest = new Request(VerifyRegistrationRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return new EmptyResponse($httpResponse);
+            return VerifyRegistrationOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => VerifyRegistrationBadRequestResponse::fromResponse($httpResponse),

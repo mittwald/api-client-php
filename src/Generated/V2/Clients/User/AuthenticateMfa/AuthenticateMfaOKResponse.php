@@ -36,7 +36,6 @@ class AuthenticateMfaOKResponse implements ResponseContainer
                 ],
                 'required' => [
                     'token',
-                    'expires',
                 ],
                 'type' => 'object',
             ],

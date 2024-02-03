@@ -36,7 +36,6 @@ class AuthenticateOKResponse implements ResponseContainer
                 ],
                 'required' => [
                     'token',
-                    'expires',
                 ],
                 'type' => 'object',
             ],

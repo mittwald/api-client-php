@@ -28,7 +28,6 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
         ],
         'required' => [
             'token',
-            'expires',
         ],
         'type' => 'object',
     ];

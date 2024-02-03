@@ -26,6 +26,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenCr
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyRequest;
@@ -36,6 +37,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\Depre
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
@@ -90,6 +92,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensRequest;
@@ -128,6 +131,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\Updat
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationRequest;
 
 /**
@@ -209,9 +213,9 @@ interface UserClient
      * @throws UnexpectedResponseException
      * @param DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest $request An object representing the request for this operation
      * @deprecated
-     * @return EmptyResponse Multi Factor Authentication was disabled.
+     * @return DeprecatedUserDisableMfa\DeprecatedUserDisableMfaOKResponse Multi Factor Authentication was disabled.
      */
-    public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): EmptyResponse;
+    public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): DeprecatedUserDisableMfaOKResponse;
     /**
      * Update an existing `ApiToken`.
      *
@@ -603,9 +607,9 @@ interface UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateSshKey\CreateSshKeyRequest $request An object representing the request for this operation
-     * @return EmptyResponse The ssh-key was stored.
+     * @return CreateSshKey\CreateSshKeyCreatedResponse The ssh-key was stored.
      */
-    public function createSshKey(CreateSshKeyRequest $request): EmptyResponse;
+    public function createSshKey(CreateSshKeyRequest $request): CreateSshKeyCreatedResponse;
     /**
      * Deletes an ApiToken.
      *
@@ -783,9 +787,9 @@ interface UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InitPasswordReset\InitPasswordResetRequest $request An object representing the request for this operation
-     * @return EmptyResponse The password reset process has been initialized and an email with confirmation code has been sent.
+     * @return InitPasswordReset\InitPasswordResetCreatedResponse The password reset process has been initialized and an email with confirmation code has been sent.
      */
-    public function initPasswordReset(InitPasswordResetRequest $request): EmptyResponse;
+    public function initPasswordReset(InitPasswordResetRequest $request): InitPasswordResetCreatedResponse;
     /**
      * List all of your ApiTokens.
      *
@@ -1025,7 +1029,7 @@ interface UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param VerifyRegistration\VerifyRegistrationRequest $request An object representing the request for this operation
-     * @return EmptyResponse User is verified and you can now login to your user account.
+     * @return VerifyRegistration\VerifyRegistrationOKResponse User is verified and you can now login to your user account.
      */
-    public function verifyRegistration(VerifyRegistrationRequest $request): EmptyResponse;
+    public function verifyRegistration(VerifyRegistrationRequest $request): VerifyRegistrationOKResponse;
 }

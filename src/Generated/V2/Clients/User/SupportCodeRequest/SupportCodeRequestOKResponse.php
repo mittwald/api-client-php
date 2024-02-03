@@ -36,8 +36,8 @@ class SupportCodeRequestOKResponse implements ResponseContainer
                     ],
                 ],
                 'required' => [
-                    'token',
-                    'expires',
+                    'supportCode',
+                    'expiresAt',
                 ],
                 'type' => 'object',
             ],

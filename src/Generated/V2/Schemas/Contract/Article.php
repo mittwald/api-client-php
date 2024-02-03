@@ -54,7 +54,6 @@ class Article
         'required' => [
             'id',
             'name',
-            'description',
             'articleTemplateId',
             'amount',
             'unitPrice',
@@ -73,9 +72,9 @@ class Article
     private string $articleTemplateId;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $description;
+    private ?string $description = null;
 
     /**
      * @var string
@@ -95,16 +94,14 @@ class Article
     /**
      * @param int $amount
      * @param string $articleTemplateId
-     * @param string $description
      * @param string $id
      * @param string $name
      * @param Price $unitPrice
      */
-    public function __construct(int $amount, string $articleTemplateId, string $description, string $id, string $name, Price $unitPrice)
+    public function __construct(int $amount, string $articleTemplateId, string $id, string $name, Price $unitPrice)
     {
         $this->amount = $amount;
         $this->articleTemplateId = $articleTemplateId;
-        $this->description = $description;
         $this->id = $id;
         $this->name = $name;
         $this->unitPrice = $unitPrice;
@@ -127,11 +124,11 @@ class Article
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
     /**
@@ -213,6 +210,17 @@ class Article
     }
 
     /**
+     * @return self
+     */
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
+    /**
      * @param string $id
      * @return self
      */
@@ -277,13 +285,16 @@ class Article
 
         $amount = (int)($input->{'amount'});
         $articleTemplateId = $input->{'articleTemplateId'};
-        $description = $input->{'description'};
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $id = $input->{'id'};
         $name = $input->{'name'};
         $unitPrice = Price::buildFromInput($input->{'unitPrice'}, validate: $validate);
 
-        $obj = new self($amount, $articleTemplateId, $description, $id, $name, $unitPrice);
-
+        $obj = new self($amount, $articleTemplateId, $id, $name, $unitPrice);
+        $obj->description = $description;
         return $obj;
     }
 
@@ -297,7 +308,9 @@ class Article
         $output = [];
         $output['amount'] = $this->amount;
         $output['articleTemplateId'] = $this->articleTemplateId;
-        $output['description'] = $this->description;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
         $output['unitPrice'] = $this->unitPrice->toJson();

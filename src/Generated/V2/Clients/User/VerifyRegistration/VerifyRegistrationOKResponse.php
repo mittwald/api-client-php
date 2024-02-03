@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ChangePasswordOKResponse implements ResponseContainer
+class VerifyRegistrationOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -23,53 +23,39 @@ class ChangePasswordOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'expires' => [
-                        'description' => 'Expiration unix timestamp.',
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'token' => [
-                        'description' => 'Public token to identify yourself against the api gateway.',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'token',
-                ],
                 'type' => 'object',
             ],
         ],
     ];
 
     /**
-     * @var ChangePasswordOKResponseBody
+     * @var VerifyRegistrationOKResponseBody
      */
-    private ChangePasswordOKResponseBody $body;
+    private VerifyRegistrationOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param ChangePasswordOKResponseBody $body
+     * @param VerifyRegistrationOKResponseBody $body
      */
-    public function __construct(ChangePasswordOKResponseBody $body)
+    public function __construct(VerifyRegistrationOKResponseBody $body)
     {
         $this->body = $body;
     }
 
     /**
-     * @return ChangePasswordOKResponseBody
+     * @return VerifyRegistrationOKResponseBody
      */
-    public function getBody(): ChangePasswordOKResponseBody
+    public function getBody(): VerifyRegistrationOKResponseBody
     {
         return $this->body;
     }
 
     /**
-     * @param ChangePasswordOKResponseBody $body
+     * @param VerifyRegistrationOKResponseBody $body
      * @return self
      */
-    public function withBody(ChangePasswordOKResponseBody $body): self
+    public function withBody(VerifyRegistrationOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -82,17 +68,17 @@ class ChangePasswordOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ChangePasswordOKResponse Created instance
+     * @return VerifyRegistrationOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ChangePasswordOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): VerifyRegistrationOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ChangePasswordOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = VerifyRegistrationOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
