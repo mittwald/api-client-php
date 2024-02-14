@@ -36,6 +36,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
                         ],
                         'score' => [
                             'format' => 'double',
+                            'nullable' => true,
                             'type' => 'number',
                         ],
                         'value' => [
@@ -46,7 +47,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
                     'required' => [
                         'name',
                         'value',
-                        'score',
                         'createdAt',
                     ],
                     'type' => 'object',

@@ -43,6 +43,7 @@ class PageinsightsGetPerformanceDataOKResponse implements ResponseContainer
                                 ],
                                 'score' => [
                                     'format' => 'double',
+                                    'nullable' => true,
                                     'type' => 'number',
                                 ],
                                 'value' => [
@@ -53,7 +54,6 @@ class PageinsightsGetPerformanceDataOKResponse implements ResponseContainer
                             'required' => [
                                 'name',
                                 'value',
-                                'score',
                                 'createdAt',
                             ],
                             'type' => 'object',

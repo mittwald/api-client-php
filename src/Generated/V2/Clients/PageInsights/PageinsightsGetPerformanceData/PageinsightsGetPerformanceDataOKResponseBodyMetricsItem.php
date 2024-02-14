@@ -26,6 +26,7 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
             ],
             'score' => [
                 'format' => 'double',
+                'nullable' => true,
                 'type' => 'number',
             ],
             'value' => [
@@ -36,7 +37,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         'required' => [
             'name',
             'value',
-            'score',
             'createdAt',
         ],
         'type' => 'object',
@@ -53,9 +53,9 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
     private string $name;
 
     /**
-     * @var int|float
+     * @var int|float|null
      */
-    private int|float $score;
+    private int|float|null $score = null;
 
     /**
      * @var int|float
@@ -65,14 +65,12 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
     /**
      * @param DateTime $createdAt
      * @param string $name
-     * @param int|float $score
      * @param int|float $value
      */
-    public function __construct(DateTime $createdAt, string $name, int|float $score, int|float $value)
+    public function __construct(DateTime $createdAt, string $name, int|float $value)
     {
         $this->createdAt = $createdAt;
         $this->name = $name;
-        $this->score = $score;
         $this->value = $value;
     }
 
@@ -93,9 +91,9 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
     }
 
     /**
-     * @return int|float
+     * @return int|float|null
      */
-    public function getScore(): int|float
+    public function getScore(): int|float|null
     {
         return $this->score;
     }
@@ -157,6 +155,17 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
     }
 
     /**
+     * @return self
+     */
+    public function withoutScore(): self
+    {
+        $clone = clone $this;
+        unset($clone->score);
+
+        return $clone;
+    }
+
+    /**
      * @param int|float $value
      * @return self
      */
@@ -191,11 +200,14 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
 
         $createdAt = new DateTime($input->{'createdAt'});
         $name = $input->{'name'};
-        $score = str_contains($input->{'score'}, '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
+        $score = null;
+        if (isset($input->{'score'})) {
+            $score = str_contains($input->{'score'}, '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
+        }
         $value = str_contains($input->{'value'}, '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
 
-        $obj = new self($createdAt, $name, $score, $value);
-
+        $obj = new self($createdAt, $name, $value);
+        $obj->score = $score;
         return $obj;
     }
 
@@ -209,7 +221,9 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         $output = [];
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['name'] = $this->name;
-        $output['score'] = $this->score;
+        if (isset($this->score)) {
+            $output['score'] = $this->score;
+        }
         $output['value'] = $this->value;
 
         return $output;
