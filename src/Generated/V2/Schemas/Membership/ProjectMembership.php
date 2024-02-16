@@ -27,6 +27,11 @@ class ProjectMembership
      */
     private static array $schema = [
         'properties' => [
+            'email' => [
+                'description' => 'Email used by the invited user.',
+                'format' => 'email',
+                'type' => 'string',
+            ],
             'expiresAt' => [
                 'description' => 'Time the ProjectMembership should expire at.',
                 'format' => 'date-time',
@@ -51,6 +56,10 @@ class ProjectMembership
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'mfa' => [
+                'description' => 'MFA activated by the user.',
+                'type' => 'boolean',
+            ],
             'projectId' => [
                 'description' => 'ID of the Project the membership is for.',
                 'format' => 'uuid',
@@ -71,9 +80,18 @@ class ProjectMembership
             'userId',
             'role',
             'inherited',
+            'email',
+            'mfa',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * Email used by the invited user.
+     *
+     * @var string
+     */
+    private string $email;
 
     /**
      * Time the ProjectMembership should expire at.
@@ -111,6 +129,13 @@ class ProjectMembership
     private ?DateTime $memberSince = null;
 
     /**
+     * MFA activated by the user.
+     *
+     * @var bool
+     */
+    private bool $mfa;
+
+    /**
      * ID of the Project the membership is for.
      *
      * @var string
@@ -130,19 +155,31 @@ class ProjectMembership
     private string $userId;
 
     /**
+     * @param string $email
      * @param string $id
      * @param bool $inherited
+     * @param bool $mfa
      * @param string $projectId
      * @param ProjectRoles $role
      * @param string $userId
      */
-    public function __construct(string $id, bool $inherited, string $projectId, ProjectRoles $role, string $userId)
+    public function __construct(string $email, string $id, bool $inherited, bool $mfa, string $projectId, ProjectRoles $role, string $userId)
     {
+        $this->email = $email;
         $this->id = $id;
         $this->inherited = $inherited;
+        $this->mfa = $mfa;
         $this->projectId = $projectId;
         $this->role = $role;
         $this->userId = $userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     /**
@@ -186,6 +223,14 @@ class ProjectMembership
     }
 
     /**
+     * @return bool
+     */
+    public function getMfa(): bool
+    {
+        return $this->mfa;
+    }
+
+    /**
      * @return string
      */
     public function getProjectId(): string
@@ -207,6 +252,24 @@ class ProjectMembership
     public function getUserId(): string
     {
         return $this->userId;
+    }
+
+    /**
+     * @param string $email
+     * @return self
+     */
+    public function withEmail(string $email): self
+    {
+        $validator = new Validator();
+        $validator->validate($email, static::$schema['properties']['email']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->email = $email;
+
+        return $clone;
     }
 
     /**
@@ -321,6 +384,24 @@ class ProjectMembership
     }
 
     /**
+     * @param bool $mfa
+     * @return self
+     */
+    public function withMfa(bool $mfa): self
+    {
+        $validator = new Validator();
+        $validator->validate($mfa, static::$schema['properties']['mfa']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->mfa = $mfa;
+
+        return $clone;
+    }
+
+    /**
      * @param string $projectId
      * @return self
      */
@@ -383,6 +464,7 @@ class ProjectMembership
             static::validateInput($input);
         }
 
+        $email = $input->{'email'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
@@ -397,11 +479,12 @@ class ProjectMembership
         if (isset($input->{'memberSince'})) {
             $memberSince = new DateTime($input->{'memberSince'});
         }
+        $mfa = (bool)($input->{'mfa'});
         $projectId = $input->{'projectId'};
         $role = ProjectRoles::from($input->{'role'});
         $userId = $input->{'userId'};
 
-        $obj = new self($id, $inherited, $projectId, $role, $userId);
+        $obj = new self($email, $id, $inherited, $mfa, $projectId, $role, $userId);
         $obj->expiresAt = $expiresAt;
         $obj->inviteId = $inviteId;
         $obj->memberSince = $memberSince;
@@ -416,6 +499,7 @@ class ProjectMembership
     public function toJson(): array
     {
         $output = [];
+        $output['email'] = $this->email;
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
@@ -427,6 +511,7 @@ class ProjectMembership
         if (isset($this->memberSince)) {
             $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }
+        $output['mfa'] = $this->mfa;
         $output['projectId'] = $this->projectId;
         $output['role'] = $this->role->value;
         $output['userId'] = $this->userId;

@@ -32,6 +32,11 @@ class CustomerMembership
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'email' => [
+                'description' => 'Email used by the invited user.',
+                'format' => 'email',
+                'type' => 'string',
+            ],
             'expiresAt' => [
                 'description' => 'Time the CustomerMembership should expire at.',
                 'format' => 'date-time',
@@ -52,6 +57,10 @@ class CustomerMembership
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'mfa' => [
+                'description' => 'MFA activated by the user.',
+                'type' => 'boolean',
+            ],
             'role' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.membership.CustomerRoles',
             ],
@@ -66,6 +75,8 @@ class CustomerMembership
             'customerId',
             'userId',
             'role',
+            'email',
+            'mfa',
         ],
         'type' => 'object',
     ];
@@ -76,6 +87,13 @@ class CustomerMembership
      * @var string
      */
     private string $customerId;
+
+    /**
+     * Email used by the invited user.
+     *
+     * @var string
+     */
+    private string $email;
 
     /**
      * Time the CustomerMembership should expire at.
@@ -106,6 +124,13 @@ class CustomerMembership
     private ?DateTime $memberSince = null;
 
     /**
+     * MFA activated by the user.
+     *
+     * @var bool
+     */
+    private bool $mfa;
+
+    /**
      * @var CustomerRoles
      */
     private CustomerRoles $role;
@@ -119,14 +144,18 @@ class CustomerMembership
 
     /**
      * @param string $customerId
+     * @param string $email
      * @param string $id
+     * @param bool $mfa
      * @param CustomerRoles $role
      * @param string $userId
      */
-    public function __construct(string $customerId, string $id, CustomerRoles $role, string $userId)
+    public function __construct(string $customerId, string $email, string $id, bool $mfa, CustomerRoles $role, string $userId)
     {
         $this->customerId = $customerId;
+        $this->email = $email;
         $this->id = $id;
+        $this->mfa = $mfa;
         $this->role = $role;
         $this->userId = $userId;
     }
@@ -137,6 +166,14 @@ class CustomerMembership
     public function getCustomerId(): string
     {
         return $this->customerId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     /**
@@ -172,6 +209,14 @@ class CustomerMembership
     }
 
     /**
+     * @return bool
+     */
+    public function getMfa(): bool
+    {
+        return $this->mfa;
+    }
+
+    /**
      * @return CustomerRoles
      */
     public function getRole(): CustomerRoles
@@ -201,6 +246,24 @@ class CustomerMembership
 
         $clone = clone $this;
         $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    /**
+     * @param string $email
+     * @return self
+     */
+    public function withEmail(string $email): self
+    {
+        $validator = new Validator();
+        $validator->validate($email, static::$schema['properties']['email']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->email = $email;
 
         return $clone;
     }
@@ -299,6 +362,24 @@ class CustomerMembership
     }
 
     /**
+     * @param bool $mfa
+     * @return self
+     */
+    public function withMfa(bool $mfa): self
+    {
+        $validator = new Validator();
+        $validator->validate($mfa, static::$schema['properties']['mfa']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->mfa = $mfa;
+
+        return $clone;
+    }
+
+    /**
      * @param CustomerRoles $role
      * @return self
      */
@@ -344,6 +425,7 @@ class CustomerMembership
         }
 
         $customerId = $input->{'customerId'};
+        $email = $input->{'email'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
@@ -357,10 +439,11 @@ class CustomerMembership
         if (isset($input->{'memberSince'})) {
             $memberSince = new DateTime($input->{'memberSince'});
         }
+        $mfa = (bool)($input->{'mfa'});
         $role = CustomerRoles::from($input->{'role'});
         $userId = $input->{'userId'};
 
-        $obj = new self($customerId, $id, $role, $userId);
+        $obj = new self($customerId, $email, $id, $mfa, $role, $userId);
         $obj->expiresAt = $expiresAt;
         $obj->inviteId = $inviteId;
         $obj->memberSince = $memberSince;
@@ -376,6 +459,7 @@ class CustomerMembership
     {
         $output = [];
         $output['customerId'] = $this->customerId;
+        $output['email'] = $this->email;
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
@@ -386,6 +470,7 @@ class CustomerMembership
         if (isset($this->memberSince)) {
             $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }
+        $output['mfa'] = $this->mfa;
         $output['role'] = $this->role->value;
         $output['userId'] = $this->userId;
 
