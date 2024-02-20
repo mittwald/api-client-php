@@ -26,6 +26,9 @@ class ListSystemsoftwareversionsRequest
             'versionRange' => [
                 'type' => 'string',
             ],
+            'recommended' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'systemSoftwareId',
@@ -41,6 +44,11 @@ class ListSystemsoftwareversionsRequest
      * @var string|null
      */
     private ?string $versionRange = null;
+
+    /**
+     * @var bool|null
+     */
+    private ?bool $recommended = null;
 
     private array $headers = [
 
@@ -68,6 +76,14 @@ class ListSystemsoftwareversionsRequest
     public function getVersionRange(): ?string
     {
         return $this->versionRange ?? null;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getRecommended(): ?bool
+    {
+        return $this->recommended ?? null;
     }
 
     /**
@@ -118,6 +134,35 @@ class ListSystemsoftwareversionsRequest
     }
 
     /**
+     * @param bool $recommended
+     * @return self
+     */
+    public function withRecommended(bool $recommended): self
+    {
+        $validator = new Validator();
+        $validator->validate($recommended, static::$schema['properties']['recommended']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recommended = $recommended;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutRecommended(): self
+    {
+        $clone = clone $this;
+        unset($clone->recommended);
+
+        return $clone;
+    }
+
+    /**
      * Builds a new instance from an input array
      *
      * @param array|object $input Input data
@@ -137,9 +182,14 @@ class ListSystemsoftwareversionsRequest
         if (isset($input->{'versionRange'})) {
             $versionRange = $input->{'versionRange'};
         }
+        $recommended = null;
+        if (isset($input->{'recommended'})) {
+            $recommended = (bool)($input->{'recommended'});
+        }
 
         $obj = new self($systemSoftwareId);
         $obj->versionRange = $versionRange;
+        $obj->recommended = $recommended;
         return $obj;
     }
 
@@ -154,6 +204,9 @@ class ListSystemsoftwareversionsRequest
         $output['systemSoftwareId'] = $this->systemSoftwareId;
         if (isset($this->versionRange)) {
             $output['versionRange'] = $this->versionRange;
+        }
+        if (isset($this->recommended)) {
+            $output['recommended'] = $this->recommended;
         }
 
         return $output;
@@ -218,6 +271,9 @@ class ListSystemsoftwareversionsRequest
         $query = [];
         if (isset($mapped['versionRange'])) {
             $query['versionRange'] = $mapped['versionRange'];
+        }
+        if (isset($mapped['recommended'])) {
+            $query['recommended'] = $mapped['recommended'];
         }
         return [
             'query' => $query,
