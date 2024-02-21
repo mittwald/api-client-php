@@ -28,6 +28,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2De
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse;
@@ -651,6 +655,28 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CheckDomainRegistrabilityV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             default => CheckDomainRegistrabilityV2DeprecatedDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check if a Domain is available to transfer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-transferability
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CheckDomainTransferability\CheckDomainTransferabilityRequest $request An object representing the request for this operation
+     * @return CheckDomainTransferability\CheckDomainTransferabilityOKResponse OK
+     */
+    public function checkDomainTransferability(CheckDomainTransferabilityRequest $request): CheckDomainTransferabilityOKResponse
+    {
+        $httpRequest = new Request(CheckDomainTransferabilityRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CheckDomainTransferabilityOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CheckDomainTransferabilityBadRequestResponse::fromResponse($httpResponse),
+            default => CheckDomainTransferabilityDefaultResponse::fromResponse($httpResponse),
         });
     }
 
