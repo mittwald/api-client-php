@@ -46,6 +46,14 @@ class InvoiceUpdateInvoiceSettingsRequestBody
             'recipientSameAsOwner' => [
                 'type' => 'boolean',
             ],
+            'resolveReturnDebitNote' => [
+                'description' => 'Choose how to resolve a return debit note if necessary.',
+                'enum' => [
+                    'invoicePayment',
+                    'retryDebit',
+                ],
+                'type' => 'string',
+            ],
             'targetDay' => [
                 'example' => 15,
                 'maximum' => 28,
@@ -89,6 +97,13 @@ class InvoiceUpdateInvoiceSettingsRequestBody
      * @var bool|null
      */
     private ?bool $recipientSameAsOwner = null;
+
+    /**
+     * Choose how to resolve a return debit note if necessary.
+     *
+     * @var InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote|null
+     */
+    private ?InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote $resolveReturnDebitNote = null;
 
     /**
      * @var int|null
@@ -152,6 +167,14 @@ class InvoiceUpdateInvoiceSettingsRequestBody
     public function getRecipientSameAsOwner(): ?bool
     {
         return $this->recipientSameAsOwner ?? null;
+    }
+
+    /**
+     * @return InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote|null
+     */
+    public function getResolveReturnDebitNote(): ?InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote
+    {
+        return $this->resolveReturnDebitNote ?? null;
     }
 
     /**
@@ -303,6 +326,29 @@ class InvoiceUpdateInvoiceSettingsRequestBody
     }
 
     /**
+     * @param InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote $resolveReturnDebitNote
+     * @return self
+     */
+    public function withResolveReturnDebitNote(InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote $resolveReturnDebitNote): self
+    {
+        $clone = clone $this;
+        $clone->resolveReturnDebitNote = $resolveReturnDebitNote;
+
+        return $clone;
+    }
+
+    /**
+     * @return self
+     */
+    public function withoutResolveReturnDebitNote(): self
+    {
+        $clone = clone $this;
+        unset($clone->resolveReturnDebitNote);
+
+        return $clone;
+    }
+
+    /**
      * @param int $targetDay
      * @return self
      */
@@ -368,6 +414,10 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         if (isset($input->{'recipientSameAsOwner'})) {
             $recipientSameAsOwner = (bool)($input->{'recipientSameAsOwner'});
         }
+        $resolveReturnDebitNote = null;
+        if (isset($input->{'resolveReturnDebitNote'})) {
+            $resolveReturnDebitNote = InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote::from($input->{'resolveReturnDebitNote'});
+        }
         $targetDay = null;
         if (isset($input->{'targetDay'})) {
             $targetDay = (int)($input->{'targetDay'});
@@ -378,6 +428,7 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         $obj->printedInvoices = $printedInvoices;
         $obj->recipient = $recipient;
         $obj->recipientSameAsOwner = $recipientSameAsOwner;
+        $obj->resolveReturnDebitNote = $resolveReturnDebitNote;
         $obj->targetDay = $targetDay;
         return $obj;
     }
@@ -406,6 +457,9 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         }
         if (isset($this->recipientSameAsOwner)) {
             $output['recipientSameAsOwner'] = $this->recipientSameAsOwner;
+        }
+        if (isset($this->resolveReturnDebitNote)) {
+            $output['resolveReturnDebitNote'] = ($this->resolveReturnDebitNote)->value;
         }
         if (isset($this->targetDay)) {
             $output['targetDay'] = $this->targetDay;

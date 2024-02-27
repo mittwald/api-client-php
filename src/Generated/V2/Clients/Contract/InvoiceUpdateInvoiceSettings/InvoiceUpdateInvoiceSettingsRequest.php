@@ -51,6 +51,14 @@ class InvoiceUpdateInvoiceSettingsRequest
                     'recipientSameAsOwner' => [
                         'type' => 'boolean',
                     ],
+                    'resolveReturnDebitNote' => [
+                        'description' => 'Choose how to resolve a return debit note if necessary.',
+                        'enum' => [
+                            'invoicePayment',
+                            'retryDebit',
+                        ],
+                        'type' => 'string',
+                    ],
                     'targetDay' => [
                         'example' => 15,
                         'maximum' => 28,
