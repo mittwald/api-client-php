@@ -66,10 +66,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsRequest;
@@ -501,6 +503,7 @@ class CustomerClientImpl implements CustomerClient
             return ListCustomerInvitesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListCustomerInvitesForbiddenResponse::fromResponse($httpResponse),
             404 => ListCustomerInvitesNotFoundResponse::fromResponse($httpResponse),
             default => ListCustomerInvitesDefaultResponse::fromResponse($httpResponse),
         });
@@ -523,6 +526,7 @@ class CustomerClientImpl implements CustomerClient
             return ListCustomerMembershipsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListCustomerMembershipsForbiddenResponse::fromResponse($httpResponse),
             404 => ListCustomerMembershipsNotFoundResponse::fromResponse($httpResponse),
             default => ListCustomerMembershipsDefaultResponse::fromResponse($httpResponse),
         });

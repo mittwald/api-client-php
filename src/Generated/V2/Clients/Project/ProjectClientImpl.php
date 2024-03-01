@@ -60,6 +60,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetPro
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
@@ -79,10 +80,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\Li
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsRequest;
@@ -451,6 +454,7 @@ class ProjectClientImpl implements ProjectClient
             return GetSelfMembershipForProjectOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetSelfMembershipForProjectForbiddenResponse::fromResponse($httpResponse),
             404 => GetSelfMembershipForProjectNotFoundResponse::fromResponse($httpResponse),
             default => GetSelfMembershipForProjectDefaultResponse::fromResponse($httpResponse),
         });
@@ -561,6 +565,7 @@ class ProjectClientImpl implements ProjectClient
             return ListProjectInvitesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListProjectInvitesForbiddenResponse::fromResponse($httpResponse),
             404 => ListProjectInvitesNotFoundResponse::fromResponse($httpResponse),
             default => ListProjectInvitesDefaultResponse::fromResponse($httpResponse),
         });
@@ -583,6 +588,7 @@ class ProjectClientImpl implements ProjectClient
             return ListProjectMembershipsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListProjectMembershipsForbiddenResponse::fromResponse($httpResponse),
             404 => ListProjectMembershipsNotFoundResponse::fromResponse($httpResponse),
             default => ListProjectMembershipsDefaultResponse::fromResponse($httpResponse),
         });
