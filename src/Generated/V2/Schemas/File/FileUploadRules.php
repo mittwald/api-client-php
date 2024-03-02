@@ -26,14 +26,31 @@ class FileUploadRules
      */
     private static array $schema = [
         'properties' => [
+            'extensions' => [
+                'items' => [
+                    'example' => [
+                        '.png',
+                        '.jpeg',
+                        '.jpg',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
             'fileTypes' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.file.FileType',
                 ],
                 'type' => 'array',
             ],
+            'maxSizeInBytes' => [
+                'example' => 1000000,
+                'type' => 'integer',
+            ],
             'maxSizeInKB' => [
-                'example' => 3000,
+                'deprecated' => true,
+                'description' => 'deprecated, see maxSizeInBytes',
+                'example' => 1000,
                 'type' => 'integer',
             ],
             'mimeTypes' => [
@@ -80,12 +97,19 @@ class FileUploadRules
             ],
         ],
         'required' => [
+            'maxSizeInBytes',
             'maxSizeInKB',
             'mimeTypes',
             'fileTypes',
+            'extensions',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * @var string[]
+     */
+    private array $extensions;
 
     /**
      * @var FileType[]
@@ -93,6 +117,13 @@ class FileUploadRules
     private array $fileTypes;
 
     /**
+     * @var int
+     */
+    private int $maxSizeInBytes;
+
+    /**
+     * deprecated, see maxSizeInBytes
+     *
      * @var int
      */
     private int $maxSizeInKB;
@@ -108,15 +139,27 @@ class FileUploadRules
     private ?FileUploadRulesProperties $properties = null;
 
     /**
+     * @param string[] $extensions
      * @param FileType[] $fileTypes
+     * @param int $maxSizeInBytes
      * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
-    public function __construct(array $fileTypes, int $maxSizeInKB, array $mimeTypes)
+    public function __construct(array $extensions, array $fileTypes, int $maxSizeInBytes, int $maxSizeInKB, array $mimeTypes)
     {
+        $this->extensions = $extensions;
         $this->fileTypes = $fileTypes;
+        $this->maxSizeInBytes = $maxSizeInBytes;
         $this->maxSizeInKB = $maxSizeInKB;
         $this->mimeTypes = $mimeTypes;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getExtensions(): array
+    {
+        return $this->extensions;
     }
 
     /**
@@ -125,6 +168,14 @@ class FileUploadRules
     public function getFileTypes(): array
     {
         return $this->fileTypes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxSizeInBytes(): int
+    {
+        return $this->maxSizeInBytes;
     }
 
     /**
@@ -152,6 +203,24 @@ class FileUploadRules
     }
 
     /**
+     * @param string[] $extensions
+     * @return self
+     */
+    public function withExtensions(array $extensions): self
+    {
+        $validator = new Validator();
+        $validator->validate($extensions, static::$schema['properties']['extensions']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->extensions = $extensions;
+
+        return $clone;
+    }
+
+    /**
      * @param FileType[] $fileTypes
      * @return self
      */
@@ -159,6 +228,24 @@ class FileUploadRules
     {
         $clone = clone $this;
         $clone->fileTypes = $fileTypes;
+
+        return $clone;
+    }
+
+    /**
+     * @param int $maxSizeInBytes
+     * @return self
+     */
+    public function withMaxSizeInBytes(int $maxSizeInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($maxSizeInBytes, static::$schema['properties']['maxSizeInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->maxSizeInBytes = $maxSizeInBytes;
 
         return $clone;
     }
@@ -237,7 +324,9 @@ class FileUploadRules
             static::validateInput($input);
         }
 
+        $extensions = $input->{'extensions'};
         $fileTypes = array_map(fn (array|object $i): FileType => FileType::buildFromInput($i, validate: $validate), $input->{'fileTypes'});
+        $maxSizeInBytes = (int)($input->{'maxSizeInBytes'});
         $maxSizeInKB = (int)($input->{'maxSizeInKB'});
         $mimeTypes = $input->{'mimeTypes'};
         $properties = null;
@@ -245,7 +334,7 @@ class FileUploadRules
             $properties = FileUploadRulesProperties::buildFromInput($input->{'properties'}, validate: $validate);
         }
 
-        $obj = new self($fileTypes, $maxSizeInKB, $mimeTypes);
+        $obj = new self($extensions, $fileTypes, $maxSizeInBytes, $maxSizeInKB, $mimeTypes);
         $obj->properties = $properties;
         return $obj;
     }
@@ -258,7 +347,9 @@ class FileUploadRules
     public function toJson(): array
     {
         $output = [];
+        $output['extensions'] = $this->extensions;
         $output['fileTypes'] = array_map(fn (FileType $i): array => $i->toJson(), $this->fileTypes);
+        $output['maxSizeInBytes'] = $this->maxSizeInBytes;
         $output['maxSizeInKB'] = $this->maxSizeInKB;
         $output['mimeTypes'] = $this->mimeTypes;
         if (isset($this->properties)) {
