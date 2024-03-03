@@ -42,7 +42,6 @@ class InvoiceSettingsStatus
             'type' => [
                 'enum' => [
                     'returnDebitNote',
-                    'returnDebitNoteWaitingForPayment',
                 ],
                 'type' => 'string',
             ],
