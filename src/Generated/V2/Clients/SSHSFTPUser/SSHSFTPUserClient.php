@@ -103,7 +103,7 @@ interface SSHSFTPUserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteSshUser\DeleteSshUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse
+     * @return EmptyResponse NoContent
      */
     public function deleteSshUser(DeleteSshUserRequest $request): EmptyResponse;
     /**
@@ -133,7 +133,7 @@ interface SSHSFTPUserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateSshUser\UpdateSshUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse
+     * @return EmptyResponse NoContent
      */
     public function updateSshUser(UpdateSshUserRequest $request): EmptyResponse;
 }

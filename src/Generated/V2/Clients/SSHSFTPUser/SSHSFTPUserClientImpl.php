@@ -10,36 +10,46 @@ use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSftpUser\CreateSftpUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\CreateSshUser\CreateSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSftpUser\DeleteSftpUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSftpUser\DeleteSftpUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSftpUser\DeleteSftpUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSshUser\DeleteSshUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSshUser\DeleteSshUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\DeleteSshUser\DeleteSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSftpUser\GetSftpUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\GetSshUser\GetSshUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSftpUsers\ListSftpUsersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\ListSshUsers\ListSshUsersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSftpUser\UpdateSftpUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\UpdateSshUser\UpdateSshUserRequest;
 
 /**
@@ -81,6 +91,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateSftpUserBadRequestResponse::fromResponse($httpResponse),
+            403 => CreateSftpUserForbiddenResponse::fromResponse($httpResponse),
             default => CreateSftpUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -102,6 +113,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => DeleteSftpUserForbiddenResponse::fromResponse($httpResponse),
             default => DeleteSftpUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -123,6 +135,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
             return GetSftpUserOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetSftpUserForbiddenResponse::fromResponse($httpResponse),
             404 => GetSftpUserNotFoundResponse::fromResponse($httpResponse),
             default => GetSftpUserDefaultResponse::fromResponse($httpResponse),
         });
@@ -145,6 +158,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
             return ListSftpUsersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListSftpUsersForbiddenResponse::fromResponse($httpResponse),
             404 => ListSftpUsersNotFoundResponse::fromResponse($httpResponse),
             default => ListSftpUsersDefaultResponse::fromResponse($httpResponse),
         });
@@ -168,6 +182,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateSftpUserBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateSftpUserForbiddenResponse::fromResponse($httpResponse),
             default => UpdateSftpUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -190,6 +205,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateSshUserBadRequestResponse::fromResponse($httpResponse),
+            403 => CreateSshUserForbiddenResponse::fromResponse($httpResponse),
             default => CreateSshUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -201,7 +217,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteSshUser\DeleteSshUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse
+     * @return EmptyResponse NoContent
      */
     public function deleteSshUser(DeleteSshUserRequest $request): EmptyResponse
     {
@@ -211,6 +227,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => DeleteSshUserForbiddenResponse::fromResponse($httpResponse),
             default => DeleteSshUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -232,6 +249,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
             return GetSshUserOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => GetSshUserForbiddenResponse::fromResponse($httpResponse),
             404 => GetSshUserNotFoundResponse::fromResponse($httpResponse),
             default => GetSshUserDefaultResponse::fromResponse($httpResponse),
         });
@@ -254,6 +272,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
             return ListSshUsersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => ListSshUsersForbiddenResponse::fromResponse($httpResponse),
             404 => ListSshUsersNotFoundResponse::fromResponse($httpResponse),
             default => ListSshUsersDefaultResponse::fromResponse($httpResponse),
         });
@@ -266,7 +285,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateSshUser\UpdateSshUserRequest $request An object representing the request for this operation
-     * @return EmptyResponse
+     * @return EmptyResponse NoContent
      */
     public function updateSshUser(UpdateSshUserRequest $request): EmptyResponse
     {
@@ -277,6 +296,7 @@ class SSHSFTPUserClientImpl implements SSHSFTPUserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateSshUserBadRequestResponse::fromResponse($httpResponse),
+            403 => UpdateSshUserForbiddenResponse::fromResponse($httpResponse),
             default => UpdateSshUserDefaultResponse::fromResponse($httpResponse),
         });
     }
