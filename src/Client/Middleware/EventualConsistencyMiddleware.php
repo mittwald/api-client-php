@@ -9,6 +9,15 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
+ * EventualConsistencyMiddleware works around the intricacies of the API's
+ * eventual consistency.
+ *
+ * In a nutshell: A response may contain a header "etag" which is a unique
+ * identifier for the current state of the resource. If a subsequent request
+ * includes the "If-Event-Reached" header with the value of the previous
+ * response's "etag" header, the API will wait until the resource has reached
+ * the state identified by the "etag" before processing the request.
+ *
  * @see https://developer.mittwald.de/docs/v2/api/intro/#eventual-consistency
  */
 class EventualConsistencyMiddleware
