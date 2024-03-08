@@ -5,6 +5,7 @@ namespace Mittwald\ApiClient\Client;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleRetry\GuzzleRetryMiddleware;
+use Mittwald\ApiClient\Client\Middleware\EventualConsistencyMiddleware;
 
 abstract class BaseClient
 {
@@ -13,6 +14,7 @@ abstract class BaseClient
     protected function __construct(string $baseUri, string|null $apiKey = null)
     {
         $stack = HandlerStack::create();
+        $stack->push(new EventualConsistencyMiddleware());
         $stack->push(GuzzleRetryMiddleware::factory([
             // 403 needs to be included here, as the API's ACL layer is eventually consistent
             // and might return 403 for a short period of time after a resource has been created
