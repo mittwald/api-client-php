@@ -13,8 +13,6 @@ class MailaddressUpdateAddressDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class MailaddressUpdateAddressDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var MailaddressUpdateAddressDeprecatedRequestBody
-     */
     private MailaddressUpdateAddressDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $id
-     * @param MailaddressUpdateAddressDeprecatedRequestBody $body
-     */
     public function __construct(string $id, MailaddressUpdateAddressDeprecatedRequestBody $body)
     {
         $this->id = $id;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return MailaddressUpdateAddressDeprecatedRequestBody
-     */
     public function getBody(): MailaddressUpdateAddressDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class MailaddressUpdateAddressDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param MailaddressUpdateAddressDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(MailaddressUpdateAddressDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

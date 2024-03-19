@@ -13,8 +13,6 @@ class DeleteProjectRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class DeleteProjectRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();

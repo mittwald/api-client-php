@@ -21,8 +21,6 @@ class VisitorSpec
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,18 +38,11 @@ class VisitorSpec
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $storage;
 
-    /**
-     * @var int|float
-     */
     private int|float $visitors;
 
     /**
-     * @param string $storage
      * @param int|float $visitors
      */
     public function __construct(string $storage, int|float $visitors)
@@ -60,26 +51,16 @@ class VisitorSpec
         $this->visitors = $visitors;
     }
 
-    /**
-     * @return string
-     */
     public function getStorage(): string
     {
         return $this->storage;
     }
 
-    /**
-     * @return int|float
-     */
     public function getVisitors(): int|float
     {
         return $this->visitors;
     }
 
-    /**
-     * @param string $storage
-     * @return self
-     */
     public function withStorage(string $storage): self
     {
         $validator = new Validator();
@@ -96,7 +77,6 @@ class VisitorSpec
 
     /**
      * @param int|float $visitors
-     * @return self
      */
     public function withVisitors(int|float $visitors): self
     {

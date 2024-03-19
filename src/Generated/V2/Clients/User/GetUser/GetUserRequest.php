@@ -13,8 +13,6 @@ class GetUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,9 +37,6 @@ class GetUserRequest
         ],
     ];
 
-    /**
-     * @var GetUserRequestUserIdAlternative1|string
-     */
     private GetUserRequestUserIdAlternative1|string $userId;
 
     private array $headers = [
@@ -56,9 +51,6 @@ class GetUserRequest
         $this->userId = $userId;
     }
 
-    /**
-     * @return GetUserRequestUserIdAlternative1|string
-     */
     public function getUserId(): GetUserRequestUserIdAlternative1|string
     {
         return $this->userId;
@@ -66,7 +58,6 @@ class GetUserRequest
 
     /**
      * @param GetUserRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(GetUserRequestUserIdAlternative1|string $userId): self
     {

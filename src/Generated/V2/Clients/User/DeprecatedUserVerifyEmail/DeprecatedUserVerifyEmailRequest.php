@@ -13,8 +13,6 @@ class DeprecatedUserVerifyEmailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,35 +42,22 @@ class DeprecatedUserVerifyEmailRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserVerifyEmailRequestBody
-     */
     private DeprecatedUserVerifyEmailRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserVerifyEmailRequestBody $body
-     */
     public function __construct(DeprecatedUserVerifyEmailRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserVerifyEmailRequestBody
-     */
     public function getBody(): DeprecatedUserVerifyEmailRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserVerifyEmailRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserVerifyEmailRequestBody $body): self
     {
         $clone = clone $this;

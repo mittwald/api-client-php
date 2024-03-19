@@ -13,8 +13,6 @@ class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,33 +43,20 @@ class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateAccessTokenRetrievalKeyCreatedResponseBody
-     */
     private CreateAccessTokenRetrievalKeyCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateAccessTokenRetrievalKeyCreatedResponseBody $body
-     */
     public function __construct(CreateAccessTokenRetrievalKeyCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateAccessTokenRetrievalKeyCreatedResponseBody
-     */
     public function getBody(): CreateAccessTokenRetrievalKeyCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateAccessTokenRetrievalKeyCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateAccessTokenRetrievalKeyCreatedResponseBody $body): self
     {
         $clone = clone $this;

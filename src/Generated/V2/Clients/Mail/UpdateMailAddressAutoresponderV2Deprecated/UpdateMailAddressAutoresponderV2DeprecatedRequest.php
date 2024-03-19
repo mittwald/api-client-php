@@ -13,8 +13,6 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -61,50 +59,30 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressAutoresponderV2DeprecatedRequestBody
-     */
     private UpdateMailAddressAutoresponderV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressAutoresponderV2DeprecatedRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressAutoresponderV2DeprecatedRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressAutoresponderV2DeprecatedRequestBody
-     */
     public function getBody(): UpdateMailAddressAutoresponderV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -119,10 +97,6 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressAutoresponderV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressAutoresponderV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

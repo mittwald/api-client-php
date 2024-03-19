@@ -13,8 +13,6 @@ class GetMysqlDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetMysqlDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlDatabaseId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mysqlDatabaseId
-     */
     public function __construct(string $mysqlDatabaseId)
     {
         $this->mysqlDatabaseId = $mysqlDatabaseId;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlDatabaseId(): string
     {
         return $this->mysqlDatabaseId;
     }
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @return self
-     */
     public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();

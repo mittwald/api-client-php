@@ -14,8 +14,6 @@ class GetProjectTokenInviteOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetProjectTokenInviteOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ProjectInvite
-     */
     private ProjectInvite $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ProjectInvite $body
-     */
     public function __construct(ProjectInvite $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ProjectInvite
-     */
     public function getBody(): ProjectInvite
     {
         return $this->body;
     }
 
-    /**
-     * @param ProjectInvite $body
-     * @return self
-     */
     public function withBody(ProjectInvite $body): self
     {
         $clone = clone $this;

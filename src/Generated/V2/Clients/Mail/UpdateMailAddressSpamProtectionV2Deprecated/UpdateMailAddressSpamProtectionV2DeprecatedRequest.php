@@ -13,8 +13,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -65,50 +63,30 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressSpamProtectionV2DeprecatedRequestBody
-     */
     private UpdateMailAddressSpamProtectionV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressSpamProtectionV2DeprecatedRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressSpamProtectionV2DeprecatedRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressSpamProtectionV2DeprecatedRequestBody
-     */
     public function getBody(): UpdateMailAddressSpamProtectionV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -123,10 +101,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressSpamProtectionV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressSpamProtectionV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

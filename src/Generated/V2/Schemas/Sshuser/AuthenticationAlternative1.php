@@ -21,8 +21,6 @@ class AuthenticationAlternative1
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,31 +34,18 @@ class AuthenticationAlternative1
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $password;
 
-    /**
-     * @param string $password
-     */
     public function __construct(string $password)
     {
         $this->password = $password;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();

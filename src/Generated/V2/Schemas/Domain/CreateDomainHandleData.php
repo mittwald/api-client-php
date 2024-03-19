@@ -21,8 +21,6 @@ class CreateDomainHandleData
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -81,7 +79,6 @@ class CreateDomainHandleData
 
     /**
      * @param HandleField[] $adminC
-     * @return self
      */
     public function withAdminC(array $adminC): self
     {
@@ -91,9 +88,6 @@ class CreateDomainHandleData
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdminC(): self
     {
         $clone = clone $this;
@@ -104,7 +98,6 @@ class CreateDomainHandleData
 
     /**
      * @param HandleField[] $ownerC
-     * @return self
      */
     public function withOwnerC(array $ownerC): self
     {

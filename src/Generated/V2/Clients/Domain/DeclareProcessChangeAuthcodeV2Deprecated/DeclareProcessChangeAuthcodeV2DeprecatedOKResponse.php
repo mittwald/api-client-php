@@ -13,8 +13,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponse implements ResponseCont
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponse implements ResponseCont
         ],
     ];
 
-    /**
-     * @var DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
-     */
     private DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody $body
-     */
     public function __construct(DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
-     */
     public function getBody(): DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody $body): self
     {
         $clone = clone $this;

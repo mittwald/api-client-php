@@ -13,8 +13,6 @@ class GetConversationMembersRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetConversationMembersRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $conversationId
-     */
     public function __construct(string $conversationId)
     {
         $this->conversationId = $conversationId;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();

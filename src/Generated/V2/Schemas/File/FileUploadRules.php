@@ -21,8 +21,6 @@ class FileUploadRules
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -116,15 +114,10 @@ class FileUploadRules
      */
     private array $fileTypes;
 
-    /**
-     * @var int
-     */
     private int $maxSizeInBytes;
 
     /**
      * deprecated, see maxSizeInBytes
-     *
-     * @var int
      */
     private int $maxSizeInKB;
 
@@ -133,16 +126,11 @@ class FileUploadRules
      */
     private array $mimeTypes;
 
-    /**
-     * @var FileUploadRulesProperties|null
-     */
     private ?FileUploadRulesProperties $properties = null;
 
     /**
      * @param string[] $extensions
      * @param FileType[] $fileTypes
-     * @param int $maxSizeInBytes
-     * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
     public function __construct(array $extensions, array $fileTypes, int $maxSizeInBytes, int $maxSizeInKB, array $mimeTypes)
@@ -170,17 +158,11 @@ class FileUploadRules
         return $this->fileTypes;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxSizeInBytes(): int
     {
         return $this->maxSizeInBytes;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -194,9 +176,6 @@ class FileUploadRules
         return $this->mimeTypes;
     }
 
-    /**
-     * @return FileUploadRulesProperties|null
-     */
     public function getProperties(): ?FileUploadRulesProperties
     {
         return $this->properties ?? null;
@@ -204,7 +183,6 @@ class FileUploadRules
 
     /**
      * @param string[] $extensions
-     * @return self
      */
     public function withExtensions(array $extensions): self
     {
@@ -222,7 +200,6 @@ class FileUploadRules
 
     /**
      * @param FileType[] $fileTypes
-     * @return self
      */
     public function withFileTypes(array $fileTypes): self
     {
@@ -232,10 +209,6 @@ class FileUploadRules
         return $clone;
     }
 
-    /**
-     * @param int $maxSizeInBytes
-     * @return self
-     */
     public function withMaxSizeInBytes(int $maxSizeInBytes): self
     {
         $validator = new Validator();
@@ -250,10 +223,6 @@ class FileUploadRules
         return $clone;
     }
 
-    /**
-     * @param int $maxSizeInKB
-     * @return self
-     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();
@@ -270,7 +239,6 @@ class FileUploadRules
 
     /**
      * @param string[] $mimeTypes
-     * @return self
      */
     public function withMimeTypes(array $mimeTypes): self
     {
@@ -286,10 +254,6 @@ class FileUploadRules
         return $clone;
     }
 
-    /**
-     * @param FileUploadRulesProperties $properties
-     * @return self
-     */
     public function withProperties(FileUploadRulesProperties $properties): self
     {
         $clone = clone $this;
@@ -298,9 +262,6 @@ class FileUploadRules
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProperties(): self
     {
         $clone = clone $this;

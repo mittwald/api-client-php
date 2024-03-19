@@ -15,8 +15,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,14 +40,8 @@ class DnsRecordMxSetCustomDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $zoneId;
 
-    /**
-     * @var RecordUnset|RecordMXCustom
-     */
     private RecordUnset|RecordMXCustom $body;
 
     private array $headers = [
@@ -57,7 +49,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
     ];
 
     /**
-     * @param string $zoneId
      * @param RecordUnset|RecordMXCustom $body
      */
     public function __construct(string $zoneId, RecordMXCustom|RecordUnset $body)
@@ -66,9 +57,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getZoneId(): string
     {
         return $this->zoneId;
@@ -83,10 +71,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
         return $this->body;
     }
 
-    /**
-     * @param string $zoneId
-     * @return self
-     */
     public function withZoneId(string $zoneId): self
     {
         $validator = new Validator();
@@ -103,7 +87,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
 
     /**
      * @param RecordUnset|RecordMXCustom $body
-     * @return self
      */
     public function withBody(RecordMXCustom|RecordUnset $body): self
     {

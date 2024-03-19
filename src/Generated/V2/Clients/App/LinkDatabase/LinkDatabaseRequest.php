@@ -13,8 +13,6 @@ class LinkDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -57,50 +55,30 @@ class LinkDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var LinkDatabaseRequestBody
-     */
     private LinkDatabaseRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param LinkDatabaseRequestBody $body
-     */
     public function __construct(string $appInstallationId, LinkDatabaseRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return LinkDatabaseRequestBody
-     */
     public function getBody(): LinkDatabaseRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -115,10 +93,6 @@ class LinkDatabaseRequest
         return $clone;
     }
 
-    /**
-     * @param LinkDatabaseRequestBody $body
-     * @return self
-     */
     public function withBody(LinkDatabaseRequestBody $body): self
     {
         $clone = clone $this;

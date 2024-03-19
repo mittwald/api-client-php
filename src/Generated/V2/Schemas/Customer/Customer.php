@@ -22,8 +22,6 @@ class Customer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -105,34 +103,16 @@ class Customer
         'type' => 'object',
     ];
 
-    /**
-     * @var CustomerActiveSuspension|null
-     */
     private ?CustomerActiveSuspension $activeSuspension = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $avatarRefId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $categoryId = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $creationDate;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $customerNumber;
 
     /**
@@ -140,54 +120,22 @@ class Customer
      */
     private ?array $executingUserRoles = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isBanned = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isInDefaultOfPayment = null;
 
-    /**
-     * @var int
-     */
     private int $memberCount;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var Contact|null
-     */
     private ?Contact $owner = null;
 
-    /**
-     * @var int
-     */
     private int $projectCount;
 
-    /**
-     * @var string|null
-     */
     private ?string $vatId = null;
 
-    /**
-     * @var CustomerVatIdValidationState|null
-     */
     private ?CustomerVatIdValidationState $vatIdValidationState = null;
 
-    /**
-     * @param DateTime $creationDate
-     * @param string $customerId
-     * @param string $customerNumber
-     * @param int $memberCount
-     * @param string $name
-     * @param int $projectCount
-     */
     public function __construct(DateTime $creationDate, string $customerId, string $customerNumber, int $memberCount, string $name, int $projectCount)
     {
         $this->creationDate = $creationDate;
@@ -198,49 +146,31 @@ class Customer
         $this->projectCount = $projectCount;
     }
 
-    /**
-     * @return CustomerActiveSuspension|null
-     */
     public function getActiveSuspension(): ?CustomerActiveSuspension
     {
         return $this->activeSuspension ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreationDate(): DateTime
     {
         return $this->creationDate;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerNumber(): string
     {
         return $this->customerNumber;
@@ -254,74 +184,46 @@ class Customer
         return $this->executingUserRoles ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsBanned(): ?bool
     {
         return $this->isBanned ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsInDefaultOfPayment(): ?bool
     {
         return $this->isInDefaultOfPayment ?? null;
     }
 
-    /**
-     * @return int
-     */
     public function getMemberCount(): int
     {
         return $this->memberCount;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return Contact|null
-     */
     public function getOwner(): ?Contact
     {
         return $this->owner ?? null;
     }
 
-    /**
-     * @return int
-     */
     public function getProjectCount(): int
     {
         return $this->projectCount;
     }
 
-    /**
-     * @return string|null
-     */
     public function getVatId(): ?string
     {
         return $this->vatId ?? null;
     }
 
-    /**
-     * @return CustomerVatIdValidationState|null
-     */
     public function getVatIdValidationState(): ?CustomerVatIdValidationState
     {
         return $this->vatIdValidationState ?? null;
     }
 
-    /**
-     * @param CustomerActiveSuspension $activeSuspension
-     * @return self
-     */
     public function withActiveSuspension(CustomerActiveSuspension $activeSuspension): self
     {
         $clone = clone $this;
@@ -330,9 +232,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActiveSuspension(): self
     {
         $clone = clone $this;
@@ -341,10 +240,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param string $avatarRefId
-     * @return self
-     */
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
@@ -359,9 +254,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
@@ -370,10 +262,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param string $categoryId
-     * @return self
-     */
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
@@ -388,9 +276,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCategoryId(): self
     {
         $clone = clone $this;
@@ -399,10 +284,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param DateTime $creationDate
-     * @return self
-     */
     public function withCreationDate(DateTime $creationDate): self
     {
         $clone = clone $this;
@@ -411,10 +292,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -429,10 +306,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param string $customerNumber
-     * @return self
-     */
     public function withCustomerNumber(string $customerNumber): self
     {
         $validator = new Validator();
@@ -449,7 +322,6 @@ class Customer
 
     /**
      * @param Role[] $executingUserRoles
-     * @return self
      */
     public function withExecutingUserRoles(array $executingUserRoles): self
     {
@@ -459,9 +331,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExecutingUserRoles(): self
     {
         $clone = clone $this;
@@ -470,10 +339,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param bool $isBanned
-     * @return self
-     */
     public function withIsBanned(bool $isBanned): self
     {
         $validator = new Validator();
@@ -488,9 +353,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsBanned(): self
     {
         $clone = clone $this;
@@ -499,10 +361,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param bool $isInDefaultOfPayment
-     * @return self
-     */
     public function withIsInDefaultOfPayment(bool $isInDefaultOfPayment): self
     {
         $validator = new Validator();
@@ -517,9 +375,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsInDefaultOfPayment(): self
     {
         $clone = clone $this;
@@ -528,10 +383,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param int $memberCount
-     * @return self
-     */
     public function withMemberCount(int $memberCount): self
     {
         $validator = new Validator();
@@ -546,10 +397,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -564,10 +411,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param Contact $owner
-     * @return self
-     */
     public function withOwner(Contact $owner): self
     {
         $clone = clone $this;
@@ -576,9 +419,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOwner(): self
     {
         $clone = clone $this;
@@ -587,10 +427,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param int $projectCount
-     * @return self
-     */
     public function withProjectCount(int $projectCount): self
     {
         $validator = new Validator();
@@ -605,10 +441,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param string $vatId
-     * @return self
-     */
     public function withVatId(string $vatId): self
     {
         $validator = new Validator();
@@ -623,9 +455,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVatId(): self
     {
         $clone = clone $this;
@@ -634,10 +463,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @param CustomerVatIdValidationState $vatIdValidationState
-     * @return self
-     */
     public function withVatIdValidationState(CustomerVatIdValidationState $vatIdValidationState): self
     {
         $clone = clone $this;
@@ -646,9 +471,6 @@ class Customer
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVatIdValidationState(): self
     {
         $clone = clone $this;

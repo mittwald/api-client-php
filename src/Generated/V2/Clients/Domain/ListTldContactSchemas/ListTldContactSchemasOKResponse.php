@@ -13,8 +13,6 @@ class ListTldContactSchemasOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,33 +37,20 @@ class ListTldContactSchemasOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ListTldContactSchemasOKResponseBody
-     */
     private ListTldContactSchemasOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ListTldContactSchemasOKResponseBody $body
-     */
     public function __construct(ListTldContactSchemasOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ListTldContactSchemasOKResponseBody
-     */
     public function getBody(): ListTldContactSchemasOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ListTldContactSchemasOKResponseBody $body
-     * @return self
-     */
     public function withBody(ListTldContactSchemasOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -22,8 +22,6 @@ class MigrationMailAddressPreMigrationJob
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -87,7 +85,6 @@ class MigrationMailAddressPreMigrationJob
 
     /**
      * @param MigrationMailAddressPreMigrationJobAliasSet[] $aliasSet
-     * @return self
      */
     public function withAliasSet(array $aliasSet): self
     {
@@ -99,7 +96,6 @@ class MigrationMailAddressPreMigrationJob
 
     /**
      * @param MigrationMailAddressPreMigrationJobDeliveryMigration[] $deliveryMigrations
-     * @return self
      */
     public function withDeliveryMigrations(array $deliveryMigrations): self
     {

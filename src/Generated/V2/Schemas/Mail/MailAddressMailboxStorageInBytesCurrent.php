@@ -22,8 +22,6 @@ class MailAddressMailboxStorageInBytesCurrent
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,18 +40,11 @@ class MailAddressMailboxStorageInBytesCurrent
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @var int|float
-     */
     private int|float $value;
 
     /**
-     * @param DateTime $updatedAt
      * @param int|float $value
      */
     public function __construct(DateTime $updatedAt, int|float $value)
@@ -62,26 +53,16 @@ class MailAddressMailboxStorageInBytesCurrent
         $this->value = $value;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return int|float
-     */
     public function getValue(): int|float
     {
         return $this->value;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -92,7 +73,6 @@ class MailAddressMailboxStorageInBytesCurrent
 
     /**
      * @param int|float $value
-     * @return self
      */
     public function withValue(int|float $value): self
     {

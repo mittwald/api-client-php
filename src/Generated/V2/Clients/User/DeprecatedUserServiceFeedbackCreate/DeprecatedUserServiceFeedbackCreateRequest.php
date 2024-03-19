@@ -13,8 +13,6 @@ class DeprecatedUserServiceFeedbackCreateRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,35 +51,22 @@ class DeprecatedUserServiceFeedbackCreateRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserServiceFeedbackCreateRequestBody
-     */
     private DeprecatedUserServiceFeedbackCreateRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserServiceFeedbackCreateRequestBody $body
-     */
     public function __construct(DeprecatedUserServiceFeedbackCreateRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserServiceFeedbackCreateRequestBody
-     */
     public function getBody(): DeprecatedUserServiceFeedbackCreateRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserServiceFeedbackCreateRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServiceFeedbackCreateRequestBody $body): self
     {
         $clone = clone $this;

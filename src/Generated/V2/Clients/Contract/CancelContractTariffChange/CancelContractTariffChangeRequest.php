@@ -13,8 +13,6 @@ class CancelContractTariffChangeRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,30 +36,16 @@ class CancelContractTariffChangeRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
-    /**
-     * @var CancelContractTariffChangeRequestBody
-     */
     private CancelContractTariffChangeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     * @param string $contractItemId
-     * @param CancelContractTariffChangeRequestBody $body
-     */
     public function __construct(string $contractId, string $contractItemId, CancelContractTariffChangeRequestBody $body)
     {
         $this->contractId = $contractId;
@@ -69,34 +53,21 @@ class CancelContractTariffChangeRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return CancelContractTariffChangeRequestBody
-     */
     public function getBody(): CancelContractTariffChangeRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -111,10 +82,6 @@ class CancelContractTariffChangeRequest
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -129,10 +96,6 @@ class CancelContractTariffChangeRequest
         return $clone;
     }
 
-    /**
-     * @param CancelContractTariffChangeRequestBody $body
-     * @return self
-     */
     public function withBody(CancelContractTariffChangeRequestBody $body): self
     {
         $clone = clone $this;

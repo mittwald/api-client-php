@@ -13,8 +13,6 @@ class PageinsightsScheduleStraceAcceptedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class PageinsightsScheduleStraceAcceptedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var PageinsightsScheduleStraceAcceptedResponseBody
-     */
     private PageinsightsScheduleStraceAcceptedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param PageinsightsScheduleStraceAcceptedResponseBody $body
-     */
     public function __construct(PageinsightsScheduleStraceAcceptedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return PageinsightsScheduleStraceAcceptedResponseBody
-     */
     public function getBody(): PageinsightsScheduleStraceAcceptedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param PageinsightsScheduleStraceAcceptedResponseBody $body
-     * @return self
-     */
     public function withBody(PageinsightsScheduleStraceAcceptedResponseBody $body): self
     {
         $clone = clone $this;

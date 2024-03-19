@@ -13,8 +13,6 @@ class CheckDomainTransferabilityForbiddenResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,33 +36,20 @@ class CheckDomainTransferabilityForbiddenResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CheckDomainTransferabilityForbiddenResponseBody
-     */
     private CheckDomainTransferabilityForbiddenResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CheckDomainTransferabilityForbiddenResponseBody $body
-     */
     public function __construct(CheckDomainTransferabilityForbiddenResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckDomainTransferabilityForbiddenResponseBody
-     */
     public function getBody(): CheckDomainTransferabilityForbiddenResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckDomainTransferabilityForbiddenResponseBody $body
-     * @return self
-     */
     public function withBody(CheckDomainTransferabilityForbiddenResponseBody $body): self
     {
         $clone = clone $this;

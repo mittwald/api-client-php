@@ -13,8 +13,6 @@ class DeprecatedUserLogoutRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class DeprecatedUserLogoutRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserLogoutRequestBody
-     */
     private DeprecatedUserLogoutRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserLogoutRequestBody $body
-     */
     public function __construct(DeprecatedUserLogoutRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserLogoutRequestBody
-     */
     public function getBody(): DeprecatedUserLogoutRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserLogoutRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserLogoutRequestBody $body): self
     {
         $clone = clone $this;

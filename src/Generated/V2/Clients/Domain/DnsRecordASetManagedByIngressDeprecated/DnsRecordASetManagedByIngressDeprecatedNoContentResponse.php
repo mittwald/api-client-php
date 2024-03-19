@@ -13,8 +13,6 @@ class DnsRecordASetManagedByIngressDeprecatedNoContentResponse implements Respon
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class DnsRecordASetManagedByIngressDeprecatedNoContentResponse implements Respon
         ],
     ];
 
-    /**
-     * @var DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody
-     */
     private DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody $body
-     */
     public function __construct(DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody
-     */
     public function getBody(): DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody $body
-     * @return self
-     */
     public function withBody(DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody $body): self
     {
         $clone = clone $this;

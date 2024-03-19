@@ -12,8 +12,6 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'nullable' => true,
@@ -40,72 +38,40 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var string
-     */
     private string $message;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $startsAt = null;
 
-    /**
-     * @param bool $active
-     * @param string $message
-     */
     public function __construct(bool $active, string $message)
     {
         $this->active = $active;
         $this->message = $message;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getStartsAt(): ?DateTime
     {
         return $this->startsAt ?? null;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -120,10 +86,6 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -132,9 +94,6 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -143,10 +102,6 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -161,10 +116,6 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
         return $clone;
     }
 
-    /**
-     * @param DateTime $startsAt
-     * @return self
-     */
     public function withStartsAt(DateTime $startsAt): self
     {
         $clone = clone $this;
@@ -173,9 +124,6 @@ class UpdateMailAddressAutoresponderRequestBodyAutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStartsAt(): self
     {
         $clone = clone $this;

@@ -11,8 +11,6 @@ class CreateFeedbackRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -55,91 +53,59 @@ class CreateFeedbackRequestBody
 
     /**
      * Personal feedback message.
-     *
-     * @var string|null
      */
     private ?string $message = null;
 
     /**
      * Origin of the feedback.
-     *
-     * @var string|null
      */
     private ?string $origin = null;
 
     /**
      * Descriptive subject.
-     *
-     * @var string
      */
     private string $subject;
 
     /**
      * Type of feedback.
-     *
-     * @var CreateFeedbackRequestBodyType|null
      */
     private ?CreateFeedbackRequestBodyType $type = null;
 
     /**
      * Feedback rating from bad to good. Set to 0 or skip this field to not vote at all.
-     *
-     * @var int|float|null
      */
     private int|float|null $vote = null;
 
-    /**
-     * @param string $subject
-     */
     public function __construct(string $subject)
     {
         $this->subject = $subject;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrigin(): ?string
     {
         return $this->origin ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getSubject(): string
     {
         return $this->subject;
     }
 
-    /**
-     * @return CreateFeedbackRequestBodyType|null
-     */
     public function getType(): ?CreateFeedbackRequestBodyType
     {
         return $this->type ?? null;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getVote(): int|float|null
     {
         return $this->vote;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -154,9 +120,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -165,10 +128,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $origin
-     * @return self
-     */
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
@@ -183,9 +142,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrigin(): self
     {
         $clone = clone $this;
@@ -194,10 +150,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -212,10 +164,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @param CreateFeedbackRequestBodyType $type
-     * @return self
-     */
     public function withType(CreateFeedbackRequestBodyType $type): self
     {
         $clone = clone $this;
@@ -224,9 +172,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutType(): self
     {
         $clone = clone $this;
@@ -237,7 +182,6 @@ class CreateFeedbackRequestBody
 
     /**
      * @param int|float $vote
-     * @return self
      */
     public function withVote(int|float $vote): self
     {
@@ -253,9 +197,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVote(): self
     {
         $clone = clone $this;

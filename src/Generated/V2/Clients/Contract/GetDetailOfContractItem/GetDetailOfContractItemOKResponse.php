@@ -14,8 +14,6 @@ class GetDetailOfContractItemOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetDetailOfContractItemOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ContractItem
-     */
     private ContractItem $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ContractItem $body
-     */
     public function __construct(ContractItem $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ContractItem
-     */
     public function getBody(): ContractItem
     {
         return $this->body;
     }
 
-    /**
-     * @param ContractItem $body
-     * @return self
-     */
     public function withBody(ContractItem $body): self
     {
         $clone = clone $this;

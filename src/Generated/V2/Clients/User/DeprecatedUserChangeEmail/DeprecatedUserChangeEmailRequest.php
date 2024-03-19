@@ -13,8 +13,6 @@ class DeprecatedUserChangeEmailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,35 +37,22 @@ class DeprecatedUserChangeEmailRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserChangeEmailRequestBody
-     */
     private DeprecatedUserChangeEmailRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserChangeEmailRequestBody $body
-     */
     public function __construct(DeprecatedUserChangeEmailRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserChangeEmailRequestBody
-     */
     public function getBody(): DeprecatedUserChangeEmailRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserChangeEmailRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserChangeEmailRequestBody $body): self
     {
         $clone = clone $this;

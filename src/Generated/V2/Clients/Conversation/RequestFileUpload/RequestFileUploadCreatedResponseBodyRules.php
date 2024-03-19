@@ -11,8 +11,6 @@ class RequestFileUploadCreatedResponseBodyRules
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,9 +63,6 @@ class RequestFileUploadCreatedResponseBodyRules
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $maxSizeInKB;
 
     /**
@@ -75,13 +70,9 @@ class RequestFileUploadCreatedResponseBodyRules
      */
     private array $mimeTypes;
 
-    /**
-     * @var RequestFileUploadCreatedResponseBodyRulesProperties|null
-     */
     private ?RequestFileUploadCreatedResponseBodyRulesProperties $properties = null;
 
     /**
-     * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
     public function __construct(int $maxSizeInKB, array $mimeTypes)
@@ -90,9 +81,6 @@ class RequestFileUploadCreatedResponseBodyRules
         $this->mimeTypes = $mimeTypes;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -106,18 +94,11 @@ class RequestFileUploadCreatedResponseBodyRules
         return $this->mimeTypes;
     }
 
-    /**
-     * @return RequestFileUploadCreatedResponseBodyRulesProperties|null
-     */
     public function getProperties(): ?RequestFileUploadCreatedResponseBodyRulesProperties
     {
         return $this->properties ?? null;
     }
 
-    /**
-     * @param int $maxSizeInKB
-     * @return self
-     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();
@@ -134,7 +115,6 @@ class RequestFileUploadCreatedResponseBodyRules
 
     /**
      * @param string[] $mimeTypes
-     * @return self
      */
     public function withMimeTypes(array $mimeTypes): self
     {
@@ -150,10 +130,6 @@ class RequestFileUploadCreatedResponseBodyRules
         return $clone;
     }
 
-    /**
-     * @param RequestFileUploadCreatedResponseBodyRulesProperties $properties
-     * @return self
-     */
     public function withProperties(RequestFileUploadCreatedResponseBodyRulesProperties $properties): self
     {
         $clone = clone $this;
@@ -162,9 +138,6 @@ class RequestFileUploadCreatedResponseBodyRules
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProperties(): self
     {
         $clone = clone $this;

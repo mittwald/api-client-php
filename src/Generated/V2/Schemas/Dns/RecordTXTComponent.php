@@ -21,8 +21,6 @@ class RecordTXTComponent
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'additionalProperties' => false,
@@ -51,14 +49,10 @@ class RecordTXTComponent
      */
     private array $entries;
 
-    /**
-     * @var RecordSettings
-     */
     private RecordSettings $settings;
 
     /**
      * @param string[] $entries
-     * @param RecordSettings $settings
      */
     public function __construct(array $entries, RecordSettings $settings)
     {
@@ -74,9 +68,6 @@ class RecordTXTComponent
         return $this->entries;
     }
 
-    /**
-     * @return RecordSettings
-     */
     public function getSettings(): RecordSettings
     {
         return $this->settings;
@@ -84,7 +75,6 @@ class RecordTXTComponent
 
     /**
      * @param string[] $entries
-     * @return self
      */
     public function withEntries(array $entries): self
     {
@@ -100,10 +90,6 @@ class RecordTXTComponent
         return $clone;
     }
 
-    /**
-     * @param RecordSettings $settings
-     * @return self
-     */
     public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;

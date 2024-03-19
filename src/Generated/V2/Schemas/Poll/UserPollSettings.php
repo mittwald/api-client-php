@@ -22,8 +22,6 @@ class UserPollSettings
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -63,41 +61,18 @@ class UserPollSettings
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $completedAt = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $dontShowUntil = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $ignoredAt = null;
 
-    /**
-     * @var bool
-     */
     private bool $shouldShow;
 
-    /**
-     * @var UserPollSettingsStatus
-     */
     private UserPollSettingsStatus $status;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param bool $shouldShow
-     * @param UserPollSettingsStatus $status
-     * @param string $userId
-     */
     public function __construct(bool $shouldShow, UserPollSettingsStatus $status, string $userId)
     {
         $this->shouldShow = $shouldShow;
@@ -105,58 +80,36 @@ class UserPollSettings
         $this->userId = $userId;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getCompletedAt(): ?DateTime
     {
         return $this->completedAt ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getDontShowUntil(): ?DateTime
     {
         return $this->dontShowUntil ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getIgnoredAt(): ?DateTime
     {
         return $this->ignoredAt ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getShouldShow(): bool
     {
         return $this->shouldShow;
     }
 
-    /**
-     * @return UserPollSettingsStatus
-     */
     public function getStatus(): UserPollSettingsStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param DateTime $completedAt
-     * @return self
-     */
     public function withCompletedAt(DateTime $completedAt): self
     {
         $clone = clone $this;
@@ -165,9 +118,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCompletedAt(): self
     {
         $clone = clone $this;
@@ -176,10 +126,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @param DateTime $dontShowUntil
-     * @return self
-     */
     public function withDontShowUntil(DateTime $dontShowUntil): self
     {
         $clone = clone $this;
@@ -188,9 +134,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDontShowUntil(): self
     {
         $clone = clone $this;
@@ -199,10 +142,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @param DateTime $ignoredAt
-     * @return self
-     */
     public function withIgnoredAt(DateTime $ignoredAt): self
     {
         $clone = clone $this;
@@ -211,9 +150,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIgnoredAt(): self
     {
         $clone = clone $this;
@@ -222,10 +158,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @param bool $shouldShow
-     * @return self
-     */
     public function withShouldShow(bool $shouldShow): self
     {
         $validator = new Validator();
@@ -240,10 +172,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @param UserPollSettingsStatus $status
-     * @return self
-     */
     public function withStatus(UserPollSettingsStatus $status): self
     {
         $clone = clone $this;
@@ -252,10 +180,6 @@ class UserPollSettings
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

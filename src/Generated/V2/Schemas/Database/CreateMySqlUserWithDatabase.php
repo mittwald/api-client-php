@@ -21,8 +21,6 @@ class CreateMySqlUserWithDatabase
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,72 +48,40 @@ class CreateMySqlUserWithDatabase
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $accessIpMask = null;
 
-    /**
-     * @var CreateMySqlUserWithDatabaseAccessLevel
-     */
     private CreateMySqlUserWithDatabaseAccessLevel $accessLevel;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $externalAccess = null;
 
-    /**
-     * @var string
-     */
     private string $password;
 
-    /**
-     * @param CreateMySqlUserWithDatabaseAccessLevel $accessLevel
-     * @param string $password
-     */
     public function __construct(CreateMySqlUserWithDatabaseAccessLevel $accessLevel, string $password)
     {
         $this->accessLevel = $accessLevel;
         $this->password = $password;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
 
-    /**
-     * @return CreateMySqlUserWithDatabaseAccessLevel
-     */
     public function getAccessLevel(): CreateMySqlUserWithDatabaseAccessLevel
     {
         return $this->accessLevel;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $accessIpMask
-     * @return self
-     */
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
@@ -130,9 +96,6 @@ class CreateMySqlUserWithDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
@@ -141,10 +104,6 @@ class CreateMySqlUserWithDatabase
         return $clone;
     }
 
-    /**
-     * @param CreateMySqlUserWithDatabaseAccessLevel $accessLevel
-     * @return self
-     */
     public function withAccessLevel(CreateMySqlUserWithDatabaseAccessLevel $accessLevel): self
     {
         $clone = clone $this;
@@ -153,10 +112,6 @@ class CreateMySqlUserWithDatabase
         return $clone;
     }
 
-    /**
-     * @param bool $externalAccess
-     * @return self
-     */
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
@@ -171,9 +126,6 @@ class CreateMySqlUserWithDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExternalAccess(): self
     {
         $clone = clone $this;
@@ -182,10 +134,6 @@ class CreateMySqlUserWithDatabase
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class SetConversationStatusRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,50 +43,30 @@ class SetConversationStatusRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var SetConversationStatusRequestBody
-     */
     private SetConversationStatusRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $conversationId
-     * @param SetConversationStatusRequestBody $body
-     */
     public function __construct(string $conversationId, SetConversationStatusRequestBody $body)
     {
         $this->conversationId = $conversationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return SetConversationStatusRequestBody
-     */
     public function getBody(): SetConversationStatusRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -103,10 +81,6 @@ class SetConversationStatusRequest
         return $clone;
     }
 
-    /**
-     * @param SetConversationStatusRequestBody $body
-     * @return self
-     */
     public function withBody(SetConversationStatusRequestBody $body): self
     {
         $clone = clone $this;

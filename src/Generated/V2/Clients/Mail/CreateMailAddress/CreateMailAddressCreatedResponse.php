@@ -13,8 +13,6 @@ class CreateMailAddressCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateMailAddressCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateMailAddressCreatedResponseBody
-     */
     private CreateMailAddressCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateMailAddressCreatedResponseBody $body
-     */
     public function __construct(CreateMailAddressCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateMailAddressCreatedResponseBody
-     */
     public function getBody(): CreateMailAddressCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateMailAddressCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateMailAddressCreatedResponseBody $body): self
     {
         $clone = clone $this;

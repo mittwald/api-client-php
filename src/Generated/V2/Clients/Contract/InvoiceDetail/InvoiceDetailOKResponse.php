@@ -14,8 +14,6 @@ class InvoiceDetailOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class InvoiceDetailOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Invoice
-     */
     private Invoice $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Invoice $body
-     */
     public function __construct(Invoice $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Invoice
-     */
     public function getBody(): Invoice
     {
         return $this->body;
     }
 
-    /**
-     * @param Invoice $body
-     * @return self
-     */
     public function withBody(Invoice $body): self
     {
         $clone = clone $this;

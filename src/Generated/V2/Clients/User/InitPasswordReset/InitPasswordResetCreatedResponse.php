@@ -13,8 +13,6 @@ class InitPasswordResetCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class InitPasswordResetCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var InitPasswordResetCreatedResponseBody
-     */
     private InitPasswordResetCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param InitPasswordResetCreatedResponseBody $body
-     */
     public function __construct(InitPasswordResetCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return InitPasswordResetCreatedResponseBody
-     */
     public function getBody(): InitPasswordResetCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param InitPasswordResetCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(InitPasswordResetCreatedResponseBody $body): self
     {
         $clone = clone $this;

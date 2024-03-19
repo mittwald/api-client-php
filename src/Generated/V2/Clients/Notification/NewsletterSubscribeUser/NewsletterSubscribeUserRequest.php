@@ -13,8 +13,6 @@ class NewsletterSubscribeUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,35 +36,22 @@ class NewsletterSubscribeUserRequest
         ],
     ];
 
-    /**
-     * @var NewsletterSubscribeUserRequestBody
-     */
     private NewsletterSubscribeUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param NewsletterSubscribeUserRequestBody $body
-     */
     public function __construct(NewsletterSubscribeUserRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NewsletterSubscribeUserRequestBody
-     */
     public function getBody(): NewsletterSubscribeUserRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NewsletterSubscribeUserRequestBody $body
-     * @return self
-     */
     public function withBody(NewsletterSubscribeUserRequestBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class ChangePasswordRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,35 +49,22 @@ This is optional, depending on the MFA activation status of the profile.
         ],
     ];
 
-    /**
-     * @var ChangePasswordRequestBody
-     */
     private ChangePasswordRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param ChangePasswordRequestBody $body
-     */
     public function __construct(ChangePasswordRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ChangePasswordRequestBody
-     */
     public function getBody(): ChangePasswordRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ChangePasswordRequestBody $body
-     * @return self
-     */
     public function withBody(ChangePasswordRequestBody $body): self
     {
         $clone = clone $this;

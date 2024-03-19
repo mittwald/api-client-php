@@ -13,8 +13,6 @@ class OauthRetrieveAccessTokenOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -63,33 +61,20 @@ response was generated.
         ],
     ];
 
-    /**
-     * @var OauthRetrieveAccessTokenOKResponseBody
-     */
     private OauthRetrieveAccessTokenOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param OauthRetrieveAccessTokenOKResponseBody $body
-     */
     public function __construct(OauthRetrieveAccessTokenOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OauthRetrieveAccessTokenOKResponseBody
-     */
     public function getBody(): OauthRetrieveAccessTokenOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OauthRetrieveAccessTokenOKResponseBody $body
-     * @return self
-     */
     public function withBody(OauthRetrieveAccessTokenOKResponseBody $body): self
     {
         $clone = clone $this;

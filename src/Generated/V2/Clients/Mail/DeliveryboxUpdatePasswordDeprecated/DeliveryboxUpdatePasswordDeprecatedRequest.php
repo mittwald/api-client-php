@@ -13,8 +13,6 @@ class DeliveryboxUpdatePasswordDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class DeliveryboxUpdatePasswordDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var DeliveryboxUpdatePasswordDeprecatedRequestBody
-     */
     private DeliveryboxUpdatePasswordDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $id
-     * @param DeliveryboxUpdatePasswordDeprecatedRequestBody $body
-     */
     public function __construct(string $id, DeliveryboxUpdatePasswordDeprecatedRequestBody $body)
     {
         $this->id = $id;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return DeliveryboxUpdatePasswordDeprecatedRequestBody
-     */
     public function getBody(): DeliveryboxUpdatePasswordDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class DeliveryboxUpdatePasswordDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DeliveryboxUpdatePasswordDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DeliveryboxUpdatePasswordDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

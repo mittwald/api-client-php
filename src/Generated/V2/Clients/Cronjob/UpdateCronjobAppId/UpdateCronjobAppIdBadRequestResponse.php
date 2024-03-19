@@ -14,8 +14,6 @@ class UpdateCronjobAppIdBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class UpdateCronjobAppIdBadRequestResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ValidationErrors
-     */
     private ValidationErrors $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ValidationErrors $body
-     */
     public function __construct(ValidationErrors $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ValidationErrors
-     */
     public function getBody(): ValidationErrors
     {
         return $this->body;
     }
 
-    /**
-     * @param ValidationErrors $body
-     * @return self
-     */
     public function withBody(ValidationErrors $body): self
     {
         $clone = clone $this;

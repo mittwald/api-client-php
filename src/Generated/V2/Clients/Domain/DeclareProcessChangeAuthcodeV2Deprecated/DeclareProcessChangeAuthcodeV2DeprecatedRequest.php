@@ -13,8 +13,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class DeclareProcessChangeAuthcodeV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var DeclareProcessChangeAuthcodeV2DeprecatedRequestBody
-     */
     private DeclareProcessChangeAuthcodeV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param DeclareProcessChangeAuthcodeV2DeprecatedRequestBody $body
-     */
     public function __construct(string $domainId, DeclareProcessChangeAuthcodeV2DeprecatedRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return DeclareProcessChangeAuthcodeV2DeprecatedRequestBody
-     */
     public function getBody(): DeclareProcessChangeAuthcodeV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DeclareProcessChangeAuthcodeV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DeclareProcessChangeAuthcodeV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

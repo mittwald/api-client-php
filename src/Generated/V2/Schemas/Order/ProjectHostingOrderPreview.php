@@ -21,8 +21,6 @@ class ProjectHostingOrderPreview
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -55,24 +53,12 @@ class ProjectHostingOrderPreview
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $customerId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $diskspaceInGiB;
 
-    /**
-     * @var MachineTypeSpec|HardwareSpec
-     */
     private MachineTypeSpec|HardwareSpec $spec;
 
     /**
@@ -85,25 +71,16 @@ class ProjectHostingOrderPreview
         $this->spec = $spec;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getDiskspaceInGiB(): int|float
     {
         return $this->diskspaceInGiB;
@@ -118,10 +95,6 @@ class ProjectHostingOrderPreview
         return $this->spec;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -136,9 +109,6 @@ class ProjectHostingOrderPreview
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerId(): self
     {
         $clone = clone $this;
@@ -147,10 +117,6 @@ class ProjectHostingOrderPreview
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -165,9 +131,6 @@ class ProjectHostingOrderPreview
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -178,7 +141,6 @@ class ProjectHostingOrderPreview
 
     /**
      * @param int|float $diskspaceInGiB
-     * @return self
      */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
@@ -196,7 +158,6 @@ class ProjectHostingOrderPreview
 
     /**
      * @param MachineTypeSpec|HardwareSpec $spec
-     * @return self
      */
     public function withSpec(HardwareSpec|MachineTypeSpec $spec): self
     {

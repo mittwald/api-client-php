@@ -11,8 +11,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -78,46 +76,26 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $refId;
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
-     */
     private DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules $rules;
 
-    /**
-     * @param string $refId
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules $rules
-     */
     public function __construct(string $refId, DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules $rules)
     {
         $this->refId = $refId;
         $this->rules = $rules;
     }
 
-    /**
-     * @return string
-     */
     public function getRefId(): string
     {
         return $this->refId;
     }
 
-    /**
-     * @return DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
-     */
     public function getRules(): DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
     {
         return $this->rules;
     }
 
-    /**
-     * @param string $refId
-     * @return self
-     */
     public function withRefId(string $refId): self
     {
         $validator = new Validator();
@@ -132,10 +110,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules $rules
-     * @return self
-     */
     public function withRules(DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules $rules): self
     {
         $clone = clone $this;

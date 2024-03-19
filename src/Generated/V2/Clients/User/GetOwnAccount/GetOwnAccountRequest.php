@@ -13,8 +13,6 @@ class GetOwnAccountRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetOwnAccountRequest
         ],
     ];
 
-    /**
-     * @var GetOwnAccountRequestBody
-     */
     private GetOwnAccountRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param GetOwnAccountRequestBody $body
-     */
     public function __construct(GetOwnAccountRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetOwnAccountRequestBody
-     */
     public function getBody(): GetOwnAccountRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetOwnAccountRequestBody $body
-     * @return self
-     */
     public function withBody(GetOwnAccountRequestBody $body): self
     {
         $clone = clone $this;

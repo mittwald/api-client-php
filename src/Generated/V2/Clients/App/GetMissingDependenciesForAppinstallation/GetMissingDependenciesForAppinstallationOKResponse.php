@@ -13,8 +13,6 @@ class GetMissingDependenciesForAppinstallationOKResponse implements ResponseCont
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,33 +40,20 @@ class GetMissingDependenciesForAppinstallationOKResponse implements ResponseCont
         ],
     ];
 
-    /**
-     * @var GetMissingDependenciesForAppinstallationOKResponseBody
-     */
     private GetMissingDependenciesForAppinstallationOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetMissingDependenciesForAppinstallationOKResponseBody $body
-     */
     public function __construct(GetMissingDependenciesForAppinstallationOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetMissingDependenciesForAppinstallationOKResponseBody
-     */
     public function getBody(): GetMissingDependenciesForAppinstallationOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetMissingDependenciesForAppinstallationOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetMissingDependenciesForAppinstallationOKResponseBody $body): self
     {
         $clone = clone $this;

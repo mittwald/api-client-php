@@ -11,8 +11,6 @@ class DeprecatedUserServicePhoneNumberAddRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class DeprecatedUserServicePhoneNumberAddRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $phoneNumber;
 
-    /**
-     * @param string $phoneNumber
-     */
     public function __construct(string $phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
 
-    /**
-     * @return string
-     */
     public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
 
-    /**
-     * @param string $phoneNumber
-     * @return self
-     */
     public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new Validator();

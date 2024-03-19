@@ -13,8 +13,6 @@ class ListAppversionsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -32,48 +30,29 @@ class ListAppversionsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $recommended = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appId
-     */
     public function __construct(string $appId)
     {
         $this->appId = $appId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -88,10 +67,6 @@ class ListAppversionsRequest
         return $clone;
     }
 
-    /**
-     * @param bool $recommended
-     * @return self
-     */
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
@@ -106,9 +81,6 @@ class ListAppversionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRecommended(): self
     {
         $clone = clone $this;

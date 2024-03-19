@@ -11,8 +11,6 @@ class IsCustomerLegallyCompetentOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -23,9 +21,6 @@ class IsCustomerLegallyCompetentOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isLegallyCompetent = null;
 
     /**
@@ -35,18 +30,11 @@ class IsCustomerLegallyCompetentOKResponseBody
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsLegallyCompetent(): ?bool
     {
         return $this->isLegallyCompetent ?? null;
     }
 
-    /**
-     * @param bool $isLegallyCompetent
-     * @return self
-     */
     public function withIsLegallyCompetent(bool $isLegallyCompetent): self
     {
         $validator = new Validator();
@@ -61,9 +49,6 @@ class IsCustomerLegallyCompetentOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsLegallyCompetent(): self
     {
         $clone = clone $this;

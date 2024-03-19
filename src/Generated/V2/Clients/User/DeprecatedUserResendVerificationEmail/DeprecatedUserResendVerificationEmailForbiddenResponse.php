@@ -13,8 +13,6 @@ class DeprecatedUserResendVerificationEmailForbiddenResponse implements Response
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,33 +36,20 @@ class DeprecatedUserResendVerificationEmailForbiddenResponse implements Response
         ],
     ];
 
-    /**
-     * @var DeprecatedUserResendVerificationEmailForbiddenResponseBody
-     */
     private DeprecatedUserResendVerificationEmailForbiddenResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedUserResendVerificationEmailForbiddenResponseBody $body
-     */
     public function __construct(DeprecatedUserResendVerificationEmailForbiddenResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserResendVerificationEmailForbiddenResponseBody
-     */
     public function getBody(): DeprecatedUserResendVerificationEmailForbiddenResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserResendVerificationEmailForbiddenResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserResendVerificationEmailForbiddenResponseBody $body): self
     {
         $clone = clone $this;

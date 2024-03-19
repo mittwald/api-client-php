@@ -13,8 +13,6 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlDatabaseId;
 
-    /**
-     * @var UpdateMysqlDatabaseDefaultCharsetRequestBody
-     */
     private UpdateMysqlDatabaseDefaultCharsetRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @param UpdateMysqlDatabaseDefaultCharsetRequestBody $body
-     */
     public function __construct(string $mysqlDatabaseId, UpdateMysqlDatabaseDefaultCharsetRequestBody $body)
     {
         $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlDatabaseId(): string
     {
         return $this->mysqlDatabaseId;
     }
 
-    /**
-     * @return UpdateMysqlDatabaseDefaultCharsetRequestBody
-     */
     public function getBody(): UpdateMysqlDatabaseDefaultCharsetRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @return self
-     */
     public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMysqlDatabaseDefaultCharsetRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMysqlDatabaseDefaultCharsetRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMysqlDatabaseDefaultCharsetRequestBody $body): self
     {
         $clone = clone $this;

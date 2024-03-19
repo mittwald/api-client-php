@@ -13,8 +13,6 @@ class GetOwnEmailOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,33 +36,20 @@ class GetOwnEmailOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetOwnEmailOKResponseBody
-     */
     private GetOwnEmailOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetOwnEmailOKResponseBody $body
-     */
     public function __construct(GetOwnEmailOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetOwnEmailOKResponseBody
-     */
     public function getBody(): GetOwnEmailOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetOwnEmailOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetOwnEmailOKResponseBody $body): self
     {
         $clone = clone $this;

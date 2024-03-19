@@ -13,8 +13,6 @@ class OrderCreateTariffChangeRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,35 +45,22 @@ class OrderCreateTariffChangeRequest
         ],
     ];
 
-    /**
-     * @var OrderCreateTariffChangeRequestBody
-     */
     private OrderCreateTariffChangeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param OrderCreateTariffChangeRequestBody $body
-     */
     public function __construct(OrderCreateTariffChangeRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OrderCreateTariffChangeRequestBody
-     */
     public function getBody(): OrderCreateTariffChangeRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OrderCreateTariffChangeRequestBody $body
-     * @return self
-     */
     public function withBody(OrderCreateTariffChangeRequestBody $body): self
     {
         $clone = clone $this;

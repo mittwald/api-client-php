@@ -13,8 +13,6 @@ class CreateExecutionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class CreateExecutionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $cronjobId;
 
     /**
@@ -48,7 +43,6 @@ class CreateExecutionRequest
     ];
 
     /**
-     * @param string $cronjobId
      * @param mixed $body
      */
     public function __construct(string $cronjobId, $body)
@@ -57,9 +51,6 @@ class CreateExecutionRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCronjobId(): string
     {
         return $this->cronjobId;
@@ -73,10 +64,6 @@ class CreateExecutionRequest
         return $this->body;
     }
 
-    /**
-     * @param string $cronjobId
-     * @return self
-     */
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class CreateExecutionRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

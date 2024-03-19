@@ -13,8 +13,6 @@ class UpdateRedisDatabaseConfigurationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,50 +35,30 @@ class UpdateRedisDatabaseConfigurationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $redisDatabaseId;
 
-    /**
-     * @var UpdateRedisDatabaseConfigurationRequestBody
-     */
     private UpdateRedisDatabaseConfigurationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $redisDatabaseId
-     * @param UpdateRedisDatabaseConfigurationRequestBody $body
-     */
     public function __construct(string $redisDatabaseId, UpdateRedisDatabaseConfigurationRequestBody $body)
     {
         $this->redisDatabaseId = $redisDatabaseId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getRedisDatabaseId(): string
     {
         return $this->redisDatabaseId;
     }
 
-    /**
-     * @return UpdateRedisDatabaseConfigurationRequestBody
-     */
     public function getBody(): UpdateRedisDatabaseConfigurationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $redisDatabaseId
-     * @return self
-     */
     public function withRedisDatabaseId(string $redisDatabaseId): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class UpdateRedisDatabaseConfigurationRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateRedisDatabaseConfigurationRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateRedisDatabaseConfigurationRequestBody $body): self
     {
         $clone = clone $this;

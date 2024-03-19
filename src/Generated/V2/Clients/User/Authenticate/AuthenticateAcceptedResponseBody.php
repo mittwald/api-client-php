@@ -11,8 +11,6 @@ class AuthenticateAcceptedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,9 +24,6 @@ class AuthenticateAcceptedResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var AuthenticateAcceptedResponseBodyName|null
-     */
     private ?AuthenticateAcceptedResponseBodyName $name = null;
 
     /**
@@ -38,18 +33,11 @@ class AuthenticateAcceptedResponseBody
     {
     }
 
-    /**
-     * @return AuthenticateAcceptedResponseBodyName|null
-     */
     public function getName(): ?AuthenticateAcceptedResponseBodyName
     {
         return $this->name ?? null;
     }
 
-    /**
-     * @param AuthenticateAcceptedResponseBodyName $name
-     * @return self
-     */
     public function withName(AuthenticateAcceptedResponseBodyName $name): self
     {
         $clone = clone $this;
@@ -58,9 +46,6 @@ class AuthenticateAcceptedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutName(): self
     {
         $clone = clone $this;

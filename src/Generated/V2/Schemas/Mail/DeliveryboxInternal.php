@@ -22,8 +22,6 @@ class DeliveryboxInternal
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -72,62 +70,24 @@ class DeliveryboxInternal
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $authenticationEnabled;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var MailsystemSettings
-     */
     private MailsystemSettings $mailsystemSettings;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $passwordUpdatedAt;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var bool
-     */
     private bool $sendingEnabled;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @param bool $authenticationEnabled
-     * @param string $description
-     * @param string $id
-     * @param MailsystemSettings $mailsystemSettings
-     * @param string $name
-     * @param DateTime $passwordUpdatedAt
-     * @param string $projectId
-     * @param bool $sendingEnabled
-     * @param DateTime $updatedAt
-     */
     public function __construct(bool $authenticationEnabled, string $description, string $id, MailsystemSettings $mailsystemSettings, string $name, DateTime $passwordUpdatedAt, string $projectId, bool $sendingEnabled, DateTime $updatedAt)
     {
         $this->authenticationEnabled = $authenticationEnabled;
@@ -141,82 +101,51 @@ class DeliveryboxInternal
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @return bool
-     */
     public function getAuthenticationEnabled(): bool
     {
         return $this->authenticationEnabled;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return MailsystemSettings
-     */
     public function getMailsystemSettings(): MailsystemSettings
     {
         return $this->mailsystemSettings;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return bool
-     */
     public function getSendingEnabled(): bool
     {
         return $this->sendingEnabled;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param bool $authenticationEnabled
-     * @return self
-     */
     public function withAuthenticationEnabled(bool $authenticationEnabled): self
     {
         $validator = new Validator();
@@ -231,10 +160,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -249,10 +174,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -267,10 +188,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param MailsystemSettings $mailsystemSettings
-     * @return self
-     */
     public function withMailsystemSettings(MailsystemSettings $mailsystemSettings): self
     {
         $clone = clone $this;
@@ -279,10 +196,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -297,10 +210,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
@@ -309,10 +218,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -327,10 +232,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param bool $sendingEnabled
-     * @return self
-     */
     public function withSendingEnabled(bool $sendingEnabled): self
     {
         $validator = new Validator();
@@ -345,10 +246,6 @@ class DeliveryboxInternal
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;

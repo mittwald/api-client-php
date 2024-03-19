@@ -14,8 +14,6 @@ class GetDomainOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetDomainOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Domain
-     */
     private Domain $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Domain $body
-     */
     public function __construct(Domain $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Domain
-     */
     public function getBody(): Domain
     {
         return $this->body;
     }
 
-    /**
-     * @param Domain $body
-     * @return self
-     */
     public function withBody(Domain $body): self
     {
         $clone = clone $this;

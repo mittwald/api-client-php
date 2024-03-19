@@ -21,8 +21,6 @@ class FsApiJwt
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,31 +35,18 @@ class FsApiJwt
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $jwt;
 
-    /**
-     * @param string $jwt
-     */
     public function __construct(string $jwt)
     {
         $this->jwt = $jwt;
     }
 
-    /**
-     * @return string
-     */
     public function getJwt(): string
     {
         return $this->jwt;
     }
 
-    /**
-     * @param string $jwt
-     * @return self
-     */
     public function withJwt(string $jwt): self
     {
         $validator = new Validator();

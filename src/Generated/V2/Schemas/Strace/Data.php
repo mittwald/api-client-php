@@ -21,8 +21,6 @@ class Data
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -178,9 +176,6 @@ class Data
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $actualUrl;
 
     /**
@@ -188,9 +183,6 @@ class Data
      */
     private array $dbQueries;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $dbStats;
 
     /**
@@ -198,14 +190,8 @@ class Data
      */
     private array $fileOps;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $fileOpsStats;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $miscStats;
 
     /**
@@ -213,36 +199,23 @@ class Data
      */
     private array $networkingOps;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $networkingStats;
 
     /**
      * Shows how much slower the websites TTFB was when it got traced (1.0 = 100% = same TTFB).
-     *
-     * @var int|float
      */
     private int|float $slowdownFactor;
 
     /**
      * Time to first byte in milliseconds while tracing the website.
-     *
-     * @var int
      */
     private int $ttfbMs;
 
     /**
-     * @param string $actualUrl
      * @param DataDbQueriesItem[] $dbQueries
-     * @param Statistics $dbStats
      * @param DataFileOpsItem[] $fileOps
-     * @param Statistics $fileOpsStats
-     * @param Statistics $miscStats
      * @param DataNetworkingOpsItem[] $networkingOps
-     * @param Statistics $networkingStats
      * @param int|float $slowdownFactor
-     * @param int $ttfbMs
      */
     public function __construct(string $actualUrl, array $dbQueries, Statistics $dbStats, array $fileOps, Statistics $fileOpsStats, Statistics $miscStats, array $networkingOps, Statistics $networkingStats, int|float $slowdownFactor, int $ttfbMs)
     {
@@ -258,9 +231,6 @@ class Data
         $this->ttfbMs = $ttfbMs;
     }
 
-    /**
-     * @return string
-     */
     public function getActualUrl(): string
     {
         return $this->actualUrl;
@@ -274,9 +244,6 @@ class Data
         return $this->dbQueries;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getDbStats(): Statistics
     {
         return $this->dbStats;
@@ -290,17 +257,11 @@ class Data
         return $this->fileOps;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getFileOpsStats(): Statistics
     {
         return $this->fileOpsStats;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getMiscStats(): Statistics
     {
         return $this->miscStats;
@@ -314,34 +275,21 @@ class Data
         return $this->networkingOps;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getNetworkingStats(): Statistics
     {
         return $this->networkingStats;
     }
 
-    /**
-     * @return int|float
-     */
     public function getSlowdownFactor(): int|float
     {
         return $this->slowdownFactor;
     }
 
-    /**
-     * @return int
-     */
     public function getTtfbMs(): int
     {
         return $this->ttfbMs;
     }
 
-    /**
-     * @param string $actualUrl
-     * @return self
-     */
     public function withActualUrl(string $actualUrl): self
     {
         $validator = new Validator();
@@ -358,7 +306,6 @@ class Data
 
     /**
      * @param DataDbQueriesItem[] $dbQueries
-     * @return self
      */
     public function withDbQueries(array $dbQueries): self
     {
@@ -368,10 +315,6 @@ class Data
         return $clone;
     }
 
-    /**
-     * @param Statistics $dbStats
-     * @return self
-     */
     public function withDbStats(Statistics $dbStats): self
     {
         $clone = clone $this;
@@ -382,7 +325,6 @@ class Data
 
     /**
      * @param DataFileOpsItem[] $fileOps
-     * @return self
      */
     public function withFileOps(array $fileOps): self
     {
@@ -392,10 +334,6 @@ class Data
         return $clone;
     }
 
-    /**
-     * @param Statistics $fileOpsStats
-     * @return self
-     */
     public function withFileOpsStats(Statistics $fileOpsStats): self
     {
         $clone = clone $this;
@@ -404,10 +342,6 @@ class Data
         return $clone;
     }
 
-    /**
-     * @param Statistics $miscStats
-     * @return self
-     */
     public function withMiscStats(Statistics $miscStats): self
     {
         $clone = clone $this;
@@ -418,7 +352,6 @@ class Data
 
     /**
      * @param DataNetworkingOpsItem[] $networkingOps
-     * @return self
      */
     public function withNetworkingOps(array $networkingOps): self
     {
@@ -428,10 +361,6 @@ class Data
         return $clone;
     }
 
-    /**
-     * @param Statistics $networkingStats
-     * @return self
-     */
     public function withNetworkingStats(Statistics $networkingStats): self
     {
         $clone = clone $this;
@@ -442,7 +371,6 @@ class Data
 
     /**
      * @param int|float $slowdownFactor
-     * @return self
      */
     public function withSlowdownFactor(int|float $slowdownFactor): self
     {
@@ -458,10 +386,6 @@ class Data
         return $clone;
     }
 
-    /**
-     * @param int $ttfbMs
-     * @return self
-     */
     public function withTtfbMs(int $ttfbMs): self
     {
         $validator = new Validator();

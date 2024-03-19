@@ -11,8 +11,6 @@ class GetLatestScreenshotOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -23,9 +21,6 @@ class GetLatestScreenshotOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $reference = null;
 
     /**
@@ -35,18 +30,11 @@ class GetLatestScreenshotOKResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getReference(): ?string
     {
         return $this->reference ?? null;
     }
 
-    /**
-     * @param string $reference
-     * @return self
-     */
     public function withReference(string $reference): self
     {
         $validator = new Validator();
@@ -61,9 +49,6 @@ class GetLatestScreenshotOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReference(): self
     {
         $clone = clone $this;

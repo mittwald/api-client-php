@@ -22,8 +22,6 @@ class ApiToken
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -63,24 +61,12 @@ class ApiToken
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $apiTokenId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
     /**
@@ -89,9 +75,6 @@ class ApiToken
     private array $roles;
 
     /**
-     * @param string $apiTokenId
-     * @param DateTime $createdAt
-     * @param string $description
      * @param string[] $roles
      */
     public function __construct(string $apiTokenId, DateTime $createdAt, string $description, array $roles)
@@ -102,33 +85,21 @@ class ApiToken
         $this->roles = $roles;
     }
 
-    /**
-     * @return string
-     */
     public function getApiTokenId(): string
     {
         return $this->apiTokenId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
@@ -142,10 +113,6 @@ class ApiToken
         return $this->roles;
     }
 
-    /**
-     * @param string $apiTokenId
-     * @return self
-     */
     public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new Validator();
@@ -160,10 +127,6 @@ class ApiToken
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -172,10 +135,6 @@ class ApiToken
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -190,10 +149,6 @@ class ApiToken
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -202,9 +157,6 @@ class ApiToken
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -215,7 +167,6 @@ class ApiToken
 
     /**
      * @param string[] $roles
-     * @return self
      */
     public function withRoles(array $roles): self
     {

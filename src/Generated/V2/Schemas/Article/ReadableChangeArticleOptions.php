@@ -21,8 +21,6 @@ class ReadableChangeArticleOptions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,44 +51,25 @@ class ReadableChangeArticleOptions
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $articleId;
 
-    /**
-     * @var ReadableChangeArticleOptionsInfo|null
-     */
     private ?ReadableChangeArticleOptionsInfo $info = null;
 
-    /**
-     * @param string $articleId
-     */
     public function __construct(string $articleId)
     {
         $this->articleId = $articleId;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleId(): string
     {
         return $this->articleId;
     }
 
-    /**
-     * @return ReadableChangeArticleOptionsInfo|null
-     */
     public function getInfo(): ?ReadableChangeArticleOptionsInfo
     {
         return $this->info ?? null;
     }
 
-    /**
-     * @param string $articleId
-     * @return self
-     */
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
@@ -105,10 +84,6 @@ class ReadableChangeArticleOptions
         return $clone;
     }
 
-    /**
-     * @param ReadableChangeArticleOptionsInfo $info
-     * @return self
-     */
     public function withInfo(ReadableChangeArticleOptionsInfo $info): self
     {
         $clone = clone $this;
@@ -117,9 +92,6 @@ class ReadableChangeArticleOptions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInfo(): self
     {
         $clone = clone $this;

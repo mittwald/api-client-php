@@ -11,8 +11,6 @@ class RequestAppinstallationCopyRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,44 +28,25 @@ class RequestAppinstallationCopyRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var string|null
-     */
     private ?string $targetProjectId = null;
 
-    /**
-     * @param string $description
-     */
     public function __construct(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTargetProjectId(): ?string
     {
         return $this->targetProjectId ?? null;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -82,10 +61,6 @@ class RequestAppinstallationCopyRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $targetProjectId
-     * @return self
-     */
     public function withTargetProjectId(string $targetProjectId): self
     {
         $validator = new Validator();
@@ -100,9 +75,6 @@ class RequestAppinstallationCopyRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTargetProjectId(): self
     {
         $clone = clone $this;

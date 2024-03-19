@@ -23,8 +23,6 @@ class Task
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -68,46 +66,22 @@ class Task
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $executedAt = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $fileReference = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var int|float
-     */
     private int|float $priority;
 
-    /**
-     * @var ScreenshotSettings
-     */
     private ScreenshotSettings $settings;
 
-    /**
-     * @var Target
-     */
     private Target $target;
 
-    /**
-     * @var string|Error|null
-     */
     private string|Error|null $taskState = null;
 
     /**
-     * @param string $id
      * @param int|float $priority
-     * @param ScreenshotSettings $settings
-     * @param Target $target
      */
     public function __construct(string $id, int|float $priority, ScreenshotSettings $settings, Target $target)
     {
@@ -117,66 +91,41 @@ class Task
         $this->target = $target;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExecutedAt(): ?DateTime
     {
         return $this->executedAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFileReference(): ?string
     {
         return $this->fileReference ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return int|float
-     */
     public function getPriority(): int|float
     {
         return $this->priority;
     }
 
-    /**
-     * @return ScreenshotSettings
-     */
     public function getSettings(): ScreenshotSettings
     {
         return $this->settings;
     }
 
-    /**
-     * @return Target
-     */
     public function getTarget(): Target
     {
         return $this->target;
     }
 
-    /**
-     * @return string|Error|null
-     */
     public function getTaskState(): Error|string|null
     {
         return $this->taskState;
     }
 
-    /**
-     * @param DateTime $executedAt
-     * @return self
-     */
     public function withExecutedAt(DateTime $executedAt): self
     {
         $clone = clone $this;
@@ -185,9 +134,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExecutedAt(): self
     {
         $clone = clone $this;
@@ -196,10 +142,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @param string $fileReference
-     * @return self
-     */
     public function withFileReference(string $fileReference): self
     {
         $validator = new Validator();
@@ -214,9 +156,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFileReference(): self
     {
         $clone = clone $this;
@@ -225,10 +164,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -245,7 +180,6 @@ class Task
 
     /**
      * @param int|float $priority
-     * @return self
      */
     public function withPriority(int|float $priority): self
     {
@@ -261,10 +195,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @param ScreenshotSettings $settings
-     * @return self
-     */
     public function withSettings(ScreenshotSettings $settings): self
     {
         $clone = clone $this;
@@ -273,10 +203,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @param Target $target
-     * @return self
-     */
     public function withTarget(Target $target): self
     {
         $clone = clone $this;
@@ -287,7 +213,6 @@ class Task
 
     /**
      * @param string|Error $taskState
-     * @return self
      */
     public function withTaskState(Error|string $taskState): self
     {
@@ -297,9 +222,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTaskState(): self
     {
         $clone = clone $this;

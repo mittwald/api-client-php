@@ -13,8 +13,6 @@ class DnsRecordMxSetManagedDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class DnsRecordMxSetManagedDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $zoneId;
 
-    /**
-     * @var DnsRecordMxSetManagedDeprecatedRequestBody
-     */
     private DnsRecordMxSetManagedDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $zoneId
-     * @param DnsRecordMxSetManagedDeprecatedRequestBody $body
-     */
     public function __construct(string $zoneId, DnsRecordMxSetManagedDeprecatedRequestBody $body)
     {
         $this->zoneId = $zoneId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getZoneId(): string
     {
         return $this->zoneId;
     }
 
-    /**
-     * @return DnsRecordMxSetManagedDeprecatedRequestBody
-     */
     public function getBody(): DnsRecordMxSetManagedDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $zoneId
-     * @return self
-     */
     public function withZoneId(string $zoneId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class DnsRecordMxSetManagedDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DnsRecordMxSetManagedDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DnsRecordMxSetManagedDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

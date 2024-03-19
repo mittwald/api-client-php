@@ -11,8 +11,6 @@ class OauthGetAuthorizationBadRequestResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,44 +30,25 @@ class OauthGetAuthorizationBadRequestResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var OauthGetAuthorizationBadRequestResponseBodyError
-     */
     private OauthGetAuthorizationBadRequestResponseBodyError $error;
 
-    /**
-     * @var string|null
-     */
     private ?string $error_description = null;
 
-    /**
-     * @param OauthGetAuthorizationBadRequestResponseBodyError $error
-     */
     public function __construct(OauthGetAuthorizationBadRequestResponseBodyError $error)
     {
         $this->error = $error;
     }
 
-    /**
-     * @return OauthGetAuthorizationBadRequestResponseBodyError
-     */
     public function getError(): OauthGetAuthorizationBadRequestResponseBodyError
     {
         return $this->error;
     }
 
-    /**
-     * @return string|null
-     */
     public function getErrorDescription(): ?string
     {
         return $this->error_description ?? null;
     }
 
-    /**
-     * @param OauthGetAuthorizationBadRequestResponseBodyError $error
-     * @return self
-     */
     public function withError(OauthGetAuthorizationBadRequestResponseBodyError $error): self
     {
         $clone = clone $this;
@@ -78,10 +57,6 @@ class OauthGetAuthorizationBadRequestResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $error_description
-     * @return self
-     */
     public function withErrorDescription(string $error_description): self
     {
         $validator = new Validator();
@@ -96,9 +71,6 @@ class OauthGetAuthorizationBadRequestResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutErrorDescription(): self
     {
         $clone = clone $this;

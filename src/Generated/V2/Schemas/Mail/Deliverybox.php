@@ -22,8 +22,6 @@ class Deliverybox
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -68,56 +66,22 @@ class Deliverybox
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $authenticationEnabled;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $passwordUpdatedAt;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var bool
-     */
     private bool $sendingEnabled;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @param bool $authenticationEnabled
-     * @param string $description
-     * @param string $id
-     * @param string $name
-     * @param DateTime $passwordUpdatedAt
-     * @param string $projectId
-     * @param bool $sendingEnabled
-     * @param DateTime $updatedAt
-     */
     public function __construct(bool $authenticationEnabled, string $description, string $id, string $name, DateTime $passwordUpdatedAt, string $projectId, bool $sendingEnabled, DateTime $updatedAt)
     {
         $this->authenticationEnabled = $authenticationEnabled;
@@ -130,74 +94,46 @@ class Deliverybox
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @return bool
-     */
     public function getAuthenticationEnabled(): bool
     {
         return $this->authenticationEnabled;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return bool
-     */
     public function getSendingEnabled(): bool
     {
         return $this->sendingEnabled;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param bool $authenticationEnabled
-     * @return self
-     */
     public function withAuthenticationEnabled(bool $authenticationEnabled): self
     {
         $validator = new Validator();
@@ -212,10 +148,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -230,10 +162,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -248,10 +176,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -266,10 +190,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
@@ -278,10 +198,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -296,10 +212,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param bool $sendingEnabled
-     * @return self
-     */
     public function withSendingEnabled(bool $sendingEnabled): self
     {
         $validator = new Validator();
@@ -314,10 +226,6 @@ class Deliverybox
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;

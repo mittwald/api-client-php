@@ -21,8 +21,6 @@ class RecordMXRecord
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,46 +43,26 @@ class RecordMXRecord
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $fqdn;
 
-    /**
-     * @var int
-     */
     private int $priority;
 
-    /**
-     * @param string $fqdn
-     * @param int $priority
-     */
     public function __construct(string $fqdn, int $priority)
     {
         $this->fqdn = $fqdn;
         $this->priority = $priority;
     }
 
-    /**
-     * @return string
-     */
     public function getFqdn(): string
     {
         return $this->fqdn;
     }
 
-    /**
-     * @return int
-     */
     public function getPriority(): int
     {
         return $this->priority;
     }
 
-    /**
-     * @param string $fqdn
-     * @return self
-     */
     public function withFqdn(string $fqdn): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class RecordMXRecord
         return $clone;
     }
 
-    /**
-     * @param int $priority
-     * @return self
-     */
     public function withPriority(int $priority): self
     {
         $validator = new Validator();

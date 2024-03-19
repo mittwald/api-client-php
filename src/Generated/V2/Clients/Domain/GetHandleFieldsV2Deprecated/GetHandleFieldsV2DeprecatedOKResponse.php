@@ -13,8 +13,6 @@ class GetHandleFieldsV2DeprecatedOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,33 +37,20 @@ class GetHandleFieldsV2DeprecatedOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetHandleFieldsV2DeprecatedOKResponseBody
-     */
     private GetHandleFieldsV2DeprecatedOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetHandleFieldsV2DeprecatedOKResponseBody $body
-     */
     public function __construct(GetHandleFieldsV2DeprecatedOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetHandleFieldsV2DeprecatedOKResponseBody
-     */
     public function getBody(): GetHandleFieldsV2DeprecatedOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetHandleFieldsV2DeprecatedOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetHandleFieldsV2DeprecatedOKResponseBody $body): self
     {
         $clone = clone $this;

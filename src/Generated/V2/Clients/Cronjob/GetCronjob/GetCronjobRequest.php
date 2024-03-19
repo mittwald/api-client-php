@@ -13,8 +13,6 @@ class GetCronjobRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetCronjobRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $cronjobId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $cronjobId
-     */
     public function __construct(string $cronjobId)
     {
         $this->cronjobId = $cronjobId;
     }
 
-    /**
-     * @return string
-     */
     public function getCronjobId(): string
     {
         return $this->cronjobId;
     }
 
-    /**
-     * @param string $cronjobId
-     * @return self
-     */
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();

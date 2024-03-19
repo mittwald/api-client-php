@@ -11,8 +11,6 @@ class CheckDomainRegistrabilityOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,46 +28,26 @@ class CheckDomainRegistrabilityOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $isPremium;
 
-    /**
-     * @var bool
-     */
     private bool $registrable;
 
-    /**
-     * @param bool $isPremium
-     * @param bool $registrable
-     */
     public function __construct(bool $isPremium, bool $registrable)
     {
         $this->isPremium = $isPremium;
         $this->registrable = $registrable;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsPremium(): bool
     {
         return $this->isPremium;
     }
 
-    /**
-     * @return bool
-     */
     public function getRegistrable(): bool
     {
         return $this->registrable;
     }
 
-    /**
-     * @param bool $isPremium
-     * @return self
-     */
     public function withIsPremium(bool $isPremium): self
     {
         $validator = new Validator();
@@ -84,10 +62,6 @@ class CheckDomainRegistrabilityOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $registrable
-     * @return self
-     */
     public function withRegistrable(bool $registrable): self
     {
         $validator = new Validator();

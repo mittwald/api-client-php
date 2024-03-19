@@ -14,8 +14,6 @@ class GetProjectOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetProjectOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Project
-     */
     private Project $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Project $body
-     */
     public function __construct(Project $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Project
-     */
     public function getBody(): Project
     {
         return $this->body;
     }
 
-    /**
-     * @param Project $body
-     * @return self
-     */
     public function withBody(Project $body): self
     {
         $clone = clone $this;

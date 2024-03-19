@@ -13,8 +13,6 @@ class RequestAppinstallationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,19 +42,10 @@ class RequestAppinstallationRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $appVersionId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var AppUpdatePolicy
-     */
     private AppUpdatePolicy $updatePolicy;
 
     /**
@@ -65,9 +54,6 @@ class RequestAppinstallationRequestBody
     private array $userInputs;
 
     /**
-     * @param string $appVersionId
-     * @param string $description
-     * @param AppUpdatePolicy $updatePolicy
      * @param SavedUserInput[] $userInputs
      */
     public function __construct(string $appVersionId, string $description, AppUpdatePolicy $updatePolicy, array $userInputs)
@@ -78,25 +64,16 @@ class RequestAppinstallationRequestBody
         $this->userInputs = $userInputs;
     }
 
-    /**
-     * @return string
-     */
     public function getAppVersionId(): string
     {
         return $this->appVersionId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return AppUpdatePolicy
-     */
     public function getUpdatePolicy(): AppUpdatePolicy
     {
         return $this->updatePolicy;
@@ -110,10 +87,6 @@ class RequestAppinstallationRequestBody
         return $this->userInputs;
     }
 
-    /**
-     * @param string $appVersionId
-     * @return self
-     */
     public function withAppVersionId(string $appVersionId): self
     {
         $validator = new Validator();
@@ -128,10 +101,6 @@ class RequestAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -146,10 +115,6 @@ class RequestAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @param AppUpdatePolicy $updatePolicy
-     * @return self
-     */
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -160,7 +125,6 @@ class RequestAppinstallationRequestBody
 
     /**
      * @param SavedUserInput[] $userInputs
-     * @return self
      */
     public function withUserInputs(array $userInputs): self
     {

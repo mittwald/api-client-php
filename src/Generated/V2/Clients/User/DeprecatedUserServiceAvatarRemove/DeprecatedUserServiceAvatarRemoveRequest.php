@@ -13,8 +13,6 @@ class DeprecatedUserServiceAvatarRemoveRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeprecatedUserServiceAvatarRemoveRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $userId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $userId
-     */
     public function __construct(string $userId)
     {
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

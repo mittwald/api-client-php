@@ -13,8 +13,6 @@ class CreateDeliveryboxCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateDeliveryboxCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateDeliveryboxCreatedResponseBody
-     */
     private CreateDeliveryboxCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateDeliveryboxCreatedResponseBody $body
-     */
     public function __construct(CreateDeliveryboxCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateDeliveryboxCreatedResponseBody
-     */
     public function getBody(): CreateDeliveryboxCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateDeliveryboxCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateDeliveryboxCreatedResponseBody $body): self
     {
         $clone = clone $this;

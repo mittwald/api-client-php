@@ -11,8 +11,6 @@ class RequestAvatarUploadOKResponseBodyRulesProperties
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,9 +45,6 @@ class RequestAvatarUploadOKResponseBodyRulesProperties
         'type' => 'object',
     ];
 
-    /**
-     * @var RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions|null
-     */
     private ?RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions $imageDimensions = null;
 
     /**
@@ -59,18 +54,11 @@ class RequestAvatarUploadOKResponseBodyRulesProperties
     {
     }
 
-    /**
-     * @return RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions|null
-     */
     public function getImageDimensions(): ?RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
 
-    /**
-     * @param RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions $imageDimensions
-     * @return self
-     */
     public function withImageDimensions(RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
@@ -79,9 +67,6 @@ class RequestAvatarUploadOKResponseBodyRulesProperties
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageDimensions(): self
     {
         $clone = clone $this;

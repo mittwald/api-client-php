@@ -11,8 +11,6 @@ class CheckDomainTransferabilityOKResponseBodyReasons
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,32 +36,14 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $domainAgeTooSmall;
 
-    /**
-     * @var bool
-     */
     private bool $domainDoesNotExist;
 
-    /**
-     * @var bool
-     */
     private bool $transferLock;
 
-    /**
-     * @var bool
-     */
     private bool $wrongAuthCode;
 
-    /**
-     * @param bool $domainAgeTooSmall
-     * @param bool $domainDoesNotExist
-     * @param bool $transferLock
-     * @param bool $wrongAuthCode
-     */
     public function __construct(bool $domainAgeTooSmall, bool $domainDoesNotExist, bool $transferLock, bool $wrongAuthCode)
     {
         $this->domainAgeTooSmall = $domainAgeTooSmall;
@@ -72,42 +52,26 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         $this->wrongAuthCode = $wrongAuthCode;
     }
 
-    /**
-     * @return bool
-     */
     public function getDomainAgeTooSmall(): bool
     {
         return $this->domainAgeTooSmall;
     }
 
-    /**
-     * @return bool
-     */
     public function getDomainDoesNotExist(): bool
     {
         return $this->domainDoesNotExist;
     }
 
-    /**
-     * @return bool
-     */
     public function getTransferLock(): bool
     {
         return $this->transferLock;
     }
 
-    /**
-     * @return bool
-     */
     public function getWrongAuthCode(): bool
     {
         return $this->wrongAuthCode;
     }
 
-    /**
-     * @param bool $domainAgeTooSmall
-     * @return self
-     */
     public function withDomainAgeTooSmall(bool $domainAgeTooSmall): self
     {
         $validator = new Validator();
@@ -122,10 +86,6 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         return $clone;
     }
 
-    /**
-     * @param bool $domainDoesNotExist
-     * @return self
-     */
     public function withDomainDoesNotExist(bool $domainDoesNotExist): self
     {
         $validator = new Validator();
@@ -140,10 +100,6 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         return $clone;
     }
 
-    /**
-     * @param bool $transferLock
-     * @return self
-     */
     public function withTransferLock(bool $transferLock): self
     {
         $validator = new Validator();
@@ -158,10 +114,6 @@ class CheckDomainTransferabilityOKResponseBodyReasons
         return $clone;
     }
 
-    /**
-     * @param bool $wrongAuthCode
-     * @return self
-     */
     public function withWrongAuthCode(bool $wrongAuthCode): self
     {
         $validator = new Validator();

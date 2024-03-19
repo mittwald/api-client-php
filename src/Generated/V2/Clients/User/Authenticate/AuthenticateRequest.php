@@ -13,8 +13,6 @@ class AuthenticateRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,35 +41,22 @@ class AuthenticateRequest
         ],
     ];
 
-    /**
-     * @var AuthenticateRequestBody
-     */
     private AuthenticateRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param AuthenticateRequestBody $body
-     */
     public function __construct(AuthenticateRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AuthenticateRequestBody
-     */
     public function getBody(): AuthenticateRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param AuthenticateRequestBody $body
-     * @return self
-     */
     public function withBody(AuthenticateRequestBody $body): self
     {
         $clone = clone $this;

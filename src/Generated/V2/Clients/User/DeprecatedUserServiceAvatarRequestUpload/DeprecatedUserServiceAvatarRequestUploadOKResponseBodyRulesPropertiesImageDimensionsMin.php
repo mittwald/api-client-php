@@ -11,8 +11,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,14 +24,8 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         'type' => 'object',
     ];
 
-    /**
-     * @var int|null
-     */
     private ?int $height = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $width = null;
 
     /**
@@ -43,26 +35,16 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
     {
     }
 
-    /**
-     * @return int|null
-     */
     public function getHeight(): ?int
     {
         return $this->height ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getWidth(): ?int
     {
         return $this->width ?? null;
     }
 
-    /**
-     * @param int $height
-     * @return self
-     */
     public function withHeight(int $height): self
     {
         $validator = new Validator();
@@ -77,9 +59,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHeight(): self
     {
         $clone = clone $this;
@@ -88,10 +67,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $clone;
     }
 
-    /**
-     * @param int $width
-     * @return self
-     */
     public function withWidth(int $width): self
     {
         $validator = new Validator();
@@ -106,9 +81,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutWidth(): self
     {
         $clone = clone $this;

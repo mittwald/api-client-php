@@ -22,8 +22,6 @@ class AppInstallation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'An AppInstallation is a concrete manifestation of an App in a specific AppVersion.',
@@ -108,39 +106,18 @@ class AppInstallation
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @var VersionStatus
-     */
     private VersionStatus $appVersion;
 
-    /**
-     * @var string|null
-     */
     private ?string $customDocumentRoot = null;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var bool
-     */
     private bool $disabled;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $installationPath;
 
     /**
@@ -153,24 +130,12 @@ class AppInstallation
      */
     private ?array $processes = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $projectId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $screenshotId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $screenshotRef = null;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
     /**
@@ -178,9 +143,6 @@ class AppInstallation
      */
     private ?array $systemSoftware = null;
 
-    /**
-     * @var AppUpdatePolicy|null
-     */
     private ?AppUpdatePolicy $updatePolicy = null;
 
     /**
@@ -188,15 +150,6 @@ class AppInstallation
      */
     private ?array $userInputs = null;
 
-    /**
-     * @param string $appId
-     * @param VersionStatus $appVersion
-     * @param string $description
-     * @param bool $disabled
-     * @param string $id
-     * @param string $installationPath
-     * @param string $shortId
-     */
     public function __construct(string $appId, VersionStatus $appVersion, string $description, bool $disabled, string $id, string $installationPath, string $shortId)
     {
         $this->appId = $appId;
@@ -208,57 +161,36 @@ class AppInstallation
         $this->shortId = $shortId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @return VersionStatus
-     */
     public function getAppVersion(): VersionStatus
     {
         return $this->appVersion;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomDocumentRoot(): ?string
     {
         return $this->customDocumentRoot ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return bool
-     */
     public function getDisabled(): bool
     {
         return $this->disabled;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getInstallationPath(): string
     {
         return $this->installationPath;
@@ -280,33 +212,21 @@ class AppInstallation
         return $this->processes ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScreenshotId(): ?string
     {
         return $this->screenshotId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScreenshotRef(): ?string
     {
         return $this->screenshotRef ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
@@ -321,9 +241,6 @@ class AppInstallation
         return $this->systemSoftware ?? null;
     }
 
-    /**
-     * @return AppUpdatePolicy|null
-     */
     public function getUpdatePolicy(): ?AppUpdatePolicy
     {
         return $this->updatePolicy ?? null;
@@ -337,10 +254,6 @@ class AppInstallation
         return $this->userInputs ?? null;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -355,10 +268,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param VersionStatus $appVersion
-     * @return self
-     */
     public function withAppVersion(VersionStatus $appVersion): self
     {
         $clone = clone $this;
@@ -367,10 +276,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $customDocumentRoot
-     * @return self
-     */
     public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
         $validator = new Validator();
@@ -385,9 +290,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomDocumentRoot(): self
     {
         $clone = clone $this;
@@ -396,10 +298,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -414,10 +312,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param bool $disabled
-     * @return self
-     */
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
@@ -432,10 +326,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -450,10 +340,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $installationPath
-     * @return self
-     */
     public function withInstallationPath(string $installationPath): self
     {
         $validator = new Validator();
@@ -470,7 +356,6 @@ class AppInstallation
 
     /**
      * @param LinkedDatabase[] $linkedDatabases
-     * @return self
      */
     public function withLinkedDatabases(array $linkedDatabases): self
     {
@@ -480,9 +365,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLinkedDatabases(): self
     {
         $clone = clone $this;
@@ -493,7 +375,6 @@ class AppInstallation
 
     /**
      * @param string[] $processes
-     * @return self
      */
     public function withProcesses(array $processes): self
     {
@@ -509,9 +390,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProcesses(): self
     {
         $clone = clone $this;
@@ -520,10 +398,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -538,9 +412,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectId(): self
     {
         $clone = clone $this;
@@ -549,10 +420,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $screenshotId
-     * @return self
-     */
     public function withScreenshotId(string $screenshotId): self
     {
         $validator = new Validator();
@@ -567,9 +434,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScreenshotId(): self
     {
         $clone = clone $this;
@@ -578,10 +442,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $screenshotRef
-     * @return self
-     */
     public function withScreenshotRef(string $screenshotRef): self
     {
         $validator = new Validator();
@@ -596,9 +456,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScreenshotRef(): self
     {
         $clone = clone $this;
@@ -607,10 +464,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
@@ -627,7 +480,6 @@ class AppInstallation
 
     /**
      * @param InstalledSystemSoftware[] $systemSoftware
-     * @return self
      */
     public function withSystemSoftware(array $systemSoftware): self
     {
@@ -637,9 +489,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSystemSoftware(): self
     {
         $clone = clone $this;
@@ -648,10 +497,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @param AppUpdatePolicy $updatePolicy
-     * @return self
-     */
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -660,9 +505,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUpdatePolicy(): self
     {
         $clone = clone $this;
@@ -673,7 +515,6 @@ class AppInstallation
 
     /**
      * @param SavedUserInput[] $userInputs
-     * @return self
      */
     public function withUserInputs(array $userInputs): self
     {
@@ -683,9 +524,6 @@ class AppInstallation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserInputs(): self
     {
         $clone = clone $this;

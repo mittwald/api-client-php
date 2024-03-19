@@ -15,8 +15,6 @@ class DnsRecordTxtSetDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,14 +40,8 @@ class DnsRecordTxtSetDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $zoneId;
 
-    /**
-     * @var RecordUnset|RecordTXTComponent
-     */
     private RecordUnset|RecordTXTComponent $body;
 
     private array $headers = [
@@ -57,7 +49,6 @@ class DnsRecordTxtSetDeprecatedRequest
     ];
 
     /**
-     * @param string $zoneId
      * @param RecordUnset|RecordTXTComponent $body
      */
     public function __construct(string $zoneId, RecordTXTComponent|RecordUnset $body)
@@ -66,9 +57,6 @@ class DnsRecordTxtSetDeprecatedRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getZoneId(): string
     {
         return $this->zoneId;
@@ -83,10 +71,6 @@ class DnsRecordTxtSetDeprecatedRequest
         return $this->body;
     }
 
-    /**
-     * @param string $zoneId
-     * @return self
-     */
     public function withZoneId(string $zoneId): self
     {
         $validator = new Validator();
@@ -103,7 +87,6 @@ class DnsRecordTxtSetDeprecatedRequest
 
     /**
      * @param RecordUnset|RecordTXTComponent $body
-     * @return self
      */
     public function withBody(RecordTXTComponent|RecordUnset $body): self
     {

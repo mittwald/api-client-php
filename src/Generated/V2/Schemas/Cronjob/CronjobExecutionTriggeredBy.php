@@ -21,8 +21,6 @@ class CronjobExecutionTriggeredBy
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -34,9 +32,6 @@ class CronjobExecutionTriggeredBy
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $id = null;
 
     /**
@@ -46,18 +41,11 @@ class CronjobExecutionTriggeredBy
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id ?? null;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -72,9 +60,6 @@ class CronjobExecutionTriggeredBy
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutId(): self
     {
         $clone = clone $this;

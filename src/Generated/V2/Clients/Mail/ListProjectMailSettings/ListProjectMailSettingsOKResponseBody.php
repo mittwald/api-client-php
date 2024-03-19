@@ -11,8 +11,6 @@ class ListProjectMailSettingsOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,9 +45,6 @@ class ListProjectMailSettingsOKResponseBody
      */
     private array $blacklist;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
     /**
@@ -59,7 +54,6 @@ class ListProjectMailSettingsOKResponseBody
 
     /**
      * @param string[] $blacklist
-     * @param string $projectId
      * @param string[] $whitelist
      */
     public function __construct(array $blacklist, string $projectId, array $whitelist)
@@ -77,9 +71,6 @@ class ListProjectMailSettingsOKResponseBody
         return $this->blacklist;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -95,7 +86,6 @@ class ListProjectMailSettingsOKResponseBody
 
     /**
      * @param string[] $blacklist
-     * @return self
      */
     public function withBlacklist(array $blacklist): self
     {
@@ -111,10 +101,6 @@ class ListProjectMailSettingsOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -131,7 +117,6 @@ class ListProjectMailSettingsOKResponseBody
 
     /**
      * @param string[] $whitelist
-     * @return self
      */
     public function withWhitelist(array $whitelist): self
     {

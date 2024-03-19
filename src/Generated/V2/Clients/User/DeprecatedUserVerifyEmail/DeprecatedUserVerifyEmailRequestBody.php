@@ -11,8 +11,6 @@ class DeprecatedUserVerifyEmailRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,46 +34,29 @@ class DeprecatedUserVerifyEmailRequestBody
 
     /**
      * The Email-Address to verify.
-     *
-     * @var string
      */
     private string $email;
 
     /**
      * The token found in the verification email.
-     *
-     * @var string|null
      */
     private ?string $token = null;
 
-    /**
-     * @param string $email
-     */
     public function __construct(string $email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string|null
-     */
     public function getToken(): ?string
     {
         return $this->token ?? null;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -90,10 +71,6 @@ class DeprecatedUserVerifyEmailRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();
@@ -108,9 +85,6 @@ class DeprecatedUserVerifyEmailRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutToken(): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class CreateDeliveryboxRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,50 +42,30 @@ class CreateDeliveryboxRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateDeliveryboxRequestBody
-     */
     private CreateDeliveryboxRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CreateDeliveryboxRequestBody $body
-     */
     public function __construct(string $projectId, CreateDeliveryboxRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CreateDeliveryboxRequestBody
-     */
     public function getBody(): CreateDeliveryboxRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -102,10 +80,6 @@ class CreateDeliveryboxRequest
         return $clone;
     }
 
-    /**
-     * @param CreateDeliveryboxRequestBody $body
-     * @return self
-     */
     public function withBody(CreateDeliveryboxRequestBody $body): self
     {
         $clone = clone $this;

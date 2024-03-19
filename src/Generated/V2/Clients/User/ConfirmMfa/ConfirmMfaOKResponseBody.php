@@ -11,8 +11,6 @@ class ConfirmMfaOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -57,7 +55,6 @@ class ConfirmMfaOKResponseBody
 
     /**
      * @param string[] $recoveryCodesList
-     * @return self
      */
     public function withRecoveryCodesList(array $recoveryCodesList): self
     {

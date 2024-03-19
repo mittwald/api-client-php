@@ -11,8 +11,6 @@ class UpdateMessageRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -22,9 +20,6 @@ class UpdateMessageRequestBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $messageContent = null;
 
     /**
@@ -34,18 +29,11 @@ class UpdateMessageRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessageContent(): ?string
     {
         return $this->messageContent ?? null;
     }
 
-    /**
-     * @param string $messageContent
-     * @return self
-     */
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
@@ -60,9 +48,6 @@ class UpdateMessageRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessageContent(): self
     {
         $clone = clone $this;

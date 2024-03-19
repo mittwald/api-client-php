@@ -21,8 +21,6 @@ class Mailbox
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -51,37 +49,16 @@ class Mailbox
         'type' => 'object',
     ];
 
-    /**
-     * @var MailSystemSettings
-     */
     private MailSystemSettings $mailsystem;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $passwordHash;
 
-    /**
-     * @var int
-     */
     private int $quotaInBytes;
 
-    /**
-     * @var SpamProtection|null
-     */
     private ?SpamProtection $spamProtection = null;
 
-    /**
-     * @param MailSystemSettings $mailsystem
-     * @param string $name
-     * @param string $passwordHash
-     * @param int $quotaInBytes
-     */
     public function __construct(MailSystemSettings $mailsystem, string $name, string $passwordHash, int $quotaInBytes)
     {
         $this->mailsystem = $mailsystem;
@@ -99,25 +76,16 @@ class Mailbox
         return $this->mailsystem;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getPasswordHash(): string
     {
         return $this->passwordHash;
     }
 
-    /**
-     * @return int
-     */
     public function getQuotaInBytes(): int
     {
         return $this->quotaInBytes;
@@ -132,10 +100,6 @@ class Mailbox
         return $this->spamProtection ?? null;
     }
 
-    /**
-     * @param MailSystemSettings $mailsystem
-     * @return self
-     */
     public function withMailsystem(MailSystemSettings $mailsystem): self
     {
         $clone = clone $this;
@@ -144,10 +108,6 @@ class Mailbox
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -162,10 +122,6 @@ class Mailbox
         return $clone;
     }
 
-    /**
-     * @param string $passwordHash
-     * @return self
-     */
     public function withPasswordHash(string $passwordHash): self
     {
         $validator = new Validator();
@@ -180,10 +136,6 @@ class Mailbox
         return $clone;
     }
 
-    /**
-     * @param int $quotaInBytes
-     * @return self
-     */
     public function withQuotaInBytes(int $quotaInBytes): self
     {
         $validator = new Validator();
@@ -198,10 +150,6 @@ class Mailbox
         return $clone;
     }
 
-    /**
-     * @param SpamProtection $spamProtection
-     * @return self
-     */
     public function withSpamProtection(SpamProtection $spamProtection): self
     {
         $clone = clone $this;
@@ -210,9 +158,6 @@ class Mailbox
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSpamProtection(): self
     {
         $clone = clone $this;

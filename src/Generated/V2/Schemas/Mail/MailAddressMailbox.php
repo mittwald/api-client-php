@@ -22,8 +22,6 @@ class MailAddressMailbox
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -104,38 +102,16 @@ class MailAddressMailbox
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $passwordUpdatedAt;
 
-    /**
-     * @var bool
-     */
     private bool $sendingEnabled;
 
-    /**
-     * @var MailAddressMailboxSpamProtection
-     */
     private MailAddressMailboxSpamProtection $spamProtection;
 
-    /**
-     * @var MailAddressMailboxStorageInBytes
-     */
     private MailAddressMailboxStorageInBytes $storageInBytes;
 
-    /**
-     * @param string $name
-     * @param DateTime $passwordUpdatedAt
-     * @param bool $sendingEnabled
-     * @param MailAddressMailboxSpamProtection $spamProtection
-     * @param MailAddressMailboxStorageInBytes $storageInBytes
-     */
     public function __construct(string $name, DateTime $passwordUpdatedAt, bool $sendingEnabled, MailAddressMailboxSpamProtection $spamProtection, MailAddressMailboxStorageInBytes $storageInBytes)
     {
         $this->name = $name;
@@ -145,50 +121,31 @@ class MailAddressMailbox
         $this->storageInBytes = $storageInBytes;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
-    /**
-     * @return bool
-     */
     public function getSendingEnabled(): bool
     {
         return $this->sendingEnabled;
     }
 
-    /**
-     * @return MailAddressMailboxSpamProtection
-     */
     public function getSpamProtection(): MailAddressMailboxSpamProtection
     {
         return $this->spamProtection;
     }
 
-    /**
-     * @return MailAddressMailboxStorageInBytes
-     */
     public function getStorageInBytes(): MailAddressMailboxStorageInBytes
     {
         return $this->storageInBytes;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -203,10 +160,6 @@ class MailAddressMailbox
         return $clone;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
@@ -215,10 +168,6 @@ class MailAddressMailbox
         return $clone;
     }
 
-    /**
-     * @param bool $sendingEnabled
-     * @return self
-     */
     public function withSendingEnabled(bool $sendingEnabled): self
     {
         $validator = new Validator();
@@ -233,10 +182,6 @@ class MailAddressMailbox
         return $clone;
     }
 
-    /**
-     * @param MailAddressMailboxSpamProtection $spamProtection
-     * @return self
-     */
     public function withSpamProtection(MailAddressMailboxSpamProtection $spamProtection): self
     {
         $clone = clone $this;
@@ -245,10 +190,6 @@ class MailAddressMailbox
         return $clone;
     }
 
-    /**
-     * @param MailAddressMailboxStorageInBytes $storageInBytes
-     * @return self
-     */
     public function withStorageInBytes(MailAddressMailboxStorageInBytes $storageInBytes): self
     {
         $clone = clone $this;

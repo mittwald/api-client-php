@@ -13,8 +13,6 @@ class NotificationsCountUnreadNotificationsOKResponse implements ResponseContain
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -57,33 +55,20 @@ class NotificationsCountUnreadNotificationsOKResponse implements ResponseContain
         ],
     ];
 
-    /**
-     * @var NotificationsCountUnreadNotificationsOKResponseBody
-     */
     private NotificationsCountUnreadNotificationsOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param NotificationsCountUnreadNotificationsOKResponseBody $body
-     */
     public function __construct(NotificationsCountUnreadNotificationsOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NotificationsCountUnreadNotificationsOKResponseBody
-     */
     public function getBody(): NotificationsCountUnreadNotificationsOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NotificationsCountUnreadNotificationsOKResponseBody $body
-     * @return self
-     */
     public function withBody(NotificationsCountUnreadNotificationsOKResponseBody $body): self
     {
         $clone = clone $this;

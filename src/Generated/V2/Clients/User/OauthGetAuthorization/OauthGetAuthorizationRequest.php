@@ -13,8 +13,6 @@ class OauthGetAuthorizationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -63,141 +61,79 @@ class OauthGetAuthorizationRequest
         ],
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $grant_consent = null;
 
-    /**
-     * @var OauthGetAuthorizationRequestGrant_type|null
-     */
     private ?OauthGetAuthorizationRequestGrant_type $grant_type = null;
 
-    /**
-     * @var OauthGetAuthorizationRequestResponse_type
-     */
     private OauthGetAuthorizationRequestResponse_type $response_type;
 
-    /**
-     * @var string
-     */
     private string $client_id;
 
-    /**
-     * @var string|null
-     */
     private ?string $redirect_uri = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $scope = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $state = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $code_challenge = null;
 
-    /**
-     * @var OauthGetAuthorizationRequestCode_challenge_method|null
-     */
     private ?OauthGetAuthorizationRequestCode_challenge_method $code_challenge_method = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param OauthGetAuthorizationRequestResponse_type $responseType
-     * @param string $clientId
-     */
     public function __construct(OauthGetAuthorizationRequestResponse_type $responseType, string $clientId)
     {
         $this->response_type = $responseType;
         $this->client_id = $clientId;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getGrantConsent(): ?bool
     {
         return $this->grant_consent ?? null;
     }
 
-    /**
-     * @return OauthGetAuthorizationRequestGrant_type|null
-     */
     public function getGrantType(): ?OauthGetAuthorizationRequestGrant_type
     {
         return $this->grant_type ?? null;
     }
 
-    /**
-     * @return OauthGetAuthorizationRequestResponse_type
-     */
     public function getResponseType(): OauthGetAuthorizationRequestResponse_type
     {
         return $this->response_type;
     }
 
-    /**
-     * @return string
-     */
     public function getClientId(): string
     {
         return $this->client_id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRedirectUri(): ?string
     {
         return $this->redirect_uri ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScope(): ?string
     {
         return $this->scope ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getState(): ?string
     {
         return $this->state ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCodeChallenge(): ?string
     {
         return $this->code_challenge ?? null;
     }
 
-    /**
-     * @return OauthGetAuthorizationRequestCode_challenge_method|null
-     */
     public function getCodeChallengeMethod(): ?OauthGetAuthorizationRequestCode_challenge_method
     {
         return $this->code_challenge_method ?? null;
     }
 
-    /**
-     * @param bool $grant_consent
-     * @return self
-     */
     public function withGrantConsent(bool $grant_consent): self
     {
         $validator = new Validator();
@@ -212,9 +148,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutGrantConsent(): self
     {
         $clone = clone $this;
@@ -223,10 +156,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param OauthGetAuthorizationRequestGrant_type $grant_type
-     * @return self
-     */
     public function withGrantType(OauthGetAuthorizationRequestGrant_type $grant_type): self
     {
         $clone = clone $this;
@@ -235,9 +164,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutGrantType(): self
     {
         $clone = clone $this;
@@ -246,10 +172,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param OauthGetAuthorizationRequestResponse_type $response_type
-     * @return self
-     */
     public function withResponseType(OauthGetAuthorizationRequestResponse_type $response_type): self
     {
         $clone = clone $this;
@@ -258,10 +180,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param string $client_id
-     * @return self
-     */
     public function withClientId(string $client_id): self
     {
         $validator = new Validator();
@@ -276,10 +194,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param string $redirect_uri
-     * @return self
-     */
     public function withRedirectUri(string $redirect_uri): self
     {
         $validator = new Validator();
@@ -294,9 +208,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRedirectUri(): self
     {
         $clone = clone $this;
@@ -305,10 +216,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param string $scope
-     * @return self
-     */
     public function withScope(string $scope): self
     {
         $validator = new Validator();
@@ -323,9 +230,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScope(): self
     {
         $clone = clone $this;
@@ -334,10 +238,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param string $state
-     * @return self
-     */
     public function withState(string $state): self
     {
         $validator = new Validator();
@@ -352,9 +252,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutState(): self
     {
         $clone = clone $this;
@@ -363,10 +260,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param string $code_challenge
-     * @return self
-     */
     public function withCodeChallenge(string $code_challenge): self
     {
         $validator = new Validator();
@@ -381,9 +274,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCodeChallenge(): self
     {
         $clone = clone $this;
@@ -392,10 +282,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @param OauthGetAuthorizationRequestCode_challenge_method $code_challenge_method
-     * @return self
-     */
     public function withCodeChallengeMethod(OauthGetAuthorizationRequestCode_challenge_method $code_challenge_method): self
     {
         $clone = clone $this;
@@ -404,9 +290,6 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCodeChallengeMethod(): self
     {
         $clone = clone $this;

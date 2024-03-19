@@ -14,8 +14,6 @@ class CreateCategoryRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class CreateCategoryRequest
         ],
     ];
 
-    /**
-     * @var Category
-     */
     private Category $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param Category $body
-     */
     public function __construct(Category $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Category
-     */
     public function getBody(): Category
     {
         return $this->body;
     }
 
-    /**
-     * @param Category $body
-     * @return self
-     */
     public function withBody(Category $body): self
     {
         $clone = clone $this;

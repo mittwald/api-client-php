@@ -12,8 +12,6 @@ class RegisterRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,28 +38,16 @@ class RegisterRequestBody
 
     /**
      * The users email address
-     *
-     * @var string
      */
     private string $email;
 
     /**
      * The users password.
-     *
-     * @var string
      */
     private string $password;
 
-    /**
-     * @var Person
-     */
     private Person $person;
 
-    /**
-     * @param string $email
-     * @param string $password
-     * @param Person $person
-     */
     public function __construct(string $email, string $password, Person $person)
     {
         $this->email = $email;
@@ -69,34 +55,21 @@ class RegisterRequestBody
         $this->person = $person;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @return Person
-     */
     public function getPerson(): Person
     {
         return $this->person;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -111,10 +84,6 @@ class RegisterRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -129,10 +98,6 @@ class RegisterRequestBody
         return $clone;
     }
 
-    /**
-     * @param Person $person
-     * @return self
-     */
     public function withPerson(Person $person): self
     {
         $clone = clone $this;

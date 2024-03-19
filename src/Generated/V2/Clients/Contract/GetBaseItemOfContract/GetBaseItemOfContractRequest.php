@@ -13,8 +13,6 @@ class GetBaseItemOfContractRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetBaseItemOfContractRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     */
     public function __construct(string $contractId)
     {
         $this->contractId = $contractId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();

@@ -14,8 +14,6 @@ class RetrieveStatusOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class RetrieveStatusOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var AppInstallationStatus
-     */
     private AppInstallationStatus $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param AppInstallationStatus $body
-     */
     public function __construct(AppInstallationStatus $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AppInstallationStatus
-     */
     public function getBody(): AppInstallationStatus
     {
         return $this->body;
     }
 
-    /**
-     * @param AppInstallationStatus $body
-     * @return self
-     */
     public function withBody(AppInstallationStatus $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class ResendVerificationEmailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,35 +41,22 @@ class ResendVerificationEmailRequest
         ],
     ];
 
-    /**
-     * @var ResendVerificationEmailRequestBody
-     */
     private ResendVerificationEmailRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param ResendVerificationEmailRequestBody $body
-     */
     public function __construct(ResendVerificationEmailRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ResendVerificationEmailRequestBody
-     */
     public function getBody(): ResendVerificationEmailRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ResendVerificationEmailRequestBody $body
-     * @return self
-     */
     public function withBody(ResendVerificationEmailRequestBody $body): self
     {
         $clone = clone $this;

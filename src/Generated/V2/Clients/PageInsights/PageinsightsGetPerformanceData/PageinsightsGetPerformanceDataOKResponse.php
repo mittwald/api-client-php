@@ -13,8 +13,6 @@ class PageinsightsGetPerformanceDataOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -101,33 +99,20 @@ class PageinsightsGetPerformanceDataOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var PageinsightsGetPerformanceDataOKResponseBody
-     */
     private PageinsightsGetPerformanceDataOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param PageinsightsGetPerformanceDataOKResponseBody $body
-     */
     public function __construct(PageinsightsGetPerformanceDataOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return PageinsightsGetPerformanceDataOKResponseBody
-     */
     public function getBody(): PageinsightsGetPerformanceDataOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param PageinsightsGetPerformanceDataOKResponseBody $body
-     * @return self
-     */
     public function withBody(PageinsightsGetPerformanceDataOKResponseBody $body): self
     {
         $clone = clone $this;

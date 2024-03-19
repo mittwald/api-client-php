@@ -22,8 +22,6 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,26 +43,12 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $sourceCoabDeliveryMailbox;
 
-    /**
-     * @var int
-     */
     private int $sourceCoabDeliveryUid;
 
-    /**
-     * @var string
-     */
     private string $targetNexusDeliveryAddress;
 
-    /**
-     * @param string $sourceCoabDeliveryMailbox
-     * @param int $sourceCoabDeliveryUid
-     * @param string $targetNexusDeliveryAddress
-     */
     public function __construct(string $sourceCoabDeliveryMailbox, int $sourceCoabDeliveryUid, string $targetNexusDeliveryAddress)
     {
         $this->sourceCoabDeliveryMailbox = $sourceCoabDeliveryMailbox;
@@ -72,34 +56,21 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
         $this->targetNexusDeliveryAddress = $targetNexusDeliveryAddress;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceCoabDeliveryMailbox(): string
     {
         return $this->sourceCoabDeliveryMailbox;
     }
 
-    /**
-     * @return int
-     */
     public function getSourceCoabDeliveryUid(): int
     {
         return $this->sourceCoabDeliveryUid;
     }
 
-    /**
-     * @return string
-     */
     public function getTargetNexusDeliveryAddress(): string
     {
         return $this->targetNexusDeliveryAddress;
     }
 
-    /**
-     * @param string $sourceCoabDeliveryMailbox
-     * @return self
-     */
     public function withSourceCoabDeliveryMailbox(string $sourceCoabDeliveryMailbox): self
     {
         $validator = new Validator();
@@ -114,10 +85,6 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
         return $clone;
     }
 
-    /**
-     * @param int $sourceCoabDeliveryUid
-     * @return self
-     */
     public function withSourceCoabDeliveryUid(int $sourceCoabDeliveryUid): self
     {
         $validator = new Validator();
@@ -132,10 +99,6 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
         return $clone;
     }
 
-    /**
-     * @param string $targetNexusDeliveryAddress
-     * @return self
-     */
     public function withTargetNexusDeliveryAddress(string $targetNexusDeliveryAddress): self
     {
         $validator = new Validator();

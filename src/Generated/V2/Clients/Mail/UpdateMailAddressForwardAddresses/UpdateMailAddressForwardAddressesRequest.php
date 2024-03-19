@@ -13,8 +13,6 @@ class UpdateMailAddressForwardAddressesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,50 +42,30 @@ class UpdateMailAddressForwardAddressesRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressForwardAddressesRequestBody
-     */
     private UpdateMailAddressForwardAddressesRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressForwardAddressesRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressForwardAddressesRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressForwardAddressesRequestBody
-     */
     public function getBody(): UpdateMailAddressForwardAddressesRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -102,10 +80,6 @@ class UpdateMailAddressForwardAddressesRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressForwardAddressesRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressForwardAddressesRequestBody $body): self
     {
         $clone = clone $this;

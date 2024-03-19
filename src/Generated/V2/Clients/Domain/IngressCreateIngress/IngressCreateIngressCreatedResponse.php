@@ -13,8 +13,6 @@ class IngressCreateIngressCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,33 +39,20 @@ class IngressCreateIngressCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var IngressCreateIngressCreatedResponseBody
-     */
     private IngressCreateIngressCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param IngressCreateIngressCreatedResponseBody $body
-     */
     public function __construct(IngressCreateIngressCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return IngressCreateIngressCreatedResponseBody
-     */
     public function getBody(): IngressCreateIngressCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param IngressCreateIngressCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(IngressCreateIngressCreatedResponseBody $body): self
     {
         $clone = clone $this;

@@ -11,8 +11,6 @@ class ProjectsettingUpdateBlacklistDeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,7 +51,6 @@ class ProjectsettingUpdateBlacklistDeprecatedRequestBody
 
     /**
      * @param string[] $blacklist
-     * @return self
      */
     public function withBlacklist(array $blacklist): self
     {

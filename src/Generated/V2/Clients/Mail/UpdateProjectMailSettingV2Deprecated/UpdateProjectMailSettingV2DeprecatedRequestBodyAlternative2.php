@@ -11,8 +11,6 @@ class UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,7 +51,6 @@ class UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2
 
     /**
      * @param string[] $whitelist
-     * @return self
      */
     public function withWhitelist(array $whitelist): self
     {

@@ -13,8 +13,6 @@ class IngressIngressVerifyOwnershipRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class IngressIngressVerifyOwnershipRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $ingressId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $ingressId
-     */
     public function __construct(string $ingressId)
     {
         $this->ingressId = $ingressId;
     }
 
-    /**
-     * @return string
-     */
     public function getIngressId(): string
     {
         return $this->ingressId;
     }
 
-    /**
-     * @param string $ingressId
-     * @return self
-     */
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();

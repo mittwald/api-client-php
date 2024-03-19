@@ -13,8 +13,6 @@ class ListTldContactSchemasRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class ListTldContactSchemasRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $tld;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $tld
-     */
     public function __construct(string $tld)
     {
         $this->tld = $tld;
     }
 
-    /**
-     * @return string
-     */
     public function getTld(): string
     {
         return $this->tld;
     }
 
-    /**
-     * @param string $tld
-     * @return self
-     */
     public function withTld(string $tld): self
     {
         $validator = new Validator();

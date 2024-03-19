@@ -22,8 +22,6 @@ class Conversation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -97,44 +95,20 @@ class Conversation
         'type' => 'object',
     ];
 
-    /**
-     * @var Category|null
-     */
     private ?Category $category = null;
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var User|null
-     */
     private ?User $createdBy = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $lastMessageAt = null;
 
-    /**
-     * @var User|null
-     */
     private ?User $lastMessageBy = null;
 
-    /**
-     * @var User
-     */
     private User $mainUser;
 
-    /**
-     * @var AggregateReference|null
-     */
     private ?AggregateReference $relatedTo = null;
 
     /**
@@ -142,40 +116,16 @@ class Conversation
      */
     private ?array $relations = null;
 
-    /**
-     * @var AggregateReference|null
-     */
     private ?AggregateReference $sharedWith = null;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
-    /**
-     * @var ConversationStatus
-     */
     private ConversationStatus $status;
 
-    /**
-     * @var string
-     */
     private string $title;
 
-    /**
-     * @var ConversationVisibility
-     */
     private ConversationVisibility $visibility;
 
-    /**
-     * @param string $conversationId
-     * @param DateTime $createdAt
-     * @param User $mainUser
-     * @param string $shortId
-     * @param ConversationStatus $status
-     * @param string $title
-     * @param ConversationVisibility $visibility
-     */
     public function __construct(string $conversationId, DateTime $createdAt, User $mainUser, string $shortId, ConversationStatus $status, string $title, ConversationVisibility $visibility)
     {
         $this->conversationId = $conversationId;
@@ -187,57 +137,36 @@ class Conversation
         $this->visibility = $visibility;
     }
 
-    /**
-     * @return Category|null
-     */
     public function getCategory(): ?Category
     {
         return $this->category ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return User|null
-     */
     public function getCreatedBy(): ?User
     {
         return $this->createdBy ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getLastMessageAt(): ?DateTime
     {
         return $this->lastMessageAt ?? null;
     }
 
-    /**
-     * @return User|null
-     */
     public function getLastMessageBy(): ?User
     {
         return $this->lastMessageBy ?? null;
     }
 
-    /**
-     * @return User
-     */
     public function getMainUser(): User
     {
         return $this->mainUser;
@@ -270,42 +199,26 @@ class Conversation
         return $this->sharedWith ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
     }
 
-    /**
-     * @return ConversationStatus
-     */
     public function getStatus(): ConversationStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @return ConversationVisibility
-     */
     public function getVisibility(): ConversationVisibility
     {
         return $this->visibility;
     }
 
-    /**
-     * @param Category $category
-     * @return self
-     */
     public function withCategory(Category $category): self
     {
         $clone = clone $this;
@@ -314,9 +227,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCategory(): self
     {
         $clone = clone $this;
@@ -325,10 +235,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -343,10 +249,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -355,10 +257,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param User $createdBy
-     * @return self
-     */
     public function withCreatedBy(User $createdBy): self
     {
         $clone = clone $this;
@@ -367,9 +265,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCreatedBy(): self
     {
         $clone = clone $this;
@@ -378,10 +273,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param DateTime $lastMessageAt
-     * @return self
-     */
     public function withLastMessageAt(DateTime $lastMessageAt): self
     {
         $clone = clone $this;
@@ -390,9 +281,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastMessageAt(): self
     {
         $clone = clone $this;
@@ -401,10 +289,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param User $lastMessageBy
-     * @return self
-     */
     public function withLastMessageBy(User $lastMessageBy): self
     {
         $clone = clone $this;
@@ -413,9 +297,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastMessageBy(): self
     {
         $clone = clone $this;
@@ -424,10 +305,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param User $mainUser
-     * @return self
-     */
     public function withMainUser(User $mainUser): self
     {
         $clone = clone $this;
@@ -436,10 +313,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param AggregateReference $relatedTo
-     * @return self
-     */
     public function withRelatedTo(AggregateReference $relatedTo): self
     {
         $clone = clone $this;
@@ -448,9 +321,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRelatedTo(): self
     {
         $clone = clone $this;
@@ -461,7 +331,6 @@ class Conversation
 
     /**
      * @param AggregateReference[] $relations
-     * @return self
      */
     public function withRelations(array $relations): self
     {
@@ -471,9 +340,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRelations(): self
     {
         $clone = clone $this;
@@ -482,10 +348,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param AggregateReference $sharedWith
-     * @return self
-     */
     public function withSharedWith(AggregateReference $sharedWith): self
     {
         $clone = clone $this;
@@ -494,9 +356,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSharedWith(): self
     {
         $clone = clone $this;
@@ -505,10 +364,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
@@ -523,10 +378,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param ConversationStatus $status
-     * @return self
-     */
     public function withStatus(ConversationStatus $status): self
     {
         $clone = clone $this;
@@ -535,10 +386,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param string $title
-     * @return self
-     */
     public function withTitle(string $title): self
     {
         $validator = new Validator();
@@ -553,10 +400,6 @@ class Conversation
         return $clone;
     }
 
-    /**
-     * @param ConversationVisibility $visibility
-     * @return self
-     */
     public function withVisibility(ConversationVisibility $visibility): self
     {
         $clone = clone $this;

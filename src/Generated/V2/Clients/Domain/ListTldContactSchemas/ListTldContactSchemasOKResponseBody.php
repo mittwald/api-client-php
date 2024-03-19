@@ -11,8 +11,6 @@ class ListTldContactSchemasOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -29,44 +27,25 @@ class ListTldContactSchemasOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var ListTldContactSchemasOKResponseBodyJsonSchemaAdminC|null
-     */
     private ?ListTldContactSchemasOKResponseBodyJsonSchemaAdminC $jsonSchemaAdminC = null;
 
-    /**
-     * @var ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC
-     */
     private ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC;
 
-    /**
-     * @param ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC
-     */
     public function __construct(ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC)
     {
         $this->jsonSchemaOwnerC = $jsonSchemaOwnerC;
     }
 
-    /**
-     * @return ListTldContactSchemasOKResponseBodyJsonSchemaAdminC|null
-     */
     public function getJsonSchemaAdminC(): ?ListTldContactSchemasOKResponseBodyJsonSchemaAdminC
     {
         return $this->jsonSchemaAdminC ?? null;
     }
 
-    /**
-     * @return ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC
-     */
     public function getJsonSchemaOwnerC(): ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC
     {
         return $this->jsonSchemaOwnerC;
     }
 
-    /**
-     * @param ListTldContactSchemasOKResponseBodyJsonSchemaAdminC $jsonSchemaAdminC
-     * @return self
-     */
     public function withJsonSchemaAdminC(ListTldContactSchemasOKResponseBodyJsonSchemaAdminC $jsonSchemaAdminC): self
     {
         $clone = clone $this;
@@ -75,9 +54,6 @@ class ListTldContactSchemasOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutJsonSchemaAdminC(): self
     {
         $clone = clone $this;
@@ -86,10 +62,6 @@ class ListTldContactSchemasOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC
-     * @return self
-     */
     public function withJsonSchemaOwnerC(ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC): self
     {
         $clone = clone $this;

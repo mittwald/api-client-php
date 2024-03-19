@@ -11,8 +11,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,14 +24,8 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isAsync = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $transactionId = null;
 
     /**
@@ -43,26 +35,16 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsAsync(): ?bool
     {
         return $this->isAsync ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTransactionId(): ?string
     {
         return $this->transactionId ?? null;
     }
 
-    /**
-     * @param bool $isAsync
-     * @return self
-     */
     public function withIsAsync(bool $isAsync): self
     {
         $validator = new Validator();
@@ -77,9 +59,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsAsync(): self
     {
         $clone = clone $this;
@@ -88,10 +67,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $transactionId
-     * @return self
-     */
     public function withTransactionId(string $transactionId): self
     {
         $validator = new Validator();
@@ -106,9 +81,6 @@ class DeclareProcessChangeAuthcodeV2DeprecatedOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTransactionId(): self
     {
         $clone = clone $this;

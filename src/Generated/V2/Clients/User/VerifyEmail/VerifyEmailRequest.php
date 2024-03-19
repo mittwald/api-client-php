@@ -13,8 +13,6 @@ class VerifyEmailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,35 +42,22 @@ class VerifyEmailRequest
         ],
     ];
 
-    /**
-     * @var VerifyEmailRequestBody
-     */
     private VerifyEmailRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param VerifyEmailRequestBody $body
-     */
     public function __construct(VerifyEmailRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return VerifyEmailRequestBody
-     */
     public function getBody(): VerifyEmailRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param VerifyEmailRequestBody $body
-     * @return self
-     */
     public function withBody(VerifyEmailRequestBody $body): self
     {
         $clone = clone $this;

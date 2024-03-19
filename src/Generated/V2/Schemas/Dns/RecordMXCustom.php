@@ -21,8 +21,6 @@ class RecordMXCustom
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -51,14 +49,10 @@ class RecordMXCustom
      */
     private array $records;
 
-    /**
-     * @var RecordSettings
-     */
     private RecordSettings $settings;
 
     /**
      * @param RecordMXRecord[] $records
-     * @param RecordSettings $settings
      */
     public function __construct(array $records, RecordSettings $settings)
     {
@@ -74,9 +68,6 @@ class RecordMXCustom
         return $this->records;
     }
 
-    /**
-     * @return RecordSettings
-     */
     public function getSettings(): RecordSettings
     {
         return $this->settings;
@@ -84,7 +75,6 @@ class RecordMXCustom
 
     /**
      * @param RecordMXRecord[] $records
-     * @return self
      */
     public function withRecords(array $records): self
     {
@@ -94,10 +84,6 @@ class RecordMXCustom
         return $clone;
     }
 
-    /**
-     * @param RecordSettings $settings
-     * @return self
-     */
     public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;

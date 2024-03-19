@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -52,7 +54,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateConversation\CreateConversationRequest $request An object representing the request for this operation
-     * @return CreateConversation\CreateConversationCreatedResponse
      */
     public function createConversation(CreateConversationRequest $request): CreateConversationCreatedResponse;
     /**
@@ -62,7 +63,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateMessage\CreateMessageRequest $request An object representing the request for this operation
-     * @return CreateMessage\CreateMessageCreatedResponse
      */
     public function createMessage(CreateMessageRequest $request): CreateMessageCreatedResponse;
     /**
@@ -72,7 +72,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetCategory\GetCategoryRequest $request An object representing the request for this operation
-     * @return GetCategory\GetCategoryOKResponse
      */
     public function getCategory(GetCategoryRequest $request): GetCategoryOKResponse;
     /**
@@ -114,7 +113,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListCategories\ListCategoriesRequest $request An object representing the request for this operation
-     * @return ListCategories\ListCategoriesOKResponse
      */
     public function listCategories(ListCategoriesRequest $request): ListCategoriesOKResponse;
     /**
@@ -134,7 +132,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListMessagesByConversation\ListMessagesByConversationRequest $request An object representing the request for this operation
-     * @return UntypedResponse
      */
     public function listMessagesByConversation(ListMessagesByConversationRequest $request): UntypedResponse;
     /**
@@ -156,7 +153,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param SetConversationStatus\SetConversationStatusRequest $request An object representing the request for this operation
-     * @return SetConversationStatus\SetConversationStatusOKResponse
      */
     public function setConversationStatus(SetConversationStatusRequest $request): SetConversationStatusOKResponse;
     /**
@@ -166,7 +162,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateConversation\UpdateConversationRequest $request An object representing the request for this operation
-     * @return UpdateConversation\UpdateConversationOKResponse
      */
     public function updateConversation(UpdateConversationRequest $request): UpdateConversationOKResponse;
     /**
@@ -176,7 +171,6 @@ interface ConversationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateMessage\UpdateMessageRequest $request An object representing the request for this operation
-     * @return UpdateMessage\UpdateMessageOKResponse
      */
     public function updateMessage(UpdateMessageRequest $request): UpdateMessageOKResponse;
 }

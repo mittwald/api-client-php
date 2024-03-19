@@ -13,8 +13,6 @@ class EditSshKeyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,50 +44,30 @@ class EditSshKeyRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sshKeyId;
 
-    /**
-     * @var EditSshKeyRequestBody
-     */
     private EditSshKeyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sshKeyId
-     * @param EditSshKeyRequestBody $body
-     */
     public function __construct(string $sshKeyId, EditSshKeyRequestBody $body)
     {
         $this->sshKeyId = $sshKeyId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getSshKeyId(): string
     {
         return $this->sshKeyId;
     }
 
-    /**
-     * @return EditSshKeyRequestBody
-     */
     public function getBody(): EditSshKeyRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $sshKeyId
-     * @return self
-     */
     public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new Validator();
@@ -104,10 +82,6 @@ class EditSshKeyRequest
         return $clone;
     }
 
-    /**
-     * @param EditSshKeyRequestBody $body
-     * @return self
-     */
     public function withBody(EditSshKeyRequestBody $body): self
     {
         $clone = clone $this;

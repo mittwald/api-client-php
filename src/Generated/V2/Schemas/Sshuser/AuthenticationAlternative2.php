@@ -21,8 +21,6 @@ class AuthenticationAlternative2
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -62,7 +60,6 @@ class AuthenticationAlternative2
 
     /**
      * @param PublicKey[] $publicKeys
-     * @return self
      */
     public function withPublicKeys(array $publicKeys): self
     {

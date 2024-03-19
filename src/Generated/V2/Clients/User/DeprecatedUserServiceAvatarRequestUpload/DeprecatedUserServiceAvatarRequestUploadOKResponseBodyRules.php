@@ -11,8 +11,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,9 +63,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $maxSizeInKB;
 
     /**
@@ -75,13 +70,9 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
      */
     private array $mimeTypes;
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties|null
-     */
     private ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties $properties = null;
 
     /**
-     * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
     public function __construct(int $maxSizeInKB, array $mimeTypes)
@@ -90,9 +81,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
         $this->mimeTypes = $mimeTypes;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -115,10 +103,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
         return $this->properties ?? null;
     }
 
-    /**
-     * @param int $maxSizeInKB
-     * @return self
-     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();
@@ -135,7 +119,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
 
     /**
      * @param string[] $mimeTypes
-     * @return self
      */
     public function withMimeTypes(array $mimeTypes): self
     {
@@ -151,10 +134,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties $properties
-     * @return self
-     */
     public function withProperties(DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties $properties): self
     {
         $clone = clone $this;
@@ -163,9 +142,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProperties(): self
     {
         $clone = clone $this;

@@ -14,8 +14,6 @@ class GetDeliveryBoxOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetDeliveryBoxOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Deliverybox
-     */
     private Deliverybox $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Deliverybox $body
-     */
     public function __construct(Deliverybox $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Deliverybox
-     */
     public function getBody(): Deliverybox
     {
         return $this->body;
     }
 
-    /**
-     * @param Deliverybox $body
-     * @return self
-     */
     public function withBody(Deliverybox $body): self
     {
         $clone = clone $this;

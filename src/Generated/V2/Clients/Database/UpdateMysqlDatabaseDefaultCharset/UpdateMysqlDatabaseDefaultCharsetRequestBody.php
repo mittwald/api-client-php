@@ -12,8 +12,6 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,31 +24,18 @@ class UpdateMysqlDatabaseDefaultCharsetRequestBody
         ],
     ];
 
-    /**
-     * @var CharacterSettings
-     */
     private CharacterSettings $characterSettings;
 
-    /**
-     * @param CharacterSettings $characterSettings
-     */
     public function __construct(CharacterSettings $characterSettings)
     {
         $this->characterSettings = $characterSettings;
     }
 
-    /**
-     * @return CharacterSettings
-     */
     public function getCharacterSettings(): CharacterSettings
     {
         return $this->characterSettings;
     }
 
-    /**
-     * @param CharacterSettings $characterSettings
-     * @return self
-     */
     public function withCharacterSettings(CharacterSettings $characterSettings): self
     {
         $clone = clone $this;

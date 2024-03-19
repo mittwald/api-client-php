@@ -13,8 +13,6 @@ class DeprecatedFileGetFileTypeRulesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,35 +31,22 @@ class DeprecatedFileGetFileTypeRulesRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedFileGetFileTypeRulesRequestName
-     */
     private DeprecatedFileGetFileTypeRulesRequestName $name;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedFileGetFileTypeRulesRequestName $name
-     */
     public function __construct(DeprecatedFileGetFileTypeRulesRequestName $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return DeprecatedFileGetFileTypeRulesRequestName
-     */
     public function getName(): DeprecatedFileGetFileTypeRulesRequestName
     {
         return $this->name;
     }
 
-    /**
-     * @param DeprecatedFileGetFileTypeRulesRequestName $name
-     * @return self
-     */
     public function withName(DeprecatedFileGetFileTypeRulesRequestName $name): self
     {
         $clone = clone $this;

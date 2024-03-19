@@ -13,8 +13,6 @@ class VerifyRegistrationOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class VerifyRegistrationOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var VerifyRegistrationOKResponseBody
-     */
     private VerifyRegistrationOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param VerifyRegistrationOKResponseBody $body
-     */
     public function __construct(VerifyRegistrationOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return VerifyRegistrationOKResponseBody
-     */
     public function getBody(): VerifyRegistrationOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param VerifyRegistrationOKResponseBody $body
-     * @return self
-     */
     public function withBody(VerifyRegistrationOKResponseBody $body): self
     {
         $clone = clone $this;

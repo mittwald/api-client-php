@@ -11,8 +11,6 @@ class CreateRelocationRequestBodyTarget
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -66,37 +64,26 @@ class CreateRelocationRequestBodyTarget
 
     /**
      * Your customer or organisation number
-     *
-     * @var string
      */
     private string $organisation;
 
     /**
      * Help our customer service finding your target account
-     *
-     * @var string|CreateRelocationRequestBodyTargetProductAlternative2
      */
     private string|CreateRelocationRequestBodyTargetProductAlternative2 $product;
 
     /**
      * In which p-account or short project id your project should be moved.
-     *
-     * @var string
      */
     private string $projectName;
 
     /**
      * Which mittwald system does the targetProject use?
-     *
-     * @var CreateRelocationRequestBodyTargetSystem
      */
     private CreateRelocationRequestBodyTargetSystem $system;
 
     /**
-     * @param string $organisation
      * @param string|CreateRelocationRequestBodyTargetProductAlternative2 $product
-     * @param string $projectName
-     * @param CreateRelocationRequestBodyTargetSystem $system
      */
     public function __construct(string $organisation, CreateRelocationRequestBodyTargetProductAlternative2|string $product, string $projectName, CreateRelocationRequestBodyTargetSystem $system)
     {
@@ -106,42 +93,26 @@ class CreateRelocationRequestBodyTarget
         $this->system = $system;
     }
 
-    /**
-     * @return string
-     */
     public function getOrganisation(): string
     {
         return $this->organisation;
     }
 
-    /**
-     * @return string|CreateRelocationRequestBodyTargetProductAlternative2
-     */
     public function getProduct(): CreateRelocationRequestBodyTargetProductAlternative2|string
     {
         return $this->product;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectName(): string
     {
         return $this->projectName;
     }
 
-    /**
-     * @return CreateRelocationRequestBodyTargetSystem
-     */
     public function getSystem(): CreateRelocationRequestBodyTargetSystem
     {
         return $this->system;
     }
 
-    /**
-     * @param string $organisation
-     * @return self
-     */
     public function withOrganisation(string $organisation): self
     {
         $validator = new Validator();
@@ -158,7 +129,6 @@ class CreateRelocationRequestBodyTarget
 
     /**
      * @param string|CreateRelocationRequestBodyTargetProductAlternative2 $product
-     * @return self
      */
     public function withProduct(CreateRelocationRequestBodyTargetProductAlternative2|string $product): self
     {
@@ -168,10 +138,6 @@ class CreateRelocationRequestBodyTarget
         return $clone;
     }
 
-    /**
-     * @param string $projectName
-     * @return self
-     */
     public function withProjectName(string $projectName): self
     {
         $validator = new Validator();
@@ -186,10 +152,6 @@ class CreateRelocationRequestBodyTarget
         return $clone;
     }
 
-    /**
-     * @param CreateRelocationRequestBodyTargetSystem $system
-     * @return self
-     */
     public function withSystem(CreateRelocationRequestBodyTargetSystem $system): self
     {
         $clone = clone $this;

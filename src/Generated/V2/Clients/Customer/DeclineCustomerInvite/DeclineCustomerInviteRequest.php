@@ -13,8 +13,6 @@ class DeclineCustomerInviteRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class DeclineCustomerInviteRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerInviteId;
 
     /**
@@ -48,7 +43,6 @@ class DeclineCustomerInviteRequest
     ];
 
     /**
-     * @param string $customerInviteId
      * @param mixed $body
      */
     public function __construct(string $customerInviteId, $body)
@@ -57,9 +51,6 @@ class DeclineCustomerInviteRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerInviteId(): string
     {
         return $this->customerInviteId;
@@ -73,10 +64,6 @@ class DeclineCustomerInviteRequest
         return $this->body;
     }
 
-    /**
-     * @param string $customerInviteId
-     * @return self
-     */
     public function withCustomerInviteId(string $customerInviteId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class DeclineCustomerInviteRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

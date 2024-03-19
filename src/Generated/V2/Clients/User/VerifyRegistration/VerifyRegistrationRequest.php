@@ -13,8 +13,6 @@ class VerifyRegistrationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -52,35 +50,22 @@ class VerifyRegistrationRequest
         ],
     ];
 
-    /**
-     * @var VerifyRegistrationRequestBody
-     */
     private VerifyRegistrationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param VerifyRegistrationRequestBody $body
-     */
     public function __construct(VerifyRegistrationRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return VerifyRegistrationRequestBody
-     */
     public function getBody(): VerifyRegistrationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param VerifyRegistrationRequestBody $body
-     * @return self
-     */
     public function withBody(VerifyRegistrationRequestBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class PageinsightsGetPerformanceDataRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,63 +34,37 @@ class PageinsightsGetPerformanceDataRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var string
-     */
     private string $path;
 
-    /**
-     * @var string|null
-     */
     private ?string $date = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domain
-     * @param string $path
-     */
     public function __construct(string $domain, string $path)
     {
         $this->domain = $domain;
         $this->path = $path;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDate(): ?string
     {
         return $this->date ?? null;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -107,10 +79,6 @@ class PageinsightsGetPerformanceDataRequest
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -125,10 +93,6 @@ class PageinsightsGetPerformanceDataRequest
         return $clone;
     }
 
-    /**
-     * @param string $date
-     * @return self
-     */
     public function withDate(string $date): self
     {
         $validator = new Validator();
@@ -143,9 +107,6 @@ class PageinsightsGetPerformanceDataRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDate(): self
     {
         $clone = clone $this;

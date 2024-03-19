@@ -13,8 +13,6 @@ class ListMysqlVersionsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,9 +26,6 @@ class ListMysqlVersionsRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $projectId = null;
 
     private array $headers = [
@@ -44,18 +39,11 @@ class ListMysqlVersionsRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -70,9 +58,6 @@ class ListMysqlVersionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectId(): self
     {
         $clone = clone $this;

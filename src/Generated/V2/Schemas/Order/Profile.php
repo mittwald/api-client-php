@@ -21,8 +21,6 @@ class Profile
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,87 +57,50 @@ class Profile
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $email;
 
-    /**
-     * @var string|null
-     */
     private ?string $first_name = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $last_name = null;
 
     /**
      * the users title
-     *
-     * @var ProfileTitle|null
      */
     private ?ProfileTitle $title = null;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param string $email
-     * @param string $userId
-     */
     public function __construct(string $email, string $userId)
     {
         $this->email = $email;
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string
     {
         return $this->first_name ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string
     {
         return $this->last_name ?? null;
     }
 
-    /**
-     * @return ProfileTitle|null
-     */
     public function getTitle(): ?ProfileTitle
     {
         return $this->title ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -154,10 +115,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @param string $first_name
-     * @return self
-     */
     public function withFirstName(string $first_name): self
     {
         $validator = new Validator();
@@ -172,9 +129,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFirstName(): self
     {
         $clone = clone $this;
@@ -183,10 +137,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @param string $last_name
-     * @return self
-     */
     public function withLastName(string $last_name): self
     {
         $validator = new Validator();
@@ -201,9 +151,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastName(): self
     {
         $clone = clone $this;
@@ -212,10 +159,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @param ProfileTitle $title
-     * @return self
-     */
     public function withTitle(ProfileTitle $title): self
     {
         $clone = clone $this;
@@ -224,9 +167,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTitle(): self
     {
         $clone = clone $this;
@@ -235,10 +175,6 @@ class Profile
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

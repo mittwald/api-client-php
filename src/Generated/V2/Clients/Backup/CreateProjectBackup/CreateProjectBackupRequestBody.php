@@ -12,8 +12,6 @@ class CreateProjectBackupRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,46 +34,29 @@ class CreateProjectBackupRequestBody
 
     /**
      * Description of the Backup.
-     *
-     * @var string|null
      */
     private ?string $description = null;
 
     /**
      * Time when to expire the Backup.
-     *
-     * @var DateTime
      */
     private DateTime $expirationTime;
 
-    /**
-     * @param DateTime $expirationTime
-     */
     public function __construct(DateTime $expirationTime)
     {
         $this->expirationTime = $expirationTime;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getExpirationTime(): DateTime
     {
         return $this->expirationTime;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -90,9 +71,6 @@ class CreateProjectBackupRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -101,10 +79,6 @@ class CreateProjectBackupRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expirationTime
-     * @return self
-     */
     public function withExpirationTime(DateTime $expirationTime): self
     {
         $clone = clone $this;

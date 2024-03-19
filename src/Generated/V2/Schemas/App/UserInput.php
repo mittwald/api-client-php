@@ -23,8 +23,6 @@ class UserInput
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware.',
@@ -71,60 +69,28 @@ class UserInput
 
     /**
      * Optional field to tell the frontend, which data to put into the select.
-     *
-     * @var string|null
      */
     private ?string $dataSource = null;
 
-    /**
-     * @var UserInputDataType
-     */
     private UserInputDataType $dataType;
 
-    /**
-     * @var string|null
-     */
     private ?string $defaultValue = null;
 
-    /**
-     * @var UserInputFormat|null
-     */
     private ?UserInputFormat $format = null;
 
-    /**
-     * @var AppInstallationLifecycle
-     */
     private AppInstallationLifecycle $lifecycleConstraint;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var UserInputPositionMeta|null
-     */
     private ?UserInputPositionMeta $positionMeta = null;
 
-    /**
-     * @var bool
-     */
     private bool $required;
 
     /**
      * JSON Schema formatted (https://json-schema.org/).
-     *
-     * @var string
      */
     private string $validationSchema;
 
-    /**
-     * @param UserInputDataType $dataType
-     * @param AppInstallationLifecycle $lifecycleConstraint
-     * @param string $name
-     * @param bool $required
-     * @param string $validationSchema
-     */
     public function __construct(UserInputDataType $dataType, AppInstallationLifecycle $lifecycleConstraint, string $name, bool $required, string $validationSchema)
     {
         $this->dataType = $dataType;
@@ -134,82 +100,51 @@ class UserInput
         $this->validationSchema = $validationSchema;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDataSource(): ?string
     {
         return $this->dataSource ?? null;
     }
 
-    /**
-     * @return UserInputDataType
-     */
     public function getDataType(): UserInputDataType
     {
         return $this->dataType;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDefaultValue(): ?string
     {
         return $this->defaultValue ?? null;
     }
 
-    /**
-     * @return UserInputFormat|null
-     */
     public function getFormat(): ?UserInputFormat
     {
         return $this->format ?? null;
     }
 
-    /**
-     * @return AppInstallationLifecycle
-     */
     public function getLifecycleConstraint(): AppInstallationLifecycle
     {
         return $this->lifecycleConstraint;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return UserInputPositionMeta|null
-     */
     public function getPositionMeta(): ?UserInputPositionMeta
     {
         return $this->positionMeta ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getRequired(): bool
     {
         return $this->required;
     }
 
-    /**
-     * @return string
-     */
     public function getValidationSchema(): string
     {
         return $this->validationSchema;
     }
 
-    /**
-     * @param string $dataSource
-     * @return self
-     */
     public function withDataSource(string $dataSource): self
     {
         $validator = new Validator();
@@ -224,9 +159,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDataSource(): self
     {
         $clone = clone $this;
@@ -235,10 +167,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param UserInputDataType $dataType
-     * @return self
-     */
     public function withDataType(UserInputDataType $dataType): self
     {
         $clone = clone $this;
@@ -247,10 +175,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param string $defaultValue
-     * @return self
-     */
     public function withDefaultValue(string $defaultValue): self
     {
         $validator = new Validator();
@@ -265,9 +189,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDefaultValue(): self
     {
         $clone = clone $this;
@@ -276,10 +197,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param UserInputFormat $format
-     * @return self
-     */
     public function withFormat(UserInputFormat $format): self
     {
         $clone = clone $this;
@@ -288,9 +205,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFormat(): self
     {
         $clone = clone $this;
@@ -299,10 +213,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param AppInstallationLifecycle $lifecycleConstraint
-     * @return self
-     */
     public function withLifecycleConstraint(AppInstallationLifecycle $lifecycleConstraint): self
     {
         $clone = clone $this;
@@ -311,10 +221,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -329,10 +235,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param UserInputPositionMeta $positionMeta
-     * @return self
-     */
     public function withPositionMeta(UserInputPositionMeta $positionMeta): self
     {
         $clone = clone $this;
@@ -341,9 +243,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPositionMeta(): self
     {
         $clone = clone $this;
@@ -352,10 +251,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param bool $required
-     * @return self
-     */
     public function withRequired(bool $required): self
     {
         $validator = new Validator();
@@ -370,10 +265,6 @@ class UserInput
         return $clone;
     }
 
-    /**
-     * @param string $validationSchema
-     * @return self
-     */
     public function withValidationSchema(string $validationSchema): self
     {
         $validator = new Validator();

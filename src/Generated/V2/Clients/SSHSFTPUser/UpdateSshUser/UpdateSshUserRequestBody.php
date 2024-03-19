@@ -13,8 +13,6 @@ class UpdateSshUserRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,24 +39,12 @@ class UpdateSshUserRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $active = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $password = null;
 
     /**
@@ -73,33 +59,21 @@ class UpdateSshUserRequestBody
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPassword(): ?string
     {
         return $this->password ?? null;
@@ -113,10 +87,6 @@ class UpdateSshUserRequestBody
         return $this->publicKeys ?? null;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -131,9 +101,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActive(): self
     {
         $clone = clone $this;
@@ -142,10 +109,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -160,9 +123,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -171,10 +131,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -183,9 +139,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -194,10 +147,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -212,9 +161,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPassword(): self
     {
         $clone = clone $this;
@@ -225,7 +171,6 @@ class UpdateSshUserRequestBody
 
     /**
      * @param PublicKey[] $publicKeys
-     * @return self
      */
     public function withPublicKeys(array $publicKeys): self
     {
@@ -235,9 +180,6 @@ class UpdateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPublicKeys(): self
     {
         $clone = clone $this;

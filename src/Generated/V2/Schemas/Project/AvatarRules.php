@@ -21,8 +21,6 @@ class AvatarRules
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -80,9 +78,6 @@ class AvatarRules
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $maxSizeInKB;
 
     /**
@@ -90,13 +85,9 @@ class AvatarRules
      */
     private array $mimeTypes;
 
-    /**
-     * @var AvatarRulesProperties|null
-     */
     private ?AvatarRulesProperties $properties = null;
 
     /**
-     * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
     public function __construct(int $maxSizeInKB, array $mimeTypes)
@@ -105,9 +96,6 @@ class AvatarRules
         $this->mimeTypes = $mimeTypes;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -121,18 +109,11 @@ class AvatarRules
         return $this->mimeTypes;
     }
 
-    /**
-     * @return AvatarRulesProperties|null
-     */
     public function getProperties(): ?AvatarRulesProperties
     {
         return $this->properties ?? null;
     }
 
-    /**
-     * @param int $maxSizeInKB
-     * @return self
-     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();
@@ -149,7 +130,6 @@ class AvatarRules
 
     /**
      * @param string[] $mimeTypes
-     * @return self
      */
     public function withMimeTypes(array $mimeTypes): self
     {
@@ -165,10 +145,6 @@ class AvatarRules
         return $clone;
     }
 
-    /**
-     * @param AvatarRulesProperties $properties
-     * @return self
-     */
     public function withProperties(AvatarRulesProperties $properties): self
     {
         $clone = clone $this;
@@ -177,9 +153,6 @@ class AvatarRules
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProperties(): self
     {
         $clone = clone $this;

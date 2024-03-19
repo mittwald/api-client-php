@@ -13,8 +13,6 @@ class ListArticlesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -74,24 +72,12 @@ class ListArticlesRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $customerId = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $limit = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $skip = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $page = null;
 
     /**
@@ -114,9 +100,6 @@ class ListArticlesRequest
      */
     private ?array $orderable = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $name = null;
 
     private array $headers = [
@@ -130,33 +113,21 @@ class ListArticlesRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPage(): ?int
     {
         return $this->page ?? null;
@@ -194,18 +165,11 @@ class ListArticlesRequest
         return $this->orderable ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name ?? null;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -220,9 +184,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerId(): self
     {
         $clone = clone $this;
@@ -231,10 +192,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @param int $limit
-     * @return self
-     */
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -249,9 +206,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLimit(): self
     {
         $clone = clone $this;
@@ -260,10 +214,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @param int $skip
-     * @return self
-     */
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -278,9 +228,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSkip(): self
     {
         $clone = clone $this;
@@ -289,10 +236,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @param int $page
-     * @return self
-     */
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -307,9 +250,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPage(): self
     {
         $clone = clone $this;
@@ -320,7 +260,6 @@ class ListArticlesRequest
 
     /**
      * @param string[] $tags
-     * @return self
      */
     public function withTags(array $tags): self
     {
@@ -336,9 +275,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTags(): self
     {
         $clone = clone $this;
@@ -349,7 +285,6 @@ class ListArticlesRequest
 
     /**
      * @param string[] $templateNames
-     * @return self
      */
     public function withTemplateNames(array $templateNames): self
     {
@@ -365,9 +300,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTemplateNames(): self
     {
         $clone = clone $this;
@@ -378,7 +310,6 @@ class ListArticlesRequest
 
     /**
      * @param string[] $articleIds
-     * @return self
      */
     public function withArticleIds(array $articleIds): self
     {
@@ -394,9 +325,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutArticleIds(): self
     {
         $clone = clone $this;
@@ -407,7 +335,6 @@ class ListArticlesRequest
 
     /**
      * @param string[] $orderable
-     * @return self
      */
     public function withOrderable(array $orderable): self
     {
@@ -423,9 +350,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderable(): self
     {
         $clone = clone $this;
@@ -434,10 +358,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -452,9 +372,6 @@ class ListArticlesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutName(): self
     {
         $clone = clone $this;

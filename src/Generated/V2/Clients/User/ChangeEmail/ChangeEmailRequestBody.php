@@ -11,8 +11,6 @@ class ChangeEmailRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -31,31 +29,19 @@ class ChangeEmailRequestBody
 
     /**
      * The new Email-Address
-     *
-     * @var string
      */
     private string $email;
 
-    /**
-     * @param string $email
-     */
     public function __construct(string $email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();

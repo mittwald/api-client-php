@@ -12,8 +12,6 @@ class TerminateContractItemRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,15 +30,11 @@ class TerminateContractItemRequestBody
 
     /**
      * A reason for the Termination can be given as plain text.
-     *
-     * @var string|null
      */
     private ?string $reason = null;
 
     /**
      * The termination date has to be a valid date according to activation and contract period of the ContractItem. If none given, the next possible termination date will be used.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $terminationTargetDate = null;
 
@@ -51,26 +45,16 @@ class TerminateContractItemRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getTerminationTargetDate(): ?DateTime
     {
         return $this->terminationTargetDate ?? null;
     }
 
-    /**
-     * @param string $reason
-     * @return self
-     */
     public function withReason(string $reason): self
     {
         $validator = new Validator();
@@ -85,9 +69,6 @@ class TerminateContractItemRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReason(): self
     {
         $clone = clone $this;
@@ -96,10 +77,6 @@ class TerminateContractItemRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $terminationTargetDate
-     * @return self
-     */
     public function withTerminationTargetDate(DateTime $terminationTargetDate): self
     {
         $clone = clone $this;
@@ -108,9 +85,6 @@ class TerminateContractItemRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTerminationTargetDate(): self
     {
         $clone = clone $this;

@@ -14,8 +14,6 @@ class ProjectFileSystemGetDirectoriesOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,16 +27,10 @@ class ProjectFileSystemGetDirectoriesOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var FilesystemDirectoryListing
-     */
     private FilesystemDirectoryListing $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param FilesystemDirectoryListing $body
-     */
     public function __construct(FilesystemDirectoryListing $body)
     {
         $this->body = $body;
@@ -53,10 +45,6 @@ class ProjectFileSystemGetDirectoriesOKResponse implements ResponseContainer
         return $this->body;
     }
 
-    /**
-     * @param FilesystemDirectoryListing $body
-     * @return self
-     */
     public function withBody(FilesystemDirectoryListing $body): self
     {
         $clone = clone $this;

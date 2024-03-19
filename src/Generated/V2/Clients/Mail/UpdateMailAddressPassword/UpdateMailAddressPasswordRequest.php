@@ -13,8 +13,6 @@ class UpdateMailAddressPasswordRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMailAddressPasswordRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressPasswordRequestBody
-     */
     private UpdateMailAddressPasswordRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressPasswordRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressPasswordRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressPasswordRequestBody
-     */
     public function getBody(): UpdateMailAddressPasswordRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMailAddressPasswordRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressPasswordRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressPasswordRequestBody $body): self
     {
         $clone = clone $this;

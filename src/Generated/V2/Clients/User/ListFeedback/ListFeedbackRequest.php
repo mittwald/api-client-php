@@ -13,8 +13,6 @@ class ListFeedbackRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,14 +40,8 @@ class ListFeedbackRequest
         ],
     ];
 
-    /**
-     * @var ListFeedbackRequestUserIdAlternative1|string
-     */
     private ListFeedbackRequestUserIdAlternative1|string $userId;
 
-    /**
-     * @var string|null
-     */
     private ?string $subject = null;
 
     private array $headers = [
@@ -64,17 +56,11 @@ class ListFeedbackRequest
         $this->userId = $userId;
     }
 
-    /**
-     * @return ListFeedbackRequestUserIdAlternative1|string
-     */
     public function getUserId(): ListFeedbackRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSubject(): ?string
     {
         return $this->subject ?? null;
@@ -82,7 +68,6 @@ class ListFeedbackRequest
 
     /**
      * @param ListFeedbackRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(ListFeedbackRequestUserIdAlternative1|string $userId): self
     {
@@ -92,10 +77,6 @@ class ListFeedbackRequest
         return $clone;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -110,9 +91,6 @@ class ListFeedbackRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSubject(): self
     {
         $clone = clone $this;

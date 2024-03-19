@@ -13,8 +13,6 @@ class CreateExecutionCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateExecutionCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateExecutionCreatedResponseBody
-     */
     private CreateExecutionCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateExecutionCreatedResponseBody $body
-     */
     public function __construct(CreateExecutionCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateExecutionCreatedResponseBody
-     */
     public function getBody(): CreateExecutionCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateExecutionCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateExecutionCreatedResponseBody $body): self
     {
         $clone = clone $this;

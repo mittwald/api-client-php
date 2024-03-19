@@ -21,8 +21,6 @@ class Error
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,31 +35,18 @@ class Error
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $errorMessage;
 
-    /**
-     * @param string $errorMessage
-     */
     public function __construct(string $errorMessage)
     {
         $this->errorMessage = $errorMessage;
     }
 
-    /**
-     * @return string
-     */
     public function getErrorMessage(): string
     {
         return $this->errorMessage;
     }
 
-    /**
-     * @param string $errorMessage
-     * @return self
-     */
     public function withErrorMessage(string $errorMessage): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class GetLatestScreenshotRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,50 +45,30 @@ class GetLatestScreenshotRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var GetLatestScreenshotRequestBody
-     */
     private GetLatestScreenshotRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param GetLatestScreenshotRequestBody $body
-     */
     public function __construct(string $domainId, GetLatestScreenshotRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return GetLatestScreenshotRequestBody
-     */
     public function getBody(): GetLatestScreenshotRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -105,10 +83,6 @@ class GetLatestScreenshotRequest
         return $clone;
     }
 
-    /**
-     * @param GetLatestScreenshotRequestBody $body
-     * @return self
-     */
     public function withBody(GetLatestScreenshotRequestBody $body): self
     {
         $clone = clone $this;

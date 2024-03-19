@@ -21,8 +21,6 @@ class CoabAuthInfo
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,31 +34,18 @@ class CoabAuthInfo
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $accessToken;
 
-    /**
-     * @param string $accessToken
-     */
     public function __construct(string $accessToken)
     {
         $this->accessToken = $accessToken;
     }
 
-    /**
-     * @return string
-     */
     public function getAccessToken(): string
     {
         return $this->accessToken;
     }
 
-    /**
-     * @param string $accessToken
-     * @return self
-     */
     public function withAccessToken(string $accessToken): self
     {
         $validator = new Validator();

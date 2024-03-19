@@ -14,8 +14,6 @@ class CreateCustomerInviteCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class CreateCustomerInviteCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CustomerInvite
-     */
     private CustomerInvite $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CustomerInvite $body
-     */
     public function __construct(CustomerInvite $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CustomerInvite
-     */
     public function getBody(): CustomerInvite
     {
         return $this->body;
     }
 
-    /**
-     * @param CustomerInvite $body
-     * @return self
-     */
     public function withBody(CustomerInvite $body): self
     {
         $clone = clone $this;

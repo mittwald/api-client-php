@@ -13,8 +13,6 @@ class ProjectFileSystemGetFileContentRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,61 +34,36 @@ class ProjectFileSystemGetFileContentRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string|null
-     */
     private ?string $file = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $inline = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFile(): ?string
     {
         return $this->file ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getInline(): ?bool
     {
         return $this->inline ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -105,10 +78,6 @@ class ProjectFileSystemGetFileContentRequest
         return $clone;
     }
 
-    /**
-     * @param string $file
-     * @return self
-     */
     public function withFile(string $file): self
     {
         $validator = new Validator();
@@ -123,9 +92,6 @@ class ProjectFileSystemGetFileContentRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFile(): self
     {
         $clone = clone $this;
@@ -134,10 +100,6 @@ class ProjectFileSystemGetFileContentRequest
         return $clone;
     }
 
-    /**
-     * @param bool $inline
-     * @return self
-     */
     public function withInline(bool $inline): self
     {
         $validator = new Validator();
@@ -152,9 +114,6 @@ class ProjectFileSystemGetFileContentRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInline(): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class DataFileOpsItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,74 +52,43 @@ class DataFileOpsItem
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $filename = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $filepath = null;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $stats;
 
     /**
      * Alerts when the time, syscall count or occurrence count of this group are abnormal.
-     *
-     * @var DataFileOpsItemWarnLevel
      */
     private DataFileOpsItemWarnLevel $warnLevel;
 
-    /**
-     * @param Statistics $stats
-     * @param DataFileOpsItemWarnLevel $warnLevel
-     */
     public function __construct(Statistics $stats, DataFileOpsItemWarnLevel $warnLevel)
     {
         $this->stats = $stats;
         $this->warnLevel = $warnLevel;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFilename(): ?string
     {
         return $this->filename ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFilepath(): ?string
     {
         return $this->filepath ?? null;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getStats(): Statistics
     {
         return $this->stats;
     }
 
-    /**
-     * @return DataFileOpsItemWarnLevel
-     */
     public function getWarnLevel(): DataFileOpsItemWarnLevel
     {
         return $this->warnLevel;
     }
 
-    /**
-     * @param string $filename
-     * @return self
-     */
     public function withFilename(string $filename): self
     {
         $validator = new Validator();
@@ -136,9 +103,6 @@ class DataFileOpsItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFilename(): self
     {
         $clone = clone $this;
@@ -147,10 +111,6 @@ class DataFileOpsItem
         return $clone;
     }
 
-    /**
-     * @param string $filepath
-     * @return self
-     */
     public function withFilepath(string $filepath): self
     {
         $validator = new Validator();
@@ -165,9 +125,6 @@ class DataFileOpsItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFilepath(): self
     {
         $clone = clone $this;
@@ -176,10 +133,6 @@ class DataFileOpsItem
         return $clone;
     }
 
-    /**
-     * @param Statistics $stats
-     * @return self
-     */
     public function withStats(Statistics $stats): self
     {
         $clone = clone $this;
@@ -188,10 +141,6 @@ class DataFileOpsItem
         return $clone;
     }
 
-    /**
-     * @param DataFileOpsItemWarnLevel $warnLevel
-     * @return self
-     */
     public function withWarnLevel(DataFileOpsItemWarnLevel $warnLevel): self
     {
         $clone = clone $this;

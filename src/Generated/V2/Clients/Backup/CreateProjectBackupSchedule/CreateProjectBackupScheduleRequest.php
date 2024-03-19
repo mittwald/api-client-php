@@ -13,8 +13,6 @@ class CreateProjectBackupScheduleRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,50 +51,30 @@ class CreateProjectBackupScheduleRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateProjectBackupScheduleRequestBody
-     */
     private CreateProjectBackupScheduleRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CreateProjectBackupScheduleRequestBody $body
-     */
     public function __construct(string $projectId, CreateProjectBackupScheduleRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CreateProjectBackupScheduleRequestBody
-     */
     public function getBody(): CreateProjectBackupScheduleRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -111,10 +89,6 @@ class CreateProjectBackupScheduleRequest
         return $clone;
     }
 
-    /**
-     * @param CreateProjectBackupScheduleRequestBody $body
-     * @return self
-     */
     public function withBody(CreateProjectBackupScheduleRequestBody $body): self
     {
         $clone = clone $this;

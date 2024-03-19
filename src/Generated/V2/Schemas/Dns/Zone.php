@@ -21,8 +21,6 @@ class Zone
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -69,26 +67,12 @@ class Zone
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var ZoneRecordSet
-     */
     private ZoneRecordSet $recordSet;
 
-    /**
-     * @param string $domain
-     * @param string $id
-     * @param ZoneRecordSet $recordSet
-     */
     public function __construct(string $domain, string $id, ZoneRecordSet $recordSet)
     {
         $this->domain = $domain;
@@ -96,34 +80,21 @@ class Zone
         $this->recordSet = $recordSet;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return ZoneRecordSet
-     */
     public function getRecordSet(): ZoneRecordSet
     {
         return $this->recordSet;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -138,10 +109,6 @@ class Zone
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -156,10 +123,6 @@ class Zone
         return $clone;
     }
 
-    /**
-     * @param ZoneRecordSet $recordSet
-     * @return self
-     */
     public function withRecordSet(ZoneRecordSet $recordSet): self
     {
         $clone = clone $this;

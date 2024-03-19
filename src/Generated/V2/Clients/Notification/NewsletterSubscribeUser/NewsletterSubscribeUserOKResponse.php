@@ -13,8 +13,6 @@ class NewsletterSubscribeUserOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,33 +45,20 @@ class NewsletterSubscribeUserOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var NewsletterSubscribeUserOKResponseBody
-     */
     private NewsletterSubscribeUserOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param NewsletterSubscribeUserOKResponseBody $body
-     */
     public function __construct(NewsletterSubscribeUserOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NewsletterSubscribeUserOKResponseBody
-     */
     public function getBody(): NewsletterSubscribeUserOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NewsletterSubscribeUserOKResponseBody $body
-     * @return self
-     */
     public function withBody(NewsletterSubscribeUserOKResponseBody $body): self
     {
         $clone = clone $this;

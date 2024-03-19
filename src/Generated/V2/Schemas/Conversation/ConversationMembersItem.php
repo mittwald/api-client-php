@@ -21,8 +21,6 @@ class ConversationMembersItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'required' => [
@@ -48,85 +46,47 @@ class ConversationMembersItem
         ],
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var string|null
-     */
     private ?string $avatarRefId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $clearName = null;
 
-    /**
-     * @var Department|null
-     */
     private ?Department $department = null;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param bool $active
-     * @param string $userId
-     */
     public function __construct(bool $active, string $userId)
     {
         $this->active = $active;
         $this->userId = $userId;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClearName(): ?string
     {
         return $this->clearName ?? null;
     }
 
-    /**
-     * @return Department|null
-     */
     public function getDepartment(): ?Department
     {
         return $this->department ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -141,10 +101,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @param string $avatarRefId
-     * @return self
-     */
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
@@ -159,9 +115,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
@@ -170,10 +123,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @param string $clearName
-     * @return self
-     */
     public function withClearName(string $clearName): self
     {
         $validator = new Validator();
@@ -188,9 +137,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutClearName(): self
     {
         $clone = clone $this;
@@ -199,10 +145,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @param Department $department
-     * @return self
-     */
     public function withDepartment(Department $department): self
     {
         $clone = clone $this;
@@ -211,9 +153,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDepartment(): self
     {
         $clone = clone $this;
@@ -222,10 +161,6 @@ class ConversationMembersItem
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class GetServerRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetServerRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $serverId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $serverId
-     */
     public function __construct(string $serverId)
     {
         $this->serverId = $serverId;
     }
 
-    /**
-     * @return string
-     */
     public function getServerId(): string
     {
         return $this->serverId;
     }
 
-    /**
-     * @param string $serverId
-     * @return self
-     */
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();

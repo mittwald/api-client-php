@@ -11,8 +11,6 @@ class NotificationsCountUnreadNotificationsOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,38 +45,16 @@ class NotificationsCountUnreadNotificationsOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $error;
 
-    /**
-     * @var int
-     */
     private int $info;
 
-    /**
-     * @var int
-     */
     private int $success;
 
-    /**
-     * @var int
-     */
     private int $total;
 
-    /**
-     * @var int
-     */
     private int $warning;
 
-    /**
-     * @param int $error
-     * @param int $info
-     * @param int $success
-     * @param int $total
-     * @param int $warning
-     */
     public function __construct(int $error, int $info, int $success, int $total, int $warning)
     {
         $this->error = $error;
@@ -88,50 +64,31 @@ class NotificationsCountUnreadNotificationsOKResponseBody
         $this->warning = $warning;
     }
 
-    /**
-     * @return int
-     */
     public function getError(): int
     {
         return $this->error;
     }
 
-    /**
-     * @return int
-     */
     public function getInfo(): int
     {
         return $this->info;
     }
 
-    /**
-     * @return int
-     */
     public function getSuccess(): int
     {
         return $this->success;
     }
 
-    /**
-     * @return int
-     */
     public function getTotal(): int
     {
         return $this->total;
     }
 
-    /**
-     * @return int
-     */
     public function getWarning(): int
     {
         return $this->warning;
     }
 
-    /**
-     * @param int $error
-     * @return self
-     */
     public function withError(int $error): self
     {
         $validator = new Validator();
@@ -146,10 +103,6 @@ class NotificationsCountUnreadNotificationsOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int $info
-     * @return self
-     */
     public function withInfo(int $info): self
     {
         $validator = new Validator();
@@ -164,10 +117,6 @@ class NotificationsCountUnreadNotificationsOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int $success
-     * @return self
-     */
     public function withSuccess(int $success): self
     {
         $validator = new Validator();
@@ -182,10 +131,6 @@ class NotificationsCountUnreadNotificationsOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int $total
-     * @return self
-     */
     public function withTotal(int $total): self
     {
         $validator = new Validator();
@@ -200,10 +145,6 @@ class NotificationsCountUnreadNotificationsOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int $warning
-     * @return self
-     */
     public function withWarning(int $warning): self
     {
         $validator = new Validator();

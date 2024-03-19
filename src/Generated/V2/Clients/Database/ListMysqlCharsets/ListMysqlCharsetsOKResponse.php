@@ -14,8 +14,6 @@ class ListMysqlCharsetsOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -58,7 +56,6 @@ class ListMysqlCharsetsOKResponse implements ResponseContainer
 
     /**
      * @param MySqlCharacterSettings[] $body
-     * @return self
      */
     public function withBody(array $body): self
     {

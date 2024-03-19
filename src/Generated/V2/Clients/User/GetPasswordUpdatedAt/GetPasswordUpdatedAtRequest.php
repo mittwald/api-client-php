@@ -13,8 +13,6 @@ class GetPasswordUpdatedAtRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetPasswordUpdatedAtRequest
         ],
     ];
 
-    /**
-     * @var GetPasswordUpdatedAtRequestBody
-     */
     private GetPasswordUpdatedAtRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param GetPasswordUpdatedAtRequestBody $body
-     */
     public function __construct(GetPasswordUpdatedAtRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetPasswordUpdatedAtRequestBody
-     */
     public function getBody(): GetPasswordUpdatedAtRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetPasswordUpdatedAtRequestBody $body
-     * @return self
-     */
     public function withBody(GetPasswordUpdatedAtRequestBody $body): self
     {
         $clone = clone $this;

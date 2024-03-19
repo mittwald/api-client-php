@@ -19,8 +19,6 @@ class DnsUpdateRecordSetRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -69,19 +67,10 @@ class DnsUpdateRecordSetRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $dnsZoneId;
 
-    /**
-     * @var DnsUpdateRecordSetRequestRecordSet
-     */
     private DnsUpdateRecordSetRequestRecordSet $recordSet;
 
-    /**
-     * @var RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent
-     */
     private RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent $body;
 
     private array $headers = [
@@ -89,8 +78,6 @@ class DnsUpdateRecordSetRequest
     ];
 
     /**
-     * @param string $dnsZoneId
-     * @param DnsUpdateRecordSetRequestRecordSet $recordSet
      * @param RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent $body
      */
     public function __construct(string $dnsZoneId, DnsUpdateRecordSetRequestRecordSet $recordSet, CombinedACustom|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body)
@@ -100,17 +87,11 @@ class DnsUpdateRecordSetRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDnsZoneId(): string
     {
         return $this->dnsZoneId;
     }
 
-    /**
-     * @return DnsUpdateRecordSetRequestRecordSet
-     */
     public function getRecordSet(): DnsUpdateRecordSetRequestRecordSet
     {
         return $this->recordSet;
@@ -125,10 +106,6 @@ class DnsUpdateRecordSetRequest
         return $this->body;
     }
 
-    /**
-     * @param string $dnsZoneId
-     * @return self
-     */
     public function withDnsZoneId(string $dnsZoneId): self
     {
         $validator = new Validator();
@@ -143,10 +120,6 @@ class DnsUpdateRecordSetRequest
         return $clone;
     }
 
-    /**
-     * @param DnsUpdateRecordSetRequestRecordSet $recordSet
-     * @return self
-     */
     public function withRecordSet(DnsUpdateRecordSetRequestRecordSet $recordSet): self
     {
         $clone = clone $this;
@@ -157,7 +130,6 @@ class DnsUpdateRecordSetRequest
 
     /**
      * @param RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent $body
-     * @return self
      */
     public function withBody(CombinedACustom|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body): self
     {

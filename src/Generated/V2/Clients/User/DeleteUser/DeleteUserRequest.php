@@ -13,8 +13,6 @@ class DeleteUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,35 +41,22 @@ class DeleteUserRequest
         ],
     ];
 
-    /**
-     * @var DeleteUserRequestBody
-     */
     private DeleteUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeleteUserRequestBody $body
-     */
     public function __construct(DeleteUserRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeleteUserRequestBody
-     */
     public function getBody(): DeleteUserRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeleteUserRequestBody $body
-     * @return self
-     */
     public function withBody(DeleteUserRequestBody $body): self
     {
         $clone = clone $this;

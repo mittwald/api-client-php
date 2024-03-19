@@ -11,8 +11,6 @@ class UpdateCategoryOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,29 +36,14 @@ class UpdateCategoryOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $customerId = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isPublic = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $name = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $useAgencyDomainPrices = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $useAgencySslPrices = null;
 
     /**
@@ -70,50 +53,31 @@ class UpdateCategoryOKResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsPublic(): ?bool
     {
         return $this->isPublic ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getUseAgencyDomainPrices(): ?bool
     {
         return $this->useAgencyDomainPrices ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getUseAgencySslPrices(): ?bool
     {
         return $this->useAgencySslPrices ?? null;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -128,9 +92,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerId(): self
     {
         $clone = clone $this;
@@ -139,10 +100,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $isPublic
-     * @return self
-     */
     public function withIsPublic(bool $isPublic): self
     {
         $validator = new Validator();
@@ -157,9 +114,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsPublic(): self
     {
         $clone = clone $this;
@@ -168,10 +122,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -186,9 +136,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutName(): self
     {
         $clone = clone $this;
@@ -197,10 +144,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $useAgencyDomainPrices
-     * @return self
-     */
     public function withUseAgencyDomainPrices(bool $useAgencyDomainPrices): self
     {
         $validator = new Validator();
@@ -215,9 +158,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUseAgencyDomainPrices(): self
     {
         $clone = clone $this;
@@ -226,10 +166,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $useAgencySslPrices
-     * @return self
-     */
     public function withUseAgencySslPrices(bool $useAgencySslPrices): self
     {
         $validator = new Validator();
@@ -244,9 +180,6 @@ class UpdateCategoryOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUseAgencySslPrices(): self
     {
         $clone = clone $this;

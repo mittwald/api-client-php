@@ -11,8 +11,6 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'Supported range of dimensions for the avatar image.',
@@ -43,14 +41,8 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
         'type' => 'object',
     ];
 
-    /**
-     * @var RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMax|null
-     */
     private ?RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMax $max = null;
 
-    /**
-     * @var RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin|null
-     */
     private ?RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin $min = null;
 
     /**
@@ -60,26 +52,16 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
     {
     }
 
-    /**
-     * @return RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMax|null
-     */
     public function getMax(): ?RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMax
     {
         return $this->max ?? null;
     }
 
-    /**
-     * @return RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin|null
-     */
     public function getMin(): ?RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin
     {
         return $this->min ?? null;
     }
 
-    /**
-     * @param RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMax $max
-     * @return self
-     */
     public function withMax(RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMax $max): self
     {
         $clone = clone $this;
@@ -88,9 +70,6 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMax(): self
     {
         $clone = clone $this;
@@ -99,10 +78,6 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @param RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin $min
-     * @return self
-     */
     public function withMin(RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin $min): self
     {
         $clone = clone $this;
@@ -111,9 +86,6 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMin(): self
     {
         $clone = clone $this;

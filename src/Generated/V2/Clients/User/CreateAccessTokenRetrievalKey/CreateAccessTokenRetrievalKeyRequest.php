@@ -13,8 +13,6 @@ class CreateAccessTokenRetrievalKeyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -55,7 +53,6 @@ class CreateAccessTokenRetrievalKeyRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

@@ -13,8 +13,6 @@ class OrderCreateOrderRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,35 +49,22 @@ class OrderCreateOrderRequest
         ],
     ];
 
-    /**
-     * @var OrderCreateOrderRequestBody
-     */
     private OrderCreateOrderRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param OrderCreateOrderRequestBody $body
-     */
     public function __construct(OrderCreateOrderRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OrderCreateOrderRequestBody
-     */
     public function getBody(): OrderCreateOrderRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OrderCreateOrderRequestBody $body
-     * @return self
-     */
     public function withBody(OrderCreateOrderRequestBody $body): self
     {
         $clone = clone $this;

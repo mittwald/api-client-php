@@ -22,8 +22,6 @@ class CheckMigrationIsPossibleResponse
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,14 +52,8 @@ class CheckMigrationIsPossibleResponse
         'type' => 'object',
     ];
 
-    /**
-     * @var PossibleCheckErrors|null
-     */
     private ?PossibleCheckErrors $checkMigrationIsPossibleErrors = null;
 
-    /**
-     * @var MigrationFinalizeJob
-     */
     private MigrationFinalizeJob $migrationFinalizeJobs;
 
     /**
@@ -75,7 +67,6 @@ class CheckMigrationIsPossibleResponse
     private array $migrationMailbox;
 
     /**
-     * @param MigrationFinalizeJob $migrationFinalizeJobs
      * @param MigrationMailAddress[] $migrationMailAddress
      * @param MigrationMailbox[] $migrationMailbox
      */
@@ -122,10 +113,6 @@ class CheckMigrationIsPossibleResponse
         return $this->migrationMailbox;
     }
 
-    /**
-     * @param PossibleCheckErrors $checkMigrationIsPossibleErrors
-     * @return self
-     */
     public function withCheckMigrationIsPossibleErrors(PossibleCheckErrors $checkMigrationIsPossibleErrors): self
     {
         $clone = clone $this;
@@ -134,9 +121,6 @@ class CheckMigrationIsPossibleResponse
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCheckMigrationIsPossibleErrors(): self
     {
         $clone = clone $this;
@@ -145,10 +129,6 @@ class CheckMigrationIsPossibleResponse
         return $clone;
     }
 
-    /**
-     * @param MigrationFinalizeJob $migrationFinalizeJobs
-     * @return self
-     */
     public function withMigrationFinalizeJobs(MigrationFinalizeJob $migrationFinalizeJobs): self
     {
         $clone = clone $this;
@@ -159,7 +139,6 @@ class CheckMigrationIsPossibleResponse
 
     /**
      * @param MigrationMailAddress[] $migrationMailAddress
-     * @return self
      */
     public function withMigrationMailAddress(array $migrationMailAddress): self
     {
@@ -171,7 +150,6 @@ class CheckMigrationIsPossibleResponse
 
     /**
      * @param MigrationMailbox[] $migrationMailbox
-     * @return self
      */
     public function withMigrationMailbox(array $migrationMailbox): self
     {

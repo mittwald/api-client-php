@@ -21,8 +21,6 @@ class AvatarRulesPropertiesImageDimensions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,14 +50,8 @@ class AvatarRulesPropertiesImageDimensions
         'type' => 'object',
     ];
 
-    /**
-     * @var AvatarRulesPropertiesImageDimensionsMax|null
-     */
     private ?AvatarRulesPropertiesImageDimensionsMax $max = null;
 
-    /**
-     * @var AvatarRulesPropertiesImageDimensionsMin|null
-     */
     private ?AvatarRulesPropertiesImageDimensionsMin $min = null;
 
     /**
@@ -69,26 +61,16 @@ class AvatarRulesPropertiesImageDimensions
     {
     }
 
-    /**
-     * @return AvatarRulesPropertiesImageDimensionsMax|null
-     */
     public function getMax(): ?AvatarRulesPropertiesImageDimensionsMax
     {
         return $this->max ?? null;
     }
 
-    /**
-     * @return AvatarRulesPropertiesImageDimensionsMin|null
-     */
     public function getMin(): ?AvatarRulesPropertiesImageDimensionsMin
     {
         return $this->min ?? null;
     }
 
-    /**
-     * @param AvatarRulesPropertiesImageDimensionsMax $max
-     * @return self
-     */
     public function withMax(AvatarRulesPropertiesImageDimensionsMax $max): self
     {
         $clone = clone $this;
@@ -97,9 +79,6 @@ class AvatarRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMax(): self
     {
         $clone = clone $this;
@@ -108,10 +87,6 @@ class AvatarRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @param AvatarRulesPropertiesImageDimensionsMin $min
-     * @return self
-     */
     public function withMin(AvatarRulesPropertiesImageDimensionsMin $min): self
     {
         $clone = clone $this;
@@ -120,9 +95,6 @@ class AvatarRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMin(): self
     {
         $clone = clone $this;

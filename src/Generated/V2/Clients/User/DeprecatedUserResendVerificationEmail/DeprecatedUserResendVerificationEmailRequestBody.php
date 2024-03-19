@@ -11,8 +11,6 @@ class DeprecatedUserResendVerificationEmailRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,14 +30,8 @@ class DeprecatedUserResendVerificationEmailRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $email = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $userId = null;
 
     /**
@@ -49,26 +41,16 @@ class DeprecatedUserResendVerificationEmailRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUserId(): ?string
     {
         return $this->userId ?? null;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -83,9 +65,6 @@ class DeprecatedUserResendVerificationEmailRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -94,10 +73,6 @@ class DeprecatedUserResendVerificationEmailRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -112,9 +87,6 @@ class DeprecatedUserResendVerificationEmailRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserId(): self
     {
         $clone = clone $this;

@@ -22,8 +22,6 @@ class Cancellation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -57,37 +55,16 @@ class Cancellation
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $cancellationId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $cancelledAt;
 
-    /**
-     * @var string
-     */
     private string $correctionNumber;
 
-    /**
-     * @var string
-     */
     private string $pdfId;
 
-    /**
-     * @var string|null
-     */
     private ?string $reason = null;
 
-    /**
-     * @param string $cancellationId
-     * @param DateTime $cancelledAt
-     * @param string $correctionNumber
-     * @param string $pdfId
-     */
     public function __construct(string $cancellationId, DateTime $cancelledAt, string $correctionNumber, string $pdfId)
     {
         $this->cancellationId = $cancellationId;
@@ -96,50 +73,31 @@ class Cancellation
         $this->pdfId = $pdfId;
     }
 
-    /**
-     * @return string
-     */
     public function getCancellationId(): string
     {
         return $this->cancellationId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCancelledAt(): DateTime
     {
         return $this->cancelledAt;
     }
 
-    /**
-     * @return string
-     */
     public function getCorrectionNumber(): string
     {
         return $this->correctionNumber;
     }
 
-    /**
-     * @return string
-     */
     public function getPdfId(): string
     {
         return $this->pdfId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
 
-    /**
-     * @param string $cancellationId
-     * @return self
-     */
     public function withCancellationId(string $cancellationId): self
     {
         $validator = new Validator();
@@ -154,10 +112,6 @@ class Cancellation
         return $clone;
     }
 
-    /**
-     * @param DateTime $cancelledAt
-     * @return self
-     */
     public function withCancelledAt(DateTime $cancelledAt): self
     {
         $clone = clone $this;
@@ -166,10 +120,6 @@ class Cancellation
         return $clone;
     }
 
-    /**
-     * @param string $correctionNumber
-     * @return self
-     */
     public function withCorrectionNumber(string $correctionNumber): self
     {
         $validator = new Validator();
@@ -184,10 +134,6 @@ class Cancellation
         return $clone;
     }
 
-    /**
-     * @param string $pdfId
-     * @return self
-     */
     public function withPdfId(string $pdfId): self
     {
         $validator = new Validator();
@@ -202,10 +148,6 @@ class Cancellation
         return $clone;
     }
 
-    /**
-     * @param string $reason
-     * @return self
-     */
     public function withReason(string $reason): self
     {
         $validator = new Validator();
@@ -220,9 +162,6 @@ class Cancellation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReason(): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class TtlSeconds
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,31 +36,18 @@ class TtlSeconds
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $seconds;
 
-    /**
-     * @param int $seconds
-     */
     public function __construct(int $seconds)
     {
         $this->seconds = $seconds;
     }
 
-    /**
-     * @return int
-     */
     public function getSeconds(): int
     {
         return $this->seconds;
     }
 
-    /**
-     * @param int $seconds
-     * @return self
-     */
     public function withSeconds(int $seconds): self
     {
         $validator = new Validator();

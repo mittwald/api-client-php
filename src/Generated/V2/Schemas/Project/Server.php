@@ -22,8 +22,6 @@ class Server
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -97,91 +95,37 @@ class Server
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $clusterName;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var ServerDisableReason|null
-     */
     private ?ServerDisableReason $disabledReason = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string|null
-     */
     private ?string $imageRefId = null;
 
     /**
      * deprecated
-     *
-     * @var bool
      */
     private bool $isReady;
 
-    /**
-     * @var MachineType
-     */
     private MachineType $machineType;
 
-    /**
-     * @var DeprecatedServerReadinessStatus
-     */
     private DeprecatedServerReadinessStatus $readiness;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
-    /**
-     * @var string|null
-     */
     private ?string $statisticsBaseDomain = null;
 
-    /**
-     * @var ServerStatus
-     */
     private ServerStatus $status;
 
-    /**
-     * @var string
-     */
     private string $storage;
 
-    /**
-     * @param string $clusterName
-     * @param DateTime $createdAt
-     * @param string $customerId
-     * @param string $description
-     * @param string $id
-     * @param bool $isReady
-     * @param MachineType $machineType
-     * @param DeprecatedServerReadinessStatus $readiness
-     * @param string $shortId
-     * @param ServerStatus $status
-     * @param string $storage
-     */
     public function __construct(string $clusterName, DateTime $createdAt, string $customerId, string $description, string $id, bool $isReady, MachineType $machineType, DeprecatedServerReadinessStatus $readiness, string $shortId, ServerStatus $status, string $storage)
     {
         $this->clusterName = $clusterName;
@@ -197,33 +141,21 @@ class Server
         $this->storage = $storage;
     }
 
-    /**
-     * @return string
-     */
     public function getClusterName(): string
     {
         return $this->clusterName;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -238,33 +170,21 @@ class Server
         return $this->disabledReason ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageRefId(): ?string
     {
         return $this->imageRefId ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsReady(): bool
     {
         return $this->isReady;
     }
 
-    /**
-     * @return MachineType
-     */
     public function getMachineType(): MachineType
     {
         return $this->machineType;
@@ -279,42 +199,26 @@ class Server
         return $this->readiness;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStatisticsBaseDomain(): ?string
     {
         return $this->statisticsBaseDomain ?? null;
     }
 
-    /**
-     * @return ServerStatus
-     */
     public function getStatus(): ServerStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
     public function getStorage(): string
     {
         return $this->storage;
     }
 
-    /**
-     * @param string $clusterName
-     * @return self
-     */
     public function withClusterName(string $clusterName): self
     {
         $validator = new Validator();
@@ -329,10 +233,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -341,10 +241,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -359,10 +255,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -377,10 +269,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param ServerDisableReason $disabledReason
-     * @return self
-     */
     public function withDisabledReason(ServerDisableReason $disabledReason): self
     {
         $clone = clone $this;
@@ -389,9 +277,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDisabledReason(): self
     {
         $clone = clone $this;
@@ -400,10 +285,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -418,10 +299,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $imageRefId
-     * @return self
-     */
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
@@ -436,9 +313,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageRefId(): self
     {
         $clone = clone $this;
@@ -447,10 +321,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param bool $isReady
-     * @return self
-     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
@@ -465,10 +335,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param MachineType $machineType
-     * @return self
-     */
     public function withMachineType(MachineType $machineType): self
     {
         $clone = clone $this;
@@ -477,10 +343,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param DeprecatedServerReadinessStatus $readiness
-     * @return self
-     */
     public function withReadiness(DeprecatedServerReadinessStatus $readiness): self
     {
         $clone = clone $this;
@@ -489,10 +351,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
@@ -507,10 +365,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $statisticsBaseDomain
-     * @return self
-     */
     public function withStatisticsBaseDomain(string $statisticsBaseDomain): self
     {
         $validator = new Validator();
@@ -525,9 +379,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStatisticsBaseDomain(): self
     {
         $clone = clone $this;
@@ -536,10 +387,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param ServerStatus $status
-     * @return self
-     */
     public function withStatus(ServerStatus $status): self
     {
         $clone = clone $this;
@@ -548,10 +395,6 @@ class Server
         return $clone;
     }
 
-    /**
-     * @param string $storage
-     * @return self
-     */
     public function withStorage(string $storage): self
     {
         $validator = new Validator();

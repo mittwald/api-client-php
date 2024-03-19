@@ -11,8 +11,6 @@ class CheckDomainTransferabilityOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,46 +48,26 @@ class CheckDomainTransferabilityOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var CheckDomainTransferabilityOKResponseBodyReasons
-     */
     private CheckDomainTransferabilityOKResponseBodyReasons $reasons;
 
-    /**
-     * @var bool
-     */
     private bool $transferable;
 
-    /**
-     * @param CheckDomainTransferabilityOKResponseBodyReasons $reasons
-     * @param bool $transferable
-     */
     public function __construct(CheckDomainTransferabilityOKResponseBodyReasons $reasons, bool $transferable)
     {
         $this->reasons = $reasons;
         $this->transferable = $transferable;
     }
 
-    /**
-     * @return CheckDomainTransferabilityOKResponseBodyReasons
-     */
     public function getReasons(): CheckDomainTransferabilityOKResponseBodyReasons
     {
         return $this->reasons;
     }
 
-    /**
-     * @return bool
-     */
     public function getTransferable(): bool
     {
         return $this->transferable;
     }
 
-    /**
-     * @param CheckDomainTransferabilityOKResponseBodyReasons $reasons
-     * @return self
-     */
     public function withReasons(CheckDomainTransferabilityOKResponseBodyReasons $reasons): self
     {
         $clone = clone $this;
@@ -98,10 +76,6 @@ class CheckDomainTransferabilityOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $transferable
-     * @return self
-     */
     public function withTransferable(bool $transferable): self
     {
         $validator = new Validator();

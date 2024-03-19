@@ -13,8 +13,6 @@ class ListCustomersRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,24 +38,12 @@ class ListCustomersRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $role = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $limit = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $skip = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $page = null;
 
     private array $headers = [
@@ -71,42 +57,26 @@ class ListCustomersRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getRole(): ?string
     {
         return $this->role ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPage(): ?int
     {
         return $this->page ?? null;
     }
 
-    /**
-     * @param string $role
-     * @return self
-     */
     public function withRole(string $role): self
     {
         $validator = new Validator();
@@ -121,9 +91,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRole(): self
     {
         $clone = clone $this;
@@ -132,10 +99,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @param int $limit
-     * @return self
-     */
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -150,9 +113,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLimit(): self
     {
         $clone = clone $this;
@@ -161,10 +121,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @param int $skip
-     * @return self
-     */
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -179,9 +135,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSkip(): self
     {
         $clone = clone $this;
@@ -190,10 +143,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @param int $page
-     * @return self
-     */
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -208,9 +157,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPage(): self
     {
         $clone = clone $this;

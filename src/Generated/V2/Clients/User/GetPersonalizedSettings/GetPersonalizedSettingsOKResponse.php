@@ -13,8 +13,6 @@ class GetPersonalizedSettingsOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -35,33 +33,20 @@ class GetPersonalizedSettingsOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetPersonalizedSettingsOKResponseBody
-     */
     private GetPersonalizedSettingsOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetPersonalizedSettingsOKResponseBody $body
-     */
     public function __construct(GetPersonalizedSettingsOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetPersonalizedSettingsOKResponseBody
-     */
     public function getBody(): GetPersonalizedSettingsOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetPersonalizedSettingsOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetPersonalizedSettingsOKResponseBody $body): self
     {
         $clone = clone $this;

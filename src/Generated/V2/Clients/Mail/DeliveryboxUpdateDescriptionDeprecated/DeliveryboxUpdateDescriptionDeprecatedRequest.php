@@ -13,8 +13,6 @@ class DeliveryboxUpdateDescriptionDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class DeliveryboxUpdateDescriptionDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var DeliveryboxUpdateDescriptionDeprecatedRequestBody
-     */
     private DeliveryboxUpdateDescriptionDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $id
-     * @param DeliveryboxUpdateDescriptionDeprecatedRequestBody $body
-     */
     public function __construct(string $id, DeliveryboxUpdateDescriptionDeprecatedRequestBody $body)
     {
         $this->id = $id;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return DeliveryboxUpdateDescriptionDeprecatedRequestBody
-     */
     public function getBody(): DeliveryboxUpdateDescriptionDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class DeliveryboxUpdateDescriptionDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DeliveryboxUpdateDescriptionDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DeliveryboxUpdateDescriptionDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

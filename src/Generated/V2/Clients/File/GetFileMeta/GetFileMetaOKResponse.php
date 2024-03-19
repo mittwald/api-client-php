@@ -14,8 +14,6 @@ class GetFileMetaOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetFileMetaOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var FileMeta
-     */
     private FileMeta $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param FileMeta $body
-     */
     public function __construct(FileMeta $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return FileMeta
-     */
     public function getBody(): FileMeta
     {
         return $this->body;
     }
 
-    /**
-     * @param FileMeta $body
-     * @return self
-     */
     public function withBody(FileMeta $body): self
     {
         $clone = clone $this;

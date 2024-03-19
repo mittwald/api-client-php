@@ -13,8 +13,6 @@ class ResetRecoverycodesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,35 +38,22 @@ class ResetRecoverycodesRequest
         ],
     ];
 
-    /**
-     * @var ResetRecoverycodesRequestBody
-     */
     private ResetRecoverycodesRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param ResetRecoverycodesRequestBody $body
-     */
     public function __construct(ResetRecoverycodesRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ResetRecoverycodesRequestBody
-     */
     public function getBody(): ResetRecoverycodesRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ResetRecoverycodesRequestBody $body
-     * @return self
-     */
     public function withBody(ResetRecoverycodesRequestBody $body): self
     {
         $clone = clone $this;

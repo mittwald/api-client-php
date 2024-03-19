@@ -13,8 +13,6 @@ class UpdateCategoryOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -48,33 +46,20 @@ class UpdateCategoryOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var UpdateCategoryOKResponseBody
-     */
     private UpdateCategoryOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param UpdateCategoryOKResponseBody $body
-     */
     public function __construct(UpdateCategoryOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return UpdateCategoryOKResponseBody
-     */
     public function getBody(): UpdateCategoryOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param UpdateCategoryOKResponseBody $body
-     * @return self
-     */
     public function withBody(UpdateCategoryOKResponseBody $body): self
     {
         $clone = clone $this;

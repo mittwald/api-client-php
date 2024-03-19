@@ -21,8 +21,6 @@ class Reference
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,19 +40,10 @@ class Reference
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $contractItemId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $offerItemId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $orderItemId = null;
 
     /**
@@ -64,34 +53,21 @@ class Reference
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractItemId(): ?string
     {
         return $this->contractItemId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOfferItemId(): ?string
     {
         return $this->offerItemId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrderItemId(): ?string
     {
         return $this->orderItemId ?? null;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -106,9 +82,6 @@ class Reference
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractItemId(): self
     {
         $clone = clone $this;
@@ -117,10 +90,6 @@ class Reference
         return $clone;
     }
 
-    /**
-     * @param string $offerItemId
-     * @return self
-     */
     public function withOfferItemId(string $offerItemId): self
     {
         $validator = new Validator();
@@ -135,9 +104,6 @@ class Reference
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOfferItemId(): self
     {
         $clone = clone $this;
@@ -146,10 +112,6 @@ class Reference
         return $clone;
     }
 
-    /**
-     * @param string $orderItemId
-     * @return self
-     */
     public function withOrderItemId(string $orderItemId): self
     {
         $validator = new Validator();
@@ -164,9 +126,6 @@ class Reference
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderItemId(): self
     {
         $clone = clone $this;

@@ -22,8 +22,6 @@ class Invoice
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -145,36 +143,19 @@ class Invoice
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float
-     */
     private int|float $amountPaid;
 
-    /**
-     * @var Cancellation|null
-     */
     private ?Cancellation $cancellation = null;
 
     /**
      * The ID of the invoice that this invoice cancels.
-     *
-     * @var string|null
      */
     private ?string $cancellationOf = null;
 
-    /**
-     * @var string
-     */
     private string $currency;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $date;
 
     /**
@@ -182,68 +163,29 @@ class Invoice
      */
     private array $groups;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $invoiceNumber;
 
-    /**
-     * @var InvoiceInvoiceType
-     */
     private InvoiceInvoiceType $invoiceType;
 
-    /**
-     * @var PaymentSettingsDebit|PaymentSettingsInvoice|null
-     */
     private PaymentSettingsDebit|PaymentSettingsInvoice|null $paymentSettings = null;
 
-    /**
-     * @var string
-     */
     private string $pdfId;
 
-    /**
-     * @var Recipient
-     */
     private Recipient $recipient;
 
-    /**
-     * @var InvoiceStatus
-     */
     private InvoiceStatus $status;
 
-    /**
-     * @var int|float
-     */
     private int|float $totalGross;
 
-    /**
-     * @var int|float
-     */
     private int|float $totalNet;
 
-    /**
-     * @var string|null
-     */
     private ?string $vatId = null;
 
     /**
      * @param int|float $amountPaid
-     * @param string $currency
-     * @param string $customerId
-     * @param DateTime $date
      * @param InvoiceGroupsItem[] $groups
-     * @param string $id
-     * @param string $invoiceNumber
-     * @param InvoiceInvoiceType $invoiceType
-     * @param string $pdfId
-     * @param Recipient $recipient
-     * @param InvoiceStatus $status
      * @param int|float $totalGross
      * @param int|float $totalNet
      */
@@ -264,49 +206,31 @@ class Invoice
         $this->totalNet = $totalNet;
     }
 
-    /**
-     * @return int|float
-     */
     public function getAmountPaid(): int|float
     {
         return $this->amountPaid;
     }
 
-    /**
-     * @return Cancellation|null
-     */
     public function getCancellation(): ?Cancellation
     {
         return $this->cancellation ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCancellationOf(): ?string
     {
         return $this->cancellationOf ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getDate(): DateTime
     {
         return $this->date;
@@ -320,25 +244,16 @@ class Invoice
         return $this->groups;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getInvoiceNumber(): string
     {
         return $this->invoiceNumber;
     }
 
-    /**
-     * @return InvoiceInvoiceType
-     */
     public function getInvoiceType(): InvoiceInvoiceType
     {
         return $this->invoiceType;
@@ -353,49 +268,31 @@ class Invoice
         return $this->paymentSettings;
     }
 
-    /**
-     * @return string
-     */
     public function getPdfId(): string
     {
         return $this->pdfId;
     }
 
-    /**
-     * @return Recipient
-     */
     public function getRecipient(): Recipient
     {
         return $this->recipient;
     }
 
-    /**
-     * @return InvoiceStatus
-     */
     public function getStatus(): InvoiceStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return int|float
-     */
     public function getTotalGross(): int|float
     {
         return $this->totalGross;
     }
 
-    /**
-     * @return int|float
-     */
     public function getTotalNet(): int|float
     {
         return $this->totalNet;
     }
 
-    /**
-     * @return string|null
-     */
     public function getVatId(): ?string
     {
         return $this->vatId ?? null;
@@ -403,7 +300,6 @@ class Invoice
 
     /**
      * @param int|float $amountPaid
-     * @return self
      */
     public function withAmountPaid(int|float $amountPaid): self
     {
@@ -419,10 +315,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param Cancellation $cancellation
-     * @return self
-     */
     public function withCancellation(Cancellation $cancellation): self
     {
         $clone = clone $this;
@@ -431,9 +323,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCancellation(): self
     {
         $clone = clone $this;
@@ -442,10 +331,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $cancellationOf
-     * @return self
-     */
     public function withCancellationOf(string $cancellationOf): self
     {
         $validator = new Validator();
@@ -460,9 +345,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCancellationOf(): self
     {
         $clone = clone $this;
@@ -471,10 +353,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $currency
-     * @return self
-     */
     public function withCurrency(string $currency): self
     {
         $validator = new Validator();
@@ -489,10 +367,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -507,10 +381,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param DateTime $date
-     * @return self
-     */
     public function withDate(DateTime $date): self
     {
         $clone = clone $this;
@@ -521,7 +391,6 @@ class Invoice
 
     /**
      * @param InvoiceGroupsItem[] $groups
-     * @return self
      */
     public function withGroups(array $groups): self
     {
@@ -531,10 +400,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -549,10 +414,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $invoiceNumber
-     * @return self
-     */
     public function withInvoiceNumber(string $invoiceNumber): self
     {
         $validator = new Validator();
@@ -567,10 +428,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param InvoiceInvoiceType $invoiceType
-     * @return self
-     */
     public function withInvoiceType(InvoiceInvoiceType $invoiceType): self
     {
         $clone = clone $this;
@@ -581,7 +438,6 @@ class Invoice
 
     /**
      * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     * @return self
      */
     public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
@@ -591,9 +447,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPaymentSettings(): self
     {
         $clone = clone $this;
@@ -602,10 +455,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $pdfId
-     * @return self
-     */
     public function withPdfId(string $pdfId): self
     {
         $validator = new Validator();
@@ -620,10 +469,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param Recipient $recipient
-     * @return self
-     */
     public function withRecipient(Recipient $recipient): self
     {
         $clone = clone $this;
@@ -632,10 +477,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param InvoiceStatus $status
-     * @return self
-     */
     public function withStatus(InvoiceStatus $status): self
     {
         $clone = clone $this;
@@ -646,7 +487,6 @@ class Invoice
 
     /**
      * @param int|float $totalGross
-     * @return self
      */
     public function withTotalGross(int|float $totalGross): self
     {
@@ -664,7 +504,6 @@ class Invoice
 
     /**
      * @param int|float $totalNet
-     * @return self
      */
     public function withTotalNet(int|float $totalNet): self
     {
@@ -680,10 +519,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param string $vatId
-     * @return self
-     */
     public function withVatId(string $vatId): self
     {
         $validator = new Validator();
@@ -698,9 +533,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVatId(): self
     {
         $clone = clone $this;

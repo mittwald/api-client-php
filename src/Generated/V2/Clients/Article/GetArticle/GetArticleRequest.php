@@ -13,8 +13,6 @@ class GetArticleRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -31,48 +29,29 @@ class GetArticleRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $articleId;
 
-    /**
-     * @var string|null
-     */
     private ?string $customerId = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $articleId
-     */
     public function __construct(string $articleId)
     {
         $this->articleId = $articleId;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleId(): string
     {
         return $this->articleId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
 
-    /**
-     * @param string $articleId
-     * @return self
-     */
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
@@ -87,10 +66,6 @@ class GetArticleRequest
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -105,9 +80,6 @@ class GetArticleRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerId(): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class AddPhoneNumberRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -52,14 +50,8 @@ class AddPhoneNumberRequest
         ],
     ];
 
-    /**
-     * @var AddPhoneNumberRequestUserIdAlternative1|string
-     */
     private AddPhoneNumberRequestUserIdAlternative1|string $userId;
 
-    /**
-     * @var AddPhoneNumberRequestBody
-     */
     private AddPhoneNumberRequestBody $body;
 
     private array $headers = [
@@ -68,7 +60,6 @@ class AddPhoneNumberRequest
 
     /**
      * @param AddPhoneNumberRequestUserIdAlternative1|string $userId
-     * @param AddPhoneNumberRequestBody $body
      */
     public function __construct(AddPhoneNumberRequestUserIdAlternative1|string $userId, AddPhoneNumberRequestBody $body)
     {
@@ -76,17 +67,11 @@ class AddPhoneNumberRequest
         $this->body = $body;
     }
 
-    /**
-     * @return AddPhoneNumberRequestUserIdAlternative1|string
-     */
     public function getUserId(): AddPhoneNumberRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
 
-    /**
-     * @return AddPhoneNumberRequestBody
-     */
     public function getBody(): AddPhoneNumberRequestBody
     {
         return $this->body;
@@ -94,7 +79,6 @@ class AddPhoneNumberRequest
 
     /**
      * @param AddPhoneNumberRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(AddPhoneNumberRequestUserIdAlternative1|string $userId): self
     {
@@ -104,10 +88,6 @@ class AddPhoneNumberRequest
         return $clone;
     }
 
-    /**
-     * @param AddPhoneNumberRequestBody $body
-     * @return self
-     */
     public function withBody(AddPhoneNumberRequestBody $body): self
     {
         $clone = clone $this;

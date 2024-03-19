@@ -14,8 +14,6 @@ class GetRedisDatabaseOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetRedisDatabaseOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var RedisDatabase
-     */
     private RedisDatabase $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RedisDatabase $body
-     */
     public function __construct(RedisDatabase $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RedisDatabase
-     */
     public function getBody(): RedisDatabase
     {
         return $this->body;
     }
 
-    /**
-     * @param RedisDatabase $body
-     * @return self
-     */
     public function withBody(RedisDatabase $body): self
     {
         $clone = clone $this;

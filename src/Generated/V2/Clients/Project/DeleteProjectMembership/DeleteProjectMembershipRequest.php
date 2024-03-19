@@ -13,8 +13,6 @@ class DeleteProjectMembershipRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeleteProjectMembershipRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectMembershipId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectMembershipId
-     */
     public function __construct(string $projectMembershipId)
     {
         $this->projectMembershipId = $projectMembershipId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectMembershipId(): string
     {
         return $this->projectMembershipId;
     }
 
-    /**
-     * @param string $projectMembershipId
-     * @return self
-     */
     public function withProjectMembershipId(string $projectMembershipId): self
     {
         $validator = new Validator();

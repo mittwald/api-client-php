@@ -23,8 +23,6 @@ class User
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -72,113 +70,64 @@ class User
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $avatarRef = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $email = null;
 
     /**
      * additional information about mittwald employees
-     *
-     * @var UserEmployeeInformation|null
      */
     private ?UserEmployeeInformation $employeeInformation = null;
 
-    /**
-     * @var Person
-     */
     private Person $person;
 
-    /**
-     * @var string|null
-     */
     private ?string $phoneNumber = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $registeredAt = null;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param Person $person
-     * @param string $userId
-     */
     public function __construct(Person $person, string $userId)
     {
         $this->person = $person;
         $this->userId = $userId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAvatarRef(): ?string
     {
         return $this->avatarRef ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return UserEmployeeInformation|null
-     */
     public function getEmployeeInformation(): ?UserEmployeeInformation
     {
         return $this->employeeInformation ?? null;
     }
 
-    /**
-     * @return Person
-     */
     public function getPerson(): Person
     {
         return $this->person;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getRegisteredAt(): ?DateTime
     {
         return $this->registeredAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $avatarRef
-     * @return self
-     */
     public function withAvatarRef(string $avatarRef): self
     {
         $validator = new Validator();
@@ -193,9 +142,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAvatarRef(): self
     {
         $clone = clone $this;
@@ -204,10 +150,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -222,9 +164,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -233,10 +172,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param UserEmployeeInformation $employeeInformation
-     * @return self
-     */
     public function withEmployeeInformation(UserEmployeeInformation $employeeInformation): self
     {
         $clone = clone $this;
@@ -245,9 +180,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmployeeInformation(): self
     {
         $clone = clone $this;
@@ -256,10 +188,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param Person $person
-     * @return self
-     */
     public function withPerson(Person $person): self
     {
         $clone = clone $this;
@@ -268,10 +196,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param string $phoneNumber
-     * @return self
-     */
     public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new Validator();
@@ -286,9 +210,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPhoneNumber(): self
     {
         $clone = clone $this;
@@ -297,10 +218,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param DateTime $registeredAt
-     * @return self
-     */
     public function withRegisteredAt(DateTime $registeredAt): self
     {
         $clone = clone $this;
@@ -309,9 +226,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRegisteredAt(): self
     {
         $clone = clone $this;
@@ -320,10 +234,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

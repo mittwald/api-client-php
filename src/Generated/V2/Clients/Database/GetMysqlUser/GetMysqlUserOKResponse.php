@@ -14,8 +14,6 @@ class GetMysqlUserOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetMysqlUserOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var MySqlUser
-     */
     private MySqlUser $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param MySqlUser $body
-     */
     public function __construct(MySqlUser $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return MySqlUser
-     */
     public function getBody(): MySqlUser
     {
         return $this->body;
     }
 
-    /**
-     * @param MySqlUser $body
-     * @return self
-     */
     public function withBody(MySqlUser $body): self
     {
         $clone = clone $this;

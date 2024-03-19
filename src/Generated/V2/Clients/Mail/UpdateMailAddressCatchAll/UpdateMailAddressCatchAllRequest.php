@@ -13,8 +13,6 @@ class UpdateMailAddressCatchAllRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMailAddressCatchAllRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressCatchAllRequestBody
-     */
     private UpdateMailAddressCatchAllRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressCatchAllRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressCatchAllRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressCatchAllRequestBody
-     */
     public function getBody(): UpdateMailAddressCatchAllRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMailAddressCatchAllRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressCatchAllRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressCatchAllRequestBody $body): self
     {
         $clone = clone $this;

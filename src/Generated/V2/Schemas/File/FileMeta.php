@@ -21,8 +21,6 @@ class FileMeta
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,46 +63,21 @@ class FileMeta
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $friendlyURL;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $mimeType;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var int
-     */
     private int $sizeInBytes;
 
     /**
      * deprecated, see mimeType
-     *
-     * @var string
      */
     private string $type;
 
-    /**
-     * @param string $friendlyURL
-     * @param string $id
-     * @param string $mimeType
-     * @param string $name
-     * @param int $sizeInBytes
-     * @param string $type
-     */
     public function __construct(string $friendlyURL, string $id, string $mimeType, string $name, int $sizeInBytes, string $type)
     {
         $this->friendlyURL = $friendlyURL;
@@ -115,58 +88,36 @@ class FileMeta
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getFriendlyURL(): string
     {
         return $this->friendlyURL;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getMimeType(): string
     {
         return $this->mimeType;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return int
-     */
     public function getSizeInBytes(): int
     {
         return $this->sizeInBytes;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $friendlyURL
-     * @return self
-     */
     public function withFriendlyURL(string $friendlyURL): self
     {
         $validator = new Validator();
@@ -181,10 +132,6 @@ class FileMeta
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -199,10 +146,6 @@ class FileMeta
         return $clone;
     }
 
-    /**
-     * @param string $mimeType
-     * @return self
-     */
     public function withMimeType(string $mimeType): self
     {
         $validator = new Validator();
@@ -217,10 +160,6 @@ class FileMeta
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -235,10 +174,6 @@ class FileMeta
         return $clone;
     }
 
-    /**
-     * @param int $sizeInBytes
-     * @return self
-     */
     public function withSizeInBytes(int $sizeInBytes): self
     {
         $validator = new Validator();
@@ -253,10 +188,6 @@ class FileMeta
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();

@@ -21,8 +21,6 @@ class InvoiceSettingsStatus
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -55,26 +53,12 @@ class InvoiceSettingsStatus
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $message;
 
-    /**
-     * @var InvoiceSettingsStatusSeverity
-     */
     private InvoiceSettingsStatusSeverity $severity;
 
-    /**
-     * @var InvoiceSettingsStatusType
-     */
     private InvoiceSettingsStatusType $type;
 
-    /**
-     * @param string $message
-     * @param InvoiceSettingsStatusSeverity $severity
-     * @param InvoiceSettingsStatusType $type
-     */
     public function __construct(string $message, InvoiceSettingsStatusSeverity $severity, InvoiceSettingsStatusType $type)
     {
         $this->message = $message;
@@ -82,34 +66,21 @@ class InvoiceSettingsStatus
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return InvoiceSettingsStatusSeverity
-     */
     public function getSeverity(): InvoiceSettingsStatusSeverity
     {
         return $this->severity;
     }
 
-    /**
-     * @return InvoiceSettingsStatusType
-     */
     public function getType(): InvoiceSettingsStatusType
     {
         return $this->type;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -124,10 +95,6 @@ class InvoiceSettingsStatus
         return $clone;
     }
 
-    /**
-     * @param InvoiceSettingsStatusSeverity $severity
-     * @return self
-     */
     public function withSeverity(InvoiceSettingsStatusSeverity $severity): self
     {
         $clone = clone $this;
@@ -136,10 +103,6 @@ class InvoiceSettingsStatus
         return $clone;
     }
 
-    /**
-     * @param InvoiceSettingsStatusType $type
-     * @return self
-     */
     public function withType(InvoiceSettingsStatusType $type): self
     {
         $clone = clone $this;

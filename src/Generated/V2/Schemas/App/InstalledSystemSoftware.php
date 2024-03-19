@@ -23,8 +23,6 @@ class InstalledSystemSoftware
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.',
@@ -48,26 +46,12 @@ class InstalledSystemSoftware
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $systemSoftwareId;
 
-    /**
-     * @var VersionStatus
-     */
     private VersionStatus $systemSoftwareVersion;
 
-    /**
-     * @var SystemSoftwareUpdatePolicy
-     */
     private SystemSoftwareUpdatePolicy $updatePolicy;
 
-    /**
-     * @param string $systemSoftwareId
-     * @param VersionStatus $systemSoftwareVersion
-     * @param SystemSoftwareUpdatePolicy $updatePolicy
-     */
     public function __construct(string $systemSoftwareId, VersionStatus $systemSoftwareVersion, SystemSoftwareUpdatePolicy $updatePolicy)
     {
         $this->systemSoftwareId = $systemSoftwareId;
@@ -75,34 +59,21 @@ class InstalledSystemSoftware
         $this->updatePolicy = $updatePolicy;
     }
 
-    /**
-     * @return string
-     */
     public function getSystemSoftwareId(): string
     {
         return $this->systemSoftwareId;
     }
 
-    /**
-     * @return VersionStatus
-     */
     public function getSystemSoftwareVersion(): VersionStatus
     {
         return $this->systemSoftwareVersion;
     }
 
-    /**
-     * @return SystemSoftwareUpdatePolicy
-     */
     public function getUpdatePolicy(): SystemSoftwareUpdatePolicy
     {
         return $this->updatePolicy;
     }
 
-    /**
-     * @param string $systemSoftwareId
-     * @return self
-     */
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
@@ -117,10 +88,6 @@ class InstalledSystemSoftware
         return $clone;
     }
 
-    /**
-     * @param VersionStatus $systemSoftwareVersion
-     * @return self
-     */
     public function withSystemSoftwareVersion(VersionStatus $systemSoftwareVersion): self
     {
         $clone = clone $this;
@@ -129,10 +96,6 @@ class InstalledSystemSoftware
         return $clone;
     }
 
-    /**
-     * @param SystemSoftwareUpdatePolicy $updatePolicy
-     * @return self
-     */
     public function withUpdatePolicy(SystemSoftwareUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;

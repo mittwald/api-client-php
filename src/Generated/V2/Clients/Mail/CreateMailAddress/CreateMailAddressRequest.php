@@ -15,8 +15,6 @@ class CreateMailAddressRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,14 +39,8 @@ class CreateMailAddressRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateForwardAddress|CreateMailAddress
-     */
     private CreateForwardAddress|CreateMailAddress $body;
 
     private array $headers = [
@@ -56,7 +48,6 @@ class CreateMailAddressRequest
     ];
 
     /**
-     * @param string $projectId
      * @param CreateForwardAddress|CreateMailAddress $body
      */
     public function __construct(string $projectId, CreateForwardAddress|CreateMailAddress $body)
@@ -65,9 +56,6 @@ class CreateMailAddressRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -82,10 +70,6 @@ class CreateMailAddressRequest
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -102,7 +86,6 @@ class CreateMailAddressRequest
 
     /**
      * @param CreateForwardAddress|CreateMailAddress $body
-     * @return self
      */
     public function withBody(CreateForwardAddress|CreateMailAddress $body): self
     {

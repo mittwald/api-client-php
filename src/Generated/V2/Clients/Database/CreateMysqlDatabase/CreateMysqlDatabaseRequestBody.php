@@ -13,8 +13,6 @@ class CreateMysqlDatabaseRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,29 +30,16 @@ class CreateMysqlDatabaseRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var CreateMySqlDatabase
-     */
     private CreateMySqlDatabase $database;
 
-    /**
-     * @var CreateMySqlUserWithDatabase
-     */
     private CreateMySqlUserWithDatabase $user;
 
-    /**
-     * @param CreateMySqlDatabase $database
-     * @param CreateMySqlUserWithDatabase $user
-     */
     public function __construct(CreateMySqlDatabase $database, CreateMySqlUserWithDatabase $user)
     {
         $this->database = $database;
         $this->user = $user;
     }
 
-    /**
-     * @return CreateMySqlDatabase
-     */
     public function getDatabase(): CreateMySqlDatabase
     {
         return $this->database;
@@ -69,10 +54,6 @@ class CreateMysqlDatabaseRequestBody
         return $this->user;
     }
 
-    /**
-     * @param CreateMySqlDatabase $database
-     * @return self
-     */
     public function withDatabase(CreateMySqlDatabase $database): self
     {
         $clone = clone $this;
@@ -81,10 +62,6 @@ class CreateMysqlDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @param CreateMySqlUserWithDatabase $user
-     * @return self
-     */
     public function withUser(CreateMySqlUserWithDatabase $user): self
     {
         $clone = clone $this;

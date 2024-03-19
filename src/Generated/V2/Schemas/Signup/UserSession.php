@@ -22,8 +22,6 @@ class UserSession
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,36 +52,16 @@ class UserSession
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $created;
 
-    /**
-     * @var DeviceInfo
-     */
     private DeviceInfo $device;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $lastAccess = null;
 
-    /**
-     * @var Location|null
-     */
     private ?Location $location = null;
 
-    /**
-     * @var string
-     */
     private string $tokenId;
 
-    /**
-     * @param DateTime $created
-     * @param DeviceInfo $device
-     * @param string $tokenId
-     */
     public function __construct(DateTime $created, DeviceInfo $device, string $tokenId)
     {
         $this->created = $created;
@@ -91,50 +69,31 @@ class UserSession
         $this->tokenId = $tokenId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreated(): DateTime
     {
         return $this->created;
     }
 
-    /**
-     * @return DeviceInfo
-     */
     public function getDevice(): DeviceInfo
     {
         return $this->device;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getLastAccess(): ?DateTime
     {
         return $this->lastAccess ?? null;
     }
 
-    /**
-     * @return Location|null
-     */
     public function getLocation(): ?Location
     {
         return $this->location ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getTokenId(): string
     {
         return $this->tokenId;
     }
 
-    /**
-     * @param DateTime $created
-     * @return self
-     */
     public function withCreated(DateTime $created): self
     {
         $clone = clone $this;
@@ -143,10 +102,6 @@ class UserSession
         return $clone;
     }
 
-    /**
-     * @param DeviceInfo $device
-     * @return self
-     */
     public function withDevice(DeviceInfo $device): self
     {
         $clone = clone $this;
@@ -155,10 +110,6 @@ class UserSession
         return $clone;
     }
 
-    /**
-     * @param DateTime $lastAccess
-     * @return self
-     */
     public function withLastAccess(DateTime $lastAccess): self
     {
         $clone = clone $this;
@@ -167,9 +118,6 @@ class UserSession
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastAccess(): self
     {
         $clone = clone $this;
@@ -178,10 +126,6 @@ class UserSession
         return $clone;
     }
 
-    /**
-     * @param Location $location
-     * @return self
-     */
     public function withLocation(Location $location): self
     {
         $clone = clone $this;
@@ -190,9 +134,6 @@ class UserSession
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLocation(): self
     {
         $clone = clone $this;
@@ -201,10 +142,6 @@ class UserSession
         return $clone;
     }
 
-    /**
-     * @param string $tokenId
-     * @return self
-     */
     public function withTokenId(string $tokenId): self
     {
         $validator = new Validator();

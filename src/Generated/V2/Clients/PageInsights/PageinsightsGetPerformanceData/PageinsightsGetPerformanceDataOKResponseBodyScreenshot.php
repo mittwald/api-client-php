@@ -12,8 +12,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyScreenshot
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class PageinsightsGetPerformanceDataOKResponseBodyScreenshot
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $fileRef;
 
-    /**
-     * @param DateTime $createdAt
-     * @param string $fileRef
-     */
     public function __construct(DateTime $createdAt, string $fileRef)
     {
         $this->createdAt = $createdAt;
         $this->fileRef = $fileRef;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getFileRef(): string
     {
         return $this->fileRef;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -80,10 +58,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyScreenshot
         return $clone;
     }
 
-    /**
-     * @param string $fileRef
-     * @return self
-     */
     public function withFileRef(string $fileRef): self
     {
         $validator = new Validator();

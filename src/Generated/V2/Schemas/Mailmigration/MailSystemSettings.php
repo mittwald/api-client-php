@@ -21,8 +21,6 @@ class MailSystemSettings
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,26 +42,12 @@ class MailSystemSettings
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $imapClusterId;
 
-    /**
-     * @var string
-     */
     private string $mailDirectory;
 
-    /**
-     * @var string
-     */
     private string $rateLimitId;
 
-    /**
-     * @param string $imapClusterId
-     * @param string $mailDirectory
-     * @param string $rateLimitId
-     */
     public function __construct(string $imapClusterId, string $mailDirectory, string $rateLimitId)
     {
         $this->imapClusterId = $imapClusterId;
@@ -71,34 +55,21 @@ class MailSystemSettings
         $this->rateLimitId = $rateLimitId;
     }
 
-    /**
-     * @return string
-     */
     public function getImapClusterId(): string
     {
         return $this->imapClusterId;
     }
 
-    /**
-     * @return string
-     */
     public function getMailDirectory(): string
     {
         return $this->mailDirectory;
     }
 
-    /**
-     * @return string
-     */
     public function getRateLimitId(): string
     {
         return $this->rateLimitId;
     }
 
-    /**
-     * @param string $imapClusterId
-     * @return self
-     */
     public function withImapClusterId(string $imapClusterId): self
     {
         $validator = new Validator();
@@ -113,10 +84,6 @@ class MailSystemSettings
         return $clone;
     }
 
-    /**
-     * @param string $mailDirectory
-     * @return self
-     */
     public function withMailDirectory(string $mailDirectory): self
     {
         $validator = new Validator();
@@ -131,10 +98,6 @@ class MailSystemSettings
         return $clone;
     }
 
-    /**
-     * @param string $rateLimitId
-     * @return self
-     */
     public function withRateLimitId(string $rateLimitId): self
     {
         $validator = new Validator();

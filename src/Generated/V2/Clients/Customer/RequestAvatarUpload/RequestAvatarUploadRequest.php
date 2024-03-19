@@ -13,8 +13,6 @@ class RequestAvatarUploadRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -32,50 +30,30 @@ class RequestAvatarUploadRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var RequestAvatarUploadRequestBody
-     */
     private RequestAvatarUploadRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerId
-     * @param RequestAvatarUploadRequestBody $body
-     */
     public function __construct(string $customerId, RequestAvatarUploadRequestBody $body)
     {
         $this->customerId = $customerId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return RequestAvatarUploadRequestBody
-     */
     public function getBody(): RequestAvatarUploadRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -90,10 +68,6 @@ class RequestAvatarUploadRequest
         return $clone;
     }
 
-    /**
-     * @param RequestAvatarUploadRequestBody $body
-     * @return self
-     */
     public function withBody(RequestAvatarUploadRequestBody $body): self
     {
         $clone = clone $this;

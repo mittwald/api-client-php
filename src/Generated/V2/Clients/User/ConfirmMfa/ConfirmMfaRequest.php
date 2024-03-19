@@ -13,8 +13,6 @@ class ConfirmMfaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,35 +38,22 @@ class ConfirmMfaRequest
         ],
     ];
 
-    /**
-     * @var ConfirmMfaRequestBody
-     */
     private ConfirmMfaRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param ConfirmMfaRequestBody $body
-     */
     public function __construct(ConfirmMfaRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ConfirmMfaRequestBody
-     */
     public function getBody(): ConfirmMfaRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ConfirmMfaRequestBody $body
-     * @return self
-     */
     public function withBody(ConfirmMfaRequestBody $body): self
     {
         $clone = clone $this;

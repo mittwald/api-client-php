@@ -21,8 +21,6 @@ class DatabaseReference
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,46 +38,26 @@ class DatabaseReference
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $kind;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @param string $kind
-     * @param string $name
-     */
     public function __construct(string $kind, string $name)
     {
         $this->kind = $kind;
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getKind(): string
     {
         return $this->kind;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $kind
-     * @return self
-     */
     public function withKind(string $kind): self
     {
         $validator = new Validator();
@@ -94,10 +72,6 @@ class DatabaseReference
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();

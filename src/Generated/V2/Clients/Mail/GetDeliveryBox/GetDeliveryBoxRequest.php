@@ -13,8 +13,6 @@ class GetDeliveryBoxRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetDeliveryBoxRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $deliveryBoxId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $deliveryBoxId
-     */
     public function __construct(string $deliveryBoxId)
     {
         $this->deliveryBoxId = $deliveryBoxId;
     }
 
-    /**
-     * @return string
-     */
     public function getDeliveryBoxId(): string
     {
         return $this->deliveryBoxId;
     }
 
-    /**
-     * @param string $deliveryBoxId
-     * @return self
-     */
     public function withDeliveryBoxId(string $deliveryBoxId): self
     {
         $validator = new Validator();

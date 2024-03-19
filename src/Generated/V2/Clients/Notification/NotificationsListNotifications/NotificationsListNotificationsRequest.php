@@ -13,8 +13,6 @@ class NotificationsListNotificationsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -32,9 +30,6 @@ class NotificationsListNotificationsRequest
         ],
     ];
 
-    /**
-     * @var NotificationsListNotificationsRequestStatus|null
-     */
     private ?NotificationsListNotificationsRequestStatus $status = null;
 
     private array $headers = [
@@ -48,18 +43,11 @@ class NotificationsListNotificationsRequest
     {
     }
 
-    /**
-     * @return NotificationsListNotificationsRequestStatus|null
-     */
     public function getStatus(): ?NotificationsListNotificationsRequestStatus
     {
         return $this->status ?? null;
     }
 
-    /**
-     * @param NotificationsListNotificationsRequestStatus $status
-     * @return self
-     */
     public function withStatus(NotificationsListNotificationsRequestStatus $status): self
     {
         $clone = clone $this;
@@ -68,9 +56,6 @@ class NotificationsListNotificationsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStatus(): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class DeprecatedUserServicePersonalizedSettingsUpdateRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,35 +34,22 @@ class DeprecatedUserServicePersonalizedSettingsUpdateRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserServicePersonalizedSettingsUpdateRequestBody
-     */
     private DeprecatedUserServicePersonalizedSettingsUpdateRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserServicePersonalizedSettingsUpdateRequestBody $body
-     */
     public function __construct(DeprecatedUserServicePersonalizedSettingsUpdateRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserServicePersonalizedSettingsUpdateRequestBody
-     */
     public function getBody(): DeprecatedUserServicePersonalizedSettingsUpdateRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserServicePersonalizedSettingsUpdateRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServicePersonalizedSettingsUpdateRequestBody $body): self
     {
         $clone = clone $this;

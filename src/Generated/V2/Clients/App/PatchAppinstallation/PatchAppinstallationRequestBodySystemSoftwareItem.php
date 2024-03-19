@@ -12,8 +12,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,14 +25,8 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $systemSoftwareVersion = null;
 
-    /**
-     * @var SystemSoftwareUpdatePolicy|null
-     */
     private ?SystemSoftwareUpdatePolicy $updatePolicy = null;
 
     /**
@@ -44,9 +36,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getSystemSoftwareVersion(): ?string
     {
         return $this->systemSoftwareVersion ?? null;
@@ -61,10 +50,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         return $this->updatePolicy ?? null;
     }
 
-    /**
-     * @param string $systemSoftwareVersion
-     * @return self
-     */
     public function withSystemSoftwareVersion(string $systemSoftwareVersion): self
     {
         $validator = new Validator();
@@ -79,9 +64,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSystemSoftwareVersion(): self
     {
         $clone = clone $this;
@@ -90,10 +72,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         return $clone;
     }
 
-    /**
-     * @param SystemSoftwareUpdatePolicy $updatePolicy
-     * @return self
-     */
     public function withUpdatePolicy(SystemSoftwareUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -102,9 +80,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUpdatePolicy(): self
     {
         $clone = clone $this;

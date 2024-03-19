@@ -14,8 +14,6 @@ class ProjectFileSystemGetDiskUsageOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class ProjectFileSystemGetDiskUsageOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var FilesystemUsagesDisk
-     */
     private FilesystemUsagesDisk $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param FilesystemUsagesDisk $body
-     */
     public function __construct(FilesystemUsagesDisk $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return FilesystemUsagesDisk
-     */
     public function getBody(): FilesystemUsagesDisk
     {
         return $this->body;
     }
 
-    /**
-     * @param FilesystemUsagesDisk $body
-     * @return self
-     */
     public function withBody(FilesystemUsagesDisk $body): self
     {
         $clone = clone $this;

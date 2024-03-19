@@ -13,8 +13,6 @@ class CreateRedisDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -54,50 +52,30 @@ class CreateRedisDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateRedisDatabaseRequestBody
-     */
     private CreateRedisDatabaseRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CreateRedisDatabaseRequestBody $body
-     */
     public function __construct(string $projectId, CreateRedisDatabaseRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CreateRedisDatabaseRequestBody
-     */
     public function getBody(): CreateRedisDatabaseRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -112,10 +90,6 @@ class CreateRedisDatabaseRequest
         return $clone;
     }
 
-    /**
-     * @param CreateRedisDatabaseRequestBody $body
-     * @return self
-     */
     public function withBody(CreateRedisDatabaseRequestBody $body): self
     {
         $clone = clone $this;

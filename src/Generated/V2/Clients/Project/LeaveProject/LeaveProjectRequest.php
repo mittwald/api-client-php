@@ -13,8 +13,6 @@ class LeaveProjectRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class LeaveProjectRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
     /**
@@ -48,7 +43,6 @@ class LeaveProjectRequest
     ];
 
     /**
-     * @param string $projectId
      * @param mixed $body
      */
     public function __construct(string $projectId, $body)
@@ -57,9 +51,6 @@ class LeaveProjectRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -73,10 +64,6 @@ class LeaveProjectRequest
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class LeaveProjectRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

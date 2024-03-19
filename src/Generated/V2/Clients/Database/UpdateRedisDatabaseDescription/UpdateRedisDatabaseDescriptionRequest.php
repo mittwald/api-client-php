@@ -13,8 +13,6 @@ class UpdateRedisDatabaseDescriptionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateRedisDatabaseDescriptionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $redisDatabaseId;
 
-    /**
-     * @var UpdateRedisDatabaseDescriptionRequestBody
-     */
     private UpdateRedisDatabaseDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $redisDatabaseId
-     * @param UpdateRedisDatabaseDescriptionRequestBody $body
-     */
     public function __construct(string $redisDatabaseId, UpdateRedisDatabaseDescriptionRequestBody $body)
     {
         $this->redisDatabaseId = $redisDatabaseId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getRedisDatabaseId(): string
     {
         return $this->redisDatabaseId;
     }
 
-    /**
-     * @return UpdateRedisDatabaseDescriptionRequestBody
-     */
     public function getBody(): UpdateRedisDatabaseDescriptionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $redisDatabaseId
-     * @return self
-     */
     public function withRedisDatabaseId(string $redisDatabaseId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateRedisDatabaseDescriptionRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateRedisDatabaseDescriptionRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateRedisDatabaseDescriptionRequestBody $body): self
     {
         $clone = clone $this;

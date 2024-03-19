@@ -13,8 +13,6 @@ class LogoutRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class LogoutRequest
         ],
     ];
 
-    /**
-     * @var LogoutRequestBody
-     */
     private LogoutRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param LogoutRequestBody $body
-     */
     public function __construct(LogoutRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return LogoutRequestBody
-     */
     public function getBody(): LogoutRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param LogoutRequestBody $body
-     * @return self
-     */
     public function withBody(LogoutRequestBody $body): self
     {
         $clone = clone $this;

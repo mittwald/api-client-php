@@ -21,8 +21,6 @@ class PaymentSettingsDebit
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,33 +52,17 @@ class PaymentSettingsDebit
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $accountHolder;
 
     /**
      * Optional. Required for payments outside of the European Union.
-     *
-     * @var string|null
      */
     private ?string $bic = null;
 
-    /**
-     * @var string
-     */
     private string $iban;
 
-    /**
-     * @var PaymentSettingsDebitMethod
-     */
     private PaymentSettingsDebitMethod $method;
 
-    /**
-     * @param string $accountHolder
-     * @param string $iban
-     * @param PaymentSettingsDebitMethod $method
-     */
     public function __construct(string $accountHolder, string $iban, PaymentSettingsDebitMethod $method)
     {
         $this->accountHolder = $accountHolder;
@@ -88,42 +70,26 @@ class PaymentSettingsDebit
         $this->method = $method;
     }
 
-    /**
-     * @return string
-     */
     public function getAccountHolder(): string
     {
         return $this->accountHolder;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBic(): ?string
     {
         return $this->bic ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getIban(): string
     {
         return $this->iban;
     }
 
-    /**
-     * @return PaymentSettingsDebitMethod
-     */
     public function getMethod(): PaymentSettingsDebitMethod
     {
         return $this->method;
     }
 
-    /**
-     * @param string $accountHolder
-     * @return self
-     */
     public function withAccountHolder(string $accountHolder): self
     {
         $validator = new Validator();
@@ -138,10 +104,6 @@ class PaymentSettingsDebit
         return $clone;
     }
 
-    /**
-     * @param string $bic
-     * @return self
-     */
     public function withBic(string $bic): self
     {
         $validator = new Validator();
@@ -156,9 +118,6 @@ class PaymentSettingsDebit
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutBic(): self
     {
         $clone = clone $this;
@@ -167,10 +126,6 @@ class PaymentSettingsDebit
         return $clone;
     }
 
-    /**
-     * @param string $iban
-     * @return self
-     */
     public function withIban(string $iban): self
     {
         $validator = new Validator();
@@ -185,10 +140,6 @@ class PaymentSettingsDebit
         return $clone;
     }
 
-    /**
-     * @param PaymentSettingsDebitMethod $method
-     * @return self
-     */
     public function withMethod(PaymentSettingsDebitMethod $method): self
     {
         $clone = clone $this;

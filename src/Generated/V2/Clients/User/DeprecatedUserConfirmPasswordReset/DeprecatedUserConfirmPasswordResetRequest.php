@@ -13,8 +13,6 @@ class DeprecatedUserConfirmPasswordResetRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -50,35 +48,22 @@ class DeprecatedUserConfirmPasswordResetRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserConfirmPasswordResetRequestBody
-     */
     private DeprecatedUserConfirmPasswordResetRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserConfirmPasswordResetRequestBody $body
-     */
     public function __construct(DeprecatedUserConfirmPasswordResetRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserConfirmPasswordResetRequestBody
-     */
     public function getBody(): DeprecatedUserConfirmPasswordResetRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserConfirmPasswordResetRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserConfirmPasswordResetRequestBody $body): self
     {
         $clone = clone $this;

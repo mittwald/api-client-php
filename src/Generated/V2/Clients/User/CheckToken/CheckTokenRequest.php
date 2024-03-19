@@ -13,8 +13,6 @@ class CheckTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class CheckTokenRequest
         ],
     ];
 
-    /**
-     * @var CheckTokenRequestBody
-     */
     private CheckTokenRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CheckTokenRequestBody $body
-     */
     public function __construct(CheckTokenRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckTokenRequestBody
-     */
     public function getBody(): CheckTokenRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckTokenRequestBody $body
-     * @return self
-     */
     public function withBody(CheckTokenRequestBody $body): self
     {
         $clone = clone $this;

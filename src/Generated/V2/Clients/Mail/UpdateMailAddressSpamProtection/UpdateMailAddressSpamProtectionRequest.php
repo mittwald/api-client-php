@@ -13,8 +13,6 @@ class UpdateMailAddressSpamProtectionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -65,50 +63,30 @@ class UpdateMailAddressSpamProtectionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressSpamProtectionRequestBody
-     */
     private UpdateMailAddressSpamProtectionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressSpamProtectionRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressSpamProtectionRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressSpamProtectionRequestBody
-     */
     public function getBody(): UpdateMailAddressSpamProtectionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -123,10 +101,6 @@ class UpdateMailAddressSpamProtectionRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressSpamProtectionRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressSpamProtectionRequestBody $body): self
     {
         $clone = clone $this;

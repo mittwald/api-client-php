@@ -11,8 +11,6 @@ class UpdateCronjobAppIdRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class UpdateCronjobAppIdRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @param string $appId
-     */
     public function __construct(string $appId)
     {
         $this->appId = $appId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();

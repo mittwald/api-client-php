@@ -13,8 +13,6 @@ class DeprecatedUserServiceAvatarRequestUploadRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,50 +31,30 @@ class DeprecatedUserServiceAvatarRequestUploadRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadRequestBody
-     */
     private DeprecatedUserServiceAvatarRequestUploadRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $userId
-     * @param DeprecatedUserServiceAvatarRequestUploadRequestBody $body
-     */
     public function __construct(string $userId, DeprecatedUserServiceAvatarRequestUploadRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @return DeprecatedUserServiceAvatarRequestUploadRequestBody
-     */
     public function getBody(): DeprecatedUserServiceAvatarRequestUploadRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -91,10 +69,6 @@ class DeprecatedUserServiceAvatarRequestUploadRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServiceAvatarRequestUploadRequestBody $body): self
     {
         $clone = clone $this;

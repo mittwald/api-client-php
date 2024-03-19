@@ -13,8 +13,6 @@ class UpdateSshUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,50 +51,30 @@ class UpdateSshUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sshUserId;
 
-    /**
-     * @var UpdateSshUserRequestBody
-     */
     private UpdateSshUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sshUserId
-     * @param UpdateSshUserRequestBody $body
-     */
     public function __construct(string $sshUserId, UpdateSshUserRequestBody $body)
     {
         $this->sshUserId = $sshUserId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getSshUserId(): string
     {
         return $this->sshUserId;
     }
 
-    /**
-     * @return UpdateSshUserRequestBody
-     */
     public function getBody(): UpdateSshUserRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $sshUserId
-     * @return self
-     */
     public function withSshUserId(string $sshUserId): self
     {
         $validator = new Validator();
@@ -111,10 +89,6 @@ class UpdateSshUserRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateSshUserRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateSshUserRequestBody $body): self
     {
         $clone = clone $this;

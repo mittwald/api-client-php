@@ -11,8 +11,6 @@ class DeprecatedUserCreateIssueRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,93 +51,60 @@ class DeprecatedUserCreateIssueRequestBody
 
     /**
      * Detailed report of the issue.
-     *
-     * @var string
      */
     private string $message;
 
     /**
      * Origin of the issue.
-     *
-     * @var string|null
      */
     private ?string $origin = null;
 
     /**
      * Descriptive subject of the report.
-     *
-     * @var string|null
      */
     private ?string $subject = null;
 
     /**
      * Type of feedback.
-     *
-     * @var DeprecatedUserCreateIssueRequestBodyType
      */
     private DeprecatedUserCreateIssueRequestBodyType $type;
 
     /**
      * Feedback rating from bad to good.
-     *
-     * @var int|float|null
      */
     private int|float|null $vote = null;
 
-    /**
-     * @param string $message
-     * @param DeprecatedUserCreateIssueRequestBodyType $type
-     */
     public function __construct(string $message, DeprecatedUserCreateIssueRequestBodyType $type)
     {
         $this->message = $message;
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrigin(): ?string
     {
         return $this->origin ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSubject(): ?string
     {
         return $this->subject ?? null;
     }
 
-    /**
-     * @return DeprecatedUserCreateIssueRequestBodyType
-     */
     public function getType(): DeprecatedUserCreateIssueRequestBodyType
     {
         return $this->type;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getVote(): int|float|null
     {
         return $this->vote;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -154,10 +119,6 @@ class DeprecatedUserCreateIssueRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $origin
-     * @return self
-     */
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
@@ -172,9 +133,6 @@ class DeprecatedUserCreateIssueRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrigin(): self
     {
         $clone = clone $this;
@@ -183,10 +141,6 @@ class DeprecatedUserCreateIssueRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -201,9 +155,6 @@ class DeprecatedUserCreateIssueRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSubject(): self
     {
         $clone = clone $this;
@@ -212,10 +163,6 @@ class DeprecatedUserCreateIssueRequestBody
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserCreateIssueRequestBodyType $type
-     * @return self
-     */
     public function withType(DeprecatedUserCreateIssueRequestBodyType $type): self
     {
         $clone = clone $this;
@@ -226,7 +173,6 @@ class DeprecatedUserCreateIssueRequestBody
 
     /**
      * @param int|float $vote
-     * @return self
      */
     public function withVote(int|float $vote): self
     {
@@ -242,9 +188,6 @@ class DeprecatedUserCreateIssueRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVote(): self
     {
         $clone = clone $this;

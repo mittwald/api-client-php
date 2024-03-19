@@ -21,8 +21,6 @@ class OrderItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -83,19 +81,10 @@ class OrderItem
      */
     private ?array $addons = null;
 
-    /**
-     * @var string
-     */
     private string $articleId;
 
-    /**
-     * @var string|null
-     */
     private ?string $articleName = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $articleTemplateName = null;
 
     /**
@@ -103,35 +92,17 @@ class OrderItem
      */
     private ?array $attributeConfiguration = null;
 
-    /**
-     * @var bool
-     */
     private bool $isInclusive;
 
-    /**
-     * @var string
-     */
     private string $orderItemId;
 
-    /**
-     * @var string|null
-     */
     private ?string $predefinedDomainAggregateId = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $price;
 
-    /**
-     * @var Reference|null
-     */
     private ?Reference $reference = null;
 
     /**
-     * @param string $articleId
-     * @param bool $isInclusive
-     * @param string $orderItemId
      * @param int|float $price
      */
     public function __construct(string $articleId, bool $isInclusive, string $orderItemId, int|float $price)
@@ -150,25 +121,16 @@ class OrderItem
         return $this->addons ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleId(): string
     {
         return $this->articleId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getArticleName(): ?string
     {
         return $this->articleName ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getArticleTemplateName(): ?string
     {
         return $this->articleTemplateName ?? null;
@@ -183,41 +145,26 @@ class OrderItem
         return $this->attributeConfiguration ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsInclusive(): bool
     {
         return $this->isInclusive;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderItemId(): string
     {
         return $this->orderItemId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPredefinedDomainAggregateId(): ?string
     {
         return $this->predefinedDomainAggregateId ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getPrice(): int|float
     {
         return $this->price;
     }
 
-    /**
-     * @return Reference|null
-     */
     public function getReference(): ?Reference
     {
         return $this->reference ?? null;
@@ -225,7 +172,6 @@ class OrderItem
 
     /**
      * @param Addons[] $addons
-     * @return self
      */
     public function withAddons(array $addons): self
     {
@@ -235,9 +181,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAddons(): self
     {
         $clone = clone $this;
@@ -246,10 +189,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param string $articleId
-     * @return self
-     */
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
@@ -264,10 +203,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param string $articleName
-     * @return self
-     */
     public function withArticleName(string $articleName): self
     {
         $validator = new Validator();
@@ -282,9 +217,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutArticleName(): self
     {
         $clone = clone $this;
@@ -293,10 +225,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param string $articleTemplateName
-     * @return self
-     */
     public function withArticleTemplateName(string $articleTemplateName): self
     {
         $validator = new Validator();
@@ -311,9 +239,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutArticleTemplateName(): self
     {
         $clone = clone $this;
@@ -324,7 +249,6 @@ class OrderItem
 
     /**
      * @param AttributeConfiguration[] $attributeConfiguration
-     * @return self
      */
     public function withAttributeConfiguration(array $attributeConfiguration): self
     {
@@ -334,9 +258,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAttributeConfiguration(): self
     {
         $clone = clone $this;
@@ -345,10 +266,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param bool $isInclusive
-     * @return self
-     */
     public function withIsInclusive(bool $isInclusive): self
     {
         $validator = new Validator();
@@ -363,10 +280,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param string $orderItemId
-     * @return self
-     */
     public function withOrderItemId(string $orderItemId): self
     {
         $validator = new Validator();
@@ -381,10 +294,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param string $predefinedDomainAggregateId
-     * @return self
-     */
     public function withPredefinedDomainAggregateId(string $predefinedDomainAggregateId): self
     {
         $validator = new Validator();
@@ -399,9 +308,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPredefinedDomainAggregateId(): self
     {
         $clone = clone $this;
@@ -412,7 +318,6 @@ class OrderItem
 
     /**
      * @param int|float $price
-     * @return self
      */
     public function withPrice(int|float $price): self
     {
@@ -428,10 +333,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param Reference $reference
-     * @return self
-     */
     public function withReference(Reference $reference): self
     {
         $clone = clone $this;
@@ -440,9 +341,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReference(): self
     {
         $clone = clone $this;

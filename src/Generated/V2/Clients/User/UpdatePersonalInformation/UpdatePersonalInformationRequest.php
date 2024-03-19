@@ -13,8 +13,6 @@ class UpdatePersonalInformationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,14 +49,8 @@ class UpdatePersonalInformationRequest
         ],
     ];
 
-    /**
-     * @var UpdatePersonalInformationRequestUserIdAlternative1|string
-     */
     private UpdatePersonalInformationRequestUserIdAlternative1|string $userId;
 
-    /**
-     * @var UpdatePersonalInformationRequestBody
-     */
     private UpdatePersonalInformationRequestBody $body;
 
     private array $headers = [
@@ -67,7 +59,6 @@ class UpdatePersonalInformationRequest
 
     /**
      * @param UpdatePersonalInformationRequestUserIdAlternative1|string $userId
-     * @param UpdatePersonalInformationRequestBody $body
      */
     public function __construct(UpdatePersonalInformationRequestUserIdAlternative1|string $userId, UpdatePersonalInformationRequestBody $body)
     {
@@ -75,17 +66,11 @@ class UpdatePersonalInformationRequest
         $this->body = $body;
     }
 
-    /**
-     * @return UpdatePersonalInformationRequestUserIdAlternative1|string
-     */
     public function getUserId(): UpdatePersonalInformationRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
 
-    /**
-     * @return UpdatePersonalInformationRequestBody
-     */
     public function getBody(): UpdatePersonalInformationRequestBody
     {
         return $this->body;
@@ -93,7 +78,6 @@ class UpdatePersonalInformationRequest
 
     /**
      * @param UpdatePersonalInformationRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(UpdatePersonalInformationRequestUserIdAlternative1|string $userId): self
     {
@@ -103,10 +87,6 @@ class UpdatePersonalInformationRequest
         return $clone;
     }
 
-    /**
-     * @param UpdatePersonalInformationRequestBody $body
-     * @return self
-     */
     public function withBody(UpdatePersonalInformationRequestBody $body): self
     {
         $clone = clone $this;

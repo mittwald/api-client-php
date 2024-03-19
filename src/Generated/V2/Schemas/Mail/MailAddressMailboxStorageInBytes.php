@@ -21,8 +21,6 @@ class MailAddressMailboxStorageInBytes
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,18 +51,11 @@ class MailAddressMailboxStorageInBytes
         'type' => 'object',
     ];
 
-    /**
-     * @var MailAddressMailboxStorageInBytesCurrent
-     */
     private MailAddressMailboxStorageInBytesCurrent $current;
 
-    /**
-     * @var int|float
-     */
     private int|float $limit;
 
     /**
-     * @param MailAddressMailboxStorageInBytesCurrent $current
      * @param int|float $limit
      */
     public function __construct(MailAddressMailboxStorageInBytesCurrent $current, int|float $limit)
@@ -73,26 +64,16 @@ class MailAddressMailboxStorageInBytes
         $this->limit = $limit;
     }
 
-    /**
-     * @return MailAddressMailboxStorageInBytesCurrent
-     */
     public function getCurrent(): MailAddressMailboxStorageInBytesCurrent
     {
         return $this->current;
     }
 
-    /**
-     * @return int|float
-     */
     public function getLimit(): int|float
     {
         return $this->limit;
     }
 
-    /**
-     * @param MailAddressMailboxStorageInBytesCurrent $current
-     * @return self
-     */
     public function withCurrent(MailAddressMailboxStorageInBytesCurrent $current): self
     {
         $clone = clone $this;
@@ -103,7 +84,6 @@ class MailAddressMailboxStorageInBytes
 
     /**
      * @param int|float $limit
-     * @return self
      */
     public function withLimit(int|float $limit): self
     {

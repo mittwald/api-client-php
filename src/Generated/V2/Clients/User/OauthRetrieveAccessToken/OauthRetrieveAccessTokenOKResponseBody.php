@@ -11,8 +11,6 @@ class OauthRetrieveAccessTokenOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -56,8 +54,6 @@ response was generated.
     /**
      * The access token issued by the authorization server.
      *
-     *
-     * @var string
      */
     private string $access_token;
 
@@ -67,8 +63,6 @@ response was generated.
      * token will expire in one hour from the time the
      * response was generated.
      *
-     *
-     * @var int
      */
     private int $expires_in;
 
@@ -76,8 +70,6 @@ response was generated.
      * The scope of the access token as described by
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3).
      *
-     *
-     * @var string|null
      */
     private ?string $scope = null;
 
@@ -85,16 +77,9 @@ response was generated.
      * The type of the token issued as described in
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).
      *
-     *
-     * @var OauthRetrieveAccessTokenOKResponseBodyToken_type
      */
     private OauthRetrieveAccessTokenOKResponseBodyToken_type $token_type;
 
-    /**
-     * @param string $accessToken
-     * @param int $expiresIn
-     * @param OauthRetrieveAccessTokenOKResponseBodyToken_type $tokenType
-     */
     public function __construct(string $accessToken, int $expiresIn, OauthRetrieveAccessTokenOKResponseBodyToken_type $tokenType)
     {
         $this->access_token = $accessToken;
@@ -102,42 +87,26 @@ response was generated.
         $this->token_type = $tokenType;
     }
 
-    /**
-     * @return string
-     */
     public function getAccessToken(): string
     {
         return $this->access_token;
     }
 
-    /**
-     * @return int
-     */
     public function getExpiresIn(): int
     {
         return $this->expires_in;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScope(): ?string
     {
         return $this->scope ?? null;
     }
 
-    /**
-     * @return OauthRetrieveAccessTokenOKResponseBodyToken_type
-     */
     public function getTokenType(): OauthRetrieveAccessTokenOKResponseBodyToken_type
     {
         return $this->token_type;
     }
 
-    /**
-     * @param string $access_token
-     * @return self
-     */
     public function withAccessToken(string $access_token): self
     {
         $validator = new Validator();
@@ -152,10 +121,6 @@ response was generated.
         return $clone;
     }
 
-    /**
-     * @param int $expires_in
-     * @return self
-     */
     public function withExpiresIn(int $expires_in): self
     {
         $validator = new Validator();
@@ -170,10 +135,6 @@ response was generated.
         return $clone;
     }
 
-    /**
-     * @param string $scope
-     * @return self
-     */
     public function withScope(string $scope): self
     {
         $validator = new Validator();
@@ -188,9 +149,6 @@ response was generated.
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScope(): self
     {
         $clone = clone $this;
@@ -199,10 +157,6 @@ response was generated.
         return $clone;
     }
 
-    /**
-     * @param OauthRetrieveAccessTokenOKResponseBodyToken_type $token_type
-     * @return self
-     */
     public function withTokenType(OauthRetrieveAccessTokenOKResponseBodyToken_type $token_type): self
     {
         $clone = clone $this;

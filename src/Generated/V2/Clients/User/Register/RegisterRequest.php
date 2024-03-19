@@ -13,8 +13,6 @@ class RegisterRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,35 +45,22 @@ class RegisterRequest
         ],
     ];
 
-    /**
-     * @var RegisterRequestBody
-     */
     private RegisterRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param RegisterRequestBody $body
-     */
     public function __construct(RegisterRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RegisterRequestBody
-     */
     public function getBody(): RegisterRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RegisterRequestBody $body
-     * @return self
-     */
     public function withBody(RegisterRequestBody $body): self
     {
         $clone = clone $this;

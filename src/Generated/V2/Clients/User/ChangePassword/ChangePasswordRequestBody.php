@@ -11,8 +11,6 @@ class ChangePasswordRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,63 +43,40 @@ This is optional, depending on the MFA activation status of the profile.
      * Multi Factor Code to confirm MFA.
      * This is optional, depending on the MFA activation status of the profile.
      *
-     *
-     * @var string|null
      */
     private ?string $multiFactorCode = null;
 
     /**
      * The new password.
-     *
-     * @var string
      */
     private string $newPassword;
 
     /**
      * The old password.
-     *
-     * @var string
      */
     private string $oldPassword;
 
-    /**
-     * @param string $newPassword
-     * @param string $oldPassword
-     */
     public function __construct(string $newPassword, string $oldPassword)
     {
         $this->newPassword = $newPassword;
         $this->oldPassword = $oldPassword;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMultiFactorCode(): ?string
     {
         return $this->multiFactorCode ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getNewPassword(): string
     {
         return $this->newPassword;
     }
 
-    /**
-     * @return string
-     */
     public function getOldPassword(): string
     {
         return $this->oldPassword;
     }
 
-    /**
-     * @param string $multiFactorCode
-     * @return self
-     */
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();
@@ -116,9 +91,6 @@ This is optional, depending on the MFA activation status of the profile.
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMultiFactorCode(): self
     {
         $clone = clone $this;
@@ -127,10 +99,6 @@ This is optional, depending on the MFA activation status of the profile.
         return $clone;
     }
 
-    /**
-     * @param string $newPassword
-     * @return self
-     */
     public function withNewPassword(string $newPassword): self
     {
         $validator = new Validator();
@@ -145,10 +113,6 @@ This is optional, depending on the MFA activation status of the profile.
         return $clone;
     }
 
-    /**
-     * @param string $oldPassword
-     * @return self
-     */
     public function withOldPassword(string $oldPassword): self
     {
         $validator = new Validator();

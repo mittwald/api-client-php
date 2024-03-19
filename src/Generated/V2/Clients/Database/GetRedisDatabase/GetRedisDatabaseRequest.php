@@ -13,8 +13,6 @@ class GetRedisDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetRedisDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $redisDatabaseId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $redisDatabaseId
-     */
     public function __construct(string $redisDatabaseId)
     {
         $this->redisDatabaseId = $redisDatabaseId;
     }
 
-    /**
-     * @return string
-     */
     public function getRedisDatabaseId(): string
     {
         return $this->redisDatabaseId;
     }
 
-    /**
-     * @param string $redisDatabaseId
-     * @return self
-     */
     public function withRedisDatabaseId(string $redisDatabaseId): self
     {
         $validator = new Validator();

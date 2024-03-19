@@ -22,8 +22,6 @@ class AuthCode2
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,31 +36,18 @@ class AuthCode2
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $expires;
 
-    /**
-     * @param DateTime $expires
-     */
     public function __construct(DateTime $expires)
     {
         $this->expires = $expires;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getExpires(): DateTime
     {
         return $this->expires;
     }
 
-    /**
-     * @param DateTime $expires
-     * @return self
-     */
     public function withExpires(DateTime $expires): self
     {
         $clone = clone $this;

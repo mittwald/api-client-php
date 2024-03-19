@@ -21,8 +21,6 @@ class CreateMailAddress
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -62,26 +60,12 @@ class CreateMailAddress
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $address;
 
-    /**
-     * @var bool
-     */
     private bool $isCatchAll;
 
-    /**
-     * @var CreateMailAddressMailbox
-     */
     private CreateMailAddressMailbox $mailbox;
 
-    /**
-     * @param string $address
-     * @param bool $isCatchAll
-     * @param CreateMailAddressMailbox $mailbox
-     */
     public function __construct(string $address, bool $isCatchAll, CreateMailAddressMailbox $mailbox)
     {
         $this->address = $address;
@@ -89,34 +73,21 @@ class CreateMailAddress
         $this->mailbox = $mailbox;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsCatchAll(): bool
     {
         return $this->isCatchAll;
     }
 
-    /**
-     * @return CreateMailAddressMailbox
-     */
     public function getMailbox(): CreateMailAddressMailbox
     {
         return $this->mailbox;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();
@@ -131,10 +102,6 @@ class CreateMailAddress
         return $clone;
     }
 
-    /**
-     * @param bool $isCatchAll
-     * @return self
-     */
     public function withIsCatchAll(bool $isCatchAll): self
     {
         $validator = new Validator();
@@ -149,10 +116,6 @@ class CreateMailAddress
         return $clone;
     }
 
-    /**
-     * @param CreateMailAddressMailbox $mailbox
-     * @return self
-     */
     public function withMailbox(CreateMailAddressMailbox $mailbox): self
     {
         $clone = clone $this;

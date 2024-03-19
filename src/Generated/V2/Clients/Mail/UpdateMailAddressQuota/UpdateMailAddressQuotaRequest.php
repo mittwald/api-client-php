@@ -13,8 +13,6 @@ class UpdateMailAddressQuotaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class UpdateMailAddressQuotaRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressQuotaRequestBody
-     */
     private UpdateMailAddressQuotaRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressQuotaRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressQuotaRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressQuotaRequestBody
-     */
     public function getBody(): UpdateMailAddressQuotaRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class UpdateMailAddressQuotaRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressQuotaRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressQuotaRequestBody $body): self
     {
         $clone = clone $this;

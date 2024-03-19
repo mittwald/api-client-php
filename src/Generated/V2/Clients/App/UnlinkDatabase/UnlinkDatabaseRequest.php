@@ -13,8 +13,6 @@ class UnlinkDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class UnlinkDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param string $databaseId
-     */
     public function __construct(string $appInstallationId, string $databaseId)
     {
         $this->appInstallationId = $appInstallationId;
         $this->databaseId = $databaseId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class UnlinkDatabaseRequest
         return $clone;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();

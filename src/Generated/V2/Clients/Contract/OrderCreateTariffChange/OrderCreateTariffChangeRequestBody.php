@@ -13,8 +13,6 @@ class OrderCreateTariffChangeRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,14 +37,8 @@ class OrderCreateTariffChangeRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var ProjectHostingTariffChange|ServerTariffChange|null
-     */
     private ProjectHostingTariffChange|ServerTariffChange|null $tariffChangeData = null;
 
-    /**
-     * @var OrderCreateTariffChangeRequestBodyTariffChangeType|null
-     */
     private ?OrderCreateTariffChangeRequestBodyTariffChangeType $tariffChangeType = null;
 
     /**
@@ -65,9 +57,6 @@ class OrderCreateTariffChangeRequestBody
         return $this->tariffChangeData;
     }
 
-    /**
-     * @return OrderCreateTariffChangeRequestBodyTariffChangeType|null
-     */
     public function getTariffChangeType(): ?OrderCreateTariffChangeRequestBodyTariffChangeType
     {
         return $this->tariffChangeType ?? null;
@@ -75,7 +64,6 @@ class OrderCreateTariffChangeRequestBody
 
     /**
      * @param ProjectHostingTariffChange|ServerTariffChange $tariffChangeData
-     * @return self
      */
     public function withTariffChangeData(ProjectHostingTariffChange|ServerTariffChange $tariffChangeData): self
     {
@@ -85,9 +73,6 @@ class OrderCreateTariffChangeRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTariffChangeData(): self
     {
         $clone = clone $this;
@@ -96,10 +81,6 @@ class OrderCreateTariffChangeRequestBody
         return $clone;
     }
 
-    /**
-     * @param OrderCreateTariffChangeRequestBodyTariffChangeType $tariffChangeType
-     * @return self
-     */
     public function withTariffChangeType(OrderCreateTariffChangeRequestBodyTariffChangeType $tariffChangeType): self
     {
         $clone = clone $this;
@@ -108,9 +89,6 @@ class OrderCreateTariffChangeRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTariffChangeType(): self
     {
         $clone = clone $this;

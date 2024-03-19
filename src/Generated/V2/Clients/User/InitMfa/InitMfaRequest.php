@@ -13,8 +13,6 @@ class InitMfaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class InitMfaRequest
         ],
     ];
 
-    /**
-     * @var InitMfaRequestBody
-     */
     private InitMfaRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param InitMfaRequestBody $body
-     */
     public function __construct(InitMfaRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return InitMfaRequestBody
-     */
     public function getBody(): InitMfaRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param InitMfaRequestBody $body
-     * @return self
-     */
     public function withBody(InitMfaRequestBody $body): self
     {
         $clone = clone $this;

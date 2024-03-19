@@ -13,8 +13,6 @@ class GetMissingDependenciesForAppinstallationOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -70,7 +68,6 @@ class GetMissingDependenciesForAppinstallationOKResponseBody
 
     /**
      * @param SystemSoftwareDependency[] $missingSystemSoftwareDependencies
-     * @return self
      */
     public function withMissingSystemSoftwareDependencies(array $missingSystemSoftwareDependencies): self
     {
@@ -80,9 +77,6 @@ class GetMissingDependenciesForAppinstallationOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMissingSystemSoftwareDependencies(): self
     {
         $clone = clone $this;
@@ -93,7 +87,6 @@ class GetMissingDependenciesForAppinstallationOKResponseBody
 
     /**
      * @param UserInput[] $missingUserInputs
-     * @return self
      */
     public function withMissingUserInputs(array $missingUserInputs): self
     {
@@ -103,9 +96,6 @@ class GetMissingDependenciesForAppinstallationOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMissingUserInputs(): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class IngressTlsDeprecatedOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class IngressTlsDeprecatedOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var IngressTlsDeprecatedOKResponseBody
-     */
     private IngressTlsDeprecatedOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param IngressTlsDeprecatedOKResponseBody $body
-     */
     public function __construct(IngressTlsDeprecatedOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return IngressTlsDeprecatedOKResponseBody
-     */
     public function getBody(): IngressTlsDeprecatedOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param IngressTlsDeprecatedOKResponseBody $body
-     * @return self
-     */
     public function withBody(IngressTlsDeprecatedOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class Migration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -67,14 +65,8 @@ class Migration
      */
     private array $addresses;
 
-    /**
-     * @var MigrationFinalizeJob|null
-     */
     private ?MigrationFinalizeJob $finalizers = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
     /**
@@ -82,22 +74,13 @@ class Migration
      */
     private array $mailboxes;
 
-    /**
-     * @var string
-     */
     private string $sourceCoabProjectId;
 
-    /**
-     * @var string
-     */
     private string $targetNexusProjectId;
 
     /**
      * @param MigrationMailAddress[] $addresses
-     * @param string $id
      * @param MigrationMailbox[] $mailboxes
-     * @param string $sourceCoabProjectId
-     * @param string $targetNexusProjectId
      */
     public function __construct(array $addresses, string $id, array $mailboxes, string $sourceCoabProjectId, string $targetNexusProjectId)
     {
@@ -126,9 +109,6 @@ class Migration
         return $this->finalizers ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -143,17 +123,11 @@ class Migration
         return $this->mailboxes;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceCoabProjectId(): string
     {
         return $this->sourceCoabProjectId;
     }
 
-    /**
-     * @return string
-     */
     public function getTargetNexusProjectId(): string
     {
         return $this->targetNexusProjectId;
@@ -161,7 +135,6 @@ class Migration
 
     /**
      * @param MigrationMailAddress[] $addresses
-     * @return self
      */
     public function withAddresses(array $addresses): self
     {
@@ -171,10 +144,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param MigrationFinalizeJob $finalizers
-     * @return self
-     */
     public function withFinalizers(MigrationFinalizeJob $finalizers): self
     {
         $clone = clone $this;
@@ -183,9 +152,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFinalizers(): self
     {
         $clone = clone $this;
@@ -194,10 +160,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -214,7 +176,6 @@ class Migration
 
     /**
      * @param MigrationMailbox[] $mailboxes
-     * @return self
      */
     public function withMailboxes(array $mailboxes): self
     {
@@ -224,10 +185,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param string $sourceCoabProjectId
-     * @return self
-     */
     public function withSourceCoabProjectId(string $sourceCoabProjectId): self
     {
         $validator = new Validator();
@@ -242,10 +199,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param string $targetNexusProjectId
-     * @return self
-     */
     public function withTargetNexusProjectId(string $targetNexusProjectId): self
     {
         $validator = new Validator();

@@ -11,8 +11,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -33,46 +31,26 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $accessTokenRetrievalKey;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param string $accessTokenRetrievalKey
-     * @param string $userId
-     */
     public function __construct(string $accessTokenRetrievalKey, string $userId)
     {
         $this->accessTokenRetrievalKey = $accessTokenRetrievalKey;
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getAccessTokenRetrievalKey(): string
     {
         return $this->accessTokenRetrievalKey;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $accessTokenRetrievalKey
-     * @return self
-     */
     public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
     {
         $validator = new Validator();
@@ -87,10 +65,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
