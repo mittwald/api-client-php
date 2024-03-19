@@ -13,8 +13,6 @@ class DeclareProcessChangeHandlesV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,50 +42,30 @@ class DeclareProcessChangeHandlesV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var DeclareProcessChangeHandlesV2DeprecatedRequestBody
-     */
     private DeclareProcessChangeHandlesV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param DeclareProcessChangeHandlesV2DeprecatedRequestBody $body
-     */
     public function __construct(string $domainId, DeclareProcessChangeHandlesV2DeprecatedRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return DeclareProcessChangeHandlesV2DeprecatedRequestBody
-     */
     public function getBody(): DeclareProcessChangeHandlesV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -102,10 +80,6 @@ class DeclareProcessChangeHandlesV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DeclareProcessChangeHandlesV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DeclareProcessChangeHandlesV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class ServerOrderPreview
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,29 +48,16 @@ class ServerOrderPreview
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $customerId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $diskspaceInGiB;
 
-    /**
-     * @var string
-     */
     private string $machineType;
 
     /**
      * @param int|float $diskspaceInGiB
-     * @param string $machineType
      */
     public function __construct(int|float $diskspaceInGiB, string $machineType)
     {
@@ -80,42 +65,26 @@ class ServerOrderPreview
         $this->machineType = $machineType;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getDiskspaceInGiB(): int|float
     {
         return $this->diskspaceInGiB;
     }
 
-    /**
-     * @return string
-     */
     public function getMachineType(): string
     {
         return $this->machineType;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -130,9 +99,6 @@ class ServerOrderPreview
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerId(): self
     {
         $clone = clone $this;
@@ -141,10 +107,6 @@ class ServerOrderPreview
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -159,9 +121,6 @@ class ServerOrderPreview
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -172,7 +131,6 @@ class ServerOrderPreview
 
     /**
      * @param int|float $diskspaceInGiB
-     * @return self
      */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
@@ -188,10 +146,6 @@ class ServerOrderPreview
         return $clone;
     }
 
-    /**
-     * @param string $machineType
-     * @return self
-     */
     public function withMachineType(string $machineType): self
     {
         $validator = new Validator();

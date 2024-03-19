@@ -14,8 +14,6 @@ class GetCustomerCategoryOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetCustomerCategoryOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Category
-     */
     private Category $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Category $body
-     */
     public function __construct(Category $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Category
-     */
     public function getBody(): Category
     {
         return $this->body;
     }
 
-    /**
-     * @param Category $body
-     * @return self
-     */
     public function withBody(Category $body): self
     {
         $clone = clone $this;

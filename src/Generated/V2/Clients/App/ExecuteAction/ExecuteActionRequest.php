@@ -14,8 +14,6 @@ class ExecuteActionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,30 +35,16 @@ class ExecuteActionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var Action
-     */
     private Action $action;
 
-    /**
-     * @var ExecuteActionRequestBody
-     */
     private ExecuteActionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param Action $action
-     * @param ExecuteActionRequestBody $body
-     */
     public function __construct(string $appInstallationId, Action $action, ExecuteActionRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
@@ -68,34 +52,21 @@ class ExecuteActionRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return Action
-     */
     public function getAction(): Action
     {
         return $this->action;
     }
 
-    /**
-     * @return ExecuteActionRequestBody
-     */
     public function getBody(): ExecuteActionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -110,10 +81,6 @@ class ExecuteActionRequest
         return $clone;
     }
 
-    /**
-     * @param Action $action
-     * @return self
-     */
     public function withAction(Action $action): self
     {
         $clone = clone $this;
@@ -122,10 +89,6 @@ class ExecuteActionRequest
         return $clone;
     }
 
-    /**
-     * @param ExecuteActionRequestBody $body
-     * @return self
-     */
     public function withBody(ExecuteActionRequestBody $body): self
     {
         $clone = clone $this;

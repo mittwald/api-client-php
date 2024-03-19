@@ -13,8 +13,6 @@ class InitMfaOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,33 +44,20 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
         ],
     ];
 
-    /**
-     * @var InitMfaOKResponseBody
-     */
     private InitMfaOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param InitMfaOKResponseBody $body
-     */
     public function __construct(InitMfaOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return InitMfaOKResponseBody
-     */
     public function getBody(): InitMfaOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param InitMfaOKResponseBody $body
-     * @return self
-     */
     public function withBody(InitMfaOKResponseBody $body): self
     {
         $clone = clone $this;

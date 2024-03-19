@@ -13,8 +13,6 @@ class UpdateCustomerMembershipRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,50 +44,30 @@ class UpdateCustomerMembershipRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerMembershipId;
 
-    /**
-     * @var UpdateCustomerMembershipRequestBody
-     */
     private UpdateCustomerMembershipRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerMembershipId
-     * @param UpdateCustomerMembershipRequestBody $body
-     */
     public function __construct(string $customerMembershipId, UpdateCustomerMembershipRequestBody $body)
     {
         $this->customerMembershipId = $customerMembershipId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerMembershipId(): string
     {
         return $this->customerMembershipId;
     }
 
-    /**
-     * @return UpdateCustomerMembershipRequestBody
-     */
     public function getBody(): UpdateCustomerMembershipRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $customerMembershipId
-     * @return self
-     */
     public function withCustomerMembershipId(string $customerMembershipId): self
     {
         $validator = new Validator();
@@ -104,10 +82,6 @@ class UpdateCustomerMembershipRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateCustomerMembershipRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateCustomerMembershipRequestBody $body): self
     {
         $clone = clone $this;

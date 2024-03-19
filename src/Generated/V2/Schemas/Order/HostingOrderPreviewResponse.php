@@ -21,8 +21,6 @@ class HostingOrderPreviewResponse
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,19 +45,10 @@ class HostingOrderPreviewResponse
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float
-     */
     private int|float $machineTypePrice;
 
-    /**
-     * @var int|float
-     */
     private int|float $storagePrice;
 
-    /**
-     * @var int|float
-     */
     private int|float $totalPrice;
 
     /**
@@ -74,25 +63,16 @@ class HostingOrderPreviewResponse
         $this->totalPrice = $totalPrice;
     }
 
-    /**
-     * @return int|float
-     */
     public function getMachineTypePrice(): int|float
     {
         return $this->machineTypePrice;
     }
 
-    /**
-     * @return int|float
-     */
     public function getStoragePrice(): int|float
     {
         return $this->storagePrice;
     }
 
-    /**
-     * @return int|float
-     */
     public function getTotalPrice(): int|float
     {
         return $this->totalPrice;
@@ -100,7 +80,6 @@ class HostingOrderPreviewResponse
 
     /**
      * @param int|float $machineTypePrice
-     * @return self
      */
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
@@ -118,7 +97,6 @@ class HostingOrderPreviewResponse
 
     /**
      * @param int|float $storagePrice
-     * @return self
      */
     public function withStoragePrice(int|float $storagePrice): self
     {
@@ -136,7 +114,6 @@ class HostingOrderPreviewResponse
 
     /**
      * @param int|float $totalPrice
-     * @return self
      */
     public function withTotalPrice(int|float $totalPrice): self
     {

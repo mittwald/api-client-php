@@ -13,8 +13,6 @@ class CreateRelocationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -178,35 +176,22 @@ class CreateRelocationRequest
         ],
     ];
 
-    /**
-     * @var CreateRelocationRequestBody
-     */
     private CreateRelocationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateRelocationRequestBody $body
-     */
     public function __construct(CreateRelocationRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateRelocationRequestBody
-     */
     public function getBody(): CreateRelocationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateRelocationRequestBody $body
-     * @return self
-     */
     public function withBody(CreateRelocationRequestBody $body): self
     {
         $clone = clone $this;

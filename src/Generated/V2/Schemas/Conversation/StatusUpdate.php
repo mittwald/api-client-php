@@ -21,8 +21,6 @@ class StatusUpdate
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -62,42 +60,18 @@ class StatusUpdate
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var string
-     */
     private string $createdAt;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $internal = null;
 
-    /**
-     * @var string
-     */
     private string $messageContent;
 
-    /**
-     * @var StatusUpdateMeta|null
-     */
     private ?StatusUpdateMeta $meta = null;
 
-    /**
-     * @var StatusUpdateType
-     */
     private StatusUpdateType $type;
 
-    /**
-     * @param string $conversationId
-     * @param string $createdAt
-     * @param string $messageContent
-     * @param StatusUpdateType $type
-     */
     public function __construct(string $conversationId, string $createdAt, string $messageContent, StatusUpdateType $type)
     {
         $this->conversationId = $conversationId;
@@ -106,58 +80,36 @@ class StatusUpdate
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return string
-     */
     public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getInternal(): ?bool
     {
         return $this->internal ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getMessageContent(): string
     {
         return $this->messageContent;
     }
 
-    /**
-     * @return StatusUpdateMeta|null
-     */
     public function getMeta(): ?StatusUpdateMeta
     {
         return $this->meta ?? null;
     }
 
-    /**
-     * @return StatusUpdateType
-     */
     public function getType(): StatusUpdateType
     {
         return $this->type;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -172,10 +124,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @param string $createdAt
-     * @return self
-     */
     public function withCreatedAt(string $createdAt): self
     {
         $validator = new Validator();
@@ -190,10 +138,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @param bool $internal
-     * @return self
-     */
     public function withInternal(bool $internal): self
     {
         $validator = new Validator();
@@ -208,9 +152,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInternal(): self
     {
         $clone = clone $this;
@@ -219,10 +160,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @param string $messageContent
-     * @return self
-     */
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
@@ -237,10 +174,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @param StatusUpdateMeta $meta
-     * @return self
-     */
     public function withMeta(StatusUpdateMeta $meta): self
     {
         $clone = clone $this;
@@ -249,9 +182,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMeta(): self
     {
         $clone = clone $this;
@@ -260,10 +190,6 @@ class StatusUpdate
         return $clone;
     }
 
-    /**
-     * @param StatusUpdateType $type
-     * @return self
-     */
     public function withType(StatusUpdateType $type): self
     {
         $clone = clone $this;

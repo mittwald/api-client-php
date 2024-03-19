@@ -13,8 +13,6 @@ class ProjectFileSystemGetDiskUsageRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,48 +31,29 @@ class ProjectFileSystemGetDiskUsageRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string|null
-     */
     private ?string $directory = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDirectory(): ?string
     {
         return $this->directory ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -89,10 +68,6 @@ class ProjectFileSystemGetDiskUsageRequest
         return $clone;
     }
 
-    /**
-     * @param string $directory
-     * @return self
-     */
     public function withDirectory(string $directory): self
     {
         $validator = new Validator();
@@ -107,9 +82,6 @@ class ProjectFileSystemGetDiskUsageRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDirectory(): self
     {
         $clone = clone $this;

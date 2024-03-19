@@ -14,8 +14,6 @@ class CreateSshUserRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,24 +35,14 @@ class CreateSshUserRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var AuthenticationAlternative1|AuthenticationAlternative2
-     */
     private AuthenticationAlternative1|AuthenticationAlternative2 $authentication;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
     /**
      * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     * @param string $description
      */
     public function __construct(AuthenticationAlternative1|AuthenticationAlternative2 $authentication, string $description)
     {
@@ -71,17 +59,11 @@ class CreateSshUserRequestBody
         return $this->authentication;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
@@ -89,7 +71,6 @@ class CreateSshUserRequestBody
 
     /**
      * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     * @return self
      */
     public function withAuthentication(AuthenticationAlternative1|AuthenticationAlternative2 $authentication): self
     {
@@ -99,10 +80,6 @@ class CreateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -117,10 +94,6 @@ class CreateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -129,9 +102,6 @@ class CreateSshUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;

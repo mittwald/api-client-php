@@ -13,8 +13,6 @@ class UpdateMysqlUserPasswordRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMysqlUserPasswordRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlUserId;
 
-    /**
-     * @var UpdateMysqlUserPasswordRequestBody
-     */
     private UpdateMysqlUserPasswordRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mysqlUserId
-     * @param UpdateMysqlUserPasswordRequestBody $body
-     */
     public function __construct(string $mysqlUserId, UpdateMysqlUserPasswordRequestBody $body)
     {
         $this->mysqlUserId = $mysqlUserId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlUserId(): string
     {
         return $this->mysqlUserId;
     }
 
-    /**
-     * @return UpdateMysqlUserPasswordRequestBody
-     */
     public function getBody(): UpdateMysqlUserPasswordRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mysqlUserId
-     * @return self
-     */
     public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMysqlUserPasswordRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMysqlUserPasswordRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMysqlUserPasswordRequestBody $body): self
     {
         $clone = clone $this;

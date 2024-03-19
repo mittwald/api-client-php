@@ -13,8 +13,6 @@ class ListProjectsOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -133,7 +131,6 @@ class ListProjectsOKResponse implements ResponseContainer
 
     /**
      * @param ListProjectsOKResponseBodyItem[] $body
-     * @return self
      */
     public function withBody(array $body): self
     {

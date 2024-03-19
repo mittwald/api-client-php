@@ -21,8 +21,6 @@ class MailAddressInternalMailboxSpamProtection
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,32 +51,14 @@ class MailAddressInternalMailboxSpamProtection
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var bool
-     */
     private bool $autoDeleteSpam;
 
-    /**
-     * @var MailAddressInternalMailboxSpamProtectionFolder
-     */
     private MailAddressInternalMailboxSpamProtectionFolder $folder;
 
-    /**
-     * @var int
-     */
     private int $relocationMinSpamScore;
 
-    /**
-     * @param bool $active
-     * @param bool $autoDeleteSpam
-     * @param MailAddressInternalMailboxSpamProtectionFolder $folder
-     * @param int $relocationMinSpamScore
-     */
     public function __construct(bool $active, bool $autoDeleteSpam, MailAddressInternalMailboxSpamProtectionFolder $folder, int $relocationMinSpamScore)
     {
         $this->active = $active;
@@ -87,42 +67,26 @@ class MailAddressInternalMailboxSpamProtection
         $this->relocationMinSpamScore = $relocationMinSpamScore;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return bool
-     */
     public function getAutoDeleteSpam(): bool
     {
         return $this->autoDeleteSpam;
     }
 
-    /**
-     * @return MailAddressInternalMailboxSpamProtectionFolder
-     */
     public function getFolder(): MailAddressInternalMailboxSpamProtectionFolder
     {
         return $this->folder;
     }
 
-    /**
-     * @return int
-     */
     public function getRelocationMinSpamScore(): int
     {
         return $this->relocationMinSpamScore;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -137,10 +101,6 @@ class MailAddressInternalMailboxSpamProtection
         return $clone;
     }
 
-    /**
-     * @param bool $autoDeleteSpam
-     * @return self
-     */
     public function withAutoDeleteSpam(bool $autoDeleteSpam): self
     {
         $validator = new Validator();
@@ -155,10 +115,6 @@ class MailAddressInternalMailboxSpamProtection
         return $clone;
     }
 
-    /**
-     * @param MailAddressInternalMailboxSpamProtectionFolder $folder
-     * @return self
-     */
     public function withFolder(MailAddressInternalMailboxSpamProtectionFolder $folder): self
     {
         $clone = clone $this;
@@ -167,10 +123,6 @@ class MailAddressInternalMailboxSpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $relocationMinSpamScore
-     * @return self
-     */
     public function withRelocationMinSpamScore(int $relocationMinSpamScore): self
     {
         $validator = new Validator();

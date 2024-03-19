@@ -13,8 +13,6 @@ class DeleteCustomerOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class DeleteCustomerOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DeleteCustomerOKResponseBody
-     */
     private DeleteCustomerOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeleteCustomerOKResponseBody $body
-     */
     public function __construct(DeleteCustomerOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeleteCustomerOKResponseBody
-     */
     public function getBody(): DeleteCustomerOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeleteCustomerOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeleteCustomerOKResponseBody $body): self
     {
         $clone = clone $this;

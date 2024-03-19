@@ -13,8 +13,6 @@ class RemoveAvatarUnauthorizedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class RemoveAvatarUnauthorizedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var RemoveAvatarUnauthorizedResponseBody
-     */
     private RemoveAvatarUnauthorizedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RemoveAvatarUnauthorizedResponseBody $body
-     */
     public function __construct(RemoveAvatarUnauthorizedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RemoveAvatarUnauthorizedResponseBody
-     */
     public function getBody(): RemoveAvatarUnauthorizedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RemoveAvatarUnauthorizedResponseBody $body
-     * @return self
-     */
     public function withBody(RemoveAvatarUnauthorizedResponseBody $body): self
     {
         $clone = clone $this;

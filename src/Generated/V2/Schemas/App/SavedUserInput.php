@@ -22,8 +22,6 @@ class SavedUserInput
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion.',
@@ -42,46 +40,26 @@ class SavedUserInput
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $value;
 
-    /**
-     * @param string $name
-     * @param string $value
-     */
     public function __construct(string $name, string $value)
     {
         $this->name = $name;
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -96,10 +74,6 @@ class SavedUserInput
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();

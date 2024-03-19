@@ -22,8 +22,6 @@ class Notification
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,44 +63,18 @@ class Notification
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var bool
-     */
     private bool $read;
 
-    /**
-     * @var AggregateReference
-     */
     private AggregateReference $reference;
 
-    /**
-     * @var NotificationSeverity
-     */
     private NotificationSeverity $severity;
 
-    /**
-     * @var string
-     */
     private string $type;
 
-    /**
-     * @param DateTime $createdAt
-     * @param string $id
-     * @param bool $read
-     * @param AggregateReference $reference
-     * @param NotificationSeverity $severity
-     * @param string $type
-     */
     public function __construct(DateTime $createdAt, string $id, bool $read, AggregateReference $reference, NotificationSeverity $severity, string $type)
     {
         $this->createdAt = $createdAt;
@@ -113,58 +85,36 @@ class Notification
         $this->type = $type;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getRead(): bool
     {
         return $this->read;
     }
 
-    /**
-     * @return AggregateReference
-     */
     public function getReference(): AggregateReference
     {
         return $this->reference;
     }
 
-    /**
-     * @return NotificationSeverity
-     */
     public function getSeverity(): NotificationSeverity
     {
         return $this->severity;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -173,10 +123,6 @@ class Notification
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -191,10 +137,6 @@ class Notification
         return $clone;
     }
 
-    /**
-     * @param bool $read
-     * @return self
-     */
     public function withRead(bool $read): self
     {
         $validator = new Validator();
@@ -209,10 +151,6 @@ class Notification
         return $clone;
     }
 
-    /**
-     * @param AggregateReference $reference
-     * @return self
-     */
     public function withReference(AggregateReference $reference): self
     {
         $clone = clone $this;
@@ -221,10 +159,6 @@ class Notification
         return $clone;
     }
 
-    /**
-     * @param NotificationSeverity $severity
-     * @return self
-     */
     public function withSeverity(NotificationSeverity $severity): self
     {
         $clone = clone $this;
@@ -233,10 +167,6 @@ class Notification
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();

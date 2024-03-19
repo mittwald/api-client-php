@@ -12,8 +12,6 @@ class NotificationsReadAllNotificationsOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class NotificationsReadAllNotificationsOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var NotificationStatus
-     */
     private NotificationStatus $status;
 
-    /**
-     * @param NotificationStatus $status
-     */
     public function __construct(NotificationStatus $status)
     {
         $this->status = $status;
     }
 
-    /**
-     * @return NotificationStatus
-     */
     public function getStatus(): NotificationStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param NotificationStatus $status
-     * @return self
-     */
     public function withStatus(NotificationStatus $status): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class UpdateDomainNameserversRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,50 +41,30 @@ class UpdateDomainNameserversRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var UpdateDomainNameserversRequestBody
-     */
     private UpdateDomainNameserversRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param UpdateDomainNameserversRequestBody $body
-     */
     public function __construct(string $domainId, UpdateDomainNameserversRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return UpdateDomainNameserversRequestBody
-     */
     public function getBody(): UpdateDomainNameserversRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -101,10 +79,6 @@ class UpdateDomainNameserversRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDomainNameserversRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateDomainNameserversRequestBody $body): self
     {
         $clone = clone $this;

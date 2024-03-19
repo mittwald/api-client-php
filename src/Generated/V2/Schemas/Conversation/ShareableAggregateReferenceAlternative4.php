@@ -22,8 +22,6 @@ class ShareableAggregateReferenceAlternative4
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -51,26 +49,12 @@ class ShareableAggregateReferenceAlternative4
         'type' => 'object',
     ];
 
-    /**
-     * @var ShareableAggregateReferenceAlternative4Aggregate
-     */
     private ShareableAggregateReferenceAlternative4Aggregate $aggregate;
 
-    /**
-     * @var ShareableAggregateReferenceAlternative4Domain
-     */
     private ShareableAggregateReferenceAlternative4Domain $domain;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @param ShareableAggregateReferenceAlternative4Aggregate $aggregate
-     * @param ShareableAggregateReferenceAlternative4Domain $domain
-     * @param string $id
-     */
     public function __construct(ShareableAggregateReferenceAlternative4Aggregate $aggregate, ShareableAggregateReferenceAlternative4Domain $domain, string $id)
     {
         $this->aggregate = $aggregate;
@@ -78,34 +62,21 @@ class ShareableAggregateReferenceAlternative4
         $this->id = $id;
     }
 
-    /**
-     * @return ShareableAggregateReferenceAlternative4Aggregate
-     */
     public function getAggregate(): ShareableAggregateReferenceAlternative4Aggregate
     {
         return $this->aggregate;
     }
 
-    /**
-     * @return ShareableAggregateReferenceAlternative4Domain
-     */
     public function getDomain(): ShareableAggregateReferenceAlternative4Domain
     {
         return $this->domain;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param ShareableAggregateReferenceAlternative4Aggregate $aggregate
-     * @return self
-     */
     public function withAggregate(ShareableAggregateReferenceAlternative4Aggregate $aggregate): self
     {
         $clone = clone $this;
@@ -114,10 +85,6 @@ class ShareableAggregateReferenceAlternative4
         return $clone;
     }
 
-    /**
-     * @param ShareableAggregateReferenceAlternative4Domain $domain
-     * @return self
-     */
     public function withDomain(ShareableAggregateReferenceAlternative4Domain $domain): self
     {
         $clone = clone $this;
@@ -126,10 +93,6 @@ class ShareableAggregateReferenceAlternative4
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();

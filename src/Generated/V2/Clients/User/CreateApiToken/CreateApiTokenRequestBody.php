@@ -12,8 +12,6 @@ class CreateApiTokenRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -51,14 +49,8 @@ class CreateApiTokenRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
     /**
@@ -69,7 +61,6 @@ class CreateApiTokenRequestBody
     private array $roles;
 
     /**
-     * @param string $description
      * @param string[] $roles
      */
     public function __construct(string $description, array $roles)
@@ -78,17 +69,11 @@ class CreateApiTokenRequestBody
         $this->roles = $roles;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
@@ -102,10 +87,6 @@ class CreateApiTokenRequestBody
         return $this->roles;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -120,10 +101,6 @@ class CreateApiTokenRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -132,9 +109,6 @@ class CreateApiTokenRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -145,7 +119,6 @@ class CreateApiTokenRequestBody
 
     /**
      * @param string[] $roles
-     * @return self
      */
     public function withRoles(array $roles): self
     {

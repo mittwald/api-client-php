@@ -12,8 +12,6 @@ class IngressCreateIngressCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class IngressCreateIngressCreatedResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var Ownership
-     */
     private Ownership $ownership;
 
-    /**
-     * @param string $id
-     * @param Ownership $ownership
-     */
     public function __construct(string $id, Ownership $ownership)
     {
         $this->id = $id;
         $this->ownership = $ownership;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return Ownership
-     */
     public function getOwnership(): Ownership
     {
         return $this->ownership;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class IngressCreateIngressCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param Ownership $ownership
-     * @return self
-     */
     public function withOwnership(Ownership $ownership): self
     {
         $clone = clone $this;

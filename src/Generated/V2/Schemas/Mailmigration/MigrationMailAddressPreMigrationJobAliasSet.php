@@ -22,8 +22,6 @@ class MigrationMailAddressPreMigrationJobAliasSet
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,31 +35,18 @@ class MigrationMailAddressPreMigrationJobAliasSet
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $sourceCoabMailboxName;
 
-    /**
-     * @param string $sourceCoabMailboxName
-     */
     public function __construct(string $sourceCoabMailboxName)
     {
         $this->sourceCoabMailboxName = $sourceCoabMailboxName;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceCoabMailboxName(): string
     {
         return $this->sourceCoabMailboxName;
     }
 
-    /**
-     * @param string $sourceCoabMailboxName
-     * @return self
-     */
     public function withSourceCoabMailboxName(string $sourceCoabMailboxName): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class DeprecatedUserServiceFeedbackCreateCreatedResponse implements ResponseCont
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class DeprecatedUserServiceFeedbackCreateCreatedResponse implements ResponseCont
         ],
     ];
 
-    /**
-     * @var DeprecatedUserServiceFeedbackCreateCreatedResponseBody
-     */
     private DeprecatedUserServiceFeedbackCreateCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedUserServiceFeedbackCreateCreatedResponseBody $body
-     */
     public function __construct(DeprecatedUserServiceFeedbackCreateCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserServiceFeedbackCreateCreatedResponseBody
-     */
     public function getBody(): DeprecatedUserServiceFeedbackCreateCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserServiceFeedbackCreateCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServiceFeedbackCreateCreatedResponseBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class ResendVerificationEmailForbiddenResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,33 +36,20 @@ class ResendVerificationEmailForbiddenResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ResendVerificationEmailForbiddenResponseBody
-     */
     private ResendVerificationEmailForbiddenResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ResendVerificationEmailForbiddenResponseBody $body
-     */
     public function __construct(ResendVerificationEmailForbiddenResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ResendVerificationEmailForbiddenResponseBody
-     */
     public function getBody(): ResendVerificationEmailForbiddenResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ResendVerificationEmailForbiddenResponseBody $body
-     * @return self
-     */
     public function withBody(ResendVerificationEmailForbiddenResponseBody $body): self
     {
         $clone = clone $this;

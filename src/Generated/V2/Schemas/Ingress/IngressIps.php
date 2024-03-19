@@ -21,8 +21,6 @@ class IngressIps
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -63,7 +61,6 @@ class IngressIps
 
     /**
      * @param string[] $v4
-     * @return self
      */
     public function withV4(array $v4): self
     {

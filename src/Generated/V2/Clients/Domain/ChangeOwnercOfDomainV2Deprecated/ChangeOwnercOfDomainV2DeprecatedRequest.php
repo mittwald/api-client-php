@@ -13,8 +13,6 @@ class ChangeOwnercOfDomainV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,50 +42,30 @@ class ChangeOwnercOfDomainV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var ChangeOwnercOfDomainV2DeprecatedRequestBody
-     */
     private ChangeOwnercOfDomainV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param ChangeOwnercOfDomainV2DeprecatedRequestBody $body
-     */
     public function __construct(string $domainId, ChangeOwnercOfDomainV2DeprecatedRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return ChangeOwnercOfDomainV2DeprecatedRequestBody
-     */
     public function getBody(): ChangeOwnercOfDomainV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -102,10 +80,6 @@ class ChangeOwnercOfDomainV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param ChangeOwnercOfDomainV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(ChangeOwnercOfDomainV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

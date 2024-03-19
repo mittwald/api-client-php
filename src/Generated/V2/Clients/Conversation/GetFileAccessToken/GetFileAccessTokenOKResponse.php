@@ -13,8 +13,6 @@ class GetFileAccessTokenOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,33 +39,20 @@ class GetFileAccessTokenOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetFileAccessTokenOKResponseBody
-     */
     private GetFileAccessTokenOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetFileAccessTokenOKResponseBody $body
-     */
     public function __construct(GetFileAccessTokenOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetFileAccessTokenOKResponseBody
-     */
     public function getBody(): GetFileAccessTokenOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetFileAccessTokenOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetFileAccessTokenOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class GetPersonalizedSettingsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,9 +37,6 @@ class GetPersonalizedSettingsRequest
         ],
     ];
 
-    /**
-     * @var GetPersonalizedSettingsRequestUserIdAlternative1|string
-     */
     private GetPersonalizedSettingsRequestUserIdAlternative1|string $userId;
 
     private array $headers = [
@@ -56,9 +51,6 @@ class GetPersonalizedSettingsRequest
         $this->userId = $userId;
     }
 
-    /**
-     * @return GetPersonalizedSettingsRequestUserIdAlternative1|string
-     */
     public function getUserId(): GetPersonalizedSettingsRequestUserIdAlternative1|string
     {
         return $this->userId;
@@ -66,7 +58,6 @@ class GetPersonalizedSettingsRequest
 
     /**
      * @param GetPersonalizedSettingsRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(GetPersonalizedSettingsRequestUserIdAlternative1|string $userId): self
     {

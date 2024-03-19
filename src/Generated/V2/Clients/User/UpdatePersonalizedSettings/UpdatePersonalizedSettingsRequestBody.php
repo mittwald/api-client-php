@@ -11,8 +11,6 @@ class UpdatePersonalizedSettingsRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -28,31 +26,18 @@ class UpdatePersonalizedSettingsRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $settingsString;
 
-    /**
-     * @param string $settingsString
-     */
     public function __construct(string $settingsString)
     {
         $this->settingsString = $settingsString;
     }
 
-    /**
-     * @return string
-     */
     public function getSettingsString(): string
     {
         return $this->settingsString;
     }
 
-    /**
-     * @param string $settingsString
-     * @return self
-     */
     public function withSettingsString(string $settingsString): self
     {
         $validator = new Validator();

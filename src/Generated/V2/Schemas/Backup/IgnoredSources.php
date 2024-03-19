@@ -21,8 +21,6 @@ class IgnoredSources
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,14 +45,8 @@ class IgnoredSources
      */
     private ?array $databases = null;
 
-    /**
-     * @var bool
-     */
     private bool $files;
 
-    /**
-     * @param bool $files
-     */
     public function __construct(bool $files)
     {
         $this->files = $files;
@@ -68,9 +60,6 @@ class IgnoredSources
         return $this->databases ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getFiles(): bool
     {
         return $this->files;
@@ -78,7 +67,6 @@ class IgnoredSources
 
     /**
      * @param DatabaseReference[] $databases
-     * @return self
      */
     public function withDatabases(array $databases): self
     {
@@ -88,9 +76,6 @@ class IgnoredSources
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDatabases(): self
     {
         $clone = clone $this;
@@ -99,10 +84,6 @@ class IgnoredSources
         return $clone;
     }
 
-    /**
-     * @param bool $files
-     * @return self
-     */
     public function withFiles(bool $files): self
     {
         $validator = new Validator();

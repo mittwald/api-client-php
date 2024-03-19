@@ -13,8 +13,6 @@ class RequestAvatarUploadRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,14 +41,8 @@ class RequestAvatarUploadRequest
         ],
     ];
 
-    /**
-     * @var RequestAvatarUploadRequestUserIdAlternative1|string
-     */
     private RequestAvatarUploadRequestUserIdAlternative1|string $userId;
 
-    /**
-     * @var RequestAvatarUploadRequestBody
-     */
     private RequestAvatarUploadRequestBody $body;
 
     private array $headers = [
@@ -59,7 +51,6 @@ class RequestAvatarUploadRequest
 
     /**
      * @param RequestAvatarUploadRequestUserIdAlternative1|string $userId
-     * @param RequestAvatarUploadRequestBody $body
      */
     public function __construct(RequestAvatarUploadRequestUserIdAlternative1|string $userId, RequestAvatarUploadRequestBody $body)
     {
@@ -67,17 +58,11 @@ class RequestAvatarUploadRequest
         $this->body = $body;
     }
 
-    /**
-     * @return RequestAvatarUploadRequestUserIdAlternative1|string
-     */
     public function getUserId(): RequestAvatarUploadRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
 
-    /**
-     * @return RequestAvatarUploadRequestBody
-     */
     public function getBody(): RequestAvatarUploadRequestBody
     {
         return $this->body;
@@ -85,7 +70,6 @@ class RequestAvatarUploadRequest
 
     /**
      * @param RequestAvatarUploadRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(RequestAvatarUploadRequestUserIdAlternative1|string $userId): self
     {
@@ -95,10 +79,6 @@ class RequestAvatarUploadRequest
         return $clone;
     }
 
-    /**
-     * @param RequestAvatarUploadRequestBody $body
-     * @return self
-     */
     public function withBody(RequestAvatarUploadRequestBody $body): self
     {
         $clone = clone $this;

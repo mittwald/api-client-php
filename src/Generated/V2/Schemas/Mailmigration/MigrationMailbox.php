@@ -21,8 +21,6 @@ class MigrationMailbox
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,14 +50,8 @@ class MigrationMailbox
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $finished;
 
-    /**
-     * @var string
-     */
     private string $id;
 
     /**
@@ -67,16 +59,10 @@ class MigrationMailbox
      */
     private array $migrationJobs;
 
-    /**
-     * @var string
-     */
     private string $name;
 
     /**
-     * @param bool $finished
-     * @param string $id
      * @param MigrationMailboxJob[] $migrationJobs
-     * @param string $name
      */
     public function __construct(bool $finished, string $id, array $migrationJobs, string $name)
     {
@@ -86,17 +72,11 @@ class MigrationMailbox
         $this->name = $name;
     }
 
-    /**
-     * @return bool
-     */
     public function getFinished(): bool
     {
         return $this->finished;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -111,18 +91,11 @@ class MigrationMailbox
         return $this->migrationJobs;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param bool $finished
-     * @return self
-     */
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
@@ -137,10 +110,6 @@ class MigrationMailbox
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -157,7 +126,6 @@ class MigrationMailbox
 
     /**
      * @param MigrationMailboxJob[] $migrationJobs
-     * @return self
      */
     public function withMigrationJobs(array $migrationJobs): self
     {
@@ -167,10 +135,6 @@ class MigrationMailbox
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();

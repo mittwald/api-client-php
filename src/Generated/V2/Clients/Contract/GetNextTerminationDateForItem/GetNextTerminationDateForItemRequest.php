@@ -13,8 +13,6 @@ class GetNextTerminationDateForItemRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class GetNextTerminationDateForItemRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     * @param string $contractItemId
-     */
     public function __construct(string $contractId, string $contractItemId)
     {
         $this->contractId = $contractId;
         $this->contractItemId = $contractItemId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class GetNextTerminationDateForItemRequest
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();

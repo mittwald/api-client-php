@@ -13,8 +13,6 @@ class OrderCreateOrderCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -35,33 +33,20 @@ class OrderCreateOrderCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var OrderCreateOrderCreatedResponseBody
-     */
     private OrderCreateOrderCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param OrderCreateOrderCreatedResponseBody $body
-     */
     public function __construct(OrderCreateOrderCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OrderCreateOrderCreatedResponseBody
-     */
     public function getBody(): OrderCreateOrderCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OrderCreateOrderCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(OrderCreateOrderCreatedResponseBody $body): self
     {
         $clone = clone $this;

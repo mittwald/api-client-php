@@ -11,8 +11,6 @@ class CreateProjectRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,31 +28,19 @@ class CreateProjectRequestBody
 
     /**
      * Name of the Project as it is displayed in the mStudio.
-     *
-     * @var string
      */
     private string $description;
 
-    /**
-     * @param string $description
-     */
     public function __construct(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();

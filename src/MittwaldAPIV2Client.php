@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient;
 
 use Mittwald\ApiClient\Generated\V2\ClientImpl;
@@ -32,7 +34,6 @@ class MittwaldAPIV2Client extends ClientImpl
      * create a new API token in the mStudio UI, or via the API itself
      *
      * @param string $apiToken The API token
-     * @return static
      */
     public static function newWithToken(string $apiToken): static
     {
@@ -44,8 +45,6 @@ class MittwaldAPIV2Client extends ClientImpl
      *
      * This is useful for endpoints that do not require authentication, such as
      * the user registration endpoint, or the authentication endpoints themselves.
-     *
-     * @return static
      */
     public static function newUnauthenticated(): static
     {
@@ -61,7 +60,6 @@ class MittwaldAPIV2Client extends ClientImpl
      *
      * @param string $email The email address of your mStudio user.
      * @param string $password The password of your mStudio user.
-     * @return static
      */
     public static function newWithCredentials(string $email, string $password): static
     {

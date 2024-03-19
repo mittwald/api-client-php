@@ -11,8 +11,6 @@ class CreateMessageCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class CreateMessageCreatedResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var string
-     */
     private string $messageId;
 
-    /**
-     * @param string $conversationId
-     * @param string $messageId
-     */
     public function __construct(string $conversationId, string $messageId)
     {
         $this->conversationId = $conversationId;
         $this->messageId = $messageId;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return string
-     */
     public function getMessageId(): string
     {
         return $this->messageId;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class CreateMessageCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $messageId
-     * @return self
-     */
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();

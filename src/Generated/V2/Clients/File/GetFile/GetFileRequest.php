@@ -13,8 +13,6 @@ class GetFileRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,48 +32,29 @@ class GetFileRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $fileId;
 
-    /**
-     * @var string|null
-     */
     private ?string $fileName = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $fileId
-     */
     public function __construct(string $fileId)
     {
         $this->fileId = $fileId;
     }
 
-    /**
-     * @return string
-     */
     public function getFileId(): string
     {
         return $this->fileId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFileName(): ?string
     {
         return $this->fileName ?? null;
     }
 
-    /**
-     * @param string $fileId
-     * @return self
-     */
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();
@@ -90,10 +69,6 @@ class GetFileRequest
         return $clone;
     }
 
-    /**
-     * @param string $fileName
-     * @return self
-     */
     public function withFileName(string $fileName): self
     {
         $validator = new Validator();
@@ -108,9 +83,6 @@ class GetFileRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFileName(): self
     {
         $clone = clone $this;

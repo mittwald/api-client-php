@@ -21,8 +21,6 @@ class OrderSummary
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,20 +46,12 @@ class OrderSummary
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float
-     */
     private int|float $nonRecurring;
 
-    /**
-     * @var int|float
-     */
     private int|float $recurring;
 
     /**
      * The total price of the order
-     *
-     * @var int|float
      */
     private int|float $summary;
 
@@ -77,25 +67,16 @@ class OrderSummary
         $this->summary = $summary;
     }
 
-    /**
-     * @return int|float
-     */
     public function getNonRecurring(): int|float
     {
         return $this->nonRecurring;
     }
 
-    /**
-     * @return int|float
-     */
     public function getRecurring(): int|float
     {
         return $this->recurring;
     }
 
-    /**
-     * @return int|float
-     */
     public function getSummary(): int|float
     {
         return $this->summary;
@@ -103,7 +84,6 @@ class OrderSummary
 
     /**
      * @param int|float $nonRecurring
-     * @return self
      */
     public function withNonRecurring(int|float $nonRecurring): self
     {
@@ -121,7 +101,6 @@ class OrderSummary
 
     /**
      * @param int|float $recurring
-     * @return self
      */
     public function withRecurring(int|float $recurring): self
     {
@@ -139,7 +118,6 @@ class OrderSummary
 
     /**
      * @param int|float $summary
-     * @return self
      */
     public function withSummary(int|float $summary): self
     {

@@ -13,8 +13,6 @@ class UpdateMailAddressAutoresponderRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -61,50 +59,30 @@ class UpdateMailAddressAutoresponderRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressAutoresponderRequestBody
-     */
     private UpdateMailAddressAutoresponderRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressAutoresponderRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressAutoresponderRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressAutoresponderRequestBody
-     */
     public function getBody(): UpdateMailAddressAutoresponderRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -119,10 +97,6 @@ class UpdateMailAddressAutoresponderRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressAutoresponderRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressAutoresponderRequestBody $body): self
     {
         $clone = clone $this;

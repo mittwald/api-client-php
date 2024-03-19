@@ -11,8 +11,6 @@ class UpdateMailAddressAddressRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,31 +24,18 @@ class UpdateMailAddressAddressRequestBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $address;
 
-    /**
-     * @param string $address
-     */
     public function __construct(string $address)
     {
         $this->address = $address;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();

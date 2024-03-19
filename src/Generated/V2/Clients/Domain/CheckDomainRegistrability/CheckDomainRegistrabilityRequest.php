@@ -13,8 +13,6 @@ class CheckDomainRegistrabilityRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,35 +34,22 @@ class CheckDomainRegistrabilityRequest
         ],
     ];
 
-    /**
-     * @var CheckDomainRegistrabilityRequestBody
-     */
     private CheckDomainRegistrabilityRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CheckDomainRegistrabilityRequestBody $body
-     */
     public function __construct(CheckDomainRegistrabilityRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckDomainRegistrabilityRequestBody
-     */
     public function getBody(): CheckDomainRegistrabilityRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckDomainRegistrabilityRequestBody $body
-     * @return self
-     */
     public function withBody(CheckDomainRegistrabilityRequestBody $body): self
     {
         $clone = clone $this;

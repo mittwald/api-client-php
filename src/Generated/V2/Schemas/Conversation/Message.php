@@ -22,8 +22,6 @@ class Message
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -70,19 +68,10 @@ class Message
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var User|null
-     */
     private ?User $createdBy = null;
 
     /**
@@ -90,32 +79,14 @@ class Message
      */
     private ?array $files = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $internal = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $messageContent = null;
 
-    /**
-     * @var string
-     */
     private string $messageId;
 
-    /**
-     * @var MessageType
-     */
     private MessageType $type;
 
-    /**
-     * @param string $conversationId
-     * @param DateTime $createdAt
-     * @param string $messageId
-     * @param MessageType $type
-     */
     public function __construct(string $conversationId, DateTime $createdAt, string $messageId, MessageType $type)
     {
         $this->conversationId = $conversationId;
@@ -124,25 +95,16 @@ class Message
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return User|null
-     */
     public function getCreatedBy(): ?User
     {
         return $this->createdBy ?? null;
@@ -157,42 +119,26 @@ class Message
         return $this->files ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getInternal(): ?bool
     {
         return $this->internal ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessageContent(): ?string
     {
         return $this->messageContent ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getMessageId(): string
     {
         return $this->messageId;
     }
 
-    /**
-     * @return MessageType
-     */
     public function getType(): MessageType
     {
         return $this->type;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -207,10 +153,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -219,10 +161,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @param User $createdBy
-     * @return self
-     */
     public function withCreatedBy(User $createdBy): self
     {
         $clone = clone $this;
@@ -231,9 +169,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCreatedBy(): self
     {
         $clone = clone $this;
@@ -244,7 +179,6 @@ class Message
 
     /**
      * @param (RequestedFile|UploadedFile)[] $files
-     * @return self
      */
     public function withFiles(array $files): self
     {
@@ -254,9 +188,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFiles(): self
     {
         $clone = clone $this;
@@ -265,10 +196,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @param bool $internal
-     * @return self
-     */
     public function withInternal(bool $internal): self
     {
         $validator = new Validator();
@@ -283,9 +210,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInternal(): self
     {
         $clone = clone $this;
@@ -294,10 +218,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @param string $messageContent
-     * @return self
-     */
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
@@ -312,9 +232,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessageContent(): self
     {
         $clone = clone $this;
@@ -323,10 +240,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @param string $messageId
-     * @return self
-     */
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();
@@ -341,10 +254,6 @@ class Message
         return $clone;
     }
 
-    /**
-     * @param MessageType $type
-     * @return self
-     */
     public function withType(MessageType $type): self
     {
         $clone = clone $this;

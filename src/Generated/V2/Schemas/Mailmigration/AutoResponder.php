@@ -21,8 +21,6 @@ class AutoResponder
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,9 +44,6 @@ class AutoResponder
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
     /**
@@ -56,9 +51,6 @@ class AutoResponder
      */
     private $expiresAt = null;
 
-    /**
-     * @var string
-     */
     private string $message;
 
     /**
@@ -66,19 +58,12 @@ class AutoResponder
      */
     private $startsAt = null;
 
-    /**
-     * @param bool $active
-     * @param string $message
-     */
     public function __construct(bool $active, string $message)
     {
         $this->active = $active;
         $this->message = $message;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
@@ -92,9 +77,6 @@ class AutoResponder
         return $this->expiresAt;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
@@ -108,10 +90,6 @@ class AutoResponder
         return $this->startsAt;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -128,7 +106,6 @@ class AutoResponder
 
     /**
      * @param mixed $expiresAt
-     * @return self
      */
     public function withExpiresAt($expiresAt): self
     {
@@ -144,9 +121,6 @@ class AutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -155,10 +129,6 @@ class AutoResponder
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -175,7 +145,6 @@ class AutoResponder
 
     /**
      * @param mixed $startsAt
-     * @return self
      */
     public function withStartsAt($startsAt): self
     {
@@ -191,9 +160,6 @@ class AutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStartsAt(): self
     {
         $clone = clone $this;

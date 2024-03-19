@@ -11,8 +11,6 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -43,29 +41,15 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $message = null;
 
-    /**
-     * @var string
-     */
     private string $origin;
 
-    /**
-     * @var string
-     */
     private string $subject;
 
-    /**
-     * @var int|float
-     */
     private int|float $vote;
 
     /**
-     * @param string $origin
-     * @param string $subject
      * @param int|float $vote
      */
     public function __construct(string $origin, string $subject, int|float $vote)
@@ -75,42 +59,26 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
         $this->vote = $vote;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getOrigin(): string
     {
         return $this->origin;
     }
 
-    /**
-     * @return string
-     */
     public function getSubject(): string
     {
         return $this->subject;
     }
 
-    /**
-     * @return int|float
-     */
     public function getVote(): int|float
     {
         return $this->vote;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -125,9 +93,6 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -136,10 +101,6 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $origin
-     * @return self
-     */
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
@@ -154,10 +115,6 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -174,7 +131,6 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
 
     /**
      * @param int|float $vote
-     * @return self
      */
     public function withVote(int|float $vote): self
     {

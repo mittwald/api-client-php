@@ -11,8 +11,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,9 +51,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItem
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $domain;
 
     /**
@@ -64,7 +59,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItem
     private array $paths;
 
     /**
-     * @param string $domain
      * @param PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem[] $paths
      */
     public function __construct(string $domain, array $paths)
@@ -73,9 +67,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItem
         $this->paths = $paths;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
@@ -89,10 +80,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItem
         return $this->paths;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -109,7 +96,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItem
 
     /**
      * @param PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem[] $paths
-     * @return self
      */
     public function withPaths(array $paths): self
     {

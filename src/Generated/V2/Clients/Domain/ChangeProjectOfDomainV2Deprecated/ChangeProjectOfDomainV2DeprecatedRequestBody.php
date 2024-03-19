@@ -11,8 +11,6 @@ class ChangeProjectOfDomainV2DeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -23,9 +21,6 @@ class ChangeProjectOfDomainV2DeprecatedRequestBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $projectId = null;
 
     /**
@@ -35,18 +30,11 @@ class ChangeProjectOfDomainV2DeprecatedRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -61,9 +49,6 @@ class ChangeProjectOfDomainV2DeprecatedRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectId(): self
     {
         $clone = clone $this;

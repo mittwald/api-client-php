@@ -11,8 +11,6 @@ class DeleteDomainRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,8 +24,6 @@ class DeleteDomainRequestBody
 
     /**
      * Only for .de Domains.
-     *
-     * @var bool|null
      */
     private ?bool $transit = null;
 
@@ -38,18 +34,11 @@ class DeleteDomainRequestBody
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getTransit(): ?bool
     {
         return $this->transit ?? null;
     }
 
-    /**
-     * @param bool $transit
-     * @return self
-     */
     public function withTransit(bool $transit): self
     {
         $validator = new Validator();
@@ -64,9 +53,6 @@ class DeleteDomainRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTransit(): self
     {
         $clone = clone $this;

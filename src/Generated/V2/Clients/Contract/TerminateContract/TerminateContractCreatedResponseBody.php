@@ -11,8 +11,6 @@ class TerminateContractCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,9 +36,6 @@ class TerminateContractCreatedResponseBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $contractId = null;
 
     /**
@@ -48,14 +43,8 @@ class TerminateContractCreatedResponseBody
      */
     private ?array $itemsScheduledForTermination = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $reason = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $terminationTargetDate = null;
 
     /**
@@ -65,9 +54,6 @@ class TerminateContractCreatedResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractId(): ?string
     {
         return $this->contractId ?? null;
@@ -81,26 +67,16 @@ class TerminateContractCreatedResponseBody
         return $this->itemsScheduledForTermination ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTerminationTargetDate(): ?string
     {
         return $this->terminationTargetDate ?? null;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -115,9 +91,6 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractId(): self
     {
         $clone = clone $this;
@@ -128,7 +101,6 @@ class TerminateContractCreatedResponseBody
 
     /**
      * @param string[] $itemsScheduledForTermination
-     * @return self
      */
     public function withItemsScheduledForTermination(array $itemsScheduledForTermination): self
     {
@@ -144,9 +116,6 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutItemsScheduledForTermination(): self
     {
         $clone = clone $this;
@@ -155,10 +124,6 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $reason
-     * @return self
-     */
     public function withReason(string $reason): self
     {
         $validator = new Validator();
@@ -173,9 +138,6 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReason(): self
     {
         $clone = clone $this;
@@ -184,10 +146,6 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $terminationTargetDate
-     * @return self
-     */
     public function withTerminationTargetDate(string $terminationTargetDate): self
     {
         $validator = new Validator();
@@ -202,9 +160,6 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTerminationTargetDate(): self
     {
         $clone = clone $this;

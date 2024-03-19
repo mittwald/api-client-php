@@ -13,8 +13,6 @@ class CreateSshKeyCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class CreateSshKeyCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateSshKeyCreatedResponseBody
-     */
     private CreateSshKeyCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateSshKeyCreatedResponseBody $body
-     */
     public function __construct(CreateSshKeyCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateSshKeyCreatedResponseBody
-     */
     public function getBody(): CreateSshKeyCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateSshKeyCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateSshKeyCreatedResponseBody $body): self
     {
         $clone = clone $this;

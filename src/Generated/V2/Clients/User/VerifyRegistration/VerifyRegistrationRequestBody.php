@@ -11,8 +11,6 @@ class VerifyRegistrationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,30 +42,19 @@ class VerifyRegistrationRequestBody
 
     /**
      * The users email address.
-     *
-     * @var string
      */
     private string $email;
 
     /**
      * The token that was send to your email address
-     *
-     * @var string
      */
     private string $token;
 
     /**
      * UUID of the registered user.
-     *
-     * @var string
      */
     private string $userId;
 
-    /**
-     * @param string $email
-     * @param string $token
-     * @param string $userId
-     */
     public function __construct(string $email, string $token, string $userId)
     {
         $this->email = $email;
@@ -75,34 +62,21 @@ class VerifyRegistrationRequestBody
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -117,10 +91,6 @@ class VerifyRegistrationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();
@@ -135,10 +105,6 @@ class VerifyRegistrationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

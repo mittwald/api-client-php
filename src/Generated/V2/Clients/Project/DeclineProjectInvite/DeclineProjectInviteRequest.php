@@ -13,8 +13,6 @@ class DeclineProjectInviteRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class DeclineProjectInviteRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectInviteId;
 
     /**
@@ -48,7 +43,6 @@ class DeclineProjectInviteRequest
     ];
 
     /**
-     * @param string $projectInviteId
      * @param mixed $body
      */
     public function __construct(string $projectInviteId, $body)
@@ -57,9 +51,6 @@ class DeclineProjectInviteRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectInviteId(): string
     {
         return $this->projectInviteId;
@@ -73,10 +64,6 @@ class DeclineProjectInviteRequest
         return $this->body;
     }
 
-    /**
-     * @param string $projectInviteId
-     * @return self
-     */
     public function withProjectInviteId(string $projectInviteId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class DeclineProjectInviteRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

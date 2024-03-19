@@ -11,8 +11,6 @@ class NewsletterSubscribeUserRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -28,14 +26,8 @@ class NewsletterSubscribeUserRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $firstName = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $lastName = null;
 
     /**
@@ -45,26 +37,16 @@ class NewsletterSubscribeUserRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string
     {
         return $this->lastName ?? null;
     }
 
-    /**
-     * @param string $firstName
-     * @return self
-     */
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
@@ -79,9 +61,6 @@ class NewsletterSubscribeUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFirstName(): self
     {
         $clone = clone $this;
@@ -90,10 +69,6 @@ class NewsletterSubscribeUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $lastName
-     * @return self
-     */
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
@@ -108,9 +83,6 @@ class NewsletterSubscribeUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastName(): self
     {
         $clone = clone $this;

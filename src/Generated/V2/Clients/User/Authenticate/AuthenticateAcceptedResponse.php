@@ -13,8 +13,6 @@ class AuthenticateAcceptedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class AuthenticateAcceptedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var AuthenticateAcceptedResponseBody
-     */
     private AuthenticateAcceptedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param AuthenticateAcceptedResponseBody $body
-     */
     public function __construct(AuthenticateAcceptedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AuthenticateAcceptedResponseBody
-     */
     public function getBody(): AuthenticateAcceptedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param AuthenticateAcceptedResponseBody $body
-     * @return self
-     */
     public function withBody(AuthenticateAcceptedResponseBody $body): self
     {
         $clone = clone $this;

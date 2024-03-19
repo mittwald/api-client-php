@@ -22,8 +22,6 @@ class SshUser
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A representation of an SSHUser.',
@@ -81,44 +79,20 @@ class SshUser
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $active = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $authUpdatedAt;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var bool
-     */
     private bool $hasPassword;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
     /**
@@ -126,25 +100,10 @@ class SshUser
      */
     private ?array $publicKeys = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $updatedAt = null;
 
-    /**
-     * @var string
-     */
     private string $userName;
 
-    /**
-     * @param DateTime $authUpdatedAt
-     * @param DateTime $createdAt
-     * @param string $description
-     * @param bool $hasPassword
-     * @param string $id
-     * @param string $projectId
-     * @param string $userName
-     */
     public function __construct(DateTime $authUpdatedAt, DateTime $createdAt, string $description, bool $hasPassword, string $id, string $projectId, string $userName)
     {
         $this->authUpdatedAt = $authUpdatedAt;
@@ -156,65 +115,41 @@ class SshUser
         $this->userName = $userName;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getAuthUpdatedAt(): DateTime
     {
         return $this->authUpdatedAt;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getHasPassword(): bool
     {
         return $this->hasPassword;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -228,26 +163,16 @@ class SshUser
         return $this->publicKeys ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getUserName(): string
     {
         return $this->userName;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -262,9 +187,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActive(): self
     {
         $clone = clone $this;
@@ -273,10 +195,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $authUpdatedAt
-     * @return self
-     */
     public function withAuthUpdatedAt(DateTime $authUpdatedAt): self
     {
         $clone = clone $this;
@@ -285,10 +203,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -297,10 +211,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -315,10 +225,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -327,9 +233,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -338,10 +241,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param bool $hasPassword
-     * @return self
-     */
     public function withHasPassword(bool $hasPassword): self
     {
         $validator = new Validator();
@@ -356,10 +255,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -374,10 +269,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -394,7 +285,6 @@ class SshUser
 
     /**
      * @param PublicKey[] $publicKeys
-     * @return self
      */
     public function withPublicKeys(array $publicKeys): self
     {
@@ -404,9 +294,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPublicKeys(): self
     {
         $clone = clone $this;
@@ -415,10 +302,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -427,9 +310,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUpdatedAt(): self
     {
         $clone = clone $this;
@@ -438,10 +318,6 @@ class SshUser
         return $clone;
     }
 
-    /**
-     * @param string $userName
-     * @return self
-     */
     public function withUserName(string $userName): self
     {
         $validator = new Validator();

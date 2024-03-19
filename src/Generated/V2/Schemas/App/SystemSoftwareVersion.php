@@ -22,8 +22,6 @@ class SystemSoftwareVersion
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies.',
@@ -62,24 +60,12 @@ class SystemSoftwareVersion
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $externalVersion;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $internalVersion;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $recommended = null;
 
     /**
@@ -92,11 +78,6 @@ class SystemSoftwareVersion
      */
     private ?array $userInputs = null;
 
-    /**
-     * @param string $externalVersion
-     * @param string $id
-     * @param string $internalVersion
-     */
     public function __construct(string $externalVersion, string $id, string $internalVersion)
     {
         $this->externalVersion = $externalVersion;
@@ -104,33 +85,21 @@ class SystemSoftwareVersion
         $this->internalVersion = $internalVersion;
     }
 
-    /**
-     * @return string
-     */
     public function getExternalVersion(): string
     {
         return $this->externalVersion;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getInternalVersion(): string
     {
         return $this->internalVersion;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
@@ -153,10 +122,6 @@ class SystemSoftwareVersion
         return $this->userInputs ?? null;
     }
 
-    /**
-     * @param string $externalVersion
-     * @return self
-     */
     public function withExternalVersion(string $externalVersion): self
     {
         $validator = new Validator();
@@ -171,10 +136,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -189,10 +150,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @param string $internalVersion
-     * @return self
-     */
     public function withInternalVersion(string $internalVersion): self
     {
         $validator = new Validator();
@@ -207,10 +164,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @param bool $recommended
-     * @return self
-     */
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
@@ -225,9 +178,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRecommended(): self
     {
         $clone = clone $this;
@@ -238,7 +188,6 @@ class SystemSoftwareVersion
 
     /**
      * @param SystemSoftwareDependency[] $systemSoftwareDependencies
-     * @return self
      */
     public function withSystemSoftwareDependencies(array $systemSoftwareDependencies): self
     {
@@ -248,9 +197,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSystemSoftwareDependencies(): self
     {
         $clone = clone $this;
@@ -261,7 +207,6 @@ class SystemSoftwareVersion
 
     /**
      * @param UserInput[] $userInputs
-     * @return self
      */
     public function withUserInputs(array $userInputs): self
     {
@@ -271,9 +216,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserInputs(): self
     {
         $clone = clone $this;

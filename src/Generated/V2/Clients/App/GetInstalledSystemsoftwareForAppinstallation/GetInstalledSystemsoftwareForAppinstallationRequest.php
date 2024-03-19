@@ -13,8 +13,6 @@ class GetInstalledSystemsoftwareForAppinstallationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -32,48 +30,29 @@ class GetInstalledSystemsoftwareForAppinstallationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var string|null
-     */
     private ?string $tagFilter = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     */
     public function __construct(string $appInstallationId)
     {
         $this->appInstallationId = $appInstallationId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTagFilter(): ?string
     {
         return $this->tagFilter ?? null;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -88,10 +67,6 @@ class GetInstalledSystemsoftwareForAppinstallationRequest
         return $clone;
     }
 
-    /**
-     * @param string $tagFilter
-     * @return self
-     */
     public function withTagFilter(string $tagFilter): self
     {
         $validator = new Validator();
@@ -106,9 +81,6 @@ class GetInstalledSystemsoftwareForAppinstallationRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTagFilter(): self
     {
         $clone = clone $this;

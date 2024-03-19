@@ -21,8 +21,6 @@ class InviteInformation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -49,61 +47,39 @@ class InviteInformation
 
     /**
      * Token for authentication purposes.
-     *
-     * @var string|null
      */
     private ?string $invitationToken = null;
 
     /**
      * ID of the user that created the invite.
-     *
-     * @var string
      */
     private string $invitedBy;
 
     /**
      * ID of the user this invite is for.
-     *
-     * @var string|null
      */
     private ?string $userId = null;
 
-    /**
-     * @param string $invitedBy
-     */
     public function __construct(string $invitedBy)
     {
         $this->invitedBy = $invitedBy;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInvitationToken(): ?string
     {
         return $this->invitationToken ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getInvitedBy(): string
     {
         return $this->invitedBy;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUserId(): ?string
     {
         return $this->userId ?? null;
     }
 
-    /**
-     * @param string $invitationToken
-     * @return self
-     */
     public function withInvitationToken(string $invitationToken): self
     {
         $validator = new Validator();
@@ -118,9 +94,6 @@ class InviteInformation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInvitationToken(): self
     {
         $clone = clone $this;
@@ -129,10 +102,6 @@ class InviteInformation
         return $clone;
     }
 
-    /**
-     * @param string $invitedBy
-     * @return self
-     */
     public function withInvitedBy(string $invitedBy): self
     {
         $validator = new Validator();
@@ -147,10 +116,6 @@ class InviteInformation
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -165,9 +130,6 @@ class InviteInformation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserId(): self
     {
         $clone = clone $this;

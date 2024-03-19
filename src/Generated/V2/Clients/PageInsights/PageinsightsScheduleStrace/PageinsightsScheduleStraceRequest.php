@@ -13,8 +13,6 @@ class PageinsightsScheduleStraceRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,50 +41,30 @@ class PageinsightsScheduleStraceRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var PageinsightsScheduleStraceRequestBody
-     */
     private PageinsightsScheduleStraceRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param PageinsightsScheduleStraceRequestBody $body
-     */
     public function __construct(string $projectId, PageinsightsScheduleStraceRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return PageinsightsScheduleStraceRequestBody
-     */
     public function getBody(): PageinsightsScheduleStraceRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -101,10 +79,6 @@ class PageinsightsScheduleStraceRequest
         return $clone;
     }
 
-    /**
-     * @param PageinsightsScheduleStraceRequestBody $body
-     * @return self
-     */
     public function withBody(PageinsightsScheduleStraceRequestBody $body): self
     {
         $clone = clone $this;

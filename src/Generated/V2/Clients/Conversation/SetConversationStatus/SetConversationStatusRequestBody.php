@@ -11,8 +11,6 @@ class SetConversationStatusRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,31 +28,18 @@ class SetConversationStatusRequestBody
         ],
     ];
 
-    /**
-     * @var SetConversationStatusRequestBodyStatus
-     */
     private SetConversationStatusRequestBodyStatus $status;
 
-    /**
-     * @param SetConversationStatusRequestBodyStatus $status
-     */
     public function __construct(SetConversationStatusRequestBodyStatus $status)
     {
         $this->status = $status;
     }
 
-    /**
-     * @return SetConversationStatusRequestBodyStatus
-     */
     public function getStatus(): SetConversationStatusRequestBodyStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param SetConversationStatusRequestBodyStatus $status
-     * @return self
-     */
     public function withStatus(SetConversationStatusRequestBodyStatus $status): self
     {
         $clone = clone $this;

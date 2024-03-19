@@ -12,8 +12,6 @@ class UpdateRedisDatabaseConfigurationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -23,9 +21,6 @@ class UpdateRedisDatabaseConfigurationRequestBody
         ],
     ];
 
-    /**
-     * @var RedisDatabaseConfiguration|null
-     */
     private ?RedisDatabaseConfiguration $configuration = null;
 
     /**
@@ -44,10 +39,6 @@ class UpdateRedisDatabaseConfigurationRequestBody
         return $this->configuration ?? null;
     }
 
-    /**
-     * @param RedisDatabaseConfiguration $configuration
-     * @return self
-     */
     public function withConfiguration(RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
@@ -56,9 +47,6 @@ class UpdateRedisDatabaseConfigurationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutConfiguration(): self
     {
         $clone = clone $this;

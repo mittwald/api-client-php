@@ -13,8 +13,6 @@ class NotificationsReadAllNotificationsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class NotificationsReadAllNotificationsRequest
         ],
     ];
 
-    /**
-     * @var NotificationsReadAllNotificationsRequestBody
-     */
     private NotificationsReadAllNotificationsRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param NotificationsReadAllNotificationsRequestBody $body
-     */
     public function __construct(NotificationsReadAllNotificationsRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NotificationsReadAllNotificationsRequestBody
-     */
     public function getBody(): NotificationsReadAllNotificationsRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NotificationsReadAllNotificationsRequestBody $body
-     * @return self
-     */
     public function withBody(NotificationsReadAllNotificationsRequestBody $body): self
     {
         $clone = clone $this;

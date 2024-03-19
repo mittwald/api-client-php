@@ -11,8 +11,6 @@ class UpdateProjectMailSettingRequestBodyAlternative1
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,7 +51,6 @@ class UpdateProjectMailSettingRequestBodyAlternative1
 
     /**
      * @param string[] $blacklist
-     * @return self
      */
     public function withBlacklist(array $blacklist): self
     {

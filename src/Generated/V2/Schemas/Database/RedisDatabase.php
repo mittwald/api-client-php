@@ -22,8 +22,6 @@ class RedisDatabase
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'example' => [
@@ -107,19 +105,10 @@ class RedisDatabase
         'type' => 'object',
     ];
 
-    /**
-     * @var RedisDatabaseConfiguration|null
-     */
     private ?RedisDatabaseConfiguration $configuration = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $description;
 
     /**
@@ -127,52 +116,20 @@ class RedisDatabase
      */
     private ?array $finalizers = null;
 
-    /**
-     * @var string
-     */
     private string $hostname;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var int
-     */
     private int $port;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @var string
-     */
     private string $version;
 
-    /**
-     * @param DateTime $createdAt
-     * @param string $description
-     * @param string $hostname
-     * @param string $id
-     * @param string $name
-     * @param int $port
-     * @param string $projectId
-     * @param DateTime $updatedAt
-     * @param string $version
-     */
     public function __construct(DateTime $createdAt, string $description, string $hostname, string $id, string $name, int $port, string $projectId, DateTime $updatedAt, string $version)
     {
         $this->createdAt = $createdAt;
@@ -195,17 +152,11 @@ class RedisDatabase
         return $this->configuration ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -219,66 +170,41 @@ class RedisDatabase
         return $this->finalizers ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getHostname(): string
     {
         return $this->hostname;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return int
-     */
     public function getPort(): int
     {
         return $this->port;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param RedisDatabaseConfiguration $configuration
-     * @return self
-     */
     public function withConfiguration(RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
@@ -287,9 +213,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutConfiguration(): self
     {
         $clone = clone $this;
@@ -298,10 +221,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -310,10 +229,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -330,7 +245,6 @@ class RedisDatabase
 
     /**
      * @param string[] $finalizers
-     * @return self
      */
     public function withFinalizers(array $finalizers): self
     {
@@ -346,9 +260,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFinalizers(): self
     {
         $clone = clone $this;
@@ -357,10 +268,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param string $hostname
-     * @return self
-     */
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
@@ -375,10 +282,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -393,10 +296,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -411,10 +310,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param int $port
-     * @return self
-     */
     public function withPort(int $port): self
     {
         $validator = new Validator();
@@ -429,10 +324,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -447,10 +338,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -459,10 +346,6 @@ class RedisDatabase
         return $clone;
     }
 
-    /**
-     * @param string $version
-     * @return self
-     */
     public function withVersion(string $version): self
     {
         $validator = new Validator();

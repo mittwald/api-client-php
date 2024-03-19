@@ -14,8 +14,6 @@ class OrderGetOrderOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class OrderGetOrderOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CustomerOrder
-     */
     private CustomerOrder $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CustomerOrder $body
-     */
     public function __construct(CustomerOrder $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CustomerOrder
-     */
     public function getBody(): CustomerOrder
     {
         return $this->body;
     }
 
-    /**
-     * @param CustomerOrder $body
-     * @return self
-     */
     public function withBody(CustomerOrder $body): self
     {
         $clone = clone $this;

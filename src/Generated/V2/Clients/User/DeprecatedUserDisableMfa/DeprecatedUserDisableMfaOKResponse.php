@@ -13,8 +13,6 @@ class DeprecatedUserDisableMfaOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class DeprecatedUserDisableMfaOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DeprecatedUserDisableMfaOKResponseBody
-     */
     private DeprecatedUserDisableMfaOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedUserDisableMfaOKResponseBody $body
-     */
     public function __construct(DeprecatedUserDisableMfaOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserDisableMfaOKResponseBody
-     */
     public function getBody(): DeprecatedUserDisableMfaOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserDisableMfaOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserDisableMfaOKResponseBody $body): self
     {
         $clone = clone $this;

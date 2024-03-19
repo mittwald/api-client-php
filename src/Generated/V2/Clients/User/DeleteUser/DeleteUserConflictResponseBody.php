@@ -11,8 +11,6 @@ class DeleteUserConflictResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,61 +43,37 @@ class DeleteUserConflictResponseBody
 
     /**
      * A json object, given further information about the error
-     *
-     * @var DeleteUserConflictResponseBodyInfo|null
      */
     private ?DeleteUserConflictResponseBodyInfo $info = null;
 
     /**
      * more information about the error
-     *
-     * @var string
      */
     private string $message;
 
-    /**
-     * @var DeleteUserConflictResponseBodyName
-     */
     private DeleteUserConflictResponseBodyName $name;
 
-    /**
-     * @param string $message
-     * @param DeleteUserConflictResponseBodyName $name
-     */
     public function __construct(string $message, DeleteUserConflictResponseBodyName $name)
     {
         $this->message = $message;
         $this->name = $name;
     }
 
-    /**
-     * @return DeleteUserConflictResponseBodyInfo|null
-     */
     public function getInfo(): ?DeleteUserConflictResponseBodyInfo
     {
         return $this->info ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return DeleteUserConflictResponseBodyName
-     */
     public function getName(): DeleteUserConflictResponseBodyName
     {
         return $this->name;
     }
 
-    /**
-     * @param DeleteUserConflictResponseBodyInfo $info
-     * @return self
-     */
     public function withInfo(DeleteUserConflictResponseBodyInfo $info): self
     {
         $clone = clone $this;
@@ -108,9 +82,6 @@ class DeleteUserConflictResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInfo(): self
     {
         $clone = clone $this;
@@ -119,10 +90,6 @@ class DeleteUserConflictResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -137,10 +104,6 @@ class DeleteUserConflictResponseBody
         return $clone;
     }
 
-    /**
-     * @param DeleteUserConflictResponseBodyName $name
-     * @return self
-     */
     public function withName(DeleteUserConflictResponseBodyName $name): self
     {
         $clone = clone $this;

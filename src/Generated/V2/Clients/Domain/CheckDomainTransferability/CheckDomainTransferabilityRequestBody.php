@@ -11,8 +11,6 @@ class CheckDomainTransferabilityRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,46 +28,26 @@ class CheckDomainTransferabilityRequestBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $authCode;
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @param string $authCode
-     * @param string $domain
-     */
     public function __construct(string $authCode, string $domain)
     {
         $this->authCode = $authCode;
         $this->domain = $domain;
     }
 
-    /**
-     * @return string
-     */
     public function getAuthCode(): string
     {
         return $this->authCode;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @param string $authCode
-     * @return self
-     */
     public function withAuthCode(string $authCode): self
     {
         $validator = new Validator();
@@ -84,10 +62,6 @@ class CheckDomainTransferabilityRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();

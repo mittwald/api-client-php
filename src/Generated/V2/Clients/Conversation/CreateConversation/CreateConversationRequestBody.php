@@ -16,8 +16,6 @@ class CreateConversationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,29 +39,14 @@ class CreateConversationRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $categoryId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $mainUserId = null;
 
-    /**
-     * @var AggregateReference|null
-     */
     private ?AggregateReference $relatedTo = null;
 
-    /**
-     * @var ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
-     */
     private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null $sharedWith = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $title = null;
 
     /**
@@ -73,17 +56,11 @@ class CreateConversationRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMainUserId(): ?string
     {
         return $this->mainUserId ?? null;
@@ -107,18 +84,11 @@ class CreateConversationRequestBody
         return $this->sharedWith;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title ?? null;
     }
 
-    /**
-     * @param string $categoryId
-     * @return self
-     */
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
@@ -133,9 +103,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCategoryId(): self
     {
         $clone = clone $this;
@@ -144,10 +111,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $mainUserId
-     * @return self
-     */
     public function withMainUserId(string $mainUserId): self
     {
         $validator = new Validator();
@@ -162,9 +125,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMainUserId(): self
     {
         $clone = clone $this;
@@ -173,10 +133,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param AggregateReference $relatedTo
-     * @return self
-     */
     public function withRelatedTo(AggregateReference $relatedTo): self
     {
         $clone = clone $this;
@@ -185,9 +141,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRelatedTo(): self
     {
         $clone = clone $this;
@@ -198,7 +151,6 @@ class CreateConversationRequestBody
 
     /**
      * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith
-     * @return self
      */
     public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith): self
     {
@@ -208,9 +160,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSharedWith(): self
     {
         $clone = clone $this;
@@ -219,10 +168,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $title
-     * @return self
-     */
     public function withTitle(string $title): self
     {
         $validator = new Validator();
@@ -237,9 +182,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTitle(): self
     {
         $clone = clone $this;

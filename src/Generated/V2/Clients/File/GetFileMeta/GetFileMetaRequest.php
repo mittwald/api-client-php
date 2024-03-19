@@ -13,8 +13,6 @@ class GetFileMetaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -30,35 +28,22 @@ class GetFileMetaRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $fileId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $fileId
-     */
     public function __construct(string $fileId)
     {
         $this->fileId = $fileId;
     }
 
-    /**
-     * @return string
-     */
     public function getFileId(): string
     {
         return $this->fileId;
     }
 
-    /**
-     * @param string $fileId
-     * @return self
-     */
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();

@@ -12,8 +12,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,31 +37,14 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $path;
 
-    /**
-     * @var int
-     */
     private int $performanceScore;
 
-    /**
-     * @var string|null
-     */
     private ?string $screenshotFileRef = null;
 
-    /**
-     * @param DateTime $createdAt
-     * @param string $path
-     * @param int $performanceScore
-     */
     public function __construct(DateTime $createdAt, string $path, int $performanceScore)
     {
         $this->createdAt = $createdAt;
@@ -71,42 +52,26 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
         $this->performanceScore = $performanceScore;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return int
-     */
     public function getPerformanceScore(): int
     {
         return $this->performanceScore;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScreenshotFileRef(): ?string
     {
         return $this->screenshotFileRef ?? null;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -115,10 +80,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -133,10 +94,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
         return $clone;
     }
 
-    /**
-     * @param int $performanceScore
-     * @return self
-     */
     public function withPerformanceScore(int $performanceScore): self
     {
         $validator = new Validator();
@@ -151,10 +108,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
         return $clone;
     }
 
-    /**
-     * @param string $screenshotFileRef
-     * @return self
-     */
     public function withScreenshotFileRef(string $screenshotFileRef): self
     {
         $validator = new Validator();
@@ -169,9 +122,6 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScreenshotFileRef(): self
     {
         $clone = clone $this;

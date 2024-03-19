@@ -13,8 +13,6 @@ class CreateCustomerRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,35 +43,22 @@ class CreateCustomerRequest
         ],
     ];
 
-    /**
-     * @var CreateCustomerRequestBody
-     */
     private CreateCustomerRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateCustomerRequestBody $body
-     */
     public function __construct(CreateCustomerRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateCustomerRequestBody
-     */
     public function getBody(): CreateCustomerRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateCustomerRequestBody $body
-     * @return self
-     */
     public function withBody(CreateCustomerRequestBody $body): self
     {
         $clone = clone $this;

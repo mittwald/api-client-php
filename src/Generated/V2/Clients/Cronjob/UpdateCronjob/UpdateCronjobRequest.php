@@ -13,8 +13,6 @@ class UpdateCronjobRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -65,50 +63,30 @@ class UpdateCronjobRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $cronjobId;
 
-    /**
-     * @var UpdateCronjobRequestBody
-     */
     private UpdateCronjobRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $cronjobId
-     * @param UpdateCronjobRequestBody $body
-     */
     public function __construct(string $cronjobId, UpdateCronjobRequestBody $body)
     {
         $this->cronjobId = $cronjobId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCronjobId(): string
     {
         return $this->cronjobId;
     }
 
-    /**
-     * @return UpdateCronjobRequestBody
-     */
     public function getBody(): UpdateCronjobRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $cronjobId
-     * @return self
-     */
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
@@ -123,10 +101,6 @@ class UpdateCronjobRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateCronjobRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateCronjobRequestBody $body): self
     {
         $clone = clone $this;

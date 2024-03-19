@@ -13,8 +13,6 @@ class IsCustomerLegallyCompetentOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,33 +31,20 @@ class IsCustomerLegallyCompetentOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var IsCustomerLegallyCompetentOKResponseBody
-     */
     private IsCustomerLegallyCompetentOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param IsCustomerLegallyCompetentOKResponseBody $body
-     */
     public function __construct(IsCustomerLegallyCompetentOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return IsCustomerLegallyCompetentOKResponseBody
-     */
     public function getBody(): IsCustomerLegallyCompetentOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param IsCustomerLegallyCompetentOKResponseBody $body
-     * @return self
-     */
     public function withBody(IsCustomerLegallyCompetentOKResponseBody $body): self
     {
         $clone = clone $this;

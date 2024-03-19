@@ -21,8 +21,6 @@ class ReadableModifierArticleOptions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -58,23 +56,13 @@ class ReadableModifierArticleOptions
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $articleId;
 
-    /**
-     * @var ReadableModifierArticleOptionsInfo|null
-     */
     private ?ReadableModifierArticleOptionsInfo $info = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $maxArticleCount;
 
     /**
-     * @param string $articleId
      * @param int|float $maxArticleCount
      */
     public function __construct(string $articleId, int|float $maxArticleCount)
@@ -83,34 +71,21 @@ class ReadableModifierArticleOptions
         $this->maxArticleCount = $maxArticleCount;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleId(): string
     {
         return $this->articleId;
     }
 
-    /**
-     * @return ReadableModifierArticleOptionsInfo|null
-     */
     public function getInfo(): ?ReadableModifierArticleOptionsInfo
     {
         return $this->info ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getMaxArticleCount(): int|float
     {
         return $this->maxArticleCount;
     }
 
-    /**
-     * @param string $articleId
-     * @return self
-     */
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
@@ -125,10 +100,6 @@ class ReadableModifierArticleOptions
         return $clone;
     }
 
-    /**
-     * @param ReadableModifierArticleOptionsInfo $info
-     * @return self
-     */
     public function withInfo(ReadableModifierArticleOptionsInfo $info): self
     {
         $clone = clone $this;
@@ -137,9 +108,6 @@ class ReadableModifierArticleOptions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInfo(): self
     {
         $clone = clone $this;
@@ -150,7 +118,6 @@ class ReadableModifierArticleOptions
 
     /**
      * @param int|float $maxArticleCount
-     * @return self
      */
     public function withMaxArticleCount(int|float $maxArticleCount): self
     {

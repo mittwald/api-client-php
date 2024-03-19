@@ -13,8 +13,6 @@ class ListSshKeysOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class ListSshKeysOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ListSshKeysOKResponseBody
-     */
     private ListSshKeysOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ListSshKeysOKResponseBody $body
-     */
     public function __construct(ListSshKeysOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ListSshKeysOKResponseBody
-     */
     public function getBody(): ListSshKeysOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ListSshKeysOKResponseBody $body
-     * @return self
-     */
     public function withBody(ListSshKeysOKResponseBody $body): self
     {
         $clone = clone $this;

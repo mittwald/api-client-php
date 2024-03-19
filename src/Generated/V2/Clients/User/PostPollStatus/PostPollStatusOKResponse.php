@@ -14,8 +14,6 @@ class PostPollStatusOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class PostPollStatusOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var UserPollSettings
-     */
     private UserPollSettings $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param UserPollSettings $body
-     */
     public function __construct(UserPollSettings $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return UserPollSettings
-     */
     public function getBody(): UserPollSettings
     {
         return $this->body;
     }
 
-    /**
-     * @param UserPollSettings $body
-     * @return self
-     */
     public function withBody(UserPollSettings $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class DeprecatedUserEditApiTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,50 +44,30 @@ class DeprecatedUserEditApiTokenRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $apiTokenId;
 
-    /**
-     * @var DeprecatedUserEditApiTokenRequestBody
-     */
     private DeprecatedUserEditApiTokenRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $apiTokenId
-     * @param DeprecatedUserEditApiTokenRequestBody $body
-     */
     public function __construct(string $apiTokenId, DeprecatedUserEditApiTokenRequestBody $body)
     {
         $this->apiTokenId = $apiTokenId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getApiTokenId(): string
     {
         return $this->apiTokenId;
     }
 
-    /**
-     * @return DeprecatedUserEditApiTokenRequestBody
-     */
     public function getBody(): DeprecatedUserEditApiTokenRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $apiTokenId
-     * @return self
-     */
     public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new Validator();
@@ -104,10 +82,6 @@ class DeprecatedUserEditApiTokenRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserEditApiTokenRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserEditApiTokenRequestBody $body): self
     {
         $clone = clone $this;

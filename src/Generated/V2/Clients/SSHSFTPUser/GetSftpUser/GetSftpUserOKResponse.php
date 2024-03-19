@@ -14,8 +14,6 @@ class GetSftpUserOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetSftpUserOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var SftpUser
-     */
     private SftpUser $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param SftpUser $body
-     */
     public function __construct(SftpUser $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return SftpUser
-     */
     public function getBody(): SftpUser
     {
         return $this->body;
     }
 
-    /**
-     * @param SftpUser $body
-     * @return self
-     */
     public function withBody(SftpUser $body): self
     {
         $clone = clone $this;

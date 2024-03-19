@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\User;
 
 use GuzzleHttp\Client;
@@ -638,7 +640,6 @@ class UserClientImpl implements UserClient
      * @throws UnexpectedResponseException
      * @param DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateCreatedResponse
      */
     public function deprecatedUserServiceFeedbackCreate(DeprecatedUserServiceFeedbackCreateRequest $request): DeprecatedUserServiceFeedbackCreateCreatedResponse
     {
@@ -1580,7 +1581,6 @@ class UserClientImpl implements UserClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetPollStatus\GetPollStatusRequest $request An object representing the request for this operation
-     * @return GetPollStatus\GetPollStatusOKResponse
      */
     public function getPollStatus(GetPollStatusRequest $request): GetPollStatusOKResponse
     {

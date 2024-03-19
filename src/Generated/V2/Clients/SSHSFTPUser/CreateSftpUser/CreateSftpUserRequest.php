@@ -13,8 +13,6 @@ class CreateSftpUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -63,50 +61,30 @@ class CreateSftpUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateSftpUserRequestBody
-     */
     private CreateSftpUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CreateSftpUserRequestBody $body
-     */
     public function __construct(string $projectId, CreateSftpUserRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CreateSftpUserRequestBody
-     */
     public function getBody(): CreateSftpUserRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -121,10 +99,6 @@ class CreateSftpUserRequest
         return $clone;
     }
 
-    /**
-     * @param CreateSftpUserRequestBody $body
-     * @return self
-     */
     public function withBody(CreateSftpUserRequestBody $body): self
     {
         $clone = clone $this;

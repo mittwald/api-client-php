@@ -21,8 +21,6 @@ class RecordSRVRecord
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'additionalProperties' => false,
@@ -58,32 +56,14 @@ class RecordSRVRecord
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $fqdn;
 
-    /**
-     * @var int
-     */
     private int $port;
 
-    /**
-     * @var int
-     */
     private int $priority;
 
-    /**
-     * @var int
-     */
     private int $weight;
 
-    /**
-     * @param string $fqdn
-     * @param int $port
-     * @param int $priority
-     * @param int $weight
-     */
     public function __construct(string $fqdn, int $port, int $priority, int $weight)
     {
         $this->fqdn = $fqdn;
@@ -92,42 +72,26 @@ class RecordSRVRecord
         $this->weight = $weight;
     }
 
-    /**
-     * @return string
-     */
     public function getFqdn(): string
     {
         return $this->fqdn;
     }
 
-    /**
-     * @return int
-     */
     public function getPort(): int
     {
         return $this->port;
     }
 
-    /**
-     * @return int
-     */
     public function getPriority(): int
     {
         return $this->priority;
     }
 
-    /**
-     * @return int
-     */
     public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param string $fqdn
-     * @return self
-     */
     public function withFqdn(string $fqdn): self
     {
         $validator = new Validator();
@@ -142,10 +106,6 @@ class RecordSRVRecord
         return $clone;
     }
 
-    /**
-     * @param int $port
-     * @return self
-     */
     public function withPort(int $port): self
     {
         $validator = new Validator();
@@ -160,10 +120,6 @@ class RecordSRVRecord
         return $clone;
     }
 
-    /**
-     * @param int $priority
-     * @return self
-     */
     public function withPriority(int $priority): self
     {
         $validator = new Validator();
@@ -178,10 +134,6 @@ class RecordSRVRecord
         return $clone;
     }
 
-    /**
-     * @param int $weight
-     * @return self
-     */
     public function withWeight(int $weight): self
     {
         $validator = new Validator();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\Project;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -72,7 +74,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AcceptProjectInvite\AcceptProjectInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function acceptProjectInvite(AcceptProjectInviteRequest $request): EmptyResponse;
     /**
@@ -102,7 +103,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeclineProjectInvite\DeclineProjectInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function declineProjectInvite(DeclineProjectInviteRequest $request): EmptyResponse;
     /**
@@ -132,7 +132,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteProjectInvite\DeleteProjectInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function deleteProjectInvite(DeleteProjectInviteRequest $request): EmptyResponse;
     /**
@@ -182,7 +181,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetProjectMembership\GetProjectMembershipRequest $request An object representing the request for this operation
-     * @return GetProjectMembership\GetProjectMembershipOKResponse
      */
     public function getProjectMembership(GetProjectMembershipRequest $request): GetProjectMembershipOKResponse;
     /**
@@ -222,7 +220,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param LeaveProject\LeaveProjectRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function leaveProject(LeaveProjectRequest $request): EmptyResponse;
     /**
@@ -312,7 +309,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ResendProjectInviteMail\ResendProjectInviteMailRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse;
     /**
@@ -332,7 +328,6 @@ interface ProjectClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateProjectMembership\UpdateProjectMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function updateProjectMembership(UpdateProjectMembershipRequest $request): EmptyResponse;
     /**

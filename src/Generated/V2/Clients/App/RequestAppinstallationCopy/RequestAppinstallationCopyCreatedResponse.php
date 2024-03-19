@@ -13,8 +13,6 @@ class RequestAppinstallationCopyCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class RequestAppinstallationCopyCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var RequestAppinstallationCopyCreatedResponseBody
-     */
     private RequestAppinstallationCopyCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RequestAppinstallationCopyCreatedResponseBody $body
-     */
     public function __construct(RequestAppinstallationCopyCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RequestAppinstallationCopyCreatedResponseBody
-     */
     public function getBody(): RequestAppinstallationCopyCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RequestAppinstallationCopyCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(RequestAppinstallationCopyCreatedResponseBody $body): self
     {
         $clone = clone $this;

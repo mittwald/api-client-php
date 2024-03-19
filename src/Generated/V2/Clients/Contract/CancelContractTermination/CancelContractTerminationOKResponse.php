@@ -13,8 +13,6 @@ class CancelContractTerminationOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class CancelContractTerminationOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CancelContractTerminationOKResponseBody
-     */
     private CancelContractTerminationOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CancelContractTerminationOKResponseBody $body
-     */
     public function __construct(CancelContractTerminationOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CancelContractTerminationOKResponseBody
-     */
     public function getBody(): CancelContractTerminationOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CancelContractTerminationOKResponseBody $body
-     * @return self
-     */
     public function withBody(CancelContractTerminationOKResponseBody $body): self
     {
         $clone = clone $this;

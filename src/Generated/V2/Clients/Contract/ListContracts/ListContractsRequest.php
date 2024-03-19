@@ -13,8 +13,6 @@ class ListContractsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,74 +36,43 @@ class ListContractsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var int|null
-     */
     private ?int $limit = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $skip = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $page = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerId
-     */
     public function __construct(string $customerId)
     {
         $this->customerId = $customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPage(): ?int
     {
         return $this->page ?? null;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -120,10 +87,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    /**
-     * @param int $limit
-     * @return self
-     */
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -138,9 +101,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLimit(): self
     {
         $clone = clone $this;
@@ -149,10 +109,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    /**
-     * @param int $skip
-     * @return self
-     */
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -167,9 +123,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSkip(): self
     {
         $clone = clone $this;
@@ -178,10 +131,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    /**
-     * @param int $page
-     * @return self
-     */
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -196,9 +145,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPage(): self
     {
         $clone = clone $this;

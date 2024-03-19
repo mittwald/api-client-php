@@ -21,8 +21,6 @@ class ValidationErrors
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -50,14 +48,8 @@ class ValidationErrors
         ],
     ];
 
-    /**
-     * @var ValidationErrorsType
-     */
     private ValidationErrorsType $type;
 
-    /**
-     * @var string|null
-     */
     private ?string $message = null;
 
     /**
@@ -66,7 +58,6 @@ class ValidationErrors
     private array $validationErrors;
 
     /**
-     * @param ValidationErrorsType $type
      * @param ValidationErrorSchema[] $validationErrors
      */
     public function __construct(ValidationErrorsType $type, array $validationErrors)
@@ -75,17 +66,11 @@ class ValidationErrors
         $this->validationErrors = $validationErrors;
     }
 
-    /**
-     * @return ValidationErrorsType
-     */
     public function getType(): ValidationErrorsType
     {
         return $this->type;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
@@ -99,10 +84,6 @@ class ValidationErrors
         return $this->validationErrors;
     }
 
-    /**
-     * @param ValidationErrorsType $type
-     * @return self
-     */
     public function withType(ValidationErrorsType $type): self
     {
         $clone = clone $this;
@@ -111,10 +92,6 @@ class ValidationErrors
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -129,9 +106,6 @@ class ValidationErrors
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -142,7 +116,6 @@ class ValidationErrors
 
     /**
      * @param ValidationErrorSchema[] $validationErrors
-     * @return self
      */
     public function withValidationErrors(array $validationErrors): self
     {

@@ -11,8 +11,6 @@ class RequestAvatarUploadOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -78,46 +76,26 @@ class RequestAvatarUploadOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $refId;
 
-    /**
-     * @var RequestAvatarUploadOKResponseBodyRules
-     */
     private RequestAvatarUploadOKResponseBodyRules $rules;
 
-    /**
-     * @param string $refId
-     * @param RequestAvatarUploadOKResponseBodyRules $rules
-     */
     public function __construct(string $refId, RequestAvatarUploadOKResponseBodyRules $rules)
     {
         $this->refId = $refId;
         $this->rules = $rules;
     }
 
-    /**
-     * @return string
-     */
     public function getRefId(): string
     {
         return $this->refId;
     }
 
-    /**
-     * @return RequestAvatarUploadOKResponseBodyRules
-     */
     public function getRules(): RequestAvatarUploadOKResponseBodyRules
     {
         return $this->rules;
     }
 
-    /**
-     * @param string $refId
-     * @return self
-     */
     public function withRefId(string $refId): self
     {
         $validator = new Validator();
@@ -132,10 +110,6 @@ class RequestAvatarUploadOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param RequestAvatarUploadOKResponseBodyRules $rules
-     * @return self
-     */
     public function withRules(RequestAvatarUploadOKResponseBodyRules $rules): self
     {
         $clone = clone $this;

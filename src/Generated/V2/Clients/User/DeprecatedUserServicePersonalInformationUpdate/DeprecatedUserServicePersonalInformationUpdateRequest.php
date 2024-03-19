@@ -13,8 +13,6 @@ class DeprecatedUserServicePersonalInformationUpdateRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class DeprecatedUserServicePersonalInformationUpdateRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @var DeprecatedUserServicePersonalInformationUpdateRequestBody
-     */
     private DeprecatedUserServicePersonalInformationUpdateRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $userId
-     * @param DeprecatedUserServicePersonalInformationUpdateRequestBody $body
-     */
     public function __construct(string $userId, DeprecatedUserServicePersonalInformationUpdateRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @return DeprecatedUserServicePersonalInformationUpdateRequestBody
-     */
     public function getBody(): DeprecatedUserServicePersonalInformationUpdateRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class DeprecatedUserServicePersonalInformationUpdateRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServicePersonalInformationUpdateRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServicePersonalInformationUpdateRequestBody $body): self
     {
         $clone = clone $this;

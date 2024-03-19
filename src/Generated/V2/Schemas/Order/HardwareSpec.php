@@ -21,8 +21,6 @@ class HardwareSpec
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,14 +36,8 @@ class HardwareSpec
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $ram = null;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $vcpu = null;
 
     /**
@@ -55,17 +47,11 @@ class HardwareSpec
     {
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getRam(): int|float|null
     {
         return $this->ram;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getVcpu(): int|float|null
     {
         return $this->vcpu;
@@ -73,7 +59,6 @@ class HardwareSpec
 
     /**
      * @param int|float $ram
-     * @return self
      */
     public function withRam(int|float $ram): self
     {
@@ -89,9 +74,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRam(): self
     {
         $clone = clone $this;
@@ -102,7 +84,6 @@ class HardwareSpec
 
     /**
      * @param int|float $vcpu
-     * @return self
      */
     public function withVcpu(int|float $vcpu): self
     {
@@ -118,9 +99,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVcpu(): self
     {
         $clone = clone $this;

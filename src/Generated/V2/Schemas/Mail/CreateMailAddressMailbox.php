@@ -21,8 +21,6 @@ class CreateMailAddressMailbox
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,24 +43,13 @@ class CreateMailAddressMailbox
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $enableSpamProtection;
 
-    /**
-     * @var string
-     */
     private string $password;
 
-    /**
-     * @var int|float
-     */
     private int|float $quotaInBytes;
 
     /**
-     * @param bool $enableSpamProtection
-     * @param string $password
      * @param int|float $quotaInBytes
      */
     public function __construct(bool $enableSpamProtection, string $password, int|float $quotaInBytes)
@@ -72,34 +59,21 @@ class CreateMailAddressMailbox
         $this->quotaInBytes = $quotaInBytes;
     }
 
-    /**
-     * @return bool
-     */
     public function getEnableSpamProtection(): bool
     {
         return $this->enableSpamProtection;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @return int|float
-     */
     public function getQuotaInBytes(): int|float
     {
         return $this->quotaInBytes;
     }
 
-    /**
-     * @param bool $enableSpamProtection
-     * @return self
-     */
     public function withEnableSpamProtection(bool $enableSpamProtection): self
     {
         $validator = new Validator();
@@ -114,10 +88,6 @@ class CreateMailAddressMailbox
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -134,7 +104,6 @@ class CreateMailAddressMailbox
 
     /**
      * @param int|float $quotaInBytes
-     * @return self
      */
     public function withQuotaInBytes(int|float $quotaInBytes): self
     {

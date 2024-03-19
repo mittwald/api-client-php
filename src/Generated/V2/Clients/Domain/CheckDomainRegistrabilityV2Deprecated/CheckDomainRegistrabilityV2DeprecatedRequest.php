@@ -13,8 +13,6 @@ class CheckDomainRegistrabilityV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,35 +34,22 @@ class CheckDomainRegistrabilityV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var CheckDomainRegistrabilityV2DeprecatedRequestBody
-     */
     private CheckDomainRegistrabilityV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CheckDomainRegistrabilityV2DeprecatedRequestBody $body
-     */
     public function __construct(CheckDomainRegistrabilityV2DeprecatedRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckDomainRegistrabilityV2DeprecatedRequestBody
-     */
     public function getBody(): CheckDomainRegistrabilityV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckDomainRegistrabilityV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(CheckDomainRegistrabilityV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

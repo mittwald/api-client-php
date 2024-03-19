@@ -11,8 +11,6 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,31 +44,18 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequestBody
         ],
     ];
 
-    /**
-     * @var UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder
-     */
     private UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder $autoResponder;
 
-    /**
-     * @param UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder $autoResponder
-     */
     public function __construct(UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder $autoResponder)
     {
         $this->autoResponder = $autoResponder;
     }
 
-    /**
-     * @return UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder
-     */
     public function getAutoResponder(): UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder
     {
         return $this->autoResponder;
     }
 
-    /**
-     * @param UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder $autoResponder
-     * @return self
-     */
     public function withAutoResponder(UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder $autoResponder): self
     {
         $clone = clone $this;

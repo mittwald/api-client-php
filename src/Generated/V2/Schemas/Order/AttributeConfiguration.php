@@ -21,8 +21,6 @@ class AttributeConfiguration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,46 +40,26 @@ class AttributeConfiguration
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @var string
-     */
     private string $value;
 
-    /**
-     * @param string $key
-     * @param string $value
-     */
     public function __construct(string $key, string $value)
     {
         $this->key = $key;
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -96,10 +74,6 @@ class AttributeConfiguration
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();

@@ -21,8 +21,6 @@ class HandleReadable
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,44 +37,25 @@ class HandleReadable
         'type' => 'object',
     ];
 
-    /**
-     * @var HandleData
-     */
     private HandleData $current;
 
-    /**
-     * @var HandleData|null
-     */
     private ?HandleData $desired = null;
 
-    /**
-     * @param HandleData $current
-     */
     public function __construct(HandleData $current)
     {
         $this->current = $current;
     }
 
-    /**
-     * @return HandleData
-     */
     public function getCurrent(): HandleData
     {
         return $this->current;
     }
 
-    /**
-     * @return HandleData|null
-     */
     public function getDesired(): ?HandleData
     {
         return $this->desired ?? null;
     }
 
-    /**
-     * @param HandleData $current
-     * @return self
-     */
     public function withCurrent(HandleData $current): self
     {
         $clone = clone $this;
@@ -85,10 +64,6 @@ class HandleReadable
         return $clone;
     }
 
-    /**
-     * @param HandleData $desired
-     * @return self
-     */
     public function withDesired(HandleData $desired): self
     {
         $clone = clone $this;
@@ -97,9 +72,6 @@ class HandleReadable
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDesired(): self
     {
         $clone = clone $this;

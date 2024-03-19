@@ -14,8 +14,6 @@ class OrderListProjectOrdersRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -60,24 +58,12 @@ class OrderListProjectOrdersRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var int|null
-     */
     private ?int $limit = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $skip = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $page = null;
 
     /**
@@ -99,41 +85,26 @@ class OrderListProjectOrdersRequest
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPage(): ?int
     {
         return $this->page ?? null;
@@ -163,10 +134,6 @@ class OrderListProjectOrdersRequest
         return $this->templateNames ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -181,10 +148,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @param int $limit
-     * @return self
-     */
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -199,9 +162,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLimit(): self
     {
         $clone = clone $this;
@@ -210,10 +170,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @param int $skip
-     * @return self
-     */
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -228,9 +184,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSkip(): self
     {
         $clone = clone $this;
@@ -239,10 +192,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @param int $page
-     * @return self
-     */
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -257,9 +206,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPage(): self
     {
         $clone = clone $this;
@@ -270,7 +216,6 @@ class OrderListProjectOrdersRequest
 
     /**
      * @param OrderStatus[] $includesStatus
-     * @return self
      */
     public function withIncludesStatus(array $includesStatus): self
     {
@@ -280,9 +225,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIncludesStatus(): self
     {
         $clone = clone $this;
@@ -293,7 +235,6 @@ class OrderListProjectOrdersRequest
 
     /**
      * @param OrderStatus[] $excludesStatus
-     * @return self
      */
     public function withExcludesStatus(array $excludesStatus): self
     {
@@ -303,9 +244,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExcludesStatus(): self
     {
         $clone = clone $this;
@@ -316,7 +254,6 @@ class OrderListProjectOrdersRequest
 
     /**
      * @param string[] $templateNames
-     * @return self
      */
     public function withTemplateNames(array $templateNames): self
     {
@@ -332,9 +269,6 @@ class OrderListProjectOrdersRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTemplateNames(): self
     {
         $clone = clone $this;

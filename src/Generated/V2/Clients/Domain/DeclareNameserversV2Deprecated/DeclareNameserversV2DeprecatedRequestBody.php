@@ -11,8 +11,6 @@ class DeclareNameserversV2DeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,7 +48,6 @@ class DeclareNameserversV2DeprecatedRequestBody
 
     /**
      * @param string[] $nameservers
-     * @return self
      */
     public function withNameservers(array $nameservers): self
     {
@@ -66,9 +63,6 @@ class DeclareNameserversV2DeprecatedRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNameservers(): self
     {
         $clone = clone $this;

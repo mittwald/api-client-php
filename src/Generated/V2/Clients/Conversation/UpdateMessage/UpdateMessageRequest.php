@@ -13,8 +13,6 @@ class UpdateMessageRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,30 +40,16 @@ class UpdateMessageRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var string
-     */
     private string $messageId;
 
-    /**
-     * @var UpdateMessageRequestBody
-     */
     private UpdateMessageRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $conversationId
-     * @param string $messageId
-     * @param UpdateMessageRequestBody $body
-     */
     public function __construct(string $conversationId, string $messageId, UpdateMessageRequestBody $body)
     {
         $this->conversationId = $conversationId;
@@ -73,34 +57,21 @@ class UpdateMessageRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return string
-     */
     public function getMessageId(): string
     {
         return $this->messageId;
     }
 
-    /**
-     * @return UpdateMessageRequestBody
-     */
     public function getBody(): UpdateMessageRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -115,10 +86,6 @@ class UpdateMessageRequest
         return $clone;
     }
 
-    /**
-     * @param string $messageId
-     * @return self
-     */
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();
@@ -133,10 +100,6 @@ class UpdateMessageRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMessageRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMessageRequestBody $body): self
     {
         $clone = clone $this;

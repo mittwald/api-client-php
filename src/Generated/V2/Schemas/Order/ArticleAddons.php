@@ -21,8 +21,6 @@ class ArticleAddons
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -55,85 +53,47 @@ class ArticleAddons
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $hidden = null;
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @var string|null
-     */
     private ?string $type = null;
 
-    /**
-     * @var string
-     */
     private string $value;
 
-    /**
-     * @var ArticleAddonsValueMergeType|null
-     */
     private ?ArticleAddonsValueMergeType $valueMergeType = null;
 
-    /**
-     * @param string $key
-     * @param string $value
-     */
     public function __construct(string $key, string $value)
     {
         $this->key = $key;
         $this->value = $value;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getHidden(): ?bool
     {
         return $this->hidden ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string
     {
         return $this->type ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @return ArticleAddonsValueMergeType|null
-     */
     public function getValueMergeType(): ?ArticleAddonsValueMergeType
     {
         return $this->valueMergeType ?? null;
     }
 
-    /**
-     * @param bool $hidden
-     * @return self
-     */
     public function withHidden(bool $hidden): self
     {
         $validator = new Validator();
@@ -148,9 +108,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHidden(): self
     {
         $clone = clone $this;
@@ -159,10 +116,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -177,10 +130,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();
@@ -195,9 +144,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutType(): self
     {
         $clone = clone $this;
@@ -206,10 +152,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();
@@ -224,10 +166,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @param ArticleAddonsValueMergeType $valueMergeType
-     * @return self
-     */
     public function withValueMergeType(ArticleAddonsValueMergeType $valueMergeType): self
     {
         $clone = clone $this;
@@ -236,9 +174,6 @@ class ArticleAddons
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutValueMergeType(): self
     {
         $clone = clone $this;

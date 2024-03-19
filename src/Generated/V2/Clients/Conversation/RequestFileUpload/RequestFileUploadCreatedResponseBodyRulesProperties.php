@@ -11,8 +11,6 @@ class RequestFileUploadCreatedResponseBodyRulesProperties
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,9 +45,6 @@ class RequestFileUploadCreatedResponseBodyRulesProperties
         'type' => 'object',
     ];
 
-    /**
-     * @var RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions|null
-     */
     private ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions $imageDimensions = null;
 
     /**
@@ -59,18 +54,11 @@ class RequestFileUploadCreatedResponseBodyRulesProperties
     {
     }
 
-    /**
-     * @return RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions|null
-     */
     public function getImageDimensions(): ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
 
-    /**
-     * @param RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions $imageDimensions
-     * @return self
-     */
     public function withImageDimensions(RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
@@ -79,9 +67,6 @@ class RequestFileUploadCreatedResponseBodyRulesProperties
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageDimensions(): self
     {
         $clone = clone $this;

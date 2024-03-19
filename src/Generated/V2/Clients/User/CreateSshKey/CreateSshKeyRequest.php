@@ -13,8 +13,6 @@ class CreateSshKeyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,35 +39,22 @@ class CreateSshKeyRequest
         ],
     ];
 
-    /**
-     * @var CreateSshKeyRequestBody
-     */
     private CreateSshKeyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateSshKeyRequestBody $body
-     */
     public function __construct(CreateSshKeyRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateSshKeyRequestBody
-     */
     public function getBody(): CreateSshKeyRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateSshKeyRequestBody $body
-     * @return self
-     */
     public function withBody(CreateSshKeyRequestBody $body): self
     {
         $clone = clone $this;

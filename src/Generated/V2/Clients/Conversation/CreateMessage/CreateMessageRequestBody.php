@@ -11,8 +11,6 @@ class CreateMessageRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -35,9 +33,6 @@ class CreateMessageRequestBody
      */
     private ?array $fileIds = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $messageContent = null;
 
     /**
@@ -55,9 +50,6 @@ class CreateMessageRequestBody
         return $this->fileIds ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessageContent(): ?string
     {
         return $this->messageContent ?? null;
@@ -65,7 +57,6 @@ class CreateMessageRequestBody
 
     /**
      * @param string[] $fileIds
-     * @return self
      */
     public function withFileIds(array $fileIds): self
     {
@@ -81,9 +72,6 @@ class CreateMessageRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFileIds(): self
     {
         $clone = clone $this;
@@ -92,10 +80,6 @@ class CreateMessageRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $messageContent
-     * @return self
-     */
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
@@ -110,9 +94,6 @@ class CreateMessageRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessageContent(): self
     {
         $clone = clone $this;

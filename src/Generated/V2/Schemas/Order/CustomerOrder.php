@@ -22,8 +22,6 @@ class CustomerOrder
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -91,25 +89,14 @@ class CustomerOrder
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $contractChangeContractId = null;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $dueDate = null;
 
     /**
      * Invoicing period in months
-     *
-     * @var int|float
      */
     private int|float $invoicingPeriod;
 
@@ -118,51 +105,23 @@ class CustomerOrder
      */
     private array $items;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $orderDate;
 
-    /**
-     * @var string
-     */
     private string $orderId;
 
-    /**
-     * @var string
-     */
     private string $orderNumber;
 
-    /**
-     * @var Profile|null
-     */
     private ?Profile $profile = null;
 
-    /**
-     * @var OrderStatus
-     */
     private OrderStatus $status;
 
-    /**
-     * @var OrderSummary
-     */
     private OrderSummary $summary;
 
-    /**
-     * @var OrderType
-     */
     private OrderType $type;
 
     /**
-     * @param string $customerId
      * @param int|float $invoicingPeriod
      * @param OrderItem[] $items
-     * @param DateTime $orderDate
-     * @param string $orderId
-     * @param string $orderNumber
-     * @param OrderStatus $status
-     * @param OrderSummary $summary
-     * @param OrderType $type
      */
     public function __construct(string $customerId, int|float $invoicingPeriod, array $items, DateTime $orderDate, string $orderId, string $orderNumber, OrderStatus $status, OrderSummary $summary, OrderType $type)
     {
@@ -177,33 +136,21 @@ class CustomerOrder
         $this->type = $type;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractChangeContractId(): ?string
     {
         return $this->contractChangeContractId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getDueDate(): ?DateTime
     {
         return $this->dueDate ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getInvoicingPeriod(): int|float
     {
         return $this->invoicingPeriod;
@@ -217,66 +164,41 @@ class CustomerOrder
         return $this->items;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getOrderDate(): DateTime
     {
         return $this->orderDate;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderId(): string
     {
         return $this->orderId;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderNumber(): string
     {
         return $this->orderNumber;
     }
 
-    /**
-     * @return Profile|null
-     */
     public function getProfile(): ?Profile
     {
         return $this->profile ?? null;
     }
 
-    /**
-     * @return OrderStatus
-     */
     public function getStatus(): OrderStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return OrderSummary
-     */
     public function getSummary(): OrderSummary
     {
         return $this->summary;
     }
 
-    /**
-     * @return OrderType
-     */
     public function getType(): OrderType
     {
         return $this->type;
     }
 
-    /**
-     * @param string $contractChangeContractId
-     * @return self
-     */
     public function withContractChangeContractId(string $contractChangeContractId): self
     {
         $validator = new Validator();
@@ -291,9 +213,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractChangeContractId(): self
     {
         $clone = clone $this;
@@ -302,10 +221,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -320,10 +235,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param DateTime $dueDate
-     * @return self
-     */
     public function withDueDate(DateTime $dueDate): self
     {
         $clone = clone $this;
@@ -332,9 +243,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDueDate(): self
     {
         $clone = clone $this;
@@ -345,7 +253,6 @@ class CustomerOrder
 
     /**
      * @param int|float $invoicingPeriod
-     * @return self
      */
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
@@ -363,7 +270,6 @@ class CustomerOrder
 
     /**
      * @param OrderItem[] $items
-     * @return self
      */
     public function withItems(array $items): self
     {
@@ -373,10 +279,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param DateTime $orderDate
-     * @return self
-     */
     public function withOrderDate(DateTime $orderDate): self
     {
         $clone = clone $this;
@@ -385,10 +287,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param string $orderId
-     * @return self
-     */
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();
@@ -403,10 +301,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param string $orderNumber
-     * @return self
-     */
     public function withOrderNumber(string $orderNumber): self
     {
         $validator = new Validator();
@@ -421,10 +315,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param Profile $profile
-     * @return self
-     */
     public function withProfile(Profile $profile): self
     {
         $clone = clone $this;
@@ -433,9 +323,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProfile(): self
     {
         $clone = clone $this;
@@ -444,10 +331,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param OrderStatus $status
-     * @return self
-     */
     public function withStatus(OrderStatus $status): self
     {
         $clone = clone $this;
@@ -456,10 +339,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param OrderSummary $summary
-     * @return self
-     */
     public function withSummary(OrderSummary $summary): self
     {
         $clone = clone $this;
@@ -468,10 +347,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param OrderType $type
-     * @return self
-     */
     public function withType(OrderType $type): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class CreateCronjobCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateCronjobCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateCronjobCreatedResponseBody
-     */
     private CreateCronjobCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateCronjobCreatedResponseBody $body
-     */
     public function __construct(CreateCronjobCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateCronjobCreatedResponseBody
-     */
     public function getBody(): CreateCronjobCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateCronjobCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateCronjobCreatedResponseBody $body): self
     {
         $clone = clone $this;

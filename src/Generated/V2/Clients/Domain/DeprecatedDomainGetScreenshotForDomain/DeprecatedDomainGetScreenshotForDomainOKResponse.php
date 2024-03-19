@@ -13,8 +13,6 @@ class DeprecatedDomainGetScreenshotForDomainOKResponse implements ResponseContai
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class DeprecatedDomainGetScreenshotForDomainOKResponse implements ResponseContai
         ],
     ];
 
-    /**
-     * @var DeprecatedDomainGetScreenshotForDomainOKResponseBody
-     */
     private DeprecatedDomainGetScreenshotForDomainOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedDomainGetScreenshotForDomainOKResponseBody $body
-     */
     public function __construct(DeprecatedDomainGetScreenshotForDomainOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedDomainGetScreenshotForDomainOKResponseBody
-     */
     public function getBody(): DeprecatedDomainGetScreenshotForDomainOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedDomainGetScreenshotForDomainOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedDomainGetScreenshotForDomainOKResponseBody $body): self
     {
         $clone = clone $this;

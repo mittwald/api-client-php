@@ -23,8 +23,6 @@ class Contact
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -67,29 +65,14 @@ class Contact
         'type' => 'object',
     ];
 
-    /**
-     * @var Address
-     */
     private Address $address;
 
-    /**
-     * @var string|null
-     */
     private ?string $company = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $emailAddress = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $firstName = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $lastName = null;
 
     /**
@@ -97,66 +80,38 @@ class Contact
      */
     private ?array $phoneNumbers = null;
 
-    /**
-     * @var Salutation
-     */
     private Salutation $salutation;
 
-    /**
-     * @var string|null
-     */
     private ?string $title = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $useFormalTerm = null;
 
-    /**
-     * @param Address $address
-     * @param Salutation $salutation
-     */
     public function __construct(Address $address, Salutation $salutation)
     {
         $this->address = $address;
         $this->salutation = $salutation;
     }
 
-    /**
-     * @return Address
-     */
     public function getAddress(): Address
     {
         return $this->address;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCompany(): ?string
     {
         return $this->company ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmailAddress(): ?string
     {
         return $this->emailAddress ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string
     {
         return $this->lastName ?? null;
@@ -170,34 +125,21 @@ class Contact
         return $this->phoneNumbers ?? null;
     }
 
-    /**
-     * @return Salutation
-     */
     public function getSalutation(): Salutation
     {
         return $this->salutation;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getUseFormalTerm(): ?bool
     {
         return $this->useFormalTerm ?? null;
     }
 
-    /**
-     * @param Address $address
-     * @return self
-     */
     public function withAddress(Address $address): self
     {
         $clone = clone $this;
@@ -206,10 +148,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param string $company
-     * @return self
-     */
     public function withCompany(string $company): self
     {
         $validator = new Validator();
@@ -224,9 +162,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCompany(): self
     {
         $clone = clone $this;
@@ -235,10 +170,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param string $emailAddress
-     * @return self
-     */
     public function withEmailAddress(string $emailAddress): self
     {
         $validator = new Validator();
@@ -253,9 +184,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmailAddress(): self
     {
         $clone = clone $this;
@@ -264,10 +192,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param string $firstName
-     * @return self
-     */
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
@@ -282,9 +206,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFirstName(): self
     {
         $clone = clone $this;
@@ -293,10 +214,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param string $lastName
-     * @return self
-     */
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
@@ -311,9 +228,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastName(): self
     {
         $clone = clone $this;
@@ -324,7 +238,6 @@ class Contact
 
     /**
      * @param string[] $phoneNumbers
-     * @return self
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
@@ -340,9 +253,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPhoneNumbers(): self
     {
         $clone = clone $this;
@@ -351,10 +261,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param Salutation $salutation
-     * @return self
-     */
     public function withSalutation(Salutation $salutation): self
     {
         $clone = clone $this;
@@ -363,10 +269,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param string $title
-     * @return self
-     */
     public function withTitle(string $title): self
     {
         $validator = new Validator();
@@ -381,9 +283,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTitle(): self
     {
         $clone = clone $this;
@@ -392,10 +291,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @param bool $useFormalTerm
-     * @return self
-     */
     public function withUseFormalTerm(bool $useFormalTerm): self
     {
         $validator = new Validator();
@@ -410,9 +305,6 @@ class Contact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUseFormalTerm(): self
     {
         $clone = clone $this;

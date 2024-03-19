@@ -13,8 +13,6 @@ class DeprecatedUserDeleteApiTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeprecatedUserDeleteApiTokenRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $apiTokenId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $apiTokenId
-     */
     public function __construct(string $apiTokenId)
     {
         $this->apiTokenId = $apiTokenId;
     }
 
-    /**
-     * @return string
-     */
     public function getApiTokenId(): string
     {
         return $this->apiTokenId;
     }
 
-    /**
-     * @param string $apiTokenId
-     * @return self
-     */
     public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new Validator();

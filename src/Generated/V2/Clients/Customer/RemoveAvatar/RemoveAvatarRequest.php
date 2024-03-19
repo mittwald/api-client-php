@@ -13,8 +13,6 @@ class RemoveAvatarRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class RemoveAvatarRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerId
-     */
     public function __construct(string $customerId)
     {
         $this->customerId = $customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();

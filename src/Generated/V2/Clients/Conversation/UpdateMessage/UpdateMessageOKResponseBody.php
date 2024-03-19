@@ -11,8 +11,6 @@ class UpdateMessageOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class UpdateMessageOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $messageId;
 
-    /**
-     * @param string $messageId
-     */
     public function __construct(string $messageId)
     {
         $this->messageId = $messageId;
     }
 
-    /**
-     * @return string
-     */
     public function getMessageId(): string
     {
         return $this->messageId;
     }
 
-    /**
-     * @param string $messageId
-     * @return self
-     */
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();

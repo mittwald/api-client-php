@@ -21,8 +21,6 @@ class RecordSRVComponent
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'additionalProperties' => false,
@@ -50,14 +48,10 @@ class RecordSRVComponent
      */
     private array $records;
 
-    /**
-     * @var RecordSettings
-     */
     private RecordSettings $settings;
 
     /**
      * @param RecordSRVRecord[] $records
-     * @param RecordSettings $settings
      */
     public function __construct(array $records, RecordSettings $settings)
     {
@@ -73,9 +67,6 @@ class RecordSRVComponent
         return $this->records;
     }
 
-    /**
-     * @return RecordSettings
-     */
     public function getSettings(): RecordSettings
     {
         return $this->settings;
@@ -83,7 +74,6 @@ class RecordSRVComponent
 
     /**
      * @param RecordSRVRecord[] $records
-     * @return self
      */
     public function withRecords(array $records): self
     {
@@ -93,10 +83,6 @@ class RecordSRVComponent
         return $clone;
     }
 
-    /**
-     * @param RecordSettings $settings
-     * @return self
-     */
     public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;

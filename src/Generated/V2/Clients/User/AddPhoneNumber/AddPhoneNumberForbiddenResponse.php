@@ -13,8 +13,6 @@ class AddPhoneNumberForbiddenResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,33 +36,20 @@ class AddPhoneNumberForbiddenResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var AddPhoneNumberForbiddenResponseBody
-     */
     private AddPhoneNumberForbiddenResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param AddPhoneNumberForbiddenResponseBody $body
-     */
     public function __construct(AddPhoneNumberForbiddenResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AddPhoneNumberForbiddenResponseBody
-     */
     public function getBody(): AddPhoneNumberForbiddenResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param AddPhoneNumberForbiddenResponseBody $body
-     * @return self
-     */
     public function withBody(AddPhoneNumberForbiddenResponseBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class ConfirmPasswordResetRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -50,35 +48,22 @@ class ConfirmPasswordResetRequest
         ],
     ];
 
-    /**
-     * @var ConfirmPasswordResetRequestBody
-     */
     private ConfirmPasswordResetRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param ConfirmPasswordResetRequestBody $body
-     */
     public function __construct(ConfirmPasswordResetRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ConfirmPasswordResetRequestBody
-     */
     public function getBody(): ConfirmPasswordResetRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ConfirmPasswordResetRequestBody $body
-     * @return self
-     */
     public function withBody(ConfirmPasswordResetRequestBody $body): self
     {
         $clone = clone $this;

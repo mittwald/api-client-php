@@ -13,8 +13,6 @@ class GetCustomerInviteRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetCustomerInviteRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerInviteId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerInviteId
-     */
     public function __construct(string $customerInviteId)
     {
         $this->customerInviteId = $customerInviteId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerInviteId(): string
     {
         return $this->customerInviteId;
     }
 
-    /**
-     * @param string $customerInviteId
-     * @return self
-     */
     public function withCustomerInviteId(string $customerInviteId): self
     {
         $validator = new Validator();

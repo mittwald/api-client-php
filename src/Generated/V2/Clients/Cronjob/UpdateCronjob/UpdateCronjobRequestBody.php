@@ -13,8 +13,6 @@ class UpdateCronjobRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,34 +50,16 @@ class UpdateCronjobRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $active = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var CronjobUrl|CronjobCommand|null
-     */
     private CronjobUrl|CronjobCommand|null $destination = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $email = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $interval = null;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $timeout = null;
 
     /**
@@ -89,17 +69,11 @@ class UpdateCronjobRequestBody
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
@@ -114,34 +88,21 @@ class UpdateCronjobRequestBody
         return $this->destination;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInterval(): ?string
     {
         return $this->interval ?? null;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getTimeout(): int|float|null
     {
         return $this->timeout;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -156,9 +117,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActive(): self
     {
         $clone = clone $this;
@@ -167,10 +125,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -185,9 +139,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -198,7 +149,6 @@ class UpdateCronjobRequestBody
 
     /**
      * @param CronjobUrl|CronjobCommand $destination
-     * @return self
      */
     public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
@@ -208,9 +158,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDestination(): self
     {
         $clone = clone $this;
@@ -219,10 +166,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -237,9 +180,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -248,10 +188,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $interval
-     * @return self
-     */
     public function withInterval(string $interval): self
     {
         $validator = new Validator();
@@ -266,9 +202,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInterval(): self
     {
         $clone = clone $this;
@@ -279,7 +212,6 @@ class UpdateCronjobRequestBody
 
     /**
      * @param int|float $timeout
-     * @return self
      */
     public function withTimeout(int|float $timeout): self
     {
@@ -295,9 +227,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTimeout(): self
     {
         $clone = clone $this;

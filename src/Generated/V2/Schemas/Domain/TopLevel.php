@@ -21,8 +21,6 @@ class TopLevel
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,46 +39,26 @@ class TopLevel
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $rgpDays;
 
-    /**
-     * @var string
-     */
     private string $tld;
 
-    /**
-     * @param int $rgpDays
-     * @param string $tld
-     */
     public function __construct(int $rgpDays, string $tld)
     {
         $this->rgpDays = $rgpDays;
         $this->tld = $tld;
     }
 
-    /**
-     * @return int
-     */
     public function getRgpDays(): int
     {
         return $this->rgpDays;
     }
 
-    /**
-     * @return string
-     */
     public function getTld(): string
     {
         return $this->tld;
     }
 
-    /**
-     * @param int $rgpDays
-     * @return self
-     */
     public function withRgpDays(int $rgpDays): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class TopLevel
         return $clone;
     }
 
-    /**
-     * @param string $tld
-     * @return self
-     */
     public function withTld(string $tld): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class NotificationsReadAllNotificationsDeprecatedOKResponse implements ResponseC
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class NotificationsReadAllNotificationsDeprecatedOKResponse implements ResponseC
         ],
     ];
 
-    /**
-     * @var NotificationsReadAllNotificationsDeprecatedOKResponseBody
-     */
     private NotificationsReadAllNotificationsDeprecatedOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param NotificationsReadAllNotificationsDeprecatedOKResponseBody $body
-     */
     public function __construct(NotificationsReadAllNotificationsDeprecatedOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NotificationsReadAllNotificationsDeprecatedOKResponseBody
-     */
     public function getBody(): NotificationsReadAllNotificationsDeprecatedOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NotificationsReadAllNotificationsDeprecatedOKResponseBody $body
-     * @return self
-     */
     public function withBody(NotificationsReadAllNotificationsDeprecatedOKResponseBody $body): self
     {
         $clone = clone $this;

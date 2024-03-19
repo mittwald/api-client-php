@@ -13,8 +13,6 @@ class GetSystemsoftwareversionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class GetSystemsoftwareversionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $systemSoftwareId;
 
-    /**
-     * @var string
-     */
     private string $systemSoftwareVersionId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $systemSoftwareId
-     * @param string $systemSoftwareVersionId
-     */
     public function __construct(string $systemSoftwareId, string $systemSoftwareVersionId)
     {
         $this->systemSoftwareId = $systemSoftwareId;
         $this->systemSoftwareVersionId = $systemSoftwareVersionId;
     }
 
-    /**
-     * @return string
-     */
     public function getSystemSoftwareId(): string
     {
         return $this->systemSoftwareId;
     }
 
-    /**
-     * @return string
-     */
     public function getSystemSoftwareVersionId(): string
     {
         return $this->systemSoftwareVersionId;
     }
 
-    /**
-     * @param string $systemSoftwareId
-     * @return self
-     */
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class GetSystemsoftwareversionRequest
         return $clone;
     }
 
-    /**
-     * @param string $systemSoftwareVersionId
-     * @return self
-     */
     public function withSystemSoftwareVersionId(string $systemSoftwareVersionId): self
     {
         $validator = new Validator();

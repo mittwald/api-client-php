@@ -13,8 +13,6 @@ class SetDatabaseUsersRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -49,30 +47,16 @@ class SetDatabaseUsersRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
-    /**
-     * @var SetDatabaseUsersRequestBody
-     */
     private SetDatabaseUsersRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param string $databaseId
-     * @param SetDatabaseUsersRequestBody $body
-     */
     public function __construct(string $appInstallationId, string $databaseId, SetDatabaseUsersRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
@@ -80,34 +64,21 @@ class SetDatabaseUsersRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
 
-    /**
-     * @return SetDatabaseUsersRequestBody
-     */
     public function getBody(): SetDatabaseUsersRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -122,10 +93,6 @@ class SetDatabaseUsersRequest
         return $clone;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
@@ -140,10 +107,6 @@ class SetDatabaseUsersRequest
         return $clone;
     }
 
-    /**
-     * @param SetDatabaseUsersRequestBody $body
-     * @return self
-     */
     public function withBody(SetDatabaseUsersRequestBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class GetAppinstallationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetAppinstallationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     */
     public function __construct(string $appInstallationId)
     {
         $this->appInstallationId = $appInstallationId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();

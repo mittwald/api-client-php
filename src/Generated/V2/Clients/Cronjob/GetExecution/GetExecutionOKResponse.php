@@ -14,8 +14,6 @@ class GetExecutionOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetExecutionOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CronjobExecution
-     */
     private CronjobExecution $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CronjobExecution $body
-     */
     public function __construct(CronjobExecution $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CronjobExecution
-     */
     public function getBody(): CronjobExecution
     {
         return $this->body;
     }
 
-    /**
-     * @param CronjobExecution $body
-     * @return self
-     */
     public function withBody(CronjobExecution $body): self
     {
         $clone = clone $this;

@@ -12,8 +12,6 @@ class SupportCodeRequestOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,48 +35,30 @@ class SupportCodeRequestOKResponseBody
 
     /**
      * Expiration of the support code
-     *
-     * @var DateTime
      */
     private DateTime $expiresAt;
 
     /**
      * support code to authenticate yourself against the mittwald support via telephone
-     *
-     * @var string
      */
     private string $supportCode;
 
-    /**
-     * @param DateTime $expiresAt
-     * @param string $supportCode
-     */
     public function __construct(DateTime $expiresAt, string $supportCode)
     {
         $this->expiresAt = $expiresAt;
         $this->supportCode = $supportCode;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getExpiresAt(): DateTime
     {
         return $this->expiresAt;
     }
 
-    /**
-     * @return string
-     */
     public function getSupportCode(): string
     {
         return $this->supportCode;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -87,10 +67,6 @@ class SupportCodeRequestOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $supportCode
-     * @return self
-     */
     public function withSupportCode(string $supportCode): self
     {
         $validator = new Validator();

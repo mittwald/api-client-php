@@ -13,8 +13,6 @@ class UpdateCustomerRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,50 +51,30 @@ class UpdateCustomerRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var UpdateCustomerRequestBody
-     */
     private UpdateCustomerRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerId
-     * @param UpdateCustomerRequestBody $body
-     */
     public function __construct(string $customerId, UpdateCustomerRequestBody $body)
     {
         $this->customerId = $customerId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return UpdateCustomerRequestBody
-     */
     public function getBody(): UpdateCustomerRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -111,10 +89,6 @@ class UpdateCustomerRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateCustomerRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateCustomerRequestBody $body): self
     {
         $clone = clone $this;

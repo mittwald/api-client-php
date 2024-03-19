@@ -13,8 +13,6 @@ class CreateLegacyTariffChangeRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,35 +40,22 @@ class CreateLegacyTariffChangeRequest
         ],
     ];
 
-    /**
-     * @var CreateLegacyTariffChangeRequestBody
-     */
     private CreateLegacyTariffChangeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateLegacyTariffChangeRequestBody $body
-     */
     public function __construct(CreateLegacyTariffChangeRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateLegacyTariffChangeRequestBody
-     */
     public function getBody(): CreateLegacyTariffChangeRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateLegacyTariffChangeRequestBody $body
-     * @return self
-     */
     public function withBody(CreateLegacyTariffChangeRequestBody $body): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class DataDbQueriesItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,28 +52,16 @@ class DataDbQueriesItem
 
     /**
      * The whole DB query.
-     *
-     * @var string
      */
     private string $query;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $stats;
 
     /**
      * Alerts when the time, syscall count or occurrence count of this group are abnormal.
-     *
-     * @var DataDbQueriesItemWarnLevel
      */
     private DataDbQueriesItemWarnLevel $warnLevel;
 
-    /**
-     * @param string $query
-     * @param Statistics $stats
-     * @param DataDbQueriesItemWarnLevel $warnLevel
-     */
     public function __construct(string $query, Statistics $stats, DataDbQueriesItemWarnLevel $warnLevel)
     {
         $this->query = $query;
@@ -83,34 +69,21 @@ class DataDbQueriesItem
         $this->warnLevel = $warnLevel;
     }
 
-    /**
-     * @return string
-     */
     public function getQuery(): string
     {
         return $this->query;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getStats(): Statistics
     {
         return $this->stats;
     }
 
-    /**
-     * @return DataDbQueriesItemWarnLevel
-     */
     public function getWarnLevel(): DataDbQueriesItemWarnLevel
     {
         return $this->warnLevel;
     }
 
-    /**
-     * @param string $query
-     * @return self
-     */
     public function withQuery(string $query): self
     {
         $validator = new Validator();
@@ -125,10 +98,6 @@ class DataDbQueriesItem
         return $clone;
     }
 
-    /**
-     * @param Statistics $stats
-     * @return self
-     */
     public function withStats(Statistics $stats): self
     {
         $clone = clone $this;
@@ -137,10 +106,6 @@ class DataDbQueriesItem
         return $clone;
     }
 
-    /**
-     * @param DataDbQueriesItemWarnLevel $warnLevel
-     * @return self
-     */
     public function withWarnLevel(DataDbQueriesItemWarnLevel $warnLevel): self
     {
         $clone = clone $this;

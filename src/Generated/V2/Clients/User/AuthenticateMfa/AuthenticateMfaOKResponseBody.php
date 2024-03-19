@@ -12,8 +12,6 @@ class AuthenticateMfaOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -35,46 +33,29 @@ class AuthenticateMfaOKResponseBody
 
     /**
      * Expiration unix timestamp
-     *
-     * @var DateTime|null
      */
     private ?DateTime $expires = null;
 
     /**
      * Public token to identify yourself against the api gateway.
-     *
-     * @var string
      */
     private string $token;
 
-    /**
-     * @param string $token
-     */
     public function __construct(string $token)
     {
         $this->token = $token;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpires(): ?DateTime
     {
         return $this->expires ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param DateTime $expires
-     * @return self
-     */
     public function withExpires(DateTime $expires): self
     {
         $clone = clone $this;
@@ -83,9 +64,6 @@ class AuthenticateMfaOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpires(): self
     {
         $clone = clone $this;
@@ -94,10 +72,6 @@ class AuthenticateMfaOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();

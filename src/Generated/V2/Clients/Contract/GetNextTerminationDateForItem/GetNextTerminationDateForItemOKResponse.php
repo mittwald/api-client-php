@@ -13,8 +13,6 @@ class GetNextTerminationDateForItemOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,33 +39,20 @@ class GetNextTerminationDateForItemOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetNextTerminationDateForItemOKResponseBody
-     */
     private GetNextTerminationDateForItemOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetNextTerminationDateForItemOKResponseBody $body
-     */
     public function __construct(GetNextTerminationDateForItemOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetNextTerminationDateForItemOKResponseBody
-     */
     public function getBody(): GetNextTerminationDateForItemOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetNextTerminationDateForItemOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetNextTerminationDateForItemOKResponseBody $body): self
     {
         $clone = clone $this;

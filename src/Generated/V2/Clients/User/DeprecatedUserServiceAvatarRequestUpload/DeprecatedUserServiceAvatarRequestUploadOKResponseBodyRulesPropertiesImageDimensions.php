@@ -11,8 +11,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,14 +40,8 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         'type' => 'object',
     ];
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMax|null
-     */
     private ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMax $max = null;
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMin|null
-     */
     private ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMin $min = null;
 
     /**
@@ -77,10 +69,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $this->min ?? null;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMax $max
-     * @return self
-     */
     public function withMax(DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMax $max): self
     {
         $clone = clone $this;
@@ -89,9 +77,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMax(): self
     {
         $clone = clone $this;
@@ -100,10 +85,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMin $min
-     * @return self
-     */
     public function withMin(DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMin $min): self
     {
         $clone = clone $this;
@@ -112,9 +93,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMin(): self
     {
         $clone = clone $this;

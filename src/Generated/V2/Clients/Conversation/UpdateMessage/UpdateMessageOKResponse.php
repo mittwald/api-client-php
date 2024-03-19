@@ -13,8 +13,6 @@ class UpdateMessageOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class UpdateMessageOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var UpdateMessageOKResponseBody
-     */
     private UpdateMessageOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param UpdateMessageOKResponseBody $body
-     */
     public function __construct(UpdateMessageOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return UpdateMessageOKResponseBody
-     */
     public function getBody(): UpdateMessageOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param UpdateMessageOKResponseBody $body
-     * @return self
-     */
     public function withBody(UpdateMessageOKResponseBody $body): self
     {
         $clone = clone $this;

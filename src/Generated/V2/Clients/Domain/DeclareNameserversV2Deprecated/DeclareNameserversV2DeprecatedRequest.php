@@ -13,8 +13,6 @@ class DeclareNameserversV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,50 +41,30 @@ class DeclareNameserversV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var DeclareNameserversV2DeprecatedRequestBody
-     */
     private DeclareNameserversV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param DeclareNameserversV2DeprecatedRequestBody $body
-     */
     public function __construct(string $domainId, DeclareNameserversV2DeprecatedRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return DeclareNameserversV2DeprecatedRequestBody
-     */
     public function getBody(): DeclareNameserversV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -101,10 +79,6 @@ class DeclareNameserversV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DeclareNameserversV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DeclareNameserversV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

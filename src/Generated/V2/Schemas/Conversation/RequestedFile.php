@@ -21,8 +21,6 @@ class RequestedFile
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,46 +42,26 @@ class RequestedFile
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var RequestedFileStatus
-     */
     private RequestedFileStatus $status;
 
-    /**
-     * @param string $id
-     * @param RequestedFileStatus $status
-     */
     public function __construct(string $id, RequestedFileStatus $status)
     {
         $this->id = $id;
         $this->status = $status;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return RequestedFileStatus
-     */
     public function getStatus(): RequestedFileStatus
     {
         return $this->status;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class RequestedFile
         return $clone;
     }
 
-    /**
-     * @param RequestedFileStatus $status
-     * @return self
-     */
     public function withStatus(RequestedFileStatus $status): self
     {
         $clone = clone $this;

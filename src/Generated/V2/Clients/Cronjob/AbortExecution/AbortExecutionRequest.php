@@ -13,8 +13,6 @@ class AbortExecutionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,14 +36,8 @@ class AbortExecutionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $cronjobId;
 
-    /**
-     * @var string
-     */
     private string $executionId;
 
     /**
@@ -58,8 +50,6 @@ class AbortExecutionRequest
     ];
 
     /**
-     * @param string $cronjobId
-     * @param string $executionId
      * @param mixed $body
      */
     public function __construct(string $cronjobId, string $executionId, $body)
@@ -69,17 +59,11 @@ class AbortExecutionRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCronjobId(): string
     {
         return $this->cronjobId;
     }
 
-    /**
-     * @return string
-     */
     public function getExecutionId(): string
     {
         return $this->executionId;
@@ -93,10 +77,6 @@ class AbortExecutionRequest
         return $this->body;
     }
 
-    /**
-     * @param string $cronjobId
-     * @return self
-     */
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
@@ -111,10 +91,6 @@ class AbortExecutionRequest
         return $clone;
     }
 
-    /**
-     * @param string $executionId
-     * @return self
-     */
     public function withExecutionId(string $executionId): self
     {
         $validator = new Validator();
@@ -131,7 +107,6 @@ class AbortExecutionRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

@@ -13,8 +13,6 @@ class RemovePhoneNumberRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,9 +37,6 @@ class RemovePhoneNumberRequest
         ],
     ];
 
-    /**
-     * @var RemovePhoneNumberRequestUserIdAlternative1|string
-     */
     private RemovePhoneNumberRequestUserIdAlternative1|string $userId;
 
     private array $headers = [
@@ -56,9 +51,6 @@ class RemovePhoneNumberRequest
         $this->userId = $userId;
     }
 
-    /**
-     * @return RemovePhoneNumberRequestUserIdAlternative1|string
-     */
     public function getUserId(): RemovePhoneNumberRequestUserIdAlternative1|string
     {
         return $this->userId;
@@ -66,7 +58,6 @@ class RemovePhoneNumberRequest
 
     /**
      * @param RemovePhoneNumberRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(RemovePhoneNumberRequestUserIdAlternative1|string $userId): self
     {

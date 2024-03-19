@@ -14,8 +14,6 @@ class GetSessionOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetSessionOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var UserSession
-     */
     private UserSession $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param UserSession $body
-     */
     public function __construct(UserSession $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return UserSession
-     */
     public function getBody(): UserSession
     {
         return $this->body;
     }
 
-    /**
-     * @param UserSession $body
-     * @return self
-     */
     public function withBody(UserSession $body): self
     {
         $clone = clone $this;

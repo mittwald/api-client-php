@@ -22,8 +22,6 @@ class CustomerMembership
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -83,73 +81,46 @@ class CustomerMembership
 
     /**
      * ID of the Customer the CustomerMembership is for.
-     *
-     * @var string
      */
     private string $customerId;
 
     /**
      * Email used by the invited user.
-     *
-     * @var string
      */
     private string $email;
 
     /**
      * Time the CustomerMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $expiresAt = null;
 
     /**
      * ID of the CustomerMembership.
-     *
-     * @var string
      */
     private string $id;
 
     /**
      * ID of the CustomerInvite the membership was created from.
-     *
-     * @var string|null
      */
     private ?string $inviteId = null;
 
     /**
      * Date the CustomerMembership was created at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $memberSince = null;
 
     /**
      * MFA activated by the user.
-     *
-     * @var bool
      */
     private bool $mfa;
 
-    /**
-     * @var CustomerRoles
-     */
     private CustomerRoles $role;
 
     /**
      * ID of the user the CustomerMembership is for.
-     *
-     * @var string
      */
     private string $userId;
 
-    /**
-     * @param string $customerId
-     * @param string $email
-     * @param string $id
-     * @param bool $mfa
-     * @param CustomerRoles $role
-     * @param string $userId
-     */
     public function __construct(string $customerId, string $email, string $id, bool $mfa, CustomerRoles $role, string $userId)
     {
         $this->customerId = $customerId;
@@ -160,82 +131,51 @@ class CustomerMembership
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInviteId(): ?string
     {
         return $this->inviteId ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getMemberSince(): ?DateTime
     {
         return $this->memberSince ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getMfa(): bool
     {
         return $this->mfa;
     }
 
-    /**
-     * @return CustomerRoles
-     */
     public function getRole(): CustomerRoles
     {
         return $this->role;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -250,10 +190,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -268,10 +204,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -280,9 +212,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -291,10 +220,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -309,10 +234,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param string $inviteId
-     * @return self
-     */
     public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
@@ -327,9 +248,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInviteId(): self
     {
         $clone = clone $this;
@@ -338,10 +256,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param DateTime $memberSince
-     * @return self
-     */
     public function withMemberSince(DateTime $memberSince): self
     {
         $clone = clone $this;
@@ -350,9 +264,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMemberSince(): self
     {
         $clone = clone $this;
@@ -361,10 +272,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param bool $mfa
-     * @return self
-     */
     public function withMfa(bool $mfa): self
     {
         $validator = new Validator();
@@ -379,10 +286,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param CustomerRoles $role
-     * @return self
-     */
     public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;
@@ -391,10 +294,6 @@ class CustomerMembership
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

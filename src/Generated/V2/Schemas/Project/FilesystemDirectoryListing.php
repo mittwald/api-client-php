@@ -21,8 +21,6 @@ class FilesystemDirectoryListing
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,29 +63,14 @@ class FilesystemDirectoryListing
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $absolutePath;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isDirectory = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isExecutable = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isFile = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isSymlink = null;
 
     /**
@@ -95,26 +78,12 @@ class FilesystemDirectoryListing
      */
     private ?array $items = null;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var int
-     */
     private int $size;
 
-    /**
-     * @var string|null
-     */
     private ?string $target = null;
 
-    /**
-     * @param string $absolutePath
-     * @param string $name
-     * @param int $size
-     */
     public function __construct(string $absolutePath, string $name, int $size)
     {
         $this->absolutePath = $absolutePath;
@@ -122,41 +91,26 @@ class FilesystemDirectoryListing
         $this->size = $size;
     }
 
-    /**
-     * @return string
-     */
     public function getAbsolutePath(): string
     {
         return $this->absolutePath;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsDirectory(): ?bool
     {
         return $this->isDirectory ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsExecutable(): ?bool
     {
         return $this->isExecutable ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsFile(): ?bool
     {
         return $this->isFile ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsSymlink(): ?bool
     {
         return $this->isSymlink ?? null;
@@ -171,34 +125,21 @@ class FilesystemDirectoryListing
         return $this->items ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return int
-     */
     public function getSize(): int
     {
         return $this->size;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTarget(): ?string
     {
         return $this->target ?? null;
     }
 
-    /**
-     * @param string $absolutePath
-     * @return self
-     */
     public function withAbsolutePath(string $absolutePath): self
     {
         $validator = new Validator();
@@ -213,10 +154,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param bool $isDirectory
-     * @return self
-     */
     public function withIsDirectory(bool $isDirectory): self
     {
         $validator = new Validator();
@@ -231,9 +168,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsDirectory(): self
     {
         $clone = clone $this;
@@ -242,10 +176,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param bool $isExecutable
-     * @return self
-     */
     public function withIsExecutable(bool $isExecutable): self
     {
         $validator = new Validator();
@@ -260,9 +190,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsExecutable(): self
     {
         $clone = clone $this;
@@ -271,10 +198,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param bool $isFile
-     * @return self
-     */
     public function withIsFile(bool $isFile): self
     {
         $validator = new Validator();
@@ -289,9 +212,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsFile(): self
     {
         $clone = clone $this;
@@ -300,10 +220,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param bool $isSymlink
-     * @return self
-     */
     public function withIsSymlink(bool $isSymlink): self
     {
         $validator = new Validator();
@@ -318,9 +234,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsSymlink(): self
     {
         $clone = clone $this;
@@ -331,7 +244,6 @@ class FilesystemDirectoryListing
 
     /**
      * @param FilesystemDirectoryListing[] $items
-     * @return self
      */
     public function withItems(array $items): self
     {
@@ -341,9 +253,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutItems(): self
     {
         $clone = clone $this;
@@ -352,10 +261,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -370,10 +275,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param int $size
-     * @return self
-     */
     public function withSize(int $size): self
     {
         $validator = new Validator();
@@ -388,10 +289,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @param string $target
-     * @return self
-     */
     public function withTarget(string $target): self
     {
         $validator = new Validator();
@@ -406,9 +303,6 @@ class FilesystemDirectoryListing
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTarget(): self
     {
         $clone = clone $this;

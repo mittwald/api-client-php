@@ -22,8 +22,6 @@ class AppInstallationStatus
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'AppInstallationStatus describes the overall runtime status of an AppInstallation.',
@@ -53,63 +51,35 @@ class AppInstallationStatus
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $lastExitCode = null;
 
-    /**
-     * @var string
-     */
     private string $logFileLocation;
 
-    /**
-     * @var AppInstallationStatusState
-     */
     private AppInstallationStatusState $state;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $uptimeSeconds = null;
 
-    /**
-     * @param string $logFileLocation
-     * @param AppInstallationStatusState $state
-     */
     public function __construct(string $logFileLocation, AppInstallationStatusState $state)
     {
         $this->logFileLocation = $logFileLocation;
         $this->state = $state;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getLastExitCode(): int|float|null
     {
         return $this->lastExitCode;
     }
 
-    /**
-     * @return string
-     */
     public function getLogFileLocation(): string
     {
         return $this->logFileLocation;
     }
 
-    /**
-     * @return AppInstallationStatusState
-     */
     public function getState(): AppInstallationStatusState
     {
         return $this->state;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getUptimeSeconds(): int|float|null
     {
         return $this->uptimeSeconds;
@@ -117,7 +87,6 @@ class AppInstallationStatus
 
     /**
      * @param int|float $lastExitCode
-     * @return self
      */
     public function withLastExitCode(int|float $lastExitCode): self
     {
@@ -133,9 +102,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastExitCode(): self
     {
         $clone = clone $this;
@@ -144,10 +110,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @param string $logFileLocation
-     * @return self
-     */
     public function withLogFileLocation(string $logFileLocation): self
     {
         $validator = new Validator();
@@ -162,10 +124,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @param AppInstallationStatusState $state
-     * @return self
-     */
     public function withState(AppInstallationStatusState $state): self
     {
         $clone = clone $this;
@@ -176,7 +134,6 @@ class AppInstallationStatus
 
     /**
      * @param int|float $uptimeSeconds
-     * @return self
      */
     public function withUptimeSeconds(int|float $uptimeSeconds): self
     {
@@ -192,9 +149,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUptimeSeconds(): self
     {
         $clone = clone $this;

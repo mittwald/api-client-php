@@ -22,8 +22,6 @@ class MailAddressInternalMailbox
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -108,44 +106,18 @@ class MailAddressInternalMailbox
         'type' => 'object',
     ];
 
-    /**
-     * @var MailsystemSettings
-     */
     private MailsystemSettings $mailsystemSettings;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $passwordUpdatedAt;
 
-    /**
-     * @var bool
-     */
     private bool $sendingEnabled;
 
-    /**
-     * @var MailAddressInternalMailboxSpamProtection
-     */
     private MailAddressInternalMailboxSpamProtection $spamProtection;
 
-    /**
-     * @var MailAddressInternalMailboxStorageInBytes
-     */
     private MailAddressInternalMailboxStorageInBytes $storageInBytes;
 
-    /**
-     * @param MailsystemSettings $mailsystemSettings
-     * @param string $name
-     * @param DateTime $passwordUpdatedAt
-     * @param bool $sendingEnabled
-     * @param MailAddressInternalMailboxSpamProtection $spamProtection
-     * @param MailAddressInternalMailboxStorageInBytes $storageInBytes
-     */
     public function __construct(MailsystemSettings $mailsystemSettings, string $name, DateTime $passwordUpdatedAt, bool $sendingEnabled, MailAddressInternalMailboxSpamProtection $spamProtection, MailAddressInternalMailboxStorageInBytes $storageInBytes)
     {
         $this->mailsystemSettings = $mailsystemSettings;
@@ -156,58 +128,36 @@ class MailAddressInternalMailbox
         $this->storageInBytes = $storageInBytes;
     }
 
-    /**
-     * @return MailsystemSettings
-     */
     public function getMailsystemSettings(): MailsystemSettings
     {
         return $this->mailsystemSettings;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
-    /**
-     * @return bool
-     */
     public function getSendingEnabled(): bool
     {
         return $this->sendingEnabled;
     }
 
-    /**
-     * @return MailAddressInternalMailboxSpamProtection
-     */
     public function getSpamProtection(): MailAddressInternalMailboxSpamProtection
     {
         return $this->spamProtection;
     }
 
-    /**
-     * @return MailAddressInternalMailboxStorageInBytes
-     */
     public function getStorageInBytes(): MailAddressInternalMailboxStorageInBytes
     {
         return $this->storageInBytes;
     }
 
-    /**
-     * @param MailsystemSettings $mailsystemSettings
-     * @return self
-     */
     public function withMailsystemSettings(MailsystemSettings $mailsystemSettings): self
     {
         $clone = clone $this;
@@ -216,10 +166,6 @@ class MailAddressInternalMailbox
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -234,10 +180,6 @@ class MailAddressInternalMailbox
         return $clone;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
@@ -246,10 +188,6 @@ class MailAddressInternalMailbox
         return $clone;
     }
 
-    /**
-     * @param bool $sendingEnabled
-     * @return self
-     */
     public function withSendingEnabled(bool $sendingEnabled): self
     {
         $validator = new Validator();
@@ -264,10 +202,6 @@ class MailAddressInternalMailbox
         return $clone;
     }
 
-    /**
-     * @param MailAddressInternalMailboxSpamProtection $spamProtection
-     * @return self
-     */
     public function withSpamProtection(MailAddressInternalMailboxSpamProtection $spamProtection): self
     {
         $clone = clone $this;
@@ -276,10 +210,6 @@ class MailAddressInternalMailbox
         return $clone;
     }
 
-    /**
-     * @param MailAddressInternalMailboxStorageInBytes $storageInBytes
-     * @return self
-     */
     public function withStorageInBytes(MailAddressInternalMailboxStorageInBytes $storageInBytes): self
     {
         $clone = clone $this;

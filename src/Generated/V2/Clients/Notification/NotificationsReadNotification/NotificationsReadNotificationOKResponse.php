@@ -13,8 +13,6 @@ class NotificationsReadNotificationOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class NotificationsReadNotificationOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var NotificationsReadNotificationOKResponseBody
-     */
     private NotificationsReadNotificationOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param NotificationsReadNotificationOKResponseBody $body
-     */
     public function __construct(NotificationsReadNotificationOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NotificationsReadNotificationOKResponseBody
-     */
     public function getBody(): NotificationsReadNotificationOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NotificationsReadNotificationOKResponseBody $body
-     * @return self
-     */
     public function withBody(NotificationsReadNotificationOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -11,8 +11,6 @@ class CreateProjectBackupExportRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,46 +37,29 @@ class CreateProjectBackupExportRequestBody
 
     /**
      * The desired format to export the ProjectBackup in.
-     *
-     * @var CreateProjectBackupExportRequestBodyFormat
      */
     private CreateProjectBackupExportRequestBodyFormat $format;
 
     /**
      * Password to use to protect the archive.
-     *
-     * @var string|null
      */
     private ?string $password = null;
 
-    /**
-     * @param CreateProjectBackupExportRequestBodyFormat $format
-     */
     public function __construct(CreateProjectBackupExportRequestBodyFormat $format)
     {
         $this->format = $format;
     }
 
-    /**
-     * @return CreateProjectBackupExportRequestBodyFormat
-     */
     public function getFormat(): CreateProjectBackupExportRequestBodyFormat
     {
         return $this->format;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPassword(): ?string
     {
         return $this->password ?? null;
     }
 
-    /**
-     * @param CreateProjectBackupExportRequestBodyFormat $format
-     * @return self
-     */
     public function withFormat(CreateProjectBackupExportRequestBodyFormat $format): self
     {
         $clone = clone $this;
@@ -87,10 +68,6 @@ class CreateProjectBackupExportRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -105,9 +82,6 @@ class CreateProjectBackupExportRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPassword(): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class GetPasswordUpdatedAtOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class GetPasswordUpdatedAtOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetPasswordUpdatedAtOKResponseBody
-     */
     private GetPasswordUpdatedAtOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetPasswordUpdatedAtOKResponseBody $body
-     */
     public function __construct(GetPasswordUpdatedAtOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetPasswordUpdatedAtOKResponseBody
-     */
     public function getBody(): GetPasswordUpdatedAtOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetPasswordUpdatedAtOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetPasswordUpdatedAtOKResponseBody $body): self
     {
         $clone = clone $this;

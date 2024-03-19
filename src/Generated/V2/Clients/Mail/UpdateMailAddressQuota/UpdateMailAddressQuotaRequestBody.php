@@ -11,8 +11,6 @@ class UpdateMailAddressQuotaRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,9 +24,6 @@ class UpdateMailAddressQuotaRequestBody
         ],
     ];
 
-    /**
-     * @var int|float
-     */
     private int|float $quotaInBytes;
 
     /**
@@ -39,9 +34,6 @@ class UpdateMailAddressQuotaRequestBody
         $this->quotaInBytes = $quotaInBytes;
     }
 
-    /**
-     * @return int|float
-     */
     public function getQuotaInBytes(): int|float
     {
         return $this->quotaInBytes;
@@ -49,7 +41,6 @@ class UpdateMailAddressQuotaRequestBody
 
     /**
      * @param int|float $quotaInBytes
-     * @return self
      */
     public function withQuotaInBytes(int|float $quotaInBytes): self
     {

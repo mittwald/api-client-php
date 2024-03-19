@@ -21,8 +21,6 @@ class Domain
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,59 +45,36 @@ class Domain
 
     /**
      * The authcode of the domain. Leave empty when mittwald can generate a authcode on its own
-     *
-     * @var string|null
      */
     private ?string $authCode = null;
 
     /**
      * Leave empty when mittwald should keep the same domain owner
-     *
-     * @var string|null
      */
     private ?string $domainOwnerData = null;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @param string $name
-     */
     public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAuthCode(): ?string
     {
         return $this->authCode ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDomainOwnerData(): ?string
     {
         return $this->domainOwnerData ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $authCode
-     * @return self
-     */
     public function withAuthCode(string $authCode): self
     {
         $validator = new Validator();
@@ -114,9 +89,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAuthCode(): self
     {
         $clone = clone $this;
@@ -125,10 +97,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param string $domainOwnerData
-     * @return self
-     */
     public function withDomainOwnerData(string $domainOwnerData): self
     {
         $validator = new Validator();
@@ -143,9 +111,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDomainOwnerData(): self
     {
         $clone = clone $this;
@@ -154,10 +119,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();

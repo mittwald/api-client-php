@@ -13,8 +13,6 @@ class CheckTokenOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,33 +39,20 @@ class CheckTokenOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CheckTokenOKResponseBody
-     */
     private CheckTokenOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CheckTokenOKResponseBody $body
-     */
     public function __construct(CheckTokenOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckTokenOKResponseBody
-     */
     public function getBody(): CheckTokenOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckTokenOKResponseBody $body
-     * @return self
-     */
     public function withBody(CheckTokenOKResponseBody $body): self
     {
         $clone = clone $this;

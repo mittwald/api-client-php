@@ -13,8 +13,6 @@ class SupportCodeRequestOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,33 +42,20 @@ class SupportCodeRequestOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var SupportCodeRequestOKResponseBody
-     */
     private SupportCodeRequestOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param SupportCodeRequestOKResponseBody $body
-     */
     public function __construct(SupportCodeRequestOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return SupportCodeRequestOKResponseBody
-     */
     public function getBody(): SupportCodeRequestOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param SupportCodeRequestOKResponseBody $body
-     * @return self
-     */
     public function withBody(SupportCodeRequestOKResponseBody $body): self
     {
         $clone = clone $this;

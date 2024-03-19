@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\Relocation;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -30,7 +32,6 @@ interface RelocationClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateLegacyTariffChange\CreateLegacyTariffChangeRequest $request An object representing the request for this operation
-     * @return CreateLegacyTariffChange\CreateLegacyTariffChangeCreatedResponse
      */
     public function createLegacyTariffChange(CreateLegacyTariffChangeRequest $request): CreateLegacyTariffChangeCreatedResponse;
     /**

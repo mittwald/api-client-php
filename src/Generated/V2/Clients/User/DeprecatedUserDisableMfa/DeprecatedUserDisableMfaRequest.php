@@ -13,8 +13,6 @@ class DeprecatedUserDisableMfaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,35 +37,22 @@ class DeprecatedUserDisableMfaRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserDisableMfaRequestBody
-     */
     private DeprecatedUserDisableMfaRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserDisableMfaRequestBody $body
-     */
     public function __construct(DeprecatedUserDisableMfaRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserDisableMfaRequestBody
-     */
     public function getBody(): DeprecatedUserDisableMfaRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserDisableMfaRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserDisableMfaRequestBody $body): self
     {
         $clone = clone $this;

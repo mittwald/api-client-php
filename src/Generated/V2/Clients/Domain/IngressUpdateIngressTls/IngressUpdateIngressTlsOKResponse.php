@@ -13,8 +13,6 @@ class IngressUpdateIngressTlsOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class IngressUpdateIngressTlsOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var IngressUpdateIngressTlsOKResponseBody
-     */
     private IngressUpdateIngressTlsOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param IngressUpdateIngressTlsOKResponseBody $body
-     */
     public function __construct(IngressUpdateIngressTlsOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return IngressUpdateIngressTlsOKResponseBody
-     */
     public function getBody(): IngressUpdateIngressTlsOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param IngressUpdateIngressTlsOKResponseBody $body
-     * @return self
-     */
     public function withBody(IngressUpdateIngressTlsOKResponseBody $body): self
     {
         $clone = clone $this;

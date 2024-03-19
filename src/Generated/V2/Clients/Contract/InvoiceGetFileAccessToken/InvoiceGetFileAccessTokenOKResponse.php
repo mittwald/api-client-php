@@ -13,8 +13,6 @@ class InvoiceGetFileAccessTokenOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,33 +39,20 @@ class InvoiceGetFileAccessTokenOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var InvoiceGetFileAccessTokenOKResponseBody
-     */
     private InvoiceGetFileAccessTokenOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param InvoiceGetFileAccessTokenOKResponseBody $body
-     */
     public function __construct(InvoiceGetFileAccessTokenOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return InvoiceGetFileAccessTokenOKResponseBody
-     */
     public function getBody(): InvoiceGetFileAccessTokenOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param InvoiceGetFileAccessTokenOKResponseBody $body
-     * @return self
-     */
     public function withBody(InvoiceGetFileAccessTokenOKResponseBody $body): self
     {
         $clone = clone $this;

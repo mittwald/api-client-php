@@ -13,8 +13,6 @@ class DeleteSshKeyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeleteSshKeyRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sshKeyId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sshKeyId
-     */
     public function __construct(string $sshKeyId)
     {
         $this->sshKeyId = $sshKeyId;
     }
 
-    /**
-     * @return string
-     */
     public function getSshKeyId(): string
     {
         return $this->sshKeyId;
     }
 
-    /**
-     * @param string $sshKeyId
-     * @return self
-     */
     public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new Validator();

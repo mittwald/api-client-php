@@ -22,8 +22,6 @@ class ProjectBackupExport
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -62,85 +60,47 @@ class ProjectBackupExport
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $downloadURL = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var string
-     */
     private string $format;
 
-    /**
-     * @var ProjectBackupExportPhase|null
-     */
     private ?ProjectBackupExportPhase $phase = null;
 
-    /**
-     * @var bool
-     */
     private bool $withPassword;
 
-    /**
-     * @param string $format
-     * @param bool $withPassword
-     */
     public function __construct(string $format, bool $withPassword)
     {
         $this->format = $format;
         $this->withPassword = $withPassword;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDownloadURL(): ?string
     {
         return $this->downloadURL ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getFormat(): string
     {
         return $this->format;
     }
 
-    /**
-     * @return ProjectBackupExportPhase|null
-     */
     public function getPhase(): ?ProjectBackupExportPhase
     {
         return $this->phase ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getWithPassword(): bool
     {
         return $this->withPassword;
     }
 
-    /**
-     * @param string $downloadURL
-     * @return self
-     */
     public function withDownloadURL(string $downloadURL): self
     {
         $validator = new Validator();
@@ -155,9 +115,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDownloadURL(): self
     {
         $clone = clone $this;
@@ -166,10 +123,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -178,9 +131,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -189,10 +139,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @param string $format
-     * @return self
-     */
     public function withFormat(string $format): self
     {
         $validator = new Validator();
@@ -207,10 +153,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @param ProjectBackupExportPhase $phase
-     * @return self
-     */
     public function withPhase(ProjectBackupExportPhase $phase): self
     {
         $clone = clone $this;
@@ -219,9 +161,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPhase(): self
     {
         $clone = clone $this;
@@ -230,10 +169,6 @@ class ProjectBackupExport
         return $clone;
     }
 
-    /**
-     * @param bool $withPassword
-     * @return self
-     */
     public function withWithPassword(bool $withPassword): self
     {
         $validator = new Validator();

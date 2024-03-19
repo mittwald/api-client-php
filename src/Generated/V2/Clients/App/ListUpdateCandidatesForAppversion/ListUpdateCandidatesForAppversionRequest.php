@@ -13,8 +13,6 @@ class ListUpdateCandidatesForAppversionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class ListUpdateCandidatesForAppversionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @var string
-     */
     private string $baseAppVersionId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appId
-     * @param string $baseAppVersionId
-     */
     public function __construct(string $appId, string $baseAppVersionId)
     {
         $this->appId = $appId;
         $this->baseAppVersionId = $baseAppVersionId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @return string
-     */
     public function getBaseAppVersionId(): string
     {
         return $this->baseAppVersionId;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class ListUpdateCandidatesForAppversionRequest
         return $clone;
     }
 
-    /**
-     * @param string $baseAppVersionId
-     * @return self
-     */
     public function withBaseAppVersionId(string $baseAppVersionId): self
     {
         $validator = new Validator();

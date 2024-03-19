@@ -11,8 +11,6 @@ class ResetRecoverycodesRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,31 +30,19 @@ class ResetRecoverycodesRequestBody
 
     /**
      * Multi Factor Code to authorize your request.
-     *
-     * @var string
      */
     private string $multiFactorCode;
 
-    /**
-     * @param string $multiFactorCode
-     */
     public function __construct(string $multiFactorCode)
     {
         $this->multiFactorCode = $multiFactorCode;
     }
 
-    /**
-     * @return string
-     */
     public function getMultiFactorCode(): string
     {
         return $this->multiFactorCode;
     }
 
-    /**
-     * @param string $multiFactorCode
-     * @return self
-     */
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();

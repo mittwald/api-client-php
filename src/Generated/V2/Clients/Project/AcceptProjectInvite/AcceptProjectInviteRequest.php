@@ -13,8 +13,6 @@ class AcceptProjectInviteRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,50 +37,30 @@ class AcceptProjectInviteRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectInviteId;
 
-    /**
-     * @var AcceptProjectInviteRequestBody
-     */
     private AcceptProjectInviteRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectInviteId
-     * @param AcceptProjectInviteRequestBody $body
-     */
     public function __construct(string $projectInviteId, AcceptProjectInviteRequestBody $body)
     {
         $this->projectInviteId = $projectInviteId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectInviteId(): string
     {
         return $this->projectInviteId;
     }
 
-    /**
-     * @return AcceptProjectInviteRequestBody
-     */
     public function getBody(): AcceptProjectInviteRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectInviteId
-     * @return self
-     */
     public function withProjectInviteId(string $projectInviteId): self
     {
         $validator = new Validator();
@@ -97,10 +75,6 @@ class AcceptProjectInviteRequest
         return $clone;
     }
 
-    /**
-     * @param AcceptProjectInviteRequestBody $body
-     * @return self
-     */
     public function withBody(AcceptProjectInviteRequestBody $body): self
     {
         $clone = clone $this;

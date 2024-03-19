@@ -13,8 +13,6 @@ class DeleteProjectBackupExportRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeleteProjectBackupExportRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectBackupId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectBackupId
-     */
     public function __construct(string $projectBackupId)
     {
         $this->projectBackupId = $projectBackupId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectBackupId(): string
     {
         return $this->projectBackupId;
     }
 
-    /**
-     * @param string $projectBackupId
-     * @return self
-     */
     public function withProjectBackupId(string $projectBackupId): self
     {
         $validator = new Validator();

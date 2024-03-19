@@ -11,8 +11,6 @@ class DnsCreateDnsZoneRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class DnsCreateDnsZoneRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $parentZoneId;
 
-    /**
-     * @param string $name
-     * @param string $parentZoneId
-     */
     public function __construct(string $name, string $parentZoneId)
     {
         $this->name = $name;
         $this->parentZoneId = $parentZoneId;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getParentZoneId(): string
     {
         return $this->parentZoneId;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class DnsCreateDnsZoneRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $parentZoneId
-     * @return self
-     */
     public function withParentZoneId(string $parentZoneId): self
     {
         $validator = new Validator();

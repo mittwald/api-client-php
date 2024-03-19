@@ -15,8 +15,6 @@ class ListProjectsOKResponseBodyItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -99,101 +97,41 @@ class ListProjectsOKResponseBodyItem
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var ListProjectsOKResponseBodyItemCustomerMeta
-     */
     private ListProjectsOKResponseBodyItemCustomerMeta $customerMeta;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var DisableReason|null
-     */
     private ?DisableReason $disableReason = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $disabledAt = null;
 
-    /**
-     * @var bool
-     */
     private bool $enabled;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string|null
-     */
     private ?string $imageRefId = null;
 
     /**
      * deprecated
-     *
-     * @var bool
      */
     private bool $isReady;
 
-    /**
-     * @var string|null
-     */
     private ?string $projectHostingId = null;
 
-    /**
-     * @var DeprecatedProjectReadinessStatus
-     */
     private DeprecatedProjectReadinessStatus $readiness;
 
-    /**
-     * @var string|null
-     */
     private ?string $serverId = null;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
-    /**
-     * @var ProjectStatus
-     */
     private ProjectStatus $status;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $statusSetAt;
 
-    /**
-     * @param DateTime $createdAt
-     * @param string $customerId
-     * @param ListProjectsOKResponseBodyItemCustomerMeta $customerMeta
-     * @param string $description
-     * @param bool $enabled
-     * @param string $id
-     * @param bool $isReady
-     * @param DeprecatedProjectReadinessStatus $readiness
-     * @param string $shortId
-     * @param ProjectStatus $status
-     * @param DateTime $statusSetAt
-     */
     public function __construct(DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt)
     {
         $this->createdAt = $createdAt;
@@ -209,89 +147,56 @@ class ListProjectsOKResponseBodyItem
         $this->statusSetAt = $statusSetAt;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return ListProjectsOKResponseBodyItemCustomerMeta
-     */
     public function getCustomerMeta(): ListProjectsOKResponseBodyItemCustomerMeta
     {
         return $this->customerMeta;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return DisableReason|null
-     */
     public function getDisableReason(): ?DisableReason
     {
         return $this->disableReason ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getDisabledAt(): ?DateTime
     {
         return $this->disabledAt ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageRefId(): ?string
     {
         return $this->imageRefId ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsReady(): bool
     {
         return $this->isReady;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectHostingId(): ?string
     {
         return $this->projectHostingId ?? null;
@@ -306,42 +211,26 @@ class ListProjectsOKResponseBodyItem
         return $this->readiness;
     }
 
-    /**
-     * @return string|null
-     */
     public function getServerId(): ?string
     {
         return $this->serverId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
     }
 
-    /**
-     * @return ProjectStatus
-     */
     public function getStatus(): ProjectStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getStatusSetAt(): DateTime
     {
         return $this->statusSetAt;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -350,10 +239,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -368,10 +253,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param ListProjectsOKResponseBodyItemCustomerMeta $customerMeta
-     * @return self
-     */
     public function withCustomerMeta(ListProjectsOKResponseBodyItemCustomerMeta $customerMeta): self
     {
         $clone = clone $this;
@@ -380,10 +261,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -398,10 +275,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param DisableReason $disableReason
-     * @return self
-     */
     public function withDisableReason(DisableReason $disableReason): self
     {
         $clone = clone $this;
@@ -410,9 +283,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDisableReason(): self
     {
         $clone = clone $this;
@@ -421,10 +291,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $disabledAt
-     * @return self
-     */
     public function withDisabledAt(DateTime $disabledAt): self
     {
         $clone = clone $this;
@@ -433,9 +299,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDisabledAt(): self
     {
         $clone = clone $this;
@@ -444,10 +307,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param bool $enabled
-     * @return self
-     */
     public function withEnabled(bool $enabled): self
     {
         $validator = new Validator();
@@ -462,10 +321,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -480,10 +335,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $imageRefId
-     * @return self
-     */
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
@@ -498,9 +349,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageRefId(): self
     {
         $clone = clone $this;
@@ -509,10 +357,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param bool $isReady
-     * @return self
-     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
@@ -527,10 +371,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $projectHostingId
-     * @return self
-     */
     public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new Validator();
@@ -545,9 +385,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectHostingId(): self
     {
         $clone = clone $this;
@@ -556,10 +393,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param DeprecatedProjectReadinessStatus $readiness
-     * @return self
-     */
     public function withReadiness(DeprecatedProjectReadinessStatus $readiness): self
     {
         $clone = clone $this;
@@ -568,10 +401,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $serverId
-     * @return self
-     */
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
@@ -586,9 +415,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServerId(): self
     {
         $clone = clone $this;
@@ -597,10 +423,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
@@ -615,10 +437,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param ProjectStatus $status
-     * @return self
-     */
     public function withStatus(ProjectStatus $status): self
     {
         $clone = clone $this;
@@ -627,10 +445,6 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $statusSetAt
-     * @return self
-     */
     public function withStatusSetAt(DateTime $statusSetAt): self
     {
         $clone = clone $this;

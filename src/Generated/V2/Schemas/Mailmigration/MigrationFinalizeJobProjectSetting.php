@@ -22,8 +22,6 @@ class MigrationFinalizeJobProjectSetting
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -85,7 +83,6 @@ class MigrationFinalizeJobProjectSetting
 
     /**
      * @param string[] $blacklistEntries
-     * @return self
      */
     public function withBlacklistEntries(array $blacklistEntries): self
     {
@@ -103,7 +100,6 @@ class MigrationFinalizeJobProjectSetting
 
     /**
      * @param string[] $whitelistEntries
-     * @return self
      */
     public function withWhitelistEntries(array $whitelistEntries): self
     {

@@ -14,8 +14,6 @@ class ProjectFileSystemGetJwtOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class ProjectFileSystemGetJwtOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var FsApiJwt
-     */
     private FsApiJwt $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param FsApiJwt $body
-     */
     public function __construct(FsApiJwt $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return FsApiJwt
-     */
     public function getBody(): FsApiJwt
     {
         return $this->body;
     }
 
-    /**
-     * @param FsApiJwt $body
-     * @return self
-     */
     public function withBody(FsApiJwt $body): self
     {
         $clone = clone $this;

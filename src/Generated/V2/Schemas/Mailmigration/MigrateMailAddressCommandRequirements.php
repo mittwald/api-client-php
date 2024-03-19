@@ -22,8 +22,6 @@ class MigrateMailAddressCommandRequirements
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -55,14 +53,8 @@ class MigrateMailAddressCommandRequirements
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $address = null;
 
-    /**
-     * @var AutoResponder|null
-     */
     private ?AutoResponder $autoResponder = null;
 
     /**
@@ -70,32 +62,17 @@ class MigrateMailAddressCommandRequirements
      */
     private ?array $forwardedAddresses = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isCatchAll = null;
 
-    /**
-     * @var Mailbox|null
-     */
     private ?Mailbox $mailbox = null;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAddress(): ?string
     {
         return $this->address ?? null;
@@ -118,34 +95,21 @@ class MigrateMailAddressCommandRequirements
         return $this->forwardedAddresses ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsCatchAll(): ?bool
     {
         return $this->isCatchAll ?? null;
     }
 
-    /**
-     * @return Mailbox|null
-     */
     public function getMailbox(): ?Mailbox
     {
         return $this->mailbox ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();
@@ -160,9 +124,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAddress(): self
     {
         $clone = clone $this;
@@ -171,10 +132,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param AutoResponder $autoResponder
-     * @return self
-     */
     public function withAutoResponder(AutoResponder $autoResponder): self
     {
         $clone = clone $this;
@@ -183,9 +140,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAutoResponder(): self
     {
         $clone = clone $this;
@@ -196,7 +150,6 @@ class MigrateMailAddressCommandRequirements
 
     /**
      * @param string[] $forwardedAddresses
-     * @return self
      */
     public function withForwardedAddresses(array $forwardedAddresses): self
     {
@@ -212,9 +165,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutForwardedAddresses(): self
     {
         $clone = clone $this;
@@ -223,10 +173,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param bool $isCatchAll
-     * @return self
-     */
     public function withIsCatchAll(bool $isCatchAll): self
     {
         $validator = new Validator();
@@ -241,9 +187,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsCatchAll(): self
     {
         $clone = clone $this;
@@ -252,10 +195,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param Mailbox $mailbox
-     * @return self
-     */
     public function withMailbox(Mailbox $mailbox): self
     {
         $clone = clone $this;
@@ -264,9 +203,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMailbox(): self
     {
         $clone = clone $this;
@@ -275,10 +211,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();

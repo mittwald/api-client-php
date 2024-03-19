@@ -21,8 +21,6 @@ class TargetInstallation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,31 +35,18 @@ class TargetInstallation
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $installationId;
 
-    /**
-     * @param string $installationId
-     */
     public function __construct(string $installationId)
     {
         $this->installationId = $installationId;
     }
 
-    /**
-     * @return string
-     */
     public function getInstallationId(): string
     {
         return $this->installationId;
     }
 
-    /**
-     * @param string $installationId
-     * @return self
-     */
     public function withInstallationId(string $installationId): self
     {
         $validator = new Validator();

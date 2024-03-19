@@ -12,8 +12,6 @@ class GetPasswordUpdatedAtOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -28,31 +26,18 @@ class GetPasswordUpdatedAtOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $passwordUpdatedAt;
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     */
     public function __construct(DateTime $passwordUpdatedAt)
     {
         $this->passwordUpdatedAt = $passwordUpdatedAt;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;

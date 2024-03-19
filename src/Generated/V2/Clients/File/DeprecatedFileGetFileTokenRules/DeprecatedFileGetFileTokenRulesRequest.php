@@ -13,8 +13,6 @@ class DeprecatedFileGetFileTokenRulesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -30,35 +28,22 @@ class DeprecatedFileGetFileTokenRulesRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $token;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $token
-     */
     public function __construct(string $token)
     {
         $this->token = $token;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();

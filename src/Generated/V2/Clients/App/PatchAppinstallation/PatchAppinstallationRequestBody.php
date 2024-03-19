@@ -13,8 +13,6 @@ class PatchAppinstallationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -55,19 +53,10 @@ class PatchAppinstallationRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $appVersionId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $customDocumentRoot = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
     /**
@@ -75,9 +64,6 @@ class PatchAppinstallationRequestBody
      */
     private ?array $systemSoftware = null;
 
-    /**
-     * @var AppUpdatePolicy|null
-     */
     private ?AppUpdatePolicy $updatePolicy = null;
 
     /**
@@ -92,25 +78,16 @@ class PatchAppinstallationRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getAppVersionId(): ?string
     {
         return $this->appVersionId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomDocumentRoot(): ?string
     {
         return $this->customDocumentRoot ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
@@ -124,9 +101,6 @@ class PatchAppinstallationRequestBody
         return $this->systemSoftware ?? null;
     }
 
-    /**
-     * @return AppUpdatePolicy|null
-     */
     public function getUpdatePolicy(): ?AppUpdatePolicy
     {
         return $this->updatePolicy ?? null;
@@ -140,10 +114,6 @@ class PatchAppinstallationRequestBody
         return $this->userInputs ?? null;
     }
 
-    /**
-     * @param string $appVersionId
-     * @return self
-     */
     public function withAppVersionId(string $appVersionId): self
     {
         $validator = new Validator();
@@ -158,9 +128,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAppVersionId(): self
     {
         $clone = clone $this;
@@ -169,10 +136,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $customDocumentRoot
-     * @return self
-     */
     public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
         $validator = new Validator();
@@ -187,9 +150,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomDocumentRoot(): self
     {
         $clone = clone $this;
@@ -198,10 +158,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -216,9 +172,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -229,7 +182,6 @@ class PatchAppinstallationRequestBody
 
     /**
      * @param PatchAppinstallationRequestBodySystemSoftwareItem[] $systemSoftware
-     * @return self
      */
     public function withSystemSoftware(array $systemSoftware): self
     {
@@ -239,9 +191,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSystemSoftware(): self
     {
         $clone = clone $this;
@@ -250,10 +199,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @param AppUpdatePolicy $updatePolicy
-     * @return self
-     */
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
@@ -262,9 +207,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUpdatePolicy(): self
     {
         $clone = clone $this;
@@ -275,7 +217,6 @@ class PatchAppinstallationRequestBody
 
     /**
      * @param SavedUserInput[] $userInputs
-     * @return self
      */
     public function withUserInputs(array $userInputs): self
     {
@@ -285,9 +226,6 @@ class PatchAppinstallationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserInputs(): self
     {
         $clone = clone $this;

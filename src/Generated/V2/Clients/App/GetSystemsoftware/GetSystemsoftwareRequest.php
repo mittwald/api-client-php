@@ -13,8 +13,6 @@ class GetSystemsoftwareRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetSystemsoftwareRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $systemSoftwareId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $systemSoftwareId
-     */
     public function __construct(string $systemSoftwareId)
     {
         $this->systemSoftwareId = $systemSoftwareId;
     }
 
-    /**
-     * @return string
-     */
     public function getSystemSoftwareId(): string
     {
         return $this->systemSoftwareId;
     }
 
-    /**
-     * @param string $systemSoftwareId
-     * @return self
-     */
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class PageinsightsGetStraceDataRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class PageinsightsGetStraceDataRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $straceId;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $straceId
-     * @param string $projectId
-     */
     public function __construct(string $straceId, string $projectId)
     {
         $this->straceId = $straceId;
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getStraceId(): string
     {
         return $this->straceId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @param string $straceId
-     * @return self
-     */
     public function withStraceId(string $straceId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class PageinsightsGetStraceDataRequest
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();

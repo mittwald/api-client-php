@@ -21,8 +21,6 @@ class FileUploadRulesProperties
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -57,9 +55,6 @@ class FileUploadRulesProperties
         'type' => 'object',
     ];
 
-    /**
-     * @var FileUploadRulesPropertiesImageDimensions|null
-     */
     private ?FileUploadRulesPropertiesImageDimensions $imageDimensions = null;
 
     /**
@@ -69,18 +64,11 @@ class FileUploadRulesProperties
     {
     }
 
-    /**
-     * @return FileUploadRulesPropertiesImageDimensions|null
-     */
     public function getImageDimensions(): ?FileUploadRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
 
-    /**
-     * @param FileUploadRulesPropertiesImageDimensions $imageDimensions
-     * @return self
-     */
     public function withImageDimensions(FileUploadRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
@@ -89,9 +77,6 @@ class FileUploadRulesProperties
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageDimensions(): self
     {
         $clone = clone $this;

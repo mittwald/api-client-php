@@ -13,8 +13,6 @@ class ListProjectsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,14 +31,8 @@ class ListProjectsRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $customerId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $serverId = null;
 
     private array $headers = [
@@ -54,26 +46,16 @@ class ListProjectsRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getServerId(): ?string
     {
         return $this->serverId ?? null;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -88,9 +70,6 @@ class ListProjectsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerId(): self
     {
         $clone = clone $this;
@@ -99,10 +78,6 @@ class ListProjectsRequest
         return $clone;
     }
 
-    /**
-     * @param string $serverId
-     * @return self
-     */
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
@@ -117,9 +92,6 @@ class ListProjectsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServerId(): self
     {
         $clone = clone $this;

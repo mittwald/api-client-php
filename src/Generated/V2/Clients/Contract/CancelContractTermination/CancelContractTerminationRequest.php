@@ -13,8 +13,6 @@ class CancelContractTerminationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,50 +31,30 @@ class CancelContractTerminationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var CancelContractTerminationRequestBody
-     */
     private CancelContractTerminationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     * @param CancelContractTerminationRequestBody $body
-     */
     public function __construct(string $contractId, CancelContractTerminationRequestBody $body)
     {
         $this->contractId = $contractId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return CancelContractTerminationRequestBody
-     */
     public function getBody(): CancelContractTerminationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -91,10 +69,6 @@ class CancelContractTerminationRequest
         return $clone;
     }
 
-    /**
-     * @param CancelContractTerminationRequestBody $body
-     * @return self
-     */
     public function withBody(CancelContractTerminationRequestBody $body): self
     {
         $clone = clone $this;

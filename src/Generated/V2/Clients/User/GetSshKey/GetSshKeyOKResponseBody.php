@@ -12,8 +12,6 @@ class GetSshKeyOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class GetSshKeyOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var SshKey
-     */
     private SshKey $sshKey;
 
-    /**
-     * @param SshKey $sshKey
-     */
     public function __construct(SshKey $sshKey)
     {
         $this->sshKey = $sshKey;
     }
 
-    /**
-     * @return SshKey
-     */
     public function getSshKey(): SshKey
     {
         return $this->sshKey;
     }
 
-    /**
-     * @param SshKey $sshKey
-     * @return self
-     */
     public function withSshKey(SshKey $sshKey): self
     {
         $clone = clone $this;

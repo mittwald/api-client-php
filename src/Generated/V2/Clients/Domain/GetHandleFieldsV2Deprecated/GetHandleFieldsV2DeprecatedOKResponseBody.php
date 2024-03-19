@@ -11,8 +11,6 @@ class GetHandleFieldsV2DeprecatedOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -29,44 +27,25 @@ class GetHandleFieldsV2DeprecatedOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaAdminC|null
-     */
     private ?GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaAdminC $jsonSchemaAdminC = null;
 
-    /**
-     * @var GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC
-     */
     private GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC;
 
-    /**
-     * @param GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC
-     */
     public function __construct(GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC)
     {
         $this->jsonSchemaOwnerC = $jsonSchemaOwnerC;
     }
 
-    /**
-     * @return GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaAdminC|null
-     */
     public function getJsonSchemaAdminC(): ?GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaAdminC
     {
         return $this->jsonSchemaAdminC ?? null;
     }
 
-    /**
-     * @return GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC
-     */
     public function getJsonSchemaOwnerC(): GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC
     {
         return $this->jsonSchemaOwnerC;
     }
 
-    /**
-     * @param GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaAdminC $jsonSchemaAdminC
-     * @return self
-     */
     public function withJsonSchemaAdminC(GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaAdminC $jsonSchemaAdminC): self
     {
         $clone = clone $this;
@@ -75,9 +54,6 @@ class GetHandleFieldsV2DeprecatedOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutJsonSchemaAdminC(): self
     {
         $clone = clone $this;
@@ -86,10 +62,6 @@ class GetHandleFieldsV2DeprecatedOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC
-     * @return self
-     */
     public function withJsonSchemaOwnerC(GetHandleFieldsV2DeprecatedOKResponseBodyJsonSchemaOwnerC $jsonSchemaOwnerC): self
     {
         $clone = clone $this;

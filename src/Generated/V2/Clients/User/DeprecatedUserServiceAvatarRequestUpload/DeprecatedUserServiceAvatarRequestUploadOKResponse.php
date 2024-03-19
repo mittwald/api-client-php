@@ -13,8 +13,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponse implements ResponseCont
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -88,33 +86,20 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponse implements ResponseCont
         ],
     ];
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBody
-     */
     private DeprecatedUserServiceAvatarRequestUploadOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBody $body
-     */
     public function __construct(DeprecatedUserServiceAvatarRequestUploadOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserServiceAvatarRequestUploadOKResponseBody
-     */
     public function getBody(): DeprecatedUserServiceAvatarRequestUploadOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServiceAvatarRequestUploadOKResponseBody $body): self
     {
         $clone = clone $this;

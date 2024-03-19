@@ -13,8 +13,6 @@ class CreateProjectBackupExportRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -52,50 +50,30 @@ class CreateProjectBackupExportRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectBackupId;
 
-    /**
-     * @var CreateProjectBackupExportRequestBody
-     */
     private CreateProjectBackupExportRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectBackupId
-     * @param CreateProjectBackupExportRequestBody $body
-     */
     public function __construct(string $projectBackupId, CreateProjectBackupExportRequestBody $body)
     {
         $this->projectBackupId = $projectBackupId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectBackupId(): string
     {
         return $this->projectBackupId;
     }
 
-    /**
-     * @return CreateProjectBackupExportRequestBody
-     */
     public function getBody(): CreateProjectBackupExportRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectBackupId
-     * @return self
-     */
     public function withProjectBackupId(string $projectBackupId): self
     {
         $validator = new Validator();
@@ -110,10 +88,6 @@ class CreateProjectBackupExportRequest
         return $clone;
     }
 
-    /**
-     * @param CreateProjectBackupExportRequestBody $body
-     * @return self
-     */
     public function withBody(CreateProjectBackupExportRequestBody $body): self
     {
         $clone = clone $this;

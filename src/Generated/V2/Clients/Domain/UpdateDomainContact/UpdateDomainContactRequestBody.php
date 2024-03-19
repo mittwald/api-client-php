@@ -12,8 +12,6 @@ class UpdateDomainContactRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,7 +51,6 @@ class UpdateDomainContactRequestBody
 
     /**
      * @param HandleField[] $contact
-     * @return self
      */
     public function withContact(array $contact): self
     {

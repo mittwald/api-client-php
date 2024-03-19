@@ -13,8 +13,6 @@ class GetProjectBackupScheduleRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetProjectBackupScheduleRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectBackupScheduleId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectBackupScheduleId
-     */
     public function __construct(string $projectBackupScheduleId)
     {
         $this->projectBackupScheduleId = $projectBackupScheduleId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectBackupScheduleId(): string
     {
         return $this->projectBackupScheduleId;
     }
 
-    /**
-     * @param string $projectBackupScheduleId
-     * @return self
-     */
     public function withProjectBackupScheduleId(string $projectBackupScheduleId): self
     {
         $validator = new Validator();

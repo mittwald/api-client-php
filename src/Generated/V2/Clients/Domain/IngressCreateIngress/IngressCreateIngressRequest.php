@@ -13,8 +13,6 @@ class IngressCreateIngressRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -50,35 +48,22 @@ class IngressCreateIngressRequest
         ],
     ];
 
-    /**
-     * @var IngressCreateIngressRequestBody
-     */
     private IngressCreateIngressRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param IngressCreateIngressRequestBody $body
-     */
     public function __construct(IngressCreateIngressRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return IngressCreateIngressRequestBody
-     */
     public function getBody(): IngressCreateIngressRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param IngressCreateIngressRequestBody $body
-     * @return self
-     */
     public function withBody(IngressCreateIngressRequestBody $body): self
     {
         $clone = clone $this;

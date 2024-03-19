@@ -13,8 +13,6 @@ class CreateLegacyTariffChangeCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateLegacyTariffChangeCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateLegacyTariffChangeCreatedResponseBody
-     */
     private CreateLegacyTariffChangeCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateLegacyTariffChangeCreatedResponseBody $body
-     */
     public function __construct(CreateLegacyTariffChangeCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateLegacyTariffChangeCreatedResponseBody
-     */
     public function getBody(): CreateLegacyTariffChangeCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateLegacyTariffChangeCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateLegacyTariffChangeCreatedResponseBody $body): self
     {
         $clone = clone $this;

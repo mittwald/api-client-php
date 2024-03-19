@@ -11,8 +11,6 @@ class CreateProjectBackupScheduleRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,63 +38,40 @@ class CreateProjectBackupScheduleRequestBody
 
     /**
      * Description of the BackupSchedule.
-     *
-     * @var string|null
      */
     private ?string $description = null;
 
     /**
      * Execution schedule in crontab notation.
-     *
-     * @var string
      */
     private string $schedule;
 
     /**
      * TTL of the BackupSchedule as time string.
-     *
-     * @var string
      */
     private string $ttl;
 
-    /**
-     * @param string $schedule
-     * @param string $ttl
-     */
     public function __construct(string $schedule, string $ttl)
     {
         $this->schedule = $schedule;
         $this->ttl = $ttl;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getSchedule(): string
     {
         return $this->schedule;
     }
 
-    /**
-     * @return string
-     */
     public function getTtl(): string
     {
         return $this->ttl;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -111,9 +86,6 @@ class CreateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -122,10 +94,6 @@ class CreateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $schedule
-     * @return self
-     */
     public function withSchedule(string $schedule): self
     {
         $validator = new Validator();
@@ -140,10 +108,6 @@ class CreateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $ttl
-     * @return self
-     */
     public function withTtl(string $ttl): self
     {
         $validator = new Validator();

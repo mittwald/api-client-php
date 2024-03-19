@@ -13,8 +13,6 @@ class UpdateProjectMembershipRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -35,44 +33,26 @@ class UpdateProjectMembershipRequestBody
 
     /**
      * Time the ProjectMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var ProjectRoles
-     */
     private ProjectRoles $role;
 
-    /**
-     * @param ProjectRoles $role
-     */
     public function __construct(ProjectRoles $role)
     {
         $this->role = $role;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return ProjectRoles
-     */
     public function getRole(): ProjectRoles
     {
         return $this->role;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -81,9 +61,6 @@ class UpdateProjectMembershipRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -92,10 +69,6 @@ class UpdateProjectMembershipRequestBody
         return $clone;
     }
 
-    /**
-     * @param ProjectRoles $role
-     * @return self
-     */
     public function withRole(ProjectRoles $role): self
     {
         $clone = clone $this;

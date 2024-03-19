@@ -13,8 +13,6 @@ class GetFileUploadTokenRulesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -30,35 +28,22 @@ class GetFileUploadTokenRulesRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $fileUploadToken;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $fileUploadToken
-     */
     public function __construct(string $fileUploadToken)
     {
         $this->fileUploadToken = $fileUploadToken;
     }
 
-    /**
-     * @return string
-     */
     public function getFileUploadToken(): string
     {
         return $this->fileUploadToken;
     }
 
-    /**
-     * @param string $fileUploadToken
-     * @return self
-     */
     public function withFileUploadToken(string $fileUploadToken): self
     {
         $validator = new Validator();

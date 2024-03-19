@@ -13,8 +13,6 @@ class LeaveCustomerRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class LeaveCustomerRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
     /**
@@ -48,7 +43,6 @@ class LeaveCustomerRequest
     ];
 
     /**
-     * @param string $customerId
      * @param mixed $body
      */
     public function __construct(string $customerId, $body)
@@ -57,9 +51,6 @@ class LeaveCustomerRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
@@ -73,10 +64,6 @@ class LeaveCustomerRequest
         return $this->body;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class LeaveCustomerRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

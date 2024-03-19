@@ -13,8 +13,6 @@ class CreateApiTokenCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateApiTokenCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateApiTokenCreatedResponseBody
-     */
     private CreateApiTokenCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateApiTokenCreatedResponseBody $body
-     */
     public function __construct(CreateApiTokenCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateApiTokenCreatedResponseBody
-     */
     public function getBody(): CreateApiTokenCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateApiTokenCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateApiTokenCreatedResponseBody $body): self
     {
         $clone = clone $this;

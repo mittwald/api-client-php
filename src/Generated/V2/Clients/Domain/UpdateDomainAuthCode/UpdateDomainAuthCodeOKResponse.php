@@ -13,8 +13,6 @@ class UpdateDomainAuthCodeOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class UpdateDomainAuthCodeOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var UpdateDomainAuthCodeOKResponseBody
-     */
     private UpdateDomainAuthCodeOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param UpdateDomainAuthCodeOKResponseBody $body
-     */
     public function __construct(UpdateDomainAuthCodeOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return UpdateDomainAuthCodeOKResponseBody
-     */
     public function getBody(): UpdateDomainAuthCodeOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param UpdateDomainAuthCodeOKResponseBody $body
-     * @return self
-     */
     public function withBody(UpdateDomainAuthCodeOKResponseBody $body): self
     {
         $clone = clone $this;

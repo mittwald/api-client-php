@@ -13,8 +13,6 @@ class CreateFeedbackRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -63,35 +61,22 @@ class CreateFeedbackRequest
         ],
     ];
 
-    /**
-     * @var CreateFeedbackRequestBody
-     */
     private CreateFeedbackRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateFeedbackRequestBody $body
-     */
     public function __construct(CreateFeedbackRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateFeedbackRequestBody
-     */
     public function getBody(): CreateFeedbackRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateFeedbackRequestBody $body
-     * @return self
-     */
     public function withBody(CreateFeedbackRequestBody $body): self
     {
         $clone = clone $this;

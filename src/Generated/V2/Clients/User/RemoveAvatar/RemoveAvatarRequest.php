@@ -13,8 +13,6 @@ class RemoveAvatarRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,9 +37,6 @@ class RemoveAvatarRequest
         ],
     ];
 
-    /**
-     * @var RemoveAvatarRequestUserIdAlternative1|string
-     */
     private RemoveAvatarRequestUserIdAlternative1|string $userId;
 
     private array $headers = [
@@ -56,9 +51,6 @@ class RemoveAvatarRequest
         $this->userId = $userId;
     }
 
-    /**
-     * @return RemoveAvatarRequestUserIdAlternative1|string
-     */
     public function getUserId(): RemoveAvatarRequestUserIdAlternative1|string
     {
         return $this->userId;
@@ -66,7 +58,6 @@ class RemoveAvatarRequest
 
     /**
      * @param RemoveAvatarRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(RemoveAvatarRequestUserIdAlternative1|string $userId): self
     {

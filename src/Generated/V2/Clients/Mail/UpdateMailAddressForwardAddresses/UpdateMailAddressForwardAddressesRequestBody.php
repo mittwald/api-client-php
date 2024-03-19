@@ -11,8 +11,6 @@ class UpdateMailAddressForwardAddressesRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,7 +50,6 @@ class UpdateMailAddressForwardAddressesRequestBody
 
     /**
      * @param string[] $forwardAddresses
-     * @return self
      */
     public function withForwardAddresses(array $forwardAddresses): self
     {

@@ -13,8 +13,6 @@ class ConfirmMfaOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,33 +42,20 @@ class ConfirmMfaOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ConfirmMfaOKResponseBody
-     */
     private ConfirmMfaOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ConfirmMfaOKResponseBody $body
-     */
     public function __construct(ConfirmMfaOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ConfirmMfaOKResponseBody
-     */
     public function getBody(): ConfirmMfaOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ConfirmMfaOKResponseBody $body
-     * @return self
-     */
     public function withBody(ConfirmMfaOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -14,8 +14,6 @@ class GetSystemsoftwareversionOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetSystemsoftwareversionOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var SystemSoftwareVersion
-     */
     private SystemSoftwareVersion $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param SystemSoftwareVersion $body
-     */
     public function __construct(SystemSoftwareVersion $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return SystemSoftwareVersion
-     */
     public function getBody(): SystemSoftwareVersion
     {
         return $this->body;
     }
 
-    /**
-     * @param SystemSoftwareVersion $body
-     * @return self
-     */
     public function withBody(SystemSoftwareVersion $body): self
     {
         $clone = clone $this;

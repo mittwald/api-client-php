@@ -13,8 +13,6 @@ class RequestAvatarUploadInternalServerErrorResponse implements ResponseContaine
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class RequestAvatarUploadInternalServerErrorResponse implements ResponseContaine
         ],
     ];
 
-    /**
-     * @var RequestAvatarUploadInternalServerErrorResponseBody
-     */
     private RequestAvatarUploadInternalServerErrorResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RequestAvatarUploadInternalServerErrorResponseBody $body
-     */
     public function __construct(RequestAvatarUploadInternalServerErrorResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RequestAvatarUploadInternalServerErrorResponseBody
-     */
     public function getBody(): RequestAvatarUploadInternalServerErrorResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RequestAvatarUploadInternalServerErrorResponseBody $body
-     * @return self
-     */
     public function withBody(RequestAvatarUploadInternalServerErrorResponseBody $body): self
     {
         $clone = clone $this;

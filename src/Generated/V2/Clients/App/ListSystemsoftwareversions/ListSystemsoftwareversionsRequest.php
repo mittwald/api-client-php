@@ -13,8 +13,6 @@ class ListSystemsoftwareversionsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -35,61 +33,36 @@ class ListSystemsoftwareversionsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $systemSoftwareId;
 
-    /**
-     * @var string|null
-     */
     private ?string $versionRange = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $recommended = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $systemSoftwareId
-     */
     public function __construct(string $systemSoftwareId)
     {
         $this->systemSoftwareId = $systemSoftwareId;
     }
 
-    /**
-     * @return string
-     */
     public function getSystemSoftwareId(): string
     {
         return $this->systemSoftwareId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getVersionRange(): ?string
     {
         return $this->versionRange ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
     }
 
-    /**
-     * @param string $systemSoftwareId
-     * @return self
-     */
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
@@ -104,10 +77,6 @@ class ListSystemsoftwareversionsRequest
         return $clone;
     }
 
-    /**
-     * @param string $versionRange
-     * @return self
-     */
     public function withVersionRange(string $versionRange): self
     {
         $validator = new Validator();
@@ -122,9 +91,6 @@ class ListSystemsoftwareversionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVersionRange(): self
     {
         $clone = clone $this;
@@ -133,10 +99,6 @@ class ListSystemsoftwareversionsRequest
         return $clone;
     }
 
-    /**
-     * @param bool $recommended
-     * @return self
-     */
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
@@ -151,9 +113,6 @@ class ListSystemsoftwareversionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRecommended(): self
     {
         $clone = clone $this;

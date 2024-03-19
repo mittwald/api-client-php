@@ -11,8 +11,6 @@ class GetPersonalizedSettingsOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -25,9 +23,6 @@ class GetPersonalizedSettingsOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $settingsString = null;
 
     /**
@@ -37,18 +32,11 @@ class GetPersonalizedSettingsOKResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getSettingsString(): ?string
     {
         return $this->settingsString ?? null;
     }
 
-    /**
-     * @param string $settingsString
-     * @return self
-     */
     public function withSettingsString(string $settingsString): self
     {
         $validator = new Validator();
@@ -63,9 +51,6 @@ class GetPersonalizedSettingsOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSettingsString(): self
     {
         $clone = clone $this;

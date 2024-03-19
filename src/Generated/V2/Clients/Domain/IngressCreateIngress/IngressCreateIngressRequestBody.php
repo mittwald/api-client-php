@@ -12,8 +12,6 @@ class IngressCreateIngressRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,9 +39,6 @@ class IngressCreateIngressRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $hostname;
 
     /**
@@ -53,15 +48,10 @@ class IngressCreateIngressRequestBody
      */
     private array $paths;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
     /**
-     * @param string $hostname
      * @param Path[] $paths
-     * @param string $projectId
      */
     public function __construct(string $hostname, array $paths, string $projectId)
     {
@@ -70,9 +60,6 @@ class IngressCreateIngressRequestBody
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getHostname(): string
     {
         return $this->hostname;
@@ -86,18 +73,11 @@ class IngressCreateIngressRequestBody
         return $this->paths;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @param string $hostname
-     * @return self
-     */
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
@@ -114,7 +94,6 @@ class IngressCreateIngressRequestBody
 
     /**
      * @param Path[] $paths
-     * @return self
      */
     public function withPaths(array $paths): self
     {
@@ -124,10 +103,6 @@ class IngressCreateIngressRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();

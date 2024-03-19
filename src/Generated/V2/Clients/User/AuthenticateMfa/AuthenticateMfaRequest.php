@@ -13,8 +13,6 @@ class AuthenticateMfaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -50,35 +48,22 @@ class AuthenticateMfaRequest
         ],
     ];
 
-    /**
-     * @var AuthenticateMfaRequestBody
-     */
     private AuthenticateMfaRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param AuthenticateMfaRequestBody $body
-     */
     public function __construct(AuthenticateMfaRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AuthenticateMfaRequestBody
-     */
     public function getBody(): AuthenticateMfaRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param AuthenticateMfaRequestBody $body
-     * @return self
-     */
     public function withBody(AuthenticateMfaRequestBody $body): self
     {
         $clone = clone $this;

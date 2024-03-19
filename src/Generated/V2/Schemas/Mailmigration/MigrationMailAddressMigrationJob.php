@@ -22,8 +22,6 @@ class MigrationMailAddressMigrationJob
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,14 +35,8 @@ class MigrationMailAddressMigrationJob
         'type' => 'object',
     ];
 
-    /**
-     * @var MigrationMailAddressMigrationJobMigrate
-     */
     private MigrationMailAddressMigrationJobMigrate $migrate;
 
-    /**
-     * @param MigrationMailAddressMigrationJobMigrate $migrate
-     */
     public function __construct(MigrationMailAddressMigrationJobMigrate $migrate)
     {
         $this->migrate = $migrate;
@@ -59,10 +51,6 @@ class MigrationMailAddressMigrationJob
         return $this->migrate;
     }
 
-    /**
-     * @param MigrationMailAddressMigrationJobMigrate $migrate
-     * @return self
-     */
     public function withMigrate(MigrationMailAddressMigrationJobMigrate $migrate): self
     {
         $clone = clone $this;

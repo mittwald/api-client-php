@@ -22,8 +22,6 @@ class Process
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,47 +57,20 @@ class Process
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $error = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $lastUpdate;
 
-    /**
-     * @var ProcessType
-     */
     private ProcessType $processType;
 
-    /**
-     * @var ProcessState
-     */
     private ProcessState $state;
 
-    /**
-     * @var string|null
-     */
     private ?string $status = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $statusCode = null;
 
-    /**
-     * @var string
-     */
     private string $transactionId;
 
-    /**
-     * @param DateTime $lastUpdate
-     * @param ProcessType $processType
-     * @param ProcessState $state
-     * @param string $transactionId
-     */
     public function __construct(DateTime $lastUpdate, ProcessType $processType, ProcessState $state, string $transactionId)
     {
         $this->lastUpdate = $lastUpdate;
@@ -108,66 +79,41 @@ class Process
         $this->transactionId = $transactionId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError(): ?string
     {
         return $this->error ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getLastUpdate(): DateTime
     {
         return $this->lastUpdate;
     }
 
-    /**
-     * @return ProcessType
-     */
     public function getProcessType(): ProcessType
     {
         return $this->processType;
     }
 
-    /**
-     * @return ProcessState
-     */
     public function getState(): ProcessState
     {
         return $this->state;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStatus(): ?string
     {
         return $this->status ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStatusCode(): ?string
     {
         return $this->statusCode ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getTransactionId(): string
     {
         return $this->transactionId;
     }
 
-    /**
-     * @param string $error
-     * @return self
-     */
     public function withError(string $error): self
     {
         $validator = new Validator();
@@ -182,9 +128,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutError(): self
     {
         $clone = clone $this;
@@ -193,10 +136,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @param DateTime $lastUpdate
-     * @return self
-     */
     public function withLastUpdate(DateTime $lastUpdate): self
     {
         $clone = clone $this;
@@ -205,10 +144,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @param ProcessType $processType
-     * @return self
-     */
     public function withProcessType(ProcessType $processType): self
     {
         $clone = clone $this;
@@ -217,10 +152,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @param ProcessState $state
-     * @return self
-     */
     public function withState(ProcessState $state): self
     {
         $clone = clone $this;
@@ -229,10 +160,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @param string $status
-     * @return self
-     */
     public function withStatus(string $status): self
     {
         $validator = new Validator();
@@ -247,9 +174,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStatus(): self
     {
         $clone = clone $this;
@@ -258,10 +182,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @param string $statusCode
-     * @return self
-     */
     public function withStatusCode(string $statusCode): self
     {
         $validator = new Validator();
@@ -276,9 +196,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStatusCode(): self
     {
         $clone = clone $this;
@@ -287,10 +204,6 @@ class Process
         return $clone;
     }
 
-    /**
-     * @param string $transactionId
-     * @return self
-     */
     public function withTransactionId(string $transactionId): self
     {
         $validator = new Validator();

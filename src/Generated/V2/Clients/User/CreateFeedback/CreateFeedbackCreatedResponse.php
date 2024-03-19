@@ -13,8 +13,6 @@ class CreateFeedbackCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class CreateFeedbackCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateFeedbackCreatedResponseBody
-     */
     private CreateFeedbackCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateFeedbackCreatedResponseBody $body
-     */
     public function __construct(CreateFeedbackCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateFeedbackCreatedResponseBody
-     */
     public function getBody(): CreateFeedbackCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateFeedbackCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateFeedbackCreatedResponseBody $body): self
     {
         $clone = clone $this;

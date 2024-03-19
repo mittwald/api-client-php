@@ -13,8 +13,6 @@ class UpdateAccountRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,35 +34,22 @@ class UpdateAccountRequest
         ],
     ];
 
-    /**
-     * @var UpdateAccountRequestBody
-     */
     private UpdateAccountRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param UpdateAccountRequestBody $body
-     */
     public function __construct(UpdateAccountRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return UpdateAccountRequestBody
-     */
     public function getBody(): UpdateAccountRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param UpdateAccountRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateAccountRequestBody $body): self
     {
         $clone = clone $this;

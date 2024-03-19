@@ -22,8 +22,6 @@ class ProjectBackup
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -71,57 +69,24 @@ class ProjectBackup
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $createdAt = null;
 
-    /**
-     * @var bool
-     */
     private bool $deletable;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var ProjectBackupExport|null
-     */
     private ?ProjectBackupExport $export = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string|null
-     */
     private ?string $parentId = null;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string
-     */
     private string $status;
 
-    /**
-     * @param bool $deletable
-     * @param string $id
-     * @param string $projectId
-     * @param string $status
-     */
     public function __construct(bool $deletable, string $id, string $projectId, string $status)
     {
         $this->deletable = $deletable;
@@ -130,82 +95,51 @@ class ProjectBackup
         $this->status = $status;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getDeletable(): bool
     {
         return $this->deletable;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return ProjectBackupExport|null
-     */
     public function getExport(): ?ProjectBackupExport
     {
         return $this->export ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getParentId(): ?string
     {
         return $this->parentId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -214,9 +148,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCreatedAt(): self
     {
         $clone = clone $this;
@@ -225,10 +156,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param bool $deletable
-     * @return self
-     */
     public function withDeletable(bool $deletable): self
     {
         $validator = new Validator();
@@ -243,10 +170,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -261,9 +184,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -272,10 +192,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -284,9 +200,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -295,10 +208,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param ProjectBackupExport $export
-     * @return self
-     */
     public function withExport(ProjectBackupExport $export): self
     {
         $clone = clone $this;
@@ -307,9 +216,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExport(): self
     {
         $clone = clone $this;
@@ -318,10 +224,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -336,10 +238,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param string $parentId
-     * @return self
-     */
     public function withParentId(string $parentId): self
     {
         $validator = new Validator();
@@ -354,9 +252,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutParentId(): self
     {
         $clone = clone $this;
@@ -365,10 +260,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -383,10 +274,6 @@ class ProjectBackup
         return $clone;
     }
 
-    /**
-     * @param string $status
-     * @return self
-     */
     public function withStatus(string $status): self
     {
         $validator = new Validator();

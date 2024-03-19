@@ -21,8 +21,6 @@ class Location
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,19 +40,10 @@ class Location
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $city = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $country = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $ipAddress = null;
 
     /**
@@ -64,34 +53,21 @@ class Location
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getCity(): ?string
     {
         return $this->city ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCountry(): ?string
     {
         return $this->country ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getIpAddress(): ?string
     {
         return $this->ipAddress ?? null;
     }
 
-    /**
-     * @param string $city
-     * @return self
-     */
     public function withCity(string $city): self
     {
         $validator = new Validator();
@@ -106,9 +82,6 @@ class Location
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCity(): self
     {
         $clone = clone $this;
@@ -117,10 +90,6 @@ class Location
         return $clone;
     }
 
-    /**
-     * @param string $country
-     * @return self
-     */
     public function withCountry(string $country): self
     {
         $validator = new Validator();
@@ -135,9 +104,6 @@ class Location
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCountry(): self
     {
         $clone = clone $this;
@@ -146,10 +112,6 @@ class Location
         return $clone;
     }
 
-    /**
-     * @param string $ipAddress
-     * @return self
-     */
     public function withIpAddress(string $ipAddress): self
     {
         $validator = new Validator();
@@ -164,9 +126,6 @@ class Location
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIpAddress(): self
     {
         $clone = clone $this;

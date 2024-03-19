@@ -14,8 +14,6 @@ class GetInstalledSystemsoftwareForAppinstallationOKResponse implements Response
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -57,7 +55,6 @@ class GetInstalledSystemsoftwareForAppinstallationOKResponse implements Response
 
     /**
      * @param SystemSoftware[] $body
-     * @return self
      */
     public function withBody(array $body): self
     {

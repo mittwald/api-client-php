@@ -13,8 +13,6 @@ class DeprecatedUserServiceFeedbackListRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,9 +26,6 @@ class DeprecatedUserServiceFeedbackListRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $subject = null;
 
     private array $headers = [
@@ -44,18 +39,11 @@ class DeprecatedUserServiceFeedbackListRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getSubject(): ?string
     {
         return $this->subject ?? null;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -70,9 +58,6 @@ class DeprecatedUserServiceFeedbackListRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSubject(): self
     {
         $clone = clone $this;

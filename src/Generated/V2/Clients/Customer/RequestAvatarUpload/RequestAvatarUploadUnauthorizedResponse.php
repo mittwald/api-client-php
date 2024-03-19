@@ -13,8 +13,6 @@ class RequestAvatarUploadUnauthorizedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class RequestAvatarUploadUnauthorizedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var RequestAvatarUploadUnauthorizedResponseBody
-     */
     private RequestAvatarUploadUnauthorizedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RequestAvatarUploadUnauthorizedResponseBody $body
-     */
     public function __construct(RequestAvatarUploadUnauthorizedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RequestAvatarUploadUnauthorizedResponseBody
-     */
     public function getBody(): RequestAvatarUploadUnauthorizedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RequestAvatarUploadUnauthorizedResponseBody $body
-     * @return self
-     */
     public function withBody(RequestAvatarUploadUnauthorizedResponseBody $body): self
     {
         $clone = clone $this;

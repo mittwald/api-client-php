@@ -21,8 +21,6 @@ class Statistics
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -58,36 +56,26 @@ class Statistics
 
     /**
      * Elapsed kernel space time in milliseconds.
-     *
-     * @var int|float
      */
     private int|float $kernelMs;
 
     /**
      * The number of times this group occurred.
-     *
-     * @var int
      */
     private int $occurrences;
 
     /**
      * Syscall count.
-     *
-     * @var int
      */
     private int $syscallCount;
 
     /**
      * Elapsed user space time in milliseconds.
-     *
-     * @var int|float
      */
     private int|float $userspaceMs;
 
     /**
      * @param int|float $kernelMs
-     * @param int $occurrences
-     * @param int $syscallCount
      * @param int|float $userspaceMs
      */
     public function __construct(int|float $kernelMs, int $occurrences, int $syscallCount, int|float $userspaceMs)
@@ -98,33 +86,21 @@ class Statistics
         $this->userspaceMs = $userspaceMs;
     }
 
-    /**
-     * @return int|float
-     */
     public function getKernelMs(): int|float
     {
         return $this->kernelMs;
     }
 
-    /**
-     * @return int
-     */
     public function getOccurrences(): int
     {
         return $this->occurrences;
     }
 
-    /**
-     * @return int
-     */
     public function getSyscallCount(): int
     {
         return $this->syscallCount;
     }
 
-    /**
-     * @return int|float
-     */
     public function getUserspaceMs(): int|float
     {
         return $this->userspaceMs;
@@ -132,7 +108,6 @@ class Statistics
 
     /**
      * @param int|float $kernelMs
-     * @return self
      */
     public function withKernelMs(int|float $kernelMs): self
     {
@@ -148,10 +123,6 @@ class Statistics
         return $clone;
     }
 
-    /**
-     * @param int $occurrences
-     * @return self
-     */
     public function withOccurrences(int $occurrences): self
     {
         $validator = new Validator();
@@ -166,10 +137,6 @@ class Statistics
         return $clone;
     }
 
-    /**
-     * @param int $syscallCount
-     * @return self
-     */
     public function withSyscallCount(int $syscallCount): self
     {
         $validator = new Validator();
@@ -186,7 +153,6 @@ class Statistics
 
     /**
      * @param int|float $userspaceMs
-     * @return self
      */
     public function withUserspaceMs(int|float $userspaceMs): self
     {

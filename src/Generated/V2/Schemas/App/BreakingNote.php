@@ -22,8 +22,6 @@ class BreakingNote
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A BreakingNote is a hint that something serious has changed in the AppVersion containing it, so an automatic update is not possible.',
@@ -39,31 +37,18 @@ class BreakingNote
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $faqLink;
 
-    /**
-     * @param string $faqLink
-     */
     public function __construct(string $faqLink)
     {
         $this->faqLink = $faqLink;
     }
 
-    /**
-     * @return string
-     */
     public function getFaqLink(): string
     {
         return $this->faqLink;
     }
 
-    /**
-     * @param string $faqLink
-     * @return self
-     */
     public function withFaqLink(string $faqLink): self
     {
         $validator = new Validator();

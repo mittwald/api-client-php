@@ -14,8 +14,6 @@ class DnsGetDnsZoneOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class DnsGetDnsZoneOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Zone
-     */
     private Zone $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Zone $body
-     */
     public function __construct(Zone $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Zone
-     */
     public function getBody(): Zone
     {
         return $this->body;
     }
 
-    /**
-     * @param Zone $body
-     * @return self
-     */
     public function withBody(Zone $body): self
     {
         $clone = clone $this;

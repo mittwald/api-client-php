@@ -13,8 +13,6 @@ class GetLatestScreenshotOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,33 +31,20 @@ class GetLatestScreenshotOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetLatestScreenshotOKResponseBody
-     */
     private GetLatestScreenshotOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetLatestScreenshotOKResponseBody $body
-     */
     public function __construct(GetLatestScreenshotOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetLatestScreenshotOKResponseBody
-     */
     public function getBody(): GetLatestScreenshotOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetLatestScreenshotOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetLatestScreenshotOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class ListDomainsV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,74 +38,43 @@ class ListDomainsV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var int|null
-     */
     private ?int $page = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $limit = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $domainSearchName = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPage(): ?int
     {
         return $this->page ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDomainSearchName(): ?string
     {
         return $this->domainSearchName ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -122,10 +89,6 @@ class ListDomainsV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param int $page
-     * @return self
-     */
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -140,9 +103,6 @@ class ListDomainsV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPage(): self
     {
         $clone = clone $this;
@@ -151,10 +111,6 @@ class ListDomainsV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param int $limit
-     * @return self
-     */
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -169,9 +125,6 @@ class ListDomainsV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLimit(): self
     {
         $clone = clone $this;
@@ -180,10 +133,6 @@ class ListDomainsV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param string $domainSearchName
-     * @return self
-     */
     public function withDomainSearchName(string $domainSearchName): self
     {
         $validator = new Validator();
@@ -198,9 +147,6 @@ class ListDomainsV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDomainSearchName(): self
     {
         $clone = clone $this;

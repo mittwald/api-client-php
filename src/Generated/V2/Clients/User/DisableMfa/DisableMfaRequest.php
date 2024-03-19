@@ -13,8 +13,6 @@ class DisableMfaRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,35 +37,22 @@ class DisableMfaRequest
         ],
     ];
 
-    /**
-     * @var DisableMfaRequestBody
-     */
     private DisableMfaRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DisableMfaRequestBody $body
-     */
     public function __construct(DisableMfaRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DisableMfaRequestBody
-     */
     public function getBody(): DisableMfaRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DisableMfaRequestBody $body
-     * @return self
-     */
     public function withBody(DisableMfaRequestBody $body): self
     {
         $clone = clone $this;

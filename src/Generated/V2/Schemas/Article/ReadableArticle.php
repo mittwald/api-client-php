@@ -21,8 +21,6 @@ class ReadableArticle
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -147,9 +145,6 @@ class ReadableArticle
      */
     private ?array $addons = null;
 
-    /**
-     * @var string
-     */
     private string $articleId;
 
     /**
@@ -157,39 +152,18 @@ class ReadableArticle
      */
     private ?array $attributes = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $balanceAddonKey = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $contractDurationInMonth;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $forcedInvoicingPeriodInMonth = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $hasIndependentContractPeriod = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $hideOnInvoice = null;
 
-    /**
-     * @var ReadableArticleMachineType|null
-     */
     private ?ReadableArticleMachineType $machineType = null;
 
     /**
@@ -197,14 +171,8 @@ class ReadableArticle
      */
     private ?array $modifierArticles = null;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var ReadableArticleOrderable
-     */
     private ReadableArticleOrderable $orderable;
 
     /**
@@ -212,9 +180,6 @@ class ReadableArticle
      */
     private ?array $possibleArticleChanges = null;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $price = null;
 
     /**
@@ -222,18 +187,10 @@ class ReadableArticle
      */
     private ?array $tags = null;
 
-    /**
-     * @var ArticleTemplate
-     */
     private ArticleTemplate $template;
 
     /**
-     * @param string $articleId
      * @param int|float $contractDurationInMonth
-     * @param string $description
-     * @param string $name
-     * @param ReadableArticleOrderable $orderable
-     * @param ArticleTemplate $template
      */
     public function __construct(string $articleId, int|float $contractDurationInMonth, string $description, string $name, ReadableArticleOrderable $orderable, ArticleTemplate $template)
     {
@@ -253,9 +210,6 @@ class ReadableArticle
         return $this->addons ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleId(): string
     {
         return $this->articleId;
@@ -270,57 +224,36 @@ class ReadableArticle
         return $this->attributes ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBalanceAddonKey(): ?string
     {
         return $this->balanceAddonKey ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getContractDurationInMonth(): int|float
     {
         return $this->contractDurationInMonth;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getForcedInvoicingPeriodInMonth(): int|float|null
     {
         return $this->forcedInvoicingPeriodInMonth;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getHasIndependentContractPeriod(): ?bool
     {
         return $this->hasIndependentContractPeriod ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getHideOnInvoice(): ?bool
     {
         return $this->hideOnInvoice ?? null;
     }
 
-    /**
-     * @return ReadableArticleMachineType|null
-     */
     public function getMachineType(): ?ReadableArticleMachineType
     {
         return $this->machineType ?? null;
@@ -335,17 +268,11 @@ class ReadableArticle
         return $this->modifierArticles ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return ReadableArticleOrderable
-     */
     public function getOrderable(): ReadableArticleOrderable
     {
         return $this->orderable;
@@ -360,9 +287,6 @@ class ReadableArticle
         return $this->possibleArticleChanges ?? null;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getPrice(): int|float|null
     {
         return $this->price;
@@ -376,9 +300,6 @@ class ReadableArticle
         return $this->tags ?? null;
     }
 
-    /**
-     * @return ArticleTemplate
-     */
     public function getTemplate(): ArticleTemplate
     {
         return $this->template;
@@ -386,7 +307,6 @@ class ReadableArticle
 
     /**
      * @param ArticleAddons[] $addons
-     * @return self
      */
     public function withAddons(array $addons): self
     {
@@ -396,9 +316,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAddons(): self
     {
         $clone = clone $this;
@@ -407,10 +324,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param string $articleId
-     * @return self
-     */
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
@@ -427,7 +340,6 @@ class ReadableArticle
 
     /**
      * @param ArticleAttributes[] $attributes
-     * @return self
      */
     public function withAttributes(array $attributes): self
     {
@@ -437,9 +349,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAttributes(): self
     {
         $clone = clone $this;
@@ -448,10 +357,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param string $balanceAddonKey
-     * @return self
-     */
     public function withBalanceAddonKey(string $balanceAddonKey): self
     {
         $validator = new Validator();
@@ -466,9 +371,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutBalanceAddonKey(): self
     {
         $clone = clone $this;
@@ -479,7 +381,6 @@ class ReadableArticle
 
     /**
      * @param int|float $contractDurationInMonth
-     * @return self
      */
     public function withContractDurationInMonth(int|float $contractDurationInMonth): self
     {
@@ -495,10 +396,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -515,7 +412,6 @@ class ReadableArticle
 
     /**
      * @param int|float $forcedInvoicingPeriodInMonth
-     * @return self
      */
     public function withForcedInvoicingPeriodInMonth(int|float $forcedInvoicingPeriodInMonth): self
     {
@@ -531,9 +427,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutForcedInvoicingPeriodInMonth(): self
     {
         $clone = clone $this;
@@ -542,10 +435,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param bool $hasIndependentContractPeriod
-     * @return self
-     */
     public function withHasIndependentContractPeriod(bool $hasIndependentContractPeriod): self
     {
         $validator = new Validator();
@@ -560,9 +449,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHasIndependentContractPeriod(): self
     {
         $clone = clone $this;
@@ -571,10 +457,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param bool $hideOnInvoice
-     * @return self
-     */
     public function withHideOnInvoice(bool $hideOnInvoice): self
     {
         $validator = new Validator();
@@ -589,9 +471,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHideOnInvoice(): self
     {
         $clone = clone $this;
@@ -600,10 +479,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param ReadableArticleMachineType $machineType
-     * @return self
-     */
     public function withMachineType(ReadableArticleMachineType $machineType): self
     {
         $clone = clone $this;
@@ -612,9 +487,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMachineType(): self
     {
         $clone = clone $this;
@@ -625,7 +497,6 @@ class ReadableArticle
 
     /**
      * @param ReadableModifierArticleOptions[] $modifierArticles
-     * @return self
      */
     public function withModifierArticles(array $modifierArticles): self
     {
@@ -635,9 +506,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutModifierArticles(): self
     {
         $clone = clone $this;
@@ -646,10 +514,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -664,10 +528,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param ReadableArticleOrderable $orderable
-     * @return self
-     */
     public function withOrderable(ReadableArticleOrderable $orderable): self
     {
         $clone = clone $this;
@@ -678,7 +538,6 @@ class ReadableArticle
 
     /**
      * @param ReadableChangeArticleOptions[] $possibleArticleChanges
-     * @return self
      */
     public function withPossibleArticleChanges(array $possibleArticleChanges): self
     {
@@ -688,9 +547,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPossibleArticleChanges(): self
     {
         $clone = clone $this;
@@ -701,7 +557,6 @@ class ReadableArticle
 
     /**
      * @param int|float $price
-     * @return self
      */
     public function withPrice(int|float $price): self
     {
@@ -717,9 +572,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPrice(): self
     {
         $clone = clone $this;
@@ -730,7 +582,6 @@ class ReadableArticle
 
     /**
      * @param ArticleTag[] $tags
-     * @return self
      */
     public function withTags(array $tags): self
     {
@@ -740,9 +591,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTags(): self
     {
         $clone = clone $this;
@@ -751,10 +599,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param ArticleTemplate $template
-     * @return self
-     */
     public function withTemplate(ArticleTemplate $template): self
     {
         $clone = clone $this;

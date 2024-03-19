@@ -13,8 +13,6 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -60,33 +58,20 @@ class CheckDomainTransferabilityOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CheckDomainTransferabilityOKResponseBody
-     */
     private CheckDomainTransferabilityOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CheckDomainTransferabilityOKResponseBody $body
-     */
     public function __construct(CheckDomainTransferabilityOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckDomainTransferabilityOKResponseBody
-     */
     public function getBody(): CheckDomainTransferabilityOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckDomainTransferabilityOKResponseBody $body
-     * @return self
-     */
     public function withBody(CheckDomainTransferabilityOKResponseBody $body): self
     {
         $clone = clone $this;

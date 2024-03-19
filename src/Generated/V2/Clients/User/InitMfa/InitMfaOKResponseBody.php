@@ -11,8 +11,6 @@ class InitMfaOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,49 +38,31 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      * base64 encoded barcode content to scan from your mfa app. e.g. `iVBORw0KGgoAAAANSUhEUgAAAMgAAADIEAAAAADYoy...`. You
      * can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
      *
-     *
-     * @var string
      */
     private string $barcode;
 
     /**
      * Same as barcode,  but in URL form.
      *
-     *
-     * @var string
      */
     private string $url;
 
-    /**
-     * @param string $barcode
-     * @param string $url
-     */
     public function __construct(string $barcode, string $url)
     {
         $this->barcode = $barcode;
         $this->url = $url;
     }
 
-    /**
-     * @return string
-     */
     public function getBarcode(): string
     {
         return $this->barcode;
     }
 
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * @param string $barcode
-     * @return self
-     */
     public function withBarcode(string $barcode): self
     {
         $validator = new Validator();
@@ -97,10 +77,6 @@ can display it with `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.." />`
         return $clone;
     }
 
-    /**
-     * @param string $url
-     * @return self
-     */
     public function withUrl(string $url): self
     {
         $validator = new Validator();

@@ -11,8 +11,6 @@ class DeprecatedAppLinkDatabaseRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,9 +40,6 @@ class DeprecatedAppLinkDatabaseRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
     /**
@@ -52,24 +47,14 @@ class DeprecatedAppLinkDatabaseRequestBody
      */
     private ?array $databaseUserIds = null;
 
-    /**
-     * @var DeprecatedAppLinkDatabaseRequestBodyPurpose
-     */
     private DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose;
 
-    /**
-     * @param string $databaseId
-     * @param DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose
-     */
     public function __construct(string $databaseId, DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose)
     {
         $this->databaseId = $databaseId;
         $this->purpose = $purpose;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
@@ -83,18 +68,11 @@ class DeprecatedAppLinkDatabaseRequestBody
         return $this->databaseUserIds ?? null;
     }
 
-    /**
-     * @return DeprecatedAppLinkDatabaseRequestBodyPurpose
-     */
     public function getPurpose(): DeprecatedAppLinkDatabaseRequestBodyPurpose
     {
         return $this->purpose;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
@@ -111,7 +89,6 @@ class DeprecatedAppLinkDatabaseRequestBody
 
     /**
      * @param string[] $databaseUserIds
-     * @return self
      */
     public function withDatabaseUserIds(array $databaseUserIds): self
     {
@@ -127,9 +104,6 @@ class DeprecatedAppLinkDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDatabaseUserIds(): self
     {
         $clone = clone $this;
@@ -138,10 +112,6 @@ class DeprecatedAppLinkDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @param DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose
-     * @return self
-     */
     public function withPurpose(DeprecatedAppLinkDatabaseRequestBodyPurpose $purpose): self
     {
         $clone = clone $this;

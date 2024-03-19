@@ -14,8 +14,6 @@ class ListExecutionsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -54,113 +52,64 @@ class ListExecutionsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $cronjobId;
 
-    /**
-     * @var int|null
-     */
     private ?int $limit = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $skip = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $page = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $since = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $until = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $status = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $cronjobId
-     */
     public function __construct(string $cronjobId)
     {
         $this->cronjobId = $cronjobId;
     }
 
-    /**
-     * @return string
-     */
     public function getCronjobId(): string
     {
         return $this->cronjobId;
     }
 
-    /**
-     * @return int|null
-     */
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSkip(): ?int
     {
         return $this->skip ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPage(): ?int
     {
         return $this->page ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getSince(): ?DateTime
     {
         return $this->since ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getUntil(): ?DateTime
     {
         return $this->until ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStatus(): ?string
     {
         return $this->status ?? null;
     }
 
-    /**
-     * @param string $cronjobId
-     * @return self
-     */
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
@@ -175,10 +124,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @param int $limit
-     * @return self
-     */
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -193,9 +138,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLimit(): self
     {
         $clone = clone $this;
@@ -204,10 +146,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @param int $skip
-     * @return self
-     */
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -222,9 +160,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSkip(): self
     {
         $clone = clone $this;
@@ -233,10 +168,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @param int $page
-     * @return self
-     */
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -251,9 +182,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPage(): self
     {
         $clone = clone $this;
@@ -262,10 +190,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @param DateTime $since
-     * @return self
-     */
     public function withSince(DateTime $since): self
     {
         $clone = clone $this;
@@ -274,9 +198,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSince(): self
     {
         $clone = clone $this;
@@ -285,10 +206,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @param DateTime $until
-     * @return self
-     */
     public function withUntil(DateTime $until): self
     {
         $clone = clone $this;
@@ -297,9 +214,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUntil(): self
     {
         $clone = clone $this;
@@ -308,10 +222,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @param string $status
-     * @return self
-     */
     public function withStatus(string $status): self
     {
         $validator = new Validator();
@@ -326,9 +236,6 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStatus(): self
     {
         $clone = clone $this;

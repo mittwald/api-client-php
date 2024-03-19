@@ -11,8 +11,6 @@ class CreateApiTokenCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -29,31 +27,19 @@ class CreateApiTokenCreatedResponseBody
 
     /**
      * The `ApiToken`.
-     *
-     * @var string
      */
     private string $token;
 
-    /**
-     * @param string $token
-     */
     public function __construct(string $token)
     {
         $this->token = $token;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();

@@ -22,8 +22,6 @@ class Project
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -137,29 +135,14 @@ class Project
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $clusterDomain = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $clusterID = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
     /**
@@ -167,95 +150,41 @@ class Project
      */
     private array $directories;
 
-    /**
-     * @var DisableReason|null
-     */
     private ?DisableReason $disableReason = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $disabledAt = null;
 
-    /**
-     * @var bool
-     */
     private bool $enabled;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string|null
-     */
     private ?string $imageRefId = null;
 
     /**
      * deprecated
-     *
-     * @var bool
      */
     private bool $isReady;
 
-    /**
-     * @var string|null
-     */
     private ?string $projectHostingId = null;
 
-    /**
-     * @var DeprecatedProjectReadinessStatus
-     */
     private DeprecatedProjectReadinessStatus $readiness;
 
-    /**
-     * @var string|null
-     */
     private ?string $serverId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $serverShortId = null;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
-    /**
-     * @var VisitorSpec|HardwareSpec|null
-     */
     private VisitorSpec|HardwareSpec|null $spec = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $statisticsBaseDomain = null;
 
-    /**
-     * @var ProjectStatus
-     */
     private ProjectStatus $status;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $statusSetAt;
 
     /**
-     * @param DateTime $createdAt
-     * @param string $customerId
-     * @param string $description
      * @param string[] $directories
-     * @param bool $enabled
-     * @param string $id
-     * @param bool $isReady
-     * @param DeprecatedProjectReadinessStatus $readiness
-     * @param string $shortId
-     * @param ProjectStatus $status
-     * @param DateTime $statusSetAt
      */
     public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt)
     {
@@ -272,41 +201,26 @@ class Project
         $this->statusSetAt = $statusSetAt;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClusterDomain(): ?string
     {
         return $this->clusterDomain ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClusterID(): ?string
     {
         return $this->clusterID ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -320,57 +234,36 @@ class Project
         return $this->directories;
     }
 
-    /**
-     * @return DisableReason|null
-     */
     public function getDisableReason(): ?DisableReason
     {
         return $this->disableReason ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getDisabledAt(): ?DateTime
     {
         return $this->disabledAt ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageRefId(): ?string
     {
         return $this->imageRefId ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsReady(): bool
     {
         return $this->isReady;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectHostingId(): ?string
     {
         return $this->projectHostingId ?? null;
@@ -385,25 +278,16 @@ class Project
         return $this->readiness;
     }
 
-    /**
-     * @return string|null
-     */
     public function getServerId(): ?string
     {
         return $this->serverId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getServerShortId(): ?string
     {
         return $this->serverShortId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
@@ -418,34 +302,21 @@ class Project
         return $this->spec;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStatisticsBaseDomain(): ?string
     {
         return $this->statisticsBaseDomain ?? null;
     }
 
-    /**
-     * @return ProjectStatus
-     */
     public function getStatus(): ProjectStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getStatusSetAt(): DateTime
     {
         return $this->statusSetAt;
     }
 
-    /**
-     * @param string $clusterDomain
-     * @return self
-     */
     public function withClusterDomain(string $clusterDomain): self
     {
         $validator = new Validator();
@@ -460,9 +331,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutClusterDomain(): self
     {
         $clone = clone $this;
@@ -471,10 +339,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $clusterID
-     * @return self
-     */
     public function withClusterID(string $clusterID): self
     {
         $validator = new Validator();
@@ -489,9 +353,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutClusterID(): self
     {
         $clone = clone $this;
@@ -500,10 +361,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -512,10 +369,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -530,10 +383,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -550,7 +399,6 @@ class Project
 
     /**
      * @param string[] $directories
-     * @return self
      */
     public function withDirectories(array $directories): self
     {
@@ -566,10 +414,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param DisableReason $disableReason
-     * @return self
-     */
     public function withDisableReason(DisableReason $disableReason): self
     {
         $clone = clone $this;
@@ -578,9 +422,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDisableReason(): self
     {
         $clone = clone $this;
@@ -589,10 +430,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param DateTime $disabledAt
-     * @return self
-     */
     public function withDisabledAt(DateTime $disabledAt): self
     {
         $clone = clone $this;
@@ -601,9 +438,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDisabledAt(): self
     {
         $clone = clone $this;
@@ -612,10 +446,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param bool $enabled
-     * @return self
-     */
     public function withEnabled(bool $enabled): self
     {
         $validator = new Validator();
@@ -630,10 +460,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -648,10 +474,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $imageRefId
-     * @return self
-     */
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
@@ -666,9 +488,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageRefId(): self
     {
         $clone = clone $this;
@@ -677,10 +496,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param bool $isReady
-     * @return self
-     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
@@ -695,10 +510,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $projectHostingId
-     * @return self
-     */
     public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new Validator();
@@ -713,9 +524,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectHostingId(): self
     {
         $clone = clone $this;
@@ -724,10 +532,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param DeprecatedProjectReadinessStatus $readiness
-     * @return self
-     */
     public function withReadiness(DeprecatedProjectReadinessStatus $readiness): self
     {
         $clone = clone $this;
@@ -736,10 +540,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $serverId
-     * @return self
-     */
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
@@ -754,9 +554,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServerId(): self
     {
         $clone = clone $this;
@@ -765,10 +562,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $serverShortId
-     * @return self
-     */
     public function withServerShortId(string $serverShortId): self
     {
         $validator = new Validator();
@@ -783,9 +576,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServerShortId(): self
     {
         $clone = clone $this;
@@ -794,10 +584,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
@@ -814,7 +600,6 @@ class Project
 
     /**
      * @param VisitorSpec|HardwareSpec $spec
-     * @return self
      */
     public function withSpec(HardwareSpec|VisitorSpec $spec): self
     {
@@ -824,9 +609,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSpec(): self
     {
         $clone = clone $this;
@@ -835,10 +617,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param string $statisticsBaseDomain
-     * @return self
-     */
     public function withStatisticsBaseDomain(string $statisticsBaseDomain): self
     {
         $validator = new Validator();
@@ -853,9 +631,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStatisticsBaseDomain(): self
     {
         $clone = clone $this;
@@ -864,10 +639,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param ProjectStatus $status
-     * @return self
-     */
     public function withStatus(ProjectStatus $status): self
     {
         $clone = clone $this;
@@ -876,10 +647,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param DateTime $statusSetAt
-     * @return self
-     */
     public function withStatusSetAt(DateTime $statusSetAt): self
     {
         $clone = clone $this;

@@ -14,8 +14,6 @@ class GetServerOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetServerOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Server
-     */
     private Server $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Server $body
-     */
     public function __construct(Server $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Server
-     */
     public function getBody(): Server
     {
         return $this->body;
     }
 
-    /**
-     * @param Server $body
-     * @return self
-     */
     public function withBody(Server $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class DnsSetRecordSetManagedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,30 +43,16 @@ class DnsSetRecordSetManagedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $dnsZoneId;
 
-    /**
-     * @var DnsSetRecordSetManagedRequestRecordSet
-     */
     private DnsSetRecordSetManagedRequestRecordSet $recordSet;
 
-    /**
-     * @var DnsSetRecordSetManagedRequestBody
-     */
     private DnsSetRecordSetManagedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $dnsZoneId
-     * @param DnsSetRecordSetManagedRequestRecordSet $recordSet
-     * @param DnsSetRecordSetManagedRequestBody $body
-     */
     public function __construct(string $dnsZoneId, DnsSetRecordSetManagedRequestRecordSet $recordSet, DnsSetRecordSetManagedRequestBody $body)
     {
         $this->dnsZoneId = $dnsZoneId;
@@ -76,34 +60,21 @@ class DnsSetRecordSetManagedRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDnsZoneId(): string
     {
         return $this->dnsZoneId;
     }
 
-    /**
-     * @return DnsSetRecordSetManagedRequestRecordSet
-     */
     public function getRecordSet(): DnsSetRecordSetManagedRequestRecordSet
     {
         return $this->recordSet;
     }
 
-    /**
-     * @return DnsSetRecordSetManagedRequestBody
-     */
     public function getBody(): DnsSetRecordSetManagedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $dnsZoneId
-     * @return self
-     */
     public function withDnsZoneId(string $dnsZoneId): self
     {
         $validator = new Validator();
@@ -118,10 +89,6 @@ class DnsSetRecordSetManagedRequest
         return $clone;
     }
 
-    /**
-     * @param DnsSetRecordSetManagedRequestRecordSet $recordSet
-     * @return self
-     */
     public function withRecordSet(DnsSetRecordSetManagedRequestRecordSet $recordSet): self
     {
         $clone = clone $this;
@@ -130,10 +97,6 @@ class DnsSetRecordSetManagedRequest
         return $clone;
     }
 
-    /**
-     * @param DnsSetRecordSetManagedRequestBody $body
-     * @return self
-     */
     public function withBody(DnsSetRecordSetManagedRequestBody $body): self
     {
         $clone = clone $this;

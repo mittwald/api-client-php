@@ -13,8 +13,6 @@ class GetFileAccessTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,30 +36,16 @@ class GetFileAccessTokenRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var string
-     */
     private string $fileId;
 
-    /**
-     * @var GetFileAccessTokenRequestBody
-     */
     private GetFileAccessTokenRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $conversationId
-     * @param string $fileId
-     * @param GetFileAccessTokenRequestBody $body
-     */
     public function __construct(string $conversationId, string $fileId, GetFileAccessTokenRequestBody $body)
     {
         $this->conversationId = $conversationId;
@@ -69,34 +53,21 @@ class GetFileAccessTokenRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return string
-     */
     public function getFileId(): string
     {
         return $this->fileId;
     }
 
-    /**
-     * @return GetFileAccessTokenRequestBody
-     */
     public function getBody(): GetFileAccessTokenRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -111,10 +82,6 @@ class GetFileAccessTokenRequest
         return $clone;
     }
 
-    /**
-     * @param string $fileId
-     * @return self
-     */
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();
@@ -129,10 +96,6 @@ class GetFileAccessTokenRequest
         return $clone;
     }
 
-    /**
-     * @param GetFileAccessTokenRequestBody $body
-     * @return self
-     */
     public function withBody(GetFileAccessTokenRequestBody $body): self
     {
         $clone = clone $this;

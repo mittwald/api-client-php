@@ -21,8 +21,6 @@ class Category
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,38 +50,16 @@ class Category
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var bool
-     */
     private bool $isPublic;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var bool
-     */
     private bool $useAgencyDomainPrices;
 
-    /**
-     * @var bool
-     */
     private bool $useAgencySslPrices;
 
-    /**
-     * @param string $id
-     * @param bool $isPublic
-     * @param string $name
-     * @param bool $useAgencyDomainPrices
-     * @param bool $useAgencySslPrices
-     */
     public function __construct(string $id, bool $isPublic, string $name, bool $useAgencyDomainPrices, bool $useAgencySslPrices)
     {
         $this->id = $id;
@@ -93,50 +69,31 @@ class Category
         $this->useAgencySslPrices = $useAgencySslPrices;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsPublic(): bool
     {
         return $this->isPublic;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return bool
-     */
     public function getUseAgencyDomainPrices(): bool
     {
         return $this->useAgencyDomainPrices;
     }
 
-    /**
-     * @return bool
-     */
     public function getUseAgencySslPrices(): bool
     {
         return $this->useAgencySslPrices;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -151,10 +108,6 @@ class Category
         return $clone;
     }
 
-    /**
-     * @param bool $isPublic
-     * @return self
-     */
     public function withIsPublic(bool $isPublic): self
     {
         $validator = new Validator();
@@ -169,10 +122,6 @@ class Category
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -187,10 +136,6 @@ class Category
         return $clone;
     }
 
-    /**
-     * @param bool $useAgencyDomainPrices
-     * @return self
-     */
     public function withUseAgencyDomainPrices(bool $useAgencyDomainPrices): self
     {
         $validator = new Validator();
@@ -205,10 +150,6 @@ class Category
         return $clone;
     }
 
-    /**
-     * @param bool $useAgencySslPrices
-     * @return self
-     */
     public function withUseAgencySslPrices(bool $useAgencySslPrices): self
     {
         $validator = new Validator();

@@ -21,8 +21,6 @@ class GetConversationIdResponse
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,46 +39,26 @@ class GetConversationIdResponse
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
-    /**
-     * @param string $conversationId
-     * @param string $shortId
-     */
     public function __construct(string $conversationId, string $shortId)
     {
         $this->conversationId = $conversationId;
         $this->shortId = $shortId;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class GetConversationIdResponse
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();

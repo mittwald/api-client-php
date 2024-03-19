@@ -15,8 +15,6 @@ class DnsRecordSrvSetDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,14 +40,8 @@ class DnsRecordSrvSetDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $zoneId;
 
-    /**
-     * @var RecordUnset|RecordSRVComponent
-     */
     private RecordUnset|RecordSRVComponent $body;
 
     private array $headers = [
@@ -57,7 +49,6 @@ class DnsRecordSrvSetDeprecatedRequest
     ];
 
     /**
-     * @param string $zoneId
      * @param RecordUnset|RecordSRVComponent $body
      */
     public function __construct(string $zoneId, RecordSRVComponent|RecordUnset $body)
@@ -66,9 +57,6 @@ class DnsRecordSrvSetDeprecatedRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getZoneId(): string
     {
         return $this->zoneId;
@@ -83,10 +71,6 @@ class DnsRecordSrvSetDeprecatedRequest
         return $this->body;
     }
 
-    /**
-     * @param string $zoneId
-     * @return self
-     */
     public function withZoneId(string $zoneId): self
     {
         $validator = new Validator();
@@ -103,7 +87,6 @@ class DnsRecordSrvSetDeprecatedRequest
 
     /**
      * @param RecordUnset|RecordSRVComponent $body
-     * @return self
      */
     public function withBody(RecordSRVComponent|RecordUnset $body): self
     {

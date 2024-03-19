@@ -11,8 +11,6 @@ class DeprecatedDomainGetScreenshotForDomainOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,7 +46,6 @@ class DeprecatedDomainGetScreenshotForDomainOKResponseBody
 
     /**
      * @param string[] $references
-     * @return self
      */
     public function withReferences(array $references): self
     {
@@ -64,9 +61,6 @@ class DeprecatedDomainGetScreenshotForDomainOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReferences(): self
     {
         $clone = clone $this;

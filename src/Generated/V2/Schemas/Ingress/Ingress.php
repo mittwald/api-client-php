@@ -21,8 +21,6 @@ class Ingress
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -119,41 +117,21 @@ class Ingress
      */
     private array $dnsValidationErrors;
 
-    /**
-     * @var string
-     */
     private string $hostname;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var IngressIps
-     */
     private IngressIps $ips;
 
     /**
      * Whether this ingress is the default ingress or not. A default ingress is automatically created, it cannot be deleted. There can be only one default ingress per project.
-     *
-     * @var bool
      */
     private bool $isDefault;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isDomain = null;
 
-    /**
-     * @var bool
-     */
     private bool $isEnabled;
 
-    /**
-     * @var Ownership
-     */
     private Ownership $ownership;
 
     /**
@@ -163,26 +141,13 @@ class Ingress
      */
     private array $paths;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var TlsAcme|TlsCertificate
-     */
     private TlsAcme|TlsCertificate $tls;
 
     /**
      * @param string[] $dnsValidationErrors
-     * @param string $hostname
-     * @param string $id
-     * @param IngressIps $ips
-     * @param bool $isDefault
-     * @param bool $isEnabled
-     * @param Ownership $ownership
      * @param Path[] $paths
-     * @param string $projectId
      * @param TlsAcme|TlsCertificate $tls
      */
     public function __construct(array $dnsValidationErrors, string $hostname, string $id, IngressIps $ips, bool $isDefault, bool $isEnabled, Ownership $ownership, array $paths, string $projectId, TlsAcme|TlsCertificate $tls)
@@ -207,57 +172,36 @@ class Ingress
         return $this->dnsValidationErrors;
     }
 
-    /**
-     * @return string
-     */
     public function getHostname(): string
     {
         return $this->hostname;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return IngressIps
-     */
     public function getIps(): IngressIps
     {
         return $this->ips;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsDefault(): bool
     {
         return $this->isDefault;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsDomain(): ?bool
     {
         return $this->isDomain ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * @return Ownership
-     */
     public function getOwnership(): Ownership
     {
         return $this->ownership;
@@ -271,9 +215,6 @@ class Ingress
         return $this->paths;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
@@ -290,7 +231,6 @@ class Ingress
 
     /**
      * @param string[] $dnsValidationErrors
-     * @return self
      */
     public function withDnsValidationErrors(array $dnsValidationErrors): self
     {
@@ -306,10 +246,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param string $hostname
-     * @return self
-     */
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
@@ -324,10 +260,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -342,10 +274,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param IngressIps $ips
-     * @return self
-     */
     public function withIps(IngressIps $ips): self
     {
         $clone = clone $this;
@@ -354,10 +282,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param bool $isDefault
-     * @return self
-     */
     public function withIsDefault(bool $isDefault): self
     {
         $validator = new Validator();
@@ -372,10 +296,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param bool $isDomain
-     * @return self
-     */
     public function withIsDomain(bool $isDomain): self
     {
         $validator = new Validator();
@@ -390,9 +310,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsDomain(): self
     {
         $clone = clone $this;
@@ -401,10 +318,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param bool $isEnabled
-     * @return self
-     */
     public function withIsEnabled(bool $isEnabled): self
     {
         $validator = new Validator();
@@ -419,10 +332,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param Ownership $ownership
-     * @return self
-     */
     public function withOwnership(Ownership $ownership): self
     {
         $clone = clone $this;
@@ -433,7 +342,6 @@ class Ingress
 
     /**
      * @param Path[] $paths
-     * @return self
      */
     public function withPaths(array $paths): self
     {
@@ -443,10 +351,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -463,7 +367,6 @@ class Ingress
 
     /**
      * @param TlsAcme|TlsCertificate $tls
-     * @return self
      */
     public function withTls(TlsAcme|TlsCertificate $tls): self
     {

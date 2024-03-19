@@ -22,8 +22,6 @@ class ContractItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -127,14 +125,8 @@ class ContractItem
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $activationDate = null;
 
-    /**
-     * @var AggregateReference|null
-     */
     private ?AggregateReference $aggregateReference = null;
 
     /**
@@ -142,116 +134,56 @@ class ContractItem
      */
     private array $articles;
 
-    /**
-     * @var int|float
-     */
     private int|float $contractPeriod;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $freeTrialDays = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $groupByProjectId = null;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $invoicingPeriod = null;
 
-    /**
-     * @var bool
-     */
     private bool $isActivated;
 
-    /**
-     * @var bool
-     */
     private bool $isBaseItem;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isInFreeTrial = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isInclusive = null;
 
-    /**
-     * @var string
-     */
     private string $itemId;
 
     /**
      * If this attribute is not set, termination is not allowed.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $nextPossibleDowngradeDate = null;
 
     /**
      * If this attribute is not set, a tariff change is not allowed.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $nextPossibleTerminationDate = null;
 
     /**
      * If this attribute is not set, a tariff change is not allowed.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $nextPossibleUpgradeDate = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $orderDate;
 
-    /**
-     * @var string|null
-     */
     private ?string $orderId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $replacedByItem = null;
 
-    /**
-     * @var TariffChange|null
-     */
     private ?TariffChange $tariffChange = null;
 
-    /**
-     * @var Termination|null
-     */
     private ?Termination $termination = null;
 
-    /**
-     * @var Price
-     */
     private Price $totalPrice;
 
     /**
      * @param Article[] $articles
      * @param int|float $contractPeriod
-     * @param string $description
-     * @param bool $isActivated
-     * @param bool $isBaseItem
-     * @param string $itemId
-     * @param DateTime $orderDate
-     * @param Price $totalPrice
      */
     public function __construct(array $articles, int|float $contractPeriod, string $description, bool $isActivated, bool $isBaseItem, string $itemId, DateTime $orderDate, Price $totalPrice)
     {
@@ -265,9 +197,6 @@ class ContractItem
         $this->totalPrice = $totalPrice;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getActivationDate(): ?DateTime
     {
         return $this->activationDate ?? null;
@@ -290,162 +219,101 @@ class ContractItem
         return $this->articles;
     }
 
-    /**
-     * @return int|float
-     */
     public function getContractPeriod(): int|float
     {
         return $this->contractPeriod;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getFreeTrialDays(): int|float|null
     {
         return $this->freeTrialDays;
     }
 
-    /**
-     * @return string|null
-     */
     public function getGroupByProjectId(): ?string
     {
         return $this->groupByProjectId ?? null;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getInvoicingPeriod(): int|float|null
     {
         return $this->invoicingPeriod;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsActivated(): bool
     {
         return $this->isActivated;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsBaseItem(): bool
     {
         return $this->isBaseItem;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsInFreeTrial(): ?bool
     {
         return $this->isInFreeTrial ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsInclusive(): ?bool
     {
         return $this->isInclusive ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getItemId(): string
     {
         return $this->itemId;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getNextPossibleDowngradeDate(): ?DateTime
     {
         return $this->nextPossibleDowngradeDate ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getNextPossibleTerminationDate(): ?DateTime
     {
         return $this->nextPossibleTerminationDate ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getNextPossibleUpgradeDate(): ?DateTime
     {
         return $this->nextPossibleUpgradeDate ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getOrderDate(): DateTime
     {
         return $this->orderDate;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrderId(): ?string
     {
         return $this->orderId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReplacedByItem(): ?string
     {
         return $this->replacedByItem ?? null;
     }
 
-    /**
-     * @return TariffChange|null
-     */
     public function getTariffChange(): ?TariffChange
     {
         return $this->tariffChange ?? null;
     }
 
-    /**
-     * @return Termination|null
-     */
     public function getTermination(): ?Termination
     {
         return $this->termination ?? null;
     }
 
-    /**
-     * @return Price
-     */
     public function getTotalPrice(): Price
     {
         return $this->totalPrice;
     }
 
-    /**
-     * @param DateTime $activationDate
-     * @return self
-     */
     public function withActivationDate(DateTime $activationDate): self
     {
         $clone = clone $this;
@@ -454,9 +322,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActivationDate(): self
     {
         $clone = clone $this;
@@ -465,10 +330,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param AggregateReference $aggregateReference
-     * @return self
-     */
     public function withAggregateReference(AggregateReference $aggregateReference): self
     {
         $clone = clone $this;
@@ -477,9 +338,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAggregateReference(): self
     {
         $clone = clone $this;
@@ -490,7 +348,6 @@ class ContractItem
 
     /**
      * @param Article[] $articles
-     * @return self
      */
     public function withArticles(array $articles): self
     {
@@ -502,7 +359,6 @@ class ContractItem
 
     /**
      * @param int|float $contractPeriod
-     * @return self
      */
     public function withContractPeriod(int|float $contractPeriod): self
     {
@@ -518,10 +374,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -538,7 +390,6 @@ class ContractItem
 
     /**
      * @param int|float $freeTrialDays
-     * @return self
      */
     public function withFreeTrialDays(int|float $freeTrialDays): self
     {
@@ -554,9 +405,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFreeTrialDays(): self
     {
         $clone = clone $this;
@@ -565,10 +413,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param string $groupByProjectId
-     * @return self
-     */
     public function withGroupByProjectId(string $groupByProjectId): self
     {
         $validator = new Validator();
@@ -583,9 +427,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutGroupByProjectId(): self
     {
         $clone = clone $this;
@@ -596,7 +437,6 @@ class ContractItem
 
     /**
      * @param int|float $invoicingPeriod
-     * @return self
      */
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
@@ -612,9 +452,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInvoicingPeriod(): self
     {
         $clone = clone $this;
@@ -623,10 +460,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param bool $isActivated
-     * @return self
-     */
     public function withIsActivated(bool $isActivated): self
     {
         $validator = new Validator();
@@ -641,10 +474,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param bool $isBaseItem
-     * @return self
-     */
     public function withIsBaseItem(bool $isBaseItem): self
     {
         $validator = new Validator();
@@ -659,10 +488,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param bool $isInFreeTrial
-     * @return self
-     */
     public function withIsInFreeTrial(bool $isInFreeTrial): self
     {
         $validator = new Validator();
@@ -677,9 +502,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsInFreeTrial(): self
     {
         $clone = clone $this;
@@ -688,10 +510,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param bool $isInclusive
-     * @return self
-     */
     public function withIsInclusive(bool $isInclusive): self
     {
         $validator = new Validator();
@@ -706,9 +524,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsInclusive(): self
     {
         $clone = clone $this;
@@ -717,10 +532,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param string $itemId
-     * @return self
-     */
     public function withItemId(string $itemId): self
     {
         $validator = new Validator();
@@ -735,10 +546,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $nextPossibleDowngradeDate
-     * @return self
-     */
     public function withNextPossibleDowngradeDate(DateTime $nextPossibleDowngradeDate): self
     {
         $clone = clone $this;
@@ -747,9 +554,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNextPossibleDowngradeDate(): self
     {
         $clone = clone $this;
@@ -758,10 +562,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $nextPossibleTerminationDate
-     * @return self
-     */
     public function withNextPossibleTerminationDate(DateTime $nextPossibleTerminationDate): self
     {
         $clone = clone $this;
@@ -770,9 +570,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNextPossibleTerminationDate(): self
     {
         $clone = clone $this;
@@ -781,10 +578,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $nextPossibleUpgradeDate
-     * @return self
-     */
     public function withNextPossibleUpgradeDate(DateTime $nextPossibleUpgradeDate): self
     {
         $clone = clone $this;
@@ -793,9 +586,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNextPossibleUpgradeDate(): self
     {
         $clone = clone $this;
@@ -804,10 +594,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $orderDate
-     * @return self
-     */
     public function withOrderDate(DateTime $orderDate): self
     {
         $clone = clone $this;
@@ -816,10 +602,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param string $orderId
-     * @return self
-     */
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();
@@ -834,9 +616,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderId(): self
     {
         $clone = clone $this;
@@ -845,10 +624,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param string $replacedByItem
-     * @return self
-     */
     public function withReplacedByItem(string $replacedByItem): self
     {
         $validator = new Validator();
@@ -863,9 +638,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReplacedByItem(): self
     {
         $clone = clone $this;
@@ -874,10 +646,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param TariffChange $tariffChange
-     * @return self
-     */
     public function withTariffChange(TariffChange $tariffChange): self
     {
         $clone = clone $this;
@@ -886,9 +654,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTariffChange(): self
     {
         $clone = clone $this;
@@ -897,10 +662,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param Termination $termination
-     * @return self
-     */
     public function withTermination(Termination $termination): self
     {
         $clone = clone $this;
@@ -909,9 +670,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTermination(): self
     {
         $clone = clone $this;
@@ -920,10 +678,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param Price $totalPrice
-     * @return self
-     */
     public function withTotalPrice(Price $totalPrice): self
     {
         $clone = clone $this;

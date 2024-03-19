@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\Domain;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -450,7 +452,6 @@ interface DomainClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListTlds\ListTldsRequest $request An object representing the request for this operation
-     * @return ListTlds\ListTldsOKResponse
      */
     public function listTlds(ListTldsRequest $request): ListTldsOKResponse;
     /**

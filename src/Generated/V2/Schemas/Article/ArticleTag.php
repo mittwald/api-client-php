@@ -21,8 +21,6 @@ class ArticleTag
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -56,32 +54,14 @@ class ArticleTag
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var string
-     */
     private string $hexColor;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @param string $description
-     * @param string $hexColor
-     * @param string $id
-     * @param string $name
-     */
     public function __construct(string $description, string $hexColor, string $id, string $name)
     {
         $this->description = $description;
@@ -90,42 +70,26 @@ class ArticleTag
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getHexColor(): string
     {
         return $this->hexColor;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -140,10 +104,6 @@ class ArticleTag
         return $clone;
     }
 
-    /**
-     * @param string $hexColor
-     * @return self
-     */
     public function withHexColor(string $hexColor): self
     {
         $validator = new Validator();
@@ -158,10 +118,6 @@ class ArticleTag
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -176,10 +132,6 @@ class ArticleTag
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();

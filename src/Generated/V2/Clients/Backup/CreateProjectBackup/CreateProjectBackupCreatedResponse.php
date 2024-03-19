@@ -14,8 +14,6 @@ class CreateProjectBackupCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class CreateProjectBackupCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ProjectBackup
-     */
     private ProjectBackup $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ProjectBackup $body
-     */
     public function __construct(ProjectBackup $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ProjectBackup
-     */
     public function getBody(): ProjectBackup
     {
         return $this->body;
     }
 
-    /**
-     * @param ProjectBackup $body
-     * @return self
-     */
     public function withBody(ProjectBackup $body): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class ZoneRecordSet
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,29 +50,14 @@ class ZoneRecordSet
         'type' => 'object',
     ];
 
-    /**
-     * @var RecordUnset|RecordCNAMEComponent
-     */
     private RecordUnset|RecordCNAMEComponent $cname;
 
-    /**
-     * @var RecordUnset|CombinedACustom|CombinedAManaged
-     */
     private RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords;
 
-    /**
-     * @var RecordUnset|RecordMXManaged|RecordMXCustom
-     */
     private RecordUnset|RecordMXManaged|RecordMXCustom $mx;
 
-    /**
-     * @var RecordUnset|RecordSRVComponent
-     */
     private RecordUnset|RecordSRVComponent $srv;
 
-    /**
-     * @var RecordUnset|RecordTXTComponent
-     */
     private RecordUnset|RecordTXTComponent $txt;
 
     /**
@@ -140,7 +123,6 @@ class ZoneRecordSet
 
     /**
      * @param RecordUnset|RecordCNAMEComponent $cname
-     * @return self
      */
     public function withCname(RecordCNAMEComponent|RecordUnset $cname): self
     {
@@ -152,7 +134,6 @@ class ZoneRecordSet
 
     /**
      * @param RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords
-     * @return self
      */
     public function withCombinedARecords(CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords): self
     {
@@ -164,7 +145,6 @@ class ZoneRecordSet
 
     /**
      * @param RecordUnset|RecordMXManaged|RecordMXCustom $mx
-     * @return self
      */
     public function withMx(RecordMXCustom|RecordMXManaged|RecordUnset $mx): self
     {
@@ -176,7 +156,6 @@ class ZoneRecordSet
 
     /**
      * @param RecordUnset|RecordSRVComponent $srv
-     * @return self
      */
     public function withSrv(RecordSRVComponent|RecordUnset $srv): self
     {
@@ -188,7 +167,6 @@ class ZoneRecordSet
 
     /**
      * @param RecordUnset|RecordTXTComponent $txt
-     * @return self
      */
     public function withTxt(RecordTXTComponent|RecordUnset $txt): self
     {

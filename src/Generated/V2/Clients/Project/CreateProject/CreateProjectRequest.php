@@ -13,8 +13,6 @@ class CreateProjectRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,50 +41,30 @@ class CreateProjectRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $serverId;
 
-    /**
-     * @var CreateProjectRequestBody
-     */
     private CreateProjectRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $serverId
-     * @param CreateProjectRequestBody $body
-     */
     public function __construct(string $serverId, CreateProjectRequestBody $body)
     {
         $this->serverId = $serverId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getServerId(): string
     {
         return $this->serverId;
     }
 
-    /**
-     * @return CreateProjectRequestBody
-     */
     public function getBody(): CreateProjectRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $serverId
-     * @return self
-     */
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
@@ -101,10 +79,6 @@ class CreateProjectRequest
         return $clone;
     }
 
-    /**
-     * @param CreateProjectRequestBody $body
-     * @return self
-     */
     public function withBody(CreateProjectRequestBody $body): self
     {
         $clone = clone $this;
