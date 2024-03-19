@@ -8,6 +8,14 @@
       "Mittwald\\ApiClient\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Mittwald\\ApiClient\\Tests\\": "tests/"
+    },
+    "files": [
+      "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+    ]
+  },
   "authors": [
     {
       "name": "Martin Helmich",
