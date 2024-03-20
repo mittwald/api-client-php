@@ -13,8 +13,6 @@ class OrderPreviewOrderRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,35 +49,22 @@ class OrderPreviewOrderRequest
         ],
     ];
 
-    /**
-     * @var OrderPreviewOrderRequestBody
-     */
     private OrderPreviewOrderRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param OrderPreviewOrderRequestBody $body
-     */
     public function __construct(OrderPreviewOrderRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OrderPreviewOrderRequestBody
-     */
     public function getBody(): OrderPreviewOrderRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OrderPreviewOrderRequestBody $body
-     * @return self
-     */
     public function withBody(OrderPreviewOrderRequestBody $body): self
     {
         $clone = clone $this;

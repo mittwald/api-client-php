@@ -14,8 +14,6 @@ class GetApiTokenOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetApiTokenOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ApiToken
-     */
     private ApiToken $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ApiToken $body
-     */
     public function __construct(ApiToken $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ApiToken
-     */
     public function getBody(): ApiToken
     {
         return $this->body;
     }
 
-    /**
-     * @param ApiToken $body
-     * @return self
-     */
     public function withBody(ApiToken $body): self
     {
         $clone = clone $this;

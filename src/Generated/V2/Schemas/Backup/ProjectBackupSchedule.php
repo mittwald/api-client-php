@@ -22,8 +22,6 @@ class ProjectBackupSchedule
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -74,64 +72,40 @@ class ProjectBackupSchedule
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $createdAt = null;
 
     /**
      * Description of this ProjectBackupSchedule.
-     *
-     * @var string|null
      */
     private ?string $description = null;
 
     /**
      * ID of this ProjectBackupSchedule.
-     *
-     * @var string
      */
     private string $id;
 
     /**
      * True if this ProjectBackupSchedule was created and is managed by mittwald.
-     *
-     * @var bool
      */
     private bool $isSystemBackup;
 
     /**
      * ID of the Project this ProjectBackupSchedule belongs to.
-     *
-     * @var string
      */
     private string $projectId;
 
     /**
      * Execution schedule in crontab notation.
-     *
-     * @var string
      */
     private string $schedule;
 
     /**
      * TTL of the ProjectBackupSchedule as time string.
-     *
-     * @var string|null
      */
     private ?string $ttl = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $updatedAt = null;
 
-    /**
-     * @param string $id
-     * @param bool $isSystemBackup
-     * @param string $projectId
-     * @param string $schedule
-     */
     public function __construct(string $id, bool $isSystemBackup, string $projectId, string $schedule)
     {
         $this->id = $id;
@@ -140,74 +114,46 @@ class ProjectBackupSchedule
         $this->schedule = $schedule;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsSystemBackup(): bool
     {
         return $this->isSystemBackup;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getSchedule(): string
     {
         return $this->schedule;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTtl(): ?string
     {
         return $this->ttl ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt ?? null;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -216,9 +162,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCreatedAt(): self
     {
         $clone = clone $this;
@@ -227,10 +170,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -245,9 +184,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -256,10 +192,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -274,10 +206,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param bool $isSystemBackup
-     * @return self
-     */
     public function withIsSystemBackup(bool $isSystemBackup): self
     {
         $validator = new Validator();
@@ -292,10 +220,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -310,10 +234,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param string $schedule
-     * @return self
-     */
     public function withSchedule(string $schedule): self
     {
         $validator = new Validator();
@@ -328,10 +248,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param string $ttl
-     * @return self
-     */
     public function withTtl(string $ttl): self
     {
         $validator = new Validator();
@@ -346,9 +262,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTtl(): self
     {
         $clone = clone $this;
@@ -357,10 +270,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -369,9 +278,6 @@ class ProjectBackupSchedule
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUpdatedAt(): self
     {
         $clone = clone $this;
@@ -462,7 +368,7 @@ class ProjectBackupSchedule
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

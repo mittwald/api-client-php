@@ -21,8 +21,6 @@ class UserFeedback
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,36 +57,17 @@ class UserFeedback
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $message;
 
-    /**
-     * @var string
-     */
     private string $origin;
 
-    /**
-     * @var string
-     */
     private string $subject;
 
-    /**
-     * @var int|float
-     */
     private int|float $vote;
 
     /**
-     * @param string $id
-     * @param string $message
-     * @param string $origin
-     * @param string $subject
      * @param int|float $vote
      */
     public function __construct(string $id, string $message, string $origin, string $subject, int|float $vote)
@@ -100,50 +79,31 @@ class UserFeedback
         $this->vote = $vote;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return string
-     */
     public function getOrigin(): string
     {
         return $this->origin;
     }
 
-    /**
-     * @return string
-     */
     public function getSubject(): string
     {
         return $this->subject;
     }
 
-    /**
-     * @return int|float
-     */
     public function getVote(): int|float
     {
         return $this->vote;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -158,10 +118,6 @@ class UserFeedback
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -176,10 +132,6 @@ class UserFeedback
         return $clone;
     }
 
-    /**
-     * @param string $origin
-     * @return self
-     */
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
@@ -194,10 +146,6 @@ class UserFeedback
         return $clone;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -214,7 +162,6 @@ class UserFeedback
 
     /**
      * @param int|float $vote
-     * @return self
      */
     public function withVote(int|float $vote): self
     {
@@ -249,7 +196,7 @@ class UserFeedback
         $message = $input->{'message'};
         $origin = $input->{'origin'};
         $subject = $input->{'subject'};
-        $vote = str_contains($input->{'vote'}, '.') ? (float)($input->{'vote'}) : (int)($input->{'vote'});
+        $vote = str_contains((string)($input->{'vote'}), '.') ? (float)($input->{'vote'}) : (int)($input->{'vote'});
 
         $obj = new self($id, $message, $origin, $subject, $vote);
 
@@ -283,7 +230,7 @@ class UserFeedback
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

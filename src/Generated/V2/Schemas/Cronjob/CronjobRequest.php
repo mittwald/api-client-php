@@ -21,8 +21,6 @@ class CronjobRequest
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -72,47 +70,22 @@ class CronjobRequest
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var CronjobUrl|CronjobCommand
-     */
     private CronjobUrl|CronjobCommand $destination;
 
-    /**
-     * @var string|null
-     */
     private ?string $email = null;
 
-    /**
-     * @var string
-     */
     private string $interval;
 
-    /**
-     * @var int|float
-     */
     private int|float $timeout;
 
     /**
-     * @param bool $active
-     * @param string $appId
-     * @param string $description
      * @param CronjobUrl|CronjobCommand $destination
-     * @param string $interval
      * @param int|float $timeout
      */
     public function __construct(bool $active, string $appId, string $description, CronjobCommand|CronjobUrl $destination, string $interval, int|float $timeout)
@@ -125,25 +98,16 @@ class CronjobRequest
         $this->timeout = $timeout;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -158,34 +122,21 @@ class CronjobRequest
         return $this->destination;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getInterval(): string
     {
         return $this->interval;
     }
 
-    /**
-     * @return int|float
-     */
     public function getTimeout(): int|float
     {
         return $this->timeout;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -200,10 +151,6 @@ class CronjobRequest
         return $clone;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -218,10 +165,6 @@ class CronjobRequest
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -238,7 +181,6 @@ class CronjobRequest
 
     /**
      * @param CronjobUrl|CronjobCommand $destination
-     * @return self
      */
     public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
@@ -248,10 +190,6 @@ class CronjobRequest
         return $clone;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -266,9 +204,6 @@ class CronjobRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -277,10 +212,6 @@ class CronjobRequest
         return $clone;
     }
 
-    /**
-     * @param string $interval
-     * @return self
-     */
     public function withInterval(string $interval): self
     {
         $validator = new Validator();
@@ -297,7 +228,6 @@ class CronjobRequest
 
     /**
      * @param int|float $timeout
-     * @return self
      */
     public function withTimeout(int|float $timeout): self
     {
@@ -340,7 +270,7 @@ class CronjobRequest
             $email = $input->{'email'};
         }
         $interval = $input->{'interval'};
-        $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+        $timeout = str_contains((string)($input->{'timeout'}), '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
 
         $obj = new self($active, $appId, $description, $destination, $interval, $timeout);
         $obj->email = $email;
@@ -380,7 +310,7 @@ class CronjobRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

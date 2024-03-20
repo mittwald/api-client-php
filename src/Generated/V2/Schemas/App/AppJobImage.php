@@ -21,8 +21,6 @@ class AppJobImage
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,31 +34,18 @@ class AppJobImage
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $imageTemplate;
 
-    /**
-     * @param string $imageTemplate
-     */
     public function __construct(string $imageTemplate)
     {
         $this->imageTemplate = $imageTemplate;
     }
 
-    /**
-     * @return string
-     */
     public function getImageTemplate(): string
     {
         return $this->imageTemplate;
     }
 
-    /**
-     * @param string $imageTemplate
-     * @return self
-     */
     public function withImageTemplate(string $imageTemplate): self
     {
         $validator = new Validator();
@@ -120,7 +105,7 @@ class AppJobImage
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

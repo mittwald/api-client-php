@@ -12,8 +12,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -92,14 +90,8 @@ class PageinsightsGetPerformanceDataOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $createdAt = null;
 
-    /**
-     * @var string
-     */
     private string $domain;
 
     /**
@@ -112,24 +104,13 @@ class PageinsightsGetPerformanceDataOKResponseBody
      */
     private ?array $moreDataAvailable = null;
 
-    /**
-     * @var string
-     */
     private string $path;
 
-    /**
-     * @var int|float
-     */
     private int|float $performanceScore;
 
-    /**
-     * @var PageinsightsGetPerformanceDataOKResponseBodyScreenshot|null
-     */
     private ?PageinsightsGetPerformanceDataOKResponseBodyScreenshot $screenshot = null;
 
     /**
-     * @param string $domain
-     * @param string $path
      * @param int|float $performanceScore
      */
     public function __construct(string $domain, string $path, int|float $performanceScore)
@@ -139,17 +120,11 @@ class PageinsightsGetPerformanceDataOKResponseBody
         $this->performanceScore = $performanceScore;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
@@ -171,34 +146,21 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $this->moreDataAvailable ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return int|float
-     */
     public function getPerformanceScore(): int|float
     {
         return $this->performanceScore;
     }
 
-    /**
-     * @return PageinsightsGetPerformanceDataOKResponseBodyScreenshot|null
-     */
     public function getScreenshot(): ?PageinsightsGetPerformanceDataOKResponseBodyScreenshot
     {
         return $this->screenshot ?? null;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -207,9 +169,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCreatedAt(): self
     {
         $clone = clone $this;
@@ -218,10 +177,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -238,7 +193,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
 
     /**
      * @param PageinsightsGetPerformanceDataOKResponseBodyMetricsItem[] $metrics
-     * @return self
      */
     public function withMetrics(array $metrics): self
     {
@@ -248,9 +202,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMetrics(): self
     {
         $clone = clone $this;
@@ -261,7 +212,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
 
     /**
      * @param string[] $moreDataAvailable
-     * @return self
      */
     public function withMoreDataAvailable(array $moreDataAvailable): self
     {
@@ -277,9 +227,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMoreDataAvailable(): self
     {
         $clone = clone $this;
@@ -288,10 +235,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -308,7 +251,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
 
     /**
      * @param int|float $performanceScore
-     * @return self
      */
     public function withPerformanceScore(int|float $performanceScore): self
     {
@@ -324,10 +266,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param PageinsightsGetPerformanceDataOKResponseBodyScreenshot $screenshot
-     * @return self
-     */
     public function withScreenshot(PageinsightsGetPerformanceDataOKResponseBodyScreenshot $screenshot): self
     {
         $clone = clone $this;
@@ -336,9 +274,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScreenshot(): self
     {
         $clone = clone $this;
@@ -376,7 +311,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
             $moreDataAvailable = $input->{'moreDataAvailable'};
         }
         $path = $input->{'path'};
-        $performanceScore = str_contains($input->{'performanceScore'}, '.') ? (float)($input->{'performanceScore'}) : (int)($input->{'performanceScore'});
+        $performanceScore = str_contains((string)($input->{'performanceScore'}), '.') ? (float)($input->{'performanceScore'}) : (int)($input->{'performanceScore'});
         $screenshot = null;
         if (isset($input->{'screenshot'})) {
             $screenshot = PageinsightsGetPerformanceDataOKResponseBodyScreenshot::buildFromInput($input->{'screenshot'}, validate: $validate);

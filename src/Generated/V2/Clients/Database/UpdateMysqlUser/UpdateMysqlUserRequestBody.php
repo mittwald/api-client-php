@@ -11,8 +11,6 @@ class UpdateMysqlUserRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,72 +37,40 @@ class UpdateMysqlUserRequestBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $accessIpMask = null;
 
-    /**
-     * @var UpdateMysqlUserRequestBodyAccessLevel
-     */
     private UpdateMysqlUserRequestBodyAccessLevel $accessLevel;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $externalAccess = null;
 
-    /**
-     * @param UpdateMysqlUserRequestBodyAccessLevel $accessLevel
-     * @param string $description
-     */
     public function __construct(UpdateMysqlUserRequestBodyAccessLevel $accessLevel, string $description)
     {
         $this->accessLevel = $accessLevel;
         $this->description = $description;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
 
-    /**
-     * @return UpdateMysqlUserRequestBodyAccessLevel
-     */
     public function getAccessLevel(): UpdateMysqlUserRequestBodyAccessLevel
     {
         return $this->accessLevel;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
     }
 
-    /**
-     * @param string $accessIpMask
-     * @return self
-     */
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
@@ -119,9 +85,6 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
@@ -130,10 +93,6 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param UpdateMysqlUserRequestBodyAccessLevel $accessLevel
-     * @return self
-     */
     public function withAccessLevel(UpdateMysqlUserRequestBodyAccessLevel $accessLevel): self
     {
         $clone = clone $this;
@@ -142,10 +101,6 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -160,10 +115,6 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param bool $externalAccess
-     * @return self
-     */
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
@@ -178,9 +129,6 @@ class UpdateMysqlUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExternalAccess(): self
     {
         $clone = clone $this;

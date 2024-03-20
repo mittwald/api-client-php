@@ -13,8 +13,6 @@ class GetFileRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -24,58 +22,28 @@ class GetFileRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'fileName' => [
-                'example' => 'me.jpeg',
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'fileId',
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $fileId;
-
-    /**
-     * @var string|null
-     */
-    private ?string $fileName = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $fileId
-     */
     public function __construct(string $fileId)
     {
         $this->fileId = $fileId;
     }
 
-    /**
-     * @return string
-     */
     public function getFileId(): string
     {
         return $this->fileId;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFileName(): ?string
-    {
-        return $this->fileName ?? null;
-    }
-
-    /**
-     * @param string $fileId
-     * @return self
-     */
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();
@@ -86,35 +54,6 @@ class GetFileRequest
 
         $clone = clone $this;
         $clone->fileId = $fileId;
-
-        return $clone;
-    }
-
-    /**
-     * @param string $fileName
-     * @return self
-     */
-    public function withFileName(string $fileName): self
-    {
-        $validator = new Validator();
-        $validator->validate($fileName, static::$schema['properties']['fileName']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->fileName = $fileName;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutFileName(): self
-    {
-        $clone = clone $this;
-        unset($clone->fileName);
 
         return $clone;
     }
@@ -135,13 +74,9 @@ class GetFileRequest
         }
 
         $fileId = $input->{'fileId'};
-        $fileName = null;
-        if (isset($input->{'fileName'})) {
-            $fileName = $input->{'fileName'};
-        }
 
         $obj = new self($fileId);
-        $obj->fileName = $fileName;
+
         return $obj;
     }
 
@@ -154,9 +89,6 @@ class GetFileRequest
     {
         $output = [];
         $output['fileId'] = $this->fileId;
-        if (isset($this->fileName)) {
-            $output['fileName'] = $this->fileName;
-        }
 
         return $output;
     }
@@ -202,8 +134,7 @@ class GetFileRequest
     {
         $mapped = $this->toJson();
         $fileId = urlencode($mapped['fileId']);
-        $fileName = urlencode($mapped['fileName']);
-        return '/v2/files/' . $fileId . '/' . $fileName;
+        return '/v2/files/' . $fileId;
     }
 
     /**

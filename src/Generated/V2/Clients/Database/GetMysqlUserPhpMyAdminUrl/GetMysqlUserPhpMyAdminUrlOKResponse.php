@@ -14,8 +14,6 @@ class GetMysqlUserPhpMyAdminUrlOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetMysqlUserPhpMyAdminUrlOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var PhpMyAdminURL
-     */
     private PhpMyAdminURL $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param PhpMyAdminURL $body
-     */
     public function __construct(PhpMyAdminURL $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return PhpMyAdminURL
-     */
     public function getBody(): PhpMyAdminURL
     {
         return $this->body;
     }
 
-    /**
-     * @param PhpMyAdminURL $body
-     * @return self
-     */
     public function withBody(PhpMyAdminURL $body): self
     {
         $clone = clone $this;

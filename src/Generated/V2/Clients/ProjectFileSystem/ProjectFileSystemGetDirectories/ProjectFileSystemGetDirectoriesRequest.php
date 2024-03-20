@@ -13,8 +13,6 @@ class ProjectFileSystemGetDirectoriesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -49,24 +47,12 @@ class ProjectFileSystemGetDirectoriesRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string|null
-     */
     private ?string $directory = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $name = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $max_depth = null;
 
     /**
@@ -74,55 +60,34 @@ class ProjectFileSystemGetDirectoriesRequest
      */
     private ?array $type = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $executable = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $hidden = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDirectory(): ?string
     {
         return $this->directory ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMaxDepth(): ?int
     {
         return $this->max_depth ?? null;
@@ -136,26 +101,16 @@ class ProjectFileSystemGetDirectoriesRequest
         return $this->type ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getExecutable(): ?bool
     {
         return $this->executable ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getHidden(): ?bool
     {
         return $this->hidden ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -170,10 +125,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @param string $directory
-     * @return self
-     */
     public function withDirectory(string $directory): self
     {
         $validator = new Validator();
@@ -188,9 +139,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDirectory(): self
     {
         $clone = clone $this;
@@ -199,10 +147,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -217,9 +161,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutName(): self
     {
         $clone = clone $this;
@@ -228,10 +169,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @param int $max_depth
-     * @return self
-     */
     public function withMaxDepth(int $max_depth): self
     {
         $validator = new Validator();
@@ -246,9 +183,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMaxDepth(): self
     {
         $clone = clone $this;
@@ -259,7 +193,6 @@ class ProjectFileSystemGetDirectoriesRequest
 
     /**
      * @param string[] $type
-     * @return self
      */
     public function withType(array $type): self
     {
@@ -275,9 +208,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutType(): self
     {
         $clone = clone $this;
@@ -286,10 +216,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @param bool $executable
-     * @return self
-     */
     public function withExecutable(bool $executable): self
     {
         $validator = new Validator();
@@ -304,9 +230,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExecutable(): self
     {
         $clone = clone $this;
@@ -315,10 +238,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @param bool $hidden
-     * @return self
-     */
     public function withHidden(bool $hidden): self
     {
         $validator = new Validator();
@@ -333,9 +252,6 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHidden(): self
     {
         $clone = clone $this;

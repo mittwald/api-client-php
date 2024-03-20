@@ -13,8 +13,6 @@ class InvoiceDetailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class InvoiceDetailRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $invoiceId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $invoiceId
-     */
     public function __construct(string $invoiceId)
     {
         $this->invoiceId = $invoiceId;
     }
 
-    /**
-     * @return string
-     */
     public function getInvoiceId(): string
     {
         return $this->invoiceId;
     }
 
-    /**
-     * @param string $invoiceId
-     * @return self
-     */
     public function withInvoiceId(string $invoiceId): self
     {
         $validator = new Validator();

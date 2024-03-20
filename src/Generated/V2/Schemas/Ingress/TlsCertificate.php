@@ -21,8 +21,6 @@ class TlsCertificate
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,31 +35,18 @@ class TlsCertificate
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $certificateId;
 
-    /**
-     * @param string $certificateId
-     */
     public function __construct(string $certificateId)
     {
         $this->certificateId = $certificateId;
     }
 
-    /**
-     * @return string
-     */
     public function getCertificateId(): string
     {
         return $this->certificateId;
     }
 
-    /**
-     * @param string $certificateId
-     * @return self
-     */
     public function withCertificateId(string $certificateId): self
     {
         $validator = new Validator();
@@ -121,7 +106,7 @@ class TlsCertificate
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

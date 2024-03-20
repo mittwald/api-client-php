@@ -21,8 +21,6 @@ class HostingOrderPreviewResponse
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,19 +45,10 @@ class HostingOrderPreviewResponse
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float
-     */
     private int|float $machineTypePrice;
 
-    /**
-     * @var int|float
-     */
     private int|float $storagePrice;
 
-    /**
-     * @var int|float
-     */
     private int|float $totalPrice;
 
     /**
@@ -74,25 +63,16 @@ class HostingOrderPreviewResponse
         $this->totalPrice = $totalPrice;
     }
 
-    /**
-     * @return int|float
-     */
     public function getMachineTypePrice(): int|float
     {
         return $this->machineTypePrice;
     }
 
-    /**
-     * @return int|float
-     */
     public function getStoragePrice(): int|float
     {
         return $this->storagePrice;
     }
 
-    /**
-     * @return int|float
-     */
     public function getTotalPrice(): int|float
     {
         return $this->totalPrice;
@@ -100,7 +80,6 @@ class HostingOrderPreviewResponse
 
     /**
      * @param int|float $machineTypePrice
-     * @return self
      */
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
@@ -118,7 +97,6 @@ class HostingOrderPreviewResponse
 
     /**
      * @param int|float $storagePrice
-     * @return self
      */
     public function withStoragePrice(int|float $storagePrice): self
     {
@@ -136,7 +114,6 @@ class HostingOrderPreviewResponse
 
     /**
      * @param int|float $totalPrice
-     * @return self
      */
     public function withTotalPrice(int|float $totalPrice): self
     {
@@ -167,9 +144,9 @@ class HostingOrderPreviewResponse
             static::validateInput($input);
         }
 
-        $machineTypePrice = str_contains($input->{'machineTypePrice'}, '.') ? (float)($input->{'machineTypePrice'}) : (int)($input->{'machineTypePrice'});
-        $storagePrice = str_contains($input->{'storagePrice'}, '.') ? (float)($input->{'storagePrice'}) : (int)($input->{'storagePrice'});
-        $totalPrice = str_contains($input->{'totalPrice'}, '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
+        $machineTypePrice = str_contains((string)($input->{'machineTypePrice'}), '.') ? (float)($input->{'machineTypePrice'}) : (int)($input->{'machineTypePrice'});
+        $storagePrice = str_contains((string)($input->{'storagePrice'}), '.') ? (float)($input->{'storagePrice'}) : (int)($input->{'storagePrice'});
+        $totalPrice = str_contains((string)($input->{'totalPrice'}), '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
 
         $obj = new self($machineTypePrice, $storagePrice, $totalPrice);
 
@@ -201,7 +178,7 @@ class HostingOrderPreviewResponse
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

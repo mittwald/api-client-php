@@ -13,8 +13,6 @@ class AcceptCustomerInviteRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,50 +37,30 @@ class AcceptCustomerInviteRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerInviteId;
 
-    /**
-     * @var AcceptCustomerInviteRequestBody
-     */
     private AcceptCustomerInviteRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerInviteId
-     * @param AcceptCustomerInviteRequestBody $body
-     */
     public function __construct(string $customerInviteId, AcceptCustomerInviteRequestBody $body)
     {
         $this->customerInviteId = $customerInviteId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerInviteId(): string
     {
         return $this->customerInviteId;
     }
 
-    /**
-     * @return AcceptCustomerInviteRequestBody
-     */
     public function getBody(): AcceptCustomerInviteRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $customerInviteId
-     * @return self
-     */
     public function withCustomerInviteId(string $customerInviteId): self
     {
         $validator = new Validator();
@@ -97,10 +75,6 @@ class AcceptCustomerInviteRequest
         return $clone;
     }
 
-    /**
-     * @param AcceptCustomerInviteRequestBody $body
-     * @return self
-     */
     public function withBody(AcceptCustomerInviteRequestBody $body): self
     {
         $clone = clone $this;

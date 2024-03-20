@@ -14,8 +14,6 @@ class GetConversationMembersOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,16 +27,10 @@ class GetConversationMembersOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ConversationMembersItem
-     */
     private ConversationMembersItem $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ConversationMembersItem $body
-     */
     public function __construct(ConversationMembersItem $body)
     {
         $this->body = $body;
@@ -53,10 +45,6 @@ class GetConversationMembersOKResponse implements ResponseContainer
         return $this->body;
     }
 
-    /**
-     * @param ConversationMembersItem $body
-     * @return self
-     */
     public function withBody(ConversationMembersItem $body): self
     {
         $clone = clone $this;

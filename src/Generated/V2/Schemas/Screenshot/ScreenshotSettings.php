@@ -21,8 +21,6 @@ class ScreenshotSettings
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -57,33 +55,17 @@ class ScreenshotSettings
         'type' => 'object',
     ];
 
-    /**
-     * @var ScreenshotSettingsDataType
-     */
     private ScreenshotSettingsDataType $dataType;
 
-    /**
-     * @var int|float
-     */
     private int|float $delay;
 
-    /**
-     * @var int|float
-     */
     private int|float $height;
 
-    /**
-     * @var int|float
-     */
     private int|float $quality;
 
-    /**
-     * @var int|float
-     */
     private int|float $width;
 
     /**
-     * @param ScreenshotSettingsDataType $dataType
      * @param int|float $delay
      * @param int|float $height
      * @param int|float $quality
@@ -98,50 +80,31 @@ class ScreenshotSettings
         $this->width = $width;
     }
 
-    /**
-     * @return ScreenshotSettingsDataType
-     */
     public function getDataType(): ScreenshotSettingsDataType
     {
         return $this->dataType;
     }
 
-    /**
-     * @return int|float
-     */
     public function getDelay(): int|float
     {
         return $this->delay;
     }
 
-    /**
-     * @return int|float
-     */
     public function getHeight(): int|float
     {
         return $this->height;
     }
 
-    /**
-     * @return int|float
-     */
     public function getQuality(): int|float
     {
         return $this->quality;
     }
 
-    /**
-     * @return int|float
-     */
     public function getWidth(): int|float
     {
         return $this->width;
     }
 
-    /**
-     * @param ScreenshotSettingsDataType $dataType
-     * @return self
-     */
     public function withDataType(ScreenshotSettingsDataType $dataType): self
     {
         $clone = clone $this;
@@ -152,7 +115,6 @@ class ScreenshotSettings
 
     /**
      * @param int|float $delay
-     * @return self
      */
     public function withDelay(int|float $delay): self
     {
@@ -170,7 +132,6 @@ class ScreenshotSettings
 
     /**
      * @param int|float $height
-     * @return self
      */
     public function withHeight(int|float $height): self
     {
@@ -188,7 +149,6 @@ class ScreenshotSettings
 
     /**
      * @param int|float $quality
-     * @return self
      */
     public function withQuality(int|float $quality): self
     {
@@ -206,7 +166,6 @@ class ScreenshotSettings
 
     /**
      * @param int|float $width
-     * @return self
      */
     public function withWidth(int|float $width): self
     {
@@ -238,10 +197,10 @@ class ScreenshotSettings
         }
 
         $dataType = ScreenshotSettingsDataType::from($input->{'dataType'});
-        $delay = str_contains($input->{'delay'}, '.') ? (float)($input->{'delay'}) : (int)($input->{'delay'});
-        $height = str_contains($input->{'height'}, '.') ? (float)($input->{'height'}) : (int)($input->{'height'});
-        $quality = str_contains($input->{'quality'}, '.') ? (float)($input->{'quality'}) : (int)($input->{'quality'});
-        $width = str_contains($input->{'width'}, '.') ? (float)($input->{'width'}) : (int)($input->{'width'});
+        $delay = str_contains((string)($input->{'delay'}), '.') ? (float)($input->{'delay'}) : (int)($input->{'delay'});
+        $height = str_contains((string)($input->{'height'}), '.') ? (float)($input->{'height'}) : (int)($input->{'height'});
+        $quality = str_contains((string)($input->{'quality'}), '.') ? (float)($input->{'quality'}) : (int)($input->{'quality'});
+        $width = str_contains((string)($input->{'width'}), '.') ? (float)($input->{'width'}) : (int)($input->{'width'});
 
         $obj = new self($dataType, $delay, $height, $quality, $width);
 
@@ -275,7 +234,7 @@ class ScreenshotSettings
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class RequestAppinstallationCopyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,50 +43,30 @@ class RequestAppinstallationCopyRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var RequestAppinstallationCopyRequestBody
-     */
     private RequestAppinstallationCopyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param RequestAppinstallationCopyRequestBody $body
-     */
     public function __construct(string $appInstallationId, RequestAppinstallationCopyRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return RequestAppinstallationCopyRequestBody
-     */
     public function getBody(): RequestAppinstallationCopyRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -103,10 +81,6 @@ class RequestAppinstallationCopyRequest
         return $clone;
     }
 
-    /**
-     * @param RequestAppinstallationCopyRequestBody $body
-     * @return self
-     */
     public function withBody(RequestAppinstallationCopyRequestBody $body): self
     {
         $clone = clone $this;

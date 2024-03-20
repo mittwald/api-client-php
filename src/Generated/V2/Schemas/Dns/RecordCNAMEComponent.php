@@ -21,8 +21,6 @@ class RecordCNAMEComponent
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,46 +39,26 @@ class RecordCNAMEComponent
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $fqdn;
 
-    /**
-     * @var RecordSettings
-     */
     private RecordSettings $settings;
 
-    /**
-     * @param string $fqdn
-     * @param RecordSettings $settings
-     */
     public function __construct(string $fqdn, RecordSettings $settings)
     {
         $this->fqdn = $fqdn;
         $this->settings = $settings;
     }
 
-    /**
-     * @return string
-     */
     public function getFqdn(): string
     {
         return $this->fqdn;
     }
 
-    /**
-     * @return RecordSettings
-     */
     public function getSettings(): RecordSettings
     {
         return $this->settings;
     }
 
-    /**
-     * @param string $fqdn
-     * @return self
-     */
     public function withFqdn(string $fqdn): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class RecordCNAMEComponent
         return $clone;
     }
 
-    /**
-     * @param RecordSettings $settings
-     * @return self
-     */
     public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;
@@ -154,7 +128,7 @@ class RecordCNAMEComponent
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

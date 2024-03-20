@@ -13,8 +13,6 @@ class GetAppversionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class GetAppversionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @var string
-     */
     private string $appVersionId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appId
-     * @param string $appVersionId
-     */
     public function __construct(string $appId, string $appVersionId)
     {
         $this->appId = $appId;
         $this->appVersionId = $appVersionId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppVersionId(): string
     {
         return $this->appVersionId;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class GetAppversionRequest
         return $clone;
     }
 
-    /**
-     * @param string $appVersionId
-     * @return self
-     */
     public function withAppVersionId(string $appVersionId): self
     {
         $validator = new Validator();

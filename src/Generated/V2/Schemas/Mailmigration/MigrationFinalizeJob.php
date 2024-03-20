@@ -21,8 +21,6 @@ class MigrationFinalizeJob
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -33,9 +31,6 @@ class MigrationFinalizeJob
         'type' => 'object',
     ];
 
-    /**
-     * @var MigrationFinalizeJobProjectSetting|null
-     */
     private ?MigrationFinalizeJobProjectSetting $projectSettingMigrations = null;
 
     /**
@@ -54,10 +49,6 @@ class MigrationFinalizeJob
         return $this->projectSettingMigrations ?? null;
     }
 
-    /**
-     * @param MigrationFinalizeJobProjectSetting $projectSettingMigrations
-     * @return self
-     */
     public function withProjectSettingMigrations(MigrationFinalizeJobProjectSetting $projectSettingMigrations): self
     {
         $clone = clone $this;
@@ -66,9 +57,6 @@ class MigrationFinalizeJob
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectSettingMigrations(): self
     {
         $clone = clone $this;
@@ -127,7 +115,7 @@ class MigrationFinalizeJob
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

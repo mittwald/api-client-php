@@ -13,8 +13,6 @@ class VerifyPhoneNumberRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -59,14 +57,8 @@ class VerifyPhoneNumberRequest
         ],
     ];
 
-    /**
-     * @var VerifyPhoneNumberRequestUserIdAlternative1|string
-     */
     private VerifyPhoneNumberRequestUserIdAlternative1|string $userId;
 
-    /**
-     * @var VerifyPhoneNumberRequestBody
-     */
     private VerifyPhoneNumberRequestBody $body;
 
     private array $headers = [
@@ -75,7 +67,6 @@ class VerifyPhoneNumberRequest
 
     /**
      * @param VerifyPhoneNumberRequestUserIdAlternative1|string $userId
-     * @param VerifyPhoneNumberRequestBody $body
      */
     public function __construct(VerifyPhoneNumberRequestUserIdAlternative1|string $userId, VerifyPhoneNumberRequestBody $body)
     {
@@ -83,17 +74,11 @@ class VerifyPhoneNumberRequest
         $this->body = $body;
     }
 
-    /**
-     * @return VerifyPhoneNumberRequestUserIdAlternative1|string
-     */
     public function getUserId(): VerifyPhoneNumberRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
 
-    /**
-     * @return VerifyPhoneNumberRequestBody
-     */
     public function getBody(): VerifyPhoneNumberRequestBody
     {
         return $this->body;
@@ -101,7 +86,6 @@ class VerifyPhoneNumberRequest
 
     /**
      * @param VerifyPhoneNumberRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(VerifyPhoneNumberRequestUserIdAlternative1|string $userId): self
     {
@@ -111,10 +95,6 @@ class VerifyPhoneNumberRequest
         return $clone;
     }
 
-    /**
-     * @param VerifyPhoneNumberRequestBody $body
-     * @return self
-     */
     public function withBody(VerifyPhoneNumberRequestBody $body): self
     {
         $clone = clone $this;

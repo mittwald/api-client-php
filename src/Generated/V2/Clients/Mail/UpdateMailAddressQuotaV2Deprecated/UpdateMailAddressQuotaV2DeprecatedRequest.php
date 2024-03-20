@@ -13,8 +13,6 @@ class UpdateMailAddressQuotaV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class UpdateMailAddressQuotaV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressQuotaV2DeprecatedRequestBody
-     */
     private UpdateMailAddressQuotaV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressQuotaV2DeprecatedRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressQuotaV2DeprecatedRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressQuotaV2DeprecatedRequestBody
-     */
     public function getBody(): UpdateMailAddressQuotaV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class UpdateMailAddressQuotaV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressQuotaV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressQuotaV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

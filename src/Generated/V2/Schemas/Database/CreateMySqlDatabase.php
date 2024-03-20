@@ -21,8 +21,6 @@ class CreateMySqlDatabase
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,31 +46,14 @@ class CreateMySqlDatabase
         'type' => 'object',
     ];
 
-    /**
-     * @var CharacterSettings|null
-     */
     private ?CharacterSettings $characterSettings = null;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string
-     */
     private string $version;
 
-    /**
-     * @param string $description
-     * @param string $projectId
-     * @param string $version
-     */
     public function __construct(string $description, string $projectId, string $version)
     {
         $this->description = $description;
@@ -80,42 +61,26 @@ class CreateMySqlDatabase
         $this->version = $version;
     }
 
-    /**
-     * @return CharacterSettings|null
-     */
     public function getCharacterSettings(): ?CharacterSettings
     {
         return $this->characterSettings ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param CharacterSettings $characterSettings
-     * @return self
-     */
     public function withCharacterSettings(CharacterSettings $characterSettings): self
     {
         $clone = clone $this;
@@ -124,9 +89,6 @@ class CreateMySqlDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCharacterSettings(): self
     {
         $clone = clone $this;
@@ -135,10 +97,6 @@ class CreateMySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -153,10 +111,6 @@ class CreateMySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -171,10 +125,6 @@ class CreateMySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $version
-     * @return self
-     */
     public function withVersion(string $version): self
     {
         $validator = new Validator();
@@ -245,7 +195,7 @@ class CreateMySqlDatabase
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

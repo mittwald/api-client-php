@@ -21,8 +21,6 @@ class CombinedAManaged
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -49,31 +47,18 @@ class CombinedAManaged
         'type' => 'object',
     ];
 
-    /**
-     * @var CombinedAManagedManagedByAlternative1
-     */
     private CombinedAManagedManagedByAlternative1 $managedBy;
 
-    /**
-     * @param CombinedAManagedManagedByAlternative1 $managedBy
-     */
     public function __construct(CombinedAManagedManagedByAlternative1 $managedBy)
     {
         $this->managedBy = $managedBy;
     }
 
-    /**
-     * @return CombinedAManagedManagedByAlternative1
-     */
     public function getManagedBy(): CombinedAManagedManagedByAlternative1
     {
         return $this->managedBy;
     }
 
-    /**
-     * @param CombinedAManagedManagedByAlternative1 $managedBy
-     * @return self
-     */
     public function withManagedBy(CombinedAManagedManagedByAlternative1 $managedBy): self
     {
         $clone = clone $this;
@@ -131,7 +116,7 @@ class CombinedAManaged
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

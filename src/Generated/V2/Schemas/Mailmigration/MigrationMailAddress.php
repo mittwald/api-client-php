@@ -21,8 +21,6 @@ class MigrationMailAddress
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,38 +51,16 @@ class MigrationMailAddress
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $address;
 
-    /**
-     * @var bool
-     */
     private bool $finished;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var MigrationMailAddressMigrationJob
-     */
     private MigrationMailAddressMigrationJob $migrationJobs;
 
-    /**
-     * @var MigrationMailAddressPreMigrationJob
-     */
     private MigrationMailAddressPreMigrationJob $preMigrationJobs;
 
-    /**
-     * @param string $address
-     * @param bool $finished
-     * @param string $id
-     * @param MigrationMailAddressMigrationJob $migrationJobs
-     * @param MigrationMailAddressPreMigrationJob $preMigrationJobs
-     */
     public function __construct(string $address, bool $finished, string $id, MigrationMailAddressMigrationJob $migrationJobs, MigrationMailAddressPreMigrationJob $preMigrationJobs)
     {
         $this->address = $address;
@@ -94,25 +70,16 @@ class MigrationMailAddress
         $this->preMigrationJobs = $preMigrationJobs;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * @return bool
-     */
     public function getFinished(): bool
     {
         return $this->finished;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -136,10 +103,6 @@ class MigrationMailAddress
         return $this->preMigrationJobs;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();
@@ -154,10 +117,6 @@ class MigrationMailAddress
         return $clone;
     }
 
-    /**
-     * @param bool $finished
-     * @return self
-     */
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
@@ -172,10 +131,6 @@ class MigrationMailAddress
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -190,10 +145,6 @@ class MigrationMailAddress
         return $clone;
     }
 
-    /**
-     * @param MigrationMailAddressMigrationJob $migrationJobs
-     * @return self
-     */
     public function withMigrationJobs(MigrationMailAddressMigrationJob $migrationJobs): self
     {
         $clone = clone $this;
@@ -202,10 +153,6 @@ class MigrationMailAddress
         return $clone;
     }
 
-    /**
-     * @param MigrationMailAddressPreMigrationJob $preMigrationJobs
-     * @return self
-     */
     public function withPreMigrationJobs(MigrationMailAddressPreMigrationJob $preMigrationJobs): self
     {
         $clone = clone $this;
@@ -267,7 +214,7 @@ class MigrationMailAddress
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

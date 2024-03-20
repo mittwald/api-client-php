@@ -21,8 +21,6 @@ class Target
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -49,59 +47,33 @@ class Target
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var string|null
-     */
     private ?string $path = null;
 
-    /**
-     * @var TargetScheme
-     */
     private TargetScheme $scheme;
 
-    /**
-     * @param string $domain
-     * @param TargetScheme $scheme
-     */
     public function __construct(string $domain, TargetScheme $scheme)
     {
         $this->domain = $domain;
         $this->scheme = $scheme;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPath(): ?string
     {
         return $this->path ?? null;
     }
 
-    /**
-     * @return TargetScheme
-     */
     public function getScheme(): TargetScheme
     {
         return $this->scheme;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -116,10 +88,6 @@ class Target
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -134,9 +102,6 @@ class Target
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPath(): self
     {
         $clone = clone $this;
@@ -145,10 +110,6 @@ class Target
         return $clone;
     }
 
-    /**
-     * @param TargetScheme $scheme
-     * @return self
-     */
     public function withScheme(TargetScheme $scheme): self
     {
         $clone = clone $this;
@@ -211,7 +172,7 @@ class Target
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

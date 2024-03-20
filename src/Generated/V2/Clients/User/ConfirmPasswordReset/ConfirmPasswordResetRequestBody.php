@@ -11,8 +11,6 @@ class ConfirmPasswordResetRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,30 +40,19 @@ class ConfirmPasswordResetRequestBody
 
     /**
      * The new password.
-     *
-     * @var string
      */
     private string $password;
 
     /**
      * Password reset token
-     *
-     * @var string
      */
     private string $token;
 
     /**
      * UserId of the user to reset the password for.
-     *
-     * @var string
      */
     private string $userId;
 
-    /**
-     * @param string $password
-     * @param string $token
-     * @param string $userId
-     */
     public function __construct(string $password, string $token, string $userId)
     {
         $this->password = $password;
@@ -73,34 +60,21 @@ class ConfirmPasswordResetRequestBody
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -115,10 +89,6 @@ class ConfirmPasswordResetRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();
@@ -133,10 +103,6 @@ class ConfirmPasswordResetRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

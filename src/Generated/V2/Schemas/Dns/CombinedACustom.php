@@ -21,8 +21,6 @@ class CombinedACustom
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -62,15 +60,11 @@ class CombinedACustom
      */
     private array $aaaa;
 
-    /**
-     * @var RecordSettings
-     */
     private RecordSettings $settings;
 
     /**
      * @param string[] $a
      * @param string[] $aaaa
-     * @param RecordSettings $settings
      */
     public function __construct(array $a, array $aaaa, RecordSettings $settings)
     {
@@ -95,9 +89,6 @@ class CombinedACustom
         return $this->aaaa;
     }
 
-    /**
-     * @return RecordSettings
-     */
     public function getSettings(): RecordSettings
     {
         return $this->settings;
@@ -105,7 +96,6 @@ class CombinedACustom
 
     /**
      * @param string[] $a
-     * @return self
      */
     public function withA(array $a): self
     {
@@ -117,7 +107,6 @@ class CombinedACustom
 
     /**
      * @param string[] $aaaa
-     * @return self
      */
     public function withAaaa(array $aaaa): self
     {
@@ -127,10 +116,6 @@ class CombinedACustom
         return $clone;
     }
 
-    /**
-     * @param RecordSettings $settings
-     * @return self
-     */
     public function withSettings(RecordSettings $settings): self
     {
         $clone = clone $this;
@@ -188,7 +173,7 @@ class CombinedACustom
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

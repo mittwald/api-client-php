@@ -14,8 +14,6 @@ class CreateMysqlUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class CreateMysqlUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlDatabaseId;
 
-    /**
-     * @var CreateMySqlUser
-     */
     private CreateMySqlUser $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @param CreateMySqlUser $body
-     */
     public function __construct(string $mysqlDatabaseId, CreateMySqlUser $body)
     {
         $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlDatabaseId(): string
     {
         return $this->mysqlDatabaseId;
     }
 
-    /**
-     * @return CreateMySqlUser
-     */
     public function getBody(): CreateMySqlUser
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @return self
-     */
     public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class CreateMysqlUserRequest
         return $clone;
     }
 
-    /**
-     * @param CreateMySqlUser $body
-     * @return self
-     */
     public function withBody(CreateMySqlUser $body): self
     {
         $clone = clone $this;

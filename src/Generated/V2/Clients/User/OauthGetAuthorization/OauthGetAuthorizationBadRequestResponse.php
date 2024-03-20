@@ -13,8 +13,6 @@ class OauthGetAuthorizationBadRequestResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,33 +40,20 @@ class OauthGetAuthorizationBadRequestResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var OauthGetAuthorizationBadRequestResponseBody
-     */
     private OauthGetAuthorizationBadRequestResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param OauthGetAuthorizationBadRequestResponseBody $body
-     */
     public function __construct(OauthGetAuthorizationBadRequestResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OauthGetAuthorizationBadRequestResponseBody
-     */
     public function getBody(): OauthGetAuthorizationBadRequestResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OauthGetAuthorizationBadRequestResponseBody $body
-     * @return self
-     */
     public function withBody(OauthGetAuthorizationBadRequestResponseBody $body): self
     {
         $clone = clone $this;

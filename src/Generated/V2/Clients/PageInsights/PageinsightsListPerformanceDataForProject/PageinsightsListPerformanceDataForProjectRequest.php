@@ -13,8 +13,6 @@ class PageinsightsListPerformanceDataForProjectRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -32,48 +30,29 @@ class PageinsightsListPerformanceDataForProjectRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string|null
-     */
     private ?string $domain = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDomain(): ?string
     {
         return $this->domain ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -88,10 +67,6 @@ class PageinsightsListPerformanceDataForProjectRequest
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -106,9 +81,6 @@ class PageinsightsListPerformanceDataForProjectRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDomain(): self
     {
         $clone = clone $this;

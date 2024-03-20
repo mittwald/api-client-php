@@ -13,8 +13,6 @@ class DeleteSftpUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class DeleteSftpUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sftpUserId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sftpUserId
-     */
     public function __construct(string $sftpUserId)
     {
         $this->sftpUserId = $sftpUserId;
     }
 
-    /**
-     * @return string
-     */
     public function getSftpUserId(): string
     {
         return $this->sftpUserId;
     }
 
-    /**
-     * @param string $sftpUserId
-     * @return self
-     */
     public function withSftpUserId(string $sftpUserId): self
     {
         $validator = new Validator();

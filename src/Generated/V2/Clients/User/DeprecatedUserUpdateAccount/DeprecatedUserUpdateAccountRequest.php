@@ -13,8 +13,6 @@ class DeprecatedUserUpdateAccountRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,35 +34,22 @@ class DeprecatedUserUpdateAccountRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserUpdateAccountRequestBody
-     */
     private DeprecatedUserUpdateAccountRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserUpdateAccountRequestBody $body
-     */
     public function __construct(DeprecatedUserUpdateAccountRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserUpdateAccountRequestBody
-     */
     public function getBody(): DeprecatedUserUpdateAccountRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserUpdateAccountRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserUpdateAccountRequestBody $body): self
     {
         $clone = clone $this;

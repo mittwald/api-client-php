@@ -22,8 +22,6 @@ class ProjectInvite
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -76,64 +74,38 @@ class ProjectInvite
 
     /**
      * ID of the ProjectInvite.
-     *
-     * @var string
      */
     private string $id;
 
-    /**
-     * @var InviteInformation
-     */
     private InviteInformation $information;
 
     /**
      * Mail-address of the user the ProjectInvite is for.
-     *
-     * @var string
      */
     private string $mailAddress;
 
     /**
      * Time the ProjectMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $membershipExpiresAt = null;
 
     /**
      * Message contained in the ProjectInvite.
-     *
-     * @var string|null
      */
     private ?string $message = null;
 
     /**
      * Description of the Project the invite is created for.
-     *
-     * @var string
      */
     private string $projectDescription;
 
     /**
      * ID of the Project the invitation is for.
-     *
-     * @var string
      */
     private string $projectId;
 
-    /**
-     * @var ProjectRoles
-     */
     private ProjectRoles $role;
 
-    /**
-     * @param string $id
-     * @param InviteInformation $information
-     * @param string $mailAddress
-     * @param string $projectDescription
-     * @param string $projectId
-     * @param ProjectRoles $role
-     */
     public function __construct(string $id, InviteInformation $information, string $mailAddress, string $projectDescription, string $projectId, ProjectRoles $role)
     {
         $this->id = $id;
@@ -144,74 +116,46 @@ class ProjectInvite
         $this->role = $role;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return InviteInformation
-     */
     public function getInformation(): InviteInformation
     {
         return $this->information;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddress(): string
     {
         return $this->mailAddress;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getMembershipExpiresAt(): ?DateTime
     {
         return $this->membershipExpiresAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectDescription(): string
     {
         return $this->projectDescription;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return ProjectRoles
-     */
     public function getRole(): ProjectRoles
     {
         return $this->role;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -226,10 +170,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param InviteInformation $information
-     * @return self
-     */
     public function withInformation(InviteInformation $information): self
     {
         $clone = clone $this;
@@ -238,10 +178,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param string $mailAddress
-     * @return self
-     */
     public function withMailAddress(string $mailAddress): self
     {
         $validator = new Validator();
@@ -256,10 +192,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param DateTime $membershipExpiresAt
-     * @return self
-     */
     public function withMembershipExpiresAt(DateTime $membershipExpiresAt): self
     {
         $clone = clone $this;
@@ -268,9 +200,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMembershipExpiresAt(): self
     {
         $clone = clone $this;
@@ -279,10 +208,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -297,9 +222,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -308,10 +230,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param string $projectDescription
-     * @return self
-     */
     public function withProjectDescription(string $projectDescription): self
     {
         $validator = new Validator();
@@ -326,10 +244,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -344,10 +258,6 @@ class ProjectInvite
         return $clone;
     }
 
-    /**
-     * @param ProjectRoles $role
-     * @return self
-     */
     public function withRole(ProjectRoles $role): self
     {
         $clone = clone $this;
@@ -426,7 +336,7 @@ class ProjectInvite
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

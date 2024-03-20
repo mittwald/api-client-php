@@ -21,8 +21,6 @@ class Path
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,18 +51,11 @@ class Path
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $path;
 
-    /**
-     * @var TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage
-     */
     private TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target;
 
     /**
-     * @param string $path
      * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target
      */
     public function __construct(string $path, TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
@@ -73,9 +64,6 @@ class Path
         $this->target = $target;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
@@ -90,10 +78,6 @@ class Path
         return $this->target;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -110,7 +94,6 @@ class Path
 
     /**
      * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target
-     * @return self
      */
     public function withTarget(TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
     {
@@ -174,7 +157,7 @@ class Path
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class UpdateDomainProjectIdRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,50 +36,30 @@ class UpdateDomainProjectIdRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var UpdateDomainProjectIdRequestBody
-     */
     private UpdateDomainProjectIdRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param UpdateDomainProjectIdRequestBody $body
-     */
     public function __construct(string $domainId, UpdateDomainProjectIdRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return UpdateDomainProjectIdRequestBody
-     */
     public function getBody(): UpdateDomainProjectIdRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -96,10 +74,6 @@ class UpdateDomainProjectIdRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDomainProjectIdRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateDomainProjectIdRequestBody $body): self
     {
         $clone = clone $this;

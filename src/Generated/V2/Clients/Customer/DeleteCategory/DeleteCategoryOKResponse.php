@@ -13,8 +13,6 @@ class DeleteCategoryOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class DeleteCategoryOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DeleteCategoryOKResponseBody
-     */
     private DeleteCategoryOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeleteCategoryOKResponseBody $body
-     */
     public function __construct(DeleteCategoryOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeleteCategoryOKResponseBody
-     */
     public function getBody(): DeleteCategoryOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeleteCategoryOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeleteCategoryOKResponseBody $body): self
     {
         $clone = clone $this;

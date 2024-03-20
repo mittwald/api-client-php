@@ -13,8 +13,6 @@ class PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse implements Respo
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse implements Respo
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param string $body
-     */
     public function __construct(string $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getBody(): string
     {
         return $this->body;
     }
 
-    /**
-     * @param string $body
-     * @return self
-     */
     public function withBody(string $body): self
     {
         $clone = clone $this;

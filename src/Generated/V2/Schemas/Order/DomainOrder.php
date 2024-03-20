@@ -21,8 +21,6 @@ class DomainOrder
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -68,31 +66,14 @@ class DomainOrder
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $authCode = null;
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var DomainOrderHandleData
-     */
     private DomainOrderHandleData $handleData;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @param string $domain
-     * @param DomainOrderHandleData $handleData
-     * @param string $projectId
-     */
     public function __construct(string $domain, DomainOrderHandleData $handleData, string $projectId)
     {
         $this->domain = $domain;
@@ -100,42 +81,26 @@ class DomainOrder
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAuthCode(): ?string
     {
         return $this->authCode ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return DomainOrderHandleData
-     */
     public function getHandleData(): DomainOrderHandleData
     {
         return $this->handleData;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @param string $authCode
-     * @return self
-     */
     public function withAuthCode(string $authCode): self
     {
         $validator = new Validator();
@@ -150,9 +115,6 @@ class DomainOrder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAuthCode(): self
     {
         $clone = clone $this;
@@ -161,10 +123,6 @@ class DomainOrder
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -179,10 +137,6 @@ class DomainOrder
         return $clone;
     }
 
-    /**
-     * @param DomainOrderHandleData $handleData
-     * @return self
-     */
     public function withHandleData(DomainOrderHandleData $handleData): self
     {
         $clone = clone $this;
@@ -191,10 +145,6 @@ class DomainOrder
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -265,7 +215,7 @@ class DomainOrder
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

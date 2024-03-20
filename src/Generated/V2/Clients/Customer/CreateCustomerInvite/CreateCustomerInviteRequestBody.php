@@ -13,8 +13,6 @@ class CreateCustomerInviteRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,76 +43,47 @@ class CreateCustomerInviteRequestBody
 
     /**
      * Mail-address of the person to be invited.
-     *
-     * @var string
      */
     private string $mailAddress;
 
     /**
      * Time the resulting CustomerMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $membershipExpiresAt = null;
 
     /**
      * Message contained in the CustomerInvite.
-     *
-     * @var string|null
      */
     private ?string $message = null;
 
-    /**
-     * @var CustomerRoles
-     */
     private CustomerRoles $role;
 
-    /**
-     * @param string $mailAddress
-     * @param CustomerRoles $role
-     */
     public function __construct(string $mailAddress, CustomerRoles $role)
     {
         $this->mailAddress = $mailAddress;
         $this->role = $role;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddress(): string
     {
         return $this->mailAddress;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getMembershipExpiresAt(): ?DateTime
     {
         return $this->membershipExpiresAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return CustomerRoles
-     */
     public function getRole(): CustomerRoles
     {
         return $this->role;
     }
 
-    /**
-     * @param string $mailAddress
-     * @return self
-     */
     public function withMailAddress(string $mailAddress): self
     {
         $validator = new Validator();
@@ -129,10 +98,6 @@ class CreateCustomerInviteRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $membershipExpiresAt
-     * @return self
-     */
     public function withMembershipExpiresAt(DateTime $membershipExpiresAt): self
     {
         $clone = clone $this;
@@ -141,9 +106,6 @@ class CreateCustomerInviteRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMembershipExpiresAt(): self
     {
         $clone = clone $this;
@@ -152,10 +114,6 @@ class CreateCustomerInviteRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -170,9 +128,6 @@ class CreateCustomerInviteRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -181,10 +136,6 @@ class CreateCustomerInviteRequestBody
         return $clone;
     }
 
-    /**
-     * @param CustomerRoles $role
-     * @return self
-     */
     public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;

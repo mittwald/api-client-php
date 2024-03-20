@@ -12,8 +12,6 @@ class GetNextTerminationDateForItemOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class GetNextTerminationDateForItemOKResponseBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $nextTerminationDate;
 
-    /**
-     * @param string $contractItemId
-     * @param DateTime $nextTerminationDate
-     */
     public function __construct(string $contractItemId, DateTime $nextTerminationDate)
     {
         $this->contractItemId = $contractItemId;
         $this->nextTerminationDate = $nextTerminationDate;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getNextTerminationDate(): DateTime
     {
         return $this->nextTerminationDate;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class GetNextTerminationDateForItemOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $nextTerminationDate
-     * @return self
-     */
     public function withNextTerminationDate(DateTime $nextTerminationDate): self
     {
         $clone = clone $this;

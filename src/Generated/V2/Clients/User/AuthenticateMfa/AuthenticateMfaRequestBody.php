@@ -11,8 +11,6 @@ class AuthenticateMfaRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,61 +40,39 @@ class AuthenticateMfaRequestBody
 
     /**
      * The email of the user.
-     *
-     * @var string|null
      */
     private ?string $email = null;
 
     /**
      * The second factor - otp code or recovery code.
-     *
-     * @var string
      */
     private string $multiFactorCode;
 
     /**
      * The password of the user.
-     *
-     * @var string|null
      */
     private ?string $password = null;
 
-    /**
-     * @param string $multiFactorCode
-     */
     public function __construct(string $multiFactorCode)
     {
         $this->multiFactorCode = $multiFactorCode;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getMultiFactorCode(): string
     {
         return $this->multiFactorCode;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPassword(): ?string
     {
         return $this->password ?? null;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -111,9 +87,6 @@ class AuthenticateMfaRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -122,10 +95,6 @@ class AuthenticateMfaRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $multiFactorCode
-     * @return self
-     */
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();
@@ -140,10 +109,6 @@ class AuthenticateMfaRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -158,9 +123,6 @@ class AuthenticateMfaRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPassword(): self
     {
         $clone = clone $this;

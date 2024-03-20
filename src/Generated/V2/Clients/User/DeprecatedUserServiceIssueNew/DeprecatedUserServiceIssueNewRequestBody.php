@@ -11,8 +11,6 @@ class DeprecatedUserServiceIssueNewRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,72 +39,40 @@ class DeprecatedUserServiceIssueNewRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $message;
 
-    /**
-     * @var string|null
-     */
     private ?string $origin = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $subject = null;
 
-    /**
-     * @var DeprecatedUserServiceIssueNewRequestBodyType
-     */
     private DeprecatedUserServiceIssueNewRequestBodyType $type;
 
-    /**
-     * @param string $message
-     * @param DeprecatedUserServiceIssueNewRequestBodyType $type
-     */
     public function __construct(string $message, DeprecatedUserServiceIssueNewRequestBodyType $type)
     {
         $this->message = $message;
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrigin(): ?string
     {
         return $this->origin ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSubject(): ?string
     {
         return $this->subject ?? null;
     }
 
-    /**
-     * @return DeprecatedUserServiceIssueNewRequestBodyType
-     */
     public function getType(): DeprecatedUserServiceIssueNewRequestBodyType
     {
         return $this->type;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -121,10 +87,6 @@ class DeprecatedUserServiceIssueNewRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $origin
-     * @return self
-     */
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
@@ -139,9 +101,6 @@ class DeprecatedUserServiceIssueNewRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrigin(): self
     {
         $clone = clone $this;
@@ -150,10 +109,6 @@ class DeprecatedUserServiceIssueNewRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $subject
-     * @return self
-     */
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
@@ -168,9 +123,6 @@ class DeprecatedUserServiceIssueNewRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSubject(): self
     {
         $clone = clone $this;
@@ -179,10 +131,6 @@ class DeprecatedUserServiceIssueNewRequestBody
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServiceIssueNewRequestBodyType $type
-     * @return self
-     */
     public function withType(DeprecatedUserServiceIssueNewRequestBodyType $type): self
     {
         $clone = clone $this;

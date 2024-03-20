@@ -13,8 +13,6 @@ class TerminateContractItemCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,33 +43,20 @@ class TerminateContractItemCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var TerminateContractItemCreatedResponseBody
-     */
     private TerminateContractItemCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param TerminateContractItemCreatedResponseBody $body
-     */
     public function __construct(TerminateContractItemCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return TerminateContractItemCreatedResponseBody
-     */
     public function getBody(): TerminateContractItemCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param TerminateContractItemCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(TerminateContractItemCreatedResponseBody $body): self
     {
         $clone = clone $this;

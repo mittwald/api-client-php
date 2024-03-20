@@ -13,8 +13,6 @@ class DeprecatedDomainGetScreenshotForDomainRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,50 +45,30 @@ class DeprecatedDomainGetScreenshotForDomainRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var DeprecatedDomainGetScreenshotForDomainRequestBody
-     */
     private DeprecatedDomainGetScreenshotForDomainRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param DeprecatedDomainGetScreenshotForDomainRequestBody $body
-     */
     public function __construct(string $domainId, DeprecatedDomainGetScreenshotForDomainRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return DeprecatedDomainGetScreenshotForDomainRequestBody
-     */
     public function getBody(): DeprecatedDomainGetScreenshotForDomainRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -105,10 +83,6 @@ class DeprecatedDomainGetScreenshotForDomainRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedDomainGetScreenshotForDomainRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedDomainGetScreenshotForDomainRequestBody $body): self
     {
         $clone = clone $this;

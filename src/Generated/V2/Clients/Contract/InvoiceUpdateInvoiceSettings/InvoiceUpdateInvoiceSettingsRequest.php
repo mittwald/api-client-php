@@ -13,8 +13,6 @@ class InvoiceUpdateInvoiceSettingsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,14 +49,6 @@ class InvoiceUpdateInvoiceSettingsRequest
                     'recipientSameAsOwner' => [
                         'type' => 'boolean',
                     ],
-                    'resolveReturnDebitNote' => [
-                        'description' => 'Choose how to resolve a return debit note if necessary.',
-                        'enum' => [
-                            'invoicePayment',
-                            'retryDebit',
-                        ],
-                        'type' => 'string',
-                    ],
                     'targetDay' => [
                         'example' => 15,
                         'maximum' => 28,
@@ -79,50 +69,30 @@ class InvoiceUpdateInvoiceSettingsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var InvoiceUpdateInvoiceSettingsRequestBody
-     */
     private InvoiceUpdateInvoiceSettingsRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerId
-     * @param InvoiceUpdateInvoiceSettingsRequestBody $body
-     */
     public function __construct(string $customerId, InvoiceUpdateInvoiceSettingsRequestBody $body)
     {
         $this->customerId = $customerId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return InvoiceUpdateInvoiceSettingsRequestBody
-     */
     public function getBody(): InvoiceUpdateInvoiceSettingsRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -137,10 +107,6 @@ class InvoiceUpdateInvoiceSettingsRequest
         return $clone;
     }
 
-    /**
-     * @param InvoiceUpdateInvoiceSettingsRequestBody $body
-     * @return self
-     */
     public function withBody(InvoiceUpdateInvoiceSettingsRequestBody $body): self
     {
         $clone = clone $this;

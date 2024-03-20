@@ -21,8 +21,6 @@ class UserEmployeeInformation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'additional information about mittwald employees',
@@ -38,31 +36,18 @@ class UserEmployeeInformation
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $department;
 
-    /**
-     * @param string $department
-     */
     public function __construct(string $department)
     {
         $this->department = $department;
     }
 
-    /**
-     * @return string
-     */
     public function getDepartment(): string
     {
         return $this->department;
     }
 
-    /**
-     * @param string $department
-     * @return self
-     */
     public function withDepartment(string $department): self
     {
         $validator = new Validator();
@@ -122,7 +107,7 @@ class UserEmployeeInformation
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

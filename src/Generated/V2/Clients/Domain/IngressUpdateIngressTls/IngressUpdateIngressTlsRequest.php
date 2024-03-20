@@ -15,8 +15,6 @@ class IngressUpdateIngressTlsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,14 +40,8 @@ class IngressUpdateIngressTlsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $ingressId;
 
-    /**
-     * @var TlsAcme|TlsCertificate
-     */
     private TlsAcme|TlsCertificate $body;
 
     private array $headers = [
@@ -57,7 +49,6 @@ class IngressUpdateIngressTlsRequest
     ];
 
     /**
-     * @param string $ingressId
      * @param TlsAcme|TlsCertificate $body
      */
     public function __construct(string $ingressId, TlsAcme|TlsCertificate $body)
@@ -66,9 +57,6 @@ class IngressUpdateIngressTlsRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getIngressId(): string
     {
         return $this->ingressId;
@@ -83,10 +71,6 @@ class IngressUpdateIngressTlsRequest
         return $this->body;
     }
 
-    /**
-     * @param string $ingressId
-     * @return self
-     */
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();
@@ -103,7 +87,6 @@ class IngressUpdateIngressTlsRequest
 
     /**
      * @param TlsAcme|TlsCertificate $body
-     * @return self
      */
     public function withBody(TlsAcme|TlsCertificate $body): self
     {

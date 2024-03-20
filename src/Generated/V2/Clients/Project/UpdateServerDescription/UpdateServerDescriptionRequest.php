@@ -13,8 +13,6 @@ class UpdateServerDescriptionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class UpdateServerDescriptionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $serverId;
 
-    /**
-     * @var UpdateServerDescriptionRequestBody
-     */
     private UpdateServerDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $serverId
-     * @param UpdateServerDescriptionRequestBody $body
-     */
     public function __construct(string $serverId, UpdateServerDescriptionRequestBody $body)
     {
         $this->serverId = $serverId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getServerId(): string
     {
         return $this->serverId;
     }
 
-    /**
-     * @return UpdateServerDescriptionRequestBody
-     */
     public function getBody(): UpdateServerDescriptionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $serverId
-     * @return self
-     */
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class UpdateServerDescriptionRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateServerDescriptionRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateServerDescriptionRequestBody $body): self
     {
         $clone = clone $this;

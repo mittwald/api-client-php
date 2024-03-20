@@ -14,8 +14,6 @@ class PageinsightsGetStraceDataOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,24 +44,13 @@ class PageinsightsGetStraceDataOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $executedAt;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var Error|Data
-     */
     private Error|Data $result;
 
     /**
-     * @param DateTime $executedAt
-     * @param string $id
      * @param Error|Data $result
      */
     public function __construct(DateTime $executedAt, string $id, Data|Error $result)
@@ -73,17 +60,11 @@ class PageinsightsGetStraceDataOKResponseBody
         $this->result = $result;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getExecutedAt(): DateTime
     {
         return $this->executedAt;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -98,10 +79,6 @@ class PageinsightsGetStraceDataOKResponseBody
         return $this->result;
     }
 
-    /**
-     * @param DateTime $executedAt
-     * @return self
-     */
     public function withExecutedAt(DateTime $executedAt): self
     {
         $clone = clone $this;
@@ -110,10 +87,6 @@ class PageinsightsGetStraceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -130,7 +103,6 @@ class PageinsightsGetStraceDataOKResponseBody
 
     /**
      * @param Error|Data $result
-     * @return self
      */
     public function withResult(Data|Error $result): self
     {

@@ -21,8 +21,6 @@ class CronjobCommand
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,59 +44,33 @@ class CronjobCommand
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $interpreter;
 
-    /**
-     * @var string|null
-     */
     private ?string $parameters = null;
 
-    /**
-     * @var string
-     */
     private string $path;
 
-    /**
-     * @param string $interpreter
-     * @param string $path
-     */
     public function __construct(string $interpreter, string $path)
     {
         $this->interpreter = $interpreter;
         $this->path = $path;
     }
 
-    /**
-     * @return string
-     */
     public function getInterpreter(): string
     {
         return $this->interpreter;
     }
 
-    /**
-     * @return string|null
-     */
     public function getParameters(): ?string
     {
         return $this->parameters ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @param string $interpreter
-     * @return self
-     */
     public function withInterpreter(string $interpreter): self
     {
         $validator = new Validator();
@@ -113,10 +85,6 @@ class CronjobCommand
         return $clone;
     }
 
-    /**
-     * @param string $parameters
-     * @return self
-     */
     public function withParameters(string $parameters): self
     {
         $validator = new Validator();
@@ -131,9 +99,6 @@ class CronjobCommand
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutParameters(): self
     {
         $clone = clone $this;
@@ -142,10 +107,6 @@ class CronjobCommand
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -214,7 +175,7 @@ class CronjobCommand
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

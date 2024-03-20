@@ -13,8 +13,6 @@ class GetFileUploadTypeRulesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,35 +31,22 @@ class GetFileUploadTypeRulesRequest
         ],
     ];
 
-    /**
-     * @var GetFileUploadTypeRulesRequestFileUploadType
-     */
     private GetFileUploadTypeRulesRequestFileUploadType $fileUploadType;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param GetFileUploadTypeRulesRequestFileUploadType $fileUploadType
-     */
     public function __construct(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType)
     {
         $this->fileUploadType = $fileUploadType;
     }
 
-    /**
-     * @return GetFileUploadTypeRulesRequestFileUploadType
-     */
     public function getFileUploadType(): GetFileUploadTypeRulesRequestFileUploadType
     {
         return $this->fileUploadType;
     }
 
-    /**
-     * @param GetFileUploadTypeRulesRequestFileUploadType $fileUploadType
-     * @return self
-     */
     public function withFileUploadType(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class DnsRecordASetManagedByIngressDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,50 +35,30 @@ class DnsRecordASetManagedByIngressDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $zoneId;
 
-    /**
-     * @var DnsRecordASetManagedByIngressDeprecatedRequestBody
-     */
     private DnsRecordASetManagedByIngressDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $zoneId
-     * @param DnsRecordASetManagedByIngressDeprecatedRequestBody $body
-     */
     public function __construct(string $zoneId, DnsRecordASetManagedByIngressDeprecatedRequestBody $body)
     {
         $this->zoneId = $zoneId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getZoneId(): string
     {
         return $this->zoneId;
     }
 
-    /**
-     * @return DnsRecordASetManagedByIngressDeprecatedRequestBody
-     */
     public function getBody(): DnsRecordASetManagedByIngressDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $zoneId
-     * @return self
-     */
     public function withZoneId(string $zoneId): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class DnsRecordASetManagedByIngressDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param DnsRecordASetManagedByIngressDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(DnsRecordASetManagedByIngressDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

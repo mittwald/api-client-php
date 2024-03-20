@@ -21,8 +21,6 @@ class TtlAuto
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,31 +37,19 @@ class TtlAuto
 
     /**
      * this will always be true
-     *
-     * @var bool
      */
     private bool $auto;
 
-    /**
-     * @param bool $auto
-     */
     public function __construct(bool $auto)
     {
         $this->auto = $auto;
     }
 
-    /**
-     * @return bool
-     */
     public function getAuto(): bool
     {
         return $this->auto;
     }
 
-    /**
-     * @param bool $auto
-     * @return self
-     */
     public function withAuto(bool $auto): self
     {
         $validator = new Validator();
@@ -123,7 +109,7 @@ class TtlAuto
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

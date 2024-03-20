@@ -13,8 +13,6 @@ class CheckDomainTransferabilityRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,35 +38,22 @@ class CheckDomainTransferabilityRequest
         ],
     ];
 
-    /**
-     * @var CheckDomainTransferabilityRequestBody
-     */
     private CheckDomainTransferabilityRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CheckDomainTransferabilityRequestBody $body
-     */
     public function __construct(CheckDomainTransferabilityRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckDomainTransferabilityRequestBody
-     */
     public function getBody(): CheckDomainTransferabilityRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckDomainTransferabilityRequestBody $body
-     * @return self
-     */
     public function withBody(CheckDomainTransferabilityRequestBody $body): self
     {
         $clone = clone $this;

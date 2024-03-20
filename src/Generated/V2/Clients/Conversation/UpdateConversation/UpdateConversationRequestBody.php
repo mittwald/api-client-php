@@ -12,8 +12,6 @@ class UpdateConversationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,19 +28,10 @@ class UpdateConversationRequestBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $categoryId = null;
 
-    /**
-     * @var AggregateReference|null
-     */
     private ?AggregateReference $relatedTo = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $title = null;
 
     /**
@@ -52,9 +41,6 @@ class UpdateConversationRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getCategoryId(): ?string
     {
         return $this->categoryId ?? null;
@@ -69,18 +55,11 @@ class UpdateConversationRequestBody
         return $this->relatedTo ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title ?? null;
     }
 
-    /**
-     * @param string $categoryId
-     * @return self
-     */
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
@@ -95,9 +74,6 @@ class UpdateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCategoryId(): self
     {
         $clone = clone $this;
@@ -106,10 +82,6 @@ class UpdateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param AggregateReference $relatedTo
-     * @return self
-     */
     public function withRelatedTo(AggregateReference $relatedTo): self
     {
         $clone = clone $this;
@@ -118,9 +90,6 @@ class UpdateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRelatedTo(): self
     {
         $clone = clone $this;
@@ -129,10 +98,6 @@ class UpdateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $title
-     * @return self
-     */
     public function withTitle(string $title): self
     {
         $validator = new Validator();
@@ -147,9 +112,6 @@ class UpdateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTitle(): self
     {
         $clone = clone $this;

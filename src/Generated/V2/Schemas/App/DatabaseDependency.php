@@ -22,8 +22,6 @@ class DatabaseDependency
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A DatabaseDependency is a generic description of need for a database, used by AppVersions.',
@@ -56,14 +54,8 @@ class DatabaseDependency
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var DatabaseDependencyKind
-     */
     private DatabaseDependencyKind $kind;
 
     /**
@@ -71,16 +63,8 @@ class DatabaseDependency
      */
     private ?array $parameters = null;
 
-    /**
-     * @var string
-     */
     private string $version;
 
-    /**
-     * @param string $description
-     * @param DatabaseDependencyKind $kind
-     * @param string $version
-     */
     public function __construct(string $description, DatabaseDependencyKind $kind, string $version)
     {
         $this->description = $description;
@@ -88,17 +72,11 @@ class DatabaseDependency
         $this->version = $version;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return DatabaseDependencyKind
-     */
     public function getKind(): DatabaseDependencyKind
     {
         return $this->kind;
@@ -112,18 +90,11 @@ class DatabaseDependency
         return $this->parameters ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -138,10 +109,6 @@ class DatabaseDependency
         return $clone;
     }
 
-    /**
-     * @param DatabaseDependencyKind $kind
-     * @return self
-     */
     public function withKind(DatabaseDependencyKind $kind): self
     {
         $clone = clone $this;
@@ -152,7 +119,6 @@ class DatabaseDependency
 
     /**
      * @param string[] $parameters
-     * @return self
      */
     public function withParameters(array $parameters): self
     {
@@ -168,9 +134,6 @@ class DatabaseDependency
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutParameters(): self
     {
         $clone = clone $this;
@@ -179,10 +142,6 @@ class DatabaseDependency
         return $clone;
     }
 
-    /**
-     * @param string $version
-     * @return self
-     */
     public function withVersion(string $version): self
     {
         $validator = new Validator();
@@ -253,7 +212,7 @@ class DatabaseDependency
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

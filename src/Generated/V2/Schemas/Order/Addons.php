@@ -21,8 +21,6 @@ class Addons
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -43,59 +41,33 @@ class Addons
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $hidden = null;
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @var string
-     */
     private string $value;
 
-    /**
-     * @param string $key
-     * @param string $value
-     */
     public function __construct(string $key, string $value)
     {
         $this->key = $key;
         $this->value = $value;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getHidden(): ?bool
     {
         return $this->hidden ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param bool $hidden
-     * @return self
-     */
     public function withHidden(bool $hidden): self
     {
         $validator = new Validator();
@@ -110,9 +82,6 @@ class Addons
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHidden(): self
     {
         $clone = clone $this;
@@ -121,10 +90,6 @@ class Addons
         return $clone;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -139,10 +104,6 @@ class Addons
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();
@@ -211,7 +172,7 @@ class Addons
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

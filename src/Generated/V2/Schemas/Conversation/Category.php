@@ -21,8 +21,6 @@ class Category
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,14 +43,8 @@ class Category
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $categoryId;
 
-    /**
-     * @var string
-     */
     private string $name;
 
     /**
@@ -61,8 +53,6 @@ class Category
     private array $referenceType;
 
     /**
-     * @param string $categoryId
-     * @param string $name
      * @param CategoryReferenceTypeItem[] $referenceType
      */
     public function __construct(string $categoryId, string $name, array $referenceType)
@@ -72,17 +62,11 @@ class Category
         $this->referenceType = $referenceType;
     }
 
-    /**
-     * @return string
-     */
     public function getCategoryId(): string
     {
         return $this->categoryId;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -97,10 +81,6 @@ class Category
         return $this->referenceType;
     }
 
-    /**
-     * @param string $categoryId
-     * @return self
-     */
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
@@ -115,10 +95,6 @@ class Category
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -135,7 +111,6 @@ class Category
 
     /**
      * @param CategoryReferenceTypeItem[] $referenceType
-     * @return self
      */
     public function withReferenceType(array $referenceType): self
     {
@@ -194,7 +169,7 @@ class Category
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -22,8 +22,6 @@ class Termination
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,72 +48,40 @@ class Termination
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $reason = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $scheduledAtDate;
 
-    /**
-     * @var string|null
-     */
     private ?string $scheduledByUserId = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $targetDate;
 
-    /**
-     * @param DateTime $scheduledAtDate
-     * @param DateTime $targetDate
-     */
     public function __construct(DateTime $scheduledAtDate, DateTime $targetDate)
     {
         $this->scheduledAtDate = $scheduledAtDate;
         $this->targetDate = $targetDate;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getScheduledAtDate(): DateTime
     {
         return $this->scheduledAtDate;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScheduledByUserId(): ?string
     {
         return $this->scheduledByUserId ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getTargetDate(): DateTime
     {
         return $this->targetDate;
     }
 
-    /**
-     * @param string $reason
-     * @return self
-     */
     public function withReason(string $reason): self
     {
         $validator = new Validator();
@@ -130,9 +96,6 @@ class Termination
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReason(): self
     {
         $clone = clone $this;
@@ -141,10 +104,6 @@ class Termination
         return $clone;
     }
 
-    /**
-     * @param DateTime $scheduledAtDate
-     * @return self
-     */
     public function withScheduledAtDate(DateTime $scheduledAtDate): self
     {
         $clone = clone $this;
@@ -153,10 +112,6 @@ class Termination
         return $clone;
     }
 
-    /**
-     * @param string $scheduledByUserId
-     * @return self
-     */
     public function withScheduledByUserId(string $scheduledByUserId): self
     {
         $validator = new Validator();
@@ -171,9 +126,6 @@ class Termination
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScheduledByUserId(): self
     {
         $clone = clone $this;
@@ -182,10 +134,6 @@ class Termination
         return $clone;
     }
 
-    /**
-     * @param DateTime $targetDate
-     * @return self
-     */
     public function withTargetDate(DateTime $targetDate): self
     {
         $clone = clone $this;
@@ -256,7 +204,7 @@ class Termination
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

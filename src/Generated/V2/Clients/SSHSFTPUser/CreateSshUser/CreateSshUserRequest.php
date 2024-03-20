@@ -13,8 +13,6 @@ class CreateSshUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -48,50 +46,30 @@ class CreateSshUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateSshUserRequestBody
-     */
     private CreateSshUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CreateSshUserRequestBody $body
-     */
     public function __construct(string $projectId, CreateSshUserRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CreateSshUserRequestBody
-     */
     public function getBody(): CreateSshUserRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -106,10 +84,6 @@ class CreateSshUserRequest
         return $clone;
     }
 
-    /**
-     * @param CreateSshUserRequestBody $body
-     * @return self
-     */
     public function withBody(CreateSshUserRequestBody $body): self
     {
         $clone = clone $this;

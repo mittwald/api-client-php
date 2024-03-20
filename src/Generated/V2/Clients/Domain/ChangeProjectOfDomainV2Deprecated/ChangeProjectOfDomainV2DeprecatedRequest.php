@@ -13,8 +13,6 @@ class ChangeProjectOfDomainV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -38,50 +36,30 @@ class ChangeProjectOfDomainV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var ChangeProjectOfDomainV2DeprecatedRequestBody
-     */
     private ChangeProjectOfDomainV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param ChangeProjectOfDomainV2DeprecatedRequestBody $body
-     */
     public function __construct(string $domainId, ChangeProjectOfDomainV2DeprecatedRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return ChangeProjectOfDomainV2DeprecatedRequestBody
-     */
     public function getBody(): ChangeProjectOfDomainV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -96,10 +74,6 @@ class ChangeProjectOfDomainV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param ChangeProjectOfDomainV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(ChangeProjectOfDomainV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

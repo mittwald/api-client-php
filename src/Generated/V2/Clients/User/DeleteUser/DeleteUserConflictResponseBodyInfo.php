@@ -11,8 +11,6 @@ class DeleteUserConflictResponseBodyInfo
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A json object, given further information about the error',

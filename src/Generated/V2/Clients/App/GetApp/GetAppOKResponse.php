@@ -14,8 +14,6 @@ class GetAppOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetAppOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var App
-     */
     private App $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param App $body
-     */
     public function __construct(App $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return App
-     */
     public function getBody(): App
     {
         return $this->body;
     }
 
-    /**
-     * @param App $body
-     * @return self
-     */
     public function withBody(App $body): self
     {
         $clone = clone $this;

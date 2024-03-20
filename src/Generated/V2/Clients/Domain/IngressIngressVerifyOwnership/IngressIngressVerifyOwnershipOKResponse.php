@@ -13,8 +13,6 @@ class IngressIngressVerifyOwnershipOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class IngressIngressVerifyOwnershipOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var IngressIngressVerifyOwnershipOKResponseBody
-     */
     private IngressIngressVerifyOwnershipOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param IngressIngressVerifyOwnershipOKResponseBody $body
-     */
     public function __construct(IngressIngressVerifyOwnershipOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return IngressIngressVerifyOwnershipOKResponseBody
-     */
     public function getBody(): IngressIngressVerifyOwnershipOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param IngressIngressVerifyOwnershipOKResponseBody $body
-     * @return self
-     */
     public function withBody(IngressIngressVerifyOwnershipOKResponseBody $body): self
     {
         $clone = clone $this;

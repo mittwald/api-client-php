@@ -11,8 +11,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,9 +45,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties
         'type' => 'object',
     ];
 
-    /**
-     * @var DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensions|null
-     */
     private ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensions $imageDimensions = null;
 
     /**
@@ -68,10 +63,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties
         return $this->imageDimensions ?? null;
     }
 
-    /**
-     * @param DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensions $imageDimensions
-     * @return self
-     */
     public function withImageDimensions(DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
@@ -80,9 +71,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageDimensions(): self
     {
         $clone = clone $this;

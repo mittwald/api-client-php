@@ -13,8 +13,6 @@ class GetSshUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetSshUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sshUserId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sshUserId
-     */
     public function __construct(string $sshUserId)
     {
         $this->sshUserId = $sshUserId;
     }
 
-    /**
-     * @return string
-     */
     public function getSshUserId(): string
     {
         return $this->sshUserId;
     }
 
-    /**
-     * @param string $sshUserId
-     * @return self
-     */
     public function withSshUserId(string $sshUserId): self
     {
         $validator = new Validator();

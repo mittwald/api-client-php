@@ -13,8 +13,6 @@ class RequestFileUploadRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,50 +31,30 @@ class RequestFileUploadRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var RequestFileUploadRequestBody
-     */
     private RequestFileUploadRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $conversationId
-     * @param RequestFileUploadRequestBody $body
-     */
     public function __construct(string $conversationId, RequestFileUploadRequestBody $body)
     {
         $this->conversationId = $conversationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return RequestFileUploadRequestBody
-     */
     public function getBody(): RequestFileUploadRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -91,10 +69,6 @@ class RequestFileUploadRequest
         return $clone;
     }
 
-    /**
-     * @param RequestFileUploadRequestBody $body
-     * @return self
-     */
     public function withBody(RequestFileUploadRequestBody $body): self
     {
         $clone = clone $this;

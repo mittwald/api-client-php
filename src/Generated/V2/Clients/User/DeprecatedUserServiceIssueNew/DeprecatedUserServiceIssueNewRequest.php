@@ -13,8 +13,6 @@ class DeprecatedUserServiceIssueNewRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,35 +49,22 @@ class DeprecatedUserServiceIssueNewRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserServiceIssueNewRequestBody
-     */
     private DeprecatedUserServiceIssueNewRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserServiceIssueNewRequestBody $body
-     */
     public function __construct(DeprecatedUserServiceIssueNewRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserServiceIssueNewRequestBody
-     */
     public function getBody(): DeprecatedUserServiceIssueNewRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserServiceIssueNewRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServiceIssueNewRequestBody $body): self
     {
         $clone = clone $this;

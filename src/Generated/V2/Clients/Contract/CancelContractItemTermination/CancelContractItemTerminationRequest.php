@@ -13,8 +13,6 @@ class CancelContractItemTerminationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -27,76 +25,37 @@ class CancelContractItemTerminationRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-                'type' => 'object',
-            ],
         ],
         'required' => [
             'contractId',
             'contractItemId',
-            'body',
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
-
-    /**
-     * @var CancelContractItemTerminationRequestBody
-     */
-    private CancelContractItemTerminationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     * @param string $contractItemId
-     * @param CancelContractItemTerminationRequestBody $body
-     */
-    public function __construct(string $contractId, string $contractItemId, CancelContractItemTerminationRequestBody $body)
+    public function __construct(string $contractId, string $contractItemId)
     {
         $this->contractId = $contractId;
         $this->contractItemId = $contractItemId;
-        $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return CancelContractItemTerminationRequestBody
-     */
-    public function getBody(): CancelContractItemTerminationRequestBody
-    {
-        return $this->body;
-    }
-
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -111,10 +70,6 @@ class CancelContractItemTerminationRequest
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -125,18 +80,6 @@ class CancelContractItemTerminationRequest
 
         $clone = clone $this;
         $clone->contractItemId = $contractItemId;
-
-        return $clone;
-    }
-
-    /**
-     * @param CancelContractItemTerminationRequestBody $body
-     * @return self
-     */
-    public function withBody(CancelContractItemTerminationRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
 
         return $clone;
     }
@@ -158,9 +101,8 @@ class CancelContractItemTerminationRequest
 
         $contractId = $input->{'contractId'};
         $contractItemId = $input->{'contractItemId'};
-        $body = CancelContractItemTerminationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($contractId, $contractItemId, $body);
+        $obj = new self($contractId, $contractItemId);
 
         return $obj;
     }
@@ -175,7 +117,6 @@ class CancelContractItemTerminationRequest
         $output = [];
         $output['contractId'] = $this->contractId;
         $output['contractItemId'] = $this->contractItemId;
-        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -206,7 +147,6 @@ class CancelContractItemTerminationRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -242,7 +182,6 @@ class CancelContractItemTerminationRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -11,8 +11,6 @@ class AcceptProjectInviteRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,8 +24,6 @@ class AcceptProjectInviteRequestBody
 
     /**
      * Token contained in the invite for authentication.
-     *
-     * @var string|null
      */
     private ?string $invitationToken = null;
 
@@ -38,18 +34,11 @@ class AcceptProjectInviteRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getInvitationToken(): ?string
     {
         return $this->invitationToken ?? null;
     }
 
-    /**
-     * @param string $invitationToken
-     * @return self
-     */
     public function withInvitationToken(string $invitationToken): self
     {
         $validator = new Validator();
@@ -64,9 +53,6 @@ class AcceptProjectInviteRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInvitationToken(): self
     {
         $clone = clone $this;

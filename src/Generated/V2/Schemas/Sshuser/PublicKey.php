@@ -21,8 +21,6 @@ class PublicKey
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A representation of an ssh-public-key.',
@@ -41,46 +39,26 @@ class PublicKey
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $comment;
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @param string $comment
-     * @param string $key
-     */
     public function __construct(string $comment, string $key)
     {
         $this->comment = $comment;
         $this->key = $key;
     }
 
-    /**
-     * @return string
-     */
     public function getComment(): string
     {
         return $this->comment;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @param string $comment
-     * @return self
-     */
     public function withComment(string $comment): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class PublicKey
         return $clone;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -160,7 +134,7 @@ class PublicKey
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

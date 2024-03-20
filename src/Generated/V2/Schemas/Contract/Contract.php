@@ -21,8 +21,6 @@ class Contract
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,37 +63,16 @@ class Contract
      */
     private ?array $additionalItems = null;
 
-    /**
-     * @var ContractItem
-     */
     private ContractItem $baseItem;
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var string
-     */
     private string $contractNumber;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var Termination|null
-     */
     private ?Termination $termination = null;
 
-    /**
-     * @param ContractItem $baseItem
-     * @param string $contractId
-     * @param string $contractNumber
-     * @param string $customerId
-     */
     public function __construct(ContractItem $baseItem, string $contractId, string $contractNumber, string $customerId)
     {
         $this->baseItem = $baseItem;
@@ -112,41 +89,26 @@ class Contract
         return $this->additionalItems ?? null;
     }
 
-    /**
-     * @return ContractItem
-     */
     public function getBaseItem(): ContractItem
     {
         return $this->baseItem;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractNumber(): string
     {
         return $this->contractNumber;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return Termination|null
-     */
     public function getTermination(): ?Termination
     {
         return $this->termination ?? null;
@@ -154,7 +116,6 @@ class Contract
 
     /**
      * @param ContractItem[] $additionalItems
-     * @return self
      */
     public function withAdditionalItems(array $additionalItems): self
     {
@@ -164,9 +125,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdditionalItems(): self
     {
         $clone = clone $this;
@@ -175,10 +133,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @param ContractItem $baseItem
-     * @return self
-     */
     public function withBaseItem(ContractItem $baseItem): self
     {
         $clone = clone $this;
@@ -187,10 +141,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -205,10 +155,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @param string $contractNumber
-     * @return self
-     */
     public function withContractNumber(string $contractNumber): self
     {
         $validator = new Validator();
@@ -223,10 +169,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -241,10 +183,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @param Termination $termination
-     * @return self
-     */
     public function withTermination(Termination $termination): self
     {
         $clone = clone $this;
@@ -253,9 +191,6 @@ class Contract
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTermination(): self
     {
         $clone = clone $this;
@@ -330,7 +265,7 @@ class Contract
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

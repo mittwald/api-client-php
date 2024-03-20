@@ -22,8 +22,6 @@ class SshKey
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -67,49 +65,20 @@ class SshKey
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $algorithm;
 
-    /**
-     * @var string
-     */
     private string $comment;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var string
-     */
     private string $fingerprint;
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @var string
-     */
     private string $sshKeyId;
 
-    /**
-     * @param string $algorithm
-     * @param string $comment
-     * @param DateTime $createdAt
-     * @param string $fingerprint
-     * @param string $key
-     * @param string $sshKeyId
-     */
     public function __construct(string $algorithm, string $comment, DateTime $createdAt, string $fingerprint, string $key, string $sshKeyId)
     {
         $this->algorithm = $algorithm;
@@ -120,66 +89,41 @@ class SshKey
         $this->sshKeyId = $sshKeyId;
     }
 
-    /**
-     * @return string
-     */
     public function getAlgorithm(): string
     {
         return $this->algorithm;
     }
 
-    /**
-     * @return string
-     */
     public function getComment(): string
     {
         return $this->comment;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getFingerprint(): string
     {
         return $this->fingerprint;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return string
-     */
     public function getSshKeyId(): string
     {
         return $this->sshKeyId;
     }
 
-    /**
-     * @param string $algorithm
-     * @return self
-     */
     public function withAlgorithm(string $algorithm): self
     {
         $validator = new Validator();
@@ -194,10 +138,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @param string $comment
-     * @return self
-     */
     public function withComment(string $comment): self
     {
         $validator = new Validator();
@@ -212,10 +152,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -224,10 +160,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -236,9 +168,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -247,10 +176,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @param string $fingerprint
-     * @return self
-     */
     public function withFingerprint(string $fingerprint): self
     {
         $validator = new Validator();
@@ -265,10 +190,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -283,10 +204,6 @@ class SshKey
         return $clone;
     }
 
-    /**
-     * @param string $sshKeyId
-     * @return self
-     */
     public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new Validator();
@@ -363,7 +280,7 @@ class SshKey
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class ListOfCustomerCategoriesOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -35,33 +33,20 @@ class ListOfCustomerCategoriesOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ListOfCustomerCategoriesOKResponseBody
-     */
     private ListOfCustomerCategoriesOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ListOfCustomerCategoriesOKResponseBody $body
-     */
     public function __construct(ListOfCustomerCategoriesOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ListOfCustomerCategoriesOKResponseBody
-     */
     public function getBody(): ListOfCustomerCategoriesOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ListOfCustomerCategoriesOKResponseBody $body
-     * @return self
-     */
     public function withBody(ListOfCustomerCategoriesOKResponseBody $body): self
     {
         $clone = clone $this;

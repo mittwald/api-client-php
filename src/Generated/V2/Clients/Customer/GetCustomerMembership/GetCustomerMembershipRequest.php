@@ -13,8 +13,6 @@ class GetCustomerMembershipRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetCustomerMembershipRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerMembershipId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerMembershipId
-     */
     public function __construct(string $customerMembershipId)
     {
         $this->customerMembershipId = $customerMembershipId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerMembershipId(): string
     {
         return $this->customerMembershipId;
     }
 
-    /**
-     * @param string $customerMembershipId
-     * @return self
-     */
     public function withCustomerMembershipId(string $customerMembershipId): self
     {
         $validator = new Validator();

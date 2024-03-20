@@ -12,8 +12,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,29 +40,15 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $score = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $value;
 
     /**
-     * @param DateTime $createdAt
-     * @param string $name
      * @param int|float $value
      */
     public function __construct(DateTime $createdAt, string $name, int|float $value)
@@ -74,42 +58,26 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         $this->value = $value;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getScore(): int|float|null
     {
         return $this->score;
     }
 
-    /**
-     * @return int|float
-     */
     public function getValue(): int|float
     {
         return $this->value;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -118,10 +86,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -138,7 +102,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
 
     /**
      * @param int|float $score
-     * @return self
      */
     public function withScore(int|float $score): self
     {
@@ -154,9 +117,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScore(): self
     {
         $clone = clone $this;
@@ -167,7 +127,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
 
     /**
      * @param int|float $value
-     * @return self
      */
     public function withValue(int|float $value): self
     {
@@ -202,9 +161,9 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         $name = $input->{'name'};
         $score = null;
         if (isset($input->{'score'})) {
-            $score = str_contains($input->{'score'}, '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
+            $score = str_contains((string)($input->{'score'}), '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
         }
-        $value = str_contains($input->{'value'}, '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
+        $value = str_contains((string)($input->{'value'}), '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
 
         $obj = new self($createdAt, $name, $value);
         $obj->score = $score;

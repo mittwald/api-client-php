@@ -13,8 +13,6 @@ class UpdateDeliveryBoxDescriptionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateDeliveryBoxDescriptionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $deliveryBoxId;
 
-    /**
-     * @var UpdateDeliveryBoxDescriptionRequestBody
-     */
     private UpdateDeliveryBoxDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $deliveryBoxId
-     * @param UpdateDeliveryBoxDescriptionRequestBody $body
-     */
     public function __construct(string $deliveryBoxId, UpdateDeliveryBoxDescriptionRequestBody $body)
     {
         $this->deliveryBoxId = $deliveryBoxId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDeliveryBoxId(): string
     {
         return $this->deliveryBoxId;
     }
 
-    /**
-     * @return UpdateDeliveryBoxDescriptionRequestBody
-     */
     public function getBody(): UpdateDeliveryBoxDescriptionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $deliveryBoxId
-     * @return self
-     */
     public function withDeliveryBoxId(string $deliveryBoxId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateDeliveryBoxDescriptionRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDeliveryBoxDescriptionRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateDeliveryBoxDescriptionRequestBody $body): self
     {
         $clone = clone $this;

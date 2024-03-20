@@ -11,8 +11,6 @@ class ResendVerificationEmailRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -33,46 +31,26 @@ class ResendVerificationEmailRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $email;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param string $email
-     * @param string $userId
-     */
     public function __construct(string $email, string $userId)
     {
         $this->email = $email;
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -87,10 +65,6 @@ class ResendVerificationEmailRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

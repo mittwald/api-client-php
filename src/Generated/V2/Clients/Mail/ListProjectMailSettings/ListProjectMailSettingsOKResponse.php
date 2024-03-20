@@ -13,8 +13,6 @@ class ListProjectMailSettingsOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -52,33 +50,20 @@ class ListProjectMailSettingsOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ListProjectMailSettingsOKResponseBody
-     */
     private ListProjectMailSettingsOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ListProjectMailSettingsOKResponseBody $body
-     */
     public function __construct(ListProjectMailSettingsOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ListProjectMailSettingsOKResponseBody
-     */
     public function getBody(): ListProjectMailSettingsOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ListProjectMailSettingsOKResponseBody $body
-     * @return self
-     */
     public function withBody(ListProjectMailSettingsOKResponseBody $body): self
     {
         $clone = clone $this;

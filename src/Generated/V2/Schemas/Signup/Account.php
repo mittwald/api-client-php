@@ -23,8 +23,6 @@ class Account
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,31 +57,17 @@ class Account
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $email = null;
 
     /**
      * The users mfa details.
-     *
-     * @var AccountMfaDetails|null
      */
     private ?AccountMfaDetails $mfaDetails = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $passwordUpdatedAt = null;
 
-    /**
-     * @var Person|null
-     */
     private ?Person $person = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $userId = null;
 
     /**
@@ -93,50 +77,31 @@ class Account
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return AccountMfaDetails|null
-     */
     public function getMfaDetails(): ?AccountMfaDetails
     {
         return $this->mfaDetails ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getPasswordUpdatedAt(): ?DateTime
     {
         return $this->passwordUpdatedAt ?? null;
     }
 
-    /**
-     * @return Person|null
-     */
     public function getPerson(): ?Person
     {
         return $this->person ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUserId(): ?string
     {
         return $this->userId ?? null;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -151,9 +116,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -162,10 +124,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @param AccountMfaDetails $mfaDetails
-     * @return self
-     */
     public function withMfaDetails(AccountMfaDetails $mfaDetails): self
     {
         $clone = clone $this;
@@ -174,9 +132,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMfaDetails(): self
     {
         $clone = clone $this;
@@ -185,10 +140,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
@@ -197,9 +148,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPasswordUpdatedAt(): self
     {
         $clone = clone $this;
@@ -208,10 +156,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @param Person $person
-     * @return self
-     */
     public function withPerson(Person $person): self
     {
         $clone = clone $this;
@@ -220,9 +164,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPerson(): self
     {
         $clone = clone $this;
@@ -231,10 +172,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -249,9 +186,6 @@ class Account
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserId(): self
     {
         $clone = clone $this;
@@ -342,7 +276,7 @@ class Account
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

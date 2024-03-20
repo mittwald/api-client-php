@@ -14,8 +14,6 @@ class GetSshUserOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetSshUserOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var SshUser
-     */
     private SshUser $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param SshUser $body
-     */
     public function __construct(SshUser $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return SshUser
-     */
     public function getBody(): SshUser
     {
         return $this->body;
     }
 
-    /**
-     * @param SshUser $body
-     * @return self
-     */
     public function withBody(SshUser $body): self
     {
         $clone = clone $this;

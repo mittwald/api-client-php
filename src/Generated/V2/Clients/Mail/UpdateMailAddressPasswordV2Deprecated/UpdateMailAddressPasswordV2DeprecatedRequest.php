@@ -13,8 +13,6 @@ class UpdateMailAddressPasswordV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMailAddressPasswordV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressPasswordV2DeprecatedRequestBody
-     */
     private UpdateMailAddressPasswordV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressPasswordV2DeprecatedRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressPasswordV2DeprecatedRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressPasswordV2DeprecatedRequestBody
-     */
     public function getBody(): UpdateMailAddressPasswordV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMailAddressPasswordV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressPasswordV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressPasswordV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

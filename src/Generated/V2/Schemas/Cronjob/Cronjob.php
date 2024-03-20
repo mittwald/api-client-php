@@ -22,8 +22,6 @@ class Cronjob
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -104,87 +102,37 @@ class Cronjob
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var string
-     */
     private string $appId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var CronjobUrl|CronjobCommand
-     */
     private CronjobUrl|CronjobCommand $destination;
 
-    /**
-     * @var string|null
-     */
     private ?string $email = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $interval;
 
-    /**
-     * @var CronjobExecution|null
-     */
     private ?CronjobExecution $latestExecution = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $nextExecutionTime = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $projectId = null;
 
-    /**
-     * @var string
-     */
     private string $shortId;
 
-    /**
-     * @var int|float
-     */
     private int|float $timeout;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
     /**
-     * @param bool $active
-     * @param string $appId
-     * @param DateTime $createdAt
-     * @param string $description
      * @param CronjobUrl|CronjobCommand $destination
-     * @param string $id
-     * @param string $interval
-     * @param string $shortId
      * @param int|float $timeout
-     * @param DateTime $updatedAt
      */
     public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, int|float $timeout, DateTime $updatedAt)
     {
@@ -200,33 +148,21 @@ class Cronjob
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -241,82 +177,51 @@ class Cronjob
         return $this->destination;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getInterval(): string
     {
         return $this->interval;
     }
 
-    /**
-     * @return CronjobExecution|null
-     */
     public function getLatestExecution(): ?CronjobExecution
     {
         return $this->latestExecution ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getNextExecutionTime(): ?DateTime
     {
         return $this->nextExecutionTime ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getShortId(): string
     {
         return $this->shortId;
     }
 
-    /**
-     * @return int|float
-     */
     public function getTimeout(): int|float
     {
         return $this->timeout;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -331,10 +236,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
@@ -349,10 +250,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -361,10 +258,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -381,7 +274,6 @@ class Cronjob
 
     /**
      * @param CronjobUrl|CronjobCommand $destination
-     * @return self
      */
     public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
@@ -391,10 +283,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -409,9 +297,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEmail(): self
     {
         $clone = clone $this;
@@ -420,10 +305,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -438,10 +319,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $interval
-     * @return self
-     */
     public function withInterval(string $interval): self
     {
         $validator = new Validator();
@@ -456,10 +333,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param CronjobExecution $latestExecution
-     * @return self
-     */
     public function withLatestExecution(CronjobExecution $latestExecution): self
     {
         $clone = clone $this;
@@ -468,9 +341,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLatestExecution(): self
     {
         $clone = clone $this;
@@ -479,10 +349,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param DateTime $nextExecutionTime
-     * @return self
-     */
     public function withNextExecutionTime(DateTime $nextExecutionTime): self
     {
         $clone = clone $this;
@@ -491,9 +357,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNextExecutionTime(): self
     {
         $clone = clone $this;
@@ -502,10 +365,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -520,9 +379,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectId(): self
     {
         $clone = clone $this;
@@ -531,10 +387,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param string $shortId
-     * @return self
-     */
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
@@ -551,7 +403,6 @@ class Cronjob
 
     /**
      * @param int|float $timeout
-     * @return self
      */
     public function withTimeout(int|float $timeout): self
     {
@@ -567,10 +418,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -621,7 +468,7 @@ class Cronjob
             $projectId = $input->{'projectId'};
         }
         $shortId = $input->{'shortId'};
-        $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+        $timeout = str_contains((string)($input->{'timeout'}), '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $timeout, $updatedAt);
@@ -678,7 +525,7 @@ class Cronjob
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -14,8 +14,6 @@ class GetSystemsoftwareOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetSystemsoftwareOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var SystemSoftware
-     */
     private SystemSoftware $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param SystemSoftware $body
-     */
     public function __construct(SystemSoftware $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return SystemSoftware
-     */
     public function getBody(): SystemSoftware
     {
         return $this->body;
     }
 
-    /**
-     * @param SystemSoftware $body
-     * @return self
-     */
     public function withBody(SystemSoftware $body): self
     {
         $clone = clone $this;

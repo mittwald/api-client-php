@@ -11,8 +11,6 @@ class CancelContractTariffChangeOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,19 +28,10 @@ class CancelContractTariffChangeOKResponseBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $contractId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $contractItemId = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isCancelled = null;
 
     /**
@@ -52,34 +41,21 @@ class CancelContractTariffChangeOKResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractId(): ?string
     {
         return $this->contractId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractItemId(): ?string
     {
         return $this->contractItemId ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsCancelled(): ?bool
     {
         return $this->isCancelled ?? null;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -94,9 +70,6 @@ class CancelContractTariffChangeOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractId(): self
     {
         $clone = clone $this;
@@ -105,10 +78,6 @@ class CancelContractTariffChangeOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -123,9 +92,6 @@ class CancelContractTariffChangeOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractItemId(): self
     {
         $clone = clone $this;
@@ -134,10 +100,6 @@ class CancelContractTariffChangeOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $isCancelled
-     * @return self
-     */
     public function withIsCancelled(bool $isCancelled): self
     {
         $validator = new Validator();
@@ -152,9 +114,6 @@ class CancelContractTariffChangeOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsCancelled(): self
     {
         $clone = clone $this;

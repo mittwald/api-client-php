@@ -13,8 +13,6 @@ class UpdateDeliveryBoxPasswordRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateDeliveryBoxPasswordRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $deliveryBoxId;
 
-    /**
-     * @var UpdateDeliveryBoxPasswordRequestBody
-     */
     private UpdateDeliveryBoxPasswordRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $deliveryBoxId
-     * @param UpdateDeliveryBoxPasswordRequestBody $body
-     */
     public function __construct(string $deliveryBoxId, UpdateDeliveryBoxPasswordRequestBody $body)
     {
         $this->deliveryBoxId = $deliveryBoxId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDeliveryBoxId(): string
     {
         return $this->deliveryBoxId;
     }
 
-    /**
-     * @return UpdateDeliveryBoxPasswordRequestBody
-     */
     public function getBody(): UpdateDeliveryBoxPasswordRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $deliveryBoxId
-     * @return self
-     */
     public function withDeliveryBoxId(string $deliveryBoxId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateDeliveryBoxPasswordRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDeliveryBoxPasswordRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateDeliveryBoxPasswordRequestBody $body): self
     {
         $clone = clone $this;

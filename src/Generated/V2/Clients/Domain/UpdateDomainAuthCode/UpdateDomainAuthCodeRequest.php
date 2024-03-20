@@ -13,8 +13,6 @@ class UpdateDomainAuthCodeRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class UpdateDomainAuthCodeRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var UpdateDomainAuthCodeRequestBody
-     */
     private UpdateDomainAuthCodeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param UpdateDomainAuthCodeRequestBody $body
-     */
     public function __construct(string $domainId, UpdateDomainAuthCodeRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return UpdateDomainAuthCodeRequestBody
-     */
     public function getBody(): UpdateDomainAuthCodeRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class UpdateDomainAuthCodeRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDomainAuthCodeRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateDomainAuthCodeRequestBody $body): self
     {
         $clone = clone $this;

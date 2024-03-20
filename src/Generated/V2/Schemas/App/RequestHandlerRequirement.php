@@ -22,8 +22,6 @@ class RequestHandlerRequirement
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start.',
@@ -57,26 +55,12 @@ class RequestHandlerRequirement
      */
     private ?array $exampleValues = null;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $namespace;
 
-    /**
-     * @var string
-     */
     private string $parametersTemplate;
 
-    /**
-     * @param string $name
-     * @param string $namespace
-     * @param string $parametersTemplate
-     */
     public function __construct(string $name, string $namespace, string $parametersTemplate)
     {
         $this->name = $name;
@@ -92,25 +76,16 @@ class RequestHandlerRequirement
         return $this->exampleValues ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getNamespace(): string
     {
         return $this->namespace;
     }
 
-    /**
-     * @return string
-     */
     public function getParametersTemplate(): string
     {
         return $this->parametersTemplate;
@@ -118,7 +93,6 @@ class RequestHandlerRequirement
 
     /**
      * @param SavedUserInput[] $exampleValues
-     * @return self
      */
     public function withExampleValues(array $exampleValues): self
     {
@@ -128,9 +102,6 @@ class RequestHandlerRequirement
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExampleValues(): self
     {
         $clone = clone $this;
@@ -139,10 +110,6 @@ class RequestHandlerRequirement
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -157,10 +124,6 @@ class RequestHandlerRequirement
         return $clone;
     }
 
-    /**
-     * @param string $namespace
-     * @return self
-     */
     public function withNamespace(string $namespace): self
     {
         $validator = new Validator();
@@ -175,10 +138,6 @@ class RequestHandlerRequirement
         return $clone;
     }
 
-    /**
-     * @param string $parametersTemplate
-     * @return self
-     */
     public function withParametersTemplate(string $parametersTemplate): self
     {
         $validator = new Validator();
@@ -249,7 +208,7 @@ class RequestHandlerRequirement
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

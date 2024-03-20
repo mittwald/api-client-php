@@ -22,8 +22,6 @@ class BackupTemplate
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,44 +39,25 @@ class BackupTemplate
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $expirationTime;
 
-    /**
-     * @var IgnoredSources|null
-     */
     private ?IgnoredSources $ignoredSources = null;
 
-    /**
-     * @param DateTime $expirationTime
-     */
     public function __construct(DateTime $expirationTime)
     {
         $this->expirationTime = $expirationTime;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getExpirationTime(): DateTime
     {
         return $this->expirationTime;
     }
 
-    /**
-     * @return IgnoredSources|null
-     */
     public function getIgnoredSources(): ?IgnoredSources
     {
         return $this->ignoredSources ?? null;
     }
 
-    /**
-     * @param DateTime $expirationTime
-     * @return self
-     */
     public function withExpirationTime(DateTime $expirationTime): self
     {
         $clone = clone $this;
@@ -87,10 +66,6 @@ class BackupTemplate
         return $clone;
     }
 
-    /**
-     * @param IgnoredSources $ignoredSources
-     * @return self
-     */
     public function withIgnoredSources(IgnoredSources $ignoredSources): self
     {
         $clone = clone $this;
@@ -99,9 +74,6 @@ class BackupTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIgnoredSources(): self
     {
         $clone = clone $this;
@@ -162,7 +134,7 @@ class BackupTemplate
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

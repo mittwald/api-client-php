@@ -21,8 +21,6 @@ class InvoiceItemReference
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,46 +40,26 @@ class InvoiceItemReference
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $sourceInvoiceId;
 
-    /**
-     * @var string
-     */
     private string $sourceInvoiceItemId;
 
-    /**
-     * @param string $sourceInvoiceId
-     * @param string $sourceInvoiceItemId
-     */
     public function __construct(string $sourceInvoiceId, string $sourceInvoiceItemId)
     {
         $this->sourceInvoiceId = $sourceInvoiceId;
         $this->sourceInvoiceItemId = $sourceInvoiceItemId;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceInvoiceId(): string
     {
         return $this->sourceInvoiceId;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceInvoiceItemId(): string
     {
         return $this->sourceInvoiceItemId;
     }
 
-    /**
-     * @param string $sourceInvoiceId
-     * @return self
-     */
     public function withSourceInvoiceId(string $sourceInvoiceId): self
     {
         $validator = new Validator();
@@ -96,10 +74,6 @@ class InvoiceItemReference
         return $clone;
     }
 
-    /**
-     * @param string $sourceInvoiceItemId
-     * @return self
-     */
     public function withSourceInvoiceItemId(string $sourceInvoiceItemId): self
     {
         $validator = new Validator();
@@ -161,7 +135,7 @@ class InvoiceItemReference
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

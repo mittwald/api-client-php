@@ -13,8 +13,6 @@ class DeleteMailAddressRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeleteMailAddressRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     */
     public function __construct(string $mailAddressId)
     {
         $this->mailAddressId = $mailAddressId;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();

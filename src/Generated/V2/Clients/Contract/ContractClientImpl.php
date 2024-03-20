@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract;
 
 use GuzzleHttp\Client;
@@ -95,6 +97,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContracts
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeCreatedResponse;
@@ -247,7 +250,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetDetailOfContract\GetDetailOfContractRequest $request An object representing the request for this operation
-     * @return GetDetailOfContract\GetDetailOfContractOKResponse
      */
     public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse
     {
@@ -339,7 +341,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetDetailOfContractItem\GetDetailOfContractItemRequest $request An object representing the request for this operation
-     * @return GetDetailOfContractItem\GetDetailOfContractItemOKResponse
      */
     public function getDetailOfContractItem(GetDetailOfContractItemRequest $request): GetDetailOfContractItemOKResponse
     {
@@ -455,7 +456,6 @@ class ContractClientImpl implements ContractClient
      * @throws UnexpectedResponseException
      * @param DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse
      */
     public function deprecatedInvoiceDetailOfInvoice(DeprecatedInvoiceDetailOfInvoiceRequest $request): DeprecatedInvoiceDetailOfInvoiceOKResponse
     {
@@ -478,7 +478,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InvoiceDetail\InvoiceDetailRequest $request An object representing the request for this operation
-     * @return InvoiceDetail\InvoiceDetailOKResponse
      */
     public function invoiceDetail(InvoiceDetailRequest $request): InvoiceDetailOKResponse
     {
@@ -501,7 +500,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest $request An object representing the request for this operation
-     * @return InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsOKResponse
      */
     public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettingsRequest $request): InvoiceGetDetailOfInvoiceSettingsOKResponse
     {
@@ -547,7 +545,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest $request An object representing the request for this operation
-     * @return InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesOKResponse
      */
     public function invoiceListCustomerInvoices(InvoiceListCustomerInvoicesRequest $request): InvoiceListCustomerInvoicesOKResponse
     {
@@ -570,7 +567,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
-     * @return InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse
      */
     public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse
     {
@@ -593,7 +589,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderCreateOrder\OrderCreateOrderRequest $request An object representing the request for this operation
-     * @return OrderCreateOrder\OrderCreateOrderCreatedResponse
      */
     public function orderCreateOrder(OrderCreateOrderRequest $request): OrderCreateOrderCreatedResponse
     {
@@ -604,6 +599,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateOrderBadRequestResponse::fromResponse($httpResponse),
+            403 => OrderCreateOrderForbiddenResponse::fromResponse($httpResponse),
             default => OrderCreateOrderDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -615,7 +611,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderCreateTariffChange\OrderCreateTariffChangeRequest $request An object representing the request for this operation
-     * @return OrderCreateTariffChange\OrderCreateTariffChangeCreatedResponse
      */
     public function orderCreateTariffChange(OrderCreateTariffChangeRequest $request): OrderCreateTariffChangeCreatedResponse
     {
@@ -639,7 +634,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderGetOrder\OrderGetOrderRequest $request An object representing the request for this operation
-     * @return OrderGetOrder\OrderGetOrderOKResponse
      */
     public function orderGetOrder(OrderGetOrderRequest $request): OrderGetOrderOKResponse
     {
@@ -662,7 +656,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderListCustomerOrders\OrderListCustomerOrdersRequest $request An object representing the request for this operation
-     * @return OrderListCustomerOrders\OrderListCustomerOrdersOKResponse
      */
     public function orderListCustomerOrders(OrderListCustomerOrdersRequest $request): OrderListCustomerOrdersOKResponse
     {
@@ -685,7 +678,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderListProjectOrders\OrderListProjectOrdersRequest $request An object representing the request for this operation
-     * @return OrderListProjectOrders\OrderListProjectOrdersOKResponse
      */
     public function orderListProjectOrders(OrderListProjectOrdersRequest $request): OrderListProjectOrdersOKResponse
     {
@@ -706,7 +698,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderPreviewOrder\OrderPreviewOrderRequest $request An object representing the request for this operation
-     * @return UntypedResponse
      */
     public function orderPreviewOrder(OrderPreviewOrderRequest $request): UntypedResponse
     {
@@ -728,7 +719,6 @@ class ContractClientImpl implements ContractClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param OrderPreviewTariffChange\OrderPreviewTariffChangeRequest $request An object representing the request for this operation
-     * @return OrderPreviewTariffChange\OrderPreviewTariffChangeOKResponse
      */
     public function orderPreviewTariffChange(OrderPreviewTariffChangeRequest $request): OrderPreviewTariffChangeOKResponse
     {

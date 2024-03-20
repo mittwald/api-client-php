@@ -13,8 +13,6 @@ class SupportCodeRequestRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,9 +26,6 @@ class SupportCodeRequestRequest
         ],
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $forceRecreate = null;
 
     private array $headers = [
@@ -44,18 +39,11 @@ class SupportCodeRequestRequest
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getForceRecreate(): ?bool
     {
         return $this->forceRecreate ?? null;
     }
 
-    /**
-     * @param bool $forceRecreate
-     * @return self
-     */
     public function withForceRecreate(bool $forceRecreate): self
     {
         $validator = new Validator();
@@ -70,9 +58,6 @@ class SupportCodeRequestRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutForceRecreate(): self
     {
         $clone = clone $this;

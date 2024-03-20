@@ -13,8 +13,6 @@ class TerminateContractRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,50 +42,30 @@ class TerminateContractRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var TerminateContractRequestBody
-     */
     private TerminateContractRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     * @param TerminateContractRequestBody $body
-     */
     public function __construct(string $contractId, TerminateContractRequestBody $body)
     {
         $this->contractId = $contractId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return TerminateContractRequestBody
-     */
     public function getBody(): TerminateContractRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -102,10 +80,6 @@ class TerminateContractRequest
         return $clone;
     }
 
-    /**
-     * @param TerminateContractRequestBody $body
-     * @return self
-     */
     public function withBody(TerminateContractRequestBody $body): self
     {
         $clone = clone $this;

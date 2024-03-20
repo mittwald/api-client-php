@@ -13,8 +13,6 @@ class GetHandleFieldsV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetHandleFieldsV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainName;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainName
-     */
     public function __construct(string $domainName)
     {
         $this->domainName = $domainName;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainName(): string
     {
         return $this->domainName;
     }
 
-    /**
-     * @param string $domainName
-     * @return self
-     */
     public function withDomainName(string $domainName): self
     {
         $validator = new Validator();

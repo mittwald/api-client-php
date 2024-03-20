@@ -13,8 +13,6 @@ class UpdateCustomerMembershipRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -35,44 +33,26 @@ class UpdateCustomerMembershipRequestBody
 
     /**
      * Time the CustomerMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var CustomerRoles
-     */
     private CustomerRoles $role;
 
-    /**
-     * @param CustomerRoles $role
-     */
     public function __construct(CustomerRoles $role)
     {
         $this->role = $role;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return CustomerRoles
-     */
     public function getRole(): CustomerRoles
     {
         return $this->role;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -81,9 +61,6 @@ class UpdateCustomerMembershipRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -92,10 +69,6 @@ class UpdateCustomerMembershipRequestBody
         return $clone;
     }
 
-    /**
-     * @param CustomerRoles $role
-     * @return self
-     */
     public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;

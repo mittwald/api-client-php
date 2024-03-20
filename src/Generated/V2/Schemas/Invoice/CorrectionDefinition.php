@@ -21,8 +21,6 @@ class CorrectionDefinition
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,46 +39,26 @@ class CorrectionDefinition
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
-    /**
-     * @var DatePeriod
-     */
     private DatePeriod $creditPeriod;
 
-    /**
-     * @param string $contractItemId
-     * @param DatePeriod $creditPeriod
-     */
     public function __construct(string $contractItemId, DatePeriod $creditPeriod)
     {
         $this->contractItemId = $contractItemId;
         $this->creditPeriod = $creditPeriod;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return DatePeriod
-     */
     public function getCreditPeriod(): DatePeriod
     {
         return $this->creditPeriod;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -95,10 +73,6 @@ class CorrectionDefinition
         return $clone;
     }
 
-    /**
-     * @param DatePeriod $creditPeriod
-     * @return self
-     */
     public function withCreditPeriod(DatePeriod $creditPeriod): self
     {
         $clone = clone $this;
@@ -154,7 +128,7 @@ class CorrectionDefinition
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

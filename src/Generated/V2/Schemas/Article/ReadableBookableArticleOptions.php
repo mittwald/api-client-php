@@ -21,8 +21,6 @@ class ReadableBookableArticleOptions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -58,57 +56,32 @@ class ReadableBookableArticleOptions
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $articleId;
 
-    /**
-     * @var ReadableBookableArticleOptionsInfo|null
-     */
     private ?ReadableBookableArticleOptionsInfo $info = null;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $maxArticleCount = null;
 
-    /**
-     * @param string $articleId
-     */
     public function __construct(string $articleId)
     {
         $this->articleId = $articleId;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleId(): string
     {
         return $this->articleId;
     }
 
-    /**
-     * @return ReadableBookableArticleOptionsInfo|null
-     */
     public function getInfo(): ?ReadableBookableArticleOptionsInfo
     {
         return $this->info ?? null;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getMaxArticleCount(): int|float|null
     {
         return $this->maxArticleCount;
     }
 
-    /**
-     * @param string $articleId
-     * @return self
-     */
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
@@ -123,10 +96,6 @@ class ReadableBookableArticleOptions
         return $clone;
     }
 
-    /**
-     * @param ReadableBookableArticleOptionsInfo $info
-     * @return self
-     */
     public function withInfo(ReadableBookableArticleOptionsInfo $info): self
     {
         $clone = clone $this;
@@ -135,9 +104,6 @@ class ReadableBookableArticleOptions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInfo(): self
     {
         $clone = clone $this;
@@ -148,7 +114,6 @@ class ReadableBookableArticleOptions
 
     /**
      * @param int|float $maxArticleCount
-     * @return self
      */
     public function withMaxArticleCount(int|float $maxArticleCount): self
     {
@@ -164,9 +129,6 @@ class ReadableBookableArticleOptions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMaxArticleCount(): self
     {
         $clone = clone $this;
@@ -197,7 +159,7 @@ class ReadableBookableArticleOptions
         }
         $maxArticleCount = null;
         if (isset($input->{'maxArticleCount'})) {
-            $maxArticleCount = str_contains($input->{'maxArticleCount'}, '.') ? (float)($input->{'maxArticleCount'}) : (int)($input->{'maxArticleCount'});
+            $maxArticleCount = str_contains((string)($input->{'maxArticleCount'}), '.') ? (float)($input->{'maxArticleCount'}) : (int)($input->{'maxArticleCount'});
         }
 
         $obj = new self($articleId);
@@ -235,7 +197,7 @@ class ReadableBookableArticleOptions
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

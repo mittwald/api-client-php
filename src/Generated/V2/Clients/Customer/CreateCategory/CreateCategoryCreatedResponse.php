@@ -13,8 +13,6 @@ class CreateCategoryCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -48,33 +46,20 @@ class CreateCategoryCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateCategoryCreatedResponseBody
-     */
     private CreateCategoryCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateCategoryCreatedResponseBody $body
-     */
     public function __construct(CreateCategoryCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateCategoryCreatedResponseBody
-     */
     public function getBody(): CreateCategoryCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateCategoryCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateCategoryCreatedResponseBody $body): self
     {
         $clone = clone $this;

@@ -11,8 +11,6 @@ class SetDatabaseUsersRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,7 +50,6 @@ class SetDatabaseUsersRequestBody
 
     /**
      * @param string[] $databaseUserIds
-     * @return self
      */
     public function withDatabaseUserIds(array $databaseUserIds): self
     {

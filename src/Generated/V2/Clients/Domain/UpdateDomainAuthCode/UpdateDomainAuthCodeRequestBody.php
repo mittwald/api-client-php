@@ -11,8 +11,6 @@ class UpdateDomainAuthCodeRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,31 +24,18 @@ class UpdateDomainAuthCodeRequestBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $authCode;
 
-    /**
-     * @param string $authCode
-     */
     public function __construct(string $authCode)
     {
         $this->authCode = $authCode;
     }
 
-    /**
-     * @return string
-     */
     public function getAuthCode(): string
     {
         return $this->authCode;
     }
 
-    /**
-     * @param string $authCode
-     * @return self
-     */
     public function withAuthCode(string $authCode): self
     {
         $validator = new Validator();

@@ -12,8 +12,6 @@ class DeprecatedUserUpdateAccountRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class DeprecatedUserUpdateAccountRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var Person
-     */
     private Person $person;
 
-    /**
-     * @param Person $person
-     */
     public function __construct(Person $person)
     {
         $this->person = $person;
     }
 
-    /**
-     * @return Person
-     */
     public function getPerson(): Person
     {
         return $this->person;
     }
 
-    /**
-     * @param Person $person
-     * @return self
-     */
     public function withPerson(Person $person): self
     {
         $clone = clone $this;

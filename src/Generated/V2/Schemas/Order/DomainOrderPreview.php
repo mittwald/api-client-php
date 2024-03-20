@@ -21,8 +21,6 @@ class DomainOrderPreview
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,57 +43,32 @@ class DomainOrderPreview
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $authCode = null;
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var string|null
-     */
     private ?string $projectId = null;
 
-    /**
-     * @param string $domain
-     */
     public function __construct(string $domain)
     {
         $this->domain = $domain;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAuthCode(): ?string
     {
         return $this->authCode ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
 
-    /**
-     * @param string $authCode
-     * @return self
-     */
     public function withAuthCode(string $authCode): self
     {
         $validator = new Validator();
@@ -110,9 +83,6 @@ class DomainOrderPreview
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAuthCode(): self
     {
         $clone = clone $this;
@@ -121,10 +91,6 @@ class DomainOrderPreview
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -139,10 +105,6 @@ class DomainOrderPreview
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -157,9 +119,6 @@ class DomainOrderPreview
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectId(): self
     {
         $clone = clone $this;
@@ -228,7 +187,7 @@ class DomainOrderPreview
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

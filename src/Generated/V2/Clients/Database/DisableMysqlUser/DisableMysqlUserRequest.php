@@ -13,8 +13,6 @@ class DisableMysqlUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class DisableMysqlUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlUserId;
 
     /**
@@ -48,7 +43,6 @@ class DisableMysqlUserRequest
     ];
 
     /**
-     * @param string $mysqlUserId
      * @param mixed $body
      */
     public function __construct(string $mysqlUserId, $body)
@@ -57,9 +51,6 @@ class DisableMysqlUserRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlUserId(): string
     {
         return $this->mysqlUserId;
@@ -73,10 +64,6 @@ class DisableMysqlUserRequest
         return $this->body;
     }
 
-    /**
-     * @param string $mysqlUserId
-     * @return self
-     */
     public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class DisableMysqlUserRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

@@ -11,8 +11,6 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,44 +35,25 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var OauthRetrieveAccessTokenBadRequestResponseBodyError
-     */
     private OauthRetrieveAccessTokenBadRequestResponseBodyError $error;
 
-    /**
-     * @var string|null
-     */
     private ?string $error_description = null;
 
-    /**
-     * @param OauthRetrieveAccessTokenBadRequestResponseBodyError $error
-     */
     public function __construct(OauthRetrieveAccessTokenBadRequestResponseBodyError $error)
     {
         $this->error = $error;
     }
 
-    /**
-     * @return OauthRetrieveAccessTokenBadRequestResponseBodyError
-     */
     public function getError(): OauthRetrieveAccessTokenBadRequestResponseBodyError
     {
         return $this->error;
     }
 
-    /**
-     * @return string|null
-     */
     public function getErrorDescription(): ?string
     {
         return $this->error_description ?? null;
     }
 
-    /**
-     * @param OauthRetrieveAccessTokenBadRequestResponseBodyError $error
-     * @return self
-     */
     public function withError(OauthRetrieveAccessTokenBadRequestResponseBodyError $error): self
     {
         $clone = clone $this;
@@ -83,10 +62,6 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $error_description
-     * @return self
-     */
     public function withErrorDescription(string $error_description): self
     {
         $validator = new Validator();
@@ -101,9 +76,6 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutErrorDescription(): self
     {
         $clone = clone $this;

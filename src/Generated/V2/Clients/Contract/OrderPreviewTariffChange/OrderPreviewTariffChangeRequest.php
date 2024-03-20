@@ -13,8 +13,6 @@ class OrderPreviewTariffChangeRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,35 +45,22 @@ class OrderPreviewTariffChangeRequest
         ],
     ];
 
-    /**
-     * @var OrderPreviewTariffChangeRequestBody
-     */
     private OrderPreviewTariffChangeRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param OrderPreviewTariffChangeRequestBody $body
-     */
     public function __construct(OrderPreviewTariffChangeRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OrderPreviewTariffChangeRequestBody
-     */
     public function getBody(): OrderPreviewTariffChangeRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OrderPreviewTariffChangeRequestBody $body
-     * @return self
-     */
     public function withBody(OrderPreviewTariffChangeRequestBody $body): self
     {
         $clone = clone $this;

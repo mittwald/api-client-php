@@ -13,8 +13,6 @@ class DnsGetDnsZoneRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DnsGetDnsZoneRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $dnsZoneId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $dnsZoneId
-     */
     public function __construct(string $dnsZoneId)
     {
         $this->dnsZoneId = $dnsZoneId;
     }
 
-    /**
-     * @return string
-     */
     public function getDnsZoneId(): string
     {
         return $this->dnsZoneId;
     }
 
-    /**
-     * @param string $dnsZoneId
-     * @return self
-     */
     public function withDnsZoneId(string $dnsZoneId): self
     {
         $validator = new Validator();

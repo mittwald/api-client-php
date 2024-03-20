@@ -21,8 +21,6 @@ class AuthenticationAlternative2
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -62,7 +60,6 @@ class AuthenticationAlternative2
 
     /**
      * @param PublicKey[] $publicKeys
-     * @return self
      */
     public function withPublicKeys(array $publicKeys): self
     {
@@ -117,7 +114,7 @@ class AuthenticationAlternative2
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

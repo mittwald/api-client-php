@@ -13,8 +13,6 @@ class GetMissingDependenciesForAppinstallationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class GetMissingDependenciesForAppinstallationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var string
-     */
     private string $targetAppVersionID;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param string $targetAppVersionID
-     */
     public function __construct(string $appInstallationId, string $targetAppVersionID)
     {
         $this->appInstallationId = $appInstallationId;
         $this->targetAppVersionID = $targetAppVersionID;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return string
-     */
     public function getTargetAppVersionID(): string
     {
         return $this->targetAppVersionID;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class GetMissingDependenciesForAppinstallationRequest
         return $clone;
     }
 
-    /**
-     * @param string $targetAppVersionID
-     * @return self
-     */
     public function withTargetAppVersionID(string $targetAppVersionID): self
     {
         $validator = new Validator();

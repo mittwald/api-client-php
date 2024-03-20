@@ -22,8 +22,6 @@ class MySqlUser
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -88,78 +86,30 @@ class MySqlUser
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $accessIpMask = null;
 
-    /**
-     * @var MySqlUserAccessLevel
-     */
     private MySqlUserAccessLevel $accessLevel;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var bool
-     */
     private bool $disabled;
 
-    /**
-     * @var bool
-     */
     private bool $externalAccess;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var bool
-     */
     private bool $mainUser;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $passwordUpdatedAt;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @param MySqlUserAccessLevel $accessLevel
-     * @param DateTime $createdAt
-     * @param string $databaseId
-     * @param bool $disabled
-     * @param bool $externalAccess
-     * @param string $id
-     * @param bool $mainUser
-     * @param string $name
-     * @param DateTime $passwordUpdatedAt
-     * @param DateTime $updatedAt
-     */
     public function __construct(MySqlUserAccessLevel $accessLevel, DateTime $createdAt, string $databaseId, bool $disabled, bool $externalAccess, string $id, bool $mainUser, string $name, DateTime $passwordUpdatedAt, DateTime $updatedAt)
     {
         $this->accessLevel = $accessLevel;
@@ -174,106 +124,66 @@ class MySqlUser
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
 
-    /**
-     * @return MySqlUserAccessLevel
-     */
     public function getAccessLevel(): MySqlUserAccessLevel
     {
         return $this->accessLevel;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getDisabled(): bool
     {
         return $this->disabled;
     }
 
-    /**
-     * @return bool
-     */
     public function getExternalAccess(): bool
     {
         return $this->externalAccess;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getMainUser(): bool
     {
         return $this->mainUser;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param string $accessIpMask
-     * @return self
-     */
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
@@ -288,9 +198,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
@@ -299,10 +206,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param MySqlUserAccessLevel $accessLevel
-     * @return self
-     */
     public function withAccessLevel(MySqlUserAccessLevel $accessLevel): self
     {
         $clone = clone $this;
@@ -311,10 +214,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -323,10 +222,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
@@ -341,10 +236,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -359,9 +250,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -370,10 +258,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param bool $disabled
-     * @return self
-     */
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
@@ -388,10 +272,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param bool $externalAccess
-     * @return self
-     */
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
@@ -406,10 +286,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -424,10 +300,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param bool $mainUser
-     * @return self
-     */
     public function withMainUser(bool $mainUser): self
     {
         $validator = new Validator();
@@ -442,10 +314,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -460,10 +328,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $passwordUpdatedAt
-     * @return self
-     */
     public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
     {
         $clone = clone $this;
@@ -472,10 +336,6 @@ class MySqlUser
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -562,7 +422,7 @@ class MySqlUser
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

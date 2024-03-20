@@ -13,8 +13,6 @@ class UpdateProjectDescriptionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class UpdateProjectDescriptionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var UpdateProjectDescriptionRequestBody
-     */
     private UpdateProjectDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param UpdateProjectDescriptionRequestBody $body
-     */
     public function __construct(string $projectId, UpdateProjectDescriptionRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return UpdateProjectDescriptionRequestBody
-     */
     public function getBody(): UpdateProjectDescriptionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class UpdateProjectDescriptionRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateProjectDescriptionRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateProjectDescriptionRequestBody $body): self
     {
         $clone = clone $this;

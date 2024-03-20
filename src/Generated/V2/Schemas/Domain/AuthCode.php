@@ -22,8 +22,6 @@ class AuthCode
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,44 +39,25 @@ class AuthCode
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expires = null;
 
-    /**
-     * @var string
-     */
     private string $value;
 
-    /**
-     * @param string $value
-     */
     public function __construct(string $value)
     {
         $this->value = $value;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpires(): ?DateTime
     {
         return $this->expires ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getValue(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param DateTime $expires
-     * @return self
-     */
     public function withExpires(DateTime $expires): self
     {
         $clone = clone $this;
@@ -87,9 +66,6 @@ class AuthCode
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpires(): self
     {
         $clone = clone $this;
@@ -98,10 +74,6 @@ class AuthCode
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();
@@ -168,7 +140,7 @@ class AuthCode
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

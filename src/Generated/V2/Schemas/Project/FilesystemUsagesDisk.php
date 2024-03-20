@@ -21,8 +21,6 @@ class FilesystemUsagesDisk
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,19 +37,10 @@ class FilesystemUsagesDisk
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $path = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $totalBytes = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $usedBytes = null;
 
     /**
@@ -61,34 +50,21 @@ class FilesystemUsagesDisk
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getPath(): ?string
     {
         return $this->path ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getTotalBytes(): ?int
     {
         return $this->totalBytes ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getUsedBytes(): ?int
     {
         return $this->usedBytes ?? null;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -103,9 +79,6 @@ class FilesystemUsagesDisk
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPath(): self
     {
         $clone = clone $this;
@@ -114,10 +87,6 @@ class FilesystemUsagesDisk
         return $clone;
     }
 
-    /**
-     * @param int $totalBytes
-     * @return self
-     */
     public function withTotalBytes(int $totalBytes): self
     {
         $validator = new Validator();
@@ -132,9 +101,6 @@ class FilesystemUsagesDisk
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTotalBytes(): self
     {
         $clone = clone $this;
@@ -143,10 +109,6 @@ class FilesystemUsagesDisk
         return $clone;
     }
 
-    /**
-     * @param int $usedBytes
-     * @return self
-     */
     public function withUsedBytes(int $usedBytes): self
     {
         $validator = new Validator();
@@ -161,9 +123,6 @@ class FilesystemUsagesDisk
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUsedBytes(): self
     {
         $clone = clone $this;
@@ -238,7 +197,7 @@ class FilesystemUsagesDisk
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

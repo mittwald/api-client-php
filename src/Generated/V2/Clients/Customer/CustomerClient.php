@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Generated\V2\Clients\Customer;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -75,7 +77,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param AcceptCustomerInvite\AcceptCustomerInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function acceptCustomerInvite(AcceptCustomerInviteRequest $request): EmptyResponse;
     /**
@@ -105,7 +106,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param CreateCustomerInvite\CreateCustomerInviteRequest $request An object representing the request for this operation
-     * @return CreateCustomerInvite\CreateCustomerInviteCreatedResponse
      */
     public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse;
     /**
@@ -115,7 +115,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeclineCustomerInvite\DeclineCustomerInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function declineCustomerInvite(DeclineCustomerInviteRequest $request): EmptyResponse;
     /**
@@ -125,7 +124,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteCategory\DeleteCategoryRequest $request An object representing the request for this operation
-     * @return DeleteCategory\DeleteCategoryOKResponse
      */
     public function deleteCategory(DeleteCategoryRequest $request): DeleteCategoryOKResponse;
     /**
@@ -135,7 +133,7 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteCustomer\DeleteCustomerRequest $request An object representing the request for this operation
-     * @return DeleteCustomer\DeleteCustomerOKResponse
+     * @return DeleteCustomer\DeleteCustomerOKResponse Returns the uuid of the deleted customer
      */
     public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse;
     /**
@@ -145,7 +143,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteCustomerInvite\DeleteCustomerInviteRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function deleteCustomerInvite(DeleteCustomerInviteRequest $request): EmptyResponse;
     /**
@@ -155,7 +152,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteCustomerMembership\DeleteCustomerMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function deleteCustomerMembership(DeleteCustomerMembershipRequest $request): EmptyResponse;
     /**
@@ -205,7 +201,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param GetCustomerTokenInvite\GetCustomerTokenInviteRequest $request An object representing the request for this operation
-     * @return GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse
      */
     public function getCustomerTokenInvite(GetCustomerTokenInviteRequest $request): GetCustomerTokenInviteOKResponse;
     /**
@@ -225,7 +220,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param LeaveCustomer\LeaveCustomerRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function leaveCustomer(LeaveCustomerRequest $request): EmptyResponse;
     /**
@@ -255,7 +249,7 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListCustomers\ListCustomersRequest $request An object representing the request for this operation
-     * @return ListCustomers\ListCustomersOKResponse The list of customers the user is a member for
+     * @return ListCustomers\ListCustomersOKResponse The list of customers the authenticated user is a member for
      */
     public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse;
     /**
@@ -315,7 +309,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ResendCustomerInviteMail\ResendCustomerInviteMailRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function resendCustomerInviteMail(ResendCustomerInviteMailRequest $request): EmptyResponse;
     /**
@@ -345,7 +338,6 @@ interface CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param UpdateCustomerMembership\UpdateCustomerMembershipRequest $request An object representing the request for this operation
-     * @return EmptyResponse
      */
     public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse;
 }

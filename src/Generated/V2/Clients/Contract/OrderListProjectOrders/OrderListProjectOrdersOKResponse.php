@@ -14,8 +14,6 @@ class OrderListProjectOrdersOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -57,7 +55,6 @@ class OrderListProjectOrdersOKResponse implements ResponseContainer
 
     /**
      * @param CustomerOrder[] $body
-     * @return self
      */
     public function withBody(array $body): self
     {

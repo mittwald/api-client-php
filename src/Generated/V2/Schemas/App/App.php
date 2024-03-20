@@ -22,8 +22,6 @@ class App
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'An App is to be understood as a manifest for AppInstallations. E.g. \'WordPress\' only exists inside our ecosystem, because there is an  App -Manifest for it.',
@@ -57,14 +55,8 @@ class App
      */
     private ?array $actionCapabilities = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
     /**
@@ -73,8 +65,6 @@ class App
     private array $tags;
 
     /**
-     * @param string $id
-     * @param string $name
      * @param string[] $tags
      */
     public function __construct(string $id, string $name, array $tags)
@@ -92,17 +82,11 @@ class App
         return $this->actionCapabilities ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -118,7 +102,6 @@ class App
 
     /**
      * @param Action[] $actionCapabilities
-     * @return self
      */
     public function withActionCapabilities(array $actionCapabilities): self
     {
@@ -128,9 +111,6 @@ class App
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActionCapabilities(): self
     {
         $clone = clone $this;
@@ -139,10 +119,6 @@ class App
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -157,10 +133,6 @@ class App
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -177,7 +149,6 @@ class App
 
     /**
      * @param string[] $tags
-     * @return self
      */
     public function withTags(array $tags): self
     {
@@ -249,7 +220,7 @@ class App
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

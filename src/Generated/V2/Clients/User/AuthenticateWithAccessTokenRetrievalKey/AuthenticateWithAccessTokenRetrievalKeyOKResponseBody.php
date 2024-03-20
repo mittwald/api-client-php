@@ -12,8 +12,6 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,28 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
     /**
      * Public token to identify yourself against the public api.
-     *
-     * @var string
      */
     private string $token;
 
-    /**
-     * @param string $token
-     */
     public function __construct(string $token)
     {
         $this->token = $token;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -80,9 +60,6 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -91,10 +68,6 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function withToken(string $token): self
     {
         $validator = new Validator();

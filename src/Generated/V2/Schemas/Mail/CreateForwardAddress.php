@@ -21,8 +21,6 @@ class CreateForwardAddress
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,9 +43,6 @@ class CreateForwardAddress
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $address;
 
     /**
@@ -56,7 +51,6 @@ class CreateForwardAddress
     private array $forwardAddresses;
 
     /**
-     * @param string $address
      * @param string[] $forwardAddresses
      */
     public function __construct(string $address, array $forwardAddresses)
@@ -65,9 +59,6 @@ class CreateForwardAddress
         $this->forwardAddresses = $forwardAddresses;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress(): string
     {
         return $this->address;
@@ -81,10 +72,6 @@ class CreateForwardAddress
         return $this->forwardAddresses;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();
@@ -101,7 +88,6 @@ class CreateForwardAddress
 
     /**
      * @param string[] $forwardAddresses
-     * @return self
      */
     public function withForwardAddresses(array $forwardAddresses): self
     {
@@ -164,7 +150,7 @@ class CreateForwardAddress
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

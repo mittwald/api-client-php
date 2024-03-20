@@ -21,8 +21,6 @@ class InvoiceItemItemCancelledOrCorrectedByItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -38,14 +36,8 @@ class InvoiceItemItemCancelledOrCorrectedByItem
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $sourceInvoiceId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $sourceInvoiceItemId = null;
 
     /**
@@ -55,26 +47,16 @@ class InvoiceItemItemCancelledOrCorrectedByItem
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getSourceInvoiceId(): ?string
     {
         return $this->sourceInvoiceId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSourceInvoiceItemId(): ?string
     {
         return $this->sourceInvoiceItemId ?? null;
     }
 
-    /**
-     * @param string $sourceInvoiceId
-     * @return self
-     */
     public function withSourceInvoiceId(string $sourceInvoiceId): self
     {
         $validator = new Validator();
@@ -89,9 +71,6 @@ class InvoiceItemItemCancelledOrCorrectedByItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSourceInvoiceId(): self
     {
         $clone = clone $this;
@@ -100,10 +79,6 @@ class InvoiceItemItemCancelledOrCorrectedByItem
         return $clone;
     }
 
-    /**
-     * @param string $sourceInvoiceItemId
-     * @return self
-     */
     public function withSourceInvoiceItemId(string $sourceInvoiceItemId): self
     {
         $validator = new Validator();
@@ -118,9 +93,6 @@ class InvoiceItemItemCancelledOrCorrectedByItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSourceInvoiceItemId(): self
     {
         $clone = clone $this;
@@ -187,7 +159,7 @@ class InvoiceItemItemCancelledOrCorrectedByItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class GetMysqlUserPhpMyAdminUrlRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetMysqlUserPhpMyAdminUrlRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlUserId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mysqlUserId
-     */
     public function __construct(string $mysqlUserId)
     {
         $this->mysqlUserId = $mysqlUserId;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlUserId(): string
     {
         return $this->mysqlUserId;
     }
 
-    /**
-     * @param string $mysqlUserId
-     * @return self
-     */
     public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();

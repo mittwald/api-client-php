@@ -21,8 +21,6 @@ class ReadableArticleMachineType
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,26 +45,12 @@ class ReadableArticleMachineType
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $cpu;
 
-    /**
-     * @var string
-     */
     private string $memory;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @param string $cpu
-     * @param string $memory
-     * @param string $name
-     */
     public function __construct(string $cpu, string $memory, string $name)
     {
         $this->cpu = $cpu;
@@ -74,34 +58,21 @@ class ReadableArticleMachineType
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getCpu(): string
     {
         return $this->cpu;
     }
 
-    /**
-     * @return string
-     */
     public function getMemory(): string
     {
         return $this->memory;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $cpu
-     * @return self
-     */
     public function withCpu(string $cpu): self
     {
         $validator = new Validator();
@@ -116,10 +87,6 @@ class ReadableArticleMachineType
         return $clone;
     }
 
-    /**
-     * @param string $memory
-     * @return self
-     */
     public function withMemory(string $memory): self
     {
         $validator = new Validator();
@@ -134,10 +101,6 @@ class ReadableArticleMachineType
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -201,7 +164,7 @@ class ReadableArticleMachineType
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

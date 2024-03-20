@@ -11,8 +11,6 @@ class DnsSetRecordSetManagedNoContentResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -24,9 +22,6 @@ class DnsSetRecordSetManagedNoContentResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $ingressId = null;
 
     /**
@@ -36,18 +31,11 @@ class DnsSetRecordSetManagedNoContentResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getIngressId(): ?string
     {
         return $this->ingressId ?? null;
     }
 
-    /**
-     * @param string $ingressId
-     * @return self
-     */
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();
@@ -62,9 +50,6 @@ class DnsSetRecordSetManagedNoContentResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIngressId(): self
     {
         $clone = clone $this;

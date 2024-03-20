@@ -21,8 +21,6 @@ class ReadableChangeArticleOptionsInfo
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -41,19 +39,10 @@ class ReadableChangeArticleOptionsInfo
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $articleName = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $articleTemplateName = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $fromArticleTemplate = null;
 
     /**
@@ -63,34 +52,21 @@ class ReadableChangeArticleOptionsInfo
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getArticleName(): ?string
     {
         return $this->articleName ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getArticleTemplateName(): ?string
     {
         return $this->articleTemplateName ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getFromArticleTemplate(): ?bool
     {
         return $this->fromArticleTemplate ?? null;
     }
 
-    /**
-     * @param string $articleName
-     * @return self
-     */
     public function withArticleName(string $articleName): self
     {
         $validator = new Validator();
@@ -105,9 +81,6 @@ class ReadableChangeArticleOptionsInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutArticleName(): self
     {
         $clone = clone $this;
@@ -116,10 +89,6 @@ class ReadableChangeArticleOptionsInfo
         return $clone;
     }
 
-    /**
-     * @param string $articleTemplateName
-     * @return self
-     */
     public function withArticleTemplateName(string $articleTemplateName): self
     {
         $validator = new Validator();
@@ -134,9 +103,6 @@ class ReadableChangeArticleOptionsInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutArticleTemplateName(): self
     {
         $clone = clone $this;
@@ -145,10 +111,6 @@ class ReadableChangeArticleOptionsInfo
         return $clone;
     }
 
-    /**
-     * @param bool $fromArticleTemplate
-     * @return self
-     */
     public function withFromArticleTemplate(bool $fromArticleTemplate): self
     {
         $validator = new Validator();
@@ -163,9 +125,6 @@ class ReadableChangeArticleOptionsInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFromArticleTemplate(): self
     {
         $clone = clone $this;
@@ -240,7 +199,7 @@ class ReadableChangeArticleOptionsInfo
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

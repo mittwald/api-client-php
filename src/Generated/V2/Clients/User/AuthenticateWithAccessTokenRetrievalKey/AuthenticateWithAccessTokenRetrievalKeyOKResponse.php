@@ -13,8 +13,6 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponse implements ResponseConta
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,33 +39,20 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponse implements ResponseConta
         ],
     ];
 
-    /**
-     * @var AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
-     */
     private AuthenticateWithAccessTokenRetrievalKeyOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param AuthenticateWithAccessTokenRetrievalKeyOKResponseBody $body
-     */
     public function __construct(AuthenticateWithAccessTokenRetrievalKeyOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
-     */
     public function getBody(): AuthenticateWithAccessTokenRetrievalKeyOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param AuthenticateWithAccessTokenRetrievalKeyOKResponseBody $body
-     * @return self
-     */
     public function withBody(AuthenticateWithAccessTokenRetrievalKeyOKResponseBody $body): self
     {
         $clone = clone $this;

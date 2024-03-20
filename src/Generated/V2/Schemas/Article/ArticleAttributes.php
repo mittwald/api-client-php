@@ -21,8 +21,6 @@ class ArticleAttributes
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -58,116 +56,64 @@ class ArticleAttributes
         ],
         'required' => [
             'key',
-            'value',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $customerEditable = null;
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @var ArticleAttributesMergeType|null
-     */
     private ?ArticleAttributesMergeType $mergeType = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $readonly = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $required = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $unit = null;
 
-    /**
-     * @var string
-     */
-    private string $value;
+    private ?string $value = null;
 
-    /**
-     * @param string $key
-     * @param string $value
-     */
-    public function __construct(string $key, string $value)
+    public function __construct(string $key)
     {
         $this->key = $key;
-        $this->value = $value;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCustomerEditable(): ?bool
     {
         return $this->customerEditable ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return ArticleAttributesMergeType|null
-     */
     public function getMergeType(): ?ArticleAttributesMergeType
     {
         return $this->mergeType ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getReadonly(): ?bool
     {
         return $this->readonly ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRequired(): ?bool
     {
         return $this->required ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUnit(): ?string
     {
         return $this->unit ?? null;
     }
 
-    /**
-     * @return string
-     */
-    public function getValue(): string
+    public function getValue(): ?string
     {
-        return $this->value;
+        return $this->value ?? null;
     }
 
-    /**
-     * @param bool $customerEditable
-     * @return self
-     */
     public function withCustomerEditable(bool $customerEditable): self
     {
         $validator = new Validator();
@@ -182,9 +128,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCustomerEditable(): self
     {
         $clone = clone $this;
@@ -193,10 +136,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -211,10 +150,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @param ArticleAttributesMergeType $mergeType
-     * @return self
-     */
     public function withMergeType(ArticleAttributesMergeType $mergeType): self
     {
         $clone = clone $this;
@@ -223,9 +158,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMergeType(): self
     {
         $clone = clone $this;
@@ -234,10 +166,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @param bool $readonly
-     * @return self
-     */
     public function withReadonly(bool $readonly): self
     {
         $validator = new Validator();
@@ -252,9 +180,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReadonly(): self
     {
         $clone = clone $this;
@@ -263,10 +188,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @param bool $required
-     * @return self
-     */
     public function withRequired(bool $required): self
     {
         $validator = new Validator();
@@ -281,9 +202,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRequired(): self
     {
         $clone = clone $this;
@@ -292,10 +210,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @param string $unit
-     * @return self
-     */
     public function withUnit(string $unit): self
     {
         $validator = new Validator();
@@ -310,9 +224,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUnit(): self
     {
         $clone = clone $this;
@@ -321,10 +232,6 @@ class ArticleAttributes
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();
@@ -335,6 +242,14 @@ class ArticleAttributes
 
         $clone = clone $this;
         $clone->value = $value;
+
+        return $clone;
+    }
+
+    public function withoutValue(): self
+    {
+        $clone = clone $this;
+        unset($clone->value);
 
         return $clone;
     }
@@ -375,14 +290,18 @@ class ArticleAttributes
         if (isset($input->{'unit'})) {
             $unit = $input->{'unit'};
         }
-        $value = $input->{'value'};
+        $value = null;
+        if (isset($input->{'value'})) {
+            $value = $input->{'value'};
+        }
 
-        $obj = new self($key, $value);
+        $obj = new self($key);
         $obj->customerEditable = $customerEditable;
         $obj->mergeType = $mergeType;
         $obj->readonly = $readonly;
         $obj->required = $required;
         $obj->unit = $unit;
+        $obj->value = $value;
         return $obj;
     }
 
@@ -410,7 +329,9 @@ class ArticleAttributes
         if (isset($this->unit)) {
             $output['unit'] = $this->unit;
         }
-        $output['value'] = $this->value;
+        if (isset($this->value)) {
+            $output['value'] = $this->value;
+        }
 
         return $output;
     }
@@ -425,7 +346,7 @@ class ArticleAttributes
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

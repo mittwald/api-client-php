@@ -13,8 +13,6 @@ class UpdateSftpUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -67,50 +65,30 @@ class UpdateSftpUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sftpUserId;
 
-    /**
-     * @var UpdateSftpUserRequestBody
-     */
     private UpdateSftpUserRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sftpUserId
-     * @param UpdateSftpUserRequestBody $body
-     */
     public function __construct(string $sftpUserId, UpdateSftpUserRequestBody $body)
     {
         $this->sftpUserId = $sftpUserId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getSftpUserId(): string
     {
         return $this->sftpUserId;
     }
 
-    /**
-     * @return UpdateSftpUserRequestBody
-     */
     public function getBody(): UpdateSftpUserRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $sftpUserId
-     * @return self
-     */
     public function withSftpUserId(string $sftpUserId): self
     {
         $validator = new Validator();
@@ -125,10 +103,6 @@ class UpdateSftpUserRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateSftpUserRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateSftpUserRequestBody $body): self
     {
         $clone = clone $this;

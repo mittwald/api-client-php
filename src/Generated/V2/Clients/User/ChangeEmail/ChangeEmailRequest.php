@@ -13,8 +13,6 @@ class ChangeEmailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,35 +37,22 @@ class ChangeEmailRequest
         ],
     ];
 
-    /**
-     * @var ChangeEmailRequestBody
-     */
     private ChangeEmailRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param ChangeEmailRequestBody $body
-     */
     public function __construct(ChangeEmailRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ChangeEmailRequestBody
-     */
     public function getBody(): ChangeEmailRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ChangeEmailRequestBody $body
-     * @return self
-     */
     public function withBody(ChangeEmailRequestBody $body): self
     {
         $clone = clone $this;

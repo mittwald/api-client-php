@@ -22,8 +22,6 @@ class MigrationMailAddressPreMigrationJob
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -87,7 +85,6 @@ class MigrationMailAddressPreMigrationJob
 
     /**
      * @param MigrationMailAddressPreMigrationJobAliasSet[] $aliasSet
-     * @return self
      */
     public function withAliasSet(array $aliasSet): self
     {
@@ -99,7 +96,6 @@ class MigrationMailAddressPreMigrationJob
 
     /**
      * @param MigrationMailAddressPreMigrationJobDeliveryMigration[] $deliveryMigrations
-     * @return self
      */
     public function withDeliveryMigrations(array $deliveryMigrations): self
     {
@@ -156,7 +152,7 @@ class MigrationMailAddressPreMigrationJob
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

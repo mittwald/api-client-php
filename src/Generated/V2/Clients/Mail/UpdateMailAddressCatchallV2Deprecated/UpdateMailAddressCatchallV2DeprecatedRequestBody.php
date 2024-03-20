@@ -11,8 +11,6 @@ class UpdateMailAddressCatchallV2DeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -25,31 +23,18 @@ class UpdateMailAddressCatchallV2DeprecatedRequestBody
         ],
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @param bool $active
-     */
     public function __construct(bool $active)
     {
         $this->active = $active;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();

@@ -11,8 +11,6 @@ class UpdateMailAddressSpamProtectionRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,31 +48,18 @@ class UpdateMailAddressSpamProtectionRequestBody
         ],
     ];
 
-    /**
-     * @var UpdateMailAddressSpamProtectionRequestBodySpamProtection
-     */
     private UpdateMailAddressSpamProtectionRequestBodySpamProtection $spamProtection;
 
-    /**
-     * @param UpdateMailAddressSpamProtectionRequestBodySpamProtection $spamProtection
-     */
     public function __construct(UpdateMailAddressSpamProtectionRequestBodySpamProtection $spamProtection)
     {
         $this->spamProtection = $spamProtection;
     }
 
-    /**
-     * @return UpdateMailAddressSpamProtectionRequestBodySpamProtection
-     */
     public function getSpamProtection(): UpdateMailAddressSpamProtectionRequestBodySpamProtection
     {
         return $this->spamProtection;
     }
 
-    /**
-     * @param UpdateMailAddressSpamProtectionRequestBodySpamProtection $spamProtection
-     * @return self
-     */
     public function withSpamProtection(UpdateMailAddressSpamProtectionRequestBodySpamProtection $spamProtection): self
     {
         $clone = clone $this;

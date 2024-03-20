@@ -13,8 +13,6 @@ class UpdateMailAddressAddressRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class UpdateMailAddressAddressRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressAddressRequestBody
-     */
     private UpdateMailAddressAddressRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressAddressRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressAddressRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressAddressRequestBody
-     */
     public function getBody(): UpdateMailAddressAddressRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class UpdateMailAddressAddressRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressAddressRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressAddressRequestBody $body): self
     {
         $clone = clone $this;

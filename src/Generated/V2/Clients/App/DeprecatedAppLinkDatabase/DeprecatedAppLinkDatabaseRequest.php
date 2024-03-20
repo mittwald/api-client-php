@@ -13,8 +13,6 @@ class DeprecatedAppLinkDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -57,50 +55,30 @@ class DeprecatedAppLinkDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appInstallationId;
 
-    /**
-     * @var DeprecatedAppLinkDatabaseRequestBody
-     */
     private DeprecatedAppLinkDatabaseRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appInstallationId
-     * @param DeprecatedAppLinkDatabaseRequestBody $body
-     */
     public function __construct(string $appInstallationId, DeprecatedAppLinkDatabaseRequestBody $body)
     {
         $this->appInstallationId = $appInstallationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getAppInstallationId(): string
     {
         return $this->appInstallationId;
     }
 
-    /**
-     * @return DeprecatedAppLinkDatabaseRequestBody
-     */
     public function getBody(): DeprecatedAppLinkDatabaseRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $appInstallationId
-     * @return self
-     */
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
@@ -115,10 +93,6 @@ class DeprecatedAppLinkDatabaseRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedAppLinkDatabaseRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedAppLinkDatabaseRequestBody $body): self
     {
         $clone = clone $this;

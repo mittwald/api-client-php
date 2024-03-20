@@ -22,8 +22,6 @@ class MailAddressInternalMailboxStorageInBytesCurrent
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,18 +40,11 @@ class MailAddressInternalMailboxStorageInBytesCurrent
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @var int|float
-     */
     private int|float $value;
 
     /**
-     * @param DateTime $updatedAt
      * @param int|float $value
      */
     public function __construct(DateTime $updatedAt, int|float $value)
@@ -62,26 +53,16 @@ class MailAddressInternalMailboxStorageInBytesCurrent
         $this->value = $value;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return int|float
-     */
     public function getValue(): int|float
     {
         return $this->value;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -92,7 +73,6 @@ class MailAddressInternalMailboxStorageInBytesCurrent
 
     /**
      * @param int|float $value
-     * @return self
      */
     public function withValue(int|float $value): self
     {
@@ -124,7 +104,7 @@ class MailAddressInternalMailboxStorageInBytesCurrent
         }
 
         $updatedAt = new DateTime($input->{'updatedAt'});
-        $value = str_contains($input->{'value'}, '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
+        $value = str_contains((string)($input->{'value'}), '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
 
         $obj = new self($updatedAt, $value);
 
@@ -155,7 +135,7 @@ class MailAddressInternalMailboxStorageInBytesCurrent
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -21,56 +21,221 @@ class PossibleCheckErrors
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
-            'jwt' => [
-                'type' => 'string',
+            'alreadyExistingMailAddress' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorAlreadyExistingMailAddress',
+                ],
+                'type' => 'array',
+            ],
+            'ambiguousMailAddressDelivery' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery',
+                ],
+                'type' => 'array',
+            ],
+            'ambiguousMailboxDelivery' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery',
+                ],
+                'type' => 'array',
+            ],
+            'catchAllMissingAddress' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorCatchAllMissingAddress',
+                ],
+                'type' => 'array',
+            ],
+            'catchAllTargetWithoutAlias' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias',
+                ],
+                'type' => 'array',
+            ],
+            'missingVerifiedIngress' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorMissingVerifiedIngress',
+                ],
+                'type' => 'array',
             ],
         ],
         'required' => [
-            'jwt',
+            'ambiguousMailAddressDelivery',
+            'ambiguousMailboxDelivery',
+            'catchAllMissingAddress',
+            'catchAllTargetWithoutAlias',
+            'missingVerifiedIngress',
+            'alreadyExistingMailAddress',
         ],
         'type' => 'object',
     ];
 
     /**
-     * @var string
+     * @var CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[]
      */
-    private string $jwt;
+    private array $alreadyExistingMailAddress;
 
     /**
-     * @param string $jwt
+     * @var CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[]
      */
-    public function __construct(string $jwt)
+    private array $ambiguousMailAddressDelivery;
+
+    /**
+     * @var CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[]
+     */
+    private array $ambiguousMailboxDelivery;
+
+    /**
+     * @var CheckMigrationIsPossibleErrorCatchAllMissingAddress[]
+     */
+    private array $catchAllMissingAddress;
+
+    /**
+     * @var CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[]
+     */
+    private array $catchAllTargetWithoutAlias;
+
+    /**
+     * @var CheckMigrationIsPossibleErrorMissingVerifiedIngress[]
+     */
+    private array $missingVerifiedIngress;
+
+    /**
+     * @param CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[] $alreadyExistingMailAddress
+     * @param CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[] $ambiguousMailAddressDelivery
+     * @param CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[] $ambiguousMailboxDelivery
+     * @param CheckMigrationIsPossibleErrorCatchAllMissingAddress[] $catchAllMissingAddress
+     * @param CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[] $catchAllTargetWithoutAlias
+     * @param CheckMigrationIsPossibleErrorMissingVerifiedIngress[] $missingVerifiedIngress
+     */
+    public function __construct(array $alreadyExistingMailAddress, array $ambiguousMailAddressDelivery, array $ambiguousMailboxDelivery, array $catchAllMissingAddress, array $catchAllTargetWithoutAlias, array $missingVerifiedIngress)
     {
-        $this->jwt = $jwt;
+        $this->alreadyExistingMailAddress = $alreadyExistingMailAddress;
+        $this->ambiguousMailAddressDelivery = $ambiguousMailAddressDelivery;
+        $this->ambiguousMailboxDelivery = $ambiguousMailboxDelivery;
+        $this->catchAllMissingAddress = $catchAllMissingAddress;
+        $this->catchAllTargetWithoutAlias = $catchAllTargetWithoutAlias;
+        $this->missingVerifiedIngress = $missingVerifiedIngress;
     }
 
     /**
-     * @return string
+     * @return
+     * CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[]
      */
-    public function getJwt(): string
+    public function getAlreadyExistingMailAddress(): array
     {
-        return $this->jwt;
+        return $this->alreadyExistingMailAddress;
     }
 
     /**
-     * @param string $jwt
-     * @return self
+     * @return
+     * CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[]
      */
-    public function withJwt(string $jwt): self
+    public function getAmbiguousMailAddressDelivery(): array
     {
-        $validator = new Validator();
-        $validator->validate($jwt, static::$schema['properties']['jwt']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
+        return $this->ambiguousMailAddressDelivery;
+    }
 
+    /**
+     * @return
+     * CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[]
+     */
+    public function getAmbiguousMailboxDelivery(): array
+    {
+        return $this->ambiguousMailboxDelivery;
+    }
+
+    /**
+     * @return
+     * CheckMigrationIsPossibleErrorCatchAllMissingAddress[]
+     */
+    public function getCatchAllMissingAddress(): array
+    {
+        return $this->catchAllMissingAddress;
+    }
+
+    /**
+     * @return
+     * CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[]
+     */
+    public function getCatchAllTargetWithoutAlias(): array
+    {
+        return $this->catchAllTargetWithoutAlias;
+    }
+
+    /**
+     * @return
+     * CheckMigrationIsPossibleErrorMissingVerifiedIngress[]
+     */
+    public function getMissingVerifiedIngress(): array
+    {
+        return $this->missingVerifiedIngress;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[] $alreadyExistingMailAddress
+     */
+    public function withAlreadyExistingMailAddress(array $alreadyExistingMailAddress): self
+    {
         $clone = clone $this;
-        $clone->jwt = $jwt;
+        $clone->alreadyExistingMailAddress = $alreadyExistingMailAddress;
+
+        return $clone;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[] $ambiguousMailAddressDelivery
+     */
+    public function withAmbiguousMailAddressDelivery(array $ambiguousMailAddressDelivery): self
+    {
+        $clone = clone $this;
+        $clone->ambiguousMailAddressDelivery = $ambiguousMailAddressDelivery;
+
+        return $clone;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[] $ambiguousMailboxDelivery
+     */
+    public function withAmbiguousMailboxDelivery(array $ambiguousMailboxDelivery): self
+    {
+        $clone = clone $this;
+        $clone->ambiguousMailboxDelivery = $ambiguousMailboxDelivery;
+
+        return $clone;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorCatchAllMissingAddress[] $catchAllMissingAddress
+     */
+    public function withCatchAllMissingAddress(array $catchAllMissingAddress): self
+    {
+        $clone = clone $this;
+        $clone->catchAllMissingAddress = $catchAllMissingAddress;
+
+        return $clone;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[] $catchAllTargetWithoutAlias
+     */
+    public function withCatchAllTargetWithoutAlias(array $catchAllTargetWithoutAlias): self
+    {
+        $clone = clone $this;
+        $clone->catchAllTargetWithoutAlias = $catchAllTargetWithoutAlias;
+
+        return $clone;
+    }
+
+    /**
+     * @param CheckMigrationIsPossibleErrorMissingVerifiedIngress[] $missingVerifiedIngress
+     */
+    public function withMissingVerifiedIngress(array $missingVerifiedIngress): self
+    {
+        $clone = clone $this;
+        $clone->missingVerifiedIngress = $missingVerifiedIngress;
 
         return $clone;
     }
@@ -90,9 +255,14 @@ class PossibleCheckErrors
             static::validateInput($input);
         }
 
-        $jwt = $input->{'jwt'};
+        $alreadyExistingMailAddress = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorAlreadyExistingMailAddress => CheckMigrationIsPossibleErrorAlreadyExistingMailAddress::buildFromInput($i, validate: $validate), $input->{'alreadyExistingMailAddress'});
+        $ambiguousMailAddressDelivery = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery => CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery::buildFromInput($i, validate: $validate), $input->{'ambiguousMailAddressDelivery'});
+        $ambiguousMailboxDelivery = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery => CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery::buildFromInput($i, validate: $validate), $input->{'ambiguousMailboxDelivery'});
+        $catchAllMissingAddress = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorCatchAllMissingAddress => CheckMigrationIsPossibleErrorCatchAllMissingAddress::buildFromInput($i, validate: $validate), $input->{'catchAllMissingAddress'});
+        $catchAllTargetWithoutAlias = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias => CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias::buildFromInput($i, validate: $validate), $input->{'catchAllTargetWithoutAlias'});
+        $missingVerifiedIngress = array_map(fn (array|object $i): CheckMigrationIsPossibleErrorMissingVerifiedIngress => CheckMigrationIsPossibleErrorMissingVerifiedIngress::buildFromInput($i, validate: $validate), $input->{'missingVerifiedIngress'});
 
-        $obj = new self($jwt);
+        $obj = new self($alreadyExistingMailAddress, $ambiguousMailAddressDelivery, $ambiguousMailboxDelivery, $catchAllMissingAddress, $catchAllTargetWithoutAlias, $missingVerifiedIngress);
 
         return $obj;
     }
@@ -105,7 +275,12 @@ class PossibleCheckErrors
     public function toJson(): array
     {
         $output = [];
-        $output['jwt'] = $this->jwt;
+        $output['alreadyExistingMailAddress'] = array_map(fn (CheckMigrationIsPossibleErrorAlreadyExistingMailAddress $i): array => $i->toJson(), $this->alreadyExistingMailAddress);
+        $output['ambiguousMailAddressDelivery'] = array_map(fn (CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery $i): array => $i->toJson(), $this->ambiguousMailAddressDelivery);
+        $output['ambiguousMailboxDelivery'] = array_map(fn (CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery $i): array => $i->toJson(), $this->ambiguousMailboxDelivery);
+        $output['catchAllMissingAddress'] = array_map(fn (CheckMigrationIsPossibleErrorCatchAllMissingAddress $i): array => $i->toJson(), $this->catchAllMissingAddress);
+        $output['catchAllTargetWithoutAlias'] = array_map(fn (CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias $i): array => $i->toJson(), $this->catchAllTargetWithoutAlias);
+        $output['missingVerifiedIngress'] = array_map(fn (CheckMigrationIsPossibleErrorMissingVerifiedIngress $i): array => $i->toJson(), $this->missingVerifiedIngress);
 
         return $output;
     }
@@ -120,7 +295,7 @@ class PossibleCheckErrors
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

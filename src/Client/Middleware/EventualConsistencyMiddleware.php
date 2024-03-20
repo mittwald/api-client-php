@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Client\Middleware;
@@ -34,7 +35,7 @@ class EventualConsistencyMiddleware
             /** @var PromiseInterface $responsePromise */
             $responsePromise = $handler($request, $options);
 
-            return $responsePromise->then(function(ResponseInterface $response): ResponseInterface {
+            return $responsePromise->then(function (ResponseInterface $response): ResponseInterface {
                 if ($response->hasHeader("etag")) {
                     $this->lastEventId = $response->getHeader("etag")[0];
                 }

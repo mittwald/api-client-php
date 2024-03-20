@@ -13,8 +13,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -43,35 +41,22 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
         ],
     ];
 
-    /**
-     * @var AuthenticateWithAccessTokenRetrievalKeyRequestBody
-     */
     private AuthenticateWithAccessTokenRetrievalKeyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param AuthenticateWithAccessTokenRetrievalKeyRequestBody $body
-     */
     public function __construct(AuthenticateWithAccessTokenRetrievalKeyRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AuthenticateWithAccessTokenRetrievalKeyRequestBody
-     */
     public function getBody(): AuthenticateWithAccessTokenRetrievalKeyRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param AuthenticateWithAccessTokenRetrievalKeyRequestBody $body
-     * @return self
-     */
     public function withBody(AuthenticateWithAccessTokenRetrievalKeyRequestBody $body): self
     {
         $clone = clone $this;

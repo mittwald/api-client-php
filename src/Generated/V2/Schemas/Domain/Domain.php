@@ -21,8 +21,6 @@ class Domain
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,9 +57,6 @@ class Domain
                     'ownerC',
                 ],
                 'type' => 'object',
-            ],
-            'hasAuthCode' => [
-                'type' => 'boolean',
             ],
             'nameservers' => [
                 'items' => [
@@ -103,45 +98,19 @@ class Domain
         'type' => 'object',
     ];
 
-    /**
-     * @var AuthCode|null
-     */
     private ?AuthCode $authCode = null;
 
-    /**
-     * @var AuthCode2|null
-     */
     private ?AuthCode2 $authCode2 = null;
 
-    /**
-     * @var bool
-     */
     private bool $connected;
 
-    /**
-     * @var bool
-     */
     private bool $deleted;
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var DomainHandles
-     */
     private DomainHandles $handles;
-
-    /**
-     * @var bool
-     */
-    private bool $hasAuthCode;
 
     /**
      * @var string[]
@@ -153,107 +122,60 @@ class Domain
      */
     private ?array $processes = null;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string|null
-     */
     private ?string $transferInAuthCode = null;
 
-    /**
-     * @var bool
-     */
     private bool $usesDefaultNameserver;
 
     /**
-     * @param bool $connected
-     * @param bool $deleted
-     * @param string $domain
-     * @param string $domainId
-     * @param DomainHandles $handles
-     * @param bool $hasAuthCode
      * @param string[] $nameservers
-     * @param string $projectId
-     * @param bool $usesDefaultNameserver
      */
-    public function __construct(bool $connected, bool $deleted, string $domain, string $domainId, DomainHandles $handles, bool $hasAuthCode, array $nameservers, string $projectId, bool $usesDefaultNameserver)
+    public function __construct(bool $connected, bool $deleted, string $domain, string $domainId, DomainHandles $handles, array $nameservers, string $projectId, bool $usesDefaultNameserver)
     {
         $this->connected = $connected;
         $this->deleted = $deleted;
         $this->domain = $domain;
         $this->domainId = $domainId;
         $this->handles = $handles;
-        $this->hasAuthCode = $hasAuthCode;
         $this->nameservers = $nameservers;
         $this->projectId = $projectId;
         $this->usesDefaultNameserver = $usesDefaultNameserver;
     }
 
-    /**
-     * @return AuthCode|null
-     */
     public function getAuthCode(): ?AuthCode
     {
         return $this->authCode ?? null;
     }
 
-    /**
-     * @return AuthCode2|null
-     */
     public function getAuthCode2(): ?AuthCode2
     {
         return $this->authCode2 ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getConnected(): bool
     {
         return $this->connected;
     }
 
-    /**
-     * @return bool
-     */
     public function getDeleted(): bool
     {
         return $this->deleted;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return DomainHandles
-     */
     public function getHandles(): DomainHandles
     {
         return $this->handles;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getHasAuthCode(): bool
-    {
-        return $this->hasAuthCode;
     }
 
     /**
@@ -272,34 +194,21 @@ class Domain
         return $this->processes ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTransferInAuthCode(): ?string
     {
         return $this->transferInAuthCode ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getUsesDefaultNameserver(): bool
     {
         return $this->usesDefaultNameserver;
     }
 
-    /**
-     * @param AuthCode $authCode
-     * @return self
-     */
     public function withAuthCode(AuthCode $authCode): self
     {
         $clone = clone $this;
@@ -308,9 +217,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAuthCode(): self
     {
         $clone = clone $this;
@@ -319,10 +225,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param AuthCode2 $authCode2
-     * @return self
-     */
     public function withAuthCode2(AuthCode2 $authCode2): self
     {
         $clone = clone $this;
@@ -331,9 +233,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAuthCode2(): self
     {
         $clone = clone $this;
@@ -342,10 +241,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param bool $connected
-     * @return self
-     */
     public function withConnected(bool $connected): self
     {
         $validator = new Validator();
@@ -360,10 +255,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param bool $deleted
-     * @return self
-     */
     public function withDeleted(bool $deleted): self
     {
         $validator = new Validator();
@@ -378,10 +269,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -396,10 +283,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -414,10 +297,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param DomainHandles $handles
-     * @return self
-     */
     public function withHandles(DomainHandles $handles): self
     {
         $clone = clone $this;
@@ -427,26 +306,7 @@ class Domain
     }
 
     /**
-     * @param bool $hasAuthCode
-     * @return self
-     */
-    public function withHasAuthCode(bool $hasAuthCode): self
-    {
-        $validator = new Validator();
-        $validator->validate($hasAuthCode, static::$schema['properties']['hasAuthCode']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->hasAuthCode = $hasAuthCode;
-
-        return $clone;
-    }
-
-    /**
      * @param string[] $nameservers
-     * @return self
      */
     public function withNameservers(array $nameservers): self
     {
@@ -464,7 +324,6 @@ class Domain
 
     /**
      * @param Process[] $processes
-     * @return self
      */
     public function withProcesses(array $processes): self
     {
@@ -474,9 +333,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProcesses(): self
     {
         $clone = clone $this;
@@ -485,10 +341,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -503,10 +355,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param string $transferInAuthCode
-     * @return self
-     */
     public function withTransferInAuthCode(string $transferInAuthCode): self
     {
         $validator = new Validator();
@@ -521,9 +369,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTransferInAuthCode(): self
     {
         $clone = clone $this;
@@ -532,10 +377,6 @@ class Domain
         return $clone;
     }
 
-    /**
-     * @param bool $usesDefaultNameserver
-     * @return self
-     */
     public function withUsesDefaultNameserver(bool $usesDefaultNameserver): self
     {
         $validator = new Validator();
@@ -578,7 +419,6 @@ class Domain
         $domain = $input->{'domain'};
         $domainId = $input->{'domainId'};
         $handles = DomainHandles::buildFromInput($input->{'handles'}, validate: $validate);
-        $hasAuthCode = (bool)($input->{'hasAuthCode'});
         $nameservers = $input->{'nameservers'};
         $processes = null;
         if (isset($input->{'processes'})) {
@@ -591,7 +431,7 @@ class Domain
         }
         $usesDefaultNameserver = (bool)($input->{'usesDefaultNameserver'});
 
-        $obj = new self($connected, $deleted, $domain, $domainId, $handles, $hasAuthCode, $nameservers, $projectId, $usesDefaultNameserver);
+        $obj = new self($connected, $deleted, $domain, $domainId, $handles, $nameservers, $projectId, $usesDefaultNameserver);
         $obj->authCode = $authCode;
         $obj->authCode2 = $authCode2;
         $obj->processes = $processes;
@@ -618,7 +458,6 @@ class Domain
         $output['domain'] = $this->domain;
         $output['domainId'] = $this->domainId;
         $output['handles'] = ($this->handles)->toJson();
-        $output['hasAuthCode'] = $this->hasAuthCode;
         $output['nameservers'] = $this->nameservers;
         if (isset($this->processes)) {
             $output['processes'] = array_map(fn (Process $i): array => $i->toJson(), $this->processes);
@@ -642,7 +481,7 @@ class Domain
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

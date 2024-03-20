@@ -21,8 +21,6 @@ class Price
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,46 +42,26 @@ class Price
         'type' => 'object',
     ];
 
-    /**
-     * @var PriceCurrency
-     */
     private PriceCurrency $currency;
 
-    /**
-     * @var int
-     */
     private int $value;
 
-    /**
-     * @param PriceCurrency $currency
-     * @param int $value
-     */
     public function __construct(PriceCurrency $currency, int $value)
     {
         $this->currency = $currency;
         $this->value = $value;
     }
 
-    /**
-     * @return PriceCurrency
-     */
     public function getCurrency(): PriceCurrency
     {
         return $this->currency;
     }
 
-    /**
-     * @return int
-     */
     public function getValue(): int
     {
         return $this->value;
     }
 
-    /**
-     * @param PriceCurrency $currency
-     * @return self
-     */
     public function withCurrency(PriceCurrency $currency): self
     {
         $clone = clone $this;
@@ -92,10 +70,6 @@ class Price
         return $clone;
     }
 
-    /**
-     * @param int $value
-     * @return self
-     */
     public function withValue(int $value): self
     {
         $validator = new Validator();
@@ -157,7 +131,7 @@ class Price
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

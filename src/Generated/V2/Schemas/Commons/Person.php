@@ -21,8 +21,6 @@ class Person
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -50,61 +48,37 @@ class Person
 
     /**
      * The users first name
-     *
-     * @var string
      */
     private string $firstName;
 
     /**
      * The users last name
-     *
-     * @var string
      */
     private string $lastName;
 
-    /**
-     * @var Salutation|null
-     */
     private ?Salutation $title = null;
 
-    /**
-     * @param string $firstName
-     * @param string $lastName
-     */
     public function __construct(string $firstName, string $lastName)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return string
-     */
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * @return string
-     */
     public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * @return Salutation|null
-     */
     public function getTitle(): ?Salutation
     {
         return $this->title ?? null;
     }
 
-    /**
-     * @param string $firstName
-     * @return self
-     */
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
@@ -119,10 +93,6 @@ class Person
         return $clone;
     }
 
-    /**
-     * @param string $lastName
-     * @return self
-     */
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
@@ -137,10 +107,6 @@ class Person
         return $clone;
     }
 
-    /**
-     * @param Salutation $title
-     * @return self
-     */
     public function withTitle(Salutation $title): self
     {
         $clone = clone $this;
@@ -149,9 +115,6 @@ class Person
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTitle(): self
     {
         $clone = clone $this;
@@ -214,7 +177,7 @@ class Person
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

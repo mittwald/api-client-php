@@ -21,8 +21,6 @@ class StatusUpdateMeta
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -33,9 +31,6 @@ class StatusUpdateMeta
         'type' => 'object',
     ];
 
-    /**
-     * @var User|null
-     */
     private ?User $user = null;
 
     /**
@@ -45,18 +40,11 @@ class StatusUpdateMeta
     {
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user ?? null;
     }
 
-    /**
-     * @param User $user
-     * @return self
-     */
     public function withUser(User $user): self
     {
         $clone = clone $this;
@@ -65,9 +53,6 @@ class StatusUpdateMeta
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUser(): self
     {
         $clone = clone $this;
@@ -126,7 +111,7 @@ class StatusUpdateMeta
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

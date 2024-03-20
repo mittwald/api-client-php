@@ -12,8 +12,6 @@ class TerminateContractItemCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,24 +34,12 @@ class TerminateContractItemCreatedResponseBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $contractId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $contractItemId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $reason = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $terminationTargetDate = null;
 
     /**
@@ -63,42 +49,26 @@ class TerminateContractItemCreatedResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractId(): ?string
     {
         return $this->contractId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractItemId(): ?string
     {
         return $this->contractItemId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReason(): ?string
     {
         return $this->reason ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getTerminationTargetDate(): ?DateTime
     {
         return $this->terminationTargetDate ?? null;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -113,9 +83,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractId(): self
     {
         $clone = clone $this;
@@ -124,10 +91,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -142,9 +105,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractItemId(): self
     {
         $clone = clone $this;
@@ -153,10 +113,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $reason
-     * @return self
-     */
     public function withReason(string $reason): self
     {
         $validator = new Validator();
@@ -171,9 +127,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReason(): self
     {
         $clone = clone $this;
@@ -182,10 +135,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $terminationTargetDate
-     * @return self
-     */
     public function withTerminationTargetDate(DateTime $terminationTargetDate): self
     {
         $clone = clone $this;
@@ -194,9 +143,6 @@ class TerminateContractItemCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTerminationTargetDate(): self
     {
         $clone = clone $this;

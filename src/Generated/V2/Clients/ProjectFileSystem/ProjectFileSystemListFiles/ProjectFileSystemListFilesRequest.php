@@ -13,8 +13,6 @@ class ProjectFileSystemListFilesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,48 +31,29 @@ class ProjectFileSystemListFilesRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var string|null
-     */
     private ?string $file = null;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFile(): ?string
     {
         return $this->file ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -89,10 +68,6 @@ class ProjectFileSystemListFilesRequest
         return $clone;
     }
 
-    /**
-     * @param string $file
-     * @return self
-     */
     public function withFile(string $file): self
     {
         $validator = new Validator();
@@ -107,9 +82,6 @@ class ProjectFileSystemListFilesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFile(): self
     {
         $clone = clone $this;

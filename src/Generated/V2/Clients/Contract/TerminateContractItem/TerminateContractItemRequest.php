@@ -13,8 +13,6 @@ class TerminateContractItemRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -49,30 +47,16 @@ class TerminateContractItemRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
-    /**
-     * @var TerminateContractItemRequestBody
-     */
     private TerminateContractItemRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $contractId
-     * @param string $contractItemId
-     * @param TerminateContractItemRequestBody $body
-     */
     public function __construct(string $contractId, string $contractItemId, TerminateContractItemRequestBody $body)
     {
         $this->contractId = $contractId;
@@ -80,34 +64,21 @@ class TerminateContractItemRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return TerminateContractItemRequestBody
-     */
     public function getBody(): TerminateContractItemRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -122,10 +93,6 @@ class TerminateContractItemRequest
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -140,10 +107,6 @@ class TerminateContractItemRequest
         return $clone;
     }
 
-    /**
-     * @param TerminateContractItemRequestBody $body
-     * @return self
-     */
     public function withBody(TerminateContractItemRequestBody $body): self
     {
         $clone = clone $this;

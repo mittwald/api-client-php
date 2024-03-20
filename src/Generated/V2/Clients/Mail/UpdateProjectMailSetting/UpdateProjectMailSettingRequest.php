@@ -13,8 +13,6 @@ class UpdateProjectMailSettingRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -71,19 +69,10 @@ class UpdateProjectMailSettingRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var UpdateProjectMailSettingRequestMailSetting
-     */
     private UpdateProjectMailSettingRequestMailSetting $mailSetting;
 
-    /**
-     * @var UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2
-     */
     private UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body;
 
     private array $headers = [
@@ -91,8 +80,6 @@ class UpdateProjectMailSettingRequest
     ];
 
     /**
-     * @param string $projectId
-     * @param UpdateProjectMailSettingRequestMailSetting $mailSetting
      * @param UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body
      */
     public function __construct(string $projectId, UpdateProjectMailSettingRequestMailSetting $mailSetting, UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body)
@@ -102,17 +89,11 @@ class UpdateProjectMailSettingRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return UpdateProjectMailSettingRequestMailSetting
-     */
     public function getMailSetting(): UpdateProjectMailSettingRequestMailSetting
     {
         return $this->mailSetting;
@@ -127,10 +108,6 @@ class UpdateProjectMailSettingRequest
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -145,10 +122,6 @@ class UpdateProjectMailSettingRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateProjectMailSettingRequestMailSetting $mailSetting
-     * @return self
-     */
     public function withMailSetting(UpdateProjectMailSettingRequestMailSetting $mailSetting): self
     {
         $clone = clone $this;
@@ -159,7 +132,6 @@ class UpdateProjectMailSettingRequest
 
     /**
      * @param UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body
-     * @return self
      */
     public function withBody(UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body): self
     {

@@ -21,8 +21,6 @@ class ProjectHostingOrder
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -64,39 +62,19 @@ class ProjectHostingOrder
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var int|float
-     */
     private int|float $diskspaceInGiB;
 
-    /**
-     * @var string|null
-     */
     private ?string $promotionCode = null;
 
-    /**
-     * @var MachineTypeSpec|HardwareSpec
-     */
     private MachineTypeSpec|HardwareSpec $spec;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $useFreeTrial = null;
 
     /**
-     * @param string $customerId
-     * @param string $description
      * @param int|float $diskspaceInGiB
      * @param MachineTypeSpec|HardwareSpec $spec
      */
@@ -108,33 +86,21 @@ class ProjectHostingOrder
         $this->spec = $spec;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return int|float
-     */
     public function getDiskspaceInGiB(): int|float
     {
         return $this->diskspaceInGiB;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPromotionCode(): ?string
     {
         return $this->promotionCode ?? null;
@@ -149,18 +115,11 @@ class ProjectHostingOrder
         return $this->spec;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getUseFreeTrial(): ?bool
     {
         return $this->useFreeTrial ?? null;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -175,10 +134,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -195,7 +150,6 @@ class ProjectHostingOrder
 
     /**
      * @param int|float $diskspaceInGiB
-     * @return self
      */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
@@ -211,10 +165,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @param string $promotionCode
-     * @return self
-     */
     public function withPromotionCode(string $promotionCode): self
     {
         $validator = new Validator();
@@ -229,9 +179,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPromotionCode(): self
     {
         $clone = clone $this;
@@ -242,7 +189,6 @@ class ProjectHostingOrder
 
     /**
      * @param MachineTypeSpec|HardwareSpec $spec
-     * @return self
      */
     public function withSpec(HardwareSpec|MachineTypeSpec $spec): self
     {
@@ -252,10 +198,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @param bool $useFreeTrial
-     * @return self
-     */
     public function withUseFreeTrial(bool $useFreeTrial): self
     {
         $validator = new Validator();
@@ -270,9 +212,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUseFreeTrial(): self
     {
         $clone = clone $this;
@@ -298,7 +237,7 @@ class ProjectHostingOrder
 
         $customerId = $input->{'customerId'};
         $description = $input->{'description'};
-        $diskspaceInGiB = str_contains($input->{'diskspaceInGiB'}, '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
+        $diskspaceInGiB = str_contains((string)($input->{'diskspaceInGiB'}), '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
         $promotionCode = null;
         if (isset($input->{'promotionCode'})) {
             $promotionCode = $input->{'promotionCode'};
@@ -352,7 +291,7 @@ class ProjectHostingOrder
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

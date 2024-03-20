@@ -14,8 +14,6 @@ class IngressUpdateIngressPathsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,9 +35,6 @@ class IngressUpdateIngressPathsRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $ingressId;
 
     /**
@@ -52,7 +47,6 @@ class IngressUpdateIngressPathsRequest
     ];
 
     /**
-     * @param string $ingressId
      * @param Path[] $body
      */
     public function __construct(string $ingressId, array $body)
@@ -61,9 +55,6 @@ class IngressUpdateIngressPathsRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getIngressId(): string
     {
         return $this->ingressId;
@@ -77,10 +68,6 @@ class IngressUpdateIngressPathsRequest
         return $this->body;
     }
 
-    /**
-     * @param string $ingressId
-     * @return self
-     */
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();
@@ -97,7 +84,6 @@ class IngressUpdateIngressPathsRequest
 
     /**
      * @param Path[] $body
-     * @return self
      */
     public function withBody(array $body): self
     {

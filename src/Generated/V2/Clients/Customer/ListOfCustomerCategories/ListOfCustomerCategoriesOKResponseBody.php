@@ -12,8 +12,6 @@ class ListOfCustomerCategoriesOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,7 +46,6 @@ class ListOfCustomerCategoriesOKResponseBody
 
     /**
      * @param Category[] $categories
-     * @return self
      */
     public function withCategories(array $categories): self
     {
@@ -58,9 +55,6 @@ class ListOfCustomerCategoriesOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCategories(): self
     {
         $clone = clone $this;

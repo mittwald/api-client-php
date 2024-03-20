@@ -11,8 +11,6 @@ class CreateRelocationRequestBodyContact
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,31 +40,14 @@ class CreateRelocationRequestBodyContact
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $email;
 
-    /**
-     * @var string
-     */
     private string $firstName;
 
-    /**
-     * @var string
-     */
     private string $lastName;
 
-    /**
-     * @var string|null
-     */
     private ?string $phoneNumber = null;
 
-    /**
-     * @param string $email
-     * @param string $firstName
-     * @param string $lastName
-     */
     public function __construct(string $email, string $firstName, string $lastName)
     {
         $this->email = $email;
@@ -74,42 +55,26 @@ class CreateRelocationRequestBodyContact
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * @return string
-     */
     public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber ?? null;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -124,10 +89,6 @@ class CreateRelocationRequestBodyContact
         return $clone;
     }
 
-    /**
-     * @param string $firstName
-     * @return self
-     */
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
@@ -142,10 +103,6 @@ class CreateRelocationRequestBodyContact
         return $clone;
     }
 
-    /**
-     * @param string $lastName
-     * @return self
-     */
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
@@ -160,10 +117,6 @@ class CreateRelocationRequestBodyContact
         return $clone;
     }
 
-    /**
-     * @param string $phoneNumber
-     * @return self
-     */
     public function withPhoneNumber(string $phoneNumber): self
     {
         $validator = new Validator();
@@ -178,9 +131,6 @@ class CreateRelocationRequestBodyContact
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPhoneNumber(): self
     {
         $clone = clone $this;

@@ -14,8 +14,6 @@ class GetArticleOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetArticleOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ReadableArticle
-     */
     private ReadableArticle $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ReadableArticle $body
-     */
     public function __construct(ReadableArticle $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ReadableArticle
-     */
     public function getBody(): ReadableArticle
     {
         return $this->body;
     }
 
-    /**
-     * @param ReadableArticle $body
-     * @return self
-     */
     public function withBody(ReadableArticle $body): self
     {
         $clone = clone $this;

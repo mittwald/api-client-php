@@ -13,8 +13,6 @@ class DeleteDomainRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,50 +37,30 @@ class DeleteDomainRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var DeleteDomainRequestBody
-     */
     private DeleteDomainRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param DeleteDomainRequestBody $body
-     */
     public function __construct(string $domainId, DeleteDomainRequestBody $body)
     {
         $this->domainId = $domainId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return DeleteDomainRequestBody
-     */
     public function getBody(): DeleteDomainRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -97,10 +75,6 @@ class DeleteDomainRequest
         return $clone;
     }
 
-    /**
-     * @param DeleteDomainRequestBody $body
-     * @return self
-     */
     public function withBody(DeleteDomainRequestBody $body): self
     {
         $clone = clone $this;

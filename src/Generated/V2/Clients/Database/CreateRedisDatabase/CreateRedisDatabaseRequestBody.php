@@ -12,8 +12,6 @@ class CreateRedisDatabaseRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'example' => [
@@ -40,29 +38,18 @@ class CreateRedisDatabaseRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var RedisDatabaseConfiguration|null
-     */
     private ?RedisDatabaseConfiguration $configuration = null;
 
     /**
      * A description for the database.
-     *
-     * @var string
      */
     private string $description;
 
     /**
      * The version the database should use.
-     *
-     * @var string
      */
     private string $version;
 
-    /**
-     * @param string $description
-     * @param string $version
-     */
     public function __construct(string $description, string $version)
     {
         $this->description = $description;
@@ -78,26 +65,16 @@ class CreateRedisDatabaseRequestBody
         return $this->configuration ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param RedisDatabaseConfiguration $configuration
-     * @return self
-     */
     public function withConfiguration(RedisDatabaseConfiguration $configuration): self
     {
         $clone = clone $this;
@@ -106,9 +83,6 @@ class CreateRedisDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutConfiguration(): self
     {
         $clone = clone $this;
@@ -117,10 +91,6 @@ class CreateRedisDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -135,10 +105,6 @@ class CreateRedisDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $version
-     * @return self
-     */
     public function withVersion(string $version): self
     {
         $validator = new Validator();

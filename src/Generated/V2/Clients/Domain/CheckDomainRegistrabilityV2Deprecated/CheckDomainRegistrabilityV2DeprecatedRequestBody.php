@@ -11,8 +11,6 @@ class CheckDomainRegistrabilityV2DeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,31 +24,18 @@ class CheckDomainRegistrabilityV2DeprecatedRequestBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @param string $domain
-     */
     public function __construct(string $domain)
     {
         $this->domain = $domain;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();

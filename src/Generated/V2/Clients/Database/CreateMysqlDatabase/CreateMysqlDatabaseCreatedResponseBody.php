@@ -11,8 +11,6 @@ class CreateMysqlDatabaseCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class CreateMysqlDatabaseCreatedResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param string $id
-     * @param string $userId
-     */
     public function __construct(string $id, string $userId)
     {
         $this->id = $id;
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class CreateMysqlDatabaseCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();

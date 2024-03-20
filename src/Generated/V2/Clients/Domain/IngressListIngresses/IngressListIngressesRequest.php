@@ -13,8 +13,6 @@ class IngressListIngressesRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,9 +27,6 @@ class IngressListIngressesRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $projectId = null;
 
     private array $headers = [
@@ -45,18 +40,11 @@ class IngressListIngressesRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -71,9 +59,6 @@ class IngressListIngressesRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProjectId(): self
     {
         $clone = clone $this;

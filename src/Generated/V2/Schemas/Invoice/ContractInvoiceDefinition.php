@@ -21,8 +21,6 @@ class ContractInvoiceDefinition
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,9 +42,6 @@ class ContractInvoiceDefinition
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
     /**
@@ -55,7 +50,6 @@ class ContractInvoiceDefinition
     private array $items;
 
     /**
-     * @param string $contractId
      * @param ContractItemInvoiceDefinition[] $items
      */
     public function __construct(string $contractId, array $items)
@@ -64,9 +58,6 @@ class ContractInvoiceDefinition
         $this->items = $items;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
@@ -81,10 +72,6 @@ class ContractInvoiceDefinition
         return $this->items;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -101,7 +88,6 @@ class ContractInvoiceDefinition
 
     /**
      * @param ContractItemInvoiceDefinition[] $items
-     * @return self
      */
     public function withItems(array $items): self
     {
@@ -158,7 +144,7 @@ class ContractInvoiceDefinition
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

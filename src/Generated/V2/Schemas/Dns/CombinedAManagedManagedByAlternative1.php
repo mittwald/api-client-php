@@ -21,8 +21,6 @@ class CombinedAManagedManagedByAlternative1
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,31 +35,18 @@ class CombinedAManagedManagedByAlternative1
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $ingressId;
 
-    /**
-     * @param string $ingressId
-     */
     public function __construct(string $ingressId)
     {
         $this->ingressId = $ingressId;
     }
 
-    /**
-     * @return string
-     */
     public function getIngressId(): string
     {
         return $this->ingressId;
     }
 
-    /**
-     * @param string $ingressId
-     * @return self
-     */
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();
@@ -121,7 +106,7 @@ class CombinedAManagedManagedByAlternative1
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

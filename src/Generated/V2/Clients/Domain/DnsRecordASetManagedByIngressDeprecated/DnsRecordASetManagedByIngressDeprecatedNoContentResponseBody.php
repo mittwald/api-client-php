@@ -11,8 +11,6 @@ class DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,31 +25,18 @@ class DnsRecordASetManagedByIngressDeprecatedNoContentResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $ingressId;
 
-    /**
-     * @param string $ingressId
-     */
     public function __construct(string $ingressId)
     {
         $this->ingressId = $ingressId;
     }
 
-    /**
-     * @return string
-     */
     public function getIngressId(): string
     {
         return $this->ingressId;
     }
 
-    /**
-     * @param string $ingressId
-     * @return self
-     */
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();

@@ -22,8 +22,6 @@ class ProjectMembership
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -88,81 +86,51 @@ class ProjectMembership
 
     /**
      * Email used by the invited user.
-     *
-     * @var string
      */
     private string $email;
 
     /**
      * Time the ProjectMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $expiresAt = null;
 
     /**
      * ID of the ProjectMembership.
-     *
-     * @var string
      */
     private string $id;
 
     /**
      * Whether the ProjectMembership was inherited from a CustomerMembership.
-     *
-     * @var bool
      */
     private bool $inherited;
 
     /**
      * ID of the ProjectInvite the membership was created from.
-     *
-     * @var string|null
      */
     private ?string $inviteId = null;
 
     /**
      * Date the projectMembership was created at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $memberSince = null;
 
     /**
      * MFA activated by the user.
-     *
-     * @var bool
      */
     private bool $mfa;
 
     /**
      * ID of the Project the membership is for.
-     *
-     * @var string
      */
     private string $projectId;
 
-    /**
-     * @var ProjectRoles
-     */
     private ProjectRoles $role;
 
     /**
      * ID of the user the ProjectMembership is for.
-     *
-     * @var string
      */
     private string $userId;
 
-    /**
-     * @param string $email
-     * @param string $id
-     * @param bool $inherited
-     * @param bool $mfa
-     * @param string $projectId
-     * @param ProjectRoles $role
-     * @param string $userId
-     */
     public function __construct(string $email, string $id, bool $inherited, bool $mfa, string $projectId, ProjectRoles $role, string $userId)
     {
         $this->email = $email;
@@ -174,90 +142,56 @@ class ProjectMembership
         $this->userId = $userId;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getInherited(): bool
     {
         return $this->inherited;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInviteId(): ?string
     {
         return $this->inviteId ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getMemberSince(): ?DateTime
     {
         return $this->memberSince ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getMfa(): bool
     {
         return $this->mfa;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return ProjectRoles
-     */
     public function getRole(): ProjectRoles
     {
         return $this->role;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -272,10 +206,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -284,9 +214,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -295,10 +222,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -313,10 +236,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param bool $inherited
-     * @return self
-     */
     public function withInherited(bool $inherited): self
     {
         $validator = new Validator();
@@ -331,10 +250,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param string $inviteId
-     * @return self
-     */
     public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
@@ -349,9 +264,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInviteId(): self
     {
         $clone = clone $this;
@@ -360,10 +272,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param DateTime $memberSince
-     * @return self
-     */
     public function withMemberSince(DateTime $memberSince): self
     {
         $clone = clone $this;
@@ -372,9 +280,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMemberSince(): self
     {
         $clone = clone $this;
@@ -383,10 +288,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param bool $mfa
-     * @return self
-     */
     public function withMfa(bool $mfa): self
     {
         $validator = new Validator();
@@ -401,10 +302,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -419,10 +316,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param ProjectRoles $role
-     * @return self
-     */
     public function withRole(ProjectRoles $role): self
     {
         $clone = clone $this;
@@ -431,10 +324,6 @@ class ProjectMembership
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -529,7 +418,7 @@ class ProjectMembership
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

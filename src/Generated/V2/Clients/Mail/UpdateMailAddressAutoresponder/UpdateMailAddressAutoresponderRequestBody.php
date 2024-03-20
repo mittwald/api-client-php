@@ -11,8 +11,6 @@ class UpdateMailAddressAutoresponderRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,31 +44,18 @@ class UpdateMailAddressAutoresponderRequestBody
         ],
     ];
 
-    /**
-     * @var UpdateMailAddressAutoresponderRequestBodyAutoResponder
-     */
     private UpdateMailAddressAutoresponderRequestBodyAutoResponder $autoResponder;
 
-    /**
-     * @param UpdateMailAddressAutoresponderRequestBodyAutoResponder $autoResponder
-     */
     public function __construct(UpdateMailAddressAutoresponderRequestBodyAutoResponder $autoResponder)
     {
         $this->autoResponder = $autoResponder;
     }
 
-    /**
-     * @return UpdateMailAddressAutoresponderRequestBodyAutoResponder
-     */
     public function getAutoResponder(): UpdateMailAddressAutoresponderRequestBodyAutoResponder
     {
         return $this->autoResponder;
     }
 
-    /**
-     * @param UpdateMailAddressAutoresponderRequestBodyAutoResponder $autoResponder
-     * @return self
-     */
     public function withAutoResponder(UpdateMailAddressAutoresponderRequestBodyAutoResponder $autoResponder): self
     {
         $clone = clone $this;

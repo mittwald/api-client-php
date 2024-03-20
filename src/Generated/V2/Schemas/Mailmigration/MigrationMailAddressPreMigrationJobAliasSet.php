@@ -22,46 +22,57 @@ class MigrationMailAddressPreMigrationJobAliasSet
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
+            'finished' => [
+                'type' => 'boolean',
+            ],
             'sourceCoabMailboxName' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
             'sourceCoabMailboxName',
+            'finished',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
+    private bool $finished;
+
     private string $sourceCoabMailboxName;
 
-    /**
-     * @param string $sourceCoabMailboxName
-     */
-    public function __construct(string $sourceCoabMailboxName)
+    public function __construct(bool $finished, string $sourceCoabMailboxName)
     {
+        $this->finished = $finished;
         $this->sourceCoabMailboxName = $sourceCoabMailboxName;
     }
 
-    /**
-     * @return string
-     */
+    public function getFinished(): bool
+    {
+        return $this->finished;
+    }
+
     public function getSourceCoabMailboxName(): string
     {
         return $this->sourceCoabMailboxName;
     }
 
-    /**
-     * @param string $sourceCoabMailboxName
-     * @return self
-     */
+    public function withFinished(bool $finished): self
+    {
+        $validator = new Validator();
+        $validator->validate($finished, static::$schema['properties']['finished']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->finished = $finished;
+
+        return $clone;
+    }
+
     public function withSourceCoabMailboxName(string $sourceCoabMailboxName): self
     {
         $validator = new Validator();
@@ -91,9 +102,10 @@ class MigrationMailAddressPreMigrationJobAliasSet
             static::validateInput($input);
         }
 
+        $finished = (bool)($input->{'finished'});
         $sourceCoabMailboxName = $input->{'sourceCoabMailboxName'};
 
-        $obj = new self($sourceCoabMailboxName);
+        $obj = new self($finished, $sourceCoabMailboxName);
 
         return $obj;
     }
@@ -106,6 +118,7 @@ class MigrationMailAddressPreMigrationJobAliasSet
     public function toJson(): array
     {
         $output = [];
+        $output['finished'] = $this->finished;
         $output['sourceCoabMailboxName'] = $this->sourceCoabMailboxName;
 
         return $output;
@@ -121,7 +134,7 @@ class MigrationMailAddressPreMigrationJobAliasSet
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

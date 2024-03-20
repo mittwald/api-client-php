@@ -12,8 +12,6 @@ class CreateRelocationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -171,21 +169,14 @@ class CreateRelocationRequestBody
 
     /**
      * Should all project releated domains should be transferred to mittwald?
-     *
-     * @var bool|null
      */
     private ?bool $allDomains = null;
 
     /**
      * Has to be true. Do you accept that our mittwald team can change and get password from your current provider?
-     *
-     * @var bool
      */
     private bool $allowPasswordChange;
 
-    /**
-     * @var CreateRelocationRequestBodyContact
-     */
     private CreateRelocationRequestBodyContact $contact;
 
     /**
@@ -197,27 +188,13 @@ class CreateRelocationRequestBody
 
     /**
      * Anything our customer service needs to know for the relocation process.
-     *
-     * @var string|null
      */
     private ?string $notes = null;
 
-    /**
-     * @var CreateRelocationRequestBodyProvider
-     */
     private CreateRelocationRequestBodyProvider $provider;
 
-    /**
-     * @var CreateRelocationRequestBodyTarget
-     */
     private CreateRelocationRequestBodyTarget $target;
 
-    /**
-     * @param bool $allowPasswordChange
-     * @param CreateRelocationRequestBodyContact $contact
-     * @param CreateRelocationRequestBodyProvider $provider
-     * @param CreateRelocationRequestBodyTarget $target
-     */
     public function __construct(bool $allowPasswordChange, CreateRelocationRequestBodyContact $contact, CreateRelocationRequestBodyProvider $provider, CreateRelocationRequestBodyTarget $target)
     {
         $this->allowPasswordChange = $allowPasswordChange;
@@ -226,25 +203,16 @@ class CreateRelocationRequestBody
         $this->target = $target;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getAllDomains(): ?bool
     {
         return $this->allDomains ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getAllowPasswordChange(): bool
     {
         return $this->allowPasswordChange;
     }
 
-    /**
-     * @return CreateRelocationRequestBodyContact
-     */
     public function getContact(): CreateRelocationRequestBodyContact
     {
         return $this->contact;
@@ -258,34 +226,21 @@ class CreateRelocationRequestBody
         return $this->domains ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getNotes(): ?string
     {
         return $this->notes ?? null;
     }
 
-    /**
-     * @return CreateRelocationRequestBodyProvider
-     */
     public function getProvider(): CreateRelocationRequestBodyProvider
     {
         return $this->provider;
     }
 
-    /**
-     * @return CreateRelocationRequestBodyTarget
-     */
     public function getTarget(): CreateRelocationRequestBodyTarget
     {
         return $this->target;
     }
 
-    /**
-     * @param bool $allDomains
-     * @return self
-     */
     public function withAllDomains(bool $allDomains): self
     {
         $validator = new Validator();
@@ -300,9 +255,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAllDomains(): self
     {
         $clone = clone $this;
@@ -311,10 +263,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @param bool $allowPasswordChange
-     * @return self
-     */
     public function withAllowPasswordChange(bool $allowPasswordChange): self
     {
         $validator = new Validator();
@@ -329,10 +277,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @param CreateRelocationRequestBodyContact $contact
-     * @return self
-     */
     public function withContact(CreateRelocationRequestBodyContact $contact): self
     {
         $clone = clone $this;
@@ -343,7 +287,6 @@ class CreateRelocationRequestBody
 
     /**
      * @param Domain[] $domains
-     * @return self
      */
     public function withDomains(array $domains): self
     {
@@ -353,9 +296,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDomains(): self
     {
         $clone = clone $this;
@@ -364,10 +304,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $notes
-     * @return self
-     */
     public function withNotes(string $notes): self
     {
         $validator = new Validator();
@@ -382,9 +318,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNotes(): self
     {
         $clone = clone $this;
@@ -393,10 +326,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @param CreateRelocationRequestBodyProvider $provider
-     * @return self
-     */
     public function withProvider(CreateRelocationRequestBodyProvider $provider): self
     {
         $clone = clone $this;
@@ -405,10 +334,6 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
-    /**
-     * @param CreateRelocationRequestBodyTarget $target
-     * @return self
-     */
     public function withTarget(CreateRelocationRequestBodyTarget $target): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class GetCustomerCategoryRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class GetCustomerCategoryRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $categoryId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $categoryId
-     */
     public function __construct(string $categoryId)
     {
         $this->categoryId = $categoryId;
     }
 
-    /**
-     * @return string
-     */
     public function getCategoryId(): string
     {
         return $this->categoryId;
     }
 
-    /**
-     * @param string $categoryId
-     * @return self
-     */
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();

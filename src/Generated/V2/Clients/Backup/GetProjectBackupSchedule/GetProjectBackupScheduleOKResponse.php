@@ -14,8 +14,6 @@ class GetProjectBackupScheduleOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetProjectBackupScheduleOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var ProjectBackupSchedule
-     */
     private ProjectBackupSchedule $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ProjectBackupSchedule $body
-     */
     public function __construct(ProjectBackupSchedule $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ProjectBackupSchedule
-     */
     public function getBody(): ProjectBackupSchedule
     {
         return $this->body;
     }
 
-    /**
-     * @param ProjectBackupSchedule $body
-     * @return self
-     */
     public function withBody(ProjectBackupSchedule $body): self
     {
         $clone = clone $this;

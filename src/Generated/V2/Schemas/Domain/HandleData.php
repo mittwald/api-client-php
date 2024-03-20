@@ -21,8 +21,6 @@ class HandleData
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,9 +42,6 @@ class HandleData
      */
     private ?array $handleFields = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $handleRef = null;
 
     /**
@@ -64,9 +59,6 @@ class HandleData
         return $this->handleFields ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getHandleRef(): ?string
     {
         return $this->handleRef ?? null;
@@ -74,7 +66,6 @@ class HandleData
 
     /**
      * @param HandleField[] $handleFields
-     * @return self
      */
     public function withHandleFields(array $handleFields): self
     {
@@ -84,9 +75,6 @@ class HandleData
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHandleFields(): self
     {
         $clone = clone $this;
@@ -95,10 +83,6 @@ class HandleData
         return $clone;
     }
 
-    /**
-     * @param string $handleRef
-     * @return self
-     */
     public function withHandleRef(string $handleRef): self
     {
         $validator = new Validator();
@@ -113,9 +97,6 @@ class HandleData
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHandleRef(): self
     {
         $clone = clone $this;
@@ -182,7 +163,7 @@ class HandleData
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

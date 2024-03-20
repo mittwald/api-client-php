@@ -22,8 +22,6 @@ class CronjobExecution
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -100,66 +98,28 @@ class CronjobExecution
         'type' => 'object',
     ];
 
-    /**
-     * @var CronjobExecutionAbortedBy|null
-     */
     private ?CronjobExecutionAbortedBy $abortedBy = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $durationInMilliseconds = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $end = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $executionEnd = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $executionStart = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string|null
-     */
     private ?string $logPath = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $start = null;
 
-    /**
-     * @var CronjobExecutionStatus
-     */
     private CronjobExecutionStatus $status;
 
-    /**
-     * @var bool
-     */
     private bool $successful;
 
-    /**
-     * @var CronjobExecutionTriggeredBy|null
-     */
     private ?CronjobExecutionTriggeredBy $triggeredBy = null;
 
-    /**
-     * @param string $id
-     * @param CronjobExecutionStatus $status
-     * @param bool $successful
-     */
     public function __construct(string $id, CronjobExecutionStatus $status, bool $successful)
     {
         $this->id = $id;
@@ -167,98 +127,61 @@ class CronjobExecution
         $this->successful = $successful;
     }
 
-    /**
-     * @return CronjobExecutionAbortedBy|null
-     */
     public function getAbortedBy(): ?CronjobExecutionAbortedBy
     {
         return $this->abortedBy ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getDurationInMilliseconds(): ?int
     {
         return $this->durationInMilliseconds ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getEnd(): ?DateTime
     {
         return $this->end ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExecutionEnd(): ?DateTime
     {
         return $this->executionEnd ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExecutionStart(): ?DateTime
     {
         return $this->executionStart ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLogPath(): ?string
     {
         return $this->logPath ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getStart(): ?DateTime
     {
         return $this->start ?? null;
     }
 
-    /**
-     * @return CronjobExecutionStatus
-     */
     public function getStatus(): CronjobExecutionStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return bool
-     */
     public function getSuccessful(): bool
     {
         return $this->successful;
     }
 
-    /**
-     * @return CronjobExecutionTriggeredBy|null
-     */
     public function getTriggeredBy(): ?CronjobExecutionTriggeredBy
     {
         return $this->triggeredBy ?? null;
     }
 
-    /**
-     * @param CronjobExecutionAbortedBy $abortedBy
-     * @return self
-     */
     public function withAbortedBy(CronjobExecutionAbortedBy $abortedBy): self
     {
         $clone = clone $this;
@@ -267,9 +190,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAbortedBy(): self
     {
         $clone = clone $this;
@@ -278,10 +198,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param int $durationInMilliseconds
-     * @return self
-     */
     public function withDurationInMilliseconds(int $durationInMilliseconds): self
     {
         $validator = new Validator();
@@ -296,9 +212,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDurationInMilliseconds(): self
     {
         $clone = clone $this;
@@ -307,10 +220,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param DateTime $end
-     * @return self
-     */
     public function withEnd(DateTime $end): self
     {
         $clone = clone $this;
@@ -319,9 +228,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutEnd(): self
     {
         $clone = clone $this;
@@ -330,10 +236,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param DateTime $executionEnd
-     * @return self
-     */
     public function withExecutionEnd(DateTime $executionEnd): self
     {
         $clone = clone $this;
@@ -342,9 +244,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExecutionEnd(): self
     {
         $clone = clone $this;
@@ -353,10 +252,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param DateTime $executionStart
-     * @return self
-     */
     public function withExecutionStart(DateTime $executionStart): self
     {
         $clone = clone $this;
@@ -365,9 +260,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExecutionStart(): self
     {
         $clone = clone $this;
@@ -376,10 +268,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -394,10 +282,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param string $logPath
-     * @return self
-     */
     public function withLogPath(string $logPath): self
     {
         $validator = new Validator();
@@ -412,9 +296,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLogPath(): self
     {
         $clone = clone $this;
@@ -423,10 +304,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param DateTime $start
-     * @return self
-     */
     public function withStart(DateTime $start): self
     {
         $clone = clone $this;
@@ -435,9 +312,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStart(): self
     {
         $clone = clone $this;
@@ -446,10 +320,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param CronjobExecutionStatus $status
-     * @return self
-     */
     public function withStatus(CronjobExecutionStatus $status): self
     {
         $clone = clone $this;
@@ -458,10 +328,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param bool $successful
-     * @return self
-     */
     public function withSuccessful(bool $successful): self
     {
         $validator = new Validator();
@@ -476,10 +342,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @param CronjobExecutionTriggeredBy $triggeredBy
-     * @return self
-     */
     public function withTriggeredBy(CronjobExecutionTriggeredBy $triggeredBy): self
     {
         $clone = clone $this;
@@ -488,9 +350,6 @@ class CronjobExecution
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTriggeredBy(): self
     {
         $clone = clone $this;
@@ -611,7 +470,7 @@ class CronjobExecution
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

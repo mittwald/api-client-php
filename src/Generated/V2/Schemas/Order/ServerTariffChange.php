@@ -21,8 +21,6 @@ class ServerTariffChange
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,25 +45,14 @@ class ServerTariffChange
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $contractId;
 
-    /**
-     * @var int|float
-     */
     private int|float $diskspaceInGiB;
 
-    /**
-     * @var string
-     */
     private string $machineType;
 
     /**
-     * @param string $contractId
      * @param int|float $diskspaceInGiB
-     * @param string $machineType
      */
     public function __construct(string $contractId, int|float $diskspaceInGiB, string $machineType)
     {
@@ -74,34 +61,21 @@ class ServerTariffChange
         $this->machineType = $machineType;
     }
 
-    /**
-     * @return string
-     */
     public function getContractId(): string
     {
         return $this->contractId;
     }
 
-    /**
-     * @return int|float
-     */
     public function getDiskspaceInGiB(): int|float
     {
         return $this->diskspaceInGiB;
     }
 
-    /**
-     * @return string
-     */
     public function getMachineType(): string
     {
         return $this->machineType;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -118,7 +92,6 @@ class ServerTariffChange
 
     /**
      * @param int|float $diskspaceInGiB
-     * @return self
      */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
@@ -134,10 +107,6 @@ class ServerTariffChange
         return $clone;
     }
 
-    /**
-     * @param string $machineType
-     * @return self
-     */
     public function withMachineType(string $machineType): self
     {
         $validator = new Validator();
@@ -168,7 +137,7 @@ class ServerTariffChange
         }
 
         $contractId = $input->{'contractId'};
-        $diskspaceInGiB = str_contains($input->{'diskspaceInGiB'}, '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
+        $diskspaceInGiB = str_contains((string)($input->{'diskspaceInGiB'}), '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
         $machineType = $input->{'machineType'};
 
         $obj = new self($contractId, $diskspaceInGiB, $machineType);
@@ -201,7 +170,7 @@ class ServerTariffChange
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

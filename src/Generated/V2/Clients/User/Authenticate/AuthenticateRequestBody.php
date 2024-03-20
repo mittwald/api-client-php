@@ -11,8 +11,6 @@ class AuthenticateRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -35,48 +33,30 @@ class AuthenticateRequestBody
 
     /**
      * The users Email-Address.
-     *
-     * @var string
      */
     private string $email;
 
     /**
      * Password of the User.
-     *
-     * @var string
      */
     private string $password;
 
-    /**
-     * @param string $email
-     * @param string $password
-     */
     public function __construct(string $email, string $password)
     {
         $this->email = $email;
         $this->password = $password;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -91,10 +71,6 @@ class AuthenticateRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();

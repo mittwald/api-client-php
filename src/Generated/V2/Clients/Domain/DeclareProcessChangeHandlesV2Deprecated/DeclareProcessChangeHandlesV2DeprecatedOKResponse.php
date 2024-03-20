@@ -13,8 +13,6 @@ class DeclareProcessChangeHandlesV2DeprecatedOKResponse implements ResponseConta
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class DeclareProcessChangeHandlesV2DeprecatedOKResponse implements ResponseConta
         ],
     ];
 
-    /**
-     * @var DeclareProcessChangeHandlesV2DeprecatedOKResponseBody
-     */
     private DeclareProcessChangeHandlesV2DeprecatedOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeclareProcessChangeHandlesV2DeprecatedOKResponseBody $body
-     */
     public function __construct(DeclareProcessChangeHandlesV2DeprecatedOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeclareProcessChangeHandlesV2DeprecatedOKResponseBody
-     */
     public function getBody(): DeclareProcessChangeHandlesV2DeprecatedOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeclareProcessChangeHandlesV2DeprecatedOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeclareProcessChangeHandlesV2DeprecatedOKResponseBody $body): self
     {
         $clone = clone $this;

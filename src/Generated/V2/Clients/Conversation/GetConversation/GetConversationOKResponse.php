@@ -14,8 +14,6 @@ class GetConversationOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetConversationOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Conversation
-     */
     private Conversation $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Conversation $body
-     */
     public function __construct(Conversation $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Conversation
-     */
     public function getBody(): Conversation
     {
         return $this->body;
     }
 
-    /**
-     * @param Conversation $body
-     * @return self
-     */
     public function withBody(Conversation $body): self
     {
         $clone = clone $this;

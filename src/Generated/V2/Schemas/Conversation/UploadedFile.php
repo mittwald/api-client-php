@@ -21,8 +21,6 @@ class UploadedFile
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,32 +50,14 @@ class UploadedFile
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var UploadedFileStatus
-     */
     private UploadedFileStatus $status;
 
-    /**
-     * @var string
-     */
     private string $type;
 
-    /**
-     * @param string $id
-     * @param string $name
-     * @param UploadedFileStatus $status
-     * @param string $type
-     */
     public function __construct(string $id, string $name, UploadedFileStatus $status, string $type)
     {
         $this->id = $id;
@@ -86,42 +66,26 @@ class UploadedFile
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return UploadedFileStatus
-     */
     public function getStatus(): UploadedFileStatus
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -136,10 +100,6 @@ class UploadedFile
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -154,10 +114,6 @@ class UploadedFile
         return $clone;
     }
 
-    /**
-     * @param UploadedFileStatus $status
-     * @return self
-     */
     public function withStatus(UploadedFileStatus $status): self
     {
         $clone = clone $this;
@@ -166,10 +122,6 @@ class UploadedFile
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();
@@ -235,7 +187,7 @@ class UploadedFile
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

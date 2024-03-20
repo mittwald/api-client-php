@@ -14,8 +14,6 @@ class UpdateCategoryRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,50 +31,30 @@ class UpdateCategoryRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $categoryId;
 
-    /**
-     * @var Category
-     */
     private Category $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $categoryId
-     * @param Category $body
-     */
     public function __construct(string $categoryId, Category $body)
     {
         $this->categoryId = $categoryId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getCategoryId(): string
     {
         return $this->categoryId;
     }
 
-    /**
-     * @return Category
-     */
     public function getBody(): Category
     {
         return $this->body;
     }
 
-    /**
-     * @param string $categoryId
-     * @return self
-     */
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
@@ -91,10 +69,6 @@ class UpdateCategoryRequest
         return $clone;
     }
 
-    /**
-     * @param Category $body
-     * @return self
-     */
     public function withBody(Category $body): self
     {
         $clone = clone $this;

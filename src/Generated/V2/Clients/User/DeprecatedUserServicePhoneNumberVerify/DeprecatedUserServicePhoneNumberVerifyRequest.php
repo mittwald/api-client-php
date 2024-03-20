@@ -13,8 +13,6 @@ class DeprecatedUserServicePhoneNumberVerifyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -47,50 +45,30 @@ class DeprecatedUserServicePhoneNumberVerifyRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @var DeprecatedUserServicePhoneNumberVerifyRequestBody
-     */
     private DeprecatedUserServicePhoneNumberVerifyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $userId
-     * @param DeprecatedUserServicePhoneNumberVerifyRequestBody $body
-     */
     public function __construct(string $userId, DeprecatedUserServicePhoneNumberVerifyRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @return DeprecatedUserServicePhoneNumberVerifyRequestBody
-     */
     public function getBody(): DeprecatedUserServicePhoneNumberVerifyRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -105,10 +83,6 @@ class DeprecatedUserServicePhoneNumberVerifyRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserServicePhoneNumberVerifyRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServicePhoneNumberVerifyRequestBody $body): self
     {
         $clone = clone $this;

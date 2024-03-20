@@ -11,8 +11,6 @@ class GetMfaStatusOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,46 +28,26 @@ class GetMfaStatusOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $confirmed;
 
-    /**
-     * @var bool
-     */
     private bool $initialized;
 
-    /**
-     * @param bool $confirmed
-     * @param bool $initialized
-     */
     public function __construct(bool $confirmed, bool $initialized)
     {
         $this->confirmed = $confirmed;
         $this->initialized = $initialized;
     }
 
-    /**
-     * @return bool
-     */
     public function getConfirmed(): bool
     {
         return $this->confirmed;
     }
 
-    /**
-     * @return bool
-     */
     public function getInitialized(): bool
     {
         return $this->initialized;
     }
 
-    /**
-     * @param bool $confirmed
-     * @return self
-     */
     public function withConfirmed(bool $confirmed): self
     {
         $validator = new Validator();
@@ -84,10 +62,6 @@ class GetMfaStatusOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $initialized
-     * @return self
-     */
     public function withInitialized(bool $initialized): self
     {
         $validator = new Validator();

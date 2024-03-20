@@ -13,8 +13,6 @@ class PageinsightsGetStraceDataOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,33 +51,20 @@ class PageinsightsGetStraceDataOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var PageinsightsGetStraceDataOKResponseBody
-     */
     private PageinsightsGetStraceDataOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param PageinsightsGetStraceDataOKResponseBody $body
-     */
     public function __construct(PageinsightsGetStraceDataOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return PageinsightsGetStraceDataOKResponseBody
-     */
     public function getBody(): PageinsightsGetStraceDataOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param PageinsightsGetStraceDataOKResponseBody $body
-     * @return self
-     */
     public function withBody(PageinsightsGetStraceDataOKResponseBody $body): self
     {
         $clone = clone $this;

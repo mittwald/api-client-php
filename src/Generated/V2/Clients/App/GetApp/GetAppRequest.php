@@ -13,8 +13,6 @@ class GetAppRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class GetAppRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $appId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $appId
-     */
     public function __construct(string $appId)
     {
         $this->appId = $appId;
     }
 
-    /**
-     * @return string
-     */
     public function getAppId(): string
     {
         return $this->appId;
     }
 
-    /**
-     * @param string $appId
-     * @return self
-     */
     public function withAppId(string $appId): self
     {
         $validator = new Validator();

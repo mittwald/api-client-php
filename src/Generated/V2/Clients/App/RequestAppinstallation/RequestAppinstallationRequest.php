@@ -13,8 +13,6 @@ class RequestAppinstallationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -57,50 +55,30 @@ class RequestAppinstallationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var RequestAppinstallationRequestBody
-     */
     private RequestAppinstallationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param RequestAppinstallationRequestBody $body
-     */
     public function __construct(string $projectId, RequestAppinstallationRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return RequestAppinstallationRequestBody
-     */
     public function getBody(): RequestAppinstallationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -115,10 +93,6 @@ class RequestAppinstallationRequest
         return $clone;
     }
 
-    /**
-     * @param RequestAppinstallationRequestBody $body
-     * @return self
-     */
     public function withBody(RequestAppinstallationRequestBody $body): self
     {
         $clone = clone $this;

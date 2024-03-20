@@ -13,8 +13,6 @@ class ResendDomainEmailRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class ResendDomainEmailRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     */
     public function __construct(string $domainId)
     {
         $this->domainId = $domainId;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();

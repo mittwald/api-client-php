@@ -12,8 +12,6 @@ class InvoiceGetFileAccessTokenOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class InvoiceGetFileAccessTokenOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $accessToken;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $expiresAt;
 
-    /**
-     * @param string $accessToken
-     * @param DateTime $expiresAt
-     */
     public function __construct(string $accessToken, DateTime $expiresAt)
     {
         $this->accessToken = $accessToken;
         $this->expiresAt = $expiresAt;
     }
 
-    /**
-     * @return string
-     */
     public function getAccessToken(): string
     {
         return $this->accessToken;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getExpiresAt(): DateTime
     {
         return $this->expiresAt;
     }
 
-    /**
-     * @param string $accessToken
-     * @return self
-     */
     public function withAccessToken(string $accessToken): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class InvoiceGetFileAccessTokenOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;

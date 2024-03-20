@@ -21,8 +21,6 @@ class User
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,83 +46,46 @@ class User
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $active = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $avatarRefId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $clearName = null;
 
-    /**
-     * @var Department|null
-     */
     private ?Department $department = null;
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @param string $userId
-     */
     public function __construct(string $userId)
     {
         $this->userId = $userId;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getActive(): ?bool
     {
         return $this->active ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClearName(): ?string
     {
         return $this->clearName ?? null;
     }
 
-    /**
-     * @return Department|null
-     */
     public function getDepartment(): ?Department
     {
         return $this->department ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -139,9 +100,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutActive(): self
     {
         $clone = clone $this;
@@ -150,10 +108,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param string $avatarRefId
-     * @return self
-     */
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
@@ -168,9 +122,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
@@ -179,10 +130,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param string $clearName
-     * @return self
-     */
     public function withClearName(string $clearName): self
     {
         $validator = new Validator();
@@ -197,9 +144,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutClearName(): self
     {
         $clone = clone $this;
@@ -208,10 +152,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param Department $department
-     * @return self
-     */
     public function withDepartment(Department $department): self
     {
         $clone = clone $this;
@@ -220,9 +160,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDepartment(): self
     {
         $clone = clone $this;
@@ -231,10 +168,6 @@ class User
         return $clone;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -325,7 +258,7 @@ class User
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

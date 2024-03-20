@@ -11,8 +11,6 @@ class OrderCreateTariffChangeCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -25,31 +23,18 @@ class OrderCreateTariffChangeCreatedResponseBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $orderId;
 
-    /**
-     * @param string $orderId
-     */
     public function __construct(string $orderId)
     {
         $this->orderId = $orderId;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderId(): string
     {
         return $this->orderId;
     }
 
-    /**
-     * @param string $orderId
-     * @return self
-     */
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();

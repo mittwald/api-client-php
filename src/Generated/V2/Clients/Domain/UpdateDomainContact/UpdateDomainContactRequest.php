@@ -13,8 +13,6 @@ class UpdateDomainContactRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -51,30 +49,16 @@ class UpdateDomainContactRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $domainId;
 
-    /**
-     * @var UpdateDomainContactRequestContact
-     */
     private UpdateDomainContactRequestContact $contact;
 
-    /**
-     * @var UpdateDomainContactRequestBody
-     */
     private UpdateDomainContactRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $domainId
-     * @param UpdateDomainContactRequestContact $contact
-     * @param UpdateDomainContactRequestBody $body
-     */
     public function __construct(string $domainId, UpdateDomainContactRequestContact $contact, UpdateDomainContactRequestBody $body)
     {
         $this->domainId = $domainId;
@@ -82,34 +66,21 @@ class UpdateDomainContactRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainId(): string
     {
         return $this->domainId;
     }
 
-    /**
-     * @return UpdateDomainContactRequestContact
-     */
     public function getContact(): UpdateDomainContactRequestContact
     {
         return $this->contact;
     }
 
-    /**
-     * @return UpdateDomainContactRequestBody
-     */
     public function getBody(): UpdateDomainContactRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $domainId
-     * @return self
-     */
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
@@ -124,10 +95,6 @@ class UpdateDomainContactRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDomainContactRequestContact $contact
-     * @return self
-     */
     public function withContact(UpdateDomainContactRequestContact $contact): self
     {
         $clone = clone $this;
@@ -136,10 +103,6 @@ class UpdateDomainContactRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateDomainContactRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateDomainContactRequestBody $body): self
     {
         $clone = clone $this;

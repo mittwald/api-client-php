@@ -14,8 +14,6 @@ class GetOwnAccountOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetOwnAccountOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Account
-     */
     private Account $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Account $body
-     */
     public function __construct(Account $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Account
-     */
     public function getBody(): Account
     {
         return $this->body;
     }
 
-    /**
-     * @param Account $body
-     * @return self
-     */
     public function withBody(Account $body): self
     {
         $clone = clone $this;

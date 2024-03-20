@@ -13,8 +13,6 @@ class UpdateMailAddressCatchallV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMailAddressCatchallV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mailAddressId;
 
-    /**
-     * @var UpdateMailAddressCatchallV2DeprecatedRequestBody
-     */
     private UpdateMailAddressCatchallV2DeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mailAddressId
-     * @param UpdateMailAddressCatchallV2DeprecatedRequestBody $body
-     */
     public function __construct(string $mailAddressId, UpdateMailAddressCatchallV2DeprecatedRequestBody $body)
     {
         $this->mailAddressId = $mailAddressId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddressId(): string
     {
         return $this->mailAddressId;
     }
 
-    /**
-     * @return UpdateMailAddressCatchallV2DeprecatedRequestBody
-     */
     public function getBody(): UpdateMailAddressCatchallV2DeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mailAddressId
-     * @return self
-     */
     public function withMailAddressId(string $mailAddressId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMailAddressCatchallV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressCatchallV2DeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMailAddressCatchallV2DeprecatedRequestBody $body): self
     {
         $clone = clone $this;

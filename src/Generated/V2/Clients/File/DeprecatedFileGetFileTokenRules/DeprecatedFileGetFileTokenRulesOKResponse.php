@@ -14,8 +14,6 @@ class DeprecatedFileGetFileTokenRulesOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class DeprecatedFileGetFileTokenRulesOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var FileUploadRules
-     */
     private FileUploadRules $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param FileUploadRules $body
-     */
     public function __construct(FileUploadRules $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return FileUploadRules
-     */
     public function getBody(): FileUploadRules
     {
         return $this->body;
     }
 
-    /**
-     * @param FileUploadRules $body
-     * @return self
-     */
     public function withBody(FileUploadRules $body): self
     {
         $clone = clone $this;

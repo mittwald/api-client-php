@@ -21,8 +21,6 @@ class Migration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -34,6 +32,9 @@ class Migration
             ],
             'finalizers' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrationFinalizeJob',
+            ],
+            'finished' => [
+                'type' => 'boolean',
             ],
             'id' => [
                 'format' => 'uuid',
@@ -58,6 +59,8 @@ class Migration
             'sourceCoabProjectId',
             'addresses',
             'mailboxes',
+            'finalizers',
+            'finished',
         ],
         'type' => 'object',
     ];
@@ -67,14 +70,10 @@ class Migration
      */
     private array $addresses;
 
-    /**
-     * @var MigrationFinalizeJob|null
-     */
-    private ?MigrationFinalizeJob $finalizers = null;
+    private MigrationFinalizeJob $finalizers;
 
-    /**
-     * @var string
-     */
+    private bool $finished;
+
     private string $id;
 
     /**
@@ -82,26 +81,19 @@ class Migration
      */
     private array $mailboxes;
 
-    /**
-     * @var string
-     */
     private string $sourceCoabProjectId;
 
-    /**
-     * @var string
-     */
     private string $targetNexusProjectId;
 
     /**
      * @param MigrationMailAddress[] $addresses
-     * @param string $id
      * @param MigrationMailbox[] $mailboxes
-     * @param string $sourceCoabProjectId
-     * @param string $targetNexusProjectId
      */
-    public function __construct(array $addresses, string $id, array $mailboxes, string $sourceCoabProjectId, string $targetNexusProjectId)
+    public function __construct(array $addresses, MigrationFinalizeJob $finalizers, bool $finished, string $id, array $mailboxes, string $sourceCoabProjectId, string $targetNexusProjectId)
     {
         $this->addresses = $addresses;
+        $this->finalizers = $finalizers;
+        $this->finished = $finished;
         $this->id = $id;
         $this->mailboxes = $mailboxes;
         $this->sourceCoabProjectId = $sourceCoabProjectId;
@@ -119,16 +111,18 @@ class Migration
 
     /**
      * @return
-     * MigrationFinalizeJob|null
+     * MigrationFinalizeJob
      */
-    public function getFinalizers(): ?MigrationFinalizeJob
+    public function getFinalizers(): MigrationFinalizeJob
     {
-        return $this->finalizers ?? null;
+        return $this->finalizers;
     }
 
-    /**
-     * @return string
-     */
+    public function getFinished(): bool
+    {
+        return $this->finished;
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -143,17 +137,11 @@ class Migration
         return $this->mailboxes;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceCoabProjectId(): string
     {
         return $this->sourceCoabProjectId;
     }
 
-    /**
-     * @return string
-     */
     public function getTargetNexusProjectId(): string
     {
         return $this->targetNexusProjectId;
@@ -161,7 +149,6 @@ class Migration
 
     /**
      * @param MigrationMailAddress[] $addresses
-     * @return self
      */
     public function withAddresses(array $addresses): self
     {
@@ -171,10 +158,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param MigrationFinalizeJob $finalizers
-     * @return self
-     */
     public function withFinalizers(MigrationFinalizeJob $finalizers): self
     {
         $clone = clone $this;
@@ -183,21 +166,20 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @return self
-     */
-    public function withoutFinalizers(): self
+    public function withFinished(bool $finished): self
     {
+        $validator = new Validator();
+        $validator->validate($finished, static::$schema['properties']['finished']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        unset($clone->finalizers);
+        $clone->finished = $finished;
 
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -214,7 +196,6 @@ class Migration
 
     /**
      * @param MigrationMailbox[] $mailboxes
-     * @return self
      */
     public function withMailboxes(array $mailboxes): self
     {
@@ -224,10 +205,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param string $sourceCoabProjectId
-     * @return self
-     */
     public function withSourceCoabProjectId(string $sourceCoabProjectId): self
     {
         $validator = new Validator();
@@ -242,10 +219,6 @@ class Migration
         return $clone;
     }
 
-    /**
-     * @param string $targetNexusProjectId
-     * @return self
-     */
     public function withTargetNexusProjectId(string $targetNexusProjectId): self
     {
         $validator = new Validator();
@@ -276,17 +249,15 @@ class Migration
         }
 
         $addresses = array_map(fn (array|object $i): MigrationMailAddress => MigrationMailAddress::buildFromInput($i, validate: $validate), $input->{'addresses'});
-        $finalizers = null;
-        if (isset($input->{'finalizers'})) {
-            $finalizers = MigrationFinalizeJob::buildFromInput($input->{'finalizers'}, validate: $validate);
-        }
+        $finalizers = MigrationFinalizeJob::buildFromInput($input->{'finalizers'}, validate: $validate);
+        $finished = (bool)($input->{'finished'});
         $id = $input->{'id'};
         $mailboxes = array_map(fn (array|object $i): MigrationMailbox => MigrationMailbox::buildFromInput($i, validate: $validate), $input->{'mailboxes'});
         $sourceCoabProjectId = $input->{'sourceCoabProjectId'};
         $targetNexusProjectId = $input->{'targetNexusProjectId'};
 
-        $obj = new self($addresses, $id, $mailboxes, $sourceCoabProjectId, $targetNexusProjectId);
-        $obj->finalizers = $finalizers;
+        $obj = new self($addresses, $finalizers, $finished, $id, $mailboxes, $sourceCoabProjectId, $targetNexusProjectId);
+
         return $obj;
     }
 
@@ -299,9 +270,8 @@ class Migration
     {
         $output = [];
         $output['addresses'] = array_map(fn (MigrationMailAddress $i): array => $i->toJson(), $this->addresses);
-        if (isset($this->finalizers)) {
-            $output['finalizers'] = $this->finalizers->toJson();
-        }
+        $output['finalizers'] = $this->finalizers->toJson();
+        $output['finished'] = $this->finished;
         $output['id'] = $this->id;
         $output['mailboxes'] = array_map(fn (MigrationMailbox $i): array => $i->toJson(), $this->mailboxes);
         $output['sourceCoabProjectId'] = $this->sourceCoabProjectId;
@@ -320,7 +290,7 @@ class Migration
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

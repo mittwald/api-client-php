@@ -22,8 +22,6 @@ class DatePeriod
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -43,46 +41,26 @@ class DatePeriod
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime
-     */
     private DateTime $end;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $start;
 
-    /**
-     * @param DateTime $end
-     * @param DateTime $start
-     */
     public function __construct(DateTime $end, DateTime $start)
     {
         $this->end = $end;
         $this->start = $start;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getEnd(): DateTime
     {
         return $this->end;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getStart(): DateTime
     {
         return $this->start;
     }
 
-    /**
-     * @param DateTime $end
-     * @return self
-     */
     public function withEnd(DateTime $end): self
     {
         $clone = clone $this;
@@ -91,10 +69,6 @@ class DatePeriod
         return $clone;
     }
 
-    /**
-     * @param DateTime $start
-     * @return self
-     */
     public function withStart(DateTime $start): self
     {
         $clone = clone $this;
@@ -150,7 +124,7 @@ class DatePeriod
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

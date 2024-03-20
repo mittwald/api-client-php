@@ -13,8 +13,6 @@ class InvoiceGetFileAccessTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,50 +31,30 @@ class InvoiceGetFileAccessTokenRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $invoiceId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $customerId
-     * @param string $invoiceId
-     */
     public function __construct(string $customerId, string $invoiceId)
     {
         $this->customerId = $customerId;
         $this->invoiceId = $invoiceId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getInvoiceId(): string
     {
         return $this->invoiceId;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -91,10 +69,6 @@ class InvoiceGetFileAccessTokenRequest
         return $clone;
     }
 
-    /**
-     * @param string $invoiceId
-     * @return self
-     */
     public function withInvoiceId(string $invoiceId): self
     {
         $validator = new Validator();

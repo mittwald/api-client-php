@@ -21,8 +21,6 @@ class IngressIps
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -63,7 +61,6 @@ class IngressIps
 
     /**
      * @param string[] $v4
-     * @return self
      */
     public function withV4(array $v4): self
     {
@@ -124,7 +121,7 @@ class IngressIps
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class DnsSetRecordSetManagedNoContentResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,33 +32,20 @@ class DnsSetRecordSetManagedNoContentResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DnsSetRecordSetManagedNoContentResponseBody
-     */
     private DnsSetRecordSetManagedNoContentResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DnsSetRecordSetManagedNoContentResponseBody $body
-     */
     public function __construct(DnsSetRecordSetManagedNoContentResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DnsSetRecordSetManagedNoContentResponseBody
-     */
     public function getBody(): DnsSetRecordSetManagedNoContentResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DnsSetRecordSetManagedNoContentResponseBody $body
-     * @return self
-     */
     public function withBody(DnsSetRecordSetManagedNoContentResponseBody $body): self
     {
         $clone = clone $this;

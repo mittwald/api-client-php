@@ -21,8 +21,6 @@ class CreateMySqlUser
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,42 +57,18 @@ class CreateMySqlUser
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $accessIpMask = null;
 
-    /**
-     * @var CreateMySqlUserAccessLevel
-     */
     private CreateMySqlUserAccessLevel $accessLevel;
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $externalAccess = null;
 
-    /**
-     * @var string
-     */
     private string $password;
 
-    /**
-     * @param CreateMySqlUserAccessLevel $accessLevel
-     * @param string $databaseId
-     * @param string $description
-     * @param string $password
-     */
     public function __construct(CreateMySqlUserAccessLevel $accessLevel, string $databaseId, string $description, string $password)
     {
         $this->accessLevel = $accessLevel;
@@ -103,58 +77,36 @@ class CreateMySqlUser
         $this->password = $password;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAccessIpMask(): ?string
     {
         return $this->accessIpMask ?? null;
     }
 
-    /**
-     * @return CreateMySqlUserAccessLevel
-     */
     public function getAccessLevel(): CreateMySqlUserAccessLevel
     {
         return $this->accessLevel;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getExternalAccess(): ?bool
     {
         return $this->externalAccess ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $accessIpMask
-     * @return self
-     */
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
@@ -169,9 +121,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAccessIpMask(): self
     {
         $clone = clone $this;
@@ -180,10 +129,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @param CreateMySqlUserAccessLevel $accessLevel
-     * @return self
-     */
     public function withAccessLevel(CreateMySqlUserAccessLevel $accessLevel): self
     {
         $clone = clone $this;
@@ -192,10 +137,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
@@ -210,10 +151,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -228,10 +165,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @param bool $externalAccess
-     * @return self
-     */
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
@@ -246,9 +179,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExternalAccess(): self
     {
         $clone = clone $this;
@@ -257,10 +187,6 @@ class CreateMySqlUser
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -341,7 +267,7 @@ class CreateMySqlUser
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

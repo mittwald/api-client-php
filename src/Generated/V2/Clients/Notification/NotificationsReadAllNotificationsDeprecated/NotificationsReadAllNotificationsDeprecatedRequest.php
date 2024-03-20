@@ -13,8 +13,6 @@ class NotificationsReadAllNotificationsDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class NotificationsReadAllNotificationsDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var NotificationsReadAllNotificationsDeprecatedRequestBody
-     */
     private NotificationsReadAllNotificationsDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param NotificationsReadAllNotificationsDeprecatedRequestBody $body
-     */
     public function __construct(NotificationsReadAllNotificationsDeprecatedRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return NotificationsReadAllNotificationsDeprecatedRequestBody
-     */
     public function getBody(): NotificationsReadAllNotificationsDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param NotificationsReadAllNotificationsDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(NotificationsReadAllNotificationsDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

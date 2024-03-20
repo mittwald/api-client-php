@@ -11,8 +11,6 @@ class CreateRelocationRequestBodyProvider
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -64,43 +62,28 @@ class CreateRelocationRequestBodyProvider
 
     /**
      * Url to the control panel of the provider
-     *
-     * @var string
      */
     private string $loginUrl;
 
     /**
      * Name of your provider
-     *
-     * @var string|CreateRelocationRequestBodyProviderNameAlternative2
      */
     private string|CreateRelocationRequestBodyProviderNameAlternative2 $name;
 
-    /**
-     * @var string
-     */
     private string $password;
 
     /**
      * Which account of your provider should be moved?
-     *
-     * @var string
      */
     private string $sourceAccount;
 
     /**
      * Login name to your provider
-     *
-     * @var string
      */
     private string $userName;
 
     /**
-     * @param string $loginUrl
      * @param string|CreateRelocationRequestBodyProviderNameAlternative2 $name
-     * @param string $password
-     * @param string $sourceAccount
-     * @param string $userName
      */
     public function __construct(string $loginUrl, CreateRelocationRequestBodyProviderNameAlternative2|string $name, string $password, string $sourceAccount, string $userName)
     {
@@ -111,50 +94,31 @@ class CreateRelocationRequestBodyProvider
         $this->userName = $userName;
     }
 
-    /**
-     * @return string
-     */
     public function getLoginUrl(): string
     {
         return $this->loginUrl;
     }
 
-    /**
-     * @return string|CreateRelocationRequestBodyProviderNameAlternative2
-     */
     public function getName(): CreateRelocationRequestBodyProviderNameAlternative2|string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @return string
-     */
     public function getSourceAccount(): string
     {
         return $this->sourceAccount;
     }
 
-    /**
-     * @return string
-     */
     public function getUserName(): string
     {
         return $this->userName;
     }
 
-    /**
-     * @param string $loginUrl
-     * @return self
-     */
     public function withLoginUrl(string $loginUrl): self
     {
         $validator = new Validator();
@@ -171,7 +135,6 @@ class CreateRelocationRequestBodyProvider
 
     /**
      * @param string|CreateRelocationRequestBodyProviderNameAlternative2 $name
-     * @return self
      */
     public function withName(CreateRelocationRequestBodyProviderNameAlternative2|string $name): self
     {
@@ -181,10 +144,6 @@ class CreateRelocationRequestBodyProvider
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();
@@ -199,10 +158,6 @@ class CreateRelocationRequestBodyProvider
         return $clone;
     }
 
-    /**
-     * @param string $sourceAccount
-     * @return self
-     */
     public function withSourceAccount(string $sourceAccount): self
     {
         $validator = new Validator();
@@ -217,10 +172,6 @@ class CreateRelocationRequestBodyProvider
         return $clone;
     }
 
-    /**
-     * @param string $userName
-     * @return self
-     */
     public function withUserName(string $userName): self
     {
         $validator = new Validator();

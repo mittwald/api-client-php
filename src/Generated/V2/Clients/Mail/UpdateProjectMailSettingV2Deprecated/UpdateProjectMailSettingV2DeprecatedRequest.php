@@ -13,8 +13,6 @@ class UpdateProjectMailSettingV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -71,19 +69,10 @@ class UpdateProjectMailSettingV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var UpdateProjectMailSettingV2DeprecatedRequestSetting
-     */
     private UpdateProjectMailSettingV2DeprecatedRequestSetting $setting;
 
-    /**
-     * @var UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2
-     */
     private UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2 $body;
 
     private array $headers = [
@@ -91,8 +80,6 @@ class UpdateProjectMailSettingV2DeprecatedRequest
     ];
 
     /**
-     * @param string $projectId
-     * @param UpdateProjectMailSettingV2DeprecatedRequestSetting $setting
      * @param UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2 $body
      */
     public function __construct(string $projectId, UpdateProjectMailSettingV2DeprecatedRequestSetting $setting, UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2 $body)
@@ -102,17 +89,11 @@ class UpdateProjectMailSettingV2DeprecatedRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return UpdateProjectMailSettingV2DeprecatedRequestSetting
-     */
     public function getSetting(): UpdateProjectMailSettingV2DeprecatedRequestSetting
     {
         return $this->setting;
@@ -127,10 +108,6 @@ class UpdateProjectMailSettingV2DeprecatedRequest
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -145,10 +122,6 @@ class UpdateProjectMailSettingV2DeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateProjectMailSettingV2DeprecatedRequestSetting $setting
-     * @return self
-     */
     public function withSetting(UpdateProjectMailSettingV2DeprecatedRequestSetting $setting): self
     {
         $clone = clone $this;
@@ -159,7 +132,6 @@ class UpdateProjectMailSettingV2DeprecatedRequest
 
     /**
      * @param UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2 $body
-     * @return self
      */
     public function withBody(UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2 $body): self
     {

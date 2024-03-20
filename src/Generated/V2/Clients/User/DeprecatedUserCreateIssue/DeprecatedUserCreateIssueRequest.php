@@ -13,8 +13,6 @@ class DeprecatedUserCreateIssueRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -61,35 +59,22 @@ class DeprecatedUserCreateIssueRequest
         ],
     ];
 
-    /**
-     * @var DeprecatedUserCreateIssueRequestBody
-     */
     private DeprecatedUserCreateIssueRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DeprecatedUserCreateIssueRequestBody $body
-     */
     public function __construct(DeprecatedUserCreateIssueRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserCreateIssueRequestBody
-     */
     public function getBody(): DeprecatedUserCreateIssueRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserCreateIssueRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserCreateIssueRequestBody $body): self
     {
         $clone = clone $this;

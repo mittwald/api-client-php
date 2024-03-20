@@ -21,8 +21,6 @@ class LinkedDatabase
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'LinkedDatabase is a reference to a concrete Database and DatabaseUsers.',
@@ -61,9 +59,6 @@ class LinkedDatabase
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
     /**
@@ -71,21 +66,10 @@ class LinkedDatabase
      */
     private ?array $databaseUserIds = null;
 
-    /**
-     * @var LinkedDatabaseKind
-     */
     private LinkedDatabaseKind $kind;
 
-    /**
-     * @var LinkedDatabasePurpose
-     */
     private LinkedDatabasePurpose $purpose;
 
-    /**
-     * @param string $databaseId
-     * @param LinkedDatabaseKind $kind
-     * @param LinkedDatabasePurpose $purpose
-     */
     public function __construct(string $databaseId, LinkedDatabaseKind $kind, LinkedDatabasePurpose $purpose)
     {
         $this->databaseId = $databaseId;
@@ -93,9 +77,6 @@ class LinkedDatabase
         $this->purpose = $purpose;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
@@ -109,26 +90,16 @@ class LinkedDatabase
         return $this->databaseUserIds ?? null;
     }
 
-    /**
-     * @return LinkedDatabaseKind
-     */
     public function getKind(): LinkedDatabaseKind
     {
         return $this->kind;
     }
 
-    /**
-     * @return LinkedDatabasePurpose
-     */
     public function getPurpose(): LinkedDatabasePurpose
     {
         return $this->purpose;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
@@ -145,7 +116,6 @@ class LinkedDatabase
 
     /**
      * @param string[] $databaseUserIds
-     * @return self
      */
     public function withDatabaseUserIds(array $databaseUserIds): self
     {
@@ -161,9 +131,6 @@ class LinkedDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDatabaseUserIds(): self
     {
         $clone = clone $this;
@@ -172,10 +139,6 @@ class LinkedDatabase
         return $clone;
     }
 
-    /**
-     * @param LinkedDatabaseKind $kind
-     * @return self
-     */
     public function withKind(LinkedDatabaseKind $kind): self
     {
         $clone = clone $this;
@@ -184,10 +147,6 @@ class LinkedDatabase
         return $clone;
     }
 
-    /**
-     * @param LinkedDatabasePurpose $purpose
-     * @return self
-     */
     public function withPurpose(LinkedDatabasePurpose $purpose): self
     {
         $clone = clone $this;
@@ -252,7 +211,7 @@ class LinkedDatabase
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class NotificationsReadNotificationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -41,50 +39,30 @@ class NotificationsReadNotificationRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $notificationId;
 
-    /**
-     * @var NotificationsReadNotificationRequestBody
-     */
     private NotificationsReadNotificationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $notificationId
-     * @param NotificationsReadNotificationRequestBody $body
-     */
     public function __construct(string $notificationId, NotificationsReadNotificationRequestBody $body)
     {
         $this->notificationId = $notificationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getNotificationId(): string
     {
         return $this->notificationId;
     }
 
-    /**
-     * @return NotificationsReadNotificationRequestBody
-     */
     public function getBody(): NotificationsReadNotificationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $notificationId
-     * @return self
-     */
     public function withNotificationId(string $notificationId): self
     {
         $validator = new Validator();
@@ -99,10 +77,6 @@ class NotificationsReadNotificationRequest
         return $clone;
     }
 
-    /**
-     * @param NotificationsReadNotificationRequestBody $body
-     * @return self
-     */
     public function withBody(NotificationsReadNotificationRequestBody $body): self
     {
         $clone = clone $this;

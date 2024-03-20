@@ -21,8 +21,6 @@ class DomainError
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,63 +46,40 @@ class DomainError
 
     /**
      * A json object, given further information about the error
-     *
-     * @var DomainErrorInfo|null
      */
     private ?DomainErrorInfo $info = null;
 
     /**
      * Some more detailed information about the error
-     *
-     * @var string
      */
     private string $message;
 
     /**
      * Unique key for the error type
-     *
-     * @var string
      */
     private string $name;
 
-    /**
-     * @param string $message
-     * @param string $name
-     */
     public function __construct(string $message, string $name)
     {
         $this->message = $message;
         $this->name = $name;
     }
 
-    /**
-     * @return DomainErrorInfo|null
-     */
     public function getInfo(): ?DomainErrorInfo
     {
         return $this->info ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param DomainErrorInfo $info
-     * @return self
-     */
     public function withInfo(DomainErrorInfo $info): self
     {
         $clone = clone $this;
@@ -113,9 +88,6 @@ class DomainError
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutInfo(): self
     {
         $clone = clone $this;
@@ -124,10 +96,6 @@ class DomainError
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -142,10 +110,6 @@ class DomainError
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -214,7 +178,7 @@ class DomainError
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

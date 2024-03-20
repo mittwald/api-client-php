@@ -14,8 +14,6 @@ class GetAppversionOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetAppversionOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var AppVersion
-     */
     private AppVersion $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param AppVersion $body
-     */
     public function __construct(AppVersion $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return AppVersion
-     */
     public function getBody(): AppVersion
     {
         return $this->body;
     }
 
-    /**
-     * @param AppVersion $body
-     * @return self
-     */
     public function withBody(AppVersion $body): self
     {
         $clone = clone $this;

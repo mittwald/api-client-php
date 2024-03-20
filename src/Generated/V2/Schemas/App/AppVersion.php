@@ -22,8 +22,6 @@ class AppVersion
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.',
@@ -84,9 +82,6 @@ class AppVersion
         'type' => 'object',
     ];
 
-    /**
-     * @var BreakingNote|null
-     */
     private ?BreakingNote $breakingNote = null;
 
     /**
@@ -94,39 +89,18 @@ class AppVersion
      */
     private ?array $databases = null;
 
-    /**
-     * @var string
-     */
     private string $docRoot;
 
-    /**
-     * @var bool
-     */
     private bool $docRootUserEditable;
 
-    /**
-     * @var string
-     */
     private string $externalVersion;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $internalVersion;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $recommended = null;
 
-    /**
-     * @var RequestHandlerRequirement|null
-     */
     private ?RequestHandlerRequirement $requestHandler = null;
 
     /**
@@ -139,13 +113,6 @@ class AppVersion
      */
     private ?array $userInputs = null;
 
-    /**
-     * @param string $docRoot
-     * @param bool $docRootUserEditable
-     * @param string $externalVersion
-     * @param string $id
-     * @param string $internalVersion
-     */
     public function __construct(string $docRoot, bool $docRootUserEditable, string $externalVersion, string $id, string $internalVersion)
     {
         $this->docRoot = $docRoot;
@@ -155,9 +122,6 @@ class AppVersion
         $this->internalVersion = $internalVersion;
     }
 
-    /**
-     * @return BreakingNote|null
-     */
     public function getBreakingNote(): ?BreakingNote
     {
         return $this->breakingNote ?? null;
@@ -171,49 +135,31 @@ class AppVersion
         return $this->databases ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDocRoot(): string
     {
         return $this->docRoot;
     }
 
-    /**
-     * @return bool
-     */
     public function getDocRootUserEditable(): bool
     {
         return $this->docRootUserEditable;
     }
 
-    /**
-     * @return string
-     */
     public function getExternalVersion(): string
     {
         return $this->externalVersion;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getInternalVersion(): string
     {
         return $this->internalVersion;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRecommended(): ?bool
     {
         return $this->recommended ?? null;
@@ -245,10 +191,6 @@ class AppVersion
         return $this->userInputs ?? null;
     }
 
-    /**
-     * @param BreakingNote $breakingNote
-     * @return self
-     */
     public function withBreakingNote(BreakingNote $breakingNote): self
     {
         $clone = clone $this;
@@ -257,9 +199,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutBreakingNote(): self
     {
         $clone = clone $this;
@@ -270,7 +209,6 @@ class AppVersion
 
     /**
      * @param DatabaseDependency[] $databases
-     * @return self
      */
     public function withDatabases(array $databases): self
     {
@@ -280,9 +218,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDatabases(): self
     {
         $clone = clone $this;
@@ -291,10 +226,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param string $docRoot
-     * @return self
-     */
     public function withDocRoot(string $docRoot): self
     {
         $validator = new Validator();
@@ -309,10 +240,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param bool $docRootUserEditable
-     * @return self
-     */
     public function withDocRootUserEditable(bool $docRootUserEditable): self
     {
         $validator = new Validator();
@@ -327,10 +254,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param string $externalVersion
-     * @return self
-     */
     public function withExternalVersion(string $externalVersion): self
     {
         $validator = new Validator();
@@ -345,10 +268,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -363,10 +282,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param string $internalVersion
-     * @return self
-     */
     public function withInternalVersion(string $internalVersion): self
     {
         $validator = new Validator();
@@ -381,10 +296,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param bool $recommended
-     * @return self
-     */
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
@@ -399,9 +310,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRecommended(): self
     {
         $clone = clone $this;
@@ -410,10 +318,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @param RequestHandlerRequirement $requestHandler
-     * @return self
-     */
     public function withRequestHandler(RequestHandlerRequirement $requestHandler): self
     {
         $clone = clone $this;
@@ -422,9 +326,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRequestHandler(): self
     {
         $clone = clone $this;
@@ -435,7 +336,6 @@ class AppVersion
 
     /**
      * @param SystemSoftwareDependency[] $systemSoftwareDependencies
-     * @return self
      */
     public function withSystemSoftwareDependencies(array $systemSoftwareDependencies): self
     {
@@ -445,9 +345,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSystemSoftwareDependencies(): self
     {
         $clone = clone $this;
@@ -458,7 +355,6 @@ class AppVersion
 
     /**
      * @param UserInput[] $userInputs
-     * @return self
      */
     public function withUserInputs(array $userInputs): self
     {
@@ -468,9 +364,6 @@ class AppVersion
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUserInputs(): self
     {
         $clone = clone $this;
@@ -579,7 +472,7 @@ class AppVersion
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

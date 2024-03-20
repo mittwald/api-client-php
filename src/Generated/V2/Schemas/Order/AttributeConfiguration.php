@@ -21,8 +21,6 @@ class AttributeConfiguration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,51 +35,29 @@ class AttributeConfiguration
         ],
         'required' => [
             'key',
-            'value',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $key;
 
-    /**
-     * @var string
-     */
-    private string $value;
+    private ?string $value = null;
 
-    /**
-     * @param string $key
-     * @param string $value
-     */
-    public function __construct(string $key, string $value)
+    public function __construct(string $key)
     {
         $this->key = $key;
-        $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
     public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return string
-     */
-    public function getValue(): string
+    public function getValue(): ?string
     {
-        return $this->value;
+        return $this->value ?? null;
     }
 
-    /**
-     * @param string $key
-     * @return self
-     */
     public function withKey(string $key): self
     {
         $validator = new Validator();
@@ -96,10 +72,6 @@ class AttributeConfiguration
         return $clone;
     }
 
-    /**
-     * @param string $value
-     * @return self
-     */
     public function withValue(string $value): self
     {
         $validator = new Validator();
@@ -110,6 +82,14 @@ class AttributeConfiguration
 
         $clone = clone $this;
         $clone->value = $value;
+
+        return $clone;
+    }
+
+    public function withoutValue(): self
+    {
+        $clone = clone $this;
+        unset($clone->value);
 
         return $clone;
     }
@@ -130,10 +110,13 @@ class AttributeConfiguration
         }
 
         $key = $input->{'key'};
-        $value = $input->{'value'};
+        $value = null;
+        if (isset($input->{'value'})) {
+            $value = $input->{'value'};
+        }
 
-        $obj = new self($key, $value);
-
+        $obj = new self($key);
+        $obj->value = $value;
         return $obj;
     }
 
@@ -146,7 +129,9 @@ class AttributeConfiguration
     {
         $output = [];
         $output['key'] = $this->key;
-        $output['value'] = $this->value;
+        if (isset($this->value)) {
+            $output['value'] = $this->value;
+        }
 
         return $output;
     }
@@ -161,7 +146,7 @@ class AttributeConfiguration
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

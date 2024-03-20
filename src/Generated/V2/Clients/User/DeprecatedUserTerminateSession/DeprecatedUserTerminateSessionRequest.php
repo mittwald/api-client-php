@@ -13,8 +13,6 @@ class DeprecatedUserTerminateSessionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class DeprecatedUserTerminateSessionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $tokenId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $tokenId
-     */
     public function __construct(string $tokenId)
     {
         $this->tokenId = $tokenId;
     }
 
-    /**
-     * @return string
-     */
     public function getTokenId(): string
     {
         return $this->tokenId;
     }
 
-    /**
-     * @param string $tokenId
-     * @return self
-     */
     public function withTokenId(string $tokenId): self
     {
         $validator = new Validator();

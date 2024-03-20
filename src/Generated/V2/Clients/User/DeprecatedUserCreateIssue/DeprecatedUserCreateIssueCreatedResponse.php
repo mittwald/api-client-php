@@ -13,8 +13,6 @@ class DeprecatedUserCreateIssueCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,33 +26,20 @@ class DeprecatedUserCreateIssueCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DeprecatedUserCreateIssueCreatedResponseBody
-     */
     private DeprecatedUserCreateIssueCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedUserCreateIssueCreatedResponseBody $body
-     */
     public function __construct(DeprecatedUserCreateIssueCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserCreateIssueCreatedResponseBody
-     */
     public function getBody(): DeprecatedUserCreateIssueCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserCreateIssueCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserCreateIssueCreatedResponseBody $body): self
     {
         $clone = clone $this;

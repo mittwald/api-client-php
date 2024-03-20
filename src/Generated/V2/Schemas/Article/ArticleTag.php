@@ -21,8 +21,6 @@ class ArticleTag
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -49,83 +47,43 @@ class ArticleTag
         ],
         'required' => [
             'id',
-            'name',
-            'description',
-            'hexColor',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
-    private string $description;
+    private ?string $description = null;
 
-    /**
-     * @var string
-     */
-    private string $hexColor;
+    private ?string $hexColor = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
-    private string $name;
+    private ?string $name = null;
 
-    /**
-     * @param string $description
-     * @param string $hexColor
-     * @param string $id
-     * @param string $name
-     */
-    public function __construct(string $description, string $hexColor, string $id, string $name)
+    public function __construct(string $id)
     {
-        $this->description = $description;
-        $this->hexColor = $hexColor;
         $this->id = $id;
-        $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
-    /**
-     * @return string
-     */
-    public function getHexColor(): string
+    public function getHexColor(): ?string
     {
-        return $this->hexColor;
+        return $this->hexColor ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName(): string
+    public function getName(): ?string
     {
-        return $this->name;
+        return $this->name ?? null;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -140,10 +98,14 @@ class ArticleTag
         return $clone;
     }
 
-    /**
-     * @param string $hexColor
-     * @return self
-     */
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
     public function withHexColor(string $hexColor): self
     {
         $validator = new Validator();
@@ -158,10 +120,14 @@ class ArticleTag
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
+    public function withoutHexColor(): self
+    {
+        $clone = clone $this;
+        unset($clone->hexColor);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -176,10 +142,6 @@ class ArticleTag
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -190,6 +152,14 @@ class ArticleTag
 
         $clone = clone $this;
         $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withoutName(): self
+    {
+        $clone = clone $this;
+        unset($clone->name);
 
         return $clone;
     }
@@ -209,13 +179,24 @@ class ArticleTag
             static::validateInput($input);
         }
 
-        $description = $input->{'description'};
-        $hexColor = $input->{'hexColor'};
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
+        $hexColor = null;
+        if (isset($input->{'hexColor'})) {
+            $hexColor = $input->{'hexColor'};
+        }
         $id = $input->{'id'};
-        $name = $input->{'name'};
+        $name = null;
+        if (isset($input->{'name'})) {
+            $name = $input->{'name'};
+        }
 
-        $obj = new self($description, $hexColor, $id, $name);
-
+        $obj = new self($id);
+        $obj->description = $description;
+        $obj->hexColor = $hexColor;
+        $obj->name = $name;
         return $obj;
     }
 
@@ -227,10 +208,16 @@ class ArticleTag
     public function toJson(): array
     {
         $output = [];
-        $output['description'] = $this->description;
-        $output['hexColor'] = $this->hexColor;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
+        if (isset($this->hexColor)) {
+            $output['hexColor'] = $this->hexColor;
+        }
         $output['id'] = $this->id;
-        $output['name'] = $this->name;
+        if (isset($this->name)) {
+            $output['name'] = $this->name;
+        }
 
         return $output;
     }
@@ -245,7 +232,7 @@ class ArticleTag
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

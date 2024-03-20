@@ -13,8 +13,6 @@ class ProjectsettingUpdateWhitelistDeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -44,50 +42,30 @@ class ProjectsettingUpdateWhitelistDeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var ProjectsettingUpdateWhitelistDeprecatedRequestBody
-     */
     private ProjectsettingUpdateWhitelistDeprecatedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param ProjectsettingUpdateWhitelistDeprecatedRequestBody $body
-     */
     public function __construct(string $projectId, ProjectsettingUpdateWhitelistDeprecatedRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return ProjectsettingUpdateWhitelistDeprecatedRequestBody
-     */
     public function getBody(): ProjectsettingUpdateWhitelistDeprecatedRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -102,10 +80,6 @@ class ProjectsettingUpdateWhitelistDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param ProjectsettingUpdateWhitelistDeprecatedRequestBody $body
-     * @return self
-     */
     public function withBody(ProjectsettingUpdateWhitelistDeprecatedRequestBody $body): self
     {
         $clone = clone $this;

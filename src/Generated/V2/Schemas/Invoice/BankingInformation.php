@@ -21,8 +21,6 @@ class BankingInformation
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,59 +44,33 @@ class BankingInformation
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $accountHolder;
 
-    /**
-     * @var string|null
-     */
     private ?string $bic = null;
 
-    /**
-     * @var string
-     */
     private string $iban;
 
-    /**
-     * @param string $accountHolder
-     * @param string $iban
-     */
     public function __construct(string $accountHolder, string $iban)
     {
         $this->accountHolder = $accountHolder;
         $this->iban = $iban;
     }
 
-    /**
-     * @return string
-     */
     public function getAccountHolder(): string
     {
         return $this->accountHolder;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBic(): ?string
     {
         return $this->bic ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getIban(): string
     {
         return $this->iban;
     }
 
-    /**
-     * @param string $accountHolder
-     * @return self
-     */
     public function withAccountHolder(string $accountHolder): self
     {
         $validator = new Validator();
@@ -113,10 +85,6 @@ class BankingInformation
         return $clone;
     }
 
-    /**
-     * @param string $bic
-     * @return self
-     */
     public function withBic(string $bic): self
     {
         $validator = new Validator();
@@ -131,9 +99,6 @@ class BankingInformation
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutBic(): self
     {
         $clone = clone $this;
@@ -142,10 +107,6 @@ class BankingInformation
         return $clone;
     }
 
-    /**
-     * @param string $iban
-     * @return self
-     */
     public function withIban(string $iban): self
     {
         $validator = new Validator();
@@ -214,7 +175,7 @@ class BankingInformation
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

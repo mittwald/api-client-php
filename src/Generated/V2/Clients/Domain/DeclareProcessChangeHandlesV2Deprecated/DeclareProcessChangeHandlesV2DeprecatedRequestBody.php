@@ -12,8 +12,6 @@ class DeclareProcessChangeHandlesV2DeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,7 +51,6 @@ class DeclareProcessChangeHandlesV2DeprecatedRequestBody
 
     /**
      * @param HandleField[] $ownerC
-     * @return self
      */
     public function withOwnerC(array $ownerC): self
     {

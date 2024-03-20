@@ -13,8 +13,6 @@ class PasswordValidationGetPasswordPolicyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class PasswordValidationGetPasswordPolicyRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $passwordPolicy;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $passwordPolicy
-     */
     public function __construct(string $passwordPolicy)
     {
         $this->passwordPolicy = $passwordPolicy;
     }
 
-    /**
-     * @return string
-     */
     public function getPasswordPolicy(): string
     {
         return $this->passwordPolicy;
     }
 
-    /**
-     * @param string $passwordPolicy
-     * @return self
-     */
     public function withPasswordPolicy(string $passwordPolicy): self
     {
         $validator = new Validator();

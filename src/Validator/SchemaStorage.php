@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mittwald\ApiClient\Validator;
 
 use JsonSchema\SchemaStorageInterface;
+use stdClass;
 
 class SchemaStorage implements SchemaStorageInterface
 {
@@ -20,7 +23,7 @@ class SchemaStorage implements SchemaStorageInterface
 
     public function resolveRef($ref): object
     {
-        return new \stdClass();
+        return new stdClass();
     }
 
     public function resolveRefSchema($refSchema)

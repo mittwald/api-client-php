@@ -22,8 +22,6 @@ class CustomerInvite
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -80,71 +78,43 @@ class CustomerInvite
 
     /**
      * Reference to the Customer's avatar.
-     *
-     * @var string|null
      */
     private ?string $avatarRefId = null;
 
     /**
      * ID of the Customer the invite is for.
-     *
-     * @var string
      */
     private string $customerId;
 
     /**
      * Name of the Customer the user is invited to.
-     *
-     * @var string
      */
     private string $customerName;
 
     /**
      * ID of the CustomerInvite.
-     *
-     * @var string
      */
     private string $id;
 
-    /**
-     * @var InviteInformation
-     */
     private InviteInformation $information;
 
     /**
      * Mail-address of the user the invite is for.
-     *
-     * @var string
      */
     private string $mailAddress;
 
     /**
      * Time the CustomerMembership should expire at.
-     *
-     * @var DateTime|null
      */
     private ?DateTime $membershipExpiresAt = null;
 
     /**
      * Message contained in the CustomerInvite.
-     *
-     * @var string|null
      */
     private ?string $message = null;
 
-    /**
-     * @var CustomerRoles
-     */
     private CustomerRoles $role;
 
-    /**
-     * @param string $customerId
-     * @param string $customerName
-     * @param string $id
-     * @param InviteInformation $information
-     * @param string $mailAddress
-     * @param CustomerRoles $role
-     */
     public function __construct(string $customerId, string $customerName, string $id, InviteInformation $information, string $mailAddress, CustomerRoles $role)
     {
         $this->customerId = $customerId;
@@ -155,82 +125,51 @@ class CustomerInvite
         $this->role = $role;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerName(): string
     {
         return $this->customerName;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return InviteInformation
-     */
     public function getInformation(): InviteInformation
     {
         return $this->information;
     }
 
-    /**
-     * @return string
-     */
     public function getMailAddress(): string
     {
         return $this->mailAddress;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getMembershipExpiresAt(): ?DateTime
     {
         return $this->membershipExpiresAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return CustomerRoles
-     */
     public function getRole(): CustomerRoles
     {
         return $this->role;
     }
 
-    /**
-     * @param string $avatarRefId
-     * @return self
-     */
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
@@ -245,9 +184,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
@@ -256,10 +192,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -274,10 +206,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param string $customerName
-     * @return self
-     */
     public function withCustomerName(string $customerName): self
     {
         $validator = new Validator();
@@ -292,10 +220,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -310,10 +234,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param InviteInformation $information
-     * @return self
-     */
     public function withInformation(InviteInformation $information): self
     {
         $clone = clone $this;
@@ -322,10 +242,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param string $mailAddress
-     * @return self
-     */
     public function withMailAddress(string $mailAddress): self
     {
         $validator = new Validator();
@@ -340,10 +256,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param DateTime $membershipExpiresAt
-     * @return self
-     */
     public function withMembershipExpiresAt(DateTime $membershipExpiresAt): self
     {
         $clone = clone $this;
@@ -352,9 +264,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMembershipExpiresAt(): self
     {
         $clone = clone $this;
@@ -363,10 +272,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -381,9 +286,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -392,10 +294,6 @@ class CustomerInvite
         return $clone;
     }
 
-    /**
-     * @param CustomerRoles $role
-     * @return self
-     */
     public function withRole(CustomerRoles $role): self
     {
         $clone = clone $this;
@@ -482,7 +380,7 @@ class CustomerInvite
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

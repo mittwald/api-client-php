@@ -14,8 +14,6 @@ class AuthenticateDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class AuthenticateDefaultResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var Error
-     */
     private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param Error $body
-     */
     public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Error
-     */
     public function getBody(): Error
     {
         return $this->body;
     }
 
-    /**
-     * @param Error $body
-     * @return self
-     */
     public function withBody(Error $body): self
     {
         $clone = clone $this;

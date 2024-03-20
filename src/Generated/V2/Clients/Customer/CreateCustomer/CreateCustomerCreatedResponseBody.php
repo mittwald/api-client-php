@@ -11,8 +11,6 @@ class CreateCustomerCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -34,26 +32,12 @@ class CreateCustomerCreatedResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $customerNumber;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @param string $customerId
-     * @param string $customerNumber
-     * @param string $name
-     */
     public function __construct(string $customerId, string $customerNumber, string $name)
     {
         $this->customerId = $customerId;
@@ -61,34 +45,21 @@ class CreateCustomerCreatedResponseBody
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerNumber(): string
     {
         return $this->customerNumber;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -103,10 +74,6 @@ class CreateCustomerCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $customerNumber
-     * @return self
-     */
     public function withCustomerNumber(string $customerNumber): self
     {
         $validator = new Validator();
@@ -121,10 +88,6 @@ class CreateCustomerCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();

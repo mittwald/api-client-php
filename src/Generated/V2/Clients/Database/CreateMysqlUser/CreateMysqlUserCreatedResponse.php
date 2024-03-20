@@ -13,8 +13,6 @@ class CreateMysqlUserCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateMysqlUserCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateMysqlUserCreatedResponseBody
-     */
     private CreateMysqlUserCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateMysqlUserCreatedResponseBody $body
-     */
     public function __construct(CreateMysqlUserCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateMysqlUserCreatedResponseBody
-     */
     public function getBody(): CreateMysqlUserCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateMysqlUserCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateMysqlUserCreatedResponseBody $body): self
     {
         $clone = clone $this;

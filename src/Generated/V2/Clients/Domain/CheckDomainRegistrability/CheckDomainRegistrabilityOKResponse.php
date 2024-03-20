@@ -13,8 +13,6 @@ class CheckDomainRegistrabilityOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,33 +38,20 @@ class CheckDomainRegistrabilityOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CheckDomainRegistrabilityOKResponseBody
-     */
     private CheckDomainRegistrabilityOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CheckDomainRegistrabilityOKResponseBody $body
-     */
     public function __construct(CheckDomainRegistrabilityOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CheckDomainRegistrabilityOKResponseBody
-     */
     public function getBody(): CheckDomainRegistrabilityOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CheckDomainRegistrabilityOKResponseBody $body
-     * @return self
-     */
     public function withBody(CheckDomainRegistrabilityOKResponseBody $body): self
     {
         $clone = clone $this;

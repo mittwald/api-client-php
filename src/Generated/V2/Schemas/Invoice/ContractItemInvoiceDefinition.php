@@ -22,8 +22,6 @@ class ContractItemInvoiceDefinition
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,36 +52,16 @@ class ContractItemInvoiceDefinition
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isDue = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $serviceDate = null;
 
-    /**
-     * @var DatePeriod
-     */
     private DatePeriod $servicePeriod;
 
-    /**
-     * @var int
-     */
     private int $vatRate;
 
-    /**
-     * @param string $contractItemId
-     * @param DatePeriod $servicePeriod
-     * @param int $vatRate
-     */
     public function __construct(string $contractItemId, DatePeriod $servicePeriod, int $vatRate)
     {
         $this->contractItemId = $contractItemId;
@@ -91,50 +69,31 @@ class ContractItemInvoiceDefinition
         $this->vatRate = $vatRate;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsDue(): ?bool
     {
         return $this->isDue ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getServiceDate(): ?DateTime
     {
         return $this->serviceDate ?? null;
     }
 
-    /**
-     * @return DatePeriod
-     */
     public function getServicePeriod(): DatePeriod
     {
         return $this->servicePeriod;
     }
 
-    /**
-     * @return int
-     */
     public function getVatRate(): int
     {
         return $this->vatRate;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -149,10 +108,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @param bool $isDue
-     * @return self
-     */
     public function withIsDue(bool $isDue): self
     {
         $validator = new Validator();
@@ -167,9 +122,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsDue(): self
     {
         $clone = clone $this;
@@ -178,10 +130,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @param DateTime $serviceDate
-     * @return self
-     */
     public function withServiceDate(DateTime $serviceDate): self
     {
         $clone = clone $this;
@@ -190,9 +138,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServiceDate(): self
     {
         $clone = clone $this;
@@ -201,10 +146,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @param DatePeriod $servicePeriod
-     * @return self
-     */
     public function withServicePeriod(DatePeriod $servicePeriod): self
     {
         $clone = clone $this;
@@ -213,10 +154,6 @@ class ContractItemInvoiceDefinition
         return $clone;
     }
 
-    /**
-     * @param int $vatRate
-     * @return self
-     */
     public function withVatRate(int $vatRate): self
     {
         $validator = new Validator();
@@ -295,7 +232,7 @@ class ContractItemInvoiceDefinition
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -13,8 +13,6 @@ class DeprecatedUserServicePersonalizedSettingsGetOKResponse implements Response
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,33 +31,20 @@ class DeprecatedUserServicePersonalizedSettingsGetOKResponse implements Response
         ],
     ];
 
-    /**
-     * @var DeprecatedUserServicePersonalizedSettingsGetOKResponseBody
-     */
     private DeprecatedUserServicePersonalizedSettingsGetOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeprecatedUserServicePersonalizedSettingsGetOKResponseBody $body
-     */
     public function __construct(DeprecatedUserServicePersonalizedSettingsGetOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeprecatedUserServicePersonalizedSettingsGetOKResponseBody
-     */
     public function getBody(): DeprecatedUserServicePersonalizedSettingsGetOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeprecatedUserServicePersonalizedSettingsGetOKResponseBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserServicePersonalizedSettingsGetOKResponseBody $body): self
     {
         $clone = clone $this;

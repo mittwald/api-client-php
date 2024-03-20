@@ -13,8 +13,6 @@ class EditApiTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,50 +44,30 @@ class EditApiTokenRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $apiTokenId;
 
-    /**
-     * @var EditApiTokenRequestBody
-     */
     private EditApiTokenRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $apiTokenId
-     * @param EditApiTokenRequestBody $body
-     */
     public function __construct(string $apiTokenId, EditApiTokenRequestBody $body)
     {
         $this->apiTokenId = $apiTokenId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getApiTokenId(): string
     {
         return $this->apiTokenId;
     }
 
-    /**
-     * @return EditApiTokenRequestBody
-     */
     public function getBody(): EditApiTokenRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $apiTokenId
-     * @return self
-     */
     public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new Validator();
@@ -104,10 +82,6 @@ class EditApiTokenRequest
         return $clone;
     }
 
-    /**
-     * @param EditApiTokenRequestBody $body
-     * @return self
-     */
     public function withBody(EditApiTokenRequestBody $body): self
     {
         $clone = clone $this;

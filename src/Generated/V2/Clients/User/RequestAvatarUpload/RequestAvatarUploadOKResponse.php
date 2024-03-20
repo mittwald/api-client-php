@@ -13,8 +13,6 @@ class RequestAvatarUploadOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -95,33 +93,20 @@ class RequestAvatarUploadOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var RequestAvatarUploadOKResponseBody
-     */
     private RequestAvatarUploadOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RequestAvatarUploadOKResponseBody $body
-     */
     public function __construct(RequestAvatarUploadOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RequestAvatarUploadOKResponseBody
-     */
     public function getBody(): RequestAvatarUploadOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RequestAvatarUploadOKResponseBody $body
-     * @return self
-     */
     public function withBody(RequestAvatarUploadOKResponseBody $body): self
     {
         $clone = clone $this;

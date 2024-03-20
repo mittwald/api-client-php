@@ -21,8 +21,6 @@ class ProfileMfaDetails
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'the users mfa details',
@@ -37,14 +35,8 @@ class ProfileMfaDetails
         'type' => 'object',
     ];
 
-    /**
-     * @var bool|null
-     */
     private ?bool $mfaConfirmed = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $mfaInitialized = null;
 
     /**
@@ -54,26 +46,16 @@ class ProfileMfaDetails
     {
     }
 
-    /**
-     * @return bool|null
-     */
     public function getMfaConfirmed(): ?bool
     {
         return $this->mfaConfirmed ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getMfaInitialized(): ?bool
     {
         return $this->mfaInitialized ?? null;
     }
 
-    /**
-     * @param bool $mfaConfirmed
-     * @return self
-     */
     public function withMfaConfirmed(bool $mfaConfirmed): self
     {
         $validator = new Validator();
@@ -88,9 +70,6 @@ class ProfileMfaDetails
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMfaConfirmed(): self
     {
         $clone = clone $this;
@@ -99,10 +78,6 @@ class ProfileMfaDetails
         return $clone;
     }
 
-    /**
-     * @param bool $mfaInitialized
-     * @return self
-     */
     public function withMfaInitialized(bool $mfaInitialized): self
     {
         $validator = new Validator();
@@ -117,9 +92,6 @@ class ProfileMfaDetails
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMfaInitialized(): self
     {
         $clone = clone $this;
@@ -186,7 +158,7 @@ class ProfileMfaDetails
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

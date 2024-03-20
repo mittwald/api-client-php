@@ -21,8 +21,6 @@ class RecordMXManaged
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,31 +34,18 @@ class RecordMXManaged
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $managed;
 
-    /**
-     * @param bool $managed
-     */
     public function __construct(bool $managed)
     {
         $this->managed = $managed;
     }
 
-    /**
-     * @return bool
-     */
     public function getManaged(): bool
     {
         return $this->managed;
     }
 
-    /**
-     * @param bool $managed
-     * @return self
-     */
     public function withManaged(bool $managed): self
     {
         $validator = new Validator();
@@ -120,7 +105,7 @@ class RecordMXManaged
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

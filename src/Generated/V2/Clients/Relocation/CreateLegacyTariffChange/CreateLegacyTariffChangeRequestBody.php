@@ -11,8 +11,6 @@ class CreateLegacyTariffChangeRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class CreateLegacyTariffChangeRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $pAccount;
 
-    /**
-     * @var string
-     */
     private string $targetTariff;
 
-    /**
-     * @param string $pAccount
-     * @param string $targetTariff
-     */
     public function __construct(string $pAccount, string $targetTariff)
     {
         $this->pAccount = $pAccount;
         $this->targetTariff = $targetTariff;
     }
 
-    /**
-     * @return string
-     */
     public function getPAccount(): string
     {
         return $this->pAccount;
     }
 
-    /**
-     * @return string
-     */
     public function getTargetTariff(): string
     {
         return $this->targetTariff;
     }
 
-    /**
-     * @param string $pAccount
-     * @return self
-     */
     public function withPAccount(string $pAccount): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class CreateLegacyTariffChangeRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $targetTariff
-     * @return self
-     */
     public function withTargetTariff(string $targetTariff): self
     {
         $validator = new Validator();

@@ -13,8 +13,6 @@ class OrderPreviewTariffChangeOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,33 +44,20 @@ class OrderPreviewTariffChangeOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var OrderPreviewTariffChangeOKResponseBody
-     */
     private OrderPreviewTariffChangeOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param OrderPreviewTariffChangeOKResponseBody $body
-     */
     public function __construct(OrderPreviewTariffChangeOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return OrderPreviewTariffChangeOKResponseBody
-     */
     public function getBody(): OrderPreviewTariffChangeOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param OrderPreviewTariffChangeOKResponseBody $body
-     * @return self
-     */
     public function withBody(OrderPreviewTariffChangeOKResponseBody $body): self
     {
         $clone = clone $this;

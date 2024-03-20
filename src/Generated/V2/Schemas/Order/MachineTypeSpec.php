@@ -21,8 +21,6 @@ class MachineTypeSpec
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -34,9 +32,6 @@ class MachineTypeSpec
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $machineType = null;
 
     /**
@@ -46,18 +41,11 @@ class MachineTypeSpec
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getMachineType(): ?string
     {
         return $this->machineType ?? null;
     }
 
-    /**
-     * @param string $machineType
-     * @return self
-     */
     public function withMachineType(string $machineType): self
     {
         $validator = new Validator();
@@ -72,9 +60,6 @@ class MachineTypeSpec
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMachineType(): self
     {
         $clone = clone $this;
@@ -133,7 +118,7 @@ class MachineTypeSpec
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

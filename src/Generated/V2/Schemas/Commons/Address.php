@@ -21,8 +21,6 @@ class Address
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -62,45 +60,21 @@ class Address
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $street;
 
-    /**
-     * @var string
-     */
     private string $houseNumber;
 
-    /**
-     * @var string
-     */
     private string $city;
 
-    /**
-     * @var string
-     */
     private string $zip;
 
     /**
      * ISO 3166-1 alpha-2 country code
-     *
-     * @var string
      */
     private string $countryCode;
 
-    /**
-     * @var string|null
-     */
     private ?string $addressPrefix = null;
 
-    /**
-     * @param string $street
-     * @param string $houseNumber
-     * @param string $city
-     * @param string $zip
-     * @param string $countryCode
-     */
     public function __construct(string $street, string $houseNumber, string $city, string $zip, string $countryCode)
     {
         $this->street = $street;
@@ -110,58 +84,36 @@ class Address
         $this->countryCode = $countryCode;
     }
 
-    /**
-     * @return string
-     */
     public function getStreet(): string
     {
         return $this->street;
     }
 
-    /**
-     * @return string
-     */
     public function getHouseNumber(): string
     {
         return $this->houseNumber;
     }
 
-    /**
-     * @return string
-     */
     public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * @return string
-     */
     public function getZip(): string
     {
         return $this->zip;
     }
 
-    /**
-     * @return string
-     */
     public function getCountryCode(): string
     {
         return $this->countryCode;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAddressPrefix(): ?string
     {
         return $this->addressPrefix ?? null;
     }
 
-    /**
-     * @param string $street
-     * @return self
-     */
     public function withStreet(string $street): self
     {
         $validator = new Validator();
@@ -176,10 +128,6 @@ class Address
         return $clone;
     }
 
-    /**
-     * @param string $houseNumber
-     * @return self
-     */
     public function withHouseNumber(string $houseNumber): self
     {
         $validator = new Validator();
@@ -194,10 +142,6 @@ class Address
         return $clone;
     }
 
-    /**
-     * @param string $city
-     * @return self
-     */
     public function withCity(string $city): self
     {
         $validator = new Validator();
@@ -212,10 +156,6 @@ class Address
         return $clone;
     }
 
-    /**
-     * @param string $zip
-     * @return self
-     */
     public function withZip(string $zip): self
     {
         $validator = new Validator();
@@ -230,10 +170,6 @@ class Address
         return $clone;
     }
 
-    /**
-     * @param string $countryCode
-     * @return self
-     */
     public function withCountryCode(string $countryCode): self
     {
         $validator = new Validator();
@@ -248,10 +184,6 @@ class Address
         return $clone;
     }
 
-    /**
-     * @param string $addressPrefix
-     * @return self
-     */
     public function withAddressPrefix(string $addressPrefix): self
     {
         $validator = new Validator();
@@ -266,9 +198,6 @@ class Address
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAddressPrefix(): self
     {
         $clone = clone $this;
@@ -337,7 +266,7 @@ class Address
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

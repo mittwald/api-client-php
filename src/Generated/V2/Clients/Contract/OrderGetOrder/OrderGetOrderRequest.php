@@ -13,8 +13,6 @@ class OrderGetOrderRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class OrderGetOrderRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $orderId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $orderId
-     */
     public function __construct(string $orderId)
     {
         $this->orderId = $orderId;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderId(): string
     {
         return $this->orderId;
     }
 
-    /**
-     * @param string $orderId
-     * @return self
-     */
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();

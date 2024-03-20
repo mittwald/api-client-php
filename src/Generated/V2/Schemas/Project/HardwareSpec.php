@@ -21,8 +21,6 @@ class HardwareSpec
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -45,57 +43,32 @@ class HardwareSpec
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $cpu = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $mem = null;
 
-    /**
-     * @var string
-     */
     private string $storage;
 
-    /**
-     * @param string $storage
-     */
     public function __construct(string $storage)
     {
         $this->storage = $storage;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCpu(): ?string
     {
         return $this->cpu ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMem(): ?string
     {
         return $this->mem ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getStorage(): string
     {
         return $this->storage;
     }
 
-    /**
-     * @param string $cpu
-     * @return self
-     */
     public function withCpu(string $cpu): self
     {
         $validator = new Validator();
@@ -110,9 +83,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCpu(): self
     {
         $clone = clone $this;
@@ -121,10 +91,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @param string $mem
-     * @return self
-     */
     public function withMem(string $mem): self
     {
         $validator = new Validator();
@@ -139,9 +105,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMem(): self
     {
         $clone = clone $this;
@@ -150,10 +113,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @param string $storage
-     * @return self
-     */
     public function withStorage(string $storage): self
     {
         $validator = new Validator();
@@ -228,7 +187,7 @@ class HardwareSpec
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

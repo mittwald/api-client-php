@@ -13,8 +13,6 @@ class PasswordValidationGetPasswordPolicyV2DeprecatedRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,35 +26,22 @@ class PasswordValidationGetPasswordPolicyV2DeprecatedRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $path;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $path
-     */
     public function __construct(string $path)
     {
         $this->path = $path;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();

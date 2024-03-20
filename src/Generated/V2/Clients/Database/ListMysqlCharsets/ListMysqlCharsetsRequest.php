@@ -13,8 +13,6 @@ class ListMysqlCharsetsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,9 +26,6 @@ class ListMysqlCharsetsRequest
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $version = null;
 
     private array $headers = [
@@ -44,18 +39,11 @@ class ListMysqlCharsetsRequest
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getVersion(): ?string
     {
         return $this->version ?? null;
     }
 
-    /**
-     * @param string $version
-     * @return self
-     */
     public function withVersion(string $version): self
     {
         $validator = new Validator();
@@ -70,9 +58,6 @@ class ListMysqlCharsetsRequest
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutVersion(): self
     {
         $clone = clone $this;

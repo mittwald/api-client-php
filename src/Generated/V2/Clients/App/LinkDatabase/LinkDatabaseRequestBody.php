@@ -11,8 +11,6 @@ class LinkDatabaseRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,9 +40,6 @@ class LinkDatabaseRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $databaseId;
 
     /**
@@ -52,24 +47,14 @@ class LinkDatabaseRequestBody
      */
     private ?array $databaseUserIds = null;
 
-    /**
-     * @var LinkDatabaseRequestBodyPurpose
-     */
     private LinkDatabaseRequestBodyPurpose $purpose;
 
-    /**
-     * @param string $databaseId
-     * @param LinkDatabaseRequestBodyPurpose $purpose
-     */
     public function __construct(string $databaseId, LinkDatabaseRequestBodyPurpose $purpose)
     {
         $this->databaseId = $databaseId;
         $this->purpose = $purpose;
     }
 
-    /**
-     * @return string
-     */
     public function getDatabaseId(): string
     {
         return $this->databaseId;
@@ -83,18 +68,11 @@ class LinkDatabaseRequestBody
         return $this->databaseUserIds ?? null;
     }
 
-    /**
-     * @return LinkDatabaseRequestBodyPurpose
-     */
     public function getPurpose(): LinkDatabaseRequestBodyPurpose
     {
         return $this->purpose;
     }
 
-    /**
-     * @param string $databaseId
-     * @return self
-     */
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
@@ -111,7 +89,6 @@ class LinkDatabaseRequestBody
 
     /**
      * @param string[] $databaseUserIds
-     * @return self
      */
     public function withDatabaseUserIds(array $databaseUserIds): self
     {
@@ -127,9 +104,6 @@ class LinkDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDatabaseUserIds(): self
     {
         $clone = clone $this;
@@ -138,10 +112,6 @@ class LinkDatabaseRequestBody
         return $clone;
     }
 
-    /**
-     * @param LinkDatabaseRequestBodyPurpose $purpose
-     * @return self
-     */
     public function withPurpose(LinkDatabaseRequestBodyPurpose $purpose): self
     {
         $clone = clone $this;

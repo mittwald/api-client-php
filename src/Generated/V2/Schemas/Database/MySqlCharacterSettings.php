@@ -21,8 +21,6 @@ class MySqlCharacterSettings
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -59,20 +57,12 @@ class MySqlCharacterSettings
      */
     private array $collations;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $versionId;
 
     /**
      * @param string[] $collations
-     * @param string $name
-     * @param string $versionId
      */
     public function __construct(array $collations, string $name, string $versionId)
     {
@@ -89,17 +79,11 @@ class MySqlCharacterSettings
         return $this->collations;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getVersionId(): string
     {
         return $this->versionId;
@@ -107,7 +91,6 @@ class MySqlCharacterSettings
 
     /**
      * @param string[] $collations
-     * @return self
      */
     public function withCollations(array $collations): self
     {
@@ -123,10 +106,6 @@ class MySqlCharacterSettings
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -141,10 +120,6 @@ class MySqlCharacterSettings
         return $clone;
     }
 
-    /**
-     * @param string $versionId
-     * @return self
-     */
     public function withVersionId(string $versionId): self
     {
         $validator = new Validator();
@@ -208,7 +183,7 @@ class MySqlCharacterSettings
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

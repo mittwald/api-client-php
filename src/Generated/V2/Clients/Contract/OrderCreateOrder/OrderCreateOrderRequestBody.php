@@ -14,8 +14,6 @@ class OrderCreateOrderRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,14 +42,8 @@ class OrderCreateOrderRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var ProjectHostingOrder|ServerOrder|DomainOrder|null
-     */
     private ProjectHostingOrder|ServerOrder|DomainOrder|null $orderData = null;
 
-    /**
-     * @var OrderCreateOrderRequestBodyOrderType|null
-     */
     private ?OrderCreateOrderRequestBodyOrderType $orderType = null;
 
     /**
@@ -70,9 +62,6 @@ class OrderCreateOrderRequestBody
         return $this->orderData;
     }
 
-    /**
-     * @return OrderCreateOrderRequestBodyOrderType|null
-     */
     public function getOrderType(): ?OrderCreateOrderRequestBodyOrderType
     {
         return $this->orderType ?? null;
@@ -80,7 +69,6 @@ class OrderCreateOrderRequestBody
 
     /**
      * @param ProjectHostingOrder|ServerOrder|DomainOrder $orderData
-     * @return self
      */
     public function withOrderData(DomainOrder|ProjectHostingOrder|ServerOrder $orderData): self
     {
@@ -90,9 +78,6 @@ class OrderCreateOrderRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderData(): self
     {
         $clone = clone $this;
@@ -101,10 +86,6 @@ class OrderCreateOrderRequestBody
         return $clone;
     }
 
-    /**
-     * @param OrderCreateOrderRequestBodyOrderType $orderType
-     * @return self
-     */
     public function withOrderType(OrderCreateOrderRequestBodyOrderType $orderType): self
     {
         $clone = clone $this;
@@ -113,9 +94,6 @@ class OrderCreateOrderRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderType(): self
     {
         $clone = clone $this;

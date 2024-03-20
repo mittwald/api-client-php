@@ -22,8 +22,6 @@ class InvoiceItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -101,19 +99,10 @@ class InvoiceItem
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $additionalDescription = null;
 
-    /**
-     * @var string
-     */
     private string $contractItemId;
 
-    /**
-     * @var string
-     */
     private string $description;
 
     /**
@@ -121,41 +110,19 @@ class InvoiceItem
      */
     private ?array $itemCancelledOrCorrectedBy = null;
 
-    /**
-     * @var string
-     */
     private string $itemId;
 
-    /**
-     * @var Price
-     */
     private Price $price;
 
-    /**
-     * @var InvoiceItemReference|null
-     */
     private ?InvoiceItemReference $reference = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $serviceDate = null;
 
-    /**
-     * @var DatePeriod|null
-     */
     private ?DatePeriod $servicePeriod = null;
 
-    /**
-     * @var int|float
-     */
     private int|float $vatRate;
 
     /**
-     * @param string $contractItemId
-     * @param string $description
-     * @param string $itemId
-     * @param Price $price
      * @param int|float $vatRate
      */
     public function __construct(string $contractItemId, string $description, string $itemId, Price $price, int|float $vatRate)
@@ -167,25 +134,16 @@ class InvoiceItem
         $this->vatRate = $vatRate;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAdditionalDescription(): ?string
     {
         return $this->additionalDescription ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getContractItemId(): string
     {
         return $this->contractItemId;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -199,58 +157,36 @@ class InvoiceItem
         return $this->itemCancelledOrCorrectedBy ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getItemId(): string
     {
         return $this->itemId;
     }
 
-    /**
-     * @return Price
-     */
     public function getPrice(): Price
     {
         return $this->price;
     }
 
-    /**
-     * @return InvoiceItemReference|null
-     */
     public function getReference(): ?InvoiceItemReference
     {
         return $this->reference ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getServiceDate(): ?DateTime
     {
         return $this->serviceDate ?? null;
     }
 
-    /**
-     * @return DatePeriod|null
-     */
     public function getServicePeriod(): ?DatePeriod
     {
         return $this->servicePeriod ?? null;
     }
 
-    /**
-     * @return int|float
-     */
     public function getVatRate(): int|float
     {
         return $this->vatRate;
     }
 
-    /**
-     * @param string $additionalDescription
-     * @return self
-     */
     public function withAdditionalDescription(string $additionalDescription): self
     {
         $validator = new Validator();
@@ -265,9 +201,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdditionalDescription(): self
     {
         $clone = clone $this;
@@ -276,10 +209,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param string $contractItemId
-     * @return self
-     */
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
@@ -294,10 +223,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -314,7 +239,6 @@ class InvoiceItem
 
     /**
      * @param InvoiceItemItemCancelledOrCorrectedByItem[] $itemCancelledOrCorrectedBy
-     * @return self
      */
     public function withItemCancelledOrCorrectedBy(array $itemCancelledOrCorrectedBy): self
     {
@@ -324,9 +248,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutItemCancelledOrCorrectedBy(): self
     {
         $clone = clone $this;
@@ -335,10 +256,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param string $itemId
-     * @return self
-     */
     public function withItemId(string $itemId): self
     {
         $validator = new Validator();
@@ -353,10 +270,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param Price $price
-     * @return self
-     */
     public function withPrice(Price $price): self
     {
         $clone = clone $this;
@@ -365,10 +278,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param InvoiceItemReference $reference
-     * @return self
-     */
     public function withReference(InvoiceItemReference $reference): self
     {
         $clone = clone $this;
@@ -377,9 +286,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutReference(): self
     {
         $clone = clone $this;
@@ -388,10 +294,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param DateTime $serviceDate
-     * @return self
-     */
     public function withServiceDate(DateTime $serviceDate): self
     {
         $clone = clone $this;
@@ -400,9 +302,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServiceDate(): self
     {
         $clone = clone $this;
@@ -411,10 +310,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param DatePeriod $servicePeriod
-     * @return self
-     */
     public function withServicePeriod(DatePeriod $servicePeriod): self
     {
         $clone = clone $this;
@@ -423,9 +318,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutServicePeriod(): self
     {
         $clone = clone $this;
@@ -436,7 +328,6 @@ class InvoiceItem
 
     /**
      * @param int|float $vatRate
-     * @return self
      */
     public function withVatRate(int|float $vatRate): self
     {
@@ -491,7 +382,7 @@ class InvoiceItem
         if (isset($input->{'servicePeriod'})) {
             $servicePeriod = DatePeriod::buildFromInput($input->{'servicePeriod'}, validate: $validate);
         }
-        $vatRate = str_contains($input->{'vatRate'}, '.') ? (float)($input->{'vatRate'}) : (int)($input->{'vatRate'});
+        $vatRate = str_contains((string)($input->{'vatRate'}), '.') ? (float)($input->{'vatRate'}) : (int)($input->{'vatRate'});
 
         $obj = new self($contractItemId, $description, $itemId, $price, $vatRate);
         $obj->additionalDescription = $additionalDescription;
@@ -544,7 +435,7 @@ class InvoiceItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

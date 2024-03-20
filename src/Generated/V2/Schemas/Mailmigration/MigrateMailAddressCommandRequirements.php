@@ -22,8 +22,6 @@ class MigrateMailAddressCommandRequirements
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -33,7 +31,7 @@ class MigrateMailAddressCommandRequirements
             'autoResponder' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.AutoResponder',
             ],
-            'forwardedAddresses' => [
+            'forwardAddresses' => [
                 'items' => [
                     'type' => 'string',
                 ],
@@ -55,47 +53,26 @@ class MigrateMailAddressCommandRequirements
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $address = null;
 
-    /**
-     * @var AutoResponder|null
-     */
     private ?AutoResponder $autoResponder = null;
 
     /**
      * @var string[]|null
      */
-    private ?array $forwardedAddresses = null;
+    private ?array $forwardAddresses = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $isCatchAll = null;
 
-    /**
-     * @var Mailbox|null
-     */
     private ?Mailbox $mailbox = null;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @param string $projectId
-     */
     public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAddress(): ?string
     {
         return $this->address ?? null;
@@ -113,39 +90,26 @@ class MigrateMailAddressCommandRequirements
     /**
      * @return string[]|null
      */
-    public function getForwardedAddresses(): ?array
+    public function getForwardAddresses(): ?array
     {
-        return $this->forwardedAddresses ?? null;
+        return $this->forwardAddresses ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getIsCatchAll(): ?bool
     {
         return $this->isCatchAll ?? null;
     }
 
-    /**
-     * @return Mailbox|null
-     */
     public function getMailbox(): ?Mailbox
     {
         return $this->mailbox ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();
@@ -160,9 +124,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAddress(): self
     {
         $clone = clone $this;
@@ -171,10 +132,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param AutoResponder $autoResponder
-     * @return self
-     */
     public function withAutoResponder(AutoResponder $autoResponder): self
     {
         $clone = clone $this;
@@ -183,9 +140,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAutoResponder(): self
     {
         $clone = clone $this;
@@ -195,38 +149,30 @@ class MigrateMailAddressCommandRequirements
     }
 
     /**
-     * @param string[] $forwardedAddresses
-     * @return self
+     * @param string[] $forwardAddresses
      */
-    public function withForwardedAddresses(array $forwardedAddresses): self
+    public function withForwardAddresses(array $forwardAddresses): self
     {
         $validator = new Validator();
-        $validator->validate($forwardedAddresses, static::$schema['properties']['forwardedAddresses']);
+        $validator->validate($forwardAddresses, static::$schema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->forwardedAddresses = $forwardedAddresses;
+        $clone->forwardAddresses = $forwardAddresses;
 
         return $clone;
     }
 
-    /**
-     * @return self
-     */
-    public function withoutForwardedAddresses(): self
+    public function withoutForwardAddresses(): self
     {
         $clone = clone $this;
-        unset($clone->forwardedAddresses);
+        unset($clone->forwardAddresses);
 
         return $clone;
     }
 
-    /**
-     * @param bool $isCatchAll
-     * @return self
-     */
     public function withIsCatchAll(bool $isCatchAll): self
     {
         $validator = new Validator();
@@ -241,9 +187,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIsCatchAll(): self
     {
         $clone = clone $this;
@@ -252,10 +195,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param Mailbox $mailbox
-     * @return self
-     */
     public function withMailbox(Mailbox $mailbox): self
     {
         $clone = clone $this;
@@ -264,9 +203,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMailbox(): self
     {
         $clone = clone $this;
@@ -275,10 +211,6 @@ class MigrateMailAddressCommandRequirements
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -316,9 +248,9 @@ class MigrateMailAddressCommandRequirements
         if (isset($input->{'autoResponder'})) {
             $autoResponder = AutoResponder::buildFromInput($input->{'autoResponder'}, validate: $validate);
         }
-        $forwardedAddresses = null;
-        if (isset($input->{'forwardedAddresses'})) {
-            $forwardedAddresses = $input->{'forwardedAddresses'};
+        $forwardAddresses = null;
+        if (isset($input->{'forwardAddresses'})) {
+            $forwardAddresses = $input->{'forwardAddresses'};
         }
         $isCatchAll = null;
         if (isset($input->{'isCatchAll'})) {
@@ -333,7 +265,7 @@ class MigrateMailAddressCommandRequirements
         $obj = new self($projectId);
         $obj->address = $address;
         $obj->autoResponder = $autoResponder;
-        $obj->forwardedAddresses = $forwardedAddresses;
+        $obj->forwardAddresses = $forwardAddresses;
         $obj->isCatchAll = $isCatchAll;
         $obj->mailbox = $mailbox;
         return $obj;
@@ -353,8 +285,8 @@ class MigrateMailAddressCommandRequirements
         if (isset($this->autoResponder)) {
             $output['autoResponder'] = $this->autoResponder->toJson();
         }
-        if (isset($this->forwardedAddresses)) {
-            $output['forwardedAddresses'] = $this->forwardedAddresses;
+        if (isset($this->forwardAddresses)) {
+            $output['forwardAddresses'] = $this->forwardAddresses;
         }
         if (isset($this->isCatchAll)) {
             $output['isCatchAll'] = $this->isCatchAll;
@@ -377,7 +309,7 @@ class MigrateMailAddressCommandRequirements
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

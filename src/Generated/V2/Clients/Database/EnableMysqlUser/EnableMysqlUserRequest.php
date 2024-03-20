@@ -13,8 +13,6 @@ class EnableMysqlUserRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -33,9 +31,6 @@ class EnableMysqlUserRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlUserId;
 
     /**
@@ -48,7 +43,6 @@ class EnableMysqlUserRequest
     ];
 
     /**
-     * @param string $mysqlUserId
      * @param mixed $body
      */
     public function __construct(string $mysqlUserId, $body)
@@ -57,9 +51,6 @@ class EnableMysqlUserRequest
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlUserId(): string
     {
         return $this->mysqlUserId;
@@ -73,10 +64,6 @@ class EnableMysqlUserRequest
         return $this->body;
     }
 
-    /**
-     * @param string $mysqlUserId
-     * @return self
-     */
     public function withMysqlUserId(string $mysqlUserId): self
     {
         $validator = new Validator();
@@ -93,7 +80,6 @@ class EnableMysqlUserRequest
 
     /**
      * @param mixed $body
-     * @return self
      */
     public function withBody($body): self
     {

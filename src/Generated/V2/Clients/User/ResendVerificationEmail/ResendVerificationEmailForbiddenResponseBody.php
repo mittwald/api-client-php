@@ -11,8 +11,6 @@ class ResendVerificationEmailForbiddenResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -28,14 +26,8 @@ class ResendVerificationEmailForbiddenResponseBody
         ],
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $message = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $type = null;
 
     /**
@@ -45,26 +37,16 @@ class ResendVerificationEmailForbiddenResponseBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string
     {
         return $this->type ?? null;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -79,9 +61,6 @@ class ResendVerificationEmailForbiddenResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -90,10 +69,6 @@ class ResendVerificationEmailForbiddenResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();
@@ -108,9 +83,6 @@ class ResendVerificationEmailForbiddenResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutType(): self
     {
         $clone = clone $this;

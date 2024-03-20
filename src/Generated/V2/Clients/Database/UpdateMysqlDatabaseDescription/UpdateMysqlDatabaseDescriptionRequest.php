@@ -13,8 +13,6 @@ class UpdateMysqlDatabaseDescriptionRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,50 +38,30 @@ class UpdateMysqlDatabaseDescriptionRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $mysqlDatabaseId;
 
-    /**
-     * @var UpdateMysqlDatabaseDescriptionRequestBody
-     */
     private UpdateMysqlDatabaseDescriptionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @param UpdateMysqlDatabaseDescriptionRequestBody $body
-     */
     public function __construct(string $mysqlDatabaseId, UpdateMysqlDatabaseDescriptionRequestBody $body)
     {
         $this->mysqlDatabaseId = $mysqlDatabaseId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getMysqlDatabaseId(): string
     {
         return $this->mysqlDatabaseId;
     }
 
-    /**
-     * @return UpdateMysqlDatabaseDescriptionRequestBody
-     */
     public function getBody(): UpdateMysqlDatabaseDescriptionRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $mysqlDatabaseId
-     * @return self
-     */
     public function withMysqlDatabaseId(string $mysqlDatabaseId): self
     {
         $validator = new Validator();
@@ -98,10 +76,6 @@ class UpdateMysqlDatabaseDescriptionRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateMysqlDatabaseDescriptionRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateMysqlDatabaseDescriptionRequestBody $body): self
     {
         $clone = clone $this;

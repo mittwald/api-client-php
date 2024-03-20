@@ -21,8 +21,6 @@ class RedisVersion
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,32 +46,14 @@ class RedisVersion
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $disabled;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $number;
 
-    /**
-     * @param bool $disabled
-     * @param string $id
-     * @param string $name
-     * @param string $number
-     */
     public function __construct(bool $disabled, string $id, string $name, string $number)
     {
         $this->disabled = $disabled;
@@ -82,42 +62,26 @@ class RedisVersion
         $this->number = $number;
     }
 
-    /**
-     * @return bool
-     */
     public function getDisabled(): bool
     {
         return $this->disabled;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getNumber(): string
     {
         return $this->number;
     }
 
-    /**
-     * @param bool $disabled
-     * @return self
-     */
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
@@ -132,10 +96,6 @@ class RedisVersion
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -150,10 +110,6 @@ class RedisVersion
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -168,10 +124,6 @@ class RedisVersion
         return $clone;
     }
 
-    /**
-     * @param string $number
-     * @return self
-     */
     public function withNumber(string $number): self
     {
         $validator = new Validator();
@@ -237,7 +189,7 @@ class RedisVersion
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

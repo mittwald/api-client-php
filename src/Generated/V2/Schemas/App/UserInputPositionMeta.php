@@ -22,8 +22,6 @@ class UserInputPositionMeta
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend.',
@@ -41,19 +39,10 @@ class UserInputPositionMeta
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $index = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $section = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $step = null;
 
     /**
@@ -63,25 +52,16 @@ class UserInputPositionMeta
     {
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getIndex(): int|float|null
     {
         return $this->index;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSection(): ?string
     {
         return $this->section ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStep(): ?string
     {
         return $this->step ?? null;
@@ -89,7 +69,6 @@ class UserInputPositionMeta
 
     /**
      * @param int|float $index
-     * @return self
      */
     public function withIndex(int|float $index): self
     {
@@ -105,9 +84,6 @@ class UserInputPositionMeta
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutIndex(): self
     {
         $clone = clone $this;
@@ -116,10 +92,6 @@ class UserInputPositionMeta
         return $clone;
     }
 
-    /**
-     * @param string $section
-     * @return self
-     */
     public function withSection(string $section): self
     {
         $validator = new Validator();
@@ -134,9 +106,6 @@ class UserInputPositionMeta
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSection(): self
     {
         $clone = clone $this;
@@ -145,10 +114,6 @@ class UserInputPositionMeta
         return $clone;
     }
 
-    /**
-     * @param string $step
-     * @return self
-     */
     public function withStep(string $step): self
     {
         $validator = new Validator();
@@ -163,9 +128,6 @@ class UserInputPositionMeta
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStep(): self
     {
         $clone = clone $this;
@@ -191,7 +153,7 @@ class UserInputPositionMeta
 
         $index = null;
         if (isset($input->{'index'})) {
-            $index = str_contains($input->{'index'}, '.') ? (float)($input->{'index'}) : (int)($input->{'index'});
+            $index = str_contains((string)($input->{'index'}), '.') ? (float)($input->{'index'}) : (int)($input->{'index'});
         }
         $section = null;
         if (isset($input->{'section'})) {
@@ -240,7 +202,7 @@ class UserInputPositionMeta
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

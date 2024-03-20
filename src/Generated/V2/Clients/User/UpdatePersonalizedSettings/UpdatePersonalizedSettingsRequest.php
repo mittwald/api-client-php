@@ -13,8 +13,6 @@ class UpdatePersonalizedSettingsRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,14 +51,8 @@ class UpdatePersonalizedSettingsRequest
         ],
     ];
 
-    /**
-     * @var UpdatePersonalizedSettingsRequestUserIdAlternative1|string
-     */
     private UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId;
 
-    /**
-     * @var UpdatePersonalizedSettingsRequestBody
-     */
     private UpdatePersonalizedSettingsRequestBody $body;
 
     private array $headers = [
@@ -69,7 +61,6 @@ class UpdatePersonalizedSettingsRequest
 
     /**
      * @param UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId
-     * @param UpdatePersonalizedSettingsRequestBody $body
      */
     public function __construct(UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId, UpdatePersonalizedSettingsRequestBody $body)
     {
@@ -77,17 +68,11 @@ class UpdatePersonalizedSettingsRequest
         $this->body = $body;
     }
 
-    /**
-     * @return UpdatePersonalizedSettingsRequestUserIdAlternative1|string
-     */
     public function getUserId(): UpdatePersonalizedSettingsRequestUserIdAlternative1|string
     {
         return $this->userId;
     }
 
-    /**
-     * @return UpdatePersonalizedSettingsRequestBody
-     */
     public function getBody(): UpdatePersonalizedSettingsRequestBody
     {
         return $this->body;
@@ -95,7 +80,6 @@ class UpdatePersonalizedSettingsRequest
 
     /**
      * @param UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId
-     * @return self
      */
     public function withUserId(UpdatePersonalizedSettingsRequestUserIdAlternative1|string $userId): self
     {
@@ -105,10 +89,6 @@ class UpdatePersonalizedSettingsRequest
         return $clone;
     }
 
-    /**
-     * @param UpdatePersonalizedSettingsRequestBody $body
-     * @return self
-     */
     public function withBody(UpdatePersonalizedSettingsRequestBody $body): self
     {
         $clone = clone $this;

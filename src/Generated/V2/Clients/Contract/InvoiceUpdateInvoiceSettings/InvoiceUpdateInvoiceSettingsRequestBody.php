@@ -14,8 +14,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,14 +44,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
             'recipientSameAsOwner' => [
                 'type' => 'boolean',
             ],
-            'resolveReturnDebitNote' => [
-                'description' => 'Choose how to resolve a return debit note if necessary.',
-                'enum' => [
-                    'invoicePayment',
-                    'retryDebit',
-                ],
-                'type' => 'string',
-            ],
             'targetDay' => [
                 'example' => 15,
                 'maximum' => 28,
@@ -73,45 +63,19 @@ class InvoiceUpdateInvoiceSettingsRequestBody
      */
     private ?array $additionalEmailRecipients = null;
 
-    /**
-     * @var int
-     */
     private int $invoicePeriod;
 
-    /**
-     * @var PaymentSettingsDebit|PaymentSettingsInvoice
-     */
     private PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $printedInvoices = null;
 
-    /**
-     * @var Recipient|null
-     */
     private ?Recipient $recipient = null;
 
-    /**
-     * @var bool|null
-     */
     private ?bool $recipientSameAsOwner = null;
 
-    /**
-     * Choose how to resolve a return debit note if necessary.
-     *
-     * @var InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote|null
-     */
-    private ?InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote $resolveReturnDebitNote = null;
-
-    /**
-     * @var int|null
-     */
     private ?int $targetDay = null;
 
     /**
-     * @param int $invoicePeriod
      * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
      */
     public function __construct(int $invoicePeriod, PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings)
@@ -128,9 +92,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $this->additionalEmailRecipients ?? null;
     }
 
-    /**
-     * @return int
-     */
     public function getInvoicePeriod(): int
     {
         return $this->invoicePeriod;
@@ -145,41 +106,21 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $this->paymentSettings;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getPrintedInvoices(): ?bool
     {
         return $this->printedInvoices ?? null;
     }
 
-    /**
-     * @return Recipient|null
-     */
     public function getRecipient(): ?Recipient
     {
         return $this->recipient ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getRecipientSameAsOwner(): ?bool
     {
         return $this->recipientSameAsOwner ?? null;
     }
 
-    /**
-     * @return InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote|null
-     */
-    public function getResolveReturnDebitNote(): ?InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote
-    {
-        return $this->resolveReturnDebitNote ?? null;
-    }
-
-    /**
-     * @return int|null
-     */
     public function getTargetDay(): ?int
     {
         return $this->targetDay ?? null;
@@ -187,7 +128,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
 
     /**
      * @param string[] $additionalEmailRecipients
-     * @return self
      */
     public function withAdditionalEmailRecipients(array $additionalEmailRecipients): self
     {
@@ -203,9 +143,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdditionalEmailRecipients(): self
     {
         $clone = clone $this;
@@ -214,10 +151,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param int $invoicePeriod
-     * @return self
-     */
     public function withInvoicePeriod(int $invoicePeriod): self
     {
         $validator = new Validator();
@@ -234,7 +167,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
 
     /**
      * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     * @return self
      */
     public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
@@ -244,10 +176,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param bool $printedInvoices
-     * @return self
-     */
     public function withPrintedInvoices(bool $printedInvoices): self
     {
         $validator = new Validator();
@@ -262,9 +190,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPrintedInvoices(): self
     {
         $clone = clone $this;
@@ -273,10 +198,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param Recipient $recipient
-     * @return self
-     */
     public function withRecipient(Recipient $recipient): self
     {
         $clone = clone $this;
@@ -285,9 +206,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRecipient(): self
     {
         $clone = clone $this;
@@ -296,10 +214,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param bool $recipientSameAsOwner
-     * @return self
-     */
     public function withRecipientSameAsOwner(bool $recipientSameAsOwner): self
     {
         $validator = new Validator();
@@ -314,9 +228,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRecipientSameAsOwner(): self
     {
         $clone = clone $this;
@@ -325,33 +236,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote $resolveReturnDebitNote
-     * @return self
-     */
-    public function withResolveReturnDebitNote(InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote $resolveReturnDebitNote): self
-    {
-        $clone = clone $this;
-        $clone->resolveReturnDebitNote = $resolveReturnDebitNote;
-
-        return $clone;
-    }
-
-    /**
-     * @return self
-     */
-    public function withoutResolveReturnDebitNote(): self
-    {
-        $clone = clone $this;
-        unset($clone->resolveReturnDebitNote);
-
-        return $clone;
-    }
-
-    /**
-     * @param int $targetDay
-     * @return self
-     */
     public function withTargetDay(int $targetDay): self
     {
         $validator = new Validator();
@@ -366,9 +250,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTargetDay(): self
     {
         $clone = clone $this;
@@ -414,10 +295,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         if (isset($input->{'recipientSameAsOwner'})) {
             $recipientSameAsOwner = (bool)($input->{'recipientSameAsOwner'});
         }
-        $resolveReturnDebitNote = null;
-        if (isset($input->{'resolveReturnDebitNote'})) {
-            $resolveReturnDebitNote = InvoiceUpdateInvoiceSettingsRequestBodyResolveReturnDebitNote::from($input->{'resolveReturnDebitNote'});
-        }
         $targetDay = null;
         if (isset($input->{'targetDay'})) {
             $targetDay = (int)($input->{'targetDay'});
@@ -428,7 +305,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         $obj->printedInvoices = $printedInvoices;
         $obj->recipient = $recipient;
         $obj->recipientSameAsOwner = $recipientSameAsOwner;
-        $obj->resolveReturnDebitNote = $resolveReturnDebitNote;
         $obj->targetDay = $targetDay;
         return $obj;
     }
@@ -457,9 +333,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         }
         if (isset($this->recipientSameAsOwner)) {
             $output['recipientSameAsOwner'] = $this->recipientSameAsOwner;
-        }
-        if (isset($this->resolveReturnDebitNote)) {
-            $output['resolveReturnDebitNote'] = ($this->resolveReturnDebitNote)->value;
         }
         if (isset($this->targetDay)) {
             $output['targetDay'] = $this->targetDay;

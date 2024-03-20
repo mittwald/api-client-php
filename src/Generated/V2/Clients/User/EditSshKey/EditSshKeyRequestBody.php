@@ -12,8 +12,6 @@ class EditSshKeyRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,44 +30,25 @@ class EditSshKeyRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $comment;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @param string $comment
-     */
     public function __construct(string $comment)
     {
         $this->comment = $comment;
     }
 
-    /**
-     * @return string
-     */
     public function getComment(): string
     {
         return $this->comment;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @param string $comment
-     * @return self
-     */
     public function withComment(string $comment): self
     {
         $validator = new Validator();
@@ -84,10 +63,6 @@ class EditSshKeyRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -96,9 +71,6 @@ class EditSshKeyRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;

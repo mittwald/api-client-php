@@ -22,8 +22,6 @@ class MySqlDatabase
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -89,19 +87,10 @@ class MySqlDatabase
         'type' => 'object',
     ];
 
-    /**
-     * @var CharacterSettings
-     */
     private CharacterSettings $characterSettings;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     */
     private string $description;
 
     /**
@@ -109,59 +98,22 @@ class MySqlDatabase
      */
     private ?array $finalizers = null;
 
-    /**
-     * @var string
-     */
     private string $hostname;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var bool
-     */
     private bool $isReady;
 
-    /**
-     * @var bool
-     */
     private bool $isShared;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
-    /**
-     * @var string
-     */
     private string $version;
 
-    /**
-     * @param CharacterSettings $characterSettings
-     * @param DateTime $createdAt
-     * @param string $description
-     * @param string $hostname
-     * @param string $id
-     * @param bool $isReady
-     * @param bool $isShared
-     * @param string $name
-     * @param string $projectId
-     * @param DateTime $updatedAt
-     * @param string $version
-     */
     public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, DateTime $updatedAt, string $version)
     {
         $this->characterSettings = $characterSettings;
@@ -177,25 +129,16 @@ class MySqlDatabase
         $this->version = $version;
     }
 
-    /**
-     * @return CharacterSettings
-     */
     public function getCharacterSettings(): CharacterSettings
     {
         return $this->characterSettings;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -209,74 +152,46 @@ class MySqlDatabase
         return $this->finalizers ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getHostname(): string
     {
         return $this->hostname;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsReady(): bool
     {
         return $this->isReady;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsShared(): bool
     {
         return $this->isShared;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return string
-     */
     public function getVersion(): string
     {
         return $this->version;
     }
 
-    /**
-     * @param CharacterSettings $characterSettings
-     * @return self
-     */
     public function withCharacterSettings(CharacterSettings $characterSettings): self
     {
         $clone = clone $this;
@@ -285,10 +200,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param DateTime $createdAt
-     * @return self
-     */
     public function withCreatedAt(DateTime $createdAt): self
     {
         $clone = clone $this;
@@ -297,10 +208,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -317,7 +224,6 @@ class MySqlDatabase
 
     /**
      * @param string[] $finalizers
-     * @return self
      */
     public function withFinalizers(array $finalizers): self
     {
@@ -333,9 +239,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutFinalizers(): self
     {
         $clone = clone $this;
@@ -344,10 +247,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $hostname
-     * @return self
-     */
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
@@ -362,10 +261,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -380,10 +275,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param bool $isReady
-     * @return self
-     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
@@ -398,10 +289,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param bool $isShared
-     * @return self
-     */
     public function withIsShared(bool $isShared): self
     {
         $validator = new Validator();
@@ -416,10 +303,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -434,10 +317,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -452,10 +331,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -464,10 +339,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    /**
-     * @param string $version
-     * @return self
-     */
     public function withVersion(string $version): self
     {
         $validator = new Validator();
@@ -554,7 +425,7 @@ class MySqlDatabase
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

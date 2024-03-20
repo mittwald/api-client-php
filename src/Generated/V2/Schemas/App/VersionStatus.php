@@ -23,8 +23,6 @@ class VersionStatus
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'VersionStatus describes the current and desired version of something like the AppVersion of an AppInstallation. If diverging, an internal process is going to assert, the current value will be aligned.',
@@ -42,44 +40,25 @@ class VersionStatus
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $current = null;
 
-    /**
-     * @var string
-     */
     private string $desired;
 
-    /**
-     * @param string $desired
-     */
     public function __construct(string $desired)
     {
         $this->desired = $desired;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCurrent(): ?string
     {
         return $this->current ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getDesired(): string
     {
         return $this->desired;
     }
 
-    /**
-     * @param string $current
-     * @return self
-     */
     public function withCurrent(string $current): self
     {
         $validator = new Validator();
@@ -94,9 +73,6 @@ class VersionStatus
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutCurrent(): self
     {
         $clone = clone $this;
@@ -105,10 +81,6 @@ class VersionStatus
         return $clone;
     }
 
-    /**
-     * @param string $desired
-     * @return self
-     */
     public function withDesired(string $desired): self
     {
         $validator = new Validator();
@@ -175,7 +147,7 @@ class VersionStatus
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

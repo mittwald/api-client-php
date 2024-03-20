@@ -21,8 +21,6 @@ class DeviceInfo
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -46,24 +44,12 @@ class DeviceInfo
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $browser = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $model = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $os = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $type = null;
 
     /**
@@ -73,42 +59,26 @@ class DeviceInfo
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getBrowser(): ?string
     {
         return $this->browser ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getModel(): ?string
     {
         return $this->model ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOs(): ?string
     {
         return $this->os ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string
     {
         return $this->type ?? null;
     }
 
-    /**
-     * @param string $browser
-     * @return self
-     */
     public function withBrowser(string $browser): self
     {
         $validator = new Validator();
@@ -123,9 +93,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutBrowser(): self
     {
         $clone = clone $this;
@@ -134,10 +101,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @param string $model
-     * @return self
-     */
     public function withModel(string $model): self
     {
         $validator = new Validator();
@@ -152,9 +115,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutModel(): self
     {
         $clone = clone $this;
@@ -163,10 +123,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @param string $os
-     * @return self
-     */
     public function withOs(string $os): self
     {
         $validator = new Validator();
@@ -181,9 +137,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOs(): self
     {
         $clone = clone $this;
@@ -192,10 +145,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();
@@ -210,9 +159,6 @@ class DeviceInfo
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutType(): self
     {
         $clone = clone $this;
@@ -295,7 +241,7 @@ class DeviceInfo
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

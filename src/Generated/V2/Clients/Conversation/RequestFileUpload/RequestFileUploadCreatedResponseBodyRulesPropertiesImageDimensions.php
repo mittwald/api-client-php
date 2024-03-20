@@ -11,8 +11,6 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -42,14 +40,8 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
         'type' => 'object',
     ];
 
-    /**
-     * @var RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMax|null
-     */
     private ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMax $max = null;
 
-    /**
-     * @var RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin|null
-     */
     private ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin $min = null;
 
     /**
@@ -77,10 +69,6 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
         return $this->min ?? null;
     }
 
-    /**
-     * @param RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMax $max
-     * @return self
-     */
     public function withMax(RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMax $max): self
     {
         $clone = clone $this;
@@ -89,9 +77,6 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMax(): self
     {
         $clone = clone $this;
@@ -100,10 +85,6 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @param RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin $min
-     * @return self
-     */
     public function withMin(RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin $min): self
     {
         $clone = clone $this;
@@ -112,9 +93,6 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMin(): self
     {
         $clone = clone $this;

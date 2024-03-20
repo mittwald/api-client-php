@@ -12,8 +12,6 @@ class ListSshKeysOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -49,7 +47,6 @@ class ListSshKeysOKResponseBody
 
     /**
      * @param SshKey[] $sshKeys
-     * @return self
      */
     public function withSshKeys(array $sshKeys): self
     {
@@ -59,9 +56,6 @@ class ListSshKeysOKResponseBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSshKeys(): self
     {
         $clone = clone $this;

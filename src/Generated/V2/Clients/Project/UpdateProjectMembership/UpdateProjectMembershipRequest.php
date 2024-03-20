@@ -13,8 +13,6 @@ class UpdateProjectMembershipRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,50 +44,30 @@ class UpdateProjectMembershipRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectMembershipId;
 
-    /**
-     * @var UpdateProjectMembershipRequestBody
-     */
     private UpdateProjectMembershipRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectMembershipId
-     * @param UpdateProjectMembershipRequestBody $body
-     */
     public function __construct(string $projectMembershipId, UpdateProjectMembershipRequestBody $body)
     {
         $this->projectMembershipId = $projectMembershipId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectMembershipId(): string
     {
         return $this->projectMembershipId;
     }
 
-    /**
-     * @return UpdateProjectMembershipRequestBody
-     */
     public function getBody(): UpdateProjectMembershipRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectMembershipId
-     * @return self
-     */
     public function withProjectMembershipId(string $projectMembershipId): self
     {
         $validator = new Validator();
@@ -104,10 +82,6 @@ class UpdateProjectMembershipRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateProjectMembershipRequestBody $body
-     * @return self
-     */
     public function withBody(UpdateProjectMembershipRequestBody $body): self
     {
         $clone = clone $this;

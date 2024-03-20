@@ -22,8 +22,6 @@ class ShareableAggregateReferenceAlternative3
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -51,26 +49,12 @@ class ShareableAggregateReferenceAlternative3
         'type' => 'object',
     ];
 
-    /**
-     * @var ShareableAggregateReferenceAlternative3Aggregate
-     */
     private ShareableAggregateReferenceAlternative3Aggregate $aggregate;
 
-    /**
-     * @var ShareableAggregateReferenceAlternative3Domain
-     */
     private ShareableAggregateReferenceAlternative3Domain $domain;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @param ShareableAggregateReferenceAlternative3Aggregate $aggregate
-     * @param ShareableAggregateReferenceAlternative3Domain $domain
-     * @param string $id
-     */
     public function __construct(ShareableAggregateReferenceAlternative3Aggregate $aggregate, ShareableAggregateReferenceAlternative3Domain $domain, string $id)
     {
         $this->aggregate = $aggregate;
@@ -78,34 +62,21 @@ class ShareableAggregateReferenceAlternative3
         $this->id = $id;
     }
 
-    /**
-     * @return ShareableAggregateReferenceAlternative3Aggregate
-     */
     public function getAggregate(): ShareableAggregateReferenceAlternative3Aggregate
     {
         return $this->aggregate;
     }
 
-    /**
-     * @return ShareableAggregateReferenceAlternative3Domain
-     */
     public function getDomain(): ShareableAggregateReferenceAlternative3Domain
     {
         return $this->domain;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param ShareableAggregateReferenceAlternative3Aggregate $aggregate
-     * @return self
-     */
     public function withAggregate(ShareableAggregateReferenceAlternative3Aggregate $aggregate): self
     {
         $clone = clone $this;
@@ -114,10 +85,6 @@ class ShareableAggregateReferenceAlternative3
         return $clone;
     }
 
-    /**
-     * @param ShareableAggregateReferenceAlternative3Domain $domain
-     * @return self
-     */
     public function withDomain(ShareableAggregateReferenceAlternative3Domain $domain): self
     {
         $clone = clone $this;
@@ -126,10 +93,6 @@ class ShareableAggregateReferenceAlternative3
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -193,7 +156,7 @@ class ShareableAggregateReferenceAlternative3
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

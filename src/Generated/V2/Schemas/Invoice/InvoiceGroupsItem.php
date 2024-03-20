@@ -21,8 +21,6 @@ class InvoiceGroupsItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -47,14 +45,8 @@ class InvoiceGroupsItem
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $contractId = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
     /**
@@ -70,17 +62,11 @@ class InvoiceGroupsItem
         $this->items = $items;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContractId(): ?string
     {
         return $this->contractId ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
@@ -94,10 +80,6 @@ class InvoiceGroupsItem
         return $this->items;
     }
 
-    /**
-     * @param string $contractId
-     * @return self
-     */
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
@@ -112,9 +94,6 @@ class InvoiceGroupsItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContractId(): self
     {
         $clone = clone $this;
@@ -123,10 +102,6 @@ class InvoiceGroupsItem
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -141,9 +116,6 @@ class InvoiceGroupsItem
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -154,7 +126,6 @@ class InvoiceGroupsItem
 
     /**
      * @param InvoiceItem[] $items
-     * @return self
      */
     public function withItems(array $items): self
     {
@@ -224,7 +195,7 @@ class InvoiceGroupsItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

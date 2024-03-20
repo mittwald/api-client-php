@@ -13,8 +13,6 @@ class CreateRedisDatabaseCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class CreateRedisDatabaseCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateRedisDatabaseCreatedResponseBody
-     */
     private CreateRedisDatabaseCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateRedisDatabaseCreatedResponseBody $body
-     */
     public function __construct(CreateRedisDatabaseCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateRedisDatabaseCreatedResponseBody
-     */
     public function getBody(): CreateRedisDatabaseCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateRedisDatabaseCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateRedisDatabaseCreatedResponseBody $body): self
     {
         $clone = clone $this;

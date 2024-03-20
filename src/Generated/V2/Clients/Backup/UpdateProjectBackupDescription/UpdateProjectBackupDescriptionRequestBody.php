@@ -11,8 +11,6 @@ class UpdateProjectBackupDescriptionRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -27,8 +25,6 @@ class UpdateProjectBackupDescriptionRequestBody
 
     /**
      * Description of the ProjectBackup.
-     *
-     * @var string|null
      */
     private ?string $description = null;
 
@@ -39,18 +35,11 @@ class UpdateProjectBackupDescriptionRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -65,9 +54,6 @@ class UpdateProjectBackupDescriptionRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;

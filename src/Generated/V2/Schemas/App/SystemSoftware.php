@@ -22,8 +22,6 @@ class SystemSoftware
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable.',
@@ -55,9 +53,6 @@ class SystemSoftware
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $id;
 
     /**
@@ -65,9 +60,6 @@ class SystemSoftware
      */
     private ?array $meta = null;
 
-    /**
-     * @var string
-     */
     private string $name;
 
     /**
@@ -76,8 +68,6 @@ class SystemSoftware
     private array $tags;
 
     /**
-     * @param string $id
-     * @param string $name
      * @param string[] $tags
      */
     public function __construct(string $id, string $name, array $tags)
@@ -87,9 +77,6 @@ class SystemSoftware
         $this->tags = $tags;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
@@ -103,9 +90,6 @@ class SystemSoftware
         return $this->meta ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -119,10 +103,6 @@ class SystemSoftware
         return $this->tags;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -139,7 +119,6 @@ class SystemSoftware
 
     /**
      * @param string[] $meta
-     * @return self
      */
     public function withMeta(array $meta): self
     {
@@ -155,9 +134,6 @@ class SystemSoftware
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMeta(): self
     {
         $clone = clone $this;
@@ -166,10 +142,6 @@ class SystemSoftware
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -186,7 +158,6 @@ class SystemSoftware
 
     /**
      * @param string[] $tags
-     * @return self
      */
     public function withTags(array $tags): self
     {
@@ -258,7 +229,7 @@ class SystemSoftware
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -11,8 +11,6 @@ class ListTldContactSchemasOKResponseBodyJsonSchemaOwnerC
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',

@@ -13,8 +13,6 @@ class CreateMessageRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,50 +43,30 @@ class CreateMessageRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var CreateMessageRequestBody
-     */
     private CreateMessageRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $conversationId
-     * @param CreateMessageRequestBody $body
-     */
     public function __construct(string $conversationId, CreateMessageRequestBody $body)
     {
         $this->conversationId = $conversationId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return CreateMessageRequestBody
-     */
     public function getBody(): CreateMessageRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -103,10 +81,6 @@ class CreateMessageRequest
         return $clone;
     }
 
-    /**
-     * @param CreateMessageRequestBody $body
-     * @return self
-     */
     public function withBody(CreateMessageRequestBody $body): self
     {
         $clone = clone $this;

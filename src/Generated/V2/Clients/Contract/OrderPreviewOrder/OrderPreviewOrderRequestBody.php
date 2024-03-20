@@ -14,8 +14,6 @@ class OrderPreviewOrderRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,14 +42,8 @@ class OrderPreviewOrderRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|null
-     */
     private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|null $orderData = null;
 
-    /**
-     * @var OrderPreviewOrderRequestBodyOrderType|null
-     */
     private ?OrderPreviewOrderRequestBodyOrderType $orderType = null;
 
     /**
@@ -70,9 +62,6 @@ class OrderPreviewOrderRequestBody
         return $this->orderData;
     }
 
-    /**
-     * @return OrderPreviewOrderRequestBodyOrderType|null
-     */
     public function getOrderType(): ?OrderPreviewOrderRequestBodyOrderType
     {
         return $this->orderType ?? null;
@@ -80,7 +69,6 @@ class OrderPreviewOrderRequestBody
 
     /**
      * @param ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview $orderData
-     * @return self
      */
     public function withOrderData(DomainOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
     {
@@ -90,9 +78,6 @@ class OrderPreviewOrderRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderData(): self
     {
         $clone = clone $this;
@@ -101,10 +86,6 @@ class OrderPreviewOrderRequestBody
         return $clone;
     }
 
-    /**
-     * @param OrderPreviewOrderRequestBodyOrderType $orderType
-     * @return self
-     */
     public function withOrderType(OrderPreviewOrderRequestBodyOrderType $orderType): self
     {
         $clone = clone $this;
@@ -113,9 +94,6 @@ class OrderPreviewOrderRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutOrderType(): self
     {
         $clone = clone $this;

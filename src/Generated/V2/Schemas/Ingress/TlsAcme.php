@@ -22,8 +22,6 @@ class TlsAcme
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,44 +42,26 @@ class TlsAcme
 
     /**
      * Has to be `true`, as ssl cannot be deactivated.
-     *
-     * @var bool
      */
     private bool $acme;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $requestDeadline = null;
 
-    /**
-     * @param bool $acme
-     */
     public function __construct(bool $acme)
     {
         $this->acme = $acme;
     }
 
-    /**
-     * @return bool
-     */
     public function getAcme(): bool
     {
         return $this->acme;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getRequestDeadline(): ?DateTime
     {
         return $this->requestDeadline ?? null;
     }
 
-    /**
-     * @param bool $acme
-     * @return self
-     */
     public function withAcme(bool $acme): self
     {
         $validator = new Validator();
@@ -96,10 +76,6 @@ class TlsAcme
         return $clone;
     }
 
-    /**
-     * @param DateTime $requestDeadline
-     * @return self
-     */
     public function withRequestDeadline(DateTime $requestDeadline): self
     {
         $clone = clone $this;
@@ -108,9 +84,6 @@ class TlsAcme
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutRequestDeadline(): self
     {
         $clone = clone $this;
@@ -171,7 +144,7 @@ class TlsAcme
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

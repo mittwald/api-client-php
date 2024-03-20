@@ -12,8 +12,6 @@ class RequestProjectAvatarUploadOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class RequestProjectAvatarUploadOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $refId;
 
-    /**
-     * @var AvatarRules
-     */
     private AvatarRules $rules;
 
-    /**
-     * @param string $refId
-     * @param AvatarRules $rules
-     */
     public function __construct(string $refId, AvatarRules $rules)
     {
         $this->refId = $refId;
         $this->rules = $rules;
     }
 
-    /**
-     * @return string
-     */
     public function getRefId(): string
     {
         return $this->refId;
     }
 
-    /**
-     * @return AvatarRules
-     */
     public function getRules(): AvatarRules
     {
         return $this->rules;
     }
 
-    /**
-     * @param string $refId
-     * @return self
-     */
     public function withRefId(string $refId): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class RequestProjectAvatarUploadOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param AvatarRules $rules
-     * @return self
-     */
     public function withRules(AvatarRules $rules): self
     {
         $clone = clone $this;

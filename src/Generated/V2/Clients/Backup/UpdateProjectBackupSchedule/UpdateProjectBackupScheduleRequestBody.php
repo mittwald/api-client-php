@@ -11,8 +11,6 @@ class UpdateProjectBackupScheduleRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,22 +35,16 @@ class UpdateProjectBackupScheduleRequestBody
 
     /**
      * Description of the ProjectBackupSchedule. Note that the description of isSystemBackup true items cannot be changed.
-     *
-     * @var string|null
      */
     private ?string $description = null;
 
     /**
      * Execution schedule in crontab notation. Note that the schedule of isSystemBackup true items must be daily once.
-     *
-     * @var string|null
      */
     private ?string $schedule = null;
 
     /**
      * TTL of the ProjectBackupSchedule as time string.
-     *
-     * @var string|null
      */
     private ?string $ttl = null;
 
@@ -63,34 +55,21 @@ class UpdateProjectBackupScheduleRequestBody
     {
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSchedule(): ?string
     {
         return $this->schedule ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTtl(): ?string
     {
         return $this->ttl ?? null;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -105,9 +84,6 @@ class UpdateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -116,10 +92,6 @@ class UpdateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $schedule
-     * @return self
-     */
     public function withSchedule(string $schedule): self
     {
         $validator = new Validator();
@@ -134,9 +106,6 @@ class UpdateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutSchedule(): self
     {
         $clone = clone $this;
@@ -145,10 +114,6 @@ class UpdateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $ttl
-     * @return self
-     */
     public function withTtl(string $ttl): self
     {
         $validator = new Validator();
@@ -163,9 +128,6 @@ class UpdateProjectBackupScheduleRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTtl(): self
     {
         $clone = clone $this;

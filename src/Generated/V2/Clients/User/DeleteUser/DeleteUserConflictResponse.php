@@ -13,8 +13,6 @@ class DeleteUserConflictResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -53,33 +51,20 @@ class DeleteUserConflictResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DeleteUserConflictResponseBody
-     */
     private DeleteUserConflictResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DeleteUserConflictResponseBody $body
-     */
     public function __construct(DeleteUserConflictResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DeleteUserConflictResponseBody
-     */
     public function getBody(): DeleteUserConflictResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DeleteUserConflictResponseBody $body
-     * @return self
-     */
     public function withBody(DeleteUserConflictResponseBody $body): self
     {
         $clone = clone $this;

@@ -13,8 +13,6 @@ class CreateDomainAuthCodeCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -36,33 +34,20 @@ class CreateDomainAuthCodeCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var CreateDomainAuthCodeCreatedResponseBody
-     */
     private CreateDomainAuthCodeCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param CreateDomainAuthCodeCreatedResponseBody $body
-     */
     public function __construct(CreateDomainAuthCodeCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateDomainAuthCodeCreatedResponseBody
-     */
     public function getBody(): CreateDomainAuthCodeCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateDomainAuthCodeCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(CreateDomainAuthCodeCreatedResponseBody $body): self
     {
         $clone = clone $this;

@@ -22,8 +22,6 @@ class MailAddressInternal
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -177,14 +175,8 @@ class MailAddressInternal
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $address;
 
-    /**
-     * @var MailAddressInternalAutoResponder
-     */
     private MailAddressInternalAutoResponder $autoResponder;
 
     /**
@@ -192,51 +184,22 @@ class MailAddressInternal
      */
     private array $forwardAddresses;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var bool
-     */
     private bool $isArchived;
 
-    /**
-     * @var bool
-     */
     private bool $isCatchAll;
 
-    /**
-     * @var MailAddressInternalMailbox|null
-     */
     private ?MailAddressInternalMailbox $mailbox = null;
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var bool
-     */
     private bool $receivingDisabled;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $updatedAt;
 
     /**
-     * @param string $address
-     * @param MailAddressInternalAutoResponder $autoResponder
      * @param string[] $forwardAddresses
-     * @param string $id
-     * @param bool $isArchived
-     * @param bool $isCatchAll
-     * @param string $projectId
-     * @param bool $receivingDisabled
-     * @param DateTime $updatedAt
      */
     public function __construct(string $address, MailAddressInternalAutoResponder $autoResponder, array $forwardAddresses, string $id, bool $isArchived, bool $isCatchAll, string $projectId, bool $receivingDisabled, DateTime $updatedAt)
     {
@@ -251,17 +214,11 @@ class MailAddressInternal
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * @return MailAddressInternalAutoResponder
-     */
     public function getAutoResponder(): MailAddressInternalAutoResponder
     {
         return $this->autoResponder;
@@ -275,66 +232,41 @@ class MailAddressInternal
         return $this->forwardAddresses;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsArchived(): bool
     {
         return $this->isArchived;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsCatchAll(): bool
     {
         return $this->isCatchAll;
     }
 
-    /**
-     * @return MailAddressInternalMailbox|null
-     */
     public function getMailbox(): ?MailAddressInternalMailbox
     {
         return $this->mailbox ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return bool
-     */
     public function getReceivingDisabled(): bool
     {
         return $this->receivingDisabled;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param string $address
-     * @return self
-     */
     public function withAddress(string $address): self
     {
         $validator = new Validator();
@@ -349,10 +281,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param MailAddressInternalAutoResponder $autoResponder
-     * @return self
-     */
     public function withAutoResponder(MailAddressInternalAutoResponder $autoResponder): self
     {
         $clone = clone $this;
@@ -363,7 +291,6 @@ class MailAddressInternal
 
     /**
      * @param string[] $forwardAddresses
-     * @return self
      */
     public function withForwardAddresses(array $forwardAddresses): self
     {
@@ -379,10 +306,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -397,10 +320,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param bool $isArchived
-     * @return self
-     */
     public function withIsArchived(bool $isArchived): self
     {
         $validator = new Validator();
@@ -415,10 +334,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param bool $isCatchAll
-     * @return self
-     */
     public function withIsCatchAll(bool $isCatchAll): self
     {
         $validator = new Validator();
@@ -433,10 +348,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param MailAddressInternalMailbox $mailbox
-     * @return self
-     */
     public function withMailbox(MailAddressInternalMailbox $mailbox): self
     {
         $clone = clone $this;
@@ -445,9 +356,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMailbox(): self
     {
         $clone = clone $this;
@@ -456,10 +364,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -474,10 +378,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param bool $receivingDisabled
-     * @return self
-     */
     public function withReceivingDisabled(bool $receivingDisabled): self
     {
         $validator = new Validator();
@@ -492,10 +392,6 @@ class MailAddressInternal
         return $clone;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     * @return self
-     */
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -572,7 +468,7 @@ class MailAddressInternal
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -22,8 +22,6 @@ class AppInstallationStatus
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'AppInstallationStatus describes the overall runtime status of an AppInstallation.',
@@ -53,63 +51,35 @@ class AppInstallationStatus
         'type' => 'object',
     ];
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $lastExitCode = null;
 
-    /**
-     * @var string
-     */
     private string $logFileLocation;
 
-    /**
-     * @var AppInstallationStatusState
-     */
     private AppInstallationStatusState $state;
 
-    /**
-     * @var int|float|null
-     */
     private int|float|null $uptimeSeconds = null;
 
-    /**
-     * @param string $logFileLocation
-     * @param AppInstallationStatusState $state
-     */
     public function __construct(string $logFileLocation, AppInstallationStatusState $state)
     {
         $this->logFileLocation = $logFileLocation;
         $this->state = $state;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getLastExitCode(): int|float|null
     {
         return $this->lastExitCode;
     }
 
-    /**
-     * @return string
-     */
     public function getLogFileLocation(): string
     {
         return $this->logFileLocation;
     }
 
-    /**
-     * @return AppInstallationStatusState
-     */
     public function getState(): AppInstallationStatusState
     {
         return $this->state;
     }
 
-    /**
-     * @return int|float|null
-     */
     public function getUptimeSeconds(): int|float|null
     {
         return $this->uptimeSeconds;
@@ -117,7 +87,6 @@ class AppInstallationStatus
 
     /**
      * @param int|float $lastExitCode
-     * @return self
      */
     public function withLastExitCode(int|float $lastExitCode): self
     {
@@ -133,9 +102,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutLastExitCode(): self
     {
         $clone = clone $this;
@@ -144,10 +110,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @param string $logFileLocation
-     * @return self
-     */
     public function withLogFileLocation(string $logFileLocation): self
     {
         $validator = new Validator();
@@ -162,10 +124,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @param AppInstallationStatusState $state
-     * @return self
-     */
     public function withState(AppInstallationStatusState $state): self
     {
         $clone = clone $this;
@@ -176,7 +134,6 @@ class AppInstallationStatus
 
     /**
      * @param int|float $uptimeSeconds
-     * @return self
      */
     public function withUptimeSeconds(int|float $uptimeSeconds): self
     {
@@ -192,9 +149,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutUptimeSeconds(): self
     {
         $clone = clone $this;
@@ -220,13 +174,13 @@ class AppInstallationStatus
 
         $lastExitCode = null;
         if (isset($input->{'lastExitCode'})) {
-            $lastExitCode = str_contains($input->{'lastExitCode'}, '.') ? (float)($input->{'lastExitCode'}) : (int)($input->{'lastExitCode'});
+            $lastExitCode = str_contains((string)($input->{'lastExitCode'}), '.') ? (float)($input->{'lastExitCode'}) : (int)($input->{'lastExitCode'});
         }
         $logFileLocation = $input->{'logFileLocation'};
         $state = AppInstallationStatusState::from($input->{'state'});
         $uptimeSeconds = null;
         if (isset($input->{'uptimeSeconds'})) {
-            $uptimeSeconds = str_contains($input->{'uptimeSeconds'}, '.') ? (float)($input->{'uptimeSeconds'}) : (int)($input->{'uptimeSeconds'});
+            $uptimeSeconds = str_contains((string)($input->{'uptimeSeconds'}), '.') ? (float)($input->{'uptimeSeconds'}) : (int)($input->{'uptimeSeconds'});
         }
 
         $obj = new self($logFileLocation, $state);
@@ -265,7 +219,7 @@ class AppInstallationStatus
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

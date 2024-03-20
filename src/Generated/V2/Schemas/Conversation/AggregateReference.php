@@ -21,8 +21,6 @@ class AggregateReference
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -44,26 +42,12 @@ class AggregateReference
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $aggregate;
 
-    /**
-     * @var string
-     */
     private string $domain;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @param string $aggregate
-     * @param string $domain
-     * @param string $id
-     */
     public function __construct(string $aggregate, string $domain, string $id)
     {
         $this->aggregate = $aggregate;
@@ -71,34 +55,21 @@ class AggregateReference
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
     public function getAggregate(): string
     {
         return $this->aggregate;
     }
 
-    /**
-     * @return string
-     */
     public function getDomain(): string
     {
         return $this->domain;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $aggregate
-     * @return self
-     */
     public function withAggregate(string $aggregate): self
     {
         $validator = new Validator();
@@ -113,10 +84,6 @@ class AggregateReference
         return $clone;
     }
 
-    /**
-     * @param string $domain
-     * @return self
-     */
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
@@ -131,10 +98,6 @@ class AggregateReference
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -198,7 +161,7 @@ class AggregateReference
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

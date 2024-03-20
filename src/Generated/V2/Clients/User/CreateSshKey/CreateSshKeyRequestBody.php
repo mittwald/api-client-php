@@ -12,8 +12,6 @@ class CreateSshKeyRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,44 +30,25 @@ class CreateSshKeyRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var string
-     */
     private string $publicKey;
 
-    /**
-     * @param string $publicKey
-     */
     public function __construct(string $publicKey)
     {
         $this->publicKey = $publicKey;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getPublicKey(): string
     {
         return $this->publicKey;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -78,9 +57,6 @@ class CreateSshKeyRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -89,10 +65,6 @@ class CreateSshKeyRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $publicKey
-     * @return self
-     */
     public function withPublicKey(string $publicKey): self
     {
         $validator = new Validator();

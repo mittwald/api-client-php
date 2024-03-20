@@ -13,8 +13,6 @@ class PostPollStatusRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -49,50 +47,30 @@ class PostPollStatusRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $userId;
 
-    /**
-     * @var PostPollStatusRequestBody
-     */
     private PostPollStatusRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $userId
-     * @param PostPollStatusRequestBody $body
-     */
     public function __construct(string $userId, PostPollStatusRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @return PostPollStatusRequestBody
-     */
     public function getBody(): PostPollStatusRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $userId
-     * @return self
-     */
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
@@ -107,10 +85,6 @@ class PostPollStatusRequest
         return $clone;
     }
 
-    /**
-     * @param PostPollStatusRequestBody $body
-     * @return self
-     */
     public function withBody(PostPollStatusRequestBody $body): self
     {
         $clone = clone $this;

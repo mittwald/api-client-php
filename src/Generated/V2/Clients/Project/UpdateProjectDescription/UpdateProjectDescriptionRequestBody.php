@@ -11,8 +11,6 @@ class UpdateProjectDescriptionRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,31 +24,18 @@ class UpdateProjectDescriptionRequestBody
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @param string $description
-     */
     public function __construct(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();

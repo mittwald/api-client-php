@@ -21,8 +21,6 @@ class DataNetworkingOpsItem
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -70,52 +68,30 @@ class DataNetworkingOpsItem
         'type' => 'object',
     ];
 
-    /**
-     * @var DataNetworkingOpsItemConnectionType
-     */
     private DataNetworkingOpsItemConnectionType $connectionType;
 
     /**
      * A short description of the network connection to provide additional context.
-     *
-     * @var string
      */
     private string $description;
 
     /**
      * IP address to which a connection was established.
-     *
-     * @var string
      */
     private string $ip;
 
     /**
      * Port to which a connection was established.
-     *
-     * @var int
      */
     private int $port;
 
-    /**
-     * @var Statistics
-     */
     private Statistics $stats;
 
     /**
      * Alerts when the time, syscall count or occurrence count of this group are abnormal.
-     *
-     * @var DataNetworkingOpsItemWarnLevel
      */
     private DataNetworkingOpsItemWarnLevel $warnLevel;
 
-    /**
-     * @param DataNetworkingOpsItemConnectionType $connectionType
-     * @param string $description
-     * @param string $ip
-     * @param int $port
-     * @param Statistics $stats
-     * @param DataNetworkingOpsItemWarnLevel $warnLevel
-     */
     public function __construct(DataNetworkingOpsItemConnectionType $connectionType, string $description, string $ip, int $port, Statistics $stats, DataNetworkingOpsItemWarnLevel $warnLevel)
     {
         $this->connectionType = $connectionType;
@@ -126,58 +102,36 @@ class DataNetworkingOpsItem
         $this->warnLevel = $warnLevel;
     }
 
-    /**
-     * @return DataNetworkingOpsItemConnectionType
-     */
     public function getConnectionType(): DataNetworkingOpsItemConnectionType
     {
         return $this->connectionType;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getIp(): string
     {
         return $this->ip;
     }
 
-    /**
-     * @return int
-     */
     public function getPort(): int
     {
         return $this->port;
     }
 
-    /**
-     * @return Statistics
-     */
     public function getStats(): Statistics
     {
         return $this->stats;
     }
 
-    /**
-     * @return DataNetworkingOpsItemWarnLevel
-     */
     public function getWarnLevel(): DataNetworkingOpsItemWarnLevel
     {
         return $this->warnLevel;
     }
 
-    /**
-     * @param DataNetworkingOpsItemConnectionType $connectionType
-     * @return self
-     */
     public function withConnectionType(DataNetworkingOpsItemConnectionType $connectionType): self
     {
         $clone = clone $this;
@@ -186,10 +140,6 @@ class DataNetworkingOpsItem
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -204,10 +154,6 @@ class DataNetworkingOpsItem
         return $clone;
     }
 
-    /**
-     * @param string $ip
-     * @return self
-     */
     public function withIp(string $ip): self
     {
         $validator = new Validator();
@@ -222,10 +168,6 @@ class DataNetworkingOpsItem
         return $clone;
     }
 
-    /**
-     * @param int $port
-     * @return self
-     */
     public function withPort(int $port): self
     {
         $validator = new Validator();
@@ -240,10 +182,6 @@ class DataNetworkingOpsItem
         return $clone;
     }
 
-    /**
-     * @param Statistics $stats
-     * @return self
-     */
     public function withStats(Statistics $stats): self
     {
         $clone = clone $this;
@@ -252,10 +190,6 @@ class DataNetworkingOpsItem
         return $clone;
     }
 
-    /**
-     * @param DataNetworkingOpsItemWarnLevel $warnLevel
-     * @return self
-     */
     public function withWarnLevel(DataNetworkingOpsItemWarnLevel $warnLevel): self
     {
         $clone = clone $this;
@@ -319,7 +253,7 @@ class DataNetworkingOpsItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

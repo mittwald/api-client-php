@@ -13,8 +13,6 @@ class CreateConversationRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,35 +44,22 @@ class CreateConversationRequest
         ],
     ];
 
-    /**
-     * @var CreateConversationRequestBody
-     */
     private CreateConversationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateConversationRequestBody $body
-     */
     public function __construct(CreateConversationRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateConversationRequestBody
-     */
     public function getBody(): CreateConversationRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateConversationRequestBody $body
-     * @return self
-     */
     public function withBody(CreateConversationRequestBody $body): self
     {
         $clone = clone $this;

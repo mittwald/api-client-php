@@ -2,27 +2,51 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination;
+namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
+use Psr\Http\Message\ResponseInterface;
 
-class CancelContractTerminationRequestBody
+class GetFileWithNameUnprocessableEntityResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
+        'properties' => [
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+            ],
+        ],
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    private ValidationErrors $body;
+
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(ValidationErrors $body)
     {
+        $this->body = $body;
+    }
+
+    public function getBody(): ValidationErrors
+    {
+        return $this->body;
+    }
+
+    public function withBody(ValidationErrors $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
     }
 
     /**
@@ -30,19 +54,19 @@ class CancelContractTerminationRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CancelContractTerminationRequestBody Created instance
+     * @return GetFileWithNameUnprocessableEntityResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CancelContractTerminationRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetFileWithNameUnprocessableEntityResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
-
-        $obj = new self();
+        $obj = new self($body);
 
         return $obj;
     }
@@ -55,7 +79,7 @@ class CancelContractTerminationRequestBody
     public function toJson(): array
     {
         $output = [];
-
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -86,5 +110,18 @@ class CancelContractTerminationRequestBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

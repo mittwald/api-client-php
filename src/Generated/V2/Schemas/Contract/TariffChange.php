@@ -22,8 +22,6 @@ class TariffChange
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -58,25 +56,14 @@ class TariffChange
      */
     private array $newArticles;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $scheduledAtDate;
 
-    /**
-     * @var string|null
-     */
     private ?string $scheduledByUserId = null;
 
-    /**
-     * @var DateTime
-     */
     private DateTime $targetDate;
 
     /**
      * @param Article[] $newArticles
-     * @param DateTime $scheduledAtDate
-     * @param DateTime $targetDate
      */
     public function __construct(array $newArticles, DateTime $scheduledAtDate, DateTime $targetDate)
     {
@@ -93,25 +80,16 @@ class TariffChange
         return $this->newArticles;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getScheduledAtDate(): DateTime
     {
         return $this->scheduledAtDate;
     }
 
-    /**
-     * @return string|null
-     */
     public function getScheduledByUserId(): ?string
     {
         return $this->scheduledByUserId ?? null;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getTargetDate(): DateTime
     {
         return $this->targetDate;
@@ -119,7 +97,6 @@ class TariffChange
 
     /**
      * @param Article[] $newArticles
-     * @return self
      */
     public function withNewArticles(array $newArticles): self
     {
@@ -129,10 +106,6 @@ class TariffChange
         return $clone;
     }
 
-    /**
-     * @param DateTime $scheduledAtDate
-     * @return self
-     */
     public function withScheduledAtDate(DateTime $scheduledAtDate): self
     {
         $clone = clone $this;
@@ -141,10 +114,6 @@ class TariffChange
         return $clone;
     }
 
-    /**
-     * @param string $scheduledByUserId
-     * @return self
-     */
     public function withScheduledByUserId(string $scheduledByUserId): self
     {
         $validator = new Validator();
@@ -159,9 +128,6 @@ class TariffChange
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutScheduledByUserId(): self
     {
         $clone = clone $this;
@@ -170,10 +136,6 @@ class TariffChange
         return $clone;
     }
 
-    /**
-     * @param DateTime $targetDate
-     * @return self
-     */
     public function withTargetDate(DateTime $targetDate): self
     {
         $clone = clone $this;
@@ -238,7 +200,7 @@ class TariffChange
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

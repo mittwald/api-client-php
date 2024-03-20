@@ -13,8 +13,6 @@ class GetMfaStatusOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -40,33 +38,20 @@ class GetMfaStatusOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var GetMfaStatusOKResponseBody
-     */
     private GetMfaStatusOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param GetMfaStatusOKResponseBody $body
-     */
     public function __construct(GetMfaStatusOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return GetMfaStatusOKResponseBody
-     */
     public function getBody(): GetMfaStatusOKResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param GetMfaStatusOKResponseBody $body
-     * @return self
-     */
     public function withBody(GetMfaStatusOKResponseBody $body): self
     {
         $clone = clone $this;

@@ -22,8 +22,6 @@ class MailAddressInternalAutoResponder
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,70 +46,39 @@ class MailAddressInternalAutoResponder
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $message = null;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $startsAt = null;
 
-    /**
-     * @param bool $active
-     */
     public function __construct(bool $active)
     {
         $this->active = $active;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMessage(): ?string
     {
         return $this->message ?? null;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getStartsAt(): ?DateTime
     {
         return $this->startsAt ?? null;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -126,10 +93,6 @@ class MailAddressInternalAutoResponder
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -138,9 +101,6 @@ class MailAddressInternalAutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;
@@ -149,10 +109,6 @@ class MailAddressInternalAutoResponder
         return $clone;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -167,9 +123,6 @@ class MailAddressInternalAutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMessage(): self
     {
         $clone = clone $this;
@@ -178,10 +131,6 @@ class MailAddressInternalAutoResponder
         return $clone;
     }
 
-    /**
-     * @param DateTime $startsAt
-     * @return self
-     */
     public function withStartsAt(DateTime $startsAt): self
     {
         $clone = clone $this;
@@ -190,9 +139,6 @@ class MailAddressInternalAutoResponder
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutStartsAt(): self
     {
         $clone = clone $this;
@@ -269,7 +215,7 @@ class MailAddressInternalAutoResponder
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

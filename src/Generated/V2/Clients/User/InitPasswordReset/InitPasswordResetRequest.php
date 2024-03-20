@@ -13,8 +13,6 @@ class InitPasswordResetRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -39,35 +37,22 @@ class InitPasswordResetRequest
         ],
     ];
 
-    /**
-     * @var InitPasswordResetRequestBody
-     */
     private InitPasswordResetRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param InitPasswordResetRequestBody $body
-     */
     public function __construct(InitPasswordResetRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return InitPasswordResetRequestBody
-     */
     public function getBody(): InitPasswordResetRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param InitPasswordResetRequestBody $body
-     * @return self
-     */
     public function withBody(InitPasswordResetRequestBody $body): self
     {
         $clone = clone $this;

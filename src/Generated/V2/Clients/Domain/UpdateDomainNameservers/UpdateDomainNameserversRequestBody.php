@@ -11,8 +11,6 @@ class UpdateDomainNameserversRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -50,7 +48,6 @@ class UpdateDomainNameserversRequestBody
 
     /**
      * @param string[] $nameservers
-     * @return self
      */
     public function withNameservers(array $nameservers): self
     {
@@ -66,9 +63,6 @@ class UpdateDomainNameserversRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutNameservers(): self
     {
         $clone = clone $this;

@@ -11,8 +11,6 @@ class GetLatestScreenshotRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -32,46 +30,26 @@ class GetLatestScreenshotRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $domainName;
 
-    /**
-     * @var string
-     */
     private string $path;
 
-    /**
-     * @param string $domainName
-     * @param string $path
-     */
     public function __construct(string $domainName, string $path)
     {
         $this->domainName = $domainName;
         $this->path = $path;
     }
 
-    /**
-     * @return string
-     */
     public function getDomainName(): string
     {
         return $this->domainName;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @param string $domainName
-     * @return self
-     */
     public function withDomainName(string $domainName): self
     {
         $validator = new Validator();
@@ -86,10 +64,6 @@ class GetLatestScreenshotRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();

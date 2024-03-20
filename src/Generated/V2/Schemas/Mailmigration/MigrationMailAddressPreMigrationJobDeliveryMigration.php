@@ -22,84 +22,81 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
+            'finished' => [
+                'type' => 'boolean',
+            ],
             'sourceCoabDeliveryMailbox' => [
                 'type' => 'string',
             ],
             'sourceCoabDeliveryUid' => [
                 'type' => 'integer',
             ],
-            'targetNexusDeliveryAddress' => [
+            'targetDeliveryAddress' => [
                 'type' => 'string',
             ],
         ],
         'required' => [
             'sourceCoabDeliveryUid',
             'sourceCoabDeliveryMailbox',
-            'targetNexusDeliveryAddress',
+            'targetDeliveryAddress',
+            'finished',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
+    private bool $finished;
+
     private string $sourceCoabDeliveryMailbox;
 
-    /**
-     * @var int
-     */
     private int $sourceCoabDeliveryUid;
 
-    /**
-     * @var string
-     */
-    private string $targetNexusDeliveryAddress;
+    private string $targetDeliveryAddress;
 
-    /**
-     * @param string $sourceCoabDeliveryMailbox
-     * @param int $sourceCoabDeliveryUid
-     * @param string $targetNexusDeliveryAddress
-     */
-    public function __construct(string $sourceCoabDeliveryMailbox, int $sourceCoabDeliveryUid, string $targetNexusDeliveryAddress)
+    public function __construct(bool $finished, string $sourceCoabDeliveryMailbox, int $sourceCoabDeliveryUid, string $targetDeliveryAddress)
     {
+        $this->finished = $finished;
         $this->sourceCoabDeliveryMailbox = $sourceCoabDeliveryMailbox;
         $this->sourceCoabDeliveryUid = $sourceCoabDeliveryUid;
-        $this->targetNexusDeliveryAddress = $targetNexusDeliveryAddress;
+        $this->targetDeliveryAddress = $targetDeliveryAddress;
     }
 
-    /**
-     * @return string
-     */
+    public function getFinished(): bool
+    {
+        return $this->finished;
+    }
+
     public function getSourceCoabDeliveryMailbox(): string
     {
         return $this->sourceCoabDeliveryMailbox;
     }
 
-    /**
-     * @return int
-     */
     public function getSourceCoabDeliveryUid(): int
     {
         return $this->sourceCoabDeliveryUid;
     }
 
-    /**
-     * @return string
-     */
-    public function getTargetNexusDeliveryAddress(): string
+    public function getTargetDeliveryAddress(): string
     {
-        return $this->targetNexusDeliveryAddress;
+        return $this->targetDeliveryAddress;
     }
 
-    /**
-     * @param string $sourceCoabDeliveryMailbox
-     * @return self
-     */
+    public function withFinished(bool $finished): self
+    {
+        $validator = new Validator();
+        $validator->validate($finished, static::$schema['properties']['finished']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->finished = $finished;
+
+        return $clone;
+    }
+
     public function withSourceCoabDeliveryMailbox(string $sourceCoabDeliveryMailbox): self
     {
         $validator = new Validator();
@@ -114,10 +111,6 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
         return $clone;
     }
 
-    /**
-     * @param int $sourceCoabDeliveryUid
-     * @return self
-     */
     public function withSourceCoabDeliveryUid(int $sourceCoabDeliveryUid): self
     {
         $validator = new Validator();
@@ -132,20 +125,16 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
         return $clone;
     }
 
-    /**
-     * @param string $targetNexusDeliveryAddress
-     * @return self
-     */
-    public function withTargetNexusDeliveryAddress(string $targetNexusDeliveryAddress): self
+    public function withTargetDeliveryAddress(string $targetDeliveryAddress): self
     {
         $validator = new Validator();
-        $validator->validate($targetNexusDeliveryAddress, static::$schema['properties']['targetNexusDeliveryAddress']);
+        $validator->validate($targetDeliveryAddress, static::$schema['properties']['targetDeliveryAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->targetNexusDeliveryAddress = $targetNexusDeliveryAddress;
+        $clone->targetDeliveryAddress = $targetDeliveryAddress;
 
         return $clone;
     }
@@ -165,11 +154,12 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
             static::validateInput($input);
         }
 
+        $finished = (bool)($input->{'finished'});
         $sourceCoabDeliveryMailbox = $input->{'sourceCoabDeliveryMailbox'};
         $sourceCoabDeliveryUid = (int)($input->{'sourceCoabDeliveryUid'});
-        $targetNexusDeliveryAddress = $input->{'targetNexusDeliveryAddress'};
+        $targetDeliveryAddress = $input->{'targetDeliveryAddress'};
 
-        $obj = new self($sourceCoabDeliveryMailbox, $sourceCoabDeliveryUid, $targetNexusDeliveryAddress);
+        $obj = new self($finished, $sourceCoabDeliveryMailbox, $sourceCoabDeliveryUid, $targetDeliveryAddress);
 
         return $obj;
     }
@@ -182,9 +172,10 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function toJson(): array
     {
         $output = [];
+        $output['finished'] = $this->finished;
         $output['sourceCoabDeliveryMailbox'] = $this->sourceCoabDeliveryMailbox;
         $output['sourceCoabDeliveryUid'] = $this->sourceCoabDeliveryUid;
-        $output['targetNexusDeliveryAddress'] = $this->targetNexusDeliveryAddress;
+        $output['targetDeliveryAddress'] = $this->targetDeliveryAddress;
 
         return $output;
     }
@@ -199,7 +190,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -21,8 +21,6 @@ class FileUploadRulesPropertiesImageDimensionsMax
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,14 +34,8 @@ class FileUploadRulesPropertiesImageDimensionsMax
         'type' => 'object',
     ];
 
-    /**
-     * @var int|null
-     */
     private ?int $height = null;
 
-    /**
-     * @var int|null
-     */
     private ?int $width = null;
 
     /**
@@ -53,26 +45,16 @@ class FileUploadRulesPropertiesImageDimensionsMax
     {
     }
 
-    /**
-     * @return int|null
-     */
     public function getHeight(): ?int
     {
         return $this->height ?? null;
     }
 
-    /**
-     * @return int|null
-     */
     public function getWidth(): ?int
     {
         return $this->width ?? null;
     }
 
-    /**
-     * @param int $height
-     * @return self
-     */
     public function withHeight(int $height): self
     {
         $validator = new Validator();
@@ -87,9 +69,6 @@ class FileUploadRulesPropertiesImageDimensionsMax
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutHeight(): self
     {
         $clone = clone $this;
@@ -98,10 +77,6 @@ class FileUploadRulesPropertiesImageDimensionsMax
         return $clone;
     }
 
-    /**
-     * @param int $width
-     * @return self
-     */
     public function withWidth(int $width): self
     {
         $validator = new Validator();
@@ -116,9 +91,6 @@ class FileUploadRulesPropertiesImageDimensionsMax
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutWidth(): self
     {
         $clone = clone $this;
@@ -185,7 +157,7 @@ class FileUploadRulesPropertiesImageDimensionsMax
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -21,8 +21,6 @@ class CharacterSettings
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,46 +38,26 @@ class CharacterSettings
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $characterSet;
 
-    /**
-     * @var string
-     */
     private string $collation;
 
-    /**
-     * @param string $characterSet
-     * @param string $collation
-     */
     public function __construct(string $characterSet, string $collation)
     {
         $this->characterSet = $characterSet;
         $this->collation = $collation;
     }
 
-    /**
-     * @return string
-     */
     public function getCharacterSet(): string
     {
         return $this->characterSet;
     }
 
-    /**
-     * @return string
-     */
     public function getCollation(): string
     {
         return $this->collation;
     }
 
-    /**
-     * @param string $characterSet
-     * @return self
-     */
     public function withCharacterSet(string $characterSet): self
     {
         $validator = new Validator();
@@ -94,10 +72,6 @@ class CharacterSettings
         return $clone;
     }
 
-    /**
-     * @param string $collation
-     * @return self
-     */
     public function withCollation(string $collation): self
     {
         $validator = new Validator();
@@ -159,7 +133,7 @@ class CharacterSettings
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

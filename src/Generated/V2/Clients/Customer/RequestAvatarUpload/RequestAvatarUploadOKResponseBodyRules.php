@@ -11,8 +11,6 @@ class RequestAvatarUploadOKResponseBodyRules
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -65,9 +63,6 @@ class RequestAvatarUploadOKResponseBodyRules
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $maxSizeInKB;
 
     /**
@@ -75,13 +70,9 @@ class RequestAvatarUploadOKResponseBodyRules
      */
     private array $mimeTypes;
 
-    /**
-     * @var RequestAvatarUploadOKResponseBodyRulesProperties|null
-     */
     private ?RequestAvatarUploadOKResponseBodyRulesProperties $properties = null;
 
     /**
-     * @param int $maxSizeInKB
      * @param string[] $mimeTypes
      */
     public function __construct(int $maxSizeInKB, array $mimeTypes)
@@ -90,9 +81,6 @@ class RequestAvatarUploadOKResponseBodyRules
         $this->mimeTypes = $mimeTypes;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -106,18 +94,11 @@ class RequestAvatarUploadOKResponseBodyRules
         return $this->mimeTypes;
     }
 
-    /**
-     * @return RequestAvatarUploadOKResponseBodyRulesProperties|null
-     */
     public function getProperties(): ?RequestAvatarUploadOKResponseBodyRulesProperties
     {
         return $this->properties ?? null;
     }
 
-    /**
-     * @param int $maxSizeInKB
-     * @return self
-     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();
@@ -134,7 +115,6 @@ class RequestAvatarUploadOKResponseBodyRules
 
     /**
      * @param string[] $mimeTypes
-     * @return self
      */
     public function withMimeTypes(array $mimeTypes): self
     {
@@ -150,10 +130,6 @@ class RequestAvatarUploadOKResponseBodyRules
         return $clone;
     }
 
-    /**
-     * @param RequestAvatarUploadOKResponseBodyRulesProperties $properties
-     * @return self
-     */
     public function withProperties(RequestAvatarUploadOKResponseBodyRulesProperties $properties): self
     {
         $clone = clone $this;
@@ -162,9 +138,6 @@ class RequestAvatarUploadOKResponseBodyRules
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutProperties(): self
     {
         $clone = clone $this;

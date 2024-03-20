@@ -13,8 +13,6 @@ class DeprecatedUserEditSshKeyRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -46,50 +44,30 @@ class DeprecatedUserEditSshKeyRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $sshKeyId;
 
-    /**
-     * @var DeprecatedUserEditSshKeyRequestBody
-     */
     private DeprecatedUserEditSshKeyRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $sshKeyId
-     * @param DeprecatedUserEditSshKeyRequestBody $body
-     */
     public function __construct(string $sshKeyId, DeprecatedUserEditSshKeyRequestBody $body)
     {
         $this->sshKeyId = $sshKeyId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getSshKeyId(): string
     {
         return $this->sshKeyId;
     }
 
-    /**
-     * @return DeprecatedUserEditSshKeyRequestBody
-     */
     public function getBody(): DeprecatedUserEditSshKeyRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $sshKeyId
-     * @return self
-     */
     public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new Validator();
@@ -104,10 +82,6 @@ class DeprecatedUserEditSshKeyRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedUserEditSshKeyRequestBody $body
-     * @return self
-     */
     public function withBody(DeprecatedUserEditSshKeyRequestBody $body): self
     {
         $clone = clone $this;

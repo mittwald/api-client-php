@@ -21,8 +21,6 @@ class SpamProtection
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -58,40 +56,19 @@ class SpamProtection
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var int
-     */
     private int $deleteSensitivity;
 
     /**
      * SPAM_FOLDER_INBOX_UNSPECIFIED = 0 SPAM_FOLDER_SPAM = 1
-     *
-     * @var int
      */
     private int $folder;
 
-    /**
-     * @var int
-     */
     private int $keepDays;
 
-    /**
-     * @var int
-     */
     private int $relocateSensitivity;
 
-    /**
-     * @param bool $active
-     * @param int $deleteSensitivity
-     * @param int $folder
-     * @param int $keepDays
-     * @param int $relocateSensitivity
-     */
     public function __construct(bool $active, int $deleteSensitivity, int $folder, int $keepDays, int $relocateSensitivity)
     {
         $this->active = $active;
@@ -101,50 +78,31 @@ class SpamProtection
         $this->relocateSensitivity = $relocateSensitivity;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return int
-     */
     public function getDeleteSensitivity(): int
     {
         return $this->deleteSensitivity;
     }
 
-    /**
-     * @return int
-     */
     public function getFolder(): int
     {
         return $this->folder;
     }
 
-    /**
-     * @return int
-     */
     public function getKeepDays(): int
     {
         return $this->keepDays;
     }
 
-    /**
-     * @return int
-     */
     public function getRelocateSensitivity(): int
     {
         return $this->relocateSensitivity;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -159,10 +117,6 @@ class SpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $deleteSensitivity
-     * @return self
-     */
     public function withDeleteSensitivity(int $deleteSensitivity): self
     {
         $validator = new Validator();
@@ -177,10 +131,6 @@ class SpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $folder
-     * @return self
-     */
     public function withFolder(int $folder): self
     {
         $validator = new Validator();
@@ -195,10 +145,6 @@ class SpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $keepDays
-     * @return self
-     */
     public function withKeepDays(int $keepDays): self
     {
         $validator = new Validator();
@@ -213,10 +159,6 @@ class SpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $relocateSensitivity
-     * @return self
-     */
     public function withRelocateSensitivity(int $relocateSensitivity): self
     {
         $validator = new Validator();
@@ -287,7 +229,7 @@ class SpamProtection
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

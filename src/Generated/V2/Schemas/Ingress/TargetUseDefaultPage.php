@@ -21,8 +21,6 @@ class TargetUseDefaultPage
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,31 +34,18 @@ class TargetUseDefaultPage
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $useDefaultPage;
 
-    /**
-     * @param bool $useDefaultPage
-     */
     public function __construct(bool $useDefaultPage)
     {
         $this->useDefaultPage = $useDefaultPage;
     }
 
-    /**
-     * @return bool
-     */
     public function getUseDefaultPage(): bool
     {
         return $this->useDefaultPage;
     }
 
-    /**
-     * @param bool $useDefaultPage
-     * @return self
-     */
     public function withUseDefaultPage(bool $useDefaultPage): self
     {
         $validator = new Validator();
@@ -120,7 +105,7 @@ class TargetUseDefaultPage
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

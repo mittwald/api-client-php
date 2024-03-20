@@ -21,8 +21,6 @@ class Article
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -61,43 +59,18 @@ class Article
         'type' => 'object',
     ];
 
-    /**
-     * @var int
-     */
     private int $amount;
 
-    /**
-     * @var string
-     */
     private string $articleTemplateId;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var string
-     */
     private string $id;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var Price
-     */
     private Price $unitPrice;
 
-    /**
-     * @param int $amount
-     * @param string $articleTemplateId
-     * @param string $id
-     * @param string $name
-     * @param Price $unitPrice
-     */
     public function __construct(int $amount, string $articleTemplateId, string $id, string $name, Price $unitPrice)
     {
         $this->amount = $amount;
@@ -107,58 +80,36 @@ class Article
         $this->unitPrice = $unitPrice;
     }
 
-    /**
-     * @return int
-     */
     public function getAmount(): int
     {
         return $this->amount;
     }
 
-    /**
-     * @return string
-     */
     public function getArticleTemplateId(): string
     {
         return $this->articleTemplateId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return Price
-     */
     public function getUnitPrice(): Price
     {
         return $this->unitPrice;
     }
 
-    /**
-     * @param int $amount
-     * @return self
-     */
     public function withAmount(int $amount): self
     {
         $validator = new Validator();
@@ -173,10 +124,6 @@ class Article
         return $clone;
     }
 
-    /**
-     * @param string $articleTemplateId
-     * @return self
-     */
     public function withArticleTemplateId(string $articleTemplateId): self
     {
         $validator = new Validator();
@@ -191,10 +138,6 @@ class Article
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -209,9 +152,6 @@ class Article
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -220,10 +160,6 @@ class Article
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -238,10 +174,6 @@ class Article
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -256,10 +188,6 @@ class Article
         return $clone;
     }
 
-    /**
-     * @param Price $unitPrice
-     * @return self
-     */
     public function withUnitPrice(Price $unitPrice): self
     {
         $clone = clone $this;
@@ -328,7 +256,7 @@ class Article
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

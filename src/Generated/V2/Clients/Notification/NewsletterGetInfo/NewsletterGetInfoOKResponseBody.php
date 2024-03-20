@@ -11,8 +11,6 @@ class NewsletterGetInfoOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -37,26 +35,12 @@ class NewsletterGetInfoOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var string
-     */
     private string $email;
 
-    /**
-     * @var bool
-     */
     private bool $registered;
 
-    /**
-     * @param bool $active
-     * @param string $email
-     * @param bool $registered
-     */
     public function __construct(bool $active, string $email, bool $registered)
     {
         $this->active = $active;
@@ -64,34 +48,21 @@ class NewsletterGetInfoOKResponseBody
         $this->registered = $registered;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return bool
-     */
     public function getRegistered(): bool
     {
         return $this->registered;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -106,10 +77,6 @@ class NewsletterGetInfoOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $email
-     * @return self
-     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -124,10 +91,6 @@ class NewsletterGetInfoOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param bool $registered
-     * @return self
-     */
     public function withRegistered(bool $registered): self
     {
         $validator = new Validator();

@@ -14,8 +14,6 @@ class CreateSftpUserRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,19 +50,10 @@ class CreateSftpUserRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var CreateSftpUserRequestBodyAccessLevel|null
-     */
     private ?CreateSftpUserRequestBodyAccessLevel $accessLevel = null;
 
-    /**
-     * @var AuthenticationAlternative1|AuthenticationAlternative2
-     */
     private AuthenticationAlternative1|AuthenticationAlternative2 $authentication;
 
-    /**
-     * @var string
-     */
     private string $description;
 
     /**
@@ -72,14 +61,10 @@ class CreateSftpUserRequestBody
      */
     private array $directories;
 
-    /**
-     * @var DateTime|null
-     */
     private ?DateTime $expiresAt = null;
 
     /**
      * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     * @param string $description
      * @param string[] $directories
      */
     public function __construct(AuthenticationAlternative1|AuthenticationAlternative2 $authentication, string $description, array $directories)
@@ -89,9 +74,6 @@ class CreateSftpUserRequestBody
         $this->directories = $directories;
     }
 
-    /**
-     * @return CreateSftpUserRequestBodyAccessLevel|null
-     */
     public function getAccessLevel(): ?CreateSftpUserRequestBodyAccessLevel
     {
         return $this->accessLevel ?? null;
@@ -106,9 +88,6 @@ class CreateSftpUserRequestBody
         return $this->authentication;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -122,18 +101,11 @@ class CreateSftpUserRequestBody
         return $this->directories;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @param CreateSftpUserRequestBodyAccessLevel $accessLevel
-     * @return self
-     */
     public function withAccessLevel(CreateSftpUserRequestBodyAccessLevel $accessLevel): self
     {
         $clone = clone $this;
@@ -142,9 +114,6 @@ class CreateSftpUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAccessLevel(): self
     {
         $clone = clone $this;
@@ -155,7 +124,6 @@ class CreateSftpUserRequestBody
 
     /**
      * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     * @return self
      */
     public function withAuthentication(AuthenticationAlternative1|AuthenticationAlternative2 $authentication): self
     {
@@ -165,10 +133,6 @@ class CreateSftpUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -185,7 +149,6 @@ class CreateSftpUserRequestBody
 
     /**
      * @param string[] $directories
-     * @return self
      */
     public function withDirectories(array $directories): self
     {
@@ -201,10 +164,6 @@ class CreateSftpUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param DateTime $expiresAt
-     * @return self
-     */
     public function withExpiresAt(DateTime $expiresAt): self
     {
         $clone = clone $this;
@@ -213,9 +172,6 @@ class CreateSftpUserRequestBody
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutExpiresAt(): self
     {
         $clone = clone $this;

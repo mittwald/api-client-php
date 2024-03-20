@@ -13,8 +13,6 @@ class DnsCreateDnsZoneRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -42,35 +40,22 @@ class DnsCreateDnsZoneRequest
         ],
     ];
 
-    /**
-     * @var DnsCreateDnsZoneRequestBody
-     */
     private DnsCreateDnsZoneRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param DnsCreateDnsZoneRequestBody $body
-     */
     public function __construct(DnsCreateDnsZoneRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DnsCreateDnsZoneRequestBody
-     */
     public function getBody(): DnsCreateDnsZoneRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DnsCreateDnsZoneRequestBody $body
-     * @return self
-     */
     public function withBody(DnsCreateDnsZoneRequestBody $body): self
     {
         $clone = clone $this;

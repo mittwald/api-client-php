@@ -21,8 +21,6 @@ class ValidationErrorSchema
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -65,23 +63,17 @@ type that failed validation (e.g. "missingProperty" for type "required")
 
     /**
      * The standard error message
-     *
-     * @var string
      */
     private string $message;
 
     /**
      * The path to the part of the data that was validated. JavaScript property access notation (e.g., ".prop[1].subProp") is used.
      *
-     *
-     * @var string
      */
     private string $path;
 
     /**
      * ajv validation error type (e.g. "format", "required", "type") or own validation error types
-     *
-     * @var string
      */
     private string $type;
 
@@ -94,11 +86,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
      */
     private ?array $context = null;
 
-    /**
-     * @param string $message
-     * @param string $path
-     * @param string $type
-     */
     public function __construct(string $message, string $path, string $type)
     {
         $this->message = $message;
@@ -106,25 +93,16 @@ type that failed validation (e.g. "missingProperty" for type "required")
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
@@ -138,10 +116,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
         return $this->context ?? null;
     }
 
-    /**
-     * @param string $message
-     * @return self
-     */
     public function withMessage(string $message): self
     {
         $validator = new Validator();
@@ -156,10 +130,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
         return $clone;
     }
 
-    /**
-     * @param string $path
-     * @return self
-     */
     public function withPath(string $path): self
     {
         $validator = new Validator();
@@ -174,10 +144,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
         return $clone;
     }
 
-    /**
-     * @param string $type
-     * @return self
-     */
     public function withType(string $type): self
     {
         $validator = new Validator();
@@ -194,7 +160,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
 
     /**
      * @param string[] $context
-     * @return self
      */
     public function withContext(array $context): self
     {
@@ -210,9 +175,6 @@ type that failed validation (e.g. "missingProperty" for type "required")
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutContext(): self
     {
         $clone = clone $this;
@@ -277,7 +239,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

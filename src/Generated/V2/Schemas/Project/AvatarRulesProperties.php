@@ -21,8 +21,6 @@ class AvatarRulesProperties
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -57,9 +55,6 @@ class AvatarRulesProperties
         'type' => 'object',
     ];
 
-    /**
-     * @var AvatarRulesPropertiesImageDimensions|null
-     */
     private ?AvatarRulesPropertiesImageDimensions $imageDimensions = null;
 
     /**
@@ -69,18 +64,11 @@ class AvatarRulesProperties
     {
     }
 
-    /**
-     * @return AvatarRulesPropertiesImageDimensions|null
-     */
     public function getImageDimensions(): ?AvatarRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;
     }
 
-    /**
-     * @param AvatarRulesPropertiesImageDimensions $imageDimensions
-     * @return self
-     */
     public function withImageDimensions(AvatarRulesPropertiesImageDimensions $imageDimensions): self
     {
         $clone = clone $this;
@@ -89,9 +77,6 @@ class AvatarRulesProperties
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutImageDimensions(): self
     {
         $clone = clone $this;
@@ -150,7 +135,7 @@ class AvatarRulesProperties
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

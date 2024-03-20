@@ -11,8 +11,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -43,32 +41,14 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var bool
-     */
     private bool $autoDeleteSpam;
 
-    /**
-     * @var UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder
-     */
     private UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder $folder;
 
-    /**
-     * @var int
-     */
     private int $relocationMinSpamScore;
 
-    /**
-     * @param bool $active
-     * @param bool $autoDeleteSpam
-     * @param UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder $folder
-     * @param int $relocationMinSpamScore
-     */
     public function __construct(bool $active, bool $autoDeleteSpam, UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder $folder, int $relocationMinSpamScore)
     {
         $this->active = $active;
@@ -77,17 +57,11 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         $this->relocationMinSpamScore = $relocationMinSpamScore;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return bool
-     */
     public function getAutoDeleteSpam(): bool
     {
         return $this->autoDeleteSpam;
@@ -102,18 +76,11 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         return $this->folder;
     }
 
-    /**
-     * @return int
-     */
     public function getRelocationMinSpamScore(): int
     {
         return $this->relocationMinSpamScore;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -128,10 +95,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         return $clone;
     }
 
-    /**
-     * @param bool $autoDeleteSpam
-     * @return self
-     */
     public function withAutoDeleteSpam(bool $autoDeleteSpam): self
     {
         $validator = new Validator();
@@ -146,10 +109,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         return $clone;
     }
 
-    /**
-     * @param UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder $folder
-     * @return self
-     */
     public function withFolder(UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder $folder): self
     {
         $clone = clone $this;
@@ -158,10 +117,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $relocationMinSpamScore
-     * @return self
-     */
     public function withRelocationMinSpamScore(int $relocationMinSpamScore): self
     {
         $validator = new Validator();

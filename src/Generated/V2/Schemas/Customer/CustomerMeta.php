@@ -21,8 +21,6 @@ class CustomerMeta
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -43,59 +41,33 @@ class CustomerMeta
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $avatarRefId = null;
 
-    /**
-     * @var string
-     */
     private string $customerId;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @param string $customerId
-     * @param string $name
-     */
     public function __construct(string $customerId, string $name)
     {
         $this->customerId = $customerId;
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAvatarRefId(): ?string
     {
         return $this->avatarRefId ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $avatarRefId
-     * @return self
-     */
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
@@ -110,9 +82,6 @@ class CustomerMeta
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAvatarRefId(): self
     {
         $clone = clone $this;
@@ -121,10 +90,6 @@ class CustomerMeta
         return $clone;
     }
 
-    /**
-     * @param string $customerId
-     * @return self
-     */
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -139,10 +104,6 @@ class CustomerMeta
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -211,7 +172,7 @@ class CustomerMeta
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -14,8 +14,6 @@ class GetMailAddressOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,33 +27,20 @@ class GetMailAddressOKResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var MailAddress
-     */
     private MailAddress $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param MailAddress $body
-     */
     public function __construct(MailAddress $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return MailAddress
-     */
     public function getBody(): MailAddress
     {
         return $this->body;
     }
 
-    /**
-     * @param MailAddress $body
-     * @return self
-     */
     public function withBody(MailAddress $body): self
     {
         $clone = clone $this;

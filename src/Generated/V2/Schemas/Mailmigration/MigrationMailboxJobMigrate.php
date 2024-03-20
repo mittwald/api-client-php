@@ -22,13 +22,11 @@ class MigrationMailboxJobMigrate
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
             'requirements' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrateMailAddressCommandRequirements',
+                '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrateMailboxCommandRequirements',
             ],
         ],
         'required' => [
@@ -37,33 +35,23 @@ class MigrationMailboxJobMigrate
         'type' => 'object',
     ];
 
-    /**
-     * @var MigrateMailAddressCommandRequirements
-     */
-    private MigrateMailAddressCommandRequirements $requirements;
+    private MigrateMailboxCommandRequirements $requirements;
 
-    /**
-     * @param MigrateMailAddressCommandRequirements $requirements
-     */
-    public function __construct(MigrateMailAddressCommandRequirements $requirements)
+    public function __construct(MigrateMailboxCommandRequirements $requirements)
     {
         $this->requirements = $requirements;
     }
 
     /**
      * @return
-     * MigrateMailAddressCommandRequirements
+     * MigrateMailboxCommandRequirements
      */
-    public function getRequirements(): MigrateMailAddressCommandRequirements
+    public function getRequirements(): MigrateMailboxCommandRequirements
     {
         return $this->requirements;
     }
 
-    /**
-     * @param MigrateMailAddressCommandRequirements $requirements
-     * @return self
-     */
-    public function withRequirements(MigrateMailAddressCommandRequirements $requirements): self
+    public function withRequirements(MigrateMailboxCommandRequirements $requirements): self
     {
         $clone = clone $this;
         $clone->requirements = $requirements;
@@ -86,7 +74,7 @@ class MigrationMailboxJobMigrate
             static::validateInput($input);
         }
 
-        $requirements = MigrateMailAddressCommandRequirements::buildFromInput($input->{'requirements'}, validate: $validate);
+        $requirements = MigrateMailboxCommandRequirements::buildFromInput($input->{'requirements'}, validate: $validate);
 
         $obj = new self($requirements);
 
@@ -116,7 +104,7 @@ class MigrationMailboxJobMigrate
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

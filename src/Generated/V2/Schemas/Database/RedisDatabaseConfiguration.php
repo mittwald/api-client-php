@@ -21,8 +21,6 @@ class RedisDatabaseConfiguration
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'The configuration for a RedisDatabase.',
@@ -63,22 +61,16 @@ class RedisDatabaseConfiguration
 
     /**
      * The database's maximum memory. This may be a number, optionally suffixed by one of the IEC binary suffixes `Ki`, `Mi` or `Gi`.
-     *
-     * @var string|null
      */
     private ?string $maxMemory = null;
 
     /**
      * The database's key eviction policy. See the [Redis documentation on key evictions](https://redis.io/docs/reference/eviction/) for more information.
-     *
-     * @var string|null
      */
     private ?string $maxMemoryPolicy = null;
 
     /**
      * Persistent status of the database.
-     *
-     * @var bool|null
      */
     private ?bool $persistent = null;
 
@@ -97,25 +89,16 @@ class RedisDatabaseConfiguration
         return $this->additionalFlags ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMaxMemory(): ?string
     {
         return $this->maxMemory ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMaxMemoryPolicy(): ?string
     {
         return $this->maxMemoryPolicy ?? null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getPersistent(): ?bool
     {
         return $this->persistent ?? null;
@@ -123,7 +106,6 @@ class RedisDatabaseConfiguration
 
     /**
      * @param string[] $additionalFlags
-     * @return self
      */
     public function withAdditionalFlags(array $additionalFlags): self
     {
@@ -139,9 +121,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdditionalFlags(): self
     {
         $clone = clone $this;
@@ -150,10 +129,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @param string $maxMemory
-     * @return self
-     */
     public function withMaxMemory(string $maxMemory): self
     {
         $validator = new Validator();
@@ -168,9 +143,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMaxMemory(): self
     {
         $clone = clone $this;
@@ -179,10 +151,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @param string $maxMemoryPolicy
-     * @return self
-     */
     public function withMaxMemoryPolicy(string $maxMemoryPolicy): self
     {
         $validator = new Validator();
@@ -197,9 +165,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMaxMemoryPolicy(): self
     {
         $clone = clone $this;
@@ -208,10 +173,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @param bool $persistent
-     * @return self
-     */
     public function withPersistent(bool $persistent): self
     {
         $validator = new Validator();
@@ -226,9 +187,6 @@ class RedisDatabaseConfiguration
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutPersistent(): self
     {
         $clone = clone $this;
@@ -311,7 +269,7 @@ class RedisDatabaseConfiguration
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

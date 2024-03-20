@@ -13,8 +13,6 @@ class DnsCreateDnsZoneCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -37,33 +35,20 @@ class DnsCreateDnsZoneCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var DnsCreateDnsZoneCreatedResponseBody
-     */
     private DnsCreateDnsZoneCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param DnsCreateDnsZoneCreatedResponseBody $body
-     */
     public function __construct(DnsCreateDnsZoneCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return DnsCreateDnsZoneCreatedResponseBody
-     */
     public function getBody(): DnsCreateDnsZoneCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param DnsCreateDnsZoneCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(DnsCreateDnsZoneCreatedResponseBody $body): self
     {
         $clone = clone $this;

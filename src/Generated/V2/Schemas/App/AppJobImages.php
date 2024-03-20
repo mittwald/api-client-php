@@ -21,8 +21,6 @@ class AppJobImages
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -48,32 +46,14 @@ class AppJobImages
         'type' => 'object',
     ];
 
-    /**
-     * @var AppJobImage
-     */
     private AppJobImage $reconfigureImage;
 
-    /**
-     * @var AppJobImage
-     */
     private AppJobImage $setupImage;
 
-    /**
-     * @var AppJobImage
-     */
     private AppJobImage $uninstallImage;
 
-    /**
-     * @var AppJobImage
-     */
     private AppJobImage $upgradeImage;
 
-    /**
-     * @param AppJobImage $reconfigureImage
-     * @param AppJobImage $setupImage
-     * @param AppJobImage $uninstallImage
-     * @param AppJobImage $upgradeImage
-     */
     public function __construct(AppJobImage $reconfigureImage, AppJobImage $setupImage, AppJobImage $uninstallImage, AppJobImage $upgradeImage)
     {
         $this->reconfigureImage = $reconfigureImage;
@@ -82,42 +62,26 @@ class AppJobImages
         $this->upgradeImage = $upgradeImage;
     }
 
-    /**
-     * @return AppJobImage
-     */
     public function getReconfigureImage(): AppJobImage
     {
         return $this->reconfigureImage;
     }
 
-    /**
-     * @return AppJobImage
-     */
     public function getSetupImage(): AppJobImage
     {
         return $this->setupImage;
     }
 
-    /**
-     * @return AppJobImage
-     */
     public function getUninstallImage(): AppJobImage
     {
         return $this->uninstallImage;
     }
 
-    /**
-     * @return AppJobImage
-     */
     public function getUpgradeImage(): AppJobImage
     {
         return $this->upgradeImage;
     }
 
-    /**
-     * @param AppJobImage $reconfigureImage
-     * @return self
-     */
     public function withReconfigureImage(AppJobImage $reconfigureImage): self
     {
         $clone = clone $this;
@@ -126,10 +90,6 @@ class AppJobImages
         return $clone;
     }
 
-    /**
-     * @param AppJobImage $setupImage
-     * @return self
-     */
     public function withSetupImage(AppJobImage $setupImage): self
     {
         $clone = clone $this;
@@ -138,10 +98,6 @@ class AppJobImages
         return $clone;
     }
 
-    /**
-     * @param AppJobImage $uninstallImage
-     * @return self
-     */
     public function withUninstallImage(AppJobImage $uninstallImage): self
     {
         $clone = clone $this;
@@ -150,10 +106,6 @@ class AppJobImages
         return $clone;
     }
 
-    /**
-     * @param AppJobImage $upgradeImage
-     * @return self
-     */
     public function withUpgradeImage(AppJobImage $upgradeImage): self
     {
         $clone = clone $this;
@@ -213,7 +165,7 @@ class AppJobImages
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

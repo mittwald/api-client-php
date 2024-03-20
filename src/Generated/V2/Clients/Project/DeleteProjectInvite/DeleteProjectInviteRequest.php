@@ -13,8 +13,6 @@ class DeleteProjectInviteRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -29,35 +27,22 @@ class DeleteProjectInviteRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectInviteId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectInviteId
-     */
     public function __construct(string $projectInviteId)
     {
         $this->projectInviteId = $projectInviteId;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectInviteId(): string
     {
         return $this->projectInviteId;
     }
 
-    /**
-     * @param string $projectInviteId
-     * @return self
-     */
     public function withProjectInviteId(string $projectInviteId): self
     {
         $validator = new Validator();

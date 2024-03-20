@@ -13,8 +13,6 @@ class CreateApiTokenRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -60,35 +58,22 @@ class CreateApiTokenRequest
         ],
     ];
 
-    /**
-     * @var CreateApiTokenRequestBody
-     */
     private CreateApiTokenRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param CreateApiTokenRequestBody $body
-     */
     public function __construct(CreateApiTokenRequestBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return CreateApiTokenRequestBody
-     */
     public function getBody(): CreateApiTokenRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param CreateApiTokenRequestBody $body
-     * @return self
-     */
     public function withBody(CreateApiTokenRequestBody $body): self
     {
         $clone = clone $this;

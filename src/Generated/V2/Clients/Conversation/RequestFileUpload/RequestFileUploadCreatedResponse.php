@@ -13,8 +13,6 @@ class RequestFileUploadCreatedResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -92,33 +90,20 @@ class RequestFileUploadCreatedResponse implements ResponseContainer
         ],
     ];
 
-    /**
-     * @var RequestFileUploadCreatedResponseBody
-     */
     private RequestFileUploadCreatedResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param RequestFileUploadCreatedResponseBody $body
-     */
     public function __construct(RequestFileUploadCreatedResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return RequestFileUploadCreatedResponseBody
-     */
     public function getBody(): RequestFileUploadCreatedResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param RequestFileUploadCreatedResponseBody $body
-     * @return self
-     */
     public function withBody(RequestFileUploadCreatedResponseBody $body): self
     {
         $clone = clone $this;

@@ -21,8 +21,6 @@ class TargetUrl
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -36,31 +34,18 @@ class TargetUrl
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $url;
 
-    /**
-     * @param string $url
-     */
     public function __construct(string $url)
     {
         $this->url = $url;
     }
 
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * @param string $url
-     * @return self
-     */
     public function withUrl(string $url): self
     {
         $validator = new Validator();
@@ -120,7 +105,7 @@ class TargetUrl
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

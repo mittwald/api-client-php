@@ -21,8 +21,6 @@ class FileType
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -54,14 +52,10 @@ class FileType
      */
     private array $extensions;
 
-    /**
-     * @var string
-     */
     private string $mimeType;
 
     /**
      * @param string[] $extensions
-     * @param string $mimeType
      */
     public function __construct(array $extensions, string $mimeType)
     {
@@ -77,9 +71,6 @@ class FileType
         return $this->extensions;
     }
 
-    /**
-     * @return string
-     */
     public function getMimeType(): string
     {
         return $this->mimeType;
@@ -87,7 +78,6 @@ class FileType
 
     /**
      * @param string[] $extensions
-     * @return self
      */
     public function withExtensions(array $extensions): self
     {
@@ -103,10 +93,6 @@ class FileType
         return $clone;
     }
 
-    /**
-     * @param string $mimeType
-     * @return self
-     */
     public function withMimeType(string $mimeType): self
     {
         $validator = new Validator();
@@ -168,7 +154,7 @@ class FileType
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

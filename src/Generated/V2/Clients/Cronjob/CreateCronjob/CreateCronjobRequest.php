@@ -14,8 +14,6 @@ class CreateCronjobRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -34,50 +32,30 @@ class CreateCronjobRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CronjobRequest
-     */
     private CronjobRequest $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CronjobRequest $body
-     */
     public function __construct(string $projectId, CronjobRequest $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CronjobRequest
-     */
     public function getBody(): CronjobRequest
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -92,10 +70,6 @@ class CreateCronjobRequest
         return $clone;
     }
 
-    /**
-     * @param CronjobRequest $body
-     * @return self
-     */
     public function withBody(CronjobRequest $body): self
     {
         $clone = clone $this;

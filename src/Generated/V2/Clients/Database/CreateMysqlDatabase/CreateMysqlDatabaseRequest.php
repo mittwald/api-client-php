@@ -13,8 +13,6 @@ class CreateMysqlDatabaseRequest
 
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'type' => 'object',
@@ -45,50 +43,30 @@ class CreateMysqlDatabaseRequest
         ],
     ];
 
-    /**
-     * @var string
-     */
     private string $projectId;
 
-    /**
-     * @var CreateMysqlDatabaseRequestBody
-     */
     private CreateMysqlDatabaseRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param string $projectId
-     * @param CreateMysqlDatabaseRequestBody $body
-     */
     public function __construct(string $projectId, CreateMysqlDatabaseRequestBody $body)
     {
         $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    /**
-     * @return string
-     */
     public function getProjectId(): string
     {
         return $this->projectId;
     }
 
-    /**
-     * @return CreateMysqlDatabaseRequestBody
-     */
     public function getBody(): CreateMysqlDatabaseRequestBody
     {
         return $this->body;
     }
 
-    /**
-     * @param string $projectId
-     * @return self
-     */
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -103,10 +81,6 @@ class CreateMysqlDatabaseRequest
         return $clone;
     }
 
-    /**
-     * @param CreateMysqlDatabaseRequestBody $body
-     * @return self
-     */
     public function withBody(CreateMysqlDatabaseRequestBody $body): self
     {
         $clone = clone $this;

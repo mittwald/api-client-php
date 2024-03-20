@@ -11,8 +11,6 @@ class CheckDomainRegistrabilityV2DeprecatedOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -26,31 +24,18 @@ class CheckDomainRegistrabilityV2DeprecatedOKResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $available;
 
-    /**
-     * @param bool $available
-     */
     public function __construct(bool $available)
     {
         $this->available = $available;
     }
 
-    /**
-     * @return bool
-     */
     public function getAvailable(): bool
     {
         return $this->available;
     }
 
-    /**
-     * @param bool $available
-     * @return self
-     */
     public function withAvailable(bool $available): self
     {
         $validator = new Validator();

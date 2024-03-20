@@ -22,8 +22,6 @@ class SystemSoftwareDependency
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'description' => 'A SystemSoftwareDependency is a description of a need for a specific SystemSoftware in a semver versionRange.',
@@ -43,46 +41,26 @@ class SystemSoftwareDependency
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $systemSoftwareId;
 
-    /**
-     * @var string
-     */
     private string $versionRange;
 
-    /**
-     * @param string $systemSoftwareId
-     * @param string $versionRange
-     */
     public function __construct(string $systemSoftwareId, string $versionRange)
     {
         $this->systemSoftwareId = $systemSoftwareId;
         $this->versionRange = $versionRange;
     }
 
-    /**
-     * @return string
-     */
     public function getSystemSoftwareId(): string
     {
         return $this->systemSoftwareId;
     }
 
-    /**
-     * @return string
-     */
     public function getVersionRange(): string
     {
         return $this->versionRange;
     }
 
-    /**
-     * @param string $systemSoftwareId
-     * @return self
-     */
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
@@ -97,10 +75,6 @@ class SystemSoftwareDependency
         return $clone;
     }
 
-    /**
-     * @param string $versionRange
-     * @return self
-     */
     public function withVersionRange(string $versionRange): self
     {
         $validator = new Validator();
@@ -162,7 +136,7 @@ class SystemSoftwareDependency
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -21,8 +21,6 @@ class MailAddressMailboxSpamProtection
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,32 +51,14 @@ class MailAddressMailboxSpamProtection
         'type' => 'object',
     ];
 
-    /**
-     * @var bool
-     */
     private bool $active;
 
-    /**
-     * @var bool
-     */
     private bool $autoDeleteSpam;
 
-    /**
-     * @var MailAddressMailboxSpamProtectionFolder
-     */
     private MailAddressMailboxSpamProtectionFolder $folder;
 
-    /**
-     * @var int
-     */
     private int $relocationMinSpamScore;
 
-    /**
-     * @param bool $active
-     * @param bool $autoDeleteSpam
-     * @param MailAddressMailboxSpamProtectionFolder $folder
-     * @param int $relocationMinSpamScore
-     */
     public function __construct(bool $active, bool $autoDeleteSpam, MailAddressMailboxSpamProtectionFolder $folder, int $relocationMinSpamScore)
     {
         $this->active = $active;
@@ -87,42 +67,26 @@ class MailAddressMailboxSpamProtection
         $this->relocationMinSpamScore = $relocationMinSpamScore;
     }
 
-    /**
-     * @return bool
-     */
     public function getActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @return bool
-     */
     public function getAutoDeleteSpam(): bool
     {
         return $this->autoDeleteSpam;
     }
 
-    /**
-     * @return MailAddressMailboxSpamProtectionFolder
-     */
     public function getFolder(): MailAddressMailboxSpamProtectionFolder
     {
         return $this->folder;
     }
 
-    /**
-     * @return int
-     */
     public function getRelocationMinSpamScore(): int
     {
         return $this->relocationMinSpamScore;
     }
 
-    /**
-     * @param bool $active
-     * @return self
-     */
     public function withActive(bool $active): self
     {
         $validator = new Validator();
@@ -137,10 +101,6 @@ class MailAddressMailboxSpamProtection
         return $clone;
     }
 
-    /**
-     * @param bool $autoDeleteSpam
-     * @return self
-     */
     public function withAutoDeleteSpam(bool $autoDeleteSpam): self
     {
         $validator = new Validator();
@@ -155,10 +115,6 @@ class MailAddressMailboxSpamProtection
         return $clone;
     }
 
-    /**
-     * @param MailAddressMailboxSpamProtectionFolder $folder
-     * @return self
-     */
     public function withFolder(MailAddressMailboxSpamProtectionFolder $folder): self
     {
         $clone = clone $this;
@@ -167,10 +123,6 @@ class MailAddressMailboxSpamProtection
         return $clone;
     }
 
-    /**
-     * @param int $relocationMinSpamScore
-     * @return self
-     */
     public function withRelocationMinSpamScore(int $relocationMinSpamScore): self
     {
         $validator = new Validator();
@@ -236,7 +188,7 @@ class MailAddressMailboxSpamProtection
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

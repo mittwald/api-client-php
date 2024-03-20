@@ -11,8 +11,6 @@ class CreateDeliveryboxRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -30,46 +28,26 @@ class CreateDeliveryboxRequestBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $description;
 
-    /**
-     * @var string
-     */
     private string $password;
 
-    /**
-     * @param string $description
-     * @param string $password
-     */
     public function __construct(string $description, string $password)
     {
         $this->description = $description;
         $this->password = $password;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -84,10 +62,6 @@ class CreateDeliveryboxRequestBody
         return $clone;
     }
 
-    /**
-     * @param string $password
-     * @return self
-     */
     public function withPassword(string $password): self
     {
         $validator = new Validator();

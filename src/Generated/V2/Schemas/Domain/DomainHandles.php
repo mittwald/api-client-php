@@ -21,8 +21,6 @@ class DomainHandles
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -39,44 +37,25 @@ class DomainHandles
         'type' => 'object',
     ];
 
-    /**
-     * @var HandleReadable|null
-     */
     private ?HandleReadable $adminC = null;
 
-    /**
-     * @var HandleReadable
-     */
     private HandleReadable $ownerC;
 
-    /**
-     * @param HandleReadable $ownerC
-     */
     public function __construct(HandleReadable $ownerC)
     {
         $this->ownerC = $ownerC;
     }
 
-    /**
-     * @return HandleReadable|null
-     */
     public function getAdminC(): ?HandleReadable
     {
         return $this->adminC ?? null;
     }
 
-    /**
-     * @return HandleReadable
-     */
     public function getOwnerC(): HandleReadable
     {
         return $this->ownerC;
     }
 
-    /**
-     * @param HandleReadable $adminC
-     * @return self
-     */
     public function withAdminC(HandleReadable $adminC): self
     {
         $clone = clone $this;
@@ -85,9 +64,6 @@ class DomainHandles
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdminC(): self
     {
         $clone = clone $this;
@@ -96,10 +72,6 @@ class DomainHandles
         return $clone;
     }
 
-    /**
-     * @param HandleReadable $ownerC
-     * @return self
-     */
     public function withOwnerC(HandleReadable $ownerC): self
     {
         $clone = clone $this;
@@ -160,7 +132,7 @@ class DomainHandles
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

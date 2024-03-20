@@ -21,8 +21,6 @@ class Ownership
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -40,46 +38,28 @@ class Ownership
         'type' => 'object',
     ];
 
-    /**
-     * @var string|null
-     */
     private ?string $txtRecord = null;
 
     /**
      * Whether the domain ownership is verified or not.
-     *
-     * @var bool
      */
     private bool $verified;
 
-    /**
-     * @param bool $verified
-     */
     public function __construct(bool $verified)
     {
         $this->verified = $verified;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTxtRecord(): ?string
     {
         return $this->txtRecord ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getVerified(): bool
     {
         return $this->verified;
     }
 
-    /**
-     * @param string $txtRecord
-     * @return self
-     */
     public function withTxtRecord(string $txtRecord): self
     {
         $validator = new Validator();
@@ -94,9 +74,6 @@ class Ownership
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutTxtRecord(): self
     {
         $clone = clone $this;
@@ -105,10 +82,6 @@ class Ownership
         return $clone;
     }
 
-    /**
-     * @param bool $verified
-     * @return self
-     */
     public function withVerified(bool $verified): self
     {
         $validator = new Validator();
@@ -175,7 +148,7 @@ class Ownership
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

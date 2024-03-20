@@ -11,8 +11,6 @@ class RequestFileUploadCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -82,26 +80,12 @@ class RequestFileUploadCreatedResponseBody
         'type' => 'object',
     ];
 
-    /**
-     * @var string
-     */
     private string $conversationId;
 
-    /**
-     * @var RequestFileUploadCreatedResponseBodyRules
-     */
     private RequestFileUploadCreatedResponseBodyRules $rules;
 
-    /**
-     * @var string
-     */
     private string $uploadToken;
 
-    /**
-     * @param string $conversationId
-     * @param RequestFileUploadCreatedResponseBodyRules $rules
-     * @param string $uploadToken
-     */
     public function __construct(string $conversationId, RequestFileUploadCreatedResponseBodyRules $rules, string $uploadToken)
     {
         $this->conversationId = $conversationId;
@@ -109,34 +93,21 @@ class RequestFileUploadCreatedResponseBody
         $this->uploadToken = $uploadToken;
     }
 
-    /**
-     * @return string
-     */
     public function getConversationId(): string
     {
         return $this->conversationId;
     }
 
-    /**
-     * @return RequestFileUploadCreatedResponseBodyRules
-     */
     public function getRules(): RequestFileUploadCreatedResponseBodyRules
     {
         return $this->rules;
     }
 
-    /**
-     * @return string
-     */
     public function getUploadToken(): string
     {
         return $this->uploadToken;
     }
 
-    /**
-     * @param string $conversationId
-     * @return self
-     */
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
@@ -151,10 +122,6 @@ class RequestFileUploadCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param RequestFileUploadCreatedResponseBodyRules $rules
-     * @return self
-     */
     public function withRules(RequestFileUploadCreatedResponseBodyRules $rules): self
     {
         $clone = clone $this;
@@ -163,10 +130,6 @@ class RequestFileUploadCreatedResponseBody
         return $clone;
     }
 
-    /**
-     * @param string $uploadToken
-     * @return self
-     */
     public function withUploadToken(string $uploadToken): self
     {
         $validator = new Validator();

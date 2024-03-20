@@ -21,8 +21,6 @@ class ArticleTemplate
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -105,24 +103,12 @@ class ArticleTemplate
      */
     private ?array $attributes = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $description = null;
 
-    /**
-     * @var string|null
-     */
     private ?string $id = null;
 
-    /**
-     * @var bool
-     */
     private bool $isManagedByDomain;
 
-    /**
-     * @var bool
-     */
     private bool $isRecurring;
 
     /**
@@ -130,22 +116,10 @@ class ArticleTemplate
      */
     private ?array $modifierArticles = null;
 
-    /**
-     * @var string
-     */
     private string $name;
 
-    /**
-     * @var ArticleTemplateType
-     */
     private ArticleTemplateType $type;
 
-    /**
-     * @param bool $isManagedByDomain
-     * @param bool $isRecurring
-     * @param string $name
-     * @param ArticleTemplateType $type
-     */
     public function __construct(bool $isManagedByDomain, bool $isRecurring, string $name, ArticleTemplateType $type)
     {
         $this->isManagedByDomain = $isManagedByDomain;
@@ -180,33 +154,21 @@ class ArticleTemplate
         return $this->attributes ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description ?? null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id ?? null;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsManagedByDomain(): bool
     {
         return $this->isManagedByDomain;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsRecurring(): bool
     {
         return $this->isRecurring;
@@ -221,17 +183,11 @@ class ArticleTemplate
         return $this->modifierArticles ?? null;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return ArticleTemplateType
-     */
     public function getType(): ArticleTemplateType
     {
         return $this->type;
@@ -239,7 +195,6 @@ class ArticleTemplate
 
     /**
      * @param ReadableBookableArticleOptions[] $additionalArticles
-     * @return self
      */
     public function withAdditionalArticles(array $additionalArticles): self
     {
@@ -249,9 +204,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAdditionalArticles(): self
     {
         $clone = clone $this;
@@ -262,7 +214,6 @@ class ArticleTemplate
 
     /**
      * @param ArticleAddons[] $addons
-     * @return self
      */
     public function withAddons(array $addons): self
     {
@@ -272,9 +223,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAddons(): self
     {
         $clone = clone $this;
@@ -285,7 +233,6 @@ class ArticleTemplate
 
     /**
      * @param ArticleAttributes[] $attributes
-     * @return self
      */
     public function withAttributes(array $attributes): self
     {
@@ -295,9 +242,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutAttributes(): self
     {
         $clone = clone $this;
@@ -306,10 +250,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $validator = new Validator();
@@ -324,9 +264,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutDescription(): self
     {
         $clone = clone $this;
@@ -335,10 +272,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @param string $id
-     * @return self
-     */
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -353,9 +286,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutId(): self
     {
         $clone = clone $this;
@@ -364,10 +294,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @param bool $isManagedByDomain
-     * @return self
-     */
     public function withIsManagedByDomain(bool $isManagedByDomain): self
     {
         $validator = new Validator();
@@ -382,10 +308,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @param bool $isRecurring
-     * @return self
-     */
     public function withIsRecurring(bool $isRecurring): self
     {
         $validator = new Validator();
@@ -402,7 +324,6 @@ class ArticleTemplate
 
     /**
      * @param ReadableModifierArticleOptions[] $modifierArticles
-     * @return self
      */
     public function withModifierArticles(array $modifierArticles): self
     {
@@ -412,9 +333,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutModifierArticles(): self
     {
         $clone = clone $this;
@@ -423,10 +341,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @param string $name
-     * @return self
-     */
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -441,10 +355,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    /**
-     * @param ArticleTemplateType $type
-     * @return self
-     */
     public function withType(ArticleTemplateType $type): self
     {
         $clone = clone $this;
@@ -551,7 +461,7 @@ class ArticleTemplate
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -11,8 +11,6 @@ class ProjectsettingUpdateWhitelistDeprecatedRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -53,7 +51,6 @@ class ProjectsettingUpdateWhitelistDeprecatedRequestBody
 
     /**
      * @param string[] $whitelist
-     * @return self
      */
     public function withWhitelist(array $whitelist): self
     {

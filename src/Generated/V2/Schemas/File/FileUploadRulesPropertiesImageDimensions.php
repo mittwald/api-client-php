@@ -21,8 +21,6 @@ class FileUploadRulesPropertiesImageDimensions
 {
     /**
      * Schema used to validate input for creating instances of this class
-     *
-     * @var array
      */
     private static array $schema = [
         'properties' => [
@@ -52,14 +50,8 @@ class FileUploadRulesPropertiesImageDimensions
         'type' => 'object',
     ];
 
-    /**
-     * @var FileUploadRulesPropertiesImageDimensionsMax|null
-     */
     private ?FileUploadRulesPropertiesImageDimensionsMax $max = null;
 
-    /**
-     * @var FileUploadRulesPropertiesImageDimensionsMin|null
-     */
     private ?FileUploadRulesPropertiesImageDimensionsMin $min = null;
 
     /**
@@ -69,26 +61,16 @@ class FileUploadRulesPropertiesImageDimensions
     {
     }
 
-    /**
-     * @return FileUploadRulesPropertiesImageDimensionsMax|null
-     */
     public function getMax(): ?FileUploadRulesPropertiesImageDimensionsMax
     {
         return $this->max ?? null;
     }
 
-    /**
-     * @return FileUploadRulesPropertiesImageDimensionsMin|null
-     */
     public function getMin(): ?FileUploadRulesPropertiesImageDimensionsMin
     {
         return $this->min ?? null;
     }
 
-    /**
-     * @param FileUploadRulesPropertiesImageDimensionsMax $max
-     * @return self
-     */
     public function withMax(FileUploadRulesPropertiesImageDimensionsMax $max): self
     {
         $clone = clone $this;
@@ -97,9 +79,6 @@ class FileUploadRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMax(): self
     {
         $clone = clone $this;
@@ -108,10 +87,6 @@ class FileUploadRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @param FileUploadRulesPropertiesImageDimensionsMin $min
-     * @return self
-     */
     public function withMin(FileUploadRulesPropertiesImageDimensionsMin $min): self
     {
         $clone = clone $this;
@@ -120,9 +95,6 @@ class FileUploadRulesPropertiesImageDimensions
         return $clone;
     }
 
-    /**
-     * @return self
-     */
     public function withoutMin(): self
     {
         $clone = clone $this;
@@ -189,7 +161,7 @@ class FileUploadRulesPropertiesImageDimensions
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
