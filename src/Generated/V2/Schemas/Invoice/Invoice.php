@@ -556,7 +556,7 @@ class Invoice
             static::validateInput($input);
         }
 
-        $amountPaid = str_contains($input->{'amountPaid'}, '.') ? (float)($input->{'amountPaid'}) : (int)($input->{'amountPaid'});
+        $amountPaid = str_contains((string)($input->{'amountPaid'}), '.') ? (float)($input->{'amountPaid'}) : (int)($input->{'amountPaid'});
         $cancellation = null;
         if (isset($input->{'cancellation'})) {
             $cancellation = Cancellation::buildFromInput($input->{'cancellation'}, validate: $validate);
@@ -583,8 +583,8 @@ class Invoice
         $pdfId = $input->{'pdfId'};
         $recipient = Recipient::buildFromInput($input->{'recipient'}, validate: $validate);
         $status = InvoiceStatus::from($input->{'status'});
-        $totalGross = str_contains($input->{'totalGross'}, '.') ? (float)($input->{'totalGross'}) : (int)($input->{'totalGross'});
-        $totalNet = str_contains($input->{'totalNet'}, '.') ? (float)($input->{'totalNet'}) : (int)($input->{'totalNet'});
+        $totalGross = str_contains((string)($input->{'totalGross'}), '.') ? (float)($input->{'totalGross'}) : (int)($input->{'totalGross'});
+        $totalNet = str_contains((string)($input->{'totalNet'}), '.') ? (float)($input->{'totalNet'}) : (int)($input->{'totalNet'});
         $vatId = null;
         if (isset($input->{'vatId'})) {
             $vatId = $input->{'vatId'};
@@ -648,7 +648,7 @@ class Invoice
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

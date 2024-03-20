@@ -58,9 +58,6 @@ class Domain
                 ],
                 'type' => 'object',
             ],
-            'hasAuthCode' => [
-                'type' => 'boolean',
-            ],
             'nameservers' => [
                 'items' => [
                     'format' => 'hostname',
@@ -115,8 +112,6 @@ class Domain
 
     private DomainHandles $handles;
 
-    private bool $hasAuthCode;
-
     /**
      * @var string[]
      */
@@ -136,14 +131,13 @@ class Domain
     /**
      * @param string[] $nameservers
      */
-    public function __construct(bool $connected, bool $deleted, string $domain, string $domainId, DomainHandles $handles, bool $hasAuthCode, array $nameservers, string $projectId, bool $usesDefaultNameserver)
+    public function __construct(bool $connected, bool $deleted, string $domain, string $domainId, DomainHandles $handles, array $nameservers, string $projectId, bool $usesDefaultNameserver)
     {
         $this->connected = $connected;
         $this->deleted = $deleted;
         $this->domain = $domain;
         $this->domainId = $domainId;
         $this->handles = $handles;
-        $this->hasAuthCode = $hasAuthCode;
         $this->nameservers = $nameservers;
         $this->projectId = $projectId;
         $this->usesDefaultNameserver = $usesDefaultNameserver;
@@ -182,11 +176,6 @@ class Domain
     public function getHandles(): DomainHandles
     {
         return $this->handles;
-    }
-
-    public function getHasAuthCode(): bool
-    {
-        return $this->hasAuthCode;
     }
 
     /**
@@ -316,20 +305,6 @@ class Domain
         return $clone;
     }
 
-    public function withHasAuthCode(bool $hasAuthCode): self
-    {
-        $validator = new Validator();
-        $validator->validate($hasAuthCode, static::$schema['properties']['hasAuthCode']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->hasAuthCode = $hasAuthCode;
-
-        return $clone;
-    }
-
     /**
      * @param string[] $nameservers
      */
@@ -444,7 +419,6 @@ class Domain
         $domain = $input->{'domain'};
         $domainId = $input->{'domainId'};
         $handles = DomainHandles::buildFromInput($input->{'handles'}, validate: $validate);
-        $hasAuthCode = (bool)($input->{'hasAuthCode'});
         $nameservers = $input->{'nameservers'};
         $processes = null;
         if (isset($input->{'processes'})) {
@@ -457,7 +431,7 @@ class Domain
         }
         $usesDefaultNameserver = (bool)($input->{'usesDefaultNameserver'});
 
-        $obj = new self($connected, $deleted, $domain, $domainId, $handles, $hasAuthCode, $nameservers, $projectId, $usesDefaultNameserver);
+        $obj = new self($connected, $deleted, $domain, $domainId, $handles, $nameservers, $projectId, $usesDefaultNameserver);
         $obj->authCode = $authCode;
         $obj->authCode2 = $authCode2;
         $obj->processes = $processes;
@@ -484,7 +458,6 @@ class Domain
         $output['domain'] = $this->domain;
         $output['domainId'] = $this->domainId;
         $output['handles'] = ($this->handles)->toJson();
-        $output['hasAuthCode'] = $this->hasAuthCode;
         $output['nameservers'] = $this->nameservers;
         if (isset($this->processes)) {
             $output['processes'] = array_map(fn (Process $i): array => $i->toJson(), $this->processes);
@@ -508,7 +481,7 @@ class Domain
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

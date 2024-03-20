@@ -104,7 +104,7 @@ class MailAddressMailboxStorageInBytesCurrent
         }
 
         $updatedAt = new DateTime($input->{'updatedAt'});
-        $value = str_contains($input->{'value'}, '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
+        $value = str_contains((string)($input->{'value'}), '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
 
         $obj = new self($updatedAt, $value);
 
@@ -135,7 +135,7 @@ class MailAddressMailboxStorageInBytesCurrent
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

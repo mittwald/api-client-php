@@ -423,7 +423,7 @@ class Data
         $miscStats = Statistics::buildFromInput($input->{'miscStats'}, validate: $validate);
         $networkingOps = array_map(fn (array|object $i): DataNetworkingOpsItem => DataNetworkingOpsItem::buildFromInput($i, validate: $validate), $input->{'networkingOps'});
         $networkingStats = Statistics::buildFromInput($input->{'networkingStats'}, validate: $validate);
-        $slowdownFactor = str_contains($input->{'slowdownFactor'}, '.') ? (float)($input->{'slowdownFactor'}) : (int)($input->{'slowdownFactor'});
+        $slowdownFactor = str_contains((string)($input->{'slowdownFactor'}), '.') ? (float)($input->{'slowdownFactor'}) : (int)($input->{'slowdownFactor'});
         $ttfbMs = (int)($input->{'ttfbMs'});
 
         $obj = new self($actualUrl, $dbQueries, $dbStats, $fileOps, $fileOpsStats, $miscStats, $networkingOps, $networkingStats, $slowdownFactor, $ttfbMs);
@@ -463,7 +463,7 @@ class Data
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

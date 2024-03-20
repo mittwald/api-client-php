@@ -22,10 +22,6 @@ class GetFileRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'fileName' => [
-                'example' => 'me.jpeg',
-                'type' => 'string',
-            ],
         ],
         'required' => [
             'fileId',
@@ -33,8 +29,6 @@ class GetFileRequest
     ];
 
     private string $fileId;
-
-    private ?string $fileName = null;
 
     private array $headers = [
 
@@ -50,11 +44,6 @@ class GetFileRequest
         return $this->fileId;
     }
 
-    public function getFileName(): ?string
-    {
-        return $this->fileName ?? null;
-    }
-
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();
@@ -65,28 +54,6 @@ class GetFileRequest
 
         $clone = clone $this;
         $clone->fileId = $fileId;
-
-        return $clone;
-    }
-
-    public function withFileName(string $fileName): self
-    {
-        $validator = new Validator();
-        $validator->validate($fileName, static::$schema['properties']['fileName']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->fileName = $fileName;
-
-        return $clone;
-    }
-
-    public function withoutFileName(): self
-    {
-        $clone = clone $this;
-        unset($clone->fileName);
 
         return $clone;
     }
@@ -107,13 +74,9 @@ class GetFileRequest
         }
 
         $fileId = $input->{'fileId'};
-        $fileName = null;
-        if (isset($input->{'fileName'})) {
-            $fileName = $input->{'fileName'};
-        }
 
         $obj = new self($fileId);
-        $obj->fileName = $fileName;
+
         return $obj;
     }
 
@@ -126,9 +89,6 @@ class GetFileRequest
     {
         $output = [];
         $output['fileId'] = $this->fileId;
-        if (isset($this->fileName)) {
-            $output['fileName'] = $this->fileName;
-        }
 
         return $output;
     }
@@ -174,8 +134,7 @@ class GetFileRequest
     {
         $mapped = $this->toJson();
         $fileId = urlencode($mapped['fileId']);
-        $fileName = urlencode($mapped['fileName']);
-        return '/v2/files/' . $fileId . '/' . $fileName;
+        return '/v2/files/' . $fileId;
     }
 
     /**

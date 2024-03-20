@@ -71,7 +71,7 @@ class UpdateMailAddressQuotaRequestBody
             static::validateInput($input);
         }
 
-        $quotaInBytes = str_contains($input->{'quotaInBytes'}, '.') ? (float)($input->{'quotaInBytes'}) : (int)($input->{'quotaInBytes'});
+        $quotaInBytes = str_contains((string)($input->{'quotaInBytes'}), '.') ? (float)($input->{'quotaInBytes'}) : (int)($input->{'quotaInBytes'});
 
         $obj = new self($quotaInBytes);
 

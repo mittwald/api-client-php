@@ -97,6 +97,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContracts
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeCreatedResponse;
@@ -598,6 +599,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateOrderBadRequestResponse::fromResponse($httpResponse),
+            403 => OrderCreateOrderForbiddenResponse::fromResponse($httpResponse),
             default => OrderCreateOrderDefaultResponse::fromResponse($httpResponse),
         });
     }

@@ -148,9 +148,9 @@ class OrderSummary
             static::validateInput($input);
         }
 
-        $nonRecurring = str_contains($input->{'nonRecurring'}, '.') ? (float)($input->{'nonRecurring'}) : (int)($input->{'nonRecurring'});
-        $recurring = str_contains($input->{'recurring'}, '.') ? (float)($input->{'recurring'}) : (int)($input->{'recurring'});
-        $summary = str_contains($input->{'summary'}, '.') ? (float)($input->{'summary'}) : (int)($input->{'summary'});
+        $nonRecurring = str_contains((string)($input->{'nonRecurring'}), '.') ? (float)($input->{'nonRecurring'}) : (int)($input->{'nonRecurring'});
+        $recurring = str_contains((string)($input->{'recurring'}), '.') ? (float)($input->{'recurring'}) : (int)($input->{'recurring'});
+        $summary = str_contains((string)($input->{'summary'}), '.') ? (float)($input->{'summary'}) : (int)($input->{'summary'});
 
         $obj = new self($nonRecurring, $recurring, $summary);
 
@@ -182,7 +182,7 @@ class OrderSummary
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

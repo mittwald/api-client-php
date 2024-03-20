@@ -174,13 +174,13 @@ class AppInstallationStatus
 
         $lastExitCode = null;
         if (isset($input->{'lastExitCode'})) {
-            $lastExitCode = str_contains($input->{'lastExitCode'}, '.') ? (float)($input->{'lastExitCode'}) : (int)($input->{'lastExitCode'});
+            $lastExitCode = str_contains((string)($input->{'lastExitCode'}), '.') ? (float)($input->{'lastExitCode'}) : (int)($input->{'lastExitCode'});
         }
         $logFileLocation = $input->{'logFileLocation'};
         $state = AppInstallationStatusState::from($input->{'state'});
         $uptimeSeconds = null;
         if (isset($input->{'uptimeSeconds'})) {
-            $uptimeSeconds = str_contains($input->{'uptimeSeconds'}, '.') ? (float)($input->{'uptimeSeconds'}) : (int)($input->{'uptimeSeconds'});
+            $uptimeSeconds = str_contains((string)($input->{'uptimeSeconds'}), '.') ? (float)($input->{'uptimeSeconds'}) : (int)($input->{'uptimeSeconds'});
         }
 
         $obj = new self($logFileLocation, $state);
@@ -219,7 +219,7 @@ class AppInstallationStatus
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -136,7 +136,7 @@ class CreateMailAddressMailbox
 
         $enableSpamProtection = (bool)($input->{'enableSpamProtection'});
         $password = $input->{'password'};
-        $quotaInBytes = str_contains($input->{'quotaInBytes'}, '.') ? (float)($input->{'quotaInBytes'}) : (int)($input->{'quotaInBytes'});
+        $quotaInBytes = str_contains((string)($input->{'quotaInBytes'}), '.') ? (float)($input->{'quotaInBytes'}) : (int)($input->{'quotaInBytes'});
 
         $obj = new self($enableSpamProtection, $password, $quotaInBytes);
 
@@ -168,7 +168,7 @@ class CreateMailAddressMailbox
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

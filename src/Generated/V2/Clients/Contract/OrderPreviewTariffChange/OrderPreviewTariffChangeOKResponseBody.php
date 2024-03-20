@@ -133,9 +133,9 @@ class OrderPreviewTariffChangeOKResponseBody
             static::validateInput($input);
         }
 
-        $machineTypePrice = str_contains($input->{'machineTypePrice'}, '.') ? (float)($input->{'machineTypePrice'}) : (int)($input->{'machineTypePrice'});
-        $storagePrice = str_contains($input->{'storagePrice'}, '.') ? (float)($input->{'storagePrice'}) : (int)($input->{'storagePrice'});
-        $totalPrice = str_contains($input->{'totalPrice'}, '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
+        $machineTypePrice = str_contains((string)($input->{'machineTypePrice'}), '.') ? (float)($input->{'machineTypePrice'}) : (int)($input->{'machineTypePrice'});
+        $storagePrice = str_contains((string)($input->{'storagePrice'}), '.') ? (float)($input->{'storagePrice'}) : (int)($input->{'storagePrice'});
+        $totalPrice = str_contains((string)($input->{'totalPrice'}), '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
 
         $obj = new self($machineTypePrice, $storagePrice, $totalPrice);
 

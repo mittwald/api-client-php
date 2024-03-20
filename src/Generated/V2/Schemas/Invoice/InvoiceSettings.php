@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Invoice;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -30,6 +31,10 @@ class InvoiceSettings
                     'type' => 'string',
                 ],
                 'type' => 'array',
+            ],
+            'debitPaymentStopUntil' => [
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'id' => [
                 'example' => '5f9b9b9b-9b9b-9b9b-9b9b-9b9b9b9b9b9b',
@@ -76,6 +81,8 @@ class InvoiceSettings
      */
     private ?array $additionalEmailRecipients = null;
 
+    private ?DateTime $debitPaymentStopUntil = null;
+
     private string $id;
 
     private ?int $invoicePeriod = null;
@@ -108,6 +115,11 @@ class InvoiceSettings
     public function getAdditionalEmailRecipients(): ?array
     {
         return $this->additionalEmailRecipients ?? null;
+    }
+
+    public function getDebitPaymentStopUntil(): ?DateTime
+    {
+        return $this->debitPaymentStopUntil ?? null;
     }
 
     public function getId(): string
@@ -184,6 +196,22 @@ class InvoiceSettings
     {
         $clone = clone $this;
         unset($clone->additionalEmailRecipients);
+
+        return $clone;
+    }
+
+    public function withDebitPaymentStopUntil(DateTime $debitPaymentStopUntil): self
+    {
+        $clone = clone $this;
+        $clone->debitPaymentStopUntil = $debitPaymentStopUntil;
+
+        return $clone;
+    }
+
+    public function withoutDebitPaymentStopUntil(): self
+    {
+        $clone = clone $this;
+        unset($clone->debitPaymentStopUntil);
 
         return $clone;
     }
@@ -379,6 +407,10 @@ class InvoiceSettings
         if (isset($input->{'additionalEmailRecipients'})) {
             $additionalEmailRecipients = $input->{'additionalEmailRecipients'};
         }
+        $debitPaymentStopUntil = null;
+        if (isset($input->{'debitPaymentStopUntil'})) {
+            $debitPaymentStopUntil = new DateTime($input->{'debitPaymentStopUntil'});
+        }
         $id = $input->{'id'};
         $invoicePeriod = null;
         if (isset($input->{'invoicePeriod'})) {
@@ -419,6 +451,7 @@ class InvoiceSettings
 
         $obj = new self($id);
         $obj->additionalEmailRecipients = $additionalEmailRecipients;
+        $obj->debitPaymentStopUntil = $debitPaymentStopUntil;
         $obj->invoicePeriod = $invoicePeriod;
         $obj->lastBankingInformation = $lastBankingInformation;
         $obj->paymentSettings = $paymentSettings;
@@ -440,6 +473,9 @@ class InvoiceSettings
         $output = [];
         if (isset($this->additionalEmailRecipients)) {
             $output['additionalEmailRecipients'] = $this->additionalEmailRecipients;
+        }
+        if (isset($this->debitPaymentStopUntil)) {
+            $output['debitPaymentStopUntil'] = ($this->debitPaymentStopUntil)->format(DateTime::ATOM);
         }
         $output['id'] = $this->id;
         if (isset($this->invoicePeriod)) {
@@ -483,7 +519,7 @@ class InvoiceSettings
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
@@ -499,5 +535,8 @@ class InvoiceSettings
 
     public function __clone()
     {
+        if (isset($this->debitPaymentStopUntil)) {
+            $this->debitPaymentStopUntil = clone $this->debitPaymentStopUntil;
+        }
     }
 }

@@ -56,6 +56,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileU
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameUnprocessableEntityResponse;
 
 /**
  * Client for File API
@@ -252,6 +260,33 @@ class FileClientImpl implements FileClient
             404 => GetFileUploadTypeRulesNotFoundResponse::fromResponse($httpResponse),
             500 => GetFileUploadTypeRulesInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetFileUploadTypeRulesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a File.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-with-name
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFileWithName\GetFileWithNameRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getFileWithName(GetFileWithNameRequest $request): StringResponse
+    {
+        $httpRequest = new Request(GetFileWithNameRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return StringResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetFileWithNameBadRequestResponse::fromResponse($httpResponse),
+            401 => GetFileWithNameUnauthorizedResponse::fromResponse($httpResponse),
+            403 => GetFileWithNameForbiddenResponse::fromResponse($httpResponse),
+            404 => GetFileWithNameNotFoundResponse::fromResponse($httpResponse),
+            422 => GetFileWithNameUnprocessableEntityResponse::fromResponse($httpResponse),
+            500 => GetFileWithNameInternalServerErrorResponse::fromResponse($httpResponse),
+            default => GetFileWithNameDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

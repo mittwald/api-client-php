@@ -21,6 +21,11 @@ class DeleteCustomerOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
+                'properties' => [
+                    'customerId' => [
+                        'type' => 'string',
+                    ],
+                ],
                 'type' => 'object',
             ],
         ],

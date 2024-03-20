@@ -468,7 +468,7 @@ class Cronjob
             $projectId = $input->{'projectId'};
         }
         $shortId = $input->{'shortId'};
-        $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+        $timeout = str_contains((string)($input->{'timeout'}), '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
         $obj = new self($active, $appId, $createdAt, $description, $destination, $id, $interval, $shortId, $timeout, $updatedAt);
@@ -525,7 +525,7 @@ class Cronjob
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

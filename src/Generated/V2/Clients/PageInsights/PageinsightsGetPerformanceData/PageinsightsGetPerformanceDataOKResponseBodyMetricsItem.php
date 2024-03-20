@@ -161,9 +161,9 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         $name = $input->{'name'};
         $score = null;
         if (isset($input->{'score'})) {
-            $score = str_contains($input->{'score'}, '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
+            $score = str_contains((string)($input->{'score'}), '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
         }
-        $value = str_contains($input->{'value'}, '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
+        $value = str_contains((string)($input->{'value'}), '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
 
         $obj = new self($createdAt, $name, $value);
         $obj->score = $score;

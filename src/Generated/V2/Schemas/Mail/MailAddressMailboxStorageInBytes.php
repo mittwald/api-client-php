@@ -115,7 +115,7 @@ class MailAddressMailboxStorageInBytes
         }
 
         $current = MailAddressMailboxStorageInBytesCurrent::buildFromInput($input->{'current'}, validate: $validate);
-        $limit = str_contains($input->{'limit'}, '.') ? (float)($input->{'limit'}) : (int)($input->{'limit'});
+        $limit = str_contains((string)($input->{'limit'}), '.') ? (float)($input->{'limit'}) : (int)($input->{'limit'});
 
         $obj = new self($current, $limit);
 
@@ -146,7 +146,7 @@ class MailAddressMailboxStorageInBytes
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

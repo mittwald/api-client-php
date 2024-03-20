@@ -183,10 +183,10 @@ class Statistics
             static::validateInput($input);
         }
 
-        $kernelMs = str_contains($input->{'kernelMs'}, '.') ? (float)($input->{'kernelMs'}) : (int)($input->{'kernelMs'});
+        $kernelMs = str_contains((string)($input->{'kernelMs'}), '.') ? (float)($input->{'kernelMs'}) : (int)($input->{'kernelMs'});
         $occurrences = (int)($input->{'occurrences'});
         $syscallCount = (int)($input->{'syscallCount'});
-        $userspaceMs = str_contains($input->{'userspaceMs'}, '.') ? (float)($input->{'userspaceMs'}) : (int)($input->{'userspaceMs'});
+        $userspaceMs = str_contains((string)($input->{'userspaceMs'}), '.') ? (float)($input->{'userspaceMs'}) : (int)($input->{'userspaceMs'});
 
         $obj = new self($kernelMs, $occurrences, $syscallCount, $userspaceMs);
 
@@ -219,7 +219,7 @@ class Statistics
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

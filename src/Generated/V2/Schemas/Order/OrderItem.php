@@ -387,7 +387,7 @@ class OrderItem
         if (isset($input->{'predefinedDomainAggregateId'})) {
             $predefinedDomainAggregateId = $input->{'predefinedDomainAggregateId'};
         }
-        $price = str_contains($input->{'price'}, '.') ? (float)($input->{'price'}) : (int)($input->{'price'});
+        $price = str_contains((string)($input->{'price'}), '.') ? (float)($input->{'price'}) : (int)($input->{'price'});
         $reference = null;
         if (isset($input->{'reference'})) {
             $reference = Reference::buildFromInput($input->{'reference'}, validate: $validate);
@@ -447,7 +447,7 @@ class OrderItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

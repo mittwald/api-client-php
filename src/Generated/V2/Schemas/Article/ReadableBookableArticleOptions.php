@@ -159,7 +159,7 @@ class ReadableBookableArticleOptions
         }
         $maxArticleCount = null;
         if (isset($input->{'maxArticleCount'})) {
-            $maxArticleCount = str_contains($input->{'maxArticleCount'}, '.') ? (float)($input->{'maxArticleCount'}) : (int)($input->{'maxArticleCount'});
+            $maxArticleCount = str_contains((string)($input->{'maxArticleCount'}), '.') ? (float)($input->{'maxArticleCount'}) : (int)($input->{'maxArticleCount'});
         }
 
         $obj = new self($articleId);
@@ -197,7 +197,7 @@ class ReadableBookableArticleOptions
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

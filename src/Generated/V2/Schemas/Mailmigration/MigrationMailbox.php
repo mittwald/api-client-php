@@ -32,10 +32,7 @@ class MigrationMailbox
                 'type' => 'string',
             ],
             'migrationJobs' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrationMailboxJob',
-                ],
-                'type' => 'array',
+                '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrationMailboxJob',
             ],
             'name' => [
                 'type' => 'string',
@@ -54,17 +51,11 @@ class MigrationMailbox
 
     private string $id;
 
-    /**
-     * @var MigrationMailboxJob[]
-     */
-    private array $migrationJobs;
+    private MigrationMailboxJob $migrationJobs;
 
     private string $name;
 
-    /**
-     * @param MigrationMailboxJob[] $migrationJobs
-     */
-    public function __construct(bool $finished, string $id, array $migrationJobs, string $name)
+    public function __construct(bool $finished, string $id, MigrationMailboxJob $migrationJobs, string $name)
     {
         $this->finished = $finished;
         $this->id = $id;
@@ -84,9 +75,9 @@ class MigrationMailbox
 
     /**
      * @return
-     * MigrationMailboxJob[]
+     * MigrationMailboxJob
      */
-    public function getMigrationJobs(): array
+    public function getMigrationJobs(): MigrationMailboxJob
     {
         return $this->migrationJobs;
     }
@@ -124,10 +115,7 @@ class MigrationMailbox
         return $clone;
     }
 
-    /**
-     * @param MigrationMailboxJob[] $migrationJobs
-     */
-    public function withMigrationJobs(array $migrationJobs): self
+    public function withMigrationJobs(MigrationMailboxJob $migrationJobs): self
     {
         $clone = clone $this;
         $clone->migrationJobs = $migrationJobs;
@@ -166,7 +154,7 @@ class MigrationMailbox
 
         $finished = (bool)($input->{'finished'});
         $id = $input->{'id'};
-        $migrationJobs = array_map(fn (array|object $i): MigrationMailboxJob => MigrationMailboxJob::buildFromInput($i, validate: $validate), $input->{'migrationJobs'});
+        $migrationJobs = MigrationMailboxJob::buildFromInput($input->{'migrationJobs'}, validate: $validate);
         $name = $input->{'name'};
 
         $obj = new self($finished, $id, $migrationJobs, $name);
@@ -184,7 +172,7 @@ class MigrationMailbox
         $output = [];
         $output['finished'] = $this->finished;
         $output['id'] = $this->id;
-        $output['migrationJobs'] = array_map(fn (MigrationMailboxJob $i): array => $i->toJson(), $this->migrationJobs);
+        $output['migrationJobs'] = $this->migrationJobs->toJson();
         $output['name'] = $this->name;
 
         return $output;
@@ -200,7 +188,7 @@ class MigrationMailbox
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

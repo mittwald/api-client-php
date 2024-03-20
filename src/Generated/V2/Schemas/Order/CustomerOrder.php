@@ -379,7 +379,7 @@ class CustomerOrder
         if (isset($input->{'dueDate'})) {
             $dueDate = new DateTime($input->{'dueDate'});
         }
-        $invoicingPeriod = str_contains($input->{'invoicingPeriod'}, '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
+        $invoicingPeriod = str_contains((string)($input->{'invoicingPeriod'}), '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
         $items = array_map(fn (array|object $i): OrderItem => OrderItem::buildFromInput($i, validate: $validate), $input->{'items'});
         $orderDate = new DateTime($input->{'orderDate'});
         $orderId = $input->{'orderId'};
@@ -439,7 +439,7 @@ class CustomerOrder
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

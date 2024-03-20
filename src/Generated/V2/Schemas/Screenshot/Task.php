@@ -254,7 +254,7 @@ class Task
             $fileReference = $input->{'fileReference'};
         }
         $id = $input->{'id'};
-        $priority = str_contains($input->{'priority'}, '.') ? (float)($input->{'priority'}) : (int)($input->{'priority'});
+        $priority = str_contains((string)($input->{'priority'}), '.') ? (float)($input->{'priority'}) : (int)($input->{'priority'});
         $settings = ScreenshotSettings::buildFromInput($input->{'settings'}, validate: $validate);
         $target = Target::buildFromInput($input->{'target'}, validate: $validate);
         $taskState = null;
@@ -310,7 +310,7 @@ class Task
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

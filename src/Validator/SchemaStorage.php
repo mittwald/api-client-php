@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Validator;
 
-use stdClass;
 use JsonSchema\SchemaStorageInterface;
+use stdClass;
 
 class SchemaStorage implements SchemaStorageInterface
 {

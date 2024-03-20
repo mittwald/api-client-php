@@ -710,11 +710,11 @@ class ContractItem
             $aggregateReference = AggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
         }
         $articles = array_map(fn (array|object $i): Article => Article::buildFromInput($i, validate: $validate), $input->{'articles'});
-        $contractPeriod = str_contains($input->{'contractPeriod'}, '.') ? (float)($input->{'contractPeriod'}) : (int)($input->{'contractPeriod'});
+        $contractPeriod = str_contains((string)($input->{'contractPeriod'}), '.') ? (float)($input->{'contractPeriod'}) : (int)($input->{'contractPeriod'});
         $description = $input->{'description'};
         $freeTrialDays = null;
         if (isset($input->{'freeTrialDays'})) {
-            $freeTrialDays = str_contains($input->{'freeTrialDays'}, '.') ? (float)($input->{'freeTrialDays'}) : (int)($input->{'freeTrialDays'});
+            $freeTrialDays = str_contains((string)($input->{'freeTrialDays'}), '.') ? (float)($input->{'freeTrialDays'}) : (int)($input->{'freeTrialDays'});
         }
         $groupByProjectId = null;
         if (isset($input->{'groupByProjectId'})) {
@@ -722,7 +722,7 @@ class ContractItem
         }
         $invoicingPeriod = null;
         if (isset($input->{'invoicingPeriod'})) {
-            $invoicingPeriod = str_contains($input->{'invoicingPeriod'}, '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
+            $invoicingPeriod = str_contains((string)($input->{'invoicingPeriod'}), '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
         }
         $isActivated = (bool)($input->{'isActivated'});
         $isBaseItem = (bool)($input->{'isBaseItem'});
@@ -856,7 +856,7 @@ class ContractItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

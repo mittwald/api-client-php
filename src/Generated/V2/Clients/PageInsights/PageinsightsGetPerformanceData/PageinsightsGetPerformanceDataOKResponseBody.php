@@ -311,7 +311,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
             $moreDataAvailable = $input->{'moreDataAvailable'};
         }
         $path = $input->{'path'};
-        $performanceScore = str_contains($input->{'performanceScore'}, '.') ? (float)($input->{'performanceScore'}) : (int)($input->{'performanceScore'});
+        $performanceScore = str_contains((string)($input->{'performanceScore'}), '.') ? (float)($input->{'performanceScore'}) : (int)($input->{'performanceScore'});
         $screenshot = null;
         if (isset($input->{'screenshot'})) {
             $screenshot = PageinsightsGetPerformanceDataOKResponseBodyScreenshot::buildFromInput($input->{'screenshot'}, validate: $validate);

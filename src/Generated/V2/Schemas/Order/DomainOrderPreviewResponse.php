@@ -144,9 +144,9 @@ class DomainOrderPreviewResponse
             static::validateInput($input);
         }
 
-        $domainPrice = str_contains($input->{'domainPrice'}, '.') ? (float)($input->{'domainPrice'}) : (int)($input->{'domainPrice'});
-        $feePrice = str_contains($input->{'feePrice'}, '.') ? (float)($input->{'feePrice'}) : (int)($input->{'feePrice'});
-        $totalPrice = str_contains($input->{'totalPrice'}, '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
+        $domainPrice = str_contains((string)($input->{'domainPrice'}), '.') ? (float)($input->{'domainPrice'}) : (int)($input->{'domainPrice'});
+        $feePrice = str_contains((string)($input->{'feePrice'}), '.') ? (float)($input->{'feePrice'}) : (int)($input->{'feePrice'});
+        $totalPrice = str_contains((string)($input->{'totalPrice'}), '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
 
         $obj = new self($domainPrice, $feePrice, $totalPrice);
 
@@ -178,7 +178,7 @@ class DomainOrderPreviewResponse
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

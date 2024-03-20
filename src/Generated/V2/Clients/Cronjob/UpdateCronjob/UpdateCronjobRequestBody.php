@@ -275,7 +275,7 @@ class UpdateCronjobRequestBody
         }
         $timeout = null;
         if (isset($input->{'timeout'})) {
-            $timeout = str_contains($input->{'timeout'}, '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+            $timeout = str_contains((string)($input->{'timeout'}), '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
         }
 
         $obj = new self();

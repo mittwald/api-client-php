@@ -223,7 +223,7 @@ class DeprecatedUserCreateIssueRequestBody
         $type = DeprecatedUserCreateIssueRequestBodyType::from($input->{'type'});
         $vote = null;
         if (isset($input->{'vote'})) {
-            $vote = str_contains($input->{'vote'}, '.') ? (float)($input->{'vote'}) : (int)($input->{'vote'});
+            $vote = str_contains((string)($input->{'vote'}), '.') ? (float)($input->{'vote'}) : (int)($input->{'vote'});
         }
 
         $obj = new self($message, $type);

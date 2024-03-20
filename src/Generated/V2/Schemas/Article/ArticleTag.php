@@ -47,37 +47,31 @@ class ArticleTag
         ],
         'required' => [
             'id',
-            'name',
-            'description',
-            'hexColor',
         ],
         'type' => 'object',
     ];
 
-    private string $description;
+    private ?string $description = null;
 
-    private string $hexColor;
+    private ?string $hexColor = null;
 
     private string $id;
 
-    private string $name;
+    private ?string $name = null;
 
-    public function __construct(string $description, string $hexColor, string $id, string $name)
+    public function __construct(string $id)
     {
-        $this->description = $description;
-        $this->hexColor = $hexColor;
         $this->id = $id;
-        $this->name = $name;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
-    public function getHexColor(): string
+    public function getHexColor(): ?string
     {
-        return $this->hexColor;
+        return $this->hexColor ?? null;
     }
 
     public function getId(): string
@@ -85,9 +79,9 @@ class ArticleTag
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
-        return $this->name;
+        return $this->name ?? null;
     }
 
     public function withDescription(string $description): self
@@ -104,6 +98,14 @@ class ArticleTag
         return $clone;
     }
 
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
     public function withHexColor(string $hexColor): self
     {
         $validator = new Validator();
@@ -114,6 +116,14 @@ class ArticleTag
 
         $clone = clone $this;
         $clone->hexColor = $hexColor;
+
+        return $clone;
+    }
+
+    public function withoutHexColor(): self
+    {
+        $clone = clone $this;
+        unset($clone->hexColor);
 
         return $clone;
     }
@@ -146,6 +156,14 @@ class ArticleTag
         return $clone;
     }
 
+    public function withoutName(): self
+    {
+        $clone = clone $this;
+        unset($clone->name);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -161,13 +179,24 @@ class ArticleTag
             static::validateInput($input);
         }
 
-        $description = $input->{'description'};
-        $hexColor = $input->{'hexColor'};
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
+        $hexColor = null;
+        if (isset($input->{'hexColor'})) {
+            $hexColor = $input->{'hexColor'};
+        }
         $id = $input->{'id'};
-        $name = $input->{'name'};
+        $name = null;
+        if (isset($input->{'name'})) {
+            $name = $input->{'name'};
+        }
 
-        $obj = new self($description, $hexColor, $id, $name);
-
+        $obj = new self($id);
+        $obj->description = $description;
+        $obj->hexColor = $hexColor;
+        $obj->name = $name;
         return $obj;
     }
 
@@ -179,10 +208,16 @@ class ArticleTag
     public function toJson(): array
     {
         $output = [];
-        $output['description'] = $this->description;
-        $output['hexColor'] = $this->hexColor;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
+        if (isset($this->hexColor)) {
+            $output['hexColor'] = $this->hexColor;
+        }
         $output['id'] = $this->id;
-        $output['name'] = $this->name;
+        if (isset($this->name)) {
+            $output['name'] = $this->name;
+        }
 
         return $output;
     }
@@ -197,7 +232,7 @@ class ArticleTag
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

@@ -25,7 +25,7 @@ abstract class BaseClient
             'retry_on_methods'         => ['GET', 'HEAD'],
 
             // Exponential backoff, base 2 starting at 100ms, capped at 4 seconds
-            'default_retry_multiplier' => fn(int $retries): float => min(4, 2 ** ($retries - 1) * .1),
+            'default_retry_multiplier' => fn (int $retries): float => min(4, 2 ** ($retries - 1) * .1),
         ]));
 
         $opts = [

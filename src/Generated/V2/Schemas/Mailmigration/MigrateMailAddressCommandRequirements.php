@@ -31,7 +31,7 @@ class MigrateMailAddressCommandRequirements
             'autoResponder' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.AutoResponder',
             ],
-            'forwardedAddresses' => [
+            'forwardAddresses' => [
                 'items' => [
                     'type' => 'string',
                 ],
@@ -60,7 +60,7 @@ class MigrateMailAddressCommandRequirements
     /**
      * @var string[]|null
      */
-    private ?array $forwardedAddresses = null;
+    private ?array $forwardAddresses = null;
 
     private ?bool $isCatchAll = null;
 
@@ -90,9 +90,9 @@ class MigrateMailAddressCommandRequirements
     /**
      * @return string[]|null
      */
-    public function getForwardedAddresses(): ?array
+    public function getForwardAddresses(): ?array
     {
-        return $this->forwardedAddresses ?? null;
+        return $this->forwardAddresses ?? null;
     }
 
     public function getIsCatchAll(): ?bool
@@ -149,26 +149,26 @@ class MigrateMailAddressCommandRequirements
     }
 
     /**
-     * @param string[] $forwardedAddresses
+     * @param string[] $forwardAddresses
      */
-    public function withForwardedAddresses(array $forwardedAddresses): self
+    public function withForwardAddresses(array $forwardAddresses): self
     {
         $validator = new Validator();
-        $validator->validate($forwardedAddresses, static::$schema['properties']['forwardedAddresses']);
+        $validator->validate($forwardAddresses, static::$schema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->forwardedAddresses = $forwardedAddresses;
+        $clone->forwardAddresses = $forwardAddresses;
 
         return $clone;
     }
 
-    public function withoutForwardedAddresses(): self
+    public function withoutForwardAddresses(): self
     {
         $clone = clone $this;
-        unset($clone->forwardedAddresses);
+        unset($clone->forwardAddresses);
 
         return $clone;
     }
@@ -248,9 +248,9 @@ class MigrateMailAddressCommandRequirements
         if (isset($input->{'autoResponder'})) {
             $autoResponder = AutoResponder::buildFromInput($input->{'autoResponder'}, validate: $validate);
         }
-        $forwardedAddresses = null;
-        if (isset($input->{'forwardedAddresses'})) {
-            $forwardedAddresses = $input->{'forwardedAddresses'};
+        $forwardAddresses = null;
+        if (isset($input->{'forwardAddresses'})) {
+            $forwardAddresses = $input->{'forwardAddresses'};
         }
         $isCatchAll = null;
         if (isset($input->{'isCatchAll'})) {
@@ -265,7 +265,7 @@ class MigrateMailAddressCommandRequirements
         $obj = new self($projectId);
         $obj->address = $address;
         $obj->autoResponder = $autoResponder;
-        $obj->forwardedAddresses = $forwardedAddresses;
+        $obj->forwardAddresses = $forwardAddresses;
         $obj->isCatchAll = $isCatchAll;
         $obj->mailbox = $mailbox;
         return $obj;
@@ -285,8 +285,8 @@ class MigrateMailAddressCommandRequirements
         if (isset($this->autoResponder)) {
             $output['autoResponder'] = $this->autoResponder->toJson();
         }
-        if (isset($this->forwardedAddresses)) {
-            $output['forwardedAddresses'] = $this->forwardedAddresses;
+        if (isset($this->forwardAddresses)) {
+            $output['forwardAddresses'] = $this->forwardAddresses;
         }
         if (isset($this->isCatchAll)) {
             $output['isCatchAll'] = $this->isCatchAll;
@@ -309,7 +309,7 @@ class MigrateMailAddressCommandRequirements
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

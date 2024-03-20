@@ -153,7 +153,7 @@ class UserInputPositionMeta
 
         $index = null;
         if (isset($input->{'index'})) {
-            $index = str_contains($input->{'index'}, '.') ? (float)($input->{'index'}) : (int)($input->{'index'});
+            $index = str_contains((string)($input->{'index'}), '.') ? (float)($input->{'index'}) : (int)($input->{'index'});
         }
         $section = null;
         if (isset($input->{'section'})) {
@@ -202,7 +202,7 @@ class UserInputPositionMeta
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

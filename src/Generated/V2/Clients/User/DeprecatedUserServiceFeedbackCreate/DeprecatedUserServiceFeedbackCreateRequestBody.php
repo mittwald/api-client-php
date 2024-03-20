@@ -167,7 +167,7 @@ class DeprecatedUserServiceFeedbackCreateRequestBody
         }
         $origin = $input->{'origin'};
         $subject = $input->{'subject'};
-        $vote = str_contains($input->{'vote'}, '.') ? (float)($input->{'vote'}) : (int)($input->{'vote'});
+        $vote = str_contains((string)($input->{'vote'}), '.') ? (float)($input->{'vote'}) : (int)($input->{'vote'});
 
         $obj = new self($origin, $subject, $vote);
         $obj->message = $message;

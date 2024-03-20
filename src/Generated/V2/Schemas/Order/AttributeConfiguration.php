@@ -35,19 +35,17 @@ class AttributeConfiguration
         ],
         'required' => [
             'key',
-            'value',
         ],
         'type' => 'object',
     ];
 
     private string $key;
 
-    private string $value;
+    private ?string $value = null;
 
-    public function __construct(string $key, string $value)
+    public function __construct(string $key)
     {
         $this->key = $key;
-        $this->value = $value;
     }
 
     public function getKey(): string
@@ -55,9 +53,9 @@ class AttributeConfiguration
         return $this->key;
     }
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
-        return $this->value;
+        return $this->value ?? null;
     }
 
     public function withKey(string $key): self
@@ -88,6 +86,14 @@ class AttributeConfiguration
         return $clone;
     }
 
+    public function withoutValue(): self
+    {
+        $clone = clone $this;
+        unset($clone->value);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -104,10 +110,13 @@ class AttributeConfiguration
         }
 
         $key = $input->{'key'};
-        $value = $input->{'value'};
+        $value = null;
+        if (isset($input->{'value'})) {
+            $value = $input->{'value'};
+        }
 
-        $obj = new self($key, $value);
-
+        $obj = new self($key);
+        $obj->value = $value;
         return $obj;
     }
 
@@ -120,7 +129,9 @@ class AttributeConfiguration
     {
         $output = [];
         $output['key'] = $this->key;
-        $output['value'] = $this->value;
+        if (isset($this->value)) {
+            $output['value'] = $this->value;
+        }
 
         return $output;
     }
@@ -135,7 +146,7 @@ class AttributeConfiguration
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

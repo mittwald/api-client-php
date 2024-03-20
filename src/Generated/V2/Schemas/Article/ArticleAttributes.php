@@ -56,7 +56,6 @@ class ArticleAttributes
         ],
         'required' => [
             'key',
-            'value',
         ],
         'type' => 'object',
     ];
@@ -73,12 +72,11 @@ class ArticleAttributes
 
     private ?string $unit = null;
 
-    private string $value;
+    private ?string $value = null;
 
-    public function __construct(string $key, string $value)
+    public function __construct(string $key)
     {
         $this->key = $key;
-        $this->value = $value;
     }
 
     public function getCustomerEditable(): ?bool
@@ -111,9 +109,9 @@ class ArticleAttributes
         return $this->unit ?? null;
     }
 
-    public function getValue(): string
+    public function getValue(): ?string
     {
-        return $this->value;
+        return $this->value ?? null;
     }
 
     public function withCustomerEditable(bool $customerEditable): self
@@ -248,6 +246,14 @@ class ArticleAttributes
         return $clone;
     }
 
+    public function withoutValue(): self
+    {
+        $clone = clone $this;
+        unset($clone->value);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -284,14 +290,18 @@ class ArticleAttributes
         if (isset($input->{'unit'})) {
             $unit = $input->{'unit'};
         }
-        $value = $input->{'value'};
+        $value = null;
+        if (isset($input->{'value'})) {
+            $value = $input->{'value'};
+        }
 
-        $obj = new self($key, $value);
+        $obj = new self($key);
         $obj->customerEditable = $customerEditable;
         $obj->mergeType = $mergeType;
         $obj->readonly = $readonly;
         $obj->required = $required;
         $obj->unit = $unit;
+        $obj->value = $value;
         return $obj;
     }
 
@@ -319,7 +329,9 @@ class ArticleAttributes
         if (isset($this->unit)) {
             $output['unit'] = $this->unit;
         }
-        $output['value'] = $this->value;
+        if (isset($this->value)) {
+            $output['value'] = $this->value;
+        }
 
         return $output;
     }
@@ -334,7 +346,7 @@ class ArticleAttributes
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

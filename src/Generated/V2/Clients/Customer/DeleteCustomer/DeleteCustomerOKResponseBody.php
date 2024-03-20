@@ -13,14 +13,48 @@ class DeleteCustomerOKResponseBody
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'properties' => [
+            'customerId' => [
+                'type' => 'string',
+            ],
+        ],
         'type' => 'object',
     ];
+
+    private ?string $customerId = null;
 
     /**
      *
      */
     public function __construct()
     {
+    }
+
+    public function getCustomerId(): ?string
+    {
+        return $this->customerId ?? null;
+    }
+
+    public function withCustomerId(string $customerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withoutCustomerId(): self
+    {
+        $clone = clone $this;
+        unset($clone->customerId);
+
+        return $clone;
     }
 
     /**
@@ -38,10 +72,13 @@ class DeleteCustomerOKResponseBody
             static::validateInput($input);
         }
 
-
+        $customerId = null;
+        if (isset($input->{'customerId'})) {
+            $customerId = $input->{'customerId'};
+        }
 
         $obj = new self();
-
+        $obj->customerId = $customerId;
         return $obj;
     }
 
@@ -53,7 +90,9 @@ class DeleteCustomerOKResponseBody
     public function toJson(): array
     {
         $output = [];
-
+        if (isset($this->customerId)) {
+            $output['customerId'] = $this->customerId;
+        }
 
         return $output;
     }

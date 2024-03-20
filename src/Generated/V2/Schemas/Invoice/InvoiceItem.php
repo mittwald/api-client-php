@@ -382,7 +382,7 @@ class InvoiceItem
         if (isset($input->{'servicePeriod'})) {
             $servicePeriod = DatePeriod::buildFromInput($input->{'servicePeriod'}, validate: $validate);
         }
-        $vatRate = str_contains($input->{'vatRate'}, '.') ? (float)($input->{'vatRate'}) : (int)($input->{'vatRate'});
+        $vatRate = str_contains((string)($input->{'vatRate'}), '.') ? (float)($input->{'vatRate'}) : (int)($input->{'vatRate'});
 
         $obj = new self($contractItemId, $description, $itemId, $price, $vatRate);
         $obj->additionalDescription = $additionalDescription;
@@ -435,7 +435,7 @@ class InvoiceItem
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

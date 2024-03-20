@@ -635,11 +635,11 @@ class ReadableArticle
         if (isset($input->{'balanceAddonKey'})) {
             $balanceAddonKey = $input->{'balanceAddonKey'};
         }
-        $contractDurationInMonth = str_contains($input->{'contractDurationInMonth'}, '.') ? (float)($input->{'contractDurationInMonth'}) : (int)($input->{'contractDurationInMonth'});
+        $contractDurationInMonth = str_contains((string)($input->{'contractDurationInMonth'}), '.') ? (float)($input->{'contractDurationInMonth'}) : (int)($input->{'contractDurationInMonth'});
         $description = $input->{'description'};
         $forcedInvoicingPeriodInMonth = null;
         if (isset($input->{'forcedInvoicingPeriodInMonth'})) {
-            $forcedInvoicingPeriodInMonth = str_contains($input->{'forcedInvoicingPeriodInMonth'}, '.') ? (float)($input->{'forcedInvoicingPeriodInMonth'}) : (int)($input->{'forcedInvoicingPeriodInMonth'});
+            $forcedInvoicingPeriodInMonth = str_contains((string)($input->{'forcedInvoicingPeriodInMonth'}), '.') ? (float)($input->{'forcedInvoicingPeriodInMonth'}) : (int)($input->{'forcedInvoicingPeriodInMonth'});
         }
         $hasIndependentContractPeriod = null;
         if (isset($input->{'hasIndependentContractPeriod'})) {
@@ -665,7 +665,7 @@ class ReadableArticle
         }
         $price = null;
         if (isset($input->{'price'})) {
-            $price = str_contains($input->{'price'}, '.') ? (float)($input->{'price'}) : (int)($input->{'price'});
+            $price = str_contains((string)($input->{'price'}), '.') ? (float)($input->{'price'}) : (int)($input->{'price'});
         }
         $tags = null;
         if (isset($input->{'tags'})) {
@@ -749,7 +749,7 @@ class ReadableArticle
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

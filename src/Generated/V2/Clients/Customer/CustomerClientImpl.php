@@ -274,6 +274,7 @@ class CustomerClientImpl implements CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DeleteCustomer\DeleteCustomerRequest $request An object representing the request for this operation
+     * @return DeleteCustomer\DeleteCustomerOKResponse Returns the uuid of the deleted customer
      */
     public function deleteCustomer(DeleteCustomerRequest $request): DeleteCustomerOKResponse
     {
@@ -532,7 +533,7 @@ class CustomerClientImpl implements CustomerClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ListCustomers\ListCustomersRequest $request An object representing the request for this operation
-     * @return ListCustomers\ListCustomersOKResponse The list of customers the user is a member for
+     * @return ListCustomers\ListCustomersOKResponse The list of customers the authenticated user is a member for
      */
     public function listCustomers(ListCustomersRequest $request): ListCustomersOKResponse
     {

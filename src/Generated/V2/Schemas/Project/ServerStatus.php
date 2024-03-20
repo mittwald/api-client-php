@@ -8,4 +8,5 @@ enum ServerStatus: string
 {
     case pending = 'pending';
     case ready = 'ready';
+    case unready = 'unready';
 }

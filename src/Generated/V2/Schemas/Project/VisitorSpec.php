@@ -108,7 +108,7 @@ class VisitorSpec
         }
 
         $storage = $input->{'storage'};
-        $visitors = str_contains($input->{'visitors'}, '.') ? (float)($input->{'visitors'}) : (int)($input->{'visitors'});
+        $visitors = str_contains((string)($input->{'visitors'}), '.') ? (float)($input->{'visitors'}) : (int)($input->{'visitors'});
 
         $obj = new self($storage, $visitors);
 
@@ -139,7 +139,7 @@ class VisitorSpec
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

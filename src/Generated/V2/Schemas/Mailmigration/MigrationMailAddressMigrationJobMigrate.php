@@ -25,21 +25,33 @@ class MigrationMailAddressMigrationJobMigrate
      */
     private static array $schema = [
         'properties' => [
+            'finished' => [
+                'type' => 'boolean',
+            ],
             'requirements' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrateMailAddressCommandRequirements',
             ],
         ],
         'required' => [
             'requirements',
+            'finished',
         ],
         'type' => 'object',
     ];
 
+    private bool $finished;
+
     private MigrateMailAddressCommandRequirements $requirements;
 
-    public function __construct(MigrateMailAddressCommandRequirements $requirements)
+    public function __construct(bool $finished, MigrateMailAddressCommandRequirements $requirements)
     {
+        $this->finished = $finished;
         $this->requirements = $requirements;
+    }
+
+    public function getFinished(): bool
+    {
+        return $this->finished;
     }
 
     /**
@@ -49,6 +61,20 @@ class MigrationMailAddressMigrationJobMigrate
     public function getRequirements(): MigrateMailAddressCommandRequirements
     {
         return $this->requirements;
+    }
+
+    public function withFinished(bool $finished): self
+    {
+        $validator = new Validator();
+        $validator->validate($finished, static::$schema['properties']['finished']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->finished = $finished;
+
+        return $clone;
     }
 
     public function withRequirements(MigrateMailAddressCommandRequirements $requirements): self
@@ -74,9 +100,10 @@ class MigrationMailAddressMigrationJobMigrate
             static::validateInput($input);
         }
 
+        $finished = (bool)($input->{'finished'});
         $requirements = MigrateMailAddressCommandRequirements::buildFromInput($input->{'requirements'}, validate: $validate);
 
-        $obj = new self($requirements);
+        $obj = new self($finished, $requirements);
 
         return $obj;
     }
@@ -89,6 +116,7 @@ class MigrationMailAddressMigrationJobMigrate
     public function toJson(): array
     {
         $output = [];
+        $output['finished'] = $this->finished;
         $output['requirements'] = $this->requirements->toJson();
 
         return $output;
@@ -104,7 +132,7 @@ class MigrationMailAddressMigrationJobMigrate
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

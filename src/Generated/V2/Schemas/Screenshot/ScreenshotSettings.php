@@ -197,10 +197,10 @@ class ScreenshotSettings
         }
 
         $dataType = ScreenshotSettingsDataType::from($input->{'dataType'});
-        $delay = str_contains($input->{'delay'}, '.') ? (float)($input->{'delay'}) : (int)($input->{'delay'});
-        $height = str_contains($input->{'height'}, '.') ? (float)($input->{'height'}) : (int)($input->{'height'});
-        $quality = str_contains($input->{'quality'}, '.') ? (float)($input->{'quality'}) : (int)($input->{'quality'});
-        $width = str_contains($input->{'width'}, '.') ? (float)($input->{'width'}) : (int)($input->{'width'});
+        $delay = str_contains((string)($input->{'delay'}), '.') ? (float)($input->{'delay'}) : (int)($input->{'delay'});
+        $height = str_contains((string)($input->{'height'}), '.') ? (float)($input->{'height'}) : (int)($input->{'height'});
+        $quality = str_contains((string)($input->{'quality'}), '.') ? (float)($input->{'quality'}) : (int)($input->{'quality'});
+        $width = str_contains((string)($input->{'width'}), '.') ? (float)($input->{'width'}) : (int)($input->{'width'});
 
         $obj = new self($dataType, $delay, $height, $quality, $width);
 
@@ -234,7 +234,7 @@ class ScreenshotSettings
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

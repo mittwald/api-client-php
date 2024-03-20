@@ -20,6 +20,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFile
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTokenRules\GetFileUploadTokenRulesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules\GetFileUploadTypeRulesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\File\GetFileWithName\GetFileWithNameRequest;
 
 /**
  * Client for File API
@@ -108,4 +109,14 @@ interface FileClient
      * @return GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse OK
      */
     public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRulesOKResponse;
+    /**
+     * Get a File.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-with-name
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetFileWithName\GetFileWithNameRequest $request An object representing the request for this operation
+     * @return StringResponse OK
+     */
+    public function getFileWithName(GetFileWithNameRequest $request): StringResponse;
 }

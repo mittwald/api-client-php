@@ -124,11 +124,11 @@ class HardwareSpec
 
         $ram = null;
         if (isset($input->{'ram'})) {
-            $ram = str_contains($input->{'ram'}, '.') ? (float)($input->{'ram'}) : (int)($input->{'ram'});
+            $ram = str_contains((string)($input->{'ram'}), '.') ? (float)($input->{'ram'}) : (int)($input->{'ram'});
         }
         $vcpu = null;
         if (isset($input->{'vcpu'})) {
-            $vcpu = str_contains($input->{'vcpu'}, '.') ? (float)($input->{'vcpu'}) : (int)($input->{'vcpu'});
+            $vcpu = str_contains((string)($input->{'vcpu'}), '.') ? (float)($input->{'vcpu'}) : (int)($input->{'vcpu'});
         }
 
         $obj = new self();
@@ -165,7 +165,7 @@ class HardwareSpec
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 
