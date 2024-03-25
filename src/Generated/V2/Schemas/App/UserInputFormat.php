@@ -9,5 +9,4 @@ enum UserInputFormat: string
     case email = 'email';
     case password = 'password';
     case url = 'url';
-    case uri = 'uri';
 }
