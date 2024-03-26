@@ -24,6 +24,9 @@ class Migration
      */
     private static array $schema = [
         'properties' => [
+            'aborted' => [
+                'type' => 'boolean',
+            ],
             'addresses' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrationMailAddress',
@@ -61,9 +64,12 @@ class Migration
             'mailboxes',
             'finalizers',
             'finished',
+            'aborted',
         ],
         'type' => 'object',
     ];
+
+    private bool $aborted;
 
     /**
      * @var MigrationMailAddress[]
@@ -89,8 +95,9 @@ class Migration
      * @param MigrationMailAddress[] $addresses
      * @param MigrationMailbox[] $mailboxes
      */
-    public function __construct(array $addresses, MigrationFinalizeJob $finalizers, bool $finished, string $id, array $mailboxes, string $sourceCoabProjectId, string $targetNexusProjectId)
+    public function __construct(bool $aborted, array $addresses, MigrationFinalizeJob $finalizers, bool $finished, string $id, array $mailboxes, string $sourceCoabProjectId, string $targetNexusProjectId)
     {
+        $this->aborted = $aborted;
         $this->addresses = $addresses;
         $this->finalizers = $finalizers;
         $this->finished = $finished;
@@ -98,6 +105,11 @@ class Migration
         $this->mailboxes = $mailboxes;
         $this->sourceCoabProjectId = $sourceCoabProjectId;
         $this->targetNexusProjectId = $targetNexusProjectId;
+    }
+
+    public function getAborted(): bool
+    {
+        return $this->aborted;
     }
 
     /**
@@ -145,6 +157,20 @@ class Migration
     public function getTargetNexusProjectId(): string
     {
         return $this->targetNexusProjectId;
+    }
+
+    public function withAborted(bool $aborted): self
+    {
+        $validator = new Validator();
+        $validator->validate($aborted, static::$schema['properties']['aborted']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->aborted = $aborted;
+
+        return $clone;
     }
 
     /**
@@ -248,6 +274,7 @@ class Migration
             static::validateInput($input);
         }
 
+        $aborted = (bool)($input->{'aborted'});
         $addresses = array_map(fn (array|object $i): MigrationMailAddress => MigrationMailAddress::buildFromInput($i, validate: $validate), $input->{'addresses'});
         $finalizers = MigrationFinalizeJob::buildFromInput($input->{'finalizers'}, validate: $validate);
         $finished = (bool)($input->{'finished'});
@@ -256,7 +283,7 @@ class Migration
         $sourceCoabProjectId = $input->{'sourceCoabProjectId'};
         $targetNexusProjectId = $input->{'targetNexusProjectId'};
 
-        $obj = new self($addresses, $finalizers, $finished, $id, $mailboxes, $sourceCoabProjectId, $targetNexusProjectId);
+        $obj = new self($aborted, $addresses, $finalizers, $finished, $id, $mailboxes, $sourceCoabProjectId, $targetNexusProjectId);
 
         return $obj;
     }
@@ -269,6 +296,7 @@ class Migration
     public function toJson(): array
     {
         $output = [];
+        $output['aborted'] = $this->aborted;
         $output['addresses'] = array_map(fn (MigrationMailAddress $i): array => $i->toJson(), $this->addresses);
         $output['finalizers'] = $this->finalizers->toJson();
         $output['finished'] = $this->finished;
