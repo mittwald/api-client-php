@@ -24,7 +24,6 @@ class DeprecatedUserServicePhoneNumberAddRequest
             'body' => [
                 'properties' => [
                     'phoneNumber' => [
-                        'format' => 'phone',
                         'type' => 'string',
                     ],
                 ],

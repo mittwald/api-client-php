@@ -63,7 +63,6 @@ class Domain
                     'format' => 'hostname',
                     'type' => 'string',
                 ],
-                'minItems' => 2,
                 'type' => 'array',
                 'uniqueItems' => true,
             ],

@@ -15,7 +15,7 @@ class AddPhoneNumberRequestBody
     private static array $schema = [
         'properties' => [
             'phoneNumber' => [
-                'format' => 'phone',
+                'example' => '+491701234567',
                 'type' => 'string',
             ],
         ],
