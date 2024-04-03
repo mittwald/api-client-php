@@ -16,7 +16,7 @@ class DeclareNameserversV2DeprecatedRequestBody
         'properties' => [
             'nameservers' => [
                 'items' => [
-                    'format' => 'hostname',
+                    'format' => 'idn-hostname',
                     'type' => 'string',
                 ],
                 'minItems' => 2,

@@ -25,7 +25,7 @@ class UpdateDomainNameserversRequest
                 'properties' => [
                     'nameservers' => [
                         'items' => [
-                            'format' => 'hostname',
+                            'format' => 'idn-hostname',
                             'type' => 'string',
                         ],
                         'minItems' => 2,

@@ -20,7 +20,7 @@ class CheckDomainRegistrabilityV2DeprecatedRequest
             'body' => [
                 'properties' => [
                     'domain' => [
-                        'format' => 'hostname',
+                        'format' => 'naked-domain',
                         'type' => 'string',
                     ],
                 ],

@@ -20,7 +20,7 @@ class CheckDomainRegistrabilityRequest
             'body' => [
                 'properties' => [
                     'domain' => [
-                        'format' => 'hostname',
+                        'format' => 'naked-domain',
                         'type' => 'string',
                     ],
                 ],

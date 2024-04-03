@@ -37,7 +37,7 @@ class Domain
                 'type' => 'boolean',
             ],
             'domain' => [
-                'format' => 'hostname',
+                'format' => 'naked-domain',
                 'type' => 'string',
             ],
             'domainId' => [
@@ -60,7 +60,7 @@ class Domain
             ],
             'nameservers' => [
                 'items' => [
-                    'format' => 'hostname',
+                    'format' => 'idn-hostname',
                     'type' => 'string',
                 ],
                 'type' => 'array',

@@ -15,7 +15,7 @@ class CheckDomainRegistrabilityRequestBody
     private static array $schema = [
         'properties' => [
             'domain' => [
-                'format' => 'hostname',
+                'format' => 'naked-domain',
                 'type' => 'string',
             ],
         ],

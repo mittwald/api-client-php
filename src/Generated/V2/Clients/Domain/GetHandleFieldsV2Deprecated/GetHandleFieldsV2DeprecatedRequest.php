@@ -18,7 +18,7 @@ class GetHandleFieldsV2DeprecatedRequest
         'type' => 'object',
         'properties' => [
             'domainName' => [
-                'format' => 'hostname',
+                'format' => 'naked-domain',
                 'type' => 'string',
             ],
         ],
