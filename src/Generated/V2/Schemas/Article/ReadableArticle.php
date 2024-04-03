@@ -52,7 +52,7 @@ class ReadableArticle
                 'type' => 'number',
             ],
             'description' => [
-                'example' => 'proSpace without dedicated ressources',
+                'example' => 'proSpace without dedicated resources',
                 'type' => 'string',
             ],
             'forcedInvoicingPeriodInMonth' => [
@@ -132,7 +132,6 @@ class ReadableArticle
         'required' => [
             'articleId',
             'name',
-            'description',
             'contractDurationInMonth',
             'orderable',
             'template',
@@ -156,7 +155,7 @@ class ReadableArticle
 
     private int|float $contractDurationInMonth;
 
-    private string $description;
+    private ?string $description = null;
 
     private int|float|null $forcedInvoicingPeriodInMonth = null;
 
@@ -192,11 +191,10 @@ class ReadableArticle
     /**
      * @param int|float $contractDurationInMonth
      */
-    public function __construct(string $articleId, int|float $contractDurationInMonth, string $description, string $name, ReadableArticleOrderable $orderable, ArticleTemplate $template)
+    public function __construct(string $articleId, int|float $contractDurationInMonth, string $name, ReadableArticleOrderable $orderable, ArticleTemplate $template)
     {
         $this->articleId = $articleId;
         $this->contractDurationInMonth = $contractDurationInMonth;
-        $this->description = $description;
         $this->name = $name;
         $this->orderable = $orderable;
         $this->template = $template;
@@ -234,9 +232,9 @@ class ReadableArticle
         return $this->contractDurationInMonth;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
     public function getForcedInvoicingPeriodInMonth(): int|float|null
@@ -406,6 +404,14 @@ class ReadableArticle
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
 
         return $clone;
     }
@@ -636,7 +642,10 @@ class ReadableArticle
             $balanceAddonKey = $input->{'balanceAddonKey'};
         }
         $contractDurationInMonth = str_contains((string)($input->{'contractDurationInMonth'}), '.') ? (float)($input->{'contractDurationInMonth'}) : (int)($input->{'contractDurationInMonth'});
-        $description = $input->{'description'};
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $forcedInvoicingPeriodInMonth = null;
         if (isset($input->{'forcedInvoicingPeriodInMonth'})) {
             $forcedInvoicingPeriodInMonth = str_contains((string)($input->{'forcedInvoicingPeriodInMonth'}), '.') ? (float)($input->{'forcedInvoicingPeriodInMonth'}) : (int)($input->{'forcedInvoicingPeriodInMonth'});
@@ -673,10 +682,11 @@ class ReadableArticle
         }
         $template = ArticleTemplate::buildFromInput($input->{'template'}, validate: $validate);
 
-        $obj = new self($articleId, $contractDurationInMonth, $description, $name, $orderable, $template);
+        $obj = new self($articleId, $contractDurationInMonth, $name, $orderable, $template);
         $obj->addons = $addons;
         $obj->attributes = $attributes;
         $obj->balanceAddonKey = $balanceAddonKey;
+        $obj->description = $description;
         $obj->forcedInvoicingPeriodInMonth = $forcedInvoicingPeriodInMonth;
         $obj->hasIndependentContractPeriod = $hasIndependentContractPeriod;
         $obj->hideOnInvoice = $hideOnInvoice;
@@ -707,7 +717,9 @@ class ReadableArticle
             $output['balanceAddonKey'] = $this->balanceAddonKey;
         }
         $output['contractDurationInMonth'] = $this->contractDurationInMonth;
-        $output['description'] = $this->description;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         if (isset($this->forcedInvoicingPeriodInMonth)) {
             $output['forcedInvoicingPeriodInMonth'] = $this->forcedInvoicingPeriodInMonth;
         }

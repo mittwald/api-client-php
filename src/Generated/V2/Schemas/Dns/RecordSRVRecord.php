@@ -48,8 +48,6 @@ class RecordSRVRecord
             ],
         ],
         'required' => [
-            'priority',
-            'weight',
             'port',
             'fqdn',
         ],
@@ -60,16 +58,14 @@ class RecordSRVRecord
 
     private int $port;
 
-    private int $priority;
+    private ?int $priority = null;
 
-    private int $weight;
+    private ?int $weight = null;
 
-    public function __construct(string $fqdn, int $port, int $priority, int $weight)
+    public function __construct(string $fqdn, int $port)
     {
         $this->fqdn = $fqdn;
         $this->port = $port;
-        $this->priority = $priority;
-        $this->weight = $weight;
     }
 
     public function getFqdn(): string
@@ -82,14 +78,14 @@ class RecordSRVRecord
         return $this->port;
     }
 
-    public function getPriority(): int
+    public function getPriority(): ?int
     {
-        return $this->priority;
+        return $this->priority ?? null;
     }
 
-    public function getWeight(): int
+    public function getWeight(): ?int
     {
-        return $this->weight;
+        return $this->weight ?? null;
     }
 
     public function withFqdn(string $fqdn): self
@@ -134,6 +130,14 @@ class RecordSRVRecord
         return $clone;
     }
 
+    public function withoutPriority(): self
+    {
+        $clone = clone $this;
+        unset($clone->priority);
+
+        return $clone;
+    }
+
     public function withWeight(int $weight): self
     {
         $validator = new Validator();
@@ -144,6 +148,14 @@ class RecordSRVRecord
 
         $clone = clone $this;
         $clone->weight = $weight;
+
+        return $clone;
+    }
+
+    public function withoutWeight(): self
+    {
+        $clone = clone $this;
+        unset($clone->weight);
 
         return $clone;
     }
@@ -165,11 +177,18 @@ class RecordSRVRecord
 
         $fqdn = $input->{'fqdn'};
         $port = (int)($input->{'port'});
-        $priority = (int)($input->{'priority'});
-        $weight = (int)($input->{'weight'});
+        $priority = null;
+        if (isset($input->{'priority'})) {
+            $priority = (int)($input->{'priority'});
+        }
+        $weight = null;
+        if (isset($input->{'weight'})) {
+            $weight = (int)($input->{'weight'});
+        }
 
-        $obj = new self($fqdn, $port, $priority, $weight);
-
+        $obj = new self($fqdn, $port);
+        $obj->priority = $priority;
+        $obj->weight = $weight;
         return $obj;
     }
 
@@ -183,8 +202,12 @@ class RecordSRVRecord
         $output = [];
         $output['fqdn'] = $this->fqdn;
         $output['port'] = $this->port;
-        $output['priority'] = $this->priority;
-        $output['weight'] = $this->weight;
+        if (isset($this->priority)) {
+            $output['priority'] = $this->priority;
+        }
+        if (isset($this->weight)) {
+            $output['weight'] = $this->weight;
+        }
 
         return $output;
     }

@@ -152,7 +152,7 @@ class UpdateMailAddressAutoresponderV2DeprecatedRequest
      */
     public static function validateInput(array|object $input, bool $return = false): bool
     {
-        $validator = new Validator();
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         $validator->validate($input, static::$schema);
 

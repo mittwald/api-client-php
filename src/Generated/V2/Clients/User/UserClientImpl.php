@@ -99,6 +99,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutDefaultResponse;
@@ -221,6 +222,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensOKResponse;
@@ -535,6 +537,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserInitPasswordResetBadRequestResponse::fromResponse($httpResponse),
+            403 => DeprecatedUserInitPasswordResetForbiddenResponse::fromResponse($httpResponse),
             default => DeprecatedUserInitPasswordResetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1704,6 +1707,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InitPasswordResetBadRequestResponse::fromResponse($httpResponse),
+            403 => InitPasswordResetForbiddenResponse::fromResponse($httpResponse),
             default => InitPasswordResetDefaultResponse::fromResponse($httpResponse),
         });
     }
