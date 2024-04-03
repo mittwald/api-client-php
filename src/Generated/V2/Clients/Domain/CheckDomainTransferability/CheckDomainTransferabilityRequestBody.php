@@ -18,7 +18,7 @@ class CheckDomainTransferabilityRequestBody
                 'type' => 'string',
             ],
             'domain' => [
-                'format' => 'idn-hostname',
+                'format' => 'naked-domain',
                 'type' => 'string',
             ],
         ],

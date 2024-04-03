@@ -15,7 +15,6 @@ class DeprecatedUserServicePhoneNumberAddRequestBody
     private static array $schema = [
         'properties' => [
             'phoneNumber' => [
-                'format' => 'phone',
                 'type' => 'string',
             ],
         ],

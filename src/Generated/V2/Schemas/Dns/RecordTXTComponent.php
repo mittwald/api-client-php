@@ -27,7 +27,7 @@ class RecordTXTComponent
         'properties' => [
             'entries' => [
                 'items' => [
-                    'maxLength' => 100,
+                    'maxLength' => 2048,
                     'type' => 'string',
                 ],
                 'maxItems' => 20,

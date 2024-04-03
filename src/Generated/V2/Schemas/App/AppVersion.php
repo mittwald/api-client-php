@@ -26,6 +26,9 @@ class AppVersion
     private static array $schema = [
         'description' => 'An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.',
         'properties' => [
+            'appId' => [
+                'type' => 'string',
+            ],
             'breakingNote' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.BreakingNote',
             ],
@@ -78,9 +81,12 @@ class AppVersion
             'internalVersion',
             'docRoot',
             'docRootUserEditable',
+            'appId',
         ],
         'type' => 'object',
     ];
+
+    private string $appId;
 
     private ?BreakingNote $breakingNote = null;
 
@@ -113,13 +119,19 @@ class AppVersion
      */
     private ?array $userInputs = null;
 
-    public function __construct(string $docRoot, bool $docRootUserEditable, string $externalVersion, string $id, string $internalVersion)
+    public function __construct(string $appId, string $docRoot, bool $docRootUserEditable, string $externalVersion, string $id, string $internalVersion)
     {
+        $this->appId = $appId;
         $this->docRoot = $docRoot;
         $this->docRootUserEditable = $docRootUserEditable;
         $this->externalVersion = $externalVersion;
         $this->id = $id;
         $this->internalVersion = $internalVersion;
+    }
+
+    public function getAppId(): string
+    {
+        return $this->appId;
     }
 
     public function getBreakingNote(): ?BreakingNote
@@ -189,6 +201,20 @@ class AppVersion
     public function getUserInputs(): ?array
     {
         return $this->userInputs ?? null;
+    }
+
+    public function withAppId(string $appId): self
+    {
+        $validator = new Validator();
+        $validator->validate($appId, static::$schema['properties']['appId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appId = $appId;
+
+        return $clone;
     }
 
     public function withBreakingNote(BreakingNote $breakingNote): self
@@ -387,6 +413,7 @@ class AppVersion
             static::validateInput($input);
         }
 
+        $appId = $input->{'appId'};
         $breakingNote = null;
         if (isset($input->{'breakingNote'})) {
             $breakingNote = BreakingNote::buildFromInput($input->{'breakingNote'}, validate: $validate);
@@ -417,7 +444,7 @@ class AppVersion
             $userInputs = array_map(fn (array|object $i): UserInput => UserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
-        $obj = new self($docRoot, $docRootUserEditable, $externalVersion, $id, $internalVersion);
+        $obj = new self($appId, $docRoot, $docRootUserEditable, $externalVersion, $id, $internalVersion);
         $obj->breakingNote = $breakingNote;
         $obj->databases = $databases;
         $obj->recommended = $recommended;
@@ -435,6 +462,7 @@ class AppVersion
     public function toJson(): array
     {
         $output = [];
+        $output['appId'] = $this->appId;
         if (isset($this->breakingNote)) {
             $output['breakingNote'] = $this->breakingNote->toJson();
         }

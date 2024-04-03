@@ -19,7 +19,7 @@ class DeprecatedUserServicePhoneNumberVerifyRequestBody
                 'type' => 'string',
             ],
             'phoneNumber' => [
-                'format' => 'phone',
+                'example' => '+491701234567',
                 'type' => 'string',
             ],
         ],

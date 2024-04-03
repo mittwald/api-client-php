@@ -34,6 +34,12 @@ class Extension
             'description' => [
                 'type' => 'string',
             ],
+            'frontendComponents' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
+                ],
+                'type' => 'array',
+            ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -43,7 +49,7 @@ class Extension
             ],
             'scopes' => [
                 'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Scope',
+                    'type' => 'string',
                 ],
                 'type' => 'array',
             ],
@@ -81,12 +87,17 @@ class Extension
 
     private string $description;
 
+    /**
+     * @var ExternalComponent[]|null
+     */
+    private ?array $frontendComponents = null;
+
     private string $id;
 
     private string $name;
 
     /**
-     * @var Scope[]
+     * @var string[]
      */
     private array $scopes;
 
@@ -100,7 +111,7 @@ class Extension
     private array $tags;
 
     /**
-     * @param Scope[] $scopes
+     * @param string[] $scopes
      * @param string[] $tags
      */
     public function __construct(Context $context, string $contributorId, string $description, string $id, string $name, array $scopes, ExtensionState $state, SupportMeta $support, array $tags)
@@ -131,6 +142,15 @@ class Extension
         return $this->description;
     }
 
+    /**
+     * @return
+     * ExternalComponent[]|null
+     */
+    public function getFrontendComponents(): ?array
+    {
+        return $this->frontendComponents ?? null;
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -142,7 +162,7 @@ class Extension
     }
 
     /**
-     * @return Scope[]
+     * @return string[]
      */
     public function getScopes(): array
     {
@@ -203,6 +223,25 @@ class Extension
         return $clone;
     }
 
+    /**
+     * @param ExternalComponent[] $frontendComponents
+     */
+    public function withFrontendComponents(array $frontendComponents): self
+    {
+        $clone = clone $this;
+        $clone->frontendComponents = $frontendComponents;
+
+        return $clone;
+    }
+
+    public function withoutFrontendComponents(): self
+    {
+        $clone = clone $this;
+        unset($clone->frontendComponents);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -232,10 +271,16 @@ class Extension
     }
 
     /**
-     * @param Scope[] $scopes
+     * @param string[] $scopes
      */
     public function withScopes(array $scopes): self
     {
+        $validator = new Validator();
+        $validator->validate($scopes, static::$schema['properties']['scopes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->scopes = $scopes;
 
@@ -293,15 +338,19 @@ class Extension
         $context = Context::from($input->{'context'});
         $contributorId = $input->{'contributorId'};
         $description = $input->{'description'};
+        $frontendComponents = null;
+        if (isset($input->{'frontendComponents'})) {
+            $frontendComponents = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'frontendComponents'});
+        }
         $id = $input->{'id'};
         $name = $input->{'name'};
-        $scopes = array_map(fn (string $i): Scope => Scope::from($i), $input->{'scopes'});
+        $scopes = $input->{'scopes'};
         $state = ExtensionState::from($input->{'state'});
         $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
         $obj = new self($context, $contributorId, $description, $id, $name, $scopes, $state, $support, $tags);
-
+        $obj->frontendComponents = $frontendComponents;
         return $obj;
     }
 
@@ -316,9 +365,12 @@ class Extension
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
         $output['description'] = $this->description;
+        if (isset($this->frontendComponents)) {
+            $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
+        }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
-        $output['scopes'] = array_map(fn (Scope $i): string => $i->value, $this->scopes);
+        $output['scopes'] = $this->scopes;
         $output['state'] = $this->state->value;
         $output['support'] = $this->support->toJson();
         $output['tags'] = $this->tags;

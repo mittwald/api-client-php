@@ -47,7 +47,7 @@ class ExtensionInstance
             ],
             'consentedScopes' => [
                 'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Scope',
+                    'type' => 'string',
                 ],
                 'type' => 'array',
             ],
@@ -81,7 +81,7 @@ class ExtensionInstance
     private ExtensionInstanceAggregateReference $aggregateReference;
 
     /**
-     * @var Scope[]
+     * @var string[]
      */
     private array $consentedScopes;
 
@@ -94,7 +94,7 @@ class ExtensionInstance
     private string $id;
 
     /**
-     * @param Scope[] $consentedScopes
+     * @param string[] $consentedScopes
      */
     public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, bool $disabled, string $extensionId, string $id)
     {
@@ -111,7 +111,7 @@ class ExtensionInstance
     }
 
     /**
-     * @return Scope[]
+     * @return string[]
      */
     public function getConsentedScopes(): array
     {
@@ -147,10 +147,16 @@ class ExtensionInstance
     }
 
     /**
-     * @param Scope[] $consentedScopes
+     * @param string[] $consentedScopes
      */
     public function withConsentedScopes(array $consentedScopes): self
     {
+        $validator = new Validator();
+        $validator->validate($consentedScopes, static::$schema['properties']['consentedScopes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->consentedScopes = $consentedScopes;
 
@@ -231,7 +237,7 @@ class ExtensionInstance
         }
 
         $aggregateReference = ExtensionInstanceAggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
-        $consentedScopes = array_map(fn (string $i): Scope => Scope::from($i), $input->{'consentedScopes'});
+        $consentedScopes = $input->{'consentedScopes'};
         $createdAt = null;
         if (isset($input->{'createdAt'})) {
             $createdAt = new DateTime($input->{'createdAt'});
@@ -257,7 +263,7 @@ class ExtensionInstance
     {
         $output = [];
         $output['aggregateReference'] = ($this->aggregateReference)->toJson();
-        $output['consentedScopes'] = array_map(fn (Scope $i): string => $i->value, $this->consentedScopes);
+        $output['consentedScopes'] = $this->consentedScopes;
         if (isset($this->createdAt)) {
             $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         }

@@ -21,34 +21,30 @@ class DeleteDomainRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'transit' => [
-                        'description' => 'Only for .de Domains.',
-                        'type' => 'boolean',
-                    ],
-                ],
-                'type' => 'object',
+            'transit' => [
+                'description' => 'Only for .de Domains.',
+                'type' => 'boolean',
             ],
         ],
         'required' => [
             'domainId',
-            'body',
         ],
     ];
 
     private string $domainId;
 
-    private DeleteDomainRequestBody $body;
+    /**
+     * Only for .de Domains.
+     */
+    private ?bool $transit = null;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $domainId, DeleteDomainRequestBody $body)
+    public function __construct(string $domainId)
     {
         $this->domainId = $domainId;
-        $this->body = $body;
     }
 
     public function getDomainId(): string
@@ -56,9 +52,9 @@ class DeleteDomainRequest
         return $this->domainId;
     }
 
-    public function getBody(): DeleteDomainRequestBody
+    public function getTransit(): ?bool
     {
-        return $this->body;
+        return $this->transit ?? null;
     }
 
     public function withDomainId(string $domainId): self
@@ -75,10 +71,24 @@ class DeleteDomainRequest
         return $clone;
     }
 
-    public function withBody(DeleteDomainRequestBody $body): self
+    public function withTransit(bool $transit): self
+    {
+        $validator = new Validator();
+        $validator->validate($transit, static::$schema['properties']['transit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->transit = $transit;
+
+        return $clone;
+    }
+
+    public function withoutTransit(): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        unset($clone->transit);
 
         return $clone;
     }
@@ -99,10 +109,13 @@ class DeleteDomainRequest
         }
 
         $domainId = $input->{'domainId'};
-        $body = DeleteDomainRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $transit = null;
+        if (isset($input->{'transit'})) {
+            $transit = (bool)($input->{'transit'});
+        }
 
-        $obj = new self($domainId, $body);
-
+        $obj = new self($domainId);
+        $obj->transit = $transit;
         return $obj;
     }
 
@@ -115,7 +128,9 @@ class DeleteDomainRequest
     {
         $output = [];
         $output['domainId'] = $this->domainId;
-        $output['body'] = ($this->body)->toJson();
+        if (isset($this->transit)) {
+            $output['transit'] = $this->transit;
+        }
 
         return $output;
     }
@@ -146,7 +161,6 @@ class DeleteDomainRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -178,10 +192,12 @@ class DeleteDomainRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['transit'])) {
+            $query['transit'] = $mapped['transit'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

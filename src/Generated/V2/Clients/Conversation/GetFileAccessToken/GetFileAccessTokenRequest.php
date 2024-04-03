@@ -25,14 +25,10 @@ class GetFileAccessTokenRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-                'type' => 'object',
-            ],
         ],
         'required' => [
             'conversationId',
             'fileId',
-            'body',
         ],
     ];
 
@@ -40,17 +36,14 @@ class GetFileAccessTokenRequest
 
     private string $fileId;
 
-    private GetFileAccessTokenRequestBody $body;
-
     private array $headers = [
 
     ];
 
-    public function __construct(string $conversationId, string $fileId, GetFileAccessTokenRequestBody $body)
+    public function __construct(string $conversationId, string $fileId)
     {
         $this->conversationId = $conversationId;
         $this->fileId = $fileId;
-        $this->body = $body;
     }
 
     public function getConversationId(): string
@@ -61,11 +54,6 @@ class GetFileAccessTokenRequest
     public function getFileId(): string
     {
         return $this->fileId;
-    }
-
-    public function getBody(): GetFileAccessTokenRequestBody
-    {
-        return $this->body;
     }
 
     public function withConversationId(string $conversationId): self
@@ -96,14 +84,6 @@ class GetFileAccessTokenRequest
         return $clone;
     }
 
-    public function withBody(GetFileAccessTokenRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -121,9 +101,8 @@ class GetFileAccessTokenRequest
 
         $conversationId = $input->{'conversationId'};
         $fileId = $input->{'fileId'};
-        $body = GetFileAccessTokenRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($conversationId, $fileId, $body);
+        $obj = new self($conversationId, $fileId);
 
         return $obj;
     }
@@ -138,7 +117,6 @@ class GetFileAccessTokenRequest
         $output = [];
         $output['conversationId'] = $this->conversationId;
         $output['fileId'] = $this->fileId;
-        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -169,7 +147,6 @@ class GetFileAccessTokenRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -205,7 +182,6 @@ class GetFileAccessTokenRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

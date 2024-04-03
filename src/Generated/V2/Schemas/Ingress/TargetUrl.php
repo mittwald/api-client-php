@@ -25,6 +25,7 @@ class TargetUrl
     private static array $schema = [
         'properties' => [
             'url' => [
+                'format' => 'uri',
                 'type' => 'string',
             ],
         ],

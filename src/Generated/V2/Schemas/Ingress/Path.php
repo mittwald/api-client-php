@@ -41,6 +41,9 @@ class Path
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TargetUseDefaultPage',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TargetContainer',
+                    ],
                 ],
             ],
         ],
@@ -53,12 +56,12 @@ class Path
 
     private string $path;
 
-    private TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target;
+    private TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target;
 
     /**
-     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target
+     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target
      */
-    public function __construct(string $path, TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
+    public function __construct(string $path, TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
     {
         $this->path = $path;
         $this->target = $target;
@@ -71,9 +74,9 @@ class Path
 
     /**
      * @return
-     * TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage
+     * TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer
      */
-    public function getTarget(): TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage
+    public function getTarget(): TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage
     {
         return $this->target;
     }
@@ -93,9 +96,9 @@ class Path
     }
 
     /**
-     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage $target
+     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target
      */
-    public function withTarget(TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
+    public function withTarget(TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
     {
         $clone = clone $this;
         $clone->target = $target;
@@ -124,6 +127,7 @@ class Path
             TargetUrl::validateInput($input->{'target'}, true) => TargetUrl::buildFromInput($input->{'target'}, validate: $validate),
             TargetInstallation::validateInput($input->{'target'}, true) => TargetInstallation::buildFromInput($input->{'target'}, validate: $validate),
             TargetUseDefaultPage::validateInput($input->{'target'}, true) => TargetUseDefaultPage::buildFromInput($input->{'target'}, validate: $validate),
+            TargetContainer::validateInput($input->{'target'}, true) => TargetContainer::buildFromInput($input->{'target'}, validate: $validate),
         };
 
         $obj = new self($path, $target);
@@ -141,7 +145,7 @@ class Path
         $output = [];
         $output['path'] = $this->path;
         $output['target'] = match (true) {
-            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage => $this->target->toJson(),
+            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage, ($this->target) instanceof TargetContainer => $this->target->toJson(),
         };
 
         return $output;
@@ -174,7 +178,7 @@ class Path
     public function __clone()
     {
         $this->target = match (true) {
-            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage => $this->target,
+            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage, ($this->target) instanceof TargetContainer => $this->target,
         };
     }
 }
