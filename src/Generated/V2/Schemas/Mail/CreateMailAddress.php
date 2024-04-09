@@ -25,7 +25,7 @@ class CreateMailAddress
     private static array $schema = [
         'properties' => [
             'address' => [
-                'format' => 'email',
+                'format' => 'idn-email',
                 'type' => 'string',
             ],
             'isCatchAll' => [

@@ -26,7 +26,8 @@ class TargetContainer
         'properties' => [
             'container' => [
                 'properties' => [
-                    'name' => [
+                    'id' => [
+                        'format' => 'uuid',
                         'type' => 'string',
                     ],
                     'portProtocol' => [
@@ -36,7 +37,7 @@ class TargetContainer
                     ],
                 ],
                 'required' => [
-                    'name',
+                    'id',
                     'portProtocol',
                 ],
                 'type' => 'object',

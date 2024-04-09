@@ -56,8 +56,8 @@ class PageInsightsClientImpl implements PageInsightsClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-get-performance-data
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataRequest $request An object representing the request for this operation
-     * @return PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataOKResponse OK
+     * @param PageinsightsGetPerformanceDataRequest $request An object representing the request for this operation
+     * @return PageinsightsGetPerformanceDataOKResponse OK
      */
     public function pageinsightsGetPerformanceData(PageinsightsGetPerformanceDataRequest $request): PageinsightsGetPerformanceDataOKResponse
     {
@@ -79,8 +79,8 @@ class PageInsightsClientImpl implements PageInsightsClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-get-strace-data
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PageinsightsGetStraceData\PageinsightsGetStraceDataRequest $request An object representing the request for this operation
-     * @return PageinsightsGetStraceData\PageinsightsGetStraceDataOKResponse OK
+     * @param PageinsightsGetStraceDataRequest $request An object representing the request for this operation
+     * @return PageinsightsGetStraceDataOKResponse OK
      */
     public function pageinsightsGetStraceData(PageinsightsGetStraceDataRequest $request): PageinsightsGetStraceDataOKResponse
     {
@@ -102,8 +102,8 @@ class PageInsightsClientImpl implements PageInsightsClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-list-performance-data-for-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectRequest $request An object representing the request for this operation
-     * @return PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse OK
+     * @param PageinsightsListPerformanceDataForProjectRequest $request An object representing the request for this operation
+     * @return PageinsightsListPerformanceDataForProjectOKResponse OK
      */
     public function pageinsightsListPerformanceDataForProject(PageinsightsListPerformanceDataForProjectRequest $request): PageinsightsListPerformanceDataForProjectOKResponse
     {
@@ -125,8 +125,8 @@ class PageInsightsClientImpl implements PageInsightsClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Page-Insights/operation/pageinsights-schedule-strace
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest $request An object representing the request for this operation
-     * @return PageinsightsScheduleStrace\PageinsightsScheduleStraceAcceptedResponse Scheduled
+     * @param PageinsightsScheduleStraceRequest $request An object representing the request for this operation
+     * @return PageinsightsScheduleStraceAcceptedResponse Scheduled
      */
     public function pageinsightsScheduleStrace(PageinsightsScheduleStraceRequest $request): PageinsightsScheduleStraceAcceptedResponse
     {

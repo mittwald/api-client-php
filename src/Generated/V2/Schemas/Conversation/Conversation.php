@@ -69,6 +69,7 @@ class Conversation
                     'open',
                     'closed',
                     'answered',
+                    'inProgress',
                 ],
                 'type' => 'string',
             ],

@@ -25,12 +25,12 @@ class CreateForwardAddress
     private static array $schema = [
         'properties' => [
             'address' => [
-                'format' => 'email',
+                'format' => 'idn-email',
                 'type' => 'string',
             ],
             'forwardAddresses' => [
                 'items' => [
-                    'format' => 'email',
+                    'format' => 'idn-email',
                     'type' => 'string',
                 ],
                 'type' => 'array',

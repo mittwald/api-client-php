@@ -16,7 +16,7 @@ class UpdateMailAddressForwardAddressesRequestBody
         'properties' => [
             'forwardAddresses' => [
                 'items' => [
-                    'format' => 'email',
+                    'format' => 'idn-email',
                     'type' => 'string',
                 ],
                 'type' => 'array',

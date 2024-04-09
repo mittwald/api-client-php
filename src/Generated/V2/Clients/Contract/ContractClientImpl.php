@@ -115,10 +115,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\Orde
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractDefaultResponse;
@@ -157,8 +159,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-cancel-contract-item-termination
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CancelContractItemTermination\CancelContractItemTerminationRequest $request An object representing the request for this operation
-     * @return CancelContractItemTermination\CancelContractItemTerminationOKResponse Return the contractId and the contractItemId of the ContractItem where the Termination was cancelled.
+     * @param CancelContractItemTerminationRequest $request An object representing the request for this operation
+     * @return CancelContractItemTerminationOKResponse Return the contractId and the contractItemId of the ContractItem where the Termination was cancelled.
      */
     public function cancelContractItemTermination(CancelContractItemTerminationRequest $request): CancelContractItemTerminationOKResponse
     {
@@ -180,8 +182,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-cancel-contract-tariff-change
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CancelContractTariffChange\CancelContractTariffChangeRequest $request An object representing the request for this operation
-     * @return CancelContractTariffChange\CancelContractTariffChangeOKResponse Returns the contractId of the Contract whose TariffChange was cancelled.
+     * @param CancelContractTariffChangeRequest $request An object representing the request for this operation
+     * @return CancelContractTariffChangeOKResponse Returns the contractId of the Contract whose TariffChange was cancelled.
      */
     public function cancelContractTariffChange(CancelContractTariffChangeRequest $request): CancelContractTariffChangeOKResponse
     {
@@ -203,8 +205,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-cancel-contract-termination
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CancelContractTermination\CancelContractTerminationRequest $request An object representing the request for this operation
-     * @return CancelContractTermination\CancelContractTerminationOKResponse Return the contractId of the Contract whose Termination was cancelled.
+     * @param CancelContractTerminationRequest $request An object representing the request for this operation
+     * @return CancelContractTerminationOKResponse Return the contractId of the Contract whose Termination was cancelled.
      */
     public function cancelContractTermination(CancelContractTerminationRequest $request): CancelContractTerminationOKResponse
     {
@@ -226,8 +228,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-base-item-of-contract
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetBaseItemOfContract\GetBaseItemOfContractRequest $request An object representing the request for this operation
-     * @return GetBaseItemOfContract\GetBaseItemOfContractOKResponse The BaseItem of the Contract.
+     * @param GetBaseItemOfContractRequest $request An object representing the request for this operation
+     * @return GetBaseItemOfContractOKResponse The BaseItem of the Contract.
      */
     public function getBaseItemOfContract(GetBaseItemOfContractRequest $request): GetBaseItemOfContractOKResponse
     {
@@ -249,7 +251,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDetailOfContract\GetDetailOfContractRequest $request An object representing the request for this operation
+     * @param GetDetailOfContractRequest $request An object representing the request for this operation
      */
     public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse
     {
@@ -271,8 +273,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-domain
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest $request An object representing the request for this operation
-     * @return GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse Returns an active Contract for the given Domain.
+     * @param GetDetailOfContractByDomainRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByDomainOKResponse Returns an active Contract for the given Domain.
      */
     public function getDetailOfContractByDomain(GetDetailOfContractByDomainRequest $request): GetDetailOfContractByDomainOKResponse
     {
@@ -294,8 +296,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDetailOfContractByProject\GetDetailOfContractByProjectRequest $request An object representing the request for this operation
-     * @return GetDetailOfContractByProject\GetDetailOfContractByProjectOKResponse Returns an active Contract for the given Project.
+     * @param GetDetailOfContractByProjectRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByProjectOKResponse Returns an active Contract for the given Project.
      */
     public function getDetailOfContractByProject(GetDetailOfContractByProjectRequest $request): GetDetailOfContractByProjectOKResponse
     {
@@ -317,8 +319,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-server
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDetailOfContractByServer\GetDetailOfContractByServerRequest $request An object representing the request for this operation
-     * @return GetDetailOfContractByServer\GetDetailOfContractByServerOKResponse Returns an active Contract for the given Server.
+     * @param GetDetailOfContractByServerRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByServerOKResponse Returns an active Contract for the given Server.
      */
     public function getDetailOfContractByServer(GetDetailOfContractByServerRequest $request): GetDetailOfContractByServerOKResponse
     {
@@ -340,7 +342,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-item
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDetailOfContractItem\GetDetailOfContractItemRequest $request An object representing the request for this operation
+     * @param GetDetailOfContractItemRequest $request An object representing the request for this operation
      */
     public function getDetailOfContractItem(GetDetailOfContractItemRequest $request): GetDetailOfContractItemOKResponse
     {
@@ -362,8 +364,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-next-termination-date-for-item
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest $request An object representing the request for this operation
-     * @return GetNextTerminationDateForItem\GetNextTerminationDateForItemOKResponse Return the next possible TerminationDate for the ContractItem as date.
+     * @param GetNextTerminationDateForItemRequest $request An object representing the request for this operation
+     * @return GetNextTerminationDateForItemOKResponse Return the next possible TerminationDate for the ContractItem as date.
      */
     public function getNextTerminationDateForItem(GetNextTerminationDateForItemRequest $request): GetNextTerminationDateForItemOKResponse
     {
@@ -385,8 +387,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-list-contracts
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListContracts\ListContractsRequest $request An object representing the request for this operation
-     * @return ListContracts\ListContractsOKResponse Return the Contracts that belong to the Customer.
+     * @param ListContractsRequest $request An object representing the request for this operation
+     * @return ListContractsOKResponse Return the Contracts that belong to the Customer.
      */
     public function listContracts(ListContractsRequest $request): ListContractsOKResponse
     {
@@ -408,8 +410,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateContract\TerminateContractRequest $request An object representing the request for this operation
-     * @return TerminateContract\TerminateContractCreatedResponse Returns the contractId, the date on which the Termination will take place and the list of affected ContractItems.
+     * @param TerminateContractRequest $request An object representing the request for this operation
+     * @return TerminateContractCreatedResponse Returns the contractId, the date on which the Termination will take place and the list of affected ContractItems.
      */
     public function terminateContract(TerminateContractRequest $request): TerminateContractCreatedResponse
     {
@@ -431,8 +433,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-terminate-contract-item
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateContractItem\TerminateContractItemRequest $request An object representing the request for this operation
-     * @return TerminateContractItem\TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
+     * @param TerminateContractItemRequest $request An object representing the request for this operation
+     * @return TerminateContractItemCreatedResponse Return the contractId, the date on which the Termination will take place and the list of affected ContractItems.
      */
     public function terminateContractItem(TerminateContractItemRequest $request): TerminateContractItemCreatedResponse
     {
@@ -454,7 +456,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-invoice-detail-of-invoice
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
+     * @param DeprecatedInvoiceDetailOfInvoiceRequest $request An object representing the request for this operation
      * @deprecated
      */
     public function deprecatedInvoiceDetailOfInvoice(DeprecatedInvoiceDetailOfInvoiceRequest $request): DeprecatedInvoiceDetailOfInvoiceOKResponse
@@ -477,7 +479,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-detail
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceDetail\InvoiceDetailRequest $request An object representing the request for this operation
+     * @param InvoiceDetailRequest $request An object representing the request for this operation
      */
     public function invoiceDetail(InvoiceDetailRequest $request): InvoiceDetailOKResponse
     {
@@ -499,7 +501,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-get-detail-of-invoice-settings
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest $request An object representing the request for this operation
+     * @param InvoiceGetDetailOfInvoiceSettingsRequest $request An object representing the request for this operation
      */
     public function invoiceGetDetailOfInvoiceSettings(InvoiceGetDetailOfInvoiceSettingsRequest $request): InvoiceGetDetailOfInvoiceSettingsOKResponse
     {
@@ -521,8 +523,8 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-get-file-access-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenRequest $request An object representing the request for this operation
-     * @return InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenOKResponse The File Access Token required to access the Invoice file.
+     * @param InvoiceGetFileAccessTokenRequest $request An object representing the request for this operation
+     * @return InvoiceGetFileAccessTokenOKResponse The File Access Token required to access the Invoice file.
      */
     public function invoiceGetFileAccessToken(InvoiceGetFileAccessTokenRequest $request): InvoiceGetFileAccessTokenOKResponse
     {
@@ -544,7 +546,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-list-customer-invoices
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest $request An object representing the request for this operation
+     * @param InvoiceListCustomerInvoicesRequest $request An object representing the request for this operation
      */
     public function invoiceListCustomerInvoices(InvoiceListCustomerInvoicesRequest $request): InvoiceListCustomerInvoicesOKResponse
     {
@@ -566,7 +568,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-update-invoice-settings
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
+     * @param InvoiceUpdateInvoiceSettingsRequest $request An object representing the request for this operation
      */
     public function invoiceUpdateInvoiceSettings(InvoiceUpdateInvoiceSettingsRequest $request): InvoiceUpdateInvoiceSettingsOKResponse
     {
@@ -588,7 +590,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-create-order
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderCreateOrder\OrderCreateOrderRequest $request An object representing the request for this operation
+     * @param OrderCreateOrderRequest $request An object representing the request for this operation
      */
     public function orderCreateOrder(OrderCreateOrderRequest $request): OrderCreateOrderCreatedResponse
     {
@@ -610,7 +612,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-create-tariff-change
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderCreateTariffChange\OrderCreateTariffChangeRequest $request An object representing the request for this operation
+     * @param OrderCreateTariffChangeRequest $request An object representing the request for this operation
      */
     public function orderCreateTariffChange(OrderCreateTariffChangeRequest $request): OrderCreateTariffChangeCreatedResponse
     {
@@ -633,7 +635,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-get-order
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderGetOrder\OrderGetOrderRequest $request An object representing the request for this operation
+     * @param OrderGetOrderRequest $request An object representing the request for this operation
      */
     public function orderGetOrder(OrderGetOrderRequest $request): OrderGetOrderOKResponse
     {
@@ -655,7 +657,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-list-customer-orders
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderListCustomerOrders\OrderListCustomerOrdersRequest $request An object representing the request for this operation
+     * @param OrderListCustomerOrdersRequest $request An object representing the request for this operation
      */
     public function orderListCustomerOrders(OrderListCustomerOrdersRequest $request): OrderListCustomerOrdersOKResponse
     {
@@ -677,7 +679,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-list-project-orders
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderListProjectOrders\OrderListProjectOrdersRequest $request An object representing the request for this operation
+     * @param OrderListProjectOrdersRequest $request An object representing the request for this operation
      */
     public function orderListProjectOrders(OrderListProjectOrdersRequest $request): OrderListProjectOrdersOKResponse
     {
@@ -697,7 +699,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-preview-order
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderPreviewOrder\OrderPreviewOrderRequest $request An object representing the request for this operation
+     * @param OrderPreviewOrderRequest $request An object representing the request for this operation
      */
     public function orderPreviewOrder(OrderPreviewOrderRequest $request): UntypedResponse
     {
@@ -708,6 +710,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderPreviewOrderBadRequestResponse::fromResponse($httpResponse),
+            422 => OrderPreviewOrderUnprocessableEntityResponse::fromResponse($httpResponse),
             default => OrderPreviewOrderDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -718,7 +721,7 @@ class ContractClientImpl implements ContractClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-preview-tariff-change
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OrderPreviewTariffChange\OrderPreviewTariffChangeRequest $request An object representing the request for this operation
+     * @param OrderPreviewTariffChangeRequest $request An object representing the request for this operation
      */
     public function orderPreviewTariffChange(OrderPreviewTariffChangeRequest $request): OrderPreviewTariffChangeOKResponse
     {
@@ -729,6 +732,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderPreviewTariffChangeBadRequestResponse::fromResponse($httpResponse),
+            422 => OrderPreviewTariffChangeUnprocessableEntityResponse::fromResponse($httpResponse),
             default => OrderPreviewTariffChangeDefaultResponse::fromResponse($httpResponse),
         });
     }

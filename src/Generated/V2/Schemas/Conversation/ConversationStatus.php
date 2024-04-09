@@ -9,4 +9,5 @@ enum ConversationStatus: string
     case open = 'open';
     case closed = 'closed';
     case answered = 'answered';
+    case inProgress = 'inProgress';
 }

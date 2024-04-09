@@ -93,9 +93,9 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-token-rules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesRequest $request An object representing the request for this operation
+     * @param DeprecatedFileGetFileTokenRulesRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedFileGetFileTokenRules\DeprecatedFileGetFileTokenRulesOKResponse OK
+     * @return DeprecatedFileGetFileTokenRulesOKResponse OK
      */
     public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRulesOKResponse
     {
@@ -117,9 +117,9 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-type-rules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesRequest $request An object representing the request for this operation
+     * @param DeprecatedFileGetFileTypeRulesRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedFileGetFileTypeRules\DeprecatedFileGetFileTypeRulesOKResponse OK
+     * @return DeprecatedFileGetFileTypeRulesOKResponse OK
      */
     public function deprecatedFileGetFileTypeRules(DeprecatedFileGetFileTypeRulesRequest $request): DeprecatedFileGetFileTypeRulesOKResponse
     {
@@ -141,8 +141,8 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-create-file
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateFile\CreateFileRequest $request An object representing the request for this operation
-     * @return CreateFile\CreateFileCreatedResponse Created
+     * @param CreateFileRequest $request An object representing the request for this operation
+     * @return CreateFileCreatedResponse Created
      */
     public function createFile(CreateFileRequest $request): CreateFileCreatedResponse
     {
@@ -167,7 +167,7 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetFile\GetFileRequest $request An object representing the request for this operation
+     * @param GetFileRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
     public function getFile(GetFileRequest $request): StringResponse
@@ -194,8 +194,8 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-meta
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetFileMeta\GetFileMetaRequest $request An object representing the request for this operation
-     * @return GetFileMeta\GetFileMetaOKResponse OK
+     * @param GetFileMetaRequest $request An object representing the request for this operation
+     * @return GetFileMetaOKResponse OK
      */
     public function getFileMeta(GetFileMetaRequest $request): GetFileMetaOKResponse
     {
@@ -221,8 +221,8 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-upload-token-rules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetFileUploadTokenRules\GetFileUploadTokenRulesRequest $request An object representing the request for this operation
-     * @return GetFileUploadTokenRules\GetFileUploadTokenRulesOKResponse OK
+     * @param GetFileUploadTokenRulesRequest $request An object representing the request for this operation
+     * @return GetFileUploadTokenRulesOKResponse OK
      */
     public function getFileUploadTokenRules(GetFileUploadTokenRulesRequest $request): GetFileUploadTokenRulesOKResponse
     {
@@ -245,8 +245,8 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-upload-type-rules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetFileUploadTypeRules\GetFileUploadTypeRulesRequest $request An object representing the request for this operation
-     * @return GetFileUploadTypeRules\GetFileUploadTypeRulesOKResponse OK
+     * @param GetFileUploadTypeRulesRequest $request An object representing the request for this operation
+     * @return GetFileUploadTypeRulesOKResponse OK
      */
     public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRulesOKResponse
     {
@@ -269,7 +269,7 @@ class FileClientImpl implements FileClient
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-with-name
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetFileWithName\GetFileWithNameRequest $request An object representing the request for this operation
+     * @param GetFileWithNameRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
     public function getFileWithName(GetFileWithNameRequest $request): StringResponse

@@ -16,6 +16,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\DatabaseClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
@@ -52,4 +53,5 @@ interface Client
     public function container(): ContainerClient;
     public function pageInsights(): PageInsightsClient;
     public function relocation(): RelocationClient;
+    public function marketplace(): MarketplaceClient;
 }

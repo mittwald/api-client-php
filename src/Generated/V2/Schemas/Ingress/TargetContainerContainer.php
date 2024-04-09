@@ -24,7 +24,8 @@ class TargetContainerContainer
      */
     private static array $schema = [
         'properties' => [
-            'name' => [
+            'id' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'portProtocol' => [
@@ -34,28 +35,28 @@ class TargetContainerContainer
             ],
         ],
         'required' => [
-            'name',
+            'id',
             'portProtocol',
         ],
         'type' => 'object',
     ];
 
-    private string $name;
+    private string $id;
 
     /**
      * docker-compose port specification in format port/protocol (e.g. 8080/TCP)
      */
     private string $portProtocol;
 
-    public function __construct(string $name, string $portProtocol)
+    public function __construct(string $id, string $portProtocol)
     {
-        $this->name = $name;
+        $this->id = $id;
         $this->portProtocol = $portProtocol;
     }
 
-    public function getName(): string
+    public function getId(): string
     {
-        return $this->name;
+        return $this->id;
     }
 
     public function getPortProtocol(): string
@@ -63,16 +64,16 @@ class TargetContainerContainer
         return $this->portProtocol;
     }
 
-    public function withName(string $name): self
+    public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($id, static::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->name = $name;
+        $clone->id = $id;
 
         return $clone;
     }
@@ -106,10 +107,10 @@ class TargetContainerContainer
             static::validateInput($input);
         }
 
-        $name = $input->{'name'};
+        $id = $input->{'id'};
         $portProtocol = $input->{'portProtocol'};
 
-        $obj = new self($name, $portProtocol);
+        $obj = new self($id, $portProtocol);
 
         return $obj;
     }
@@ -122,7 +123,7 @@ class TargetContainerContainer
     public function toJson(): array
     {
         $output = [];
-        $output['name'] = $this->name;
+        $output['id'] = $this->id;
         $output['portProtocol'] = $this->portProtocol;
 
         return $output;

@@ -15,7 +15,7 @@ class DnsCreateDnsZoneRequestBody
     private static array $schema = [
         'properties' => [
             'name' => [
-                'format' => 'hostname',
+                'format' => 'idn-dnsname',
                 'type' => 'string',
             ],
             'parentZoneId' => [

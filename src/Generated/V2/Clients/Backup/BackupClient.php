@@ -46,8 +46,8 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-create-project-backup
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateProjectBackup\CreateProjectBackupRequest $request An object representing the request for this operation
-     * @return CreateProjectBackup\CreateProjectBackupCreatedResponse Created
+     * @param CreateProjectBackupRequest $request An object representing the request for this operation
+     * @return CreateProjectBackupCreatedResponse Created
      */
     public function createProjectBackup(CreateProjectBackupRequest $request): CreateProjectBackupCreatedResponse;
     /**
@@ -56,7 +56,7 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-create-project-backup-export
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateProjectBackupExport\CreateProjectBackupExportRequest $request An object representing the request for this operation
+     * @param CreateProjectBackupExportRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function createProjectBackupExport(CreateProjectBackupExportRequest $request): EmptyResponse;
@@ -66,8 +66,8 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-create-project-backup-schedule
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateProjectBackupSchedule\CreateProjectBackupScheduleRequest $request An object representing the request for this operation
-     * @return CreateProjectBackupSchedule\CreateProjectBackupScheduleCreatedResponse Created
+     * @param CreateProjectBackupScheduleRequest $request An object representing the request for this operation
+     * @return CreateProjectBackupScheduleCreatedResponse Created
      */
     public function createProjectBackupSchedule(CreateProjectBackupScheduleRequest $request): CreateProjectBackupScheduleCreatedResponse;
     /**
@@ -76,7 +76,7 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProjectBackup\DeleteProjectBackupRequest $request An object representing the request for this operation
+     * @param DeleteProjectBackupRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteProjectBackup(DeleteProjectBackupRequest $request): EmptyResponse;
@@ -86,7 +86,7 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup-export
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProjectBackupExport\DeleteProjectBackupExportRequest $request An object representing the request for this operation
+     * @param DeleteProjectBackupExportRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteProjectBackupExport(DeleteProjectBackupExportRequest $request): EmptyResponse;
@@ -96,7 +96,7 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-delete-project-backup-schedule
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProjectBackupSchedule\DeleteProjectBackupScheduleRequest $request An object representing the request for this operation
+     * @param DeleteProjectBackupScheduleRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteProjectBackupSchedule(DeleteProjectBackupScheduleRequest $request): EmptyResponse;
@@ -106,8 +106,8 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetProjectBackup\GetProjectBackupRequest $request An object representing the request for this operation
-     * @return GetProjectBackup\GetProjectBackupOKResponse OK
+     * @param GetProjectBackupRequest $request An object representing the request for this operation
+     * @return GetProjectBackupOKResponse OK
      */
     public function getProjectBackup(GetProjectBackupRequest $request): GetProjectBackupOKResponse;
     /**
@@ -116,8 +116,8 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-project-backup-schedule
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetProjectBackupSchedule\GetProjectBackupScheduleRequest $request An object representing the request for this operation
-     * @return GetProjectBackupSchedule\GetProjectBackupScheduleOKResponse OK
+     * @param GetProjectBackupScheduleRequest $request An object representing the request for this operation
+     * @return GetProjectBackupScheduleOKResponse OK
      */
     public function getProjectBackupSchedule(GetProjectBackupScheduleRequest $request): GetProjectBackupScheduleOKResponse;
     /**
@@ -126,8 +126,8 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-list-project-backup-schedules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjectBackupSchedules\ListProjectBackupSchedulesRequest $request An object representing the request for this operation
-     * @return ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse OK
+     * @param ListProjectBackupSchedulesRequest $request An object representing the request for this operation
+     * @return ListProjectBackupSchedulesOKResponse OK
      */
     public function listProjectBackupSchedules(ListProjectBackupSchedulesRequest $request): ListProjectBackupSchedulesOKResponse;
     /**
@@ -136,8 +136,8 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-list-project-backups
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjectBackups\ListProjectBackupsRequest $request An object representing the request for this operation
-     * @return ListProjectBackups\ListProjectBackupsOKResponse OK
+     * @param ListProjectBackupsRequest $request An object representing the request for this operation
+     * @return ListProjectBackupsOKResponse OK
      */
     public function listProjectBackups(ListProjectBackupsRequest $request): ListProjectBackupsOKResponse;
     /**
@@ -146,7 +146,7 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest $request An object representing the request for this operation
+     * @param UpdateProjectBackupDescriptionRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateProjectBackupDescription(UpdateProjectBackupDescriptionRequest $request): EmptyResponse;
@@ -156,7 +156,7 @@ interface BackupClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-update-project-backup-schedule
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest $request An object representing the request for this operation
+     * @param UpdateProjectBackupScheduleRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateProjectBackupSchedule(UpdateProjectBackupScheduleRequest $request): EmptyResponse;

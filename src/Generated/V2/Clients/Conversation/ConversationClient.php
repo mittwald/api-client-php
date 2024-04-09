@@ -53,7 +53,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-create-conversation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateConversation\CreateConversationRequest $request An object representing the request for this operation
+     * @param CreateConversationRequest $request An object representing the request for this operation
      */
     public function createConversation(CreateConversationRequest $request): CreateConversationCreatedResponse;
     /**
@@ -62,7 +62,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-create-message
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateMessage\CreateMessageRequest $request An object representing the request for this operation
+     * @param CreateMessageRequest $request An object representing the request for this operation
      */
     public function createMessage(CreateMessageRequest $request): CreateMessageCreatedResponse;
     /**
@@ -71,7 +71,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-category
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetCategory\GetCategoryRequest $request An object representing the request for this operation
+     * @param GetCategoryRequest $request An object representing the request for this operation
      */
     public function getCategory(GetCategoryRequest $request): GetCategoryOKResponse;
     /**
@@ -80,8 +80,8 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-conversation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetConversation\GetConversationRequest $request An object representing the request for this operation
-     * @return GetConversation\GetConversationOKResponse The metadata of the conversation.
+     * @param GetConversationRequest $request An object representing the request for this operation
+     * @return GetConversationOKResponse The metadata of the conversation.
      * Does not contain messages send in the conversation.
      * Use [`/v2/conversations/{conversationId}/messages`](#/Conversation/conversation-service-get-messages-by-conversation-v2) to get the messages.
      */
@@ -92,8 +92,8 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-conversation-members
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetConversationMembers\GetConversationMembersRequest $request An object representing the request for this operation
-     * @return GetConversationMembers\GetConversationMembersOKResponse The members of the conversation.
+     * @param GetConversationMembersRequest $request An object representing the request for this operation
+     * @return GetConversationMembersOKResponse The members of the conversation.
      */
     public function getConversationMembers(GetConversationMembersRequest $request): GetConversationMembersOKResponse;
     /**
@@ -102,8 +102,8 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-file-access-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetFileAccessToken\GetFileAccessTokenRequest $request An object representing the request for this operation
-     * @return GetFileAccessToken\GetFileAccessTokenOKResponse The file access token required to access the file linked with the conversation.
+     * @param GetFileAccessTokenRequest $request An object representing the request for this operation
+     * @return GetFileAccessTokenOKResponse The file access token required to access the file linked with the conversation.
      */
     public function getFileAccessToken(GetFileAccessTokenRequest $request): GetFileAccessTokenOKResponse;
     /**
@@ -112,7 +112,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-categories
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListCategories\ListCategoriesRequest $request An object representing the request for this operation
+     * @param ListCategoriesRequest $request An object representing the request for this operation
      */
     public function listCategories(ListCategoriesRequest $request): ListCategoriesOKResponse;
     /**
@@ -121,8 +121,8 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-conversations
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListConversations\ListConversationsRequest $request An object representing the request for this operation
-     * @return ListConversations\ListConversationsOKResponse The conversations list ordered by creation date
+     * @param ListConversationsRequest $request An object representing the request for this operation
+     * @return ListConversationsOKResponse The conversations list ordered by creation date
      */
     public function listConversations(ListConversationsRequest $request): ListConversationsOKResponse;
     /**
@@ -131,7 +131,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-list-messages-by-conversation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMessagesByConversation\ListMessagesByConversationRequest $request An object representing the request for this operation
+     * @param ListMessagesByConversationRequest $request An object representing the request for this operation
      */
     public function listMessagesByConversation(ListMessagesByConversationRequest $request): UntypedResponse;
     /**
@@ -140,8 +140,8 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-request-file-upload
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestFileUpload\RequestFileUploadRequest $request An object representing the request for this operation
-     * @return RequestFileUpload\RequestFileUploadCreatedResponse The upload token with additional rules describing what files can be uploaded using this token.
+     * @param RequestFileUploadRequest $request An object representing the request for this operation
+     * @return RequestFileUploadCreatedResponse The upload token with additional rules describing what files can be uploaded using this token.
      * The token can be used with [`POST /v2/files`](#/Files/file-service-file-create) to upload a file that is
      * linked with the conversation.
      */
@@ -152,7 +152,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-set-conversation-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param SetConversationStatus\SetConversationStatusRequest $request An object representing the request for this operation
+     * @param SetConversationStatusRequest $request An object representing the request for this operation
      */
     public function setConversationStatus(SetConversationStatusRequest $request): SetConversationStatusOKResponse;
     /**
@@ -161,7 +161,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-update-conversation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateConversation\UpdateConversationRequest $request An object representing the request for this operation
+     * @param UpdateConversationRequest $request An object representing the request for this operation
      */
     public function updateConversation(UpdateConversationRequest $request): UpdateConversationOKResponse;
     /**
@@ -170,7 +170,7 @@ interface ConversationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-update-message
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMessage\UpdateMessageRequest $request An object representing the request for this operation
+     * @param UpdateMessageRequest $request An object representing the request for this operation
      */
     public function updateMessage(UpdateMessageRequest $request): UpdateMessageOKResponse;
 }

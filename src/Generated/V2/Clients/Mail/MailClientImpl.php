@@ -231,8 +231,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-create-deliverybox
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateDeliverybox\CreateDeliveryboxRequest $request An object representing the request for this operation
-     * @return CreateDeliverybox\CreateDeliveryboxCreatedResponse OK
+     * @param CreateDeliveryboxRequest $request An object representing the request for this operation
+     * @return CreateDeliveryboxCreatedResponse OK
      */
     public function createDeliverybox(CreateDeliveryboxRequest $request): CreateDeliveryboxCreatedResponse
     {
@@ -257,8 +257,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-create-mail-address
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateMailAddress\CreateMailAddressRequest $request An object representing the request for this operation
-     * @return CreateMailAddress\CreateMailAddressCreatedResponse OK
+     * @param CreateMailAddressRequest $request An object representing the request for this operation
+     * @return CreateMailAddressCreatedResponse OK
      */
     public function createMailAddress(CreateMailAddressRequest $request): CreateMailAddressCreatedResponse
     {
@@ -283,7 +283,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-delete-delivery-box
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteDeliveryBox\DeleteDeliveryBoxRequest $request An object representing the request for this operation
+     * @param DeleteDeliveryBoxRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function deleteDeliveryBox(DeleteDeliveryBoxRequest $request): EmptyResponse
@@ -309,7 +309,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-delete-mail-address
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteMailAddress\DeleteMailAddressRequest $request An object representing the request for this operation
+     * @param DeleteMailAddressRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse
@@ -335,7 +335,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-deliverybox-update-description-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeliveryboxUpdateDescriptionDeprecated\DeliveryboxUpdateDescriptionDeprecatedRequest $request An object representing the request for this operation
+     * @param DeliveryboxUpdateDescriptionDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -357,7 +357,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-deliverybox-update-password-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeliveryboxUpdatePasswordDeprecated\DeliveryboxUpdatePasswordDeprecatedRequest $request An object representing the request for this operation
+     * @param DeliveryboxUpdatePasswordDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -379,8 +379,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-delivery-box
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDeliveryBox\GetDeliveryBoxRequest $request An object representing the request for this operation
-     * @return GetDeliveryBox\GetDeliveryBoxOKResponse OK
+     * @param GetDeliveryBoxRequest $request An object representing the request for this operation
+     * @return GetDeliveryBoxOKResponse OK
      */
     public function getDeliveryBox(GetDeliveryBoxRequest $request): GetDeliveryBoxOKResponse
     {
@@ -405,8 +405,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-mail-address
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetMailAddress\GetMailAddressRequest $request An object representing the request for this operation
-     * @return GetMailAddress\GetMailAddressOKResponse OK
+     * @param GetMailAddressRequest $request An object representing the request for this operation
+     * @return GetMailAddressOKResponse OK
      */
     public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse
     {
@@ -431,8 +431,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-delivery-boxes
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListDeliveryBoxes\ListDeliveryBoxesRequest $request An object representing the request for this operation
-     * @return ListDeliveryBoxes\ListDeliveryBoxesOKResponse OK
+     * @param ListDeliveryBoxesRequest $request An object representing the request for this operation
+     * @return ListDeliveryBoxesOKResponse OK
      */
     public function listDeliveryBoxes(ListDeliveryBoxesRequest $request): ListDeliveryBoxesOKResponse
     {
@@ -457,8 +457,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-mail-addresses
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMailAddresses\ListMailAddressesRequest $request An object representing the request for this operation
-     * @return ListMailAddresses\ListMailAddressesOKResponse OK
+     * @param ListMailAddressesRequest $request An object representing the request for this operation
+     * @return ListMailAddressesOKResponse OK
      */
     public function listMailAddresses(ListMailAddressesRequest $request): ListMailAddressesOKResponse
     {
@@ -483,8 +483,8 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-project-mail-settings
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjectMailSettings\ListProjectMailSettingsRequest $request An object representing the request for this operation
-     * @return ListProjectMailSettings\ListProjectMailSettingsOKResponse OK
+     * @param ListProjectMailSettingsRequest $request An object representing the request for this operation
+     * @return ListProjectMailSettingsOKResponse OK
      */
     public function listProjectMailSettings(ListProjectMailSettingsRequest $request): ListProjectMailSettingsOKResponse
     {
@@ -509,7 +509,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-mailaddress-update-address-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedRequest $request An object representing the request for this operation
+     * @param MailaddressUpdateAddressDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -531,7 +531,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-projectsetting-update-blacklist-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedRequest $request An object representing the request for this operation
+     * @param ProjectsettingUpdateBlacklistDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -553,7 +553,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-projectsetting-update-whitelist-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedRequest $request An object representing the request for this operation
+     * @param ProjectsettingUpdateWhitelistDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -575,7 +575,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-delivery-box-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionRequest $request An object representing the request for this operation
+     * @param UpdateDeliveryBoxDescriptionRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateDeliveryBoxDescription(UpdateDeliveryBoxDescriptionRequest $request): EmptyResponse
@@ -601,7 +601,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-delivery-box-password
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordRequest $request An object representing the request for this operation
+     * @param UpdateDeliveryBoxPasswordRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateDeliveryBoxPassword(UpdateDeliveryBoxPasswordRequest $request): EmptyResponse
@@ -627,7 +627,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-address
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressAddress\UpdateMailAddressAddressRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressAddressRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressAddress(UpdateMailAddressAddressRequest $request): EmptyResponse
@@ -653,7 +653,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-autoresponder
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressAutoresponderRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressAutoresponder(UpdateMailAddressAutoresponderRequest $request): EmptyResponse
@@ -679,7 +679,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-autoresponder-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressAutoresponderV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -706,7 +706,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catch-all
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressCatchAll\UpdateMailAddressCatchAllRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressCatchAllRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressCatchAll(UpdateMailAddressCatchAllRequest $request): EmptyResponse
@@ -732,7 +732,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catchall-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressCatchallV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -759,7 +759,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-forward-addresses
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressForwardAddressesRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressForwardAddresses(UpdateMailAddressForwardAddressesRequest $request): EmptyResponse
@@ -785,7 +785,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-forward-addresses-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressForwardAddressesV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -812,7 +812,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-password
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressPassword\UpdateMailAddressPasswordRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressPasswordRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressPassword(UpdateMailAddressPasswordRequest $request): EmptyResponse
@@ -838,7 +838,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-password-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressPasswordV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -865,7 +865,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-quota
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressQuota\UpdateMailAddressQuotaRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressQuotaRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressQuota(UpdateMailAddressQuotaRequest $request): EmptyResponse
@@ -891,7 +891,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-quota-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressQuotaV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -918,7 +918,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-spam-protection
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressSpamProtectionRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateMailAddressSpamProtection(UpdateMailAddressSpamProtectionRequest $request): EmptyResponse
@@ -944,7 +944,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-spam-protection-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateMailAddressSpamProtectionV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */
@@ -971,7 +971,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-project-mail-setting
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectMailSetting\UpdateProjectMailSettingRequest $request An object representing the request for this operation
+     * @param UpdateProjectMailSettingRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function updateProjectMailSetting(UpdateProjectMailSettingRequest $request): EmptyResponse
@@ -997,7 +997,7 @@ class MailClientImpl implements MailClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-project-mail-setting-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedRequest $request An object representing the request for this operation
+     * @param UpdateProjectMailSettingV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse OK
      */

@@ -66,8 +66,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-create-mysql-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateMysqlDatabase\CreateMysqlDatabaseRequest $request An object representing the request for this operation
-     * @return CreateMysqlDatabase\CreateMysqlDatabaseCreatedResponse Created
+     * @param CreateMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return CreateMysqlDatabaseCreatedResponse Created
      */
     public function createMysqlDatabase(CreateMysqlDatabaseRequest $request): CreateMysqlDatabaseCreatedResponse;
     /**
@@ -76,8 +76,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-create-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateMysqlUser\CreateMysqlUserRequest $request An object representing the request for this operation
-     * @return CreateMysqlUser\CreateMysqlUserCreatedResponse Created
+     * @param CreateMysqlUserRequest $request An object representing the request for this operation
+     * @return CreateMysqlUserCreatedResponse Created
      */
     public function createMysqlUser(CreateMysqlUserRequest $request): CreateMysqlUserCreatedResponse;
     /**
@@ -86,8 +86,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-create-redis-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateRedisDatabase\CreateRedisDatabaseRequest $request An object representing the request for this operation
-     * @return CreateRedisDatabase\CreateRedisDatabaseCreatedResponse Created
+     * @param CreateRedisDatabaseRequest $request An object representing the request for this operation
+     * @return CreateRedisDatabaseCreatedResponse Created
      */
     public function createRedisDatabase(CreateRedisDatabaseRequest $request): CreateRedisDatabaseCreatedResponse;
     /**
@@ -96,7 +96,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-delete-mysql-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteMysqlDatabase\DeleteMysqlDatabaseRequest $request An object representing the request for this operation
+     * @param DeleteMysqlDatabaseRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteMysqlDatabase(DeleteMysqlDatabaseRequest $request): EmptyResponse;
@@ -106,7 +106,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-delete-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteMysqlUser\DeleteMysqlUserRequest $request An object representing the request for this operation
+     * @param DeleteMysqlUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteMysqlUser(DeleteMysqlUserRequest $request): EmptyResponse;
@@ -116,7 +116,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-delete-redis-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteRedisDatabase\DeleteRedisDatabaseRequest $request An object representing the request for this operation
+     * @param DeleteRedisDatabaseRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteRedisDatabase(DeleteRedisDatabaseRequest $request): EmptyResponse;
@@ -126,7 +126,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-disable-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DisableMysqlUser\DisableMysqlUserRequest $request An object representing the request for this operation
+     * @param DisableMysqlUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function disableMysqlUser(DisableMysqlUserRequest $request): EmptyResponse;
@@ -136,7 +136,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-enable-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param EnableMysqlUser\EnableMysqlUserRequest $request An object representing the request for this operation
+     * @param EnableMysqlUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function enableMysqlUser(EnableMysqlUserRequest $request): EmptyResponse;
@@ -146,8 +146,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetMysqlDatabase\GetMysqlDatabaseRequest $request An object representing the request for this operation
-     * @return GetMysqlDatabase\GetMysqlDatabaseOKResponse OK
+     * @param GetMysqlDatabaseRequest $request An object representing the request for this operation
+     * @return GetMysqlDatabaseOKResponse OK
      */
     public function getMysqlDatabase(GetMysqlDatabaseRequest $request): GetMysqlDatabaseOKResponse;
     /**
@@ -156,8 +156,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetMysqlUser\GetMysqlUserRequest $request An object representing the request for this operation
-     * @return GetMysqlUser\GetMysqlUserOKResponse OK
+     * @param GetMysqlUserRequest $request An object representing the request for this operation
+     * @return GetMysqlUserOKResponse OK
      */
     public function getMysqlUser(GetMysqlUserRequest $request): GetMysqlUserOKResponse;
     /**
@@ -166,8 +166,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-mysql-user-php-my-admin-url
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlRequest $request An object representing the request for this operation
-     * @return GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlOKResponse OK
+     * @param GetMysqlUserPhpMyAdminUrlRequest $request An object representing the request for this operation
+     * @return GetMysqlUserPhpMyAdminUrlOKResponse OK
      */
     public function getMysqlUserPhpMyAdminUrl(GetMysqlUserPhpMyAdminUrlRequest $request): GetMysqlUserPhpMyAdminUrlOKResponse;
     /**
@@ -176,8 +176,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-get-redis-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetRedisDatabase\GetRedisDatabaseRequest $request An object representing the request for this operation
-     * @return GetRedisDatabase\GetRedisDatabaseOKResponse OK
+     * @param GetRedisDatabaseRequest $request An object representing the request for this operation
+     * @return GetRedisDatabaseOKResponse OK
      */
     public function getRedisDatabase(GetRedisDatabaseRequest $request): GetRedisDatabaseOKResponse;
     /**
@@ -186,8 +186,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-charsets
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMysqlCharsets\ListMysqlCharsetsRequest $request An object representing the request for this operation
-     * @return ListMysqlCharsets\ListMysqlCharsetsOKResponse OK
+     * @param ListMysqlCharsetsRequest $request An object representing the request for this operation
+     * @return ListMysqlCharsetsOKResponse OK
      */
     public function listMysqlCharsets(ListMysqlCharsetsRequest $request): ListMysqlCharsetsOKResponse;
     /**
@@ -196,8 +196,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-databases
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMysqlDatabases\ListMysqlDatabasesRequest $request An object representing the request for this operation
-     * @return ListMysqlDatabases\ListMysqlDatabasesOKResponse OK
+     * @param ListMysqlDatabasesRequest $request An object representing the request for this operation
+     * @return ListMysqlDatabasesOKResponse OK
      */
     public function listMysqlDatabases(ListMysqlDatabasesRequest $request): ListMysqlDatabasesOKResponse;
     /**
@@ -206,8 +206,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-users
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMysqlUsers\ListMysqlUsersRequest $request An object representing the request for this operation
-     * @return ListMysqlUsers\ListMysqlUsersOKResponse OK
+     * @param ListMysqlUsersRequest $request An object representing the request for this operation
+     * @return ListMysqlUsersOKResponse OK
      */
     public function listMysqlUsers(ListMysqlUsersRequest $request): ListMysqlUsersOKResponse;
     /**
@@ -216,8 +216,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-mysql-versions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMysqlVersions\ListMysqlVersionsRequest $request An object representing the request for this operation
-     * @return ListMysqlVersions\ListMysqlVersionsOKResponse OK
+     * @param ListMysqlVersionsRequest $request An object representing the request for this operation
+     * @return ListMysqlVersionsOKResponse OK
      */
     public function listMysqlVersions(ListMysqlVersionsRequest $request): ListMysqlVersionsOKResponse;
     /**
@@ -226,8 +226,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-redis-databases
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListRedisDatabases\ListRedisDatabasesRequest $request An object representing the request for this operation
-     * @return ListRedisDatabases\ListRedisDatabasesOKResponse OK
+     * @param ListRedisDatabasesRequest $request An object representing the request for this operation
+     * @return ListRedisDatabasesOKResponse OK
      */
     public function listRedisDatabases(ListRedisDatabasesRequest $request): ListRedisDatabasesOKResponse;
     /**
@@ -236,8 +236,8 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-list-redis-versions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListRedisVersions\ListRedisVersionsRequest $request An object representing the request for this operation
-     * @return ListRedisVersions\ListRedisVersionsOKResponse OK
+     * @param ListRedisVersionsRequest $request An object representing the request for this operation
+     * @return ListRedisVersionsOKResponse OK
      */
     public function listRedisVersions(ListRedisVersionsRequest $request): ListRedisVersionsOKResponse;
     /**
@@ -246,7 +246,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-default-charset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
+     * @param UpdateMysqlDatabaseDefaultCharsetRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateMysqlDatabaseDefaultCharset(UpdateMysqlDatabaseDefaultCharsetRequest $request): EmptyResponse;
@@ -256,7 +256,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-database-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @param UpdateMysqlDatabaseDescriptionRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateMysqlDatabaseDescription(UpdateMysqlDatabaseDescriptionRequest $request): EmptyResponse;
@@ -266,7 +266,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMysqlUser\UpdateMysqlUserRequest $request An object representing the request for this operation
+     * @param UpdateMysqlUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateMysqlUser(UpdateMysqlUserRequest $request): EmptyResponse;
@@ -276,7 +276,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-mysql-user-password
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
+     * @param UpdateMysqlUserPasswordRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateMysqlUserPassword(UpdateMysqlUserPasswordRequest $request): EmptyResponse;
@@ -286,7 +286,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-configuration
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
+     * @param UpdateRedisDatabaseConfigurationRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateRedisDatabaseConfiguration(UpdateRedisDatabaseConfigurationRequest $request): EmptyResponse;
@@ -296,7 +296,7 @@ interface DatabaseClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Database/operation/database-update-redis-database-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
+     * @param UpdateRedisDatabaseDescriptionRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateRedisDatabaseDescription(UpdateRedisDatabaseDescriptionRequest $request): EmptyResponse;

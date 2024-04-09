@@ -117,7 +117,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-execute-action
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ExecuteAction\ExecuteActionRequest $request An object representing the request for this operation
+     * @param ExecuteActionRequest $request An object representing the request for this operation
      * @return EmptyResponse The given action has been executed.
      */
     public function executeAction(ExecuteActionRequest $request): EmptyResponse
@@ -139,8 +139,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-app
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetApp\GetAppRequest $request An object representing the request for this operation
-     * @return GetApp\GetAppOKResponse The app object.
+     * @param GetAppRequest $request An object representing the request for this operation
+     * @return GetAppOKResponse The app object.
      */
     public function getApp(GetAppRequest $request): GetAppOKResponse
     {
@@ -161,8 +161,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetAppinstallation\GetAppinstallationRequest $request An object representing the request for this operation
-     * @return GetAppinstallation\GetAppinstallationOKResponse The AppInstallation.
+     * @param GetAppinstallationRequest $request An object representing the request for this operation
+     * @return GetAppinstallationOKResponse The AppInstallation.
      */
     public function getAppinstallation(GetAppinstallationRequest $request): GetAppinstallationOKResponse
     {
@@ -183,8 +183,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-appversion
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetAppversion\GetAppversionRequest $request An object representing the request for this operation
-     * @return GetAppversion\GetAppversionOKResponse The appVersion object.
+     * @param GetAppversionRequest $request An object representing the request for this operation
+     * @return GetAppversionOKResponse The appVersion object.
      */
     public function getAppversion(GetAppversionRequest $request): GetAppversionOKResponse
     {
@@ -205,8 +205,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-installed-systemsoftware-for-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationRequest $request An object representing the request for this operation
-     * @return GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationOKResponse The list of installed 'SystemSoftware'.
+     * @param GetInstalledSystemsoftwareForAppinstallationRequest $request An object representing the request for this operation
+     * @return GetInstalledSystemsoftwareForAppinstallationOKResponse The list of installed 'SystemSoftware'.
      */
     public function getInstalledSystemsoftwareForAppinstallation(GetInstalledSystemsoftwareForAppinstallationRequest $request): GetInstalledSystemsoftwareForAppinstallationOKResponse
     {
@@ -227,8 +227,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-missing-dependencies-for-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest $request An object representing the request for this operation
-     * @return GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse The missing dependencies of the AppInstallation for the target AppVersion.
+     * @param GetMissingDependenciesForAppinstallationRequest $request An object representing the request for this operation
+     * @return GetMissingDependenciesForAppinstallationOKResponse The missing dependencies of the AppInstallation for the target AppVersion.
      */
     public function getMissingDependenciesForAppinstallation(GetMissingDependenciesForAppinstallationRequest $request): GetMissingDependenciesForAppinstallationOKResponse
     {
@@ -249,8 +249,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-systemsoftware
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSystemsoftware\GetSystemsoftwareRequest $request An object representing the request for this operation
-     * @return GetSystemsoftware\GetSystemsoftwareOKResponse The SystemSoftware.
+     * @param GetSystemsoftwareRequest $request An object representing the request for this operation
+     * @return GetSystemsoftwareOKResponse The SystemSoftware.
      */
     public function getSystemsoftware(GetSystemsoftwareRequest $request): GetSystemsoftwareOKResponse
     {
@@ -271,8 +271,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-get-systemsoftwareversion
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSystemsoftwareversion\GetSystemsoftwareversionRequest $request An object representing the request for this operation
-     * @return GetSystemsoftwareversion\GetSystemsoftwareversionOKResponse The systemSoftwareVersion object.
+     * @param GetSystemsoftwareversionRequest $request An object representing the request for this operation
+     * @return GetSystemsoftwareversionOKResponse The systemSoftwareVersion object.
      */
     public function getSystemsoftwareversion(GetSystemsoftwareversionRequest $request): GetSystemsoftwareversionOKResponse
     {
@@ -293,7 +293,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-link-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param LinkDatabase\LinkDatabaseRequest $request An object representing the request for this operation
+     * @param LinkDatabaseRequest $request An object representing the request for this operation
      * @return EmptyResponse The database has been linked.
      */
     public function linkDatabase(LinkDatabaseRequest $request): EmptyResponse
@@ -315,8 +315,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appinstallations
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListAppinstallations\ListAppinstallationsRequest $request An object representing the request for this operation
-     * @return ListAppinstallations\ListAppinstallationsOKResponse Object containing the list of AppInstallations.
+     * @param ListAppinstallationsRequest $request An object representing the request for this operation
+     * @return ListAppinstallationsOKResponse Object containing the list of AppInstallations.
      */
     public function listAppinstallations(ListAppinstallationsRequest $request): ListAppinstallationsOKResponse
     {
@@ -336,8 +336,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-apps
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListApps\ListAppsRequest $request An object representing the request for this operation
-     * @return ListApps\ListAppsOKResponse Object containing the list of Apps.
+     * @param ListAppsRequest $request An object representing the request for this operation
+     * @return ListAppsOKResponse Object containing the list of Apps.
      */
     public function listApps(ListAppsRequest $request): ListAppsOKResponse
     {
@@ -357,8 +357,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appversions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListAppversions\ListAppversionsRequest $request An object representing the request for this operation
-     * @return ListAppversions\ListAppversionsOKResponse Object containing the list of AppVersions.
+     * @param ListAppversionsRequest $request An object representing the request for this operation
+     * @return ListAppversionsOKResponse Object containing the list of AppVersions.
      */
     public function listAppversions(ListAppversionsRequest $request): ListAppversionsOKResponse
     {
@@ -378,8 +378,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-systemsoftwares
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListSystemsoftwares\ListSystemsoftwaresRequest $request An object representing the request for this operation
-     * @return ListSystemsoftwares\ListSystemsoftwaresOKResponse Object containing the list of SystemSoftwares.
+     * @param ListSystemsoftwaresRequest $request An object representing the request for this operation
+     * @return ListSystemsoftwaresOKResponse Object containing the list of SystemSoftwares.
      */
     public function listSystemsoftwares(ListSystemsoftwaresRequest $request): ListSystemsoftwaresOKResponse
     {
@@ -399,8 +399,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-systemsoftwareversions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListSystemsoftwareversions\ListSystemsoftwareversionsRequest $request An object representing the request for this operation
-     * @return ListSystemsoftwareversions\ListSystemsoftwareversionsOKResponse Object containing the list of SystemSoftwareVersions.
+     * @param ListSystemsoftwareversionsRequest $request An object representing the request for this operation
+     * @return ListSystemsoftwareversionsOKResponse Object containing the list of SystemSoftwareVersions.
      */
     public function listSystemsoftwareversions(ListSystemsoftwareversionsRequest $request): ListSystemsoftwareversionsOKResponse
     {
@@ -420,8 +420,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-update-candidates-for-appversion
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest $request An object representing the request for this operation
-     * @return ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionOKResponse Object containing the list of AppVersions.
+     * @param ListUpdateCandidatesForAppversionRequest $request An object representing the request for this operation
+     * @return ListUpdateCandidatesForAppversionOKResponse Object containing the list of AppVersions.
      */
     public function listUpdateCandidatesForAppversion(ListUpdateCandidatesForAppversionRequest $request): ListUpdateCandidatesForAppversionOKResponse
     {
@@ -441,7 +441,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-patch-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PatchAppinstallation\PatchAppinstallationRequest $request An object representing the request for this operation
+     * @param PatchAppinstallationRequest $request An object representing the request for this operation
      * @return EmptyResponse The AppInstallation has been patched.
      */
     public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse
@@ -463,8 +463,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestAppinstallation\RequestAppinstallationRequest $request An object representing the request for this operation
-     * @return RequestAppinstallation\RequestAppinstallationCreatedResponse The AppInstallation has been requested.
+     * @param RequestAppinstallationRequest $request An object representing the request for this operation
+     * @return RequestAppinstallationCreatedResponse The AppInstallation has been requested.
      */
     public function requestAppinstallation(RequestAppinstallationRequest $request): RequestAppinstallationCreatedResponse
     {
@@ -485,8 +485,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-request-appinstallation-copy
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestAppinstallationCopy\RequestAppinstallationCopyRequest $request An object representing the request for this operation
-     * @return RequestAppinstallationCopy\RequestAppinstallationCopyCreatedResponse The AppInstallation copy has been requested.
+     * @param RequestAppinstallationCopyRequest $request An object representing the request for this operation
+     * @return RequestAppinstallationCopyCreatedResponse The AppInstallation copy has been requested.
      */
     public function requestAppinstallationCopy(RequestAppinstallationCopyRequest $request): RequestAppinstallationCopyCreatedResponse
     {
@@ -507,8 +507,8 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-retrieve-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RetrieveStatus\RetrieveStatusRequest $request An object representing the request for this operation
-     * @return RetrieveStatus\RetrieveStatusOKResponse The appInstallation status.
+     * @param RetrieveStatusRequest $request An object representing the request for this operation
+     * @return RetrieveStatusOKResponse The appInstallation status.
      */
     public function retrieveStatus(RetrieveStatusRequest $request): RetrieveStatusOKResponse
     {
@@ -529,7 +529,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-set-database-users
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param SetDatabaseUsers\SetDatabaseUsersRequest $request An object representing the request for this operation
+     * @param SetDatabaseUsersRequest $request An object representing the request for this operation
      * @return EmptyResponse The database users have been set.
      */
     public function setDatabaseUsers(SetDatabaseUsersRequest $request): EmptyResponse
@@ -551,7 +551,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-uninstall-appinstallation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UninstallAppinstallation\UninstallAppinstallationRequest $request An object representing the request for this operation
+     * @param UninstallAppinstallationRequest $request An object representing the request for this operation
      * @return EmptyResponse The app installation is going to be deleted.
      */
     public function uninstallAppinstallation(UninstallAppinstallationRequest $request): EmptyResponse
@@ -573,7 +573,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-unlink-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UnlinkDatabase\UnlinkDatabaseRequest $request An object representing the request for this operation
+     * @param UnlinkDatabaseRequest $request An object representing the request for this operation
      * @return EmptyResponse The database has been unlinked.
      */
     public function unlinkDatabase(UnlinkDatabaseRequest $request): EmptyResponse
@@ -595,7 +595,7 @@ class AppClientImpl implements AppClient
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-link-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest $request An object representing the request for this operation
+     * @param DeprecatedAppLinkDatabaseRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse The database has been linked.
      */

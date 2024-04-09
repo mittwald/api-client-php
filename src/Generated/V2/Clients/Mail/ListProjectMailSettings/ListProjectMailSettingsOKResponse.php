@@ -24,7 +24,7 @@ class ListProjectMailSettingsOKResponse implements ResponseContainer
                 'properties' => [
                     'blacklist' => [
                         'items' => [
-                            'format' => 'email',
+                            'format' => 'idn-email',
                             'type' => 'string',
                         ],
                         'type' => 'array',
@@ -34,7 +34,7 @@ class ListProjectMailSettingsOKResponse implements ResponseContainer
                     ],
                     'whitelist' => [
                         'items' => [
-                            'format' => 'email',
+                            'format' => 'idn-email',
                             'type' => 'string',
                         ],
                         'type' => 'array',

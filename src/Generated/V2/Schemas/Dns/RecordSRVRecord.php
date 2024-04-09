@@ -26,7 +26,7 @@ class RecordSRVRecord
         'additionalProperties' => false,
         'properties' => [
             'fqdn' => [
-                'format' => 'hostname',
+                'format' => 'idn-dnsname',
                 'maxLength' => 50,
                 'minLength' => 1,
                 'type' => 'string',

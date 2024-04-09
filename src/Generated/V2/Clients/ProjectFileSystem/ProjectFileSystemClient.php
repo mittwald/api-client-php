@@ -37,8 +37,8 @@ interface ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-directories
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesOKResponse OK
+     * @param ProjectFileSystemGetDirectoriesRequest $request An object representing the request for this operation
+     * @return ProjectFileSystemGetDirectoriesOKResponse OK
      */
     public function projectFileSystemGetDirectories(ProjectFileSystemGetDirectoriesRequest $request): ProjectFileSystemGetDirectoriesOKResponse;
     /**
@@ -47,8 +47,8 @@ interface ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-disk-usage
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageOKResponse OK
+     * @param ProjectFileSystemGetDiskUsageRequest $request An object representing the request for this operation
+     * @return ProjectFileSystemGetDiskUsageOKResponse OK
      */
     public function projectFileSystemGetDiskUsage(ProjectFileSystemGetDiskUsageRequest $request): ProjectFileSystemGetDiskUsageOKResponse;
     /**
@@ -57,7 +57,7 @@ interface ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-file-content
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentRequest $request An object representing the request for this operation
+     * @param ProjectFileSystemGetFileContentRequest $request An object representing the request for this operation
      * @return StringResponse OK
      */
     public function projectFileSystemGetFileContent(ProjectFileSystemGetFileContentRequest $request): StringResponse;
@@ -67,8 +67,8 @@ interface ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-get-jwt
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemGetJwt\ProjectFileSystemGetJwtOKResponse OK
+     * @param ProjectFileSystemGetJwtRequest $request An object representing the request for this operation
+     * @return ProjectFileSystemGetJwtOKResponse OK
      */
     public function projectFileSystemGetJwt(ProjectFileSystemGetJwtRequest $request): ProjectFileSystemGetJwtOKResponse;
     /**
@@ -77,8 +77,8 @@ interface ProjectFileSystemClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project-File-System/operation/project-file-system-list-files
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ProjectFileSystemListFiles\ProjectFileSystemListFilesRequest $request An object representing the request for this operation
-     * @return ProjectFileSystemListFiles\ProjectFileSystemListFilesOKResponse OK
+     * @param ProjectFileSystemListFilesRequest $request An object representing the request for this operation
+     * @return ProjectFileSystemListFilesOKResponse OK
      */
     public function projectFileSystemListFiles(ProjectFileSystemListFilesRequest $request): ProjectFileSystemListFilesOKResponse;
 }

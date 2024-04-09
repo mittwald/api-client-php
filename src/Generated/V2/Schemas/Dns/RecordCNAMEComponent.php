@@ -25,7 +25,7 @@ class RecordCNAMEComponent
     private static array $schema = [
         'properties' => [
             'fqdn' => [
-                'format' => 'hostname',
+                'format' => 'idn-dnsname',
                 'type' => 'string',
             ],
             'settings' => [

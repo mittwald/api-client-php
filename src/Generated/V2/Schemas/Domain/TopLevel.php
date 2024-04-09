@@ -24,6 +24,9 @@ class TopLevel
      */
     private static array $schema = [
         'properties' => [
+            'irtp' => [
+                'type' => 'boolean',
+            ],
             'rgpDays' => [
                 'minimum' => 0,
                 'type' => 'integer',
@@ -35,18 +38,27 @@ class TopLevel
         'required' => [
             'tld',
             'rgpDays',
+            'irtp',
         ],
         'type' => 'object',
     ];
+
+    private bool $irtp;
 
     private int $rgpDays;
 
     private string $tld;
 
-    public function __construct(int $rgpDays, string $tld)
+    public function __construct(bool $irtp, int $rgpDays, string $tld)
     {
+        $this->irtp = $irtp;
         $this->rgpDays = $rgpDays;
         $this->tld = $tld;
+    }
+
+    public function getIrtp(): bool
+    {
+        return $this->irtp;
     }
 
     public function getRgpDays(): int
@@ -57,6 +69,20 @@ class TopLevel
     public function getTld(): string
     {
         return $this->tld;
+    }
+
+    public function withIrtp(bool $irtp): self
+    {
+        $validator = new Validator();
+        $validator->validate($irtp, static::$schema['properties']['irtp']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->irtp = $irtp;
+
+        return $clone;
     }
 
     public function withRgpDays(int $rgpDays): self
@@ -102,10 +128,11 @@ class TopLevel
             static::validateInput($input);
         }
 
+        $irtp = (bool)($input->{'irtp'});
         $rgpDays = (int)($input->{'rgpDays'});
         $tld = $input->{'tld'};
 
-        $obj = new self($rgpDays, $tld);
+        $obj = new self($irtp, $rgpDays, $tld);
 
         return $obj;
     }
@@ -118,6 +145,7 @@ class TopLevel
     public function toJson(): array
     {
         $output = [];
+        $output['irtp'] = $this->irtp;
         $output['rgpDays'] = $this->rgpDays;
         $output['tld'] = $this->tld;
 

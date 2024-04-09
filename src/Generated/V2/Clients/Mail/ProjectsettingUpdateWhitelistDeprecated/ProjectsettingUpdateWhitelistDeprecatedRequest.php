@@ -24,7 +24,7 @@ class ProjectsettingUpdateWhitelistDeprecatedRequest
                 'properties' => [
                     'whitelist' => [
                         'items' => [
-                            'format' => 'email',
+                            'format' => 'idn-email',
                             'type' => 'string',
                         ],
                         'type' => 'array',

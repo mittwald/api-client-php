@@ -16,7 +16,7 @@ class UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2
         'properties' => [
             'whitelist' => [
                 'items' => [
-                    'format' => 'email',
+                    'format' => 'idn-email',
                     'type' => 'string',
                 ],
                 'type' => 'array',

@@ -64,8 +64,8 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-get-info
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NewsletterGetInfo\NewsletterGetInfoRequest $request An object representing the request for this operation
-     * @return NewsletterGetInfo\NewsletterGetInfoOKResponse Status information about the subscription.
+     * @param NewsletterGetInfoRequest $request An object representing the request for this operation
+     * @return NewsletterGetInfoOKResponse Status information about the subscription.
      */
     public function newsletterGetInfo(NewsletterGetInfoRequest $request): NewsletterGetInfoOKResponse
     {
@@ -85,8 +85,8 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-subscribe-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NewsletterSubscribeUser\NewsletterSubscribeUserRequest $request An object representing the request for this operation
-     * @return NewsletterSubscribeUser\NewsletterSubscribeUserOKResponse Subscription information email has been sent.
+     * @param NewsletterSubscribeUserRequest $request An object representing the request for this operation
+     * @return NewsletterSubscribeUserOKResponse Subscription information email has been sent.
      */
     public function newsletterSubscribeUser(NewsletterSubscribeUserRequest $request): NewsletterSubscribeUserOKResponse
     {
@@ -107,7 +107,7 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/newsletter-unsubscribe-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NewsletterUnsubscribeUser\NewsletterUnsubscribeUserRequest $request An object representing the request for this operation
+     * @param NewsletterUnsubscribeUserRequest $request An object representing the request for this operation
      * @return EmptyResponse User has been unsubscribed.
      */
     public function newsletterUnsubscribeUser(NewsletterUnsubscribeUserRequest $request): EmptyResponse
@@ -132,8 +132,8 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-count-unread-notifications
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsRequest $request An object representing the request for this operation
-     * @return NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsOKResponse Counts of unread notifications
+     * @param NotificationsCountUnreadNotificationsRequest $request An object representing the request for this operation
+     * @return NotificationsCountUnreadNotificationsOKResponse Counts of unread notifications
      */
     public function notificationsCountUnreadNotifications(NotificationsCountUnreadNotificationsRequest $request): NotificationsCountUnreadNotificationsOKResponse
     {
@@ -153,8 +153,8 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-list-notifications
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NotificationsListNotifications\NotificationsListNotificationsRequest $request An object representing the request for this operation
-     * @return NotificationsListNotifications\NotificationsListNotificationsOKResponse List of notifications
+     * @param NotificationsListNotificationsRequest $request An object representing the request for this operation
+     * @return NotificationsListNotificationsOKResponse List of notifications
      */
     public function notificationsListNotifications(NotificationsListNotificationsRequest $request): NotificationsListNotificationsOKResponse
     {
@@ -176,8 +176,8 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest $request An object representing the request for this operation
-     * @return NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse OK
+     * @param NotificationsReadAllNotificationsRequest $request An object representing the request for this operation
+     * @return NotificationsReadAllNotificationsOKResponse OK
      */
     public function notificationsReadAllNotifications(NotificationsReadAllNotificationsRequest $request): NotificationsReadAllNotificationsOKResponse
     {
@@ -200,9 +200,9 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-all-notifications-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedRequest $request An object representing the request for this operation
+     * @param NotificationsReadAllNotificationsDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedOKResponse OK
+     * @return NotificationsReadAllNotificationsDeprecatedOKResponse OK
      */
     public function notificationsReadAllNotificationsDeprecated(NotificationsReadAllNotificationsDeprecatedRequest $request): NotificationsReadAllNotificationsDeprecatedOKResponse
     {
@@ -223,8 +223,8 @@ class NotificationClientImpl implements NotificationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Notification/operation/notifications-read-notification
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param NotificationsReadNotification\NotificationsReadNotificationRequest $request An object representing the request for this operation
-     * @return NotificationsReadNotification\NotificationsReadNotificationOKResponse OK
+     * @param NotificationsReadNotificationRequest $request An object representing the request for this operation
+     * @return NotificationsReadNotificationOKResponse OK
      */
     public function notificationsReadNotification(NotificationsReadNotificationRequest $request): NotificationsReadNotificationOKResponse
     {

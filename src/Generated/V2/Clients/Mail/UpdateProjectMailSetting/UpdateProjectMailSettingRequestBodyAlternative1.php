@@ -16,7 +16,7 @@ class UpdateProjectMailSettingRequestBodyAlternative1
         'properties' => [
             'blacklist' => [
                 'items' => [
-                    'format' => 'email',
+                    'format' => 'idn-email',
                     'type' => 'string',
                 ],
                 'type' => 'array',

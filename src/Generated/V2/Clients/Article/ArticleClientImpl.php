@@ -43,8 +43,8 @@ class ArticleClientImpl implements ArticleClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Article/operation/article-get-article
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetArticle\GetArticleRequest $request An object representing the request for this operation
-     * @return GetArticle\GetArticleOKResponse The Article object
+     * @param GetArticleRequest $request An object representing the request for this operation
+     * @return GetArticleOKResponse The Article object
      */
     public function getArticle(GetArticleRequest $request): GetArticleOKResponse
     {
@@ -65,8 +65,8 @@ class ArticleClientImpl implements ArticleClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Article/operation/article-list-articles
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListArticles\ListArticlesRequest $request An object representing the request for this operation
-     * @return ListArticles\ListArticlesOKResponse Object containing the list of Articles
+     * @param ListArticlesRequest $request An object representing the request for this operation
+     * @return ListArticlesOKResponse Object containing the list of Articles
      */
     public function listArticles(ListArticlesRequest $request): ListArticlesOKResponse
     {

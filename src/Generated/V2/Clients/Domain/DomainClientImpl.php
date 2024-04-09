@@ -227,9 +227,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest $request An object representing the request for this operation
+     * @param DeprecatedDomainGetScreenshotForDomainRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainOKResponse The References.
+     * @return DeprecatedDomainGetScreenshotForDomainOKResponse The References.
      */
     public function deprecatedDomainGetScreenshotForDomain(DeprecatedDomainGetScreenshotForDomainRequest $request): DeprecatedDomainGetScreenshotForDomainOKResponse
     {
@@ -250,8 +250,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-create-dns-zone
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsCreateDnsZone\DnsCreateDnsZoneRequest $request An object representing the request for this operation
-     * @return DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse The ID of the created DNSZone.
+     * @param DnsCreateDnsZoneRequest $request An object representing the request for this operation
+     * @return DnsCreateDnsZoneCreatedResponse The ID of the created DNSZone.
      */
     public function dnsCreateDnsZone(DnsCreateDnsZoneRequest $request): DnsCreateDnsZoneCreatedResponse
     {
@@ -272,7 +272,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-delete-dns-zone
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsDeleteDnsZone\DnsDeleteDnsZoneRequest $request An object representing the request for this operation
+     * @param DnsDeleteDnsZoneRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function dnsDeleteDnsZone(DnsDeleteDnsZoneRequest $request): EmptyResponse
@@ -294,8 +294,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-dns-zone
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsGetDnsZone\DnsGetDnsZoneRequest $request An object representing the request for this operation
-     * @return DnsGetDnsZone\DnsGetDnsZoneOKResponse The requested DNSZone.
+     * @param DnsGetDnsZoneRequest $request An object representing the request for this operation
+     * @return DnsGetDnsZoneOKResponse The requested DNSZone.
      */
     public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZoneOKResponse
     {
@@ -316,8 +316,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-list-dns-zones
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsListDnsZones\DnsListDnsZonesRequest $request An object representing the request for this operation
-     * @return DnsListDnsZones\DnsListDnsZonesOKResponse An array of DNSZone objects.
+     * @param DnsListDnsZonesRequest $request An object representing the request for this operation
+     * @return DnsListDnsZonesOKResponse An array of DNSZone objects.
      */
     public function dnsListDnsZones(DnsListDnsZonesRequest $request): DnsListDnsZonesOKResponse
     {
@@ -338,7 +338,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-custom-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordASetCustomDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse recordset updated
      */
@@ -361,9 +361,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-managed-by-ingress-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordASetManagedByIngressDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedNoContentResponse zone set managed by ingressId
+     * @return DnsRecordASetManagedByIngressDeprecatedNoContentResponse zone set managed by ingressId
      */
     public function dnsRecordASetManagedByIngressDeprecated(DnsRecordASetManagedByIngressDeprecatedRequest $request): DnsRecordASetManagedByIngressDeprecatedNoContentResponse
     {
@@ -384,7 +384,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-cname-set-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordCnameSetDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse recordset updated
      */
@@ -407,7 +407,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-custom-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordMxSetCustomDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse recordset updated
      */
@@ -430,7 +430,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-managed-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordMxSetManagedDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse recordset updated
      */
@@ -453,7 +453,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-srv-set-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordSrvSetDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse recordset updated
      */
@@ -476,7 +476,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-txt-set-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecatedRequest $request An object representing the request for this operation
+     * @param DnsRecordTxtSetDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse recordset updated
      */
@@ -499,8 +499,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-set-record-set-managed
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsSetRecordSetManaged\DnsSetRecordSetManagedRequest $request An object representing the request for this operation
-     * @return DnsSetRecordSetManaged\DnsSetRecordSetManagedNoContentResponse The ID of the Ingress the a-records were set for, or an empty object if mx-records were set.
+     * @param DnsSetRecordSetManagedRequest $request An object representing the request for this operation
+     * @return DnsSetRecordSetManagedNoContentResponse The ID of the Ingress the a-records were set for, or an empty object if mx-records were set.
      */
     public function dnsSetRecordSetManaged(DnsSetRecordSetManagedRequest $request): DnsSetRecordSetManagedNoContentResponse
     {
@@ -521,7 +521,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-update-record-set
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DnsUpdateRecordSet\DnsUpdateRecordSetRequest $request An object representing the request for this operation
+     * @param DnsUpdateRecordSetRequest $request An object representing the request for this operation
      * @return EmptyResponse Record set updated.
      */
     public function dnsUpdateRecordSet(DnsUpdateRecordSetRequest $request): EmptyResponse
@@ -545,7 +545,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-domain-declaration
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AbortDomainDeclaration\AbortDomainDeclarationRequest $request An object representing the request for this operation
+     * @param AbortDomainDeclarationRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse
@@ -570,9 +570,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-ownerc-of-domain-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedRequest $request An object representing the request for this operation
+     * @param ChangeOwnercOfDomainV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedOKResponse OK
+     * @return ChangeOwnercOfDomainV2DeprecatedOKResponse OK
      */
     public function changeOwnercOfDomainV2Deprecated(ChangeOwnercOfDomainV2DeprecatedRequest $request): ChangeOwnercOfDomainV2DeprecatedOKResponse
     {
@@ -594,7 +594,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-project-of-domain-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedRequest $request An object representing the request for this operation
+     * @param ChangeProjectOfDomainV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse No Content
      */
@@ -620,8 +620,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CheckDomainRegistrability\CheckDomainRegistrabilityRequest $request An object representing the request for this operation
-     * @return CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse OK
+     * @param CheckDomainRegistrabilityRequest $request An object representing the request for this operation
+     * @return CheckDomainRegistrabilityOKResponse OK
      */
     public function checkDomainRegistrability(CheckDomainRegistrabilityRequest $request): CheckDomainRegistrabilityOKResponse
     {
@@ -644,9 +644,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
+     * @param CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedOKResponse OK
+     * @return CheckDomainRegistrabilityV2DeprecatedOKResponse OK
      */
     public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2DeprecatedOKResponse
     {
@@ -667,8 +667,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-transferability
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CheckDomainTransferability\CheckDomainTransferabilityRequest $request An object representing the request for this operation
-     * @return CheckDomainTransferability\CheckDomainTransferabilityOKResponse OK
+     * @param CheckDomainTransferabilityRequest $request An object representing the request for this operation
+     * @return CheckDomainTransferabilityOKResponse OK
      */
     public function checkDomainTransferability(CheckDomainTransferabilityRequest $request): CheckDomainTransferabilityOKResponse
     {
@@ -690,8 +690,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-create-domain-auth-code
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateDomainAuthCode\CreateDomainAuthCodeRequest $request An object representing the request for this operation
-     * @return CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse Created
+     * @param CreateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return CreateDomainAuthCodeCreatedResponse Created
      */
     public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse
     {
@@ -713,7 +713,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedRequest $request An object representing the request for this operation
+     * @param DeclareNameserversV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse No Content
      */
@@ -739,9 +739,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-authcode-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedRequest $request An object representing the request for this operation
+     * @param DeclareProcessChangeAuthcodeV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedOKResponse OK
+     * @return DeclareProcessChangeAuthcodeV2DeprecatedOKResponse OK
      */
     public function declareProcessChangeAuthcodeV2Deprecated(DeclareProcessChangeAuthcodeV2DeprecatedRequest $request): DeclareProcessChangeAuthcodeV2DeprecatedOKResponse
     {
@@ -765,9 +765,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-handles-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedRequest $request An object representing the request for this operation
+     * @param DeclareProcessChangeHandlesV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedOKResponse OK
+     * @return DeclareProcessChangeHandlesV2DeprecatedOKResponse OK
      */
     public function declareProcessChangeHandlesV2Deprecated(DeclareProcessChangeHandlesV2DeprecatedRequest $request): DeclareProcessChangeHandlesV2DeprecatedOKResponse
     {
@@ -789,8 +789,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-delete-domain
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteDomain\DeleteDomainRequest $request An object representing the request for this operation
-     * @return DeleteDomain\DeleteDomainOKResponse OK
+     * @param DeleteDomainRequest $request An object representing the request for this operation
+     * @return DeleteDomainOKResponse OK
      */
     public function deleteDomain(DeleteDomainRequest $request): DeleteDomainOKResponse
     {
@@ -812,8 +812,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-domain
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetDomain\GetDomainRequest $request An object representing the request for this operation
-     * @return GetDomain\GetDomainOKResponse OK
+     * @param GetDomainRequest $request An object representing the request for this operation
+     * @return GetDomainOKResponse OK
      */
     public function getDomain(GetDomainRequest $request): GetDomainOKResponse
     {
@@ -837,9 +837,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
+     * @param GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedOKResponse The parseable json schema objects
+     * @return GetHandleFieldsV2DeprecatedOKResponse The parseable json schema objects
      */
     public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2DeprecatedOKResponse
     {
@@ -859,8 +859,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-latest-screenshot
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetLatestScreenshot\GetLatestScreenshotRequest $request An object representing the request for this operation
-     * @return GetLatestScreenshot\GetLatestScreenshotOKResponse OK
+     * @param GetLatestScreenshotRequest $request An object representing the request for this operation
+     * @return GetLatestScreenshotOKResponse OK
      */
     public function getLatestScreenshot(GetLatestScreenshotRequest $request): GetLatestScreenshotOKResponse
     {
@@ -881,8 +881,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListDomains\ListDomainsRequest $request An object representing the request for this operation
-     * @return ListDomains\ListDomainsOKResponse OK
+     * @param ListDomainsRequest $request An object representing the request for this operation
+     * @return ListDomainsOKResponse OK
      */
     public function listDomains(ListDomainsRequest $request): ListDomainsOKResponse
     {
@@ -903,9 +903,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest $request An object representing the request for this operation
+     * @param ListDomainsV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse OK
+     * @return ListDomainsV2DeprecatedOKResponse OK
      */
     public function listDomainsV2Deprecated(ListDomainsV2DeprecatedRequest $request): ListDomainsV2DeprecatedOKResponse
     {
@@ -928,8 +928,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tld-contact-schemas
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListTldContactSchemas\ListTldContactSchemasRequest $request An object representing the request for this operation
-     * @return ListTldContactSchemas\ListTldContactSchemasOKResponse The JSON-Schema objects.
+     * @param ListTldContactSchemasRequest $request An object representing the request for this operation
+     * @return ListTldContactSchemasOKResponse The JSON-Schema objects.
      */
     public function listTldContactSchemas(ListTldContactSchemasRequest $request): ListTldContactSchemasOKResponse
     {
@@ -951,7 +951,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-tlds
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListTlds\ListTldsRequest $request An object representing the request for this operation
+     * @param ListTldsRequest $request An object representing the request for this operation
      */
     public function listTlds(ListTldsRequest $request): ListTldsOKResponse
     {
@@ -973,7 +973,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-resend-domain-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ResendDomainEmail\ResendDomainEmailRequest $request An object representing the request for this operation
+     * @param ResendDomainEmailRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function resendDomainEmail(ResendDomainEmailRequest $request): EmptyResponse
@@ -998,8 +998,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-auth-code
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateDomainAuthCode\UpdateDomainAuthCodeRequest $request An object representing the request for this operation
-     * @return UpdateDomainAuthCode\UpdateDomainAuthCodeOKResponse OK
+     * @param UpdateDomainAuthCodeRequest $request An object representing the request for this operation
+     * @return UpdateDomainAuthCodeOKResponse OK
      */
     public function updateDomainAuthCode(UpdateDomainAuthCodeRequest $request): UpdateDomainAuthCodeOKResponse
     {
@@ -1021,8 +1021,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-contact
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateDomainContact\UpdateDomainContactRequest $request An object representing the request for this operation
-     * @return UpdateDomainContact\UpdateDomainContactOKResponse OK
+     * @param UpdateDomainContactRequest $request An object representing the request for this operation
+     * @return UpdateDomainContactOKResponse OK
      */
     public function updateDomainContact(UpdateDomainContactRequest $request): UpdateDomainContactOKResponse
     {
@@ -1044,7 +1044,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-nameservers
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateDomainNameservers\UpdateDomainNameserversRequest $request An object representing the request for this operation
+     * @param UpdateDomainNameserversRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function updateDomainNameservers(UpdateDomainNameserversRequest $request): EmptyResponse
@@ -1067,7 +1067,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-update-domain-project-id
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateDomainProjectId\UpdateDomainProjectIdRequest $request An object representing the request for this operation
+     * @param UpdateDomainProjectIdRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function updateDomainProjectId(UpdateDomainProjectIdRequest $request): EmptyResponse
@@ -1090,8 +1090,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-create-ingress
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressCreateIngress\IngressCreateIngressRequest $request An object representing the request for this operation
-     * @return IngressCreateIngress\IngressCreateIngressCreatedResponse Created
+     * @param IngressCreateIngressRequest $request An object representing the request for this operation
+     * @return IngressCreateIngressCreatedResponse Created
      */
     public function ingressCreateIngress(IngressCreateIngressRequest $request): IngressCreateIngressCreatedResponse
     {
@@ -1112,7 +1112,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-delete-ingress
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressDeleteIngress\IngressDeleteIngressRequest $request An object representing the request for this operation
+     * @param IngressDeleteIngressRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function ingressDeleteIngress(IngressDeleteIngressRequest $request): EmptyResponse
@@ -1134,8 +1134,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-get-ingress
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressGetIngress\IngressGetIngressRequest $request An object representing the request for this operation
-     * @return IngressGetIngress\IngressGetIngressOKResponse OK
+     * @param IngressGetIngressRequest $request An object representing the request for this operation
+     * @return IngressGetIngressOKResponse OK
      */
     public function ingressGetIngress(IngressGetIngressRequest $request): IngressGetIngressOKResponse
     {
@@ -1156,8 +1156,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-ingress-verify-ownership
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest $request An object representing the request for this operation
-     * @return IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipOKResponse OK
+     * @param IngressIngressVerifyOwnershipRequest $request An object representing the request for this operation
+     * @return IngressIngressVerifyOwnershipOKResponse OK
      */
     public function ingressIngressVerifyOwnership(IngressIngressVerifyOwnershipRequest $request): IngressIngressVerifyOwnershipOKResponse
     {
@@ -1180,8 +1180,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressListIngresses\IngressListIngressesRequest $request An object representing the request for this operation
-     * @return IngressListIngresses\IngressListIngressesOKResponse OK
+     * @param IngressListIngressesRequest $request An object representing the request for this operation
+     * @return IngressListIngressesOKResponse OK
      */
     public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse
     {
@@ -1202,9 +1202,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
+     * @param IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse OK
+     * @return IngressListIngressesV2DeprecatedOKResponse OK
      */
     public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2DeprecatedOKResponse
     {
@@ -1225,7 +1225,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressPathsDeprecated\IngressPathsDeprecatedRequest $request An object representing the request for this operation
+     * @param IngressPathsDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse No Content
      */
@@ -1248,7 +1248,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest $request An object representing the request for this operation
+     * @param IngressRequestIngressAcmeCertificateIssuanceRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse
@@ -1271,9 +1271,9 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressTlsDeprecated\IngressTlsDeprecatedRequest $request An object representing the request for this operation
+     * @param IngressTlsDeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return IngressTlsDeprecated\IngressTlsDeprecatedOKResponse OK
+     * @return IngressTlsDeprecatedOKResponse OK
      */
     public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse
     {
@@ -1294,7 +1294,7 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-paths
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest $request An object representing the request for this operation
+     * @param IngressUpdateIngressPathsRequest $request An object representing the request for this operation
      * @return EmptyResponse No Content
      */
     public function ingressUpdateIngressPaths(IngressUpdateIngressPathsRequest $request): EmptyResponse
@@ -1316,8 +1316,8 @@ class DomainClientImpl implements DomainClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-update-ingress-tls
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param IngressUpdateIngressTls\IngressUpdateIngressTlsRequest $request An object representing the request for this operation
-     * @return IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse OK
+     * @param IngressUpdateIngressTlsRequest $request An object representing the request for this operation
+     * @return IngressUpdateIngressTlsOKResponse OK
      */
     public function ingressUpdateIngressTls(IngressUpdateIngressTlsRequest $request): IngressUpdateIngressTlsOKResponse
     {

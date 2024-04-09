@@ -44,8 +44,8 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-create-sftp-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateSftpUser\CreateSftpUserRequest $request An object representing the request for this operation
-     * @return CreateSftpUser\CreateSftpUserCreatedResponse Created
+     * @param CreateSftpUserRequest $request An object representing the request for this operation
+     * @return CreateSftpUserCreatedResponse Created
      */
     public function createSftpUser(CreateSftpUserRequest $request): CreateSftpUserCreatedResponse;
     /**
@@ -54,7 +54,7 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-delete-sftp-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteSftpUser\DeleteSftpUserRequest $request An object representing the request for this operation
+     * @param DeleteSftpUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteSftpUser(DeleteSftpUserRequest $request): EmptyResponse;
@@ -64,8 +64,8 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-get-sftp-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSftpUser\GetSftpUserRequest $request An object representing the request for this operation
-     * @return GetSftpUser\GetSftpUserOKResponse OK
+     * @param GetSftpUserRequest $request An object representing the request for this operation
+     * @return GetSftpUserOKResponse OK
      */
     public function getSftpUser(GetSftpUserRequest $request): GetSftpUserOKResponse;
     /**
@@ -74,8 +74,8 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-list-sftp-users
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListSftpUsers\ListSftpUsersRequest $request An object representing the request for this operation
-     * @return ListSftpUsers\ListSftpUsersOKResponse OK
+     * @param ListSftpUsersRequest $request An object representing the request for this operation
+     * @return ListSftpUsersOKResponse OK
      */
     public function listSftpUsers(ListSftpUsersRequest $request): ListSftpUsersOKResponse;
     /**
@@ -84,7 +84,7 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/sftp-user-update-sftp-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateSftpUser\UpdateSftpUserRequest $request An object representing the request for this operation
+     * @param UpdateSftpUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateSftpUser(UpdateSftpUserRequest $request): EmptyResponse;
@@ -94,8 +94,8 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-create-ssh-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateSshUser\CreateSshUserRequest $request An object representing the request for this operation
-     * @return CreateSshUser\CreateSshUserCreatedResponse Created
+     * @param CreateSshUserRequest $request An object representing the request for this operation
+     * @return CreateSshUserCreatedResponse Created
      */
     public function createSshUser(CreateSshUserRequest $request): CreateSshUserCreatedResponse;
     /**
@@ -104,7 +104,7 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-delete-ssh-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteSshUser\DeleteSshUserRequest $request An object representing the request for this operation
+     * @param DeleteSshUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteSshUser(DeleteSshUserRequest $request): EmptyResponse;
@@ -114,8 +114,8 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-get-ssh-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSshUser\GetSshUserRequest $request An object representing the request for this operation
-     * @return GetSshUser\GetSshUserOKResponse OK
+     * @param GetSshUserRequest $request An object representing the request for this operation
+     * @return GetSshUserOKResponse OK
      */
     public function getSshUser(GetSshUserRequest $request): GetSshUserOKResponse;
     /**
@@ -124,8 +124,8 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-list-ssh-users
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListSshUsers\ListSshUsersRequest $request An object representing the request for this operation
-     * @return ListSshUsers\ListSshUsersOKResponse OK
+     * @param ListSshUsersRequest $request An object representing the request for this operation
+     * @return ListSshUsersOKResponse OK
      */
     public function listSshUsers(ListSshUsersRequest $request): ListSshUsersOKResponse;
     /**
@@ -134,7 +134,7 @@ interface SSHSFTPUserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/SSHSFTP-User/operation/ssh-user-update-ssh-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateSshUser\UpdateSshUserRequest $request An object representing the request for this operation
+     * @param UpdateSshUserRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateSshUser(UpdateSshUserRequest $request): EmptyResponse;

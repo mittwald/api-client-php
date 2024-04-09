@@ -16,7 +16,7 @@ class ListProjectMailSettingsOKResponseBody
         'properties' => [
             'blacklist' => [
                 'items' => [
-                    'format' => 'email',
+                    'format' => 'idn-email',
                     'type' => 'string',
                 ],
                 'type' => 'array',
@@ -26,7 +26,7 @@ class ListProjectMailSettingsOKResponseBody
             ],
             'whitelist' => [
                 'items' => [
-                    'format' => 'email',
+                    'format' => 'idn-email',
                     'type' => 'string',
                 ],
                 'type' => 'array',

@@ -77,7 +77,7 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-abort-execution
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AbortExecution\AbortExecutionRequest $request An object representing the request for this operation
+     * @param AbortExecutionRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function abortExecution(AbortExecutionRequest $request): EmptyResponse
@@ -99,8 +99,8 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-create-cronjob
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateCronjob\CreateCronjobRequest $request An object representing the request for this operation
-     * @return CreateCronjob\CreateCronjobCreatedResponse Created
+     * @param CreateCronjobRequest $request An object representing the request for this operation
+     * @return CreateCronjobCreatedResponse Created
      */
     public function createCronjob(CreateCronjobRequest $request): CreateCronjobCreatedResponse
     {
@@ -122,8 +122,8 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-create-execution
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateExecution\CreateExecutionRequest $request An object representing the request for this operation
-     * @return CreateExecution\CreateExecutionCreatedResponse Created
+     * @param CreateExecutionRequest $request An object representing the request for this operation
+     * @return CreateExecutionCreatedResponse Created
      */
     public function createExecution(CreateExecutionRequest $request): CreateExecutionCreatedResponse
     {
@@ -145,7 +145,7 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-delete-cronjob
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteCronjob\DeleteCronjobRequest $request An object representing the request for this operation
+     * @param DeleteCronjobRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteCronjob(DeleteCronjobRequest $request): EmptyResponse
@@ -168,8 +168,8 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-cronjob
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetCronjob\GetCronjobRequest $request An object representing the request for this operation
-     * @return GetCronjob\GetCronjobOKResponse OK
+     * @param GetCronjobRequest $request An object representing the request for this operation
+     * @return GetCronjobOKResponse OK
      */
     public function getCronjob(GetCronjobRequest $request): GetCronjobOKResponse
     {
@@ -190,8 +190,8 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-get-execution
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetExecution\GetExecutionRequest $request An object representing the request for this operation
-     * @return GetExecution\GetExecutionOKResponse OK
+     * @param GetExecutionRequest $request An object representing the request for this operation
+     * @return GetExecutionOKResponse OK
      */
     public function getExecution(GetExecutionRequest $request): GetExecutionOKResponse
     {
@@ -212,8 +212,8 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-cronjobs
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListCronjobs\ListCronjobsRequest $request An object representing the request for this operation
-     * @return ListCronjobs\ListCronjobsOKResponse OK
+     * @param ListCronjobsRequest $request An object representing the request for this operation
+     * @return ListCronjobsOKResponse OK
      */
     public function listCronjobs(ListCronjobsRequest $request): ListCronjobsOKResponse
     {
@@ -233,8 +233,8 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-list-executions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListExecutions\ListExecutionsRequest $request An object representing the request for this operation
-     * @return ListExecutions\ListExecutionsOKResponse OK
+     * @param ListExecutionsRequest $request An object representing the request for this operation
+     * @return ListExecutionsOKResponse OK
      */
     public function listExecutions(ListExecutionsRequest $request): ListExecutionsOKResponse
     {
@@ -254,7 +254,7 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateCronjob\UpdateCronjobRequest $request An object representing the request for this operation
+     * @param UpdateCronjobRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateCronjob(UpdateCronjobRequest $request): EmptyResponse
@@ -278,7 +278,7 @@ class CronjobClientImpl implements CronjobClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Cronjob/operation/cronjob-update-cronjob-app-id
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateCronjobAppId\UpdateCronjobAppIdRequest $request An object representing the request for this operation
+     * @param UpdateCronjobAppIdRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateCronjobAppId(UpdateCronjobAppIdRequest $request): EmptyResponse

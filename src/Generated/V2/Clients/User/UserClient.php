@@ -157,7 +157,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-change-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest $request An object representing the request for this operation
+     * @param DeprecatedUserChangeEmailRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Your email has been added, but needs to be verfied. Check your mails and
      * call /email/verify with the verification code sent with the mail.
@@ -169,7 +169,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-confirm-password-reset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest $request An object representing the request for this operation
+     * @param DeprecatedUserConfirmPasswordResetRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Password reset was successful.
      */
@@ -180,9 +180,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-create-issue
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest $request An object representing the request for this operation
+     * @param DeprecatedUserCreateIssueRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserCreateIssue\DeprecatedUserCreateIssueCreatedResponse Issue successfully submitted.
+     * @return DeprecatedUserCreateIssueCreatedResponse Issue successfully submitted.
      */
     public function deprecatedUserCreateIssue(DeprecatedUserCreateIssueRequest $request): DeprecatedUserCreateIssueCreatedResponse;
     /**
@@ -191,7 +191,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenRequest $request An object representing the request for this operation
+     * @param DeprecatedUserDeleteApiTokenRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse The `ApiToken` has been deleted.
      */
@@ -202,7 +202,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest $request An object representing the request for this operation
+     * @param DeprecatedUserDeleteSshKeyRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse The ssh-key was removed.
      */
@@ -213,9 +213,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-disable-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest $request An object representing the request for this operation
+     * @param DeprecatedUserDisableMfaRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserDisableMfa\DeprecatedUserDisableMfaOKResponse Multi Factor Authentication was disabled.
+     * @return DeprecatedUserDisableMfaOKResponse Multi Factor Authentication was disabled.
      */
     public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): DeprecatedUserDisableMfaOKResponse;
     /**
@@ -224,7 +224,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest $request An object representing the request for this operation
+     * @param DeprecatedUserEditApiTokenRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse ApiToken was updated.
      */
@@ -235,7 +235,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest $request An object representing the request for this operation
+     * @param DeprecatedUserEditSshKeyRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse The ssh-key has been edited.
      */
@@ -246,7 +246,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-init-password-reset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest $request An object representing the request for this operation
+     * @param DeprecatedUserInitPasswordResetRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse The password reset process has been initialized and an email with confirmation code has been sent.
      */
@@ -257,7 +257,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-logout
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserLogout\DeprecatedUserLogoutRequest $request An object representing the request for this operation
+     * @param DeprecatedUserLogoutRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse You've been logged out. The access token has been removed and invalidated.
      */
@@ -268,7 +268,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-resend-verification-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest $request An object representing the request for this operation
+     * @param DeprecatedUserResendVerificationEmailRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse New Email-Address verification mail was sent.
      */
@@ -279,7 +279,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-avatar-remove
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceAvatarRemoveRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Avatar removal was successful
      */
@@ -290,9 +290,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-avatar-request-upload
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceAvatarRequestUploadRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadOKResponse Avatar upload request was successful. Use the `refId` to upload your avatar to the /v2/files/:refId
+     * @return DeprecatedUserServiceAvatarRequestUploadOKResponse Avatar upload request was successful. Use the `refId` to upload your avatar to the /v2/files/:refId
      */
     public function deprecatedUserServiceAvatarRequestUpload(DeprecatedUserServiceAvatarRequestUploadRequest $request): DeprecatedUserServiceAvatarRequestUploadOKResponse;
     /**
@@ -301,7 +301,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-feedback-create
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceFeedbackCreateRequest $request An object representing the request for this operation
      * @deprecated
      */
     public function deprecatedUserServiceFeedbackCreate(DeprecatedUserServiceFeedbackCreateRequest $request): DeprecatedUserServiceFeedbackCreateCreatedResponse;
@@ -311,9 +311,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-feedback-list
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceFeedbackListRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListOKResponse A list of feedback submitted by the user
+     * @return DeprecatedUserServiceFeedbackListOKResponse A list of feedback submitted by the user
      */
     public function deprecatedUserServiceFeedbackList(DeprecatedUserServiceFeedbackListRequest $request): DeprecatedUserServiceFeedbackListOKResponse;
     /**
@@ -322,7 +322,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-issue-new
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceIssueNewRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Issue created
      */
@@ -333,7 +333,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personal-information-update
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServicePersonalInformationUpdateRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Your personal information has been changed
      */
@@ -344,9 +344,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-get
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServicePersonalizedSettingsGetRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetOKResponse The settingsString
+     * @return DeprecatedUserServicePersonalizedSettingsGetOKResponse The settingsString
      */
     public function deprecatedUserServicePersonalizedSettingsGet(DeprecatedUserServicePersonalizedSettingsGetRequest $request): DeprecatedUserServicePersonalizedSettingsGetOKResponse;
     /**
@@ -355,7 +355,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-update
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServicePersonalizedSettingsUpdateRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse PersonalSettings have been updated
      */
@@ -366,7 +366,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-add
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServicePhoneNumberAddRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse PhoneNumber was added successfully. Now, it can be verified under /v2/user/{userId}/phone/verify
      */
@@ -377,7 +377,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-remove
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServicePhoneNumberRemoveRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse PhoneNumber removal was successful
      */
@@ -388,7 +388,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-verify
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServicePhoneNumberVerifyRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse The PhoneNumber has been verified
      */
@@ -399,9 +399,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceUserGetRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetOKResponse The Profile
+     * @return DeprecatedUserServiceUserGetOKResponse The Profile
      */
     public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse;
     /**
@@ -410,9 +410,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get-own
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnRequest $request An object representing the request for this operation
+     * @param DeprecatedUserServiceUserGetOwnRequest $request An object representing the request for this operation
      * @deprecated
-     * @return DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnOKResponse The Profile
+     * @return DeprecatedUserServiceUserGetOwnOKResponse The Profile
      */
     public function deprecatedUserServiceUserGetOwn(DeprecatedUserServiceUserGetOwnRequest $request): DeprecatedUserServiceUserGetOwnOKResponse;
     /**
@@ -421,7 +421,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-terminate-all-sessions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsRequest $request An object representing the request for this operation
+     * @param DeprecatedUserTerminateAllSessionsRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse All sessions terminated.
      */
@@ -432,7 +432,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-terminate-session
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionRequest $request An object representing the request for this operation
+     * @param DeprecatedUserTerminateSessionRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Session terminated.
      */
@@ -443,7 +443,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-update-account
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountRequest $request An object representing the request for this operation
+     * @param DeprecatedUserUpdateAccountRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Account has been updated.
      */
@@ -454,7 +454,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-verify-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailRequest $request An object representing the request for this operation
+     * @param DeprecatedUserVerifyEmailRequest $request An object representing the request for this operation
      * @deprecated
      * @return EmptyResponse Email has been verified.
      */
@@ -465,8 +465,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest $request An object representing the request for this operation
-     * @return PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyOKResponse The PasswordPolicy to be retrieved.
+     * @param PasswordValidationGetPasswordPolicyRequest $request An object representing the request for this operation
+     * @return PasswordValidationGetPasswordPolicyOKResponse The PasswordPolicy to be retrieved.
      */
     public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicyOKResponse;
     /**
@@ -475,9 +475,9 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy-v2-deprecated
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request An object representing the request for this operation
+     * @param PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request An object representing the request for this operation
      * @deprecated
-     * @return PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse The requested password policy
+     * @return PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse The requested password policy
      */
     public function passwordValidationGetPasswordPolicyV2Deprecated(PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request): PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
     /**
@@ -486,7 +486,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-add-phone-number
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AddPhoneNumber\AddPhoneNumberRequest $request An object representing the request for this operation
+     * @param AddPhoneNumberRequest $request An object representing the request for this operation
      * @return EmptyResponse Phone number was added successfully. Now, it can be verified via /v2/users/:userId/actions/verify-phone.
      */
     public function addPhoneNumber(AddPhoneNumberRequest $request): EmptyResponse;
@@ -496,8 +496,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param Authenticate\AuthenticateRequest $request An object representing the request for this operation
-     * @return Authenticate\AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
+     * @param AuthenticateRequest $request An object representing the request for this operation
+     * @return AuthenticateOKResponse Your authentication request was successfull and you've got an access token.
      */
     public function authenticate(AuthenticateRequest $request): AuthenticateOKResponse;
     /**
@@ -506,8 +506,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AuthenticateMfa\AuthenticateMfaRequest $request An object representing the request for this operation
-     * @return AuthenticateMfa\AuthenticateMfaOKResponse Your authentication request was successful and you've got an access token.
+     * @param AuthenticateMfaRequest $request An object representing the request for this operation
+     * @return AuthenticateMfaOKResponse Your authentication request was successful and you've got an access token.
      */
     public function authenticateMfa(AuthenticateMfaRequest $request): AuthenticateMfaOKResponse;
     /**
@@ -516,8 +516,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-authenticate-with-access-token-retrieval-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
-     * @return AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyOKResponse Your authentication request was successful and you've got an access token.
+     * @param AuthenticateWithAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
+     * @return AuthenticateWithAccessTokenRetrievalKeyOKResponse Your authentication request was successful and you've got an access token.
      */
     public function authenticateWithAccessTokenRetrievalKey(AuthenticateWithAccessTokenRetrievalKeyRequest $request): AuthenticateWithAccessTokenRetrievalKeyOKResponse;
     /**
@@ -526,7 +526,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ChangeEmail\ChangeEmailRequest $request An object representing the request for this operation
+     * @param ChangeEmailRequest $request An object representing the request for this operation
      * @return EmptyResponse Your email has been added, but needs to be verfied. Check your mails and
      * call /email/verify with the verification code sent with the mail.
      */
@@ -537,8 +537,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-change-password
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ChangePassword\ChangePasswordRequest $request An object representing the request for this operation
-     * @return ChangePassword\ChangePasswordOKResponse Your password has been changed.
+     * @param ChangePasswordRequest $request An object representing the request for this operation
+     * @return ChangePasswordOKResponse Your password has been changed.
      */
     public function changePassword(ChangePasswordRequest $request): ChangePasswordOKResponse;
     /**
@@ -547,8 +547,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-check-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CheckToken\CheckTokenRequest $request An object representing the request for this operation
-     * @return CheckToken\CheckTokenOKResponse Your token is valid.
+     * @param CheckTokenRequest $request An object representing the request for this operation
+     * @return CheckTokenOKResponse Your token is valid.
      */
     public function checkToken(CheckTokenRequest $request): CheckTokenOKResponse;
     /**
@@ -557,8 +557,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-confirm-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ConfirmMfa\ConfirmMfaRequest $request An object representing the request for this operation
-     * @return ConfirmMfa\ConfirmMfaOKResponse Mfa is now activated and recovery codes are in the response body.
+     * @param ConfirmMfaRequest $request An object representing the request for this operation
+     * @return ConfirmMfaOKResponse Mfa is now activated and recovery codes are in the response body.
      */
     public function confirmMfa(ConfirmMfaRequest $request): ConfirmMfaOKResponse;
     /**
@@ -567,7 +567,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-confirm-password-reset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ConfirmPasswordReset\ConfirmPasswordResetRequest $request An object representing the request for this operation
+     * @param ConfirmPasswordResetRequest $request An object representing the request for this operation
      * @return EmptyResponse Password reset was successful.
      */
     public function confirmPasswordReset(ConfirmPasswordResetRequest $request): EmptyResponse;
@@ -577,8 +577,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-access-token-retrieval-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
-     * @return CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyCreatedResponse You got an access token retrieval key use it as a one time password to get an actual access token.
+     * @param CreateAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
+     * @return CreateAccessTokenRetrievalKeyCreatedResponse You got an access token retrieval key use it as a one time password to get an actual access token.
      */
     public function createAccessTokenRetrievalKey(CreateAccessTokenRetrievalKeyRequest $request): CreateAccessTokenRetrievalKeyCreatedResponse;
     /**
@@ -587,8 +587,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateApiToken\CreateApiTokenRequest $request An object representing the request for this operation
-     * @return CreateApiToken\CreateApiTokenCreatedResponse ApiToken was added.
+     * @param CreateApiTokenRequest $request An object representing the request for this operation
+     * @return CreateApiTokenCreatedResponse ApiToken was added.
      */
     public function createApiToken(CreateApiTokenRequest $request): CreateApiTokenCreatedResponse;
     /**
@@ -597,8 +597,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-feedback
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateFeedback\CreateFeedbackRequest $request An object representing the request for this operation
-     * @return CreateFeedback\CreateFeedbackCreatedResponse Feedback successfully submitted.
+     * @param CreateFeedbackRequest $request An object representing the request for this operation
+     * @return CreateFeedbackCreatedResponse Feedback successfully submitted.
      */
     public function createFeedback(CreateFeedbackRequest $request): CreateFeedbackCreatedResponse;
     /**
@@ -607,8 +607,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateSshKey\CreateSshKeyRequest $request An object representing the request for this operation
-     * @return CreateSshKey\CreateSshKeyCreatedResponse The ssh-key was stored.
+     * @param CreateSshKeyRequest $request An object representing the request for this operation
+     * @return CreateSshKeyCreatedResponse The ssh-key was stored.
      */
     public function createSshKey(CreateSshKeyRequest $request): CreateSshKeyCreatedResponse;
     /**
@@ -617,7 +617,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteApiToken\DeleteApiTokenRequest $request An object representing the request for this operation
+     * @param DeleteApiTokenRequest $request An object representing the request for this operation
      * @return EmptyResponse The `ApiToken` has been deleted.
      */
     public function deleteApiToken(DeleteApiTokenRequest $request): EmptyResponse;
@@ -627,7 +627,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteSshKey\DeleteSshKeyRequest $request An object representing the request for this operation
+     * @param DeleteSshKeyRequest $request An object representing the request for this operation
      * @return EmptyResponse The ssh-key has been removed.
      */
     public function deleteSshKey(DeleteSshKeyRequest $request): EmptyResponse;
@@ -637,7 +637,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-delete-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteUser\DeleteUserRequest $request An object representing the request for this operation
+     * @param DeleteUserRequest $request An object representing the request for this operation
      * @return EmptyResponse Your user has been deleted.
      */
     public function deleteUser(DeleteUserRequest $request): EmptyResponse;
@@ -647,7 +647,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-disable-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DisableMfa\DisableMfaRequest $request An object representing the request for this operation
+     * @param DisableMfaRequest $request An object representing the request for this operation
      * @return EmptyResponse Multi Factor Authentication was disabled.
      */
     public function disableMfa(DisableMfaRequest $request): EmptyResponse;
@@ -657,7 +657,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param EditApiToken\EditApiTokenRequest $request An object representing the request for this operation
+     * @param EditApiTokenRequest $request An object representing the request for this operation
      * @return EmptyResponse ApiToken was updated.
      */
     public function editApiToken(EditApiTokenRequest $request): EmptyResponse;
@@ -667,7 +667,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-edit-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param EditSshKey\EditSshKeyRequest $request An object representing the request for this operation
+     * @param EditSshKeyRequest $request An object representing the request for this operation
      * @return EmptyResponse The ssh-key has been edited.
      */
     public function editSshKey(EditSshKeyRequest $request): EmptyResponse;
@@ -677,8 +677,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-api-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetApiToken\GetApiTokenRequest $request An object representing the request for this operation
-     * @return GetApiToken\GetApiTokenOKResponse The ApiToken.
+     * @param GetApiTokenRequest $request An object representing the request for this operation
+     * @return GetApiTokenOKResponse The ApiToken.
      */
     public function getApiToken(GetApiTokenRequest $request): GetApiTokenOKResponse;
     /**
@@ -687,8 +687,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-mfa-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetMfaStatus\GetMfaStatusRequest $request An object representing the request for this operation
-     * @return GetMfaStatus\GetMfaStatusOKResponse Multi factor auth status
+     * @param GetMfaStatusRequest $request An object representing the request for this operation
+     * @return GetMfaStatusOKResponse Multi factor auth status
      */
     public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse;
     /**
@@ -697,8 +697,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-account
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetOwnAccount\GetOwnAccountRequest $request An object representing the request for this operation
-     * @return GetOwnAccount\GetOwnAccountOKResponse Account information.
+     * @param GetOwnAccountRequest $request An object representing the request for this operation
+     * @return GetOwnAccountOKResponse Account information.
      */
     public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse;
     /**
@@ -707,8 +707,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetOwnEmail\GetOwnEmailRequest $request An object representing the request for this operation
-     * @return GetOwnEmail\GetOwnEmailOKResponse Your Email-Address.
+     * @param GetOwnEmailRequest $request An object representing the request for this operation
+     * @return GetOwnEmailOKResponse Your Email-Address.
      */
     public function getOwnEmail(GetOwnEmailRequest $request): GetOwnEmailOKResponse;
     /**
@@ -717,8 +717,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-password-updated-at
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest $request An object representing the request for this operation
-     * @return GetPasswordUpdatedAt\GetPasswordUpdatedAtOKResponse Timestamp of latest password change.
+     * @param GetPasswordUpdatedAtRequest $request An object representing the request for this operation
+     * @return GetPasswordUpdatedAtOKResponse Timestamp of latest password change.
      */
     public function getPasswordUpdatedAt(GetPasswordUpdatedAtRequest $request): GetPasswordUpdatedAtOKResponse;
     /**
@@ -727,8 +727,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-personalized-settings
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetPersonalizedSettings\GetPersonalizedSettingsRequest $request An object representing the request for this operation
-     * @return GetPersonalizedSettings\GetPersonalizedSettingsOKResponse Personal settings of the user.
+     * @param GetPersonalizedSettingsRequest $request An object representing the request for this operation
+     * @return GetPersonalizedSettingsOKResponse Personal settings of the user.
      */
     public function getPersonalizedSettings(GetPersonalizedSettingsRequest $request): GetPersonalizedSettingsOKResponse;
     /**
@@ -737,7 +737,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-poll-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetPollStatus\GetPollStatusRequest $request An object representing the request for this operation
+     * @param GetPollStatusRequest $request An object representing the request for this operation
      */
     public function getPollStatus(GetPollStatusRequest $request): GetPollStatusOKResponse;
     /**
@@ -746,8 +746,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-session
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSession\GetSessionRequest $request An object representing the request for this operation
-     * @return GetSession\GetSessionOKResponse The session.
+     * @param GetSessionRequest $request An object representing the request for this operation
+     * @return GetSessionOKResponse The session.
      */
     public function getSession(GetSessionRequest $request): GetSessionOKResponse;
     /**
@@ -756,8 +756,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-ssh-key
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSshKey\GetSshKeyRequest $request An object representing the request for this operation
-     * @return GetSshKey\GetSshKeyOKResponse The requested ssh-key.
+     * @param GetSshKeyRequest $request An object representing the request for this operation
+     * @return GetSshKeyOKResponse The requested ssh-key.
      */
     public function getSshKey(GetSshKeyRequest $request): GetSshKeyOKResponse;
     /**
@@ -766,8 +766,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-user
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetUser\GetUserRequest $request An object representing the request for this operation
-     * @return GetUser\GetUserOKResponse The user profile.
+     * @param GetUserRequest $request An object representing the request for this operation
+     * @return GetUserOKResponse The user profile.
      */
     public function getUser(GetUserRequest $request): GetUserOKResponse;
     /**
@@ -776,8 +776,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-init-mfa
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InitMfa\InitMfaRequest $request An object representing the request for this operation
-     * @return InitMfa\InitMfaOKResponse The process of activating Multi Factor Authentication is initialized.
+     * @param InitMfaRequest $request An object representing the request for this operation
+     * @return InitMfaOKResponse The process of activating Multi Factor Authentication is initialized.
      */
     public function initMfa(InitMfaRequest $request): InitMfaOKResponse;
     /**
@@ -786,8 +786,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-init-password-reset
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param InitPasswordReset\InitPasswordResetRequest $request An object representing the request for this operation
-     * @return InitPasswordReset\InitPasswordResetCreatedResponse The password reset process has been initialized and an email with confirmation code has been sent.
+     * @param InitPasswordResetRequest $request An object representing the request for this operation
+     * @return InitPasswordResetCreatedResponse The password reset process has been initialized and an email with confirmation code has been sent.
      */
     public function initPasswordReset(InitPasswordResetRequest $request): InitPasswordResetCreatedResponse;
     /**
@@ -796,8 +796,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-api-tokens
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListApiTokens\ListApiTokensRequest $request An object representing the request for this operation
-     * @return ListApiTokens\ListApiTokensOKResponse A list of ApiTokens.
+     * @param ListApiTokensRequest $request An object representing the request for this operation
+     * @return ListApiTokensOKResponse A list of ApiTokens.
      */
     public function listApiTokens(ListApiTokensRequest $request): ListApiTokensOKResponse;
     /**
@@ -806,8 +806,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-feedback
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListFeedback\ListFeedbackRequest $request An object representing the request for this operation
-     * @return ListFeedback\ListFeedbackOKResponse Feedback submitted by the user.
+     * @param ListFeedbackRequest $request An object representing the request for this operation
+     * @return ListFeedbackOKResponse Feedback submitted by the user.
      */
     public function listFeedback(ListFeedbackRequest $request): ListFeedbackOKResponse;
     /**
@@ -816,8 +816,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-sessions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListSessions\ListSessionsRequest $request An object representing the request for this operation
-     * @return ListSessions\ListSessionsOKResponse List of all sessions.
+     * @param ListSessionsRequest $request An object representing the request for this operation
+     * @return ListSessionsOKResponse List of all sessions.
      */
     public function listSessions(ListSessionsRequest $request): ListSessionsOKResponse;
     /**
@@ -826,8 +826,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-list-ssh-keys
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListSshKeys\ListSshKeysRequest $request An object representing the request for this operation
-     * @return ListSshKeys\ListSshKeysOKResponse The list of stored ssh-keys.
+     * @param ListSshKeysRequest $request An object representing the request for this operation
+     * @return ListSshKeysOKResponse The list of stored ssh-keys.
      */
     public function listSshKeys(ListSshKeysRequest $request): ListSshKeysOKResponse;
     /**
@@ -836,7 +836,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-logout
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param Logout\LogoutRequest $request An object representing the request for this operation
+     * @param LogoutRequest $request An object representing the request for this operation
      * @return EmptyResponse You've been logged out. The access token has been removed and invalidated.
      */
     public function logout(LogoutRequest $request): EmptyResponse;
@@ -852,8 +852,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-oauth-get-authorization
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OauthGetAuthorization\OauthGetAuthorizationRequest $request An object representing the request for this operation
-     * @return OauthGetAuthorization\OauthGetAuthorizationDefaultResponse An unexpected Error that occurred while handling the request
+     * @param OauthGetAuthorizationRequest $request An object representing the request for this operation
+     * @return OauthGetAuthorizationDefaultResponse An unexpected Error that occurred while handling the request
      */
     public function oauthGetAuthorization(OauthGetAuthorizationRequest $request): OauthGetAuthorizationDefaultResponse;
     /**
@@ -866,8 +866,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-oauth-retrieve-access-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param OauthRetrieveAccessToken\OauthRetrieveAccessTokenRequest $request An object representing the request for this operation
-     * @return OauthRetrieveAccessToken\OauthRetrieveAccessTokenOKResponse The authorization server issues an access token as described in
+     * @param OauthRetrieveAccessTokenRequest $request An object representing the request for this operation
+     * @return OauthRetrieveAccessTokenOKResponse The authorization server issues an access token as described in
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-5.1).
      */
     public function oauthRetrieveAccessToken(OauthRetrieveAccessTokenRequest $request): OauthRetrieveAccessTokenOKResponse;
@@ -877,8 +877,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-post-poll-status
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param PostPollStatus\PostPollStatusRequest $request An object representing the request for this operation
-     * @return PostPollStatus\PostPollStatusOKResponse The updated poll settings.
+     * @param PostPollStatusRequest $request An object representing the request for this operation
+     * @return PostPollStatusOKResponse The updated poll settings.
      */
     public function postPollStatus(PostPollStatusRequest $request): PostPollStatusOKResponse;
     /**
@@ -887,8 +887,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-register
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param Register\RegisterRequest $request An object representing the request for this operation
-     * @return Register\RegisterCreatedResponse Registration was successfull. A verification email will be sent to the specified email address.
+     * @param RegisterRequest $request An object representing the request for this operation
+     * @return RegisterCreatedResponse Registration was successfull. A verification email will be sent to the specified email address.
      * The users can be used as soon as the verification link was opened
      */
     public function register(RegisterRequest $request): RegisterCreatedResponse;
@@ -898,7 +898,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-remove-avatar
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RemoveAvatar\RemoveAvatarRequest $request An object representing the request for this operation
+     * @param RemoveAvatarRequest $request An object representing the request for this operation
      * @return EmptyResponse Avatar removal was successful.
      */
     public function removeAvatar(RemoveAvatarRequest $request): EmptyResponse;
@@ -908,7 +908,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-remove-phone-number
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RemovePhoneNumber\RemovePhoneNumberRequest $request An object representing the request for this operation
+     * @param RemovePhoneNumberRequest $request An object representing the request for this operation
      * @return EmptyResponse PhoneNumber removal was successful
      */
     public function removePhoneNumber(RemovePhoneNumberRequest $request): EmptyResponse;
@@ -918,8 +918,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-request-avatar-upload
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestAvatarUpload\RequestAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestAvatarUpload\RequestAvatarUploadOKResponse Avatar upload request was successful.
+     * @param RequestAvatarUploadRequest $request An object representing the request for this operation
+     * @return RequestAvatarUploadOKResponse Avatar upload request was successful.
      */
     public function requestAvatarUpload(RequestAvatarUploadRequest $request): RequestAvatarUploadOKResponse;
     /**
@@ -928,7 +928,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-resend-verification-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ResendVerificationEmail\ResendVerificationEmailRequest $request An object representing the request for this operation
+     * @param ResendVerificationEmailRequest $request An object representing the request for this operation
      * @return EmptyResponse New Email-Address verification email was sent.
      */
     public function resendVerificationEmail(ResendVerificationEmailRequest $request): EmptyResponse;
@@ -938,8 +938,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-reset-recoverycodes
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ResetRecoverycodes\ResetRecoverycodesRequest $request An object representing the request for this operation
-     * @return ResetRecoverycodes\ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
+     * @param ResetRecoverycodesRequest $request An object representing the request for this operation
+     * @return ResetRecoverycodesOKResponse Recovery-Codes are reset now. The new Recovery-Codes are in the response body.
      */
     public function resetRecoverycodes(ResetRecoverycodesRequest $request): ResetRecoverycodesOKResponse;
     /**
@@ -948,8 +948,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-support-code-request
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param SupportCodeRequest\SupportCodeRequestRequest $request An object representing the request for this operation
-     * @return SupportCodeRequest\SupportCodeRequestOKResponse The requested support code and the expiry.
+     * @param SupportCodeRequestRequest $request An object representing the request for this operation
+     * @return SupportCodeRequestOKResponse The requested support code and the expiry.
      */
     public function supportCodeRequest(SupportCodeRequestRequest $request): SupportCodeRequestOKResponse;
     /**
@@ -958,7 +958,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-all-sessions
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateAllSessions\TerminateAllSessionsRequest $request An object representing the request for this operation
+     * @param TerminateAllSessionsRequest $request An object representing the request for this operation
      * @return EmptyResponse All sessions terminated.
      */
     public function terminateAllSessions(TerminateAllSessionsRequest $request): EmptyResponse;
@@ -968,7 +968,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-terminate-session
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param TerminateSession\TerminateSessionRequest $request An object representing the request for this operation
+     * @param TerminateSessionRequest $request An object representing the request for this operation
      * @return EmptyResponse Session terminated.
      */
     public function terminateSession(TerminateSessionRequest $request): EmptyResponse;
@@ -978,7 +978,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-account
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateAccount\UpdateAccountRequest $request An object representing the request for this operation
+     * @param UpdateAccountRequest $request An object representing the request for this operation
      * @return EmptyResponse Account has been updated.
      */
     public function updateAccount(UpdateAccountRequest $request): EmptyResponse;
@@ -988,7 +988,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personal-information
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdatePersonalInformation\UpdatePersonalInformationRequest $request An object representing the request for this operation
+     * @param UpdatePersonalInformationRequest $request An object representing the request for this operation
      * @return EmptyResponse Your personal information has been changed
      */
     public function updatePersonalInformation(UpdatePersonalInformationRequest $request): EmptyResponse;
@@ -998,7 +998,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-update-personalized-settings
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest $request An object representing the request for this operation
+     * @param UpdatePersonalizedSettingsRequest $request An object representing the request for this operation
      * @return EmptyResponse PersonalSettings have been updated
      */
     public function updatePersonalizedSettings(UpdatePersonalizedSettingsRequest $request): EmptyResponse;
@@ -1008,7 +1008,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-verify-email
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param VerifyEmail\VerifyEmailRequest $request An object representing the request for this operation
+     * @param VerifyEmailRequest $request An object representing the request for this operation
      * @return EmptyResponse Email has been verified.
      */
     public function verifyEmail(VerifyEmailRequest $request): EmptyResponse;
@@ -1018,7 +1018,7 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-verify-phone-number
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param VerifyPhoneNumber\VerifyPhoneNumberRequest $request An object representing the request for this operation
+     * @param VerifyPhoneNumberRequest $request An object representing the request for this operation
      * @return EmptyResponse The phone number has been verified.
      */
     public function verifyPhoneNumber(VerifyPhoneNumberRequest $request): EmptyResponse;
@@ -1028,8 +1028,8 @@ interface UserClient
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-verify-registration
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param VerifyRegistration\VerifyRegistrationRequest $request An object representing the request for this operation
-     * @return VerifyRegistration\VerifyRegistrationOKResponse User is verified and you can now login to your user account.
+     * @param VerifyRegistrationRequest $request An object representing the request for this operation
+     * @return VerifyRegistrationOKResponse User is verified and you can now login to your user account.
      */
     public function verifyRegistration(VerifyRegistrationRequest $request): VerifyRegistrationOKResponse;
 }

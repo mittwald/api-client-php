@@ -24,7 +24,7 @@ class MailaddressUpdateAddressDeprecatedRequest
             'body' => [
                 'properties' => [
                     'address' => [
-                        'format' => 'email',
+                        'format' => 'idn-email',
                         'type' => 'string',
                     ],
                 ],

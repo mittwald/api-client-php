@@ -29,6 +29,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
@@ -146,5 +148,10 @@ class ClientImpl extends BaseClient implements Client
     public function relocation(): RelocationClient
     {
         return new RelocationClientImpl($this->client);
+    }
+
+    public function marketplace(): MarketplaceClient
+    {
+        return new MarketplaceClientImpl($this->client);
     }
 }

@@ -73,7 +73,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-accept-project-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param AcceptProjectInvite\AcceptProjectInviteRequest $request An object representing the request for this operation
+     * @param AcceptProjectInviteRequest $request An object representing the request for this operation
      */
     public function acceptProjectInvite(AcceptProjectInviteRequest $request): EmptyResponse;
     /**
@@ -82,8 +82,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateProject\CreateProjectRequest $request An object representing the request for this operation
-     * @return CreateProject\CreateProjectCreatedResponse Created
+     * @param CreateProjectRequest $request An object representing the request for this operation
+     * @return CreateProjectCreatedResponse Created
      */
     public function createProject(CreateProjectRequest $request): CreateProjectCreatedResponse;
     /**
@@ -92,8 +92,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-create-project-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateProjectInvite\CreateProjectInviteRequest $request An object representing the request for this operation
-     * @return CreateProjectInvite\CreateProjectInviteCreatedResponse Created
+     * @param CreateProjectInviteRequest $request An object representing the request for this operation
+     * @return CreateProjectInviteCreatedResponse Created
      */
     public function createProjectInvite(CreateProjectInviteRequest $request): CreateProjectInviteCreatedResponse;
     /**
@@ -102,7 +102,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-decline-project-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeclineProjectInvite\DeclineProjectInviteRequest $request An object representing the request for this operation
+     * @param DeclineProjectInviteRequest $request An object representing the request for this operation
      */
     public function declineProjectInvite(DeclineProjectInviteRequest $request): EmptyResponse;
     /**
@@ -111,7 +111,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProject\DeleteProjectRequest $request An object representing the request for this operation
+     * @param DeleteProjectRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteProject(DeleteProjectRequest $request): EmptyResponse;
@@ -121,7 +121,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-avatar
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProjectAvatar\DeleteProjectAvatarRequest $request An object representing the request for this operation
+     * @param DeleteProjectAvatarRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteProjectAvatar(DeleteProjectAvatarRequest $request): EmptyResponse;
@@ -131,7 +131,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProjectInvite\DeleteProjectInviteRequest $request An object representing the request for this operation
+     * @param DeleteProjectInviteRequest $request An object representing the request for this operation
      */
     public function deleteProjectInvite(DeleteProjectInviteRequest $request): EmptyResponse;
     /**
@@ -140,7 +140,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-project-membership
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteProjectMembership\DeleteProjectMembershipRequest $request An object representing the request for this operation
+     * @param DeleteProjectMembershipRequest $request An object representing the request for this operation
      * @return EmptyResponse OK
      */
     public function deleteProjectMembership(DeleteProjectMembershipRequest $request): EmptyResponse;
@@ -150,7 +150,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-delete-server-avatar
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param DeleteServerAvatar\DeleteServerAvatarRequest $request An object representing the request for this operation
+     * @param DeleteServerAvatarRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function deleteServerAvatar(DeleteServerAvatarRequest $request): EmptyResponse;
@@ -160,8 +160,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetProject\GetProjectRequest $request An object representing the request for this operation
-     * @return GetProject\GetProjectOKResponse OK
+     * @param GetProjectRequest $request An object representing the request for this operation
+     * @return GetProjectOKResponse OK
      */
     public function getProject(GetProjectRequest $request): GetProjectOKResponse;
     /**
@@ -170,8 +170,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetProjectInvite\GetProjectInviteRequest $request An object representing the request for this operation
-     * @return GetProjectInvite\GetProjectInviteOKResponse OK
+     * @param GetProjectInviteRequest $request An object representing the request for this operation
+     * @return GetProjectInviteOKResponse OK
      */
     public function getProjectInvite(GetProjectInviteRequest $request): GetProjectInviteOKResponse;
     /**
@@ -180,7 +180,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-membership
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetProjectMembership\GetProjectMembershipRequest $request An object representing the request for this operation
+     * @param GetProjectMembershipRequest $request An object representing the request for this operation
      */
     public function getProjectMembership(GetProjectMembershipRequest $request): GetProjectMembershipOKResponse;
     /**
@@ -189,8 +189,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-project-token-invite
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetProjectTokenInvite\GetProjectTokenInviteRequest $request An object representing the request for this operation
-     * @return GetProjectTokenInvite\GetProjectTokenInviteOKResponse OK
+     * @param GetProjectTokenInviteRequest $request An object representing the request for this operation
+     * @return GetProjectTokenInviteOKResponse OK
      */
     public function getProjectTokenInvite(GetProjectTokenInviteRequest $request): GetProjectTokenInviteOKResponse;
     /**
@@ -199,8 +199,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-self-membership-for-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetSelfMembershipForProject\GetSelfMembershipForProjectRequest $request An object representing the request for this operation
-     * @return GetSelfMembershipForProject\GetSelfMembershipForProjectOKResponse OK
+     * @param GetSelfMembershipForProjectRequest $request An object representing the request for this operation
+     * @return GetSelfMembershipForProjectOKResponse OK
      */
     public function getSelfMembershipForProject(GetSelfMembershipForProjectRequest $request): GetSelfMembershipForProjectOKResponse;
     /**
@@ -209,8 +209,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-get-server
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param GetServer\GetServerRequest $request An object representing the request for this operation
-     * @return GetServer\GetServerOKResponse OK
+     * @param GetServerRequest $request An object representing the request for this operation
+     * @return GetServerOKResponse OK
      */
     public function getServer(GetServerRequest $request): GetServerOKResponse;
     /**
@@ -219,7 +219,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-leave-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param LeaveProject\LeaveProjectRequest $request An object representing the request for this operation
+     * @param LeaveProjectRequest $request An object representing the request for this operation
      */
     public function leaveProject(LeaveProjectRequest $request): EmptyResponse;
     /**
@@ -228,8 +228,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-invites-for-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListInvitesForProject\ListInvitesForProjectRequest $request An object representing the request for this operation
-     * @return ListInvitesForProject\ListInvitesForProjectOKResponse OK
+     * @param ListInvitesForProjectRequest $request An object representing the request for this operation
+     * @return ListInvitesForProjectOKResponse OK
      */
     public function listInvitesForProject(ListInvitesForProjectRequest $request): ListInvitesForProjectOKResponse;
     /**
@@ -238,8 +238,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-memberships-for-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListMembershipsForProject\ListMembershipsForProjectRequest $request An object representing the request for this operation
-     * @return ListMembershipsForProject\ListMembershipsForProjectOKResponse OK
+     * @param ListMembershipsForProjectRequest $request An object representing the request for this operation
+     * @return ListMembershipsForProjectOKResponse OK
      */
     public function listMembershipsForProject(ListMembershipsForProjectRequest $request): ListMembershipsForProjectOKResponse;
     /**
@@ -248,8 +248,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-project-invites
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjectInvites\ListProjectInvitesRequest $request An object representing the request for this operation
-     * @return ListProjectInvites\ListProjectInvitesOKResponse OK
+     * @param ListProjectInvitesRequest $request An object representing the request for this operation
+     * @return ListProjectInvitesOKResponse OK
      */
     public function listProjectInvites(ListProjectInvitesRequest $request): ListProjectInvitesOKResponse;
     /**
@@ -258,8 +258,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-project-memberships
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjectMemberships\ListProjectMembershipsRequest $request An object representing the request for this operation
-     * @return ListProjectMemberships\ListProjectMembershipsOKResponse OK
+     * @param ListProjectMembershipsRequest $request An object representing the request for this operation
+     * @return ListProjectMembershipsOKResponse OK
      */
     public function listProjectMemberships(ListProjectMembershipsRequest $request): ListProjectMembershipsOKResponse;
     /**
@@ -268,8 +268,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-projects
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListProjects\ListProjectsRequest $request An object representing the request for this operation
-     * @return ListProjects\ListProjectsOKResponse OK
+     * @param ListProjectsRequest $request An object representing the request for this operation
+     * @return ListProjectsOKResponse OK
      */
     public function listProjects(ListProjectsRequest $request): ListProjectsOKResponse;
     /**
@@ -278,8 +278,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-list-servers
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ListServers\ListServersRequest $request An object representing the request for this operation
-     * @return ListServers\ListServersOKResponse OK
+     * @param ListServersRequest $request An object representing the request for this operation
+     * @return ListServersOKResponse OK
      */
     public function listServers(ListServersRequest $request): ListServersOKResponse;
     /**
@@ -288,8 +288,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-request-project-avatar-upload
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestProjectAvatarUpload\RequestProjectAvatarUploadOKResponse OK
+     * @param RequestProjectAvatarUploadRequest $request An object representing the request for this operation
+     * @return RequestProjectAvatarUploadOKResponse OK
      */
     public function requestProjectAvatarUpload(RequestProjectAvatarUploadRequest $request): RequestProjectAvatarUploadOKResponse;
     /**
@@ -298,8 +298,8 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-request-server-avatar-upload
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param RequestServerAvatarUpload\RequestServerAvatarUploadRequest $request An object representing the request for this operation
-     * @return RequestServerAvatarUpload\RequestServerAvatarUploadOKResponse OK
+     * @param RequestServerAvatarUploadRequest $request An object representing the request for this operation
+     * @return RequestServerAvatarUploadOKResponse OK
      */
     public function requestServerAvatarUpload(RequestServerAvatarUploadRequest $request): RequestServerAvatarUploadOKResponse;
     /**
@@ -308,7 +308,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-resend-project-invite-mail
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ResendProjectInviteMail\ResendProjectInviteMailRequest $request An object representing the request for this operation
+     * @param ResendProjectInviteMailRequest $request An object representing the request for this operation
      */
     public function resendProjectInviteMail(ResendProjectInviteMailRequest $request): EmptyResponse;
     /**
@@ -317,7 +317,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectDescription\UpdateProjectDescriptionRequest $request An object representing the request for this operation
+     * @param UpdateProjectDescriptionRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateProjectDescription(UpdateProjectDescriptionRequest $request): EmptyResponse;
@@ -327,7 +327,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-project-membership
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateProjectMembership\UpdateProjectMembershipRequest $request An object representing the request for this operation
+     * @param UpdateProjectMembershipRequest $request An object representing the request for this operation
      */
     public function updateProjectMembership(UpdateProjectMembershipRequest $request): EmptyResponse;
     /**
@@ -336,7 +336,7 @@ interface ProjectClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-update-server-description
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param UpdateServerDescription\UpdateServerDescriptionRequest $request An object representing the request for this operation
+     * @param UpdateServerDescriptionRequest $request An object representing the request for this operation
      * @return EmptyResponse NoContent
      */
     public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse;

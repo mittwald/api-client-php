@@ -31,7 +31,7 @@ interface RelocationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Relocation/operation/relocation-create-legacy-tariff-change
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateLegacyTariffChange\CreateLegacyTariffChangeRequest $request An object representing the request for this operation
+     * @param CreateLegacyTariffChangeRequest $request An object representing the request for this operation
      */
     public function createLegacyTariffChange(CreateLegacyTariffChangeRequest $request): CreateLegacyTariffChangeCreatedResponse;
     /**
@@ -42,7 +42,7 @@ interface RelocationClient
      * @see https://developer.mittwald.de/reference/v2/#tag/Relocation/operation/relocation-create-relocation
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param CreateRelocation\CreateRelocationRequest $request An object representing the request for this operation
+     * @param CreateRelocationRequest $request An object representing the request for this operation
      * @return EmptyResponse No content
      */
     public function createRelocation(CreateRelocationRequest $request): EmptyResponse;

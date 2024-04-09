@@ -44,6 +44,8 @@ class RedisDatabase
             'name' => 'redis_xxxxxx',
             'port' => 6379,
             'projectId' => '9f2bddf1-dea6-4441-b4fe-a22ff39caff8',
+            'storageUsageInBytes' => 10485760,
+            'storageUsageInBytesSetAt' => '2024-03-05T9:26:32.000Z',
             'updatedAt' => '2023-03-29T15:50:10.000Z',
             'version' => '7.0',
         ],
@@ -83,6 +85,13 @@ class RedisDatabase
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'storageUsageInBytes' => [
+                'type' => 'integer',
+            ],
+            'storageUsageInBytesSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'updatedAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -101,6 +110,8 @@ class RedisDatabase
             'createdAt',
             'updatedAt',
             'name',
+            'storageUsageInBytes',
+            'storageUsageInBytesSetAt',
         ],
         'type' => 'object',
     ];
@@ -126,11 +137,15 @@ class RedisDatabase
 
     private string $projectId;
 
+    private int $storageUsageInBytes;
+
+    private DateTime $storageUsageInBytesSetAt;
+
     private DateTime $updatedAt;
 
     private string $version;
 
-    public function __construct(DateTime $createdAt, string $description, string $hostname, string $id, string $name, int $port, string $projectId, DateTime $updatedAt, string $version)
+    public function __construct(DateTime $createdAt, string $description, string $hostname, string $id, string $name, int $port, string $projectId, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt, DateTime $updatedAt, string $version)
     {
         $this->createdAt = $createdAt;
         $this->description = $description;
@@ -139,6 +154,8 @@ class RedisDatabase
         $this->name = $name;
         $this->port = $port;
         $this->projectId = $projectId;
+        $this->storageUsageInBytes = $storageUsageInBytes;
+        $this->storageUsageInBytesSetAt = $storageUsageInBytesSetAt;
         $this->updatedAt = $updatedAt;
         $this->version = $version;
     }
@@ -193,6 +210,16 @@ class RedisDatabase
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getStorageUsageInBytes(): int
+    {
+        return $this->storageUsageInBytes;
+    }
+
+    public function getStorageUsageInBytesSetAt(): DateTime
+    {
+        return $this->storageUsageInBytesSetAt;
     }
 
     public function getUpdatedAt(): DateTime
@@ -338,6 +365,28 @@ class RedisDatabase
         return $clone;
     }
 
+    public function withStorageUsageInBytes(int $storageUsageInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($storageUsageInBytes, static::$schema['properties']['storageUsageInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->storageUsageInBytes = $storageUsageInBytes;
+
+        return $clone;
+    }
+
+    public function withStorageUsageInBytesSetAt(DateTime $storageUsageInBytesSetAt): self
+    {
+        $clone = clone $this;
+        $clone->storageUsageInBytesSetAt = $storageUsageInBytesSetAt;
+
+        return $clone;
+    }
+
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -390,10 +439,12 @@ class RedisDatabase
         $name = $input->{'name'};
         $port = (int)($input->{'port'});
         $projectId = $input->{'projectId'};
+        $storageUsageInBytes = (int)($input->{'storageUsageInBytes'});
+        $storageUsageInBytesSetAt = new DateTime($input->{'storageUsageInBytesSetAt'});
         $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
-        $obj = new self($createdAt, $description, $hostname, $id, $name, $port, $projectId, $updatedAt, $version);
+        $obj = new self($createdAt, $description, $hostname, $id, $name, $port, $projectId, $storageUsageInBytes, $storageUsageInBytesSetAt, $updatedAt, $version);
         $obj->configuration = $configuration;
         $obj->finalizers = $finalizers;
         return $obj;
@@ -420,6 +471,8 @@ class RedisDatabase
         $output['name'] = $this->name;
         $output['port'] = $this->port;
         $output['projectId'] = $this->projectId;
+        $output['storageUsageInBytes'] = $this->storageUsageInBytes;
+        $output['storageUsageInBytesSetAt'] = ($this->storageUsageInBytesSetAt)->format(DateTime::ATOM);
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
         $output['version'] = $this->version;
 
@@ -453,6 +506,7 @@ class RedisDatabase
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
+        $this->storageUsageInBytesSetAt = clone $this->storageUsageInBytesSetAt;
         $this->updatedAt = clone $this->updatedAt;
     }
 }

@@ -33,7 +33,7 @@ class UpdateProjectMailSettingRequest
                         'properties' => [
                             'blacklist' => [
                                 'items' => [
-                                    'format' => 'email',
+                                    'format' => 'idn-email',
                                     'type' => 'string',
                                 ],
                                 'type' => 'array',
@@ -48,7 +48,7 @@ class UpdateProjectMailSettingRequest
                         'properties' => [
                             'whitelist' => [
                                 'items' => [
-                                    'format' => 'email',
+                                    'format' => 'idn-email',
                                     'type' => 'string',
                                 ],
                                 'type' => 'array',

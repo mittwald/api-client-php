@@ -20,7 +20,7 @@ class DnsCreateDnsZoneRequest
             'body' => [
                 'properties' => [
                     'name' => [
-                        'format' => 'hostname',
+                        'format' => 'idn-dnsname',
                         'type' => 'string',
                     ],
                     'parentZoneId' => [
