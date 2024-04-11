@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -26,6 +27,10 @@ class SystemSoftwareVersion
     private static array $schema = [
         'description' => 'A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies.',
         'properties' => [
+            'expiryDate' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'externalVersion' => [
                 'type' => 'string',
             ],
@@ -60,6 +65,8 @@ class SystemSoftwareVersion
         'type' => 'object',
     ];
 
+    private ?DateTime $expiryDate = null;
+
     private string $externalVersion;
 
     private string $id;
@@ -83,6 +90,11 @@ class SystemSoftwareVersion
         $this->externalVersion = $externalVersion;
         $this->id = $id;
         $this->internalVersion = $internalVersion;
+    }
+
+    public function getExpiryDate(): ?DateTime
+    {
+        return $this->expiryDate ?? null;
     }
 
     public function getExternalVersion(): string
@@ -120,6 +132,22 @@ class SystemSoftwareVersion
     public function getUserInputs(): ?array
     {
         return $this->userInputs ?? null;
+    }
+
+    public function withExpiryDate(DateTime $expiryDate): self
+    {
+        $clone = clone $this;
+        $clone->expiryDate = $expiryDate;
+
+        return $clone;
+    }
+
+    public function withoutExpiryDate(): self
+    {
+        $clone = clone $this;
+        unset($clone->expiryDate);
+
+        return $clone;
     }
 
     public function withExternalVersion(string $externalVersion): self
@@ -239,6 +267,10 @@ class SystemSoftwareVersion
             static::validateInput($input);
         }
 
+        $expiryDate = null;
+        if (isset($input->{'expiryDate'})) {
+            $expiryDate = new DateTime($input->{'expiryDate'});
+        }
         $externalVersion = $input->{'externalVersion'};
         $id = $input->{'id'};
         $internalVersion = $input->{'internalVersion'};
@@ -256,6 +288,7 @@ class SystemSoftwareVersion
         }
 
         $obj = new self($externalVersion, $id, $internalVersion);
+        $obj->expiryDate = $expiryDate;
         $obj->recommended = $recommended;
         $obj->systemSoftwareDependencies = $systemSoftwareDependencies;
         $obj->userInputs = $userInputs;
@@ -270,6 +303,9 @@ class SystemSoftwareVersion
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->expiryDate)) {
+            $output['expiryDate'] = ($this->expiryDate)->format(DateTime::ATOM);
+        }
         $output['externalVersion'] = $this->externalVersion;
         $output['id'] = $this->id;
         $output['internalVersion'] = $this->internalVersion;
@@ -312,5 +348,8 @@ class SystemSoftwareVersion
 
     public function __clone()
     {
+        if (isset($this->expiryDate)) {
+            $this->expiryDate = clone $this->expiryDate;
+        }
     }
 }
