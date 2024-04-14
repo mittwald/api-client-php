@@ -30,9 +30,6 @@ class Mailbox
             'name' => [
                 'type' => 'string',
             ],
-            'passwordHash' => [
-                'type' => 'string',
-            ],
             'quotaInBytes' => [
                 'type' => 'integer',
             ],
@@ -42,7 +39,6 @@ class Mailbox
         ],
         'required' => [
             'name',
-            'passwordHash',
             'quotaInBytes',
             'mailsystem',
         ],
@@ -53,17 +49,14 @@ class Mailbox
 
     private string $name;
 
-    private string $passwordHash;
-
     private int $quotaInBytes;
 
     private ?SpamProtection $spamProtection = null;
 
-    public function __construct(MailSystemSettings $mailsystem, string $name, string $passwordHash, int $quotaInBytes)
+    public function __construct(MailSystemSettings $mailsystem, string $name, int $quotaInBytes)
     {
         $this->mailsystem = $mailsystem;
         $this->name = $name;
-        $this->passwordHash = $passwordHash;
         $this->quotaInBytes = $quotaInBytes;
     }
 
@@ -79,11 +72,6 @@ class Mailbox
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPasswordHash(): string
-    {
-        return $this->passwordHash;
     }
 
     public function getQuotaInBytes(): int
@@ -118,20 +106,6 @@ class Mailbox
 
         $clone = clone $this;
         $clone->name = $name;
-
-        return $clone;
-    }
-
-    public function withPasswordHash(string $passwordHash): self
-    {
-        $validator = new Validator();
-        $validator->validate($passwordHash, static::$schema['properties']['passwordHash']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->passwordHash = $passwordHash;
 
         return $clone;
     }
@@ -183,14 +157,13 @@ class Mailbox
 
         $mailsystem = MailSystemSettings::buildFromInput($input->{'mailsystem'}, validate: $validate);
         $name = $input->{'name'};
-        $passwordHash = $input->{'passwordHash'};
         $quotaInBytes = (int)($input->{'quotaInBytes'});
         $spamProtection = null;
         if (isset($input->{'spamProtection'})) {
             $spamProtection = SpamProtection::buildFromInput($input->{'spamProtection'}, validate: $validate);
         }
 
-        $obj = new self($mailsystem, $name, $passwordHash, $quotaInBytes);
+        $obj = new self($mailsystem, $name, $quotaInBytes);
         $obj->spamProtection = $spamProtection;
         return $obj;
     }
@@ -205,7 +178,6 @@ class Mailbox
         $output = [];
         $output['mailsystem'] = $this->mailsystem->toJson();
         $output['name'] = $this->name;
-        $output['passwordHash'] = $this->passwordHash;
         $output['quotaInBytes'] = $this->quotaInBytes;
         if (isset($this->spamProtection)) {
             $output['spamProtection'] = $this->spamProtection->toJson();
