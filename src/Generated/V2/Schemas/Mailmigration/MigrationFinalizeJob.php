@@ -24,17 +24,12 @@ class MigrationFinalizeJob
      */
     private static array $schema = [
         'properties' => [
-            'disableLegacyEntities' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrationFinalizeJobDisableLegacyEntities',
-            ],
             'projectSettingMigrations' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.mailmigration.MigrationFinalizeJobProjectSetting',
             ],
         ],
         'type' => 'object',
     ];
-
-    private ?MigrationFinalizeJobDisableLegacyEntities $disableLegacyEntities = null;
 
     private ?MigrationFinalizeJobProjectSetting $projectSettingMigrations = null;
 
@@ -47,36 +42,11 @@ class MigrationFinalizeJob
 
     /**
      * @return
-     * MigrationFinalizeJobDisableLegacyEntities|null
-     */
-    public function getDisableLegacyEntities(): ?MigrationFinalizeJobDisableLegacyEntities
-    {
-        return $this->disableLegacyEntities ?? null;
-    }
-
-    /**
-     * @return
      * MigrationFinalizeJobProjectSetting|null
      */
     public function getProjectSettingMigrations(): ?MigrationFinalizeJobProjectSetting
     {
         return $this->projectSettingMigrations ?? null;
-    }
-
-    public function withDisableLegacyEntities(MigrationFinalizeJobDisableLegacyEntities $disableLegacyEntities): self
-    {
-        $clone = clone $this;
-        $clone->disableLegacyEntities = $disableLegacyEntities;
-
-        return $clone;
-    }
-
-    public function withoutDisableLegacyEntities(): self
-    {
-        $clone = clone $this;
-        unset($clone->disableLegacyEntities);
-
-        return $clone;
     }
 
     public function withProjectSettingMigrations(MigrationFinalizeJobProjectSetting $projectSettingMigrations): self
@@ -110,17 +80,12 @@ class MigrationFinalizeJob
             static::validateInput($input);
         }
 
-        $disableLegacyEntities = null;
-        if (isset($input->{'disableLegacyEntities'})) {
-            $disableLegacyEntities = MigrationFinalizeJobDisableLegacyEntities::buildFromInput($input->{'disableLegacyEntities'}, validate: $validate);
-        }
         $projectSettingMigrations = null;
         if (isset($input->{'projectSettingMigrations'})) {
             $projectSettingMigrations = MigrationFinalizeJobProjectSetting::buildFromInput($input->{'projectSettingMigrations'}, validate: $validate);
         }
 
         $obj = new self();
-        $obj->disableLegacyEntities = $disableLegacyEntities;
         $obj->projectSettingMigrations = $projectSettingMigrations;
         return $obj;
     }
@@ -133,9 +98,6 @@ class MigrationFinalizeJob
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->disableLegacyEntities)) {
-            $output['disableLegacyEntities'] = $this->disableLegacyEntities->toJson();
-        }
         if (isset($this->projectSettingMigrations)) {
             $output['projectSettingMigrations'] = $this->projectSettingMigrations->toJson();
         }
