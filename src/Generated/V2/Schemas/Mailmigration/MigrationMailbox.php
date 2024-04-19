@@ -24,9 +24,6 @@ class MigrationMailbox
      */
     private static array $schema = [
         'properties' => [
-            'description' => [
-                'type' => 'string',
-            ],
             'finished' => [
                 'type' => 'boolean',
             ],
@@ -50,8 +47,6 @@ class MigrationMailbox
         'type' => 'object',
     ];
 
-    private ?string $description = null;
-
     private bool $finished;
 
     private string $id;
@@ -66,11 +61,6 @@ class MigrationMailbox
         $this->id = $id;
         $this->migrationJobs = $migrationJobs;
         $this->name = $name;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description ?? null;
     }
 
     public function getFinished(): bool
@@ -95,28 +85,6 @@ class MigrationMailbox
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function withDescription(string $description): self
-    {
-        $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->description = $description;
-
-        return $clone;
-    }
-
-    public function withoutDescription(): self
-    {
-        $clone = clone $this;
-        unset($clone->description);
-
-        return $clone;
     }
 
     public function withFinished(bool $finished): self
@@ -184,17 +152,13 @@ class MigrationMailbox
             static::validateInput($input);
         }
 
-        $description = null;
-        if (isset($input->{'description'})) {
-            $description = $input->{'description'};
-        }
         $finished = (bool)($input->{'finished'});
         $id = $input->{'id'};
         $migrationJobs = MigrationMailboxJob::buildFromInput($input->{'migrationJobs'}, validate: $validate);
         $name = $input->{'name'};
 
         $obj = new self($finished, $id, $migrationJobs, $name);
-        $obj->description = $description;
+
         return $obj;
     }
 
@@ -206,9 +170,6 @@ class MigrationMailbox
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->description)) {
-            $output['description'] = $this->description;
-        }
         $output['finished'] = $this->finished;
         $output['id'] = $this->id;
         $output['migrationJobs'] = $this->migrationJobs->toJson();

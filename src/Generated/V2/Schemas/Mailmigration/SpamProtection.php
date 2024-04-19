@@ -50,13 +50,15 @@ class SpamProtection
             'active',
             'folder',
             'keepDays',
+            'relocateSensitivity',
+            'deleteSensitivity',
         ],
         'type' => 'object',
     ];
 
     private bool $active;
 
-    private ?int $deleteSensitivity = null;
+    private int $deleteSensitivity;
 
     /**
      * SPAM_FOLDER_INBOX_UNSPECIFIED = 0 SPAM_FOLDER_SPAM = 1
@@ -65,13 +67,15 @@ class SpamProtection
 
     private int $keepDays;
 
-    private ?int $relocateSensitivity = null;
+    private int $relocateSensitivity;
 
-    public function __construct(bool $active, int $folder, int $keepDays)
+    public function __construct(bool $active, int $deleteSensitivity, int $folder, int $keepDays, int $relocateSensitivity)
     {
         $this->active = $active;
+        $this->deleteSensitivity = $deleteSensitivity;
         $this->folder = $folder;
         $this->keepDays = $keepDays;
+        $this->relocateSensitivity = $relocateSensitivity;
     }
 
     public function getActive(): bool
@@ -79,9 +83,9 @@ class SpamProtection
         return $this->active;
     }
 
-    public function getDeleteSensitivity(): ?int
+    public function getDeleteSensitivity(): int
     {
-        return $this->deleteSensitivity ?? null;
+        return $this->deleteSensitivity;
     }
 
     public function getFolder(): int
@@ -94,9 +98,9 @@ class SpamProtection
         return $this->keepDays;
     }
 
-    public function getRelocateSensitivity(): ?int
+    public function getRelocateSensitivity(): int
     {
-        return $this->relocateSensitivity ?? null;
+        return $this->relocateSensitivity;
     }
 
     public function withActive(bool $active): self
@@ -123,14 +127,6 @@ class SpamProtection
 
         $clone = clone $this;
         $clone->deleteSensitivity = $deleteSensitivity;
-
-        return $clone;
-    }
-
-    public function withoutDeleteSensitivity(): self
-    {
-        $clone = clone $this;
-        unset($clone->deleteSensitivity);
 
         return $clone;
     }
@@ -177,14 +173,6 @@ class SpamProtection
         return $clone;
     }
 
-    public function withoutRelocateSensitivity(): self
-    {
-        $clone = clone $this;
-        unset($clone->relocateSensitivity);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -201,23 +189,16 @@ class SpamProtection
         }
 
         $active = (bool)($input->{'active'});
-        $deleteSensitivity = null;
-        if (isset($input->{'deleteSensitivity'})) {
-            $deleteSensitivity = (int)($input->{'deleteSensitivity'});
-        }
+        $deleteSensitivity = (int)($input->{'deleteSensitivity'});
         $folder = 0;
         if (isset($input->{'folder'})) {
             $folder = (int)($input->{'folder'});
         }
         $keepDays = (int)($input->{'keepDays'});
-        $relocateSensitivity = null;
-        if (isset($input->{'relocateSensitivity'})) {
-            $relocateSensitivity = (int)($input->{'relocateSensitivity'});
-        }
+        $relocateSensitivity = (int)($input->{'relocateSensitivity'});
 
-        $obj = new self($active, $folder, $keepDays);
-        $obj->deleteSensitivity = $deleteSensitivity;
-        $obj->relocateSensitivity = $relocateSensitivity;
+        $obj = new self($active, $deleteSensitivity, $folder, $keepDays, $relocateSensitivity);
+
         return $obj;
     }
 
@@ -230,14 +211,10 @@ class SpamProtection
     {
         $output = [];
         $output['active'] = $this->active;
-        if (isset($this->deleteSensitivity)) {
-            $output['deleteSensitivity'] = $this->deleteSensitivity;
-        }
+        $output['deleteSensitivity'] = $this->deleteSensitivity;
         $output['folder'] = $this->folder;
         $output['keepDays'] = $this->keepDays;
-        if (isset($this->relocateSensitivity)) {
-            $output['relocateSensitivity'] = $this->relocateSensitivity;
-        }
+        $output['relocateSensitivity'] = $this->relocateSensitivity;
 
         return $output;
     }
