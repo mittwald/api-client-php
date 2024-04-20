@@ -63,6 +63,13 @@ class MySqlDatabase
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.database.DatabaseStatus',
+            ],
+            'statusSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'storageUsageInBytes' => [
                 'type' => 'integer',
             ],
@@ -92,6 +99,8 @@ class MySqlDatabase
             'isReady',
             'storageUsageInBytes',
             'storageUsageInBytesSetAt',
+            'status',
+            'statusSetAt',
         ],
         'type' => 'object',
     ];
@@ -119,6 +128,10 @@ class MySqlDatabase
 
     private string $projectId;
 
+    private DatabaseStatus $status;
+
+    private DateTime $statusSetAt;
+
     private int $storageUsageInBytes;
 
     private DateTime $storageUsageInBytesSetAt;
@@ -127,7 +140,7 @@ class MySqlDatabase
 
     private string $version;
 
-    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt, DateTime $updatedAt, string $version)
+    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, DatabaseStatus $status, DateTime $statusSetAt, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt, DateTime $updatedAt, string $version)
     {
         $this->characterSettings = $characterSettings;
         $this->createdAt = $createdAt;
@@ -138,6 +151,8 @@ class MySqlDatabase
         $this->isShared = $isShared;
         $this->name = $name;
         $this->projectId = $projectId;
+        $this->status = $status;
+        $this->statusSetAt = $statusSetAt;
         $this->storageUsageInBytes = $storageUsageInBytes;
         $this->storageUsageInBytesSetAt = $storageUsageInBytesSetAt;
         $this->updatedAt = $updatedAt;
@@ -195,6 +210,16 @@ class MySqlDatabase
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getStatus(): DatabaseStatus
+    {
+        return $this->status;
+    }
+
+    public function getStatusSetAt(): DateTime
+    {
+        return $this->statusSetAt;
     }
 
     public function getStorageUsageInBytes(): int
@@ -356,6 +381,22 @@ class MySqlDatabase
         return $clone;
     }
 
+    public function withStatus(DatabaseStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withStatusSetAt(DateTime $statusSetAt): self
+    {
+        $clone = clone $this;
+        $clone->statusSetAt = $statusSetAt;
+
+        return $clone;
+    }
+
     public function withStorageUsageInBytes(int $storageUsageInBytes): self
     {
         $validator = new Validator();
@@ -428,12 +469,14 @@ class MySqlDatabase
         $isShared = (bool)($input->{'isShared'});
         $name = $input->{'name'};
         $projectId = $input->{'projectId'};
+        $status = DatabaseStatus::from($input->{'status'});
+        $statusSetAt = new DateTime($input->{'statusSetAt'});
         $storageUsageInBytes = (int)($input->{'storageUsageInBytes'});
         $storageUsageInBytesSetAt = new DateTime($input->{'storageUsageInBytesSetAt'});
         $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
-        $obj = new self($characterSettings, $createdAt, $description, $hostname, $id, $isReady, $isShared, $name, $projectId, $storageUsageInBytes, $storageUsageInBytesSetAt, $updatedAt, $version);
+        $obj = new self($characterSettings, $createdAt, $description, $hostname, $id, $isReady, $isShared, $name, $projectId, $status, $statusSetAt, $storageUsageInBytes, $storageUsageInBytesSetAt, $updatedAt, $version);
         $obj->finalizers = $finalizers;
         return $obj;
     }
@@ -458,6 +501,8 @@ class MySqlDatabase
         $output['isShared'] = $this->isShared;
         $output['name'] = $this->name;
         $output['projectId'] = $this->projectId;
+        $output['status'] = $this->status->value;
+        $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
         $output['storageUsageInBytes'] = $this->storageUsageInBytes;
         $output['storageUsageInBytesSetAt'] = ($this->storageUsageInBytesSetAt)->format(DateTime::ATOM);
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
@@ -493,6 +538,7 @@ class MySqlDatabase
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
+        $this->statusSetAt = clone $this->statusSetAt;
         $this->storageUsageInBytesSetAt = clone $this->storageUsageInBytesSetAt;
         $this->updatedAt = clone $this->updatedAt;
     }

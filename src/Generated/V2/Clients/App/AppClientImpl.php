@@ -67,6 +67,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversio
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationNotFoundResponse;
@@ -474,6 +475,7 @@ class AppClientImpl implements AppClient
             return RequestAppinstallationCreatedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RequestAppinstallationBadRequestResponse::fromResponse($httpResponse),
             404 => RequestAppinstallationNotFoundResponse::fromResponse($httpResponse),
             default => RequestAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
