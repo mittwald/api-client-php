@@ -55,6 +55,11 @@ class ContractItem
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'invoiceStop' => [
+                'description' => 'If this attribute is set, the contract item will currently only be invoiced until this date.',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'invoicingPeriod' => [
                 'example' => 1,
                 'type' => 'number',
@@ -114,7 +119,6 @@ class ContractItem
         ],
         'required' => [
             'itemId',
-            'orderDate',
             'isActivated',
             'contractPeriod',
             'articles',
@@ -141,6 +145,11 @@ class ContractItem
     private int|float|null $freeTrialDays = null;
 
     private ?string $groupByProjectId = null;
+
+    /**
+     * If this attribute is set, the contract item will currently only be invoiced until this date.
+     */
+    private ?DateTime $invoiceStop = null;
 
     private int|float|null $invoicingPeriod = null;
 
@@ -169,7 +178,7 @@ class ContractItem
      */
     private ?DateTime $nextPossibleUpgradeDate = null;
 
-    private DateTime $orderDate;
+    private ?DateTime $orderDate = null;
 
     private ?string $orderId = null;
 
@@ -185,7 +194,7 @@ class ContractItem
      * @param Article[] $articles
      * @param int|float $contractPeriod
      */
-    public function __construct(array $articles, int|float $contractPeriod, string $description, bool $isActivated, bool $isBaseItem, string $itemId, DateTime $orderDate, Price $totalPrice)
+    public function __construct(array $articles, int|float $contractPeriod, string $description, bool $isActivated, bool $isBaseItem, string $itemId, Price $totalPrice)
     {
         $this->articles = $articles;
         $this->contractPeriod = $contractPeriod;
@@ -193,7 +202,6 @@ class ContractItem
         $this->isActivated = $isActivated;
         $this->isBaseItem = $isBaseItem;
         $this->itemId = $itemId;
-        $this->orderDate = $orderDate;
         $this->totalPrice = $totalPrice;
     }
 
@@ -237,6 +245,11 @@ class ContractItem
     public function getGroupByProjectId(): ?string
     {
         return $this->groupByProjectId ?? null;
+    }
+
+    public function getInvoiceStop(): ?DateTime
+    {
+        return $this->invoiceStop ?? null;
     }
 
     public function getInvoicingPeriod(): int|float|null
@@ -284,9 +297,9 @@ class ContractItem
         return $this->nextPossibleUpgradeDate ?? null;
     }
 
-    public function getOrderDate(): DateTime
+    public function getOrderDate(): ?DateTime
     {
-        return $this->orderDate;
+        return $this->orderDate ?? null;
     }
 
     public function getOrderId(): ?string
@@ -431,6 +444,22 @@ class ContractItem
     {
         $clone = clone $this;
         unset($clone->groupByProjectId);
+
+        return $clone;
+    }
+
+    public function withInvoiceStop(DateTime $invoiceStop): self
+    {
+        $clone = clone $this;
+        $clone->invoiceStop = $invoiceStop;
+
+        return $clone;
+    }
+
+    public function withoutInvoiceStop(): self
+    {
+        $clone = clone $this;
+        unset($clone->invoiceStop);
 
         return $clone;
     }
@@ -602,6 +631,14 @@ class ContractItem
         return $clone;
     }
 
+    public function withoutOrderDate(): self
+    {
+        $clone = clone $this;
+        unset($clone->orderDate);
+
+        return $clone;
+    }
+
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();
@@ -720,6 +757,10 @@ class ContractItem
         if (isset($input->{'groupByProjectId'})) {
             $groupByProjectId = $input->{'groupByProjectId'};
         }
+        $invoiceStop = null;
+        if (isset($input->{'invoiceStop'})) {
+            $invoiceStop = new DateTime($input->{'invoiceStop'});
+        }
         $invoicingPeriod = null;
         if (isset($input->{'invoicingPeriod'})) {
             $invoicingPeriod = str_contains((string)($input->{'invoicingPeriod'}), '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
@@ -747,7 +788,10 @@ class ContractItem
         if (isset($input->{'nextPossibleUpgradeDate'})) {
             $nextPossibleUpgradeDate = new DateTime($input->{'nextPossibleUpgradeDate'});
         }
-        $orderDate = new DateTime($input->{'orderDate'});
+        $orderDate = null;
+        if (isset($input->{'orderDate'})) {
+            $orderDate = new DateTime($input->{'orderDate'});
+        }
         $orderId = null;
         if (isset($input->{'orderId'})) {
             $orderId = $input->{'orderId'};
@@ -766,17 +810,19 @@ class ContractItem
         }
         $totalPrice = Price::buildFromInput($input->{'totalPrice'}, validate: $validate);
 
-        $obj = new self($articles, $contractPeriod, $description, $isActivated, $isBaseItem, $itemId, $orderDate, $totalPrice);
+        $obj = new self($articles, $contractPeriod, $description, $isActivated, $isBaseItem, $itemId, $totalPrice);
         $obj->activationDate = $activationDate;
         $obj->aggregateReference = $aggregateReference;
         $obj->freeTrialDays = $freeTrialDays;
         $obj->groupByProjectId = $groupByProjectId;
+        $obj->invoiceStop = $invoiceStop;
         $obj->invoicingPeriod = $invoicingPeriod;
         $obj->isInFreeTrial = $isInFreeTrial;
         $obj->isInclusive = $isInclusive;
         $obj->nextPossibleDowngradeDate = $nextPossibleDowngradeDate;
         $obj->nextPossibleTerminationDate = $nextPossibleTerminationDate;
         $obj->nextPossibleUpgradeDate = $nextPossibleUpgradeDate;
+        $obj->orderDate = $orderDate;
         $obj->orderId = $orderId;
         $obj->replacedByItem = $replacedByItem;
         $obj->tariffChange = $tariffChange;
@@ -807,6 +853,9 @@ class ContractItem
         if (isset($this->groupByProjectId)) {
             $output['groupByProjectId'] = $this->groupByProjectId;
         }
+        if (isset($this->invoiceStop)) {
+            $output['invoiceStop'] = ($this->invoiceStop)->format(DateTime::ATOM);
+        }
         if (isset($this->invoicingPeriod)) {
             $output['invoicingPeriod'] = $this->invoicingPeriod;
         }
@@ -828,7 +877,9 @@ class ContractItem
         if (isset($this->nextPossibleUpgradeDate)) {
             $output['nextPossibleUpgradeDate'] = ($this->nextPossibleUpgradeDate)->format(DateTime::ATOM);
         }
-        $output['orderDate'] = ($this->orderDate)->format(DateTime::ATOM);
+        if (isset($this->orderDate)) {
+            $output['orderDate'] = ($this->orderDate)->format(DateTime::ATOM);
+        }
         if (isset($this->orderId)) {
             $output['orderId'] = $this->orderId;
         }
@@ -875,6 +926,9 @@ class ContractItem
         if (isset($this->activationDate)) {
             $this->activationDate = clone $this->activationDate;
         }
+        if (isset($this->invoiceStop)) {
+            $this->invoiceStop = clone $this->invoiceStop;
+        }
         if (isset($this->nextPossibleDowngradeDate)) {
             $this->nextPossibleDowngradeDate = clone $this->nextPossibleDowngradeDate;
         }
@@ -884,6 +938,8 @@ class ContractItem
         if (isset($this->nextPossibleUpgradeDate)) {
             $this->nextPossibleUpgradeDate = clone $this->nextPossibleUpgradeDate;
         }
-        $this->orderDate = clone $this->orderDate;
+        if (isset($this->orderDate)) {
+            $this->orderDate = clone $this->orderDate;
+        }
     }
 }
