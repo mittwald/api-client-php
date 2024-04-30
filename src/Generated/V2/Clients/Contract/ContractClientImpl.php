@@ -109,6 +109,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrder
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersRequest;
@@ -668,6 +671,28 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => OrderListCustomerOrdersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get list of Orders.
+     *
+     * The list of Orders the User has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-list-orders
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param OrderListOrdersRequest $request An object representing the request for this operation
+     */
+    public function orderListOrders(OrderListOrdersRequest $request): OrderListOrdersOKResponse
+    {
+        $httpRequest = new Request(OrderListOrdersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return OrderListOrdersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => OrderListOrdersDefaultResponse::fromResponse($httpResponse),
         });
     }
 

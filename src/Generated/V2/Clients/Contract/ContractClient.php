@@ -49,6 +49,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrder
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderRequest;
@@ -297,6 +299,17 @@ interface ContractClient
      * @param OrderListCustomerOrdersRequest $request An object representing the request for this operation
      */
     public function orderListCustomerOrders(OrderListCustomerOrdersRequest $request): OrderListCustomerOrdersOKResponse;
+    /**
+     * Get list of Orders.
+     *
+     * The list of Orders the User has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/order-list-orders
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param OrderListOrdersRequest $request An object representing the request for this operation
+     */
+    public function orderListOrders(OrderListOrdersRequest $request): OrderListOrdersOKResponse;
     /**
      * Get list of Orders of a Project.
      *
