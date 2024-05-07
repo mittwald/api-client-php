@@ -34,11 +34,15 @@ class TopLevel
             'tld' => [
                 'type' => 'string',
             ],
+            'transferAuthCodeRequired' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'tld',
             'rgpDays',
             'irtp',
+            'transferAuthCodeRequired',
         ],
         'type' => 'object',
     ];
@@ -49,11 +53,14 @@ class TopLevel
 
     private string $tld;
 
-    public function __construct(bool $irtp, int $rgpDays, string $tld)
+    private bool $transferAuthCodeRequired;
+
+    public function __construct(bool $irtp, int $rgpDays, string $tld, bool $transferAuthCodeRequired)
     {
         $this->irtp = $irtp;
         $this->rgpDays = $rgpDays;
         $this->tld = $tld;
+        $this->transferAuthCodeRequired = $transferAuthCodeRequired;
     }
 
     public function getIrtp(): bool
@@ -69,6 +76,11 @@ class TopLevel
     public function getTld(): string
     {
         return $this->tld;
+    }
+
+    public function getTransferAuthCodeRequired(): bool
+    {
+        return $this->transferAuthCodeRequired;
     }
 
     public function withIrtp(bool $irtp): self
@@ -113,6 +125,20 @@ class TopLevel
         return $clone;
     }
 
+    public function withTransferAuthCodeRequired(bool $transferAuthCodeRequired): self
+    {
+        $validator = new Validator();
+        $validator->validate($transferAuthCodeRequired, static::$schema['properties']['transferAuthCodeRequired']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->transferAuthCodeRequired = $transferAuthCodeRequired;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -131,8 +157,9 @@ class TopLevel
         $irtp = (bool)($input->{'irtp'});
         $rgpDays = (int)($input->{'rgpDays'});
         $tld = $input->{'tld'};
+        $transferAuthCodeRequired = (bool)($input->{'transferAuthCodeRequired'});
 
-        $obj = new self($irtp, $rgpDays, $tld);
+        $obj = new self($irtp, $rgpDays, $tld, $transferAuthCodeRequired);
 
         return $obj;
     }
@@ -148,6 +175,7 @@ class TopLevel
         $output['irtp'] = $this->irtp;
         $output['rgpDays'] = $this->rgpDays;
         $output['tld'] = $this->tld;
+        $output['transferAuthCodeRequired'] = $this->transferAuthCodeRequired;
 
         return $output;
     }

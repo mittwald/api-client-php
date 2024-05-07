@@ -24,9 +24,13 @@ class TlsAcme
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'additionalProperties' => false,
         'properties' => [
             'acme' => [
                 'description' => 'Has to be `true`, as ssl cannot be deactivated.',
+                'type' => 'boolean',
+            ],
+            'isCreated' => [
                 'type' => 'boolean',
             ],
             'requestDeadline' => [
@@ -36,6 +40,7 @@ class TlsAcme
         ],
         'required' => [
             'acme',
+            'isCreated',
         ],
         'type' => 'object',
     ];
@@ -45,16 +50,24 @@ class TlsAcme
      */
     private bool $acme;
 
+    private bool $isCreated;
+
     private ?DateTime $requestDeadline = null;
 
-    public function __construct(bool $acme)
+    public function __construct(bool $acme, bool $isCreated)
     {
         $this->acme = $acme;
+        $this->isCreated = $isCreated;
     }
 
     public function getAcme(): bool
     {
         return $this->acme;
+    }
+
+    public function getIsCreated(): bool
+    {
+        return $this->isCreated;
     }
 
     public function getRequestDeadline(): ?DateTime
@@ -72,6 +85,20 @@ class TlsAcme
 
         $clone = clone $this;
         $clone->acme = $acme;
+
+        return $clone;
+    }
+
+    public function withIsCreated(bool $isCreated): self
+    {
+        $validator = new Validator();
+        $validator->validate($isCreated, static::$schema['properties']['isCreated']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isCreated = $isCreated;
 
         return $clone;
     }
@@ -108,12 +135,13 @@ class TlsAcme
         }
 
         $acme = (bool)($input->{'acme'});
+        $isCreated = (bool)($input->{'isCreated'});
         $requestDeadline = null;
         if (isset($input->{'requestDeadline'})) {
             $requestDeadline = new DateTime($input->{'requestDeadline'});
         }
 
-        $obj = new self($acme);
+        $obj = new self($acme, $isCreated);
         $obj->requestDeadline = $requestDeadline;
         return $obj;
     }
@@ -127,6 +155,7 @@ class TlsAcme
     {
         $output = [];
         $output['acme'] = $this->acme;
+        $output['isCreated'] = $this->isCreated;
         if (isset($this->requestDeadline)) {
             $output['requestDeadline'] = ($this->requestDeadline)->format(DateTime::ATOM);
         }

@@ -29,7 +29,6 @@ class CheckDomainTransferabilityRequest
                 ],
                 'required' => [
                     'domain',
-                    'authCode',
                 ],
             ],
         ],

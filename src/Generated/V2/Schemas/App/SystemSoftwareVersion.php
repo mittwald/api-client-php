@@ -7,6 +7,8 @@ namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Fee\OneTimePaymentFeeStrategy;
+use Mittwald\ApiClient\Generated\V2\Schemas\Fee\PeriodBasedFeeStrategy;
 
 /**
  * A SystemSoftwareVersion is an officially  supported version of a SystemSoftware,
@@ -33,6 +35,9 @@ class SystemSoftwareVersion
             ],
             'externalVersion' => [
                 'type' => 'string',
+            ],
+            'fee' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.fee.FeeStrategy',
             ],
             'id' => [
                 'format' => 'uuid',
@@ -69,6 +74,8 @@ class SystemSoftwareVersion
 
     private string $externalVersion;
 
+    private OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy|null $fee = null;
+
     private string $id;
 
     private string $internalVersion;
@@ -100,6 +107,15 @@ class SystemSoftwareVersion
     public function getExternalVersion(): string
     {
         return $this->externalVersion;
+    }
+
+    /**
+     * @return
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Fee\OneTimePaymentFeeStrategy|\Mittwald\ApiClient\Generated\V2\Schemas\Fee\PeriodBasedFeeStrategy|null
+     */
+    public function getFee(): OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy|null
+    {
+        return $this->fee;
     }
 
     public function getId(): string
@@ -160,6 +176,25 @@ class SystemSoftwareVersion
 
         $clone = clone $this;
         $clone->externalVersion = $externalVersion;
+
+        return $clone;
+    }
+
+    /**
+     * @param OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy $fee
+     */
+    public function withFee(OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy $fee): self
+    {
+        $clone = clone $this;
+        $clone->fee = $fee;
+
+        return $clone;
+    }
+
+    public function withoutFee(): self
+    {
+        $clone = clone $this;
+        unset($clone->fee);
 
         return $clone;
     }
@@ -272,6 +307,14 @@ class SystemSoftwareVersion
             $expiryDate = new DateTime($input->{'expiryDate'});
         }
         $externalVersion = $input->{'externalVersion'};
+        $fee = null;
+        if (isset($input->{'fee'})) {
+            $fee = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                OneTimePaymentFeeStrategy::validateInput($input->{'fee'}, true) => OneTimePaymentFeeStrategy::buildFromInput($input->{'fee'}, validate: $validate),
+                PeriodBasedFeeStrategy::validateInput($input->{'fee'}, true) => PeriodBasedFeeStrategy::buildFromInput($input->{'fee'}, validate: $validate),
+            };
+        }
         $id = $input->{'id'};
         $internalVersion = $input->{'internalVersion'};
         $recommended = null;
@@ -289,6 +332,7 @@ class SystemSoftwareVersion
 
         $obj = new self($externalVersion, $id, $internalVersion);
         $obj->expiryDate = $expiryDate;
+        $obj->fee = $fee;
         $obj->recommended = $recommended;
         $obj->systemSoftwareDependencies = $systemSoftwareDependencies;
         $obj->userInputs = $userInputs;
@@ -307,6 +351,12 @@ class SystemSoftwareVersion
             $output['expiryDate'] = ($this->expiryDate)->format(DateTime::ATOM);
         }
         $output['externalVersion'] = $this->externalVersion;
+        if (isset($this->fee)) {
+            $output['fee'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->fee) instanceof OneTimePaymentFeeStrategy, ($this->fee) instanceof PeriodBasedFeeStrategy => $this->fee->toJson(),
+            };
+        }
         $output['id'] = $this->id;
         $output['internalVersion'] = $this->internalVersion;
         if (isset($this->recommended)) {

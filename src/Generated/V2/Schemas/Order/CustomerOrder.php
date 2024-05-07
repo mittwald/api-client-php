@@ -78,7 +78,6 @@ class CustomerOrder
         'required' => [
             'orderId',
             'orderNumber',
-            'orderDate',
             'summary',
             'customerId',
             'invoicingPeriod',
@@ -105,7 +104,7 @@ class CustomerOrder
      */
     private array $items;
 
-    private DateTime $orderDate;
+    private ?DateTime $orderDate = null;
 
     private string $orderId;
 
@@ -123,12 +122,11 @@ class CustomerOrder
      * @param int|float $invoicingPeriod
      * @param OrderItem[] $items
      */
-    public function __construct(string $customerId, int|float $invoicingPeriod, array $items, DateTime $orderDate, string $orderId, string $orderNumber, OrderStatus $status, OrderSummary $summary, OrderType $type)
+    public function __construct(string $customerId, int|float $invoicingPeriod, array $items, string $orderId, string $orderNumber, OrderStatus $status, OrderSummary $summary, OrderType $type)
     {
         $this->customerId = $customerId;
         $this->invoicingPeriod = $invoicingPeriod;
         $this->items = $items;
-        $this->orderDate = $orderDate;
         $this->orderId = $orderId;
         $this->orderNumber = $orderNumber;
         $this->status = $status;
@@ -164,9 +162,9 @@ class CustomerOrder
         return $this->items;
     }
 
-    public function getOrderDate(): DateTime
+    public function getOrderDate(): ?DateTime
     {
-        return $this->orderDate;
+        return $this->orderDate ?? null;
     }
 
     public function getOrderId(): string
@@ -287,6 +285,14 @@ class CustomerOrder
         return $clone;
     }
 
+    public function withoutOrderDate(): self
+    {
+        $clone = clone $this;
+        unset($clone->orderDate);
+
+        return $clone;
+    }
+
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();
@@ -381,7 +387,10 @@ class CustomerOrder
         }
         $invoicingPeriod = str_contains((string)($input->{'invoicingPeriod'}), '.') ? (float)($input->{'invoicingPeriod'}) : (int)($input->{'invoicingPeriod'});
         $items = array_map(fn (array|object $i): OrderItem => OrderItem::buildFromInput($i, validate: $validate), $input->{'items'});
-        $orderDate = new DateTime($input->{'orderDate'});
+        $orderDate = null;
+        if (isset($input->{'orderDate'})) {
+            $orderDate = new DateTime($input->{'orderDate'});
+        }
         $orderId = $input->{'orderId'};
         $orderNumber = $input->{'orderNumber'};
         $profile = null;
@@ -392,9 +401,10 @@ class CustomerOrder
         $summary = OrderSummary::buildFromInput($input->{'summary'}, validate: $validate);
         $type = OrderType::from($input->{'type'});
 
-        $obj = new self($customerId, $invoicingPeriod, $items, $orderDate, $orderId, $orderNumber, $status, $summary, $type);
+        $obj = new self($customerId, $invoicingPeriod, $items, $orderId, $orderNumber, $status, $summary, $type);
         $obj->contractChangeContractId = $contractChangeContractId;
         $obj->dueDate = $dueDate;
+        $obj->orderDate = $orderDate;
         $obj->profile = $profile;
         return $obj;
     }
@@ -416,7 +426,9 @@ class CustomerOrder
         }
         $output['invoicingPeriod'] = $this->invoicingPeriod;
         $output['items'] = array_map(fn (OrderItem $i): array => $i->toJson(), $this->items);
-        $output['orderDate'] = ($this->orderDate)->format(DateTime::ATOM);
+        if (isset($this->orderDate)) {
+            $output['orderDate'] = ($this->orderDate)->format(DateTime::ATOM);
+        }
         $output['orderId'] = $this->orderId;
         $output['orderNumber'] = $this->orderNumber;
         if (isset($this->profile)) {
@@ -458,6 +470,8 @@ class CustomerOrder
         if (isset($this->dueDate)) {
             $this->dueDate = clone $this->dueDate;
         }
-        $this->orderDate = clone $this->orderDate;
+        if (isset($this->orderDate)) {
+            $this->orderDate = clone $this->orderDate;
+        }
     }
 }

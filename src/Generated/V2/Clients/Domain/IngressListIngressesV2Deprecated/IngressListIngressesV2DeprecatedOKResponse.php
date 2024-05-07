@@ -7,7 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2D
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\Ingress;
+use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\IngressDeprecated;
 use Psr\Http\Message\ResponseInterface;
 
 class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
@@ -23,7 +23,7 @@ class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
         'properties' => [
             'body' => [
                 'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.ingress.Ingress',
+                    '$ref' => '#/components/schemas/de.mittwald.v1.ingress.IngressDeprecated',
                 ],
                 'type' => 'array',
             ],
@@ -31,14 +31,14 @@ class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
     ];
 
     /**
-     * @var Ingress[]
+     * @var IngressDeprecated[]
      */
     private array $body;
 
     private ResponseInterface|null $httpResponse = null;
 
     /**
-     * @param Ingress[] $body
+     * @param IngressDeprecated[] $body
      */
     public function __construct(array $body)
     {
@@ -46,7 +46,7 @@ class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
     }
 
     /**
-     * @return Ingress[]
+     * @return IngressDeprecated[]
      */
     public function getBody(): array
     {
@@ -54,7 +54,7 @@ class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
     }
 
     /**
-     * @param Ingress[] $body
+     * @param IngressDeprecated[] $body
      */
     public function withBody(array $body): self
     {
@@ -79,7 +79,7 @@ class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array|object $i): Ingress => Ingress::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = array_map(fn (array|object $i): IngressDeprecated => IngressDeprecated::buildFromInput($i, validate: $validate), $input->{'body'});
 
         $obj = new self($body);
 
@@ -94,7 +94,7 @@ class IngressListIngressesV2DeprecatedOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (Ingress $i): array => $i->toJson(), $this->body);
+        $output['body'] = array_map(fn (IngressDeprecated $i): array => $i->toJson(), $this->body);
 
         return $output;
     }

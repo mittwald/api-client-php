@@ -39,6 +39,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDo
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedDefaultResponse;
@@ -703,6 +704,7 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateDomainAuthCodeBadRequestResponse::fromResponse($httpResponse),
             404 => CreateDomainAuthCodeNotFoundResponse::fromResponse($httpResponse),
+            412 => CreateDomainAuthCodePreconditionFailedResponse::fromResponse($httpResponse),
             default => CreateDomainAuthCodeDefaultResponse::fromResponse($httpResponse),
         });
     }
