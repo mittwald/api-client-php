@@ -35,7 +35,11 @@ class TopLevel
                 'type' => 'string',
             ],
             'transferAuthCodeRequired' => [
+                'deprecated' => true,
                 'type' => 'boolean',
+            ],
+            'transferAuthentication' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.domain.TransferAuthentication',
             ],
         ],
         'required' => [
@@ -43,6 +47,7 @@ class TopLevel
             'rgpDays',
             'irtp',
             'transferAuthCodeRequired',
+            'transferAuthentication',
         ],
         'type' => 'object',
     ];
@@ -55,12 +60,15 @@ class TopLevel
 
     private bool $transferAuthCodeRequired;
 
-    public function __construct(bool $irtp, int $rgpDays, string $tld, bool $transferAuthCodeRequired)
+    private TransferAuthentication $transferAuthentication;
+
+    public function __construct(bool $irtp, int $rgpDays, string $tld, bool $transferAuthCodeRequired, TransferAuthentication $transferAuthentication)
     {
         $this->irtp = $irtp;
         $this->rgpDays = $rgpDays;
         $this->tld = $tld;
         $this->transferAuthCodeRequired = $transferAuthCodeRequired;
+        $this->transferAuthentication = $transferAuthentication;
     }
 
     public function getIrtp(): bool
@@ -81,6 +89,11 @@ class TopLevel
     public function getTransferAuthCodeRequired(): bool
     {
         return $this->transferAuthCodeRequired;
+    }
+
+    public function getTransferAuthentication(): TransferAuthentication
+    {
+        return $this->transferAuthentication;
     }
 
     public function withIrtp(bool $irtp): self
@@ -139,6 +152,14 @@ class TopLevel
         return $clone;
     }
 
+    public function withTransferAuthentication(TransferAuthentication $transferAuthentication): self
+    {
+        $clone = clone $this;
+        $clone->transferAuthentication = $transferAuthentication;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -158,8 +179,9 @@ class TopLevel
         $rgpDays = (int)($input->{'rgpDays'});
         $tld = $input->{'tld'};
         $transferAuthCodeRequired = (bool)($input->{'transferAuthCodeRequired'});
+        $transferAuthentication = TransferAuthentication::from($input->{'transferAuthentication'});
 
-        $obj = new self($irtp, $rgpDays, $tld, $transferAuthCodeRequired);
+        $obj = new self($irtp, $rgpDays, $tld, $transferAuthCodeRequired, $transferAuthentication);
 
         return $obj;
     }
@@ -176,6 +198,7 @@ class TopLevel
         $output['rgpDays'] = $this->rgpDays;
         $output['tld'] = $this->tld;
         $output['transferAuthCodeRequired'] = $this->transferAuthCodeRequired;
+        $output['transferAuthentication'] = $this->transferAuthentication->value;
 
         return $output;
     }
