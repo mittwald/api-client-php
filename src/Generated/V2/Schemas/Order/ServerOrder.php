@@ -41,6 +41,10 @@ class ServerOrder
                 'example' => 'shared.xlarge',
                 'type' => 'string',
             ],
+            'promotionCode' => [
+                'example' => '123456',
+                'type' => 'string',
+            ],
             'useFreeTrial' => [
                 'type' => 'boolean',
             ],
@@ -61,6 +65,8 @@ class ServerOrder
     private int|float $diskspaceInGiB;
 
     private string $machineType;
+
+    private ?string $promotionCode = null;
 
     private ?bool $useFreeTrial = null;
 
@@ -93,6 +99,11 @@ class ServerOrder
     public function getMachineType(): string
     {
         return $this->machineType;
+    }
+
+    public function getPromotionCode(): ?string
+    {
+        return $this->promotionCode ?? null;
     }
 
     public function getUseFreeTrial(): ?bool
@@ -159,6 +170,28 @@ class ServerOrder
         return $clone;
     }
 
+    public function withPromotionCode(string $promotionCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($promotionCode, static::$schema['properties']['promotionCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->promotionCode = $promotionCode;
+
+        return $clone;
+    }
+
+    public function withoutPromotionCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->promotionCode);
+
+        return $clone;
+    }
+
     public function withUseFreeTrial(bool $useFreeTrial): self
     {
         $validator = new Validator();
@@ -200,12 +233,17 @@ class ServerOrder
         $description = $input->{'description'};
         $diskspaceInGiB = str_contains((string)($input->{'diskspaceInGiB'}), '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
         $machineType = $input->{'machineType'};
+        $promotionCode = null;
+        if (isset($input->{'promotionCode'})) {
+            $promotionCode = $input->{'promotionCode'};
+        }
         $useFreeTrial = null;
         if (isset($input->{'useFreeTrial'})) {
             $useFreeTrial = (bool)($input->{'useFreeTrial'});
         }
 
         $obj = new self($customerId, $description, $diskspaceInGiB, $machineType);
+        $obj->promotionCode = $promotionCode;
         $obj->useFreeTrial = $useFreeTrial;
         return $obj;
     }
@@ -222,6 +260,9 @@ class ServerOrder
         $output['description'] = $this->description;
         $output['diskspaceInGiB'] = $this->diskspaceInGiB;
         $output['machineType'] = $this->machineType;
+        if (isset($this->promotionCode)) {
+            $output['promotionCode'] = $this->promotionCode;
+        }
         if (isset($this->useFreeTrial)) {
             $output['useFreeTrial'] = $this->useFreeTrial;
         }

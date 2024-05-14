@@ -27,6 +27,7 @@ class UpdateSshUserRequestBody
                 'type' => 'string',
             ],
             'password' => [
+                'maxLength' => 72,
                 'type' => 'string',
             ],
             'publicKeys' => [

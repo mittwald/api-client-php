@@ -25,6 +25,7 @@ class AuthenticationAlternative1
     private static array $schema = [
         'properties' => [
             'password' => [
+                'maxLength' => 72,
                 'type' => 'string',
             ],
         ],

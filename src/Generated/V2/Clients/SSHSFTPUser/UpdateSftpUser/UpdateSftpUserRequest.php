@@ -47,6 +47,7 @@ class UpdateSftpUserRequest
                         'type' => 'string',
                     ],
                     'password' => [
+                        'maxLength' => 72,
                         'type' => 'string',
                     ],
                     'publicKeys' => [
