@@ -49,6 +49,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseRequest
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsRequest;
@@ -328,6 +331,27 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => ListAppinstallationsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List AppInstallations that a user has access to.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-list-appinstallations-for-user
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListAppinstallationsForUserRequest $request An object representing the request for this operation
+     * @return ListAppinstallationsForUserOKResponse Object containing the list of AppInstallations.
+     */
+    public function listAppinstallationsForUser(ListAppinstallationsForUserRequest $request): ListAppinstallationsForUserOKResponse
+    {
+        $httpRequest = new Request(ListAppinstallationsForUserRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ListAppinstallationsForUserOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            default => ListAppinstallationsForUserDefaultResponse::fromResponse($httpResponse),
         });
     }
 
