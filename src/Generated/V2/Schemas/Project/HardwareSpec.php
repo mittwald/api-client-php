@@ -29,6 +29,12 @@ class HardwareSpec
                 'type' => 'string',
             ],
             'mem' => [
+                'deprecated' => true,
+                'description' => 'deprecated by memory',
+                'example' => '4Gi',
+                'type' => 'string',
+            ],
+            'memory' => [
                 'example' => '4Gi',
                 'type' => 'string',
             ],
@@ -45,7 +51,12 @@ class HardwareSpec
 
     private ?string $cpu = null;
 
+    /**
+     * deprecated by memory
+     */
     private ?string $mem = null;
+
+    private ?string $memory = null;
 
     private string $storage;
 
@@ -62,6 +73,11 @@ class HardwareSpec
     public function getMem(): ?string
     {
         return $this->mem ?? null;
+    }
+
+    public function getMemory(): ?string
+    {
+        return $this->memory ?? null;
     }
 
     public function getStorage(): string
@@ -113,6 +129,28 @@ class HardwareSpec
         return $clone;
     }
 
+    public function withMemory(string $memory): self
+    {
+        $validator = new Validator();
+        $validator->validate($memory, static::$schema['properties']['memory']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->memory = $memory;
+
+        return $clone;
+    }
+
+    public function withoutMemory(): self
+    {
+        $clone = clone $this;
+        unset($clone->memory);
+
+        return $clone;
+    }
+
     public function withStorage(string $storage): self
     {
         $validator = new Validator();
@@ -150,11 +188,16 @@ class HardwareSpec
         if (isset($input->{'mem'})) {
             $mem = $input->{'mem'};
         }
+        $memory = null;
+        if (isset($input->{'memory'})) {
+            $memory = $input->{'memory'};
+        }
         $storage = $input->{'storage'};
 
         $obj = new self($storage);
         $obj->cpu = $cpu;
         $obj->mem = $mem;
+        $obj->memory = $memory;
         return $obj;
     }
 
@@ -171,6 +214,9 @@ class HardwareSpec
         }
         if (isset($this->mem)) {
             $output['mem'] = $this->mem;
+        }
+        if (isset($this->memory)) {
+            $output['memory'] = $this->memory;
         }
         $output['storage'] = $this->storage;
 
