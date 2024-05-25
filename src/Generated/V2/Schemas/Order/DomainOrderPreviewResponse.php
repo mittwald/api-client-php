@@ -24,6 +24,11 @@ class DomainOrderPreviewResponse
      */
     private static array $schema = [
         'properties' => [
+            'domainContractDuration' => [
+                'description' => 'Contract duration in months.',
+                'example' => 12,
+                'type' => 'number',
+            ],
             'domainPrice' => [
                 'example' => 800,
                 'type' => 'number',
@@ -41,9 +46,15 @@ class DomainOrderPreviewResponse
             'totalPrice',
             'domainPrice',
             'feePrice',
+            'domainContractDuration',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * Contract duration in months.
+     */
+    private int|float $domainContractDuration;
 
     private int|float $domainPrice;
 
@@ -52,15 +63,22 @@ class DomainOrderPreviewResponse
     private int|float $totalPrice;
 
     /**
+     * @param int|float $domainContractDuration
      * @param int|float $domainPrice
      * @param int|float $feePrice
      * @param int|float $totalPrice
      */
-    public function __construct(int|float $domainPrice, int|float $feePrice, int|float $totalPrice)
+    public function __construct(int|float $domainContractDuration, int|float $domainPrice, int|float $feePrice, int|float $totalPrice)
     {
+        $this->domainContractDuration = $domainContractDuration;
         $this->domainPrice = $domainPrice;
         $this->feePrice = $feePrice;
         $this->totalPrice = $totalPrice;
+    }
+
+    public function getDomainContractDuration(): int|float
+    {
+        return $this->domainContractDuration;
     }
 
     public function getDomainPrice(): int|float
@@ -76,6 +94,23 @@ class DomainOrderPreviewResponse
     public function getTotalPrice(): int|float
     {
         return $this->totalPrice;
+    }
+
+    /**
+     * @param int|float $domainContractDuration
+     */
+    public function withDomainContractDuration(int|float $domainContractDuration): self
+    {
+        $validator = new Validator();
+        $validator->validate($domainContractDuration, static::$schema['properties']['domainContractDuration']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->domainContractDuration = $domainContractDuration;
+
+        return $clone;
     }
 
     /**
@@ -144,11 +179,12 @@ class DomainOrderPreviewResponse
             static::validateInput($input);
         }
 
+        $domainContractDuration = str_contains((string)($input->{'domainContractDuration'}), '.') ? (float)($input->{'domainContractDuration'}) : (int)($input->{'domainContractDuration'});
         $domainPrice = str_contains((string)($input->{'domainPrice'}), '.') ? (float)($input->{'domainPrice'}) : (int)($input->{'domainPrice'});
         $feePrice = str_contains((string)($input->{'feePrice'}), '.') ? (float)($input->{'feePrice'}) : (int)($input->{'feePrice'});
         $totalPrice = str_contains((string)($input->{'totalPrice'}), '.') ? (float)($input->{'totalPrice'}) : (int)($input->{'totalPrice'});
 
-        $obj = new self($domainPrice, $feePrice, $totalPrice);
+        $obj = new self($domainContractDuration, $domainPrice, $feePrice, $totalPrice);
 
         return $obj;
     }
@@ -161,6 +197,7 @@ class DomainOrderPreviewResponse
     public function toJson(): array
     {
         $output = [];
+        $output['domainContractDuration'] = $this->domainContractDuration;
         $output['domainPrice'] = $this->domainPrice;
         $output['feePrice'] = $this->feePrice;
         $output['totalPrice'] = $this->totalPrice;
