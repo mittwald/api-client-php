@@ -15,6 +15,8 @@ class UpdateMailAddressQuotaV2DeprecatedRequestBody
     private static array $schema = [
         'properties' => [
             'quotaInBytes' => [
+                'description' => '2 GB',
+                'example' => 2147483648,
                 'minimum' => -1,
                 'type' => 'number',
             ],
@@ -24,6 +26,9 @@ class UpdateMailAddressQuotaV2DeprecatedRequestBody
         ],
     ];
 
+    /**
+     * 2 GB
+     */
     private int|float $quotaInBytes;
 
     /**

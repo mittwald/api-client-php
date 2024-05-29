@@ -40,6 +40,8 @@ class CreateMailAddress
                         'type' => 'string',
                     ],
                     'quotaInBytes' => [
+                        'description' => '2 GB',
+                        'example' => 2147483648,
                         'minimum' => -1,
                         'type' => 'number',
                     ],

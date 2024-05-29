@@ -24,6 +24,8 @@ class UpdateMailAddressQuotaV2DeprecatedRequest
             'body' => [
                 'properties' => [
                     'quotaInBytes' => [
+                        'description' => '2 GB',
+                        'example' => 2147483648,
                         'minimum' => -1,
                         'type' => 'number',
                     ],

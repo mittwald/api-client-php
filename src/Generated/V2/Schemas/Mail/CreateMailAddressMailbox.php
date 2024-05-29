@@ -31,6 +31,8 @@ class CreateMailAddressMailbox
                 'type' => 'string',
             ],
             'quotaInBytes' => [
+                'description' => '2 GB',
+                'example' => 2147483648,
                 'minimum' => -1,
                 'type' => 'number',
             ],
@@ -47,6 +49,9 @@ class CreateMailAddressMailbox
 
     private string $password;
 
+    /**
+     * 2 GB
+     */
     private int|float $quotaInBytes;
 
     /**
