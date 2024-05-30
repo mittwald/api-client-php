@@ -36,15 +36,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCatego
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerUnauthorizedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryRequest;
@@ -285,6 +288,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => DeleteCustomerNotFoundResponse::fromResponse($httpResponse),
+            412 => DeleteCustomerPreconditionFailedResponse::fromResponse($httpResponse),
             default => DeleteCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -346,6 +350,8 @@ class CustomerClientImpl implements CustomerClient
             return GetCustomerOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            401 => GetCustomerUnauthorizedResponse::fromResponse($httpResponse),
+            403 => GetCustomerForbiddenResponse::fromResponse($httpResponse),
             404 => GetCustomerNotFoundResponse::fromResponse($httpResponse),
             default => GetCustomerDefaultResponse::fromResponse($httpResponse),
         });
