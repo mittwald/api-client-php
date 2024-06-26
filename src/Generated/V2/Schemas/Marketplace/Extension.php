@@ -24,6 +24,9 @@ class Extension
      */
     private static array $schema = [
         'properties' => [
+            'blocked' => [
+                'type' => 'boolean',
+            ],
             'context' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
             ],
@@ -33,6 +36,9 @@ class Extension
             ],
             'description' => [
                 'type' => 'string',
+            ],
+            'disabled' => [
+                'type' => 'boolean',
             ],
             'frontendComponents' => [
                 'items' => [
@@ -77,15 +83,21 @@ class Extension
             'tags',
             'context',
             'scopes',
+            'disabled',
+            'blocked',
         ],
         'type' => 'object',
     ];
+
+    private bool $blocked;
 
     private Context $context;
 
     private string $contributorId;
 
     private string $description;
+
+    private bool $disabled;
 
     /**
      * @var ExternalComponent[]|null
@@ -114,17 +126,24 @@ class Extension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(Context $context, string $contributorId, string $description, string $id, string $name, array $scopes, ExtensionState $state, SupportMeta $support, array $tags)
+    public function __construct(bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, array $scopes, ExtensionState $state, SupportMeta $support, array $tags)
     {
+        $this->blocked = $blocked;
         $this->context = $context;
         $this->contributorId = $contributorId;
         $this->description = $description;
+        $this->disabled = $disabled;
         $this->id = $id;
         $this->name = $name;
         $this->scopes = $scopes;
         $this->state = $state;
         $this->support = $support;
         $this->tags = $tags;
+    }
+
+    public function getBlocked(): bool
+    {
+        return $this->blocked;
     }
 
     public function getContext(): Context
@@ -140,6 +159,11 @@ class Extension
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getDisabled(): bool
+    {
+        return $this->disabled;
     }
 
     /**
@@ -187,6 +211,20 @@ class Extension
         return $this->tags;
     }
 
+    public function withBlocked(bool $blocked): self
+    {
+        $validator = new Validator();
+        $validator->validate($blocked, static::$schema['properties']['blocked']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->blocked = $blocked;
+
+        return $clone;
+    }
+
     public function withContext(Context $context): self
     {
         $clone = clone $this;
@@ -219,6 +257,20 @@ class Extension
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withDisabled(bool $disabled): self
+    {
+        $validator = new Validator();
+        $validator->validate($disabled, static::$schema['properties']['disabled']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->disabled = $disabled;
 
         return $clone;
     }
@@ -335,9 +387,11 @@ class Extension
             static::validateInput($input);
         }
 
+        $blocked = (bool)($input->{'blocked'});
         $context = Context::from($input->{'context'});
         $contributorId = $input->{'contributorId'};
         $description = $input->{'description'};
+        $disabled = (bool)($input->{'disabled'});
         $frontendComponents = null;
         if (isset($input->{'frontendComponents'})) {
             $frontendComponents = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'frontendComponents'});
@@ -349,7 +403,7 @@ class Extension
         $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($context, $contributorId, $description, $id, $name, $scopes, $state, $support, $tags);
+        $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $scopes, $state, $support, $tags);
         $obj->frontendComponents = $frontendComponents;
         return $obj;
     }
@@ -362,9 +416,11 @@ class Extension
     public function toJson(): array
     {
         $output = [];
+        $output['blocked'] = $this->blocked;
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
         $output['description'] = $this->description;
+        $output['disabled'] = $this->disabled;
         if (isset($this->frontendComponents)) {
             $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
         }

@@ -2,84 +2,82 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class CreateAccessTokenRetrievalKeyCreatedResponseBody
+class ContributorRotateSecretForExtensionInstanceOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'accessTokenRetrievalKey' => [
-                'description' => 'This retrieval can be used as a one time password. It is only valid once and for a short time.',
-                'example' => 'mwrk-abcdefghijklmnopqrstuvwxyz012345',
-                'maxLength' => 37,
-                'minLength' => 37,
+            'secret' => [
                 'type' => 'string',
             ],
-            'userId' => [
-                'format' => 'uuid',
-                'type' => 'string',
+            'webhookResult' => [
+                'properties' => [
+                    'failure' => [
+                        'type' => 'boolean',
+                    ],
+                    'statusCode' => [
+                        'description' => 'The status code returned by the external application.',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'failure',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'userId',
-            'accessTokenRetrievalKey',
+            'secret',
+            'webhookResult',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * This retrieval can be used as a one time password. It is only valid once and for a short time.
-     */
-    private string $accessTokenRetrievalKey;
+    private string $secret;
 
-    private string $userId;
+    private ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult $webhookResult;
 
-    public function __construct(string $accessTokenRetrievalKey, string $userId)
+    public function __construct(string $secret, ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult $webhookResult)
     {
-        $this->accessTokenRetrievalKey = $accessTokenRetrievalKey;
-        $this->userId = $userId;
+        $this->secret = $secret;
+        $this->webhookResult = $webhookResult;
     }
 
-    public function getAccessTokenRetrievalKey(): string
+    public function getSecret(): string
     {
-        return $this->accessTokenRetrievalKey;
+        return $this->secret;
     }
 
-    public function getUserId(): string
+    public function getWebhookResult(): ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     {
-        return $this->userId;
+        return $this->webhookResult;
     }
 
-    public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
+    public function withSecret(string $secret): self
     {
         $validator = new Validator();
-        $validator->validate($accessTokenRetrievalKey, static::$schema['properties']['accessTokenRetrievalKey']);
+        $validator->validate($secret, static::$schema['properties']['secret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->accessTokenRetrievalKey = $accessTokenRetrievalKey;
+        $clone->secret = $secret;
 
         return $clone;
     }
 
-    public function withUserId(string $userId): self
+    public function withWebhookResult(ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult $webhookResult): self
     {
-        $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->userId = $userId;
+        $clone->webhookResult = $webhookResult;
 
         return $clone;
     }
@@ -89,20 +87,20 @@ class CreateAccessTokenRetrievalKeyCreatedResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CreateAccessTokenRetrievalKeyCreatedResponseBody Created instance
+     * @return ContributorRotateSecretForExtensionInstanceOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CreateAccessTokenRetrievalKeyCreatedResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorRotateSecretForExtensionInstanceOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $accessTokenRetrievalKey = $input->{'accessTokenRetrievalKey'};
-        $userId = $input->{'userId'};
+        $secret = $input->{'secret'};
+        $webhookResult = ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult::buildFromInput($input->{'webhookResult'}, validate: $validate);
 
-        $obj = new self($accessTokenRetrievalKey, $userId);
+        $obj = new self($secret, $webhookResult);
 
         return $obj;
     }
@@ -115,8 +113,8 @@ class CreateAccessTokenRetrievalKeyCreatedResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['accessTokenRetrievalKey'] = $this->accessTokenRetrievalKey;
-        $output['userId'] = $this->userId;
+        $output['secret'] = $this->secret;
+        $output['webhookResult'] = ($this->webhookResult)->toJson();
 
         return $output;
     }
@@ -147,5 +145,6 @@ class CreateAccessTokenRetrievalKeyCreatedResponseBody
 
     public function __clone()
     {
+        $this->webhookResult = clone $this->webhookResult;
     }
 }

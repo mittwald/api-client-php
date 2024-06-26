@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class CreateAccessTokenRetrievalKeyRequest
+class ExtensionCreateRetrievalKeyRequest
 {
     public const method = 'post';
 
@@ -17,53 +17,42 @@ class CreateAccessTokenRetrievalKeyRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-
+            'extensionInstanceId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'extensionInstanceId',
         ],
     ];
 
-    /**
-     * @var mixed
-     */
-    private $body;
+    private string $extensionInstanceId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param mixed $body
-     */
-    public function __construct($body)
+    public function __construct(string $extensionInstanceId)
     {
-        $this->body = $body;
+        $this->extensionInstanceId = $extensionInstanceId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBody()
+    public function getExtensionInstanceId(): string
     {
-        return $this->body;
+        return $this->extensionInstanceId;
     }
 
-    /**
-     * @param mixed $body
-     */
-    public function withBody($body): self
+    public function withExtensionInstanceId(string $extensionInstanceId): self
     {
         $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
+        $validator->validate($extensionInstanceId, static::$schema['properties']['extensionInstanceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->extensionInstanceId = $extensionInstanceId;
 
         return $clone;
     }
@@ -73,19 +62,19 @@ class CreateAccessTokenRetrievalKeyRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CreateAccessTokenRetrievalKeyRequest Created instance
+     * @return ExtensionCreateRetrievalKeyRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CreateAccessTokenRetrievalKeyRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionCreateRetrievalKeyRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = $input->{'body'};
+        $extensionInstanceId = $input->{'extensionInstanceId'};
 
-        $obj = new self($body);
+        $obj = new self($extensionInstanceId);
 
         return $obj;
     }
@@ -98,7 +87,7 @@ class CreateAccessTokenRetrievalKeyRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body;
+        $output['extensionInstanceId'] = $this->extensionInstanceId;
 
         return $output;
     }
@@ -143,7 +132,8 @@ class CreateAccessTokenRetrievalKeyRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/users/self/token-retrieval-key';
+        $extensionInstanceId = urlencode($mapped['extensionInstanceId']);
+        return '/v2/extension-instances/' . $extensionInstanceId . '/actions/create-access-token-retrieval-key';
     }
 
     /**
@@ -162,7 +152,6 @@ class CreateAccessTokenRetrievalKeyRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

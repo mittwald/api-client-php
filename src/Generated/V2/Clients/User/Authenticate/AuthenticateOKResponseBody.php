@@ -16,8 +16,12 @@ class AuthenticateOKResponseBody
     private static array $schema = [
         'properties' => [
             'expires' => [
-                'description' => 'Expiration unix timestamp',
+                'description' => 'The expiration date of the token.',
                 'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'refreshToken' => [
+                'description' => 'Refresh token to refresh your access token even after it has expired.',
                 'type' => 'string',
             ],
             'token' => [
@@ -27,28 +31,42 @@ class AuthenticateOKResponseBody
         ],
         'required' => [
             'token',
+            'refreshToken',
+            'expires',
         ],
         'type' => 'object',
     ];
 
     /**
-     * Expiration unix timestamp
+     * The expiration date of the token.
      */
-    private ?DateTime $expires = null;
+    private DateTime $expires;
+
+    /**
+     * Refresh token to refresh your access token even after it has expired.
+     */
+    private string $refreshToken;
 
     /**
      * Public token to identify yourself against the api gateway.
      */
     private string $token;
 
-    public function __construct(string $token)
+    public function __construct(DateTime $expires, string $refreshToken, string $token)
     {
+        $this->expires = $expires;
+        $this->refreshToken = $refreshToken;
         $this->token = $token;
     }
 
-    public function getExpires(): ?DateTime
+    public function getExpires(): DateTime
     {
-        return $this->expires ?? null;
+        return $this->expires;
+    }
+
+    public function getRefreshToken(): string
+    {
+        return $this->refreshToken;
     }
 
     public function getToken(): string
@@ -64,10 +82,16 @@ class AuthenticateOKResponseBody
         return $clone;
     }
 
-    public function withoutExpires(): self
+    public function withRefreshToken(string $refreshToken): self
     {
+        $validator = new Validator();
+        $validator->validate($refreshToken, static::$schema['properties']['refreshToken']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        unset($clone->expires);
+        $clone->refreshToken = $refreshToken;
 
         return $clone;
     }
@@ -101,14 +125,12 @@ class AuthenticateOKResponseBody
             static::validateInput($input);
         }
 
-        $expires = null;
-        if (isset($input->{'expires'})) {
-            $expires = new DateTime($input->{'expires'});
-        }
+        $expires = new DateTime($input->{'expires'});
+        $refreshToken = $input->{'refreshToken'};
         $token = $input->{'token'};
 
-        $obj = new self($token);
-        $obj->expires = $expires;
+        $obj = new self($expires, $refreshToken, $token);
+
         return $obj;
     }
 
@@ -120,9 +142,8 @@ class AuthenticateOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->expires)) {
-            $output['expires'] = ($this->expires)->format(DateTime::ATOM);
-        }
+        $output['expires'] = ($this->expires)->format(DateTime::ATOM);
+        $output['refreshToken'] = $this->refreshToken;
         $output['token'] = $this->token;
 
         return $output;
@@ -154,8 +175,6 @@ class AuthenticateOKResponseBody
 
     public function __clone()
     {
-        if (isset($this->expires)) {
-            $this->expires = clone $this->expires;
-        }
+        $this->expires = clone $this->expires;
     }
 }

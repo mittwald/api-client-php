@@ -22,8 +22,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackCreatedResponse;
@@ -115,6 +113,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPo
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarRequest;
@@ -572,16 +572,6 @@ interface UserClient
      */
     public function confirmPasswordReset(ConfirmPasswordResetRequest $request): EmptyResponse;
     /**
-     * Create an access token retrieval key to acquire an access token for your user.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-access-token-retrieval-key
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
-     * @return CreateAccessTokenRetrievalKeyCreatedResponse You got an access token retrieval key use it as a one time password to get an actual access token.
-     */
-    public function createAccessTokenRetrievalKey(CreateAccessTokenRetrievalKeyRequest $request): CreateAccessTokenRetrievalKeyCreatedResponse;
-    /**
      * Store a new ApiToken.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-api-token
@@ -881,6 +871,16 @@ interface UserClient
      * @return PostPollStatusOKResponse The updated poll settings.
      */
     public function postPollStatus(PostPollStatusRequest $request): PostPollStatusOKResponse;
+    /**
+     * Refresh a session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-refresh-session
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RefreshSessionRequest $request An object representing the request for this operation
+     * @return RefreshSessionOKResponse Your token refresh was successful and you've got new a new access token. The used one in this call is no longer valid.
+     */
+    public function refreshSession(RefreshSessionRequest $request): RefreshSessionOKResponse;
     /**
      * Register with email and password.
      *

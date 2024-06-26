@@ -2,80 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateWithAccessTokenRetrievalKeyRequestBody
+class ContributorRotateSecretForExtensionInstanceRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'accessTokenRetrievalKey' => [
-                'maxLength' => 37,
-                'minLength' => 37,
-                'type' => 'string',
+            'allowWebhookFailure' => [
+                'type' => 'boolean',
             ],
-            'userId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-        ],
-        'required' => [
-            'userId',
-            'accessTokenRetrievalKey',
-            'refreshToken',
         ],
         'type' => 'object',
     ];
 
-    private string $accessTokenRetrievalKey;
+    private ?bool $allowWebhookFailure = null;
 
-    private string $userId;
-
-    public function __construct(string $accessTokenRetrievalKey, string $userId)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->accessTokenRetrievalKey = $accessTokenRetrievalKey;
-        $this->userId = $userId;
     }
 
-    public function getAccessTokenRetrievalKey(): string
+    public function getAllowWebhookFailure(): ?bool
     {
-        return $this->accessTokenRetrievalKey;
+        return $this->allowWebhookFailure ?? null;
     }
 
-    public function getUserId(): string
-    {
-        return $this->userId;
-    }
-
-    public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
+    public function withAllowWebhookFailure(bool $allowWebhookFailure): self
     {
         $validator = new Validator();
-        $validator->validate($accessTokenRetrievalKey, static::$schema['properties']['accessTokenRetrievalKey']);
+        $validator->validate($allowWebhookFailure, static::$schema['properties']['allowWebhookFailure']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->accessTokenRetrievalKey = $accessTokenRetrievalKey;
+        $clone->allowWebhookFailure = $allowWebhookFailure;
 
         return $clone;
     }
 
-    public function withUserId(string $userId): self
+    public function withoutAllowWebhookFailure(): self
     {
-        $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->userId = $userId;
+        unset($clone->allowWebhookFailure);
 
         return $clone;
     }
@@ -85,21 +62,23 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateWithAccessTokenRetrievalKeyRequestBody Created instance
+     * @return ContributorRotateSecretForExtensionInstanceRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateWithAccessTokenRetrievalKeyRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorRotateSecretForExtensionInstanceRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $accessTokenRetrievalKey = $input->{'accessTokenRetrievalKey'};
-        $userId = $input->{'userId'};
+        $allowWebhookFailure = null;
+        if (isset($input->{'allowWebhookFailure'})) {
+            $allowWebhookFailure = (bool)($input->{'allowWebhookFailure'});
+        }
 
-        $obj = new self($accessTokenRetrievalKey, $userId);
-
+        $obj = new self();
+        $obj->allowWebhookFailure = $allowWebhookFailure;
         return $obj;
     }
 
@@ -111,8 +90,9 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['accessTokenRetrievalKey'] = $this->accessTokenRetrievalKey;
-        $output['userId'] = $this->userId;
+        if (isset($this->allowWebhookFailure)) {
+            $output['allowWebhookFailure'] = $this->allowWebhookFailure;
+        }
 
         return $output;
     }

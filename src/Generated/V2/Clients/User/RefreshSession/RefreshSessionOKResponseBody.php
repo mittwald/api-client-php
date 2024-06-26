@@ -2,80 +2,110 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateWithAccessTokenRetrievalKeyRequestBody
+class RefreshSessionOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'accessTokenRetrievalKey' => [
-                'maxLength' => 37,
-                'minLength' => 37,
+            'expiresAt' => [
+                'description' => 'The expiration date of the token.',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
-            'userId' => [
-                'format' => 'uuid',
+            'refreshToken' => [
+                'description' => 'Refresh token to refresh your access token even after it has expired.',
+                'type' => 'string',
+            ],
+            'token' => [
+                'description' => 'Public token to identify yourself against the public api.',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'userId',
-            'accessTokenRetrievalKey',
+            'token',
             'refreshToken',
+            'expiresAt',
         ],
         'type' => 'object',
     ];
 
-    private string $accessTokenRetrievalKey;
+    /**
+     * The expiration date of the token.
+     */
+    private DateTime $expiresAt;
 
-    private string $userId;
+    /**
+     * Refresh token to refresh your access token even after it has expired.
+     */
+    private string $refreshToken;
 
-    public function __construct(string $accessTokenRetrievalKey, string $userId)
+    /**
+     * Public token to identify yourself against the public api.
+     */
+    private string $token;
+
+    public function __construct(DateTime $expiresAt, string $refreshToken, string $token)
     {
-        $this->accessTokenRetrievalKey = $accessTokenRetrievalKey;
-        $this->userId = $userId;
+        $this->expiresAt = $expiresAt;
+        $this->refreshToken = $refreshToken;
+        $this->token = $token;
     }
 
-    public function getAccessTokenRetrievalKey(): string
+    public function getExpiresAt(): DateTime
     {
-        return $this->accessTokenRetrievalKey;
+        return $this->expiresAt;
     }
 
-    public function getUserId(): string
+    public function getRefreshToken(): string
     {
-        return $this->userId;
+        return $this->refreshToken;
     }
 
-    public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
+    public function getToken(): string
     {
-        $validator = new Validator();
-        $validator->validate($accessTokenRetrievalKey, static::$schema['properties']['accessTokenRetrievalKey']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
+        return $this->token;
+    }
 
+    public function withExpiresAt(DateTime $expiresAt): self
+    {
         $clone = clone $this;
-        $clone->accessTokenRetrievalKey = $accessTokenRetrievalKey;
+        $clone->expiresAt = $expiresAt;
 
         return $clone;
     }
 
-    public function withUserId(string $userId): self
+    public function withRefreshToken(string $refreshToken): self
     {
         $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
+        $validator->validate($refreshToken, static::$schema['properties']['refreshToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->userId = $userId;
+        $clone->refreshToken = $refreshToken;
+
+        return $clone;
+    }
+
+    public function withToken(string $token): self
+    {
+        $validator = new Validator();
+        $validator->validate($token, static::$schema['properties']['token']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->token = $token;
 
         return $clone;
     }
@@ -85,20 +115,21 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateWithAccessTokenRetrievalKeyRequestBody Created instance
+     * @return RefreshSessionOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateWithAccessTokenRetrievalKeyRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): RefreshSessionOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $accessTokenRetrievalKey = $input->{'accessTokenRetrievalKey'};
-        $userId = $input->{'userId'};
+        $expiresAt = new DateTime($input->{'expiresAt'});
+        $refreshToken = $input->{'refreshToken'};
+        $token = $input->{'token'};
 
-        $obj = new self($accessTokenRetrievalKey, $userId);
+        $obj = new self($expiresAt, $refreshToken, $token);
 
         return $obj;
     }
@@ -111,8 +142,9 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['accessTokenRetrievalKey'] = $this->accessTokenRetrievalKey;
-        $output['userId'] = $this->userId;
+        $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
+        $output['refreshToken'] = $this->refreshToken;
+        $output['token'] = $this->token;
 
         return $output;
     }
@@ -143,5 +175,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
 
     public function __clone()
     {
+        $this->expiresAt = clone $this->expiresAt;
     }
 }

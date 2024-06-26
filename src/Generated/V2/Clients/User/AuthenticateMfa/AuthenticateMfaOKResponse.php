@@ -23,8 +23,12 @@ class AuthenticateMfaOKResponse implements ResponseContainer
             'body' => [
                 'properties' => [
                     'expires' => [
-                        'description' => 'Expiration unix timestamp',
+                        'description' => 'The expiration date of the token.',
                         'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                    'refreshToken' => [
+                        'description' => 'Refresh token to refresh your access token even after it has expired.',
                         'type' => 'string',
                     ],
                     'token' => [
@@ -34,6 +38,8 @@ class AuthenticateMfaOKResponse implements ResponseContainer
                 ],
                 'required' => [
                     'token',
+                    'refreshToken',
+                    'expires',
                 ],
                 'type' => 'object',
             ],

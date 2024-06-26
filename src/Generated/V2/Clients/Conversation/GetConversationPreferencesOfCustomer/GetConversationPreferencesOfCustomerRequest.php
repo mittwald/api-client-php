@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateWithAccessTokenRetrievalKeyRequest
+class GetConversationPreferencesOfCustomerRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,51 +17,42 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'accessTokenRetrievalKey' => [
-                        'maxLength' => 37,
-                        'minLength' => 37,
-                        'type' => 'string',
-                    ],
-                    'userId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'userId',
-                    'accessTokenRetrievalKey',
-                    'refreshToken',
-                ],
-                'type' => 'object',
+            'customerId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'customerId',
         ],
     ];
 
-    private AuthenticateWithAccessTokenRetrievalKeyRequestBody $body;
+    private string $customerId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(AuthenticateWithAccessTokenRetrievalKeyRequestBody $body)
+    public function __construct(string $customerId)
     {
-        $this->body = $body;
+        $this->customerId = $customerId;
     }
 
-    public function getBody(): AuthenticateWithAccessTokenRetrievalKeyRequestBody
+    public function getCustomerId(): string
     {
-        return $this->body;
+        return $this->customerId;
     }
 
-    public function withBody(AuthenticateWithAccessTokenRetrievalKeyRequestBody $body): self
+    public function withCustomerId(string $customerId): self
     {
+        $validator = new Validator();
+        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
@@ -71,19 +62,19 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateWithAccessTokenRetrievalKeyRequest Created instance
+     * @return GetConversationPreferencesOfCustomerRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateWithAccessTokenRetrievalKeyRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetConversationPreferencesOfCustomerRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = AuthenticateWithAccessTokenRetrievalKeyRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
 
-        $obj = new self($body);
+        $obj = new self($customerId);
 
         return $obj;
     }
@@ -96,7 +87,7 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['customerId'] = $this->customerId;
 
         return $output;
     }
@@ -127,7 +118,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -142,7 +132,8 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/authenticate-token-retrieval-key';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/conversation-preferences';
     }
 
     /**
@@ -161,7 +152,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -85,6 +85,13 @@ class ListProjectsOKResponse implements ResponseContainer
                             'format' => 'date-time',
                             'type' => 'string',
                         ],
+                        'webStorageUsageInBytes' => [
+                            'type' => 'integer',
+                        ],
+                        'webStorageUsageInBytesSetAt' => [
+                            'format' => 'date-time',
+                            'type' => 'string',
+                        ],
                     ],
                     'required' => [
                         'id',
@@ -98,6 +105,8 @@ class ListProjectsOKResponse implements ResponseContainer
                         'readiness',
                         'status',
                         'statusSetAt',
+                        'webStorageUsageInBytes',
+                        'webStorageUsageInBytesSetAt',
                     ],
                     'type' => 'object',
                 ],

@@ -2,60 +2,55 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Psr\Http\Message\ResponseInterface;
 
-class ChangePasswordOKResponse implements ResponseContainer
+class RefreshSessionRequest
 {
+    public const method = 'put';
+
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
             'body' => [
                 'properties' => [
-                    'expires' => [
-                        'description' => 'The expiration date of the token.',
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                    'token' => [
-                        'description' => 'Public token to identify yourself against the api gateway.',
+                    'refreshToken' => [
                         'type' => 'string',
                     ],
                 ],
                 'required' => [
-                    'token',
-                    'expires',
+                    'refreshToken',
                 ],
                 'type' => 'object',
             ],
         ],
+        'required' => [
+            'body',
+        ],
     ];
 
-    private ChangePasswordOKResponseBody $body;
+    private RefreshSessionRequestBody $body;
 
-    private ResponseInterface|null $httpResponse = null;
+    private array $headers = [
 
-    public function __construct(ChangePasswordOKResponseBody $body)
+    ];
+
+    public function __construct(RefreshSessionRequestBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ChangePasswordOKResponseBody
+    public function getBody(): RefreshSessionRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(ChangePasswordOKResponseBody $body): self
+    public function withBody(RefreshSessionRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,17 +63,17 @@ class ChangePasswordOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ChangePasswordOKResponse Created instance
+     * @return RefreshSessionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ChangePasswordOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): RefreshSessionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ChangePasswordOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = RefreshSessionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -127,16 +122,54 @@ class ChangePasswordOKResponse implements ResponseContainer
         $this->body = clone $this->body;
     }
 
-    public static function fromResponse(ResponseInterface $httpResponse): self
+    /**
+     * Builds the URL for this request
+     *
+     * This method is used internally by the client to build the URL for this request.
+     * You should not need to call this method directly.
+     *
+     * @internal
+     * @return string The URL for this request
+     */
+    public function buildUrl(): string
     {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
+        $mapped = $this->toJson();
+        return '/v2/users/self/sessions';
     }
 
-    public function getResponse(): ResponseInterface|null
+    /**
+     * Builds the request options for this request
+     *
+     * This method is used internally by the client to build the Guzzle request options
+     * for this request. You should not need to call this method directly.
+     *
+     * @internal
+     * @return array The Guzzle request options for this request
+     */
+    public function buildRequestOptions(): array
     {
-        return $this->httpResponse;
+        $mapped = $this->toJson();
+        $query = [];
+        return [
+            'query' => $query,
+            'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
+        ];
+    }
+
+    /**
+     * Adds a header to this request
+     *
+     * You can use this method to add custom HTTP headers to the request.
+     *
+     * @param string $name The name of the header to add
+     * @param string|array $value The value of the header to add
+     * @return self A clone of this request with the header added
+     */
+    public function withHeader(string $name, string|array $value): self
+    {
+        $clone = clone $this;
+        $clone->headers[$name] = $value;
+        return $clone;
     }
 }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateWithAccessTokenRetrievalKeyRequestBody
+class ExtensionCreateRetrievalKeyOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -15,8 +15,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     private static array $schema = [
         'properties' => [
             'accessTokenRetrievalKey' => [
-                'maxLength' => 37,
-                'minLength' => 37,
                 'type' => 'string',
             ],
             'userId' => [
@@ -25,9 +23,8 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
             ],
         ],
         'required' => [
-            'userId',
             'accessTokenRetrievalKey',
-            'refreshToken',
+            'userId',
         ],
         'type' => 'object',
     ];
@@ -85,10 +82,10 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateWithAccessTokenRetrievalKeyRequestBody Created instance
+     * @return ExtensionCreateRetrievalKeyOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateWithAccessTokenRetrievalKeyRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionCreateRetrievalKeyOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
+class ContributorRotateSecretForExtensionInstanceDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,43 +22,26 @@ class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                'properties' => [
-                    'accessTokenRetrievalKey' => [
-                        'description' => 'This retrieval can be used as a one time password. It is only valid once and for a short time.',
-                        'example' => 'mwrk-abcdefghijklmnopqrstuvwxyz012345',
-                        'maxLength' => 37,
-                        'minLength' => 37,
-                        'type' => 'string',
-                    ],
-                    'userId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'userId',
-                    'accessTokenRetrievalKey',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private CreateAccessTokenRetrievalKeyCreatedResponseBody $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(CreateAccessTokenRetrievalKeyCreatedResponseBody $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): CreateAccessTokenRetrievalKeyCreatedResponseBody
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(CreateAccessTokenRetrievalKeyCreatedResponseBody $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -70,17 +54,17 @@ class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CreateAccessTokenRetrievalKeyCreatedResponse Created instance
+     * @return ContributorRotateSecretForExtensionInstanceDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CreateAccessTokenRetrievalKeyCreatedResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorRotateSecretForExtensionInstanceDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CreateAccessTokenRetrievalKeyCreatedResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -95,7 +79,7 @@ class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -126,7 +110,6 @@ class CreateAccessTokenRetrievalKeyCreatedResponse implements ResponseContainer
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

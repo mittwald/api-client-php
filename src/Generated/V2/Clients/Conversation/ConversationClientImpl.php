@@ -36,6 +36,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenNotFoundResponse;
@@ -208,6 +214,29 @@ class ConversationClientImpl implements ConversationClient
             403 => GetConversationMembersForbiddenResponse::fromResponse($httpResponse),
             404 => GetConversationMembersNotFoundResponse::fromResponse($httpResponse),
             default => GetConversationMembersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get preferences for customer conversations.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-conversation-preferences-of-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetConversationPreferencesOfCustomerRequest $request An object representing the request for this operation
+     */
+    public function getConversationPreferencesOfCustomer(GetConversationPreferencesOfCustomerRequest $request): GetConversationPreferencesOfCustomerOKResponse
+    {
+        $httpRequest = new Request(GetConversationPreferencesOfCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetConversationPreferencesOfCustomerOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetConversationPreferencesOfCustomerBadRequestResponse::fromResponse($httpResponse),
+            403 => GetConversationPreferencesOfCustomerForbiddenResponse::fromResponse($httpResponse),
+            404 => GetConversationPreferencesOfCustomerNotFoundResponse::fromResponse($httpResponse),
+            default => GetConversationPreferencesOfCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
 

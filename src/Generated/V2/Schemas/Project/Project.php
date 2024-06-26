@@ -118,6 +118,14 @@ class Project
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'webStorageUsageInBytes' => [
+                'format' => 'int64',
+                'type' => 'integer',
+            ],
+            'webStorageUsageInBytesSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -131,6 +139,8 @@ class Project
             'readiness',
             'status',
             'statusSetAt',
+            'webStorageUsageInBytes',
+            'webStorageUsageInBytesSetAt',
         ],
         'type' => 'object',
     ];
@@ -183,10 +193,14 @@ class Project
 
     private DateTime $statusSetAt;
 
+    private int $webStorageUsageInBytes;
+
+    private DateTime $webStorageUsageInBytesSetAt;
+
     /**
      * @param string[] $directories
      */
-    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt)
+    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
     {
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
@@ -199,6 +213,8 @@ class Project
         $this->shortId = $shortId;
         $this->status = $status;
         $this->statusSetAt = $statusSetAt;
+        $this->webStorageUsageInBytes = $webStorageUsageInBytes;
+        $this->webStorageUsageInBytesSetAt = $webStorageUsageInBytesSetAt;
     }
 
     public function getClusterDomain(): ?string
@@ -315,6 +331,16 @@ class Project
     public function getStatusSetAt(): DateTime
     {
         return $this->statusSetAt;
+    }
+
+    public function getWebStorageUsageInBytes(): int
+    {
+        return $this->webStorageUsageInBytes;
+    }
+
+    public function getWebStorageUsageInBytesSetAt(): DateTime
+    {
+        return $this->webStorageUsageInBytesSetAt;
     }
 
     public function withClusterDomain(string $clusterDomain): self
@@ -655,6 +681,28 @@ class Project
         return $clone;
     }
 
+    public function withWebStorageUsageInBytes(int $webStorageUsageInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($webStorageUsageInBytes, static::$schema['properties']['webStorageUsageInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->webStorageUsageInBytes = $webStorageUsageInBytes;
+
+        return $clone;
+    }
+
+    public function withWebStorageUsageInBytesSetAt(DateTime $webStorageUsageInBytesSetAt): self
+    {
+        $clone = clone $this;
+        $clone->webStorageUsageInBytesSetAt = $webStorageUsageInBytesSetAt;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -724,8 +772,10 @@ class Project
         }
         $status = ProjectStatus::from($input->{'status'});
         $statusSetAt = new DateTime($input->{'statusSetAt'});
+        $webStorageUsageInBytes = (int)($input->{'webStorageUsageInBytes'});
+        $webStorageUsageInBytesSetAt = new DateTime($input->{'webStorageUsageInBytesSetAt'});
 
-        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt);
+        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
         $obj->disableReason = $disableReason;
@@ -790,6 +840,8 @@ class Project
         }
         $output['status'] = $this->status->value;
         $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
+        $output['webStorageUsageInBytes'] = $this->webStorageUsageInBytes;
+        $output['webStorageUsageInBytesSetAt'] = ($this->webStorageUsageInBytesSetAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -830,5 +882,6 @@ class Project
             };
         }
         $this->statusSetAt = clone $this->statusSetAt;
+        $this->webStorageUsageInBytesSetAt = clone $this->webStorageUsageInBytesSetAt;
     }
 }

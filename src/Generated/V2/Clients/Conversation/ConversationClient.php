@@ -17,6 +17,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConv
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListCategories\ListCategoriesOKResponse;
@@ -96,6 +98,15 @@ interface ConversationClient
      * @return GetConversationMembersOKResponse The members of the conversation.
      */
     public function getConversationMembers(GetConversationMembersRequest $request): GetConversationMembersOKResponse;
+    /**
+     * Get preferences for customer conversations.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Conversation/operation/conversation-get-conversation-preferences-of-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetConversationPreferencesOfCustomerRequest $request An object representing the request for this operation
+     */
+    public function getConversationPreferencesOfCustomer(GetConversationPreferencesOfCustomerRequest $request): GetConversationPreferencesOfCustomerOKResponse;
     /**
      * Request an access token for the File belonging to the Conversation.
      *

@@ -2,80 +2,86 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateWithAccessTokenRetrievalKeyRequestBody
+class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'accessTokenRetrievalKey' => [
-                'maxLength' => 37,
-                'minLength' => 37,
-                'type' => 'string',
+            'failure' => [
+                'type' => 'boolean',
             ],
-            'userId' => [
-                'format' => 'uuid',
+            'statusCode' => [
+                'description' => 'The status code returned by the external application.',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'userId',
-            'accessTokenRetrievalKey',
-            'refreshToken',
+            'failure',
         ],
         'type' => 'object',
     ];
 
-    private string $accessTokenRetrievalKey;
+    private bool $failure;
 
-    private string $userId;
+    /**
+     * The status code returned by the external application.
+     */
+    private ?string $statusCode = null;
 
-    public function __construct(string $accessTokenRetrievalKey, string $userId)
+    public function __construct(bool $failure)
     {
-        $this->accessTokenRetrievalKey = $accessTokenRetrievalKey;
-        $this->userId = $userId;
+        $this->failure = $failure;
     }
 
-    public function getAccessTokenRetrievalKey(): string
+    public function getFailure(): bool
     {
-        return $this->accessTokenRetrievalKey;
+        return $this->failure;
     }
 
-    public function getUserId(): string
+    public function getStatusCode(): ?string
     {
-        return $this->userId;
+        return $this->statusCode ?? null;
     }
 
-    public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
+    public function withFailure(bool $failure): self
     {
         $validator = new Validator();
-        $validator->validate($accessTokenRetrievalKey, static::$schema['properties']['accessTokenRetrievalKey']);
+        $validator->validate($failure, static::$schema['properties']['failure']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->accessTokenRetrievalKey = $accessTokenRetrievalKey;
+        $clone->failure = $failure;
 
         return $clone;
     }
 
-    public function withUserId(string $userId): self
+    public function withStatusCode(string $statusCode): self
     {
         $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
+        $validator->validate($statusCode, static::$schema['properties']['statusCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->userId = $userId;
+        $clone->statusCode = $statusCode;
+
+        return $clone;
+    }
+
+    public function withoutStatusCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->statusCode);
 
         return $clone;
     }
@@ -85,21 +91,24 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateWithAccessTokenRetrievalKeyRequestBody Created instance
+     * @return ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateWithAccessTokenRetrievalKeyRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $accessTokenRetrievalKey = $input->{'accessTokenRetrievalKey'};
-        $userId = $input->{'userId'};
+        $failure = (bool)($input->{'failure'});
+        $statusCode = null;
+        if (isset($input->{'statusCode'})) {
+            $statusCode = $input->{'statusCode'};
+        }
 
-        $obj = new self($accessTokenRetrievalKey, $userId);
-
+        $obj = new self($failure);
+        $obj->statusCode = $statusCode;
         return $obj;
     }
 
@@ -111,8 +120,10 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['accessTokenRetrievalKey'] = $this->accessTokenRetrievalKey;
-        $output['userId'] = $this->userId;
+        $output['failure'] = $this->failure;
+        if (isset($this->statusCode)) {
+            $output['statusCode'] = $this->statusCode;
+        }
 
         return $output;
     }

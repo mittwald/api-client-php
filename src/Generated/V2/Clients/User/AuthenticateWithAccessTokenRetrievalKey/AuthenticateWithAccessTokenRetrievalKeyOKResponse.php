@@ -23,7 +23,12 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponse implements ResponseConta
             'body' => [
                 'properties' => [
                     'expiresAt' => [
+                        'description' => 'The expiration date of the token.',
                         'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                    'refreshToken' => [
+                        'description' => 'Refresh token to refresh your access token even after it has expired.',
                         'type' => 'string',
                     ],
                     'token' => [
@@ -33,6 +38,8 @@ class AuthenticateWithAccessTokenRetrievalKeyOKResponse implements ResponseConta
                 ],
                 'required' => [
                     'token',
+                    'refreshToken',
+                    'expiresAt',
                 ],
                 'type' => 'object',
             ],

@@ -27,6 +27,11 @@ response was generated.
 ',
                 'type' => 'integer',
             ],
+            'refresh_token' => [
+                'description' => 'The refresh token issued by the authorization server.
+',
+                'type' => 'string',
+            ],
             'scope' => [
                 'description' => 'The scope of the access token as described by
 [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3).
@@ -45,6 +50,7 @@ response was generated.
         ],
         'required' => [
             'access_token',
+            'refresh_token',
             'token_type',
             'expires_in',
         ],
@@ -67,6 +73,12 @@ response was generated.
     private int $expires_in;
 
     /**
+     * The refresh token issued by the authorization server.
+     *
+     */
+    private string $refresh_token;
+
+    /**
      * The scope of the access token as described by
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3).
      *
@@ -80,10 +92,11 @@ response was generated.
      */
     private OauthRetrieveAccessTokenOKResponseBodyToken_type $token_type;
 
-    public function __construct(string $accessToken, int $expiresIn, OauthRetrieveAccessTokenOKResponseBodyToken_type $tokenType)
+    public function __construct(string $accessToken, int $expiresIn, string $refreshToken, OauthRetrieveAccessTokenOKResponseBodyToken_type $tokenType)
     {
         $this->access_token = $accessToken;
         $this->expires_in = $expiresIn;
+        $this->refresh_token = $refreshToken;
         $this->token_type = $tokenType;
     }
 
@@ -95,6 +108,11 @@ response was generated.
     public function getExpiresIn(): int
     {
         return $this->expires_in;
+    }
+
+    public function getRefreshToken(): string
+    {
+        return $this->refresh_token;
     }
 
     public function getScope(): ?string
@@ -131,6 +149,20 @@ response was generated.
 
         $clone = clone $this;
         $clone->expires_in = $expires_in;
+
+        return $clone;
+    }
+
+    public function withRefreshToken(string $refresh_token): self
+    {
+        $validator = new Validator();
+        $validator->validate($refresh_token, static::$schema['properties']['refresh_token']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->refresh_token = $refresh_token;
 
         return $clone;
     }
@@ -182,13 +214,14 @@ response was generated.
 
         $access_token = $input->{'access_token'};
         $expires_in = (int)($input->{'expires_in'});
+        $refresh_token = $input->{'refresh_token'};
         $scope = null;
         if (isset($input->{'scope'})) {
             $scope = $input->{'scope'};
         }
         $token_type = OauthRetrieveAccessTokenOKResponseBodyToken_type::from($input->{'token_type'});
 
-        $obj = new self($access_token, $expires_in, $token_type);
+        $obj = new self($access_token, $expires_in, $refresh_token, $token_type);
         $obj->scope = $scope;
         return $obj;
     }
@@ -203,6 +236,7 @@ response was generated.
         $output = [];
         $output['access_token'] = $this->access_token;
         $output['expires_in'] = $this->expires_in;
+        $output['refresh_token'] = $this->refresh_token;
         if (isset($this->scope)) {
             $output['scope'] = $this->scope;
         }

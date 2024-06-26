@@ -43,6 +43,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSyst
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseRequest;
@@ -308,6 +309,7 @@ class AppClientImpl implements AppClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => LinkDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => LinkDatabaseNotFoundResponse::fromResponse($httpResponse),
             default => LinkDatabaseDefaultResponse::fromResponse($httpResponse),
         });

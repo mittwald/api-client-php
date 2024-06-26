@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ChangePasswordOKResponse implements ResponseContainer
+class ContributorRotateSecretForExtensionInstanceOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,40 +22,49 @@ class ChangePasswordOKResponse implements ResponseContainer
         'properties' => [
             'body' => [
                 'properties' => [
-                    'expires' => [
-                        'description' => 'The expiration date of the token.',
-                        'format' => 'date-time',
+                    'secret' => [
                         'type' => 'string',
                     ],
-                    'token' => [
-                        'description' => 'Public token to identify yourself against the api gateway.',
-                        'type' => 'string',
+                    'webhookResult' => [
+                        'properties' => [
+                            'failure' => [
+                                'type' => 'boolean',
+                            ],
+                            'statusCode' => [
+                                'description' => 'The status code returned by the external application.',
+                                'type' => 'string',
+                            ],
+                        ],
+                        'required' => [
+                            'failure',
+                        ],
+                        'type' => 'object',
                     ],
                 ],
                 'required' => [
-                    'token',
-                    'expires',
+                    'secret',
+                    'webhookResult',
                 ],
                 'type' => 'object',
             ],
         ],
     ];
 
-    private ChangePasswordOKResponseBody $body;
+    private ContributorRotateSecretForExtensionInstanceOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ChangePasswordOKResponseBody $body)
+    public function __construct(ContributorRotateSecretForExtensionInstanceOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ChangePasswordOKResponseBody
+    public function getBody(): ContributorRotateSecretForExtensionInstanceOKResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(ChangePasswordOKResponseBody $body): self
+    public function withBody(ContributorRotateSecretForExtensionInstanceOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,17 +77,17 @@ class ChangePasswordOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ChangePasswordOKResponse Created instance
+     * @return ContributorRotateSecretForExtensionInstanceOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ChangePasswordOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorRotateSecretForExtensionInstanceOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ChangePasswordOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = ContributorRotateSecretForExtensionInstanceOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

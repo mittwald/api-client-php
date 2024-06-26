@@ -35,6 +35,11 @@ response was generated.
 ',
                         'type' => 'integer',
                     ],
+                    'refresh_token' => [
+                        'description' => 'The refresh token issued by the authorization server.
+',
+                        'type' => 'string',
+                    ],
                     'scope' => [
                         'description' => 'The scope of the access token as described by
 [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3).
@@ -53,6 +58,7 @@ response was generated.
                 ],
                 'required' => [
                     'access_token',
+                    'refresh_token',
                     'token_type',
                     'expires_in',
                 ],

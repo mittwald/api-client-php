@@ -456,6 +456,8 @@ class ContractClientImpl implements ContractClient
     /**
      * Get details of an Invoice.
      *
+     * This route is deprecated. Use /v2/invoices/{invoiceId} instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-invoice-detail-of-invoice
      * @throws GuzzleException
      * @throws UnexpectedResponseException

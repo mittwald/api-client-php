@@ -46,9 +46,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\CreateAccessTokenRetrievalKey\CreateAccessTokenRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenDefaultResponse;
@@ -257,6 +254,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusDe
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterDefaultResponse;
@@ -1230,27 +1231,6 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Create an access token retrieval key to acquire an access token for your user.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-access-token-retrieval-key
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateAccessTokenRetrievalKeyRequest $request An object representing the request for this operation
-     * @return CreateAccessTokenRetrievalKeyCreatedResponse You got an access token retrieval key use it as a one time password to get an actual access token.
-     */
-    public function createAccessTokenRetrievalKey(CreateAccessTokenRetrievalKeyRequest $request): CreateAccessTokenRetrievalKeyCreatedResponse
-    {
-        $httpRequest = new Request(CreateAccessTokenRetrievalKeyRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateAccessTokenRetrievalKeyCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => CreateAccessTokenRetrievalKeyDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Store a new ApiToken.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-create-api-token
@@ -1894,6 +1874,28 @@ class UserClientImpl implements UserClient
             400 => PostPollStatusBadRequestResponse::fromResponse($httpResponse),
             403 => PostPollStatusForbiddenResponse::fromResponse($httpResponse),
             default => PostPollStatusDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Refresh a session.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-refresh-session
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RefreshSessionRequest $request An object representing the request for this operation
+     * @return RefreshSessionOKResponse Your token refresh was successful and you've got new a new access token. The used one in this call is no longer valid.
+     */
+    public function refreshSession(RefreshSessionRequest $request): RefreshSessionOKResponse
+    {
+        $httpRequest = new Request(RefreshSessionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return RefreshSessionOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => RefreshSessionBadRequestResponse::fromResponse($httpResponse),
+            default => RefreshSessionDefaultResponse::fromResponse($httpResponse),
         });
     }
 
