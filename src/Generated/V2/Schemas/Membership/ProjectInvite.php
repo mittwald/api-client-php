@@ -25,6 +25,11 @@ class ProjectInvite
      */
     private static array $schema = [
         'properties' => [
+            'avatarRefId' => [
+                'description' => 'Reference to the Project\'s avatar.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'id' => [
                 'description' => 'ID of the ProjectInvite.',
                 'format' => 'uuid',
@@ -73,6 +78,11 @@ class ProjectInvite
     ];
 
     /**
+     * Reference to the Project's avatar.
+     */
+    private ?string $avatarRefId = null;
+
+    /**
      * ID of the ProjectInvite.
      */
     private string $id;
@@ -116,6 +126,11 @@ class ProjectInvite
         $this->role = $role;
     }
 
+    public function getAvatarRefId(): ?string
+    {
+        return $this->avatarRefId ?? null;
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -154,6 +169,28 @@ class ProjectInvite
     public function getRole(): ProjectRoles
     {
         return $this->role;
+    }
+
+    public function withAvatarRefId(string $avatarRefId): self
+    {
+        $validator = new Validator();
+        $validator->validate($avatarRefId, static::$schema['properties']['avatarRefId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->avatarRefId = $avatarRefId;
+
+        return $clone;
+    }
+
+    public function withoutAvatarRefId(): self
+    {
+        $clone = clone $this;
+        unset($clone->avatarRefId);
+
+        return $clone;
     }
 
     public function withId(string $id): self
@@ -281,6 +318,10 @@ class ProjectInvite
             static::validateInput($input);
         }
 
+        $avatarRefId = null;
+        if (isset($input->{'avatarRefId'})) {
+            $avatarRefId = $input->{'avatarRefId'};
+        }
         $id = $input->{'id'};
         $information = InviteInformation::buildFromInput($input->{'information'}, validate: $validate);
         $mailAddress = $input->{'mailAddress'};
@@ -297,6 +338,7 @@ class ProjectInvite
         $role = ProjectRoles::from($input->{'role'});
 
         $obj = new self($id, $information, $mailAddress, $projectDescription, $projectId, $role);
+        $obj->avatarRefId = $avatarRefId;
         $obj->membershipExpiresAt = $membershipExpiresAt;
         $obj->message = $message;
         return $obj;
@@ -310,6 +352,9 @@ class ProjectInvite
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->avatarRefId)) {
+            $output['avatarRefId'] = $this->avatarRefId;
+        }
         $output['id'] = $this->id;
         $output['information'] = $this->information->toJson();
         $output['mailAddress'] = $this->mailAddress;

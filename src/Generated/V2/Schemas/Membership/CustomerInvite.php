@@ -26,7 +26,8 @@ class CustomerInvite
     private static array $schema = [
         'properties' => [
             'avatarRefId' => [
-                'description' => 'Reference to the Customer\'s avatar.',
+                'description' => 'Reference to the Project\'s avatar.',
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'customerId' => [
@@ -77,7 +78,7 @@ class CustomerInvite
     ];
 
     /**
-     * Reference to the Customer's avatar.
+     * Reference to the Project's avatar.
      */
     private ?string $avatarRefId = null;
 
