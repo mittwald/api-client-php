@@ -37,6 +37,9 @@ class Extension
             'description' => [
                 'type' => 'string',
             ],
+            'detailedDescriptions' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
+            ],
             'disabled' => [
                 'type' => 'boolean',
             ],
@@ -96,6 +99,8 @@ class Extension
     private string $contributorId;
 
     private string $description;
+
+    private ?DetailedDescriptions $detailedDescriptions = null;
 
     private bool $disabled;
 
@@ -159,6 +164,15 @@ class Extension
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    /**
+     * @return
+     * DetailedDescriptions|null
+     */
+    public function getDetailedDescriptions(): ?DetailedDescriptions
+    {
+        return $this->detailedDescriptions ?? null;
     }
 
     public function getDisabled(): bool
@@ -257,6 +271,22 @@ class Extension
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withDetailedDescriptions(DetailedDescriptions $detailedDescriptions): self
+    {
+        $clone = clone $this;
+        $clone->detailedDescriptions = $detailedDescriptions;
+
+        return $clone;
+    }
+
+    public function withoutDetailedDescriptions(): self
+    {
+        $clone = clone $this;
+        unset($clone->detailedDescriptions);
 
         return $clone;
     }
@@ -391,6 +421,10 @@ class Extension
         $context = Context::from($input->{'context'});
         $contributorId = $input->{'contributorId'};
         $description = $input->{'description'};
+        $detailedDescriptions = null;
+        if (isset($input->{'detailedDescriptions'})) {
+            $detailedDescriptions = DetailedDescriptions::buildFromInput($input->{'detailedDescriptions'}, validate: $validate);
+        }
         $disabled = (bool)($input->{'disabled'});
         $frontendComponents = null;
         if (isset($input->{'frontendComponents'})) {
@@ -404,6 +438,7 @@ class Extension
         $tags = $input->{'tags'};
 
         $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $scopes, $state, $support, $tags);
+        $obj->detailedDescriptions = $detailedDescriptions;
         $obj->frontendComponents = $frontendComponents;
         return $obj;
     }
@@ -420,6 +455,9 @@ class Extension
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
         $output['description'] = $this->description;
+        if (isset($this->detailedDescriptions)) {
+            $output['detailedDescriptions'] = $this->detailedDescriptions->toJson();
+        }
         $output['disabled'] = $this->disabled;
         if (isset($this->frontendComponents)) {
             $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
