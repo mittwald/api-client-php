@@ -8,23 +8,17 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipOKResponse;
@@ -44,14 +38,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\List
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\ListInvitesForCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipRequest;
@@ -80,16 +70,6 @@ interface CustomerClient
      */
     public function acceptCustomerInvite(AcceptCustomerInviteRequest $request): EmptyResponse;
     /**
-     * Create a new customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateCategoryRequest $request An object representing the request for this operation
-     * @return CreateCategoryCreatedResponse The new customer category
-     */
-    public function createCategory(CreateCategoryRequest $request): CreateCategoryCreatedResponse;
-    /**
      * Create a new customer profile.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-customer
@@ -117,15 +97,6 @@ interface CustomerClient
      * @param DeclineCustomerInviteRequest $request An object representing the request for this operation
      */
     public function declineCustomerInvite(DeclineCustomerInviteRequest $request): EmptyResponse;
-    /**
-     * Delete a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteCategoryRequest $request An object representing the request for this operation
-     */
-    public function deleteCategory(DeleteCategoryRequest $request): DeleteCategoryOKResponse;
     /**
      * Delete a customer profile.
      *
@@ -164,16 +135,6 @@ interface CustomerClient
      * @return GetCustomerOKResponse The customer object
      */
     public function getCustomer(GetCustomerRequest $request): GetCustomerOKResponse;
-    /**
-     * Get a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetCustomerCategoryRequest $request An object representing the request for this operation
-     * @return GetCustomerCategoryOKResponse Returns the customer category
-     */
-    public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse;
     /**
      * Get a CustomerInvite.
      *
@@ -273,16 +234,6 @@ interface CustomerClient
      */
     public function listMembershipsForCustomer(ListMembershipsForCustomerRequest $request): ListMembershipsForCustomerOKResponse;
     /**
-     * Get all customer categories.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListOfCustomerCategoriesRequest $request An object representing the request for this operation
-     * @return ListOfCustomerCategoriesOKResponse Object containing the list of customer categories
-     */
-    public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse;
-    /**
      * Remove the avatar picture of the customer profile.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-remove-avatar
@@ -311,16 +262,6 @@ interface CustomerClient
      * @param ResendCustomerInviteMailRequest $request An object representing the request for this operation
      */
     public function resendCustomerInviteMail(ResendCustomerInviteMailRequest $request): EmptyResponse;
-    /**
-     * Update a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCategoryRequest $request An object representing the request for this operation
-     * @return UpdateCategoryOKResponse The updated customer category
-     */
-    public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse;
     /**
      * Update a customer profile.
      *

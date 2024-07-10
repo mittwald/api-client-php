@@ -22,9 +22,6 @@ class UpdateCustomerRequest
             ],
             'body' => [
                 'properties' => [
-                    'categoryId' => [
-                        'type' => 'string',
-                    ],
                     'customerId' => [
                         'type' => 'string',
                     ],

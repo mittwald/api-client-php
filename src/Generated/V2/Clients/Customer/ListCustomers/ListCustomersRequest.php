@@ -21,16 +21,17 @@ class ListCustomersRequest
                 'type' => 'string',
             ],
             'limit' => [
-                'minimum' => 0,
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
             ],
             'skip' => [
-                'minimum' => 0,
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
-                'minimum' => 0,
                 'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -40,9 +41,9 @@ class ListCustomersRequest
 
     private ?string $role = null;
 
-    private ?int $limit = null;
+    private int $limit;
 
-    private ?int $skip = null;
+    private int $skip;
 
     private ?int $page = null;
 
@@ -50,11 +51,10 @@ class ListCustomersRequest
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(int $limit, int $skip)
     {
+        $this->limit = $limit;
+        $this->skip = $skip;
     }
 
     public function getRole(): ?string
@@ -62,14 +62,14 @@ class ListCustomersRequest
         return $this->role ?? null;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
     }
 
     public function getPage(): ?int
@@ -113,14 +113,6 @@ class ListCustomersRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -131,14 +123,6 @@ class ListCustomersRequest
 
         $clone = clone $this;
         $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -184,11 +168,11 @@ class ListCustomersRequest
         if (isset($input->{'role'})) {
             $role = $input->{'role'};
         }
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
@@ -197,10 +181,8 @@ class ListCustomersRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self();
+        $obj = new self($limit, $skip);
         $obj->role = $role;
-        $obj->limit = $limit;
-        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }
@@ -216,12 +198,8 @@ class ListCustomersRequest
         if (isset($this->role)) {
             $output['role'] = $this->role;
         }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }

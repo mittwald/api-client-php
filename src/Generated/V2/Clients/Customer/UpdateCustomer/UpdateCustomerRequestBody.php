@@ -15,9 +15,6 @@ class UpdateCustomerRequestBody
      */
     private static array $schema = [
         'properties' => [
-            'categoryId' => [
-                'type' => 'string',
-            ],
             'customerId' => [
                 'type' => 'string',
             ],
@@ -38,8 +35,6 @@ class UpdateCustomerRequestBody
         'type' => 'object',
     ];
 
-    private ?string $categoryId = null;
-
     private string $customerId;
 
     private string $name;
@@ -52,11 +47,6 @@ class UpdateCustomerRequestBody
     {
         $this->customerId = $customerId;
         $this->name = $name;
-    }
-
-    public function getCategoryId(): ?string
-    {
-        return $this->categoryId ?? null;
     }
 
     public function getCustomerId(): string
@@ -77,28 +67,6 @@ class UpdateCustomerRequestBody
     public function getVatId(): ?string
     {
         return $this->vatId ?? null;
-    }
-
-    public function withCategoryId(string $categoryId): self
-    {
-        $validator = new Validator();
-        $validator->validate($categoryId, static::$schema['properties']['categoryId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->categoryId = $categoryId;
-
-        return $clone;
-    }
-
-    public function withoutCategoryId(): self
-    {
-        $clone = clone $this;
-        unset($clone->categoryId);
-
-        return $clone;
     }
 
     public function withCustomerId(string $customerId): self
@@ -182,10 +150,6 @@ class UpdateCustomerRequestBody
             static::validateInput($input);
         }
 
-        $categoryId = null;
-        if (isset($input->{'categoryId'})) {
-            $categoryId = $input->{'categoryId'};
-        }
         $customerId = $input->{'customerId'};
         $name = $input->{'name'};
         $owner = null;
@@ -198,7 +162,6 @@ class UpdateCustomerRequestBody
         }
 
         $obj = new self($customerId, $name);
-        $obj->categoryId = $categoryId;
         $obj->owner = $owner;
         $obj->vatId = $vatId;
         return $obj;
@@ -212,9 +175,6 @@ class UpdateCustomerRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->categoryId)) {
-            $output['categoryId'] = $this->categoryId;
-        }
         $output['customerId'] = $this->customerId;
         $output['name'] = $this->name;
         if (isset($this->owner)) {

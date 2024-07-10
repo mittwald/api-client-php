@@ -19,9 +19,6 @@ class CreateCustomerRequest
         'properties' => [
             'body' => [
                 'properties' => [
-                    'categoryId' => [
-                        'type' => 'string',
-                    ],
                     'name' => [
                         'type' => 'string',
                     ],

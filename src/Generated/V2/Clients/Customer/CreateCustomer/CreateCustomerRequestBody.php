@@ -15,9 +15,6 @@ class CreateCustomerRequestBody
      */
     private static array $schema = [
         'properties' => [
-            'categoryId' => [
-                'type' => 'string',
-            ],
             'name' => [
                 'type' => 'string',
             ],
@@ -34,8 +31,6 @@ class CreateCustomerRequestBody
         'type' => 'object',
     ];
 
-    private ?string $categoryId = null;
-
     private string $name;
 
     private ?Contact $owner = null;
@@ -45,11 +40,6 @@ class CreateCustomerRequestBody
     public function __construct(string $name)
     {
         $this->name = $name;
-    }
-
-    public function getCategoryId(): ?string
-    {
-        return $this->categoryId ?? null;
     }
 
     public function getName(): string
@@ -65,28 +55,6 @@ class CreateCustomerRequestBody
     public function getVatId(): ?string
     {
         return $this->vatId ?? null;
-    }
-
-    public function withCategoryId(string $categoryId): self
-    {
-        $validator = new Validator();
-        $validator->validate($categoryId, static::$schema['properties']['categoryId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->categoryId = $categoryId;
-
-        return $clone;
-    }
-
-    public function withoutCategoryId(): self
-    {
-        $clone = clone $this;
-        unset($clone->categoryId);
-
-        return $clone;
     }
 
     public function withName(string $name): self
@@ -156,10 +124,6 @@ class CreateCustomerRequestBody
             static::validateInput($input);
         }
 
-        $categoryId = null;
-        if (isset($input->{'categoryId'})) {
-            $categoryId = $input->{'categoryId'};
-        }
         $name = $input->{'name'};
         $owner = null;
         if (isset($input->{'owner'})) {
@@ -171,7 +135,6 @@ class CreateCustomerRequestBody
         }
 
         $obj = new self($name);
-        $obj->categoryId = $categoryId;
         $obj->owner = $owner;
         $obj->vatId = $vatId;
         return $obj;
@@ -185,9 +148,6 @@ class CreateCustomerRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->categoryId)) {
-            $output['categoryId'] = $this->categoryId;
-        }
         $output['name'] = $this->name;
         if (isset($this->owner)) {
             $output['owner'] = $this->owner->toJson();

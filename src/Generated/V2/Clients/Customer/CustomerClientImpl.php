@@ -14,10 +14,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\Accept
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInvitePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCategory\CreateCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerDefaultResponse;
@@ -30,9 +26,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\Create
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCategory\DeleteCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerOKResponse;
@@ -48,9 +41,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerNotF
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerUnauthorizedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerCategory\GetCustomerCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteOKResponse;
@@ -91,9 +81,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListOfCustomerCategories\ListOfCustomerCategoriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarRequest;
@@ -106,11 +93,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\Request
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCategory\UpdateCategoryRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerNotFoundResponse;
@@ -160,28 +142,6 @@ class CustomerClientImpl implements CustomerClient
             403 => AcceptCustomerInviteForbiddenResponse::fromResponse($httpResponse),
             412 => AcceptCustomerInvitePreconditionFailedResponse::fromResponse($httpResponse),
             default => AcceptCustomerInviteDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Create a new customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CreateCategoryRequest $request An object representing the request for this operation
-     * @return CreateCategoryCreatedResponse The new customer category
-     */
-    public function createCategory(CreateCategoryRequest $request): CreateCategoryCreatedResponse
-    {
-        $httpRequest = new Request(CreateCategoryRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return CreateCategoryCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CreateCategoryBadRequestResponse::fromResponse($httpResponse),
-            default => CreateCategoryDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -247,26 +207,6 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             default => DeclineCustomerInviteDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Delete a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-delete-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeleteCategoryRequest $request An object representing the request for this operation
-     */
-    public function deleteCategory(DeleteCategoryRequest $request): DeleteCategoryOKResponse
-    {
-        $httpRequest = new Request(DeleteCategoryRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return DeleteCategoryOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => DeleteCategoryDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -354,27 +294,6 @@ class CustomerClientImpl implements CustomerClient
             403 => GetCustomerForbiddenResponse::fromResponse($httpResponse),
             404 => GetCustomerNotFoundResponse::fromResponse($httpResponse),
             default => GetCustomerDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-customer-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetCustomerCategoryRequest $request An object representing the request for this operation
-     * @return GetCustomerCategoryOKResponse Returns the customer category
-     */
-    public function getCustomerCategory(GetCustomerCategoryRequest $request): GetCustomerCategoryOKResponse
-    {
-        $httpRequest = new Request(GetCustomerCategoryRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetCustomerCategoryOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => GetCustomerCategoryDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -598,27 +517,6 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
-     * Get all customer categories.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-of-customer-categories
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListOfCustomerCategoriesRequest $request An object representing the request for this operation
-     * @return ListOfCustomerCategoriesOKResponse Object containing the list of customer categories
-     */
-    public function listOfCustomerCategories(ListOfCustomerCategoriesRequest $request): ListOfCustomerCategoriesOKResponse
-    {
-        $httpRequest = new Request(ListOfCustomerCategoriesRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListOfCustomerCategoriesOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            default => ListOfCustomerCategoriesDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Remove the avatar picture of the customer profile.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-remove-avatar
@@ -682,29 +580,6 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ResendCustomerInviteMailForbiddenResponse::fromResponse($httpResponse),
             default => ResendCustomerInviteMailDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a customer category.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-update-category
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateCategoryRequest $request An object representing the request for this operation
-     * @return UpdateCategoryOKResponse The updated customer category
-     */
-    public function updateCategory(UpdateCategoryRequest $request): UpdateCategoryOKResponse
-    {
-        $httpRequest = new Request(UpdateCategoryRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return UpdateCategoryOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => UpdateCategoryBadRequestResponse::fromResponse($httpResponse),
-            404 => UpdateCategoryNotFoundResponse::fromResponse($httpResponse),
-            default => UpdateCategoryDefaultResponse::fromResponse($httpResponse),
         });
     }
 
