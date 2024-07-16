@@ -63,7 +63,14 @@ class Extension
                 'type' => 'array',
             ],
             'state' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionState',
+                'deprecated' => true,
+                'description' => 'deprecated',
+                'enum' => [
+                    'enabled',
+                    'blocked',
+                    'disabled',
+                ],
+                'type' => 'string',
             ],
             'support' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
@@ -118,6 +125,9 @@ class Extension
      */
     private array $scopes;
 
+    /**
+     * deprecated
+     */
     private ExtensionState $state;
 
     private SupportMeta $support;
@@ -465,7 +475,7 @@ class Extension
         $output['id'] = $this->id;
         $output['name'] = $this->name;
         $output['scopes'] = $this->scopes;
-        $output['state'] = $this->state->value;
+        $output['state'] = ($this->state)->value;
         $output['support'] = $this->support->toJson();
         $output['tags'] = $this->tags;
 

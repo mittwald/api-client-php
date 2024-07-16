@@ -180,6 +180,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomai
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeNotFoundResponse;
@@ -987,6 +992,29 @@ class DomainClientImpl implements DomainClient
             400 => ResendDomainEmailBadRequestResponse::fromResponse($httpResponse),
             404 => ResendDomainEmailNotFoundResponse::fromResponse($httpResponse),
             default => ResendDomainEmailDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Suggest a list of domains based on a prompt using AI.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-suggest
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SuggestRequest $request An object representing the request for this operation
+     * @return SuggestOKResponse OK
+     */
+    public function suggest(SuggestRequest $request): SuggestOKResponse
+    {
+        $httpRequest = new Request(SuggestRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SuggestOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SuggestBadRequestResponse::fromResponse($httpResponse),
+            412 => SuggestPreconditionFailedResponse::fromResponse($httpResponse),
+            default => SuggestDefaultResponse::fromResponse($httpResponse),
         });
     }
 

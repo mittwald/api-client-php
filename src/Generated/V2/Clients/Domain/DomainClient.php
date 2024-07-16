@@ -79,6 +79,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTld
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainContact\UpdateDomainContactOKResponse;
@@ -466,6 +468,16 @@ interface DomainClient
      * @return EmptyResponse No Content
      */
     public function resendDomainEmail(ResendDomainEmailRequest $request): EmptyResponse;
+    /**
+     * Suggest a list of domains based on a prompt using AI.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-suggest
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SuggestRequest $request An object representing the request for this operation
+     * @return SuggestOKResponse OK
+     */
+    public function suggest(SuggestRequest $request): SuggestOKResponse;
     /**
      * Update the auth code of a Domain.
      *
