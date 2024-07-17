@@ -80,6 +80,7 @@ class ArticleTemplate
             ],
         ],
         'required' => [
+            'id',
             'name',
             'isRecurring',
             'type',
@@ -105,7 +106,7 @@ class ArticleTemplate
 
     private ?string $description = null;
 
-    private ?string $id = null;
+    private string $id;
 
     private bool $isManagedByDomain;
 
@@ -120,8 +121,9 @@ class ArticleTemplate
 
     private ArticleTemplateType $type;
 
-    public function __construct(bool $isManagedByDomain, bool $isRecurring, string $name, ArticleTemplateType $type)
+    public function __construct(string $id, bool $isManagedByDomain, bool $isRecurring, string $name, ArticleTemplateType $type)
     {
+        $this->id = $id;
         $this->isManagedByDomain = $isManagedByDomain;
         $this->isRecurring = $isRecurring;
         $this->name = $name;
@@ -159,9 +161,9 @@ class ArticleTemplate
         return $this->description ?? null;
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
-        return $this->id ?? null;
+        return $this->id;
     }
 
     public function getIsManagedByDomain(): bool
@@ -286,14 +288,6 @@ class ArticleTemplate
         return $clone;
     }
 
-    public function withoutId(): self
-    {
-        $clone = clone $this;
-        unset($clone->id);
-
-        return $clone;
-    }
-
     public function withIsManagedByDomain(bool $isManagedByDomain): self
     {
         $validator = new Validator();
@@ -394,10 +388,7 @@ class ArticleTemplate
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
         }
-        $id = null;
-        if (isset($input->{'id'})) {
-            $id = $input->{'id'};
-        }
+        $id = $input->{'id'};
         $isManagedByDomain = (bool)($input->{'isManagedByDomain'});
         $isRecurring = (bool)($input->{'isRecurring'});
         $modifierArticles = null;
@@ -407,12 +398,11 @@ class ArticleTemplate
         $name = $input->{'name'};
         $type = ArticleTemplateType::from($input->{'type'});
 
-        $obj = new self($isManagedByDomain, $isRecurring, $name, $type);
+        $obj = new self($id, $isManagedByDomain, $isRecurring, $name, $type);
         $obj->additionalArticles = $additionalArticles;
         $obj->addons = $addons;
         $obj->attributes = $attributes;
         $obj->description = $description;
-        $obj->id = $id;
         $obj->modifierArticles = $modifierArticles;
         return $obj;
     }
@@ -437,9 +427,7 @@ class ArticleTemplate
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
-        if (isset($this->id)) {
-            $output['id'] = $this->id;
-        }
+        $output['id'] = $this->id;
         $output['isManagedByDomain'] = $this->isManagedByDomain;
         $output['isRecurring'] = $this->isRecurring;
         if (isset($this->modifierArticles)) {

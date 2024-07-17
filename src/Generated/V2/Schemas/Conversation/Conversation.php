@@ -65,13 +65,7 @@ class Conversation
                 'type' => 'string',
             ],
             'status' => [
-                'enum' => [
-                    'open',
-                    'closed',
-                    'answered',
-                    'inProgress',
-                ],
-                'type' => 'string',
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.Status',
             ],
             'title' => [
                 'type' => 'string',
@@ -121,13 +115,13 @@ class Conversation
 
     private string $shortId;
 
-    private ConversationStatus $status;
+    private Status $status;
 
     private string $title;
 
     private ConversationVisibility $visibility;
 
-    public function __construct(string $conversationId, DateTime $createdAt, User $mainUser, string $shortId, ConversationStatus $status, string $title, ConversationVisibility $visibility)
+    public function __construct(string $conversationId, DateTime $createdAt, User $mainUser, string $shortId, Status $status, string $title, ConversationVisibility $visibility)
     {
         $this->conversationId = $conversationId;
         $this->createdAt = $createdAt;
@@ -205,7 +199,7 @@ class Conversation
         return $this->shortId;
     }
 
-    public function getStatus(): ConversationStatus
+    public function getStatus(): Status
     {
         return $this->status;
     }
@@ -379,7 +373,7 @@ class Conversation
         return $clone;
     }
 
-    public function withStatus(ConversationStatus $status): self
+    public function withStatus(Status $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
@@ -456,7 +450,7 @@ class Conversation
             $sharedWith = AggregateReference::buildFromInput($input->{'sharedWith'}, validate: $validate);
         }
         $shortId = $input->{'shortId'};
-        $status = ConversationStatus::from($input->{'status'});
+        $status = Status::from($input->{'status'});
         $title = $input->{'title'};
         $visibility = ConversationVisibility::from($input->{'visibility'});
 
@@ -504,7 +498,7 @@ class Conversation
             $output['sharedWith'] = $this->sharedWith->toJson();
         }
         $output['shortId'] = $this->shortId;
-        $output['status'] = ($this->status)->value;
+        $output['status'] = $this->status->value;
         $output['title'] = $this->title;
         $output['visibility'] = ($this->visibility)->value;
 
