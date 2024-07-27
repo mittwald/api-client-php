@@ -30,6 +30,9 @@ class OrderPreviewOrderRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrderPreview',
                             ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreview',
+                            ],
                         ],
                     ],
                     'orderType' => [
@@ -37,6 +40,7 @@ class OrderPreviewOrderRequest
                             'domain',
                             'projectHosting',
                             'server',
+                            'externalCertificate',
                         ],
                         'type' => 'string',
                     ],

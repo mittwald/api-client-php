@@ -9,4 +9,5 @@ enum OrderPreviewOrderRequestBodyOrderType: string
     case domain = 'domain';
     case projectHosting = 'projectHosting';
     case server = 'server';
+    case externalCertificate = 'externalCertificate';
 }

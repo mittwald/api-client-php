@@ -30,6 +30,9 @@ class OrderCreateOrderRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrder',
                             ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrder',
+                            ],
                         ],
                     ],
                     'orderType' => [
@@ -37,6 +40,7 @@ class OrderCreateOrderRequest
                             'domain',
                             'projectHosting',
                             'server',
+                            'externalCertificate',
                         ],
                         'type' => 'string',
                     ],

@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview;
+use Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrderPreview;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview;
 use Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview;
 
@@ -28,6 +29,9 @@ class OrderPreviewOrderRequestBody
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrderPreview',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreview',
+                    ],
                 ],
             ],
             'orderType' => [
@@ -35,6 +39,7 @@ class OrderPreviewOrderRequestBody
                     'domain',
                     'projectHosting',
                     'server',
+                    'externalCertificate',
                 ],
                 'type' => 'string',
             ],
@@ -42,7 +47,7 @@ class OrderPreviewOrderRequestBody
         'type' => 'object',
     ];
 
-    private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|null $orderData = null;
+    private ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview|null $orderData = null;
 
     private ?OrderPreviewOrderRequestBodyOrderType $orderType = null;
 
@@ -55,9 +60,9 @@ class OrderPreviewOrderRequestBody
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|null
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrderPreview|null
      */
-    public function getOrderData(): DomainOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null
+    public function getOrderData(): DomainOrderPreview|ExternalCertificateOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null
     {
         return $this->orderData;
     }
@@ -68,9 +73,9 @@ class OrderPreviewOrderRequestBody
     }
 
     /**
-     * @param ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview $orderData
+     * @param ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview $orderData
      */
-    public function withOrderData(DomainOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
+    public function withOrderData(DomainOrderPreview|ExternalCertificateOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
     {
         $clone = clone $this;
         $clone->orderData = $orderData;
@@ -123,6 +128,7 @@ class OrderPreviewOrderRequestBody
                 ProjectHostingOrderPreview::validateInput($input->{'orderData'}, true) => ProjectHostingOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 ServerOrderPreview::validateInput($input->{'orderData'}, true) => ServerOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 DomainOrderPreview::validateInput($input->{'orderData'}, true) => DomainOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
+                ExternalCertificateOrderPreview::validateInput($input->{'orderData'}, true) => ExternalCertificateOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
             };
         }
         $orderType = null;
@@ -146,7 +152,7 @@ class OrderPreviewOrderRequestBody
         $output = [];
         if (isset($this->orderData)) {
             $output['orderData'] = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview => $this->orderData->toJson(),
+                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview, ($this->orderData) instanceof ExternalCertificateOrderPreview => $this->orderData->toJson(),
             };
         }
         if (isset($this->orderType)) {
@@ -184,7 +190,7 @@ class OrderPreviewOrderRequestBody
     {
         if (isset($this->orderData)) {
             $this->orderData = match (true) {
-                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview => $this->orderData,
+                ($this->orderData) instanceof ProjectHostingOrderPreview, ($this->orderData) instanceof ServerOrderPreview, ($this->orderData) instanceof DomainOrderPreview, ($this->orderData) instanceof ExternalCertificateOrderPreview => $this->orderData,
             };
         }
     }
