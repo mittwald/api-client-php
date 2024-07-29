@@ -12,111 +12,111 @@ use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\DeprecatedAppLinkDatabase\DeprecatedAppLinkDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ExecuteAction\ExecuteActionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetApp\GetAppTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppinstallation\GetAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetAppversion\GetAppversionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetInstalledSystemsoftwareForAppinstallation\GetInstalledSystemsoftwareForAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetMissingDependenciesForAppinstallation\GetMissingDependenciesForAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftware\GetSystemsoftwareTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\GetSystemsoftwareversion\GetSystemsoftwareversionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\LinkDatabase\LinkDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations\ListAppinstallationsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser\ListAppinstallationsForUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListApps\ListAppsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppversions\ListAppversionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppversions\ListAppversionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppversions\ListAppversionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppversions\ListAppversionsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListAppversions\ListAppversionsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwares\ListSystemsoftwaresTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListSystemsoftwareversionsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\RetrieveStatus\RetrieveStatusTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\SetDatabaseUsers\SetDatabaseUsersTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\UninstallAppinstallation\UninstallAppinstallationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\UnlinkDatabase\UnlinkDatabaseTooManyRequestsResponse;
 
 /**
  * Client for App API
@@ -158,7 +158,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExecuteActionNotFoundResponse::fromResponse($httpResponse),
-            429 => ExecuteActionUnknownResponse::fromResponse($httpResponse),
+            429 => ExecuteActionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExecuteActionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -181,7 +181,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetAppNotFoundResponse::fromResponse($httpResponse),
-            429 => GetAppUnknownResponse::fromResponse($httpResponse),
+            429 => GetAppTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetAppDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -204,7 +204,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            429 => GetAppinstallationUnknownResponse::fromResponse($httpResponse),
+            429 => GetAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -227,7 +227,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetAppversionNotFoundResponse::fromResponse($httpResponse),
-            429 => GetAppversionUnknownResponse::fromResponse($httpResponse),
+            429 => GetAppversionTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetAppversionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -250,7 +250,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetInstalledSystemsoftwareForAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            429 => GetInstalledSystemsoftwareForAppinstallationUnknownResponse::fromResponse($httpResponse),
+            429 => GetInstalledSystemsoftwareForAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetInstalledSystemsoftwareForAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -273,7 +273,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetMissingDependenciesForAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            429 => GetMissingDependenciesForAppinstallationUnknownResponse::fromResponse($httpResponse),
+            429 => GetMissingDependenciesForAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetMissingDependenciesForAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -296,7 +296,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetSystemsoftwareNotFoundResponse::fromResponse($httpResponse),
-            429 => GetSystemsoftwareUnknownResponse::fromResponse($httpResponse),
+            429 => GetSystemsoftwareTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetSystemsoftwareDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -319,7 +319,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetSystemsoftwareversionNotFoundResponse::fromResponse($httpResponse),
-            429 => GetSystemsoftwareversionUnknownResponse::fromResponse($httpResponse),
+            429 => GetSystemsoftwareversionTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetSystemsoftwareversionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -343,7 +343,7 @@ class AppClientImpl implements AppClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => LinkDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => LinkDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => LinkDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => LinkDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => LinkDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -365,7 +365,7 @@ class AppClientImpl implements AppClient
             return ListAppinstallationsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListAppinstallationsUnknownResponse::fromResponse($httpResponse),
+            429 => ListAppinstallationsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListAppinstallationsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -387,7 +387,7 @@ class AppClientImpl implements AppClient
             return ListAppinstallationsForUserOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListAppinstallationsForUserUnknownResponse::fromResponse($httpResponse),
+            429 => ListAppinstallationsForUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListAppinstallationsForUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -409,7 +409,7 @@ class AppClientImpl implements AppClient
             return ListAppsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListAppsUnknownResponse::fromResponse($httpResponse),
+            429 => ListAppsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListAppsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -431,7 +431,7 @@ class AppClientImpl implements AppClient
             return ListAppversionsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListAppversionsUnknownResponse::fromResponse($httpResponse),
+            429 => ListAppversionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListAppversionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -453,7 +453,7 @@ class AppClientImpl implements AppClient
             return ListSystemsoftwaresOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListSystemsoftwaresUnknownResponse::fromResponse($httpResponse),
+            429 => ListSystemsoftwaresTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListSystemsoftwaresDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -475,7 +475,7 @@ class AppClientImpl implements AppClient
             return ListSystemsoftwareversionsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListSystemsoftwareversionsUnknownResponse::fromResponse($httpResponse),
+            429 => ListSystemsoftwareversionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListSystemsoftwareversionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -497,7 +497,7 @@ class AppClientImpl implements AppClient
             return ListUpdateCandidatesForAppversionOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ListUpdateCandidatesForAppversionUnknownResponse::fromResponse($httpResponse),
+            429 => ListUpdateCandidatesForAppversionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListUpdateCandidatesForAppversionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -520,7 +520,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => PatchAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            429 => PatchAppinstallationUnknownResponse::fromResponse($httpResponse),
+            429 => PatchAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => PatchAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -544,7 +544,7 @@ class AppClientImpl implements AppClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RequestAppinstallationBadRequestResponse::fromResponse($httpResponse),
             404 => RequestAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            429 => RequestAppinstallationUnknownResponse::fromResponse($httpResponse),
+            429 => RequestAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => RequestAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -567,7 +567,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => RequestAppinstallationCopyNotFoundResponse::fromResponse($httpResponse),
-            429 => RequestAppinstallationCopyUnknownResponse::fromResponse($httpResponse),
+            429 => RequestAppinstallationCopyTooManyRequestsResponse::fromResponse($httpResponse),
             default => RequestAppinstallationCopyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -590,7 +590,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => RetrieveStatusNotFoundResponse::fromResponse($httpResponse),
-            429 => RetrieveStatusUnknownResponse::fromResponse($httpResponse),
+            429 => RetrieveStatusTooManyRequestsResponse::fromResponse($httpResponse),
             default => RetrieveStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -613,7 +613,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => SetDatabaseUsersNotFoundResponse::fromResponse($httpResponse),
-            429 => SetDatabaseUsersUnknownResponse::fromResponse($httpResponse),
+            429 => SetDatabaseUsersTooManyRequestsResponse::fromResponse($httpResponse),
             default => SetDatabaseUsersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -636,7 +636,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => UninstallAppinstallationNotFoundResponse::fromResponse($httpResponse),
-            429 => UninstallAppinstallationUnknownResponse::fromResponse($httpResponse),
+            429 => UninstallAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => UninstallAppinstallationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -659,7 +659,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => UnlinkDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => UnlinkDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => UnlinkDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => UnlinkDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -683,7 +683,7 @@ class AppClientImpl implements AppClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => DeprecatedAppLinkDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => DeprecatedAppLinkDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => DeprecatedAppLinkDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedAppLinkDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }

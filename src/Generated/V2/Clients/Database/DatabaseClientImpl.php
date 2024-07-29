@@ -14,140 +14,140 @@ use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateM
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlDatabase\CreateMysqlDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateMysqlUser\CreateMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\CreateRedisDatabase\CreateRedisDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabasePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlDatabase\DeleteMysqlDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteMysqlUser\DeleteMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabasePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DeleteRedisDatabase\DeleteRedisDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\DisableMysqlUser\DisableMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\EnableMysqlUser\EnableMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlDatabase\GetMysqlDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUser\GetMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetMysqlUserPhpMyAdminUrl\GetMysqlUserPhpMyAdminUrlTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\GetRedisDatabase\GetRedisDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlCharsets\ListMysqlCharsetsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlDatabases\ListMysqlDatabasesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlUsers\ListMysqlUsersTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListMysqlVersions\ListMysqlVersionsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisDatabases\ListRedisDatabasesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\ListRedisVersions\ListRedisVersionsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDefaultCharset\UpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlDatabaseDescription\UpdateMysqlDatabaseDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUser\UpdateMysqlUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateMysqlUserPassword\UpdateMysqlUserPasswordTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseConfiguration\UpdateRedisDatabaseConfigurationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Database\UpdateRedisDatabaseDescription\UpdateRedisDatabaseDescriptionTooManyRequestsResponse;
 
 /**
  * Client for Database API
@@ -190,7 +190,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => CreateMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => CreateMysqlDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => CreateMysqlDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -214,7 +214,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => CreateMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            429 => CreateMysqlUserUnknownResponse::fromResponse($httpResponse),
+            429 => CreateMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -238,7 +238,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => CreateRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => CreateRedisDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => CreateRedisDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateRedisDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -262,7 +262,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
             412 => DeleteMysqlDatabasePreconditionFailedResponse::fromResponse($httpResponse),
-            429 => DeleteMysqlDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => DeleteMysqlDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => DeleteMysqlDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteMysqlDatabaseServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
@@ -288,7 +288,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => DeleteMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            429 => DeleteMysqlUserUnknownResponse::fromResponse($httpResponse),
+            429 => DeleteMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeleteMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -312,7 +312,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
             412 => DeleteRedisDatabasePreconditionFailedResponse::fromResponse($httpResponse),
-            429 => DeleteRedisDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => DeleteRedisDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => DeleteRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteRedisDatabaseServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteRedisDatabaseDefaultResponse::fromResponse($httpResponse),
@@ -338,7 +338,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DisableMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => DisableMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            429 => DisableMysqlUserUnknownResponse::fromResponse($httpResponse),
+            429 => DisableMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => DisableMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -362,7 +362,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => EnableMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => EnableMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            429 => EnableMysqlUserUnknownResponse::fromResponse($httpResponse),
+            429 => EnableMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => EnableMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -386,7 +386,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetMysqlDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => GetMysqlDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => GetMysqlDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => GetMysqlDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetMysqlDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetMysqlDatabaseDefaultResponse::fromResponse($httpResponse),
         });
@@ -411,7 +411,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => GetMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            429 => GetMysqlUserUnknownResponse::fromResponse($httpResponse),
+            429 => GetMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -435,7 +435,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetMysqlUserPhpMyAdminUrlBadRequestResponse::fromResponse($httpResponse),
             404 => GetMysqlUserPhpMyAdminUrlNotFoundResponse::fromResponse($httpResponse),
-            429 => GetMysqlUserPhpMyAdminUrlUnknownResponse::fromResponse($httpResponse),
+            429 => GetMysqlUserPhpMyAdminUrlTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetMysqlUserPhpMyAdminUrlDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -459,7 +459,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetRedisDatabaseBadRequestResponse::fromResponse($httpResponse),
             404 => GetRedisDatabaseNotFoundResponse::fromResponse($httpResponse),
-            429 => GetRedisDatabaseUnknownResponse::fromResponse($httpResponse),
+            429 => GetRedisDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetRedisDatabaseInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetRedisDatabaseDefaultResponse::fromResponse($httpResponse),
         });
@@ -484,7 +484,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListMysqlCharsetsBadRequestResponse::fromResponse($httpResponse),
             404 => ListMysqlCharsetsNotFoundResponse::fromResponse($httpResponse),
-            429 => ListMysqlCharsetsUnknownResponse::fromResponse($httpResponse),
+            429 => ListMysqlCharsetsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListMysqlCharsetsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -508,7 +508,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListMysqlDatabasesBadRequestResponse::fromResponse($httpResponse),
             404 => ListMysqlDatabasesNotFoundResponse::fromResponse($httpResponse),
-            429 => ListMysqlDatabasesUnknownResponse::fromResponse($httpResponse),
+            429 => ListMysqlDatabasesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListMysqlDatabasesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -532,7 +532,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListMysqlUsersBadRequestResponse::fromResponse($httpResponse),
             404 => ListMysqlUsersNotFoundResponse::fromResponse($httpResponse),
-            429 => ListMysqlUsersUnknownResponse::fromResponse($httpResponse),
+            429 => ListMysqlUsersTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListMysqlUsersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -556,7 +556,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListMysqlVersionsBadRequestResponse::fromResponse($httpResponse),
             404 => ListMysqlVersionsNotFoundResponse::fromResponse($httpResponse),
-            429 => ListMysqlVersionsUnknownResponse::fromResponse($httpResponse),
+            429 => ListMysqlVersionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListMysqlVersionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -580,7 +580,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListRedisDatabasesBadRequestResponse::fromResponse($httpResponse),
             404 => ListRedisDatabasesNotFoundResponse::fromResponse($httpResponse),
-            429 => ListRedisDatabasesUnknownResponse::fromResponse($httpResponse),
+            429 => ListRedisDatabasesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListRedisDatabasesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -604,7 +604,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListRedisVersionsBadRequestResponse::fromResponse($httpResponse),
             404 => ListRedisVersionsNotFoundResponse::fromResponse($httpResponse),
-            429 => ListRedisVersionsUnknownResponse::fromResponse($httpResponse),
+            429 => ListRedisVersionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListRedisVersionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -628,7 +628,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateMysqlDatabaseDefaultCharsetBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateMysqlDatabaseDefaultCharsetNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlDatabaseDefaultCharsetUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMysqlDatabaseDefaultCharsetTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateMysqlDatabaseDefaultCharsetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -652,7 +652,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateMysqlDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateMysqlDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlDatabaseDescriptionUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMysqlDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateMysqlDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -676,7 +676,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateMysqlUserBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateMysqlUserNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlUserUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMysqlUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateMysqlUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -700,7 +700,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateMysqlUserPasswordBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateMysqlUserPasswordNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMysqlUserPasswordUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMysqlUserPasswordTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateMysqlUserPasswordDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -724,7 +724,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateRedisDatabaseConfigurationBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateRedisDatabaseConfigurationNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateRedisDatabaseConfigurationUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateRedisDatabaseConfigurationTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateRedisDatabaseConfigurationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -748,7 +748,7 @@ class DatabaseClientImpl implements DatabaseClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateRedisDatabaseDescriptionBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateRedisDatabaseDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateRedisDatabaseDescriptionUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateRedisDatabaseDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateRedisDatabaseDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }

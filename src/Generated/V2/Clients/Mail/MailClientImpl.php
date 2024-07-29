@@ -17,7 +17,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliver
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateDeliverybox\CreateDeliveryboxTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressDefaultResponse;
@@ -26,7 +26,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAdd
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxForbiddenResponse;
@@ -34,7 +34,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliver
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressForbiddenResponse;
@@ -42,11 +42,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAdd
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdateDescriptionDeprecated\DeliveryboxUpdateDescriptionDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdateDescriptionDeprecated\DeliveryboxUpdateDescriptionDeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdateDescriptionDeprecated\DeliveryboxUpdateDescriptionDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdatePasswordDeprecated\DeliveryboxUpdatePasswordDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdatePasswordDeprecated\DeliveryboxUpdatePasswordDeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdatePasswordDeprecated\DeliveryboxUpdatePasswordDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxForbiddenResponse;
@@ -55,7 +55,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxNo
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressForbiddenResponse;
@@ -64,7 +64,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressNo
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesForbiddenResponse;
@@ -73,7 +73,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryB
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesForbiddenResponse;
@@ -82,7 +82,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddre
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsForbiddenResponse;
@@ -91,13 +91,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListPro
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionForbiddenResponse;
@@ -105,7 +105,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\Up
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordForbiddenResponse;
@@ -113,7 +113,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\Updat
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressForbiddenResponse;
@@ -121,7 +121,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\Update
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderForbiddenResponse;
@@ -129,7 +129,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedForbiddenResponse;
@@ -137,7 +137,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllForbiddenResponse;
@@ -145,7 +145,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\Updat
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedForbiddenResponse;
@@ -153,7 +153,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Depr
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesForbiddenResponse;
@@ -161,7 +161,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddress
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedForbiddenResponse;
@@ -169,7 +169,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddress
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordForbiddenResponse;
@@ -177,7 +177,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\Updat
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedForbiddenResponse;
@@ -185,7 +185,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Depr
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaForbiddenResponse;
@@ -193,7 +193,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMa
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedForbiddenResponse;
@@ -201,7 +201,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Depreca
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionForbiddenResponse;
@@ -209,7 +209,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedForbiddenResponse;
@@ -217,7 +217,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingForbiddenResponse;
@@ -225,7 +225,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\Update
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedForbiddenResponse;
@@ -233,7 +233,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Depre
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedServiceUnavailableResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedTooManyRequestsResponse;
 
 /**
  * Client for Mail API
@@ -276,7 +276,7 @@ class MailClientImpl implements MailClient
             400 => CreateDeliveryboxBadRequestResponse::fromResponse($httpResponse),
             403 => CreateDeliveryboxForbiddenResponse::fromResponse($httpResponse),
             404 => CreateDeliveryboxNotFoundResponse::fromResponse($httpResponse),
-            429 => CreateDeliveryboxUnknownResponse::fromResponse($httpResponse),
+            429 => CreateDeliveryboxTooManyRequestsResponse::fromResponse($httpResponse),
             500 => CreateDeliveryboxInternalServerErrorResponse::fromResponse($httpResponse),
             503 => CreateDeliveryboxServiceUnavailableResponse::fromResponse($httpResponse),
             default => CreateDeliveryboxDefaultResponse::fromResponse($httpResponse),
@@ -303,7 +303,7 @@ class MailClientImpl implements MailClient
             400 => CreateMailAddressBadRequestResponse::fromResponse($httpResponse),
             403 => CreateMailAddressForbiddenResponse::fromResponse($httpResponse),
             404 => CreateMailAddressNotFoundResponse::fromResponse($httpResponse),
-            429 => CreateMailAddressUnknownResponse::fromResponse($httpResponse),
+            429 => CreateMailAddressTooManyRequestsResponse::fromResponse($httpResponse),
             500 => CreateMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => CreateMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => CreateMailAddressDefaultResponse::fromResponse($httpResponse),
@@ -330,7 +330,7 @@ class MailClientImpl implements MailClient
             400 => DeleteDeliveryBoxBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteDeliveryBoxForbiddenResponse::fromResponse($httpResponse),
             404 => DeleteDeliveryBoxNotFoundResponse::fromResponse($httpResponse),
-            429 => DeleteDeliveryBoxUnknownResponse::fromResponse($httpResponse),
+            429 => DeleteDeliveryBoxTooManyRequestsResponse::fromResponse($httpResponse),
             500 => DeleteDeliveryBoxInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteDeliveryBoxServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteDeliveryBoxDefaultResponse::fromResponse($httpResponse),
@@ -357,7 +357,7 @@ class MailClientImpl implements MailClient
             400 => DeleteMailAddressBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteMailAddressForbiddenResponse::fromResponse($httpResponse),
             404 => DeleteMailAddressNotFoundResponse::fromResponse($httpResponse),
-            429 => DeleteMailAddressUnknownResponse::fromResponse($httpResponse),
+            429 => DeleteMailAddressTooManyRequestsResponse::fromResponse($httpResponse),
             500 => DeleteMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => DeleteMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => DeleteMailAddressDefaultResponse::fromResponse($httpResponse),
@@ -383,7 +383,7 @@ class MailClientImpl implements MailClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
-            429 => DeliveryboxUpdateDescriptionDeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => DeliveryboxUpdateDescriptionDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
         });
     }
 
@@ -406,7 +406,7 @@ class MailClientImpl implements MailClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
-            429 => DeliveryboxUpdatePasswordDeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => DeliveryboxUpdatePasswordDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
         });
     }
 
@@ -430,7 +430,7 @@ class MailClientImpl implements MailClient
             400 => GetDeliveryBoxBadRequestResponse::fromResponse($httpResponse),
             403 => GetDeliveryBoxForbiddenResponse::fromResponse($httpResponse),
             404 => GetDeliveryBoxNotFoundResponse::fromResponse($httpResponse),
-            429 => GetDeliveryBoxUnknownResponse::fromResponse($httpResponse),
+            429 => GetDeliveryBoxTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetDeliveryBoxInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetDeliveryBoxServiceUnavailableResponse::fromResponse($httpResponse),
             default => GetDeliveryBoxDefaultResponse::fromResponse($httpResponse),
@@ -457,7 +457,7 @@ class MailClientImpl implements MailClient
             400 => GetMailAddressBadRequestResponse::fromResponse($httpResponse),
             403 => GetMailAddressForbiddenResponse::fromResponse($httpResponse),
             404 => GetMailAddressNotFoundResponse::fromResponse($httpResponse),
-            429 => GetMailAddressUnknownResponse::fromResponse($httpResponse),
+            429 => GetMailAddressTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetMailAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => GetMailAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => GetMailAddressDefaultResponse::fromResponse($httpResponse),
@@ -484,7 +484,7 @@ class MailClientImpl implements MailClient
             400 => ListDeliveryBoxesBadRequestResponse::fromResponse($httpResponse),
             403 => ListDeliveryBoxesForbiddenResponse::fromResponse($httpResponse),
             404 => ListDeliveryBoxesNotFoundResponse::fromResponse($httpResponse),
-            429 => ListDeliveryBoxesUnknownResponse::fromResponse($httpResponse),
+            429 => ListDeliveryBoxesTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListDeliveryBoxesInternalServerErrorResponse::fromResponse($httpResponse),
             503 => ListDeliveryBoxesServiceUnavailableResponse::fromResponse($httpResponse),
             default => ListDeliveryBoxesDefaultResponse::fromResponse($httpResponse),
@@ -511,7 +511,7 @@ class MailClientImpl implements MailClient
             400 => ListMailAddressesBadRequestResponse::fromResponse($httpResponse),
             403 => ListMailAddressesForbiddenResponse::fromResponse($httpResponse),
             404 => ListMailAddressesNotFoundResponse::fromResponse($httpResponse),
-            429 => ListMailAddressesUnknownResponse::fromResponse($httpResponse),
+            429 => ListMailAddressesTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListMailAddressesInternalServerErrorResponse::fromResponse($httpResponse),
             503 => ListMailAddressesServiceUnavailableResponse::fromResponse($httpResponse),
             default => ListMailAddressesDefaultResponse::fromResponse($httpResponse),
@@ -538,7 +538,7 @@ class MailClientImpl implements MailClient
             400 => ListProjectMailSettingsBadRequestResponse::fromResponse($httpResponse),
             403 => ListProjectMailSettingsForbiddenResponse::fromResponse($httpResponse),
             404 => ListProjectMailSettingsNotFoundResponse::fromResponse($httpResponse),
-            429 => ListProjectMailSettingsUnknownResponse::fromResponse($httpResponse),
+            429 => ListProjectMailSettingsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListProjectMailSettingsInternalServerErrorResponse::fromResponse($httpResponse),
             503 => ListProjectMailSettingsServiceUnavailableResponse::fromResponse($httpResponse),
             default => ListProjectMailSettingsDefaultResponse::fromResponse($httpResponse),
@@ -564,7 +564,7 @@ class MailClientImpl implements MailClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
-            429 => MailaddressUpdateAddressDeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => MailaddressUpdateAddressDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
         });
     }
 
@@ -587,7 +587,7 @@ class MailClientImpl implements MailClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
-            429 => ProjectsettingUpdateBlacklistDeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => ProjectsettingUpdateBlacklistDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
         });
     }
 
@@ -610,7 +610,7 @@ class MailClientImpl implements MailClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
-            429 => ProjectsettingUpdateWhitelistDeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => ProjectsettingUpdateWhitelistDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
         });
     }
 
@@ -634,7 +634,7 @@ class MailClientImpl implements MailClient
             400 => UpdateDeliveryBoxDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateDeliveryBoxDescriptionForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateDeliveryBoxDescriptionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateDeliveryBoxDescriptionUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateDeliveryBoxDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateDeliveryBoxDescriptionInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateDeliveryBoxDescriptionServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateDeliveryBoxDescriptionDefaultResponse::fromResponse($httpResponse),
@@ -661,7 +661,7 @@ class MailClientImpl implements MailClient
             400 => UpdateDeliveryBoxPasswordBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateDeliveryBoxPasswordForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateDeliveryBoxPasswordNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateDeliveryBoxPasswordUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateDeliveryBoxPasswordTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateDeliveryBoxPasswordInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateDeliveryBoxPasswordServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateDeliveryBoxPasswordDefaultResponse::fromResponse($httpResponse),
@@ -688,7 +688,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressAddressBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressAddressForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressAddressNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressAddressUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressAddressTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressAddressInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressAddressServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressAddressDefaultResponse::fromResponse($httpResponse),
@@ -715,7 +715,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressAutoresponderBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressAutoresponderForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressAutoresponderNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressAutoresponderUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressAutoresponderTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressAutoresponderInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressAutoresponderServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressAutoresponderDefaultResponse::fromResponse($httpResponse),
@@ -743,7 +743,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressAutoresponderV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressAutoresponderV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressAutoresponderV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressAutoresponderV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressAutoresponderV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressAutoresponderV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressAutoresponderV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressAutoresponderV2DeprecatedDefaultResponse::fromResponse($httpResponse),
@@ -770,7 +770,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressCatchAllBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressCatchAllForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressCatchAllNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressCatchAllUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressCatchAllTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressCatchAllInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressCatchAllServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressCatchAllDefaultResponse::fromResponse($httpResponse),
@@ -798,7 +798,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressCatchallV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressCatchallV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressCatchallV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressCatchallV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressCatchallV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressCatchallV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressCatchallV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressCatchallV2DeprecatedDefaultResponse::fromResponse($httpResponse),
@@ -825,7 +825,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressForwardAddressesBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressForwardAddressesForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressForwardAddressesNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressForwardAddressesUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressForwardAddressesTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressForwardAddressesInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressForwardAddressesServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressForwardAddressesDefaultResponse::fromResponse($httpResponse),
@@ -853,7 +853,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressForwardAddressesV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressForwardAddressesV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressForwardAddressesV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressForwardAddressesV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressForwardAddressesV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressForwardAddressesV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressForwardAddressesV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressForwardAddressesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
@@ -880,7 +880,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressPasswordBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressPasswordForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressPasswordNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressPasswordUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressPasswordTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressPasswordInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressPasswordServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressPasswordDefaultResponse::fromResponse($httpResponse),
@@ -908,7 +908,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressPasswordV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressPasswordV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressPasswordV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressPasswordV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressPasswordV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressPasswordV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressPasswordV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressPasswordV2DeprecatedDefaultResponse::fromResponse($httpResponse),
@@ -935,7 +935,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressQuotaBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressQuotaForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressQuotaNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressQuotaUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressQuotaTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressQuotaInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressQuotaServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressQuotaDefaultResponse::fromResponse($httpResponse),
@@ -963,7 +963,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressQuotaV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressQuotaV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressQuotaV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressQuotaV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressQuotaV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressQuotaV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressQuotaV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressQuotaV2DeprecatedDefaultResponse::fromResponse($httpResponse),
@@ -990,7 +990,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressSpamProtectionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressSpamProtectionForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressSpamProtectionNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressSpamProtectionUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressSpamProtectionTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressSpamProtectionInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressSpamProtectionServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressSpamProtectionDefaultResponse::fromResponse($httpResponse),
@@ -1018,7 +1018,7 @@ class MailClientImpl implements MailClient
             400 => UpdateMailAddressSpamProtectionV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMailAddressSpamProtectionV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMailAddressSpamProtectionV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateMailAddressSpamProtectionV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateMailAddressSpamProtectionV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateMailAddressSpamProtectionV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateMailAddressSpamProtectionV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateMailAddressSpamProtectionV2DeprecatedDefaultResponse::fromResponse($httpResponse),
@@ -1045,7 +1045,7 @@ class MailClientImpl implements MailClient
             400 => UpdateProjectMailSettingBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateProjectMailSettingForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateProjectMailSettingNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateProjectMailSettingUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateProjectMailSettingTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateProjectMailSettingInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateProjectMailSettingServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateProjectMailSettingDefaultResponse::fromResponse($httpResponse),
@@ -1073,7 +1073,7 @@ class MailClientImpl implements MailClient
             400 => UpdateProjectMailSettingV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateProjectMailSettingV2DeprecatedForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateProjectMailSettingV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => UpdateProjectMailSettingV2DeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => UpdateProjectMailSettingV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             500 => UpdateProjectMailSettingV2DeprecatedInternalServerErrorResponse::fromResponse($httpResponse),
             503 => UpdateProjectMailSettingV2DeprecatedServiceUnavailableResponse::fromResponse($httpResponse),
             default => UpdateProjectMailSettingV2DeprecatedDefaultResponse::fromResponse($httpResponse),

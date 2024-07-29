@@ -14,7 +14,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretF
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceDefaultResponse;
@@ -22,61 +22,61 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsTooManyRequestsResponse;
 
 /**
  * Client for Marketplace API
@@ -119,7 +119,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ContributorRotateSecretForExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
             404 => ContributorRotateSecretForExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
-            429 => ContributorRotateSecretForExtensionInstanceUnknownResponse::fromResponse($httpResponse),
+            429 => ContributorRotateSecretForExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorRotateSecretForExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -164,7 +164,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionConsentToExtensionScopesBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionConsentToExtensionScopesUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionConsentToExtensionScopesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionConsentToExtensionScopesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -187,7 +187,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionCreateExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionCreateExtensionInstanceUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionCreateExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionCreateExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -210,7 +210,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionCreateRetrievalKeyBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionCreateRetrievalKeyUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionCreateRetrievalKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionCreateRetrievalKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -233,7 +233,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionDeleteExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionDeleteExtensionInstanceUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionDeleteExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDeleteExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -256,7 +256,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionDisableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionDisableExtensionInstanceUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionDisableExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDisableExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -279,7 +279,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionEnableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionEnableExtensionInstanceUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionEnableExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionEnableExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -302,7 +302,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionGetContributorNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionGetContributorUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionGetContributorTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetContributorDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -324,7 +324,7 @@ class MarketplaceClientImpl implements MarketplaceClient
             return ExtensionGetExtensionOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ExtensionGetExtensionUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionGetExtensionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetExtensionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -347,7 +347,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionGetExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionGetExtensionInstanceUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionGetExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -370,7 +370,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionGetPublicKeyNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionGetPublicKeyUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionGetPublicKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetPublicKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -392,7 +392,7 @@ class MarketplaceClientImpl implements MarketplaceClient
             return ExtensionListContributorsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ExtensionListContributorsUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionListContributorsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListContributorsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -415,7 +415,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionListExtensionInstancesBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionListExtensionInstancesUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionListExtensionInstancesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListExtensionInstancesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -437,7 +437,7 @@ class MarketplaceClientImpl implements MarketplaceClient
             return ExtensionListExtensionsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => ExtensionListExtensionsUnknownResponse::fromResponse($httpResponse),
+            429 => ExtensionListExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListExtensionsDefaultResponse::fromResponse($httpResponse),
         });
     }

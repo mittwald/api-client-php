@@ -12,38 +12,38 @@ use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterGetInfo\NewsletterGetInfoTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser\NewsletterSubscribeUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser\NewsletterSubscribeUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser\NewsletterSubscribeUserOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser\NewsletterSubscribeUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser\NewsletterSubscribeUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterSubscribeUser\NewsletterSubscribeUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NewsletterUnsubscribeUser\NewsletterUnsubscribeUserTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsCountUnreadNotifications\NotificationsCountUnreadNotificationsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsListNotifications\NotificationsListNotificationsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotifications\NotificationsReadAllNotificationsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadAllNotificationsDeprecated\NotificationsReadAllNotificationsDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationUnknownResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationsReadNotification\NotificationsReadNotificationTooManyRequestsResponse;
 
 /**
  * Client for Notification API
@@ -83,7 +83,7 @@ class NotificationClientImpl implements NotificationClient
             return NewsletterGetInfoOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => NewsletterGetInfoUnknownResponse::fromResponse($httpResponse),
+            429 => NewsletterGetInfoTooManyRequestsResponse::fromResponse($httpResponse),
             default => NewsletterGetInfoDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -106,7 +106,7 @@ class NotificationClientImpl implements NotificationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => NewsletterSubscribeUserBadRequestResponse::fromResponse($httpResponse),
-            429 => NewsletterSubscribeUserUnknownResponse::fromResponse($httpResponse),
+            429 => NewsletterSubscribeUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => NewsletterSubscribeUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -128,7 +128,7 @@ class NotificationClientImpl implements NotificationClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => NewsletterUnsubscribeUserUnknownResponse::fromResponse($httpResponse),
+            429 => NewsletterUnsubscribeUserTooManyRequestsResponse::fromResponse($httpResponse),
             default => NewsletterUnsubscribeUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -154,7 +154,7 @@ class NotificationClientImpl implements NotificationClient
             return NotificationsCountUnreadNotificationsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => NotificationsCountUnreadNotificationsUnknownResponse::fromResponse($httpResponse),
+            429 => NotificationsCountUnreadNotificationsTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsCountUnreadNotificationsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -176,7 +176,7 @@ class NotificationClientImpl implements NotificationClient
             return NotificationsListNotificationsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => NotificationsListNotificationsUnknownResponse::fromResponse($httpResponse),
+            429 => NotificationsListNotificationsTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsListNotificationsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -201,7 +201,7 @@ class NotificationClientImpl implements NotificationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => NotificationsReadAllNotificationsForbiddenResponse::fromResponse($httpResponse),
-            429 => NotificationsReadAllNotificationsUnknownResponse::fromResponse($httpResponse),
+            429 => NotificationsReadAllNotificationsTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsReadAllNotificationsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -227,7 +227,7 @@ class NotificationClientImpl implements NotificationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => NotificationsReadAllNotificationsDeprecatedForbiddenResponse::fromResponse($httpResponse),
-            429 => NotificationsReadAllNotificationsDeprecatedUnknownResponse::fromResponse($httpResponse),
+            429 => NotificationsReadAllNotificationsDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsReadAllNotificationsDeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -250,7 +250,7 @@ class NotificationClientImpl implements NotificationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => NotificationsReadNotificationNotFoundResponse::fromResponse($httpResponse),
-            429 => NotificationsReadNotificationUnknownResponse::fromResponse($httpResponse),
+            429 => NotificationsReadNotificationTooManyRequestsResponse::fromResponse($httpResponse),
             default => NotificationsReadNotificationDefaultResponse::fromResponse($httpResponse),
         });
     }
