@@ -14,115 +14,143 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptPr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInvitePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\AcceptProjectInvite\AcceptProjectInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProject\CreateProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\CreateProjectInvite\CreateProjectInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeclineProjectInvite\DeclineProjectInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProject\DeleteProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeleteProjectAvatarUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectMembership\GetProjectMembershipUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectTokenInvite\GetProjectTokenInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectInvites\ListProjectInvitesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjectMemberships\ListProjectMembershipsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListProjects\ListProjectsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ListServers\ListServersUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\RequestProjectAvatarUploadUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionUnknownResponse;
 
 /**
  * Client for Project API
@@ -165,6 +193,7 @@ class ProjectClientImpl implements ProjectClient
             400 => AcceptProjectInviteBadRequestResponse::fromResponse($httpResponse),
             403 => AcceptProjectInviteForbiddenResponse::fromResponse($httpResponse),
             412 => AcceptProjectInvitePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => AcceptProjectInviteUnknownResponse::fromResponse($httpResponse),
             default => AcceptProjectInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -189,6 +218,7 @@ class ProjectClientImpl implements ProjectClient
             400 => CreateProjectBadRequestResponse::fromResponse($httpResponse),
             403 => CreateProjectForbiddenResponse::fromResponse($httpResponse),
             412 => CreateProjectPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateProjectUnknownResponse::fromResponse($httpResponse),
             default => CreateProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -212,6 +242,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateProjectInviteBadRequestResponse::fromResponse($httpResponse),
             409 => CreateProjectInviteConflictResponse::fromResponse($httpResponse),
+            429 => CreateProjectInviteUnknownResponse::fromResponse($httpResponse),
             default => CreateProjectInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -232,6 +263,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeclineProjectInviteUnknownResponse::fromResponse($httpResponse),
             default => DeclineProjectInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -256,6 +288,7 @@ class ProjectClientImpl implements ProjectClient
             400 => DeleteProjectBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteProjectForbiddenResponse::fromResponse($httpResponse),
             412 => DeleteProjectPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeleteProjectUnknownResponse::fromResponse($httpResponse),
             500 => DeleteProjectInternalServerErrorResponse::fromResponse($httpResponse),
             default => DeleteProjectDefaultResponse::fromResponse($httpResponse),
         });
@@ -280,6 +313,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteProjectAvatarBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteProjectAvatarForbiddenResponse::fromResponse($httpResponse),
+            429 => DeleteProjectAvatarUnknownResponse::fromResponse($httpResponse),
             default => DeleteProjectAvatarDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -300,6 +334,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeleteProjectInviteUnknownResponse::fromResponse($httpResponse),
             default => DeleteProjectInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -321,6 +356,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeleteProjectMembershipUnknownResponse::fromResponse($httpResponse),
             default => DeleteProjectMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -344,6 +380,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteServerAvatarBadRequestResponse::fromResponse($httpResponse),
             403 => DeleteServerAvatarForbiddenResponse::fromResponse($httpResponse),
+            429 => DeleteServerAvatarUnknownResponse::fromResponse($httpResponse),
             default => DeleteServerAvatarDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -366,6 +403,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => GetProjectForbiddenResponse::fromResponse($httpResponse),
+            429 => GetProjectUnknownResponse::fromResponse($httpResponse),
             default => GetProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -388,6 +426,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetProjectInviteNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectInviteUnknownResponse::fromResponse($httpResponse),
             default => GetProjectInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -409,6 +448,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetProjectMembershipNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectMembershipUnknownResponse::fromResponse($httpResponse),
             default => GetProjectMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -431,6 +471,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetProjectTokenInviteNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectTokenInviteUnknownResponse::fromResponse($httpResponse),
             default => GetProjectTokenInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -454,6 +495,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => GetSelfMembershipForProjectForbiddenResponse::fromResponse($httpResponse),
             404 => GetSelfMembershipForProjectNotFoundResponse::fromResponse($httpResponse),
+            429 => GetSelfMembershipForProjectUnknownResponse::fromResponse($httpResponse),
             default => GetSelfMembershipForProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -477,6 +519,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => GetServerForbiddenResponse::fromResponse($httpResponse),
             404 => GetServerNotFoundResponse::fromResponse($httpResponse),
+            429 => GetServerUnknownResponse::fromResponse($httpResponse),
             default => GetServerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -497,6 +540,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => LeaveProjectUnknownResponse::fromResponse($httpResponse),
             default => LeaveProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -519,6 +563,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ListInvitesForProjectNotFoundResponse::fromResponse($httpResponse),
+            429 => ListInvitesForProjectUnknownResponse::fromResponse($httpResponse),
             default => ListInvitesForProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -541,6 +586,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ListMembershipsForProjectNotFoundResponse::fromResponse($httpResponse),
+            429 => ListMembershipsForProjectUnknownResponse::fromResponse($httpResponse),
             default => ListMembershipsForProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -564,6 +610,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ListProjectInvitesForbiddenResponse::fromResponse($httpResponse),
             404 => ListProjectInvitesNotFoundResponse::fromResponse($httpResponse),
+            429 => ListProjectInvitesUnknownResponse::fromResponse($httpResponse),
             default => ListProjectInvitesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -587,6 +634,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ListProjectMembershipsForbiddenResponse::fromResponse($httpResponse),
             404 => ListProjectMembershipsNotFoundResponse::fromResponse($httpResponse),
+            429 => ListProjectMembershipsUnknownResponse::fromResponse($httpResponse),
             default => ListProjectMembershipsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -610,6 +658,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListProjectsBadRequestResponse::fromResponse($httpResponse),
             403 => ListProjectsForbiddenResponse::fromResponse($httpResponse),
+            429 => ListProjectsUnknownResponse::fromResponse($httpResponse),
             default => ListProjectsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -632,6 +681,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ListServersForbiddenResponse::fromResponse($httpResponse),
+            429 => ListServersUnknownResponse::fromResponse($httpResponse),
             default => ListServersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -655,6 +705,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RequestProjectAvatarUploadBadRequestResponse::fromResponse($httpResponse),
             403 => RequestProjectAvatarUploadForbiddenResponse::fromResponse($httpResponse),
+            429 => RequestProjectAvatarUploadUnknownResponse::fromResponse($httpResponse),
             default => RequestProjectAvatarUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -678,6 +729,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RequestServerAvatarUploadBadRequestResponse::fromResponse($httpResponse),
             403 => RequestServerAvatarUploadForbiddenResponse::fromResponse($httpResponse),
+            429 => RequestServerAvatarUploadUnknownResponse::fromResponse($httpResponse),
             default => RequestServerAvatarUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -699,6 +751,7 @@ class ProjectClientImpl implements ProjectClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ResendProjectInviteMailForbiddenResponse::fromResponse($httpResponse),
+            429 => ResendProjectInviteMailUnknownResponse::fromResponse($httpResponse),
             default => ResendProjectInviteMailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -722,6 +775,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateProjectDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateProjectDescriptionForbiddenResponse::fromResponse($httpResponse),
+            429 => UpdateProjectDescriptionUnknownResponse::fromResponse($httpResponse),
             default => UpdateProjectDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -742,6 +796,7 @@ class ProjectClientImpl implements ProjectClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => UpdateProjectMembershipUnknownResponse::fromResponse($httpResponse),
             default => UpdateProjectMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -765,6 +820,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateServerDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateServerDescriptionForbiddenResponse::fromResponse($httpResponse),
+            429 => UpdateServerDescriptionUnknownResponse::fromResponse($httpResponse),
             default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }

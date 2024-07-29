@@ -15,28 +15,33 @@ use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemG
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDirectories\ProjectFileSystemGetDirectoriesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetDiskUsage\ProjectFileSystemGetDiskUsageUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetFileContent\ProjectFileSystemGetFileContentUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemGetJwt\ProjectFileSystemGetJwtUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesServiceUnavailableResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemListFiles\ProjectFileSystemListFilesUnknownResponse;
 
 /**
  * Client for Project File System API
@@ -78,6 +83,7 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ProjectFileSystemGetDirectoriesForbiddenResponse::fromResponse($httpResponse),
             404 => ProjectFileSystemGetDirectoriesNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectFileSystemGetDirectoriesUnknownResponse::fromResponse($httpResponse),
             503 => ProjectFileSystemGetDirectoriesServiceUnavailableResponse::fromResponse($httpResponse),
             default => ProjectFileSystemGetDirectoriesDefaultResponse::fromResponse($httpResponse),
         });
@@ -102,6 +108,7 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ProjectFileSystemGetDiskUsageForbiddenResponse::fromResponse($httpResponse),
             404 => ProjectFileSystemGetDiskUsageNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectFileSystemGetDiskUsageUnknownResponse::fromResponse($httpResponse),
             503 => ProjectFileSystemGetDiskUsageServiceUnavailableResponse::fromResponse($httpResponse),
             default => ProjectFileSystemGetDiskUsageDefaultResponse::fromResponse($httpResponse),
         });
@@ -126,6 +133,7 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ProjectFileSystemGetFileContentForbiddenResponse::fromResponse($httpResponse),
             404 => ProjectFileSystemGetFileContentNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectFileSystemGetFileContentUnknownResponse::fromResponse($httpResponse),
             503 => ProjectFileSystemGetFileContentServiceUnavailableResponse::fromResponse($httpResponse),
             default => ProjectFileSystemGetFileContentDefaultResponse::fromResponse($httpResponse),
         });
@@ -150,6 +158,7 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ProjectFileSystemGetJwtForbiddenResponse::fromResponse($httpResponse),
             404 => ProjectFileSystemGetJwtNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectFileSystemGetJwtUnknownResponse::fromResponse($httpResponse),
             503 => ProjectFileSystemGetJwtServiceUnavailableResponse::fromResponse($httpResponse),
         });
     }
@@ -173,6 +182,7 @@ class ProjectFileSystemClientImpl implements ProjectFileSystemClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ProjectFileSystemListFilesForbiddenResponse::fromResponse($httpResponse),
             404 => ProjectFileSystemListFilesNotFoundResponse::fromResponse($httpResponse),
+            429 => ProjectFileSystemListFilesUnknownResponse::fromResponse($httpResponse),
             503 => ProjectFileSystemListFilesServiceUnavailableResponse::fromResponse($httpResponse),
             default => ProjectFileSystemListFilesDefaultResponse::fromResponse($httpResponse),
         });

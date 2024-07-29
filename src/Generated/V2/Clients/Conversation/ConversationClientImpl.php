@@ -13,72 +13,86 @@ use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversation\Crea
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversation\CreateConversationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversation\CreateConversationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversation\CreateConversationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversation\CreateConversationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateMessage\CreateMessageUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetCategory\GetCategoryBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetCategory\GetCategoryDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetCategory\GetCategoryNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetCategory\GetCategoryOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetCategory\GetCategoryRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetCategory\GetCategoryUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversation\GetConversationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationMembers\GetConversationMembersUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetConversationPreferencesOfCustomer\GetConversationPreferencesOfCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\GetFileAccessToken\GetFileAccessTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListCategories\ListCategoriesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListCategories\ListCategoriesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListCategories\ListCategoriesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListCategories\ListCategoriesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListConversations\ListConversationsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListConversations\ListConversationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListConversations\ListConversationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListConversations\ListConversationsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListMessagesByConversation\ListMessagesByConversationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListMessagesByConversation\ListMessagesByConversationForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListMessagesByConversation\ListMessagesByConversationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListMessagesByConversation\ListMessagesByConversationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ListMessagesByConversation\ListMessagesByConversationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload\RequestFileUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload\RequestFileUploadCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload\RequestFileUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload\RequestFileUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\RequestFileUpload\RequestFileUploadUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\SetConversationStatus\SetConversationStatusUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversation\UpdateConversationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateMessage\UpdateMessageUnknownResponse;
 
 /**
  * Client for Conversation API
@@ -118,6 +132,7 @@ class ConversationClientImpl implements ConversationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateConversationBadRequestResponse::fromResponse($httpResponse),
+            429 => CreateConversationUnknownResponse::fromResponse($httpResponse),
             default => CreateConversationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -141,6 +156,7 @@ class ConversationClientImpl implements ConversationClient
             400 => CreateMessageBadRequestResponse::fromResponse($httpResponse),
             403 => CreateMessageForbiddenResponse::fromResponse($httpResponse),
             404 => CreateMessageNotFoundResponse::fromResponse($httpResponse),
+            429 => CreateMessageUnknownResponse::fromResponse($httpResponse),
             default => CreateMessageDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -163,6 +179,7 @@ class ConversationClientImpl implements ConversationClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetCategoryBadRequestResponse::fromResponse($httpResponse),
             404 => GetCategoryNotFoundResponse::fromResponse($httpResponse),
+            429 => GetCategoryUnknownResponse::fromResponse($httpResponse),
             default => GetCategoryDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -189,6 +206,7 @@ class ConversationClientImpl implements ConversationClient
             400 => GetConversationBadRequestResponse::fromResponse($httpResponse),
             403 => GetConversationForbiddenResponse::fromResponse($httpResponse),
             404 => GetConversationNotFoundResponse::fromResponse($httpResponse),
+            429 => GetConversationUnknownResponse::fromResponse($httpResponse),
             default => GetConversationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -213,6 +231,7 @@ class ConversationClientImpl implements ConversationClient
             400 => GetConversationMembersBadRequestResponse::fromResponse($httpResponse),
             403 => GetConversationMembersForbiddenResponse::fromResponse($httpResponse),
             404 => GetConversationMembersNotFoundResponse::fromResponse($httpResponse),
+            429 => GetConversationMembersUnknownResponse::fromResponse($httpResponse),
             default => GetConversationMembersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -236,6 +255,7 @@ class ConversationClientImpl implements ConversationClient
             400 => GetConversationPreferencesOfCustomerBadRequestResponse::fromResponse($httpResponse),
             403 => GetConversationPreferencesOfCustomerForbiddenResponse::fromResponse($httpResponse),
             404 => GetConversationPreferencesOfCustomerNotFoundResponse::fromResponse($httpResponse),
+            429 => GetConversationPreferencesOfCustomerUnknownResponse::fromResponse($httpResponse),
             default => GetConversationPreferencesOfCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -259,6 +279,7 @@ class ConversationClientImpl implements ConversationClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetFileAccessTokenBadRequestResponse::fromResponse($httpResponse),
             404 => GetFileAccessTokenNotFoundResponse::fromResponse($httpResponse),
+            429 => GetFileAccessTokenUnknownResponse::fromResponse($httpResponse),
             default => GetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -279,6 +300,7 @@ class ConversationClientImpl implements ConversationClient
             return ListCategoriesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListCategoriesUnknownResponse::fromResponse($httpResponse),
             default => ListCategoriesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -300,6 +322,7 @@ class ConversationClientImpl implements ConversationClient
             return ListConversationsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListConversationsUnknownResponse::fromResponse($httpResponse),
             default => ListConversationsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -322,6 +345,7 @@ class ConversationClientImpl implements ConversationClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ListMessagesByConversationForbiddenResponse::fromResponse($httpResponse),
             404 => ListMessagesByConversationNotFoundResponse::fromResponse($httpResponse),
+            429 => ListMessagesByConversationUnknownResponse::fromResponse($httpResponse),
             default => ListMessagesByConversationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -346,6 +370,7 @@ class ConversationClientImpl implements ConversationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RequestFileUploadBadRequestResponse::fromResponse($httpResponse),
+            429 => RequestFileUploadUnknownResponse::fromResponse($httpResponse),
             default => RequestFileUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -369,6 +394,7 @@ class ConversationClientImpl implements ConversationClient
             400 => SetConversationStatusBadRequestResponse::fromResponse($httpResponse),
             403 => SetConversationStatusForbiddenResponse::fromResponse($httpResponse),
             404 => SetConversationStatusNotFoundResponse::fromResponse($httpResponse),
+            429 => SetConversationStatusUnknownResponse::fromResponse($httpResponse),
             default => SetConversationStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -392,6 +418,7 @@ class ConversationClientImpl implements ConversationClient
             400 => UpdateConversationBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateConversationForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateConversationNotFoundResponse::fromResponse($httpResponse),
+            429 => UpdateConversationUnknownResponse::fromResponse($httpResponse),
             default => UpdateConversationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -415,6 +442,7 @@ class ConversationClientImpl implements ConversationClient
             400 => UpdateMessageBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateMessageForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateMessageNotFoundResponse::fromResponse($httpResponse),
+            429 => UpdateMessageUnknownResponse::fromResponse($httpResponse),
             default => UpdateMessageDefaultResponse::fromResponse($httpResponse),
         });
     }

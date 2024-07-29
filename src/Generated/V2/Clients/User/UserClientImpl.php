@@ -13,199 +13,251 @@ use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AddPhoneNumber\AddPhoneNumberUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateAcceptedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\Authenticate\AuthenticateUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa\AuthenticateMfaUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateWithAccessTokenRetrievalKey\AuthenticateWithAccessTokenRetrievalKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ChangeEmail\ChangeEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ChangePassword\ChangePasswordUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CheckToken\CheckTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmMfa\ConfirmMfaUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ConfirmPasswordReset\ConfirmPasswordResetUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateApiToken\CreateApiTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateFeedback\CreateFeedbackUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\CreateSshKey\CreateSshKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteApiToken\DeleteApiTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteSshKey\DeleteSshKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeleteUser\DeleteUserUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserChangeEmail\DeprecatedUserChangeEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserConfirmPasswordReset\DeprecatedUserConfirmPasswordResetUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserCreateIssue\DeprecatedUserCreateIssueUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteApiToken\DeprecatedUserDeleteApiTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDeleteSshKey\DeprecatedUserDeleteSshKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRemove\DeprecatedUserServiceAvatarRemoveUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceAvatarRequestUpload\DeprecatedUserServiceAvatarRequestUploadUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackCreate\DeprecatedUserServiceFeedbackCreateUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceFeedbackList\DeprecatedUserServiceFeedbackListUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceIssueNew\DeprecatedUserServiceIssueNewUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalInformationUpdate\DeprecatedUserServicePersonalInformationUpdateUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsGet\DeprecatedUserServicePersonalizedSettingsGetUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePersonalizedSettingsUpdate\DeprecatedUserServicePersonalizedSettingsUpdateUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberAdd\DeprecatedUserServicePhoneNumberAddUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberRemove\DeprecatedUserServicePhoneNumberRemoveUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServicePhoneNumberVerify\DeprecatedUserServicePhoneNumberVerifyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGet\DeprecatedUserServiceUserGetUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserServiceUserGetOwn\DeprecatedUserServiceUserGetOwnUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateAllSessions\DeprecatedUserTerminateAllSessionsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserTerminateSession\DeprecatedUserTerminateSessionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserUpdateAccount\DeprecatedUserUpdateAccountUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserVerifyEmail\DeprecatedUserVerifyEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DisableMfa\DisableMfaBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DisableMfa\DisableMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DisableMfa\DisableMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DisableMfa\DisableMfaUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditApiToken\EditApiTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditApiToken\EditApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditApiToken\EditApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\EditApiToken\EditApiTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditSshKey\EditSshKeyBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditSshKey\EditSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\EditSshKey\EditSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\EditSshKey\EditSshKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPersonalizedSettings\GetPersonalizedSettingsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetPollStatus\GetPollStatusUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSession\GetSessionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\GetSshKey\GetSshKeyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetUser\GetUserNotFoundResponse;
@@ -216,102 +268,127 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaBadRequestRespon
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\InitMfa\InitMfaUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\InitPasswordReset\InitPasswordResetUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListApiTokens\ListApiTokensUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListFeedback\ListFeedbackUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListSessions\ListSessionsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ListSshKeys\ListSshKeysUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\Logout\LogoutUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\Register\RegisterUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ResendVerificationEmail\ResendVerificationEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\ResetRecoverycodes\ResetRecoverycodesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\SupportCodeRequest\SupportCodeRequestUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateAllSessions\TerminateAllSessionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateAllSessions\TerminateAllSessionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateAllSessions\TerminateAllSessionsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateSession\TerminateSessionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateSession\TerminateSessionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateSession\TerminateSessionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\TerminateSession\TerminateSessionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdateAccount\UpdateAccountUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalInformation\UpdatePersonalInformationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings\UpdatePersonalizedSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings\UpdatePersonalizedSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings\UpdatePersonalizedSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\UpdatePersonalizedSettings\UpdatePersonalizedSettingsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyEmail\VerifyEmailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyPhoneNumber\VerifyPhoneNumberUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegistrationUnknownResponse;
 
 /**
  * Client for User API
@@ -355,6 +432,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserChangeEmailBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserChangeEmailUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserChangeEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -378,6 +456,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserConfirmPasswordResetBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserConfirmPasswordResetUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserConfirmPasswordResetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -402,6 +481,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             401 => DeprecatedUserCreateIssueUnauthorizedResponse::fromResponse($httpResponse),
             404 => DeprecatedUserCreateIssueNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserCreateIssueUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserCreateIssueDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -425,6 +505,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserDeleteApiTokenBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserDeleteApiTokenUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserDeleteApiTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -447,6 +528,7 @@ class UserClientImpl implements UserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserDeleteSshKeyUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserDeleteSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -470,6 +552,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserDisableMfaBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserDisableMfaUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserDisableMfaDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -493,6 +576,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserEditApiTokenBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserEditApiTokenUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserEditApiTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -516,6 +600,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserEditSshKeyBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserEditSshKeyUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserEditSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -539,7 +624,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserInitPasswordResetBadRequestResponse::fromResponse($httpResponse),
-            403 => DeprecatedUserInitPasswordResetForbiddenResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserInitPasswordResetUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserInitPasswordResetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -563,6 +648,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserLogoutBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserLogoutUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserLogoutDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -586,7 +672,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserResendVerificationEmailBadRequestResponse::fromResponse($httpResponse),
-            403 => DeprecatedUserResendVerificationEmailForbiddenResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserResendVerificationEmailUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserResendVerificationEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -610,6 +696,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserServiceAvatarRemoveBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServiceAvatarRemoveUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceAvatarRemoveDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -633,6 +720,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserServiceAvatarRequestUploadBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServiceAvatarRequestUploadUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceAvatarRequestUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -656,6 +744,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             401 => DeprecatedUserServiceFeedbackCreateUnauthorizedResponse::fromResponse($httpResponse),
             404 => DeprecatedUserServiceFeedbackCreateNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServiceFeedbackCreateUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceFeedbackCreateDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -678,6 +767,7 @@ class UserClientImpl implements UserClient
             return DeprecatedUserServiceFeedbackListOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserServiceFeedbackListUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceFeedbackListDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -700,6 +790,7 @@ class UserClientImpl implements UserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserServiceIssueNewUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceIssueNewDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -723,6 +814,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserServicePersonalInformationUpdateBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServicePersonalInformationUpdateUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePersonalInformationUpdateDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -745,6 +837,7 @@ class UserClientImpl implements UserClient
             return DeprecatedUserServicePersonalizedSettingsGetOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserServicePersonalizedSettingsGetUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePersonalizedSettingsGetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -768,6 +861,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserServicePersonalizedSettingsUpdateBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServicePersonalizedSettingsUpdateUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePersonalizedSettingsUpdateDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -792,6 +886,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserServicePhoneNumberAddBadRequestResponse::fromResponse($httpResponse),
             409 => DeprecatedUserServicePhoneNumberAddConflictResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServicePhoneNumberAddUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePhoneNumberAddDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -815,6 +910,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserServicePhoneNumberRemoveBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServicePhoneNumberRemoveUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePhoneNumberRemoveDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -840,6 +936,7 @@ class UserClientImpl implements UserClient
             400 => DeprecatedUserServicePhoneNumberVerifyBadRequestResponse::fromResponse($httpResponse),
             404 => DeprecatedUserServicePhoneNumberVerifyNotFoundResponse::fromResponse($httpResponse),
             409 => DeprecatedUserServicePhoneNumberVerifyConflictResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServicePhoneNumberVerifyUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServicePhoneNumberVerifyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -865,6 +962,7 @@ class UserClientImpl implements UserClient
             403 => DeprecatedUserServiceUserGetForbiddenResponse::fromResponse($httpResponse),
             404 => DeprecatedUserServiceUserGetNotFoundResponse::fromResponse($httpResponse),
             412 => DeprecatedUserServiceUserGetPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserServiceUserGetUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceUserGetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -887,6 +985,7 @@ class UserClientImpl implements UserClient
             return DeprecatedUserServiceUserGetOwnOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserServiceUserGetOwnUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserServiceUserGetOwnDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -909,6 +1008,7 @@ class UserClientImpl implements UserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserTerminateAllSessionsUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserTerminateAllSessionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -932,6 +1032,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => DeprecatedUserTerminateSessionNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserTerminateSessionUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserTerminateSessionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -955,6 +1056,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserUpdateAccountBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserUpdateAccountUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserUpdateAccountDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -979,6 +1081,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedUserVerifyEmailBadRequestResponse::fromResponse($httpResponse),
             404 => DeprecatedUserVerifyEmailNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedUserVerifyEmailUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedUserVerifyEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1000,6 +1103,7 @@ class UserClientImpl implements UserClient
             return PasswordValidationGetPasswordPolicyOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => PasswordValidationGetPasswordPolicyUnknownResponse::fromResponse($httpResponse),
             default => PasswordValidationGetPasswordPolicyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1022,6 +1126,7 @@ class UserClientImpl implements UserClient
             return PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => PasswordValidationGetPasswordPolicyV2DeprecatedUnknownResponse::fromResponse($httpResponse),
             default => PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1044,8 +1149,8 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => AddPhoneNumberBadRequestResponse::fromResponse($httpResponse),
-            403 => AddPhoneNumberForbiddenResponse::fromResponse($httpResponse),
             409 => AddPhoneNumberConflictResponse::fromResponse($httpResponse),
+            429 => AddPhoneNumberUnknownResponse::fromResponse($httpResponse),
             default => AddPhoneNumberDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1070,6 +1175,7 @@ class UserClientImpl implements UserClient
             202 => AuthenticateAcceptedResponse::fromResponse($httpResponse),
             400 => AuthenticateBadRequestResponse::fromResponse($httpResponse),
             401 => AuthenticateUnauthorizedResponse::fromResponse($httpResponse),
+            429 => AuthenticateUnknownResponse::fromResponse($httpResponse),
             default => AuthenticateDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1093,6 +1199,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => AuthenticateMfaBadRequestResponse::fromResponse($httpResponse),
             408 => UntypedResponse::fromResponse($httpResponse),
+            429 => AuthenticateMfaUnknownResponse::fromResponse($httpResponse),
             default => AuthenticateMfaDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1115,6 +1222,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => AuthenticateWithAccessTokenRetrievalKeyBadRequestResponse::fromResponse($httpResponse),
+            429 => AuthenticateWithAccessTokenRetrievalKeyUnknownResponse::fromResponse($httpResponse),
             default => AuthenticateWithAccessTokenRetrievalKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1138,6 +1246,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ChangeEmailBadRequestResponse::fromResponse($httpResponse),
+            429 => ChangeEmailUnknownResponse::fromResponse($httpResponse),
             default => ChangeEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1161,6 +1270,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             202 => UntypedResponse::fromResponse($httpResponse),
             400 => ChangePasswordBadRequestResponse::fromResponse($httpResponse),
+            429 => ChangePasswordUnknownResponse::fromResponse($httpResponse),
             default => ChangePasswordDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1182,6 +1292,7 @@ class UserClientImpl implements UserClient
             return CheckTokenOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => CheckTokenUnknownResponse::fromResponse($httpResponse),
             default => CheckTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1204,6 +1315,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ConfirmMfaBadRequestResponse::fromResponse($httpResponse),
+            429 => ConfirmMfaUnknownResponse::fromResponse($httpResponse),
             default => ConfirmMfaDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1226,6 +1338,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ConfirmPasswordResetBadRequestResponse::fromResponse($httpResponse),
+            429 => ConfirmPasswordResetUnknownResponse::fromResponse($httpResponse),
             default => ConfirmPasswordResetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1248,6 +1361,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateApiTokenBadRequestResponse::fromResponse($httpResponse),
+            429 => CreateApiTokenUnknownResponse::fromResponse($httpResponse),
             default => CreateApiTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1271,6 +1385,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             401 => CreateFeedbackUnauthorizedResponse::fromResponse($httpResponse),
             404 => CreateFeedbackNotFoundResponse::fromResponse($httpResponse),
+            429 => CreateFeedbackUnknownResponse::fromResponse($httpResponse),
             default => CreateFeedbackDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1293,6 +1408,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateSshKeyBadRequestResponse::fromResponse($httpResponse),
+            429 => CreateSshKeyUnknownResponse::fromResponse($httpResponse),
             default => CreateSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1315,6 +1431,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteApiTokenBadRequestResponse::fromResponse($httpResponse),
+            429 => DeleteApiTokenUnknownResponse::fromResponse($httpResponse),
             default => DeleteApiTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1336,6 +1453,7 @@ class UserClientImpl implements UserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeleteSshKeyUnknownResponse::fromResponse($httpResponse),
             default => DeleteSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1360,6 +1478,7 @@ class UserClientImpl implements UserClient
             202 => UntypedResponse::fromResponse($httpResponse),
             400 => DeleteUserBadRequestResponse::fromResponse($httpResponse),
             409 => DeleteUserConflictResponse::fromResponse($httpResponse),
+            429 => DeleteUserUnknownResponse::fromResponse($httpResponse),
             default => DeleteUserDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1382,6 +1501,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DisableMfaBadRequestResponse::fromResponse($httpResponse),
+            429 => DisableMfaUnknownResponse::fromResponse($httpResponse),
             default => DisableMfaDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1404,6 +1524,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => EditApiTokenBadRequestResponse::fromResponse($httpResponse),
+            429 => EditApiTokenUnknownResponse::fromResponse($httpResponse),
             default => EditApiTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1426,6 +1547,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => EditSshKeyBadRequestResponse::fromResponse($httpResponse),
+            429 => EditSshKeyUnknownResponse::fromResponse($httpResponse),
             default => EditSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1448,6 +1570,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetApiTokenNotFoundResponse::fromResponse($httpResponse),
+            429 => GetApiTokenUnknownResponse::fromResponse($httpResponse),
             default => GetApiTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1469,6 +1592,7 @@ class UserClientImpl implements UserClient
             return GetMfaStatusOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => GetMfaStatusUnknownResponse::fromResponse($httpResponse),
             default => GetMfaStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1490,6 +1614,7 @@ class UserClientImpl implements UserClient
             return GetOwnAccountOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => GetOwnAccountUnknownResponse::fromResponse($httpResponse),
             default => GetOwnAccountDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1512,6 +1637,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetOwnEmailNotFoundResponse::fromResponse($httpResponse),
+            429 => GetOwnEmailUnknownResponse::fromResponse($httpResponse),
             default => GetOwnEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1533,6 +1659,7 @@ class UserClientImpl implements UserClient
             return GetPasswordUpdatedAtOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => GetPasswordUpdatedAtUnknownResponse::fromResponse($httpResponse),
             default => GetPasswordUpdatedAtDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1554,6 +1681,7 @@ class UserClientImpl implements UserClient
             return GetPersonalizedSettingsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => GetPersonalizedSettingsUnknownResponse::fromResponse($httpResponse),
             default => GetPersonalizedSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1576,6 +1704,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetPollStatusBadRequestResponse::fromResponse($httpResponse),
             404 => GetPollStatusNotFoundResponse::fromResponse($httpResponse),
+            429 => GetPollStatusUnknownResponse::fromResponse($httpResponse),
             default => GetPollStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1598,6 +1727,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetSessionNotFoundResponse::fromResponse($httpResponse),
+            429 => GetSessionUnknownResponse::fromResponse($httpResponse),
             default => GetSessionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1620,6 +1750,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetSshKeyNotFoundResponse::fromResponse($httpResponse),
+            429 => GetSshKeyUnknownResponse::fromResponse($httpResponse),
             default => GetSshKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1666,6 +1797,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InitMfaBadRequestResponse::fromResponse($httpResponse),
+            429 => InitMfaUnknownResponse::fromResponse($httpResponse),
             default => InitMfaDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1688,7 +1820,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InitPasswordResetBadRequestResponse::fromResponse($httpResponse),
-            403 => InitPasswordResetForbiddenResponse::fromResponse($httpResponse),
+            429 => InitPasswordResetUnknownResponse::fromResponse($httpResponse),
             default => InitPasswordResetDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1710,6 +1842,7 @@ class UserClientImpl implements UserClient
             return ListApiTokensOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListApiTokensUnknownResponse::fromResponse($httpResponse),
             default => ListApiTokensDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1731,6 +1864,7 @@ class UserClientImpl implements UserClient
             return ListFeedbackOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListFeedbackUnknownResponse::fromResponse($httpResponse),
             default => ListFeedbackDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1752,6 +1886,7 @@ class UserClientImpl implements UserClient
             return ListSessionsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListSessionsUnknownResponse::fromResponse($httpResponse),
             default => ListSessionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1773,6 +1908,7 @@ class UserClientImpl implements UserClient
             return ListSshKeysOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListSshKeysUnknownResponse::fromResponse($httpResponse),
             default => ListSshKeysDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1795,6 +1931,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => LogoutBadRequestResponse::fromResponse($httpResponse),
+            429 => LogoutUnknownResponse::fromResponse($httpResponse),
             default => LogoutDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1824,6 +1961,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             302 => new EmptyResponse($httpResponse),
             400 => OauthGetAuthorizationBadRequestResponse::fromResponse($httpResponse),
+            429 => OauthGetAuthorizationUnknownResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1850,6 +1988,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OauthRetrieveAccessTokenBadRequestResponse::fromResponse($httpResponse),
+            429 => OauthRetrieveAccessTokenUnknownResponse::fromResponse($httpResponse),
             default => OauthRetrieveAccessTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1873,6 +2012,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PostPollStatusBadRequestResponse::fromResponse($httpResponse),
             403 => PostPollStatusForbiddenResponse::fromResponse($httpResponse),
+            429 => PostPollStatusUnknownResponse::fromResponse($httpResponse),
             default => PostPollStatusDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1895,6 +2035,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RefreshSessionBadRequestResponse::fromResponse($httpResponse),
+            429 => RefreshSessionUnknownResponse::fromResponse($httpResponse),
             default => RefreshSessionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1918,7 +2059,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RegisterBadRequestResponse::fromResponse($httpResponse),
-            403 => RegisterForbiddenResponse::fromResponse($httpResponse),
+            429 => RegisterUnknownResponse::fromResponse($httpResponse),
             default => RegisterDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1941,6 +2082,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RemoveAvatarBadRequestResponse::fromResponse($httpResponse),
+            429 => RemoveAvatarUnknownResponse::fromResponse($httpResponse),
             default => RemoveAvatarDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1963,6 +2105,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RemovePhoneNumberBadRequestResponse::fromResponse($httpResponse),
+            429 => RemovePhoneNumberUnknownResponse::fromResponse($httpResponse),
             default => RemovePhoneNumberDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -1985,6 +2128,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RequestAvatarUploadBadRequestResponse::fromResponse($httpResponse),
+            429 => RequestAvatarUploadUnknownResponse::fromResponse($httpResponse),
             default => RequestAvatarUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2007,7 +2151,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ResendVerificationEmailBadRequestResponse::fromResponse($httpResponse),
-            403 => ResendVerificationEmailForbiddenResponse::fromResponse($httpResponse),
+            429 => ResendVerificationEmailUnknownResponse::fromResponse($httpResponse),
             default => ResendVerificationEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2030,6 +2174,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ResetRecoverycodesBadRequestResponse::fromResponse($httpResponse),
+            429 => ResetRecoverycodesUnknownResponse::fromResponse($httpResponse),
             default => ResetRecoverycodesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2051,6 +2196,7 @@ class UserClientImpl implements UserClient
             return SupportCodeRequestOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => SupportCodeRequestUnknownResponse::fromResponse($httpResponse),
             default => SupportCodeRequestDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2072,6 +2218,7 @@ class UserClientImpl implements UserClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => TerminateAllSessionsUnknownResponse::fromResponse($httpResponse),
             default => TerminateAllSessionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2094,6 +2241,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => TerminateSessionNotFoundResponse::fromResponse($httpResponse),
+            429 => TerminateSessionUnknownResponse::fromResponse($httpResponse),
             default => TerminateSessionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2116,6 +2264,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateAccountBadRequestResponse::fromResponse($httpResponse),
+            429 => UpdateAccountUnknownResponse::fromResponse($httpResponse),
             default => UpdateAccountDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2138,6 +2287,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdatePersonalInformationBadRequestResponse::fromResponse($httpResponse),
+            429 => UpdatePersonalInformationUnknownResponse::fromResponse($httpResponse),
             default => UpdatePersonalInformationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2160,6 +2310,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdatePersonalizedSettingsBadRequestResponse::fromResponse($httpResponse),
+            429 => UpdatePersonalizedSettingsUnknownResponse::fromResponse($httpResponse),
             default => UpdatePersonalizedSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2183,6 +2334,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => VerifyEmailBadRequestResponse::fromResponse($httpResponse),
             404 => VerifyEmailNotFoundResponse::fromResponse($httpResponse),
+            429 => VerifyEmailUnknownResponse::fromResponse($httpResponse),
             default => VerifyEmailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2207,6 +2359,7 @@ class UserClientImpl implements UserClient
             400 => VerifyPhoneNumberBadRequestResponse::fromResponse($httpResponse),
             404 => VerifyPhoneNumberNotFoundResponse::fromResponse($httpResponse),
             409 => VerifyPhoneNumberConflictResponse::fromResponse($httpResponse),
+            429 => VerifyPhoneNumberUnknownResponse::fromResponse($httpResponse),
             default => VerifyPhoneNumberDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -2230,6 +2383,7 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => VerifyRegistrationBadRequestResponse::fromResponse($httpResponse),
             404 => VerifyRegistrationNotFoundResponse::fromResponse($httpResponse),
+            429 => VerifyRegistrationUnknownResponse::fromResponse($httpResponse),
             default => VerifyRegistrationDefaultResponse::fromResponse($httpResponse),
         });
     }

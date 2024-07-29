@@ -14,126 +14,152 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractItemTerminati
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractItemTermination\CancelContractItemTerminationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractItemTermination\CancelContractItemTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractItemTermination\CancelContractItemTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractItemTermination\CancelContractItemTerminationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTariffChange\CancelContractTariffChangeUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByServer\GetDetailOfContractByServerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetDetailOfInvoiceSettings\InvoiceGetDetailOfInvoiceSettingsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder\OrderCreateOrderUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateTariffChange\OrderCreateTariffChangeUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrderDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrderOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrderRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderGetOrder\OrderGetOrderUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListCustomerOrders\OrderListCustomerOrdersUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListOrders\OrderListOrdersUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderListProjectOrders\OrderListProjectOrdersUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewOrder\OrderPreviewOrderUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderPreviewTariffChange\OrderPreviewTariffChangeUnprocessableEntityResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract\TerminateContractUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem\TerminateContractItemBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem\TerminateContractItemCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem\TerminateContractItemDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem\TerminateContractItemNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem\TerminateContractItemRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContractItem\TerminateContractItemUnknownResponse;
 
 /**
  * Client for Contract API
@@ -175,6 +201,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CancelContractItemTerminationBadRequestResponse::fromResponse($httpResponse),
             404 => CancelContractItemTerminationNotFoundResponse::fromResponse($httpResponse),
+            429 => CancelContractItemTerminationUnknownResponse::fromResponse($httpResponse),
             default => CancelContractItemTerminationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -198,6 +225,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CancelContractTariffChangeBadRequestResponse::fromResponse($httpResponse),
             404 => CancelContractTariffChangeNotFoundResponse::fromResponse($httpResponse),
+            429 => CancelContractTariffChangeUnknownResponse::fromResponse($httpResponse),
             default => CancelContractTariffChangeDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -221,6 +249,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CancelContractTerminationBadRequestResponse::fromResponse($httpResponse),
             404 => CancelContractTerminationNotFoundResponse::fromResponse($httpResponse),
+            429 => CancelContractTerminationUnknownResponse::fromResponse($httpResponse),
             default => CancelContractTerminationDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -244,6 +273,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetBaseItemOfContractBadRequestResponse::fromResponse($httpResponse),
             404 => GetBaseItemOfContractNotFoundResponse::fromResponse($httpResponse),
+            429 => GetBaseItemOfContractUnknownResponse::fromResponse($httpResponse),
             default => GetBaseItemOfContractDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -266,6 +296,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractBadRequestResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractUnknownResponse::fromResponse($httpResponse),
             default => GetDetailOfContractDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -289,6 +320,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByDomainBadRequestResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByDomainNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByDomainUnknownResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByDomainDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -312,6 +344,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByProjectBadRequestResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByProjectNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByProjectUnknownResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -335,6 +368,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractByServerBadRequestResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractByServerNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByServerUnknownResponse::fromResponse($httpResponse),
             default => GetDetailOfContractByServerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -357,6 +391,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetDetailOfContractItemBadRequestResponse::fromResponse($httpResponse),
             404 => GetDetailOfContractItemNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractItemUnknownResponse::fromResponse($httpResponse),
             default => GetDetailOfContractItemDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -380,6 +415,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetNextTerminationDateForItemBadRequestResponse::fromResponse($httpResponse),
             404 => GetNextTerminationDateForItemNotFoundResponse::fromResponse($httpResponse),
+            429 => GetNextTerminationDateForItemUnknownResponse::fromResponse($httpResponse),
             default => GetNextTerminationDateForItemDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -403,6 +439,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ListContractsBadRequestResponse::fromResponse($httpResponse),
             404 => ListContractsNotFoundResponse::fromResponse($httpResponse),
+            429 => ListContractsUnknownResponse::fromResponse($httpResponse),
             default => ListContractsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -426,6 +463,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => TerminateContractBadRequestResponse::fromResponse($httpResponse),
             404 => TerminateContractNotFoundResponse::fromResponse($httpResponse),
+            429 => TerminateContractUnknownResponse::fromResponse($httpResponse),
             default => TerminateContractDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -449,6 +487,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => TerminateContractItemBadRequestResponse::fromResponse($httpResponse),
             404 => TerminateContractItemNotFoundResponse::fromResponse($httpResponse),
+            429 => TerminateContractItemUnknownResponse::fromResponse($httpResponse),
             default => TerminateContractItemDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -474,6 +513,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeprecatedInvoiceDetailOfInvoiceBadRequestResponse::fromResponse($httpResponse),
             404 => DeprecatedInvoiceDetailOfInvoiceNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedInvoiceDetailOfInvoiceUnknownResponse::fromResponse($httpResponse),
             default => DeprecatedInvoiceDetailOfInvoiceDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -496,6 +536,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InvoiceDetailBadRequestResponse::fromResponse($httpResponse),
             404 => InvoiceDetailNotFoundResponse::fromResponse($httpResponse),
+            429 => InvoiceDetailUnknownResponse::fromResponse($httpResponse),
             default => InvoiceDetailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -518,6 +559,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InvoiceGetDetailOfInvoiceSettingsBadRequestResponse::fromResponse($httpResponse),
             404 => InvoiceGetDetailOfInvoiceSettingsNotFoundResponse::fromResponse($httpResponse),
+            429 => InvoiceGetDetailOfInvoiceSettingsUnknownResponse::fromResponse($httpResponse),
             default => InvoiceGetDetailOfInvoiceSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -541,6 +583,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InvoiceGetFileAccessTokenBadRequestResponse::fromResponse($httpResponse),
             404 => InvoiceGetFileAccessTokenNotFoundResponse::fromResponse($httpResponse),
+            429 => InvoiceGetFileAccessTokenUnknownResponse::fromResponse($httpResponse),
             default => InvoiceGetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -563,6 +606,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InvoiceListCustomerInvoicesBadRequestResponse::fromResponse($httpResponse),
             404 => InvoiceListCustomerInvoicesNotFoundResponse::fromResponse($httpResponse),
+            429 => InvoiceListCustomerInvoicesUnknownResponse::fromResponse($httpResponse),
             default => InvoiceListCustomerInvoicesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -585,6 +629,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => InvoiceUpdateInvoiceSettingsBadRequestResponse::fromResponse($httpResponse),
             404 => InvoiceUpdateInvoiceSettingsNotFoundResponse::fromResponse($httpResponse),
+            429 => InvoiceUpdateInvoiceSettingsUnknownResponse::fromResponse($httpResponse),
             default => InvoiceUpdateInvoiceSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -606,7 +651,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateOrderBadRequestResponse::fromResponse($httpResponse),
-            403 => OrderCreateOrderForbiddenResponse::fromResponse($httpResponse),
+            429 => OrderCreateOrderUnknownResponse::fromResponse($httpResponse),
             default => OrderCreateOrderDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -628,6 +673,7 @@ class ContractClientImpl implements ContractClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderCreateTariffChangeBadRequestResponse::fromResponse($httpResponse),
+            429 => OrderCreateTariffChangeUnknownResponse::fromResponse($httpResponse),
             default => OrderCreateTariffChangeDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -650,6 +696,7 @@ class ContractClientImpl implements ContractClient
             return OrderGetOrderOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => OrderGetOrderUnknownResponse::fromResponse($httpResponse),
             default => OrderGetOrderDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -672,6 +719,7 @@ class ContractClientImpl implements ContractClient
             return OrderListCustomerOrdersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => OrderListCustomerOrdersUnknownResponse::fromResponse($httpResponse),
             default => OrderListCustomerOrdersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -694,6 +742,7 @@ class ContractClientImpl implements ContractClient
             return OrderListOrdersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => OrderListOrdersUnknownResponse::fromResponse($httpResponse),
             default => OrderListOrdersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -716,6 +765,7 @@ class ContractClientImpl implements ContractClient
             return OrderListProjectOrdersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => OrderListProjectOrdersUnknownResponse::fromResponse($httpResponse),
             default => OrderListProjectOrdersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -738,6 +788,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderPreviewOrderBadRequestResponse::fromResponse($httpResponse),
             422 => OrderPreviewOrderUnprocessableEntityResponse::fromResponse($httpResponse),
+            429 => OrderPreviewOrderUnknownResponse::fromResponse($httpResponse),
             default => OrderPreviewOrderDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -760,6 +811,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => OrderPreviewTariffChangeBadRequestResponse::fromResponse($httpResponse),
             422 => OrderPreviewTariffChangeUnprocessableEntityResponse::fromResponse($httpResponse),
+            429 => OrderPreviewTariffChangeUnknownResponse::fromResponse($httpResponse),
             default => OrderPreviewTariffChangeDefaultResponse::fromResponse($httpResponse),
         });
     }

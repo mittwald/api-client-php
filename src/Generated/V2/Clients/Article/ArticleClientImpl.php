@@ -12,9 +12,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleDefault
 use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\GetArticle\GetArticleUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticlesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticlesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticlesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Article\ListArticles\ListArticlesUnknownResponse;
 
 /**
  * Client for Article API
@@ -55,6 +57,7 @@ class ArticleClientImpl implements ArticleClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetArticleNotFoundResponse::fromResponse($httpResponse),
+            429 => GetArticleUnknownResponse::fromResponse($httpResponse),
             default => GetArticleDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -76,6 +79,7 @@ class ArticleClientImpl implements ArticleClient
             return ListArticlesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListArticlesUnknownResponse::fromResponse($httpResponse),
             default => ListArticlesDefaultResponse::fromResponse($httpResponse),
         });
     }

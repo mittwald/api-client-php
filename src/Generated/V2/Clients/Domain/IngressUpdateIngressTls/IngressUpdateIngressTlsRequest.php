@@ -6,8 +6,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate;
 
 class IngressUpdateIngressTlsRequest
 {
@@ -26,10 +24,41 @@ class IngressUpdateIngressTlsRequest
             'body' => [
                 'oneOf' => [
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TlsAcme',
+                        'additionalProperties' => false,
+                        'properties' => [
+                            'acme' => [
+                                'description' => 'Has to be `true`, as ssl cannot be deactivated.',
+                                'type' => 'boolean',
+                            ],
+                            'isCreated' => [
+                                'deprecated' => true,
+                                'description' => 'Was added by mistake. Never did anything.',
+                                'type' => 'boolean',
+                            ],
+                            'requestDeadline' => [
+                                'deprecated' => true,
+                                'description' => 'Was added by mistake. Never did anything.',
+                                'format' => 'date-time',
+                                'type' => 'string',
+                            ],
+                        ],
+                        'required' => [
+                            'acme',
+                        ],
+                        'type' => 'object',
                     ],
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TlsCertificate',
+                        'additionalProperties' => false,
+                        'properties' => [
+                            'certificateId' => [
+                                'format' => 'uuid',
+                                'type' => 'string',
+                            ],
+                        ],
+                        'required' => [
+                            'certificateId',
+                        ],
+                        'type' => 'object',
                     ],
                 ],
             ],
@@ -42,16 +71,16 @@ class IngressUpdateIngressTlsRequest
 
     private string $ingressId;
 
-    private TlsAcme|TlsCertificate $body;
+    private IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body;
 
     private array $headers = [
 
     ];
 
     /**
-     * @param TlsAcme|TlsCertificate $body
+     * @param IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body
      */
-    public function __construct(string $ingressId, TlsAcme|TlsCertificate $body)
+    public function __construct(string $ingressId, IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body)
     {
         $this->ingressId = $ingressId;
         $this->body = $body;
@@ -64,9 +93,9 @@ class IngressUpdateIngressTlsRequest
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate
+     * IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2
      */
-    public function getBody(): TlsAcme|TlsCertificate
+    public function getBody(): IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2
     {
         return $this->body;
     }
@@ -86,9 +115,9 @@ class IngressUpdateIngressTlsRequest
     }
 
     /**
-     * @param TlsAcme|TlsCertificate $body
+     * @param IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body
      */
-    public function withBody(TlsAcme|TlsCertificate $body): self
+    public function withBody(IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -113,8 +142,8 @@ class IngressUpdateIngressTlsRequest
 
         $ingressId = $input->{'ingressId'};
         $body = match (true) {
-            TlsAcme::validateInput($input->{'body'}, true) => TlsAcme::buildFromInput($input->{'body'}, validate: $validate),
-            TlsCertificate::validateInput($input->{'body'}, true) => TlsCertificate::buildFromInput($input->{'body'}, validate: $validate),
+            IngressUpdateIngressTlsRequestBodyAlternative1::validateInput($input->{'body'}, true) => IngressUpdateIngressTlsRequestBodyAlternative1::buildFromInput($input->{'body'}, validate: $validate),
+            IngressUpdateIngressTlsRequestBodyAlternative2::validateInput($input->{'body'}, true) => IngressUpdateIngressTlsRequestBodyAlternative2::buildFromInput($input->{'body'}, validate: $validate),
         };
 
         $obj = new self($ingressId, $body);
@@ -132,7 +161,7 @@ class IngressUpdateIngressTlsRequest
         $output = [];
         $output['ingressId'] = $this->ingressId;
         $output['body'] = match (true) {
-            ($this->body) instanceof TlsAcme, ($this->body) instanceof TlsCertificate => $this->body->toJson(),
+            $this->body instanceof IngressUpdateIngressTlsRequestBodyAlternative1, $this->body instanceof IngressUpdateIngressTlsRequestBodyAlternative2 => ($this->body)->toJson(),
         };
 
         return $output;
@@ -165,7 +194,7 @@ class IngressUpdateIngressTlsRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof TlsAcme, ($this->body) instanceof TlsCertificate => $this->body,
+            $this->body instanceof IngressUpdateIngressTlsRequestBodyAlternative1, $this->body instanceof IngressUpdateIngressTlsRequestBodyAlternative2 => clone $this->body,
         };
     }
 

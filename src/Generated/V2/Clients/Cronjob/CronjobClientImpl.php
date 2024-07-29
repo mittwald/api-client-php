@@ -12,43 +12,53 @@ use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution\AbortExecutionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateCronjob\CreateCronjobUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CreateExecution\CreateExecutionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeleteCronjob\DeleteCronjobUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetCronjob\GetCronjobUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\GetExecution\GetExecutionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs\ListCronjobsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions\ListExecutionsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjob\UpdateCronjobUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\UpdateCronjobAppId\UpdateCronjobAppIdUnknownResponse;
 
 /**
  * Client for Cronjob API
@@ -89,6 +99,7 @@ class CronjobClientImpl implements CronjobClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => AbortExecutionNotFoundResponse::fromResponse($httpResponse),
+            429 => AbortExecutionUnknownResponse::fromResponse($httpResponse),
             default => AbortExecutionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -112,6 +123,7 @@ class CronjobClientImpl implements CronjobClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateCronjobBadRequestResponse::fromResponse($httpResponse),
             412 => CreateCronjobPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateCronjobUnknownResponse::fromResponse($httpResponse),
             default => CreateCronjobDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -135,6 +147,7 @@ class CronjobClientImpl implements CronjobClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => CreateExecutionNotFoundResponse::fromResponse($httpResponse),
             412 => CreateExecutionPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateExecutionUnknownResponse::fromResponse($httpResponse),
             default => CreateExecutionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -158,6 +171,7 @@ class CronjobClientImpl implements CronjobClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteCronjobBadRequestResponse::fromResponse($httpResponse),
             412 => DeleteCronjobPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeleteCronjobUnknownResponse::fromResponse($httpResponse),
             default => DeleteCronjobDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -180,6 +194,7 @@ class CronjobClientImpl implements CronjobClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetCronjobNotFoundResponse::fromResponse($httpResponse),
+            429 => GetCronjobUnknownResponse::fromResponse($httpResponse),
             default => GetCronjobDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -202,6 +217,7 @@ class CronjobClientImpl implements CronjobClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetExecutionNotFoundResponse::fromResponse($httpResponse),
+            429 => GetExecutionUnknownResponse::fromResponse($httpResponse),
             default => GetExecutionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -223,6 +239,7 @@ class CronjobClientImpl implements CronjobClient
             return ListCronjobsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListCronjobsUnknownResponse::fromResponse($httpResponse),
             default => ListCronjobsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -244,6 +261,7 @@ class CronjobClientImpl implements CronjobClient
             return ListExecutionsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListExecutionsUnknownResponse::fromResponse($httpResponse),
             default => ListExecutionsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -268,6 +286,7 @@ class CronjobClientImpl implements CronjobClient
             400 => UpdateCronjobBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateCronjobNotFoundResponse::fromResponse($httpResponse),
             412 => UpdateCronjobPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => UpdateCronjobUnknownResponse::fromResponse($httpResponse),
             default => UpdateCronjobDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -291,6 +310,7 @@ class CronjobClientImpl implements CronjobClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateCronjobAppIdBadRequestResponse::fromResponse($httpResponse),
             412 => UpdateCronjobAppIdPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => UpdateCronjobAppIdUnknownResponse::fromResponse($httpResponse),
             default => UpdateCronjobAppIdDefaultResponse::fromResponse($httpResponse),
         });
     }

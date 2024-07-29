@@ -14,54 +14,66 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackup\CreatePro
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackup\CreateProjectBackupDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackup\CreateProjectBackupNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackup\CreateProjectBackupRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackup\CreateProjectBackupUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupExport\CreateProjectBackupExportBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupExport\CreateProjectBackupExportDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupExport\CreateProjectBackupExportForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupExport\CreateProjectBackupExportNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupExport\CreateProjectBackupExportRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupExport\CreateProjectBackupExportUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupSchedule\CreateProjectBackupScheduleBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupSchedule\CreateProjectBackupScheduleCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupSchedule\CreateProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupSchedule\CreateProjectBackupScheduleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupSchedule\CreateProjectBackupScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\CreateProjectBackupSchedule\CreateProjectBackupScheduleUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackup\DeleteProjectBackupDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackup\DeleteProjectBackupForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackup\DeleteProjectBackupNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackup\DeleteProjectBackupRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackup\DeleteProjectBackupUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupExport\DeleteProjectBackupExportDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupExport\DeleteProjectBackupExportForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupExport\DeleteProjectBackupExportNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupExport\DeleteProjectBackupExportRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupExport\DeleteProjectBackupExportUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\DeleteProjectBackupSchedule\DeleteProjectBackupScheduleUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupDescription\UpdateProjectBackupDescriptionUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupSchedulePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\UpdateProjectBackupSchedule\UpdateProjectBackupScheduleUnknownResponse;
 
 /**
  * Client for Backup API
@@ -103,6 +115,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateProjectBackupBadRequestResponse::fromResponse($httpResponse),
             404 => CreateProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            429 => CreateProjectBackupUnknownResponse::fromResponse($httpResponse),
             default => CreateProjectBackupDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -127,6 +140,7 @@ class BackupClientImpl implements BackupClient
             400 => CreateProjectBackupExportBadRequestResponse::fromResponse($httpResponse),
             403 => CreateProjectBackupExportForbiddenResponse::fromResponse($httpResponse),
             404 => CreateProjectBackupExportNotFoundResponse::fromResponse($httpResponse),
+            429 => CreateProjectBackupExportUnknownResponse::fromResponse($httpResponse),
             default => CreateProjectBackupExportDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -150,6 +164,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateProjectBackupScheduleBadRequestResponse::fromResponse($httpResponse),
             404 => CreateProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
+            429 => CreateProjectBackupScheduleUnknownResponse::fromResponse($httpResponse),
             default => CreateProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -173,6 +188,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => DeleteProjectBackupForbiddenResponse::fromResponse($httpResponse),
             404 => DeleteProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            429 => DeleteProjectBackupUnknownResponse::fromResponse($httpResponse),
             default => DeleteProjectBackupDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -196,6 +212,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => DeleteProjectBackupExportForbiddenResponse::fromResponse($httpResponse),
             404 => DeleteProjectBackupExportNotFoundResponse::fromResponse($httpResponse),
+            429 => DeleteProjectBackupExportUnknownResponse::fromResponse($httpResponse),
             default => DeleteProjectBackupExportDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -219,6 +236,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => DeleteProjectBackupScheduleForbiddenResponse::fromResponse($httpResponse),
             404 => DeleteProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
+            429 => DeleteProjectBackupScheduleUnknownResponse::fromResponse($httpResponse),
             default => DeleteProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -242,6 +260,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => GetProjectBackupForbiddenResponse::fromResponse($httpResponse),
             404 => GetProjectBackupNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectBackupUnknownResponse::fromResponse($httpResponse),
             default => GetProjectBackupDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -265,6 +284,7 @@ class BackupClientImpl implements BackupClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => GetProjectBackupScheduleForbiddenResponse::fromResponse($httpResponse),
             404 => GetProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
+            429 => GetProjectBackupScheduleUnknownResponse::fromResponse($httpResponse),
             default => GetProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -286,6 +306,7 @@ class BackupClientImpl implements BackupClient
             return ListProjectBackupSchedulesOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListProjectBackupSchedulesUnknownResponse::fromResponse($httpResponse),
             default => ListProjectBackupSchedulesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -307,6 +328,7 @@ class BackupClientImpl implements BackupClient
             return ListProjectBackupsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListProjectBackupsUnknownResponse::fromResponse($httpResponse),
             default => ListProjectBackupsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -331,6 +353,7 @@ class BackupClientImpl implements BackupClient
             400 => UpdateProjectBackupDescriptionBadRequestResponse::fromResponse($httpResponse),
             403 => UpdateProjectBackupDescriptionForbiddenResponse::fromResponse($httpResponse),
             404 => UpdateProjectBackupDescriptionNotFoundResponse::fromResponse($httpResponse),
+            429 => UpdateProjectBackupDescriptionUnknownResponse::fromResponse($httpResponse),
             default => UpdateProjectBackupDescriptionDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -355,6 +378,7 @@ class BackupClientImpl implements BackupClient
             400 => UpdateProjectBackupScheduleBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
             412 => UpdateProjectBackupSchedulePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => UpdateProjectBackupScheduleUnknownResponse::fromResponse($httpResponse),
             default => UpdateProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
         });
     }

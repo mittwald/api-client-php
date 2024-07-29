@@ -13,21 +13,25 @@ use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerforma
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetPerformanceData\PageinsightsGetPerformanceDataUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsGetStraceData\PageinsightsGetStraceDataUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsListPerformanceDataForProject\PageinsightsListPerformanceDataForProjectUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceAcceptedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageinsightsScheduleStrace\PageinsightsScheduleStraceUnknownResponse;
 
 /**
  * Client for Page Insights API
@@ -69,6 +73,7 @@ class PageInsightsClientImpl implements PageInsightsClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PageinsightsGetPerformanceDataBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsGetPerformanceDataForbiddenResponse::fromResponse($httpResponse),
+            429 => PageinsightsGetPerformanceDataUnknownResponse::fromResponse($httpResponse),
             default => PageinsightsGetPerformanceDataDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -92,6 +97,7 @@ class PageInsightsClientImpl implements PageInsightsClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PageinsightsGetStraceDataBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsGetStraceDataForbiddenResponse::fromResponse($httpResponse),
+            429 => PageinsightsGetStraceDataUnknownResponse::fromResponse($httpResponse),
             default => PageinsightsGetStraceDataDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -115,6 +121,7 @@ class PageInsightsClientImpl implements PageInsightsClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PageinsightsListPerformanceDataForProjectBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsListPerformanceDataForProjectForbiddenResponse::fromResponse($httpResponse),
+            429 => PageinsightsListPerformanceDataForProjectUnknownResponse::fromResponse($httpResponse),
             default => PageinsightsListPerformanceDataForProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -138,6 +145,7 @@ class PageInsightsClientImpl implements PageInsightsClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => PageinsightsScheduleStraceBadRequestResponse::fromResponse($httpResponse),
             403 => PageinsightsScheduleStraceForbiddenResponse::fromResponse($httpResponse),
+            429 => PageinsightsScheduleStraceUnknownResponse::fromResponse($httpResponse),
             default => PageinsightsScheduleStraceDefaultResponse::fromResponse($httpResponse),
         });
     }

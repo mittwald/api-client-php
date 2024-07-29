@@ -14,92 +14,115 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\Accept
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInvitePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\ListInvitesForCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\ListInvitesForCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\ListInvitesForCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\ListInvitesForCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListInvitesForCustomer\ListInvitesForCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListMembershipsForCustomer\ListMembershipsForCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\RemoveAvatar\RemoveAvatarUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadInternalServerErrorResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadUnauthorizedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\RequestAvatarUpload\RequestAvatarUploadUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ResendCustomerInviteMail\ResendCustomerInviteMailUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomer\UpdateCustomerUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\UpdateCustomerMembershipUnknownResponse;
 
 /**
  * Client for Customer API
@@ -141,6 +164,7 @@ class CustomerClientImpl implements CustomerClient
             400 => AcceptCustomerInviteBadRequestResponse::fromResponse($httpResponse),
             403 => AcceptCustomerInviteForbiddenResponse::fromResponse($httpResponse),
             412 => AcceptCustomerInvitePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => AcceptCustomerInviteUnknownResponse::fromResponse($httpResponse),
             default => AcceptCustomerInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -163,6 +187,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateCustomerBadRequestResponse::fromResponse($httpResponse),
+            429 => CreateCustomerUnknownResponse::fromResponse($httpResponse),
             default => CreateCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -186,6 +211,7 @@ class CustomerClientImpl implements CustomerClient
             400 => CreateCustomerInviteBadRequestResponse::fromResponse($httpResponse),
             403 => CreateCustomerInviteForbiddenResponse::fromResponse($httpResponse),
             409 => CreateCustomerInviteConflictResponse::fromResponse($httpResponse),
+            429 => CreateCustomerInviteUnknownResponse::fromResponse($httpResponse),
             default => CreateCustomerInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -206,6 +232,7 @@ class CustomerClientImpl implements CustomerClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeclineCustomerInviteUnknownResponse::fromResponse($httpResponse),
             default => DeclineCustomerInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -229,6 +256,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => DeleteCustomerNotFoundResponse::fromResponse($httpResponse),
             412 => DeleteCustomerPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => DeleteCustomerUnknownResponse::fromResponse($httpResponse),
             default => DeleteCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -249,6 +277,7 @@ class CustomerClientImpl implements CustomerClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeleteCustomerInviteUnknownResponse::fromResponse($httpResponse),
             default => DeleteCustomerInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -269,6 +298,7 @@ class CustomerClientImpl implements CustomerClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeleteCustomerMembershipUnknownResponse::fromResponse($httpResponse),
             default => DeleteCustomerMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -293,6 +323,7 @@ class CustomerClientImpl implements CustomerClient
             401 => GetCustomerUnauthorizedResponse::fromResponse($httpResponse),
             403 => GetCustomerForbiddenResponse::fromResponse($httpResponse),
             404 => GetCustomerNotFoundResponse::fromResponse($httpResponse),
+            429 => GetCustomerUnknownResponse::fromResponse($httpResponse),
             default => GetCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -315,6 +346,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetCustomerInviteNotFoundResponse::fromResponse($httpResponse),
+            429 => GetCustomerInviteUnknownResponse::fromResponse($httpResponse),
             default => GetCustomerInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -337,6 +369,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetCustomerMembershipNotFoundResponse::fromResponse($httpResponse),
+            429 => GetCustomerMembershipUnknownResponse::fromResponse($httpResponse),
             default => GetCustomerMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -358,6 +391,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => GetCustomerTokenInviteNotFoundResponse::fromResponse($httpResponse),
+            429 => GetCustomerTokenInviteUnknownResponse::fromResponse($httpResponse),
             default => GetCustomerTokenInviteDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -381,6 +415,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => IsCustomerLegallyCompetentBadRequestResponse::fromResponse($httpResponse),
             404 => IsCustomerLegallyCompetentNotFoundResponse::fromResponse($httpResponse),
+            429 => IsCustomerLegallyCompetentUnknownResponse::fromResponse($httpResponse),
             default => IsCustomerLegallyCompetentDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -401,6 +436,7 @@ class CustomerClientImpl implements CustomerClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => LeaveCustomerUnknownResponse::fromResponse($httpResponse),
             default => LeaveCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -424,6 +460,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ListCustomerInvitesForbiddenResponse::fromResponse($httpResponse),
             404 => ListCustomerInvitesNotFoundResponse::fromResponse($httpResponse),
+            429 => ListCustomerInvitesUnknownResponse::fromResponse($httpResponse),
             default => ListCustomerInvitesDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -447,6 +484,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ListCustomerMembershipsForbiddenResponse::fromResponse($httpResponse),
             404 => ListCustomerMembershipsNotFoundResponse::fromResponse($httpResponse),
+            429 => ListCustomerMembershipsUnknownResponse::fromResponse($httpResponse),
             default => ListCustomerMembershipsDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -468,6 +506,7 @@ class CustomerClientImpl implements CustomerClient
             return ListCustomersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ListCustomersUnknownResponse::fromResponse($httpResponse),
             default => ListCustomersDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -490,6 +529,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ListInvitesForCustomerNotFoundResponse::fromResponse($httpResponse),
+            429 => ListInvitesForCustomerUnknownResponse::fromResponse($httpResponse),
             default => ListInvitesForCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -512,6 +552,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ListMembershipsForCustomerNotFoundResponse::fromResponse($httpResponse),
+            429 => ListMembershipsForCustomerUnknownResponse::fromResponse($httpResponse),
             default => ListMembershipsForCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -535,6 +576,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RemoveAvatarBadRequestResponse::fromResponse($httpResponse),
             401 => RemoveAvatarUnauthorizedResponse::fromResponse($httpResponse),
+            429 => RemoveAvatarUnknownResponse::fromResponse($httpResponse),
             500 => RemoveAvatarInternalServerErrorResponse::fromResponse($httpResponse),
         });
     }
@@ -558,6 +600,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RequestAvatarUploadBadRequestResponse::fromResponse($httpResponse),
             401 => RequestAvatarUploadUnauthorizedResponse::fromResponse($httpResponse),
+            429 => RequestAvatarUploadUnknownResponse::fromResponse($httpResponse),
             500 => RequestAvatarUploadInternalServerErrorResponse::fromResponse($httpResponse),
         });
     }
@@ -579,6 +622,7 @@ class CustomerClientImpl implements CustomerClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403 => ResendCustomerInviteMailForbiddenResponse::fromResponse($httpResponse),
+            429 => ResendCustomerInviteMailUnknownResponse::fromResponse($httpResponse),
             default => ResendCustomerInviteMailDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -602,6 +646,7 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => UpdateCustomerBadRequestResponse::fromResponse($httpResponse),
             404 => UpdateCustomerNotFoundResponse::fromResponse($httpResponse),
+            429 => UpdateCustomerUnknownResponse::fromResponse($httpResponse),
             default => UpdateCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -622,6 +667,7 @@ class CustomerClientImpl implements CustomerClient
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => UpdateCustomerMembershipUnknownResponse::fromResponse($httpResponse),
             default => UpdateCustomerMembershipDefaultResponse::fromResponse($httpResponse),
         });
     }

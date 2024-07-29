@@ -11,11 +11,12 @@ use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateLegacyTariffChange\CreateLegacyTariffChangeUnknownResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Relocation\CreateRelocation\CreateRelocationUnknownResponse;
 
 /**
  * Client for Relocation API
@@ -54,7 +55,7 @@ class RelocationClientImpl implements RelocationClient
             return CreateLegacyTariffChangeCreatedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            403 => CreateLegacyTariffChangeForbiddenResponse::fromResponse($httpResponse),
+            429 => CreateLegacyTariffChangeUnknownResponse::fromResponse($httpResponse),
             default => CreateLegacyTariffChangeDefaultResponse::fromResponse($httpResponse),
         });
     }
@@ -79,6 +80,7 @@ class RelocationClientImpl implements RelocationClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CreateRelocationBadRequestResponse::fromResponse($httpResponse),
+            429 => CreateRelocationUnknownResponse::fromResponse($httpResponse),
             default => CreateRelocationDefaultResponse::fromResponse($httpResponse),
         });
     }
