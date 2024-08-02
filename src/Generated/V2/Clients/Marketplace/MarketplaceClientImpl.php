@@ -41,6 +41,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
@@ -258,6 +263,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionDisableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionDisableExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDisableExtensionInstanceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Dry run a webhook with random or given values.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-dry-run-webhook
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionDryRunWebhookRequest $request An object representing the request for this operation
+     * @return ExtensionDryRunWebhookOKResponse The webhook has been run successfully.
+     */
+    public function extensionDryRunWebhook(ExtensionDryRunWebhookRequest $request): ExtensionDryRunWebhookOKResponse
+    {
+        $httpRequest = new Request(ExtensionDryRunWebhookRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionDryRunWebhookOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionDryRunWebhookBadRequestResponse::fromResponse($httpResponse),
+            429 => ExtensionDryRunWebhookTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionDryRunWebhookDefaultResponse::fromResponse($httpResponse),
         });
     }
 
