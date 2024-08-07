@@ -21,14 +21,17 @@ class ListServersRequest
                 'type' => 'string',
             ],
             'limit' => [
+                'default' => 10000,
                 'minimum' => 0,
                 'type' => 'integer',
             ],
             'page' => [
+                'default' => 1,
                 'minimum' => 0,
                 'type' => 'integer',
             ],
             'skip' => [
+                'default' => 0,
                 'minimum' => 0,
                 'type' => 'integer',
             ],
@@ -40,21 +43,21 @@ class ListServersRequest
 
     private ?string $customerId = null;
 
-    private ?int $limit = null;
+    private int $limit;
 
-    private ?int $page = null;
+    private int $page;
 
-    private ?int $skip = null;
+    private int $skip;
 
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(int $limit, int $page, int $skip)
     {
+        $this->limit = $limit;
+        $this->page = $page;
+        $this->skip = $skip;
     }
 
     public function getCustomerId(): ?string
@@ -62,19 +65,19 @@ class ListServersRequest
         return $this->customerId ?? null;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getPage(): ?int
+    public function getPage(): int
     {
-        return $this->page ?? null;
+        return $this->page;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
     }
 
     public function withCustomerId(string $customerId): self
@@ -113,14 +116,6 @@ class ListServersRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withPage(int $page): self
     {
         $validator = new Validator();
@@ -135,14 +130,6 @@ class ListServersRequest
         return $clone;
     }
 
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -153,14 +140,6 @@ class ListServersRequest
 
         $clone = clone $this;
         $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -184,24 +163,21 @@ class ListServersRequest
         if (isset($input->{'customerId'})) {
             $customerId = $input->{'customerId'};
         }
-        $limit = null;
+        $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $page = null;
+        $page = 1;
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
 
-        $obj = new self();
+        $obj = new self($limit, $page, $skip);
         $obj->customerId = $customerId;
-        $obj->limit = $limit;
-        $obj->page = $page;
-        $obj->skip = $skip;
         return $obj;
     }
 
@@ -216,15 +192,9 @@ class ListServersRequest
         if (isset($this->customerId)) {
             $output['customerId'] = $this->customerId;
         }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
+        $output['limit'] = $this->limit;
+        $output['page'] = $this->page;
+        $output['skip'] = $this->skip;
 
         return $output;
     }

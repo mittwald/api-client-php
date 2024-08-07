@@ -27,6 +27,7 @@ class AppVersion
         'description' => 'An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.',
         'properties' => [
             'appId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
             'breakingNote' => [
@@ -77,11 +78,11 @@ class AppVersion
         ],
         'required' => [
             'id',
+            'appId',
             'externalVersion',
             'internalVersion',
             'docRoot',
             'docRootUserEditable',
-            'appId',
         ],
         'type' => 'object',
     ];
