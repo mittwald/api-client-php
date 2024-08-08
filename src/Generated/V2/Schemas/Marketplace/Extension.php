@@ -49,6 +49,12 @@ class Extension
                 ],
                 'type' => 'array',
             ],
+            'frontendFragments' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment',
+                ],
+                'type' => 'object',
+            ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -115,6 +121,11 @@ class Extension
      * @var ExternalComponent[]|null
      */
     private ?array $frontendComponents = null;
+
+    /**
+     * @var mixed[]|null
+     */
+    private ?array $frontendFragments = null;
 
     private string $id;
 
@@ -197,6 +208,14 @@ class Extension
     public function getFrontendComponents(): ?array
     {
         return $this->frontendComponents ?? null;
+    }
+
+    /**
+     * @return mixed[]|null
+     */
+    public function getFrontendFragments(): ?array
+    {
+        return $this->frontendFragments ?? null;
     }
 
     public function getId(): string
@@ -334,6 +353,31 @@ class Extension
         return $clone;
     }
 
+    /**
+     * @param mixed[] $frontendFragments
+     */
+    public function withFrontendFragments(array $frontendFragments): self
+    {
+        $validator = new Validator();
+        $validator->validate($frontendFragments, static::$schema['properties']['frontendFragments']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->frontendFragments = $frontendFragments;
+
+        return $clone;
+    }
+
+    public function withoutFrontendFragments(): self
+    {
+        $clone = clone $this;
+        unset($clone->frontendFragments);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -440,6 +484,10 @@ class Extension
         if (isset($input->{'frontendComponents'})) {
             $frontendComponents = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'frontendComponents'});
         }
+        $frontendFragments = null;
+        if (isset($input->{'frontendFragments'})) {
+            $frontendFragments = (array)$input->{'frontendFragments'};
+        }
         $id = $input->{'id'};
         $name = $input->{'name'};
         $scopes = $input->{'scopes'};
@@ -450,6 +498,7 @@ class Extension
         $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $scopes, $state, $support, $tags);
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->frontendComponents = $frontendComponents;
+        $obj->frontendFragments = $frontendFragments;
         return $obj;
     }
 
@@ -471,6 +520,9 @@ class Extension
         $output['disabled'] = $this->disabled;
         if (isset($this->frontendComponents)) {
             $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
+        }
+        if (isset($this->frontendFragments)) {
+            $output['frontendFragments'] = $this->frontendFragments;
         }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
