@@ -18,18 +18,7 @@ class UpdatePersonalInformationRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
             'body' => [
                 'properties' => [
@@ -49,7 +38,7 @@ class UpdatePersonalInformationRequest
         ],
     ];
 
-    private UpdatePersonalInformationRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private UpdatePersonalInformationRequestBody $body;
 
@@ -57,16 +46,13 @@ class UpdatePersonalInformationRequest
 
     ];
 
-    /**
-     * @param UpdatePersonalInformationRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(UpdatePersonalInformationRequestUserIdAlternative1|string $userId, UpdatePersonalInformationRequestBody $body)
+    public function __construct(string $userId, UpdatePersonalInformationRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    public function getUserId(): UpdatePersonalInformationRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -76,11 +62,14 @@ class UpdatePersonalInformationRequest
         return $this->body;
     }
 
-    /**
-     * @param UpdatePersonalInformationRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(UpdatePersonalInformationRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -110,10 +99,7 @@ class UpdatePersonalInformationRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            UpdatePersonalInformationRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => UpdatePersonalInformationRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
         $body = UpdatePersonalInformationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($userId, $body);
@@ -129,10 +115,7 @@ class UpdatePersonalInformationRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof UpdatePersonalInformationRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -164,9 +147,6 @@ class UpdatePersonalInformationRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof UpdatePersonalInformationRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
         $this->body = clone $this->body;
     }
 

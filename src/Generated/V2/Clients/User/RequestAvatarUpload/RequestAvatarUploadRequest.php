@@ -18,18 +18,7 @@ class RequestAvatarUploadRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
             'body' => [
                 'type' => 'object',
@@ -41,7 +30,7 @@ class RequestAvatarUploadRequest
         ],
     ];
 
-    private RequestAvatarUploadRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private RequestAvatarUploadRequestBody $body;
 
@@ -49,16 +38,13 @@ class RequestAvatarUploadRequest
 
     ];
 
-    /**
-     * @param RequestAvatarUploadRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(RequestAvatarUploadRequestUserIdAlternative1|string $userId, RequestAvatarUploadRequestBody $body)
+    public function __construct(string $userId, RequestAvatarUploadRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    public function getUserId(): RequestAvatarUploadRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -68,11 +54,14 @@ class RequestAvatarUploadRequest
         return $this->body;
     }
 
-    /**
-     * @param RequestAvatarUploadRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(RequestAvatarUploadRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -102,10 +91,7 @@ class RequestAvatarUploadRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            RequestAvatarUploadRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => RequestAvatarUploadRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
         $body = RequestAvatarUploadRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($userId, $body);
@@ -121,10 +107,7 @@ class RequestAvatarUploadRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof RequestAvatarUploadRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -156,9 +139,6 @@ class RequestAvatarUploadRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof RequestAvatarUploadRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
         $this->body = clone $this->body;
     }
 

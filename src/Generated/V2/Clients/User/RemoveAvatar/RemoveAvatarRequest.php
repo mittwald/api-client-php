@@ -18,18 +18,7 @@ class RemoveAvatarRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
         ],
         'required' => [
@@ -37,30 +26,30 @@ class RemoveAvatarRequest
         ],
     ];
 
-    private RemoveAvatarRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param RemoveAvatarRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(RemoveAvatarRequestUserIdAlternative1|string $userId)
+    public function __construct(string $userId)
     {
         $this->userId = $userId;
     }
 
-    public function getUserId(): RemoveAvatarRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param RemoveAvatarRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(RemoveAvatarRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -82,10 +71,7 @@ class RemoveAvatarRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            RemoveAvatarRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => RemoveAvatarRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
 
         $obj = new self($userId);
 
@@ -100,10 +86,7 @@ class RemoveAvatarRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof RemoveAvatarRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
 
         return $output;
     }
@@ -134,9 +117,6 @@ class RemoveAvatarRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof RemoveAvatarRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
     }
 
     /**

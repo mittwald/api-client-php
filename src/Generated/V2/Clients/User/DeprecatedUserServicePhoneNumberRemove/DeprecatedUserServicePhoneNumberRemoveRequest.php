@@ -18,7 +18,6 @@ class DeprecatedUserServicePhoneNumberRemoveRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

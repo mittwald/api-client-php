@@ -18,7 +18,6 @@ class DeprecatedUserServiceAvatarRemoveRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],

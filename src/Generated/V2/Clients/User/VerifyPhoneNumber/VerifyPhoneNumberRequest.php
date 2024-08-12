@@ -18,18 +18,7 @@ class VerifyPhoneNumberRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
             'body' => [
                 'properties' => [
@@ -57,7 +46,7 @@ class VerifyPhoneNumberRequest
         ],
     ];
 
-    private VerifyPhoneNumberRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private VerifyPhoneNumberRequestBody $body;
 
@@ -65,16 +54,13 @@ class VerifyPhoneNumberRequest
 
     ];
 
-    /**
-     * @param VerifyPhoneNumberRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(VerifyPhoneNumberRequestUserIdAlternative1|string $userId, VerifyPhoneNumberRequestBody $body)
+    public function __construct(string $userId, VerifyPhoneNumberRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    public function getUserId(): VerifyPhoneNumberRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -84,11 +70,14 @@ class VerifyPhoneNumberRequest
         return $this->body;
     }
 
-    /**
-     * @param VerifyPhoneNumberRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(VerifyPhoneNumberRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -118,10 +107,7 @@ class VerifyPhoneNumberRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            VerifyPhoneNumberRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => VerifyPhoneNumberRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
         $body = VerifyPhoneNumberRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($userId, $body);
@@ -137,10 +123,7 @@ class VerifyPhoneNumberRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof VerifyPhoneNumberRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -172,9 +155,6 @@ class VerifyPhoneNumberRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof VerifyPhoneNumberRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
         $this->body = clone $this->body;
     }
 

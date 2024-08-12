@@ -18,18 +18,7 @@ class GetUserRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
         ],
         'required' => [
@@ -37,30 +26,30 @@ class GetUserRequest
         ],
     ];
 
-    private GetUserRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private array $headers = [
 
     ];
 
-    /**
-     * @param GetUserRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(GetUserRequestUserIdAlternative1|string $userId)
+    public function __construct(string $userId)
     {
         $this->userId = $userId;
     }
 
-    public function getUserId(): GetUserRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
 
-    /**
-     * @param GetUserRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(GetUserRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -82,10 +71,7 @@ class GetUserRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            GetUserRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => GetUserRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
 
         $obj = new self($userId);
 
@@ -100,10 +86,7 @@ class GetUserRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof GetUserRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
 
         return $output;
     }
@@ -134,9 +117,6 @@ class GetUserRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof GetUserRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
     }
 
     /**

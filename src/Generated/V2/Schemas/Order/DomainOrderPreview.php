@@ -39,6 +39,7 @@ class DomainOrderPreview
         ],
         'required' => [
             'domain',
+            'projectId',
         ],
         'type' => 'object',
     ];
@@ -47,11 +48,12 @@ class DomainOrderPreview
 
     private string $domain;
 
-    private ?string $projectId = null;
+    private string $projectId;
 
-    public function __construct(string $domain)
+    public function __construct(string $domain, string $projectId)
     {
         $this->domain = $domain;
+        $this->projectId = $projectId;
     }
 
     public function getAuthCode(): ?string
@@ -64,9 +66,9 @@ class DomainOrderPreview
         return $this->domain;
     }
 
-    public function getProjectId(): ?string
+    public function getProjectId(): string
     {
-        return $this->projectId ?? null;
+        return $this->projectId;
     }
 
     public function withAuthCode(string $authCode): self
@@ -119,14 +121,6 @@ class DomainOrderPreview
         return $clone;
     }
 
-    public function withoutProjectId(): self
-    {
-        $clone = clone $this;
-        unset($clone->projectId);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -147,14 +141,10 @@ class DomainOrderPreview
             $authCode = $input->{'authCode'};
         }
         $domain = $input->{'domain'};
-        $projectId = null;
-        if (isset($input->{'projectId'})) {
-            $projectId = $input->{'projectId'};
-        }
+        $projectId = $input->{'projectId'};
 
-        $obj = new self($domain);
+        $obj = new self($domain, $projectId);
         $obj->authCode = $authCode;
-        $obj->projectId = $projectId;
         return $obj;
     }
 
@@ -170,9 +160,7 @@ class DomainOrderPreview
             $output['authCode'] = $this->authCode;
         }
         $output['domain'] = $this->domain;
-        if (isset($this->projectId)) {
-            $output['projectId'] = $this->projectId;
-        }
+        $output['projectId'] = $this->projectId;
 
         return $output;
     }

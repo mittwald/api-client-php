@@ -18,18 +18,7 @@ class ListFeedbackRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
             'subject' => [
                 'type' => 'string',
@@ -40,7 +29,7 @@ class ListFeedbackRequest
         ],
     ];
 
-    private ListFeedbackRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private ?string $subject = null;
 
@@ -48,15 +37,12 @@ class ListFeedbackRequest
 
     ];
 
-    /**
-     * @param ListFeedbackRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(ListFeedbackRequestUserIdAlternative1|string $userId)
+    public function __construct(string $userId)
     {
         $this->userId = $userId;
     }
 
-    public function getUserId(): ListFeedbackRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -66,11 +52,14 @@ class ListFeedbackRequest
         return $this->subject ?? null;
     }
 
-    /**
-     * @param ListFeedbackRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(ListFeedbackRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -114,10 +103,7 @@ class ListFeedbackRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            ListFeedbackRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => ListFeedbackRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
         $subject = null;
         if (isset($input->{'subject'})) {
             $subject = $input->{'subject'};
@@ -136,10 +122,7 @@ class ListFeedbackRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof ListFeedbackRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
         if (isset($this->subject)) {
             $output['subject'] = $this->subject;
         }
@@ -173,9 +156,6 @@ class ListFeedbackRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof ListFeedbackRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
     }
 
     /**

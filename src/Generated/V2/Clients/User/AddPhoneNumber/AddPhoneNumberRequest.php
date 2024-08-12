@@ -18,18 +18,7 @@ class AddPhoneNumberRequest
         'type' => 'object',
         'properties' => [
             'userId' => [
-                'oneOf' => [
-                    [
-                        'enum' => [
-                            'self',
-                        ],
-                        'type' => 'string',
-                    ],
-                    [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                ],
+                'type' => 'string',
             ],
             'body' => [
                 'properties' => [
@@ -50,7 +39,7 @@ class AddPhoneNumberRequest
         ],
     ];
 
-    private AddPhoneNumberRequestUserIdAlternative1|string $userId;
+    private string $userId;
 
     private AddPhoneNumberRequestBody $body;
 
@@ -58,16 +47,13 @@ class AddPhoneNumberRequest
 
     ];
 
-    /**
-     * @param AddPhoneNumberRequestUserIdAlternative1|string $userId
-     */
-    public function __construct(AddPhoneNumberRequestUserIdAlternative1|string $userId, AddPhoneNumberRequestBody $body)
+    public function __construct(string $userId, AddPhoneNumberRequestBody $body)
     {
         $this->userId = $userId;
         $this->body = $body;
     }
 
-    public function getUserId(): AddPhoneNumberRequestUserIdAlternative1|string
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -77,11 +63,14 @@ class AddPhoneNumberRequest
         return $this->body;
     }
 
-    /**
-     * @param AddPhoneNumberRequestUserIdAlternative1|string $userId
-     */
-    public function withUserId(AddPhoneNumberRequestUserIdAlternative1|string $userId): self
+    public function withUserId(string $userId): self
     {
+        $validator = new Validator();
+        $validator->validate($userId, static::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->userId = $userId;
 
@@ -111,10 +100,7 @@ class AddPhoneNumberRequest
             static::validateInput($input);
         }
 
-        $userId = match (true) {
-            AddPhoneNumberRequestUserIdAlternative1::tryFrom($input->{'userId'}) !== null => AddPhoneNumberRequestUserIdAlternative1::from($input->{'userId'}),
-            is_string($input->{'userId'}) => $input->{'userId'},
-        };
+        $userId = $input->{'userId'};
         $body = AddPhoneNumberRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($userId, $body);
@@ -130,10 +116,7 @@ class AddPhoneNumberRequest
     public function toJson(): array
     {
         $output = [];
-        $output['userId'] = match (true) {
-            $this->userId instanceof AddPhoneNumberRequestUserIdAlternative1 => ($this->userId)->value,
-            is_string($this->userId) => $this->userId,
-        };
+        $output['userId'] = $this->userId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -165,9 +148,6 @@ class AddPhoneNumberRequest
 
     public function __clone()
     {
-        $this->userId = match (true) {
-            $this->userId instanceof AddPhoneNumberRequestUserIdAlternative1, is_string($this->userId) => $this->userId,
-        };
         $this->body = clone $this->body;
     }
 
