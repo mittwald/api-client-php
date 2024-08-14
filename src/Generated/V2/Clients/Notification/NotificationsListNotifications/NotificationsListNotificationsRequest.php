@@ -24,6 +24,19 @@ class NotificationsListNotificationsRequest
                 ],
                 'type' => 'string',
             ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 500,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
         ],
         'required' => [
 
@@ -32,20 +45,40 @@ class NotificationsListNotificationsRequest
 
     private ?NotificationsListNotificationsRequestStatus $status = null;
 
+    private int $limit;
+
+    private int $skip;
+
+    private ?int $page = null;
+
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(int $limit, int $skip)
     {
+        $this->limit = $limit;
+        $this->skip = $skip;
     }
 
     public function getStatus(): ?NotificationsListNotificationsRequestStatus
     {
         return $this->status ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withStatus(NotificationsListNotificationsRequestStatus $status): self
@@ -60,6 +93,56 @@ class NotificationsListNotificationsRequest
     {
         $clone = clone $this;
         unset($clone->status);
+
+        return $clone;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, static::$schema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, static::$schema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, static::$schema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
 
         return $clone;
     }
@@ -83,9 +166,22 @@ class NotificationsListNotificationsRequest
         if (isset($input->{'status'})) {
             $status = NotificationsListNotificationsRequestStatus::from($input->{'status'});
         }
+        $limit = 500;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
-        $obj = new self();
+        $obj = new self($limit, $skip);
         $obj->status = $status;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -99,6 +195,11 @@ class NotificationsListNotificationsRequest
         $output = [];
         if (isset($this->status)) {
             $output['status'] = ($this->status)->value;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -162,6 +263,15 @@ class NotificationsListNotificationsRequest
         $query = [];
         if (isset($mapped['status'])) {
             $query['status'] = $mapped['status'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,
