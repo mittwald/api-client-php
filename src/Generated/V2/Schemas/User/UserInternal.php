@@ -51,6 +51,27 @@ class UserInternal
                 ],
                 'type' => 'object',
             ],
+            'mfa' => [
+                'properties' => [
+                    'active' => [
+                        'default' => false,
+                        'type' => 'boolean',
+                    ],
+                    'setup' => [
+                        'default' => false,
+                        'type' => 'boolean',
+                    ],
+                ],
+                'required' => [
+                    'active',
+                    'setup',
+                ],
+                'type' => 'object',
+            ],
+            'passwordUpdatedAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'person' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.commons.Person',
             ],
@@ -88,6 +109,10 @@ class UserInternal
      */
     private ?UserInternalEmployeeInformation $employeeInformation = null;
 
+    private ?UserInternalMfa $mfa = null;
+
+    private ?DateTime $passwordUpdatedAt = null;
+
     private Person $person;
 
     private ?string $phoneNumber = null;
@@ -120,6 +145,16 @@ class UserInternal
     public function getEmployeeInformation(): ?UserInternalEmployeeInformation
     {
         return $this->employeeInformation ?? null;
+    }
+
+    public function getMfa(): ?UserInternalMfa
+    {
+        return $this->mfa ?? null;
+    }
+
+    public function getPasswordUpdatedAt(): ?DateTime
+    {
+        return $this->passwordUpdatedAt ?? null;
     }
 
     public function getPerson(): Person
@@ -224,6 +259,38 @@ class UserInternal
         return $clone;
     }
 
+    public function withMfa(UserInternalMfa $mfa): self
+    {
+        $clone = clone $this;
+        $clone->mfa = $mfa;
+
+        return $clone;
+    }
+
+    public function withoutMfa(): self
+    {
+        $clone = clone $this;
+        unset($clone->mfa);
+
+        return $clone;
+    }
+
+    public function withPasswordUpdatedAt(DateTime $passwordUpdatedAt): self
+    {
+        $clone = clone $this;
+        $clone->passwordUpdatedAt = $passwordUpdatedAt;
+
+        return $clone;
+    }
+
+    public function withoutPasswordUpdatedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->passwordUpdatedAt);
+
+        return $clone;
+    }
+
     public function withPerson(Person $person): self
     {
         $clone = clone $this;
@@ -315,6 +382,14 @@ class UserInternal
         if (isset($input->{'employeeInformation'})) {
             $employeeInformation = UserInternalEmployeeInformation::buildFromInput($input->{'employeeInformation'}, validate: $validate);
         }
+        $mfa = null;
+        if (isset($input->{'mfa'})) {
+            $mfa = UserInternalMfa::buildFromInput($input->{'mfa'}, validate: $validate);
+        }
+        $passwordUpdatedAt = null;
+        if (isset($input->{'passwordUpdatedAt'})) {
+            $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
+        }
         $person = Person::buildFromInput($input->{'person'}, validate: $validate);
         $phoneNumber = null;
         if (isset($input->{'phoneNumber'})) {
@@ -331,6 +406,8 @@ class UserInternal
         $obj->disabled = $disabled;
         $obj->email = $email;
         $obj->employeeInformation = $employeeInformation;
+        $obj->mfa = $mfa;
+        $obj->passwordUpdatedAt = $passwordUpdatedAt;
         $obj->phoneNumber = $phoneNumber;
         $obj->registeredAt = $registeredAt;
         return $obj;
@@ -355,6 +432,12 @@ class UserInternal
         }
         if (isset($this->employeeInformation)) {
             $output['employeeInformation'] = ($this->employeeInformation)->toJson();
+        }
+        if (isset($this->mfa)) {
+            $output['mfa'] = ($this->mfa)->toJson();
+        }
+        if (isset($this->passwordUpdatedAt)) {
+            $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
         }
         $output['person'] = $this->person->toJson();
         if (isset($this->phoneNumber)) {
@@ -396,6 +479,12 @@ class UserInternal
     {
         if (isset($this->employeeInformation)) {
             $this->employeeInformation = clone $this->employeeInformation;
+        }
+        if (isset($this->mfa)) {
+            $this->mfa = clone $this->mfa;
+        }
+        if (isset($this->passwordUpdatedAt)) {
+            $this->passwordUpdatedAt = clone $this->passwordUpdatedAt;
         }
         if (isset($this->registeredAt)) {
             $this->registeredAt = clone $this->registeredAt;

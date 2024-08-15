@@ -85,6 +85,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\Lis
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomers\ListCustomersRequest;
@@ -506,6 +507,7 @@ class CustomerClientImpl implements CustomerClient
             return ListCustomersOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ListCustomersBadRequestResponse::fromResponse($httpResponse),
             429 => ListCustomersTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListCustomersDefaultResponse::fromResponse($httpResponse),
         });

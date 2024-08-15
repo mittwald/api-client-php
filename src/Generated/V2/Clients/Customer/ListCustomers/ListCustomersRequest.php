@@ -20,6 +20,9 @@ class ListCustomersRequest
             'role' => [
                 'type' => 'string',
             ],
+            'search' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'default' => 1000,
@@ -41,6 +44,8 @@ class ListCustomersRequest
 
     private ?string $role = null;
 
+    private ?string $search = null;
+
     private int $limit;
 
     private int $skip;
@@ -60,6 +65,11 @@ class ListCustomersRequest
     public function getRole(): ?string
     {
         return $this->role ?? null;
+    }
+
+    public function getSearch(): ?string
+    {
+        return $this->search ?? null;
     }
 
     public function getLimit(): int
@@ -95,6 +105,28 @@ class ListCustomersRequest
     {
         $clone = clone $this;
         unset($clone->role);
+
+        return $clone;
+    }
+
+    public function withSearch(string $search): self
+    {
+        $validator = new Validator();
+        $validator->validate($search, static::$schema['properties']['search']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->search = $search;
+
+        return $clone;
+    }
+
+    public function withoutSearch(): self
+    {
+        $clone = clone $this;
+        unset($clone->search);
 
         return $clone;
     }
@@ -168,6 +200,10 @@ class ListCustomersRequest
         if (isset($input->{'role'})) {
             $role = $input->{'role'};
         }
+        $search = null;
+        if (isset($input->{'search'})) {
+            $search = $input->{'search'};
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -183,6 +219,7 @@ class ListCustomersRequest
 
         $obj = new self($limit, $skip);
         $obj->role = $role;
+        $obj->search = $search;
         $obj->page = $page;
         return $obj;
     }
@@ -197,6 +234,9 @@ class ListCustomersRequest
         $output = [];
         if (isset($this->role)) {
             $output['role'] = $this->role;
+        }
+        if (isset($this->search)) {
+            $output['search'] = $this->search;
         }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
@@ -265,6 +305,9 @@ class ListCustomersRequest
         $query = [];
         if (isset($mapped['role'])) {
             $query['role'] = $mapped['role'];
+        }
+        if (isset($mapped['search'])) {
+            $query['search'] = $mapped['search'];
         }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
