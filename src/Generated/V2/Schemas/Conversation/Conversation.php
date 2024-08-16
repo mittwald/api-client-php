@@ -39,6 +39,21 @@ class Conversation
             'createdBy' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
             ],
+            'lastMessage' => [
+                'properties' => [
+                    'createdAt' => [
+                        'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                    'createdBy' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
+                    ],
+                ],
+                'required' => [
+                    'createdAt',
+                ],
+                'type' => 'object',
+            ],
             'lastMessageAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -98,6 +113,8 @@ class Conversation
 
     private ?User $createdBy = null;
 
+    private ?ConversationLastMessage $lastMessage = null;
+
     private ?DateTime $lastMessageAt = null;
 
     private ?User $lastMessageBy = null;
@@ -150,6 +167,11 @@ class Conversation
     public function getCreatedBy(): ?User
     {
         return $this->createdBy ?? null;
+    }
+
+    public function getLastMessage(): ?ConversationLastMessage
+    {
+        return $this->lastMessage ?? null;
     }
 
     public function getLastMessageAt(): ?DateTime
@@ -264,6 +286,22 @@ class Conversation
     {
         $clone = clone $this;
         unset($clone->createdBy);
+
+        return $clone;
+    }
+
+    public function withLastMessage(ConversationLastMessage $lastMessage): self
+    {
+        $clone = clone $this;
+        $clone->lastMessage = $lastMessage;
+
+        return $clone;
+    }
+
+    public function withoutLastMessage(): self
+    {
+        $clone = clone $this;
+        unset($clone->lastMessage);
 
         return $clone;
     }
@@ -428,6 +466,10 @@ class Conversation
         if (isset($input->{'createdBy'})) {
             $createdBy = User::buildFromInput($input->{'createdBy'}, validate: $validate);
         }
+        $lastMessage = null;
+        if (isset($input->{'lastMessage'})) {
+            $lastMessage = ConversationLastMessage::buildFromInput($input->{'lastMessage'}, validate: $validate);
+        }
         $lastMessageAt = null;
         if (isset($input->{'lastMessageAt'})) {
             $lastMessageAt = new DateTime($input->{'lastMessageAt'});
@@ -457,6 +499,7 @@ class Conversation
         $obj = new self($conversationId, $createdAt, $mainUser, $shortId, $status, $title, $visibility);
         $obj->category = $category;
         $obj->createdBy = $createdBy;
+        $obj->lastMessage = $lastMessage;
         $obj->lastMessageAt = $lastMessageAt;
         $obj->lastMessageBy = $lastMessageBy;
         $obj->relatedTo = $relatedTo;
@@ -480,6 +523,9 @@ class Conversation
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->createdBy)) {
             $output['createdBy'] = $this->createdBy->toJson();
+        }
+        if (isset($this->lastMessage)) {
+            $output['lastMessage'] = ($this->lastMessage)->toJson();
         }
         if (isset($this->lastMessageAt)) {
             $output['lastMessageAt'] = ($this->lastMessageAt)->format(DateTime::ATOM);
@@ -532,6 +578,9 @@ class Conversation
     public function __clone()
     {
         $this->createdAt = clone $this->createdAt;
+        if (isset($this->lastMessage)) {
+            $this->lastMessage = clone $this->lastMessage;
+        }
         if (isset($this->lastMessageAt)) {
             $this->lastMessageAt = clone $this->lastMessageAt;
         }

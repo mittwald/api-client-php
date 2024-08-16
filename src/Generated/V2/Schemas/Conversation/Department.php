@@ -8,14 +8,8 @@ enum Department: string
 {
     case development = 'development';
     case mail = 'mail';
-    case infra = 'infra';
-    case marketing = 'marketing';
-    case network = 'network';
-    case dataCenter = 'dataCenter';
     case accounting = 'accounting';
-    case customerService = 'customerService';
     case cloudHosting = 'cloudHosting';
-    case software = 'software';
+    case customerService = 'customerService';
     case generic = 'generic';
-    case security = 'security';
 }

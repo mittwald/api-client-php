@@ -31,6 +31,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\Nexus\NexusClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Nexus\NexusClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
@@ -43,6 +47,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\Task\TaskClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Task\TaskClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClientImpl;
 
@@ -153,5 +159,20 @@ class ClientImpl extends BaseClient implements Client
     public function marketplace(): MarketplaceClient
     {
         return new MarketplaceClientImpl($this->client);
+    }
+
+    public function task(): TaskClient
+    {
+        return new TaskClientImpl($this->client);
+    }
+
+    public function nexus(): NexusClient
+    {
+        return new NexusClientImpl($this->client);
+    }
+
+    public function misc(): MiscClient
+    {
+        return new MiscClientImpl($this->client);
     }
 }

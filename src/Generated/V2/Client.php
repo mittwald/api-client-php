@@ -17,12 +17,15 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DomainClient;
 use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Nexus\NexusClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Task\TaskClient;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
 
 /**
@@ -54,4 +57,7 @@ interface Client
     public function pageInsights(): PageInsightsClient;
     public function relocation(): RelocationClient;
     public function marketplace(): MarketplaceClient;
+    public function task(): TaskClient;
+    public function nexus(): NexusClient;
+    public function misc(): MiscClient;
 }
