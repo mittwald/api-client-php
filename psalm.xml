@@ -14,4 +14,19 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+    <issueHandlers>
+        <!--
+        @deprecated annotations will be emitted for API properties that are
+        marked as such in the OpenAPI spec.
+
+        However, the generated code will still _use_ these properties (in
+        methods that will also be marked as deprecated), so we need to disable
+        the deprecation warnings for the generated code.
+        -->
+        <DeprecatedProperty>
+            <errorLevel type="suppress">
+                <directory name="src/Generated" />
+            </errorLevel>
+        </DeprecatedProperty>
+    </issueHandlers>
 </psalm>
