@@ -27,7 +27,6 @@ class IngressUpdateIngressTlsRequest
                         'additionalProperties' => false,
                         'properties' => [
                             'acme' => [
-                                'description' => 'Has to be `true`, as ssl cannot be deactivated.',
                                 'type' => 'boolean',
                             ],
                             'isCreated' => [

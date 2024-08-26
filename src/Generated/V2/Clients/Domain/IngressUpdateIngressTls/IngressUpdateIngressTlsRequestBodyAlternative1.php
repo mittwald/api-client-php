@@ -17,7 +17,6 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
         'additionalProperties' => false,
         'properties' => [
             'acme' => [
-                'description' => 'Has to be `true`, as ssl cannot be deactivated.',
                 'type' => 'boolean',
             ],
             'isCreated' => [
@@ -38,9 +37,6 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
         'type' => 'object',
     ];
 
-    /**
-     * Has to be `true`, as ssl cannot be deactivated.
-     */
     private bool $acme;
 
     /**
