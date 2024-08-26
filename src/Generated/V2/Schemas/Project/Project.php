@@ -31,6 +31,12 @@ class Project
                 'type' => 'string',
             ],
             'clusterID' => [
+                'deprecated' => true,
+                'description' => 'deprecated by property clusterId',
+                'example' => 'espelkamp',
+                'type' => 'string',
+            ],
+            'clusterId' => [
                 'example' => 'espelkamp',
                 'type' => 'string',
             ],
@@ -75,7 +81,7 @@ class Project
             ],
             'isReady' => [
                 'deprecated' => true,
-                'description' => 'deprecated',
+                'description' => 'deprecated by property status',
                 'type' => 'boolean',
             ],
             'projectHostingId' => [
@@ -147,7 +153,14 @@ class Project
 
     private ?string $clusterDomain = null;
 
+    /**
+     * deprecated by property clusterId
+     *
+     * @deprecated
+     */
     private ?string $clusterID = null;
+
+    private ?string $clusterId = null;
 
     private DateTime $createdAt;
 
@@ -171,7 +184,9 @@ class Project
     private ?string $imageRefId = null;
 
     /**
-     * deprecated
+     * deprecated by property status
+     *
+     * @deprecated
      */
     private bool $isReady;
 
@@ -222,9 +237,9 @@ class Project
         return $this->clusterDomain ?? null;
     }
 
-    public function getClusterID(): ?string
+    public function getClusterId(): ?string
     {
-        return $this->clusterID ?? null;
+        return $this->clusterId ?? null;
     }
 
     public function getCreatedAt(): DateTime
@@ -275,6 +290,9 @@ class Project
         return $this->imageRefId ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getIsReady(): bool
     {
         return $this->isReady;
@@ -365,24 +383,24 @@ class Project
         return $clone;
     }
 
-    public function withClusterID(string $clusterID): self
+    public function withClusterId(string $clusterId): self
     {
         $validator = new Validator();
-        $validator->validate($clusterID, static::$schema['properties']['clusterID']);
+        $validator->validate($clusterId, static::$schema['properties']['clusterId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->clusterID = $clusterID;
+        $clone->clusterId = $clusterId;
 
         return $clone;
     }
 
-    public function withoutClusterID(): self
+    public function withoutClusterId(): self
     {
         $clone = clone $this;
-        unset($clone->clusterID);
+        unset($clone->clusterId);
 
         return $clone;
     }
@@ -522,6 +540,9 @@ class Project
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
@@ -726,6 +747,10 @@ class Project
         if (isset($input->{'clusterID'})) {
             $clusterID = $input->{'clusterID'};
         }
+        $clusterId = null;
+        if (isset($input->{'clusterId'})) {
+            $clusterId = $input->{'clusterId'};
+        }
         $createdAt = new DateTime($input->{'createdAt'});
         $customerId = $input->{'customerId'};
         $description = $input->{'description'};
@@ -778,6 +803,7 @@ class Project
         $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
+        $obj->clusterId = $clusterId;
         $obj->disableReason = $disableReason;
         $obj->disabledAt = $disabledAt;
         $obj->imageRefId = $imageRefId;
@@ -802,6 +828,9 @@ class Project
         }
         if (isset($this->clusterID)) {
             $output['clusterID'] = $this->clusterID;
+        }
+        if (isset($this->clusterId)) {
+            $output['clusterId'] = $this->clusterId;
         }
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;

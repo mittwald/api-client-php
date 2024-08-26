@@ -45,11 +45,15 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
 
     /**
      * Was added by mistake. Never did anything.
+     *
+     * @deprecated
      */
     private ?bool $isCreated = null;
 
     /**
      * Was added by mistake. Never did anything.
+     *
+     * @deprecated
      */
     private ?DateTime $requestDeadline = null;
 
@@ -63,11 +67,17 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
         return $this->acme;
     }
 
+    /**
+     * @deprecated
+     */
     public function getIsCreated(): ?bool
     {
         return $this->isCreated ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getRequestDeadline(): ?DateTime
     {
         return $this->requestDeadline ?? null;
@@ -87,6 +97,9 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withIsCreated(bool $isCreated): self
     {
         $validator = new Validator();
@@ -109,6 +122,9 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withRequestDeadline(DateTime $requestDeadline): self
     {
         $clone = clone $this;

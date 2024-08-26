@@ -138,6 +138,8 @@ class Extension
 
     /**
      * deprecated
+     *
+     * @deprecated
      */
     private ExtensionState $state;
 
@@ -236,6 +238,9 @@ class Extension
         return $this->scopes;
     }
 
+    /**
+     * @deprecated
+     */
     public function getState(): ExtensionState
     {
         return $this->state;
@@ -423,6 +428,9 @@ class Extension
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withState(ExtensionState $state): self
     {
         $clone = clone $this;

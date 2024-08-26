@@ -75,6 +75,8 @@ class FileMeta
 
     /**
      * deprecated, see mimeType
+     *
+     * @deprecated
      */
     private string $type;
 
@@ -113,6 +115,9 @@ class FileMeta
         return $this->sizeInBytes;
     }
 
+    /**
+     * @deprecated
+     */
     public function getType(): string
     {
         return $this->type;
@@ -188,6 +193,9 @@ class FileMeta
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withType(string $type): self
     {
         $validator = new Validator();

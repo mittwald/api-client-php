@@ -34,12 +34,16 @@ class InvoiceListCustomerInvoicesRequest
             ],
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
                 'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -54,9 +58,9 @@ class InvoiceListCustomerInvoicesRequest
      */
     private ?array $invoiceTypes = null;
 
-    private ?int $limit = null;
+    private int $limit;
 
-    private ?int $skip = null;
+    private int $skip;
 
     private ?int $page = null;
 
@@ -64,9 +68,11 @@ class InvoiceListCustomerInvoicesRequest
 
     ];
 
-    public function __construct(string $customerId)
+    public function __construct(string $customerId, int $limit, int $skip)
     {
         $this->customerId = $customerId;
+        $this->limit = $limit;
+        $this->skip = $skip;
     }
 
     public function getCustomerId(): string
@@ -82,14 +88,14 @@ class InvoiceListCustomerInvoicesRequest
         return $this->invoiceTypes ?? null;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
     }
 
     public function getPage(): ?int
@@ -150,14 +156,6 @@ class InvoiceListCustomerInvoicesRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -168,14 +166,6 @@ class InvoiceListCustomerInvoicesRequest
 
         $clone = clone $this;
         $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -222,11 +212,11 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($input->{'invoiceTypes'})) {
             $invoiceTypes = $input->{'invoiceTypes'};
         }
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
@@ -235,10 +225,8 @@ class InvoiceListCustomerInvoicesRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($customerId);
+        $obj = new self($customerId, $limit, $skip);
         $obj->invoiceTypes = $invoiceTypes;
-        $obj->limit = $limit;
-        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }
@@ -255,12 +243,8 @@ class InvoiceListCustomerInvoicesRequest
         if (isset($this->invoiceTypes)) {
             $output['invoiceTypes'] = $this->invoiceTypes;
         }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }

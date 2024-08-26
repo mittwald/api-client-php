@@ -104,8 +104,14 @@ class CronjobExecution
 
     private ?DateTime $end = null;
 
+    /**
+     * @deprecated
+     */
     private ?DateTime $executionEnd = null;
 
+    /**
+     * @deprecated
+     */
     private ?DateTime $executionStart = null;
 
     private string $id;
@@ -142,11 +148,17 @@ class CronjobExecution
         return $this->end ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getExecutionEnd(): ?DateTime
     {
         return $this->executionEnd ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getExecutionStart(): ?DateTime
     {
         return $this->executionStart ?? null;
@@ -236,6 +248,9 @@ class CronjobExecution
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withExecutionEnd(DateTime $executionEnd): self
     {
         $clone = clone $this;
@@ -252,6 +267,9 @@ class CronjobExecution
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withExecutionStart(DateTime $executionStart): self
     {
         $clone = clone $this;

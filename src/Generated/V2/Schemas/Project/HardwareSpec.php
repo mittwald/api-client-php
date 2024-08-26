@@ -53,6 +53,8 @@ class HardwareSpec
 
     /**
      * deprecated by memory
+     *
+     * @deprecated
      */
     private ?string $mem = null;
 
@@ -70,6 +72,9 @@ class HardwareSpec
         return $this->cpu ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getMem(): ?string
     {
         return $this->mem ?? null;
@@ -107,6 +112,9 @@ class HardwareSpec
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withMem(string $mem): self
     {
         $validator = new Validator();

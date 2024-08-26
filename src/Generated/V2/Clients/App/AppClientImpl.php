@@ -89,6 +89,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppins
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationDefaultResponse;
@@ -522,6 +527,30 @@ class AppClientImpl implements AppClient
             404 => PatchAppinstallationNotFoundResponse::fromResponse($httpResponse),
             429 => PatchAppinstallationTooManyRequestsResponse::fromResponse($httpResponse),
             default => PatchAppinstallationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Replace a MySQL Database with another MySQL Database.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-replace-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ReplaceDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse The database has been linked.
+     */
+    public function replaceDatabase(ReplaceDatabaseRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ReplaceDatabaseRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ReplaceDatabaseBadRequestResponse::fromResponse($httpResponse),
+            404 => ReplaceDatabaseNotFoundResponse::fromResponse($httpResponse),
+            429 => ReplaceDatabaseTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ReplaceDatabaseDefaultResponse::fromResponse($httpResponse),
         });
     }
 

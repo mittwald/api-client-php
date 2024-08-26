@@ -45,6 +45,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDeta
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainNotFoundResponse;
@@ -298,6 +304,30 @@ class ContractClientImpl implements ContractClient
             404 => GetDetailOfContractNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Return the Contract for the given Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByCertificateRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByCertificateOKResponse Returns an active Contract for the given Certificate.
+     */
+    public function getDetailOfContractByCertificate(GetDetailOfContractByCertificateRequest $request): GetDetailOfContractByCertificateOKResponse
+    {
+        $httpRequest = new Request(GetDetailOfContractByCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDetailOfContractByCertificateOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDetailOfContractByCertificateBadRequestResponse::fromResponse($httpResponse),
+            404 => GetDetailOfContractByCertificateNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetDetailOfContractByCertificateDefaultResponse::fromResponse($httpResponse),
         });
     }
 

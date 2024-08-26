@@ -118,6 +118,8 @@ class FileUploadRules
 
     /**
      * deprecated, see maxSizeInBytes
+     *
+     * @deprecated
      */
     private int $maxSizeInKB;
 
@@ -163,6 +165,9 @@ class FileUploadRules
         return $this->maxSizeInBytes;
     }
 
+    /**
+     * @deprecated
+     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -223,6 +228,9 @@ class FileUploadRules
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();

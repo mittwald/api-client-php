@@ -39,6 +39,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\App\ListSystemsoftwareversions\ListS
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\ListUpdateCandidatesForAppversion\ListUpdateCandidatesForAppversionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\PatchAppinstallation\PatchAppinstallationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\App\ReplaceDatabase\ReplaceDatabaseRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallation\RequestAppinstallationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\App\RequestAppinstallationCopy\RequestAppinstallationCopyCreatedResponse;
@@ -234,6 +235,16 @@ interface AppClient
      * @return EmptyResponse The AppInstallation has been patched.
      */
     public function patchAppinstallation(PatchAppinstallationRequest $request): EmptyResponse;
+    /**
+     * Replace a MySQL Database with another MySQL Database.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/app-replace-database
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ReplaceDatabaseRequest $request An object representing the request for this operation
+     * @return EmptyResponse The database has been linked.
+     */
+    public function replaceDatabase(ReplaceDatabaseRequest $request): EmptyResponse;
     /**
      * Request an AppInstallation.
      *

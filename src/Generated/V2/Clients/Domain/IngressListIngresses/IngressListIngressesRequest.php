@@ -21,6 +21,23 @@ class IngressListIngressesRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'certificateId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 10000,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
         ],
         'required' => [
 
@@ -29,20 +46,47 @@ class IngressListIngressesRequest
 
     private ?string $projectId = null;
 
+    private ?string $certificateId = null;
+
+    private int $limit;
+
+    private int $skip;
+
+    private ?int $page = null;
+
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(int $limit, int $skip)
     {
+        $this->limit = $limit;
+        $this->skip = $skip;
     }
 
     public function getProjectId(): ?string
     {
         return $this->projectId ?? null;
+    }
+
+    public function getCertificateId(): ?string
+    {
+        return $this->certificateId ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -67,6 +111,78 @@ class IngressListIngressesRequest
         return $clone;
     }
 
+    public function withCertificateId(string $certificateId): self
+    {
+        $validator = new Validator();
+        $validator->validate($certificateId, static::$schema['properties']['certificateId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->certificateId = $certificateId;
+
+        return $clone;
+    }
+
+    public function withoutCertificateId(): self
+    {
+        $clone = clone $this;
+        unset($clone->certificateId);
+
+        return $clone;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, static::$schema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, static::$schema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, static::$schema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -86,9 +202,27 @@ class IngressListIngressesRequest
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
         }
+        $certificateId = null;
+        if (isset($input->{'certificateId'})) {
+            $certificateId = $input->{'certificateId'};
+        }
+        $limit = 10000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
-        $obj = new self();
+        $obj = new self($limit, $skip);
         $obj->projectId = $projectId;
+        $obj->certificateId = $certificateId;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -102,6 +236,14 @@ class IngressListIngressesRequest
         $output = [];
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
+        }
+        if (isset($this->certificateId)) {
+            $output['certificateId'] = $this->certificateId;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -165,6 +307,18 @@ class IngressListIngressesRequest
         $query = [];
         if (isset($mapped['projectId'])) {
             $query['projectId'] = $mapped['projectId'];
+        }
+        if (isset($mapped['certificateId'])) {
+            $query['certificateId'] = $mapped['certificateId'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

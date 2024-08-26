@@ -172,6 +172,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressL
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
@@ -196,8 +202,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\Ing
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsBadRequestResponse;
@@ -223,6 +231,50 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomai
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificateRequest\SslDeleteCertificateRequestDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificateRequest\SslDeleteCertificateRequestNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificateRequest\SslDeleteCertificateRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificateRequest\SslDeleteCertificateRequestTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestOKResponse;
@@ -1315,6 +1367,32 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * List Ingresses compatible with a certificate.
+     *
+     * List Ingresses in a Project compatible with a certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-compatible-with-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressListIngressesCompatibleWithCertificateRequest $request An object representing the request for this operation
+     * @return IngressListIngressesCompatibleWithCertificateOKResponse OK
+     */
+    public function ingressListIngressesCompatibleWithCertificate(IngressListIngressesCompatibleWithCertificateRequest $request): IngressListIngressesCompatibleWithCertificateOKResponse
+    {
+        $httpRequest = new Request(IngressListIngressesCompatibleWithCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return IngressListIngressesCompatibleWithCertificateOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => IngressListIngressesCompatibleWithCertificateBadRequestResponse::fromResponse($httpResponse),
+            404 => IngressListIngressesCompatibleWithCertificateNotFoundResponse::fromResponse($httpResponse),
+            429 => IngressListIngressesCompatibleWithCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => IngressListIngressesCompatibleWithCertificateDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List Ingresses belonging to a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
@@ -1450,9 +1528,222 @@ class DomainClientImpl implements DomainClient
             return IngressUpdateIngressTlsOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => IngressUpdateIngressTlsForbiddenResponse::fromResponse($httpResponse),
             404 => IngressUpdateIngressTlsNotFoundResponse::fromResponse($httpResponse),
+            412 => IngressUpdateIngressTlsPreconditionFailedResponse::fromResponse($httpResponse),
             429 => IngressUpdateIngressTlsTooManyRequestsResponse::fromResponse($httpResponse),
             default => IngressUpdateIngressTlsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check the replacement of a Certificate.
+     *
+     * Checks the replacement of a Certificate and shows differences between the current and the new Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-check-replace-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslCheckReplaceCertificateRequest $request An object representing the request for this operation
+     * @return SslCheckReplaceCertificateOKResponse OK
+     */
+    public function sslCheckReplaceCertificate(SslCheckReplaceCertificateRequest $request): SslCheckReplaceCertificateOKResponse
+    {
+        $httpRequest = new Request(SslCheckReplaceCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SslCheckReplaceCertificateOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslCheckReplaceCertificateNotFoundResponse::fromResponse($httpResponse),
+            429 => SslCheckReplaceCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslCheckReplaceCertificateDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-create-certificate-request
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslCreateCertificateRequestRequest $request An object representing the request for this operation
+     * @return SslCreateCertificateRequestCreatedResponse Created
+     */
+    public function sslCreateCertificateRequest(SslCreateCertificateRequestRequest $request): SslCreateCertificateRequestCreatedResponse
+    {
+        $httpRequest = new Request(SslCreateCertificateRequestRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return SslCreateCertificateRequestCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SslCreateCertificateRequestBadRequestResponse::fromResponse($httpResponse),
+            404 => SslCreateCertificateRequestNotFoundResponse::fromResponse($httpResponse),
+            429 => SslCreateCertificateRequestTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslCreateCertificateRequestDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Delete a Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-delete-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslDeleteCertificateRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function sslDeleteCertificate(SslDeleteCertificateRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SslDeleteCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslDeleteCertificateNotFoundResponse::fromResponse($httpResponse),
+            429 => SslDeleteCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslDeleteCertificateDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Delete a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-delete-certificate-request
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslDeleteCertificateRequestRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function sslDeleteCertificateRequest(SslDeleteCertificateRequestRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SslDeleteCertificateRequestRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslDeleteCertificateRequestNotFoundResponse::fromResponse($httpResponse),
+            429 => SslDeleteCertificateRequestTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslDeleteCertificateRequestDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-get-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslGetCertificateRequest $request An object representing the request for this operation
+     * @return SslGetCertificateOKResponse OK
+     */
+    public function sslGetCertificate(SslGetCertificateRequest $request): SslGetCertificateOKResponse
+    {
+        $httpRequest = new Request(SslGetCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SslGetCertificateOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslGetCertificateNotFoundResponse::fromResponse($httpResponse),
+            429 => SslGetCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslGetCertificateDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-get-certificate-request
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslGetCertificateRequestRequest $request An object representing the request for this operation
+     * @return SslGetCertificateRequestOKResponse OK
+     */
+    public function sslGetCertificateRequest(SslGetCertificateRequestRequest $request): SslGetCertificateRequestOKResponse
+    {
+        $httpRequest = new Request(SslGetCertificateRequestRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SslGetCertificateRequestOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslGetCertificateRequestNotFoundResponse::fromResponse($httpResponse),
+            429 => SslGetCertificateRequestTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslGetCertificateRequestDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List CertificateRequests belonging to a Project or an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-list-certificate-requests
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslListCertificateRequestsRequest $request An object representing the request for this operation
+     * @return SslListCertificateRequestsOKResponse OK
+     */
+    public function sslListCertificateRequests(SslListCertificateRequestsRequest $request): SslListCertificateRequestsOKResponse
+    {
+        $httpRequest = new Request(SslListCertificateRequestsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SslListCertificateRequestsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslListCertificateRequestsNotFoundResponse::fromResponse($httpResponse),
+            429 => SslListCertificateRequestsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslListCertificateRequestsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Certificates belonging to a Project or an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-list-certificates
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslListCertificatesRequest $request An object representing the request for this operation
+     * @return SslListCertificatesOKResponse OK
+     */
+    public function sslListCertificates(SslListCertificatesRequest $request): SslListCertificatesOKResponse
+    {
+        $httpRequest = new Request(SslListCertificatesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return SslListCertificatesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => SslListCertificatesNotFoundResponse::fromResponse($httpResponse),
+            429 => SslListCertificatesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslListCertificatesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-replace-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslReplaceCertificateRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function sslReplaceCertificate(SslReplaceCertificateRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SslReplaceCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SslReplaceCertificateBadRequestResponse::fromResponse($httpResponse),
+            404 => SslReplaceCertificateNotFoundResponse::fromResponse($httpResponse),
+            429 => SslReplaceCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslReplaceCertificateDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

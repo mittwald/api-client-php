@@ -19,6 +19,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBa
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetBaseItemOfContract\GetBaseItemOfContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContract\GetDetailOfContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByCertificate\GetDetailOfContractByCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectOKResponse;
@@ -124,6 +126,16 @@ interface ContractClient
      * @param GetDetailOfContractRequest $request An object representing the request for this operation
      */
     public function getDetailOfContract(GetDetailOfContractRequest $request): GetDetailOfContractOKResponse;
+    /**
+     * Return the Contract for the given Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByCertificateRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByCertificateOKResponse Returns an active Contract for the given Certificate.
+     */
+    public function getDetailOfContractByCertificate(GetDetailOfContractByCertificateRequest $request): GetDetailOfContractByCertificateOKResponse;
     /**
      * Return the Contract for the given Domain.
      *

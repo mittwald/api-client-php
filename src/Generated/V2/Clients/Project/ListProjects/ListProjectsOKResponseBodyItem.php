@@ -126,6 +126,8 @@ class ListProjectsOKResponseBodyItem
 
     /**
      * deprecated
+     *
+     * @deprecated
      */
     private bool $isReady;
 
@@ -207,6 +209,9 @@ class ListProjectsOKResponseBodyItem
         return $this->imageRefId ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getIsReady(): bool
     {
         return $this->isReady;
@@ -382,6 +387,9 @@ class ListProjectsOKResponseBodyItem
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();

@@ -61,6 +61,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressIngressVerifyOwnership\IngressIngressVerifyOwnershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedRequest;
@@ -79,6 +81,21 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTld
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest\SslCreateCertificateRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificate\SslDeleteCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslDeleteCertificateRequest\SslDeleteCertificateRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificate\SslGetCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslGetCertificateRequest\SslGetCertificateRequestRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\SslListCertificateRequestsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeOKResponse;
@@ -571,6 +588,18 @@ interface DomainClient
      */
     public function ingressListIngresses(IngressListIngressesRequest $request): IngressListIngressesOKResponse;
     /**
+     * List Ingresses compatible with a certificate.
+     *
+     * List Ingresses in a Project compatible with a certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-compatible-with-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param IngressListIngressesCompatibleWithCertificateRequest $request An object representing the request for this operation
+     * @return IngressListIngressesCompatibleWithCertificateOKResponse OK
+     */
+    public function ingressListIngressesCompatibleWithCertificate(IngressListIngressesCompatibleWithCertificateRequest $request): IngressListIngressesCompatibleWithCertificateOKResponse;
+    /**
      * List Ingresses belonging to a project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
@@ -633,4 +662,96 @@ interface DomainClient
      * @return IngressUpdateIngressTlsOKResponse OK
      */
     public function ingressUpdateIngressTls(IngressUpdateIngressTlsRequest $request): IngressUpdateIngressTlsOKResponse;
+    /**
+     * Check the replacement of a Certificate.
+     *
+     * Checks the replacement of a Certificate and shows differences between the current and the new Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-check-replace-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslCheckReplaceCertificateRequest $request An object representing the request for this operation
+     * @return SslCheckReplaceCertificateOKResponse OK
+     */
+    public function sslCheckReplaceCertificate(SslCheckReplaceCertificateRequest $request): SslCheckReplaceCertificateOKResponse;
+    /**
+     * Create a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-create-certificate-request
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslCreateCertificateRequestRequest $request An object representing the request for this operation
+     * @return SslCreateCertificateRequestCreatedResponse Created
+     */
+    public function sslCreateCertificateRequest(SslCreateCertificateRequestRequest $request): SslCreateCertificateRequestCreatedResponse;
+    /**
+     * Delete a Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-delete-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslDeleteCertificateRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function sslDeleteCertificate(SslDeleteCertificateRequest $request): EmptyResponse;
+    /**
+     * Delete a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-delete-certificate-request
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslDeleteCertificateRequestRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function sslDeleteCertificateRequest(SslDeleteCertificateRequestRequest $request): EmptyResponse;
+    /**
+     * Get a Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-get-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslGetCertificateRequest $request An object representing the request for this operation
+     * @return SslGetCertificateOKResponse OK
+     */
+    public function sslGetCertificate(SslGetCertificateRequest $request): SslGetCertificateOKResponse;
+    /**
+     * Get a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-get-certificate-request
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslGetCertificateRequestRequest $request An object representing the request for this operation
+     * @return SslGetCertificateRequestOKResponse OK
+     */
+    public function sslGetCertificateRequest(SslGetCertificateRequestRequest $request): SslGetCertificateRequestOKResponse;
+    /**
+     * List CertificateRequests belonging to a Project or an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-list-certificate-requests
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslListCertificateRequestsRequest $request An object representing the request for this operation
+     * @return SslListCertificateRequestsOKResponse OK
+     */
+    public function sslListCertificateRequests(SslListCertificateRequestsRequest $request): SslListCertificateRequestsOKResponse;
+    /**
+     * List Certificates belonging to a Project or an Ingress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-list-certificates
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslListCertificatesRequest $request An object representing the request for this operation
+     * @return SslListCertificatesOKResponse OK
+     */
+    public function sslListCertificates(SslListCertificatesRequest $request): SslListCertificatesOKResponse;
+    /**
+     * Update a Certificate.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-replace-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslReplaceCertificateRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function sslReplaceCertificate(SslReplaceCertificateRequest $request): EmptyResponse;
 }

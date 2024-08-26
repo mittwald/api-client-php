@@ -58,6 +58,9 @@ class TopLevel
 
     private string $tld;
 
+    /**
+     * @deprecated
+     */
     private bool $transferAuthCodeRequired;
 
     private TransferAuthentication $transferAuthentication;
@@ -86,6 +89,9 @@ class TopLevel
         return $this->tld;
     }
 
+    /**
+     * @deprecated
+     */
     public function getTransferAuthCodeRequired(): bool
     {
         return $this->transferAuthCodeRequired;
@@ -138,6 +144,9 @@ class TopLevel
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withTransferAuthCodeRequired(bool $transferAuthCodeRequired): self
     {
         $validator = new Validator();

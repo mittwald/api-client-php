@@ -53,7 +53,7 @@ class Server
             ],
             'isReady' => [
                 'deprecated' => true,
-                'description' => 'deprecated',
+                'description' => 'deprecated by property status',
                 'type' => 'boolean',
             ],
             'machineType' => [
@@ -110,7 +110,9 @@ class Server
     private ?string $imageRefId = null;
 
     /**
-     * deprecated
+     * deprecated by property status
+     *
+     * @deprecated
      */
     private bool $isReady;
 
@@ -180,6 +182,9 @@ class Server
         return $this->imageRefId ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getIsReady(): bool
     {
         return $this->isReady;
@@ -321,6 +326,9 @@ class Server
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
