@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Misc;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
+
 /**
  * Client for Misc API
  *
@@ -18,4 +23,14 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Misc;
  */
 interface MiscClient
 {
+    /**
+     * Obtain a service token.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/servicetoken-authenticate-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ServicetokenAuthenticateServiceRequest $request An object representing the request for this operation
+     * @return ServicetokenAuthenticateServiceOKResponse Authentication has been successful.
+     */
+    public function servicetokenAuthenticateService(ServicetokenAuthenticateServiceRequest $request): ServicetokenAuthenticateServiceOKResponse;
 }

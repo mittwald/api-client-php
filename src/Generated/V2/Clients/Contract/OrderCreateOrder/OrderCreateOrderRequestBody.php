@@ -41,6 +41,7 @@ class OrderCreateOrderRequestBody
                     'server',
                     'externalCertificate',
                 ],
+                'example' => 'projectHosting',
                 'type' => 'string',
             ],
         ],

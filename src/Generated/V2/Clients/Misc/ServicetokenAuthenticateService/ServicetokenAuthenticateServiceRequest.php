@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\OrderCreateOrder;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OrderCreateOrderRequest
+class ServicetokenAuthenticateServiceRequest
 {
     public const method = 'post';
 
@@ -17,60 +17,66 @@ class OrderCreateOrderRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
+            'accessKeyId' => [
+                'type' => 'string',
+            ],
             'body' => [
                 'properties' => [
-                    'orderData' => [
-                        'oneOf' => [
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ProjectHostingOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ServerOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainOrder',
-                            ],
-                            [
-                                '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrder',
-                            ],
-                        ],
-                    ],
-                    'orderType' => [
-                        'enum' => [
-                            'domain',
-                            'projectHosting',
-                            'server',
-                            'externalCertificate',
-                        ],
-                        'example' => 'projectHosting',
+                    'secretAccessKey' => [
                         'type' => 'string',
                     ],
+                ],
+                'required' => [
+                    'secretAccessKey',
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
+            'accessKeyId',
             'body',
         ],
     ];
 
-    private OrderCreateOrderRequestBody $body;
+    private string $accessKeyId;
+
+    private ServicetokenAuthenticateServiceRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OrderCreateOrderRequestBody $body)
+    public function __construct(string $accessKeyId, ServicetokenAuthenticateServiceRequestBody $body)
     {
+        $this->accessKeyId = $accessKeyId;
         $this->body = $body;
     }
 
-    public function getBody(): OrderCreateOrderRequestBody
+    public function getAccessKeyId(): string
+    {
+        return $this->accessKeyId;
+    }
+
+    public function getBody(): ServicetokenAuthenticateServiceRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(OrderCreateOrderRequestBody $body): self
+    public function withAccessKeyId(string $accessKeyId): self
+    {
+        $validator = new Validator();
+        $validator->validate($accessKeyId, static::$schema['properties']['accessKeyId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->accessKeyId = $accessKeyId;
+
+        return $clone;
+    }
+
+    public function withBody(ServicetokenAuthenticateServiceRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -83,19 +89,20 @@ class OrderCreateOrderRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OrderCreateOrderRequest Created instance
+     * @return ServicetokenAuthenticateServiceRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OrderCreateOrderRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ServicetokenAuthenticateServiceRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = OrderCreateOrderRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $accessKeyId = $input->{'accessKeyId'};
+        $body = ServicetokenAuthenticateServiceRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($accessKeyId, $body);
 
         return $obj;
     }
@@ -108,6 +115,7 @@ class OrderCreateOrderRequest
     public function toJson(): array
     {
         $output = [];
+        $output['accessKeyId'] = $this->accessKeyId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -154,7 +162,8 @@ class OrderCreateOrderRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/orders';
+        $accessKeyId = urlencode($mapped['accessKeyId']);
+        return '/v2/services/' . $accessKeyId . '/actions/authenticate';
     }
 
     /**
