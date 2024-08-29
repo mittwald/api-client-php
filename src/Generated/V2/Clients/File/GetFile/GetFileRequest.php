@@ -22,6 +22,10 @@ class GetFileRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'token' => [
+                'example' => 'jwt',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'fileId',
@@ -29,6 +33,8 @@ class GetFileRequest
     ];
 
     private string $fileId;
+
+    private ?string $token = null;
 
     private array $headers = [
 
@@ -44,6 +50,11 @@ class GetFileRequest
         return $this->fileId;
     }
 
+    public function getToken(): ?string
+    {
+        return $this->token ?? null;
+    }
+
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();
@@ -54,6 +65,28 @@ class GetFileRequest
 
         $clone = clone $this;
         $clone->fileId = $fileId;
+
+        return $clone;
+    }
+
+    public function withToken(string $token): self
+    {
+        $validator = new Validator();
+        $validator->validate($token, static::$schema['properties']['token']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->token = $token;
+
+        return $clone;
+    }
+
+    public function withoutToken(): self
+    {
+        $clone = clone $this;
+        unset($clone->token);
 
         return $clone;
     }
@@ -74,9 +107,13 @@ class GetFileRequest
         }
 
         $fileId = $input->{'fileId'};
+        $token = null;
+        if (isset($input->{'token'})) {
+            $token = $input->{'token'};
+        }
 
         $obj = new self($fileId);
-
+        $obj->token = $token;
         return $obj;
     }
 
@@ -89,6 +126,9 @@ class GetFileRequest
     {
         $output = [];
         $output['fileId'] = $this->fileId;
+        if (isset($this->token)) {
+            $output['token'] = $this->token;
+        }
 
         return $output;
     }
@@ -150,6 +190,9 @@ class GetFileRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['token'])) {
+            $query['token'] = $mapped['token'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

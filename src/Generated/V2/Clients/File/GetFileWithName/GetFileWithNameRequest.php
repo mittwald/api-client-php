@@ -26,6 +26,10 @@ class GetFileWithNameRequest
                 'example' => 'me.jpeg',
                 'type' => 'string',
             ],
+            'token' => [
+                'example' => 'jwt',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'fileId',
@@ -36,6 +40,8 @@ class GetFileWithNameRequest
     private string $fileId;
 
     private string $fileName;
+
+    private ?string $token = null;
 
     private array $headers = [
 
@@ -55,6 +61,11 @@ class GetFileWithNameRequest
     public function getFileName(): string
     {
         return $this->fileName;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token ?? null;
     }
 
     public function withFileId(string $fileId): self
@@ -85,6 +96,28 @@ class GetFileWithNameRequest
         return $clone;
     }
 
+    public function withToken(string $token): self
+    {
+        $validator = new Validator();
+        $validator->validate($token, static::$schema['properties']['token']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->token = $token;
+
+        return $clone;
+    }
+
+    public function withoutToken(): self
+    {
+        $clone = clone $this;
+        unset($clone->token);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -102,9 +135,13 @@ class GetFileWithNameRequest
 
         $fileId = $input->{'fileId'};
         $fileName = $input->{'fileName'};
+        $token = null;
+        if (isset($input->{'token'})) {
+            $token = $input->{'token'};
+        }
 
         $obj = new self($fileId, $fileName);
-
+        $obj->token = $token;
         return $obj;
     }
 
@@ -118,6 +155,9 @@ class GetFileWithNameRequest
         $output = [];
         $output['fileId'] = $this->fileId;
         $output['fileName'] = $this->fileName;
+        if (isset($this->token)) {
+            $output['token'] = $this->token;
+        }
 
         return $output;
     }
@@ -180,6 +220,9 @@ class GetFileWithNameRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['token'])) {
+            $query['token'] = $mapped['token'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
