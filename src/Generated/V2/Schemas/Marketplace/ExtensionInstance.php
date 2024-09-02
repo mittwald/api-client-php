@@ -67,11 +67,21 @@ class ExtensionInstance
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'pendingInstallation' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
+            'pendingRemoval' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'id',
             'extensionId',
             'disabled',
+            'pendingInstallation',
+            'pendingRemoval',
             'consentedScopes',
             'aggregateReference',
         ],
@@ -93,16 +103,22 @@ class ExtensionInstance
 
     private string $id;
 
+    private bool $pendingInstallation;
+
+    private bool $pendingRemoval;
+
     /**
      * @param string[] $consentedScopes
      */
-    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, bool $disabled, string $extensionId, string $id)
+    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, bool $disabled, string $extensionId, string $id, bool $pendingInstallation, bool $pendingRemoval)
     {
         $this->aggregateReference = $aggregateReference;
         $this->consentedScopes = $consentedScopes;
         $this->disabled = $disabled;
         $this->extensionId = $extensionId;
         $this->id = $id;
+        $this->pendingInstallation = $pendingInstallation;
+        $this->pendingRemoval = $pendingRemoval;
     }
 
     public function getAggregateReference(): ExtensionInstanceAggregateReference
@@ -136,6 +152,16 @@ class ExtensionInstance
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getPendingInstallation(): bool
+    {
+        return $this->pendingInstallation;
+    }
+
+    public function getPendingRemoval(): bool
+    {
+        return $this->pendingRemoval;
     }
 
     public function withAggregateReference(ExtensionInstanceAggregateReference $aggregateReference): self
@@ -221,6 +247,34 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withPendingInstallation(bool $pendingInstallation): self
+    {
+        $validator = new Validator();
+        $validator->validate($pendingInstallation, static::$schema['properties']['pendingInstallation']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->pendingInstallation = $pendingInstallation;
+
+        return $clone;
+    }
+
+    public function withPendingRemoval(bool $pendingRemoval): self
+    {
+        $validator = new Validator();
+        $validator->validate($pendingRemoval, static::$schema['properties']['pendingRemoval']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->pendingRemoval = $pendingRemoval;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -248,8 +302,16 @@ class ExtensionInstance
         }
         $extensionId = $input->{'extensionId'};
         $id = $input->{'id'};
+        $pendingInstallation = false;
+        if (isset($input->{'pendingInstallation'})) {
+            $pendingInstallation = (bool)($input->{'pendingInstallation'});
+        }
+        $pendingRemoval = false;
+        if (isset($input->{'pendingRemoval'})) {
+            $pendingRemoval = (bool)($input->{'pendingRemoval'});
+        }
 
-        $obj = new self($aggregateReference, $consentedScopes, $disabled, $extensionId, $id);
+        $obj = new self($aggregateReference, $consentedScopes, $disabled, $extensionId, $id, $pendingInstallation, $pendingRemoval);
         $obj->createdAt = $createdAt;
         return $obj;
     }
@@ -270,6 +332,8 @@ class ExtensionInstance
         $output['disabled'] = $this->disabled;
         $output['extensionId'] = $this->extensionId;
         $output['id'] = $this->id;
+        $output['pendingInstallation'] = $this->pendingInstallation;
+        $output['pendingRemoval'] = $this->pendingRemoval;
 
         return $output;
     }
