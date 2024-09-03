@@ -47,6 +47,10 @@ class User
                 ],
                 'type' => 'object',
             ],
+            'isEmployee' => [
+                'description' => 'Truth value, whether the user is a mittwald employee',
+                'type' => 'boolean',
+            ],
             'mfa' => [
                 'properties' => [
                     'active' => [
@@ -100,6 +104,11 @@ class User
      */
     private ?UserEmployeeInformation $employeeInformation = null;
 
+    /**
+     * Truth value, whether the user is a mittwald employee
+     */
+    private ?bool $isEmployee = null;
+
     private ?UserMfa $mfa = null;
 
     private ?DateTime $passwordUpdatedAt = null;
@@ -131,6 +140,11 @@ class User
     public function getEmployeeInformation(): ?UserEmployeeInformation
     {
         return $this->employeeInformation ?? null;
+    }
+
+    public function getIsEmployee(): ?bool
+    {
+        return $this->isEmployee ?? null;
     }
 
     public function getMfa(): ?UserMfa
@@ -219,6 +233,28 @@ class User
     {
         $clone = clone $this;
         unset($clone->employeeInformation);
+
+        return $clone;
+    }
+
+    public function withIsEmployee(bool $isEmployee): self
+    {
+        $validator = new Validator();
+        $validator->validate($isEmployee, static::$schema['properties']['isEmployee']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isEmployee = $isEmployee;
+
+        return $clone;
+    }
+
+    public function withoutIsEmployee(): self
+    {
+        $clone = clone $this;
+        unset($clone->isEmployee);
 
         return $clone;
     }
@@ -342,6 +378,10 @@ class User
         if (isset($input->{'employeeInformation'})) {
             $employeeInformation = UserEmployeeInformation::buildFromInput($input->{'employeeInformation'}, validate: $validate);
         }
+        $isEmployee = null;
+        if (isset($input->{'isEmployee'})) {
+            $isEmployee = (bool)($input->{'isEmployee'});
+        }
         $mfa = null;
         if (isset($input->{'mfa'})) {
             $mfa = UserMfa::buildFromInput($input->{'mfa'}, validate: $validate);
@@ -365,6 +405,7 @@ class User
         $obj->avatarRef = $avatarRef;
         $obj->email = $email;
         $obj->employeeInformation = $employeeInformation;
+        $obj->isEmployee = $isEmployee;
         $obj->mfa = $mfa;
         $obj->passwordUpdatedAt = $passwordUpdatedAt;
         $obj->phoneNumber = $phoneNumber;
@@ -388,6 +429,9 @@ class User
         }
         if (isset($this->employeeInformation)) {
             $output['employeeInformation'] = ($this->employeeInformation)->toJson();
+        }
+        if (isset($this->isEmployee)) {
+            $output['isEmployee'] = $this->isEmployee;
         }
         if (isset($this->mfa)) {
             $output['mfa'] = ($this->mfa)->toJson();
