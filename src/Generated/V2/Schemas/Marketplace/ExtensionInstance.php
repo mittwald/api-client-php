@@ -97,28 +97,25 @@ class ExtensionInstance
 
     private ?DateTime $createdAt = null;
 
-    private bool $disabled;
+    private bool $disabled = false;
 
     private string $extensionId;
 
     private string $id;
 
-    private bool $pendingInstallation;
+    private bool $pendingInstallation = false;
 
-    private bool $pendingRemoval;
+    private bool $pendingRemoval = false;
 
     /**
      * @param string[] $consentedScopes
      */
-    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, bool $disabled, string $extensionId, string $id, bool $pendingInstallation, bool $pendingRemoval)
+    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, string $extensionId, string $id)
     {
         $this->aggregateReference = $aggregateReference;
         $this->consentedScopes = $consentedScopes;
-        $this->disabled = $disabled;
         $this->extensionId = $extensionId;
         $this->id = $id;
-        $this->pendingInstallation = $pendingInstallation;
-        $this->pendingRemoval = $pendingRemoval;
     }
 
     public function getAggregateReference(): ExtensionInstanceAggregateReference
@@ -311,8 +308,11 @@ class ExtensionInstance
             $pendingRemoval = (bool)($input->{'pendingRemoval'});
         }
 
-        $obj = new self($aggregateReference, $consentedScopes, $disabled, $extensionId, $id, $pendingInstallation, $pendingRemoval);
+        $obj = new self($aggregateReference, $consentedScopes, $extensionId, $id);
         $obj->createdAt = $createdAt;
+        $obj->disabled = $disabled;
+        $obj->pendingInstallation = $pendingInstallation;
+        $obj->pendingRemoval = $pendingRemoval;
         return $obj;
     }
 

@@ -44,11 +44,11 @@ class ExtensionListExtensionInstancesRequest
         ],
     ];
 
-    private int $limit;
+    private int $limit = 1000;
 
-    private int $skip;
+    private int $skip = 0;
 
-    private int $page;
+    private int $page = 1;
 
     private Context $context;
 
@@ -58,11 +58,8 @@ class ExtensionListExtensionInstancesRequest
 
     ];
 
-    public function __construct(int $limit, int $skip, int $page, Context $context, string $contextId)
+    public function __construct(Context $context, string $contextId)
     {
-        $this->limit = $limit;
-        $this->skip = $skip;
-        $this->page = $page;
         $this->context = $context;
         $this->contextId = $contextId;
     }
@@ -186,8 +183,10 @@ class ExtensionListExtensionInstancesRequest
         $context = Context::from($input->{'context'});
         $contextId = $input->{'contextId'};
 
-        $obj = new self($limit, $skip, $page, $context, $contextId);
-
+        $obj = new self($context, $contextId);
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 

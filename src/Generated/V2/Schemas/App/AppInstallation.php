@@ -114,7 +114,7 @@ class AppInstallation
 
     private string $description;
 
-    private bool $disabled;
+    private bool $disabled = false;
 
     private string $id;
 
@@ -150,12 +150,11 @@ class AppInstallation
      */
     private ?array $userInputs = null;
 
-    public function __construct(string $appId, VersionStatus $appVersion, string $description, bool $disabled, string $id, string $installationPath, string $shortId)
+    public function __construct(string $appId, VersionStatus $appVersion, string $description, string $id, string $installationPath, string $shortId)
     {
         $this->appId = $appId;
         $this->appVersion = $appVersion;
         $this->description = $description;
-        $this->disabled = $disabled;
         $this->id = $id;
         $this->installationPath = $installationPath;
         $this->shortId = $shortId;
@@ -594,8 +593,9 @@ class AppInstallation
             $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
-        $obj = new self($appId, $appVersion, $description, $disabled, $id, $installationPath, $shortId);
+        $obj = new self($appId, $appVersion, $description, $id, $installationPath, $shortId);
         $obj->customDocumentRoot = $customDocumentRoot;
+        $obj->disabled = $disabled;
         $obj->linkedDatabases = $linkedDatabases;
         $obj->processes = $processes;
         $obj->projectId = $projectId;

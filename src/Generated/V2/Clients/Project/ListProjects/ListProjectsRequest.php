@@ -48,9 +48,9 @@ class ListProjectsRequest
 
     private ?string $serverId = null;
 
-    private int $limit;
+    private int $limit = 10000;
 
-    private int $skip;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -58,10 +58,11 @@ class ListProjectsRequest
 
     ];
 
-    public function __construct(int $limit, int $skip)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->limit = $limit;
-        $this->skip = $skip;
     }
 
     public function getCustomerId(): ?string
@@ -219,9 +220,11 @@ class ListProjectsRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($limit, $skip);
+        $obj = new self();
         $obj->customerId = $customerId;
         $obj->serverId = $serverId;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }

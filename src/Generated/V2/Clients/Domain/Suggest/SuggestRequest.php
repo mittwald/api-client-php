@@ -41,7 +41,7 @@ class SuggestRequest
 
     private string $prompt;
 
-    private int $domainCount;
+    private int $domainCount = 6;
 
     /**
      * @var string[]|null
@@ -52,10 +52,9 @@ class SuggestRequest
 
     ];
 
-    public function __construct(string $prompt, int $domainCount)
+    public function __construct(string $prompt)
     {
         $this->prompt = $prompt;
-        $this->domainCount = $domainCount;
     }
 
     public function getPrompt(): string
@@ -154,7 +153,8 @@ class SuggestRequest
             $tlds = $input->{'tlds'};
         }
 
-        $obj = new self($prompt, $domainCount);
+        $obj = new self($prompt);
+        $obj->domainCount = $domainCount;
         $obj->tlds = $tlds;
         return $obj;
     }

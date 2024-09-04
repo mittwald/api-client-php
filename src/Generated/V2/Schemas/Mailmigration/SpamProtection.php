@@ -61,16 +61,15 @@ class SpamProtection
     /**
      * SPAM_FOLDER_INBOX_UNSPECIFIED = 0 SPAM_FOLDER_SPAM = 1
      */
-    private int $folder;
+    private int $folder = 0;
 
     private int $keepDays;
 
     private ?int $relocateSensitivity = null;
 
-    public function __construct(bool $active, int $folder, int $keepDays)
+    public function __construct(bool $active, int $keepDays)
     {
         $this->active = $active;
-        $this->folder = $folder;
         $this->keepDays = $keepDays;
     }
 
@@ -215,8 +214,9 @@ class SpamProtection
             $relocateSensitivity = (int)($input->{'relocateSensitivity'});
         }
 
-        $obj = new self($active, $folder, $keepDays);
+        $obj = new self($active, $keepDays);
         $obj->deleteSensitivity = $deleteSensitivity;
+        $obj->folder = $folder;
         $obj->relocateSensitivity = $relocateSensitivity;
         return $obj;
     }

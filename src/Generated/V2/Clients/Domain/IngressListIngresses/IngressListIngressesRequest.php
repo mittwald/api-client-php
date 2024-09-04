@@ -48,9 +48,9 @@ class IngressListIngressesRequest
 
     private ?string $certificateId = null;
 
-    private int $limit;
+    private int $limit = 10000;
 
-    private int $skip;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -58,10 +58,11 @@ class IngressListIngressesRequest
 
     ];
 
-    public function __construct(int $limit, int $skip)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->limit = $limit;
-        $this->skip = $skip;
     }
 
     public function getProjectId(): ?string
@@ -219,9 +220,11 @@ class IngressListIngressesRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($limit, $skip);
+        $obj = new self();
         $obj->projectId = $projectId;
         $obj->certificateId = $certificateId;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }

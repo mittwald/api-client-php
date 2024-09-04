@@ -40,14 +40,15 @@ class UserInternalMfa
         'type' => 'object',
     ];
 
-    private bool $active;
+    private bool $active = false;
 
-    private bool $setup;
+    private bool $setup = false;
 
-    public function __construct(bool $active, bool $setup)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->active = $active;
-        $this->setup = $setup;
     }
 
     public function getActive(): bool
@@ -112,8 +113,9 @@ class UserInternalMfa
             $setup = (bool)($input->{'setup'});
         }
 
-        $obj = new self($active, $setup);
-
+        $obj = new self();
+        $obj->active = $active;
+        $obj->setup = $setup;
         return $obj;
     }
 

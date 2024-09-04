@@ -58,9 +58,9 @@ class InvoiceListCustomerInvoicesRequest
      */
     private ?array $invoiceTypes = null;
 
-    private int $limit;
+    private int $limit = 1000;
 
-    private int $skip;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -68,11 +68,9 @@ class InvoiceListCustomerInvoicesRequest
 
     ];
 
-    public function __construct(string $customerId, int $limit, int $skip)
+    public function __construct(string $customerId)
     {
         $this->customerId = $customerId;
-        $this->limit = $limit;
-        $this->skip = $skip;
     }
 
     public function getCustomerId(): string
@@ -225,8 +223,10 @@ class InvoiceListCustomerInvoicesRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($customerId, $limit, $skip);
+        $obj = new self($customerId);
         $obj->invoiceTypes = $invoiceTypes;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }

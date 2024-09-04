@@ -45,9 +45,9 @@ class NotificationsListNotificationsRequest
 
     private ?NotificationsListNotificationsRequestStatus $status = null;
 
-    private int $limit;
+    private int $limit = 500;
 
-    private int $skip;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -55,10 +55,11 @@ class NotificationsListNotificationsRequest
 
     ];
 
-    public function __construct(int $limit, int $skip)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->limit = $limit;
-        $this->skip = $skip;
     }
 
     public function getStatus(): ?NotificationsListNotificationsRequestStatus
@@ -179,8 +180,10 @@ class NotificationsListNotificationsRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($limit, $skip);
+        $obj = new self();
         $obj->status = $status;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }

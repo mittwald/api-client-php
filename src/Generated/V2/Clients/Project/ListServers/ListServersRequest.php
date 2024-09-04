@@ -43,21 +43,21 @@ class ListServersRequest
 
     private ?string $customerId = null;
 
-    private int $limit;
+    private int $limit = 10000;
 
-    private int $page;
+    private int $page = 1;
 
-    private int $skip;
+    private int $skip = 0;
 
     private array $headers = [
 
     ];
 
-    public function __construct(int $limit, int $page, int $skip)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->limit = $limit;
-        $this->page = $page;
-        $this->skip = $skip;
     }
 
     public function getCustomerId(): ?string
@@ -176,8 +176,11 @@ class ListServersRequest
             $skip = (int)($input->{'skip'});
         }
 
-        $obj = new self($limit, $page, $skip);
+        $obj = new self();
         $obj->customerId = $customerId;
+        $obj->limit = $limit;
+        $obj->page = $page;
+        $obj->skip = $skip;
         return $obj;
     }
 

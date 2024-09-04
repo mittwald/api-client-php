@@ -46,9 +46,9 @@ class ListCustomersRequest
 
     private ?string $search = null;
 
-    private int $limit;
+    private int $limit = 1000;
 
-    private int $skip;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -56,10 +56,11 @@ class ListCustomersRequest
 
     ];
 
-    public function __construct(int $limit, int $skip)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->limit = $limit;
-        $this->skip = $skip;
     }
 
     public function getRole(): ?string
@@ -217,9 +218,11 @@ class ListCustomersRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($limit, $skip);
+        $obj = new self();
         $obj->role = $role;
         $obj->search = $search;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
         $obj->page = $page;
         return $obj;
     }

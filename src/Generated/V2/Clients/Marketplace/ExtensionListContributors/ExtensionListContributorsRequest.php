@@ -35,21 +35,21 @@ class ExtensionListContributorsRequest
         ],
     ];
 
-    private int $limit;
+    private int $limit = 1000;
 
-    private int $skip;
+    private int $skip = 0;
 
-    private int $page;
+    private int $page = 1;
 
     private array $headers = [
 
     ];
 
-    public function __construct(int $limit, int $skip, int $page)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->limit = $limit;
-        $this->skip = $skip;
-        $this->page = $page;
     }
 
     public function getLimit(): int
@@ -137,8 +137,10 @@ class ExtensionListContributorsRequest
             $page = (int)($input->{'page'});
         }
 
-        $obj = new self($limit, $skip, $page);
-
+        $obj = new self();
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
