@@ -7,7 +7,6 @@ namespace Mittwald\ApiClient\Generated\V2;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient;
@@ -18,14 +17,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\File\FileClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Nexus\NexusClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ProjectClient;
 use Mittwald\ApiClient\Generated\V2\Clients\ProjectFileSystem\ProjectFileSystemClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Task\TaskClient;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
 
 /**
@@ -53,11 +50,8 @@ interface Client
     public function file(): FileClient;
     public function mail(): MailClient;
     public function article(): ArticleClient;
-    public function container(): ContainerClient;
     public function pageInsights(): PageInsightsClient;
     public function relocation(): RelocationClient;
     public function marketplace(): MarketplaceClient;
-    public function task(): TaskClient;
-    public function nexus(): NexusClient;
     public function misc(): MiscClient;
 }

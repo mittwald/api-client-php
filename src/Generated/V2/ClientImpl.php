@@ -11,8 +11,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClientImpl;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
@@ -33,8 +31,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClientImpl;
-use Mittwald\ApiClient\Generated\V2\Clients\Nexus\NexusClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Nexus\NexusClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
@@ -47,8 +43,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Relocation\RelocationClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClient;
 use Mittwald\ApiClient\Generated\V2\Clients\SSHSFTPUser\SSHSFTPUserClientImpl;
-use Mittwald\ApiClient\Generated\V2\Clients\Task\TaskClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Task\TaskClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClient;
 use Mittwald\ApiClient\Generated\V2\Clients\User\UserClientImpl;
 
@@ -141,11 +135,6 @@ class ClientImpl extends BaseClient implements Client
         return new ArticleClientImpl($this->client);
     }
 
-    public function container(): ContainerClient
-    {
-        return new ContainerClientImpl($this->client);
-    }
-
     public function pageInsights(): PageInsightsClient
     {
         return new PageInsightsClientImpl($this->client);
@@ -159,16 +148,6 @@ class ClientImpl extends BaseClient implements Client
     public function marketplace(): MarketplaceClient
     {
         return new MarketplaceClientImpl($this->client);
-    }
-
-    public function task(): TaskClient
-    {
-        return new TaskClientImpl($this->client);
-    }
-
-    public function nexus(): NexusClient
-    {
-        return new NexusClientImpl($this->client);
     }
 
     public function misc(): MiscClient
