@@ -110,7 +110,7 @@ interface FileClient
      */
     public function getFileUploadTypeRules(GetFileUploadTypeRulesRequest $request): GetFileUploadTypeRulesOKResponse;
     /**
-     * Get a File.
+     * Get a File with user-friendly url.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/file-get-file-with-name
      * @throws GuzzleException

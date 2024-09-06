@@ -25,6 +25,12 @@ class FileMeta
     private static array $schema = [
         'properties' => [
             'friendlyURL' => [
+                'deprecated' => true,
+                'description' => 'deprecated, see friendlyUrl',
+                'example' => '3fa85f64-5717-4562-b3fc-2c963f66afa6/me.jpeg',
+                'type' => 'string',
+            ],
+            'friendlyUrl' => [
                 'example' => '3fa85f64-5717-4562-b3fc-2c963f66afa6/me.jpeg',
                 'type' => 'string',
             ],
@@ -57,13 +63,21 @@ class FileMeta
             'name',
             'type',
             'friendlyURL',
+            'friendlyUrl',
             'sizeInBytes',
             'mimeType',
         ],
         'type' => 'object',
     ];
 
+    /**
+     * deprecated, see friendlyUrl
+     *
+     * @deprecated
+     */
     private string $friendlyURL;
+
+    private string $friendlyUrl;
 
     private string $id;
 
@@ -80,9 +94,10 @@ class FileMeta
      */
     private string $type;
 
-    public function __construct(string $friendlyURL, string $id, string $mimeType, string $name, int $sizeInBytes, string $type)
+    public function __construct(string $friendlyURL, string $friendlyUrl, string $id, string $mimeType, string $name, int $sizeInBytes, string $type)
     {
         $this->friendlyURL = $friendlyURL;
+        $this->friendlyUrl = $friendlyUrl;
         $this->id = $id;
         $this->mimeType = $mimeType;
         $this->name = $name;
@@ -90,9 +105,9 @@ class FileMeta
         $this->type = $type;
     }
 
-    public function getFriendlyURL(): string
+    public function getFriendlyUrl(): string
     {
-        return $this->friendlyURL;
+        return $this->friendlyUrl;
     }
 
     public function getId(): string
@@ -123,16 +138,16 @@ class FileMeta
         return $this->type;
     }
 
-    public function withFriendlyURL(string $friendlyURL): self
+    public function withFriendlyUrl(string $friendlyUrl): self
     {
         $validator = new Validator();
-        $validator->validate($friendlyURL, static::$schema['properties']['friendlyURL']);
+        $validator->validate($friendlyUrl, static::$schema['properties']['friendlyUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->friendlyURL = $friendlyURL;
+        $clone->friendlyUrl = $friendlyUrl;
 
         return $clone;
     }
@@ -226,13 +241,14 @@ class FileMeta
         }
 
         $friendlyURL = $input->{'friendlyURL'};
+        $friendlyUrl = $input->{'friendlyUrl'};
         $id = $input->{'id'};
         $mimeType = $input->{'mimeType'};
         $name = $input->{'name'};
         $sizeInBytes = (int)($input->{'sizeInBytes'});
         $type = $input->{'type'};
 
-        $obj = new self($friendlyURL, $id, $mimeType, $name, $sizeInBytes, $type);
+        $obj = new self($friendlyURL, $friendlyUrl, $id, $mimeType, $name, $sizeInBytes, $type);
 
         return $obj;
     }
@@ -246,6 +262,7 @@ class FileMeta
     {
         $output = [];
         $output['friendlyURL'] = $this->friendlyURL;
+        $output['friendlyUrl'] = $this->friendlyUrl;
         $output['id'] = $this->id;
         $output['mimeType'] = $this->mimeType;
         $output['name'] = $this->name;

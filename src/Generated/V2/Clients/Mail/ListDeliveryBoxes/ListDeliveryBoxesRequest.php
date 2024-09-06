@@ -18,6 +18,10 @@ class ListDeliveryBoxesRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'search' => [
                 'type' => 'string',
             ],
             'limit' => [
@@ -41,6 +45,8 @@ class ListDeliveryBoxesRequest
 
     private string $projectId;
 
+    private ?string $search = null;
+
     private int $limit = 10000;
 
     private int $skip = 0;
@@ -59,6 +65,11 @@ class ListDeliveryBoxesRequest
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getSearch(): ?string
+    {
+        return $this->search ?? null;
     }
 
     public function getLimit(): int
@@ -86,6 +97,28 @@ class ListDeliveryBoxesRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withSearch(string $search): self
+    {
+        $validator = new Validator();
+        $validator->validate($search, static::$schema['properties']['search']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->search = $search;
+
+        return $clone;
+    }
+
+    public function withoutSearch(): self
+    {
+        $clone = clone $this;
+        unset($clone->search);
 
         return $clone;
     }
@@ -156,6 +189,10 @@ class ListDeliveryBoxesRequest
         }
 
         $projectId = $input->{'projectId'};
+        $search = null;
+        if (isset($input->{'search'})) {
+            $search = $input->{'search'};
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -170,6 +207,7 @@ class ListDeliveryBoxesRequest
         }
 
         $obj = new self($projectId);
+        $obj->search = $search;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -185,6 +223,9 @@ class ListDeliveryBoxesRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->search)) {
+            $output['search'] = $this->search;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
@@ -251,6 +292,9 @@ class ListDeliveryBoxesRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['search'])) {
+            $query['search'] = $mapped['search'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

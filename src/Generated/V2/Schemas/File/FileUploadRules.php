@@ -51,6 +51,12 @@ class FileUploadRules
                 'example' => 1000,
                 'type' => 'integer',
             ],
+            'maxSizeInKb' => [
+                'deprecated' => true,
+                'description' => 'deprecated, see maxSizeInBytes',
+                'example' => 1000,
+                'type' => 'integer',
+            ],
             'mimeTypes' => [
                 'items' => [
                     'example' => [
@@ -97,6 +103,7 @@ class FileUploadRules
         'required' => [
             'maxSizeInBytes',
             'maxSizeInKB',
+            'maxSizeInKb',
             'mimeTypes',
             'fileTypes',
             'extensions',
@@ -124,6 +131,13 @@ class FileUploadRules
     private int $maxSizeInKB;
 
     /**
+     * deprecated, see maxSizeInBytes
+     *
+     * @deprecated
+     */
+    private int $maxSizeInKb;
+
+    /**
      * @var string[]
      */
     private array $mimeTypes;
@@ -135,12 +149,13 @@ class FileUploadRules
      * @param FileType[] $fileTypes
      * @param string[] $mimeTypes
      */
-    public function __construct(array $extensions, array $fileTypes, int $maxSizeInBytes, int $maxSizeInKB, array $mimeTypes)
+    public function __construct(array $extensions, array $fileTypes, int $maxSizeInBytes, int $maxSizeInKB, int $maxSizeInKb, array $mimeTypes)
     {
         $this->extensions = $extensions;
         $this->fileTypes = $fileTypes;
         $this->maxSizeInBytes = $maxSizeInBytes;
         $this->maxSizeInKB = $maxSizeInKB;
+        $this->maxSizeInKb = $maxSizeInKb;
         $this->mimeTypes = $mimeTypes;
     }
 
@@ -163,14 +178,6 @@ class FileUploadRules
     public function getMaxSizeInBytes(): int
     {
         return $this->maxSizeInBytes;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function getMaxSizeInKB(): int
-    {
-        return $this->maxSizeInKB;
     }
 
     /**
@@ -229,23 +236,6 @@ class FileUploadRules
     }
 
     /**
-     * @deprecated
-     */
-    public function withMaxSizeInKB(int $maxSizeInKB): self
-    {
-        $validator = new Validator();
-        $validator->validate($maxSizeInKB, static::$schema['properties']['maxSizeInKB']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->maxSizeInKB = $maxSizeInKB;
-
-        return $clone;
-    }
-
-    /**
      * @param string[] $mimeTypes
      */
     public function withMimeTypes(array $mimeTypes): self
@@ -297,13 +287,14 @@ class FileUploadRules
         $fileTypes = array_map(fn (array|object $i): FileType => FileType::buildFromInput($i, validate: $validate), $input->{'fileTypes'});
         $maxSizeInBytes = (int)($input->{'maxSizeInBytes'});
         $maxSizeInKB = (int)($input->{'maxSizeInKB'});
+        $maxSizeInKb = (int)($input->{'maxSizeInKb'});
         $mimeTypes = $input->{'mimeTypes'};
         $properties = null;
         if (isset($input->{'properties'})) {
             $properties = FileUploadRulesProperties::buildFromInput($input->{'properties'}, validate: $validate);
         }
 
-        $obj = new self($extensions, $fileTypes, $maxSizeInBytes, $maxSizeInKB, $mimeTypes);
+        $obj = new self($extensions, $fileTypes, $maxSizeInBytes, $maxSizeInKB, $maxSizeInKb, $mimeTypes);
         $obj->properties = $properties;
         return $obj;
     }
@@ -320,6 +311,7 @@ class FileUploadRules
         $output['fileTypes'] = array_map(fn (FileType $i): array => $i->toJson(), $this->fileTypes);
         $output['maxSizeInBytes'] = $this->maxSizeInBytes;
         $output['maxSizeInKB'] = $this->maxSizeInKB;
+        $output['maxSizeInKb'] = $this->maxSizeInKb;
         $output['mimeTypes'] = $this->mimeTypes;
         if (isset($this->properties)) {
             $output['properties'] = ($this->properties)->toJson();
