@@ -10,4 +10,5 @@ enum CategoryReferenceTypeItem: string
     case server = 'server';
     case project = 'project';
     case organisation = 'organisation';
+    case extensionInstance = 'extensionInstance';
 }

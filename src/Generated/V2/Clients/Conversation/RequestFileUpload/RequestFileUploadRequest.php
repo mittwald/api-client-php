@@ -156,7 +156,7 @@ class RequestFileUploadRequest
     {
         $mapped = $this->toJson();
         $conversationId = urlencode($mapped['conversationId']);
-        return '/v2/conversations/' . $conversationId . '/files';
+        return '/internal-v2/conversations/' . $conversationId . '/files';
     }
 
     /**
