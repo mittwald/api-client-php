@@ -68,6 +68,9 @@ class AppInstallationInternal
                 ],
                 'type' => 'array',
             ],
+            'projectEnvironment' => [
+                'type' => 'string',
+            ],
             'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -136,6 +139,8 @@ class AppInstallationInternal
      * @var string[]|null
      */
     private ?array $processes = null;
+
+    private ?string $projectEnvironment = null;
 
     private ?string $projectId = null;
 
@@ -221,6 +226,11 @@ class AppInstallationInternal
     public function getProcesses(): ?array
     {
         return $this->processes ?? null;
+    }
+
+    public function getProjectEnvironment(): ?string
+    {
+        return $this->projectEnvironment ?? null;
     }
 
     public function getProjectId(): ?string
@@ -425,6 +435,28 @@ class AppInstallationInternal
         return $clone;
     }
 
+    public function withProjectEnvironment(string $projectEnvironment): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectEnvironment, static::$schema['properties']['projectEnvironment']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectEnvironment = $projectEnvironment;
+
+        return $clone;
+    }
+
+    public function withoutProjectEnvironment(): self
+    {
+        $clone = clone $this;
+        unset($clone->projectEnvironment);
+
+        return $clone;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -599,6 +631,10 @@ class AppInstallationInternal
         if (isset($input->{'processes'})) {
             $processes = $input->{'processes'};
         }
+        $projectEnvironment = null;
+        if (isset($input->{'projectEnvironment'})) {
+            $projectEnvironment = $input->{'projectEnvironment'};
+        }
         $projectId = null;
         if (isset($input->{'projectId'})) {
             $projectId = $input->{'projectId'};
@@ -631,6 +667,7 @@ class AppInstallationInternal
         $obj->linkedDatabases = $linkedDatabases;
         $obj->processRunningSince = $processRunningSince;
         $obj->processes = $processes;
+        $obj->projectEnvironment = $projectEnvironment;
         $obj->projectId = $projectId;
         $obj->screenshotId = $screenshotId;
         $obj->screenshotRef = $screenshotRef;
@@ -665,6 +702,9 @@ class AppInstallationInternal
         }
         if (isset($this->processes)) {
             $output['processes'] = $this->processes;
+        }
+        if (isset($this->projectEnvironment)) {
+            $output['projectEnvironment'] = $this->projectEnvironment;
         }
         if (isset($this->projectId)) {
             $output['projectId'] = $this->projectId;
