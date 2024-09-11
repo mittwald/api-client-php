@@ -12,6 +12,7 @@ use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateRefer
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative5;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative6;
 
 class CreateConversationRequestBody
 {
@@ -46,7 +47,7 @@ class CreateConversationRequestBody
 
     private ?AggregateReference $relatedTo = null;
 
-    private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|null $sharedWith = null;
+    private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6|null $sharedWith = null;
 
     private ?string $title = null;
 
@@ -78,9 +79,9 @@ class CreateConversationRequestBody
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative5|null
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative5|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative6|null
      */
-    public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|null
+    public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6|null
     {
         return $this->sharedWith;
     }
@@ -151,9 +152,9 @@ class CreateConversationRequestBody
     }
 
     /**
-     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5 $sharedWith
+     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6 $sharedWith
      */
-    public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5 $sharedWith): self
+    public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6 $sharedWith): self
     {
         $clone = clone $this;
         $clone->sharedWith = $sharedWith;
@@ -227,6 +228,7 @@ class CreateConversationRequestBody
                 ShareableAggregateReferenceAlternative3::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative3::buildFromInput($input->{'sharedWith'}, validate: $validate),
                 ShareableAggregateReferenceAlternative4::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative4::buildFromInput($input->{'sharedWith'}, validate: $validate),
                 ShareableAggregateReferenceAlternative5::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative5::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative6::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative6::buildFromInput($input->{'sharedWith'}, validate: $validate),
             };
         }
         $title = null;
@@ -263,7 +265,7 @@ class CreateConversationRequestBody
         if (isset($this->sharedWith)) {
             $output['sharedWith'] = match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-                ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative1, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative2, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative3, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative4, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative5 => $this->sharedWith->toJson(),
+                ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative1, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative2, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative3, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative4, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative5, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative6 => $this->sharedWith->toJson(),
             };
         }
         if (isset($this->title)) {
