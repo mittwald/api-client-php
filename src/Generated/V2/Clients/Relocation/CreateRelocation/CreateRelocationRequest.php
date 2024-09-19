@@ -19,6 +19,21 @@ class CreateRelocationRequest
         'properties' => [
             'body' => [
                 'properties' => [
+                    'additionalServices' => [
+                        'properties' => [
+                            'dataCompare' => [
+                                'enum' => [
+                                    'default',
+                                    'additionalCompare',
+                                ],
+                                'type' => 'string',
+                            ],
+                        ],
+                        'required' => [
+                            'dataCompare',
+                        ],
+                        'type' => 'object',
+                    ],
                     'allDomains' => [
                         'description' => 'Should all project releated domains should be transferred to mittwald?',
                         'type' => 'boolean',
@@ -26,6 +41,16 @@ class CreateRelocationRequest
                     'allowPasswordChange' => [
                         'description' => 'Has to be true. Do you accept that our mittwald team can change and get password from your current provider?',
                         'type' => 'boolean',
+                    ],
+                    'articleType' => [
+                        'description' => 'Type of the article you want to relocate.',
+                        'enum' => [
+                            'cms-hosting',
+                            'cms-hosting-express',
+                            'onlineshop',
+                            'onlineshop-express',
+                        ],
+                        'type' => 'string',
                     ],
                     'contact' => [
                         'properties' => [
@@ -64,6 +89,39 @@ class CreateRelocationRequest
                     'notes' => [
                         'description' => 'Anything our customer service needs to know for the relocation process.',
                         'type' => 'string',
+                    ],
+                    'prices' => [
+                        'properties' => [
+                            'positions' => [
+                                'items' => [
+                                    'properties' => [
+                                        'name' => [
+                                            'minLength' => 1,
+                                            'type' => 'string',
+                                        ],
+                                        'price' => [
+                                            'minimum' => 0,
+                                            'type' => 'number',
+                                        ],
+                                    ],
+                                    'required' => [
+                                        'name',
+                                        'price',
+                                    ],
+                                    'type' => 'object',
+                                ],
+                                'type' => 'array',
+                            ],
+                            'total' => [
+                                'minimum' => 0,
+                                'type' => 'number',
+                            ],
+                        ],
+                        'required' => [
+                            'positions',
+                            'total',
+                        ],
+                        'type' => 'object',
                     ],
                     'provider' => [
                         'properties' => [
@@ -163,6 +221,9 @@ class CreateRelocationRequest
                     ],
                 ],
                 'required' => [
+                    'articleType',
+                    'additionalServices',
+                    'prices',
                     'provider',
                     'contact',
                     'target',

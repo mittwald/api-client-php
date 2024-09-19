@@ -15,6 +15,21 @@ class CreateRelocationRequestBody
      */
     private static array $schema = [
         'properties' => [
+            'additionalServices' => [
+                'properties' => [
+                    'dataCompare' => [
+                        'enum' => [
+                            'default',
+                            'additionalCompare',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'dataCompare',
+                ],
+                'type' => 'object',
+            ],
             'allDomains' => [
                 'description' => 'Should all project releated domains should be transferred to mittwald?',
                 'type' => 'boolean',
@@ -22,6 +37,16 @@ class CreateRelocationRequestBody
             'allowPasswordChange' => [
                 'description' => 'Has to be true. Do you accept that our mittwald team can change and get password from your current provider?',
                 'type' => 'boolean',
+            ],
+            'articleType' => [
+                'description' => 'Type of the article you want to relocate.',
+                'enum' => [
+                    'cms-hosting',
+                    'cms-hosting-express',
+                    'onlineshop',
+                    'onlineshop-express',
+                ],
+                'type' => 'string',
             ],
             'contact' => [
                 'properties' => [
@@ -60,6 +85,39 @@ class CreateRelocationRequestBody
             'notes' => [
                 'description' => 'Anything our customer service needs to know for the relocation process.',
                 'type' => 'string',
+            ],
+            'prices' => [
+                'properties' => [
+                    'positions' => [
+                        'items' => [
+                            'properties' => [
+                                'name' => [
+                                    'minLength' => 1,
+                                    'type' => 'string',
+                                ],
+                                'price' => [
+                                    'minimum' => 0,
+                                    'type' => 'number',
+                                ],
+                            ],
+                            'required' => [
+                                'name',
+                                'price',
+                            ],
+                            'type' => 'object',
+                        ],
+                        'type' => 'array',
+                    ],
+                    'total' => [
+                        'minimum' => 0,
+                        'type' => 'number',
+                    ],
+                ],
+                'required' => [
+                    'positions',
+                    'total',
+                ],
+                'type' => 'object',
             ],
             'provider' => [
                 'properties' => [
@@ -159,6 +217,9 @@ class CreateRelocationRequestBody
             ],
         ],
         'required' => [
+            'articleType',
+            'additionalServices',
+            'prices',
             'provider',
             'contact',
             'target',
@@ -166,6 +227,8 @@ class CreateRelocationRequestBody
         ],
         'type' => 'object',
     ];
+
+    private CreateRelocationRequestBodyAdditionalServices $additionalServices;
 
     /**
      * Should all project releated domains should be transferred to mittwald?
@@ -176,6 +239,11 @@ class CreateRelocationRequestBody
      * Has to be true. Do you accept that our mittwald team can change and get password from your current provider?
      */
     private bool $allowPasswordChange;
+
+    /**
+     * Type of the article you want to relocate.
+     */
+    private CreateRelocationRequestBodyArticleType $articleType;
 
     private CreateRelocationRequestBodyContact $contact;
 
@@ -191,16 +259,26 @@ class CreateRelocationRequestBody
      */
     private ?string $notes = null;
 
+    private CreateRelocationRequestBodyPrices $prices;
+
     private CreateRelocationRequestBodyProvider $provider;
 
     private CreateRelocationRequestBodyTarget $target;
 
-    public function __construct(bool $allowPasswordChange, CreateRelocationRequestBodyContact $contact, CreateRelocationRequestBodyProvider $provider, CreateRelocationRequestBodyTarget $target)
+    public function __construct(CreateRelocationRequestBodyAdditionalServices $additionalServices, bool $allowPasswordChange, CreateRelocationRequestBodyArticleType $articleType, CreateRelocationRequestBodyContact $contact, CreateRelocationRequestBodyPrices $prices, CreateRelocationRequestBodyProvider $provider, CreateRelocationRequestBodyTarget $target)
     {
+        $this->additionalServices = $additionalServices;
         $this->allowPasswordChange = $allowPasswordChange;
+        $this->articleType = $articleType;
         $this->contact = $contact;
+        $this->prices = $prices;
         $this->provider = $provider;
         $this->target = $target;
+    }
+
+    public function getAdditionalServices(): CreateRelocationRequestBodyAdditionalServices
+    {
+        return $this->additionalServices;
     }
 
     public function getAllDomains(): ?bool
@@ -211,6 +289,11 @@ class CreateRelocationRequestBody
     public function getAllowPasswordChange(): bool
     {
         return $this->allowPasswordChange;
+    }
+
+    public function getArticleType(): CreateRelocationRequestBodyArticleType
+    {
+        return $this->articleType;
     }
 
     public function getContact(): CreateRelocationRequestBodyContact
@@ -231,6 +314,11 @@ class CreateRelocationRequestBody
         return $this->notes ?? null;
     }
 
+    public function getPrices(): CreateRelocationRequestBodyPrices
+    {
+        return $this->prices;
+    }
+
     public function getProvider(): CreateRelocationRequestBodyProvider
     {
         return $this->provider;
@@ -239,6 +327,14 @@ class CreateRelocationRequestBody
     public function getTarget(): CreateRelocationRequestBodyTarget
     {
         return $this->target;
+    }
+
+    public function withAdditionalServices(CreateRelocationRequestBodyAdditionalServices $additionalServices): self
+    {
+        $clone = clone $this;
+        $clone->additionalServices = $additionalServices;
+
+        return $clone;
     }
 
     public function withAllDomains(bool $allDomains): self
@@ -273,6 +369,14 @@ class CreateRelocationRequestBody
 
         $clone = clone $this;
         $clone->allowPasswordChange = $allowPasswordChange;
+
+        return $clone;
+    }
+
+    public function withArticleType(CreateRelocationRequestBodyArticleType $articleType): self
+    {
+        $clone = clone $this;
+        $clone->articleType = $articleType;
 
         return $clone;
     }
@@ -326,6 +430,14 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
+    public function withPrices(CreateRelocationRequestBodyPrices $prices): self
+    {
+        $clone = clone $this;
+        $clone->prices = $prices;
+
+        return $clone;
+    }
+
     public function withProvider(CreateRelocationRequestBodyProvider $provider): self
     {
         $clone = clone $this;
@@ -357,11 +469,13 @@ class CreateRelocationRequestBody
             static::validateInput($input);
         }
 
+        $additionalServices = CreateRelocationRequestBodyAdditionalServices::buildFromInput($input->{'additionalServices'}, validate: $validate);
         $allDomains = null;
         if (isset($input->{'allDomains'})) {
             $allDomains = (bool)($input->{'allDomains'});
         }
         $allowPasswordChange = (bool)($input->{'allowPasswordChange'});
+        $articleType = CreateRelocationRequestBodyArticleType::from($input->{'articleType'});
         $contact = CreateRelocationRequestBodyContact::buildFromInput($input->{'contact'}, validate: $validate);
         $domains = null;
         if (isset($input->{'domains'})) {
@@ -371,10 +485,11 @@ class CreateRelocationRequestBody
         if (isset($input->{'notes'})) {
             $notes = $input->{'notes'};
         }
+        $prices = CreateRelocationRequestBodyPrices::buildFromInput($input->{'prices'}, validate: $validate);
         $provider = CreateRelocationRequestBodyProvider::buildFromInput($input->{'provider'}, validate: $validate);
         $target = CreateRelocationRequestBodyTarget::buildFromInput($input->{'target'}, validate: $validate);
 
-        $obj = new self($allowPasswordChange, $contact, $provider, $target);
+        $obj = new self($additionalServices, $allowPasswordChange, $articleType, $contact, $prices, $provider, $target);
         $obj->allDomains = $allDomains;
         $obj->domains = $domains;
         $obj->notes = $notes;
@@ -389,10 +504,12 @@ class CreateRelocationRequestBody
     public function toJson(): array
     {
         $output = [];
+        $output['additionalServices'] = ($this->additionalServices)->toJson();
         if (isset($this->allDomains)) {
             $output['allDomains'] = $this->allDomains;
         }
         $output['allowPasswordChange'] = $this->allowPasswordChange;
+        $output['articleType'] = ($this->articleType)->value;
         $output['contact'] = ($this->contact)->toJson();
         if (isset($this->domains)) {
             $output['domains'] = array_map(fn (Domain $i): array => $i->toJson(), $this->domains);
@@ -400,6 +517,7 @@ class CreateRelocationRequestBody
         if (isset($this->notes)) {
             $output['notes'] = $this->notes;
         }
+        $output['prices'] = ($this->prices)->toJson();
         $output['provider'] = ($this->provider)->toJson();
         $output['target'] = ($this->target)->toJson();
 
@@ -432,7 +550,9 @@ class CreateRelocationRequestBody
 
     public function __clone()
     {
+        $this->additionalServices = clone $this->additionalServices;
         $this->contact = clone $this->contact;
+        $this->prices = clone $this->prices;
         $this->provider = clone $this->provider;
         $this->target = clone $this->target;
     }

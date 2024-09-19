@@ -34,6 +34,14 @@ class UserInternal
                 'description' => 'Truth value, whether the user has been disabled.',
                 'type' => 'boolean',
             ],
+            'disabledAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'disabledBy' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'email' => [
                 'format' => 'email',
                 'type' => 'string',
@@ -106,6 +114,10 @@ class UserInternal
      */
     private ?bool $disabled = null;
 
+    private ?DateTime $disabledAt = null;
+
+    private ?string $disabledBy = null;
+
     private ?string $email = null;
 
     /**
@@ -144,6 +156,16 @@ class UserInternal
     public function getDisabled(): ?bool
     {
         return $this->disabled ?? null;
+    }
+
+    public function getDisabledAt(): ?DateTime
+    {
+        return $this->disabledAt ?? null;
+    }
+
+    public function getDisabledBy(): ?string
+    {
+        return $this->disabledBy ?? null;
     }
 
     public function getEmail(): ?string
@@ -231,6 +253,44 @@ class UserInternal
     {
         $clone = clone $this;
         unset($clone->disabled);
+
+        return $clone;
+    }
+
+    public function withDisabledAt(DateTime $disabledAt): self
+    {
+        $clone = clone $this;
+        $clone->disabledAt = $disabledAt;
+
+        return $clone;
+    }
+
+    public function withoutDisabledAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->disabledAt);
+
+        return $clone;
+    }
+
+    public function withDisabledBy(string $disabledBy): self
+    {
+        $validator = new Validator();
+        $validator->validate($disabledBy, static::$schema['properties']['disabledBy']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->disabledBy = $disabledBy;
+
+        return $clone;
+    }
+
+    public function withoutDisabledBy(): self
+    {
+        $clone = clone $this;
+        unset($clone->disabledBy);
 
         return $clone;
     }
@@ -410,6 +470,14 @@ class UserInternal
         if (isset($input->{'disabled'})) {
             $disabled = (bool)($input->{'disabled'});
         }
+        $disabledAt = null;
+        if (isset($input->{'disabledAt'})) {
+            $disabledAt = new DateTime($input->{'disabledAt'});
+        }
+        $disabledBy = null;
+        if (isset($input->{'disabledBy'})) {
+            $disabledBy = $input->{'disabledBy'};
+        }
         $email = null;
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
@@ -444,6 +512,8 @@ class UserInternal
         $obj = new self($person, $userId);
         $obj->avatarRef = $avatarRef;
         $obj->disabled = $disabled;
+        $obj->disabledAt = $disabledAt;
+        $obj->disabledBy = $disabledBy;
         $obj->email = $email;
         $obj->employeeInformation = $employeeInformation;
         $obj->isEmployee = $isEmployee;
@@ -467,6 +537,12 @@ class UserInternal
         }
         if (isset($this->disabled)) {
             $output['disabled'] = $this->disabled;
+        }
+        if (isset($this->disabledAt)) {
+            $output['disabledAt'] = ($this->disabledAt)->format(DateTime::ATOM);
+        }
+        if (isset($this->disabledBy)) {
+            $output['disabledBy'] = $this->disabledBy;
         }
         if (isset($this->email)) {
             $output['email'] = $this->email;
@@ -521,6 +597,9 @@ class UserInternal
 
     public function __clone()
     {
+        if (isset($this->disabledAt)) {
+            $this->disabledAt = clone $this->disabledAt;
+        }
         if (isset($this->employeeInformation)) {
             $this->employeeInformation = clone $this->employeeInformation;
         }

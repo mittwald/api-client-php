@@ -16,7 +16,7 @@ class ExtensionDryRunWebhookOKResponseBody
         'properties' => [
             'errorMessage' => [
                 'description' => 'The error message of an internal error.',
-                'example' => 'he url httpsecurity is not a valid protocol',
+                'example' => 'The url httpsecurity is not a valid protocol',
                 'type' => 'string',
             ],
             'responseBody' => [
