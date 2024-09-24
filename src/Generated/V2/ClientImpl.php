@@ -11,6 +11,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
@@ -29,8 +31,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\MarketplaceClientImpl;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClient;
-use Mittwald\ApiClient\Generated\V2\Clients\Misc\MiscClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Notification\NotificationClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\PageInsights\PageInsightsClient;
@@ -135,6 +135,11 @@ class ClientImpl extends BaseClient implements Client
         return new ArticleClientImpl($this->client);
     }
 
+    public function container(): ContainerClient
+    {
+        return new ContainerClientImpl($this->client);
+    }
+
     public function pageInsights(): PageInsightsClient
     {
         return new PageInsightsClientImpl($this->client);
@@ -148,10 +153,5 @@ class ClientImpl extends BaseClient implements Client
     public function marketplace(): MarketplaceClient
     {
         return new MarketplaceClientImpl($this->client);
-    }
-
-    public function misc(): MiscClient
-    {
-        return new MiscClientImpl($this->client);
     }
 }

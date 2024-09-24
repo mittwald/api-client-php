@@ -96,6 +96,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificateRequests\Ss
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslListCertificates\SslListCertificatesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainAuthCode\UpdateDomainAuthCodeOKResponse;
@@ -754,4 +755,14 @@ interface DomainClient
      * @return EmptyResponse OK
      */
     public function sslReplaceCertificate(SslReplaceCertificateRequest $request): EmptyResponse;
+    /**
+     * Update the certificate of a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-set-certificate-request-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslSetCertificateRequestCertificateRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function sslSetCertificateRequestCertificate(SslSetCertificateRequestCertificateRequest $request): EmptyResponse;
 }

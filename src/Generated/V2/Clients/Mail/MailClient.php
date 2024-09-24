@@ -26,6 +26,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddre
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionRequest;
@@ -183,6 +190,50 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function mailaddressUpdateAddressDeprecated(MailaddressUpdateAddressDeprecatedRequest $request): EmptyResponse;
+    /**
+     * Check if a Migration between two projects is possible.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-check-migration-is-possible
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationCheckMigrationIsPossibleRequest $request An object representing the request for this operation
+     * @return MigrationCheckMigrationIsPossibleOKResponse Ok
+     */
+    public function migrationCheckMigrationIsPossible(MigrationCheckMigrationIsPossibleRequest $request): MigrationCheckMigrationIsPossibleOKResponse;
+    /**
+     * Get a Migration.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-get-migration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationGetMigrationRequest $request An object representing the request for this operation
+     * @return MigrationGetMigrationOKResponse The requested Migration.
+     */
+    public function migrationGetMigration(MigrationGetMigrationRequest $request): MigrationGetMigrationOKResponse;
+    /**
+     * List Migrations belonging to a Project in customer center or mStudio.
+     *
+     * In case you want to list the Migrations for a p-Account you will have to use `commons.LegacyBearerAuthentication` and `commons.AccessToken` for authentication.
+     * If you want to list the Migrations for a mStudio-project you will have to use `commons.AccessToken` for authentication.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-list-migrations
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationListMigrationsRequest $request An object representing the request for this operation
+     * @return MigrationListMigrationsOKResponse An array of Migration objects.
+     */
+    public function migrationListMigrations(MigrationListMigrationsRequest $request): MigrationListMigrationsOKResponse;
+    /**
+     * Request a Mail Migration between two projects.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-request-mail-migration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationRequestMailMigrationRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function migrationRequestMailMigration(MigrationRequestMailMigrationRequest $request): EmptyResponse;
     /**
      * Update blacklist for a given project ID
      *

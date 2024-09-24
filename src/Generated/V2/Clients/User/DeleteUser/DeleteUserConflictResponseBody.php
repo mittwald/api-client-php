@@ -27,9 +27,6 @@ class DeleteUserConflictResponseBody
                 'type' => 'string',
             ],
             'name' => [
-                'enum' => [
-                    'RemovingLastOwnerNotAllowedError',
-                ],
                 'example' => 'RemovingLastOwnerNotAllowedError',
                 'type' => 'string',
             ],
@@ -51,9 +48,9 @@ class DeleteUserConflictResponseBody
      */
     private string $message;
 
-    private DeleteUserConflictResponseBodyName $name;
+    private string $name;
 
-    public function __construct(string $message, DeleteUserConflictResponseBodyName $name)
+    public function __construct(string $message, string $name)
     {
         $this->message = $message;
         $this->name = $name;
@@ -69,7 +66,7 @@ class DeleteUserConflictResponseBody
         return $this->message;
     }
 
-    public function getName(): DeleteUserConflictResponseBodyName
+    public function getName(): string
     {
         return $this->name;
     }
@@ -104,8 +101,14 @@ class DeleteUserConflictResponseBody
         return $clone;
     }
 
-    public function withName(DeleteUserConflictResponseBodyName $name): self
+    public function withName(string $name): self
     {
+        $validator = new Validator();
+        $validator->validate($name, static::$schema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->name = $name;
 
@@ -132,7 +135,7 @@ class DeleteUserConflictResponseBody
             $info = DeleteUserConflictResponseBodyInfo::buildFromInput($input->{'info'}, validate: $validate);
         }
         $message = $input->{'message'};
-        $name = DeleteUserConflictResponseBodyName::from($input->{'name'});
+        $name = $input->{'name'};
 
         $obj = new self($message, $name);
         $obj->info = $info;
@@ -151,7 +154,7 @@ class DeleteUserConflictResponseBody
             $output['info'] = ($this->info)->toJson();
         }
         $output['message'] = $this->message;
-        $output['name'] = ($this->name)->value;
+        $output['name'] = $this->name;
 
         return $output;
     }

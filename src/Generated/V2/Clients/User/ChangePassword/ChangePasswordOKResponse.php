@@ -27,6 +27,10 @@ class ChangePasswordOKResponse implements ResponseContainer
                         'format' => 'date-time',
                         'type' => 'string',
                     ],
+                    'refreshToken' => [
+                        'description' => 'Refresh token to refresh your access token once it has expired.',
+                        'type' => 'string',
+                    ],
                     'token' => [
                         'description' => 'Public token to identify yourself against the api gateway.',
                         'type' => 'string',

@@ -32,6 +32,9 @@ class ListDomainsRequest
             'domainSearchName' => [
                 'type' => 'string',
             ],
+            'contactHash' => [
+                'type' => 'string',
+            ],
         ],
         'required' => [
 
@@ -45,6 +48,8 @@ class ListDomainsRequest
     private ?int $limit = null;
 
     private ?string $domainSearchName = null;
+
+    private ?string $contactHash = null;
 
     private array $headers = [
 
@@ -75,6 +80,11 @@ class ListDomainsRequest
     public function getDomainSearchName(): ?string
     {
         return $this->domainSearchName ?? null;
+    }
+
+    public function getContactHash(): ?string
+    {
+        return $this->contactHash ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -165,6 +175,28 @@ class ListDomainsRequest
         return $clone;
     }
 
+    public function withContactHash(string $contactHash): self
+    {
+        $validator = new Validator();
+        $validator->validate($contactHash, static::$schema['properties']['contactHash']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contactHash = $contactHash;
+
+        return $clone;
+    }
+
+    public function withoutContactHash(): self
+    {
+        $clone = clone $this;
+        unset($clone->contactHash);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -196,12 +228,17 @@ class ListDomainsRequest
         if (isset($input->{'domainSearchName'})) {
             $domainSearchName = $input->{'domainSearchName'};
         }
+        $contactHash = null;
+        if (isset($input->{'contactHash'})) {
+            $contactHash = $input->{'contactHash'};
+        }
 
         $obj = new self();
         $obj->projectId = $projectId;
         $obj->page = $page;
         $obj->limit = $limit;
         $obj->domainSearchName = $domainSearchName;
+        $obj->contactHash = $contactHash;
         return $obj;
     }
 
@@ -224,6 +261,9 @@ class ListDomainsRequest
         }
         if (isset($this->domainSearchName)) {
             $output['domainSearchName'] = $this->domainSearchName;
+        }
+        if (isset($this->contactHash)) {
+            $output['contactHash'] = $this->contactHash;
         }
 
         return $output;
@@ -296,6 +336,9 @@ class ListDomainsRequest
         }
         if (isset($mapped['domainSearchName'])) {
             $query['domainSearchName'] = $mapped['domainSearchName'];
+        }
+        if (isset($mapped['contactHash'])) {
+            $query['contactHash'] = $mapped['contactHash'];
         }
         return [
             'query' => $query,

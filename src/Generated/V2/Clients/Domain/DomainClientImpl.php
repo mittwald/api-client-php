@@ -275,6 +275,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslRepl
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslReplaceCertificate\SslReplaceCertificateTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificatePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslSetCertificateRequestCertificate\SslSetCertificateRequestCertificateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\Suggest\SuggestOKResponse;
@@ -1744,6 +1750,31 @@ class DomainClientImpl implements DomainClient
             404 => SslReplaceCertificateNotFoundResponse::fromResponse($httpResponse),
             429 => SslReplaceCertificateTooManyRequestsResponse::fromResponse($httpResponse),
             default => SslReplaceCertificateDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update the certificate of a CertificateRequest.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ssl-set-certificate-request-certificate
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param SslSetCertificateRequestCertificateRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function sslSetCertificateRequestCertificate(SslSetCertificateRequestCertificateRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(SslSetCertificateRequestCertificateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => SslSetCertificateRequestCertificateBadRequestResponse::fromResponse($httpResponse),
+            404 => SslSetCertificateRequestCertificateNotFoundResponse::fromResponse($httpResponse),
+            412 => SslSetCertificateRequestCertificatePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => SslSetCertificateRequestCertificateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => SslSetCertificateRequestCertificateDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

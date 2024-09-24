@@ -94,6 +94,26 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListPro
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationCheckMigrationIsPossible\MigrationCheckMigrationIsPossibleTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\MigrationGetMigrationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedRequest;
@@ -565,6 +585,103 @@ class MailClientImpl implements MailClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             403, 404, 500, 503 => new EmptyResponse($httpResponse),
             429 => MailaddressUpdateAddressDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check if a Migration between two projects is possible.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-check-migration-is-possible
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationCheckMigrationIsPossibleRequest $request An object representing the request for this operation
+     * @return MigrationCheckMigrationIsPossibleOKResponse Ok
+     */
+    public function migrationCheckMigrationIsPossible(MigrationCheckMigrationIsPossibleRequest $request): MigrationCheckMigrationIsPossibleOKResponse
+    {
+        $httpRequest = new Request(MigrationCheckMigrationIsPossibleRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return MigrationCheckMigrationIsPossibleOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationCheckMigrationIsPossibleBadRequestResponse::fromResponse($httpResponse),
+            429 => MigrationCheckMigrationIsPossibleTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationCheckMigrationIsPossibleDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a Migration.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-get-migration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationGetMigrationRequest $request An object representing the request for this operation
+     * @return MigrationGetMigrationOKResponse The requested Migration.
+     */
+    public function migrationGetMigration(MigrationGetMigrationRequest $request): MigrationGetMigrationOKResponse
+    {
+        $httpRequest = new Request(MigrationGetMigrationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return MigrationGetMigrationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationGetMigrationBadRequestResponse::fromResponse($httpResponse),
+            429 => MigrationGetMigrationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationGetMigrationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Migrations belonging to a Project in customer center or mStudio.
+     *
+     * In case you want to list the Migrations for a p-Account you will have to use `commons.LegacyBearerAuthentication` and `commons.AccessToken` for authentication.
+     * If you want to list the Migrations for a mStudio-project you will have to use `commons.AccessToken` for authentication.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-list-migrations
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationListMigrationsRequest $request An object representing the request for this operation
+     * @return MigrationListMigrationsOKResponse An array of Migration objects.
+     */
+    public function migrationListMigrations(MigrationListMigrationsRequest $request): MigrationListMigrationsOKResponse
+    {
+        $httpRequest = new Request(MigrationListMigrationsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return MigrationListMigrationsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationListMigrationsBadRequestResponse::fromResponse($httpResponse),
+            429 => MigrationListMigrationsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationListMigrationsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Request a Mail Migration between two projects.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-migration-request-mail-migration
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param MigrationRequestMailMigrationRequest $request An object representing the request for this operation
+     * @return EmptyResponse No Content
+     */
+    public function migrationRequestMailMigration(MigrationRequestMailMigrationRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(MigrationRequestMailMigrationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => MigrationRequestMailMigrationBadRequestResponse::fromResponse($httpResponse),
+            412 => MigrationRequestMailMigrationPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => MigrationRequestMailMigrationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => MigrationRequestMailMigrationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
