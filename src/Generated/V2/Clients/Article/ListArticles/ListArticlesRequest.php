@@ -20,18 +20,6 @@ class ListArticlesRequest
             'customerId' => [
                 'type' => 'string',
             ],
-            'limit' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
-            'skip' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
-            'page' => [
-                'minimum' => 0,
-                'type' => 'integer',
-            ],
             'tags' => [
                 'items' => [
                     'type' => 'string',
@@ -66,6 +54,19 @@ class ListArticlesRequest
             'name' => [
                 'type' => 'string',
             ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
         ],
         'required' => [
 
@@ -73,12 +74,6 @@ class ListArticlesRequest
     ];
 
     private ?string $customerId = null;
-
-    private ?int $limit = null;
-
-    private ?int $skip = null;
-
-    private ?int $page = null;
 
     /**
      * @var string[]|null
@@ -102,6 +97,12 @@ class ListArticlesRequest
 
     private ?string $name = null;
 
+    private int $limit = 1000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
+
     private array $headers = [
 
     ];
@@ -116,21 +117,6 @@ class ListArticlesRequest
     public function getCustomerId(): ?string
     {
         return $this->customerId ?? null;
-    }
-
-    public function getLimit(): ?int
-    {
-        return $this->limit ?? null;
-    }
-
-    public function getSkip(): ?int
-    {
-        return $this->skip ?? null;
-    }
-
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
     }
 
     /**
@@ -170,6 +156,21 @@ class ListArticlesRequest
         return $this->name ?? null;
     }
 
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
@@ -188,72 +189,6 @@ class ListArticlesRequest
     {
         $clone = clone $this;
         unset($clone->customerId);
-
-        return $clone;
-    }
-
-    public function withLimit(int $limit): self
-    {
-        $validator = new Validator();
-        $validator->validate($limit, static::$schema['properties']['limit']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, static::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, static::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
 
         return $clone;
     }
@@ -380,6 +315,56 @@ class ListArticlesRequest
         return $clone;
     }
 
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, static::$schema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, static::$schema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, static::$schema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -398,18 +383,6 @@ class ListArticlesRequest
         $customerId = null;
         if (isset($input->{'customerId'})) {
             $customerId = $input->{'customerId'};
-        }
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = null;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
         }
         $tags = null;
         if (isset($input->{'tags'})) {
@@ -431,17 +404,29 @@ class ListArticlesRequest
         if (isset($input->{'name'})) {
             $name = $input->{'name'};
         }
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self();
         $obj->customerId = $customerId;
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
         $obj->tags = $tags;
         $obj->templateNames = $templateNames;
         $obj->articleIds = $articleIds;
         $obj->orderable = $orderable;
         $obj->name = $name;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -455,15 +440,6 @@ class ListArticlesRequest
         $output = [];
         if (isset($this->customerId)) {
             $output['customerId'] = $this->customerId;
-        }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
         }
         if (isset($this->tags)) {
             $output['tags'] = $this->tags;
@@ -479,6 +455,11 @@ class ListArticlesRequest
         }
         if (isset($this->name)) {
             $output['name'] = $this->name;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -543,15 +524,6 @@ class ListArticlesRequest
         if (isset($mapped['customerId'])) {
             $query['customerId'] = $mapped['customerId'];
         }
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         if (isset($mapped['tags'])) {
             $query['tags'] = $mapped['tags'];
         }
@@ -566,6 +538,15 @@ class ListArticlesRequest
         }
         if (isset($mapped['name'])) {
             $query['name'] = $mapped['name'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

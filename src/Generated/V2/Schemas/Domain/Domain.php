@@ -33,6 +33,9 @@ class Domain
             'connected' => [
                 'type' => 'boolean',
             ],
+            'contactHash' => [
+                'type' => 'string',
+            ],
             'deleted' => [
                 'type' => 'boolean',
             ],
@@ -103,6 +106,8 @@ class Domain
 
     private bool $connected;
 
+    private ?string $contactHash = null;
+
     private bool $deleted;
 
     private string $domain;
@@ -155,6 +160,11 @@ class Domain
     public function getConnected(): bool
     {
         return $this->connected;
+    }
+
+    public function getContactHash(): ?string
+    {
+        return $this->contactHash ?? null;
     }
 
     public function getDeleted(): bool
@@ -250,6 +260,28 @@ class Domain
 
         $clone = clone $this;
         $clone->connected = $connected;
+
+        return $clone;
+    }
+
+    public function withContactHash(string $contactHash): self
+    {
+        $validator = new Validator();
+        $validator->validate($contactHash, static::$schema['properties']['contactHash']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contactHash = $contactHash;
+
+        return $clone;
+    }
+
+    public function withoutContactHash(): self
+    {
+        $clone = clone $this;
+        unset($clone->contactHash);
 
         return $clone;
     }
@@ -414,6 +446,10 @@ class Domain
             $authCode2 = AuthCode2::buildFromInput($input->{'authCode2'}, validate: $validate);
         }
         $connected = (bool)($input->{'connected'});
+        $contactHash = null;
+        if (isset($input->{'contactHash'})) {
+            $contactHash = $input->{'contactHash'};
+        }
         $deleted = (bool)($input->{'deleted'});
         $domain = $input->{'domain'};
         $domainId = $input->{'domainId'};
@@ -433,6 +469,7 @@ class Domain
         $obj = new self($connected, $deleted, $domain, $domainId, $handles, $nameservers, $projectId, $usesDefaultNameserver);
         $obj->authCode = $authCode;
         $obj->authCode2 = $authCode2;
+        $obj->contactHash = $contactHash;
         $obj->processes = $processes;
         $obj->transferInAuthCode = $transferInAuthCode;
         return $obj;
@@ -453,6 +490,9 @@ class Domain
             $output['authCode2'] = $this->authCode2->toJson();
         }
         $output['connected'] = $this->connected;
+        if (isset($this->contactHash)) {
+            $output['contactHash'] = $this->contactHash;
+        }
         $output['deleted'] = $this->deleted;
         $output['domain'] = $this->domain;
         $output['domainId'] = $this->domainId;
