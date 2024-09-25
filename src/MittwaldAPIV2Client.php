@@ -36,11 +36,11 @@ class MittwaldAPIV2Client extends ClientImpl
      * create a new API token in the mStudio UI, or via the API itself
      *
      * @param string $apiToken The API token
-     * @param string $baseURL The base URL of the API. Defaults to the production API. Note that this is only useful for testing.
+     * @param string $baseUri The base URL of the API. Defaults to the production API. Note that this is only useful for testing.
      */
-    public static function newWithToken(string $apiToken, string $baseURL = self::DEFAULT_BASE_URL): static
+    public static function newWithToken(string $apiToken, string $baseUri = self::DEFAULT_BASE_URL): static
     {
-        return new static($baseURL, $apiToken);
+        return new static($baseUri, $apiToken);
     }
 
     /**
@@ -49,11 +49,11 @@ class MittwaldAPIV2Client extends ClientImpl
      * This is useful for endpoints that do not require authentication, such as
      * the user registration endpoint, or the authentication endpoints themselves.
      *
-     * @param string $baseURL The base URL of the API. Defaults to the production API. Note that this is only useful for testing.
+     * @param string $baseUri The base URL of the API. Defaults to the production API. Note that this is only useful for testing.
      */
-    public static function newUnauthenticated(string $baseURL = self::DEFAULT_BASE_URL): static
+    public static function newUnauthenticated(string $baseUri = self::DEFAULT_BASE_URL): static
     {
-        return new static($baseURL);
+        return new static($baseUri);
     }
 
     /**
@@ -65,13 +65,13 @@ class MittwaldAPIV2Client extends ClientImpl
      *
      * @param string $email The email address of your mStudio user.
      * @param string $password The password of your mStudio user.
-     * @param string $baseURL The base URL of the API. Defaults to the production API. Note that this is only useful for testing.
+     * @param string $baseUri The base URL of the API. Defaults to the production API. Note that this is only useful for testing.
      */
-    public static function newWithCredentials(string $email, string $password, string $baseURL = self::DEFAULT_BASE_URL): static
+    public static function newWithCredentials(string $email, string $password, string $baseUri = self::DEFAULT_BASE_URL): static
     {
         $authenticateRequest  = new AuthenticateRequest(new AuthenticateRequestBody($email, $password));
-        $authenticateResponse = static::newUnauthenticated($baseURL)->user()->authenticate($authenticateRequest);
+        $authenticateResponse = static::newUnauthenticated($baseUri)->user()->authenticate($authenticateRequest);
 
-        return static::newWithToken($authenticateResponse->getBody()->getToken(), baseURL: $baseURL);
+        return static::newWithToken($authenticateResponse->getBody()->getToken(), baseUri: $baseUri);
     }
 }
