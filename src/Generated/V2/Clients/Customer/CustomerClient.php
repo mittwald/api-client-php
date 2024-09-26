@@ -12,6 +12,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustom
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerRequest;
@@ -88,6 +90,16 @@ interface CustomerClient
      * @param CreateCustomerInviteRequest $request An object representing the request for this operation
      */
     public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse;
+    /**
+     * Create the Wallet for the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateWalletRequest $request An object representing the request for this operation
+     * @return CreateWalletOKResponse The Wallet has been created.
+     */
+    public function createWallet(CreateWalletRequest $request): CreateWalletOKResponse;
     /**
      * Decline a CustomerInvite.
      *

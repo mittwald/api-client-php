@@ -30,6 +30,12 @@ class UserInternal
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'customerMemberships' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.user.CustomerMembership',
+                ],
+                'type' => 'object',
+            ],
             'disabled' => [
                 'description' => 'Truth value, whether the user has been disabled.',
                 'type' => 'boolean',
@@ -91,6 +97,12 @@ class UserInternal
                 'example' => '+491701234567',
                 'type' => 'string',
             ],
+            'projectMemberships' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.user.ProjectMembership',
+                ],
+                'type' => 'object',
+            ],
             'registeredAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -108,6 +120,11 @@ class UserInternal
     ];
 
     private ?string $avatarRef = null;
+
+    /**
+     * @var mixed[]|null
+     */
+    private ?array $customerMemberships = null;
 
     /**
      * Truth value, whether the user has been disabled.
@@ -138,6 +155,11 @@ class UserInternal
 
     private ?string $phoneNumber = null;
 
+    /**
+     * @var mixed[]|null
+     */
+    private ?array $projectMemberships = null;
+
     private ?DateTime $registeredAt = null;
 
     private string $userId;
@@ -151,6 +173,14 @@ class UserInternal
     public function getAvatarRef(): ?string
     {
         return $this->avatarRef ?? null;
+    }
+
+    /**
+     * @return mixed[]|null
+     */
+    public function getCustomerMemberships(): ?array
+    {
+        return $this->customerMemberships ?? null;
     }
 
     public function getDisabled(): ?bool
@@ -203,6 +233,14 @@ class UserInternal
         return $this->phoneNumber ?? null;
     }
 
+    /**
+     * @return mixed[]|null
+     */
+    public function getProjectMemberships(): ?array
+    {
+        return $this->projectMemberships ?? null;
+    }
+
     public function getRegisteredAt(): ?DateTime
     {
         return $this->registeredAt ?? null;
@@ -231,6 +269,31 @@ class UserInternal
     {
         $clone = clone $this;
         unset($clone->avatarRef);
+
+        return $clone;
+    }
+
+    /**
+     * @param mixed[] $customerMemberships
+     */
+    public function withCustomerMemberships(array $customerMemberships): self
+    {
+        $validator = new Validator();
+        $validator->validate($customerMemberships, static::$schema['properties']['customerMemberships']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->customerMemberships = $customerMemberships;
+
+        return $clone;
+    }
+
+    public function withoutCustomerMemberships(): self
+    {
+        $clone = clone $this;
+        unset($clone->customerMemberships);
 
         return $clone;
     }
@@ -417,6 +480,31 @@ class UserInternal
         return $clone;
     }
 
+    /**
+     * @param mixed[] $projectMemberships
+     */
+    public function withProjectMemberships(array $projectMemberships): self
+    {
+        $validator = new Validator();
+        $validator->validate($projectMemberships, static::$schema['properties']['projectMemberships']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->projectMemberships = $projectMemberships;
+
+        return $clone;
+    }
+
+    public function withoutProjectMemberships(): self
+    {
+        $clone = clone $this;
+        unset($clone->projectMemberships);
+
+        return $clone;
+    }
+
     public function withRegisteredAt(DateTime $registeredAt): self
     {
         $clone = clone $this;
@@ -466,6 +554,10 @@ class UserInternal
         if (isset($input->{'avatarRef'})) {
             $avatarRef = $input->{'avatarRef'};
         }
+        $customerMemberships = null;
+        if (isset($input->{'customerMemberships'})) {
+            $customerMemberships = (array)$input->{'customerMemberships'};
+        }
         $disabled = null;
         if (isset($input->{'disabled'})) {
             $disabled = (bool)($input->{'disabled'});
@@ -503,6 +595,10 @@ class UserInternal
         if (isset($input->{'phoneNumber'})) {
             $phoneNumber = $input->{'phoneNumber'};
         }
+        $projectMemberships = null;
+        if (isset($input->{'projectMemberships'})) {
+            $projectMemberships = (array)$input->{'projectMemberships'};
+        }
         $registeredAt = null;
         if (isset($input->{'registeredAt'})) {
             $registeredAt = new DateTime($input->{'registeredAt'});
@@ -511,6 +607,7 @@ class UserInternal
 
         $obj = new self($person, $userId);
         $obj->avatarRef = $avatarRef;
+        $obj->customerMemberships = $customerMemberships;
         $obj->disabled = $disabled;
         $obj->disabledAt = $disabledAt;
         $obj->disabledBy = $disabledBy;
@@ -520,6 +617,7 @@ class UserInternal
         $obj->mfa = $mfa;
         $obj->passwordUpdatedAt = $passwordUpdatedAt;
         $obj->phoneNumber = $phoneNumber;
+        $obj->projectMemberships = $projectMemberships;
         $obj->registeredAt = $registeredAt;
         return $obj;
     }
@@ -534,6 +632,9 @@ class UserInternal
         $output = [];
         if (isset($this->avatarRef)) {
             $output['avatarRef'] = $this->avatarRef;
+        }
+        if (isset($this->customerMemberships)) {
+            $output['customerMemberships'] = $this->customerMemberships;
         }
         if (isset($this->disabled)) {
             $output['disabled'] = $this->disabled;
@@ -562,6 +663,9 @@ class UserInternal
         $output['person'] = $this->person->toJson();
         if (isset($this->phoneNumber)) {
             $output['phoneNumber'] = $this->phoneNumber;
+        }
+        if (isset($this->projectMemberships)) {
+            $output['projectMemberships'] = $this->projectMemberships;
         }
         if (isset($this->registeredAt)) {
             $output['registeredAt'] = ($this->registeredAt)->format(DateTime::ATOM);

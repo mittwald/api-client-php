@@ -27,6 +27,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\Create
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteTooManyRequestsResponse;
@@ -214,6 +222,32 @@ class CustomerClientImpl implements CustomerClient
             409 => CreateCustomerInviteConflictResponse::fromResponse($httpResponse),
             429 => CreateCustomerInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateCustomerInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create the Wallet for the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateWalletRequest $request An object representing the request for this operation
+     * @return CreateWalletOKResponse The Wallet has been created.
+     */
+    public function createWallet(CreateWalletRequest $request): CreateWalletOKResponse
+    {
+        $httpRequest = new Request(CreateWalletRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CreateWalletOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateWalletBadRequestResponse::fromResponse($httpResponse),
+            404 => CreateWalletNotFoundResponse::fromResponse($httpResponse),
+            409 => CreateWalletConflictResponse::fromResponse($httpResponse),
+            412 => CreateWalletPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateWalletTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateWalletDefaultResponse::fromResponse($httpResponse),
         });
     }
 

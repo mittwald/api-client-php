@@ -18,16 +18,16 @@ class ListAppinstallationsForUserRequest
         'type' => 'object',
         'properties' => [
             'limit' => [
-                'minimum' => 0,
                 'type' => 'integer',
-            ],
-            'page' => [
-                'minimum' => 0,
-                'type' => 'integer',
+                'minimum' => 1,
             ],
             'skip' => [
-                'minimum' => 0,
                 'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -37,9 +37,9 @@ class ListAppinstallationsForUserRequest
 
     private ?int $limit = null;
 
-    private ?int $page = null;
+    private int $skip = 0;
 
-    private ?int $skip = null;
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -57,14 +57,14 @@ class ListAppinstallationsForUserRequest
         return $this->limit ?? null;
     }
 
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
     public function getPage(): ?int
     {
         return $this->page ?? null;
-    }
-
-    public function getSkip(): ?int
-    {
-        return $this->skip ?? null;
     }
 
     public function withLimit(int $limit): self
@@ -85,6 +85,20 @@ class ListAppinstallationsForUserRequest
     {
         $clone = clone $this;
         unset($clone->limit);
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, static::$schema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
 
         return $clone;
     }
@@ -111,28 +125,6 @@ class ListAppinstallationsForUserRequest
         return $clone;
     }
 
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, static::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -152,19 +144,19 @@ class ListAppinstallationsForUserRequest
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
         $page = null;
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
-        $skip = null;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
 
         $obj = new self();
         $obj->limit = $limit;
-        $obj->page = $page;
         $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -179,11 +171,9 @@ class ListAppinstallationsForUserRequest
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
+        $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
         }
 
         return $output;
@@ -248,11 +238,11 @@ class ListAppinstallationsForUserRequest
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,
