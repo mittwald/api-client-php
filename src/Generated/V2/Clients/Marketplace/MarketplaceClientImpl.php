@@ -56,6 +56,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionTooManyRequestsResponse;
@@ -352,6 +353,7 @@ class MarketplaceClientImpl implements MarketplaceClient
             return ExtensionGetExtensionOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionGetExtensionNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionGetExtensionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetExtensionDefaultResponse::fromResponse($httpResponse),
         });
