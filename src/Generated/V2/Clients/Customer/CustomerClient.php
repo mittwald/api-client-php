@@ -27,6 +27,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCu
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerRequest;
@@ -176,6 +178,16 @@ interface CustomerClient
      * @param GetCustomerTokenInviteRequest $request An object representing the request for this operation
      */
     public function getCustomerTokenInvite(GetCustomerTokenInviteRequest $request): GetCustomerTokenInviteOKResponse;
+    /**
+     * Gets the Wallet of the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetWalletRequest $request An object representing the request for this operation
+     * @return GetWalletOKResponse The Wallet of the Customer
+     */
+    public function getWallet(GetWalletRequest $request): GetWalletOKResponse;
     /**
      * Check if the customer profile has a valid contract partner configured.
      *

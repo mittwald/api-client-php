@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateMfaRequest
+class GetWalletRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,59 +17,41 @@ class AuthenticateMfaRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'email' => [
-                        'description' => 'The email of the user.',
-                        'example' => 'a.lovelace@example.com',
-                        'format' => 'email',
-                        'type' => 'string',
-                    ],
-                    'multiFactorCode' => [
-                        'description' => 'The second factor - otp code or recovery code.',
-                        'example' => '123456',
-                        'maxLength' => 16,
-                        'minLength' => 6,
-                        'type' => 'string',
-                    ],
-                    'password' => [
-                        'description' => 'The password of the user.',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'multiFactorCode',
-                    'email',
-                    'password',
-                ],
-                'type' => 'object',
+            'customerId' => [
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'customerId',
         ],
     ];
 
-    private AuthenticateMfaRequestBody $body;
+    private string $customerId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(AuthenticateMfaRequestBody $body)
+    public function __construct(string $customerId)
     {
-        $this->body = $body;
+        $this->customerId = $customerId;
     }
 
-    public function getBody(): AuthenticateMfaRequestBody
+    public function getCustomerId(): string
     {
-        return $this->body;
+        return $this->customerId;
     }
 
-    public function withBody(AuthenticateMfaRequestBody $body): self
+    public function withCustomerId(string $customerId): self
     {
+        $validator = new Validator();
+        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
@@ -79,19 +61,19 @@ class AuthenticateMfaRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateMfaRequest Created instance
+     * @return GetWalletRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateMfaRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetWalletRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = AuthenticateMfaRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
 
-        $obj = new self($body);
+        $obj = new self($customerId);
 
         return $obj;
     }
@@ -104,7 +86,7 @@ class AuthenticateMfaRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['customerId'] = $this->customerId;
 
         return $output;
     }
@@ -135,7 +117,6 @@ class AuthenticateMfaRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -150,7 +131,8 @@ class AuthenticateMfaRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/authenticate-mfa';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/wallet';
     }
 
     /**
@@ -169,7 +151,6 @@ class AuthenticateMfaRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -2,119 +2,111 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\AuthenticateMfa;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class AuthenticateMfaRequestBody
+class GetWalletOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'email' => [
-                'description' => 'The email of the user.',
-                'example' => 'a.lovelace@example.com',
-                'format' => 'email',
+            'customerId' => [
+                'example' => 'edefeee4-e8e9-4e2d-ab95-9a2eb6104cfb',
                 'type' => 'string',
             ],
-            'multiFactorCode' => [
-                'description' => 'The second factor - otp code or recovery code.',
-                'example' => '123456',
-                'maxLength' => 16,
-                'minLength' => 6,
-                'type' => 'string',
+            'points' => [
+                'example' => 10,
+                'type' => 'number',
             ],
-            'password' => [
-                'description' => 'The password of the user.',
+            'walletId' => [
+                'example' => '32485364-7500-4591-b5cb-4e25e4bd1f30',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'multiFactorCode',
-            'email',
-            'password',
+            'customerId',
+            'walletId',
+            'points',
         ],
         'type' => 'object',
     ];
 
-    /**
-     * The email of the user.
-     */
-    private string $email;
+    private string $customerId;
+
+    private int|float $points;
+
+    private string $walletId;
 
     /**
-     * The second factor - otp code or recovery code.
+     * @param int|float $points
      */
-    private string $multiFactorCode;
-
-    /**
-     * The password of the user.
-     */
-    private string $password;
-
-    public function __construct(string $email, string $multiFactorCode, string $password)
+    public function __construct(string $customerId, int|float $points, string $walletId)
     {
-        $this->email = $email;
-        $this->multiFactorCode = $multiFactorCode;
-        $this->password = $password;
+        $this->customerId = $customerId;
+        $this->points = $points;
+        $this->walletId = $walletId;
     }
 
-    public function getEmail(): string
+    public function getCustomerId(): string
     {
-        return $this->email;
+        return $this->customerId;
     }
 
-    public function getMultiFactorCode(): string
+    public function getPoints(): int|float
     {
-        return $this->multiFactorCode;
+        return $this->points;
     }
 
-    public function getPassword(): string
+    public function getWalletId(): string
     {
-        return $this->password;
+        return $this->walletId;
     }
 
-    public function withEmail(string $email): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($email, static::$schema['properties']['email']);
+        $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->email = $email;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
 
-    public function withMultiFactorCode(string $multiFactorCode): self
+    /**
+     * @param int|float $points
+     */
+    public function withPoints(int|float $points): self
     {
         $validator = new Validator();
-        $validator->validate($multiFactorCode, static::$schema['properties']['multiFactorCode']);
+        $validator->validate($points, static::$schema['properties']['points']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->multiFactorCode = $multiFactorCode;
+        $clone->points = $points;
 
         return $clone;
     }
 
-    public function withPassword(string $password): self
+    public function withWalletId(string $walletId): self
     {
         $validator = new Validator();
-        $validator->validate($password, static::$schema['properties']['password']);
+        $validator->validate($walletId, static::$schema['properties']['walletId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->password = $password;
+        $clone->walletId = $walletId;
 
         return $clone;
     }
@@ -124,21 +116,21 @@ class AuthenticateMfaRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return AuthenticateMfaRequestBody Created instance
+     * @return GetWalletOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): AuthenticateMfaRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): GetWalletOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $email = $input->{'email'};
-        $multiFactorCode = $input->{'multiFactorCode'};
-        $password = $input->{'password'};
+        $customerId = $input->{'customerId'};
+        $points = str_contains((string)($input->{'points'}), '.') ? (float)($input->{'points'}) : (int)($input->{'points'});
+        $walletId = $input->{'walletId'};
 
-        $obj = new self($email, $multiFactorCode, $password);
+        $obj = new self($customerId, $points, $walletId);
 
         return $obj;
     }
@@ -151,9 +143,9 @@ class AuthenticateMfaRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['email'] = $this->email;
-        $output['multiFactorCode'] = $this->multiFactorCode;
-        $output['password'] = $this->password;
+        $output['customerId'] = $this->customerId;
+        $output['points'] = $this->points;
+        $output['walletId'] = $this->walletId;
 
         return $output;
     }

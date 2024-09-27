@@ -72,6 +72,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetC
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentNotFoundResponse;
@@ -428,6 +436,32 @@ class CustomerClientImpl implements CustomerClient
             404 => GetCustomerTokenInviteNotFoundResponse::fromResponse($httpResponse),
             429 => GetCustomerTokenInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetCustomerTokenInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Gets the Wallet of the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetWalletRequest $request An object representing the request for this operation
+     * @return GetWalletOKResponse The Wallet of the Customer
+     */
+    public function getWallet(GetWalletRequest $request): GetWalletOKResponse
+    {
+        $httpRequest = new Request(GetWalletRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetWalletOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetWalletBadRequestResponse::fromResponse($httpResponse),
+            404 => GetWalletNotFoundResponse::fromResponse($httpResponse),
+            409 => GetWalletConflictResponse::fromResponse($httpResponse),
+            412 => GetWalletPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => GetWalletTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetWalletDefaultResponse::fromResponse($httpResponse),
         });
     }
 
