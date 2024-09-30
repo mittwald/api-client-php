@@ -39,6 +39,8 @@ class AuthenticateMfaRequest
                 ],
                 'required' => [
                     'multiFactorCode',
+                    'email',
+                    'password',
                 ],
                 'type' => 'object',
             ],

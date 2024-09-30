@@ -34,6 +34,8 @@ class AuthenticateMfaRequestBody
         ],
         'required' => [
             'multiFactorCode',
+            'email',
+            'password',
         ],
         'type' => 'object',
     ];
@@ -41,7 +43,7 @@ class AuthenticateMfaRequestBody
     /**
      * The email of the user.
      */
-    private ?string $email = null;
+    private string $email;
 
     /**
      * The second factor - otp code or recovery code.
@@ -51,16 +53,18 @@ class AuthenticateMfaRequestBody
     /**
      * The password of the user.
      */
-    private ?string $password = null;
+    private string $password;
 
-    public function __construct(string $multiFactorCode)
+    public function __construct(string $email, string $multiFactorCode, string $password)
     {
+        $this->email = $email;
         $this->multiFactorCode = $multiFactorCode;
+        $this->password = $password;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
-        return $this->email ?? null;
+        return $this->email;
     }
 
     public function getMultiFactorCode(): string
@@ -68,9 +72,9 @@ class AuthenticateMfaRequestBody
         return $this->multiFactorCode;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
-        return $this->password ?? null;
+        return $this->password;
     }
 
     public function withEmail(string $email): self
@@ -83,14 +87,6 @@ class AuthenticateMfaRequestBody
 
         $clone = clone $this;
         $clone->email = $email;
-
-        return $clone;
-    }
-
-    public function withoutEmail(): self
-    {
-        $clone = clone $this;
-        unset($clone->email);
 
         return $clone;
     }
@@ -123,14 +119,6 @@ class AuthenticateMfaRequestBody
         return $clone;
     }
 
-    public function withoutPassword(): self
-    {
-        $clone = clone $this;
-        unset($clone->password);
-
-        return $clone;
-    }
-
     /**
      * Builds a new instance from an input array
      *
@@ -146,19 +134,12 @@ class AuthenticateMfaRequestBody
             static::validateInput($input);
         }
 
-        $email = null;
-        if (isset($input->{'email'})) {
-            $email = $input->{'email'};
-        }
+        $email = $input->{'email'};
         $multiFactorCode = $input->{'multiFactorCode'};
-        $password = null;
-        if (isset($input->{'password'})) {
-            $password = $input->{'password'};
-        }
+        $password = $input->{'password'};
 
-        $obj = new self($multiFactorCode);
-        $obj->email = $email;
-        $obj->password = $password;
+        $obj = new self($email, $multiFactorCode, $password);
+
         return $obj;
     }
 
@@ -170,13 +151,9 @@ class AuthenticateMfaRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->email)) {
-            $output['email'] = $this->email;
-        }
+        $output['email'] = $this->email;
         $output['multiFactorCode'] = $this->multiFactorCode;
-        if (isset($this->password)) {
-            $output['password'] = $this->password;
-        }
+        $output['password'] = $this->password;
 
         return $output;
     }
