@@ -30,6 +30,10 @@ class GetWalletOKResponse implements ResponseContainer
                         'example' => 10,
                         'type' => 'number',
                     ],
+                    'recommendationCode' => [
+                        'example' => 'm-123456',
+                        'type' => 'string',
+                    ],
                     'walletId' => [
                         'example' => '32485364-7500-4591-b5cb-4e25e4bd1f30',
                         'type' => 'string',

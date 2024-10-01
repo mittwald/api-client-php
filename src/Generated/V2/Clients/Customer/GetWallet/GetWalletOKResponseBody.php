@@ -22,6 +22,10 @@ class GetWalletOKResponseBody
                 'example' => 10,
                 'type' => 'number',
             ],
+            'recommendationCode' => [
+                'example' => 'm-123456',
+                'type' => 'string',
+            ],
             'walletId' => [
                 'example' => '32485364-7500-4591-b5cb-4e25e4bd1f30',
                 'type' => 'string',
@@ -38,6 +42,8 @@ class GetWalletOKResponseBody
     private string $customerId;
 
     private int|float $points;
+
+    private ?string $recommendationCode = null;
 
     private string $walletId;
 
@@ -59,6 +65,11 @@ class GetWalletOKResponseBody
     public function getPoints(): int|float
     {
         return $this->points;
+    }
+
+    public function getRecommendationCode(): ?string
+    {
+        return $this->recommendationCode ?? null;
     }
 
     public function getWalletId(): string
@@ -97,6 +108,28 @@ class GetWalletOKResponseBody
         return $clone;
     }
 
+    public function withRecommendationCode(string $recommendationCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($recommendationCode, static::$schema['properties']['recommendationCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recommendationCode = $recommendationCode;
+
+        return $clone;
+    }
+
+    public function withoutRecommendationCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->recommendationCode);
+
+        return $clone;
+    }
+
     public function withWalletId(string $walletId): self
     {
         $validator = new Validator();
@@ -128,10 +161,14 @@ class GetWalletOKResponseBody
 
         $customerId = $input->{'customerId'};
         $points = str_contains((string)($input->{'points'}), '.') ? (float)($input->{'points'}) : (int)($input->{'points'});
+        $recommendationCode = null;
+        if (isset($input->{'recommendationCode'})) {
+            $recommendationCode = $input->{'recommendationCode'};
+        }
         $walletId = $input->{'walletId'};
 
         $obj = new self($customerId, $points, $walletId);
-
+        $obj->recommendationCode = $recommendationCode;
         return $obj;
     }
 
@@ -145,6 +182,9 @@ class GetWalletOKResponseBody
         $output = [];
         $output['customerId'] = $this->customerId;
         $output['points'] = $this->points;
+        if (isset($this->recommendationCode)) {
+            $output['recommendationCode'] = $this->recommendationCode;
+        }
         $output['walletId'] = $this->walletId;
 
         return $output;
