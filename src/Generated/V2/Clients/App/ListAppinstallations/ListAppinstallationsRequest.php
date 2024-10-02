@@ -21,10 +21,6 @@ class ListAppinstallationsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 1,
-            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 1,
@@ -32,6 +28,10 @@ class ListAppinstallationsRequest
             'skip' => [
                 'type' => 'integer',
                 'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -41,11 +41,11 @@ class ListAppinstallationsRequest
 
     private string $projectId;
 
-    private ?int $page = null;
-
     private ?int $limit = null;
 
     private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -61,11 +61,6 @@ class ListAppinstallationsRequest
         return $this->projectId;
     }
 
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
@@ -74,6 +69,11 @@ class ListAppinstallationsRequest
     public function getSkip(): int
     {
         return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -86,28 +86,6 @@ class ListAppinstallationsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, static::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
 
         return $clone;
     }
@@ -148,6 +126,28 @@ class ListAppinstallationsRequest
         return $clone;
     }
 
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, static::$schema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -164,10 +164,6 @@ class ListAppinstallationsRequest
         }
 
         $projectId = $input->{'projectId'};
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -176,11 +172,15 @@ class ListAppinstallationsRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self($projectId);
-        $obj->page = $page;
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -193,13 +193,13 @@ class ListAppinstallationsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
         $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
 
         return $output;
     }
@@ -261,9 +261,6 @@ class ListAppinstallationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
