@@ -45,6 +45,10 @@ class ServerOrder
                 'example' => '123456',
                 'type' => 'string',
             ],
+            'recommendationCode' => [
+                'example' => 'm-123456',
+                'type' => 'string',
+            ],
             'useFreeTrial' => [
                 'type' => 'boolean',
             ],
@@ -67,6 +71,8 @@ class ServerOrder
     private string $machineType;
 
     private ?string $promotionCode = null;
+
+    private ?string $recommendationCode = null;
 
     private ?bool $useFreeTrial = null;
 
@@ -104,6 +110,11 @@ class ServerOrder
     public function getPromotionCode(): ?string
     {
         return $this->promotionCode ?? null;
+    }
+
+    public function getRecommendationCode(): ?string
+    {
+        return $this->recommendationCode ?? null;
     }
 
     public function getUseFreeTrial(): ?bool
@@ -192,6 +203,28 @@ class ServerOrder
         return $clone;
     }
 
+    public function withRecommendationCode(string $recommendationCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($recommendationCode, static::$schema['properties']['recommendationCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recommendationCode = $recommendationCode;
+
+        return $clone;
+    }
+
+    public function withoutRecommendationCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->recommendationCode);
+
+        return $clone;
+    }
+
     public function withUseFreeTrial(bool $useFreeTrial): self
     {
         $validator = new Validator();
@@ -237,6 +270,10 @@ class ServerOrder
         if (isset($input->{'promotionCode'})) {
             $promotionCode = $input->{'promotionCode'};
         }
+        $recommendationCode = null;
+        if (isset($input->{'recommendationCode'})) {
+            $recommendationCode = $input->{'recommendationCode'};
+        }
         $useFreeTrial = null;
         if (isset($input->{'useFreeTrial'})) {
             $useFreeTrial = (bool)($input->{'useFreeTrial'});
@@ -244,6 +281,7 @@ class ServerOrder
 
         $obj = new self($customerId, $description, $diskspaceInGiB, $machineType);
         $obj->promotionCode = $promotionCode;
+        $obj->recommendationCode = $recommendationCode;
         $obj->useFreeTrial = $useFreeTrial;
         return $obj;
     }
@@ -262,6 +300,9 @@ class ServerOrder
         $output['machineType'] = $this->machineType;
         if (isset($this->promotionCode)) {
             $output['promotionCode'] = $this->promotionCode;
+        }
+        if (isset($this->recommendationCode)) {
+            $output['recommendationCode'] = $this->recommendationCode;
         }
         if (isset($this->useFreeTrial)) {
             $output['useFreeTrial'] = $this->useFreeTrial;

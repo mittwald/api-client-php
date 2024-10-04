@@ -27,6 +27,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\Create
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletDefaultResponse;
@@ -230,6 +238,32 @@ class CustomerClientImpl implements CustomerClient
             409 => CreateCustomerInviteConflictResponse::fromResponse($httpResponse),
             429 => CreateCustomerInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateCustomerInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Lets us know your idea for our recommendation programm.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-recommendation-suggestion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateRecommendationSuggestionRequest $request An object representing the request for this operation
+     * @return CreateRecommendationSuggestionCreatedResponse The suggestion has been made.
+     */
+    public function createRecommendationSuggestion(CreateRecommendationSuggestionRequest $request): CreateRecommendationSuggestionCreatedResponse
+    {
+        $httpRequest = new Request(CreateRecommendationSuggestionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateRecommendationSuggestionCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateRecommendationSuggestionBadRequestResponse::fromResponse($httpResponse),
+            404 => CreateRecommendationSuggestionNotFoundResponse::fromResponse($httpResponse),
+            409 => CreateRecommendationSuggestionConflictResponse::fromResponse($httpResponse),
+            412 => CreateRecommendationSuggestionPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateRecommendationSuggestionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateRecommendationSuggestionDefaultResponse::fromResponse($httpResponse),
         });
     }
 

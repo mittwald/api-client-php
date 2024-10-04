@@ -12,6 +12,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustom
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
@@ -92,6 +94,16 @@ interface CustomerClient
      * @param CreateCustomerInviteRequest $request An object representing the request for this operation
      */
     public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse;
+    /**
+     * Lets us know your idea for our recommendation programm.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-recommendation-suggestion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateRecommendationSuggestionRequest $request An object representing the request for this operation
+     * @return CreateRecommendationSuggestionCreatedResponse The suggestion has been made.
+     */
+    public function createRecommendationSuggestion(CreateRecommendationSuggestionRequest $request): CreateRecommendationSuggestionCreatedResponse;
     /**
      * Create the Wallet for the Customer.
      *
