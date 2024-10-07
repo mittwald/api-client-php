@@ -39,6 +39,10 @@ class ProjectHostingOrder
                 'example' => '123456',
                 'type' => 'string',
             ],
+            'recommendationCode' => [
+                'example' => 'm-123456',
+                'type' => 'string',
+            ],
             'spec' => [
                 'oneOf' => [
                     [
@@ -69,6 +73,8 @@ class ProjectHostingOrder
     private int|float $diskspaceInGiB;
 
     private ?string $promotionCode = null;
+
+    private ?string $recommendationCode = null;
 
     private MachineTypeSpec|HardwareSpec $spec;
 
@@ -104,6 +110,11 @@ class ProjectHostingOrder
     public function getPromotionCode(): ?string
     {
         return $this->promotionCode ?? null;
+    }
+
+    public function getRecommendationCode(): ?string
+    {
+        return $this->recommendationCode ?? null;
     }
 
     /**
@@ -187,6 +198,28 @@ class ProjectHostingOrder
         return $clone;
     }
 
+    public function withRecommendationCode(string $recommendationCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($recommendationCode, static::$schema['properties']['recommendationCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->recommendationCode = $recommendationCode;
+
+        return $clone;
+    }
+
+    public function withoutRecommendationCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->recommendationCode);
+
+        return $clone;
+    }
+
     /**
      * @param MachineTypeSpec|HardwareSpec $spec
      */
@@ -242,6 +275,10 @@ class ProjectHostingOrder
         if (isset($input->{'promotionCode'})) {
             $promotionCode = $input->{'promotionCode'};
         }
+        $recommendationCode = null;
+        if (isset($input->{'recommendationCode'})) {
+            $recommendationCode = $input->{'recommendationCode'};
+        }
         $spec = match (true) {
             MachineTypeSpec::validateInput($input->{'spec'}, true) => MachineTypeSpec::buildFromInput($input->{'spec'}, validate: $validate),
             HardwareSpec::validateInput($input->{'spec'}, true) => HardwareSpec::buildFromInput($input->{'spec'}, validate: $validate),
@@ -253,6 +290,7 @@ class ProjectHostingOrder
 
         $obj = new self($customerId, $description, $diskspaceInGiB, $spec);
         $obj->promotionCode = $promotionCode;
+        $obj->recommendationCode = $recommendationCode;
         $obj->useFreeTrial = $useFreeTrial;
         return $obj;
     }
@@ -270,6 +308,9 @@ class ProjectHostingOrder
         $output['diskspaceInGiB'] = $this->diskspaceInGiB;
         if (isset($this->promotionCode)) {
             $output['promotionCode'] = $this->promotionCode;
+        }
+        if (isset($this->recommendationCode)) {
+            $output['recommendationCode'] = $this->recommendationCode;
         }
         $output['spec'] = match (true) {
             ($this->spec) instanceof MachineTypeSpec, ($this->spec) instanceof HardwareSpec => $this->spec->toJson(),

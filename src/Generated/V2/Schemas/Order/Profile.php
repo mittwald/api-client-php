@@ -28,11 +28,11 @@ class Profile
                 'format' => 'email',
                 'type' => 'string',
             ],
-            'first_name' => [
+            'firstName' => [
                 'example' => 'Ada',
                 'type' => 'string',
             ],
-            'last_name' => [
+            'lastName' => [
                 'example' => 'Lovelace',
                 'type' => 'string',
             ],
@@ -59,9 +59,9 @@ class Profile
 
     private string $email;
 
-    private ?string $first_name = null;
+    private ?string $firstName = null;
 
-    private ?string $last_name = null;
+    private ?string $lastName = null;
 
     /**
      * the users title
@@ -83,12 +83,12 @@ class Profile
 
     public function getFirstName(): ?string
     {
-        return $this->first_name ?? null;
+        return $this->firstName ?? null;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name ?? null;
+        return $this->lastName ?? null;
     }
 
     public function getTitle(): ?ProfileTitle
@@ -115,16 +115,16 @@ class Profile
         return $clone;
     }
 
-    public function withFirstName(string $first_name): self
+    public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($first_name, static::$schema['properties']['first_name']);
+        $validator->validate($firstName, static::$schema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->first_name = $first_name;
+        $clone->firstName = $firstName;
 
         return $clone;
     }
@@ -132,21 +132,21 @@ class Profile
     public function withoutFirstName(): self
     {
         $clone = clone $this;
-        unset($clone->first_name);
+        unset($clone->firstName);
 
         return $clone;
     }
 
-    public function withLastName(string $last_name): self
+    public function withLastName(string $lastName): self
     {
         $validator = new Validator();
-        $validator->validate($last_name, static::$schema['properties']['last_name']);
+        $validator->validate($lastName, static::$schema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->last_name = $last_name;
+        $clone->lastName = $lastName;
 
         return $clone;
     }
@@ -154,7 +154,7 @@ class Profile
     public function withoutLastName(): self
     {
         $clone = clone $this;
-        unset($clone->last_name);
+        unset($clone->lastName);
 
         return $clone;
     }
@@ -205,13 +205,13 @@ class Profile
         }
 
         $email = $input->{'email'};
-        $first_name = null;
-        if (isset($input->{'first_name'})) {
-            $first_name = $input->{'first_name'};
+        $firstName = null;
+        if (isset($input->{'firstName'})) {
+            $firstName = $input->{'firstName'};
         }
-        $last_name = null;
-        if (isset($input->{'last_name'})) {
-            $last_name = $input->{'last_name'};
+        $lastName = null;
+        if (isset($input->{'lastName'})) {
+            $lastName = $input->{'lastName'};
         }
         $title = null;
         if (isset($input->{'title'})) {
@@ -220,8 +220,8 @@ class Profile
         $userId = $input->{'userId'};
 
         $obj = new self($email, $userId);
-        $obj->first_name = $first_name;
-        $obj->last_name = $last_name;
+        $obj->firstName = $firstName;
+        $obj->lastName = $lastName;
         $obj->title = $title;
         return $obj;
     }
@@ -235,11 +235,11 @@ class Profile
     {
         $output = [];
         $output['email'] = $this->email;
-        if (isset($this->first_name)) {
-            $output['first_name'] = $this->first_name;
+        if (isset($this->firstName)) {
+            $output['firstName'] = $this->firstName;
         }
-        if (isset($this->last_name)) {
-            $output['last_name'] = $this->last_name;
+        if (isset($this->lastName)) {
+            $output['lastName'] = $this->lastName;
         }
         if (isset($this->title)) {
             $output['title'] = ($this->title)->value;
