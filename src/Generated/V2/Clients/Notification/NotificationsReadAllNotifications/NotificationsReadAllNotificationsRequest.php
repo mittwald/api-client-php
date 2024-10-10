@@ -17,6 +17,28 @@ class NotificationsReadAllNotificationsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
+            'severities' => [
+                'items' => [
+                    'enum' => [
+                        'success',
+                        'info',
+                        'warning',
+                        'error',
+                    ],
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
+            'referenceId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'referenceAggregate' => [
+                'type' => 'string',
+            ],
+            'referenceDomain' => [
+                'type' => 'string',
+            ],
             'body' => [
                 'type' => 'object',
             ],
@@ -25,6 +47,17 @@ class NotificationsReadAllNotificationsRequest
             'body',
         ],
     ];
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $severities = null;
+
+    private ?string $referenceId = null;
+
+    private ?string $referenceAggregate = null;
+
+    private ?string $referenceDomain = null;
 
     private NotificationsReadAllNotificationsRequestBody $body;
 
@@ -37,9 +70,123 @@ class NotificationsReadAllNotificationsRequest
         $this->body = $body;
     }
 
+    /**
+     * @return string[]|null
+     */
+    public function getSeverities(): ?array
+    {
+        return $this->severities ?? null;
+    }
+
+    public function getReferenceId(): ?string
+    {
+        return $this->referenceId ?? null;
+    }
+
+    public function getReferenceAggregate(): ?string
+    {
+        return $this->referenceAggregate ?? null;
+    }
+
+    public function getReferenceDomain(): ?string
+    {
+        return $this->referenceDomain ?? null;
+    }
+
     public function getBody(): NotificationsReadAllNotificationsRequestBody
     {
         return $this->body;
+    }
+
+    /**
+     * @param string[] $severities
+     */
+    public function withSeverities(array $severities): self
+    {
+        $validator = new Validator();
+        $validator->validate($severities, static::$schema['properties']['severities']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->severities = $severities;
+
+        return $clone;
+    }
+
+    public function withoutSeverities(): self
+    {
+        $clone = clone $this;
+        unset($clone->severities);
+
+        return $clone;
+    }
+
+    public function withReferenceId(string $referenceId): self
+    {
+        $validator = new Validator();
+        $validator->validate($referenceId, static::$schema['properties']['referenceId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referenceId = $referenceId;
+
+        return $clone;
+    }
+
+    public function withoutReferenceId(): self
+    {
+        $clone = clone $this;
+        unset($clone->referenceId);
+
+        return $clone;
+    }
+
+    public function withReferenceAggregate(string $referenceAggregate): self
+    {
+        $validator = new Validator();
+        $validator->validate($referenceAggregate, static::$schema['properties']['referenceAggregate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referenceAggregate = $referenceAggregate;
+
+        return $clone;
+    }
+
+    public function withoutReferenceAggregate(): self
+    {
+        $clone = clone $this;
+        unset($clone->referenceAggregate);
+
+        return $clone;
+    }
+
+    public function withReferenceDomain(string $referenceDomain): self
+    {
+        $validator = new Validator();
+        $validator->validate($referenceDomain, static::$schema['properties']['referenceDomain']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->referenceDomain = $referenceDomain;
+
+        return $clone;
+    }
+
+    public function withoutReferenceDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->referenceDomain);
+
+        return $clone;
     }
 
     public function withBody(NotificationsReadAllNotificationsRequestBody $body): self
@@ -65,10 +212,29 @@ class NotificationsReadAllNotificationsRequest
             static::validateInput($input);
         }
 
+        $severities = null;
+        if (isset($input->{'severities'})) {
+            $severities = $input->{'severities'};
+        }
+        $referenceId = null;
+        if (isset($input->{'referenceId'})) {
+            $referenceId = $input->{'referenceId'};
+        }
+        $referenceAggregate = null;
+        if (isset($input->{'referenceAggregate'})) {
+            $referenceAggregate = $input->{'referenceAggregate'};
+        }
+        $referenceDomain = null;
+        if (isset($input->{'referenceDomain'})) {
+            $referenceDomain = $input->{'referenceDomain'};
+        }
         $body = NotificationsReadAllNotificationsRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
-
+        $obj->severities = $severities;
+        $obj->referenceId = $referenceId;
+        $obj->referenceAggregate = $referenceAggregate;
+        $obj->referenceDomain = $referenceDomain;
         return $obj;
     }
 
@@ -80,6 +246,18 @@ class NotificationsReadAllNotificationsRequest
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->severities)) {
+            $output['severities'] = $this->severities;
+        }
+        if (isset($this->referenceId)) {
+            $output['referenceId'] = $this->referenceId;
+        }
+        if (isset($this->referenceAggregate)) {
+            $output['referenceAggregate'] = $this->referenceAggregate;
+        }
+        if (isset($this->referenceDomain)) {
+            $output['referenceDomain'] = $this->referenceDomain;
+        }
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -142,6 +320,18 @@ class NotificationsReadAllNotificationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['severities'])) {
+            $query['severities'] = $mapped['severities'];
+        }
+        if (isset($mapped['referenceId'])) {
+            $query['referenceId'] = $mapped['referenceId'];
+        }
+        if (isset($mapped['referenceAggregate'])) {
+            $query['referenceAggregate'] = $mapped['referenceAggregate'];
+        }
+        if (isset($mapped['referenceDomain'])) {
+            $query['referenceDomain'] = $mapped['referenceDomain'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
