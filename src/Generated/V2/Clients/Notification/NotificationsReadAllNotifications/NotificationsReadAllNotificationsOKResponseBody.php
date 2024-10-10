@@ -18,18 +18,30 @@ class NotificationsReadAllNotificationsOKResponseBody
             'status' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.messaging.NotificationStatus',
             ],
+            'updatedCount' => [
+                'description' => 'The number of notifications that have been updated.',
+                'format' => 'int32',
+                'type' => 'integer',
+            ],
         ],
         'required' => [
             'status',
+            'updatedCount',
         ],
         'type' => 'object',
     ];
 
     private NotificationStatus $status;
 
-    public function __construct(NotificationStatus $status)
+    /**
+     * The number of notifications that have been updated.
+     */
+    private int $updatedCount;
+
+    public function __construct(NotificationStatus $status, int $updatedCount)
     {
         $this->status = $status;
+        $this->updatedCount = $updatedCount;
     }
 
     public function getStatus(): NotificationStatus
@@ -37,10 +49,29 @@ class NotificationsReadAllNotificationsOKResponseBody
         return $this->status;
     }
 
+    public function getUpdatedCount(): int
+    {
+        return $this->updatedCount;
+    }
+
     public function withStatus(NotificationStatus $status): self
     {
         $clone = clone $this;
         $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withUpdatedCount(int $updatedCount): self
+    {
+        $validator = new Validator();
+        $validator->validate($updatedCount, static::$schema['properties']['updatedCount']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->updatedCount = $updatedCount;
 
         return $clone;
     }
@@ -61,8 +92,9 @@ class NotificationsReadAllNotificationsOKResponseBody
         }
 
         $status = NotificationStatus::from($input->{'status'});
+        $updatedCount = (int)($input->{'updatedCount'});
 
-        $obj = new self($status);
+        $obj = new self($status, $updatedCount);
 
         return $obj;
     }
@@ -76,6 +108,7 @@ class NotificationsReadAllNotificationsOKResponseBody
     {
         $output = [];
         $output['status'] = $this->status->value;
+        $output['updatedCount'] = $this->updatedCount;
 
         return $output;
     }

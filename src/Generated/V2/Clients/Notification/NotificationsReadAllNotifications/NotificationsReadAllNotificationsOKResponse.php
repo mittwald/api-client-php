@@ -25,9 +25,15 @@ class NotificationsReadAllNotificationsOKResponse implements ResponseContainer
                     'status' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.messaging.NotificationStatus',
                     ],
+                    'updatedCount' => [
+                        'description' => 'The number of notifications that have been updated.',
+                        'format' => 'int32',
+                        'type' => 'integer',
+                    ],
                 ],
                 'required' => [
                     'status',
+                    'updatedCount',
                 ],
                 'type' => 'object',
             ],
