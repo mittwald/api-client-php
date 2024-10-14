@@ -333,6 +333,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarReques
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemoveAvatar\RemoveAvatarTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RemovePhoneNumber\RemovePhoneNumberTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RequestAvatarUpload\RequestAvatarUploadBadRequestResponse;
@@ -2105,6 +2106,7 @@ class UserClientImpl implements UserClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => RemovePhoneNumberBadRequestResponse::fromResponse($httpResponse),
+            412 => RemovePhoneNumberPreconditionFailedResponse::fromResponse($httpResponse),
             429 => RemovePhoneNumberTooManyRequestsResponse::fromResponse($httpResponse),
             default => RemovePhoneNumberDefaultResponse::fromResponse($httpResponse),
         });
