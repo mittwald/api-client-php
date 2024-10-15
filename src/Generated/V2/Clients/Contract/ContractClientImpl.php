@@ -25,6 +25,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\C
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceBadRequestResponse;
@@ -255,6 +256,7 @@ class ContractClientImpl implements ContractClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => CancelContractTerminationBadRequestResponse::fromResponse($httpResponse),
             404 => CancelContractTerminationNotFoundResponse::fromResponse($httpResponse),
+            412 => CancelContractTerminationPreconditionFailedResponse::fromResponse($httpResponse),
             429 => CancelContractTerminationTooManyRequestsResponse::fromResponse($httpResponse),
             default => CancelContractTerminationDefaultResponse::fromResponse($httpResponse),
         });
