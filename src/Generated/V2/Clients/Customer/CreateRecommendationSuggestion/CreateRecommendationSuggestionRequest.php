@@ -164,7 +164,7 @@ class CreateRecommendationSuggestionRequest
     {
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
-        return '/v2/customers/' . $customerId . '/recommendation/suggestions';
+        return '/v2/customers/' . $customerId . '/recommendation-suggestions';
     }
 
     /**

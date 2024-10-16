@@ -25,6 +25,7 @@ class Extension
     private static array $schema = [
         'properties' => [
             'blocked' => [
+                'deprecated' => true,
                 'type' => 'boolean',
             ],
             'context' => [
@@ -33,6 +34,19 @@ class Extension
             'contributorId' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'deprecation' => [
+                'description' => 'The Extension is deprecated by the contributor and will expire at the given date.',
+                'properties' => [
+                    'deprecatedAt' => [
+                        'format' => 'date-time',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'deprecatedAt',
+                ],
+                'type' => 'object',
             ],
             'description' => [
                 'type' => 'string',
@@ -105,11 +119,19 @@ class Extension
         'type' => 'object',
     ];
 
+    /**
+     * @deprecated
+     */
     private bool $blocked;
 
     private Context $context;
 
     private string $contributorId;
+
+    /**
+     * The Extension is deprecated by the contributor and will expire at the given date.
+     */
+    private ?ExtensionDeprecation $deprecation = null;
 
     private string $description;
 
@@ -169,6 +191,9 @@ class Extension
         $this->tags = $tags;
     }
 
+    /**
+     * @deprecated
+     */
     public function getBlocked(): bool
     {
         return $this->blocked;
@@ -182,6 +207,11 @@ class Extension
     public function getContributorId(): string
     {
         return $this->contributorId;
+    }
+
+    public function getDeprecation(): ?ExtensionDeprecation
+    {
+        return $this->deprecation ?? null;
     }
 
     public function getDescription(): string
@@ -259,6 +289,9 @@ class Extension
         return $this->tags;
     }
 
+    /**
+     * @deprecated
+     */
     public function withBlocked(bool $blocked): self
     {
         $validator = new Validator();
@@ -291,6 +324,22 @@ class Extension
 
         $clone = clone $this;
         $clone->contributorId = $contributorId;
+
+        return $clone;
+    }
+
+    public function withDeprecation(ExtensionDeprecation $deprecation): self
+    {
+        $clone = clone $this;
+        $clone->deprecation = $deprecation;
+
+        return $clone;
+    }
+
+    public function withoutDeprecation(): self
+    {
+        $clone = clone $this;
+        unset($clone->deprecation);
 
         return $clone;
     }
@@ -482,6 +531,10 @@ class Extension
         $blocked = (bool)($input->{'blocked'});
         $context = Context::from($input->{'context'});
         $contributorId = $input->{'contributorId'};
+        $deprecation = null;
+        if (isset($input->{'deprecation'})) {
+            $deprecation = ExtensionDeprecation::buildFromInput($input->{'deprecation'}, validate: $validate);
+        }
         $description = $input->{'description'};
         $detailedDescriptions = null;
         if (isset($input->{'detailedDescriptions'})) {
@@ -504,6 +557,7 @@ class Extension
         $tags = $input->{'tags'};
 
         $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $scopes, $state, $support, $tags);
+        $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
@@ -521,6 +575,9 @@ class Extension
         $output['blocked'] = $this->blocked;
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
+        if (isset($this->deprecation)) {
+            $output['deprecation'] = ($this->deprecation)->toJson();
+        }
         $output['description'] = $this->description;
         if (isset($this->detailedDescriptions)) {
             $output['detailedDescriptions'] = $this->detailedDescriptions->toJson();
@@ -568,5 +625,8 @@ class Extension
 
     public function __clone()
     {
+        if (isset($this->deprecation)) {
+            $this->deprecation = clone $this->deprecation;
+        }
     }
 }

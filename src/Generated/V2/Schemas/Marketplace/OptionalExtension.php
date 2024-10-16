@@ -28,6 +28,7 @@ class OptionalExtension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.BackendComponents',
             ],
             'blocked' => [
+                'deprecated' => true,
                 'type' => 'boolean',
             ],
             'context' => [
@@ -72,7 +73,6 @@ class OptionalExtension
                 'type' => 'array',
             ],
             'state' => [
-                'deprecated' => true,
                 'description' => 'deprecated',
                 'enum' => [
                     'enabled',
@@ -102,6 +102,9 @@ class OptionalExtension
 
     private ?BackendComponents $backendComponents = null;
 
+    /**
+     * @deprecated
+     */
     private ?bool $blocked = null;
 
     private ?Context $context = null;
@@ -135,8 +138,6 @@ class OptionalExtension
 
     /**
      * deprecated
-     *
-     * @deprecated
      */
     private ?OptionalExtensionState $state = null;
 
@@ -163,6 +164,9 @@ class OptionalExtension
         return $this->backendComponents ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getBlocked(): ?bool
     {
         return $this->blocked ?? null;
@@ -232,9 +236,6 @@ class OptionalExtension
         return $this->scopes ?? null;
     }
 
-    /**
-     * @deprecated
-     */
     public function getState(): ?OptionalExtensionState
     {
         return $this->state ?? null;
@@ -269,6 +270,9 @@ class OptionalExtension
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withBlocked(bool $blocked): self
     {
         $validator = new Validator();
@@ -478,9 +482,6 @@ class OptionalExtension
         return $clone;
     }
 
-    /**
-     * @deprecated
-     */
     public function withState(OptionalExtensionState $state): self
     {
         $clone = clone $this;
