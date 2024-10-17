@@ -696,6 +696,8 @@ class AppClientImpl implements AppClient
     /**
      * Create linkage between an AppInstallation and a MySql-Database.
      *
+     * This route is deprecated. Use PATCH /v2/app-installations/{appInstallationId}/database instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/App/operation/deprecated-app-link-database
      * @throws GuzzleException
      * @throws UnexpectedResponseException
