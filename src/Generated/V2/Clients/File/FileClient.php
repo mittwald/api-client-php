@@ -40,6 +40,8 @@ interface FileClient
     /**
      * Get a Token's upload rules.
      *
+     * Deprecated by `GET /v2/file-upload-tokens/{fileUploadToken}/rules`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-token-rules
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -50,6 +52,8 @@ interface FileClient
     public function deprecatedFileGetFileTokenRules(DeprecatedFileGetFileTokenRulesRequest $request): DeprecatedFileGetFileTokenRulesOKResponse;
     /**
      * Get a Type's upload rules.
+     *
+     * Deprecated by `GET /v2/file-upload-types/{fileUploadType}/rules`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/File/operation/deprecated-file-get-file-type-rules
      * @throws GuzzleException
