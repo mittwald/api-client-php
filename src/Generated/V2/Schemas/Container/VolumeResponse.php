@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Container;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -39,12 +40,21 @@ class VolumeResponse
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'storageUsageInBytes' => [
+                'type' => 'integer',
+            ],
+            'storageUsageInBytesSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
             'stackId',
             'name',
             'orphaned',
+            'storageUsageInBytes',
+            'storageUsageInBytesSetAt',
         ],
         'type' => 'object',
     ];
@@ -60,12 +70,18 @@ class VolumeResponse
 
     private string $stackId;
 
-    public function __construct(string $id, string $name, bool $orphaned, string $stackId)
+    private int $storageUsageInBytes;
+
+    private DateTime $storageUsageInBytesSetAt;
+
+    public function __construct(string $id, string $name, bool $orphaned, string $stackId, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt)
     {
         $this->id = $id;
         $this->name = $name;
         $this->orphaned = $orphaned;
         $this->stackId = $stackId;
+        $this->storageUsageInBytes = $storageUsageInBytes;
+        $this->storageUsageInBytesSetAt = $storageUsageInBytesSetAt;
     }
 
     public function getId(): string
@@ -86,6 +102,16 @@ class VolumeResponse
     public function getStackId(): string
     {
         return $this->stackId;
+    }
+
+    public function getStorageUsageInBytes(): int
+    {
+        return $this->storageUsageInBytes;
+    }
+
+    public function getStorageUsageInBytesSetAt(): DateTime
+    {
+        return $this->storageUsageInBytesSetAt;
     }
 
     public function withId(string $id): self
@@ -144,6 +170,28 @@ class VolumeResponse
         return $clone;
     }
 
+    public function withStorageUsageInBytes(int $storageUsageInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($storageUsageInBytes, static::$schema['properties']['storageUsageInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->storageUsageInBytes = $storageUsageInBytes;
+
+        return $clone;
+    }
+
+    public function withStorageUsageInBytesSetAt(DateTime $storageUsageInBytesSetAt): self
+    {
+        $clone = clone $this;
+        $clone->storageUsageInBytesSetAt = $storageUsageInBytesSetAt;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -163,8 +211,10 @@ class VolumeResponse
         $name = $input->{'name'};
         $orphaned = (bool)($input->{'orphaned'});
         $stackId = $input->{'stackId'};
+        $storageUsageInBytes = (int)($input->{'storageUsageInBytes'});
+        $storageUsageInBytesSetAt = new DateTime($input->{'storageUsageInBytesSetAt'});
 
-        $obj = new self($id, $name, $orphaned, $stackId);
+        $obj = new self($id, $name, $orphaned, $stackId, $storageUsageInBytes, $storageUsageInBytesSetAt);
 
         return $obj;
     }
@@ -181,6 +231,8 @@ class VolumeResponse
         $output['name'] = $this->name;
         $output['orphaned'] = $this->orphaned;
         $output['stackId'] = $this->stackId;
+        $output['storageUsageInBytes'] = $this->storageUsageInBytes;
+        $output['storageUsageInBytesSetAt'] = ($this->storageUsageInBytesSetAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -211,5 +263,6 @@ class VolumeResponse
 
     public function __clone()
     {
+        $this->storageUsageInBytesSetAt = clone $this->storageUsageInBytesSetAt;
     }
 }
