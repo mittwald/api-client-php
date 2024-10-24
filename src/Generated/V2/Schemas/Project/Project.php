@@ -25,14 +25,6 @@ class Project
      */
     private static array $schema = [
         'properties' => [
-            'backupStorageUsageInBytes' => [
-                'format' => 'int64',
-                'type' => 'integer',
-            ],
-            'backupStorageUsageInBytesSetAt' => [
-                'format' => 'date-time',
-                'type' => 'string',
-            ],
             'clusterDomain' => [
                 'example' => 'project.host',
                 'format' => 'hostname',
@@ -155,15 +147,9 @@ class Project
             'statusSetAt',
             'webStorageUsageInBytes',
             'webStorageUsageInBytesSetAt',
-            'backupStorageUsageInBytes',
-            'backupStorageUsageInBytesSetAt',
         ],
         'type' => 'object',
     ];
-
-    private int $backupStorageUsageInBytes;
-
-    private DateTime $backupStorageUsageInBytesSetAt;
 
     private ?string $clusterDomain = null;
 
@@ -229,10 +215,8 @@ class Project
     /**
      * @param string[] $directories
      */
-    public function __construct(int $backupStorageUsageInBytes, DateTime $backupStorageUsageInBytesSetAt, DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
+    public function __construct(DateTime $createdAt, string $customerId, string $description, array $directories, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
     {
-        $this->backupStorageUsageInBytes = $backupStorageUsageInBytes;
-        $this->backupStorageUsageInBytesSetAt = $backupStorageUsageInBytesSetAt;
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
         $this->description = $description;
@@ -246,16 +230,6 @@ class Project
         $this->statusSetAt = $statusSetAt;
         $this->webStorageUsageInBytes = $webStorageUsageInBytes;
         $this->webStorageUsageInBytesSetAt = $webStorageUsageInBytesSetAt;
-    }
-
-    public function getBackupStorageUsageInBytes(): int
-    {
-        return $this->backupStorageUsageInBytes;
-    }
-
-    public function getBackupStorageUsageInBytesSetAt(): DateTime
-    {
-        return $this->backupStorageUsageInBytesSetAt;
     }
 
     public function getClusterDomain(): ?string
@@ -385,28 +359,6 @@ class Project
     public function getWebStorageUsageInBytesSetAt(): DateTime
     {
         return $this->webStorageUsageInBytesSetAt;
-    }
-
-    public function withBackupStorageUsageInBytes(int $backupStorageUsageInBytes): self
-    {
-        $validator = new Validator();
-        $validator->validate($backupStorageUsageInBytes, static::$schema['properties']['backupStorageUsageInBytes']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->backupStorageUsageInBytes = $backupStorageUsageInBytes;
-
-        return $clone;
-    }
-
-    public function withBackupStorageUsageInBytesSetAt(DateTime $backupStorageUsageInBytesSetAt): self
-    {
-        $clone = clone $this;
-        $clone->backupStorageUsageInBytesSetAt = $backupStorageUsageInBytesSetAt;
-
-        return $clone;
     }
 
     public function withClusterDomain(string $clusterDomain): self
@@ -787,8 +739,6 @@ class Project
             static::validateInput($input);
         }
 
-        $backupStorageUsageInBytes = (int)($input->{'backupStorageUsageInBytes'});
-        $backupStorageUsageInBytesSetAt = new DateTime($input->{'backupStorageUsageInBytesSetAt'});
         $clusterDomain = null;
         if (isset($input->{'clusterDomain'})) {
             $clusterDomain = $input->{'clusterDomain'};
@@ -850,7 +800,7 @@ class Project
         $webStorageUsageInBytes = (int)($input->{'webStorageUsageInBytes'});
         $webStorageUsageInBytesSetAt = new DateTime($input->{'webStorageUsageInBytesSetAt'});
 
-        $obj = new self($backupStorageUsageInBytes, $backupStorageUsageInBytesSetAt, $createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
+        $obj = new self($createdAt, $customerId, $description, $directories, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
         $obj->clusterDomain = $clusterDomain;
         $obj->clusterID = $clusterID;
         $obj->clusterId = $clusterId;
@@ -873,8 +823,6 @@ class Project
     public function toJson(): array
     {
         $output = [];
-        $output['backupStorageUsageInBytes'] = $this->backupStorageUsageInBytes;
-        $output['backupStorageUsageInBytesSetAt'] = ($this->backupStorageUsageInBytesSetAt)->format(DateTime::ATOM);
         if (isset($this->clusterDomain)) {
             $output['clusterDomain'] = $this->clusterDomain;
         }
@@ -953,7 +901,6 @@ class Project
 
     public function __clone()
     {
-        $this->backupStorageUsageInBytesSetAt = clone $this->backupStorageUsageInBytesSetAt;
         $this->createdAt = clone $this->createdAt;
         if (isset($this->disabledAt)) {
             $this->disabledAt = clone $this->disabledAt;

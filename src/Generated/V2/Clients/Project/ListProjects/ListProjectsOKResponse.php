@@ -23,13 +23,6 @@ class ListProjectsOKResponse implements ResponseContainer
             'body' => [
                 'items' => [
                     'properties' => [
-                        'backupStorageUsageInBytes' => [
-                            'type' => 'integer',
-                        ],
-                        'backupStorageUsageInBytesSetAt' => [
-                            'format' => 'date-time',
-                            'type' => 'string',
-                        ],
                         'createdAt' => [
                             'format' => 'date-time',
                             'type' => 'string',
@@ -114,8 +107,6 @@ class ListProjectsOKResponse implements ResponseContainer
                         'statusSetAt',
                         'webStorageUsageInBytes',
                         'webStorageUsageInBytesSetAt',
-                        'backupStorageUsageInBytes',
-                        'backupStorageUsageInBytesSetAt',
                     ],
                     'type' => 'object',
                 ],

@@ -106,6 +106,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsNotFoundResponse;
@@ -640,6 +646,29 @@ class ContractClientImpl implements ContractClient
             404 => InvoiceListCustomerInvoicesNotFoundResponse::fromResponse($httpResponse),
             429 => InvoiceListCustomerInvoicesTooManyRequestsResponse::fromResponse($httpResponse),
             default => InvoiceListCustomerInvoicesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update InvoiceSettings of a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-replace-invoice-settings
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param InvoiceReplaceInvoiceSettingsRequest $request An object representing the request for this operation
+     */
+    public function invoiceReplaceInvoiceSettings(InvoiceReplaceInvoiceSettingsRequest $request): InvoiceReplaceInvoiceSettingsOKResponse
+    {
+        $httpRequest = new Request(InvoiceReplaceInvoiceSettingsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return InvoiceReplaceInvoiceSettingsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => InvoiceReplaceInvoiceSettingsBadRequestResponse::fromResponse($httpResponse),
+            404 => InvoiceReplaceInvoiceSettingsNotFoundResponse::fromResponse($httpResponse),
+            429 => InvoiceReplaceInvoiceSettingsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => InvoiceReplaceInvoiceSettingsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
