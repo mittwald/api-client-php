@@ -27,6 +27,22 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\Create
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteTooManyRequestsResponse;
@@ -64,6 +80,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetC
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentNotFoundResponse;
@@ -214,6 +238,58 @@ class CustomerClientImpl implements CustomerClient
             409 => CreateCustomerInviteConflictResponse::fromResponse($httpResponse),
             429 => CreateCustomerInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => CreateCustomerInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Lets us know your idea for our recommendation programm.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-recommendation-suggestion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateRecommendationSuggestionRequest $request An object representing the request for this operation
+     * @return CreateRecommendationSuggestionCreatedResponse The suggestion has been made.
+     */
+    public function createRecommendationSuggestion(CreateRecommendationSuggestionRequest $request): CreateRecommendationSuggestionCreatedResponse
+    {
+        $httpRequest = new Request(CreateRecommendationSuggestionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateRecommendationSuggestionCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateRecommendationSuggestionBadRequestResponse::fromResponse($httpResponse),
+            404 => CreateRecommendationSuggestionNotFoundResponse::fromResponse($httpResponse),
+            409 => CreateRecommendationSuggestionConflictResponse::fromResponse($httpResponse),
+            412 => CreateRecommendationSuggestionPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateRecommendationSuggestionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateRecommendationSuggestionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create the Wallet for the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateWalletRequest $request An object representing the request for this operation
+     * @return CreateWalletOKResponse The Wallet has been created.
+     */
+    public function createWallet(CreateWalletRequest $request): CreateWalletOKResponse
+    {
+        $httpRequest = new Request(CreateWalletRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CreateWalletOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateWalletBadRequestResponse::fromResponse($httpResponse),
+            404 => CreateWalletNotFoundResponse::fromResponse($httpResponse),
+            409 => CreateWalletConflictResponse::fromResponse($httpResponse),
+            412 => CreateWalletPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => CreateWalletTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateWalletDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -394,6 +470,32 @@ class CustomerClientImpl implements CustomerClient
             404 => GetCustomerTokenInviteNotFoundResponse::fromResponse($httpResponse),
             429 => GetCustomerTokenInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetCustomerTokenInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Gets the Wallet of the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetWalletRequest $request An object representing the request for this operation
+     * @return GetWalletOKResponse The Wallet of the Customer
+     */
+    public function getWallet(GetWalletRequest $request): GetWalletOKResponse
+    {
+        $httpRequest = new Request(GetWalletRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetWalletOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetWalletBadRequestResponse::fromResponse($httpResponse),
+            404 => GetWalletNotFoundResponse::fromResponse($httpResponse),
+            409 => GetWalletConflictResponse::fromResponse($httpResponse),
+            412 => GetWalletPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => GetWalletTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetWalletDefaultResponse::fromResponse($httpResponse),
         });
     }
 

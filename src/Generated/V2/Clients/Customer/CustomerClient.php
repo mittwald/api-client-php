@@ -12,6 +12,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustom
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateRecommendationSuggestion\CreateRecommendationSuggestionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateWallet\CreateWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeclineCustomerInvite\DeclineCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerRequest;
@@ -25,6 +29,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCu
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerRequest;
@@ -88,6 +94,26 @@ interface CustomerClient
      * @param CreateCustomerInviteRequest $request An object representing the request for this operation
      */
     public function createCustomerInvite(CreateCustomerInviteRequest $request): CreateCustomerInviteCreatedResponse;
+    /**
+     * Lets us know your idea for our recommendation programm.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-recommendation-suggestion
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateRecommendationSuggestionRequest $request An object representing the request for this operation
+     * @return CreateRecommendationSuggestionCreatedResponse The suggestion has been made.
+     */
+    public function createRecommendationSuggestion(CreateRecommendationSuggestionRequest $request): CreateRecommendationSuggestionCreatedResponse;
+    /**
+     * Create the Wallet for the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateWalletRequest $request An object representing the request for this operation
+     * @return CreateWalletOKResponse The Wallet has been created.
+     */
+    public function createWallet(CreateWalletRequest $request): CreateWalletOKResponse;
     /**
      * Decline a CustomerInvite.
      *
@@ -164,6 +190,16 @@ interface CustomerClient
      * @param GetCustomerTokenInviteRequest $request An object representing the request for this operation
      */
     public function getCustomerTokenInvite(GetCustomerTokenInviteRequest $request): GetCustomerTokenInviteOKResponse;
+    /**
+     * Gets the Wallet of the Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-wallet
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetWalletRequest $request An object representing the request for this operation
+     * @return GetWalletOKResponse The Wallet of the Customer
+     */
+    public function getWallet(GetWalletRequest $request): GetWalletOKResponse;
     /**
      * Check if the customer profile has a valid contract partner configured.
      *
