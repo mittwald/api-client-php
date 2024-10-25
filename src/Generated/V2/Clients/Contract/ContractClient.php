@@ -39,8 +39,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\I
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceGetFileAccessToken\InvoiceGetFileAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceListCustomerInvoices\InvoiceListCustomerInvoicesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceReplaceInvoiceSettings\InvoiceReplaceInvoiceSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceUpdateInvoiceSettings\InvoiceUpdateInvoiceSettingsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ListContracts\ListContractsOKResponse;
@@ -266,15 +264,6 @@ interface ContractClient
      * @param InvoiceListCustomerInvoicesRequest $request An object representing the request for this operation
      */
     public function invoiceListCustomerInvoices(InvoiceListCustomerInvoicesRequest $request): InvoiceListCustomerInvoicesOKResponse;
-    /**
-     * Update InvoiceSettings of a Customer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/invoice-replace-invoice-settings
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param InvoiceReplaceInvoiceSettingsRequest $request An object representing the request for this operation
-     */
-    public function invoiceReplaceInvoiceSettings(InvoiceReplaceInvoiceSettingsRequest $request): InvoiceReplaceInvoiceSettingsOKResponse;
     /**
      * Update InvoiceSettings of a Customer.
      *
