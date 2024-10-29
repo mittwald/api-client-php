@@ -2,51 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class VerificationVerifyCompanyRequestBody
+class DeprecatedCronjobAbortExecutionNotFoundResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'name' => [
-                'example' => 'Mittwald CM Service GmbH & Co. KG',
-                'type' => 'string',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'name',
-        ],
-        'type' => 'object',
     ];
 
-    private string $name;
+    private Error $body;
 
-    public function __construct(string $name)
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(Error $body)
     {
-        $this->name = $name;
+        $this->body = $body;
     }
 
-    public function getName(): string
+    public function getBody(): Error
     {
-        return $this->name;
+        return $this->body;
     }
 
-    public function withName(string $name): self
+    public function withBody(Error $body): self
     {
-        $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
-        $clone->name = $name;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -56,19 +54,19 @@ class VerificationVerifyCompanyRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyCompanyRequestBody Created instance
+     * @return DeprecatedCronjobAbortExecutionNotFoundResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyCompanyRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionNotFoundResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $name = $input->{'name'};
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($name);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -81,7 +79,7 @@ class VerificationVerifyCompanyRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['name'] = $this->name;
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -112,5 +110,18 @@ class VerificationVerifyCompanyRequestBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

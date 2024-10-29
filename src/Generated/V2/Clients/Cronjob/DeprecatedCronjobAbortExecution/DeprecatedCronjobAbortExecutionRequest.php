@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class VerificationVerifyAddressRequest
+class DeprecatedCronjobAbortExecutionRequest
 {
     public const method = 'post';
 
@@ -17,59 +17,105 @@ class VerificationVerifyAddressRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
+            'cronjobId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'executionId' => [
+                'example' => 'cron-bd26li-28027320',
+                'type' => 'string',
+            ],
             'body' => [
-                'properties' => [
-                    'city' => [
-                        'example' => 'Bremen',
-                        'type' => 'string',
-                    ],
-                    'country' => [
-                        'description' => 'Accepts the whole english or german name as well as the ISO 3166-2 country codes.',
-                        'example' => 'DE',
-                        'type' => 'string',
-                    ],
-                    'street' => [
-                        'description' => 'Includes the house number.',
-                        'example' => 'Bremer Straße 1',
-                        'type' => 'string',
-                    ],
-                    'zip' => [
-                        'example' => '28203',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'street',
-                    'zip',
-                    'city',
-                    'country',
-                ],
-                'type' => 'object',
+
             ],
         ],
         'required' => [
+            'cronjobId',
+            'executionId',
             'body',
         ],
     ];
 
-    private VerificationVerifyAddressRequestBody $body;
+    private string $cronjobId;
+
+    private string $executionId;
+
+    /**
+     * @var mixed
+     */
+    private $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(VerificationVerifyAddressRequestBody $body)
+    /**
+     * @param mixed $body
+     */
+    public function __construct(string $cronjobId, string $executionId, $body)
     {
+        $this->cronjobId = $cronjobId;
+        $this->executionId = $executionId;
         $this->body = $body;
     }
 
-    public function getBody(): VerificationVerifyAddressRequestBody
+    public function getCronjobId(): string
+    {
+        return $this->cronjobId;
+    }
+
+    public function getExecutionId(): string
+    {
+        return $this->executionId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
     {
         return $this->body;
     }
 
-    public function withBody(VerificationVerifyAddressRequestBody $body): self
+    public function withCronjobId(string $cronjobId): self
     {
+        $validator = new Validator();
+        $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->cronjobId = $cronjobId;
+
+        return $clone;
+    }
+
+    public function withExecutionId(string $executionId): self
+    {
+        $validator = new Validator();
+        $validator->validate($executionId, static::$schema['properties']['executionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->executionId = $executionId;
+
+        return $clone;
+    }
+
+    /**
+     * @param mixed $body
+     */
+    public function withBody($body): self
+    {
+        $validator = new Validator();
+        $validator->validate($body, static::$schema['properties']['body']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
         $clone->body = $body;
 
@@ -81,19 +127,21 @@ class VerificationVerifyAddressRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return VerificationVerifyAddressRequest Created instance
+     * @return DeprecatedCronjobAbortExecutionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): VerificationVerifyAddressRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = VerificationVerifyAddressRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $cronjobId = $input->{'cronjobId'};
+        $executionId = $input->{'executionId'};
+        $body = $input->{'body'};
 
-        $obj = new self($body);
+        $obj = new self($cronjobId, $executionId, $body);
 
         return $obj;
     }
@@ -106,7 +154,9 @@ class VerificationVerifyAddressRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['cronjobId'] = $this->cronjobId;
+        $output['executionId'] = $this->executionId;
+        $output['body'] = $this->body;
 
         return $output;
     }
@@ -137,7 +187,6 @@ class VerificationVerifyAddressRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -152,7 +201,9 @@ class VerificationVerifyAddressRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/actions/verify-address';
+        $cronjobId = urlencode($mapped['cronjobId']);
+        $executionId = urlencode($mapped['executionId']);
+        return '/v2/cronjobs/' . $cronjobId . '/executions/' . $executionId . '/actions/abort';
     }
 
     /**
