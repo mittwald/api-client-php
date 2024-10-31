@@ -18,6 +18,13 @@ class ListProjectsOKResponseBodyItem
      */
     private static array $schema = [
         'properties' => [
+            'backupStorageUsageInBytes' => [
+                'type' => 'integer',
+            ],
+            'backupStorageUsageInBytesSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'createdAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -102,9 +109,15 @@ class ListProjectsOKResponseBodyItem
             'statusSetAt',
             'webStorageUsageInBytes',
             'webStorageUsageInBytesSetAt',
+            'backupStorageUsageInBytes',
+            'backupStorageUsageInBytesSetAt',
         ],
         'type' => 'object',
     ];
+
+    private int $backupStorageUsageInBytes;
+
+    private DateTime $backupStorageUsageInBytesSetAt;
 
     private DateTime $createdAt;
 
@@ -147,8 +160,10 @@ class ListProjectsOKResponseBodyItem
 
     private DateTime $webStorageUsageInBytesSetAt;
 
-    public function __construct(DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
+    public function __construct(int $backupStorageUsageInBytes, DateTime $backupStorageUsageInBytesSetAt, DateTime $createdAt, string $customerId, ListProjectsOKResponseBodyItemCustomerMeta $customerMeta, string $description, bool $enabled, string $id, bool $isReady, DeprecatedProjectReadinessStatus $readiness, string $shortId, ProjectStatus $status, DateTime $statusSetAt, int $webStorageUsageInBytes, DateTime $webStorageUsageInBytesSetAt)
     {
+        $this->backupStorageUsageInBytes = $backupStorageUsageInBytes;
+        $this->backupStorageUsageInBytesSetAt = $backupStorageUsageInBytesSetAt;
         $this->createdAt = $createdAt;
         $this->customerId = $customerId;
         $this->customerMeta = $customerMeta;
@@ -162,6 +177,16 @@ class ListProjectsOKResponseBodyItem
         $this->statusSetAt = $statusSetAt;
         $this->webStorageUsageInBytes = $webStorageUsageInBytes;
         $this->webStorageUsageInBytesSetAt = $webStorageUsageInBytesSetAt;
+    }
+
+    public function getBackupStorageUsageInBytes(): int
+    {
+        return $this->backupStorageUsageInBytes;
+    }
+
+    public function getBackupStorageUsageInBytesSetAt(): DateTime
+    {
+        return $this->backupStorageUsageInBytesSetAt;
     }
 
     public function getCreatedAt(): DateTime
@@ -259,6 +284,28 @@ class ListProjectsOKResponseBodyItem
     public function getWebStorageUsageInBytesSetAt(): DateTime
     {
         return $this->webStorageUsageInBytesSetAt;
+    }
+
+    public function withBackupStorageUsageInBytes(int $backupStorageUsageInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($backupStorageUsageInBytes, static::$schema['properties']['backupStorageUsageInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->backupStorageUsageInBytes = $backupStorageUsageInBytes;
+
+        return $clone;
+    }
+
+    public function withBackupStorageUsageInBytesSetAt(DateTime $backupStorageUsageInBytesSetAt): self
+    {
+        $clone = clone $this;
+        $clone->backupStorageUsageInBytesSetAt = $backupStorageUsageInBytesSetAt;
+
+        return $clone;
     }
 
     public function withCreatedAt(DateTime $createdAt): self
@@ -523,6 +570,8 @@ class ListProjectsOKResponseBodyItem
             static::validateInput($input);
         }
 
+        $backupStorageUsageInBytes = (int)($input->{'backupStorageUsageInBytes'});
+        $backupStorageUsageInBytesSetAt = new DateTime($input->{'backupStorageUsageInBytesSetAt'});
         $createdAt = new DateTime($input->{'createdAt'});
         $customerId = $input->{'customerId'};
         $customerMeta = ListProjectsOKResponseBodyItemCustomerMeta::buildFromInput($input->{'customerMeta'}, validate: $validate);
@@ -557,7 +606,7 @@ class ListProjectsOKResponseBodyItem
         $webStorageUsageInBytes = (int)($input->{'webStorageUsageInBytes'});
         $webStorageUsageInBytesSetAt = new DateTime($input->{'webStorageUsageInBytesSetAt'});
 
-        $obj = new self($createdAt, $customerId, $customerMeta, $description, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
+        $obj = new self($backupStorageUsageInBytes, $backupStorageUsageInBytesSetAt, $createdAt, $customerId, $customerMeta, $description, $enabled, $id, $isReady, $readiness, $shortId, $status, $statusSetAt, $webStorageUsageInBytes, $webStorageUsageInBytesSetAt);
         $obj->disableReason = $disableReason;
         $obj->disabledAt = $disabledAt;
         $obj->imageRefId = $imageRefId;
@@ -574,6 +623,8 @@ class ListProjectsOKResponseBodyItem
     public function toJson(): array
     {
         $output = [];
+        $output['backupStorageUsageInBytes'] = $this->backupStorageUsageInBytes;
+        $output['backupStorageUsageInBytesSetAt'] = ($this->backupStorageUsageInBytesSetAt)->format(DateTime::ATOM);
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['customerId'] = $this->customerId;
         $output['customerMeta'] = ($this->customerMeta)->toJson();
@@ -632,6 +683,7 @@ class ListProjectsOKResponseBodyItem
 
     public function __clone()
     {
+        $this->backupStorageUsageInBytesSetAt = clone $this->backupStorageUsageInBytesSetAt;
         $this->createdAt = clone $this->createdAt;
         $this->customerMeta = clone $this->customerMeta;
         if (isset($this->disabledAt)) {

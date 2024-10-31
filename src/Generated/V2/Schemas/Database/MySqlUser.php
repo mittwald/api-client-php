@@ -66,6 +66,13 @@ class MySqlUser
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.database.DatabaseStatus',
+            ],
+            'statusSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'updatedAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
@@ -82,6 +89,8 @@ class MySqlUser
             'disabled',
             'accessLevel',
             'externalAccess',
+            'status',
+            'statusSetAt',
         ],
         'type' => 'object',
     ];
@@ -108,9 +117,13 @@ class MySqlUser
 
     private DateTime $passwordUpdatedAt;
 
+    private DatabaseStatus $status;
+
+    private DateTime $statusSetAt;
+
     private DateTime $updatedAt;
 
-    public function __construct(MySqlUserAccessLevel $accessLevel, DateTime $createdAt, string $databaseId, bool $disabled, bool $externalAccess, string $id, bool $mainUser, string $name, DateTime $passwordUpdatedAt, DateTime $updatedAt)
+    public function __construct(MySqlUserAccessLevel $accessLevel, DateTime $createdAt, string $databaseId, bool $disabled, bool $externalAccess, string $id, bool $mainUser, string $name, DateTime $passwordUpdatedAt, DatabaseStatus $status, DateTime $statusSetAt, DateTime $updatedAt)
     {
         $this->accessLevel = $accessLevel;
         $this->createdAt = $createdAt;
@@ -121,6 +134,8 @@ class MySqlUser
         $this->mainUser = $mainUser;
         $this->name = $name;
         $this->passwordUpdatedAt = $passwordUpdatedAt;
+        $this->status = $status;
+        $this->statusSetAt = $statusSetAt;
         $this->updatedAt = $updatedAt;
     }
 
@@ -177,6 +192,16 @@ class MySqlUser
     public function getPasswordUpdatedAt(): DateTime
     {
         return $this->passwordUpdatedAt;
+    }
+
+    public function getStatus(): DatabaseStatus
+    {
+        return $this->status;
+    }
+
+    public function getStatusSetAt(): DateTime
+    {
+        return $this->statusSetAt;
     }
 
     public function getUpdatedAt(): DateTime
@@ -336,6 +361,22 @@ class MySqlUser
         return $clone;
     }
 
+    public function withStatus(DatabaseStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withStatusSetAt(DateTime $statusSetAt): self
+    {
+        $clone = clone $this;
+        $clone->statusSetAt = $statusSetAt;
+
+        return $clone;
+    }
+
     public function withUpdatedAt(DateTime $updatedAt): self
     {
         $clone = clone $this;
@@ -376,9 +417,11 @@ class MySqlUser
         $mainUser = (bool)($input->{'mainUser'});
         $name = $input->{'name'};
         $passwordUpdatedAt = new DateTime($input->{'passwordUpdatedAt'});
+        $status = DatabaseStatus::from($input->{'status'});
+        $statusSetAt = new DateTime($input->{'statusSetAt'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
-        $obj = new self($accessLevel, $createdAt, $databaseId, $disabled, $externalAccess, $id, $mainUser, $name, $passwordUpdatedAt, $updatedAt);
+        $obj = new self($accessLevel, $createdAt, $databaseId, $disabled, $externalAccess, $id, $mainUser, $name, $passwordUpdatedAt, $status, $statusSetAt, $updatedAt);
         $obj->accessIpMask = $accessIpMask;
         $obj->description = $description;
         return $obj;
@@ -407,6 +450,8 @@ class MySqlUser
         $output['mainUser'] = $this->mainUser;
         $output['name'] = $this->name;
         $output['passwordUpdatedAt'] = ($this->passwordUpdatedAt)->format(DateTime::ATOM);
+        $output['status'] = $this->status->value;
+        $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
         $output['updatedAt'] = ($this->updatedAt)->format(DateTime::ATOM);
 
         return $output;
@@ -440,6 +485,7 @@ class MySqlUser
     {
         $this->createdAt = clone $this->createdAt;
         $this->passwordUpdatedAt = clone $this->passwordUpdatedAt;
+        $this->statusSetAt = clone $this->statusSetAt;
         $this->updatedAt = clone $this->updatedAt;
     }
 }
