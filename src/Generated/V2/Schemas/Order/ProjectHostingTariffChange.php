@@ -28,7 +28,7 @@ class ProjectHostingTariffChange
                 'type' => 'string',
             ],
             'diskspaceInGiB' => [
-                'example' => 10,
+                'example' => 20,
                 'type' => 'number',
             ],
             'spec' => [

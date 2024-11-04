@@ -25,6 +25,7 @@ class ProjectHostingOrder
     private static array $schema = [
         'properties' => [
             'customerId' => [
+                'example' => '0f5ec9cd-1b1b-4850-9061-fcebe765c62d',
                 'type' => 'string',
             ],
             'description' => [
@@ -32,7 +33,7 @@ class ProjectHostingOrder
                 'type' => 'string',
             ],
             'diskspaceInGiB' => [
-                'example' => 10,
+                'example' => 20,
                 'type' => 'number',
             ],
             'promotionCode' => [
@@ -40,7 +41,7 @@ class ProjectHostingOrder
                 'type' => 'string',
             ],
             'recommendationCode' => [
-                'example' => 'm-123456',
+                'example' => 'mp-123456',
                 'type' => 'string',
             ],
             'spec' => [
