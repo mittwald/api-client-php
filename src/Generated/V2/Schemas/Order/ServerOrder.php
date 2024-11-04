@@ -46,7 +46,7 @@ class ServerOrder
                 'type' => 'string',
             ],
             'recommendationCode' => [
-                'example' => 'm-123456',
+                'example' => 'mp-123456',
                 'type' => 'string',
             ],
             'useFreeTrial' => [
