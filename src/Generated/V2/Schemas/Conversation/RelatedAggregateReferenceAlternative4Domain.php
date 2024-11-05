@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Conversation;
 
-enum ShareableAggregateReferenceAlternative4Domain: string
+enum RelatedAggregateReferenceAlternative4Domain: string
 {
-    case project = 'project';
+    case app = 'app';
 }

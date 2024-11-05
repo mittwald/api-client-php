@@ -26,8 +26,14 @@ class CreateConversationRequest
                         'format' => 'uuid',
                         'type' => 'string',
                     ],
+                    'notificationRoles' => [
+                        'items' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.conversation.NotificationRole',
+                        ],
+                        'type' => 'array',
+                    ],
                     'relatedTo' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.RelatedAggregateReference',
                     ],
                     'sharedWith' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ShareableAggregateReference',

@@ -173,7 +173,7 @@ class LeaveCustomerRequest
     {
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
-        return '/v2/customer/' . $customerId . '/actions/leave';
+        return '/v2/customers/' . $customerId . '/actions/leave';
     }
 
     /**

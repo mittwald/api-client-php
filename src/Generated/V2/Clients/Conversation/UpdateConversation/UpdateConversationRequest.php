@@ -28,7 +28,7 @@ class UpdateConversationRequest
                         'type' => 'string',
                     ],
                     'relatedTo' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.RelatedAggregateReference',
                     ],
                     'title' => [
                         'type' => 'string',
