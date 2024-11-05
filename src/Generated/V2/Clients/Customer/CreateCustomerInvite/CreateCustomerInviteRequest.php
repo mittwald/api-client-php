@@ -179,7 +179,7 @@ class CreateCustomerInviteRequest
     {
         $mapped = $this->toJson();
         $customerId = urlencode($mapped['customerId']);
-        return '/v2/customer/' . $customerId . '/invites';
+        return '/v2/customers/' . $customerId . '/invites';
     }
 
     /**
