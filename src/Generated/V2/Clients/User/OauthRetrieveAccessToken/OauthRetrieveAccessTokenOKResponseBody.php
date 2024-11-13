@@ -61,7 +61,7 @@ response was generated.
      * The access token issued by the authorization server.
      *
      */
-    private string $access_token;
+    private string $accessToken;
 
     /**
      * The lifetime in seconds of the access token. For
@@ -70,13 +70,13 @@ response was generated.
      * response was generated.
      *
      */
-    private int $expires_in;
+    private int $expiresIn;
 
     /**
      * The refresh token issued by the authorization server.
      *
      */
-    private string $refresh_token;
+    private string $refreshToken;
 
     /**
      * The scope of the access token as described by
@@ -90,29 +90,29 @@ response was generated.
      * [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).
      *
      */
-    private OauthRetrieveAccessTokenOKResponseBodyToken_type $token_type;
+    private OauthRetrieveAccessTokenOKResponseBodyTokenType $tokenType;
 
-    public function __construct(string $accessToken, int $expiresIn, string $refreshToken, OauthRetrieveAccessTokenOKResponseBodyToken_type $tokenType)
+    public function __construct(string $accessToken, int $expiresIn, string $refreshToken, OauthRetrieveAccessTokenOKResponseBodyTokenType $tokenType)
     {
-        $this->access_token = $accessToken;
-        $this->expires_in = $expiresIn;
-        $this->refresh_token = $refreshToken;
-        $this->token_type = $tokenType;
+        $this->accessToken = $accessToken;
+        $this->expiresIn = $expiresIn;
+        $this->refreshToken = $refreshToken;
+        $this->tokenType = $tokenType;
     }
 
     public function getAccessToken(): string
     {
-        return $this->access_token;
+        return $this->accessToken;
     }
 
     public function getExpiresIn(): int
     {
-        return $this->expires_in;
+        return $this->expiresIn;
     }
 
     public function getRefreshToken(): string
     {
-        return $this->refresh_token;
+        return $this->refreshToken;
     }
 
     public function getScope(): ?string
@@ -120,49 +120,49 @@ response was generated.
         return $this->scope ?? null;
     }
 
-    public function getTokenType(): OauthRetrieveAccessTokenOKResponseBodyToken_type
+    public function getTokenType(): OauthRetrieveAccessTokenOKResponseBodyTokenType
     {
-        return $this->token_type;
+        return $this->tokenType;
     }
 
-    public function withAccessToken(string $access_token): self
+    public function withAccessToken(string $accessToken): self
     {
         $validator = new Validator();
-        $validator->validate($access_token, static::$schema['properties']['access_token']);
+        $validator->validate($accessToken, static::$schema['properties']['access_token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->access_token = $access_token;
+        $clone->accessToken = $accessToken;
 
         return $clone;
     }
 
-    public function withExpiresIn(int $expires_in): self
+    public function withExpiresIn(int $expiresIn): self
     {
         $validator = new Validator();
-        $validator->validate($expires_in, static::$schema['properties']['expires_in']);
+        $validator->validate($expiresIn, static::$schema['properties']['expires_in']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->expires_in = $expires_in;
+        $clone->expiresIn = $expiresIn;
 
         return $clone;
     }
 
-    public function withRefreshToken(string $refresh_token): self
+    public function withRefreshToken(string $refreshToken): self
     {
         $validator = new Validator();
-        $validator->validate($refresh_token, static::$schema['properties']['refresh_token']);
+        $validator->validate($refreshToken, static::$schema['properties']['refresh_token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->refresh_token = $refresh_token;
+        $clone->refreshToken = $refreshToken;
 
         return $clone;
     }
@@ -189,10 +189,10 @@ response was generated.
         return $clone;
     }
 
-    public function withTokenType(OauthRetrieveAccessTokenOKResponseBodyToken_type $token_type): self
+    public function withTokenType(OauthRetrieveAccessTokenOKResponseBodyTokenType $tokenType): self
     {
         $clone = clone $this;
-        $clone->token_type = $token_type;
+        $clone->tokenType = $tokenType;
 
         return $clone;
     }
@@ -212,16 +212,16 @@ response was generated.
             static::validateInput($input);
         }
 
-        $access_token = $input->{'access_token'};
-        $expires_in = (int)($input->{'expires_in'});
-        $refresh_token = $input->{'refresh_token'};
+        $accessToken = $input->{'access_token'};
+        $expiresIn = (int)($input->{'expires_in'});
+        $refreshToken = $input->{'refresh_token'};
         $scope = null;
         if (isset($input->{'scope'})) {
             $scope = $input->{'scope'};
         }
-        $token_type = OauthRetrieveAccessTokenOKResponseBodyToken_type::from($input->{'token_type'});
+        $tokenType = OauthRetrieveAccessTokenOKResponseBodyTokenType::from($input->{'token_type'});
 
-        $obj = new self($access_token, $expires_in, $refresh_token, $token_type);
+        $obj = new self($accessToken, $expiresIn, $refreshToken, $tokenType);
         $obj->scope = $scope;
         return $obj;
     }
@@ -234,13 +234,13 @@ response was generated.
     public function toJson(): array
     {
         $output = [];
-        $output['access_token'] = $this->access_token;
-        $output['expires_in'] = $this->expires_in;
-        $output['refresh_token'] = $this->refresh_token;
+        $output['access_token'] = $this->accessToken;
+        $output['expires_in'] = $this->expiresIn;
+        $output['refresh_token'] = $this->refreshToken;
         if (isset($this->scope)) {
             $output['scope'] = $this->scope;
         }
-        $output['token_type'] = ($this->token_type)->value;
+        $output['token_type'] = ($this->tokenType)->value;
 
         return $output;
     }

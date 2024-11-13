@@ -6,7 +6,12 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\UpdateConversatio
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative1;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative2;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative3;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6;
 
 class UpdateConversationRequestBody
 {
@@ -20,7 +25,7 @@ class UpdateConversationRequestBody
                 'type' => 'string',
             ],
             'relatedTo' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.RelatedAggregateReference',
             ],
             'title' => [
                 'type' => 'string',
@@ -30,7 +35,7 @@ class UpdateConversationRequestBody
 
     private ?string $categoryId = null;
 
-    private ?AggregateReference $relatedTo = null;
+    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null $relatedTo = null;
 
     private ?string $title = null;
 
@@ -48,11 +53,11 @@ class UpdateConversationRequestBody
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6|null
      */
-    public function getRelatedTo(): ?AggregateReference
+    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
     {
-        return $this->relatedTo ?? null;
+        return $this->relatedTo;
     }
 
     public function getTitle(): ?string
@@ -82,7 +87,10 @@ class UpdateConversationRequestBody
         return $clone;
     }
 
-    public function withRelatedTo(AggregateReference $relatedTo): self
+    /**
+     * @param RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo
+     */
+    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -141,7 +149,15 @@ class UpdateConversationRequestBody
         }
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
-            $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
+            $relatedTo = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                RelatedAggregateReferenceAlternative1::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative1::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative2::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative2::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative3::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative3::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative4::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative4::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative5::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative5::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative6::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative6::buildFromInput($input->{'relatedTo'}, validate: $validate),
+            };
         }
         $title = null;
         if (isset($input->{'title'})) {
@@ -167,7 +183,10 @@ class UpdateConversationRequestBody
             $output['categoryId'] = $this->categoryId;
         }
         if (isset($this->relatedTo)) {
-            $output['relatedTo'] = $this->relatedTo->toJson();
+            $output['relatedTo'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6 => $this->relatedTo->toJson(),
+            };
         }
         if (isset($this->title)) {
             $output['title'] = $this->title;

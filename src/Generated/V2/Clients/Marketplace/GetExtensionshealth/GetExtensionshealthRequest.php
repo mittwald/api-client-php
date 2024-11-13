@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversation;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class CreateConversationRequest
+class GetExtensionshealthRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,59 +17,42 @@ class CreateConversationRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-                'properties' => [
-                    'categoryId' => [
-                        'type' => 'string',
-                    ],
-                    'mainUserId' => [
-                        'format' => 'uuid',
-                        'type' => 'string',
-                    ],
-                    'notificationRoles' => [
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.conversation.NotificationRole',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'relatedTo' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.RelatedAggregateReference',
-                    ],
-                    'sharedWith' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ShareableAggregateReference',
-                    ],
-                    'title' => [
-                        'type' => 'string',
-                    ],
-                ],
-                'type' => 'object',
+            'contributorId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'contributorId',
         ],
     ];
 
-    private CreateConversationRequestBody $body;
+    private string $contributorId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(CreateConversationRequestBody $body)
+    public function __construct(string $contributorId)
     {
-        $this->body = $body;
+        $this->contributorId = $contributorId;
     }
 
-    public function getBody(): CreateConversationRequestBody
+    public function getContributorId(): string
     {
-        return $this->body;
+        return $this->contributorId;
     }
 
-    public function withBody(CreateConversationRequestBody $body): self
+    public function withContributorId(string $contributorId): self
     {
+        $validator = new Validator();
+        $validator->validate($contributorId, static::$schema['properties']['contributorId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
@@ -79,19 +62,19 @@ class CreateConversationRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return CreateConversationRequest Created instance
+     * @return GetExtensionshealthRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): CreateConversationRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): GetExtensionshealthRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = CreateConversationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $contributorId = $input->{'contributorId'};
 
-        $obj = new self($body);
+        $obj = new self($contributorId);
 
         return $obj;
     }
@@ -104,7 +87,7 @@ class CreateConversationRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = ($this->body)->toJson();
+        $output['contributorId'] = $this->contributorId;
 
         return $output;
     }
@@ -135,7 +118,6 @@ class CreateConversationRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -150,7 +132,8 @@ class CreateConversationRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/conversations';
+        $contributorId = urlencode($mapped['contributorId']);
+        return '/v2/marketplace/' . $contributorId . '/extensionshealth';
     }
 
     /**
@@ -169,7 +152,6 @@ class CreateConversationRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

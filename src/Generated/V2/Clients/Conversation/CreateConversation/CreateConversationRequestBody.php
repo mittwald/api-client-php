@@ -6,13 +6,17 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Conversation\CreateConversatio
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\NotificationRole;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative1;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative2;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative3;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5;
+use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3;
 use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4;
-use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative5;
-use Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative6;
 
 class CreateConversationRequestBody
 {
@@ -28,8 +32,14 @@ class CreateConversationRequestBody
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'notificationRoles' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.conversation.NotificationRole',
+                ],
+                'type' => 'array',
+            ],
             'relatedTo' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.RelatedAggregateReference',
             ],
             'sharedWith' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ShareableAggregateReference',
@@ -45,9 +55,14 @@ class CreateConversationRequestBody
 
     private ?string $mainUserId = null;
 
-    private ?AggregateReference $relatedTo = null;
+    /**
+     * @var NotificationRole[]|null
+     */
+    private ?array $notificationRoles = null;
 
-    private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6|null $sharedWith = null;
+    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null $relatedTo = null;
+
+    private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null $sharedWith = null;
 
     private ?string $title = null;
 
@@ -70,18 +85,27 @@ class CreateConversationRequestBody
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\AggregateReference|null
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\NotificationRole[]|null
      */
-    public function getRelatedTo(): ?AggregateReference
+    public function getNotificationRoles(): ?array
     {
-        return $this->relatedTo ?? null;
+        return $this->notificationRoles ?? null;
     }
 
     /**
      * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative5|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative6|null
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6|null
      */
-    public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6|null
+    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
+    {
+        return $this->relatedTo;
+    }
+
+    /**
+     * @return
+     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4|null
+     */
+    public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
     {
         return $this->sharedWith;
     }
@@ -135,7 +159,29 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    public function withRelatedTo(AggregateReference $relatedTo): self
+    /**
+     * @param NotificationRole[] $notificationRoles
+     */
+    public function withNotificationRoles(array $notificationRoles): self
+    {
+        $clone = clone $this;
+        $clone->notificationRoles = $notificationRoles;
+
+        return $clone;
+    }
+
+    public function withoutNotificationRoles(): self
+    {
+        $clone = clone $this;
+        unset($clone->notificationRoles);
+
+        return $clone;
+    }
+
+    /**
+     * @param RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo
+     */
+    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -152,9 +198,9 @@ class CreateConversationRequestBody
     }
 
     /**
-     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6 $sharedWith
+     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith
      */
-    public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|ShareableAggregateReferenceAlternative5|ShareableAggregateReferenceAlternative6 $sharedWith): self
+    public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith): self
     {
         $clone = clone $this;
         $clone->sharedWith = $sharedWith;
@@ -215,9 +261,21 @@ class CreateConversationRequestBody
         if (isset($input->{'mainUserId'})) {
             $mainUserId = $input->{'mainUserId'};
         }
+        $notificationRoles = null;
+        if (isset($input->{'notificationRoles'})) {
+            $notificationRoles = array_map(fn (string $i): NotificationRole => NotificationRole::from($i), $input->{'notificationRoles'});
+        }
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
-            $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
+            $relatedTo = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                RelatedAggregateReferenceAlternative1::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative1::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative2::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative2::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative3::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative3::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative4::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative4::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative5::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative5::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative6::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative6::buildFromInput($input->{'relatedTo'}, validate: $validate),
+            };
         }
         $sharedWith = null;
         if (isset($input->{'sharedWith'})) {
@@ -227,8 +285,6 @@ class CreateConversationRequestBody
                 ShareableAggregateReferenceAlternative2::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative2::buildFromInput($input->{'sharedWith'}, validate: $validate),
                 ShareableAggregateReferenceAlternative3::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative3::buildFromInput($input->{'sharedWith'}, validate: $validate),
                 ShareableAggregateReferenceAlternative4::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative4::buildFromInput($input->{'sharedWith'}, validate: $validate),
-                ShareableAggregateReferenceAlternative5::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative5::buildFromInput($input->{'sharedWith'}, validate: $validate),
-                ShareableAggregateReferenceAlternative6::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative6::buildFromInput($input->{'sharedWith'}, validate: $validate),
             };
         }
         $title = null;
@@ -239,6 +295,7 @@ class CreateConversationRequestBody
         $obj = new self();
         $obj->categoryId = $categoryId;
         $obj->mainUserId = $mainUserId;
+        $obj->notificationRoles = $notificationRoles;
         $obj->relatedTo = $relatedTo;
         $obj->sharedWith = $sharedWith;
         $obj->title = $title;
@@ -259,13 +316,19 @@ class CreateConversationRequestBody
         if (isset($this->mainUserId)) {
             $output['mainUserId'] = $this->mainUserId;
         }
+        if (isset($this->notificationRoles)) {
+            $output['notificationRoles'] = array_map(fn (NotificationRole $i): string => $i->value, $this->notificationRoles);
+        }
         if (isset($this->relatedTo)) {
-            $output['relatedTo'] = $this->relatedTo->toJson();
+            $output['relatedTo'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6 => $this->relatedTo->toJson(),
+            };
         }
         if (isset($this->sharedWith)) {
             $output['sharedWith'] = match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-                ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative1, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative2, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative3, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative4, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative5, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative6 => $this->sharedWith->toJson(),
+                ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative1, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative2, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative3, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative4 => $this->sharedWith->toJson(),
             };
         }
         if (isset($this->title)) {

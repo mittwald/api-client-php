@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization;
 
-enum OauthGetAuthorizationRequestResponse_type: string
+enum OauthGetAuthorizationRequestGrantType: string
 {
-    case code = 'code';
+    case authorizationcode = 'authorization_code';
 }

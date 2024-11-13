@@ -61,57 +61,57 @@ class OauthGetAuthorizationRequest
         ],
     ];
 
-    private ?bool $grant_consent = null;
+    private ?bool $grantConsent = null;
 
-    private ?OauthGetAuthorizationRequestGrant_type $grant_type = null;
+    private ?OauthGetAuthorizationRequestGrantType $grantType = null;
 
-    private OauthGetAuthorizationRequestResponse_type $response_type;
+    private OauthGetAuthorizationRequestResponseType $responseType;
 
-    private string $client_id;
+    private string $clientId;
 
-    private ?string $redirect_uri = null;
+    private ?string $redirectUri = null;
 
     private ?string $scope = null;
 
     private ?string $state = null;
 
-    private ?string $code_challenge = null;
+    private ?string $codeChallenge = null;
 
-    private ?OauthGetAuthorizationRequestCode_challenge_method $code_challenge_method = null;
+    private ?OauthGetAuthorizationRequestCodeChallengeMethod $codeChallengeMethod = null;
 
     private array $headers = [
 
     ];
 
-    public function __construct(OauthGetAuthorizationRequestResponse_type $responseType, string $clientId)
+    public function __construct(OauthGetAuthorizationRequestResponseType $responseType, string $clientId)
     {
-        $this->response_type = $responseType;
-        $this->client_id = $clientId;
+        $this->responseType = $responseType;
+        $this->clientId = $clientId;
     }
 
     public function getGrantConsent(): ?bool
     {
-        return $this->grant_consent ?? null;
+        return $this->grantConsent ?? null;
     }
 
-    public function getGrantType(): ?OauthGetAuthorizationRequestGrant_type
+    public function getGrantType(): ?OauthGetAuthorizationRequestGrantType
     {
-        return $this->grant_type ?? null;
+        return $this->grantType ?? null;
     }
 
-    public function getResponseType(): OauthGetAuthorizationRequestResponse_type
+    public function getResponseType(): OauthGetAuthorizationRequestResponseType
     {
-        return $this->response_type;
+        return $this->responseType;
     }
 
     public function getClientId(): string
     {
-        return $this->client_id;
+        return $this->clientId;
     }
 
     public function getRedirectUri(): ?string
     {
-        return $this->redirect_uri ?? null;
+        return $this->redirectUri ?? null;
     }
 
     public function getScope(): ?string
@@ -126,24 +126,24 @@ class OauthGetAuthorizationRequest
 
     public function getCodeChallenge(): ?string
     {
-        return $this->code_challenge ?? null;
+        return $this->codeChallenge ?? null;
     }
 
-    public function getCodeChallengeMethod(): ?OauthGetAuthorizationRequestCode_challenge_method
+    public function getCodeChallengeMethod(): ?OauthGetAuthorizationRequestCodeChallengeMethod
     {
-        return $this->code_challenge_method ?? null;
+        return $this->codeChallengeMethod ?? null;
     }
 
-    public function withGrantConsent(bool $grant_consent): self
+    public function withGrantConsent(bool $grantConsent): self
     {
         $validator = new Validator();
-        $validator->validate($grant_consent, static::$schema['properties']['grant_consent']);
+        $validator->validate($grantConsent, static::$schema['properties']['grant_consent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->grant_consent = $grant_consent;
+        $clone->grantConsent = $grantConsent;
 
         return $clone;
     }
@@ -151,15 +151,15 @@ class OauthGetAuthorizationRequest
     public function withoutGrantConsent(): self
     {
         $clone = clone $this;
-        unset($clone->grant_consent);
+        unset($clone->grantConsent);
 
         return $clone;
     }
 
-    public function withGrantType(OauthGetAuthorizationRequestGrant_type $grant_type): self
+    public function withGrantType(OauthGetAuthorizationRequestGrantType $grantType): self
     {
         $clone = clone $this;
-        $clone->grant_type = $grant_type;
+        $clone->grantType = $grantType;
 
         return $clone;
     }
@@ -167,43 +167,43 @@ class OauthGetAuthorizationRequest
     public function withoutGrantType(): self
     {
         $clone = clone $this;
-        unset($clone->grant_type);
+        unset($clone->grantType);
 
         return $clone;
     }
 
-    public function withResponseType(OauthGetAuthorizationRequestResponse_type $response_type): self
+    public function withResponseType(OauthGetAuthorizationRequestResponseType $responseType): self
     {
         $clone = clone $this;
-        $clone->response_type = $response_type;
+        $clone->responseType = $responseType;
 
         return $clone;
     }
 
-    public function withClientId(string $client_id): self
+    public function withClientId(string $clientId): self
     {
         $validator = new Validator();
-        $validator->validate($client_id, static::$schema['properties']['client_id']);
+        $validator->validate($clientId, static::$schema['properties']['client_id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->client_id = $client_id;
+        $clone->clientId = $clientId;
 
         return $clone;
     }
 
-    public function withRedirectUri(string $redirect_uri): self
+    public function withRedirectUri(string $redirectUri): self
     {
         $validator = new Validator();
-        $validator->validate($redirect_uri, static::$schema['properties']['redirect_uri']);
+        $validator->validate($redirectUri, static::$schema['properties']['redirect_uri']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->redirect_uri = $redirect_uri;
+        $clone->redirectUri = $redirectUri;
 
         return $clone;
     }
@@ -211,7 +211,7 @@ class OauthGetAuthorizationRequest
     public function withoutRedirectUri(): self
     {
         $clone = clone $this;
-        unset($clone->redirect_uri);
+        unset($clone->redirectUri);
 
         return $clone;
     }
@@ -260,16 +260,16 @@ class OauthGetAuthorizationRequest
         return $clone;
     }
 
-    public function withCodeChallenge(string $code_challenge): self
+    public function withCodeChallenge(string $codeChallenge): self
     {
         $validator = new Validator();
-        $validator->validate($code_challenge, static::$schema['properties']['code_challenge']);
+        $validator->validate($codeChallenge, static::$schema['properties']['code_challenge']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->code_challenge = $code_challenge;
+        $clone->codeChallenge = $codeChallenge;
 
         return $clone;
     }
@@ -277,15 +277,15 @@ class OauthGetAuthorizationRequest
     public function withoutCodeChallenge(): self
     {
         $clone = clone $this;
-        unset($clone->code_challenge);
+        unset($clone->codeChallenge);
 
         return $clone;
     }
 
-    public function withCodeChallengeMethod(OauthGetAuthorizationRequestCode_challenge_method $code_challenge_method): self
+    public function withCodeChallengeMethod(OauthGetAuthorizationRequestCodeChallengeMethod $codeChallengeMethod): self
     {
         $clone = clone $this;
-        $clone->code_challenge_method = $code_challenge_method;
+        $clone->codeChallengeMethod = $codeChallengeMethod;
 
         return $clone;
     }
@@ -293,7 +293,7 @@ class OauthGetAuthorizationRequest
     public function withoutCodeChallengeMethod(): self
     {
         $clone = clone $this;
-        unset($clone->code_challenge_method);
+        unset($clone->codeChallengeMethod);
 
         return $clone;
     }
@@ -313,19 +313,19 @@ class OauthGetAuthorizationRequest
             static::validateInput($input);
         }
 
-        $grant_consent = null;
+        $grantConsent = null;
         if (isset($input->{'grant_consent'})) {
-            $grant_consent = (bool)($input->{'grant_consent'});
+            $grantConsent = (bool)($input->{'grant_consent'});
         }
-        $grant_type = null;
+        $grantType = null;
         if (isset($input->{'grant_type'})) {
-            $grant_type = OauthGetAuthorizationRequestGrant_type::from($input->{'grant_type'});
+            $grantType = OauthGetAuthorizationRequestGrantType::from($input->{'grant_type'});
         }
-        $response_type = OauthGetAuthorizationRequestResponse_type::from($input->{'response_type'});
-        $client_id = $input->{'client_id'};
-        $redirect_uri = null;
+        $responseType = OauthGetAuthorizationRequestResponseType::from($input->{'response_type'});
+        $clientId = $input->{'client_id'};
+        $redirectUri = null;
         if (isset($input->{'redirect_uri'})) {
-            $redirect_uri = $input->{'redirect_uri'};
+            $redirectUri = $input->{'redirect_uri'};
         }
         $scope = null;
         if (isset($input->{'scope'})) {
@@ -335,23 +335,23 @@ class OauthGetAuthorizationRequest
         if (isset($input->{'state'})) {
             $state = $input->{'state'};
         }
-        $code_challenge = null;
+        $codeChallenge = null;
         if (isset($input->{'code_challenge'})) {
-            $code_challenge = $input->{'code_challenge'};
+            $codeChallenge = $input->{'code_challenge'};
         }
-        $code_challenge_method = null;
+        $codeChallengeMethod = null;
         if (isset($input->{'code_challenge_method'})) {
-            $code_challenge_method = OauthGetAuthorizationRequestCode_challenge_method::from($input->{'code_challenge_method'});
+            $codeChallengeMethod = OauthGetAuthorizationRequestCodeChallengeMethod::from($input->{'code_challenge_method'});
         }
 
-        $obj = new self($response_type, $client_id);
-        $obj->grant_consent = $grant_consent;
-        $obj->grant_type = $grant_type;
-        $obj->redirect_uri = $redirect_uri;
+        $obj = new self($responseType, $clientId);
+        $obj->grantConsent = $grantConsent;
+        $obj->grantType = $grantType;
+        $obj->redirectUri = $redirectUri;
         $obj->scope = $scope;
         $obj->state = $state;
-        $obj->code_challenge = $code_challenge;
-        $obj->code_challenge_method = $code_challenge_method;
+        $obj->codeChallenge = $codeChallenge;
+        $obj->codeChallengeMethod = $codeChallengeMethod;
         return $obj;
     }
 
@@ -363,16 +363,16 @@ class OauthGetAuthorizationRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->grant_consent)) {
-            $output['grant_consent'] = $this->grant_consent;
+        if (isset($this->grantConsent)) {
+            $output['grant_consent'] = $this->grantConsent;
         }
-        if (isset($this->grant_type)) {
-            $output['grant_type'] = ($this->grant_type)->value;
+        if (isset($this->grantType)) {
+            $output['grant_type'] = ($this->grantType)->value;
         }
-        $output['response_type'] = ($this->response_type)->value;
-        $output['client_id'] = $this->client_id;
-        if (isset($this->redirect_uri)) {
-            $output['redirect_uri'] = $this->redirect_uri;
+        $output['response_type'] = ($this->responseType)->value;
+        $output['client_id'] = $this->clientId;
+        if (isset($this->redirectUri)) {
+            $output['redirect_uri'] = $this->redirectUri;
         }
         if (isset($this->scope)) {
             $output['scope'] = $this->scope;
@@ -380,11 +380,11 @@ class OauthGetAuthorizationRequest
         if (isset($this->state)) {
             $output['state'] = $this->state;
         }
-        if (isset($this->code_challenge)) {
-            $output['code_challenge'] = $this->code_challenge;
+        if (isset($this->codeChallenge)) {
+            $output['code_challenge'] = $this->codeChallenge;
         }
-        if (isset($this->code_challenge_method)) {
-            $output['code_challenge_method'] = ($this->code_challenge_method)->value;
+        if (isset($this->codeChallengeMethod)) {
+            $output['code_challenge_method'] = ($this->codeChallengeMethod)->value;
         }
 
         return $output;

@@ -76,6 +76,10 @@ class Extension
             'name' => [
                 'type' => 'string',
             ],
+            'published' => [
+                'description' => 'Whether the extension has been published by the contributor.',
+                'type' => 'boolean',
+            ],
             'scopes' => [
                 'items' => [
                     'type' => 'string',
@@ -108,6 +112,7 @@ class Extension
             'contributorId',
             'support',
             'state',
+            'published',
             'name',
             'description',
             'tags',
@@ -154,6 +159,11 @@ class Extension
     private string $name;
 
     /**
+     * Whether the extension has been published by the contributor.
+     */
+    private bool $published;
+
+    /**
      * @var string[]
      */
     private array $scopes;
@@ -176,7 +186,7 @@ class Extension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, array $scopes, ExtensionState $state, SupportMeta $support, array $tags)
+    public function __construct(bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, bool $published, array $scopes, ExtensionState $state, SupportMeta $support, array $tags)
     {
         $this->blocked = $blocked;
         $this->context = $context;
@@ -185,6 +195,7 @@ class Extension
         $this->disabled = $disabled;
         $this->id = $id;
         $this->name = $name;
+        $this->published = $published;
         $this->scopes = $scopes;
         $this->state = $state;
         $this->support = $support;
@@ -258,6 +269,11 @@ class Extension
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPublished(): bool
+    {
+        return $this->published;
     }
 
     /**
@@ -460,6 +476,20 @@ class Extension
         return $clone;
     }
 
+    public function withPublished(bool $published): self
+    {
+        $validator = new Validator();
+        $validator->validate($published, static::$schema['properties']['published']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->published = $published;
+
+        return $clone;
+    }
+
     /**
      * @param string[] $scopes
      */
@@ -551,12 +581,13 @@ class Extension
         }
         $id = $input->{'id'};
         $name = $input->{'name'};
+        $published = (bool)($input->{'published'});
         $scopes = $input->{'scopes'};
         $state = ExtensionState::from($input->{'state'});
         $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $scopes, $state, $support, $tags);
+        $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $published, $scopes, $state, $support, $tags);
         $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->frontendComponents = $frontendComponents;
@@ -591,6 +622,7 @@ class Extension
         }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
+        $output['published'] = $this->published;
         $output['scopes'] = $this->scopes;
         $output['state'] = ($this->state)->value;
         $output['support'] = $this->support->toJson();

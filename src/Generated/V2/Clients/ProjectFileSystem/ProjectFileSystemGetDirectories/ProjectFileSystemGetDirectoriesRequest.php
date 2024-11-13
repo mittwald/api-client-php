@@ -53,7 +53,7 @@ class ProjectFileSystemGetDirectoriesRequest
 
     private ?string $name = null;
 
-    private ?int $max_depth = null;
+    private ?int $maxDepth = null;
 
     /**
      * @var string[]|null
@@ -90,7 +90,7 @@ class ProjectFileSystemGetDirectoriesRequest
 
     public function getMaxDepth(): ?int
     {
-        return $this->max_depth ?? null;
+        return $this->maxDepth ?? null;
     }
 
     /**
@@ -169,16 +169,16 @@ class ProjectFileSystemGetDirectoriesRequest
         return $clone;
     }
 
-    public function withMaxDepth(int $max_depth): self
+    public function withMaxDepth(int $maxDepth): self
     {
         $validator = new Validator();
-        $validator->validate($max_depth, static::$schema['properties']['max_depth']);
+        $validator->validate($maxDepth, static::$schema['properties']['max_depth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->max_depth = $max_depth;
+        $clone->maxDepth = $maxDepth;
 
         return $clone;
     }
@@ -186,7 +186,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withoutMaxDepth(): self
     {
         $clone = clone $this;
-        unset($clone->max_depth);
+        unset($clone->maxDepth);
 
         return $clone;
     }
@@ -284,9 +284,9 @@ class ProjectFileSystemGetDirectoriesRequest
         if (isset($input->{'name'})) {
             $name = $input->{'name'};
         }
-        $max_depth = null;
+        $maxDepth = null;
         if (isset($input->{'max_depth'})) {
-            $max_depth = (int)($input->{'max_depth'});
+            $maxDepth = (int)($input->{'max_depth'});
         }
         $type = null;
         if (isset($input->{'type'})) {
@@ -304,7 +304,7 @@ class ProjectFileSystemGetDirectoriesRequest
         $obj = new self($projectId);
         $obj->directory = $directory;
         $obj->name = $name;
-        $obj->max_depth = $max_depth;
+        $obj->maxDepth = $maxDepth;
         $obj->type = $type;
         $obj->executable = $executable;
         $obj->hidden = $hidden;
@@ -326,8 +326,8 @@ class ProjectFileSystemGetDirectoriesRequest
         if (isset($this->name)) {
             $output['name'] = $this->name;
         }
-        if (isset($this->max_depth)) {
-            $output['max_depth'] = $this->max_depth;
+        if (isset($this->maxDepth)) {
+            $output['max_depth'] = $this->maxDepth;
         }
         if (isset($this->type)) {
             $output['type'] = $this->type;

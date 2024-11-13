@@ -37,7 +37,7 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
 
     private OauthRetrieveAccessTokenBadRequestResponseBodyError $error;
 
-    private ?string $error_description = null;
+    private ?string $errorDescription = null;
 
     public function __construct(OauthRetrieveAccessTokenBadRequestResponseBodyError $error)
     {
@@ -51,7 +51,7 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
 
     public function getErrorDescription(): ?string
     {
-        return $this->error_description ?? null;
+        return $this->errorDescription ?? null;
     }
 
     public function withError(OauthRetrieveAccessTokenBadRequestResponseBodyError $error): self
@@ -62,16 +62,16 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
         return $clone;
     }
 
-    public function withErrorDescription(string $error_description): self
+    public function withErrorDescription(string $errorDescription): self
     {
         $validator = new Validator();
-        $validator->validate($error_description, static::$schema['properties']['error_description']);
+        $validator->validate($errorDescription, static::$schema['properties']['error_description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->error_description = $error_description;
+        $clone->errorDescription = $errorDescription;
 
         return $clone;
     }
@@ -79,7 +79,7 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
     public function withoutErrorDescription(): self
     {
         $clone = clone $this;
-        unset($clone->error_description);
+        unset($clone->errorDescription);
 
         return $clone;
     }
@@ -100,13 +100,13 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
         }
 
         $error = OauthRetrieveAccessTokenBadRequestResponseBodyError::from($input->{'error'});
-        $error_description = null;
+        $errorDescription = null;
         if (isset($input->{'error_description'})) {
-            $error_description = $input->{'error_description'};
+            $errorDescription = $input->{'error_description'};
         }
 
         $obj = new self($error);
-        $obj->error_description = $error_description;
+        $obj->errorDescription = $errorDescription;
         return $obj;
     }
 
@@ -119,8 +119,8 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
     {
         $output = [];
         $output['error'] = ($this->error)->value;
-        if (isset($this->error_description)) {
-            $output['error_description'] = $this->error_description;
+        if (isset($this->errorDescription)) {
+            $output['error_description'] = $this->errorDescription;
         }
 
         return $output;

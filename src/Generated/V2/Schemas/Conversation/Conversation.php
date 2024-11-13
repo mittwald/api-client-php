@@ -64,8 +64,14 @@ class Conversation
             'mainUser' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.conversation.User',
             ],
+            'notificationRoles' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.conversation.NotificationRole',
+                ],
+                'type' => 'array',
+            ],
             'relatedTo' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.RelatedAggregateReference',
             ],
             'relations' => [
                 'items' => [
@@ -74,7 +80,7 @@ class Conversation
                 'type' => 'array',
             ],
             'sharedWith' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.AggregateReference',
+                '$ref' => '#/components/schemas/de.mittwald.v1.conversation.ShareableAggregateReference',
             ],
             'shortId' => [
                 'type' => 'string',
@@ -121,14 +127,19 @@ class Conversation
 
     private User $mainUser;
 
-    private ?AggregateReference $relatedTo = null;
+    /**
+     * @var NotificationRole[]|null
+     */
+    private ?array $notificationRoles = null;
+
+    private RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null $relatedTo = null;
 
     /**
      * @var AggregateReference[]|null
      */
     private ?array $relations = null;
 
-    private ?AggregateReference $sharedWith = null;
+    private ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null $sharedWith = null;
 
     private string $shortId;
 
@@ -191,11 +202,20 @@ class Conversation
 
     /**
      * @return
-     * AggregateReference|null
+     * NotificationRole[]|null
      */
-    public function getRelatedTo(): ?AggregateReference
+    public function getNotificationRoles(): ?array
     {
-        return $this->relatedTo ?? null;
+        return $this->notificationRoles ?? null;
+    }
+
+    /**
+     * @return
+     * RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
+     */
+    public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
+    {
+        return $this->relatedTo;
     }
 
     /**
@@ -209,11 +229,11 @@ class Conversation
 
     /**
      * @return
-     * AggregateReference|null
+     * ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
      */
-    public function getSharedWith(): ?AggregateReference
+    public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
     {
-        return $this->sharedWith ?? null;
+        return $this->sharedWith;
     }
 
     public function getShortId(): string
@@ -346,7 +366,29 @@ class Conversation
         return $clone;
     }
 
-    public function withRelatedTo(AggregateReference $relatedTo): self
+    /**
+     * @param NotificationRole[] $notificationRoles
+     */
+    public function withNotificationRoles(array $notificationRoles): self
+    {
+        $clone = clone $this;
+        $clone->notificationRoles = $notificationRoles;
+
+        return $clone;
+    }
+
+    public function withoutNotificationRoles(): self
+    {
+        $clone = clone $this;
+        unset($clone->notificationRoles);
+
+        return $clone;
+    }
+
+    /**
+     * @param RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo
+     */
+    public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo): self
     {
         $clone = clone $this;
         $clone->relatedTo = $relatedTo;
@@ -381,7 +423,10 @@ class Conversation
         return $clone;
     }
 
-    public function withSharedWith(AggregateReference $sharedWith): self
+    /**
+     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith
+     */
+    public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith): self
     {
         $clone = clone $this;
         $clone->sharedWith = $sharedWith;
@@ -479,9 +524,21 @@ class Conversation
             $lastMessageBy = User::buildFromInput($input->{'lastMessageBy'}, validate: $validate);
         }
         $mainUser = User::buildFromInput($input->{'mainUser'}, validate: $validate);
+        $notificationRoles = null;
+        if (isset($input->{'notificationRoles'})) {
+            $notificationRoles = array_map(fn (string $i): NotificationRole => NotificationRole::from($i), $input->{'notificationRoles'});
+        }
         $relatedTo = null;
         if (isset($input->{'relatedTo'})) {
-            $relatedTo = AggregateReference::buildFromInput($input->{'relatedTo'}, validate: $validate);
+            $relatedTo = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                RelatedAggregateReferenceAlternative1::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative1::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative2::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative2::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative3::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative3::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative4::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative4::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative5::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative5::buildFromInput($input->{'relatedTo'}, validate: $validate),
+                RelatedAggregateReferenceAlternative6::validateInput($input->{'relatedTo'}, true) => RelatedAggregateReferenceAlternative6::buildFromInput($input->{'relatedTo'}, validate: $validate),
+            };
         }
         $relations = null;
         if (isset($input->{'relations'})) {
@@ -489,7 +546,13 @@ class Conversation
         }
         $sharedWith = null;
         if (isset($input->{'sharedWith'})) {
-            $sharedWith = AggregateReference::buildFromInput($input->{'sharedWith'}, validate: $validate);
+            $sharedWith = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ShareableAggregateReferenceAlternative1::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative1::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative2::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative2::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative3::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative3::buildFromInput($input->{'sharedWith'}, validate: $validate),
+                ShareableAggregateReferenceAlternative4::validateInput($input->{'sharedWith'}, true) => ShareableAggregateReferenceAlternative4::buildFromInput($input->{'sharedWith'}, validate: $validate),
+            };
         }
         $shortId = $input->{'shortId'};
         $status = Status::from($input->{'status'});
@@ -502,6 +565,7 @@ class Conversation
         $obj->lastMessage = $lastMessage;
         $obj->lastMessageAt = $lastMessageAt;
         $obj->lastMessageBy = $lastMessageBy;
+        $obj->notificationRoles = $notificationRoles;
         $obj->relatedTo = $relatedTo;
         $obj->relations = $relations;
         $obj->sharedWith = $sharedWith;
@@ -534,14 +598,23 @@ class Conversation
             $output['lastMessageBy'] = $this->lastMessageBy->toJson();
         }
         $output['mainUser'] = $this->mainUser->toJson();
+        if (isset($this->notificationRoles)) {
+            $output['notificationRoles'] = array_map(fn (NotificationRole $i): string => $i->value, $this->notificationRoles);
+        }
         if (isset($this->relatedTo)) {
-            $output['relatedTo'] = $this->relatedTo->toJson();
+            $output['relatedTo'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative1, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative2, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative3, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative4, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative5, ($this->relatedTo) instanceof RelatedAggregateReferenceAlternative6 => $this->relatedTo->toJson(),
+            };
         }
         if (isset($this->relations)) {
             $output['relations'] = array_map(fn (AggregateReference $i): array => $i->toJson(), $this->relations);
         }
         if (isset($this->sharedWith)) {
-            $output['sharedWith'] = $this->sharedWith->toJson();
+            $output['sharedWith'] = match (true) {
+                default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+                ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative1, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative2, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative3, ($this->sharedWith) instanceof ShareableAggregateReferenceAlternative4 => $this->sharedWith->toJson(),
+            };
         }
         $output['shortId'] = $this->shortId;
         $output['status'] = $this->status->value;
