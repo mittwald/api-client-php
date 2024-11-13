@@ -2,79 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OauthGetAuthorizationBadRequestResponseBody
+class StoragespaceReplaceServerNotificationThresholdRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'error' => [
-                'enum' => [
-                    'invalid_request',
-                ],
-                'type' => 'string',
-            ],
-            'error_description' => [
-                'type' => 'string',
+            'notificationThresholdInBytes' => [
+                'example' => 10000,
+                'type' => 'integer',
             ],
         ],
-        'required' => [
-            'error',
-        ],
-        'type' => 'object',
     ];
 
-    private OauthGetAuthorizationBadRequestResponseBodyError $error;
+    private ?int $notificationThresholdInBytes = null;
 
-    private ?string $errorDescription = null;
-
-    public function __construct(OauthGetAuthorizationBadRequestResponseBodyError $error)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->error = $error;
     }
 
-    public function getError(): OauthGetAuthorizationBadRequestResponseBodyError
+    public function getNotificationThresholdInBytes(): ?int
     {
-        return $this->error;
+        return $this->notificationThresholdInBytes ?? null;
     }
 
-    public function getErrorDescription(): ?string
-    {
-        return $this->errorDescription ?? null;
-    }
-
-    public function withError(OauthGetAuthorizationBadRequestResponseBodyError $error): self
-    {
-        $clone = clone $this;
-        $clone->error = $error;
-
-        return $clone;
-    }
-
-    public function withErrorDescription(string $errorDescription): self
+    public function withNotificationThresholdInBytes(int $notificationThresholdInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($errorDescription, static::$schema['properties']['error_description']);
+        $validator->validate($notificationThresholdInBytes, static::$schema['properties']['notificationThresholdInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->errorDescription = $errorDescription;
+        $clone->notificationThresholdInBytes = $notificationThresholdInBytes;
 
         return $clone;
     }
 
-    public function withoutErrorDescription(): self
+    public function withoutNotificationThresholdInBytes(): self
     {
         $clone = clone $this;
-        unset($clone->errorDescription);
+        unset($clone->notificationThresholdInBytes);
 
         return $clone;
     }
@@ -84,24 +62,23 @@ class OauthGetAuthorizationBadRequestResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OauthGetAuthorizationBadRequestResponseBody Created instance
+     * @return StoragespaceReplaceServerNotificationThresholdRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OauthGetAuthorizationBadRequestResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceServerNotificationThresholdRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $error = OauthGetAuthorizationBadRequestResponseBodyError::from($input->{'error'});
-        $errorDescription = null;
-        if (isset($input->{'error_description'})) {
-            $errorDescription = $input->{'error_description'};
+        $notificationThresholdInBytes = null;
+        if (isset($input->{'notificationThresholdInBytes'})) {
+            $notificationThresholdInBytes = (int)($input->{'notificationThresholdInBytes'});
         }
 
-        $obj = new self($error);
-        $obj->errorDescription = $errorDescription;
+        $obj = new self();
+        $obj->notificationThresholdInBytes = $notificationThresholdInBytes;
         return $obj;
     }
 
@@ -113,9 +90,8 @@ class OauthGetAuthorizationBadRequestResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['error'] = ($this->error)->value;
-        if (isset($this->errorDescription)) {
-            $output['error_description'] = $this->errorDescription;
+        if (isset($this->notificationThresholdInBytes)) {
+            $output['notificationThresholdInBytes'] = $this->notificationThresholdInBytes;
         }
 
         return $output;

@@ -35,6 +35,9 @@ class MySqlDatabase
             'description' => [
                 'type' => 'string',
             ],
+            'externalHostname' => [
+                'type' => 'string',
+            ],
             'finalizers' => [
                 'items' => [
                     'minLength' => 1,
@@ -101,6 +104,7 @@ class MySqlDatabase
             'storageUsageInBytesSetAt',
             'status',
             'statusSetAt',
+            'externalHostname',
         ],
         'type' => 'object',
     ];
@@ -110,6 +114,8 @@ class MySqlDatabase
     private DateTime $createdAt;
 
     private string $description;
+
+    private string $externalHostname;
 
     /**
      * @var string[]|null
@@ -140,11 +146,12 @@ class MySqlDatabase
 
     private string $version;
 
-    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, DatabaseStatus $status, DateTime $statusSetAt, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt, DateTime $updatedAt, string $version)
+    public function __construct(CharacterSettings $characterSettings, DateTime $createdAt, string $description, string $externalHostname, string $hostname, string $id, bool $isReady, bool $isShared, string $name, string $projectId, DatabaseStatus $status, DateTime $statusSetAt, int $storageUsageInBytes, DateTime $storageUsageInBytesSetAt, DateTime $updatedAt, string $version)
     {
         $this->characterSettings = $characterSettings;
         $this->createdAt = $createdAt;
         $this->description = $description;
+        $this->externalHostname = $externalHostname;
         $this->hostname = $hostname;
         $this->id = $id;
         $this->isReady = $isReady;
@@ -172,6 +179,11 @@ class MySqlDatabase
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getExternalHostname(): string
+    {
+        return $this->externalHostname;
     }
 
     /**
@@ -268,6 +280,20 @@ class MySqlDatabase
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withExternalHostname(string $externalHostname): self
+    {
+        $validator = new Validator();
+        $validator->validate($externalHostname, static::$schema['properties']['externalHostname']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->externalHostname = $externalHostname;
 
         return $clone;
     }
@@ -459,6 +485,7 @@ class MySqlDatabase
         $characterSettings = CharacterSettings::buildFromInput($input->{'characterSettings'}, validate: $validate);
         $createdAt = new DateTime($input->{'createdAt'});
         $description = $input->{'description'};
+        $externalHostname = $input->{'externalHostname'};
         $finalizers = null;
         if (isset($input->{'finalizers'})) {
             $finalizers = $input->{'finalizers'};
@@ -476,7 +503,7 @@ class MySqlDatabase
         $updatedAt = new DateTime($input->{'updatedAt'});
         $version = $input->{'version'};
 
-        $obj = new self($characterSettings, $createdAt, $description, $hostname, $id, $isReady, $isShared, $name, $projectId, $status, $statusSetAt, $storageUsageInBytes, $storageUsageInBytesSetAt, $updatedAt, $version);
+        $obj = new self($characterSettings, $createdAt, $description, $externalHostname, $hostname, $id, $isReady, $isShared, $name, $projectId, $status, $statusSetAt, $storageUsageInBytes, $storageUsageInBytesSetAt, $updatedAt, $version);
         $obj->finalizers = $finalizers;
         return $obj;
     }
@@ -492,6 +519,7 @@ class MySqlDatabase
         $output['characterSettings'] = $this->characterSettings->toJson();
         $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         $output['description'] = $this->description;
+        $output['externalHostname'] = $this->externalHostname;
         if (isset($this->finalizers)) {
             $output['finalizers'] = $this->finalizers;
         }

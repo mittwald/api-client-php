@@ -26,6 +26,24 @@ class GetFileWithNameRequest
                 'example' => 'me.jpeg',
                 'type' => 'string',
             ],
+            'accept' => [
+                'default' => 'application/octet-stream',
+                'enum' => [
+                    'application/octet-stream',
+                    'text/plain;base64',
+                ],
+                'example' => 'application/octet-stream',
+                'type' => 'string',
+            ],
+            'content-disposition' => [
+                'default' => 'inline',
+                'enum' => [
+                    'inline',
+                    'attachment',
+                ],
+                'example' => 'inline',
+                'type' => 'string',
+            ],
             'token' => [
                 'example' => 'jwt',
                 'type' => 'string',
@@ -40,6 +58,10 @@ class GetFileWithNameRequest
     private string $fileId;
 
     private string $fileName;
+
+    private GetFileWithNameRequestAccept $accept = GetFileWithNameRequestAccept::applicationoctetstream;
+
+    private GetFileWithNameRequestContentDisposition $contentDisposition = GetFileWithNameRequestContentDisposition::inline;
 
     private ?string $token = null;
 
@@ -61,6 +83,16 @@ class GetFileWithNameRequest
     public function getFileName(): string
     {
         return $this->fileName;
+    }
+
+    public function getAccept(): GetFileWithNameRequestAccept
+    {
+        return $this->accept;
+    }
+
+    public function getContentDisposition(): GetFileWithNameRequestContentDisposition
+    {
+        return $this->contentDisposition;
     }
 
     public function getToken(): ?string
@@ -92,6 +124,22 @@ class GetFileWithNameRequest
 
         $clone = clone $this;
         $clone->fileName = $fileName;
+
+        return $clone;
+    }
+
+    public function withAccept(GetFileWithNameRequestAccept $accept): self
+    {
+        $clone = clone $this;
+        $clone->accept = $accept;
+
+        return $clone;
+    }
+
+    public function withContentDisposition(GetFileWithNameRequestContentDisposition $contentDisposition): self
+    {
+        $clone = clone $this;
+        $clone->contentDisposition = $contentDisposition;
 
         return $clone;
     }
@@ -135,12 +183,22 @@ class GetFileWithNameRequest
 
         $fileId = $input->{'fileId'};
         $fileName = $input->{'fileName'};
+        $accept = GetFileWithNameRequestAccept::applicationoctetstream;
+        if (isset($input->{'accept'})) {
+            $accept = GetFileWithNameRequestAccept::from($input->{'accept'});
+        }
+        $contentDisposition = GetFileWithNameRequestContentDisposition::inline;
+        if (isset($input->{'content-disposition'})) {
+            $contentDisposition = GetFileWithNameRequestContentDisposition::from($input->{'content-disposition'});
+        }
         $token = null;
         if (isset($input->{'token'})) {
             $token = $input->{'token'};
         }
 
         $obj = new self($fileId, $fileName);
+        $obj->accept = $accept;
+        $obj->contentDisposition = $contentDisposition;
         $obj->token = $token;
         return $obj;
     }
@@ -155,6 +213,8 @@ class GetFileWithNameRequest
         $output = [];
         $output['fileId'] = $this->fileId;
         $output['fileName'] = $this->fileName;
+        $output['accept'] = ($this->accept)->value;
+        $output['content-disposition'] = ($this->contentDisposition)->value;
         if (isset($this->token)) {
             $output['token'] = $this->token;
         }
@@ -220,6 +280,12 @@ class GetFileWithNameRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['accept'])) {
+            $query['accept'] = $mapped['accept'];
+        }
+        if (isset($mapped['content-disposition'])) {
+            $query['content-disposition'] = $mapped['content-disposition'];
+        }
         if (isset($mapped['token'])) {
             $query['token'] = $mapped['token'];
         }

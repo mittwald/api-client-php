@@ -2,79 +2,91 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class OauthGetAuthorizationBadRequestResponseBody
+class StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
-        'properties' => [
-            'error' => [
-                'enum' => [
-                    'invalid_request',
-                ],
-                'type' => 'string',
-            ],
-            'error_description' => [
-                'type' => 'string',
-            ],
-        ],
-        'required' => [
-            'error',
-        ],
         'type' => 'object',
+        'properties' => [
+            'message' => [
+                'type' => 'string',
+                'example' => 'too many requests',
+            ],
+            'type' => [
+                'type' => 'string',
+                'example' => 'RateLimitError',
+            ],
+        ],
     ];
 
-    private OauthGetAuthorizationBadRequestResponseBodyError $error;
+    private ?string $message = null;
 
-    private ?string $errorDescription = null;
+    private ?string $type = null;
 
-    public function __construct(OauthGetAuthorizationBadRequestResponseBodyError $error)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->error = $error;
     }
 
-    public function getError(): OauthGetAuthorizationBadRequestResponseBodyError
+    public function getMessage(): ?string
     {
-        return $this->error;
+        return $this->message ?? null;
     }
 
-    public function getErrorDescription(): ?string
+    public function getType(): ?string
     {
-        return $this->errorDescription ?? null;
+        return $this->type ?? null;
     }
 
-    public function withError(OauthGetAuthorizationBadRequestResponseBodyError $error): self
-    {
-        $clone = clone $this;
-        $clone->error = $error;
-
-        return $clone;
-    }
-
-    public function withErrorDescription(string $errorDescription): self
+    public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($errorDescription, static::$schema['properties']['error_description']);
+        $validator->validate($message, static::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->errorDescription = $errorDescription;
+        $clone->message = $message;
 
         return $clone;
     }
 
-    public function withoutErrorDescription(): self
+    public function withoutMessage(): self
     {
         $clone = clone $this;
-        unset($clone->errorDescription);
+        unset($clone->message);
+
+        return $clone;
+    }
+
+    public function withType(string $type): self
+    {
+        $validator = new Validator();
+        $validator->validate($type, static::$schema['properties']['type']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->type = $type;
+
+        return $clone;
+    }
+
+    public function withoutType(): self
+    {
+        $clone = clone $this;
+        unset($clone->type);
 
         return $clone;
     }
@@ -84,24 +96,28 @@ class OauthGetAuthorizationBadRequestResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return OauthGetAuthorizationBadRequestResponseBody Created instance
+     * @return StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): OauthGetAuthorizationBadRequestResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $error = OauthGetAuthorizationBadRequestResponseBodyError::from($input->{'error'});
-        $errorDescription = null;
-        if (isset($input->{'error_description'})) {
-            $errorDescription = $input->{'error_description'};
+        $message = null;
+        if (isset($input->{'message'})) {
+            $message = $input->{'message'};
+        }
+        $type = null;
+        if (isset($input->{'type'})) {
+            $type = $input->{'type'};
         }
 
-        $obj = new self($error);
-        $obj->errorDescription = $errorDescription;
+        $obj = new self();
+        $obj->message = $message;
+        $obj->type = $type;
         return $obj;
     }
 
@@ -113,9 +129,11 @@ class OauthGetAuthorizationBadRequestResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['error'] = ($this->error)->value;
-        if (isset($this->errorDescription)) {
-            $output['error_description'] = $this->errorDescription;
+        if (isset($this->message)) {
+            $output['message'] = $this->message;
+        }
+        if (isset($this->type)) {
+            $output['type'] = $this->type;
         }
 
         return $output;
