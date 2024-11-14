@@ -42,6 +42,7 @@ class InvoiceSettingsStatus
                     'returnDebitNote',
                     'returnDebitNoteWaitingForPayment',
                     'debtWrittenOff',
+                    'bankrupt',
                 ],
                 'type' => 'string',
             ],
