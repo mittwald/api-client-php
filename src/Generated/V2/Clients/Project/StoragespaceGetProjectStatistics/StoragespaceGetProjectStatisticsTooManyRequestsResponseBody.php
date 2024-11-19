@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetExtensionshealthTooManyRequestsResponseBody
+class StoragespaceGetProjectStatisticsTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class GetExtensionshealthTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetExtensionshealthTooManyRequestsResponseBody Created instance
+     * @return StoragespaceGetProjectStatisticsTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetExtensionshealthTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceGetProjectStatisticsTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

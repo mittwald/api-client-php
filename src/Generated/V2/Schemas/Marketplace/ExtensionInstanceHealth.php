@@ -29,34 +29,42 @@ class ExtensionInstanceHealth
                 'type' => 'string',
             ],
             'pendingInstallation' => [
+                'default' => false,
                 'type' => 'boolean',
             ],
-            'pendingRemval' => [
+            'pendingRemoval' => [
+                'default' => false,
                 'type' => 'boolean',
             ],
             'pendingWebhooks' => [
+                'default' => 0,
                 'minimum' => 0,
                 'type' => 'integer',
             ],
             'webhooksHalted' => [
+                'default' => false,
                 'type' => 'boolean',
             ],
         ],
         'required' => [
             'id',
+            'webhooksHalted',
+            'pendingInstallation',
+            'pendingRemoval',
+            'pendingWebhooks',
         ],
         'type' => 'object',
     ];
 
     private string $id;
 
-    private ?bool $pendingInstallation = null;
+    private bool $pendingInstallation = false;
 
-    private ?bool $pendingRemval = null;
+    private bool $pendingRemoval = false;
 
-    private ?int $pendingWebhooks = null;
+    private int $pendingWebhooks = 0;
 
-    private ?bool $webhooksHalted = null;
+    private bool $webhooksHalted = false;
 
     public function __construct(string $id)
     {
@@ -68,24 +76,24 @@ class ExtensionInstanceHealth
         return $this->id;
     }
 
-    public function getPendingInstallation(): ?bool
+    public function getPendingInstallation(): bool
     {
-        return $this->pendingInstallation ?? null;
+        return $this->pendingInstallation;
     }
 
-    public function getPendingRemval(): ?bool
+    public function getPendingRemoval(): bool
     {
-        return $this->pendingRemval ?? null;
+        return $this->pendingRemoval;
     }
 
-    public function getPendingWebhooks(): ?int
+    public function getPendingWebhooks(): int
     {
-        return $this->pendingWebhooks ?? null;
+        return $this->pendingWebhooks;
     }
 
-    public function getWebhooksHalted(): ?bool
+    public function getWebhooksHalted(): bool
     {
-        return $this->webhooksHalted ?? null;
+        return $this->webhooksHalted;
     }
 
     public function withId(string $id): self
@@ -116,32 +124,16 @@ class ExtensionInstanceHealth
         return $clone;
     }
 
-    public function withoutPendingInstallation(): self
-    {
-        $clone = clone $this;
-        unset($clone->pendingInstallation);
-
-        return $clone;
-    }
-
-    public function withPendingRemval(bool $pendingRemval): self
+    public function withPendingRemoval(bool $pendingRemoval): self
     {
         $validator = new Validator();
-        $validator->validate($pendingRemval, static::$schema['properties']['pendingRemval']);
+        $validator->validate($pendingRemoval, static::$schema['properties']['pendingRemoval']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->pendingRemval = $pendingRemval;
-
-        return $clone;
-    }
-
-    public function withoutPendingRemval(): self
-    {
-        $clone = clone $this;
-        unset($clone->pendingRemval);
+        $clone->pendingRemoval = $pendingRemoval;
 
         return $clone;
     }
@@ -160,14 +152,6 @@ class ExtensionInstanceHealth
         return $clone;
     }
 
-    public function withoutPendingWebhooks(): self
-    {
-        $clone = clone $this;
-        unset($clone->pendingWebhooks);
-
-        return $clone;
-    }
-
     public function withWebhooksHalted(bool $webhooksHalted): self
     {
         $validator = new Validator();
@@ -178,14 +162,6 @@ class ExtensionInstanceHealth
 
         $clone = clone $this;
         $clone->webhooksHalted = $webhooksHalted;
-
-        return $clone;
-    }
-
-    public function withoutWebhooksHalted(): self
-    {
-        $clone = clone $this;
-        unset($clone->webhooksHalted);
 
         return $clone;
     }
@@ -206,26 +182,26 @@ class ExtensionInstanceHealth
         }
 
         $id = $input->{'id'};
-        $pendingInstallation = null;
+        $pendingInstallation = false;
         if (isset($input->{'pendingInstallation'})) {
             $pendingInstallation = (bool)($input->{'pendingInstallation'});
         }
-        $pendingRemval = null;
-        if (isset($input->{'pendingRemval'})) {
-            $pendingRemval = (bool)($input->{'pendingRemval'});
+        $pendingRemoval = false;
+        if (isset($input->{'pendingRemoval'})) {
+            $pendingRemoval = (bool)($input->{'pendingRemoval'});
         }
-        $pendingWebhooks = null;
+        $pendingWebhooks = 0;
         if (isset($input->{'pendingWebhooks'})) {
             $pendingWebhooks = (int)($input->{'pendingWebhooks'});
         }
-        $webhooksHalted = null;
+        $webhooksHalted = false;
         if (isset($input->{'webhooksHalted'})) {
             $webhooksHalted = (bool)($input->{'webhooksHalted'});
         }
 
         $obj = new self($id);
         $obj->pendingInstallation = $pendingInstallation;
-        $obj->pendingRemval = $pendingRemval;
+        $obj->pendingRemoval = $pendingRemoval;
         $obj->pendingWebhooks = $pendingWebhooks;
         $obj->webhooksHalted = $webhooksHalted;
         return $obj;
@@ -240,18 +216,10 @@ class ExtensionInstanceHealth
     {
         $output = [];
         $output['id'] = $this->id;
-        if (isset($this->pendingInstallation)) {
-            $output['pendingInstallation'] = $this->pendingInstallation;
-        }
-        if (isset($this->pendingRemval)) {
-            $output['pendingRemval'] = $this->pendingRemval;
-        }
-        if (isset($this->pendingWebhooks)) {
-            $output['pendingWebhooks'] = $this->pendingWebhooks;
-        }
-        if (isset($this->webhooksHalted)) {
-            $output['webhooksHalted'] = $this->webhooksHalted;
-        }
+        $output['pendingInstallation'] = $this->pendingInstallation;
+        $output['pendingRemoval'] = $this->pendingRemoval;
+        $output['pendingWebhooks'] = $this->pendingWebhooks;
+        $output['webhooksHalted'] = $this->webhooksHalted;
 
         return $output;
     }

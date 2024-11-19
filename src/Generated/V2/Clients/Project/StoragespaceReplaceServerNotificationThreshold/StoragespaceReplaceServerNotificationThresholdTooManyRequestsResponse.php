@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class GetExtensionshealthTooManyRequestsResponse implements ResponseContainer
+class StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,25 @@ class GetExtensionshealthTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private GetExtensionshealthTooManyRequestsResponseBody $body;
+    private StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(GetExtensionshealthTooManyRequestsResponseBody $body)
+    public function __construct(StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): GetExtensionshealthTooManyRequestsResponseBody
+    /**
+     * @return
+     * StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponseBody
+     */
+    public function getBody(): StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(GetExtensionshealthTooManyRequestsResponseBody $body): self
+    public function withBody(StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +67,17 @@ class GetExtensionshealthTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetExtensionshealthTooManyRequestsResponse Created instance
+     * @return StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetExtensionshealthTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = GetExtensionshealthTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

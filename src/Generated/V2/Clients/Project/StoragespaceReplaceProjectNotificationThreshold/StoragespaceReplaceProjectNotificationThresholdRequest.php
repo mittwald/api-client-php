@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetExtensionshealthRequest
+class StoragespaceReplaceProjectNotificationThresholdRequest
 {
-    public const method = 'get';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,42 +17,67 @@ class GetExtensionshealthRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'contributorId' => [
-                'format' => 'uuid',
+            'projectId' => [
                 'type' => 'string',
+            ],
+            'body' => [
+                'properties' => [
+                    'notificationThresholdInBytes' => [
+                        'example' => 10000,
+                        'nullable' => true,
+                        'type' => 'integer',
+                    ],
+                ],
             ],
         ],
         'required' => [
-            'contributorId',
+            'projectId',
+            'body',
         ],
     ];
 
-    private string $contributorId;
+    private string $projectId;
+
+    private StoragespaceReplaceProjectNotificationThresholdRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $contributorId)
+    public function __construct(string $projectId, StoragespaceReplaceProjectNotificationThresholdRequestBody $body)
     {
-        $this->contributorId = $contributorId;
+        $this->projectId = $projectId;
+        $this->body = $body;
     }
 
-    public function getContributorId(): string
+    public function getProjectId(): string
     {
-        return $this->contributorId;
+        return $this->projectId;
     }
 
-    public function withContributorId(string $contributorId): self
+    public function getBody(): StoragespaceReplaceProjectNotificationThresholdRequestBody
+    {
+        return $this->body;
+    }
+
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, static::$schema['properties']['contributorId']);
+        $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->contributorId = $contributorId;
+        $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withBody(StoragespaceReplaceProjectNotificationThresholdRequestBody $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -62,19 +87,20 @@ class GetExtensionshealthRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetExtensionshealthRequest Created instance
+     * @return StoragespaceReplaceProjectNotificationThresholdRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetExtensionshealthRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceProjectNotificationThresholdRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $contributorId = $input->{'contributorId'};
+        $projectId = $input->{'projectId'};
+        $body = StoragespaceReplaceProjectNotificationThresholdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($contributorId);
+        $obj = new self($projectId, $body);
 
         return $obj;
     }
@@ -87,7 +113,8 @@ class GetExtensionshealthRequest
     public function toJson(): array
     {
         $output = [];
-        $output['contributorId'] = $this->contributorId;
+        $output['projectId'] = $this->projectId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -118,6 +145,7 @@ class GetExtensionshealthRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -132,8 +160,8 @@ class GetExtensionshealthRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $contributorId = urlencode($mapped['contributorId']);
-        return '/v2/marketplace/' . $contributorId . '/extensionshealth';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/storage-space-notification-threshold';
     }
 
     /**
@@ -152,6 +180,7 @@ class GetExtensionshealthRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

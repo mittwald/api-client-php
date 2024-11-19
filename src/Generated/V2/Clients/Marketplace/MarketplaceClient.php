@@ -35,8 +35,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionIn
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthRequest;
 
 /**
  * Client for Marketplace API
@@ -213,14 +211,4 @@ interface MarketplaceClient
      * @return ExtensionListExtensionsOKResponse OK
      */
     public function extensionListExtensions(ExtensionListExtensionsRequest $request): ExtensionListExtensionsOKResponse;
-    /**
-     * Get all extensions and instances health for the contributor.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/marketplace-get-extensionshealth
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetExtensionshealthRequest $request An object representing the request for this operation
-     * @return GetExtensionshealthOKResponse OK
-     */
-    public function getExtensionshealth(GetExtensionshealthRequest $request): GetExtensionshealthOKResponse;
 }

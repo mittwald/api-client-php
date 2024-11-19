@@ -48,6 +48,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestProjectAvatarUpload\R
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\RequestServerAvatarUpload\RequestServerAvatarUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectMembership\UpdateProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\UpdateServerDescriptionRequest;
@@ -340,4 +346,44 @@ interface ProjectClient
      * @return EmptyResponse NoContent
      */
     public function updateServerDescription(UpdateServerDescriptionRequest $request): EmptyResponse;
+    /**
+     * Get storage space Statistics belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-get-project-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceGetProjectStatisticsRequest $request An object representing the request for this operation
+     * @return StoragespaceGetProjectStatisticsOKResponse OK
+     */
+    public function storagespaceGetProjectStatistics(StoragespaceGetProjectStatisticsRequest $request): StoragespaceGetProjectStatisticsOKResponse;
+    /**
+     * Get storage space Statistics belonging to a Server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-get-server-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceGetServerStatisticsRequest $request An object representing the request for this operation
+     * @return StoragespaceGetServerStatisticsOKResponse OK
+     */
+    public function storagespaceGetServerStatistics(StoragespaceGetServerStatisticsRequest $request): StoragespaceGetServerStatisticsOKResponse;
+    /**
+     * Update a Project's storage space notification threshold.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-project-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceReplaceProjectNotificationThresholdRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceReplaceProjectNotificationThreshold(StoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse;
+    /**
+     * Update a Server's storage space notification threshold.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-server-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceReplaceServerNotificationThresholdRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceReplaceServerNotificationThreshold(StoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse;
 }

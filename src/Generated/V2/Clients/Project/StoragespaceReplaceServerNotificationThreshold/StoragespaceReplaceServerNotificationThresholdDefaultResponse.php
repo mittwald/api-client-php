@@ -2,60 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Marketplace\ExtensionHealth;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class GetExtensionshealthOKResponseBody
+class StoragespaceReplaceServerNotificationThresholdDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'extensionsHealth' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionHealth',
-                ],
-                'type' => 'array',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
-        'required' => [
-            'extensionsHealth',
-        ],
-        'type' => 'object',
     ];
 
-    /**
-     * @var ExtensionHealth[]
-     */
-    private array $extensionsHealth;
+    private Error $body;
 
-    /**
-     * @param ExtensionHealth[] $extensionsHealth
-     */
-    public function __construct(array $extensionsHealth)
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(Error $body)
     {
-        $this->extensionsHealth = $extensionsHealth;
+        $this->body = $body;
     }
 
-    /**
-     * @return ExtensionHealth[]
-     */
-    public function getExtensionsHealth(): array
+    public function getBody(): Error
     {
-        return $this->extensionsHealth;
+        return $this->body;
     }
 
-    /**
-     * @param ExtensionHealth[] $extensionsHealth
-     */
-    public function withExtensionsHealth(array $extensionsHealth): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
-        $clone->extensionsHealth = $extensionsHealth;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -65,19 +54,19 @@ class GetExtensionshealthOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetExtensionshealthOKResponseBody Created instance
+     * @return StoragespaceReplaceServerNotificationThresholdDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetExtensionshealthOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceServerNotificationThresholdDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $extensionsHealth = array_map(fn (array|object $i): ExtensionHealth => ExtensionHealth::buildFromInput($i, validate: $validate), $input->{'extensionsHealth'});
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($extensionsHealth);
+        $obj = new self($body);
 
         return $obj;
     }
@@ -90,7 +79,7 @@ class GetExtensionshealthOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['extensionsHealth'] = array_map(fn (ExtensionHealth $i): array => $i->toJson(), $this->extensionsHealth);
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -121,5 +110,18 @@ class GetExtensionshealthOKResponseBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

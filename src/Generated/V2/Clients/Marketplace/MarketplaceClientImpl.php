@@ -83,11 +83,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\GetExtensionshealth\GetExtensionshealthTooManyRequestsResponse;
 
 /**
  * Client for Marketplace API
@@ -474,29 +469,6 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListExtensionsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get all extensions and instances health for the contributor.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/marketplace-get-extensionshealth
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetExtensionshealthRequest $request An object representing the request for this operation
-     * @return GetExtensionshealthOKResponse OK
-     */
-    public function getExtensionshealth(GetExtensionshealthRequest $request): GetExtensionshealthOKResponse
-    {
-        $httpRequest = new Request(GetExtensionshealthRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetExtensionshealthOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => GetExtensionshealthNotFoundResponse::fromResponse($httpResponse),
-            429 => GetExtensionshealthTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetExtensionshealthDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

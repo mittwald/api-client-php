@@ -138,6 +138,32 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\Rese
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ResendProjectInviteMail\ResendProjectInviteMailTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold\StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold\StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateProjectDescription\UpdateProjectDescriptionForbiddenResponse;
@@ -822,6 +848,106 @@ class ProjectClientImpl implements ProjectClient
             403 => UpdateServerDescriptionForbiddenResponse::fromResponse($httpResponse),
             429 => UpdateServerDescriptionTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateServerDescriptionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get storage space Statistics belonging to a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-get-project-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceGetProjectStatisticsRequest $request An object representing the request for this operation
+     * @return StoragespaceGetProjectStatisticsOKResponse OK
+     */
+    public function storagespaceGetProjectStatistics(StoragespaceGetProjectStatisticsRequest $request): StoragespaceGetProjectStatisticsOKResponse
+    {
+        $httpRequest = new Request(StoragespaceGetProjectStatisticsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return StoragespaceGetProjectStatisticsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => StoragespaceGetProjectStatisticsBadRequestResponse::fromResponse($httpResponse),
+            403 => StoragespaceGetProjectStatisticsForbiddenResponse::fromResponse($httpResponse),
+            404 => StoragespaceGetProjectStatisticsNotFoundResponse::fromResponse($httpResponse),
+            429 => StoragespaceGetProjectStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => StoragespaceGetProjectStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
+            default => StoragespaceGetProjectStatisticsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get storage space Statistics belonging to a Server.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-get-server-statistics
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceGetServerStatisticsRequest $request An object representing the request for this operation
+     * @return StoragespaceGetServerStatisticsOKResponse OK
+     */
+    public function storagespaceGetServerStatistics(StoragespaceGetServerStatisticsRequest $request): StoragespaceGetServerStatisticsOKResponse
+    {
+        $httpRequest = new Request(StoragespaceGetServerStatisticsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return StoragespaceGetServerStatisticsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => StoragespaceGetServerStatisticsBadRequestResponse::fromResponse($httpResponse),
+            403 => StoragespaceGetServerStatisticsForbiddenResponse::fromResponse($httpResponse),
+            404 => StoragespaceGetServerStatisticsNotFoundResponse::fromResponse($httpResponse),
+            429 => StoragespaceGetServerStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => StoragespaceGetServerStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
+            default => StoragespaceGetServerStatisticsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Project's storage space notification threshold.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-project-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceReplaceProjectNotificationThresholdRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceReplaceProjectNotificationThreshold(StoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(StoragespaceReplaceProjectNotificationThresholdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => StoragespaceReplaceProjectNotificationThresholdForbiddenResponse::fromResponse($httpResponse),
+            429 => StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => StoragespaceReplaceProjectNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
+            default => StoragespaceReplaceProjectNotificationThresholdDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Server's storage space notification threshold.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-server-notification-threshold
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param StoragespaceReplaceServerNotificationThresholdRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function storagespaceReplaceServerNotificationThreshold(StoragespaceReplaceServerNotificationThresholdRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(StoragespaceReplaceServerNotificationThresholdRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            403 => StoragespaceReplaceServerNotificationThresholdForbiddenResponse::fromResponse($httpResponse),
+            429 => StoragespaceReplaceServerNotificationThresholdTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => StoragespaceReplaceServerNotificationThresholdInternalServerErrorResponse::fromResponse($httpResponse),
+            default => StoragespaceReplaceServerNotificationThresholdDefaultResponse::fromResponse($httpResponse),
         });
     }
 }
