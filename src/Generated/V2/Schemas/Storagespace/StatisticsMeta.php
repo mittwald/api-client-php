@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Storagespace;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -28,99 +29,116 @@ class StatisticsMeta
                 'example' => false,
                 'type' => 'boolean',
             ],
-            'storageLimitInBytes' => [
+            'limitInBytes' => [
                 'example' => 100000,
                 'type' => 'integer',
             ],
-            'totalStorageExceedanceInBytes' => [
+            'notificationThresholdUsedAsLimit' => [
+                'description' => 'If true, set notification threshold is used as limit for meta calculations. E.g. for projects with a parent server.',
+                'example' => false,
+                'type' => 'boolean',
+            ],
+            'totalExceedanceInBytes' => [
                 'example' => 10,
                 'type' => 'integer',
             ],
-            'totalStorageFreeInBytes' => [
+            'totalExceedanceInBytesSetAt' => [
+                'example' => '2023-12-22T13:46:52.000Z',
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'totalFreeInBytes' => [
                 'example' => 99000,
                 'type' => 'integer',
             ],
-            'totalStorageFreeInPercentage' => [
+            'totalFreeInPercentage' => [
                 'example' => 90,
-                'type' => 'integer',
+                'type' => 'number',
             ],
-            'totalStorageUsageInBytes' => [
+            'totalUsageInBytes' => [
                 'example' => 1000,
                 'type' => 'integer',
             ],
-            'totalStorageUsageInPercentage' => [
+            'totalUsageInPercentage' => [
                 'example' => 10,
-                'type' => 'integer',
+                'type' => 'number',
             ],
         ],
         'required' => [
-            'storageLimitInBytes',
-            'totalStorageUsageInBytes',
-            'totalStorageUsageInPercentage',
-            'totalStorageFreeInBytes',
-            'totalStorageFreeInPercentage',
-            'isExceeding',
+            'totalUsageInBytes',
         ],
         'type' => 'object',
     ];
 
-    private bool $isExceeding;
+    private ?bool $isExceeding = null;
 
-    private int $storageLimitInBytes;
+    private ?int $limitInBytes = null;
 
-    private ?int $totalStorageExceedanceInBytes = null;
+    /**
+     * If true, set notification threshold is used as limit for meta calculations. E.g. for projects with a parent server.
+     */
+    private ?bool $notificationThresholdUsedAsLimit = null;
 
-    private int $totalStorageFreeInBytes;
+    private ?int $totalExceedanceInBytes = null;
 
-    private int $totalStorageFreeInPercentage;
+    private ?DateTime $totalExceedanceInBytesSetAt = null;
 
-    private int $totalStorageUsageInBytes;
+    private ?int $totalFreeInBytes = null;
 
-    private int $totalStorageUsageInPercentage;
+    private int|float|null $totalFreeInPercentage = null;
 
-    public function __construct(bool $isExceeding, int $storageLimitInBytes, int $totalStorageFreeInBytes, int $totalStorageFreeInPercentage, int $totalStorageUsageInBytes, int $totalStorageUsageInPercentage)
+    private int $totalUsageInBytes;
+
+    private int|float|null $totalUsageInPercentage = null;
+
+    public function __construct(int $totalUsageInBytes)
     {
-        $this->isExceeding = $isExceeding;
-        $this->storageLimitInBytes = $storageLimitInBytes;
-        $this->totalStorageFreeInBytes = $totalStorageFreeInBytes;
-        $this->totalStorageFreeInPercentage = $totalStorageFreeInPercentage;
-        $this->totalStorageUsageInBytes = $totalStorageUsageInBytes;
-        $this->totalStorageUsageInPercentage = $totalStorageUsageInPercentage;
+        $this->totalUsageInBytes = $totalUsageInBytes;
     }
 
-    public function getIsExceeding(): bool
+    public function getIsExceeding(): ?bool
     {
-        return $this->isExceeding;
+        return $this->isExceeding ?? null;
     }
 
-    public function getStorageLimitInBytes(): int
+    public function getLimitInBytes(): ?int
     {
-        return $this->storageLimitInBytes;
+        return $this->limitInBytes ?? null;
     }
 
-    public function getTotalStorageExceedanceInBytes(): ?int
+    public function getNotificationThresholdUsedAsLimit(): ?bool
     {
-        return $this->totalStorageExceedanceInBytes ?? null;
+        return $this->notificationThresholdUsedAsLimit ?? null;
     }
 
-    public function getTotalStorageFreeInBytes(): int
+    public function getTotalExceedanceInBytes(): ?int
     {
-        return $this->totalStorageFreeInBytes;
+        return $this->totalExceedanceInBytes ?? null;
     }
 
-    public function getTotalStorageFreeInPercentage(): int
+    public function getTotalExceedanceInBytesSetAt(): ?DateTime
     {
-        return $this->totalStorageFreeInPercentage;
+        return $this->totalExceedanceInBytesSetAt ?? null;
     }
 
-    public function getTotalStorageUsageInBytes(): int
+    public function getTotalFreeInBytes(): ?int
     {
-        return $this->totalStorageUsageInBytes;
+        return $this->totalFreeInBytes ?? null;
     }
 
-    public function getTotalStorageUsageInPercentage(): int
+    public function getTotalFreeInPercentage(): int|float|null
     {
-        return $this->totalStorageUsageInPercentage;
+        return $this->totalFreeInPercentage;
+    }
+
+    public function getTotalUsageInBytes(): int
+    {
+        return $this->totalUsageInBytes;
+    }
+
+    public function getTotalUsageInPercentage(): int|float|null
+    {
+        return $this->totalUsageInPercentage;
     }
 
     public function withIsExceeding(bool $isExceeding): self
@@ -137,94 +155,178 @@ class StatisticsMeta
         return $clone;
     }
 
-    public function withStorageLimitInBytes(int $storageLimitInBytes): self
+    public function withoutIsExceeding(): self
+    {
+        $clone = clone $this;
+        unset($clone->isExceeding);
+
+        return $clone;
+    }
+
+    public function withLimitInBytes(int $limitInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($storageLimitInBytes, static::$schema['properties']['storageLimitInBytes']);
+        $validator->validate($limitInBytes, static::$schema['properties']['limitInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->storageLimitInBytes = $storageLimitInBytes;
+        $clone->limitInBytes = $limitInBytes;
 
         return $clone;
     }
 
-    public function withTotalStorageExceedanceInBytes(int $totalStorageExceedanceInBytes): self
+    public function withoutLimitInBytes(): self
+    {
+        $clone = clone $this;
+        unset($clone->limitInBytes);
+
+        return $clone;
+    }
+
+    public function withNotificationThresholdUsedAsLimit(bool $notificationThresholdUsedAsLimit): self
     {
         $validator = new Validator();
-        $validator->validate($totalStorageExceedanceInBytes, static::$schema['properties']['totalStorageExceedanceInBytes']);
+        $validator->validate($notificationThresholdUsedAsLimit, static::$schema['properties']['notificationThresholdUsedAsLimit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->totalStorageExceedanceInBytes = $totalStorageExceedanceInBytes;
+        $clone->notificationThresholdUsedAsLimit = $notificationThresholdUsedAsLimit;
 
         return $clone;
     }
 
-    public function withoutTotalStorageExceedanceInBytes(): self
+    public function withoutNotificationThresholdUsedAsLimit(): self
     {
         $clone = clone $this;
-        unset($clone->totalStorageExceedanceInBytes);
+        unset($clone->notificationThresholdUsedAsLimit);
 
         return $clone;
     }
 
-    public function withTotalStorageFreeInBytes(int $totalStorageFreeInBytes): self
+    public function withTotalExceedanceInBytes(int $totalExceedanceInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalStorageFreeInBytes, static::$schema['properties']['totalStorageFreeInBytes']);
+        $validator->validate($totalExceedanceInBytes, static::$schema['properties']['totalExceedanceInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->totalStorageFreeInBytes = $totalStorageFreeInBytes;
+        $clone->totalExceedanceInBytes = $totalExceedanceInBytes;
 
         return $clone;
     }
 
-    public function withTotalStorageFreeInPercentage(int $totalStorageFreeInPercentage): self
+    public function withoutTotalExceedanceInBytes(): self
+    {
+        $clone = clone $this;
+        unset($clone->totalExceedanceInBytes);
+
+        return $clone;
+    }
+
+    public function withTotalExceedanceInBytesSetAt(DateTime $totalExceedanceInBytesSetAt): self
+    {
+        $clone = clone $this;
+        $clone->totalExceedanceInBytesSetAt = $totalExceedanceInBytesSetAt;
+
+        return $clone;
+    }
+
+    public function withoutTotalExceedanceInBytesSetAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->totalExceedanceInBytesSetAt);
+
+        return $clone;
+    }
+
+    public function withTotalFreeInBytes(int $totalFreeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalStorageFreeInPercentage, static::$schema['properties']['totalStorageFreeInPercentage']);
+        $validator->validate($totalFreeInBytes, static::$schema['properties']['totalFreeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->totalStorageFreeInPercentage = $totalStorageFreeInPercentage;
+        $clone->totalFreeInBytes = $totalFreeInBytes;
 
         return $clone;
     }
 
-    public function withTotalStorageUsageInBytes(int $totalStorageUsageInBytes): self
+    public function withoutTotalFreeInBytes(): self
+    {
+        $clone = clone $this;
+        unset($clone->totalFreeInBytes);
+
+        return $clone;
+    }
+
+    /**
+     * @param int|float $totalFreeInPercentage
+     */
+    public function withTotalFreeInPercentage(int|float $totalFreeInPercentage): self
     {
         $validator = new Validator();
-        $validator->validate($totalStorageUsageInBytes, static::$schema['properties']['totalStorageUsageInBytes']);
+        $validator->validate($totalFreeInPercentage, static::$schema['properties']['totalFreeInPercentage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->totalStorageUsageInBytes = $totalStorageUsageInBytes;
+        $clone->totalFreeInPercentage = $totalFreeInPercentage;
 
         return $clone;
     }
 
-    public function withTotalStorageUsageInPercentage(int $totalStorageUsageInPercentage): self
+    public function withoutTotalFreeInPercentage(): self
+    {
+        $clone = clone $this;
+        unset($clone->totalFreeInPercentage);
+
+        return $clone;
+    }
+
+    public function withTotalUsageInBytes(int $totalUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalStorageUsageInPercentage, static::$schema['properties']['totalStorageUsageInPercentage']);
+        $validator->validate($totalUsageInBytes, static::$schema['properties']['totalUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->totalStorageUsageInPercentage = $totalStorageUsageInPercentage;
+        $clone->totalUsageInBytes = $totalUsageInBytes;
+
+        return $clone;
+    }
+
+    /**
+     * @param int|float $totalUsageInPercentage
+     */
+    public function withTotalUsageInPercentage(int|float $totalUsageInPercentage): self
+    {
+        $validator = new Validator();
+        $validator->validate($totalUsageInPercentage, static::$schema['properties']['totalUsageInPercentage']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->totalUsageInPercentage = $totalUsageInPercentage;
+
+        return $clone;
+    }
+
+    public function withoutTotalUsageInPercentage(): self
+    {
+        $clone = clone $this;
+        unset($clone->totalUsageInPercentage);
 
         return $clone;
     }
@@ -244,19 +346,49 @@ class StatisticsMeta
             static::validateInput($input);
         }
 
-        $isExceeding = (bool)($input->{'isExceeding'});
-        $storageLimitInBytes = (int)($input->{'storageLimitInBytes'});
-        $totalStorageExceedanceInBytes = null;
-        if (isset($input->{'totalStorageExceedanceInBytes'})) {
-            $totalStorageExceedanceInBytes = (int)($input->{'totalStorageExceedanceInBytes'});
+        $isExceeding = null;
+        if (isset($input->{'isExceeding'})) {
+            $isExceeding = (bool)($input->{'isExceeding'});
         }
-        $totalStorageFreeInBytes = (int)($input->{'totalStorageFreeInBytes'});
-        $totalStorageFreeInPercentage = (int)($input->{'totalStorageFreeInPercentage'});
-        $totalStorageUsageInBytes = (int)($input->{'totalStorageUsageInBytes'});
-        $totalStorageUsageInPercentage = (int)($input->{'totalStorageUsageInPercentage'});
+        $limitInBytes = null;
+        if (isset($input->{'limitInBytes'})) {
+            $limitInBytes = (int)($input->{'limitInBytes'});
+        }
+        $notificationThresholdUsedAsLimit = null;
+        if (isset($input->{'notificationThresholdUsedAsLimit'})) {
+            $notificationThresholdUsedAsLimit = (bool)($input->{'notificationThresholdUsedAsLimit'});
+        }
+        $totalExceedanceInBytes = null;
+        if (isset($input->{'totalExceedanceInBytes'})) {
+            $totalExceedanceInBytes = (int)($input->{'totalExceedanceInBytes'});
+        }
+        $totalExceedanceInBytesSetAt = null;
+        if (isset($input->{'totalExceedanceInBytesSetAt'})) {
+            $totalExceedanceInBytesSetAt = new DateTime($input->{'totalExceedanceInBytesSetAt'});
+        }
+        $totalFreeInBytes = null;
+        if (isset($input->{'totalFreeInBytes'})) {
+            $totalFreeInBytes = (int)($input->{'totalFreeInBytes'});
+        }
+        $totalFreeInPercentage = null;
+        if (isset($input->{'totalFreeInPercentage'})) {
+            $totalFreeInPercentage = str_contains((string)($input->{'totalFreeInPercentage'}), '.') ? (float)($input->{'totalFreeInPercentage'}) : (int)($input->{'totalFreeInPercentage'});
+        }
+        $totalUsageInBytes = (int)($input->{'totalUsageInBytes'});
+        $totalUsageInPercentage = null;
+        if (isset($input->{'totalUsageInPercentage'})) {
+            $totalUsageInPercentage = str_contains((string)($input->{'totalUsageInPercentage'}), '.') ? (float)($input->{'totalUsageInPercentage'}) : (int)($input->{'totalUsageInPercentage'});
+        }
 
-        $obj = new self($isExceeding, $storageLimitInBytes, $totalStorageFreeInBytes, $totalStorageFreeInPercentage, $totalStorageUsageInBytes, $totalStorageUsageInPercentage);
-        $obj->totalStorageExceedanceInBytes = $totalStorageExceedanceInBytes;
+        $obj = new self($totalUsageInBytes);
+        $obj->isExceeding = $isExceeding;
+        $obj->limitInBytes = $limitInBytes;
+        $obj->notificationThresholdUsedAsLimit = $notificationThresholdUsedAsLimit;
+        $obj->totalExceedanceInBytes = $totalExceedanceInBytes;
+        $obj->totalExceedanceInBytesSetAt = $totalExceedanceInBytesSetAt;
+        $obj->totalFreeInBytes = $totalFreeInBytes;
+        $obj->totalFreeInPercentage = $totalFreeInPercentage;
+        $obj->totalUsageInPercentage = $totalUsageInPercentage;
         return $obj;
     }
 
@@ -268,15 +400,31 @@ class StatisticsMeta
     public function toJson(): array
     {
         $output = [];
-        $output['isExceeding'] = $this->isExceeding;
-        $output['storageLimitInBytes'] = $this->storageLimitInBytes;
-        if (isset($this->totalStorageExceedanceInBytes)) {
-            $output['totalStorageExceedanceInBytes'] = $this->totalStorageExceedanceInBytes;
+        if (isset($this->isExceeding)) {
+            $output['isExceeding'] = $this->isExceeding;
         }
-        $output['totalStorageFreeInBytes'] = $this->totalStorageFreeInBytes;
-        $output['totalStorageFreeInPercentage'] = $this->totalStorageFreeInPercentage;
-        $output['totalStorageUsageInBytes'] = $this->totalStorageUsageInBytes;
-        $output['totalStorageUsageInPercentage'] = $this->totalStorageUsageInPercentage;
+        if (isset($this->limitInBytes)) {
+            $output['limitInBytes'] = $this->limitInBytes;
+        }
+        if (isset($this->notificationThresholdUsedAsLimit)) {
+            $output['notificationThresholdUsedAsLimit'] = $this->notificationThresholdUsedAsLimit;
+        }
+        if (isset($this->totalExceedanceInBytes)) {
+            $output['totalExceedanceInBytes'] = $this->totalExceedanceInBytes;
+        }
+        if (isset($this->totalExceedanceInBytesSetAt)) {
+            $output['totalExceedanceInBytesSetAt'] = ($this->totalExceedanceInBytesSetAt)->format(DateTime::ATOM);
+        }
+        if (isset($this->totalFreeInBytes)) {
+            $output['totalFreeInBytes'] = $this->totalFreeInBytes;
+        }
+        if (isset($this->totalFreeInPercentage)) {
+            $output['totalFreeInPercentage'] = $this->totalFreeInPercentage;
+        }
+        $output['totalUsageInBytes'] = $this->totalUsageInBytes;
+        if (isset($this->totalUsageInPercentage)) {
+            $output['totalUsageInPercentage'] = $this->totalUsageInPercentage;
+        }
 
         return $output;
     }
@@ -307,5 +455,8 @@ class StatisticsMeta
 
     public function __clone()
     {
+        if (isset($this->totalExceedanceInBytesSetAt)) {
+            $this->totalExceedanceInBytesSetAt = clone $this->totalExceedanceInBytesSetAt;
+        }
     }
 }

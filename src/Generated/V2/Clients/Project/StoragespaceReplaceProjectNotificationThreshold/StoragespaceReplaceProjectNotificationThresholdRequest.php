@@ -18,13 +18,13 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
                     'notificationThresholdInBytes' => [
                         'example' => 10000,
+                        'nullable' => true,
                         'type' => 'integer',
                     ],
                 ],

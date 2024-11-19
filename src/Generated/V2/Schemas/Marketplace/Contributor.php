@@ -28,6 +28,9 @@ class Contributor
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'description' => [
+                'type' => 'string',
+            ],
             'email' => [
                 'type' => 'string',
             ],
@@ -56,11 +59,14 @@ class Contributor
             'customerId',
             'state',
             'name',
+            'description',
         ],
         'type' => 'object',
     ];
 
     private string $customerId;
+
+    private string $description;
 
     private ?string $email = null;
 
@@ -76,9 +82,10 @@ class Contributor
 
     private ?string $url = null;
 
-    public function __construct(string $customerId, string $id, string $name, ContributorState $state)
+    public function __construct(string $customerId, string $description, string $id, string $name, ContributorState $state)
     {
         $this->customerId = $customerId;
+        $this->description = $description;
         $this->id = $id;
         $this->name = $name;
         $this->state = $state;
@@ -87,6 +94,11 @@ class Contributor
     public function getCustomerId(): string
     {
         return $this->customerId;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     public function getEmail(): ?string
@@ -134,6 +146,20 @@ class Contributor
 
         $clone = clone $this;
         $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, static::$schema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
 
         return $clone;
     }
@@ -278,6 +304,7 @@ class Contributor
         }
 
         $customerId = $input->{'customerId'};
+        $description = $input->{'description'};
         $email = null;
         if (isset($input->{'email'})) {
             $email = $input->{'email'};
@@ -298,7 +325,7 @@ class Contributor
             $url = $input->{'url'};
         }
 
-        $obj = new self($customerId, $id, $name, $state);
+        $obj = new self($customerId, $description, $id, $name, $state);
         $obj->email = $email;
         $obj->logoRefId = $logoRefId;
         $obj->phone = $phone;
@@ -315,6 +342,7 @@ class Contributor
     {
         $output = [];
         $output['customerId'] = $this->customerId;
+        $output['description'] = $this->description;
         if (isset($this->email)) {
             $output['email'] = $this->email;
         }

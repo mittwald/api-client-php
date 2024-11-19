@@ -31,6 +31,10 @@ class Statistics
                 'type' => 'array',
                 'uniqueItems' => true,
             ],
+            'description' => [
+                'example' => 'My First Project',
+                'type' => 'string',
+            ],
             'id' => [
                 'example' => '169cea81-2c11-46a4-8f0b-5b0b47caeb78',
                 'type' => 'string',
@@ -40,6 +44,10 @@ class Statistics
             ],
             'meta' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.storagespace.StatisticsMeta',
+            ],
+            'name' => [
+                'example' => 'p-zkl8tr',
+                'type' => 'string',
             ],
             'notificationThresholdInBytes' => [
                 'example' => 10000,
@@ -56,6 +64,7 @@ class Statistics
         'required' => [
             'id',
             'kind',
+            'name',
             'meta',
         ],
         'type' => 'object',
@@ -66,11 +75,15 @@ class Statistics
      */
     private ?array $childStatistics = null;
 
+    private ?string $description = null;
+
     private string $id;
 
     private StatisticsKind $kind;
 
     private StatisticsMeta $meta;
+
+    private string $name;
 
     private ?int $notificationThresholdInBytes = null;
 
@@ -79,11 +92,12 @@ class Statistics
      */
     private ?array $statisticCategories = null;
 
-    public function __construct(string $id, StatisticsKind $kind, StatisticsMeta $meta)
+    public function __construct(string $id, StatisticsKind $kind, StatisticsMeta $meta, string $name)
     {
         $this->id = $id;
         $this->kind = $kind;
         $this->meta = $meta;
+        $this->name = $name;
     }
 
     /**
@@ -92,6 +106,11 @@ class Statistics
     public function getChildStatistics(): ?array
     {
         return $this->childStatistics ?? null;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description ?? null;
     }
 
     public function getId(): string
@@ -107,6 +126,11 @@ class Statistics
     public function getMeta(): StatisticsMeta
     {
         return $this->meta;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getNotificationThresholdInBytes(): ?int
@@ -142,6 +166,28 @@ class Statistics
         return $clone;
     }
 
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, static::$schema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -168,6 +214,20 @@ class Statistics
     {
         $clone = clone $this;
         $clone->meta = $meta;
+
+        return $clone;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, static::$schema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->name = $name;
 
         return $clone;
     }
@@ -232,9 +292,14 @@ class Statistics
         if (isset($input->{'childStatistics'})) {
             $childStatistics = array_map(fn (array|object $i): Statistics => Statistics::buildFromInput($i, validate: $validate), $input->{'childStatistics'});
         }
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $id = $input->{'id'};
         $kind = StatisticsKind::from($input->{'kind'});
         $meta = StatisticsMeta::buildFromInput($input->{'meta'}, validate: $validate);
+        $name = $input->{'name'};
         $notificationThresholdInBytes = null;
         if (isset($input->{'notificationThresholdInBytes'})) {
             $notificationThresholdInBytes = (int)($input->{'notificationThresholdInBytes'});
@@ -244,8 +309,9 @@ class Statistics
             $statisticCategories = array_map(fn (array|object $i): StatisticsCategory => StatisticsCategory::buildFromInput($i, validate: $validate), $input->{'statisticCategories'});
         }
 
-        $obj = new self($id, $kind, $meta);
+        $obj = new self($id, $kind, $meta, $name);
         $obj->childStatistics = $childStatistics;
+        $obj->description = $description;
         $obj->notificationThresholdInBytes = $notificationThresholdInBytes;
         $obj->statisticCategories = $statisticCategories;
         return $obj;
@@ -262,9 +328,13 @@ class Statistics
         if (isset($this->childStatistics)) {
             $output['childStatistics'] = array_map(fn (Statistics $i): array => $i->toJson(), $this->childStatistics);
         }
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         $output['id'] = $this->id;
         $output['kind'] = $this->kind->value;
         $output['meta'] = $this->meta->toJson();
+        $output['name'] = $this->name;
         if (isset($this->notificationThresholdInBytes)) {
             $output['notificationThresholdInBytes'] = $this->notificationThresholdInBytes;
         }

@@ -9,4 +9,5 @@ enum InvoiceSettingsStatusType: string
     case returnDebitNote = 'returnDebitNote';
     case returnDebitNoteWaitingForPayment = 'returnDebitNoteWaitingForPayment';
     case debtWrittenOff = 'debtWrittenOff';
+    case bankrupt = 'bankrupt';
 }

@@ -142,6 +142,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatis
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics\StoragespaceGetProjectStatisticsTooManyRequestsResponse;
@@ -149,6 +150,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatist
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetServerStatistics\StoragespaceGetServerStatisticsTooManyRequestsResponse;
@@ -868,6 +870,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => StoragespaceGetProjectStatisticsBadRequestResponse::fromResponse($httpResponse),
             403 => StoragespaceGetProjectStatisticsForbiddenResponse::fromResponse($httpResponse),
+            404 => StoragespaceGetProjectStatisticsNotFoundResponse::fromResponse($httpResponse),
             429 => StoragespaceGetProjectStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => StoragespaceGetProjectStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
             default => StoragespaceGetProjectStatisticsDefaultResponse::fromResponse($httpResponse),
@@ -893,6 +896,7 @@ class ProjectClientImpl implements ProjectClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => StoragespaceGetServerStatisticsBadRequestResponse::fromResponse($httpResponse),
             403 => StoragespaceGetServerStatisticsForbiddenResponse::fromResponse($httpResponse),
+            404 => StoragespaceGetServerStatisticsNotFoundResponse::fromResponse($httpResponse),
             429 => StoragespaceGetServerStatisticsTooManyRequestsResponse::fromResponse($httpResponse),
             500 => StoragespaceGetServerStatisticsInternalServerErrorResponse::fromResponse($httpResponse),
             default => StoragespaceGetServerStatisticsDefaultResponse::fromResponse($httpResponse),
@@ -924,7 +928,7 @@ class ProjectClientImpl implements ProjectClient
     }
 
     /**
-     * Update a Servers' storage space notification threshold.
+     * Update a Server's storage space notification threshold.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-server-notification-threshold
      * @throws GuzzleException

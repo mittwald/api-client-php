@@ -18,13 +18,13 @@ class StoragespaceReplaceServerNotificationThresholdRequest
         'type' => 'object',
         'properties' => [
             'serverId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
                 'properties' => [
                     'notificationThresholdInBytes' => [
                         'example' => 10000,
+                        'nullable' => true,
                         'type' => 'integer',
                     ],
                 ],

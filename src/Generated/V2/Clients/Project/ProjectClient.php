@@ -377,7 +377,7 @@ interface ProjectClient
      */
     public function storagespaceReplaceProjectNotificationThreshold(StoragespaceReplaceProjectNotificationThresholdRequest $request): EmptyResponse;
     /**
-     * Update a Servers' storage space notification threshold.
+     * Update a Server's storage space notification threshold.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/storagespace-replace-server-notification-threshold
      * @throws GuzzleException

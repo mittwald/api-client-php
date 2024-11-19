@@ -25,6 +25,10 @@ class StatisticsResource
      */
     private static array $schema = [
         'properties' => [
+            'description' => [
+                'example' => 'MySQL DB for Wordpress',
+                'type' => 'string',
+            ],
             'id' => [
                 'example' => '169cea81-2c11-46a4-8f0b-5b0b47caeb78',
                 'type' => 'string',
@@ -33,11 +37,11 @@ class StatisticsResource
                 'example' => 'mysql-xyz',
                 'type' => 'string',
             ],
-            'storageSpaceUsageInBytes' => [
+            'usageInBytes' => [
                 'example' => 1000,
                 'type' => 'integer',
             ],
-            'storageSpaceUsageInBytesSetAt' => [
+            'usageInBytesSetAt' => [
                 'example' => '2023-12-22T13:46:52.000Z',
                 'format' => 'date-time',
                 'type' => 'string',
@@ -46,26 +50,33 @@ class StatisticsResource
         'required' => [
             'id',
             'name',
-            'storageSpaceUsageInBytes',
-            'storageSpaceUsageInBytesSetAt',
+            'usageInBytes',
+            'usageInBytesSetAt',
         ],
         'type' => 'object',
     ];
+
+    private ?string $description = null;
 
     private string $id;
 
     private string $name;
 
-    private int $storageSpaceUsageInBytes;
+    private int $usageInBytes;
 
-    private DateTime $storageSpaceUsageInBytesSetAt;
+    private DateTime $usageInBytesSetAt;
 
-    public function __construct(string $id, string $name, int $storageSpaceUsageInBytes, DateTime $storageSpaceUsageInBytesSetAt)
+    public function __construct(string $id, string $name, int $usageInBytes, DateTime $usageInBytesSetAt)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->storageSpaceUsageInBytes = $storageSpaceUsageInBytes;
-        $this->storageSpaceUsageInBytesSetAt = $storageSpaceUsageInBytesSetAt;
+        $this->usageInBytes = $usageInBytes;
+        $this->usageInBytesSetAt = $usageInBytesSetAt;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description ?? null;
     }
 
     public function getId(): string
@@ -78,14 +89,36 @@ class StatisticsResource
         return $this->name;
     }
 
-    public function getStorageSpaceUsageInBytes(): int
+    public function getUsageInBytes(): int
     {
-        return $this->storageSpaceUsageInBytes;
+        return $this->usageInBytes;
     }
 
-    public function getStorageSpaceUsageInBytesSetAt(): DateTime
+    public function getUsageInBytesSetAt(): DateTime
     {
-        return $this->storageSpaceUsageInBytesSetAt;
+        return $this->usageInBytesSetAt;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $validator = new Validator();
+        $validator->validate($description, static::$schema['properties']['description']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
     }
 
     public function withId(string $id): self
@@ -116,24 +149,24 @@ class StatisticsResource
         return $clone;
     }
 
-    public function withStorageSpaceUsageInBytes(int $storageSpaceUsageInBytes): self
+    public function withUsageInBytes(int $usageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($storageSpaceUsageInBytes, static::$schema['properties']['storageSpaceUsageInBytes']);
+        $validator->validate($usageInBytes, static::$schema['properties']['usageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->storageSpaceUsageInBytes = $storageSpaceUsageInBytes;
+        $clone->usageInBytes = $usageInBytes;
 
         return $clone;
     }
 
-    public function withStorageSpaceUsageInBytesSetAt(DateTime $storageSpaceUsageInBytesSetAt): self
+    public function withUsageInBytesSetAt(DateTime $usageInBytesSetAt): self
     {
         $clone = clone $this;
-        $clone->storageSpaceUsageInBytesSetAt = $storageSpaceUsageInBytesSetAt;
+        $clone->usageInBytesSetAt = $usageInBytesSetAt;
 
         return $clone;
     }
@@ -153,13 +186,17 @@ class StatisticsResource
             static::validateInput($input);
         }
 
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $id = $input->{'id'};
         $name = $input->{'name'};
-        $storageSpaceUsageInBytes = (int)($input->{'storageSpaceUsageInBytes'});
-        $storageSpaceUsageInBytesSetAt = new DateTime($input->{'storageSpaceUsageInBytesSetAt'});
+        $usageInBytes = (int)($input->{'usageInBytes'});
+        $usageInBytesSetAt = new DateTime($input->{'usageInBytesSetAt'});
 
-        $obj = new self($id, $name, $storageSpaceUsageInBytes, $storageSpaceUsageInBytesSetAt);
-
+        $obj = new self($id, $name, $usageInBytes, $usageInBytesSetAt);
+        $obj->description = $description;
         return $obj;
     }
 
@@ -171,10 +208,13 @@ class StatisticsResource
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         $output['id'] = $this->id;
         $output['name'] = $this->name;
-        $output['storageSpaceUsageInBytes'] = $this->storageSpaceUsageInBytes;
-        $output['storageSpaceUsageInBytesSetAt'] = ($this->storageSpaceUsageInBytesSetAt)->format(DateTime::ATOM);
+        $output['usageInBytes'] = $this->usageInBytes;
+        $output['usageInBytesSetAt'] = ($this->usageInBytesSetAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -205,6 +245,6 @@ class StatisticsResource
 
     public function __clone()
     {
-        $this->storageSpaceUsageInBytesSetAt = clone $this->storageSpaceUsageInBytesSetAt;
+        $this->usageInBytesSetAt = clone $this->usageInBytesSetAt;
     }
 }

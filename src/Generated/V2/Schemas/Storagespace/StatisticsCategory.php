@@ -25,7 +25,7 @@ class StatisticsCategory
     private static array $schema = [
         'properties' => [
             'kind' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.storagespace.StatisticsKind',
+                '$ref' => '#/components/schemas/de.mittwald.v1.storagespace.StatisticsCategoryKind',
             ],
             'resources' => [
                 'items' => [
@@ -34,34 +34,38 @@ class StatisticsCategory
                 'type' => 'array',
                 'uniqueItems' => true,
             ],
-            'totalStorageUsageInBytes' => [
+            'totalUsageInBytes' => [
                 'example' => 1000,
                 'type' => 'integer',
             ],
         ],
         'required' => [
             'kind',
-            'totalStorageUsageInBytes',
+            'totalUsageInBytes',
         ],
         'type' => 'object',
     ];
 
-    private StatisticsKind $kind;
+    private StatisticsCategoryKind $kind;
 
     /**
      * @var StatisticsResource[]|null
      */
     private ?array $resources = null;
 
-    private int $totalStorageUsageInBytes;
+    private int $totalUsageInBytes;
 
-    public function __construct(StatisticsKind $kind, int $totalStorageUsageInBytes)
+    public function __construct(StatisticsCategoryKind $kind, int $totalUsageInBytes)
     {
         $this->kind = $kind;
-        $this->totalStorageUsageInBytes = $totalStorageUsageInBytes;
+        $this->totalUsageInBytes = $totalUsageInBytes;
     }
 
-    public function getKind(): StatisticsKind
+    /**
+     * @return
+     * StatisticsCategoryKind
+     */
+    public function getKind(): StatisticsCategoryKind
     {
         return $this->kind;
     }
@@ -75,12 +79,12 @@ class StatisticsCategory
         return $this->resources ?? null;
     }
 
-    public function getTotalStorageUsageInBytes(): int
+    public function getTotalUsageInBytes(): int
     {
-        return $this->totalStorageUsageInBytes;
+        return $this->totalUsageInBytes;
     }
 
-    public function withKind(StatisticsKind $kind): self
+    public function withKind(StatisticsCategoryKind $kind): self
     {
         $clone = clone $this;
         $clone->kind = $kind;
@@ -107,16 +111,16 @@ class StatisticsCategory
         return $clone;
     }
 
-    public function withTotalStorageUsageInBytes(int $totalStorageUsageInBytes): self
+    public function withTotalUsageInBytes(int $totalUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalStorageUsageInBytes, static::$schema['properties']['totalStorageUsageInBytes']);
+        $validator->validate($totalUsageInBytes, static::$schema['properties']['totalUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->totalStorageUsageInBytes = $totalStorageUsageInBytes;
+        $clone->totalUsageInBytes = $totalUsageInBytes;
 
         return $clone;
     }
@@ -136,14 +140,14 @@ class StatisticsCategory
             static::validateInput($input);
         }
 
-        $kind = StatisticsKind::from($input->{'kind'});
+        $kind = StatisticsCategoryKind::from($input->{'kind'});
         $resources = null;
         if (isset($input->{'resources'})) {
             $resources = array_map(fn (array|object $i): StatisticsResource => StatisticsResource::buildFromInput($i, validate: $validate), $input->{'resources'});
         }
-        $totalStorageUsageInBytes = (int)($input->{'totalStorageUsageInBytes'});
+        $totalUsageInBytes = (int)($input->{'totalUsageInBytes'});
 
-        $obj = new self($kind, $totalStorageUsageInBytes);
+        $obj = new self($kind, $totalUsageInBytes);
         $obj->resources = $resources;
         return $obj;
     }
@@ -160,7 +164,7 @@ class StatisticsCategory
         if (isset($this->resources)) {
             $output['resources'] = array_map(fn (StatisticsResource $i): array => $i->toJson(), $this->resources);
         }
-        $output['totalStorageUsageInBytes'] = $this->totalStorageUsageInBytes;
+        $output['totalUsageInBytes'] = $this->totalUsageInBytes;
 
         return $output;
     }

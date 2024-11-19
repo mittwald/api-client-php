@@ -16,6 +16,7 @@ class StoragespaceReplaceProjectNotificationThresholdRequestBody
         'properties' => [
             'notificationThresholdInBytes' => [
                 'example' => 10000,
+                'nullable' => true,
                 'type' => 'integer',
             ],
         ],

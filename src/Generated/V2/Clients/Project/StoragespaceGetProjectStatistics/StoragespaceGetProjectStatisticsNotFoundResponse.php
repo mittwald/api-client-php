@@ -2,58 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceServerNotificationThreshold;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceGetProjectStatistics;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
+use Psr\Http\Message\ResponseInterface;
 
-class StoragespaceReplaceServerNotificationThresholdRequestBody
+class StoragespaceGetProjectStatisticsNotFoundResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'type' => 'object',
+        'required' => [
+            'body',
+        ],
         'properties' => [
-            'notificationThresholdInBytes' => [
-                'example' => 10000,
-                'nullable' => true,
-                'type' => 'integer',
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private ?int $notificationThresholdInBytes = null;
+    private Error $body;
 
-    /**
-     *
-     */
-    public function __construct()
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(Error $body)
     {
+        $this->body = $body;
     }
 
-    public function getNotificationThresholdInBytes(): ?int
+    public function getBody(): Error
     {
-        return $this->notificationThresholdInBytes ?? null;
+        return $this->body;
     }
 
-    public function withNotificationThresholdInBytes(int $notificationThresholdInBytes): self
-    {
-        $validator = new Validator();
-        $validator->validate($notificationThresholdInBytes, static::$schema['properties']['notificationThresholdInBytes']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->notificationThresholdInBytes = $notificationThresholdInBytes;
-
-        return $clone;
-    }
-
-    public function withoutNotificationThresholdInBytes(): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
-        unset($clone->notificationThresholdInBytes);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -63,23 +54,20 @@ class StoragespaceReplaceServerNotificationThresholdRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return StoragespaceReplaceServerNotificationThresholdRequestBody Created instance
+     * @return StoragespaceGetProjectStatisticsNotFoundResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceServerNotificationThresholdRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceGetProjectStatisticsNotFoundResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $notificationThresholdInBytes = null;
-        if (isset($input->{'notificationThresholdInBytes'})) {
-            $notificationThresholdInBytes = (int)($input->{'notificationThresholdInBytes'});
-        }
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self();
-        $obj->notificationThresholdInBytes = $notificationThresholdInBytes;
+        $obj = new self($body);
+
         return $obj;
     }
 
@@ -91,9 +79,7 @@ class StoragespaceReplaceServerNotificationThresholdRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->notificationThresholdInBytes)) {
-            $output['notificationThresholdInBytes'] = $this->notificationThresholdInBytes;
-        }
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -124,5 +110,18 @@ class StoragespaceReplaceServerNotificationThresholdRequestBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }
