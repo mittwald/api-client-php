@@ -67,6 +67,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainBadR
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainDefaultResponse;
@@ -936,6 +937,7 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => DeleteDomainBadRequestResponse::fromResponse($httpResponse),
             404 => DeleteDomainNotFoundResponse::fromResponse($httpResponse),
+            412 => DeleteDomainPreconditionFailedResponse::fromResponse($httpResponse),
             429 => DeleteDomainTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeleteDomainDefaultResponse::fromResponse($httpResponse),
         });

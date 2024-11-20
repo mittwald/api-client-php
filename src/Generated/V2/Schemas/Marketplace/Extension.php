@@ -73,6 +73,11 @@ class Extension
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'logoRefId' => [
+                'description' => 'This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'name' => [
                 'type' => 'string',
             ],
@@ -155,6 +160,11 @@ class Extension
     private ?array $frontendFragments = null;
 
     private string $id;
+
+    /**
+     * This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.
+     */
+    private ?string $logoRefId = null;
 
     private string $name;
 
@@ -264,6 +274,11 @@ class Extension
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getLogoRefId(): ?string
+    {
+        return $this->logoRefId ?? null;
     }
 
     public function getName(): string
@@ -462,6 +477,28 @@ class Extension
         return $clone;
     }
 
+    public function withLogoRefId(string $logoRefId): self
+    {
+        $validator = new Validator();
+        $validator->validate($logoRefId, static::$schema['properties']['logoRefId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->logoRefId = $logoRefId;
+
+        return $clone;
+    }
+
+    public function withoutLogoRefId(): self
+    {
+        $clone = clone $this;
+        unset($clone->logoRefId);
+
+        return $clone;
+    }
+
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -580,6 +617,10 @@ class Extension
             $frontendFragments = (array)$input->{'frontendFragments'};
         }
         $id = $input->{'id'};
+        $logoRefId = null;
+        if (isset($input->{'logoRefId'})) {
+            $logoRefId = $input->{'logoRefId'};
+        }
         $name = $input->{'name'};
         $published = (bool)($input->{'published'});
         $scopes = $input->{'scopes'};
@@ -592,6 +633,7 @@ class Extension
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
+        $obj->logoRefId = $logoRefId;
         return $obj;
     }
 
@@ -621,6 +663,9 @@ class Extension
             $output['frontendFragments'] = $this->frontendFragments;
         }
         $output['id'] = $this->id;
+        if (isset($this->logoRefId)) {
+            $output['logoRefId'] = $this->logoRefId;
+        }
         $output['name'] = $this->name;
         $output['published'] = $this->published;
         $output['scopes'] = $this->scopes;
