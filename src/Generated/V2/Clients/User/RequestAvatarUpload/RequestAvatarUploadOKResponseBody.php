@@ -22,8 +22,14 @@ class RequestAvatarUploadOKResponseBody
             'rules' => [
                 'description' => 'Contstraints for the avatar image upload.',
                 'properties' => [
+                    'maxSizeInBytes' => [
+                        'description' => 'Maximum size in Bytes of the avatar image.',
+                        'example' => 4096,
+                        'type' => 'integer',
+                    ],
                     'maxSizeInKB' => [
-                        'description' => 'Maximum size in kilobytes of the avatar image.',
+                        'deprecated' => true,
+                        'description' => 'Deprecated. Maximum size in kilobytes of the avatar image.',
                         'example' => 3000,
                         'type' => 'integer',
                     ],
@@ -72,6 +78,7 @@ class RequestAvatarUploadOKResponseBody
                 'required' => [
                     'mimeTypes',
                     'maxSizeInKB',
+                    'maxSizeInBytes',
                 ],
                 'type' => 'object',
             ],

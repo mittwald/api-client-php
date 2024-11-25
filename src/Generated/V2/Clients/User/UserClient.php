@@ -173,8 +173,6 @@ interface UserClient
     /**
      * Create a new issue.
      *
-     * Has been merged to POST_create-user-feedback
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-create-issue
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -274,8 +272,6 @@ interface UserClient
     /**
      * Remove Avatar
      *
-     * Use users-remove-avatar-v2 instead
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-avatar-remove
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -286,8 +282,6 @@ interface UserClient
     public function deprecatedUserServiceAvatarRemove(DeprecatedUserServiceAvatarRemoveRequest $request): EmptyResponse;
     /**
      * Request a new avatar upload
-     *
-     * Use POST_request-avatar-upload instead
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-avatar-request-upload
      * @throws GuzzleException
@@ -300,8 +294,6 @@ interface UserClient
     /**
      * Submit user feedback
      *
-     * Use POST_create-user-feedback instead
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-feedback-create
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -311,8 +303,6 @@ interface UserClient
     public function deprecatedUserServiceFeedbackCreate(DeprecatedUserServiceFeedbackCreateRequest $request): DeprecatedUserServiceFeedbackCreateCreatedResponse;
     /**
      * Returns your submitted feedback
-     *
-     * Use GET_list-user-feedback instead
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-feedback-list
      * @throws GuzzleException
@@ -325,8 +315,6 @@ interface UserClient
     /**
      * create a new issue
      *
-     * Has been merged to POST_create-user-feedback
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-issue-new
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -337,8 +325,6 @@ interface UserClient
     public function deprecatedUserServiceIssueNew(DeprecatedUserServiceIssueNewRequest $request): EmptyResponse;
     /**
      * Change your personal information
-     *
-     * Use PUT_update-personal-information instead
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personal-information-update
      * @throws GuzzleException
@@ -351,8 +337,6 @@ interface UserClient
     /**
      * Get personalized settings for the user executing the request
      *
-     * Use GET-personalized-settings instead
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-get
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -363,8 +347,6 @@ interface UserClient
     public function deprecatedUserServicePersonalizedSettingsGet(DeprecatedUserServicePersonalizedSettingsGetRequest $request): DeprecatedUserServicePersonalizedSettingsGetOKResponse;
     /**
      * update personalized settings
-     *
-     * Use PUT_update-personalized-settings instead
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-update
      * @throws GuzzleException
@@ -377,8 +359,6 @@ interface UserClient
     /**
      * Add phone number and init verification process
      *
-     * Use POST_add-phone-number instead
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-add
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -389,8 +369,6 @@ interface UserClient
     public function deprecatedUserServicePhoneNumberAdd(DeprecatedUserServicePhoneNumberAddRequest $request): EmptyResponse;
     /**
      * remove your PhoneNumber
-     *
-     * Use DELETE_remove-phone-number instead
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-remove
      * @throws GuzzleException
@@ -403,8 +381,6 @@ interface UserClient
     /**
      * Verify phone number
      *
-     * Use POST_verify-phone-number instead
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-verify
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -416,8 +392,6 @@ interface UserClient
     /**
      * Get profile information for the specified user if the user is related to the executing user
      *
-     * Use GET_get-user instead
-     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -428,8 +402,6 @@ interface UserClient
     public function deprecatedUserServiceUserGet(DeprecatedUserServiceUserGetRequest $request): DeprecatedUserServiceUserGetOKResponse;
     /**
      * Get profile information for the executing user
-     *
-     * Use GET_get-user instead
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get-own
      * @throws GuzzleException

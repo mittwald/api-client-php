@@ -230,6 +230,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsTooManyReque
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ResendDomainEmail\ResendDomainEmailTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCheckReplaceCertificate\SslCheckReplaceCertificateDefaultResponse;
@@ -1130,6 +1131,7 @@ class DomainClientImpl implements DomainClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ResendDomainEmailBadRequestResponse::fromResponse($httpResponse),
             404 => ResendDomainEmailNotFoundResponse::fromResponse($httpResponse),
+            412 => ResendDomainEmailPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ResendDomainEmailTooManyRequestsResponse::fromResponse($httpResponse),
             default => ResendDomainEmailDefaultResponse::fromResponse($httpResponse),
         });
