@@ -56,7 +56,6 @@ class ListArticlesRequest
             ],
             'limit' => [
                 'type' => 'integer',
-                'default' => 1000,
                 'minimum' => 1,
             ],
             'skip' => [
@@ -97,7 +96,7 @@ class ListArticlesRequest
 
     private ?string $name = null;
 
-    private int $limit = 1000;
+    private ?int $limit = null;
 
     private int $skip = 0;
 
@@ -156,9 +155,9 @@ class ListArticlesRequest
         return $this->name ?? null;
     }
 
-    public function getLimit(): int
+    public function getLimit(): ?int
     {
-        return $this->limit;
+        return $this->limit ?? null;
     }
 
     public function getSkip(): int
@@ -329,6 +328,14 @@ class ListArticlesRequest
         return $clone;
     }
 
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
+
+        return $clone;
+    }
+
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -404,7 +411,7 @@ class ListArticlesRequest
         if (isset($input->{'name'})) {
             $name = $input->{'name'};
         }
-        $limit = 1000;
+        $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
@@ -456,7 +463,9 @@ class ListArticlesRequest
         if (isset($this->name)) {
             $output['name'] = $this->name;
         }
-        $output['limit'] = $this->limit;
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;

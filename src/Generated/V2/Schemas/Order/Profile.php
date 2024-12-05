@@ -37,6 +37,7 @@ class Profile
                 'type' => 'string',
             ],
             'title' => [
+                'deprecated' => true,
                 'description' => 'the users title',
                 'enum' => [
                     'other',
@@ -65,6 +66,8 @@ class Profile
 
     /**
      * the users title
+     *
+     * @deprecated
      */
     private ?ProfileTitle $title = null;
 
@@ -91,6 +94,9 @@ class Profile
         return $this->lastName ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getTitle(): ?ProfileTitle
     {
         return $this->title ?? null;
@@ -159,6 +165,9 @@ class Profile
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withTitle(ProfileTitle $title): self
     {
         $clone = clone $this;
