@@ -25,6 +25,7 @@ class DomainOrderHandleData
     private static array $schema = [
         'properties' => [
             'adminC' => [
+                'deprecated' => true,
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainHandleField',
                 ],
@@ -46,6 +47,7 @@ class DomainOrderHandleData
 
     /**
      * @var DomainHandleField[]|null
+     * @deprecated
      */
     private ?array $adminC = null;
 
@@ -64,6 +66,7 @@ class DomainOrderHandleData
 
     /**
      * @return DomainHandleField[]|null
+     * @deprecated
      */
     public function getAdminC(): ?array
     {
@@ -80,6 +83,7 @@ class DomainOrderHandleData
 
     /**
      * @param DomainHandleField[] $adminC
+     * @deprecated
      */
     public function withAdminC(array $adminC): self
     {

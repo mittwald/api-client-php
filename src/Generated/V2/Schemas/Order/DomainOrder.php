@@ -35,6 +35,7 @@ class DomainOrder
             'handleData' => [
                 'properties' => [
                     'adminC' => [
+                        'deprecated' => true,
                         'items' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.order.DomainHandleField',
                         ],
