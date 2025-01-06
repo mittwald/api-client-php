@@ -219,6 +219,19 @@ class CreateRelocationRequest
                         ],
                         'type' => 'object',
                     ],
+                    'userId' => [
+                        'oneOf' => [
+                            [
+                                'format' => 'uuid',
+                                'minLength' => 1,
+                                'type' => 'string',
+                            ],
+                            [
+                                'maxLength' => 0,
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
                 ],
                 'required' => [
                     'articleType',

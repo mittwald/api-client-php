@@ -27,6 +27,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\Ex
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
@@ -171,6 +175,26 @@ interface MarketplaceClient
      * @return ExtensionGetExtensionInstanceOKResponse OK
      */
     public function extensionGetExtensionInstance(ExtensionGetExtensionInstanceRequest $request): ExtensionGetExtensionInstanceOKResponse;
+    /**
+     * Get the ExtensionInstance of a specific customer and extension, if existing.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-extension-instance-for-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetExtensionInstanceForCustomerRequest $request An object representing the request for this operation
+     * @return ExtensionGetExtensionInstanceForCustomerOKResponse OK
+     */
+    public function extensionGetExtensionInstanceForCustomer(ExtensionGetExtensionInstanceForCustomerRequest $request): ExtensionGetExtensionInstanceForCustomerOKResponse;
+    /**
+     * Get the ExtensionInstance of a specific project and extension, if existing.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-extension-instance-for-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetExtensionInstanceForProjectRequest $request An object representing the request for this operation
+     * @return ExtensionGetExtensionInstanceForProjectOKResponse OK
+     */
+    public function extensionGetExtensionInstanceForProject(ExtensionGetExtensionInstanceForProjectRequest $request): ExtensionGetExtensionInstanceForProjectOKResponse;
     /**
      * Get the public key to verify the webhook signature.
      *

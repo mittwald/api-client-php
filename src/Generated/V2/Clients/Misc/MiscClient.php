@@ -8,6 +8,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Misc\ServicetokenAuthenticateService\ServicetokenAuthenticateServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyAddress\VerificationVerifyAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany\VerificationVerifyCompanyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Misc\VerificationVerifyCompany\VerificationVerifyCompanyRequest;
 
 /**
  * Client for Misc API
@@ -33,4 +37,28 @@ interface MiscClient
      * @return ServicetokenAuthenticateServiceOKResponse Authentication has been successful.
      */
     public function servicetokenAuthenticateService(ServicetokenAuthenticateServiceRequest $request): ServicetokenAuthenticateServiceOKResponse;
+    /**
+     * Check if an address exists.
+     *
+     * Only the DACH region is currently supported.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param VerificationVerifyAddressRequest $request An object representing the request for this operation
+     * @return VerificationVerifyAddressOKResponse Success
+     */
+    public function verificationVerifyAddress(VerificationVerifyAddressRequest $request): VerificationVerifyAddressOKResponse;
+    /**
+     * Check if a company exists.
+     *
+     * Only companies registered in the german company register are currently supported.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Misc/operation/verification-verify-company
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param VerificationVerifyCompanyRequest $request An object representing the request for this operation
+     * @return VerificationVerifyCompanyOKResponse Success
+     */
+    public function verificationVerifyCompany(VerificationVerifyCompanyRequest $request): VerificationVerifyCompanyOKResponse;
 }
