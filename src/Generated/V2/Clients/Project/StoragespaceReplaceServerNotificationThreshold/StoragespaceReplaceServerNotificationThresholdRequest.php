@@ -24,6 +24,7 @@ class StoragespaceReplaceServerNotificationThresholdRequest
                 'properties' => [
                     'notificationThresholdInBytes' => [
                         'example' => 10000,
+                        'minimum' => 0,
                         'nullable' => true,
                         'type' => 'integer',
                     ],

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class StoragespaceReplaceProjectNotificationThresholdRequest
+class ExtensionGetExtensionInstanceForCustomerRequest
 {
-    public const method = 'put';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,68 +17,68 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'customerId' => [
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'notificationThresholdInBytes' => [
-                        'example' => 10000,
-                        'minimum' => 0,
-                        'nullable' => true,
-                        'type' => 'integer',
-                    ],
-                ],
+            'extensionId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'projectId',
-            'body',
+            'customerId',
+            'extensionId',
         ],
     ];
 
-    private string $projectId;
+    private string $customerId;
 
-    private StoragespaceReplaceProjectNotificationThresholdRequestBody $body;
+    private string $extensionId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId, StoragespaceReplaceProjectNotificationThresholdRequestBody $body)
+    public function __construct(string $customerId, string $extensionId)
     {
-        $this->projectId = $projectId;
-        $this->body = $body;
+        $this->customerId = $customerId;
+        $this->extensionId = $extensionId;
     }
 
-    public function getProjectId(): string
+    public function getCustomerId(): string
     {
-        return $this->projectId;
+        return $this->customerId;
     }
 
-    public function getBody(): StoragespaceReplaceProjectNotificationThresholdRequestBody
+    public function getExtensionId(): string
     {
-        return $this->body;
+        return $this->extensionId;
     }
 
-    public function withProjectId(string $projectId): self
+    public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($customerId, static::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->customerId = $customerId;
 
         return $clone;
     }
 
-    public function withBody(StoragespaceReplaceProjectNotificationThresholdRequestBody $body): self
+    public function withExtensionId(string $extensionId): self
     {
+        $validator = new Validator();
+        $validator->validate($extensionId, static::$schema['properties']['extensionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
@@ -88,20 +88,20 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return StoragespaceReplaceProjectNotificationThresholdRequest Created instance
+     * @return ExtensionGetExtensionInstanceForCustomerRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceProjectNotificationThresholdRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGetExtensionInstanceForCustomerRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $body = StoragespaceReplaceProjectNotificationThresholdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
+        $extensionId = $input->{'extensionId'};
 
-        $obj = new self($projectId, $body);
+        $obj = new self($customerId, $extensionId);
 
         return $obj;
     }
@@ -114,8 +114,8 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        $output['body'] = ($this->body)->toJson();
+        $output['customerId'] = $this->customerId;
+        $output['extensionId'] = $this->extensionId;
 
         return $output;
     }
@@ -146,7 +146,6 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -161,8 +160,9 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/storage-space-notification-threshold';
+        $customerId = urlencode($mapped['customerId']);
+        $extensionId = urlencode($mapped['extensionId']);
+        return '/v2/customers/' . $customerId . '/extensions/' . $extensionId;
     }
 
     /**
@@ -181,7 +181,6 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -215,6 +215,19 @@ class CreateRelocationRequestBody
                 ],
                 'type' => 'object',
             ],
+            'userId' => [
+                'oneOf' => [
+                    [
+                        'format' => 'uuid',
+                        'minLength' => 1,
+                        'type' => 'string',
+                    ],
+                    [
+                        'maxLength' => 0,
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ],
         'required' => [
             'articleType',
@@ -264,6 +277,8 @@ class CreateRelocationRequestBody
     private CreateRelocationRequestBodyProvider $provider;
 
     private CreateRelocationRequestBodyTarget $target;
+
+    private ?string $userId = null;
 
     public function __construct(CreateRelocationRequestBodyAdditionalServices $additionalServices, bool $allowPasswordChange, CreateRelocationRequestBodyArticleType $articleType, CreateRelocationRequestBodyContact $contact, CreateRelocationRequestBodyPrices $prices, CreateRelocationRequestBodyProvider $provider, CreateRelocationRequestBodyTarget $target)
     {
@@ -327,6 +342,11 @@ class CreateRelocationRequestBody
     public function getTarget(): CreateRelocationRequestBodyTarget
     {
         return $this->target;
+    }
+
+    public function getUserId(): ?string
+    {
+        return $this->userId ?? null;
     }
 
     public function withAdditionalServices(CreateRelocationRequestBodyAdditionalServices $additionalServices): self
@@ -454,6 +474,22 @@ class CreateRelocationRequestBody
         return $clone;
     }
 
+    public function withUserId(string $userId): self
+    {
+        $clone = clone $this;
+        $clone->userId = $userId;
+
+        return $clone;
+    }
+
+    public function withoutUserId(): self
+    {
+        $clone = clone $this;
+        unset($clone->userId);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -488,11 +524,18 @@ class CreateRelocationRequestBody
         $prices = CreateRelocationRequestBodyPrices::buildFromInput($input->{'prices'}, validate: $validate);
         $provider = CreateRelocationRequestBodyProvider::buildFromInput($input->{'provider'}, validate: $validate);
         $target = CreateRelocationRequestBodyTarget::buildFromInput($input->{'target'}, validate: $validate);
+        $userId = null;
+        if (isset($input->{'userId'})) {
+            $userId = match (true) {
+                is_string($input->{'userId'}) => $input->{'userId'},
+            };
+        }
 
         $obj = new self($additionalServices, $allowPasswordChange, $articleType, $contact, $prices, $provider, $target);
         $obj->allDomains = $allDomains;
         $obj->domains = $domains;
         $obj->notes = $notes;
+        $obj->userId = $userId;
         return $obj;
     }
 
@@ -520,6 +563,11 @@ class CreateRelocationRequestBody
         $output['prices'] = ($this->prices)->toJson();
         $output['provider'] = ($this->provider)->toJson();
         $output['target'] = ($this->target)->toJson();
+        if (isset($this->userId)) {
+            $output['userId'] = match (true) {
+                is_string($this->userId) => $this->userId,
+            };
+        }
 
         return $output;
     }
@@ -555,5 +603,10 @@ class CreateRelocationRequestBody
         $this->prices = clone $this->prices;
         $this->provider = clone $this->provider;
         $this->target = clone $this->target;
+        if (isset($this->userId)) {
+            $this->userId = match (true) {
+                is_string($this->userId) => $this->userId,
+            };
+        }
     }
 }

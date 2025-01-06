@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\DeprecatedCronjobAbortExecution;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeprecatedCronjobAbortExecutionRequest
+class DeprecatedProjectLeaveProjectRequest
 {
     public const method = 'post';
 
@@ -17,12 +17,8 @@ class DeprecatedCronjobAbortExecutionRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'cronjobId' => [
+            'projectId' => [
                 'format' => 'uuid',
-                'type' => 'string',
-            ],
-            'executionId' => [
-                'example' => 'cron-bd26li-28027320',
                 'type' => 'string',
             ],
             'body' => [
@@ -30,15 +26,12 @@ class DeprecatedCronjobAbortExecutionRequest
             ],
         ],
         'required' => [
-            'cronjobId',
-            'executionId',
+            'projectId',
             'body',
         ],
     ];
 
-    private string $cronjobId;
-
-    private string $executionId;
+    private string $projectId;
 
     /**
      * @var mixed
@@ -52,21 +45,15 @@ class DeprecatedCronjobAbortExecutionRequest
     /**
      * @param mixed $body
      */
-    public function __construct(string $cronjobId, string $executionId, $body)
+    public function __construct(string $projectId, $body)
     {
-        $this->cronjobId = $cronjobId;
-        $this->executionId = $executionId;
+        $this->projectId = $projectId;
         $this->body = $body;
     }
 
-    public function getCronjobId(): string
+    public function getProjectId(): string
     {
-        return $this->cronjobId;
-    }
-
-    public function getExecutionId(): string
-    {
-        return $this->executionId;
+        return $this->projectId;
     }
 
     /**
@@ -77,30 +64,16 @@ class DeprecatedCronjobAbortExecutionRequest
         return $this->body;
     }
 
-    public function withCronjobId(string $cronjobId): self
+    public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
+        $validator->validate($projectId, static::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->cronjobId = $cronjobId;
-
-        return $clone;
-    }
-
-    public function withExecutionId(string $executionId): self
-    {
-        $validator = new Validator();
-        $validator->validate($executionId, static::$schema['properties']['executionId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->executionId = $executionId;
+        $clone->projectId = $projectId;
 
         return $clone;
     }
@@ -127,21 +100,20 @@ class DeprecatedCronjobAbortExecutionRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedCronjobAbortExecutionRequest Created instance
+     * @return DeprecatedProjectLeaveProjectRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCronjobAbortExecutionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedProjectLeaveProjectRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $cronjobId = $input->{'cronjobId'};
-        $executionId = $input->{'executionId'};
+        $projectId = $input->{'projectId'};
         $body = $input->{'body'};
 
-        $obj = new self($cronjobId, $executionId, $body);
+        $obj = new self($projectId, $body);
 
         return $obj;
     }
@@ -154,8 +126,7 @@ class DeprecatedCronjobAbortExecutionRequest
     public function toJson(): array
     {
         $output = [];
-        $output['cronjobId'] = $this->cronjobId;
-        $output['executionId'] = $this->executionId;
+        $output['projectId'] = $this->projectId;
         $output['body'] = $this->body;
 
         return $output;
@@ -201,9 +172,8 @@ class DeprecatedCronjobAbortExecutionRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $cronjobId = urlencode($mapped['cronjobId']);
-        $executionId = urlencode($mapped['executionId']);
-        return '/v2/cronjobs/' . $cronjobId . '/executions/' . $executionId . '/actions/abort';
+        $projectId = urlencode($mapped['projectId']);
+        return '/v2/projects/' . $projectId . '/leave';
     }
 
     /**

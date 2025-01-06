@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class LeaveCustomerRequest
+class DeprecatedCustomerLeaveCustomerRequest
 {
     public const method = 'post';
 
@@ -100,10 +100,10 @@ class LeaveCustomerRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return LeaveCustomerRequest Created instance
+     * @return DeprecatedCustomerLeaveCustomerRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): LeaveCustomerRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCustomerLeaveCustomerRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

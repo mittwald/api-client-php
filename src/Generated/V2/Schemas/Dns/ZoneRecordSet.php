@@ -24,6 +24,9 @@ class ZoneRecordSet
      */
     private static array $schema = [
         'properties' => [
+            'caa' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCAA',
+            ],
             'cname' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCNAME',
             ],
@@ -46,9 +49,12 @@ class ZoneRecordSet
             'mx',
             'txt',
             'srv',
+            'caa',
         ],
         'type' => 'object',
     ];
+
+    private RecordUnset|RecordCAAComponent $caa;
 
     private RecordUnset|RecordCNAMEComponent $cname;
 
@@ -61,19 +67,30 @@ class ZoneRecordSet
     private RecordUnset|RecordTXTComponent $txt;
 
     /**
+     * @param RecordUnset|RecordCAAComponent $caa
      * @param RecordUnset|RecordCNAMEComponent $cname
      * @param RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords
      * @param RecordUnset|RecordMXManaged|RecordMXCustom $mx
      * @param RecordUnset|RecordSRVComponent $srv
      * @param RecordUnset|RecordTXTComponent $txt
      */
-    public function __construct(RecordCNAMEComponent|RecordUnset $cname, CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords, RecordMXCustom|RecordMXManaged|RecordUnset $mx, RecordSRVComponent|RecordUnset $srv, RecordTXTComponent|RecordUnset $txt)
+    public function __construct(RecordCAAComponent|RecordUnset $caa, RecordCNAMEComponent|RecordUnset $cname, CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords, RecordMXCustom|RecordMXManaged|RecordUnset $mx, RecordSRVComponent|RecordUnset $srv, RecordTXTComponent|RecordUnset $txt)
     {
+        $this->caa = $caa;
         $this->cname = $cname;
         $this->combinedARecords = $combinedARecords;
         $this->mx = $mx;
         $this->srv = $srv;
         $this->txt = $txt;
+    }
+
+    /**
+     * @return
+     * RecordUnset|RecordCAAComponent
+     */
+    public function getCaa(): RecordCAAComponent|RecordUnset
+    {
+        return $this->caa;
     }
 
     /**
@@ -119,6 +136,17 @@ class ZoneRecordSet
     public function getTxt(): RecordTXTComponent|RecordUnset
     {
         return $this->txt;
+    }
+
+    /**
+     * @param RecordUnset|RecordCAAComponent $caa
+     */
+    public function withCaa(RecordCAAComponent|RecordUnset $caa): self
+    {
+        $clone = clone $this;
+        $clone->caa = $caa;
+
+        return $clone;
     }
 
     /**
@@ -191,6 +219,11 @@ class ZoneRecordSet
             static::validateInput($input);
         }
 
+        $caa = match (true) {
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+            RecordUnset::validateInput($input->{'caa'}, true) => RecordUnset::buildFromInput($input->{'caa'}, validate: $validate),
+            RecordCAAComponent::validateInput($input->{'caa'}, true) => RecordCAAComponent::buildFromInput($input->{'caa'}, validate: $validate),
+        };
         $cname = match (true) {
             default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             RecordUnset::validateInput($input->{'cname'}, true) => RecordUnset::buildFromInput($input->{'cname'}, validate: $validate),
@@ -219,7 +252,7 @@ class ZoneRecordSet
             RecordTXTComponent::validateInput($input->{'txt'}, true) => RecordTXTComponent::buildFromInput($input->{'txt'}, validate: $validate),
         };
 
-        $obj = new self($cname, $combinedARecords, $mx, $srv, $txt);
+        $obj = new self($caa, $cname, $combinedARecords, $mx, $srv, $txt);
 
         return $obj;
     }
@@ -232,6 +265,10 @@ class ZoneRecordSet
     public function toJson(): array
     {
         $output = [];
+        $output['caa'] = match (true) {
+            default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
+            ($this->caa) instanceof RecordUnset, ($this->caa) instanceof RecordCAAComponent => $this->caa->toJson(),
+        };
         $output['cname'] = match (true) {
             default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
             ($this->cname) instanceof RecordUnset, ($this->cname) instanceof RecordCNAMEComponent => $this->cname->toJson(),

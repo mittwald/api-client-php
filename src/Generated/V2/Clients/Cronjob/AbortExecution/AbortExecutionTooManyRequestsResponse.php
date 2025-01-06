@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class LeaveProjectTooManyRequestsResponse implements ResponseContainer
+class AbortExecutionTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class LeaveProjectTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private LeaveProjectTooManyRequestsResponseBody $body;
+    private AbortExecutionTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(LeaveProjectTooManyRequestsResponseBody $body)
+    public function __construct(AbortExecutionTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): LeaveProjectTooManyRequestsResponseBody
+    public function getBody(): AbortExecutionTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(LeaveProjectTooManyRequestsResponseBody $body): self
+    public function withBody(AbortExecutionTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class LeaveProjectTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return LeaveProjectTooManyRequestsResponse Created instance
+     * @return AbortExecutionTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): LeaveProjectTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): AbortExecutionTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = LeaveProjectTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = AbortExecutionTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

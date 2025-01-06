@@ -25,6 +25,10 @@ class Termination
      */
     private static array $schema = [
         'properties' => [
+            'cancellationForbidden' => [
+                'description' => 'Indicates whether the User is allowed to cancel the Termination.',
+                'type' => 'boolean',
+            ],
             'reason' => [
                 'example' => 'Not needed anymore',
                 'type' => 'string',
@@ -48,6 +52,11 @@ class Termination
         'type' => 'object',
     ];
 
+    /**
+     * Indicates whether the User is allowed to cancel the Termination.
+     */
+    private ?bool $cancellationForbidden = null;
+
     private ?string $reason = null;
 
     private DateTime $scheduledAtDate;
@@ -60,6 +69,11 @@ class Termination
     {
         $this->scheduledAtDate = $scheduledAtDate;
         $this->targetDate = $targetDate;
+    }
+
+    public function getCancellationForbidden(): ?bool
+    {
+        return $this->cancellationForbidden ?? null;
     }
 
     public function getReason(): ?string
@@ -80,6 +94,28 @@ class Termination
     public function getTargetDate(): DateTime
     {
         return $this->targetDate;
+    }
+
+    public function withCancellationForbidden(bool $cancellationForbidden): self
+    {
+        $validator = new Validator();
+        $validator->validate($cancellationForbidden, static::$schema['properties']['cancellationForbidden']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->cancellationForbidden = $cancellationForbidden;
+
+        return $clone;
+    }
+
+    public function withoutCancellationForbidden(): self
+    {
+        $clone = clone $this;
+        unset($clone->cancellationForbidden);
+
+        return $clone;
     }
 
     public function withReason(string $reason): self
@@ -157,6 +193,10 @@ class Termination
             static::validateInput($input);
         }
 
+        $cancellationForbidden = null;
+        if (isset($input->{'cancellationForbidden'})) {
+            $cancellationForbidden = (bool)($input->{'cancellationForbidden'});
+        }
         $reason = null;
         if (isset($input->{'reason'})) {
             $reason = $input->{'reason'};
@@ -169,6 +209,7 @@ class Termination
         $targetDate = new DateTime($input->{'targetDate'});
 
         $obj = new self($scheduledAtDate, $targetDate);
+        $obj->cancellationForbidden = $cancellationForbidden;
         $obj->reason = $reason;
         $obj->scheduledByUserId = $scheduledByUserId;
         return $obj;
@@ -182,6 +223,9 @@ class Termination
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->cancellationForbidden)) {
+            $output['cancellationForbidden'] = $this->cancellationForbidden;
+        }
         if (isset($this->reason)) {
             $output['reason'] = $this->reason;
         }

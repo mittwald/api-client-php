@@ -11,4 +11,5 @@ enum DnsUpdateRecordSetRequestRecordSet: string
     case txt = 'txt';
     case srv = 'srv';
     case cname = 'cname';
+    case caa = 'caa';
 }

@@ -333,6 +333,8 @@ interface DomainClient
     /**
      * Check if a Domain is available to transfer.
      *
+     * For some TLDs (e.g., .de), transferability cannot be evaluated. In these cases, transferable = true is returned.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-transferability
      * @throws GuzzleException
      * @throws UnexpectedResponseException

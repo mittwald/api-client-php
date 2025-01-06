@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\StoragespaceReplaceProjectNotificationThreshold;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class StoragespaceReplaceProjectNotificationThresholdRequest
+class ExtensionGetExtensionInstanceForProjectRequest
 {
-    public const method = 'put';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -18,37 +18,32 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         'type' => 'object',
         'properties' => [
             'projectId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'notificationThresholdInBytes' => [
-                        'example' => 10000,
-                        'minimum' => 0,
-                        'nullable' => true,
-                        'type' => 'integer',
-                    ],
-                ],
+            'extensionId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
             'projectId',
-            'body',
+            'extensionId',
         ],
     ];
 
     private string $projectId;
 
-    private StoragespaceReplaceProjectNotificationThresholdRequestBody $body;
+    private string $extensionId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId, StoragespaceReplaceProjectNotificationThresholdRequestBody $body)
+    public function __construct(string $projectId, string $extensionId)
     {
         $this->projectId = $projectId;
-        $this->body = $body;
+        $this->extensionId = $extensionId;
     }
 
     public function getProjectId(): string
@@ -56,9 +51,9 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         return $this->projectId;
     }
 
-    public function getBody(): StoragespaceReplaceProjectNotificationThresholdRequestBody
+    public function getExtensionId(): string
     {
-        return $this->body;
+        return $this->extensionId;
     }
 
     public function withProjectId(string $projectId): self
@@ -75,10 +70,16 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         return $clone;
     }
 
-    public function withBody(StoragespaceReplaceProjectNotificationThresholdRequestBody $body): self
+    public function withExtensionId(string $extensionId): self
     {
+        $validator = new Validator();
+        $validator->validate($extensionId, static::$schema['properties']['extensionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
@@ -88,10 +89,10 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return StoragespaceReplaceProjectNotificationThresholdRequest Created instance
+     * @return ExtensionGetExtensionInstanceForProjectRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): StoragespaceReplaceProjectNotificationThresholdRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGetExtensionInstanceForProjectRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -99,9 +100,9 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         }
 
         $projectId = $input->{'projectId'};
-        $body = StoragespaceReplaceProjectNotificationThresholdRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $extensionId = $input->{'extensionId'};
 
-        $obj = new self($projectId, $body);
+        $obj = new self($projectId, $extensionId);
 
         return $obj;
     }
@@ -115,7 +116,7 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        $output['body'] = ($this->body)->toJson();
+        $output['extensionId'] = $this->extensionId;
 
         return $output;
     }
@@ -146,7 +147,6 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -162,7 +162,8 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     {
         $mapped = $this->toJson();
         $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/storage-space-notification-threshold';
+        $extensionId = urlencode($mapped['extensionId']);
+        return '/v2/projects/' . $projectId . '/extensions/' . $extensionId;
     }
 
     /**
@@ -181,7 +182,6 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

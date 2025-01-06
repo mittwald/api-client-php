@@ -33,6 +33,9 @@ class Zone
             ],
             'recordSet' => [
                 'properties' => [
+                    'caa' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCAA',
+                    ],
                     'cname' => [
                         '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCNAME',
                     ],
@@ -55,6 +58,7 @@ class Zone
                     'mx',
                     'txt',
                     'srv',
+                    'caa',
                 ],
                 'type' => 'object',
             ],

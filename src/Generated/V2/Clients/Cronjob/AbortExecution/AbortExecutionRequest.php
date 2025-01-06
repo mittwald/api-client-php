@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\AbortExecution;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class LeaveProjectRequest
+class AbortExecutionRequest
 {
     public const method = 'post';
 
@@ -17,8 +17,12 @@ class LeaveProjectRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'cronjobId' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'executionId' => [
+                'example' => 'cron-bd26li-28027320',
                 'type' => 'string',
             ],
             'body' => [
@@ -26,12 +30,15 @@ class LeaveProjectRequest
             ],
         ],
         'required' => [
-            'projectId',
+            'cronjobId',
+            'executionId',
             'body',
         ],
     ];
 
-    private string $projectId;
+    private string $cronjobId;
+
+    private string $executionId;
 
     /**
      * @var mixed
@@ -45,15 +52,21 @@ class LeaveProjectRequest
     /**
      * @param mixed $body
      */
-    public function __construct(string $projectId, $body)
+    public function __construct(string $cronjobId, string $executionId, $body)
     {
-        $this->projectId = $projectId;
+        $this->cronjobId = $cronjobId;
+        $this->executionId = $executionId;
         $this->body = $body;
     }
 
-    public function getProjectId(): string
+    public function getCronjobId(): string
     {
-        return $this->projectId;
+        return $this->cronjobId;
+    }
+
+    public function getExecutionId(): string
+    {
+        return $this->executionId;
     }
 
     /**
@@ -64,16 +77,30 @@ class LeaveProjectRequest
         return $this->body;
     }
 
-    public function withProjectId(string $projectId): self
+    public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->cronjobId = $cronjobId;
+
+        return $clone;
+    }
+
+    public function withExecutionId(string $executionId): self
+    {
+        $validator = new Validator();
+        $validator->validate($executionId, static::$schema['properties']['executionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->executionId = $executionId;
 
         return $clone;
     }
@@ -100,20 +127,21 @@ class LeaveProjectRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return LeaveProjectRequest Created instance
+     * @return AbortExecutionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): LeaveProjectRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): AbortExecutionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
+        $cronjobId = $input->{'cronjobId'};
+        $executionId = $input->{'executionId'};
         $body = $input->{'body'};
 
-        $obj = new self($projectId, $body);
+        $obj = new self($cronjobId, $executionId, $body);
 
         return $obj;
     }
@@ -126,7 +154,8 @@ class LeaveProjectRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
+        $output['cronjobId'] = $this->cronjobId;
+        $output['executionId'] = $this->executionId;
         $output['body'] = $this->body;
 
         return $output;
@@ -172,8 +201,9 @@ class LeaveProjectRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/leave';
+        $cronjobId = urlencode($mapped['cronjobId']);
+        $executionId = urlencode($mapped['executionId']);
+        return '/v2/cronjobs/' . $cronjobId . '/executions/' . $executionId . '/actions/abort';
     }
 
     /**
