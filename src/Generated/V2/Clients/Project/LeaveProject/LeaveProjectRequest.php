@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeprecatedProjectLeaveProjectRequest
+class LeaveProjectRequest
 {
     public const method = 'post';
 
@@ -100,10 +100,10 @@ class DeprecatedProjectLeaveProjectRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedProjectLeaveProjectRequest Created instance
+     * @return LeaveProjectRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedProjectLeaveProjectRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): LeaveProjectRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

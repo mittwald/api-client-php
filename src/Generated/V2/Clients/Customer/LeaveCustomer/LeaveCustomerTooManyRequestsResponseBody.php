@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class DeprecatedProjectLeaveProjectTooManyRequestsResponseBody
+class LeaveCustomerTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class DeprecatedProjectLeaveProjectTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedProjectLeaveProjectTooManyRequestsResponseBody Created instance
+     * @return LeaveCustomerTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedProjectLeaveProjectTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): LeaveCustomerTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

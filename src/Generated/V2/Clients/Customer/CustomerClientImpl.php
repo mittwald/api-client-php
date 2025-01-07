@@ -58,9 +58,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\Delete
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer\DeprecatedCustomerLeaveCustomerDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer\DeprecatedCustomerLeaveCustomerRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer\DeprecatedCustomerLeaveCustomerTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerNotFoundResponse;
@@ -97,6 +94,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesNotFoundResponse;
@@ -524,6 +524,27 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
+     * Leave a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-leave-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param LeaveCustomerRequest $request An object representing the request for this operation
+     */
+    public function leaveCustomer(LeaveCustomerRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(LeaveCustomerRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => LeaveCustomerTooManyRequestsResponse::fromResponse($httpResponse),
+            default => LeaveCustomerDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List CustomerInvites belonging to the executing user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-customer-invites
@@ -752,28 +773,6 @@ class CustomerClientImpl implements CustomerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => UpdateCustomerMembershipTooManyRequestsResponse::fromResponse($httpResponse),
             default => UpdateCustomerMembershipDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Leave a Customer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/deprecated-customer-leave-customer
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedCustomerLeaveCustomerRequest $request An object representing the request for this operation
-     * @deprecated
-     */
-    public function deprecatedCustomerLeaveCustomer(DeprecatedCustomerLeaveCustomerRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeprecatedCustomerLeaveCustomerRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => DeprecatedCustomerLeaveCustomerTooManyRequestsResponse::fromResponse($httpResponse),
-            default => DeprecatedCustomerLeaveCustomerDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

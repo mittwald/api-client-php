@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
@@ -10,7 +10,7 @@ use Mittwald\ApiClient\Client\ResponseContainer;
 use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedProjectLeaveProjectDefaultResponse implements ResponseContainer
+class LeaveProjectDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -54,10 +54,10 @@ class DeprecatedProjectLeaveProjectDefaultResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedProjectLeaveProjectDefaultResponse Created instance
+     * @return LeaveProjectDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedProjectLeaveProjectDefaultResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): LeaveProjectDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

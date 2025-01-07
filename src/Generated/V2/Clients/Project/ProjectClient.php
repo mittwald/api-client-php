@@ -18,7 +18,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectAvatar\DeletePr
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectInvite\DeleteProjectInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteProjectMembership\DeleteProjectMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProjectInvite\GetProjectInviteOKResponse;
@@ -31,6 +30,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetSelfMembershipForProject\GetSelfMembershipForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListMembershipsForProject\ListMembershipsForProjectOKResponse;
@@ -73,16 +73,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\UpdateServerDescription\Upda
  */
 interface ProjectClient
 {
-    /**
-     * Leave a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-leave-project
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedProjectLeaveProjectRequest $request An object representing the request for this operation
-     * @deprecated
-     */
-    public function deprecatedProjectLeaveProject(DeprecatedProjectLeaveProjectRequest $request): EmptyResponse;
     /**
      * Accept a ProjectInvite.
      *
@@ -229,6 +219,15 @@ interface ProjectClient
      * @return GetServerOKResponse OK
      */
     public function getServer(GetServerRequest $request): GetServerOKResponse;
+    /**
+     * Leave a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-leave-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param LeaveProjectRequest $request An object representing the request for this operation
+     */
+    public function leaveProject(LeaveProjectRequest $request): EmptyResponse;
     /**
      * List Invites belonging to a Project.
      *

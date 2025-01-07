@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class DeprecatedCustomerLeaveCustomerTooManyRequestsResponse implements ResponseContainer
+class LeaveCustomerTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class DeprecatedCustomerLeaveCustomerTooManyRequestsResponse implements Response
         ],
     ];
 
-    private DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody $body;
+    private LeaveCustomerTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody $body)
+    public function __construct(LeaveCustomerTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody
+    public function getBody(): LeaveCustomerTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody $body): self
+    public function withBody(LeaveCustomerTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class DeprecatedCustomerLeaveCustomerTooManyRequestsResponse implements Response
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return DeprecatedCustomerLeaveCustomerTooManyRequestsResponse Created instance
+     * @return LeaveCustomerTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCustomerLeaveCustomerTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): LeaveCustomerTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = LeaveCustomerTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

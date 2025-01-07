@@ -54,9 +54,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteSer
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\DeleteServerAvatar\DeleteServerAvatarTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject\DeprecatedProjectLeaveProjectTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetProject\GetProjectOKResponse;
@@ -89,6 +86,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerNotFoundR
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\GetServer\GetServerTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject\LeaveProjectTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Project\ListInvitesForProject\ListInvitesForProjectOKResponse;
@@ -198,28 +198,6 @@ class ProjectClientImpl implements ProjectClient
     public function __construct(Client $client)
     {
         $this->client = $client;
-    }
-
-    /**
-     * Leave a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-leave-project
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedProjectLeaveProjectRequest $request An object representing the request for this operation
-     * @deprecated
-     */
-    public function deprecatedProjectLeaveProject(DeprecatedProjectLeaveProjectRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeprecatedProjectLeaveProjectRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => DeprecatedProjectLeaveProjectTooManyRequestsResponse::fromResponse($httpResponse),
-            default => DeprecatedProjectLeaveProjectDefaultResponse::fromResponse($httpResponse),
-        });
     }
 
     /**
@@ -569,6 +547,27 @@ class ProjectClientImpl implements ProjectClient
             404 => GetServerNotFoundResponse::fromResponse($httpResponse),
             429 => GetServerTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetServerDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Leave a Project.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/project-leave-project
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param LeaveProjectRequest $request An object representing the request for this operation
+     */
+    public function leaveProject(LeaveProjectRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(LeaveProjectRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => LeaveProjectTooManyRequestsResponse::fromResponse($httpResponse),
+            default => LeaveProjectDefaultResponse::fromResponse($httpResponse),
         });
     }
 

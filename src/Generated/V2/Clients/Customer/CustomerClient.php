@@ -21,7 +21,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustom
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomer\DeleteCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerInvite\DeleteCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeleteCustomerMembership\DeleteCustomerMembershipRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer\DeprecatedCustomerLeaveCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomer\GetCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerInvite\GetCustomerInviteOKResponse;
@@ -34,6 +33,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletOKRespon
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer\LeaveCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerInvites\ListCustomerInvitesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\ListCustomerMemberships\ListCustomerMembershipsOKResponse;
@@ -211,6 +211,15 @@ interface CustomerClient
      */
     public function isCustomerLegallyCompetent(IsCustomerLegallyCompetentRequest $request): IsCustomerLegallyCompetentOKResponse;
     /**
+     * Leave a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-leave-customer
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param LeaveCustomerRequest $request An object representing the request for this operation
+     */
+    public function leaveCustomer(LeaveCustomerRequest $request): EmptyResponse;
+    /**
      * List CustomerInvites belonging to the executing user.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-list-customer-invites
@@ -308,14 +317,4 @@ interface CustomerClient
      * @param UpdateCustomerMembershipRequest $request An object representing the request for this operation
      */
     public function updateCustomerMembership(UpdateCustomerMembershipRequest $request): EmptyResponse;
-    /**
-     * Leave a Customer.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/deprecated-customer-leave-customer
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeprecatedCustomerLeaveCustomerRequest $request An object representing the request for this operation
-     * @deprecated
-     */
-    public function deprecatedCustomerLeaveCustomer(DeprecatedCustomerLeaveCustomerRequest $request): EmptyResponse;
 }
