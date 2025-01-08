@@ -10,6 +10,6 @@ enum NotificationRole: string
     case customeraccountant = 'customer_accountant';
     case customermember = 'customer_member';
     case projectowner = 'project_owner';
-    case projectemailadmin = 'project_email_admin';
+    case projectemailadmin = 'project_emailadmin';
     case projectexternal = 'project_external';
 }
