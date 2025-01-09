@@ -39,6 +39,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionIn
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensionInstances\ExtensionListExtensionInstancesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
 
 /**
  * Client for Marketplace API
@@ -235,4 +237,14 @@ interface MarketplaceClient
      * @return ExtensionListExtensionsOKResponse OK
      */
     public function extensionListExtensions(ExtensionListExtensionsRequest $request): ExtensionListExtensionsOKResponse;
+    /**
+     * List Extensions of own contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-list-own-extensions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionListOwnExtensionsRequest $request An object representing the request for this operation
+     * @return ExtensionListOwnExtensionsOKResponse OK
+     */
+    public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse;
 }

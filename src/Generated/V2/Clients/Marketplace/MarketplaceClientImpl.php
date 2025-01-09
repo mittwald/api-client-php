@@ -93,6 +93,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsTooManyRequestsResponse;
 
 /**
  * Client for Marketplace API
@@ -525,6 +529,28 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListExtensionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Extensions of own contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-list-own-extensions
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionListOwnExtensionsRequest $request An object representing the request for this operation
+     * @return ExtensionListOwnExtensionsOKResponse OK
+     */
+    public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse
+    {
+        $httpRequest = new Request(ExtensionListOwnExtensionsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionListOwnExtensionsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ExtensionListOwnExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionListOwnExtensionsDefaultResponse::fromResponse($httpResponse),
         });
     }
 }
