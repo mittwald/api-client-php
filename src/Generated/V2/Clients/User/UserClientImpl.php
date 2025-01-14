@@ -116,6 +116,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest;
@@ -225,10 +229,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailOKResponse;
@@ -595,6 +595,29 @@ class UserClientImpl implements UserClient
             400 => DeprecatedUserEditSshKeyBadRequestResponse::fromResponse($httpResponse),
             429 => DeprecatedUserEditSshKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedUserEditSshKeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get your account information. Replaced by `GET` `/v2/users/self`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-get-own-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserGetOwnAccountRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserGetOwnAccountOKResponse Account information.
+     */
+    public function deprecatedUserGetOwnAccount(DeprecatedUserGetOwnAccountRequest $request): DeprecatedUserGetOwnAccountOKResponse
+    {
+        $httpRequest = new Request(DeprecatedUserGetOwnAccountRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedUserGetOwnAccountOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserGetOwnAccountTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedUserGetOwnAccountDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1542,28 +1565,6 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => GetMfaStatusTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetMfaStatusDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get your account information.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-account
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetOwnAccountRequest $request An object representing the request for this operation
-     * @return GetOwnAccountOKResponse Account information.
-     */
-    public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse
-    {
-        $httpRequest = new Request(GetOwnAccountRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetOwnAccountOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => GetOwnAccountTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetOwnAccountDefaultResponse::fromResponse($httpResponse),
         });
     }
 

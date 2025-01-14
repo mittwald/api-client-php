@@ -667,7 +667,7 @@ class DomainClientImpl implements DomainClient
     /**
      * Abort a Domain declaration.
      *
-     * Abort an incomplete Domain registration/transfer.
+     * Abort an incomplete Domain registration or transfer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-domain-declaration
      * @throws GuzzleException

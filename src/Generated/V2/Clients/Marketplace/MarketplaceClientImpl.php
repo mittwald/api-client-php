@@ -23,6 +23,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtens
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceDefaultResponse;
@@ -186,6 +192,32 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionConsentToExtensionScopesBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionConsentToExtensionScopesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionConsentToExtensionScopesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Create the OnboardingProcess of a Contributor.
+     *
+     * The OnboardingProcess is needed to publish paid extensions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-create-contributor-onboarding-process
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCreateContributorOnboardingProcessRequest $request An object representing the request for this operation
+     * @return ExtensionCreateContributorOnboardingProcessCreatedResponse The Process has been started.
+     */
+    public function extensionCreateContributorOnboardingProcess(ExtensionCreateContributorOnboardingProcessRequest $request): ExtensionCreateContributorOnboardingProcessCreatedResponse
+    {
+        $httpRequest = new Request(ExtensionCreateContributorOnboardingProcessRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ExtensionCreateContributorOnboardingProcessCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionCreateContributorOnboardingProcessBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionCreateContributorOnboardingProcessNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionCreateContributorOnboardingProcessTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionCreateContributorOnboardingProcessDefaultResponse::fromResponse($httpResponse),
         });
     }
 

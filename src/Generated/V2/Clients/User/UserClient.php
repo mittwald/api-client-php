@@ -41,6 +41,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest;
@@ -74,8 +76,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenOKRespon
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtOKResponse;
@@ -236,6 +236,17 @@ interface UserClient
      * @return EmptyResponse The ssh-key has been edited.
      */
     public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse;
+    /**
+     * Get your account information. Replaced by `GET` `/v2/users/self`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-get-own-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserGetOwnAccountRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserGetOwnAccountOKResponse Account information.
+     */
+    public function deprecatedUserGetOwnAccount(DeprecatedUserGetOwnAccountRequest $request): DeprecatedUserGetOwnAccountOKResponse;
     /**
      * Initialize password reset process.
      *
@@ -656,16 +667,6 @@ interface UserClient
      * @return GetMfaStatusOKResponse Multi factor auth status
      */
     public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse;
-    /**
-     * Get your account information.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-account
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetOwnAccountRequest $request An object representing the request for this operation
-     * @return GetOwnAccountOKResponse Account information.
-     */
-    public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse;
     /**
      * Get your verified Email-Address.
      *

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetOwnAccountRequest
+class DeprecatedUserGetOwnAccountRequest
 {
     public const method = 'get';
 
@@ -26,23 +26,23 @@ class GetOwnAccountRequest
         ],
     ];
 
-    private GetOwnAccountRequestBody $body;
+    private DeprecatedUserGetOwnAccountRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(GetOwnAccountRequestBody $body)
+    public function __construct(DeprecatedUserGetOwnAccountRequestBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): GetOwnAccountRequestBody
+    public function getBody(): DeprecatedUserGetOwnAccountRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(GetOwnAccountRequestBody $body): self
+    public function withBody(DeprecatedUserGetOwnAccountRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -55,17 +55,17 @@ class GetOwnAccountRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetOwnAccountRequest Created instance
+     * @return DeprecatedUserGetOwnAccountRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetOwnAccountRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserGetOwnAccountRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = GetOwnAccountRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedUserGetOwnAccountRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

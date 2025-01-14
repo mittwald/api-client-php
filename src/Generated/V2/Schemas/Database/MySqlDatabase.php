@@ -59,9 +59,6 @@ class MySqlDatabase
             'isShared' => [
                 'type' => 'boolean',
             ],
-            'mainUser' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.database.MySqlUser',
-            ],
             'name' => [
                 'type' => 'string',
             ],
@@ -132,8 +129,6 @@ class MySqlDatabase
     private bool $isReady;
 
     private bool $isShared;
-
-    private ?MySqlUser $mainUser = null;
 
     private string $name;
 
@@ -217,11 +212,6 @@ class MySqlDatabase
     public function getIsShared(): bool
     {
         return $this->isShared;
-    }
-
-    public function getMainUser(): ?MySqlUser
-    {
-        return $this->mainUser ?? null;
     }
 
     public function getName(): string
@@ -389,22 +379,6 @@ class MySqlDatabase
         return $clone;
     }
 
-    public function withMainUser(MySqlUser $mainUser): self
-    {
-        $clone = clone $this;
-        $clone->mainUser = $mainUser;
-
-        return $clone;
-    }
-
-    public function withoutMainUser(): self
-    {
-        $clone = clone $this;
-        unset($clone->mainUser);
-
-        return $clone;
-    }
-
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -520,10 +494,6 @@ class MySqlDatabase
         $id = $input->{'id'};
         $isReady = (bool)($input->{'isReady'});
         $isShared = (bool)($input->{'isShared'});
-        $mainUser = null;
-        if (isset($input->{'mainUser'})) {
-            $mainUser = MySqlUser::buildFromInput($input->{'mainUser'}, validate: $validate);
-        }
         $name = $input->{'name'};
         $projectId = $input->{'projectId'};
         $status = DatabaseStatus::from($input->{'status'});
@@ -535,7 +505,6 @@ class MySqlDatabase
 
         $obj = new self($characterSettings, $createdAt, $description, $externalHostname, $hostname, $id, $isReady, $isShared, $name, $projectId, $status, $statusSetAt, $storageUsageInBytes, $storageUsageInBytesSetAt, $updatedAt, $version);
         $obj->finalizers = $finalizers;
-        $obj->mainUser = $mainUser;
         return $obj;
     }
 
@@ -558,9 +527,6 @@ class MySqlDatabase
         $output['id'] = $this->id;
         $output['isReady'] = $this->isReady;
         $output['isShared'] = $this->isShared;
-        if (isset($this->mainUser)) {
-            $output['mainUser'] = $this->mainUser->toJson();
-        }
         $output['name'] = $this->name;
         $output['projectId'] = $this->projectId;
         $output['status'] = $this->status->value;

@@ -2,33 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetOwnAccountTooManyRequestsResponseBody
+class ExtensionCreateContributorOnboardingProcessCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'message' => [
+            'contributorId' => [
+                'format' => 'uuid',
                 'type' => 'string',
-                'example' => 'too many requests',
             ],
-            'type' => [
+            'onboardingLink' => [
                 'type' => 'string',
-                'example' => 'RateLimitError',
             ],
         ],
+        'type' => 'object',
     ];
 
-    private ?string $message = null;
+    private ?string $contributorId = null;
 
-    private ?string $type = null;
+    private ?string $onboardingLink = null;
 
     /**
      *
@@ -37,56 +36,56 @@ class GetOwnAccountTooManyRequestsResponseBody
     {
     }
 
-    public function getMessage(): ?string
+    public function getContributorId(): ?string
     {
-        return $this->message ?? null;
+        return $this->contributorId ?? null;
     }
 
-    public function getType(): ?string
+    public function getOnboardingLink(): ?string
     {
-        return $this->type ?? null;
+        return $this->onboardingLink ?? null;
     }
 
-    public function withMessage(string $message): self
+    public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($message, static::$schema['properties']['message']);
+        $validator->validate($contributorId, static::$schema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->message = $message;
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
 
-    public function withoutMessage(): self
+    public function withoutContributorId(): self
     {
         $clone = clone $this;
-        unset($clone->message);
+        unset($clone->contributorId);
 
         return $clone;
     }
 
-    public function withType(string $type): self
+    public function withOnboardingLink(string $onboardingLink): self
     {
         $validator = new Validator();
-        $validator->validate($type, static::$schema['properties']['type']);
+        $validator->validate($onboardingLink, static::$schema['properties']['onboardingLink']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->type = $type;
+        $clone->onboardingLink = $onboardingLink;
 
         return $clone;
     }
 
-    public function withoutType(): self
+    public function withoutOnboardingLink(): self
     {
         $clone = clone $this;
-        unset($clone->type);
+        unset($clone->onboardingLink);
 
         return $clone;
     }
@@ -96,28 +95,28 @@ class GetOwnAccountTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetOwnAccountTooManyRequestsResponseBody Created instance
+     * @return ExtensionCreateContributorOnboardingProcessCreatedResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetOwnAccountTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionCreateContributorOnboardingProcessCreatedResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $message = null;
-        if (isset($input->{'message'})) {
-            $message = $input->{'message'};
+        $contributorId = null;
+        if (isset($input->{'contributorId'})) {
+            $contributorId = $input->{'contributorId'};
         }
-        $type = null;
-        if (isset($input->{'type'})) {
-            $type = $input->{'type'};
+        $onboardingLink = null;
+        if (isset($input->{'onboardingLink'})) {
+            $onboardingLink = $input->{'onboardingLink'};
         }
 
         $obj = new self();
-        $obj->message = $message;
-        $obj->type = $type;
+        $obj->contributorId = $contributorId;
+        $obj->onboardingLink = $onboardingLink;
         return $obj;
     }
 
@@ -129,11 +128,11 @@ class GetOwnAccountTooManyRequestsResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->message)) {
-            $output['message'] = $this->message;
+        if (isset($this->contributorId)) {
+            $output['contributorId'] = $this->contributorId;
         }
-        if (isset($this->type)) {
-            $output['type'] = $this->type;
+        if (isset($this->onboardingLink)) {
+            $output['onboardingLink'] = $this->onboardingLink;
         }
 
         return $output;
