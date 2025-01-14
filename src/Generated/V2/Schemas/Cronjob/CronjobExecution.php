@@ -34,6 +34,9 @@ class CronjobExecution
                 ],
                 'type' => 'object',
             ],
+            'cronjobId' => [
+                'type' => 'string',
+            ],
             'durationInMilliseconds' => [
                 'example' => 12374,
                 'format' => 'int64',
@@ -94,11 +97,14 @@ class CronjobExecution
             'id',
             'status',
             'successful',
+            'cronjobId',
         ],
         'type' => 'object',
     ];
 
     private ?CronjobExecutionAbortedBy $abortedBy = null;
+
+    private string $cronjobId;
 
     private ?int $durationInMilliseconds = null;
 
@@ -126,8 +132,9 @@ class CronjobExecution
 
     private ?CronjobExecutionTriggeredBy $triggeredBy = null;
 
-    public function __construct(string $id, CronjobExecutionStatus $status, bool $successful)
+    public function __construct(string $cronjobId, string $id, CronjobExecutionStatus $status, bool $successful)
     {
+        $this->cronjobId = $cronjobId;
         $this->id = $id;
         $this->status = $status;
         $this->successful = $successful;
@@ -136,6 +143,11 @@ class CronjobExecution
     public function getAbortedBy(): ?CronjobExecutionAbortedBy
     {
         return $this->abortedBy ?? null;
+    }
+
+    public function getCronjobId(): string
+    {
+        return $this->cronjobId;
     }
 
     public function getDurationInMilliseconds(): ?int
@@ -206,6 +218,20 @@ class CronjobExecution
     {
         $clone = clone $this;
         unset($clone->abortedBy);
+
+        return $clone;
+    }
+
+    public function withCronjobId(string $cronjobId): self
+    {
+        $validator = new Validator();
+        $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->cronjobId = $cronjobId;
 
         return $clone;
     }
@@ -395,6 +421,7 @@ class CronjobExecution
         if (isset($input->{'abortedBy'})) {
             $abortedBy = CronjobExecutionAbortedBy::buildFromInput($input->{'abortedBy'}, validate: $validate);
         }
+        $cronjobId = $input->{'cronjobId'};
         $durationInMilliseconds = null;
         if (isset($input->{'durationInMilliseconds'})) {
             $durationInMilliseconds = (int)($input->{'durationInMilliseconds'});
@@ -427,7 +454,7 @@ class CronjobExecution
             $triggeredBy = CronjobExecutionTriggeredBy::buildFromInput($input->{'triggeredBy'}, validate: $validate);
         }
 
-        $obj = new self($id, $status, $successful);
+        $obj = new self($cronjobId, $id, $status, $successful);
         $obj->abortedBy = $abortedBy;
         $obj->durationInMilliseconds = $durationInMilliseconds;
         $obj->end = $end;
@@ -450,6 +477,7 @@ class CronjobExecution
         if (isset($this->abortedBy)) {
             $output['abortedBy'] = ($this->abortedBy)->toJson();
         }
+        $output['cronjobId'] = $this->cronjobId;
         if (isset($this->durationInMilliseconds)) {
             $output['durationInMilliseconds'] = $this->durationInMilliseconds;
         }
