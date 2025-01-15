@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\LeaveCustomer;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\DeprecatedCustomerLeaveCustomer;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class LeaveCustomerTooManyRequestsResponse implements ResponseContainer
+class DeprecatedCustomerLeaveCustomerTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class LeaveCustomerTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private LeaveCustomerTooManyRequestsResponseBody $body;
+    private DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(LeaveCustomerTooManyRequestsResponseBody $body)
+    public function __construct(DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): LeaveCustomerTooManyRequestsResponseBody
+    public function getBody(): DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(LeaveCustomerTooManyRequestsResponseBody $body): self
+    public function withBody(DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class LeaveCustomerTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return LeaveCustomerTooManyRequestsResponse Created instance
+     * @return DeprecatedCustomerLeaveCustomerTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): LeaveCustomerTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedCustomerLeaveCustomerTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = LeaveCustomerTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedCustomerLeaveCustomerTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
