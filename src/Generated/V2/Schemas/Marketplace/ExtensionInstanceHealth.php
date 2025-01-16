@@ -24,51 +24,80 @@ class ExtensionInstanceHealth
      */
     private static array $schema = [
         'properties' => [
+            'aggregateReference' => [
+                'properties' => [
+                    'aggregate' => [
+                        'type' => 'string',
+                    ],
+                    'domain' => [
+                        'type' => 'string',
+                    ],
+                    'id' => [
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'id',
+                    'domain',
+                    'aggregate',
+                ],
+                'type' => 'object',
+            ],
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'pendingInstallation' => [
+            'instantiationIsPending' => [
                 'default' => false,
                 'type' => 'boolean',
             ],
-            'pendingRemoval' => [
-                'default' => false,
-                'type' => 'boolean',
-            ],
-            'pendingWebhooks' => [
+            'pendingWebhooksCount' => [
                 'default' => 0,
                 'minimum' => 0,
                 'type' => 'integer',
             ],
-            'webhooksHalted' => [
+            'removalIsPending' => [
+                'default' => false,
+                'type' => 'boolean',
+            ],
+            'webhooksAreHalted' => [
                 'default' => false,
                 'type' => 'boolean',
             ],
         ],
         'required' => [
             'id',
-            'webhooksHalted',
-            'pendingInstallation',
-            'pendingRemoval',
-            'pendingWebhooks',
+            'aggregateReference',
+            'webhooksAreHalted',
+            'instantiationIsPending',
+            'removalIsPending',
+            'pendingWebhooksCount',
         ],
         'type' => 'object',
     ];
 
+    private ExtensionInstanceHealthAggregateReference $aggregateReference;
+
     private string $id;
 
-    private bool $pendingInstallation = false;
+    private bool $instantiationIsPending = false;
 
-    private bool $pendingRemoval = false;
+    private int $pendingWebhooksCount = 0;
 
-    private int $pendingWebhooks = 0;
+    private bool $removalIsPending = false;
 
-    private bool $webhooksHalted = false;
+    private bool $webhooksAreHalted = false;
 
-    public function __construct(string $id)
+    public function __construct(ExtensionInstanceHealthAggregateReference $aggregateReference, string $id)
     {
+        $this->aggregateReference = $aggregateReference;
         $this->id = $id;
+    }
+
+    public function getAggregateReference(): ExtensionInstanceHealthAggregateReference
+    {
+        return $this->aggregateReference;
     }
 
     public function getId(): string
@@ -76,24 +105,32 @@ class ExtensionInstanceHealth
         return $this->id;
     }
 
-    public function getPendingInstallation(): bool
+    public function getInstantiationIsPending(): bool
     {
-        return $this->pendingInstallation;
+        return $this->instantiationIsPending;
     }
 
-    public function getPendingRemoval(): bool
+    public function getPendingWebhooksCount(): int
     {
-        return $this->pendingRemoval;
+        return $this->pendingWebhooksCount;
     }
 
-    public function getPendingWebhooks(): int
+    public function getRemovalIsPending(): bool
     {
-        return $this->pendingWebhooks;
+        return $this->removalIsPending;
     }
 
-    public function getWebhooksHalted(): bool
+    public function getWebhooksAreHalted(): bool
     {
-        return $this->webhooksHalted;
+        return $this->webhooksAreHalted;
+    }
+
+    public function withAggregateReference(ExtensionInstanceHealthAggregateReference $aggregateReference): self
+    {
+        $clone = clone $this;
+        $clone->aggregateReference = $aggregateReference;
+
+        return $clone;
     }
 
     public function withId(string $id): self
@@ -110,58 +147,58 @@ class ExtensionInstanceHealth
         return $clone;
     }
 
-    public function withPendingInstallation(bool $pendingInstallation): self
+    public function withInstantiationIsPending(bool $instantiationIsPending): self
     {
         $validator = new Validator();
-        $validator->validate($pendingInstallation, static::$schema['properties']['pendingInstallation']);
+        $validator->validate($instantiationIsPending, static::$schema['properties']['instantiationIsPending']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->pendingInstallation = $pendingInstallation;
+        $clone->instantiationIsPending = $instantiationIsPending;
 
         return $clone;
     }
 
-    public function withPendingRemoval(bool $pendingRemoval): self
+    public function withPendingWebhooksCount(int $pendingWebhooksCount): self
     {
         $validator = new Validator();
-        $validator->validate($pendingRemoval, static::$schema['properties']['pendingRemoval']);
+        $validator->validate($pendingWebhooksCount, static::$schema['properties']['pendingWebhooksCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->pendingRemoval = $pendingRemoval;
+        $clone->pendingWebhooksCount = $pendingWebhooksCount;
 
         return $clone;
     }
 
-    public function withPendingWebhooks(int $pendingWebhooks): self
+    public function withRemovalIsPending(bool $removalIsPending): self
     {
         $validator = new Validator();
-        $validator->validate($pendingWebhooks, static::$schema['properties']['pendingWebhooks']);
+        $validator->validate($removalIsPending, static::$schema['properties']['removalIsPending']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->pendingWebhooks = $pendingWebhooks;
+        $clone->removalIsPending = $removalIsPending;
 
         return $clone;
     }
 
-    public function withWebhooksHalted(bool $webhooksHalted): self
+    public function withWebhooksAreHalted(bool $webhooksAreHalted): self
     {
         $validator = new Validator();
-        $validator->validate($webhooksHalted, static::$schema['properties']['webhooksHalted']);
+        $validator->validate($webhooksAreHalted, static::$schema['properties']['webhooksAreHalted']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->webhooksHalted = $webhooksHalted;
+        $clone->webhooksAreHalted = $webhooksAreHalted;
 
         return $clone;
     }
@@ -181,29 +218,30 @@ class ExtensionInstanceHealth
             static::validateInput($input);
         }
 
+        $aggregateReference = ExtensionInstanceHealthAggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
         $id = $input->{'id'};
-        $pendingInstallation = false;
-        if (isset($input->{'pendingInstallation'})) {
-            $pendingInstallation = (bool)($input->{'pendingInstallation'});
+        $instantiationIsPending = false;
+        if (isset($input->{'instantiationIsPending'})) {
+            $instantiationIsPending = (bool)($input->{'instantiationIsPending'});
         }
-        $pendingRemoval = false;
-        if (isset($input->{'pendingRemoval'})) {
-            $pendingRemoval = (bool)($input->{'pendingRemoval'});
+        $pendingWebhooksCount = 0;
+        if (isset($input->{'pendingWebhooksCount'})) {
+            $pendingWebhooksCount = (int)($input->{'pendingWebhooksCount'});
         }
-        $pendingWebhooks = 0;
-        if (isset($input->{'pendingWebhooks'})) {
-            $pendingWebhooks = (int)($input->{'pendingWebhooks'});
+        $removalIsPending = false;
+        if (isset($input->{'removalIsPending'})) {
+            $removalIsPending = (bool)($input->{'removalIsPending'});
         }
-        $webhooksHalted = false;
-        if (isset($input->{'webhooksHalted'})) {
-            $webhooksHalted = (bool)($input->{'webhooksHalted'});
+        $webhooksAreHalted = false;
+        if (isset($input->{'webhooksAreHalted'})) {
+            $webhooksAreHalted = (bool)($input->{'webhooksAreHalted'});
         }
 
-        $obj = new self($id);
-        $obj->pendingInstallation = $pendingInstallation;
-        $obj->pendingRemoval = $pendingRemoval;
-        $obj->pendingWebhooks = $pendingWebhooks;
-        $obj->webhooksHalted = $webhooksHalted;
+        $obj = new self($aggregateReference, $id);
+        $obj->instantiationIsPending = $instantiationIsPending;
+        $obj->pendingWebhooksCount = $pendingWebhooksCount;
+        $obj->removalIsPending = $removalIsPending;
+        $obj->webhooksAreHalted = $webhooksAreHalted;
         return $obj;
     }
 
@@ -215,11 +253,12 @@ class ExtensionInstanceHealth
     public function toJson(): array
     {
         $output = [];
+        $output['aggregateReference'] = ($this->aggregateReference)->toJson();
         $output['id'] = $this->id;
-        $output['pendingInstallation'] = $this->pendingInstallation;
-        $output['pendingRemoval'] = $this->pendingRemoval;
-        $output['pendingWebhooks'] = $this->pendingWebhooks;
-        $output['webhooksHalted'] = $this->webhooksHalted;
+        $output['instantiationIsPending'] = $this->instantiationIsPending;
+        $output['pendingWebhooksCount'] = $this->pendingWebhooksCount;
+        $output['removalIsPending'] = $this->removalIsPending;
+        $output['webhooksAreHalted'] = $this->webhooksAreHalted;
 
         return $output;
     }
@@ -250,5 +289,6 @@ class ExtensionInstanceHealth
 
     public function __clone()
     {
+        $this->aggregateReference = clone $this->aggregateReference;
     }
 }

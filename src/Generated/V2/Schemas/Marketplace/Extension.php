@@ -36,17 +36,7 @@ class Extension
                 'type' => 'string',
             ],
             'deprecation' => [
-                'description' => 'The Extension is deprecated by the contributor and will expire at the given date.',
-                'properties' => [
-                    'deprecatedAt' => [
-                        'format' => 'date-time',
-                        'type' => 'string',
-                    ],
-                ],
-                'required' => [
-                    'deprecatedAt',
-                ],
-                'type' => 'object',
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation',
             ],
             'description' => [
                 'type' => 'string',
@@ -138,9 +128,6 @@ class Extension
 
     private string $contributorId;
 
-    /**
-     * The Extension is deprecated by the contributor and will expire at the given date.
-     */
     private ?ExtensionDeprecation $deprecation = null;
 
     private string $description;
@@ -230,6 +217,10 @@ class Extension
         return $this->contributorId;
     }
 
+    /**
+     * @return
+     * ExtensionDeprecation|null
+     */
     public function getDeprecation(): ?ExtensionDeprecation
     {
         return $this->deprecation ?? null;
@@ -649,7 +640,7 @@ class Extension
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
         if (isset($this->deprecation)) {
-            $output['deprecation'] = ($this->deprecation)->toJson();
+            $output['deprecation'] = $this->deprecation->toJson();
         }
         $output['description'] = $this->description;
         if (isset($this->detailedDescriptions)) {
@@ -702,8 +693,5 @@ class Extension
 
     public function __clone()
     {
-        if (isset($this->deprecation)) {
-            $this->deprecation = clone $this->deprecation;
-        }
     }
 }

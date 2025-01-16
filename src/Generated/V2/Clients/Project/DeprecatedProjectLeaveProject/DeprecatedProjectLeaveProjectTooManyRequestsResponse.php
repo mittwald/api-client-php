@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Project\LeaveProject;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Project\DeprecatedProjectLeaveProject;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class LeaveProjectTooManyRequestsResponse implements ResponseContainer
+class DeprecatedProjectLeaveProjectTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class LeaveProjectTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private LeaveProjectTooManyRequestsResponseBody $body;
+    private DeprecatedProjectLeaveProjectTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(LeaveProjectTooManyRequestsResponseBody $body)
+    public function __construct(DeprecatedProjectLeaveProjectTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): LeaveProjectTooManyRequestsResponseBody
+    public function getBody(): DeprecatedProjectLeaveProjectTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(LeaveProjectTooManyRequestsResponseBody $body): self
+    public function withBody(DeprecatedProjectLeaveProjectTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class LeaveProjectTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return LeaveProjectTooManyRequestsResponse Created instance
+     * @return DeprecatedProjectLeaveProjectTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): LeaveProjectTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedProjectLeaveProjectTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = LeaveProjectTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedProjectLeaveProjectTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
