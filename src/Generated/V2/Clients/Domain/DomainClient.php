@@ -272,7 +272,7 @@ interface DomainClient
     /**
      * Abort a Domain declaration.
      *
-     * Abort an incomplete Domain registration or transfer.
+     * Abort an incomplete Domain registration/transfer.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-abort-domain-declaration
      * @throws GuzzleException

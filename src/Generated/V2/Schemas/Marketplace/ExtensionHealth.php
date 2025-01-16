@@ -24,13 +24,7 @@ class ExtensionHealth
      */
     private static array $schema = [
         'properties' => [
-            'disfunctionalReason' => [
-                'type' => 'string',
-            ],
-            'extensionInstancesHealth' => [
-                'default' => [
-
-                ],
+            'extensionInstances' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionInstanceHealth',
                 ],
@@ -42,6 +36,10 @@ class ExtensionHealth
             ],
             'id' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'inoperableReason' => [
+                'example' => '9 of 10 webhooks in the last hour were unsuccessful.',
                 'type' => 'string',
             ],
             'published' => [
@@ -56,45 +54,42 @@ class ExtensionHealth
             'id',
             'functional',
             'published',
-            'extensionInstancesHealth',
+            'extensionInstances',
         ],
         'type' => 'object',
     ];
 
-    private ?string $disfunctionalReason = null;
-
     /**
      * @var ExtensionInstanceHealth[]
      */
-    private array $extensionInstancesHealth = [
-
-    ];
+    private array $extensionInstances;
 
     private bool $functional = false;
 
     private string $id;
 
+    private ?string $inoperableReason = null;
+
     private bool $published = false;
 
     private ?string $withdrawalReason = null;
 
-    public function __construct(string $id)
+    /**
+     * @param ExtensionInstanceHealth[] $extensionInstances
+     */
+    public function __construct(array $extensionInstances, string $id)
     {
+        $this->extensionInstances = $extensionInstances;
         $this->id = $id;
-    }
-
-    public function getDisfunctionalReason(): ?string
-    {
-        return $this->disfunctionalReason ?? null;
     }
 
     /**
      * @return
      * ExtensionInstanceHealth[]
      */
-    public function getExtensionInstancesHealth(): array
+    public function getExtensionInstances(): array
     {
-        return $this->extensionInstancesHealth;
+        return $this->extensionInstances;
     }
 
     public function getFunctional(): bool
@@ -107,6 +102,11 @@ class ExtensionHealth
         return $this->id;
     }
 
+    public function getInoperableReason(): ?string
+    {
+        return $this->inoperableReason ?? null;
+    }
+
     public function getPublished(): bool
     {
         return $this->published;
@@ -117,35 +117,13 @@ class ExtensionHealth
         return $this->withdrawalReason ?? null;
     }
 
-    public function withDisfunctionalReason(string $disfunctionalReason): self
-    {
-        $validator = new Validator();
-        $validator->validate($disfunctionalReason, static::$schema['properties']['disfunctionalReason']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->disfunctionalReason = $disfunctionalReason;
-
-        return $clone;
-    }
-
-    public function withoutDisfunctionalReason(): self
-    {
-        $clone = clone $this;
-        unset($clone->disfunctionalReason);
-
-        return $clone;
-    }
-
     /**
-     * @param ExtensionInstanceHealth[] $extensionInstancesHealth
+     * @param ExtensionInstanceHealth[] $extensionInstances
      */
-    public function withExtensionInstancesHealth(array $extensionInstancesHealth): self
+    public function withExtensionInstances(array $extensionInstances): self
     {
         $clone = clone $this;
-        $clone->extensionInstancesHealth = $extensionInstancesHealth;
+        $clone->extensionInstances = $extensionInstances;
 
         return $clone;
     }
@@ -174,6 +152,28 @@ class ExtensionHealth
 
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    public function withInoperableReason(string $inoperableReason): self
+    {
+        $validator = new Validator();
+        $validator->validate($inoperableReason, static::$schema['properties']['inoperableReason']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->inoperableReason = $inoperableReason;
+
+        return $clone;
+    }
+
+    public function withoutInoperableReason(): self
+    {
+        $clone = clone $this;
+        unset($clone->inoperableReason);
 
         return $clone;
     }
@@ -229,21 +229,16 @@ class ExtensionHealth
             static::validateInput($input);
         }
 
-        $disfunctionalReason = null;
-        if (isset($input->{'disfunctionalReason'})) {
-            $disfunctionalReason = $input->{'disfunctionalReason'};
-        }
-        $extensionInstancesHealth = [
-
-            ];
-        if (isset($input->{'extensionInstancesHealth'})) {
-            $extensionInstancesHealth = array_map(fn (array|object $i): ExtensionInstanceHealth => ExtensionInstanceHealth::buildFromInput($i, validate: $validate), $input->{'extensionInstancesHealth'});
-        }
+        $extensionInstances = array_map(fn (array|object $i): ExtensionInstanceHealth => ExtensionInstanceHealth::buildFromInput($i, validate: $validate), $input->{'extensionInstances'});
         $functional = false;
         if (isset($input->{'functional'})) {
             $functional = (bool)($input->{'functional'});
         }
         $id = $input->{'id'};
+        $inoperableReason = null;
+        if (isset($input->{'inoperableReason'})) {
+            $inoperableReason = $input->{'inoperableReason'};
+        }
         $published = false;
         if (isset($input->{'published'})) {
             $published = (bool)($input->{'published'});
@@ -253,10 +248,9 @@ class ExtensionHealth
             $withdrawalReason = $input->{'withdrawalReason'};
         }
 
-        $obj = new self($id);
-        $obj->disfunctionalReason = $disfunctionalReason;
-        $obj->extensionInstancesHealth = $extensionInstancesHealth;
+        $obj = new self($extensionInstances, $id);
         $obj->functional = $functional;
+        $obj->inoperableReason = $inoperableReason;
         $obj->published = $published;
         $obj->withdrawalReason = $withdrawalReason;
         return $obj;
@@ -270,12 +264,12 @@ class ExtensionHealth
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->disfunctionalReason)) {
-            $output['disfunctionalReason'] = $this->disfunctionalReason;
-        }
-        $output['extensionInstancesHealth'] = array_map(fn (ExtensionInstanceHealth $i): array => $i->toJson(), $this->extensionInstancesHealth);
+        $output['extensionInstances'] = array_map(fn (ExtensionInstanceHealth $i): array => $i->toJson(), $this->extensionInstances);
         $output['functional'] = $this->functional;
         $output['id'] = $this->id;
+        if (isset($this->inoperableReason)) {
+            $output['inoperableReason'] = $this->inoperableReason;
+        }
         $output['published'] = $this->published;
         if (isset($this->withdrawalReason)) {
             $output['withdrawalReason'] = $this->withdrawalReason;

@@ -37,6 +37,9 @@ class OwnExtension
             'contributorId' => [
                 'type' => 'string',
             ],
+            'deprecation' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation',
+            ],
             'description' => [
                 'type' => 'string',
             ],
@@ -110,6 +113,8 @@ class OwnExtension
 
     private string $contributorId;
 
+    private ?ExtensionDeprecation $deprecation = null;
+
     private ?string $description = null;
 
     private ?DetailedDescriptions $detailedDescriptions = null;
@@ -179,6 +184,15 @@ class OwnExtension
     public function getContributorId(): string
     {
         return $this->contributorId;
+    }
+
+    /**
+     * @return
+     * ExtensionDeprecation|null
+     */
+    public function getDeprecation(): ?ExtensionDeprecation
+    {
+        return $this->deprecation ?? null;
     }
 
     public function getDescription(): ?string
@@ -320,6 +334,22 @@ class OwnExtension
 
         $clone = clone $this;
         $clone->contributorId = $contributorId;
+
+        return $clone;
+    }
+
+    public function withDeprecation(ExtensionDeprecation $deprecation): self
+    {
+        $clone = clone $this;
+        $clone->deprecation = $deprecation;
+
+        return $clone;
+    }
+
+    public function withoutDeprecation(): self
+    {
+        $clone = clone $this;
+        unset($clone->deprecation);
 
         return $clone;
     }
@@ -566,6 +596,10 @@ class OwnExtension
             $context = Context::from($input->{'context'});
         }
         $contributorId = $input->{'contributorId'};
+        $deprecation = null;
+        if (isset($input->{'deprecation'})) {
+            $deprecation = ExtensionDeprecation::buildFromInput($input->{'deprecation'}, validate: $validate);
+        }
         $description = null;
         if (isset($input->{'description'})) {
             $description = $input->{'description'};
@@ -609,6 +643,7 @@ class OwnExtension
         $obj->backendComponents = $backendComponents;
         $obj->blocked = $blocked;
         $obj->context = $context;
+        $obj->deprecation = $deprecation;
         $obj->description = $description;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->disabled = $disabled;
@@ -639,6 +674,9 @@ class OwnExtension
             $output['context'] = $this->context->value;
         }
         $output['contributorId'] = $this->contributorId;
+        if (isset($this->deprecation)) {
+            $output['deprecation'] = $this->deprecation->toJson();
+        }
         if (isset($this->description)) {
             $output['description'] = $this->description;
         }
