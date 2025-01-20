@@ -8,26 +8,35 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareNameservers\DeprecatedDomainDeclareNameserversRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetHandleFields\DeprecatedDomainGetHandleFieldsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetHandleFields\DeprecatedDomainGetHandleFieldsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
@@ -48,8 +57,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSet
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressCreateIngress\IngressCreateIngressCreatedResponse;
@@ -63,19 +70,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressL
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTlds\ListTldsOKResponse;
@@ -122,6 +122,97 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateD
 interface DomainClient
 {
     /**
+     * Change the owner contact of a domain.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/contacts/{contact} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-change-ownerc-of-domain
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainChangeOwnercOfDomainRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainChangeOwnercOfDomainOKResponse OK
+     */
+    public function deprecatedDomainChangeOwnercOfDomain(DeprecatedDomainChangeOwnercOfDomainRequest $request): DeprecatedDomainChangeOwnercOfDomainOKResponse;
+    /**
+     * Change the Project relation of a Domain.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/project-id endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-change-project-of-domain
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainChangeProjectOfDomainRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedDomainChangeProjectOfDomain(DeprecatedDomainChangeProjectOfDomainRequest $request): EmptyResponse;
+    /**
+     * Check if a Domain is available to register.
+     *
+     * This operation is deprecated. Use the POST /v2/domain-registrable endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-check-domain-registrability
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainCheckDomainRegistrabilityRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainCheckDomainRegistrabilityOKResponse OK
+     */
+    public function deprecatedDomainCheckDomainRegistrability(DeprecatedDomainCheckDomainRegistrabilityRequest $request): DeprecatedDomainCheckDomainRegistrabilityOKResponse;
+    /**
+     * Change all nameservers of a Domain.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/nameservers endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-declare-nameservers
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainDeclareNameserversRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedDomainDeclareNameservers(DeprecatedDomainDeclareNameserversRequest $request): EmptyResponse;
+    /**
+     * Update an AuthCode.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/auth-code endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-declare-process-change-authcode
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainDeclareProcessChangeAuthcodeRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse OK
+     */
+    public function deprecatedDomainDeclareProcessChangeAuthcode(DeprecatedDomainDeclareProcessChangeAuthcodeRequest $request): DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse;
+    /**
+     * Update a Domain's OwnerC handle.
+     *
+     * This operation is deprecated and does not have an alternative.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-declare-process-change-handles
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainDeclareProcessChangeHandlesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainDeclareProcessChangeHandlesOKResponse OK
+     */
+    public function deprecatedDomainDeclareProcessChangeHandles(DeprecatedDomainDeclareProcessChangeHandlesRequest $request): DeprecatedDomainDeclareProcessChangeHandlesOKResponse;
+    /**
+     * Get a HandleSchema.
+     *
+     * This operation is deprecated. Use the GET /v2/domain-tlds/{tld}/contact-schemas endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-handle-fields
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainGetHandleFieldsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainGetHandleFieldsOKResponse The parseable json schema objects
+     */
+    public function deprecatedDomainGetHandleFields(DeprecatedDomainGetHandleFieldsRequest $request): DeprecatedDomainGetHandleFieldsOKResponse;
+    /**
      * Get File Service Reference for a Screenshot of a domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
@@ -132,6 +223,58 @@ interface DomainClient
      * @return DeprecatedDomainGetScreenshotForDomainOKResponse The References.
      */
     public function deprecatedDomainGetScreenshotForDomain(DeprecatedDomainGetScreenshotForDomainRequest $request): DeprecatedDomainGetScreenshotForDomainOKResponse;
+    /**
+     * List Domains belonging to a Project.
+     *
+     * This operation is deprecated. Use the GET /v2/domains endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-list-domains
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainListDomainsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainListDomainsOKResponse OK
+     */
+    public function deprecatedDomainListDomains(DeprecatedDomainListDomainsRequest $request): DeprecatedDomainListDomainsOKResponse;
+    /**
+     * List Ingresses belonging to a project.
+     *
+     * This operation is deprecated. Use the GET /v2/ingresses endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-list-ingresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressListIngressesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressListIngressesOKResponse OK
+     */
+    public function deprecatedIngressListIngresses(DeprecatedIngressListIngressesRequest $request): DeprecatedIngressListIngressesOKResponse;
+    /**
+     * Update an Ingresses paths.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/paths endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-paths
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressPathsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedIngressPaths(DeprecatedIngressPathsRequest $request): EmptyResponse;
+    /**
+     * Update an Ingresses tls settings.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/tls endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-tls
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressTlsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressTlsOKResponse OK
+     */
+    public function deprecatedIngressTls(DeprecatedIngressTlsRequest $request): DeprecatedIngressTlsOKResponse;
     /**
      * Create a DNSZone.
      *
@@ -282,30 +425,6 @@ interface DomainClient
      */
     public function abortDomainDeclaration(AbortDomainDeclarationRequest $request): EmptyResponse;
     /**
-     * Change the owner contact of a domain.
-     *
-     * Change the domain owner of a fully registered domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-ownerc-of-domain-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ChangeOwnercOfDomainV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return ChangeOwnercOfDomainV2DeprecatedOKResponse OK
-     */
-    public function changeOwnercOfDomainV2Deprecated(ChangeOwnercOfDomainV2DeprecatedRequest $request): ChangeOwnercOfDomainV2DeprecatedOKResponse;
-    /**
-     * Change the Project relation of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-project-of-domain-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ChangeProjectOfDomainV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function changeProjectOfDomainV2Deprecated(ChangeProjectOfDomainV2DeprecatedRequest $request): EmptyResponse;
-    /**
      * Check if a Domain is available to register.
      *
      * If false, you have to start a transfer with an auth code instead.
@@ -317,19 +436,6 @@ interface DomainClient
      * @return CheckDomainRegistrabilityOKResponse OK
      */
     public function checkDomainRegistrability(CheckDomainRegistrabilityRequest $request): CheckDomainRegistrabilityOKResponse;
-    /**
-     * Check if a Domain is available to register.
-     *
-     * If false, you have to start a transfer with an auth code instead.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return CheckDomainRegistrabilityV2DeprecatedOKResponse OK
-     */
-    public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2DeprecatedOKResponse;
     /**
      * Check if a Domain is available to transfer.
      *
@@ -353,43 +459,6 @@ interface DomainClient
      */
     public function createDomainAuthCode(CreateDomainAuthCodeRequest $request): CreateDomainAuthCodeCreatedResponse;
     /**
-     * Change all nameservers of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeclareNameserversV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function declareNameserversV2Deprecated(DeclareNameserversV2DeprecatedRequest $request): EmptyResponse;
-    /**
-     * Update an AuthCode.
-     *
-     * Change a wrong AuthCode of your transfer domain request (declare domain process). This route will also restart the transfer itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-authcode-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeclareProcessChangeAuthcodeV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DeclareProcessChangeAuthcodeV2DeprecatedOKResponse OK
-     */
-    public function declareProcessChangeAuthcodeV2Deprecated(DeclareProcessChangeAuthcodeV2DeprecatedRequest $request): DeclareProcessChangeAuthcodeV2DeprecatedOKResponse;
-    /**
-     * Update a Domain's OwnerC handle.
-     *
-     * This route will also restart the transfer or register itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-handles-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeclareProcessChangeHandlesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DeclareProcessChangeHandlesV2DeprecatedOKResponse OK
-     */
-    public function declareProcessChangeHandlesV2Deprecated(DeclareProcessChangeHandlesV2DeprecatedRequest $request): DeclareProcessChangeHandlesV2DeprecatedOKResponse;
-    /**
      * Delete a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-delete-domain
@@ -410,19 +479,6 @@ interface DomainClient
      */
     public function getDomain(GetDomainRequest $request): GetDomainOKResponse;
     /**
-     * Get a HandleSchema.
-     *
-     * Get required handle fields of a registrar for your domain process (transfer/registration).
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return GetHandleFieldsV2DeprecatedOKResponse The parseable json schema objects
-     */
-    public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2DeprecatedOKResponse;
-    /**
      * Get the latest screenshot's FileReference belonging to a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-latest-screenshot
@@ -442,17 +498,6 @@ interface DomainClient
      * @return ListDomainsOKResponse OK
      */
     public function listDomains(ListDomainsRequest $request): ListDomainsOKResponse;
-    /**
-     * List Domains belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDomainsV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return ListDomainsV2DeprecatedOKResponse OK
-     */
-    public function listDomainsV2Deprecated(ListDomainsV2DeprecatedRequest $request): ListDomainsV2DeprecatedOKResponse;
     /**
      * List the contact schemas for a TLD.
      *
@@ -603,28 +648,6 @@ interface DomainClient
      */
     public function ingressListIngressesCompatibleWithCertificate(IngressListIngressesCompatibleWithCertificateRequest $request): IngressListIngressesCompatibleWithCertificateOKResponse;
     /**
-     * List Ingresses belonging to a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressListIngressesV2DeprecatedOKResponse OK
-     */
-    public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2DeprecatedOKResponse;
-    /**
-     * Update an Ingresses paths.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressPathsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse;
-    /**
      * Request the ACME certificate issuance of an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
@@ -634,17 +657,6 @@ interface DomainClient
      * @return EmptyResponse No Content
      */
     public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse;
-    /**
-     * Update an Ingresses tls settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressTlsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressTlsDeprecatedOKResponse OK
-     */
-    public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse;
     /**
      * Update the paths of an Ingress.
      *

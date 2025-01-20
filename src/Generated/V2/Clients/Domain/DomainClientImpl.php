@@ -14,27 +14,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortD
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeOwnercOfDomainV2Deprecated\ChangeOwnercOfDomainV2DeprecatedTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ChangeProjectOfDomainV2Deprecated\ChangeProjectOfDomainV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrabilityV2Deprecated\CheckDomainRegistrabilityV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainTransferability\CheckDomainTransferabilityOKResponse;
@@ -46,23 +30,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDo
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareNameserversV2Deprecated\DeclareNameserversV2DeprecatedTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeAuthcodeV2Deprecated\DeclareProcessChangeAuthcodeV2DeprecatedTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeclareProcessChangeHandlesV2Deprecated\DeclareProcessChangeHandlesV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainNotFoundResponse;
@@ -70,11 +37,67 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainOKRe
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainCheckDomainRegistrability\DeprecatedDomainCheckDomainRegistrabilityTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareNameservers\DeprecatedDomainDeclareNameserversBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareNameservers\DeprecatedDomainDeclareNameserversDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareNameservers\DeprecatedDomainDeclareNameserversNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareNameservers\DeprecatedDomainDeclareNameserversRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareNameservers\DeprecatedDomainDeclareNameserversTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeAuthcode\DeprecatedDomainDeclareProcessChangeAuthcodeTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainDeclareProcessChangeHandles\DeprecatedDomainDeclareProcessChangeHandlesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetHandleFields\DeprecatedDomainGetHandleFieldsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetHandleFields\DeprecatedDomainGetHandleFieldsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetHandleFields\DeprecatedDomainGetHandleFieldsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetHandleFields\DeprecatedDomainGetHandleFieldsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneDefaultResponse;
@@ -138,10 +161,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainNotFoundRe
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetHandleFieldsV2Deprecated\GetHandleFieldsV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetLatestScreenshot\GetLatestScreenshotOKResponse;
@@ -179,25 +198,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibl
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
@@ -214,11 +219,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomains\ListDomainsTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListDomainsV2Deprecated\ListDomainsV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\ListTldContactSchemas\ListTldContactSchemasRequest;
@@ -335,6 +335,192 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
+     * Change the owner contact of a domain.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/contacts/{contact} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-change-ownerc-of-domain
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainChangeOwnercOfDomainRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainChangeOwnercOfDomainOKResponse OK
+     */
+    public function deprecatedDomainChangeOwnercOfDomain(DeprecatedDomainChangeOwnercOfDomainRequest $request): DeprecatedDomainChangeOwnercOfDomainOKResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainChangeOwnercOfDomainRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedDomainChangeOwnercOfDomainOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainChangeOwnercOfDomainBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDomainChangeOwnercOfDomainNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainChangeOwnercOfDomainTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainChangeOwnercOfDomainDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Change the Project relation of a Domain.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/project-id endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-change-project-of-domain
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainChangeProjectOfDomainRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedDomainChangeProjectOfDomain(DeprecatedDomainChangeProjectOfDomainRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainChangeProjectOfDomainRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainChangeProjectOfDomainBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDomainChangeProjectOfDomainNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainChangeProjectOfDomainTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainChangeProjectOfDomainDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Check if a Domain is available to register.
+     *
+     * This operation is deprecated. Use the POST /v2/domain-registrable endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-check-domain-registrability
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainCheckDomainRegistrabilityRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainCheckDomainRegistrabilityOKResponse OK
+     */
+    public function deprecatedDomainCheckDomainRegistrability(DeprecatedDomainCheckDomainRegistrabilityRequest $request): DeprecatedDomainCheckDomainRegistrabilityOKResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainCheckDomainRegistrabilityRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedDomainCheckDomainRegistrabilityOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainCheckDomainRegistrabilityBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainCheckDomainRegistrabilityTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainCheckDomainRegistrabilityDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Change all nameservers of a Domain.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/nameservers endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-declare-nameservers
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainDeclareNameserversRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedDomainDeclareNameservers(DeprecatedDomainDeclareNameserversRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainDeclareNameserversRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainDeclareNameserversBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDomainDeclareNameserversNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainDeclareNameserversTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainDeclareNameserversDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an AuthCode.
+     *
+     * This operation is deprecated. Use the PATCH /v2/domains/{domainId}/auth-code endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-declare-process-change-authcode
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainDeclareProcessChangeAuthcodeRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse OK
+     */
+    public function deprecatedDomainDeclareProcessChangeAuthcode(DeprecatedDomainDeclareProcessChangeAuthcodeRequest $request): DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainDeclareProcessChangeAuthcodeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedDomainDeclareProcessChangeAuthcodeOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainDeclareProcessChangeAuthcodeBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDomainDeclareProcessChangeAuthcodeNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainDeclareProcessChangeAuthcodeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainDeclareProcessChangeAuthcodeDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update a Domain's OwnerC handle.
+     *
+     * This operation is deprecated and does not have an alternative.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-declare-process-change-handles
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainDeclareProcessChangeHandlesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainDeclareProcessChangeHandlesOKResponse OK
+     */
+    public function deprecatedDomainDeclareProcessChangeHandles(DeprecatedDomainDeclareProcessChangeHandlesRequest $request): DeprecatedDomainDeclareProcessChangeHandlesOKResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainDeclareProcessChangeHandlesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedDomainDeclareProcessChangeHandlesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainDeclareProcessChangeHandlesBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedDomainDeclareProcessChangeHandlesNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainDeclareProcessChangeHandlesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainDeclareProcessChangeHandlesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a HandleSchema.
+     *
+     * This operation is deprecated. Use the GET /v2/domain-tlds/{tld}/contact-schemas endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-handle-fields
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainGetHandleFieldsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainGetHandleFieldsOKResponse The parseable json schema objects
+     */
+    public function deprecatedDomainGetHandleFields(DeprecatedDomainGetHandleFieldsRequest $request): DeprecatedDomainGetHandleFieldsOKResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainGetHandleFieldsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedDomainGetHandleFieldsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedDomainGetHandleFieldsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainGetHandleFieldsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get File Service Reference for a Screenshot of a domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
@@ -355,6 +541,110 @@ class DomainClientImpl implements DomainClient
             404 => DeprecatedDomainGetScreenshotForDomainNotFoundResponse::fromResponse($httpResponse),
             429 => DeprecatedDomainGetScreenshotForDomainTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedDomainGetScreenshotForDomainDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Domains belonging to a Project.
+     *
+     * This operation is deprecated. Use the GET /v2/domains endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-list-domains
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDomainListDomainsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDomainListDomainsOKResponse OK
+     */
+    public function deprecatedDomainListDomains(DeprecatedDomainListDomainsRequest $request): DeprecatedDomainListDomainsOKResponse
+    {
+        $httpRequest = new Request(DeprecatedDomainListDomainsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedDomainListDomainsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedDomainListDomainsBadRequestResponse::fromResponse($httpResponse),
+            429 => DeprecatedDomainListDomainsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedDomainListDomainsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Ingresses belonging to a project.
+     *
+     * This operation is deprecated. Use the GET /v2/ingresses endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-list-ingresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressListIngressesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressListIngressesOKResponse OK
+     */
+    public function deprecatedIngressListIngresses(DeprecatedIngressListIngressesRequest $request): DeprecatedIngressListIngressesOKResponse
+    {
+        $httpRequest = new Request(DeprecatedIngressListIngressesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedIngressListIngressesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DeprecatedIngressListIngressesNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedIngressListIngressesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedIngressListIngressesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an Ingresses paths.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/paths endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-paths
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressPathsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedIngressPaths(DeprecatedIngressPathsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedIngressPathsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DeprecatedIngressPathsNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedIngressPathsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedIngressPathsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an Ingresses tls settings.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/tls endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-tls
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressTlsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressTlsOKResponse OK
+     */
+    public function deprecatedIngressTls(DeprecatedIngressTlsRequest $request): DeprecatedIngressTlsOKResponse
+    {
+        $httpRequest = new Request(DeprecatedIngressTlsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedIngressTlsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DeprecatedIngressTlsNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedIngressTlsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedIngressTlsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -691,58 +981,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * Change the owner contact of a domain.
-     *
-     * Change the domain owner of a fully registered domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-ownerc-of-domain-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ChangeOwnercOfDomainV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return ChangeOwnercOfDomainV2DeprecatedOKResponse OK
-     */
-    public function changeOwnercOfDomainV2Deprecated(ChangeOwnercOfDomainV2DeprecatedRequest $request): ChangeOwnercOfDomainV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(ChangeOwnercOfDomainV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ChangeOwnercOfDomainV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ChangeOwnercOfDomainV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            404 => ChangeOwnercOfDomainV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => ChangeOwnercOfDomainV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ChangeOwnercOfDomainV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Change the Project relation of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-change-project-of-domain-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ChangeProjectOfDomainV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function changeProjectOfDomainV2Deprecated(ChangeProjectOfDomainV2DeprecatedRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(ChangeProjectOfDomainV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ChangeProjectOfDomainV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            404 => ChangeProjectOfDomainV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => ChangeProjectOfDomainV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ChangeProjectOfDomainV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Check if a Domain is available to register.
      *
      * If false, you have to start a transfer with an auth code instead.
@@ -764,32 +1002,6 @@ class DomainClientImpl implements DomainClient
             400 => CheckDomainRegistrabilityBadRequestResponse::fromResponse($httpResponse),
             429 => CheckDomainRegistrabilityTooManyRequestsResponse::fromResponse($httpResponse),
             default => CheckDomainRegistrabilityDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Check if a Domain is available to register.
-     *
-     * If false, you have to start a transfer with an auth code instead.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-check-domain-registrability-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param CheckDomainRegistrabilityV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return CheckDomainRegistrabilityV2DeprecatedOKResponse OK
-     */
-    public function checkDomainRegistrabilityV2Deprecated(CheckDomainRegistrabilityV2DeprecatedRequest $request): CheckDomainRegistrabilityV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(CheckDomainRegistrabilityV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return CheckDomainRegistrabilityV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => CheckDomainRegistrabilityV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            429 => CheckDomainRegistrabilityV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => CheckDomainRegistrabilityV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -843,85 +1055,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * Change all nameservers of a Domain.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-nameservers-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeclareNameserversV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function declareNameserversV2Deprecated(DeclareNameserversV2DeprecatedRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(DeclareNameserversV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => DeclareNameserversV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            404 => DeclareNameserversV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => DeclareNameserversV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => DeclareNameserversV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update an AuthCode.
-     *
-     * Change a wrong AuthCode of your transfer domain request (declare domain process). This route will also restart the transfer itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-authcode-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeclareProcessChangeAuthcodeV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DeclareProcessChangeAuthcodeV2DeprecatedOKResponse OK
-     */
-    public function declareProcessChangeAuthcodeV2Deprecated(DeclareProcessChangeAuthcodeV2DeprecatedRequest $request): DeclareProcessChangeAuthcodeV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(DeclareProcessChangeAuthcodeV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return DeclareProcessChangeAuthcodeV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => DeclareProcessChangeAuthcodeV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            404 => DeclareProcessChangeAuthcodeV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => DeclareProcessChangeAuthcodeV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => DeclareProcessChangeAuthcodeV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update a Domain's OwnerC handle.
-     *
-     * This route will also restart the transfer or register itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-declare-process-change-handles-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeclareProcessChangeHandlesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DeclareProcessChangeHandlesV2DeprecatedOKResponse OK
-     */
-    public function declareProcessChangeHandlesV2Deprecated(DeclareProcessChangeHandlesV2DeprecatedRequest $request): DeclareProcessChangeHandlesV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(DeclareProcessChangeHandlesV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return DeclareProcessChangeHandlesV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => DeclareProcessChangeHandlesV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            404 => DeclareProcessChangeHandlesV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => DeclareProcessChangeHandlesV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => DeclareProcessChangeHandlesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Delete a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-delete-domain
@@ -971,31 +1104,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * Get a HandleSchema.
-     *
-     * Get required handle fields of a registrar for your domain process (transfer/registration).
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-handle-fields-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetHandleFieldsV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return GetHandleFieldsV2DeprecatedOKResponse The parseable json schema objects
-     */
-    public function getHandleFieldsV2Deprecated(GetHandleFieldsV2DeprecatedRequest $request): GetHandleFieldsV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(GetHandleFieldsV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetHandleFieldsV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => GetHandleFieldsV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetHandleFieldsV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get the latest screenshot's FileReference belonging to a Domain.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-get-latest-screenshot
@@ -1038,30 +1146,6 @@ class DomainClientImpl implements DomainClient
             400 => ListDomainsBadRequestResponse::fromResponse($httpResponse),
             429 => ListDomainsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ListDomainsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List Domains belonging to a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/domain-list-domains-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ListDomainsV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return ListDomainsV2DeprecatedOKResponse OK
-     */
-    public function listDomainsV2Deprecated(ListDomainsV2DeprecatedRequest $request): ListDomainsV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(ListDomainsV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ListDomainsV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ListDomainsV2DeprecatedBadRequestResponse::fromResponse($httpResponse),
-            429 => ListDomainsV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ListDomainsV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1405,54 +1489,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * List Ingresses belonging to a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressListIngressesV2DeprecatedOKResponse OK
-     */
-    public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(IngressListIngressesV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return IngressListIngressesV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressListIngressesV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => IngressListIngressesV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => IngressListIngressesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update an Ingresses paths.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressPathsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(IngressPathsDeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressPathsDeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => IngressPathsDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => IngressPathsDeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Request the ACME certificate issuance of an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
@@ -1473,30 +1509,6 @@ class DomainClientImpl implements DomainClient
             404 => IngressRequestIngressAcmeCertificateIssuanceNotFoundResponse::fromResponse($httpResponse),
             429 => IngressRequestIngressAcmeCertificateIssuanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => IngressRequestIngressAcmeCertificateIssuanceDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update an Ingresses tls settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressTlsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressTlsDeprecatedOKResponse OK
-     */
-    public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse
-    {
-        $httpRequest = new Request(IngressTlsDeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return IngressTlsDeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressTlsDeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => IngressTlsDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => IngressTlsDeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 
