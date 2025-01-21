@@ -55,37 +55,21 @@ class BackendComponents
     {
     }
 
-    /**
-     * @return
-     * BackendComponent|null
-     */
     public function getExtensionAddedToContext(): ?BackendComponent
     {
         return $this->extensionAddedToContext ?? null;
     }
 
-    /**
-     * @return
-     * BackendComponent|null
-     */
     public function getExtensionInstanceRemovedFromContext(): ?BackendComponent
     {
         return $this->extensionInstanceRemovedFromContext ?? null;
     }
 
-    /**
-     * @return
-     * BackendComponent|null
-     */
     public function getExtensionInstanceSecretRotated(): ?BackendComponent
     {
         return $this->extensionInstanceSecretRotated ?? null;
     }
 
-    /**
-     * @return
-     * BackendComponent|null
-     */
     public function getExtensionInstanceUpdated(): ?BackendComponent
     {
         return $this->extensionInstanceUpdated ?? null;

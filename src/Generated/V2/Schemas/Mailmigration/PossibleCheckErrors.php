@@ -121,8 +121,7 @@ class PossibleCheckErrors
     }
 
     /**
-     * @return
-     * CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[]
+     * @return CheckMigrationIsPossibleErrorAlreadyExistingMailAddress[]
      */
     public function getAlreadyExistingMailAddress(): array
     {
@@ -130,8 +129,7 @@ class PossibleCheckErrors
     }
 
     /**
-     * @return
-     * CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[]
+     * @return CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery[]
      */
     public function getAmbiguousMailAddressDelivery(): array
     {
@@ -139,8 +137,7 @@ class PossibleCheckErrors
     }
 
     /**
-     * @return
-     * CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[]
+     * @return CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery[]
      */
     public function getAmbiguousMailboxDelivery(): array
     {
@@ -148,8 +145,7 @@ class PossibleCheckErrors
     }
 
     /**
-     * @return
-     * CheckMigrationIsPossibleErrorCatchAllMissingAddress[]
+     * @return CheckMigrationIsPossibleErrorCatchAllMissingAddress[]
      */
     public function getCatchAllMissingAddress(): array
     {
@@ -157,8 +153,7 @@ class PossibleCheckErrors
     }
 
     /**
-     * @return
-     * CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[]
+     * @return CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias[]
      */
     public function getCatchAllTargetWithoutAlias(): array
     {
@@ -166,8 +161,7 @@ class PossibleCheckErrors
     }
 
     /**
-     * @return
-     * CheckMigrationIsPossibleErrorMissingVerifiedIngress[]
+     * @return CheckMigrationIsPossibleErrorMissingVerifiedIngress[]
      */
     public function getMissingVerifiedIngress(): array
     {

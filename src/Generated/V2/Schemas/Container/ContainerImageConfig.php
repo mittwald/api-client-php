@@ -169,8 +169,7 @@ class ContainerImageConfig
     }
 
     /**
-     * @return
-     * ContainerImageConfigEnv[]|null
+     * @return ContainerImageConfigEnv[]|null
      */
     public function getEnv(): ?array
     {
@@ -178,8 +177,7 @@ class ContainerImageConfig
     }
 
     /**
-     * @return
-     * ContainerImageConfigExposedPort[]|null
+     * @return ContainerImageConfigExposedPort[]|null
      */
     public function getExposedPorts(): ?array
     {
@@ -207,8 +205,7 @@ class ContainerImageConfig
     }
 
     /**
-     * @return
-     * ContainerImageConfigVolume[]|null
+     * @return ContainerImageConfigVolume[]|null
      */
     public function getVolumes(): ?array
     {

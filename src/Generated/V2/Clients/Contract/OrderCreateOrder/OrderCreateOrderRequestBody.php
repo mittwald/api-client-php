@@ -59,10 +59,6 @@ class OrderCreateOrderRequestBody
     {
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrder|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrder|null
-     */
     public function getOrderData(): DomainOrder|ExternalCertificateOrder|ProjectHostingOrder|ServerOrder|null
     {
         return $this->orderData;

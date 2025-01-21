@@ -66,8 +66,7 @@ class MigrationMailAddressPreMigrationJob
     }
 
     /**
-     * @return
-     * MigrationMailAddressPreMigrationJobAliasSet[]
+     * @return MigrationMailAddressPreMigrationJobAliasSet[]
      */
     public function getAliasSet(): array
     {
@@ -75,8 +74,7 @@ class MigrationMailAddressPreMigrationJob
     }
 
     /**
-     * @return
-     * MigrationMailAddressPreMigrationJobDeliveryMigration[]
+     * @return MigrationMailAddressPreMigrationJobDeliveryMigration[]
      */
     public function getDeliveryMigrations(): array
     {

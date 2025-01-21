@@ -48,10 +48,6 @@ class OrderCreateTariffChangeRequestBody
     {
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingTariffChange|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerTariffChange|null
-     */
     public function getTariffChangeData(): ProjectHostingTariffChange|ServerTariffChange|null
     {
         return $this->tariffChangeData;

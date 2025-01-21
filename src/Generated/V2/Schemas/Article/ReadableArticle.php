@@ -214,8 +214,7 @@ class ReadableArticle
     }
 
     /**
-     * @return
-     * ArticleAttributes[]|null
+     * @return ArticleAttributes[]|null
      */
     public function getAttributes(): ?array
     {
@@ -258,8 +257,7 @@ class ReadableArticle
     }
 
     /**
-     * @return
-     * ReadableModifierArticleOptions[]|null
+     * @return ReadableModifierArticleOptions[]|null
      */
     public function getModifierArticles(): ?array
     {
@@ -277,8 +275,7 @@ class ReadableArticle
     }
 
     /**
-     * @return
-     * ReadableChangeArticleOptions[]|null
+     * @return ReadableChangeArticleOptions[]|null
      */
     public function getPossibleArticleChanges(): ?array
     {

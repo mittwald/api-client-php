@@ -67,10 +67,6 @@ class UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection
         return $this->autoDeleteSpam;
     }
 
-    /**
-     * @return
-     * UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder
-     */
     public function getFolder(): UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtectionFolder
     {
         return $this->folder;

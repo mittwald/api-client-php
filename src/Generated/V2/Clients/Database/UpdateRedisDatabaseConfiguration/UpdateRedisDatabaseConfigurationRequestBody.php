@@ -30,10 +30,6 @@ class UpdateRedisDatabaseConfigurationRequestBody
     {
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Database\RedisDatabaseConfiguration|null
-     */
     public function getConfiguration(): ?RedisDatabaseConfiguration
     {
         return $this->configuration ?? null;

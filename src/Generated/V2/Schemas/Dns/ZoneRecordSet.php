@@ -84,55 +84,31 @@ class ZoneRecordSet
         $this->txt = $txt;
     }
 
-    /**
-     * @return
-     * RecordUnset|RecordCAAComponent
-     */
     public function getCaa(): RecordCAAComponent|RecordUnset
     {
         return $this->caa;
     }
 
-    /**
-     * @return
-     * RecordUnset|RecordCNAMEComponent
-     */
     public function getCname(): RecordCNAMEComponent|RecordUnset
     {
         return $this->cname;
     }
 
-    /**
-     * @return
-     * RecordUnset|CombinedACustom|CombinedAManaged
-     */
     public function getCombinedARecords(): CombinedACustom|CombinedAManaged|RecordUnset
     {
         return $this->combinedARecords;
     }
 
-    /**
-     * @return
-     * RecordUnset|RecordMXManaged|RecordMXCustom
-     */
     public function getMx(): RecordMXCustom|RecordMXManaged|RecordUnset
     {
         return $this->mx;
     }
 
-    /**
-     * @return
-     * RecordUnset|RecordSRVComponent
-     */
     public function getSrv(): RecordSRVComponent|RecordUnset
     {
         return $this->srv;
     }
 
-    /**
-     * @return
-     * RecordUnset|RecordTXTComponent
-     */
     public function getTxt(): RecordTXTComponent|RecordUnset
     {
         return $this->txt;

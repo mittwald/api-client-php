@@ -55,10 +55,6 @@ class CreateRegistry
         $this->uri = $uri;
     }
 
-    /**
-     * @return
-     * SetRegistryCredentials|null
-     */
     public function getCredentials(): ?SetRegistryCredentials
     {
         return $this->credentials ?? null;

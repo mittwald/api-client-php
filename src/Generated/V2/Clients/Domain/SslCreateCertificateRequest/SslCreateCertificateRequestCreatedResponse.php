@@ -36,10 +36,6 @@ class SslCreateCertificateRequestCreatedResponse implements ResponseContainer
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateResponse
-     */
     public function getBody(): CertificateRequestCreateResponse
     {
         return $this->body;

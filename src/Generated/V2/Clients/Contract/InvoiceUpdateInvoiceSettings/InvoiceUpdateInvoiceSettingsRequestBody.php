@@ -97,10 +97,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $this->invoicePeriod;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Invoice\PaymentSettingsDebit|\Mittwald\ApiClient\Generated\V2\Schemas\Invoice\PaymentSettingsInvoice
-     */
     public function getPaymentSettings(): PaymentSettingsDebit|PaymentSettingsInvoice
     {
         return $this->paymentSettings;

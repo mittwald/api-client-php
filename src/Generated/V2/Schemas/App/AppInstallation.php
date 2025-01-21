@@ -247,8 +247,7 @@ class AppInstallation
     }
 
     /**
-     * @return
-     * InstalledSystemSoftware[]|null
+     * @return InstalledSystemSoftware[]|null
      */
     public function getSystemSoftware(): ?array
     {

@@ -85,19 +85,11 @@ class MigrationMailAddress
         return $this->id;
     }
 
-    /**
-     * @return
-     * MigrationMailAddressMigrationJob
-     */
     public function getMigrationJobs(): MigrationMailAddressMigrationJob
     {
         return $this->migrationJobs;
     }
 
-    /**
-     * @return
-     * MigrationMailAddressPreMigrationJob
-     */
     public function getPreMigrationJobs(): MigrationMailAddressPreMigrationJob
     {
         return $this->preMigrationJobs;

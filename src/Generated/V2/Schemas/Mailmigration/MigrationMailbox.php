@@ -83,10 +83,6 @@ class MigrationMailbox
         return $this->id;
     }
 
-    /**
-     * @return
-     * MigrationMailboxJob
-     */
     public function getMigrationJobs(): MigrationMailboxJob
     {
         return $this->migrationJobs;

@@ -61,10 +61,6 @@ class CreateMailAddressRequest
         return $this->projectId;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateForwardAddress|\Mittwald\ApiClient\Generated\V2\Schemas\Mail\CreateMailAddress
-     */
     public function getBody(): CreateForwardAddress|CreateMailAddress
     {
         return $this->body;

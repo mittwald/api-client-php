@@ -60,10 +60,6 @@ class Mailbox
         $this->quotaInBytes = $quotaInBytes;
     }
 
-    /**
-     * @return
-     * MailSystemSettings
-     */
     public function getMailsystem(): MailSystemSettings
     {
         return $this->mailsystem;
@@ -79,10 +75,6 @@ class Mailbox
         return $this->quotaInBytes;
     }
 
-    /**
-     * @return
-     * SpamProtection|null
-     */
     public function getSpamProtection(): ?SpamProtection
     {
         return $this->spamProtection ?? null;

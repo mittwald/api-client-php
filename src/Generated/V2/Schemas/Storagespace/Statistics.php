@@ -139,8 +139,7 @@ class Statistics
     }
 
     /**
-     * @return
-     * StatisticsCategory[]|null
+     * @return StatisticsCategory[]|null
      */
     public function getStatisticCategories(): ?array
     {

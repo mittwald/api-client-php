@@ -118,10 +118,6 @@ class ProjectHostingOrder
         return $this->recommendationCode ?? null;
     }
 
-    /**
-     * @return
-     * MachineTypeSpec|HardwareSpec
-     */
     public function getSpec(): HardwareSpec|MachineTypeSpec
     {
         return $this->spec;

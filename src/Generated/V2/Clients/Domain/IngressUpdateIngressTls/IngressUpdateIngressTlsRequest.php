@@ -90,10 +90,6 @@ class IngressUpdateIngressTlsRequest
         return $this->ingressId;
     }
 
-    /**
-     * @return
-     * IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2
-     */
     public function getBody(): IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2
     {
         return $this->body;

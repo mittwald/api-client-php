@@ -71,10 +71,6 @@ class Registry
         $this->uri = $uri;
     }
 
-    /**
-     * @return
-     * RegistryCredentials|null
-     */
     public function getCredentials(): ?RegistryCredentials
     {
         return $this->credentials ?? null;

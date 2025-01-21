@@ -177,10 +177,6 @@ class RedisDatabase
         $this->version = $version;
     }
 
-    /**
-     * @return
-     * RedisDatabaseConfiguration|null
-     */
     public function getConfiguration(): ?RedisDatabaseConfiguration
     {
         return $this->configuration ?? null;

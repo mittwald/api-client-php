@@ -36,10 +36,6 @@ class ProjectFileSystemListFilesOKResponse implements ResponseContainer
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Project\FilesystemDirectoryListing
-     */
     public function getBody(): FilesystemDirectoryListing
     {
         return $this->body;

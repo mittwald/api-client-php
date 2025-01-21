@@ -62,10 +62,6 @@ class DnsRecordSrvSetDeprecatedRequest
         return $this->zoneId;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent
-     */
     public function getBody(): RecordSRVComponent|RecordUnset
     {
         return $this->body;

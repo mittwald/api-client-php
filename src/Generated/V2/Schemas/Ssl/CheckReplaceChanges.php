@@ -60,28 +60,16 @@ class CheckReplaceChanges
     {
     }
 
-    /**
-     * @return
-     * CheckReplaceFieldChange|null
-     */
     public function getCommonName(): ?CheckReplaceFieldChange
     {
         return $this->commonName ?? null;
     }
 
-    /**
-     * @return
-     * CheckReplaceSliceChange|null
-     */
     public function getDnsNames(): ?CheckReplaceSliceChange
     {
         return $this->dnsNames ?? null;
     }
 
-    /**
-     * @return
-     * CheckReplaceFieldChange|null
-     */
     public function getIssuer(): ?CheckReplaceFieldChange
     {
         return $this->issuer ?? null;

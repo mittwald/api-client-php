@@ -72,10 +72,6 @@ class Path
         return $this->path;
     }
 
-    /**
-     * @return
-     * TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer
-     */
     public function getTarget(): TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage
     {
         return $this->target;

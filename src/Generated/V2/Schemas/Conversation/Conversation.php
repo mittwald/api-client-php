@@ -201,36 +201,26 @@ class Conversation
     }
 
     /**
-     * @return
-     * NotificationRole[]|null
+     * @return NotificationRole[]|null
      */
     public function getNotificationRoles(): ?array
     {
         return $this->notificationRoles ?? null;
     }
 
-    /**
-     * @return
-     * RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
-     */
     public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
     {
         return $this->relatedTo;
     }
 
     /**
-     * @return
-     * AggregateReference[]|null
+     * @return AggregateReference[]|null
      */
     public function getRelations(): ?array
     {
         return $this->relations ?? null;
     }
 
-    /**
-     * @return
-     * ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
-     */
     public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
     {
         return $this->sharedWith;

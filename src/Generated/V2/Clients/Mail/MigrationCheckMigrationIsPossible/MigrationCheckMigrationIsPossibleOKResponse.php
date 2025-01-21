@@ -36,10 +36,6 @@ class MigrationCheckMigrationIsPossibleOKResponse implements ResponseContainer
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Mailmigration\CheckMigrationIsPossibleErrorResponse
-     */
     public function getBody(): CheckMigrationIsPossibleErrorResponse
     {
         return $this->body;

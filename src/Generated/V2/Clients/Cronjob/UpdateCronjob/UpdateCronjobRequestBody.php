@@ -79,10 +79,6 @@ class UpdateCronjobRequestBody
         return $this->description ?? null;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobUrl|\Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobCommand|null
-     */
     public function getDestination(): CronjobCommand|CronjobUrl|null
     {
         return $this->destination;

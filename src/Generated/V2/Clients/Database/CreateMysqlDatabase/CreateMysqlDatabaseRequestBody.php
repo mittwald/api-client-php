@@ -45,10 +45,6 @@ class CreateMysqlDatabaseRequestBody
         return $this->database;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Database\CreateMySqlUserWithDatabase
-     */
     public function getUser(): CreateMySqlUserWithDatabase
     {
         return $this->user;

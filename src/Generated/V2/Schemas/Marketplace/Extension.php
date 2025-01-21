@@ -217,10 +217,6 @@ class Extension
         return $this->contributorId;
     }
 
-    /**
-     * @return
-     * ExtensionDeprecation|null
-     */
     public function getDeprecation(): ?ExtensionDeprecation
     {
         return $this->deprecation ?? null;
@@ -231,10 +227,6 @@ class Extension
         return $this->description;
     }
 
-    /**
-     * @return
-     * DetailedDescriptions|null
-     */
     public function getDetailedDescriptions(): ?DetailedDescriptions
     {
         return $this->detailedDescriptions ?? null;
@@ -246,8 +238,7 @@ class Extension
     }
 
     /**
-     * @return
-     * ExternalComponent[]|null
+     * @return ExternalComponent[]|null
      */
     public function getFrontendComponents(): ?array
     {

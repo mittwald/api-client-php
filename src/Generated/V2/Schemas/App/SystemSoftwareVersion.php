@@ -109,10 +109,6 @@ class SystemSoftwareVersion
         return $this->externalVersion;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Fee\OneTimePaymentFeeStrategy|\Mittwald\ApiClient\Generated\V2\Schemas\Fee\PeriodBasedFeeStrategy|null
-     */
     public function getFee(): OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy|null
     {
         return $this->fee;
@@ -134,8 +130,7 @@ class SystemSoftwareVersion
     }
 
     /**
-     * @return
-     * SystemSoftwareDependency[]|null
+     * @return SystemSoftwareDependency[]|null
      */
     public function getSystemSoftwareDependencies(): ?array
     {

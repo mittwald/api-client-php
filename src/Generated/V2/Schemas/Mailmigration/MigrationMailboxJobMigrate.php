@@ -42,10 +42,6 @@ class MigrationMailboxJobMigrate
         $this->requirements = $requirements;
     }
 
-    /**
-     * @return
-     * MigrateMailboxCommandRequirements
-     */
     public function getRequirements(): MigrateMailboxCommandRequirements
     {
         return $this->requirements;

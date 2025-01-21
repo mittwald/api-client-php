@@ -123,8 +123,7 @@ class StackResponse
     }
 
     /**
-     * @return
-     * ServiceResponse[]|null
+     * @return ServiceResponse[]|null
      */
     public function getServices(): ?array
     {

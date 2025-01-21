@@ -111,8 +111,7 @@ class Message
     }
 
     /**
-     * @return
-     * (RequestedFile|UploadedFile)[]|null
+     * @return (RequestedFile|UploadedFile)[]|null
      */
     public function getFiles(): ?array
     {

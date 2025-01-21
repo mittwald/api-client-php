@@ -50,10 +50,6 @@ class CreateSshUserRequestBody
         $this->description = $description;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Sshuser\AuthenticationAlternative2
-     */
     public function getAuthentication(): AuthenticationAlternative1|AuthenticationAlternative2
     {
         return $this->authentication;

@@ -210,10 +210,6 @@ class ContractItem
         return $this->activationDate ?? null;
     }
 
-    /**
-     * @return
-     * AggregateReference|null
-     */
     public function getAggregateReference(): ?AggregateReference
     {
         return $this->aggregateReference ?? null;

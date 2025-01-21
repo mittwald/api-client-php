@@ -99,10 +99,6 @@ class UpdateProjectMailSettingV2DeprecatedRequest
         return $this->setting;
     }
 
-    /**
-     * @return
-     * UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2
-     */
     public function getBody(): UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative1|UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2
     {
         return $this->body;

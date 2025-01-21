@@ -47,10 +47,6 @@ class RecordSettings
     {
     }
 
-    /**
-     * @return
-     * TtlSeconds|TtlAuto|null
-     */
     public function getTtl(): TtlAuto|TtlSeconds|null
     {
         return $this->ttl;

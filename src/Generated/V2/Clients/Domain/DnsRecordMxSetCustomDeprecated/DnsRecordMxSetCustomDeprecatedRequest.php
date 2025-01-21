@@ -62,10 +62,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
         return $this->zoneId;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordMXCustom
-     */
     public function getBody(): RecordMXCustom|RecordUnset
     {
         return $this->body;

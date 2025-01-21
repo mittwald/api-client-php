@@ -51,19 +51,11 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImage
     {
     }
 
-    /**
-     * @return
-     * DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMax|null
-     */
     public function getMax(): ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMax
     {
         return $this->max ?? null;
     }
 
-    /**
-     * @return
-     * DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMin|null
-     */
     public function getMin(): ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensionsMin
     {
         return $this->min ?? null;

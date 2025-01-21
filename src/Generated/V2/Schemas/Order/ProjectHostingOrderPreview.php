@@ -86,10 +86,6 @@ class ProjectHostingOrderPreview
         return $this->diskspaceInGiB;
     }
 
-    /**
-     * @return
-     * MachineTypeSpec|HardwareSpec
-     */
     public function getSpec(): HardwareSpec|MachineTypeSpec
     {
         return $this->spec;

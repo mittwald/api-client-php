@@ -51,19 +51,11 @@ class RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensions
     {
     }
 
-    /**
-     * @return
-     * RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMax|null
-     */
     public function getMax(): ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMax
     {
         return $this->max ?? null;
     }
 
-    /**
-     * @return
-     * RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin|null
-     */
     public function getMin(): ?RequestFileUploadCreatedResponseBodyRulesPropertiesImageDimensionsMin
     {
         return $this->min ?? null;

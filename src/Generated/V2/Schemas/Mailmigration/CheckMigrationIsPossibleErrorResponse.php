@@ -41,10 +41,6 @@ class CheckMigrationIsPossibleErrorResponse
     {
     }
 
-    /**
-     * @return
-     * PossibleCheckErrors|null
-     */
     public function getErrors(): ?PossibleCheckErrors
     {
         return $this->errors ?? null;

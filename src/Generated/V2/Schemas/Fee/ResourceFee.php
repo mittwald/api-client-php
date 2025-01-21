@@ -52,10 +52,6 @@ class ResourceFee
         $this->id = $id;
     }
 
-    /**
-     * @return
-     * OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy|null
-     */
     public function getFeeStrategy(): OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy|null
     {
         return $this->feeStrategy;

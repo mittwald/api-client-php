@@ -46,8 +46,7 @@ class ListMysqlCharsetsOKResponse implements ResponseContainer
     }
 
     /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Database\MySqlCharacterSettings[]
+     * @return MySqlCharacterSettings[]
      */
     public function getBody(): array
     {

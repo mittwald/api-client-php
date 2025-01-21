@@ -70,10 +70,6 @@ class PageinsightsGetStraceDataOKResponseBody
         return $this->id;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Strace\Error|\Mittwald\ApiClient\Generated\V2\Schemas\Strace\Data
-     */
     public function getResult(): Data|Error
     {
         return $this->result;
