@@ -29,8 +29,9 @@ different types of authentication:
 
 1. `MittwaldAPIClient::newUnauthenticated()`
 2. `MittwaldAPIClient::newWithToken(string $apiToken)` (recommended)
-3. `MittwaldAPIClient::newWithCredentials(string $email, string $password)` (does
-   actually perform a login in the background; does not work when using 2FA)
+3. `MittwaldAPIClient::newWithCredentials(string $email, string $password)`, does actually perform a login in the background; does not work when using 2FA.
+4. `MittwaldAPIClient::newWithAccessTokenRetrievalKey(string $userId, string $key)`, authenticates an mStudio user using the [access token retrieval key][atrek] mechanism. Only useful if you're building an mStudio extension.
+5. `MittwaldAPIClient::newWithExtensionSecret(string $extensionInstanceId, string $extensionSecret)`, authenticates an mStudio extension itself (without any user interaction). Only useful if you're building an mStudio extension.
 
 Have a look at our [API introduction][api-getting-started] for more information
 on how to obtain an API token and how to get started with the API.
@@ -54,3 +55,4 @@ The API documentation can be found in our [Developer Portal][api-ref]. You can f
 
 [api-getting-started]: https://developer.mittwald.de/docs/v2/api/intro
 [api-ref]: https://developer.mittwald.de/reference/v2/
+[atrek]: https://developer.mittwald.de/docs/v2/contribution/overview/concepts/authentication/
