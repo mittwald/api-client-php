@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\App;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -32,6 +33,11 @@ class AppInstallation
             ],
             'appVersion' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.VersionStatus',
+            ],
+            'createdAt' => [
+                'example' => '2024-09-20T22:57:32.000Z',
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'customDocumentRoot' => [
                 'type' => 'string',
@@ -102,6 +108,7 @@ class AppInstallation
             'description',
             'installationPath',
             'disabled',
+            'createdAt',
         ],
         'type' => 'object',
     ];
@@ -109,6 +116,8 @@ class AppInstallation
     private string $appId;
 
     private VersionStatus $appVersion;
+
+    private DateTime $createdAt;
 
     private ?string $customDocumentRoot = null;
 
@@ -150,10 +159,11 @@ class AppInstallation
      */
     private ?array $userInputs = null;
 
-    public function __construct(string $appId, VersionStatus $appVersion, string $description, string $id, string $installationPath, string $shortId)
+    public function __construct(string $appId, VersionStatus $appVersion, DateTime $createdAt, string $description, string $id, string $installationPath, string $shortId)
     {
         $this->appId = $appId;
         $this->appVersion = $appVersion;
+        $this->createdAt = $createdAt;
         $this->description = $description;
         $this->id = $id;
         $this->installationPath = $installationPath;
@@ -168,6 +178,11 @@ class AppInstallation
     public function getAppVersion(): VersionStatus
     {
         return $this->appVersion;
+    }
+
+    public function getCreatedAt(): DateTime
+    {
+        return $this->createdAt;
     }
 
     public function getCustomDocumentRoot(): ?string
@@ -271,6 +286,14 @@ class AppInstallation
     {
         $clone = clone $this;
         $clone->appVersion = $appVersion;
+
+        return $clone;
+    }
+
+    public function withCreatedAt(DateTime $createdAt): self
+    {
+        $clone = clone $this;
+        $clone->createdAt = $createdAt;
 
         return $clone;
     }
@@ -548,6 +571,7 @@ class AppInstallation
 
         $appId = $input->{'appId'};
         $appVersion = VersionStatus::buildFromInput($input->{'appVersion'}, validate: $validate);
+        $createdAt = new DateTime($input->{'createdAt'});
         $customDocumentRoot = null;
         if (isset($input->{'customDocumentRoot'})) {
             $customDocumentRoot = $input->{'customDocumentRoot'};
@@ -593,7 +617,7 @@ class AppInstallation
             $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
         }
 
-        $obj = new self($appId, $appVersion, $description, $id, $installationPath, $shortId);
+        $obj = new self($appId, $appVersion, $createdAt, $description, $id, $installationPath, $shortId);
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->disabled = $disabled;
         $obj->linkedDatabases = $linkedDatabases;
@@ -617,6 +641,7 @@ class AppInstallation
         $output = [];
         $output['appId'] = $this->appId;
         $output['appVersion'] = $this->appVersion->toJson();
+        $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         if (isset($this->customDocumentRoot)) {
             $output['customDocumentRoot'] = $this->customDocumentRoot;
         }
@@ -679,5 +704,6 @@ class AppInstallation
 
     public function __clone()
     {
+        $this->createdAt = clone $this->createdAt;
     }
 }

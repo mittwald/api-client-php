@@ -15,8 +15,14 @@ class RequestAvatarUploadOKResponseBodyRules
     private static array $schema = [
         'description' => 'Contstraints for the avatar image upload.',
         'properties' => [
+            'maxSizeInBytes' => [
+                'description' => 'Maximum size in Bytes of the avatar image.',
+                'example' => 4096,
+                'type' => 'integer',
+            ],
             'maxSizeInKB' => [
-                'description' => 'Maximum size in kilobytes of the avatar image.',
+                'deprecated' => true,
+                'description' => 'Deprecated. Maximum size in kilobytes of the avatar image.',
                 'example' => 3000,
                 'type' => 'integer',
             ],
@@ -65,12 +71,20 @@ class RequestAvatarUploadOKResponseBodyRules
         'required' => [
             'mimeTypes',
             'maxSizeInKB',
+            'maxSizeInBytes',
         ],
         'type' => 'object',
     ];
 
     /**
-     * Maximum size in kilobytes of the avatar image.
+     * Maximum size in Bytes of the avatar image.
+     */
+    private int $maxSizeInBytes;
+
+    /**
+     * Deprecated. Maximum size in kilobytes of the avatar image.
+     *
+     * @deprecated
      */
     private int $maxSizeInKB;
 
@@ -86,12 +100,21 @@ class RequestAvatarUploadOKResponseBodyRules
     /**
      * @param string[] $mimeTypes
      */
-    public function __construct(int $maxSizeInKB, array $mimeTypes)
+    public function __construct(int $maxSizeInBytes, int $maxSizeInKB, array $mimeTypes)
     {
+        $this->maxSizeInBytes = $maxSizeInBytes;
         $this->maxSizeInKB = $maxSizeInKB;
         $this->mimeTypes = $mimeTypes;
     }
 
+    public function getMaxSizeInBytes(): int
+    {
+        return $this->maxSizeInBytes;
+    }
+
+    /**
+     * @deprecated
+     */
     public function getMaxSizeInKB(): int
     {
         return $this->maxSizeInKB;
@@ -110,6 +133,23 @@ class RequestAvatarUploadOKResponseBodyRules
         return $this->properties ?? null;
     }
 
+    public function withMaxSizeInBytes(int $maxSizeInBytes): self
+    {
+        $validator = new Validator();
+        $validator->validate($maxSizeInBytes, static::$schema['properties']['maxSizeInBytes']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->maxSizeInBytes = $maxSizeInBytes;
+
+        return $clone;
+    }
+
+    /**
+     * @deprecated
+     */
     public function withMaxSizeInKB(int $maxSizeInKB): self
     {
         $validator = new Validator();
@@ -172,6 +212,7 @@ class RequestAvatarUploadOKResponseBodyRules
             static::validateInput($input);
         }
 
+        $maxSizeInBytes = (int)($input->{'maxSizeInBytes'});
         $maxSizeInKB = (int)($input->{'maxSizeInKB'});
         $mimeTypes = $input->{'mimeTypes'};
         $properties = null;
@@ -179,7 +220,7 @@ class RequestAvatarUploadOKResponseBodyRules
             $properties = RequestAvatarUploadOKResponseBodyRulesProperties::buildFromInput($input->{'properties'}, validate: $validate);
         }
 
-        $obj = new self($maxSizeInKB, $mimeTypes);
+        $obj = new self($maxSizeInBytes, $maxSizeInKB, $mimeTypes);
         $obj->properties = $properties;
         return $obj;
     }
@@ -192,6 +233,7 @@ class RequestAvatarUploadOKResponseBodyRules
     public function toJson(): array
     {
         $output = [];
+        $output['maxSizeInBytes'] = $this->maxSizeInBytes;
         $output['maxSizeInKB'] = $this->maxSizeInKB;
         $output['mimeTypes'] = $this->mimeTypes;
         if (isset($this->properties)) {
