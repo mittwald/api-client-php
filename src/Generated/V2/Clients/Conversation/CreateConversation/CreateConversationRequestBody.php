@@ -84,27 +84,18 @@ class CreateConversationRequestBody
     }
 
     /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\NotificationRole[]|null
+     * @return NotificationRole[]|null
      */
     public function getNotificationRoles(): ?array
     {
         return $this->notificationRoles ?? null;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6|null
-     */
     public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
     {
         return $this->relatedTo;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ShareableAggregateReferenceAlternative4|null
-     */
     public function getSharedWith(): ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4|null
     {
         return $this->sharedWith;

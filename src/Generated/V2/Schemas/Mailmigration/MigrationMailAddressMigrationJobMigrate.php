@@ -54,10 +54,6 @@ class MigrationMailAddressMigrationJobMigrate
         return $this->finished;
     }
 
-    /**
-     * @return
-     * MigrateMailAddressCommandRequirements
-     */
     public function getRequirements(): MigrateMailAddressCommandRequirements
     {
         return $this->requirements;

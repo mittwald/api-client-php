@@ -45,10 +45,6 @@ class DeprecatedUserServicePersonalizedSettingsUpdateTooManyRequestsResponse imp
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * DeprecatedUserServicePersonalizedSettingsUpdateTooManyRequestsResponseBody
-     */
     public function getBody(): DeprecatedUserServicePersonalizedSettingsUpdateTooManyRequestsResponseBody
     {
         return $this->body;

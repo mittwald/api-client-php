@@ -36,10 +36,6 @@ class GetConversationMembersOKResponse implements ResponseContainer
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ConversationMembersItem
-     */
     public function getBody(): ConversationMembersItem
     {
         return $this->body;

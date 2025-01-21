@@ -84,8 +84,7 @@ class ExtensionHealth
     }
 
     /**
-     * @return
-     * ExtensionInstanceHealth[]
+     * @return ExtensionInstanceHealth[]
      */
     public function getExtensionInstances(): array
     {

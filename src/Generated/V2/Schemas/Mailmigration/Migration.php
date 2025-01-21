@@ -113,18 +113,13 @@ class Migration
     }
 
     /**
-     * @return
-     * MigrationMailAddress[]
+     * @return MigrationMailAddress[]
      */
     public function getAddresses(): array
     {
         return $this->addresses;
     }
 
-    /**
-     * @return
-     * MigrationFinalizeJob
-     */
     public function getFinalizers(): MigrationFinalizeJob
     {
         return $this->finalizers;
@@ -141,8 +136,7 @@ class Migration
     }
 
     /**
-     * @return
-     * MigrationMailbox[]
+     * @return MigrationMailbox[]
      */
     public function getMailboxes(): array
     {

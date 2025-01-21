@@ -113,10 +113,6 @@ class CronjobRequest
         return $this->description;
     }
 
-    /**
-     * @return
-     * CronjobUrl|CronjobCommand
-     */
     public function getDestination(): CronjobCommand|CronjobUrl
     {
         return $this->destination;

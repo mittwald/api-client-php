@@ -50,8 +50,7 @@ class GetMissingDependenciesForAppinstallationOKResponseBody
     }
 
     /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareDependency[]|null
+     * @return SystemSoftwareDependency[]|null
      */
     public function getMissingSystemSoftwareDependencies(): ?array
     {

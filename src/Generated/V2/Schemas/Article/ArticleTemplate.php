@@ -131,8 +131,7 @@ class ArticleTemplate
     }
 
     /**
-     * @return
-     * ReadableBookableArticleOptions[]|null
+     * @return ReadableBookableArticleOptions[]|null
      */
     public function getAdditionalArticles(): ?array
     {
@@ -148,8 +147,7 @@ class ArticleTemplate
     }
 
     /**
-     * @return
-     * ArticleAttributes[]|null
+     * @return ArticleAttributes[]|null
      */
     public function getAttributes(): ?array
     {
@@ -177,8 +175,7 @@ class ArticleTemplate
     }
 
     /**
-     * @return
-     * ReadableModifierArticleOptions[]|null
+     * @return ReadableModifierArticleOptions[]|null
      */
     public function getModifierArticles(): ?array
     {

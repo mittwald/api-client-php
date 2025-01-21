@@ -51,10 +51,6 @@ class UpdateConversationRequestBody
         return $this->categoryId ?? null;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative1|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative2|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative3|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative4|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative5|\Mittwald\ApiClient\Generated\V2\Schemas\Conversation\RelatedAggregateReferenceAlternative6|null
-     */
     public function getRelatedTo(): RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6|null
     {
         return $this->relatedTo;

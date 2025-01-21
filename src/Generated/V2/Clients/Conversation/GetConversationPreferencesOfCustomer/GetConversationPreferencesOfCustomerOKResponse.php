@@ -36,10 +36,6 @@ class GetConversationPreferencesOfCustomerOKResponse implements ResponseContaine
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Conversation\ConversationPreferences
-     */
     public function getBody(): ConversationPreferences
     {
         return $this->body;

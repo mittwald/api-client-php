@@ -49,10 +49,6 @@ class SslCreateCertificateRequestRequest
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateRequest|\Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateWithCSRRequest
-     */
     public function getBody(): CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest
     {
         return $this->body;

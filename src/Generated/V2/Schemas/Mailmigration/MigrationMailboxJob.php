@@ -41,10 +41,6 @@ class MigrationMailboxJob
         $this->migrate = $migrate;
     }
 
-    /**
-     * @return
-     * MigrationMailboxJobMigrate
-     */
     public function getMigrate(): MigrationMailboxJobMigrate
     {
         return $this->migrate;

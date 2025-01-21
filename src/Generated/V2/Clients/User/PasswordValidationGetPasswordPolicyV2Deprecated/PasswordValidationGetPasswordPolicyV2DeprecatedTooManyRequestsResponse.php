@@ -45,10 +45,6 @@ class PasswordValidationGetPasswordPolicyV2DeprecatedTooManyRequestsResponse imp
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * PasswordValidationGetPasswordPolicyV2DeprecatedTooManyRequestsResponseBody
-     */
     public function getBody(): PasswordValidationGetPasswordPolicyV2DeprecatedTooManyRequestsResponseBody
     {
         return $this->body;

@@ -52,10 +52,6 @@ class DetailedDescriptions
         return $this->de;
     }
 
-    /**
-     * @return
-     * DescriptionFormats|null
-     */
     public function getEn(): ?DescriptionFormats
     {
         return $this->en ?? null;

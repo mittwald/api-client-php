@@ -58,10 +58,6 @@ class OrderPreviewOrderRequestBody
     {
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Order\ProjectHostingOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ServerOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\DomainOrderPreview|\Mittwald\ApiClient\Generated\V2\Schemas\Order\ExternalCertificateOrderPreview|null
-     */
     public function getOrderData(): DomainOrderPreview|ExternalCertificateOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview|null
     {
         return $this->orderData;

@@ -61,18 +61,13 @@ class StatisticsCategory
         $this->totalUsageInBytes = $totalUsageInBytes;
     }
 
-    /**
-     * @return
-     * StatisticsCategoryKind
-     */
     public function getKind(): StatisticsCategoryKind
     {
         return $this->kind;
     }
 
     /**
-     * @return
-     * StatisticsResource[]|null
+     * @return StatisticsResource[]|null
      */
     public function getResources(): ?array
     {

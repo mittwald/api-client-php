@@ -94,10 +94,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRules
         return $this->mimeTypes;
     }
 
-    /**
-     * @return
-     * DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties|null
-     */
     public function getProperties(): ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties
     {
         return $this->properties ?? null;

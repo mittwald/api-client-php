@@ -247,10 +247,6 @@ class ListProjectsOKResponseBodyItem
         return $this->projectHostingId ?? null;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Project\DeprecatedProjectReadinessStatus
-     */
     public function getReadiness(): DeprecatedProjectReadinessStatus
     {
         return $this->readiness;

@@ -62,10 +62,6 @@ class IngressTlsDeprecatedRequest
         return $this->ingressId;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsAcme|\Mittwald\ApiClient\Generated\V2\Schemas\Ingress\TlsCertificate
-     */
     public function getBody(): TlsAcme|TlsCertificate
     {
         return $this->body;

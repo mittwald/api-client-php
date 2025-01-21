@@ -45,19 +45,11 @@ class MigrationFinalizeJob
     {
     }
 
-    /**
-     * @return
-     * MigrationFinalizeJobDisableLegacyEntities|null
-     */
     public function getDisableLegacyEntities(): ?MigrationFinalizeJobDisableLegacyEntities
     {
         return $this->disableLegacyEntities ?? null;
     }
 
-    /**
-     * @return
-     * MigrationFinalizeJobProjectSetting|null
-     */
     public function getProjectSettingMigrations(): ?MigrationFinalizeJobProjectSetting
     {
         return $this->projectSettingMigrations ?? null;

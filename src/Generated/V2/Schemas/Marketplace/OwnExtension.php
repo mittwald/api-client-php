@@ -159,10 +159,6 @@ class OwnExtension
         $this->name = $name;
     }
 
-    /**
-     * @return
-     * BackendComponents|null
-     */
     public function getBackendComponents(): ?BackendComponents
     {
         return $this->backendComponents ?? null;
@@ -186,10 +182,6 @@ class OwnExtension
         return $this->contributorId;
     }
 
-    /**
-     * @return
-     * ExtensionDeprecation|null
-     */
     public function getDeprecation(): ?ExtensionDeprecation
     {
         return $this->deprecation ?? null;
@@ -200,10 +192,6 @@ class OwnExtension
         return $this->description ?? null;
     }
 
-    /**
-     * @return
-     * DetailedDescriptions|null
-     */
     public function getDetailedDescriptions(): ?DetailedDescriptions
     {
         return $this->detailedDescriptions ?? null;
@@ -215,8 +203,7 @@ class OwnExtension
     }
 
     /**
-     * @return
-     * ExternalComponent[]|null
+     * @return ExternalComponent[]|null
      */
     public function getFrontendComponents(): ?array
     {

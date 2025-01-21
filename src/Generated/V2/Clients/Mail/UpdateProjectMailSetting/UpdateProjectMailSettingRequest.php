@@ -99,10 +99,6 @@ class UpdateProjectMailSettingRequest
         return $this->mailSetting;
     }
 
-    /**
-     * @return
-     * UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2
-     */
     public function getBody(): UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2
     {
         return $this->body;

@@ -178,18 +178,13 @@ class AppVersion
         return $this->recommended ?? null;
     }
 
-    /**
-     * @return
-     * RequestHandlerRequirement|null
-     */
     public function getRequestHandler(): ?RequestHandlerRequirement
     {
         return $this->requestHandler ?? null;
     }
 
     /**
-     * @return
-     * SystemSoftwareDependency[]|null
+     * @return SystemSoftwareDependency[]|null
      */
     public function getSystemSoftwareDependencies(): ?array
     {

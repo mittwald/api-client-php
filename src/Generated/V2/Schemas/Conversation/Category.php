@@ -73,8 +73,7 @@ class Category
     }
 
     /**
-     * @return
-     * CategoryReferenceTypeItem[]
+     * @return CategoryReferenceTypeItem[]
      */
     public function getReferenceType(): array
     {

@@ -41,10 +41,6 @@ class PatchAppinstallationRequestBodySystemSoftwareItem
         return $this->systemSoftwareVersion ?? null;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\App\SystemSoftwareUpdatePolicy|null
-     */
     public function getUpdatePolicy(): ?SystemSoftwareUpdatePolicy
     {
         return $this->updatePolicy ?? null;

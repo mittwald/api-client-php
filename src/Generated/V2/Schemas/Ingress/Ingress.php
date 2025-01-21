@@ -220,10 +220,6 @@ class Ingress
         return $this->projectId;
     }
 
-    /**
-     * @return
-     * TlsAcme|TlsCertificate
-     */
     public function getTls(): TlsAcme|TlsCertificate
     {
         return $this->tls;

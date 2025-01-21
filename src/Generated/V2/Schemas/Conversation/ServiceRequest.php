@@ -121,8 +121,7 @@ class ServiceRequest
     }
 
     /**
-     * @return
-     * (RequestedFile|UploadedFile)[]|null
+     * @return (RequestedFile|UploadedFile)[]|null
      */
     public function getFiles(): ?array
     {
@@ -144,10 +143,6 @@ class ServiceRequest
         return $this->messageId;
     }
 
-    /**
-     * @return
-     * ServiceRequestRelocationPayload
-     */
     public function getMeta(): ServiceRequestRelocationPayload
     {
         return $this->meta;

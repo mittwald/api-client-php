@@ -64,8 +64,7 @@ class ContractInvoiceDefinition
     }
 
     /**
-     * @return
-     * ContractItemInvoiceDefinition[]
+     * @return ContractItemInvoiceDefinition[]
      */
     public function getItems(): array
     {

@@ -36,10 +36,6 @@ class SslCheckReplaceCertificateOKResponse implements ResponseContainer
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CheckReplaceCertificateResponse
-     */
     public function getBody(): CheckReplaceCertificateResponse
     {
         return $this->body;

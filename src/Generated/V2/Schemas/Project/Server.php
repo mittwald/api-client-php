@@ -163,10 +163,6 @@ class Server
         return $this->description;
     }
 
-    /**
-     * @return
-     * ServerDisableReason|null
-     */
     public function getDisabledReason(): ?ServerDisableReason
     {
         return $this->disabledReason ?? null;
@@ -195,10 +191,6 @@ class Server
         return $this->machineType;
     }
 
-    /**
-     * @return
-     * DeprecatedServerReadinessStatus
-     */
     public function getReadiness(): DeprecatedServerReadinessStatus
     {
         return $this->readiness;

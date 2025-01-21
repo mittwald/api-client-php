@@ -259,10 +259,6 @@ class Invoice
         return $this->invoiceType;
     }
 
-    /**
-     * @return
-     * PaymentSettingsDebit|PaymentSettingsInvoice|null
-     */
     public function getPaymentSettings(): PaymentSettingsDebit|PaymentSettingsInvoice|null
     {
         return $this->paymentSettings;

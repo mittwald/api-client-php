@@ -137,8 +137,7 @@ class OrderItem
     }
 
     /**
-     * @return
-     * AttributeConfiguration[]|null
+     * @return AttributeConfiguration[]|null
      */
     public function getAttributeConfiguration(): ?array
     {

@@ -54,10 +54,6 @@ class DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesProperties
     {
     }
 
-    /**
-     * @return
-     * DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensions|null
-     */
     public function getImageDimensions(): ?DeprecatedUserServiceAvatarRequestUploadOKResponseBodyRulesPropertiesImageDimensions
     {
         return $this->imageDimensions ?? null;

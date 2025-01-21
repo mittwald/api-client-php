@@ -62,10 +62,6 @@ class DnsRecordCnameSetDeprecatedRequest
         return $this->zoneId;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordCNAMEComponent
-     */
     public function getBody(): RecordCNAMEComponent|RecordUnset
     {
         return $this->body;

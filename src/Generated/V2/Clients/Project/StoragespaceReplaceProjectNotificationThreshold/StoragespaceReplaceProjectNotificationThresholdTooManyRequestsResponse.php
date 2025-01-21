@@ -45,10 +45,6 @@ class StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponse imp
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponseBody
-     */
     public function getBody(): StoragespaceReplaceProjectNotificationThresholdTooManyRequestsResponseBody
     {
         return $this->body;

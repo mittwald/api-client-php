@@ -117,8 +117,7 @@ class FilesystemDirectoryListing
     }
 
     /**
-     * @return
-     * FilesystemDirectoryListing[]|null
+     * @return FilesystemDirectoryListing[]|null
      */
     public function getItems(): ?array
     {

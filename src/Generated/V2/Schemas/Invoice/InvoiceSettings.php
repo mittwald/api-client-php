@@ -137,10 +137,6 @@ class InvoiceSettings
         return $this->lastBankingInformation ?? null;
     }
 
-    /**
-     * @return
-     * PaymentSettingsDebit|PaymentSettingsInvoice|null
-     */
     public function getPaymentSettings(): PaymentSettingsDebit|PaymentSettingsInvoice|null
     {
         return $this->paymentSettings;
@@ -162,8 +158,7 @@ class InvoiceSettings
     }
 
     /**
-     * @return
-     * InvoiceSettingsStatus[]|null
+     * @return InvoiceSettingsStatus[]|null
      */
     public function getStatus(): ?array
     {

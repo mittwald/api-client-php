@@ -45,10 +45,6 @@ class DeprecatedUserServicePersonalInformationUpdateTooManyRequestsResponse impl
         $this->body = $body;
     }
 
-    /**
-     * @return
-     * DeprecatedUserServicePersonalInformationUpdateTooManyRequestsResponseBody
-     */
     public function getBody(): DeprecatedUserServicePersonalInformationUpdateTooManyRequestsResponseBody
     {
         return $this->body;

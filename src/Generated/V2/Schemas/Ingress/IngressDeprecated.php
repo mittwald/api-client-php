@@ -220,10 +220,6 @@ class IngressDeprecated
         return $this->projectId;
     }
 
-    /**
-     * @return
-     * TlsAcmeDeprecated|TlsCertificate
-     */
     public function getTls(): TlsAcmeDeprecated|TlsCertificate
     {
         return $this->tls;

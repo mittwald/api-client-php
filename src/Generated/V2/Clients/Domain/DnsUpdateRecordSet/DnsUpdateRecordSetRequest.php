@@ -97,10 +97,6 @@ class DnsUpdateRecordSetRequest
         return $this->recordSet;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordMXCustom|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordTXTComponent|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordCNAMEComponent
-     */
     public function getBody(): CombinedACustom|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset
     {
         return $this->body;

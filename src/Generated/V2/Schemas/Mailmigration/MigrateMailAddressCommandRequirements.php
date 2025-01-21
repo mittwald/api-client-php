@@ -78,10 +78,6 @@ class MigrateMailAddressCommandRequirements
         return $this->address ?? null;
     }
 
-    /**
-     * @return
-     * AutoResponder|null
-     */
     public function getAutoResponder(): ?AutoResponder
     {
         return $this->autoResponder ?? null;

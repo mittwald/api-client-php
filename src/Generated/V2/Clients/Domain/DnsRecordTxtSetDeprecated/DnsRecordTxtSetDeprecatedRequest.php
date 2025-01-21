@@ -62,10 +62,6 @@ class DnsRecordTxtSetDeprecatedRequest
         return $this->zoneId;
     }
 
-    /**
-     * @return
-     * \Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset|\Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordTXTComponent
-     */
     public function getBody(): RecordTXTComponent|RecordUnset
     {
         return $this->body;

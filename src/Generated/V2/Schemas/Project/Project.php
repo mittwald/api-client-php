@@ -329,10 +329,6 @@ class Project
         return $this->projectHostingId ?? null;
     }
 
-    /**
-     * @return
-     * DeprecatedProjectReadinessStatus
-     */
     public function getReadiness(): DeprecatedProjectReadinessStatus
     {
         return $this->readiness;
@@ -353,10 +349,6 @@ class Project
         return $this->shortId;
     }
 
-    /**
-     * @return
-     * VisitorSpec|HardwareSpec|null
-     */
     public function getSpec(): HardwareSpec|VisitorSpec|null
     {
         return $this->spec;
