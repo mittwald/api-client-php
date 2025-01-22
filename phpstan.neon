@@ -2,7 +2,3 @@ parameters:
   level: 5
   paths:
     - src
-  ignoreErrors:
-    # ignore these until they can be fixed in helmich/schema2class
-    - message: '#Unsafe access to private property Mittwald\\.*::\$schema through static::.#'
-      path: src/Generated
