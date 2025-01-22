@@ -82,7 +82,7 @@ class CreateMailAddressMailbox
     public function withEnableSpamProtection(bool $enableSpamProtection): self
     {
         $validator = new Validator();
-        $validator->validate($enableSpamProtection, static::$schema['properties']['enableSpamProtection']);
+        $validator->validate($enableSpamProtection, self::$schema['properties']['enableSpamProtection']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class CreateMailAddressMailbox
     public function withPassword(string $password): self
     {
         $validator = new Validator();
-        $validator->validate($password, static::$schema['properties']['password']);
+        $validator->validate($password, self::$schema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -113,7 +113,7 @@ class CreateMailAddressMailbox
     public function withQuotaInBytes(int|float $quotaInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($quotaInBytes, static::$schema['properties']['quotaInBytes']);
+        $validator->validate($quotaInBytes, self::$schema['properties']['quotaInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -175,7 +175,7 @@ class CreateMailAddressMailbox
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -90,7 +90,7 @@ class ListDomainsRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +112,7 @@ class ListDomainsRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, static::$schema['properties']['page']);
+        $validator->validate($page, self::$schema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,7 +134,7 @@ class ListDomainsRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, static::$schema['properties']['limit']);
+        $validator->validate($limit, self::$schema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -156,7 +156,7 @@ class ListDomainsRequest
     public function withDomainSearchName(string $domainSearchName): self
     {
         $validator = new Validator();
-        $validator->validate($domainSearchName, static::$schema['properties']['domainSearchName']);
+        $validator->validate($domainSearchName, self::$schema['properties']['domainSearchName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class ListDomainsRequest
     public function withContactHash(string $contactHash): self
     {
         $validator = new Validator();
-        $validator->validate($contactHash, static::$schema['properties']['contactHash']);
+        $validator->validate($contactHash, self::$schema['properties']['contactHash']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -281,7 +281,7 @@ class ListDomainsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

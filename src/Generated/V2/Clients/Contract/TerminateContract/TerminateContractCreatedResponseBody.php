@@ -80,7 +80,7 @@ class TerminateContractCreatedResponseBody
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractId, static::$schema['properties']['contractId']);
+        $validator->validate($contractId, self::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class TerminateContractCreatedResponseBody
     public function withItemsScheduledForTermination(array $itemsScheduledForTermination): self
     {
         $validator = new Validator();
-        $validator->validate($itemsScheduledForTermination, static::$schema['properties']['itemsScheduledForTermination']);
+        $validator->validate($itemsScheduledForTermination, self::$schema['properties']['itemsScheduledForTermination']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -127,7 +127,7 @@ class TerminateContractCreatedResponseBody
     public function withReason(string $reason): self
     {
         $validator = new Validator();
-        $validator->validate($reason, static::$schema['properties']['reason']);
+        $validator->validate($reason, self::$schema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class TerminateContractCreatedResponseBody
     public function withTerminationTargetDate(string $terminationTargetDate): self
     {
         $validator = new Validator();
-        $validator->validate($terminationTargetDate, static::$schema['properties']['terminationTargetDate']);
+        $validator->validate($terminationTargetDate, self::$schema['properties']['terminationTargetDate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -244,7 +244,7 @@ class TerminateContractCreatedResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

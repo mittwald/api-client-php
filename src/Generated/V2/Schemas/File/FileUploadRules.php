@@ -199,7 +199,7 @@ class FileUploadRules
     public function withExtensions(array $extensions): self
     {
         $validator = new Validator();
-        $validator->validate($extensions, static::$schema['properties']['extensions']);
+        $validator->validate($extensions, self::$schema['properties']['extensions']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class FileUploadRules
     public function withMaxSizeInBytes(int $maxSizeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($maxSizeInBytes, static::$schema['properties']['maxSizeInBytes']);
+        $validator->validate($maxSizeInBytes, self::$schema['properties']['maxSizeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +241,7 @@ class FileUploadRules
     public function withMimeTypes(array $mimeTypes): self
     {
         $validator = new Validator();
-        $validator->validate($mimeTypes, static::$schema['properties']['mimeTypes']);
+        $validator->validate($mimeTypes, self::$schema['properties']['mimeTypes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -332,7 +332,7 @@ class FileUploadRules
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

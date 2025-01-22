@@ -156,7 +156,7 @@ class Migration
     public function withAborted(bool $aborted): self
     {
         $validator = new Validator();
-        $validator->validate($aborted, static::$schema['properties']['aborted']);
+        $validator->validate($aborted, self::$schema['properties']['aborted']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -189,7 +189,7 @@ class Migration
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
-        $validator->validate($finished, static::$schema['properties']['finished']);
+        $validator->validate($finished, self::$schema['properties']['finished']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -203,7 +203,7 @@ class Migration
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -228,7 +228,7 @@ class Migration
     public function withSourceCoabProjectId(string $sourceCoabProjectId): self
     {
         $validator = new Validator();
-        $validator->validate($sourceCoabProjectId, static::$schema['properties']['sourceCoabProjectId']);
+        $validator->validate($sourceCoabProjectId, self::$schema['properties']['sourceCoabProjectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -242,7 +242,7 @@ class Migration
     public function withTargetNexusProjectId(string $targetNexusProjectId): self
     {
         $validator = new Validator();
-        $validator->validate($targetNexusProjectId, static::$schema['properties']['targetNexusProjectId']);
+        $validator->validate($targetNexusProjectId, self::$schema['properties']['targetNexusProjectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -314,7 +314,7 @@ class Migration
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

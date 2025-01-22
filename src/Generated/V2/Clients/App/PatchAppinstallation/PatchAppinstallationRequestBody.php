@@ -117,7 +117,7 @@ class PatchAppinstallationRequestBody
     public function withAppVersionId(string $appVersionId): self
     {
         $validator = new Validator();
-        $validator->validate($appVersionId, static::$schema['properties']['appVersionId']);
+        $validator->validate($appVersionId, self::$schema['properties']['appVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -139,7 +139,7 @@ class PatchAppinstallationRequestBody
     public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
         $validator = new Validator();
-        $validator->validate($customDocumentRoot, static::$schema['properties']['customDocumentRoot']);
+        $validator->validate($customDocumentRoot, self::$schema['properties']['customDocumentRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -161,7 +161,7 @@ class PatchAppinstallationRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -326,7 +326,7 @@ class PatchAppinstallationRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -119,7 +119,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, static::$schema['properties']['message']);
+        $validator->validate($message, self::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, static::$schema['properties']['path']);
+        $validator->validate($path, self::$schema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -147,7 +147,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, static::$schema['properties']['type']);
+        $validator->validate($type, self::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     public function withContext(array $context): self
     {
         $validator = new Validator();
-        $validator->validate($context, static::$schema['properties']['context']);
+        $validator->validate($context, self::$schema['properties']['context']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +241,7 @@ type that failed validation (e.g. "missingProperty" for type "required")
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

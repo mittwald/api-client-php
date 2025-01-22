@@ -90,7 +90,7 @@ class ListProjectMailSettingsOKResponseBody
     public function withBlacklist(array $blacklist): self
     {
         $validator = new Validator();
-        $validator->validate($blacklist, static::$schema['properties']['blacklist']);
+        $validator->validate($blacklist, self::$schema['properties']['blacklist']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class ListProjectMailSettingsOKResponseBody
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -121,7 +121,7 @@ class ListProjectMailSettingsOKResponseBody
     public function withWhitelist(array $whitelist): self
     {
         $validator = new Validator();
-        $validator->validate($whitelist, static::$schema['properties']['whitelist']);
+        $validator->validate($whitelist, self::$schema['properties']['whitelist']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +183,7 @@ class ListProjectMailSettingsOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

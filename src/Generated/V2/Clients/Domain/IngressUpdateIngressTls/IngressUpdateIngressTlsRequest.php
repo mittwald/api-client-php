@@ -98,7 +98,7 @@ class IngressUpdateIngressTlsRequest
     public function withIngressId(string $ingressId): self
     {
         $validator = new Validator();
-        $validator->validate($ingressId, static::$schema['properties']['ingressId']);
+        $validator->validate($ingressId, self::$schema['properties']['ingressId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -139,6 +139,7 @@ class IngressUpdateIngressTlsRequest
         $body = match (true) {
             IngressUpdateIngressTlsRequestBodyAlternative1::validateInput($input->{'body'}, true) => IngressUpdateIngressTlsRequestBodyAlternative1::buildFromInput($input->{'body'}, validate: $validate),
             IngressUpdateIngressTlsRequestBodyAlternative2::validateInput($input->{'body'}, true) => IngressUpdateIngressTlsRequestBodyAlternative2::buildFromInput($input->{'body'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
         };
 
         $obj = new self($ingressId, $body);
@@ -174,7 +175,7 @@ class IngressUpdateIngressTlsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

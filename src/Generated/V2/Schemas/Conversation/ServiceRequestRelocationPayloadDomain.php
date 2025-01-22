@@ -76,7 +76,7 @@ class ServiceRequestRelocationPayloadDomain
     public function withAllDomains(bool $allDomains): self
     {
         $validator = new Validator();
-        $validator->validate($allDomains, static::$schema['properties']['allDomains']);
+        $validator->validate($allDomains, self::$schema['properties']['allDomains']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -174,7 +174,7 @@ class ServiceRequestRelocationPayloadDomain
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

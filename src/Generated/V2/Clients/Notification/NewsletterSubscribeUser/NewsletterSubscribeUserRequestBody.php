@@ -50,7 +50,7 @@ class NewsletterSubscribeUserRequestBody
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($firstName, static::$schema['properties']['firstName']);
+        $validator->validate($firstName, self::$schema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -72,7 +72,7 @@ class NewsletterSubscribeUserRequestBody
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
-        $validator->validate($lastName, static::$schema['properties']['lastName']);
+        $validator->validate($lastName, self::$schema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class NewsletterSubscribeUserRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

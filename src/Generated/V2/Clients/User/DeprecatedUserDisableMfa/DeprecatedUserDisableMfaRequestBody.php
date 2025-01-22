@@ -45,7 +45,7 @@ class DeprecatedUserDisableMfaRequestBody
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();
-        $validator->validate($multiFactorCode, static::$schema['properties']['multiFactorCode']);
+        $validator->validate($multiFactorCode, self::$schema['properties']['multiFactorCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +103,7 @@ class DeprecatedUserDisableMfaRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

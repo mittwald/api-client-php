@@ -39,7 +39,7 @@ class ValidateRegistryCredentialsOKResponseBody
     public function withValid(bool $valid): self
     {
         $validator = new Validator();
-        $validator->validate($valid, static::$schema['properties']['valid']);
+        $validator->validate($valid, self::$schema['properties']['valid']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class ValidateRegistryCredentialsOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

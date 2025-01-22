@@ -61,7 +61,7 @@ class CreateMessageRequestBody
     public function withFileIds(array $fileIds): self
     {
         $validator = new Validator();
-        $validator->validate($fileIds, static::$schema['properties']['fileIds']);
+        $validator->validate($fileIds, self::$schema['properties']['fileIds']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -83,7 +83,7 @@ class CreateMessageRequestBody
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
-        $validator->validate($messageContent, static::$schema['properties']['messageContent']);
+        $validator->validate($messageContent, self::$schema['properties']['messageContent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -162,7 +162,7 @@ class CreateMessageRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

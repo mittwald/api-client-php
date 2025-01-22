@@ -71,7 +71,7 @@ class Location
     public function withCity(string $city): self
     {
         $validator = new Validator();
-        $validator->validate($city, static::$schema['properties']['city']);
+        $validator->validate($city, self::$schema['properties']['city']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -93,7 +93,7 @@ class Location
     public function withCountry(string $country): self
     {
         $validator = new Validator();
-        $validator->validate($country, static::$schema['properties']['country']);
+        $validator->validate($country, self::$schema['properties']['country']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +115,7 @@ class Location
     public function withIpAddress(string $ipAddress): self
     {
         $validator = new Validator();
-        $validator->validate($ipAddress, static::$schema['properties']['ipAddress']);
+        $validator->validate($ipAddress, self::$schema['properties']['ipAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -202,7 +202,7 @@ class Location
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

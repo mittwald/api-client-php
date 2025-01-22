@@ -84,7 +84,7 @@ class ServiceRequestRelocationPayloadContact
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, static::$schema['properties']['email']);
+        $validator->validate($email, self::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -98,7 +98,7 @@ class ServiceRequestRelocationPayloadContact
     public function withFirstname(string $firstname): self
     {
         $validator = new Validator();
-        $validator->validate($firstname, static::$schema['properties']['firstname']);
+        $validator->validate($firstname, self::$schema['properties']['firstname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +112,7 @@ class ServiceRequestRelocationPayloadContact
     public function withLastname(string $lastname): self
     {
         $validator = new Validator();
-        $validator->validate($lastname, static::$schema['properties']['lastname']);
+        $validator->validate($lastname, self::$schema['properties']['lastname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class ServiceRequestRelocationPayloadContact
     public function withPhone(string $phone): self
     {
         $validator = new Validator();
-        $validator->validate($phone, static::$schema['properties']['phone']);
+        $validator->validate($phone, self::$schema['properties']['phone']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -203,7 +203,7 @@ class ServiceRequestRelocationPayloadContact
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

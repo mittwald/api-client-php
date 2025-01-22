@@ -137,7 +137,7 @@ class OauthGetAuthorizationRequest
     public function withGrantConsent(bool $grantConsent): self
     {
         $validator = new Validator();
-        $validator->validate($grantConsent, static::$schema['properties']['grant_consent']);
+        $validator->validate($grantConsent, self::$schema['properties']['grant_consent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +183,7 @@ class OauthGetAuthorizationRequest
     public function withClientId(string $clientId): self
     {
         $validator = new Validator();
-        $validator->validate($clientId, static::$schema['properties']['client_id']);
+        $validator->validate($clientId, self::$schema['properties']['client_id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -197,7 +197,7 @@ class OauthGetAuthorizationRequest
     public function withRedirectUri(string $redirectUri): self
     {
         $validator = new Validator();
-        $validator->validate($redirectUri, static::$schema['properties']['redirect_uri']);
+        $validator->validate($redirectUri, self::$schema['properties']['redirect_uri']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -219,7 +219,7 @@ class OauthGetAuthorizationRequest
     public function withScope(string $scope): self
     {
         $validator = new Validator();
-        $validator->validate($scope, static::$schema['properties']['scope']);
+        $validator->validate($scope, self::$schema['properties']['scope']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +241,7 @@ class OauthGetAuthorizationRequest
     public function withState(string $state): self
     {
         $validator = new Validator();
-        $validator->validate($state, static::$schema['properties']['state']);
+        $validator->validate($state, self::$schema['properties']['state']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -263,7 +263,7 @@ class OauthGetAuthorizationRequest
     public function withCodeChallenge(string $codeChallenge): self
     {
         $validator = new Validator();
-        $validator->validate($codeChallenge, static::$schema['properties']['code_challenge']);
+        $validator->validate($codeChallenge, self::$schema['properties']['code_challenge']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -402,7 +402,7 @@ class OauthGetAuthorizationRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

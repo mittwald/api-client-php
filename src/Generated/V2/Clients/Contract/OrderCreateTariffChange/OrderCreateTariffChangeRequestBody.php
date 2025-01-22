@@ -113,6 +113,7 @@ class OrderCreateTariffChangeRequestBody
             $tariffChangeData = match (true) {
                 ProjectHostingTariffChange::validateInput($input->{'tariffChangeData'}, true) => ProjectHostingTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
                 ServerTariffChange::validateInput($input->{'tariffChangeData'}, true) => ServerTariffChange::buildFromInput($input->{'tariffChangeData'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'tariffChangeData' from JSON"),
             };
         }
         $tariffChangeType = null;
@@ -158,7 +159,7 @@ class OrderCreateTariffChangeRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -51,7 +51,7 @@ class CheckDomainRegistrabilityOKResponseBody
     public function withIsPremium(bool $isPremium): self
     {
         $validator = new Validator();
-        $validator->validate($isPremium, static::$schema['properties']['isPremium']);
+        $validator->validate($isPremium, self::$schema['properties']['isPremium']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -65,7 +65,7 @@ class CheckDomainRegistrabilityOKResponseBody
     public function withRegistrable(bool $registrable): self
     {
         $validator = new Validator();
-        $validator->validate($registrable, static::$schema['properties']['registrable']);
+        $validator->validate($registrable, self::$schema['properties']['registrable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,7 +125,7 @@ class CheckDomainRegistrabilityOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

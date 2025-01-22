@@ -218,7 +218,7 @@ class ContainerImageConfig
     public function withCommand(array $command): self
     {
         $validator = new Validator();
-        $validator->validate($command, static::$schema['properties']['command']);
+        $validator->validate($command, self::$schema['properties']['command']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -243,7 +243,7 @@ class ContainerImageConfig
     public function withEntrypoint(array $entrypoint): self
     {
         $validator = new Validator();
-        $validator->validate($entrypoint, static::$schema['properties']['entrypoint']);
+        $validator->validate($entrypoint, self::$schema['properties']['entrypoint']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -303,7 +303,7 @@ class ContainerImageConfig
     public function withHasAiGeneratedData(bool $hasAiGeneratedData): self
     {
         $validator = new Validator();
-        $validator->validate($hasAiGeneratedData, static::$schema['properties']['hasAiGeneratedData']);
+        $validator->validate($hasAiGeneratedData, self::$schema['properties']['hasAiGeneratedData']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -317,7 +317,7 @@ class ContainerImageConfig
     public function withIsUserRoot(bool $isUserRoot): self
     {
         $validator = new Validator();
-        $validator->validate($isUserRoot, static::$schema['properties']['isUserRoot']);
+        $validator->validate($isUserRoot, self::$schema['properties']['isUserRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -331,7 +331,7 @@ class ContainerImageConfig
     public function withOverwritingUser(int $overwritingUser): self
     {
         $validator = new Validator();
-        $validator->validate($overwritingUser, static::$schema['properties']['overwritingUser']);
+        $validator->validate($overwritingUser, self::$schema['properties']['overwritingUser']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -353,7 +353,7 @@ class ContainerImageConfig
     public function withUser(string $user): self
     {
         $validator = new Validator();
-        $validator->validate($user, static::$schema['properties']['user']);
+        $validator->validate($user, self::$schema['properties']['user']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -481,7 +481,7 @@ class ContainerImageConfig
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

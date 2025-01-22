@@ -63,7 +63,7 @@ class HardwareSpec
     public function withRam(int|float $ram): self
     {
         $validator = new Validator();
-        $validator->validate($ram, static::$schema['properties']['ram']);
+        $validator->validate($ram, self::$schema['properties']['ram']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -88,7 +88,7 @@ class HardwareSpec
     public function withVcpu(int|float $vcpu): self
     {
         $validator = new Validator();
-        $validator->validate($vcpu, static::$schema['properties']['vcpu']);
+        $validator->validate($vcpu, self::$schema['properties']['vcpu']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -167,7 +167,7 @@ class HardwareSpec
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

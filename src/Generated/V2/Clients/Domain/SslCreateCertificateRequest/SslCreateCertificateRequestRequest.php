@@ -83,6 +83,7 @@ class SslCreateCertificateRequestRequest
         $body = match (true) {
             CertificateRequestCreateRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateRequest::buildFromInput($input->{'body'}, validate: $validate),
             CertificateRequestCreateWithCSRRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateWithCSRRequest::buildFromInput($input->{'body'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
         };
 
         $obj = new self($body);
@@ -117,7 +118,7 @@ class SslCreateCertificateRequestRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

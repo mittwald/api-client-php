@@ -53,7 +53,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     public function withFailure(bool $failure): self
     {
         $validator = new Validator();
-        $validator->validate($failure, static::$schema['properties']['failure']);
+        $validator->validate($failure, self::$schema['properties']['failure']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -67,7 +67,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     public function withStatusCode(string $statusCode): self
     {
         $validator = new Validator();
-        $validator->validate($statusCode, static::$schema['properties']['statusCode']);
+        $validator->validate($statusCode, self::$schema['properties']['statusCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBodyWebhookResult
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

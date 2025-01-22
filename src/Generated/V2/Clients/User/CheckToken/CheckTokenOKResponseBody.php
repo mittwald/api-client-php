@@ -52,7 +52,7 @@ class CheckTokenOKResponseBody
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -66,7 +66,7 @@ class CheckTokenOKResponseBody
     public function withPublicToken(string $publicToken): self
     {
         $validator = new Validator();
-        $validator->validate($publicToken, static::$schema['properties']['publicToken']);
+        $validator->validate($publicToken, self::$schema['properties']['publicToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class CheckTokenOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

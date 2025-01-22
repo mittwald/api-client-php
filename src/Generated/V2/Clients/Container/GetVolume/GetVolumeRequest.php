@@ -59,7 +59,7 @@ class GetVolumeRequest
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, static::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$schema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,7 +73,7 @@ class GetVolumeRequest
     public function withVolumeId(string $volumeId): self
     {
         $validator = new Validator();
-        $validator->validate($volumeId, static::$schema['properties']['volumeId']);
+        $validator->validate($volumeId, self::$schema['properties']['volumeId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class GetVolumeRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -78,7 +78,7 @@ class GetContainerImageConfigRequest
     public function withImageReference(string $imageReference): self
     {
         $validator = new Validator();
-        $validator->validate($imageReference, static::$schema['properties']['imageReference']);
+        $validator->validate($imageReference, self::$schema['properties']['imageReference']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class GetContainerImageConfigRequest
     public function withUseCredentialsForProjectId(string $useCredentialsForProjectId): self
     {
         $validator = new Validator();
-        $validator->validate($useCredentialsForProjectId, static::$schema['properties']['useCredentialsForProjectId']);
+        $validator->validate($useCredentialsForProjectId, self::$schema['properties']['useCredentialsForProjectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class GetContainerImageConfigRequest
     public function withUseCredentialsForRegistryId(string $useCredentialsForRegistryId): self
     {
         $validator = new Validator();
-        $validator->validate($useCredentialsForRegistryId, static::$schema['properties']['useCredentialsForRegistryId']);
+        $validator->validate($useCredentialsForRegistryId, self::$schema['properties']['useCredentialsForRegistryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class GetContainerImageConfigRequest
     public function withGenerateAiData(bool $generateAiData): self
     {
         $validator = new Validator();
-        $validator->validate($generateAiData, static::$schema['properties']['generateAiData']);
+        $validator->validate($generateAiData, self::$schema['properties']['generateAiData']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -225,7 +225,7 @@ class GetContainerImageConfigRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

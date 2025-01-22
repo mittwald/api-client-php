@@ -96,7 +96,7 @@ class ArticleAddons
     public function withHidden(bool $hidden): self
     {
         $validator = new Validator();
-        $validator->validate($hidden, static::$schema['properties']['hidden']);
+        $validator->validate($hidden, self::$schema['properties']['hidden']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -118,7 +118,7 @@ class ArticleAddons
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, static::$schema['properties']['key']);
+        $validator->validate($key, self::$schema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -132,7 +132,7 @@ class ArticleAddons
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, static::$schema['properties']['type']);
+        $validator->validate($type, self::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -154,7 +154,7 @@ class ArticleAddons
     public function withValue(string $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, static::$schema['properties']['value']);
+        $validator->validate($value, self::$schema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -253,7 +253,7 @@ class ArticleAddons
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

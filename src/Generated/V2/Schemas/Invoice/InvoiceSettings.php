@@ -176,7 +176,7 @@ class InvoiceSettings
     public function withAdditionalEmailRecipients(array $additionalEmailRecipients): self
     {
         $validator = new Validator();
-        $validator->validate($additionalEmailRecipients, static::$schema['properties']['additionalEmailRecipients']);
+        $validator->validate($additionalEmailRecipients, self::$schema['properties']['additionalEmailRecipients']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -214,7 +214,7 @@ class InvoiceSettings
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -228,7 +228,7 @@ class InvoiceSettings
     public function withInvoicePeriod(int $invoicePeriod): self
     {
         $validator = new Validator();
-        $validator->validate($invoicePeriod, static::$schema['properties']['invoicePeriod']);
+        $validator->validate($invoicePeriod, self::$schema['properties']['invoicePeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -285,7 +285,7 @@ class InvoiceSettings
     public function withPrintedInvoices(bool $printedInvoices): self
     {
         $validator = new Validator();
-        $validator->validate($printedInvoices, static::$schema['properties']['printedInvoices']);
+        $validator->validate($printedInvoices, self::$schema['properties']['printedInvoices']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -323,7 +323,7 @@ class InvoiceSettings
     public function withRecipientSameAsOwner(bool $recipientSameAsOwner): self
     {
         $validator = new Validator();
-        $validator->validate($recipientSameAsOwner, static::$schema['properties']['recipientSameAsOwner']);
+        $validator->validate($recipientSameAsOwner, self::$schema['properties']['recipientSameAsOwner']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -364,7 +364,7 @@ class InvoiceSettings
     public function withTargetDay(int $targetDay): self
     {
         $validator = new Validator();
-        $validator->validate($targetDay, static::$schema['properties']['targetDay']);
+        $validator->validate($targetDay, self::$schema['properties']['targetDay']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -516,7 +516,7 @@ class InvoiceSettings
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

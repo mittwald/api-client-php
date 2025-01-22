@@ -78,7 +78,7 @@ class TlsAcme
     public function withAcme(bool $acme): self
     {
         $validator = new Validator();
-        $validator->validate($acme, static::$schema['properties']['acme']);
+        $validator->validate($acme, self::$schema['properties']['acme']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class TlsAcme
     public function withIsCreated(bool $isCreated): self
     {
         $validator = new Validator();
-        $validator->validate($isCreated, static::$schema['properties']['isCreated']);
+        $validator->validate($isCreated, self::$schema['properties']['isCreated']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -175,7 +175,7 @@ class TlsAcme
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

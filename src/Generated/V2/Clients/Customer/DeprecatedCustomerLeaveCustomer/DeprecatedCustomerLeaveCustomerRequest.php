@@ -67,7 +67,7 @@ class DeprecatedCustomerLeaveCustomerRequest
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -84,7 +84,7 @@ class DeprecatedCustomerLeaveCustomerRequest
     public function withBody($body): self
     {
         $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
+        $validator->validate($body, self::$schema['properties']['body']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -144,7 +144,7 @@ class DeprecatedCustomerLeaveCustomerRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

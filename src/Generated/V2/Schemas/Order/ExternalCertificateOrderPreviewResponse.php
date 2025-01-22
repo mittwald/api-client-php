@@ -85,7 +85,7 @@ class ExternalCertificateOrderPreviewResponse
     public function withFeePrice(int|float $feePrice): self
     {
         $validator = new Validator();
-        $validator->validate($feePrice, static::$schema['properties']['feePrice']);
+        $validator->validate($feePrice, self::$schema['properties']['feePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,7 +102,7 @@ class ExternalCertificateOrderPreviewResponse
     public function withRecurringPrice(int|float $recurringPrice): self
     {
         $validator = new Validator();
-        $validator->validate($recurringPrice, static::$schema['properties']['recurringPrice']);
+        $validator->validate($recurringPrice, self::$schema['properties']['recurringPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class ExternalCertificateOrderPreviewResponse
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();
-        $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
+        $validator->validate($totalPrice, self::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -181,7 +181,7 @@ class ExternalCertificateOrderPreviewResponse
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

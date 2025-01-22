@@ -270,7 +270,7 @@ class AppInstallation
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
-        $validator->validate($appId, static::$schema['properties']['appId']);
+        $validator->validate($appId, self::$schema['properties']['appId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -300,7 +300,7 @@ class AppInstallation
     public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
         $validator = new Validator();
-        $validator->validate($customDocumentRoot, static::$schema['properties']['customDocumentRoot']);
+        $validator->validate($customDocumentRoot, self::$schema['properties']['customDocumentRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -322,7 +322,7 @@ class AppInstallation
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -336,7 +336,7 @@ class AppInstallation
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, static::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -350,7 +350,7 @@ class AppInstallation
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -364,7 +364,7 @@ class AppInstallation
     public function withInstallationPath(string $installationPath): self
     {
         $validator = new Validator();
-        $validator->validate($installationPath, static::$schema['properties']['installationPath']);
+        $validator->validate($installationPath, self::$schema['properties']['installationPath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -400,7 +400,7 @@ class AppInstallation
     public function withProcesses(array $processes): self
     {
         $validator = new Validator();
-        $validator->validate($processes, static::$schema['properties']['processes']);
+        $validator->validate($processes, self::$schema['properties']['processes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -422,7 +422,7 @@ class AppInstallation
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -444,7 +444,7 @@ class AppInstallation
     public function withScreenshotId(string $screenshotId): self
     {
         $validator = new Validator();
-        $validator->validate($screenshotId, static::$schema['properties']['screenshotId']);
+        $validator->validate($screenshotId, self::$schema['properties']['screenshotId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -466,7 +466,7 @@ class AppInstallation
     public function withScreenshotRef(string $screenshotRef): self
     {
         $validator = new Validator();
-        $validator->validate($screenshotRef, static::$schema['properties']['screenshotRef']);
+        $validator->validate($screenshotRef, self::$schema['properties']['screenshotRef']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -488,7 +488,7 @@ class AppInstallation
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, static::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -689,7 +689,7 @@ class AppInstallation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

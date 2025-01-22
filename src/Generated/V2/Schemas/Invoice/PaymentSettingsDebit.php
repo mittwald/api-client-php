@@ -93,7 +93,7 @@ class PaymentSettingsDebit
     public function withAccountHolder(string $accountHolder): self
     {
         $validator = new Validator();
-        $validator->validate($accountHolder, static::$schema['properties']['accountHolder']);
+        $validator->validate($accountHolder, self::$schema['properties']['accountHolder']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -107,7 +107,7 @@ class PaymentSettingsDebit
     public function withBic(string $bic): self
     {
         $validator = new Validator();
-        $validator->validate($bic, static::$schema['properties']['bic']);
+        $validator->validate($bic, self::$schema['properties']['bic']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -129,7 +129,7 @@ class PaymentSettingsDebit
     public function withIban(string $iban): self
     {
         $validator = new Validator();
-        $validator->validate($iban, static::$schema['properties']['iban']);
+        $validator->validate($iban, self::$schema['properties']['iban']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -206,7 +206,7 @@ class PaymentSettingsDebit
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -71,7 +71,7 @@ class RegistryCredentials
     public function withUsername(string $username): self
     {
         $validator = new Validator();
-        $validator->validate($username, static::$schema['properties']['username']);
+        $validator->validate($username, self::$schema['properties']['username']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -85,7 +85,7 @@ class RegistryCredentials
     public function withValid(bool $valid): self
     {
         $validator = new Validator();
-        $validator->validate($valid, static::$schema['properties']['valid']);
+        $validator->validate($valid, self::$schema['properties']['valid']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +145,7 @@ class RegistryCredentials
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

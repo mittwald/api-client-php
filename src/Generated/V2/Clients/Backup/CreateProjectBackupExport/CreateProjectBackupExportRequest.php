@@ -77,7 +77,7 @@ class CreateProjectBackupExportRequest
     public function withProjectBackupId(string $projectBackupId): self
     {
         $validator = new Validator();
-        $validator->validate($projectBackupId, static::$schema['properties']['projectBackupId']);
+        $validator->validate($projectBackupId, self::$schema['properties']['projectBackupId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +145,7 @@ class CreateProjectBackupExportRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

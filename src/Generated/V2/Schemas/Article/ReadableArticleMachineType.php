@@ -76,7 +76,7 @@ class ReadableArticleMachineType
     public function withCpu(string $cpu): self
     {
         $validator = new Validator();
-        $validator->validate($cpu, static::$schema['properties']['cpu']);
+        $validator->validate($cpu, self::$schema['properties']['cpu']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -90,7 +90,7 @@ class ReadableArticleMachineType
     public function withMemory(string $memory): self
     {
         $validator = new Validator();
-        $validator->validate($memory, static::$schema['properties']['memory']);
+        $validator->validate($memory, self::$schema['properties']['memory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class ReadableArticleMachineType
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -166,7 +166,7 @@ class ReadableArticleMachineType
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -60,7 +60,7 @@ class ConfigFile
     public function withContent(string $content): self
     {
         $validator = new Validator();
-        $validator->validate($content, static::$schema['properties']['content']);
+        $validator->validate($content, self::$schema['properties']['content']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class ConfigFile
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

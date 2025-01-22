@@ -110,7 +110,7 @@ class DnsUpdateRecordSetRequest
     public function withDnsZoneId(string $dnsZoneId): self
     {
         $validator = new Validator();
-        $validator->validate($dnsZoneId, static::$schema['properties']['dnsZoneId']);
+        $validator->validate($dnsZoneId, self::$schema['properties']['dnsZoneId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,6 +165,7 @@ class DnsUpdateRecordSetRequest
             RecordSRVComponent::validateInput($input->{'body'}, true) => RecordSRVComponent::buildFromInput($input->{'body'}, validate: $validate),
             RecordCNAMEComponent::validateInput($input->{'body'}, true) => RecordCNAMEComponent::buildFromInput($input->{'body'}, validate: $validate),
             RecordCAAComponent::validateInput($input->{'body'}, true) => RecordCAAComponent::buildFromInput($input->{'body'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
         };
 
         $obj = new self($dnsZoneId, $recordSet, $body);
@@ -201,7 +202,7 @@ class DnsUpdateRecordSetRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

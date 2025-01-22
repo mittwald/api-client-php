@@ -85,7 +85,7 @@ class MySqlVersion
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, static::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -99,7 +99,7 @@ class MySqlVersion
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -113,7 +113,7 @@ class MySqlVersion
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -127,7 +127,7 @@ class MySqlVersion
     public function withNumber(string $number): self
     {
         $validator = new Validator();
-        $validator->validate($number, static::$schema['properties']['number']);
+        $validator->validate($number, self::$schema['properties']['number']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -191,7 +191,7 @@ class MySqlVersion
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

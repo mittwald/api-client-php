@@ -75,7 +75,7 @@ class CreateProjectBackupScheduleRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class CreateProjectBackupScheduleRequestBody
     public function withSchedule(string $schedule): self
     {
         $validator = new Validator();
-        $validator->validate($schedule, static::$schema['properties']['schedule']);
+        $validator->validate($schedule, self::$schema['properties']['schedule']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +111,7 @@ class CreateProjectBackupScheduleRequestBody
     public function withTtl(string $ttl): self
     {
         $validator = new Validator();
-        $validator->validate($ttl, static::$schema['properties']['ttl']);
+        $validator->validate($ttl, self::$schema['properties']['ttl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class CreateProjectBackupScheduleRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

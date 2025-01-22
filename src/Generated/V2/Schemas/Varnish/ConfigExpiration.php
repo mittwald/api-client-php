@@ -61,7 +61,7 @@ class ConfigExpiration
     public function withMaxVersions(int|float $maxVersions): self
     {
         $validator = new Validator();
-        $validator->validate($maxVersions, static::$schema['properties']['maxVersions']);
+        $validator->validate($maxVersions, self::$schema['properties']['maxVersions']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -86,7 +86,7 @@ class ConfigExpiration
     public function withRetentionTime(int|float $retentionTime): self
     {
         $validator = new Validator();
-        $validator->validate($retentionTime, static::$schema['properties']['retentionTime']);
+        $validator->validate($retentionTime, self::$schema['properties']['retentionTime']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +165,7 @@ class ConfigExpiration
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

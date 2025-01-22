@@ -86,7 +86,7 @@ class HandleData
     public function withHandleRef(string $handleRef): self
     {
         $validator = new Validator();
-        $validator->validate($handleRef, static::$schema['properties']['handleRef']);
+        $validator->validate($handleRef, self::$schema['properties']['handleRef']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +165,7 @@ class HandleData
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

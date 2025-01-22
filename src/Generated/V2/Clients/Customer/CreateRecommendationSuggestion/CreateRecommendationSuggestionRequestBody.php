@@ -40,7 +40,7 @@ class CreateRecommendationSuggestionRequestBody
     public function withSuggestion(string $suggestion): self
     {
         $validator = new Validator();
-        $validator->validate($suggestion, static::$schema['properties']['suggestion']);
+        $validator->validate($suggestion, self::$schema['properties']['suggestion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -98,7 +98,7 @@ class CreateRecommendationSuggestionRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

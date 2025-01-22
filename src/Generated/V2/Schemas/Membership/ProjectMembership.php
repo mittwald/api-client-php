@@ -195,7 +195,7 @@ class ProjectMembership
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, static::$schema['properties']['email']);
+        $validator->validate($email, self::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -225,7 +225,7 @@ class ProjectMembership
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -239,7 +239,7 @@ class ProjectMembership
     public function withInherited(bool $inherited): self
     {
         $validator = new Validator();
-        $validator->validate($inherited, static::$schema['properties']['inherited']);
+        $validator->validate($inherited, self::$schema['properties']['inherited']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -253,7 +253,7 @@ class ProjectMembership
     public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($inviteId, static::$schema['properties']['inviteId']);
+        $validator->validate($inviteId, self::$schema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -291,7 +291,7 @@ class ProjectMembership
     public function withMfa(bool $mfa): self
     {
         $validator = new Validator();
-        $validator->validate($mfa, static::$schema['properties']['mfa']);
+        $validator->validate($mfa, self::$schema['properties']['mfa']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -305,7 +305,7 @@ class ProjectMembership
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -327,7 +327,7 @@ class ProjectMembership
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
+        $validator->validate($userId, self::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -420,7 +420,7 @@ class ProjectMembership
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

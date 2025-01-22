@@ -86,7 +86,7 @@ class PageinsightsGetStraceDataOKResponseBody
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -128,6 +128,7 @@ class PageinsightsGetStraceDataOKResponseBody
         $result = match (true) {
             Error::validateInput($input->{'result'}, true) => Error::buildFromInput($input->{'result'}, validate: $validate),
             Data::validateInput($input->{'result'}, true) => Data::buildFromInput($input->{'result'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'result' from JSON"),
         };
 
         $obj = new self($executedAt, $id, $result);
@@ -164,7 +165,7 @@ class PageinsightsGetStraceDataOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

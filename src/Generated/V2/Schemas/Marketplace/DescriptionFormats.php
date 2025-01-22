@@ -62,7 +62,7 @@ class DescriptionFormats
     public function withMarkdown(string $markdown): self
     {
         $validator = new Validator();
-        $validator->validate($markdown, static::$schema['properties']['markdown']);
+        $validator->validate($markdown, self::$schema['properties']['markdown']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -76,7 +76,7 @@ class DescriptionFormats
     public function withPlain(string $plain): self
     {
         $validator = new Validator();
-        $validator->validate($plain, static::$schema['properties']['plain']);
+        $validator->validate($plain, self::$schema['properties']['plain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class DescriptionFormats
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -72,7 +72,7 @@ class ConversationPreferencesPreferredUsers
     public function withCategoryUserPairs(array $categoryUserPairs): self
     {
         $validator = new Validator();
-        $validator->validate($categoryUserPairs, static::$schema['properties']['categoryUserPairs']);
+        $validator->validate($categoryUserPairs, self::$schema['properties']['categoryUserPairs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -94,7 +94,7 @@ class ConversationPreferencesPreferredUsers
     public function withFallback(string $fallback): self
     {
         $validator = new Validator();
-        $validator->validate($fallback, static::$schema['properties']['fallback']);
+        $validator->validate($fallback, self::$schema['properties']['fallback']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class ConversationPreferencesPreferredUsers
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

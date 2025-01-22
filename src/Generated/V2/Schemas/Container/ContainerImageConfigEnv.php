@@ -116,7 +116,7 @@ class ContainerImageConfigEnv
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -138,7 +138,7 @@ class ContainerImageConfigEnv
     public function withIsAiGenerated(bool $isAiGenerated): self
     {
         $validator = new Validator();
-        $validator->validate($isAiGenerated, static::$schema['properties']['isAiGenerated']);
+        $validator->validate($isAiGenerated, self::$schema['properties']['isAiGenerated']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -152,7 +152,7 @@ class ContainerImageConfigEnv
     public function withIsSensitive(bool $isSensitive): self
     {
         $validator = new Validator();
-        $validator->validate($isSensitive, static::$schema['properties']['isSensitive']);
+        $validator->validate($isSensitive, self::$schema['properties']['isSensitive']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -174,7 +174,7 @@ class ContainerImageConfigEnv
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, static::$schema['properties']['key']);
+        $validator->validate($key, self::$schema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -188,7 +188,7 @@ class ContainerImageConfigEnv
     public function withValue(string $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, static::$schema['properties']['value']);
+        $validator->validate($value, self::$schema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -279,7 +279,7 @@ class ContainerImageConfigEnv
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

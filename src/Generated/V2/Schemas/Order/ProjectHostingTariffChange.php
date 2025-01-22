@@ -85,7 +85,7 @@ class ProjectHostingTariffChange
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractId, static::$schema['properties']['contractId']);
+        $validator->validate($contractId, self::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,7 +102,7 @@ class ProjectHostingTariffChange
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
-        $validator->validate($diskspaceInGiB, static::$schema['properties']['diskspaceInGiB']);
+        $validator->validate($diskspaceInGiB, self::$schema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -144,6 +144,7 @@ class ProjectHostingTariffChange
         $spec = match (true) {
             MachineTypeSpec::validateInput($input->{'spec'}, true) => MachineTypeSpec::buildFromInput($input->{'spec'}, validate: $validate),
             HardwareSpec::validateInput($input->{'spec'}, true) => HardwareSpec::buildFromInput($input->{'spec'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'spec' from JSON"),
         };
 
         $obj = new self($contractId, $diskspaceInGiB, $spec);
@@ -180,7 +181,7 @@ class ProjectHostingTariffChange
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -68,7 +68,7 @@ class PageinsightsGetPerformanceDataRequest
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
-        $validator->validate($domain, static::$schema['properties']['domain']);
+        $validator->validate($domain, self::$schema['properties']['domain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -82,7 +82,7 @@ class PageinsightsGetPerformanceDataRequest
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, static::$schema['properties']['path']);
+        $validator->validate($path, self::$schema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class PageinsightsGetPerformanceDataRequest
     public function withDate(string $date): self
     {
         $validator = new Validator();
-        $validator->validate($date, static::$schema['properties']['date']);
+        $validator->validate($date, self::$schema['properties']['date']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -171,7 +171,7 @@ class PageinsightsGetPerformanceDataRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

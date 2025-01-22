@@ -69,7 +69,7 @@ class SslReplaceCertificateRequest
     public function withCertificateId(string $certificateId): self
     {
         $validator = new Validator();
-        $validator->validate($certificateId, static::$schema['properties']['certificateId']);
+        $validator->validate($certificateId, self::$schema['properties']['certificateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class SslReplaceCertificateRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

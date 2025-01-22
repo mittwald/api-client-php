@@ -68,7 +68,7 @@ class CertificateData
     public function withCaBundle(string $caBundle): self
     {
         $validator = new Validator();
-        $validator->validate($caBundle, static::$schema['properties']['caBundle']);
+        $validator->validate($caBundle, self::$schema['properties']['caBundle']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -90,7 +90,7 @@ class CertificateData
     public function withCertificate(string $certificate): self
     {
         $validator = new Validator();
-        $validator->validate($certificate, static::$schema['properties']['certificate']);
+        $validator->validate($certificate, self::$schema['properties']['certificate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +112,7 @@ class CertificateData
     public function withSigningRequest(string $signingRequest): self
     {
         $validator = new Validator();
-        $validator->validate($signingRequest, static::$schema['properties']['signingRequest']);
+        $validator->validate($signingRequest, self::$schema['properties']['signingRequest']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -199,7 +199,7 @@ class CertificateData
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

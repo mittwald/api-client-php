@@ -66,7 +66,7 @@ class DeprecatedDomainDeclareProcessChangeAuthcodeRequest
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($domainId, static::$schema['properties']['domainId']);
+        $validator->validate($domainId, self::$schema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,7 +134,7 @@ class DeprecatedDomainDeclareProcessChangeAuthcodeRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

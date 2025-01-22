@@ -63,7 +63,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBody
     public function withSecret(string $secret): self
     {
         $validator = new Validator();
-        $validator->validate($secret, static::$schema['properties']['secret']);
+        $validator->validate($secret, self::$schema['properties']['secret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,7 +131,7 @@ class ContributorRotateSecretForExtensionInstanceOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

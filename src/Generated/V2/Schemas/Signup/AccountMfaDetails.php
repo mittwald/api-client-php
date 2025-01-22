@@ -59,7 +59,7 @@ class AccountMfaDetails
     public function withMfaConfirmed(bool $mfaConfirmed): self
     {
         $validator = new Validator();
-        $validator->validate($mfaConfirmed, static::$schema['properties']['mfaConfirmed']);
+        $validator->validate($mfaConfirmed, self::$schema['properties']['mfaConfirmed']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -81,7 +81,7 @@ class AccountMfaDetails
     public function withMfaInitialized(bool $mfaInitialized): self
     {
         $validator = new Validator();
-        $validator->validate($mfaInitialized, static::$schema['properties']['mfaInitialized']);
+        $validator->validate($mfaInitialized, self::$schema['properties']['mfaInitialized']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -160,7 +160,7 @@ class AccountMfaDetails
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

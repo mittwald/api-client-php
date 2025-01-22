@@ -175,7 +175,7 @@ class ExtensionInstance
     public function withConsentedScopes(array $consentedScopes): self
     {
         $validator = new Validator();
-        $validator->validate($consentedScopes, static::$schema['properties']['consentedScopes']);
+        $validator->validate($consentedScopes, self::$schema['properties']['consentedScopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -205,7 +205,7 @@ class ExtensionInstance
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, static::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -219,7 +219,7 @@ class ExtensionInstance
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, static::$schema['properties']['extensionId']);
+        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -233,7 +233,7 @@ class ExtensionInstance
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -247,7 +247,7 @@ class ExtensionInstance
     public function withPendingInstallation(bool $pendingInstallation): self
     {
         $validator = new Validator();
-        $validator->validate($pendingInstallation, static::$schema['properties']['pendingInstallation']);
+        $validator->validate($pendingInstallation, self::$schema['properties']['pendingInstallation']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -261,7 +261,7 @@ class ExtensionInstance
     public function withPendingRemoval(bool $pendingRemoval): self
     {
         $validator = new Validator();
-        $validator->validate($pendingRemoval, static::$schema['properties']['pendingRemoval']);
+        $validator->validate($pendingRemoval, self::$schema['properties']['pendingRemoval']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -350,7 +350,7 @@ class ExtensionInstance
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

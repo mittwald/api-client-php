@@ -80,7 +80,7 @@ class PublicKey
     public function withAlgorithm(string $algorithm): self
     {
         $validator = new Validator();
-        $validator->validate($algorithm, static::$schema['properties']['algorithm']);
+        $validator->validate($algorithm, self::$schema['properties']['algorithm']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -94,7 +94,7 @@ class PublicKey
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, static::$schema['properties']['key']);
+        $validator->validate($key, self::$schema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class PublicKey
     public function withSerial(string $serial): self
     {
         $validator = new Validator();
-        $validator->validate($serial, static::$schema['properties']['serial']);
+        $validator->validate($serial, self::$schema['properties']['serial']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class PublicKey
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

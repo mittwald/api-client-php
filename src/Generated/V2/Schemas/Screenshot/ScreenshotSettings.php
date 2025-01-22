@@ -119,7 +119,7 @@ class ScreenshotSettings
     public function withDelay(int|float $delay): self
     {
         $validator = new Validator();
-        $validator->validate($delay, static::$schema['properties']['delay']);
+        $validator->validate($delay, self::$schema['properties']['delay']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class ScreenshotSettings
     public function withHeight(int|float $height): self
     {
         $validator = new Validator();
-        $validator->validate($height, static::$schema['properties']['height']);
+        $validator->validate($height, self::$schema['properties']['height']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -153,7 +153,7 @@ class ScreenshotSettings
     public function withQuality(int|float $quality): self
     {
         $validator = new Validator();
-        $validator->validate($quality, static::$schema['properties']['quality']);
+        $validator->validate($quality, self::$schema['properties']['quality']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class ScreenshotSettings
     public function withWidth(int|float $width): self
     {
         $validator = new Validator();
-        $validator->validate($width, static::$schema['properties']['width']);
+        $validator->validate($width, self::$schema['properties']['width']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -236,7 +236,7 @@ class ScreenshotSettings
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

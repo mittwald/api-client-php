@@ -116,7 +116,7 @@ class CreateRelocationRequestBodyTarget
     public function withOrganisation(string $organisation): self
     {
         $validator = new Validator();
-        $validator->validate($organisation, static::$schema['properties']['organisation']);
+        $validator->validate($organisation, self::$schema['properties']['organisation']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class CreateRelocationRequestBodyTarget
     public function withProjectName(string $projectName): self
     {
         $validator = new Validator();
-        $validator->validate($projectName, static::$schema['properties']['projectName']);
+        $validator->validate($projectName, self::$schema['properties']['projectName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -179,6 +179,7 @@ class CreateRelocationRequestBodyTarget
         $product = match (true) {
             is_string($input->{'product'}) => $input->{'product'},
             CreateRelocationRequestBodyTargetProductAlternative2::tryFrom($input->{'product'}) !== null => CreateRelocationRequestBodyTargetProductAlternative2::from($input->{'product'}),
+            default => throw new InvalidArgumentException("could not build property 'product' from JSON"),
         };
         $projectName = $input->{'projectName'};
         $system = CreateRelocationRequestBodyTargetSystem::from($input->{'system'});
@@ -219,7 +220,7 @@ class CreateRelocationRequestBodyTarget
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

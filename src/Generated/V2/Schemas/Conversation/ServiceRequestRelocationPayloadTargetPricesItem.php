@@ -59,7 +59,7 @@ class ServiceRequestRelocationPayloadTargetPricesItem
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -84,7 +84,7 @@ class ServiceRequestRelocationPayloadTargetPricesItem
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();
-        $validator->validate($price, static::$schema['properties']['price']);
+        $validator->validate($price, self::$schema['properties']['price']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class ServiceRequestRelocationPayloadTargetPricesItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

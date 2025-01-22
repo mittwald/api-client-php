@@ -87,7 +87,7 @@ class MigrationFinalizeJobProjectSetting
     public function withBlacklistEntries(array $blacklistEntries): self
     {
         $validator = new Validator();
-        $validator->validate($blacklistEntries, static::$schema['properties']['blacklistEntries']);
+        $validator->validate($blacklistEntries, self::$schema['properties']['blacklistEntries']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class MigrationFinalizeJobProjectSetting
     public function withWhitelistEntries(array $whitelistEntries): self
     {
         $validator = new Validator();
-        $validator->validate($whitelistEntries, static::$schema['properties']['whitelistEntries']);
+        $validator->validate($whitelistEntries, self::$schema['properties']['whitelistEntries']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class MigrationFinalizeJobProjectSetting
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

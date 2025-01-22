@@ -91,7 +91,7 @@ class ListCustomersRequest
     public function withRole(string $role): self
     {
         $validator = new Validator();
-        $validator->validate($role, static::$schema['properties']['role']);
+        $validator->validate($role, self::$schema['properties']['role']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -113,7 +113,7 @@ class ListCustomersRequest
     public function withSearch(string $search): self
     {
         $validator = new Validator();
-        $validator->validate($search, static::$schema['properties']['search']);
+        $validator->validate($search, self::$schema['properties']['search']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -135,7 +135,7 @@ class ListCustomersRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, static::$schema['properties']['limit']);
+        $validator->validate($limit, self::$schema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class ListCustomersRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, static::$schema['properties']['skip']);
+        $validator->validate($skip, self::$schema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class ListCustomersRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, static::$schema['properties']['page']);
+        $validator->validate($page, self::$schema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -262,7 +262,7 @@ class ListCustomersRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

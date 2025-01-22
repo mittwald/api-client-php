@@ -47,7 +47,7 @@ class DeprecatedUserServiceFeedbackListRequest
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
-        $validator->validate($subject, static::$schema['properties']['subject']);
+        $validator->validate($subject, self::$schema['properties']['subject']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -118,7 +118,7 @@ class DeprecatedUserServiceFeedbackListRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

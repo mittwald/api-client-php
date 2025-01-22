@@ -94,7 +94,7 @@ class Contact
     public function withCity(string $city): self
     {
         $validator = new Validator();
-        $validator->validate($city, static::$schema['properties']['city']);
+        $validator->validate($city, self::$schema['properties']['city']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,7 +116,7 @@ class Contact
     public function withCompany(string $company): self
     {
         $validator = new Validator();
-        $validator->validate($company, static::$schema['properties']['company']);
+        $validator->validate($company, self::$schema['properties']['company']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -138,7 +138,7 @@ class Contact
     public function withCountry(string $country): self
     {
         $validator = new Validator();
-        $validator->validate($country, static::$schema['properties']['country']);
+        $validator->validate($country, self::$schema['properties']['country']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -160,7 +160,7 @@ class Contact
     public function withOrganizationalUnit(string $organizationalUnit): self
     {
         $validator = new Validator();
-        $validator->validate($organizationalUnit, static::$schema['properties']['organizationalUnit']);
+        $validator->validate($organizationalUnit, self::$schema['properties']['organizationalUnit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -182,7 +182,7 @@ class Contact
     public function withState(string $state): self
     {
         $validator = new Validator();
-        $validator->validate($state, static::$schema['properties']['state']);
+        $validator->validate($state, self::$schema['properties']['state']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -285,7 +285,7 @@ class Contact
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

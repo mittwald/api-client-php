@@ -75,7 +75,7 @@ class ConfigFileRef
     public function withRefId(string $refId): self
     {
         $validator = new Validator();
-        $validator->validate($refId, static::$schema['properties']['refId']);
+        $validator->validate($refId, self::$schema['properties']['refId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class ConfigFileRef
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

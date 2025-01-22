@@ -84,6 +84,7 @@ class CombinedAManaged
 
         $managedBy = match (true) {
             CombinedAManagedManagedByAlternative1::validateInput($input->{'managedBy'}, true) => CombinedAManagedManagedByAlternative1::buildFromInput($input->{'managedBy'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'managedBy' from JSON"),
         };
 
         $obj = new self($managedBy);
@@ -118,7 +119,7 @@ class CombinedAManaged
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

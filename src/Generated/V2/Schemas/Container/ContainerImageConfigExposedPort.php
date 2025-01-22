@@ -87,7 +87,7 @@ class ContainerImageConfigExposedPort
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class ContainerImageConfigExposedPort
     public function withIsAiGenerated(bool $isAiGenerated): self
     {
         $validator = new Validator();
-        $validator->validate($isAiGenerated, static::$schema['properties']['isAiGenerated']);
+        $validator->validate($isAiGenerated, self::$schema['properties']['isAiGenerated']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -123,7 +123,7 @@ class ContainerImageConfigExposedPort
     public function withPort(string $port): self
     {
         $validator = new Validator();
-        $validator->validate($port, static::$schema['properties']['port']);
+        $validator->validate($port, self::$schema['properties']['port']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -190,7 +190,7 @@ class ContainerImageConfigExposedPort
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

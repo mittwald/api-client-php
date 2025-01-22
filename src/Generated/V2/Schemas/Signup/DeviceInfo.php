@@ -82,7 +82,7 @@ class DeviceInfo
     public function withBrowser(string $browser): self
     {
         $validator = new Validator();
-        $validator->validate($browser, static::$schema['properties']['browser']);
+        $validator->validate($browser, self::$schema['properties']['browser']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class DeviceInfo
     public function withModel(string $model): self
     {
         $validator = new Validator();
-        $validator->validate($model, static::$schema['properties']['model']);
+        $validator->validate($model, self::$schema['properties']['model']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class DeviceInfo
     public function withOs(string $os): self
     {
         $validator = new Validator();
-        $validator->validate($os, static::$schema['properties']['os']);
+        $validator->validate($os, self::$schema['properties']['os']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -148,7 +148,7 @@ class DeviceInfo
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, static::$schema['properties']['type']);
+        $validator->validate($type, self::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -243,7 +243,7 @@ class DeviceInfo
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

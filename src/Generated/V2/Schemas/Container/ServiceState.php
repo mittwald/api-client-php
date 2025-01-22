@@ -147,7 +147,7 @@ class ServiceState
     public function withCommand(array $command): self
     {
         $validator = new Validator();
-        $validator->validate($command, static::$schema['properties']['command']);
+        $validator->validate($command, self::$schema['properties']['command']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -172,7 +172,7 @@ class ServiceState
     public function withEntrypoint(array $entrypoint): self
     {
         $validator = new Validator();
-        $validator->validate($entrypoint, static::$schema['properties']['entrypoint']);
+        $validator->validate($entrypoint, self::$schema['properties']['entrypoint']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -197,7 +197,7 @@ class ServiceState
     public function withEnvs(array $envs): self
     {
         $validator = new Validator();
-        $validator->validate($envs, static::$schema['properties']['envs']);
+        $validator->validate($envs, self::$schema['properties']['envs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -219,7 +219,7 @@ class ServiceState
     public function withImage(string $image): self
     {
         $validator = new Validator();
-        $validator->validate($image, static::$schema['properties']['image']);
+        $validator->validate($image, self::$schema['properties']['image']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -236,7 +236,7 @@ class ServiceState
     public function withPorts(array $ports): self
     {
         $validator = new Validator();
-        $validator->validate($ports, static::$schema['properties']['ports']);
+        $validator->validate($ports, self::$schema['properties']['ports']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -261,7 +261,7 @@ class ServiceState
     public function withVolumes(array $volumes): self
     {
         $validator = new Validator();
-        $validator->validate($volumes, static::$schema['properties']['volumes']);
+        $validator->validate($volumes, self::$schema['properties']['volumes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -366,7 +366,7 @@ class ServiceState
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

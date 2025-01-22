@@ -145,7 +145,7 @@ class Task
     public function withFileReference(string $fileReference): self
     {
         $validator = new Validator();
-        $validator->validate($fileReference, static::$schema['properties']['fileReference']);
+        $validator->validate($fileReference, self::$schema['properties']['fileReference']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -167,7 +167,7 @@ class Task
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -184,7 +184,7 @@ class Task
     public function withPriority(int|float $priority): self
     {
         $validator = new Validator();
-        $validator->validate($priority, static::$schema['properties']['priority']);
+        $validator->validate($priority, self::$schema['properties']['priority']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -262,6 +262,7 @@ class Task
             $taskState = match (true) {
                 is_string($input->{'taskState'}) => $input->{'taskState'},
                 Error::validateInput($input->{'taskState'}, true) => Error::buildFromInput($input->{'taskState'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'taskState' from JSON"),
             };
         }
 
@@ -312,7 +313,7 @@ class Task
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -212,7 +212,7 @@ class MySqlUser
     public function withAccessIpMask(string $accessIpMask): self
     {
         $validator = new Validator();
-        $validator->validate($accessIpMask, static::$schema['properties']['accessIpMask']);
+        $validator->validate($accessIpMask, self::$schema['properties']['accessIpMask']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -250,7 +250,7 @@ class MySqlUser
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, static::$schema['properties']['databaseId']);
+        $validator->validate($databaseId, self::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -264,7 +264,7 @@ class MySqlUser
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -286,7 +286,7 @@ class MySqlUser
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, static::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -300,7 +300,7 @@ class MySqlUser
     public function withExternalAccess(bool $externalAccess): self
     {
         $validator = new Validator();
-        $validator->validate($externalAccess, static::$schema['properties']['externalAccess']);
+        $validator->validate($externalAccess, self::$schema['properties']['externalAccess']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -314,7 +314,7 @@ class MySqlUser
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -328,7 +328,7 @@ class MySqlUser
     public function withMainUser(bool $mainUser): self
     {
         $validator = new Validator();
-        $validator->validate($mainUser, static::$schema['properties']['mainUser']);
+        $validator->validate($mainUser, self::$schema['properties']['mainUser']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -342,7 +342,7 @@ class MySqlUser
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -469,7 +469,7 @@ class MySqlUser
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

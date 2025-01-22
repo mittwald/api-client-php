@@ -191,7 +191,7 @@ class OrderItem
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
-        $validator->validate($articleId, static::$schema['properties']['articleId']);
+        $validator->validate($articleId, self::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -205,7 +205,7 @@ class OrderItem
     public function withArticleName(string $articleName): self
     {
         $validator = new Validator();
-        $validator->validate($articleName, static::$schema['properties']['articleName']);
+        $validator->validate($articleName, self::$schema['properties']['articleName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -227,7 +227,7 @@ class OrderItem
     public function withArticleTemplateName(string $articleTemplateName): self
     {
         $validator = new Validator();
-        $validator->validate($articleTemplateName, static::$schema['properties']['articleTemplateName']);
+        $validator->validate($articleTemplateName, self::$schema['properties']['articleTemplateName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -268,7 +268,7 @@ class OrderItem
     public function withIsInclusive(bool $isInclusive): self
     {
         $validator = new Validator();
-        $validator->validate($isInclusive, static::$schema['properties']['isInclusive']);
+        $validator->validate($isInclusive, self::$schema['properties']['isInclusive']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -282,7 +282,7 @@ class OrderItem
     public function withOrderItemId(string $orderItemId): self
     {
         $validator = new Validator();
-        $validator->validate($orderItemId, static::$schema['properties']['orderItemId']);
+        $validator->validate($orderItemId, self::$schema['properties']['orderItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -296,7 +296,7 @@ class OrderItem
     public function withPredefinedDomainAggregateId(string $predefinedDomainAggregateId): self
     {
         $validator = new Validator();
-        $validator->validate($predefinedDomainAggregateId, static::$schema['properties']['predefinedDomainAggregateId']);
+        $validator->validate($predefinedDomainAggregateId, self::$schema['properties']['predefinedDomainAggregateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -321,7 +321,7 @@ class OrderItem
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();
-        $validator->validate($price, static::$schema['properties']['price']);
+        $validator->validate($price, self::$schema['properties']['price']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -448,7 +448,7 @@ class OrderItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -50,7 +50,7 @@ class Error
     public function withErrorMessage(string $errorMessage): self
     {
         $validator = new Validator();
-        $validator->validate($errorMessage, static::$schema['properties']['errorMessage']);
+        $validator->validate($errorMessage, self::$schema['properties']['errorMessage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class Error
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

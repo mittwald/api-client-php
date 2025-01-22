@@ -200,7 +200,7 @@ class CustomerOrder
     public function withContractChangeContractId(string $contractChangeContractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractChangeContractId, static::$schema['properties']['contractChangeContractId']);
+        $validator->validate($contractChangeContractId, self::$schema['properties']['contractChangeContractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,7 +222,7 @@ class CustomerOrder
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -255,7 +255,7 @@ class CustomerOrder
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
         $validator = new Validator();
-        $validator->validate($invoicingPeriod, static::$schema['properties']['invoicingPeriod']);
+        $validator->validate($invoicingPeriod, self::$schema['properties']['invoicingPeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -296,7 +296,7 @@ class CustomerOrder
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();
-        $validator->validate($orderId, static::$schema['properties']['orderId']);
+        $validator->validate($orderId, self::$schema['properties']['orderId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -310,7 +310,7 @@ class CustomerOrder
     public function withOrderNumber(string $orderNumber): self
     {
         $validator = new Validator();
-        $validator->validate($orderNumber, static::$schema['properties']['orderNumber']);
+        $validator->validate($orderNumber, self::$schema['properties']['orderNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -453,7 +453,7 @@ class CustomerOrder
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

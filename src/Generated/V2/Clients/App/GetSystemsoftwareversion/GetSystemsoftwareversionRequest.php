@@ -59,7 +59,7 @@ class GetSystemsoftwareversionRequest
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareId, static::$schema['properties']['systemSoftwareId']);
+        $validator->validate($systemSoftwareId, self::$schema['properties']['systemSoftwareId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,7 +73,7 @@ class GetSystemsoftwareversionRequest
     public function withSystemSoftwareVersionId(string $systemSoftwareVersionId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareVersionId, static::$schema['properties']['systemSoftwareVersionId']);
+        $validator->validate($systemSoftwareVersionId, self::$schema['properties']['systemSoftwareVersionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class GetSystemsoftwareversionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

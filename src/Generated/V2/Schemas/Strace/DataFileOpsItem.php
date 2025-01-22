@@ -92,7 +92,7 @@ class DataFileOpsItem
     public function withFilename(string $filename): self
     {
         $validator = new Validator();
-        $validator->validate($filename, static::$schema['properties']['filename']);
+        $validator->validate($filename, self::$schema['properties']['filename']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class DataFileOpsItem
     public function withFilepath(string $filepath): self
     {
         $validator = new Validator();
-        $validator->validate($filepath, static::$schema['properties']['filepath']);
+        $validator->validate($filepath, self::$schema['properties']['filepath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,7 +213,7 @@ class DataFileOpsItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
