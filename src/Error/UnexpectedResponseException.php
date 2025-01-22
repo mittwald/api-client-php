@@ -14,7 +14,7 @@ class UnexpectedResponseException extends Exception
 {
     public readonly ResponseInterface $response;
 
-    public function __construct(ResponseContainer $response, Throwable $previous = null)
+    public function __construct(ResponseContainer $response, ?Throwable $previous = null)
     {
         $response = $response->getResponse();
         if ($response === null) {
