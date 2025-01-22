@@ -47,7 +47,7 @@ Namely ExtensionAddedToContext and ExtensionInstanceSecretRotated.
     public function withExtensionInstanceSecret(string $extensionInstanceSecret): self
     {
         $validator = new Validator();
-        $validator->validate($extensionInstanceSecret, static::$schema['properties']['extensionInstanceSecret']);
+        $validator->validate($extensionInstanceSecret, self::$schema['properties']['extensionInstanceSecret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ Namely ExtensionAddedToContext and ExtensionInstanceSecretRotated.
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

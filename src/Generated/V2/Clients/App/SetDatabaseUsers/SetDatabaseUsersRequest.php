@@ -82,7 +82,7 @@ class SetDatabaseUsersRequest
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, static::$schema['properties']['appInstallationId']);
+        $validator->validate($appInstallationId, self::$schema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class SetDatabaseUsersRequest
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, static::$schema['properties']['databaseId']);
+        $validator->validate($databaseId, self::$schema['properties']['databaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -166,7 +166,7 @@ class SetDatabaseUsersRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

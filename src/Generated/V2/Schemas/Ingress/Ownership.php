@@ -63,7 +63,7 @@ class Ownership
     public function withTxtRecord(string $txtRecord): self
     {
         $validator = new Validator();
-        $validator->validate($txtRecord, static::$schema['properties']['txtRecord']);
+        $validator->validate($txtRecord, self::$schema['properties']['txtRecord']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -85,7 +85,7 @@ class Ownership
     public function withVerified(bool $verified): self
     {
         $validator = new Validator();
-        $validator->validate($verified, static::$schema['properties']['verified']);
+        $validator->validate($verified, self::$schema['properties']['verified']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class Ownership
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

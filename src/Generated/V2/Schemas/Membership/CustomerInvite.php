@@ -174,7 +174,7 @@ class CustomerInvite
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
-        $validator->validate($avatarRefId, static::$schema['properties']['avatarRefId']);
+        $validator->validate($avatarRefId, self::$schema['properties']['avatarRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -196,7 +196,7 @@ class CustomerInvite
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -210,7 +210,7 @@ class CustomerInvite
     public function withCustomerName(string $customerName): self
     {
         $validator = new Validator();
-        $validator->validate($customerName, static::$schema['properties']['customerName']);
+        $validator->validate($customerName, self::$schema['properties']['customerName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class CustomerInvite
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -246,7 +246,7 @@ class CustomerInvite
     public function withMailAddress(string $mailAddress): self
     {
         $validator = new Validator();
-        $validator->validate($mailAddress, static::$schema['properties']['mailAddress']);
+        $validator->validate($mailAddress, self::$schema['properties']['mailAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -276,7 +276,7 @@ class CustomerInvite
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, static::$schema['properties']['message']);
+        $validator->validate($message, self::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -383,7 +383,7 @@ class CustomerInvite
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

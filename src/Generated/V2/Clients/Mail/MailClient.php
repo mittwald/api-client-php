@@ -13,8 +13,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAdd
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\CreateMailAddress\CreateMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteDeliveryBox\DeleteDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeleteMailAddress\DeleteMailAddressRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdateDescriptionDeprecated\DeliveryboxUpdateDescriptionDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeliveryboxUpdatePasswordDeprecated\DeliveryboxUpdatePasswordDeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailDeliveryboxUpdateDescription\DeprecatedMailDeliveryboxUpdateDescriptionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailDeliveryboxUpdatePassword\DeprecatedMailDeliveryboxUpdatePasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailMailaddressUpdateAddress\DeprecatedMailMailaddressUpdateAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailProjectsettingUpdateBlacklist\DeprecatedMailProjectsettingUpdateBlacklistRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailProjectsettingUpdateWhitelist\DeprecatedMailProjectsettingUpdateWhitelistRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressAutoresponder\DeprecatedMailUpdateMailAddressAutoresponderRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressCatchall\DeprecatedMailUpdateMailAddressCatchallRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressForwardAddresses\DeprecatedMailUpdateMailAddressForwardAddressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressPassword\DeprecatedMailUpdateMailAddressPasswordRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressQuota\DeprecatedMailUpdateMailAddressQuotaRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressSpamProtection\DeprecatedMailUpdateMailAddressSpamProtectionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOKResponse;
@@ -25,26 +35,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddre
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListProjectMailSettings\ListProjectMailSettingsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\MailaddressUpdateAddressDeprecated\MailaddressUpdateAddressDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateBlacklistDeprecated\ProjectsettingUpdateBlacklistDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\ProjectsettingUpdateWhitelistDeprecated\ProjectsettingUpdateWhitelistDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponder\UpdateMailAddressAutoresponderRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAutoresponderV2Deprecated\UpdateMailAddressAutoresponderV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchAll\UpdateMailAddressCatchAllRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressCatchallV2Deprecated\UpdateMailAddressCatchallV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddresses\UpdateMailAddressForwardAddressesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressForwardAddressesV2Deprecated\UpdateMailAddressForwardAddressesV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPassword\UpdateMailAddressPasswordRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressPasswordV2Deprecated\UpdateMailAddressPasswordV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuota\UpdateMailAddressQuotaRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressQuotaV2Deprecated\UpdateMailAddressQuotaV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtection\UpdateMailAddressSpamProtectionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressSpamProtectionV2Deprecated\UpdateMailAddressSpamProtectionV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSetting\UpdateProjectMailSettingRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Deprecated\UpdateProjectMailSettingV2DeprecatedRequest;
 
 /**
  * Client for Mail API
@@ -60,6 +60,162 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateProjectMailSettingV2Depre
  */
 interface MailClient
 {
+    /**
+     * Update the description of an deliverybox
+     *
+     * This operation is deprecated. Use the PATCH v2/delivery-boxes/{deliveryBoxId}/description endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-deliverybox-update-description
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailDeliveryboxUpdateDescriptionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailDeliveryboxUpdateDescription(DeprecatedMailDeliveryboxUpdateDescriptionRequest $request): EmptyResponse;
+    /**
+     * Update the password for a specific deliverybox
+     *
+     * This operation is deprecated. Use the PATCH v2/delivery-boxes/{deliveryBoxId}/password endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-deliverybox-update-password
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailDeliveryboxUpdatePasswordRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailDeliveryboxUpdatePassword(DeprecatedMailDeliveryboxUpdatePasswordRequest $request): EmptyResponse;
+    /**
+     * Update mail-address
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/address endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-mailaddress-update-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailMailaddressUpdateAddressRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailMailaddressUpdateAddress(DeprecatedMailMailaddressUpdateAddressRequest $request): EmptyResponse;
+    /**
+     * Update blacklist for a given project ID
+     *
+     * This operation is deprecated. Use the PATCH v2/{projectId}/mail-settings/{mailSetting} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-projectsetting-update-blacklist
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailProjectsettingUpdateBlacklistRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailProjectsettingUpdateBlacklist(DeprecatedMailProjectsettingUpdateBlacklistRequest $request): EmptyResponse;
+    /**
+     * Update whitelist for a given project ID
+     *
+     * This operation is deprecated. Use the PATCH v2/{projectId}/mail-settings/{mailSetting} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-projectsetting-update-whitelist
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailProjectsettingUpdateWhitelistRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailProjectsettingUpdateWhitelist(DeprecatedMailProjectsettingUpdateWhitelistRequest $request): EmptyResponse;
+    /**
+     * Update the autoresponder of a MailAddress.
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/autoresponder endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-mail-address-autoresponder
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateMailAddressAutoresponderRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateMailAddressAutoresponder(DeprecatedMailUpdateMailAddressAutoresponderRequest $request): EmptyResponse;
+    /**
+     * Update the catchall of a MailAddress.
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/catch-all endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-mail-address-catchall
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateMailAddressCatchallRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateMailAddressCatchall(DeprecatedMailUpdateMailAddressCatchallRequest $request): EmptyResponse;
+    /**
+     * Update the forward addresses of a MailAddresses.
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/forward-addresses endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-mail-address-forward-addresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateMailAddressForwardAddressesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateMailAddressForwardAddresses(DeprecatedMailUpdateMailAddressForwardAddressesRequest $request): EmptyResponse;
+    /**
+     * Update the password for a MailAddress.
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/password endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-mail-address-password
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateMailAddressPasswordRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateMailAddressPassword(DeprecatedMailUpdateMailAddressPasswordRequest $request): EmptyResponse;
+    /**
+     * Update the quota of a MailAddress.
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/quota endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-mail-address-quota
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateMailAddressQuotaRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateMailAddressQuota(DeprecatedMailUpdateMailAddressQuotaRequest $request): EmptyResponse;
+    /**
+     * Update the spam protection of a MailAddress.
+     *
+     * This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/spam-protection endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-mail-address-spam-protection
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateMailAddressSpamProtectionRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateMailAddressSpamProtection(DeprecatedMailUpdateMailAddressSpamProtectionRequest $request): EmptyResponse;
+    /**
+     * Update a mail setting of a Project.
+     *
+     * This operation is deprecated. Use the PATCH v2/{projectId}/mail-settings/{mailSetting} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/deprecated-mail-update-project-mail-setting
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedMailUpdateProjectMailSettingRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse OK
+     */
+    public function deprecatedMailUpdateProjectMailSetting(DeprecatedMailUpdateProjectMailSettingRequest $request): EmptyResponse;
     /**
      * Create a DeliveryBox.
      *
@@ -100,28 +256,6 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse;
-    /**
-     * Update the description of an deliverybox
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-deliverybox-update-description-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeliveryboxUpdateDescriptionDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function deliveryboxUpdateDescriptionDeprecated(DeliveryboxUpdateDescriptionDeprecatedRequest $request): EmptyResponse;
-    /**
-     * Update the password for a specific deliverybox
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-deliverybox-update-password-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DeliveryboxUpdatePasswordDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function deliveryboxUpdatePasswordDeprecated(DeliveryboxUpdatePasswordDeprecatedRequest $request): EmptyResponse;
     /**
      * Get a DeliveryBox.
      *
@@ -173,39 +307,6 @@ interface MailClient
      */
     public function listProjectMailSettings(ListProjectMailSettingsRequest $request): ListProjectMailSettingsOKResponse;
     /**
-     * Update mail-address
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-mailaddress-update-address-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param MailaddressUpdateAddressDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function mailaddressUpdateAddressDeprecated(MailaddressUpdateAddressDeprecatedRequest $request): EmptyResponse;
-    /**
-     * Update blacklist for a given project ID
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-projectsetting-update-blacklist-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ProjectsettingUpdateBlacklistDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function projectsettingUpdateBlacklistDeprecated(ProjectsettingUpdateBlacklistDeprecatedRequest $request): EmptyResponse;
-    /**
-     * Update whitelist for a given project ID
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-projectsetting-update-whitelist-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ProjectsettingUpdateWhitelistDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function projectsettingUpdateWhitelistDeprecated(ProjectsettingUpdateWhitelistDeprecatedRequest $request): EmptyResponse;
-    /**
      * Update the description of a DeliveryBox.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-delivery-box-description
@@ -246,17 +347,6 @@ interface MailClient
      */
     public function updateMailAddressAutoresponder(UpdateMailAddressAutoresponderRequest $request): EmptyResponse;
     /**
-     * Update the autoresponder of a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-autoresponder-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMailAddressAutoresponderV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateMailAddressAutoresponderV2Deprecated(UpdateMailAddressAutoresponderV2DeprecatedRequest $request): EmptyResponse;
-    /**
      * Update the catchall of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catch-all
@@ -266,17 +356,6 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function updateMailAddressCatchAll(UpdateMailAddressCatchAllRequest $request): EmptyResponse;
-    /**
-     * Update the catchall of a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catchall-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMailAddressCatchallV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateMailAddressCatchallV2Deprecated(UpdateMailAddressCatchallV2DeprecatedRequest $request): EmptyResponse;
     /**
      * Update the forward addresses of a MailAddresses.
      *
@@ -288,17 +367,6 @@ interface MailClient
      */
     public function updateMailAddressForwardAddresses(UpdateMailAddressForwardAddressesRequest $request): EmptyResponse;
     /**
-     * Update the forward addresses of a MailAddresses.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-forward-addresses-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMailAddressForwardAddressesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateMailAddressForwardAddressesV2Deprecated(UpdateMailAddressForwardAddressesV2DeprecatedRequest $request): EmptyResponse;
-    /**
      * Update the password for a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-password
@@ -308,17 +376,6 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function updateMailAddressPassword(UpdateMailAddressPasswordRequest $request): EmptyResponse;
-    /**
-     * Update the password for a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-password-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMailAddressPasswordV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateMailAddressPasswordV2Deprecated(UpdateMailAddressPasswordV2DeprecatedRequest $request): EmptyResponse;
     /**
      * Update the quota of a MailAddress.
      *
@@ -330,17 +387,6 @@ interface MailClient
      */
     public function updateMailAddressQuota(UpdateMailAddressQuotaRequest $request): EmptyResponse;
     /**
-     * Update the quota of a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-quota-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMailAddressQuotaV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateMailAddressQuotaV2Deprecated(UpdateMailAddressQuotaV2DeprecatedRequest $request): EmptyResponse;
-    /**
      * Update the spam protection of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-spam-protection
@@ -351,17 +397,6 @@ interface MailClient
      */
     public function updateMailAddressSpamProtection(UpdateMailAddressSpamProtectionRequest $request): EmptyResponse;
     /**
-     * Update the spam protection of a MailAddress.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-spam-protection-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateMailAddressSpamProtectionV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateMailAddressSpamProtectionV2Deprecated(UpdateMailAddressSpamProtectionV2DeprecatedRequest $request): EmptyResponse;
-    /**
      * Update a mail setting of a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-project-mail-setting
@@ -371,15 +406,4 @@ interface MailClient
      * @return EmptyResponse OK
      */
     public function updateProjectMailSetting(UpdateProjectMailSettingRequest $request): EmptyResponse;
-    /**
-     * Update a mail setting of a Project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-project-mail-setting-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param UpdateProjectMailSettingV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse OK
-     */
-    public function updateProjectMailSettingV2Deprecated(UpdateProjectMailSettingV2DeprecatedRequest $request): EmptyResponse;
 }

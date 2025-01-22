@@ -142,7 +142,7 @@ class FilesystemDirectoryListing
     public function withAbsolutePath(string $absolutePath): self
     {
         $validator = new Validator();
-        $validator->validate($absolutePath, static::$schema['properties']['absolutePath']);
+        $validator->validate($absolutePath, self::$schema['properties']['absolutePath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -156,7 +156,7 @@ class FilesystemDirectoryListing
     public function withIsDirectory(bool $isDirectory): self
     {
         $validator = new Validator();
-        $validator->validate($isDirectory, static::$schema['properties']['isDirectory']);
+        $validator->validate($isDirectory, self::$schema['properties']['isDirectory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class FilesystemDirectoryListing
     public function withIsExecutable(bool $isExecutable): self
     {
         $validator = new Validator();
-        $validator->validate($isExecutable, static::$schema['properties']['isExecutable']);
+        $validator->validate($isExecutable, self::$schema['properties']['isExecutable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -200,7 +200,7 @@ class FilesystemDirectoryListing
     public function withIsFile(bool $isFile): self
     {
         $validator = new Validator();
-        $validator->validate($isFile, static::$schema['properties']['isFile']);
+        $validator->validate($isFile, self::$schema['properties']['isFile']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,7 +222,7 @@ class FilesystemDirectoryListing
     public function withIsSymlink(bool $isSymlink): self
     {
         $validator = new Validator();
-        $validator->validate($isSymlink, static::$schema['properties']['isSymlink']);
+        $validator->validate($isSymlink, self::$schema['properties']['isSymlink']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -263,7 +263,7 @@ class FilesystemDirectoryListing
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -277,7 +277,7 @@ class FilesystemDirectoryListing
     public function withSize(int $size): self
     {
         $validator = new Validator();
-        $validator->validate($size, static::$schema['properties']['size']);
+        $validator->validate($size, self::$schema['properties']['size']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -291,7 +291,7 @@ class FilesystemDirectoryListing
     public function withTarget(string $target): self
     {
         $validator = new Validator();
-        $validator->validate($target, static::$schema['properties']['target']);
+        $validator->validate($target, self::$schema['properties']['target']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -408,7 +408,7 @@ class FilesystemDirectoryListing
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

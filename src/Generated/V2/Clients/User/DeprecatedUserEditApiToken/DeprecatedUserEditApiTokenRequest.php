@@ -71,7 +71,7 @@ class DeprecatedUserEditApiTokenRequest
     public function withApiTokenId(string $apiTokenId): self
     {
         $validator = new Validator();
-        $validator->validate($apiTokenId, static::$schema['properties']['apiTokenId']);
+        $validator->validate($apiTokenId, self::$schema['properties']['apiTokenId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -139,7 +139,7 @@ class DeprecatedUserEditApiTokenRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

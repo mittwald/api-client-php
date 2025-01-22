@@ -75,7 +75,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function withDomainAgeTooSmall(bool $domainAgeTooSmall): self
     {
         $validator = new Validator();
-        $validator->validate($domainAgeTooSmall, static::$schema['properties']['domainAgeTooSmall']);
+        $validator->validate($domainAgeTooSmall, self::$schema['properties']['domainAgeTooSmall']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -89,7 +89,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function withDomainDoesNotExist(bool $domainDoesNotExist): self
     {
         $validator = new Validator();
-        $validator->validate($domainDoesNotExist, static::$schema['properties']['domainDoesNotExist']);
+        $validator->validate($domainDoesNotExist, self::$schema['properties']['domainDoesNotExist']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +103,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function withTransferLock(bool $transferLock): self
     {
         $validator = new Validator();
-        $validator->validate($transferLock, static::$schema['properties']['transferLock']);
+        $validator->validate($transferLock, self::$schema['properties']['transferLock']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -117,7 +117,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     public function withWrongAuthCode(bool $wrongAuthCode): self
     {
         $validator = new Validator();
-        $validator->validate($wrongAuthCode, static::$schema['properties']['wrongAuthCode']);
+        $validator->validate($wrongAuthCode, self::$schema['properties']['wrongAuthCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -181,7 +181,7 @@ class CheckDomainTransferabilityOKResponseBodyReasons
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

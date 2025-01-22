@@ -90,7 +90,7 @@ class MailAddressMailboxSpamProtection
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, static::$schema['properties']['active']);
+        $validator->validate($active, self::$schema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class MailAddressMailboxSpamProtection
     public function withAutoDeleteSpam(bool $autoDeleteSpam): self
     {
         $validator = new Validator();
-        $validator->validate($autoDeleteSpam, static::$schema['properties']['autoDeleteSpam']);
+        $validator->validate($autoDeleteSpam, self::$schema['properties']['autoDeleteSpam']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class MailAddressMailboxSpamProtection
     public function withRelocationMinSpamScore(int $relocationMinSpamScore): self
     {
         $validator = new Validator();
-        $validator->validate($relocationMinSpamScore, static::$schema['properties']['relocationMinSpamScore']);
+        $validator->validate($relocationMinSpamScore, self::$schema['properties']['relocationMinSpamScore']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -190,7 +190,7 @@ class MailAddressMailboxSpamProtection
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

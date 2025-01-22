@@ -144,7 +144,7 @@ class StatisticsMeta
     public function withIsExceeding(bool $isExceeding): self
     {
         $validator = new Validator();
-        $validator->validate($isExceeding, static::$schema['properties']['isExceeding']);
+        $validator->validate($isExceeding, self::$schema['properties']['isExceeding']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -166,7 +166,7 @@ class StatisticsMeta
     public function withLimitInBytes(int $limitInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($limitInBytes, static::$schema['properties']['limitInBytes']);
+        $validator->validate($limitInBytes, self::$schema['properties']['limitInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -188,7 +188,7 @@ class StatisticsMeta
     public function withNotificationThresholdUsedAsLimit(bool $notificationThresholdUsedAsLimit): self
     {
         $validator = new Validator();
-        $validator->validate($notificationThresholdUsedAsLimit, static::$schema['properties']['notificationThresholdUsedAsLimit']);
+        $validator->validate($notificationThresholdUsedAsLimit, self::$schema['properties']['notificationThresholdUsedAsLimit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -210,7 +210,7 @@ class StatisticsMeta
     public function withTotalExceedanceInBytes(int $totalExceedanceInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalExceedanceInBytes, static::$schema['properties']['totalExceedanceInBytes']);
+        $validator->validate($totalExceedanceInBytes, self::$schema['properties']['totalExceedanceInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -248,7 +248,7 @@ class StatisticsMeta
     public function withTotalFreeInBytes(int $totalFreeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalFreeInBytes, static::$schema['properties']['totalFreeInBytes']);
+        $validator->validate($totalFreeInBytes, self::$schema['properties']['totalFreeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -273,7 +273,7 @@ class StatisticsMeta
     public function withTotalFreeInPercentage(int|float $totalFreeInPercentage): self
     {
         $validator = new Validator();
-        $validator->validate($totalFreeInPercentage, static::$schema['properties']['totalFreeInPercentage']);
+        $validator->validate($totalFreeInPercentage, self::$schema['properties']['totalFreeInPercentage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -295,7 +295,7 @@ class StatisticsMeta
     public function withTotalUsageInBytes(int $totalUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($totalUsageInBytes, static::$schema['properties']['totalUsageInBytes']);
+        $validator->validate($totalUsageInBytes, self::$schema['properties']['totalUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -312,7 +312,7 @@ class StatisticsMeta
     public function withTotalUsageInPercentage(int|float $totalUsageInPercentage): self
     {
         $validator = new Validator();
-        $validator->validate($totalUsageInPercentage, static::$schema['properties']['totalUsageInPercentage']);
+        $validator->validate($totalUsageInPercentage, self::$schema['properties']['totalUsageInPercentage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -441,7 +441,7 @@ class StatisticsMeta
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

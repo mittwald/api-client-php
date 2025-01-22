@@ -322,7 +322,7 @@ class ReadableArticle
     public function withArticleId(string $articleId): self
     {
         $validator = new Validator();
-        $validator->validate($articleId, static::$schema['properties']['articleId']);
+        $validator->validate($articleId, self::$schema['properties']['articleId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -355,7 +355,7 @@ class ReadableArticle
     public function withBalanceAddonKey(string $balanceAddonKey): self
     {
         $validator = new Validator();
-        $validator->validate($balanceAddonKey, static::$schema['properties']['balanceAddonKey']);
+        $validator->validate($balanceAddonKey, self::$schema['properties']['balanceAddonKey']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -380,7 +380,7 @@ class ReadableArticle
     public function withContractDurationInMonth(int|float $contractDurationInMonth): self
     {
         $validator = new Validator();
-        $validator->validate($contractDurationInMonth, static::$schema['properties']['contractDurationInMonth']);
+        $validator->validate($contractDurationInMonth, self::$schema['properties']['contractDurationInMonth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -394,7 +394,7 @@ class ReadableArticle
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -419,7 +419,7 @@ class ReadableArticle
     public function withForcedInvoicingPeriodInMonth(int|float $forcedInvoicingPeriodInMonth): self
     {
         $validator = new Validator();
-        $validator->validate($forcedInvoicingPeriodInMonth, static::$schema['properties']['forcedInvoicingPeriodInMonth']);
+        $validator->validate($forcedInvoicingPeriodInMonth, self::$schema['properties']['forcedInvoicingPeriodInMonth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -441,7 +441,7 @@ class ReadableArticle
     public function withHasIndependentContractPeriod(bool $hasIndependentContractPeriod): self
     {
         $validator = new Validator();
-        $validator->validate($hasIndependentContractPeriod, static::$schema['properties']['hasIndependentContractPeriod']);
+        $validator->validate($hasIndependentContractPeriod, self::$schema['properties']['hasIndependentContractPeriod']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -463,7 +463,7 @@ class ReadableArticle
     public function withHideOnInvoice(bool $hideOnInvoice): self
     {
         $validator = new Validator();
-        $validator->validate($hideOnInvoice, static::$schema['properties']['hideOnInvoice']);
+        $validator->validate($hideOnInvoice, self::$schema['properties']['hideOnInvoice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -520,7 +520,7 @@ class ReadableArticle
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -564,7 +564,7 @@ class ReadableArticle
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();
-        $validator->validate($price, static::$schema['properties']['price']);
+        $validator->validate($price, self::$schema['properties']['price']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -760,7 +760,7 @@ class ReadableArticle
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -91,7 +91,7 @@ class AppInstallationStatus
     public function withLastExitCode(int|float $lastExitCode): self
     {
         $validator = new Validator();
-        $validator->validate($lastExitCode, static::$schema['properties']['lastExitCode']);
+        $validator->validate($lastExitCode, self::$schema['properties']['lastExitCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -113,7 +113,7 @@ class AppInstallationStatus
     public function withLogFileLocation(string $logFileLocation): self
     {
         $validator = new Validator();
-        $validator->validate($logFileLocation, static::$schema['properties']['logFileLocation']);
+        $validator->validate($logFileLocation, self::$schema['properties']['logFileLocation']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -138,7 +138,7 @@ class AppInstallationStatus
     public function withUptimeSeconds(int|float $uptimeSeconds): self
     {
         $validator = new Validator();
-        $validator->validate($uptimeSeconds, static::$schema['properties']['uptimeSeconds']);
+        $validator->validate($uptimeSeconds, self::$schema['properties']['uptimeSeconds']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -221,7 +221,7 @@ class AppInstallationStatus
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

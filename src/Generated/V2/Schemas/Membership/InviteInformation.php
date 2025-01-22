@@ -83,7 +83,7 @@ class InviteInformation
     public function withInvitationToken(string $invitationToken): self
     {
         $validator = new Validator();
-        $validator->validate($invitationToken, static::$schema['properties']['invitationToken']);
+        $validator->validate($invitationToken, self::$schema['properties']['invitationToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class InviteInformation
     public function withInvitedBy(string $invitedBy): self
     {
         $validator = new Validator();
-        $validator->validate($invitedBy, static::$schema['properties']['invitedBy']);
+        $validator->validate($invitedBy, self::$schema['properties']['invitedBy']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class InviteInformation
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
+        $validator->validate($userId, self::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -200,7 +200,7 @@ class InviteInformation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

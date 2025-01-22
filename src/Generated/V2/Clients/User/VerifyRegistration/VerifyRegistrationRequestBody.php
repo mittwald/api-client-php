@@ -80,7 +80,7 @@ class VerifyRegistrationRequestBody
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, static::$schema['properties']['email']);
+        $validator->validate($email, self::$schema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -94,7 +94,7 @@ class VerifyRegistrationRequestBody
     public function withToken(string $token): self
     {
         $validator = new Validator();
-        $validator->validate($token, static::$schema['properties']['token']);
+        $validator->validate($token, self::$schema['properties']['token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class VerifyRegistrationRequestBody
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
+        $validator->validate($userId, self::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class VerifyRegistrationRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -51,7 +51,7 @@ class CheckMigrationIsPossibleErrorMissingVerifiedIngress
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
-        $validator->validate($hostname, static::$schema['properties']['hostname']);
+        $validator->validate($hostname, self::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class CheckMigrationIsPossibleErrorMissingVerifiedIngress
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

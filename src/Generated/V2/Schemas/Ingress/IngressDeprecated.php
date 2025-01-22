@@ -231,7 +231,7 @@ class IngressDeprecated
     public function withDnsValidationErrors(array $dnsValidationErrors): self
     {
         $validator = new Validator();
-        $validator->validate($dnsValidationErrors, static::$schema['properties']['dnsValidationErrors']);
+        $validator->validate($dnsValidationErrors, self::$schema['properties']['dnsValidationErrors']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -245,7 +245,7 @@ class IngressDeprecated
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
-        $validator->validate($hostname, static::$schema['properties']['hostname']);
+        $validator->validate($hostname, self::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -259,7 +259,7 @@ class IngressDeprecated
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -281,7 +281,7 @@ class IngressDeprecated
     public function withIsDefault(bool $isDefault): self
     {
         $validator = new Validator();
-        $validator->validate($isDefault, static::$schema['properties']['isDefault']);
+        $validator->validate($isDefault, self::$schema['properties']['isDefault']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -295,7 +295,7 @@ class IngressDeprecated
     public function withIsDomain(bool $isDomain): self
     {
         $validator = new Validator();
-        $validator->validate($isDomain, static::$schema['properties']['isDomain']);
+        $validator->validate($isDomain, self::$schema['properties']['isDomain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -317,7 +317,7 @@ class IngressDeprecated
     public function withIsEnabled(bool $isEnabled): self
     {
         $validator = new Validator();
-        $validator->validate($isEnabled, static::$schema['properties']['isEnabled']);
+        $validator->validate($isEnabled, self::$schema['properties']['isEnabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -350,7 +350,7 @@ class IngressDeprecated
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -403,6 +403,7 @@ class IngressDeprecated
         $tls = match (true) {
             TlsAcmeDeprecated::validateInput($input->{'tls'}, true) => TlsAcmeDeprecated::buildFromInput($input->{'tls'}, validate: $validate),
             TlsCertificate::validateInput($input->{'tls'}, true) => TlsCertificate::buildFromInput($input->{'tls'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'tls' from JSON"),
         };
 
         $obj = new self($dnsValidationErrors, $hostname, $id, $ips, $isDefault, $isEnabled, $ownership, $paths, $projectId, $tls);
@@ -449,7 +450,7 @@ class IngressDeprecated
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

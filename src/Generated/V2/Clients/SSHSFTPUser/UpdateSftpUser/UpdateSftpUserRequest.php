@@ -93,7 +93,7 @@ class UpdateSftpUserRequest
     public function withSftpUserId(string $sftpUserId): self
     {
         $validator = new Validator();
-        $validator->validate($sftpUserId, static::$schema['properties']['sftpUserId']);
+        $validator->validate($sftpUserId, self::$schema['properties']['sftpUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -161,7 +161,7 @@ class UpdateSftpUserRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

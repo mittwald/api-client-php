@@ -48,7 +48,7 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin
     public function withHeight(int $height): self
     {
         $validator = new Validator();
-        $validator->validate($height, static::$schema['properties']['height']);
+        $validator->validate($height, self::$schema['properties']['height']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -70,7 +70,7 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin
     public function withWidth(int $width): self
     {
         $validator = new Validator();
-        $validator->validate($width, static::$schema['properties']['width']);
+        $validator->validate($width, self::$schema['properties']['width']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class RequestAvatarUploadOKResponseBodyRulesPropertiesImageDimensionsMin
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

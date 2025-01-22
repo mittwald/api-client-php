@@ -52,7 +52,7 @@ class DeprecatedUserEditSshKeyRequestBody
     public function withComment(string $comment): self
     {
         $validator = new Validator();
-        $validator->validate($comment, static::$schema['properties']['comment']);
+        $validator->validate($comment, self::$schema['properties']['comment']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class DeprecatedUserEditSshKeyRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

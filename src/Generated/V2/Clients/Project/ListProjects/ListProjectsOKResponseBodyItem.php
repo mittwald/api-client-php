@@ -285,7 +285,7 @@ class ListProjectsOKResponseBodyItem
     public function withBackupStorageUsageInBytes(int $backupStorageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($backupStorageUsageInBytes, static::$schema['properties']['backupStorageUsageInBytes']);
+        $validator->validate($backupStorageUsageInBytes, self::$schema['properties']['backupStorageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -315,7 +315,7 @@ class ListProjectsOKResponseBodyItem
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -337,7 +337,7 @@ class ListProjectsOKResponseBodyItem
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -383,7 +383,7 @@ class ListProjectsOKResponseBodyItem
     public function withEnabled(bool $enabled): self
     {
         $validator = new Validator();
-        $validator->validate($enabled, static::$schema['properties']['enabled']);
+        $validator->validate($enabled, self::$schema['properties']['enabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -397,7 +397,7 @@ class ListProjectsOKResponseBodyItem
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -411,7 +411,7 @@ class ListProjectsOKResponseBodyItem
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
-        $validator->validate($imageRefId, static::$schema['properties']['imageRefId']);
+        $validator->validate($imageRefId, self::$schema['properties']['imageRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -436,7 +436,7 @@ class ListProjectsOKResponseBodyItem
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
-        $validator->validate($isReady, static::$schema['properties']['isReady']);
+        $validator->validate($isReady, self::$schema['properties']['isReady']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -450,7 +450,7 @@ class ListProjectsOKResponseBodyItem
     public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new Validator();
-        $validator->validate($projectHostingId, static::$schema['properties']['projectHostingId']);
+        $validator->validate($projectHostingId, self::$schema['properties']['projectHostingId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -480,7 +480,7 @@ class ListProjectsOKResponseBodyItem
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
-        $validator->validate($serverId, static::$schema['properties']['serverId']);
+        $validator->validate($serverId, self::$schema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -502,7 +502,7 @@ class ListProjectsOKResponseBodyItem
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, static::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -532,7 +532,7 @@ class ListProjectsOKResponseBodyItem
     public function withWebStorageUsageInBytes(int $webStorageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($webStorageUsageInBytes, static::$schema['properties']['webStorageUsageInBytes']);
+        $validator->validate($webStorageUsageInBytes, self::$schema['properties']['webStorageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -665,7 +665,7 @@ class ListProjectsOKResponseBodyItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

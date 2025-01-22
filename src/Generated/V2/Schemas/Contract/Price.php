@@ -77,7 +77,7 @@ class Price
     public function withValue(int $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, static::$schema['properties']['value']);
+        $validator->validate($value, self::$schema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class Price
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

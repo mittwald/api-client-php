@@ -75,7 +75,7 @@ class ServicetokenAuthenticateServiceOKResponseBodyAccessTokenJwtClaims
     public function withExp(string $exp): self
     {
         $validator = new Validator();
-        $validator->validate($exp, static::$schema['properties']['exp']);
+        $validator->validate($exp, self::$schema['properties']['exp']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -89,7 +89,7 @@ class ServicetokenAuthenticateServiceOKResponseBodyAccessTokenJwtClaims
     public function withIat(string $iat): self
     {
         $validator = new Validator();
-        $validator->validate($iat, static::$schema['properties']['iat']);
+        $validator->validate($iat, self::$schema['properties']['iat']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +103,7 @@ class ServicetokenAuthenticateServiceOKResponseBodyAccessTokenJwtClaims
     public function withIss(string $iss): self
     {
         $validator = new Validator();
-        $validator->validate($iss, static::$schema['properties']['iss']);
+        $validator->validate($iss, self::$schema['properties']['iss']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -117,7 +117,7 @@ class ServicetokenAuthenticateServiceOKResponseBodyAccessTokenJwtClaims
     public function withSub(string $sub): self
     {
         $validator = new Validator();
-        $validator->validate($sub, static::$schema['properties']['sub']);
+        $validator->validate($sub, self::$schema['properties']['sub']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -181,7 +181,7 @@ class ServicetokenAuthenticateServiceOKResponseBodyAccessTokenJwtClaims
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

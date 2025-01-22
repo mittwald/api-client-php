@@ -101,7 +101,7 @@ class SpamProtection
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, static::$schema['properties']['active']);
+        $validator->validate($active, self::$schema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +115,7 @@ class SpamProtection
     public function withDeleteSensitivity(int $deleteSensitivity): self
     {
         $validator = new Validator();
-        $validator->validate($deleteSensitivity, static::$schema['properties']['deleteSensitivity']);
+        $validator->validate($deleteSensitivity, self::$schema['properties']['deleteSensitivity']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class SpamProtection
     public function withFolder(int $folder): self
     {
         $validator = new Validator();
-        $validator->validate($folder, static::$schema['properties']['folder']);
+        $validator->validate($folder, self::$schema['properties']['folder']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class SpamProtection
     public function withKeepDays(int $keepDays): self
     {
         $validator = new Validator();
-        $validator->validate($keepDays, static::$schema['properties']['keepDays']);
+        $validator->validate($keepDays, self::$schema['properties']['keepDays']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +165,7 @@ class SpamProtection
     public function withRelocateSensitivity(int $relocateSensitivity): self
     {
         $validator = new Validator();
-        $validator->validate($relocateSensitivity, static::$schema['properties']['relocateSensitivity']);
+        $validator->validate($relocateSensitivity, self::$schema['properties']['relocateSensitivity']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -254,7 +254,7 @@ class SpamProtection
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

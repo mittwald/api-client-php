@@ -87,7 +87,7 @@ class DataDbQueriesItem
     public function withQuery(string $query): self
     {
         $validator = new Validator();
-        $validator->validate($query, static::$schema['properties']['query']);
+        $validator->validate($query, self::$schema['properties']['query']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -165,7 +165,7 @@ class DataDbQueriesItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

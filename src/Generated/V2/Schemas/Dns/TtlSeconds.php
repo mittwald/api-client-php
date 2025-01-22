@@ -51,7 +51,7 @@ class TtlSeconds
     public function withSeconds(int $seconds): self
     {
         $validator = new Validator();
-        $validator->validate($seconds, static::$schema['properties']['seconds']);
+        $validator->validate($seconds, self::$schema['properties']['seconds']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class TtlSeconds
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

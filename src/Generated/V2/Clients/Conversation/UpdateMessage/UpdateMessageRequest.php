@@ -75,7 +75,7 @@ class UpdateMessageRequest
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
-        $validator->validate($conversationId, static::$schema['properties']['conversationId']);
+        $validator->validate($conversationId, self::$schema['properties']['conversationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -89,7 +89,7 @@ class UpdateMessageRequest
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();
-        $validator->validate($messageId, static::$schema['properties']['messageId']);
+        $validator->validate($messageId, self::$schema['properties']['messageId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -159,7 +159,7 @@ class UpdateMessageRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

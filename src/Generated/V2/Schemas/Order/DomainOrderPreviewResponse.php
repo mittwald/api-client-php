@@ -102,7 +102,7 @@ class DomainOrderPreviewResponse
     public function withDomainContractDuration(int|float $domainContractDuration): self
     {
         $validator = new Validator();
-        $validator->validate($domainContractDuration, static::$schema['properties']['domainContractDuration']);
+        $validator->validate($domainContractDuration, self::$schema['properties']['domainContractDuration']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class DomainOrderPreviewResponse
     public function withDomainPrice(int|float $domainPrice): self
     {
         $validator = new Validator();
-        $validator->validate($domainPrice, static::$schema['properties']['domainPrice']);
+        $validator->validate($domainPrice, self::$schema['properties']['domainPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class DomainOrderPreviewResponse
     public function withFeePrice(int|float $feePrice): self
     {
         $validator = new Validator();
-        $validator->validate($feePrice, static::$schema['properties']['feePrice']);
+        $validator->validate($feePrice, self::$schema['properties']['feePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -153,7 +153,7 @@ class DomainOrderPreviewResponse
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();
-        $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
+        $validator->validate($totalPrice, self::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -217,7 +217,7 @@ class DomainOrderPreviewResponse
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

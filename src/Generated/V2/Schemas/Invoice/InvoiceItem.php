@@ -190,7 +190,7 @@ class InvoiceItem
     public function withAdditionalDescription(string $additionalDescription): self
     {
         $validator = new Validator();
-        $validator->validate($additionalDescription, static::$schema['properties']['additionalDescription']);
+        $validator->validate($additionalDescription, self::$schema['properties']['additionalDescription']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -212,7 +212,7 @@ class InvoiceItem
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
-        $validator->validate($contractItemId, static::$schema['properties']['contractItemId']);
+        $validator->validate($contractItemId, self::$schema['properties']['contractItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -226,7 +226,7 @@ class InvoiceItem
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -259,7 +259,7 @@ class InvoiceItem
     public function withItemId(string $itemId): self
     {
         $validator = new Validator();
-        $validator->validate($itemId, static::$schema['properties']['itemId']);
+        $validator->validate($itemId, self::$schema['properties']['itemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -332,7 +332,7 @@ class InvoiceItem
     public function withVatRate(int|float $vatRate): self
     {
         $validator = new Validator();
-        $validator->validate($vatRate, static::$schema['properties']['vatRate']);
+        $validator->validate($vatRate, self::$schema['properties']['vatRate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -437,7 +437,7 @@ class InvoiceItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

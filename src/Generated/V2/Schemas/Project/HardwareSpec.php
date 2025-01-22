@@ -93,7 +93,7 @@ class HardwareSpec
     public function withCpu(string $cpu): self
     {
         $validator = new Validator();
-        $validator->validate($cpu, static::$schema['properties']['cpu']);
+        $validator->validate($cpu, self::$schema['properties']['cpu']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -118,7 +118,7 @@ class HardwareSpec
     public function withMem(string $mem): self
     {
         $validator = new Validator();
-        $validator->validate($mem, static::$schema['properties']['mem']);
+        $validator->validate($mem, self::$schema['properties']['mem']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class HardwareSpec
     public function withMemory(string $memory): self
     {
         $validator = new Validator();
-        $validator->validate($memory, static::$schema['properties']['memory']);
+        $validator->validate($memory, self::$schema['properties']['memory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -162,7 +162,7 @@ class HardwareSpec
     public function withStorage(string $storage): self
     {
         $validator = new Validator();
-        $validator->validate($storage, static::$schema['properties']['storage']);
+        $validator->validate($storage, self::$schema['properties']['storage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -243,7 +243,7 @@ class HardwareSpec
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

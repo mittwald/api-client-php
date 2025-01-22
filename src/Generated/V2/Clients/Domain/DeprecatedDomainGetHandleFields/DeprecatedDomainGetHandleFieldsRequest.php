@@ -46,7 +46,7 @@ class DeprecatedDomainGetHandleFieldsRequest
     public function withDomainName(string $domainName): self
     {
         $validator = new Validator();
-        $validator->validate($domainName, static::$schema['properties']['domainName']);
+        $validator->validate($domainName, self::$schema['properties']['domainName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class DeprecatedDomainGetHandleFieldsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

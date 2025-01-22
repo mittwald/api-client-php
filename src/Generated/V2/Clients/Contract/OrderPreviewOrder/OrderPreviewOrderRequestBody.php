@@ -125,6 +125,7 @@ class OrderPreviewOrderRequestBody
                 ServerOrderPreview::validateInput($input->{'orderData'}, true) => ServerOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 DomainOrderPreview::validateInput($input->{'orderData'}, true) => DomainOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
                 ExternalCertificateOrderPreview::validateInput($input->{'orderData'}, true) => ExternalCertificateOrderPreview::buildFromInput($input->{'orderData'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'orderData' from JSON"),
             };
         }
         $orderType = null;
@@ -170,7 +171,7 @@ class OrderPreviewOrderRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

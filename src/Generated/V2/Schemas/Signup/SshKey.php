@@ -127,7 +127,7 @@ class SshKey
     public function withAlgorithm(string $algorithm): self
     {
         $validator = new Validator();
-        $validator->validate($algorithm, static::$schema['properties']['algorithm']);
+        $validator->validate($algorithm, self::$schema['properties']['algorithm']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class SshKey
     public function withComment(string $comment): self
     {
         $validator = new Validator();
-        $validator->validate($comment, static::$schema['properties']['comment']);
+        $validator->validate($comment, self::$schema['properties']['comment']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -179,7 +179,7 @@ class SshKey
     public function withFingerprint(string $fingerprint): self
     {
         $validator = new Validator();
-        $validator->validate($fingerprint, static::$schema['properties']['fingerprint']);
+        $validator->validate($fingerprint, self::$schema['properties']['fingerprint']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -193,7 +193,7 @@ class SshKey
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, static::$schema['properties']['key']);
+        $validator->validate($key, self::$schema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -207,7 +207,7 @@ class SshKey
     public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new Validator();
-        $validator->validate($sshKeyId, static::$schema['properties']['sshKeyId']);
+        $validator->validate($sshKeyId, self::$schema['properties']['sshKeyId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -282,7 +282,7 @@ class SshKey
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

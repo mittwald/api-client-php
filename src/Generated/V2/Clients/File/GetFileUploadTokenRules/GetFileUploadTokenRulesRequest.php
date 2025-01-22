@@ -47,7 +47,7 @@ class GetFileUploadTokenRulesRequest
     public function withFileUploadToken(string $fileUploadToken): self
     {
         $validator = new Validator();
-        $validator->validate($fileUploadToken, static::$schema['properties']['fileUploadToken']);
+        $validator->validate($fileUploadToken, self::$schema['properties']['fileUploadToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class GetFileUploadTokenRulesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

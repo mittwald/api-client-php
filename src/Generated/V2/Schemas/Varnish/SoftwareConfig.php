@@ -96,7 +96,7 @@ class SoftwareConfig
     public function withLatestConfigRevision(int|float $latestConfigRevision): self
     {
         $validator = new Validator();
-        $validator->validate($latestConfigRevision, static::$schema['properties']['latestConfigRevision']);
+        $validator->validate($latestConfigRevision, self::$schema['properties']['latestConfigRevision']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -202,7 +202,7 @@ class SoftwareConfig
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

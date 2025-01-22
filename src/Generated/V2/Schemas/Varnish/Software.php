@@ -138,7 +138,7 @@ class Software
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -155,7 +155,7 @@ class Software
     public function withSettings(array $settings): self
     {
         $validator = new Validator();
-        $validator->validate($settings, static::$schema['properties']['settings']);
+        $validator->validate($settings, self::$schema['properties']['settings']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -177,7 +177,7 @@ class Software
     public function withSoftwareId(string $softwareId): self
     {
         $validator = new Validator();
-        $validator->validate($softwareId, static::$schema['properties']['softwareId']);
+        $validator->validate($softwareId, self::$schema['properties']['softwareId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -191,7 +191,7 @@ class Software
     public function withSoftwareTemplateId(string $softwareTemplateId): self
     {
         $validator = new Validator();
-        $validator->validate($softwareTemplateId, static::$schema['properties']['softwareTemplateId']);
+        $validator->validate($softwareTemplateId, self::$schema['properties']['softwareTemplateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -205,7 +205,7 @@ class Software
     public function withSoftwareVersion(string $softwareVersion): self
     {
         $validator = new Validator();
-        $validator->validate($softwareVersion, static::$schema['properties']['softwareVersion']);
+        $validator->validate($softwareVersion, self::$schema['properties']['softwareVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -288,7 +288,7 @@ class Software
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -282,7 +282,7 @@ class RedisDatabase
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -299,7 +299,7 @@ class RedisDatabase
     public function withFinalizers(array $finalizers): self
     {
         $validator = new Validator();
-        $validator->validate($finalizers, static::$schema['properties']['finalizers']);
+        $validator->validate($finalizers, self::$schema['properties']['finalizers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -321,7 +321,7 @@ class RedisDatabase
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
-        $validator->validate($hostname, static::$schema['properties']['hostname']);
+        $validator->validate($hostname, self::$schema['properties']['hostname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -335,7 +335,7 @@ class RedisDatabase
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -349,7 +349,7 @@ class RedisDatabase
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -363,7 +363,7 @@ class RedisDatabase
     public function withPort(int $port): self
     {
         $validator = new Validator();
-        $validator->validate($port, static::$schema['properties']['port']);
+        $validator->validate($port, self::$schema['properties']['port']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -377,7 +377,7 @@ class RedisDatabase
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -407,7 +407,7 @@ class RedisDatabase
     public function withStorageUsageInBytes(int $storageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($storageUsageInBytes, static::$schema['properties']['storageUsageInBytes']);
+        $validator->validate($storageUsageInBytes, self::$schema['properties']['storageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -437,7 +437,7 @@ class RedisDatabase
     public function withVersion(string $version): self
     {
         $validator = new Validator();
-        $validator->validate($version, static::$schema['properties']['version']);
+        $validator->validate($version, self::$schema['properties']['version']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -534,7 +534,7 @@ class RedisDatabase
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -101,7 +101,7 @@ class Cancellation
     public function withCancellationId(string $cancellationId): self
     {
         $validator = new Validator();
-        $validator->validate($cancellationId, static::$schema['properties']['cancellationId']);
+        $validator->validate($cancellationId, self::$schema['properties']['cancellationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -123,7 +123,7 @@ class Cancellation
     public function withCorrectionNumber(string $correctionNumber): self
     {
         $validator = new Validator();
-        $validator->validate($correctionNumber, static::$schema['properties']['correctionNumber']);
+        $validator->validate($correctionNumber, self::$schema['properties']['correctionNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +137,7 @@ class Cancellation
     public function withPdfId(string $pdfId): self
     {
         $validator = new Validator();
-        $validator->validate($pdfId, static::$schema['properties']['pdfId']);
+        $validator->validate($pdfId, self::$schema['properties']['pdfId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class Cancellation
     public function withReason(string $reason): self
     {
         $validator = new Validator();
-        $validator->validate($reason, static::$schema['properties']['reason']);
+        $validator->validate($reason, self::$schema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -230,7 +230,7 @@ class Cancellation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

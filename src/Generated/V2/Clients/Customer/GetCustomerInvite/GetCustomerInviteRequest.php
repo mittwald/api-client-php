@@ -45,7 +45,7 @@ class GetCustomerInviteRequest
     public function withCustomerInviteId(string $customerInviteId): self
     {
         $validator = new Validator();
-        $validator->validate($customerInviteId, static::$schema['properties']['customerInviteId']);
+        $validator->validate($customerInviteId, self::$schema['properties']['customerInviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +103,7 @@ class GetCustomerInviteRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

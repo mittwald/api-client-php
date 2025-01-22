@@ -128,7 +128,7 @@ response was generated.
     public function withAccessToken(string $accessToken): self
     {
         $validator = new Validator();
-        $validator->validate($accessToken, static::$schema['properties']['access_token']);
+        $validator->validate($accessToken, self::$schema['properties']['access_token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -142,7 +142,7 @@ response was generated.
     public function withExpiresIn(int $expiresIn): self
     {
         $validator = new Validator();
-        $validator->validate($expiresIn, static::$schema['properties']['expires_in']);
+        $validator->validate($expiresIn, self::$schema['properties']['expires_in']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -156,7 +156,7 @@ response was generated.
     public function withRefreshToken(string $refreshToken): self
     {
         $validator = new Validator();
-        $validator->validate($refreshToken, static::$schema['properties']['refresh_token']);
+        $validator->validate($refreshToken, self::$schema['properties']['refresh_token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ response was generated.
     public function withScope(string $scope): self
     {
         $validator = new Validator();
-        $validator->validate($scope, static::$schema['properties']['scope']);
+        $validator->validate($scope, self::$schema['properties']['scope']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -257,7 +257,7 @@ response was generated.
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

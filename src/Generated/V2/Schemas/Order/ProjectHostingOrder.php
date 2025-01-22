@@ -131,7 +131,7 @@ class ProjectHostingOrder
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +145,7 @@ class ProjectHostingOrder
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -162,7 +162,7 @@ class ProjectHostingOrder
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
-        $validator->validate($diskspaceInGiB, static::$schema['properties']['diskspaceInGiB']);
+        $validator->validate($diskspaceInGiB, self::$schema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -176,7 +176,7 @@ class ProjectHostingOrder
     public function withPromotionCode(string $promotionCode): self
     {
         $validator = new Validator();
-        $validator->validate($promotionCode, static::$schema['properties']['promotionCode']);
+        $validator->validate($promotionCode, self::$schema['properties']['promotionCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -198,7 +198,7 @@ class ProjectHostingOrder
     public function withRecommendationCode(string $recommendationCode): self
     {
         $validator = new Validator();
-        $validator->validate($recommendationCode, static::$schema['properties']['recommendationCode']);
+        $validator->validate($recommendationCode, self::$schema['properties']['recommendationCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -231,7 +231,7 @@ class ProjectHostingOrder
     public function withUseFreeTrial(bool $useFreeTrial): self
     {
         $validator = new Validator();
-        $validator->validate($useFreeTrial, static::$schema['properties']['useFreeTrial']);
+        $validator->validate($useFreeTrial, self::$schema['properties']['useFreeTrial']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -279,6 +279,7 @@ class ProjectHostingOrder
         $spec = match (true) {
             MachineTypeSpec::validateInput($input->{'spec'}, true) => MachineTypeSpec::buildFromInput($input->{'spec'}, validate: $validate),
             HardwareSpec::validateInput($input->{'spec'}, true) => HardwareSpec::buildFromInput($input->{'spec'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'spec' from JSON"),
         };
         $useFreeTrial = null;
         if (isset($input->{'useFreeTrial'})) {
@@ -331,7 +332,7 @@ class ProjectHostingOrder
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

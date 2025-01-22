@@ -97,7 +97,7 @@ class ContractItemInvoiceDefinition
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
-        $validator->validate($contractItemId, static::$schema['properties']['contractItemId']);
+        $validator->validate($contractItemId, self::$schema['properties']['contractItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +111,7 @@ class ContractItemInvoiceDefinition
     public function withIsDue(bool $isDue): self
     {
         $validator = new Validator();
-        $validator->validate($isDue, static::$schema['properties']['isDue']);
+        $validator->validate($isDue, self::$schema['properties']['isDue']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -157,7 +157,7 @@ class ContractItemInvoiceDefinition
     public function withVatRate(int $vatRate): self
     {
         $validator = new Validator();
-        $validator->validate($vatRate, static::$schema['properties']['vatRate']);
+        $validator->validate($vatRate, self::$schema['properties']['vatRate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -234,7 +234,7 @@ class ContractItemInvoiceDefinition
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

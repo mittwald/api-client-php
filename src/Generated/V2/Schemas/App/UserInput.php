@@ -148,7 +148,7 @@ class UserInput
     public function withDataSource(string $dataSource): self
     {
         $validator = new Validator();
-        $validator->validate($dataSource, static::$schema['properties']['dataSource']);
+        $validator->validate($dataSource, self::$schema['properties']['dataSource']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class UserInput
     public function withDefaultValue(string $defaultValue): self
     {
         $validator = new Validator();
-        $validator->validate($defaultValue, static::$schema['properties']['defaultValue']);
+        $validator->validate($defaultValue, self::$schema['properties']['defaultValue']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class UserInput
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -254,7 +254,7 @@ class UserInput
     public function withRequired(bool $required): self
     {
         $validator = new Validator();
-        $validator->validate($required, static::$schema['properties']['required']);
+        $validator->validate($required, self::$schema['properties']['required']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -268,7 +268,7 @@ class UserInput
     public function withValidationSchema(string $validationSchema): self
     {
         $validator = new Validator();
-        $validator->validate($validationSchema, static::$schema['properties']['validationSchema']);
+        $validator->validate($validationSchema, self::$schema['properties']['validationSchema']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -365,7 +365,7 @@ class UserInput
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -45,7 +45,7 @@ class PasswordValidationGetPasswordPolicyRequest
     public function withPasswordPolicy(string $passwordPolicy): self
     {
         $validator = new Validator();
-        $validator->validate($passwordPolicy, static::$schema['properties']['passwordPolicy']);
+        $validator->validate($passwordPolicy, self::$schema['properties']['passwordPolicy']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +103,7 @@ class PasswordValidationGetPasswordPolicyRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

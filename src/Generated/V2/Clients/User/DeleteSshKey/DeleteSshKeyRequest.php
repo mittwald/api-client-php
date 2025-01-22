@@ -46,7 +46,7 @@ class DeleteSshKeyRequest
     public function withSshKeyId(string $sshKeyId): self
     {
         $validator = new Validator();
-        $validator->validate($sshKeyId, static::$schema['properties']['sshKeyId']);
+        $validator->validate($sshKeyId, self::$schema['properties']['sshKeyId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class DeleteSshKeyRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

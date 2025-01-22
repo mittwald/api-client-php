@@ -136,7 +136,7 @@ class ExtensionInstanceHealth
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class ExtensionInstanceHealth
     public function withInstantiationIsPending(bool $instantiationIsPending): self
     {
         $validator = new Validator();
-        $validator->validate($instantiationIsPending, static::$schema['properties']['instantiationIsPending']);
+        $validator->validate($instantiationIsPending, self::$schema['properties']['instantiationIsPending']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class ExtensionInstanceHealth
     public function withPendingWebhooksCount(int $pendingWebhooksCount): self
     {
         $validator = new Validator();
-        $validator->validate($pendingWebhooksCount, static::$schema['properties']['pendingWebhooksCount']);
+        $validator->validate($pendingWebhooksCount, self::$schema['properties']['pendingWebhooksCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class ExtensionInstanceHealth
     public function withRemovalIsPending(bool $removalIsPending): self
     {
         $validator = new Validator();
-        $validator->validate($removalIsPending, static::$schema['properties']['removalIsPending']);
+        $validator->validate($removalIsPending, self::$schema['properties']['removalIsPending']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -192,7 +192,7 @@ class ExtensionInstanceHealth
     public function withWebhooksAreHalted(bool $webhooksAreHalted): self
     {
         $validator = new Validator();
-        $validator->validate($webhooksAreHalted, static::$schema['properties']['webhooksAreHalted']);
+        $validator->validate($webhooksAreHalted, self::$schema['properties']['webhooksAreHalted']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -275,7 +275,7 @@ class ExtensionInstanceHealth
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

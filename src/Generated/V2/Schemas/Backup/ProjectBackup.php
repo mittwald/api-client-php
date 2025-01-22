@@ -159,7 +159,7 @@ class ProjectBackup
     public function withDeletable(bool $deletable): self
     {
         $validator = new Validator();
-        $validator->validate($deletable, static::$schema['properties']['deletable']);
+        $validator->validate($deletable, self::$schema['properties']['deletable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class ProjectBackup
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -227,7 +227,7 @@ class ProjectBackup
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +241,7 @@ class ProjectBackup
     public function withParentId(string $parentId): self
     {
         $validator = new Validator();
-        $validator->validate($parentId, static::$schema['properties']['parentId']);
+        $validator->validate($parentId, self::$schema['properties']['parentId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -263,7 +263,7 @@ class ProjectBackup
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -277,7 +277,7 @@ class ProjectBackup
     public function withStatus(string $status): self
     {
         $validator = new Validator();
-        $validator->validate($status, static::$schema['properties']['status']);
+        $validator->validate($status, self::$schema['properties']['status']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -380,7 +380,7 @@ class ProjectBackup
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

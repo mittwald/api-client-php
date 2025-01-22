@@ -73,7 +73,7 @@ class UserInputPositionMeta
     public function withIndex(int|float $index): self
     {
         $validator = new Validator();
-        $validator->validate($index, static::$schema['properties']['index']);
+        $validator->validate($index, self::$schema['properties']['index']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -95,7 +95,7 @@ class UserInputPositionMeta
     public function withSection(string $section): self
     {
         $validator = new Validator();
-        $validator->validate($section, static::$schema['properties']['section']);
+        $validator->validate($section, self::$schema['properties']['section']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -117,7 +117,7 @@ class UserInputPositionMeta
     public function withStep(string $step): self
     {
         $validator = new Validator();
-        $validator->validate($step, static::$schema['properties']['step']);
+        $validator->validate($step, self::$schema['properties']['step']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -204,7 +204,7 @@ class UserInputPositionMeta
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

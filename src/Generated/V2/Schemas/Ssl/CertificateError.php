@@ -221,6 +221,7 @@ class CertificateError
             CertificateErrorMessageAlternative16::tryFrom($input->{'message'}) !== null => CertificateErrorMessageAlternative16::from($input->{'message'}),
             CertificateErrorMessageAlternative17::tryFrom($input->{'message'}) !== null => CertificateErrorMessageAlternative17::from($input->{'message'}),
             CertificateErrorMessageAlternative18::tryFrom($input->{'message'}) !== null => CertificateErrorMessageAlternative18::from($input->{'message'}),
+            default => throw new InvalidArgumentException("could not build property 'message' from JSON"),
         };
 
         $obj = new self($message);
@@ -255,7 +256,7 @@ class CertificateError
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

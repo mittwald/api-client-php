@@ -80,7 +80,7 @@ This is optional, depending on the MFA activation status of the profile.
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();
-        $validator->validate($multiFactorCode, static::$schema['properties']['multiFactorCode']);
+        $validator->validate($multiFactorCode, self::$schema['properties']['multiFactorCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,7 +102,7 @@ This is optional, depending on the MFA activation status of the profile.
     public function withNewPassword(string $newPassword): self
     {
         $validator = new Validator();
-        $validator->validate($newPassword, static::$schema['properties']['newPassword']);
+        $validator->validate($newPassword, self::$schema['properties']['newPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,7 +116,7 @@ This is optional, depending on the MFA activation status of the profile.
     public function withOldPassword(string $oldPassword): self
     {
         $validator = new Validator();
-        $validator->validate($oldPassword, static::$schema['properties']['oldPassword']);
+        $validator->validate($oldPassword, self::$schema['properties']['oldPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +183,7 @@ This is optional, depending on the MFA activation status of the profile.
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

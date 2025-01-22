@@ -49,7 +49,7 @@ class MachineTypeSpec
     public function withMachineType(string $machineType): self
     {
         $validator = new Validator();
-        $validator->validate($machineType, static::$schema['properties']['machineType']);
+        $validator->validate($machineType, self::$schema['properties']['machineType']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -120,7 +120,7 @@ class MachineTypeSpec
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

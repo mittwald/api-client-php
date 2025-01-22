@@ -86,7 +86,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
-        $validator->validate($finished, static::$schema['properties']['finished']);
+        $validator->validate($finished, self::$schema['properties']['finished']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -100,7 +100,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withSourceCoabDeliveryMailbox(string $sourceCoabDeliveryMailbox): self
     {
         $validator = new Validator();
-        $validator->validate($sourceCoabDeliveryMailbox, static::$schema['properties']['sourceCoabDeliveryMailbox']);
+        $validator->validate($sourceCoabDeliveryMailbox, self::$schema['properties']['sourceCoabDeliveryMailbox']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withSourceCoabDeliveryUid(int $sourceCoabDeliveryUid): self
     {
         $validator = new Validator();
-        $validator->validate($sourceCoabDeliveryUid, static::$schema['properties']['sourceCoabDeliveryUid']);
+        $validator->validate($sourceCoabDeliveryUid, self::$schema['properties']['sourceCoabDeliveryUid']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -128,7 +128,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withTargetDeliveryAddress(string $targetDeliveryAddress): self
     {
         $validator = new Validator();
-        $validator->validate($targetDeliveryAddress, static::$schema['properties']['targetDeliveryAddress']);
+        $validator->validate($targetDeliveryAddress, self::$schema['properties']['targetDeliveryAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -192,7 +192,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

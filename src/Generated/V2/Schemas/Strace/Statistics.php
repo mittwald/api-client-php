@@ -112,7 +112,7 @@ class Statistics
     public function withKernelMs(int|float $kernelMs): self
     {
         $validator = new Validator();
-        $validator->validate($kernelMs, static::$schema['properties']['kernelMs']);
+        $validator->validate($kernelMs, self::$schema['properties']['kernelMs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class Statistics
     public function withOccurrences(int $occurrences): self
     {
         $validator = new Validator();
-        $validator->validate($occurrences, static::$schema['properties']['occurrences']);
+        $validator->validate($occurrences, self::$schema['properties']['occurrences']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class Statistics
     public function withSyscallCount(int $syscallCount): self
     {
         $validator = new Validator();
-        $validator->validate($syscallCount, static::$schema['properties']['syscallCount']);
+        $validator->validate($syscallCount, self::$schema['properties']['syscallCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -157,7 +157,7 @@ class Statistics
     public function withUserspaceMs(int|float $userspaceMs): self
     {
         $validator = new Validator();
-        $validator->validate($userspaceMs, static::$schema['properties']['userspaceMs']);
+        $validator->validate($userspaceMs, self::$schema['properties']['userspaceMs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -221,7 +221,7 @@ class Statistics
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

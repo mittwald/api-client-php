@@ -73,7 +73,7 @@ class OrderPreviewTariffChangeOKResponseBody
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
         $validator = new Validator();
-        $validator->validate($machineTypePrice, static::$schema['properties']['machineTypePrice']);
+        $validator->validate($machineTypePrice, self::$schema['properties']['machineTypePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -90,7 +90,7 @@ class OrderPreviewTariffChangeOKResponseBody
     public function withStoragePrice(int|float $storagePrice): self
     {
         $validator = new Validator();
-        $validator->validate($storagePrice, static::$schema['properties']['storagePrice']);
+        $validator->validate($storagePrice, self::$schema['properties']['storagePrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -107,7 +107,7 @@ class OrderPreviewTariffChangeOKResponseBody
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();
-        $validator->validate($totalPrice, static::$schema['properties']['totalPrice']);
+        $validator->validate($totalPrice, self::$schema['properties']['totalPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,7 +169,7 @@ class OrderPreviewTariffChangeOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -382,7 +382,7 @@ class Project
     public function withBackupStorageUsageInBytes(int $backupStorageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($backupStorageUsageInBytes, static::$schema['properties']['backupStorageUsageInBytes']);
+        $validator->validate($backupStorageUsageInBytes, self::$schema['properties']['backupStorageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -404,7 +404,7 @@ class Project
     public function withClusterDomain(string $clusterDomain): self
     {
         $validator = new Validator();
-        $validator->validate($clusterDomain, static::$schema['properties']['clusterDomain']);
+        $validator->validate($clusterDomain, self::$schema['properties']['clusterDomain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -426,7 +426,7 @@ class Project
     public function withClusterId(string $clusterId): self
     {
         $validator = new Validator();
-        $validator->validate($clusterId, static::$schema['properties']['clusterId']);
+        $validator->validate($clusterId, self::$schema['properties']['clusterId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -456,7 +456,7 @@ class Project
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -470,7 +470,7 @@ class Project
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -487,7 +487,7 @@ class Project
     public function withDirectories(array $directories): self
     {
         $validator = new Validator();
-        $validator->validate($directories, static::$schema['properties']['directories']);
+        $validator->validate($directories, self::$schema['properties']['directories']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -533,7 +533,7 @@ class Project
     public function withEnabled(bool $enabled): self
     {
         $validator = new Validator();
-        $validator->validate($enabled, static::$schema['properties']['enabled']);
+        $validator->validate($enabled, self::$schema['properties']['enabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -547,7 +547,7 @@ class Project
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -561,7 +561,7 @@ class Project
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
-        $validator->validate($imageRefId, static::$schema['properties']['imageRefId']);
+        $validator->validate($imageRefId, self::$schema['properties']['imageRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -586,7 +586,7 @@ class Project
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
-        $validator->validate($isReady, static::$schema['properties']['isReady']);
+        $validator->validate($isReady, self::$schema['properties']['isReady']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -600,7 +600,7 @@ class Project
     public function withProjectHostingId(string $projectHostingId): self
     {
         $validator = new Validator();
-        $validator->validate($projectHostingId, static::$schema['properties']['projectHostingId']);
+        $validator->validate($projectHostingId, self::$schema['properties']['projectHostingId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -630,7 +630,7 @@ class Project
     public function withServerId(string $serverId): self
     {
         $validator = new Validator();
-        $validator->validate($serverId, static::$schema['properties']['serverId']);
+        $validator->validate($serverId, self::$schema['properties']['serverId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -652,7 +652,7 @@ class Project
     public function withServerShortId(string $serverShortId): self
     {
         $validator = new Validator();
-        $validator->validate($serverShortId, static::$schema['properties']['serverShortId']);
+        $validator->validate($serverShortId, self::$schema['properties']['serverShortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -674,7 +674,7 @@ class Project
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, static::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$schema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -707,7 +707,7 @@ class Project
     public function withStatisticsBaseDomain(string $statisticsBaseDomain): self
     {
         $validator = new Validator();
-        $validator->validate($statisticsBaseDomain, static::$schema['properties']['statisticsBaseDomain']);
+        $validator->validate($statisticsBaseDomain, self::$schema['properties']['statisticsBaseDomain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -745,7 +745,7 @@ class Project
     public function withWebStorageUsageInBytes(int $webStorageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($webStorageUsageInBytes, static::$schema['properties']['webStorageUsageInBytes']);
+        $validator->validate($webStorageUsageInBytes, self::$schema['properties']['webStorageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -831,6 +831,7 @@ class Project
             $spec = match (true) {
                 VisitorSpec::validateInput($input->{'spec'}, true) => VisitorSpec::buildFromInput($input->{'spec'}, validate: $validate),
                 HardwareSpec::validateInput($input->{'spec'}, true) => HardwareSpec::buildFromInput($input->{'spec'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'spec' from JSON"),
             };
         }
         $statisticsBaseDomain = null;
@@ -931,7 +932,7 @@ class Project
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -38,7 +38,7 @@ class DeprecatedUserServicePersonalizedSettingsGetOKResponseBody
     public function withSettingsString(string $settingsString): self
     {
         $validator = new Validator();
-        $validator->validate($settingsString, static::$schema['properties']['settingsString']);
+        $validator->validate($settingsString, self::$schema['properties']['settingsString']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class DeprecatedUserServicePersonalizedSettingsGetOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

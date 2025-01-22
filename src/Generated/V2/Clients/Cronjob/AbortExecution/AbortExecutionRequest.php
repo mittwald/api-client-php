@@ -80,7 +80,7 @@ class AbortExecutionRequest
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, static::$schema['properties']['cronjobId']);
+        $validator->validate($cronjobId, self::$schema['properties']['cronjobId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -94,7 +94,7 @@ class AbortExecutionRequest
     public function withExecutionId(string $executionId): self
     {
         $validator = new Validator();
-        $validator->validate($executionId, static::$schema['properties']['executionId']);
+        $validator->validate($executionId, self::$schema['properties']['executionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +111,7 @@ class AbortExecutionRequest
     public function withBody($body): self
     {
         $validator = new Validator();
-        $validator->validate($body, static::$schema['properties']['body']);
+        $validator->validate($body, self::$schema['properties']['body']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class AbortExecutionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

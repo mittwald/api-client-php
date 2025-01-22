@@ -84,6 +84,20 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\D
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneDefaultResponse;
@@ -184,25 +198,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibl
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
@@ -561,6 +561,84 @@ class DomainClientImpl implements DomainClient
             400 => DeprecatedDomainListDomainsBadRequestResponse::fromResponse($httpResponse),
             429 => DeprecatedDomainListDomainsTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedDomainListDomainsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Ingresses belonging to a project.
+     *
+     * This operation is deprecated. Use the GET /v2/ingresses endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-list-ingresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressListIngressesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressListIngressesOKResponse OK
+     */
+    public function deprecatedIngressListIngresses(DeprecatedIngressListIngressesRequest $request): DeprecatedIngressListIngressesOKResponse
+    {
+        $httpRequest = new Request(DeprecatedIngressListIngressesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedIngressListIngressesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DeprecatedIngressListIngressesNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedIngressListIngressesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedIngressListIngressesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an Ingresses paths.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/paths endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-paths
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressPathsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedIngressPaths(DeprecatedIngressPathsRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(DeprecatedIngressPathsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DeprecatedIngressPathsNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedIngressPathsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedIngressPathsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update an Ingresses tls settings.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/tls endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-tls
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressTlsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressTlsOKResponse OK
+     */
+    public function deprecatedIngressTls(DeprecatedIngressTlsRequest $request): DeprecatedIngressTlsOKResponse
+    {
+        $httpRequest = new Request(DeprecatedIngressTlsRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedIngressTlsOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => DeprecatedIngressTlsNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedIngressTlsTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedIngressTlsDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1405,54 +1483,6 @@ class DomainClientImpl implements DomainClient
     }
 
     /**
-     * List Ingresses belonging to a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressListIngressesV2DeprecatedOKResponse OK
-     */
-    public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2DeprecatedOKResponse
-    {
-        $httpRequest = new Request(IngressListIngressesV2DeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return IngressListIngressesV2DeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressListIngressesV2DeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => IngressListIngressesV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => IngressListIngressesV2DeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update an Ingresses paths.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressPathsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(IngressPathsDeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressPathsDeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => IngressPathsDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => IngressPathsDeprecatedDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Request the ACME certificate issuance of an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
@@ -1473,30 +1503,6 @@ class DomainClientImpl implements DomainClient
             404 => IngressRequestIngressAcmeCertificateIssuanceNotFoundResponse::fromResponse($httpResponse),
             429 => IngressRequestIngressAcmeCertificateIssuanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => IngressRequestIngressAcmeCertificateIssuanceDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Update an Ingresses tls settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressTlsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressTlsDeprecatedOKResponse OK
-     */
-    public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse
-    {
-        $httpRequest = new Request(IngressTlsDeprecatedRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return IngressTlsDeprecatedOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => IngressTlsDeprecatedNotFoundResponse::fromResponse($httpResponse),
-            429 => IngressTlsDeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
-            default => IngressTlsDeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 

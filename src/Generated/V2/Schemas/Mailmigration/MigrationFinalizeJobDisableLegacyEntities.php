@@ -87,7 +87,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     public function withAddresses(array $addresses): self
     {
         $validator = new Validator();
-        $validator->validate($addresses, static::$schema['properties']['addresses']);
+        $validator->validate($addresses, self::$schema['properties']['addresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     public function withMailboxNames(array $mailboxNames): self
     {
         $validator = new Validator();
-        $validator->validate($mailboxNames, static::$schema['properties']['mailboxNames']);
+        $validator->validate($mailboxNames, self::$schema['properties']['mailboxNames']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class MigrationFinalizeJobDisableLegacyEntities
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

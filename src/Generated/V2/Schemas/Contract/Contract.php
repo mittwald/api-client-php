@@ -144,7 +144,7 @@ class Contract
     public function withContractId(string $contractId): self
     {
         $validator = new Validator();
-        $validator->validate($contractId, static::$schema['properties']['contractId']);
+        $validator->validate($contractId, self::$schema['properties']['contractId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -158,7 +158,7 @@ class Contract
     public function withContractNumber(string $contractNumber): self
     {
         $validator = new Validator();
-        $validator->validate($contractNumber, static::$schema['properties']['contractNumber']);
+        $validator->validate($contractNumber, self::$schema['properties']['contractNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -172,7 +172,7 @@ class Contract
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -267,7 +267,7 @@ class Contract
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

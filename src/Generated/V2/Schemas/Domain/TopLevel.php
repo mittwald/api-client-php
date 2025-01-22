@@ -105,7 +105,7 @@ class TopLevel
     public function withIrtp(bool $irtp): self
     {
         $validator = new Validator();
-        $validator->validate($irtp, static::$schema['properties']['irtp']);
+        $validator->validate($irtp, self::$schema['properties']['irtp']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class TopLevel
     public function withRgpDays(int $rgpDays): self
     {
         $validator = new Validator();
-        $validator->validate($rgpDays, static::$schema['properties']['rgpDays']);
+        $validator->validate($rgpDays, self::$schema['properties']['rgpDays']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class TopLevel
     public function withTld(string $tld): self
     {
         $validator = new Validator();
-        $validator->validate($tld, static::$schema['properties']['tld']);
+        $validator->validate($tld, self::$schema['properties']['tld']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class TopLevel
     public function withTransferAuthCodeRequired(bool $transferAuthCodeRequired): self
     {
         $validator = new Validator();
-        $validator->validate($transferAuthCodeRequired, static::$schema['properties']['transferAuthCodeRequired']);
+        $validator->validate($transferAuthCodeRequired, self::$schema['properties']['transferAuthCodeRequired']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class TopLevel
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

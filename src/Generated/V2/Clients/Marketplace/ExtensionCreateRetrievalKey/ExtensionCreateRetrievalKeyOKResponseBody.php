@@ -52,7 +52,7 @@ class ExtensionCreateRetrievalKeyOKResponseBody
     public function withAccessTokenRetrievalKey(string $accessTokenRetrievalKey): self
     {
         $validator = new Validator();
-        $validator->validate($accessTokenRetrievalKey, static::$schema['properties']['accessTokenRetrievalKey']);
+        $validator->validate($accessTokenRetrievalKey, self::$schema['properties']['accessTokenRetrievalKey']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -66,7 +66,7 @@ class ExtensionCreateRetrievalKeyOKResponseBody
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, static::$schema['properties']['userId']);
+        $validator->validate($userId, self::$schema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class ExtensionCreateRetrievalKeyOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

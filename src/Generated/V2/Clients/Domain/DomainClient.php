@@ -32,6 +32,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshot
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainGetScreenshotForDomain\DeprecatedDomainGetScreenshotForDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainListDomains\DeprecatedDomainListDomainsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressListIngresses\DeprecatedIngressListIngressesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressPaths\DeprecatedIngressPathsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedIngressTls\DeprecatedIngressTlsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
@@ -65,12 +70,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressL
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngresses\IngressListIngressesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesCompatibleWithCertificate\IngressListIngressesCompatibleWithCertificateRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressListIngressesV2Deprecated\IngressListIngressesV2DeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressPathsDeprecated\IngressPathsDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressRequestIngressAcmeCertificateIssuance\IngressRequestIngressAcmeCertificateIssuanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressTlsDeprecated\IngressTlsDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressPaths\IngressUpdateIngressPathsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\IngressUpdateIngressTls\IngressUpdateIngressTlsRequest;
@@ -235,6 +235,45 @@ interface DomainClient
      * @return DeprecatedDomainListDomainsOKResponse OK
      */
     public function deprecatedDomainListDomains(DeprecatedDomainListDomainsRequest $request): DeprecatedDomainListDomainsOKResponse;
+    /**
+     * List Ingresses belonging to a project.
+     *
+     * This operation is deprecated. Use the GET /v2/ingresses endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-list-ingresses
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressListIngressesRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressListIngressesOKResponse OK
+     */
+    public function deprecatedIngressListIngresses(DeprecatedIngressListIngressesRequest $request): DeprecatedIngressListIngressesOKResponse;
+    /**
+     * Update an Ingresses paths.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/paths endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-paths
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressPathsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse No Content
+     */
+    public function deprecatedIngressPaths(DeprecatedIngressPathsRequest $request): EmptyResponse;
+    /**
+     * Update an Ingresses tls settings.
+     *
+     * This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/tls endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-ingress-tls
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedIngressTlsRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedIngressTlsOKResponse OK
+     */
+    public function deprecatedIngressTls(DeprecatedIngressTlsRequest $request): DeprecatedIngressTlsOKResponse;
     /**
      * Create a DNSZone.
      *
@@ -608,28 +647,6 @@ interface DomainClient
      */
     public function ingressListIngressesCompatibleWithCertificate(IngressListIngressesCompatibleWithCertificateRequest $request): IngressListIngressesCompatibleWithCertificateOKResponse;
     /**
-     * List Ingresses belonging to a project.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-list-ingresses-v2-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressListIngressesV2DeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressListIngressesV2DeprecatedOKResponse OK
-     */
-    public function ingressListIngressesV2Deprecated(IngressListIngressesV2DeprecatedRequest $request): IngressListIngressesV2DeprecatedOKResponse;
-    /**
-     * Update an Ingresses paths.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-paths-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressPathsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse No Content
-     */
-    public function ingressPathsDeprecated(IngressPathsDeprecatedRequest $request): EmptyResponse;
-    /**
      * Request the ACME certificate issuance of an Ingress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-request-ingress-acme-certificate-issuance
@@ -639,17 +656,6 @@ interface DomainClient
      * @return EmptyResponse No Content
      */
     public function ingressRequestIngressAcmeCertificateIssuance(IngressRequestIngressAcmeCertificateIssuanceRequest $request): EmptyResponse;
-    /**
-     * Update an Ingresses tls settings.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/ingress-tls-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param IngressTlsDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return IngressTlsDeprecatedOKResponse OK
-     */
-    public function ingressTlsDeprecated(IngressTlsDeprecatedRequest $request): IngressTlsDeprecatedOKResponse;
     /**
      * Update the paths of an Ingress.
      *

@@ -141,7 +141,7 @@ class ConfigTemplate
     public function withIsGlobal(bool $isGlobal): self
     {
         $validator = new Validator();
-        $validator->validate($isGlobal, static::$schema['properties']['isGlobal']);
+        $validator->validate($isGlobal, self::$schema['properties']['isGlobal']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class ConfigTemplate
     public function withNote(string $note): self
     {
         $validator = new Validator();
-        $validator->validate($note, static::$schema['properties']['note']);
+        $validator->validate($note, self::$schema['properties']['note']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -185,7 +185,7 @@ class ConfigTemplate
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -207,7 +207,7 @@ class ConfigTemplate
     public function withSoftwareConfigTemplateId(string $softwareConfigTemplateId): self
     {
         $validator = new Validator();
-        $validator->validate($softwareConfigTemplateId, static::$schema['properties']['softwareConfigTemplateId']);
+        $validator->validate($softwareConfigTemplateId, self::$schema['properties']['softwareConfigTemplateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -221,7 +221,7 @@ class ConfigTemplate
     public function withSoftwareTemplateId(string $softwareTemplateId): self
     {
         $validator = new Validator();
-        $validator->validate($softwareTemplateId, static::$schema['properties']['softwareTemplateId']);
+        $validator->validate($softwareTemplateId, self::$schema['properties']['softwareTemplateId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -330,7 +330,7 @@ class ConfigTemplate
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

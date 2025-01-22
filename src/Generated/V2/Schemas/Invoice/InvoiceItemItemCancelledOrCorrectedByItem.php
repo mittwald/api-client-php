@@ -60,7 +60,7 @@ class InvoiceItemItemCancelledOrCorrectedByItem
     public function withSourceInvoiceId(string $sourceInvoiceId): self
     {
         $validator = new Validator();
-        $validator->validate($sourceInvoiceId, static::$schema['properties']['sourceInvoiceId']);
+        $validator->validate($sourceInvoiceId, self::$schema['properties']['sourceInvoiceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -82,7 +82,7 @@ class InvoiceItemItemCancelledOrCorrectedByItem
     public function withSourceInvoiceItemId(string $sourceInvoiceItemId): self
     {
         $validator = new Validator();
-        $validator->validate($sourceInvoiceItemId, static::$schema['properties']['sourceInvoiceItemId']);
+        $validator->validate($sourceInvoiceItemId, self::$schema['properties']['sourceInvoiceItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -161,7 +161,7 @@ class InvoiceItemItemCancelledOrCorrectedByItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

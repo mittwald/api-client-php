@@ -174,7 +174,7 @@ class ProjectInvite
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
-        $validator->validate($avatarRefId, static::$schema['properties']['avatarRefId']);
+        $validator->validate($avatarRefId, self::$schema['properties']['avatarRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -196,7 +196,7 @@ class ProjectInvite
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -218,7 +218,7 @@ class ProjectInvite
     public function withMailAddress(string $mailAddress): self
     {
         $validator = new Validator();
-        $validator->validate($mailAddress, static::$schema['properties']['mailAddress']);
+        $validator->validate($mailAddress, self::$schema['properties']['mailAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -248,7 +248,7 @@ class ProjectInvite
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, static::$schema['properties']['message']);
+        $validator->validate($message, self::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -270,7 +270,7 @@ class ProjectInvite
     public function withProjectDescription(string $projectDescription): self
     {
         $validator = new Validator();
-        $validator->validate($projectDescription, static::$schema['properties']['projectDescription']);
+        $validator->validate($projectDescription, self::$schema['properties']['projectDescription']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -284,7 +284,7 @@ class ProjectInvite
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -383,7 +383,7 @@ class ProjectInvite
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

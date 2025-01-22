@@ -132,7 +132,7 @@ class CreateSftpUserRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class CreateSftpUserRequestBody
     public function withDirectories(array $directories): self
     {
         $validator = new Validator();
-        $validator->validate($directories, static::$schema['properties']['directories']);
+        $validator->validate($directories, self::$schema['properties']['directories']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,7 +249,7 @@ class CreateSftpUserRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

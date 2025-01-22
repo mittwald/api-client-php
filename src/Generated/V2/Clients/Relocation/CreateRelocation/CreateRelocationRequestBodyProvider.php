@@ -122,7 +122,7 @@ class CreateRelocationRequestBodyProvider
     public function withLoginUrl(string $loginUrl): self
     {
         $validator = new Validator();
-        $validator->validate($loginUrl, static::$schema['properties']['loginUrl']);
+        $validator->validate($loginUrl, self::$schema['properties']['loginUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -147,7 +147,7 @@ class CreateRelocationRequestBodyProvider
     public function withPassword(string $password): self
     {
         $validator = new Validator();
-        $validator->validate($password, static::$schema['properties']['password']);
+        $validator->validate($password, self::$schema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -161,7 +161,7 @@ class CreateRelocationRequestBodyProvider
     public function withSourceAccount(string $sourceAccount): self
     {
         $validator = new Validator();
-        $validator->validate($sourceAccount, static::$schema['properties']['sourceAccount']);
+        $validator->validate($sourceAccount, self::$schema['properties']['sourceAccount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -175,7 +175,7 @@ class CreateRelocationRequestBodyProvider
     public function withUserName(string $userName): self
     {
         $validator = new Validator();
-        $validator->validate($userName, static::$schema['properties']['userName']);
+        $validator->validate($userName, self::$schema['properties']['userName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -205,6 +205,7 @@ class CreateRelocationRequestBodyProvider
         $name = match (true) {
             is_string($input->{'name'}) => $input->{'name'},
             CreateRelocationRequestBodyProviderNameAlternative2::tryFrom($input->{'name'}) !== null => CreateRelocationRequestBodyProviderNameAlternative2::from($input->{'name'}),
+            default => throw new InvalidArgumentException("could not build property 'name' from JSON"),
         };
         $password = $input->{'password'};
         $sourceAccount = $input->{'sourceAccount'};
@@ -247,7 +248,7 @@ class CreateRelocationRequestBodyProvider
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -114,7 +114,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, static::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$schema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -128,7 +128,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withDirectory(string $directory): self
     {
         $validator = new Validator();
-        $validator->validate($directory, static::$schema['properties']['directory']);
+        $validator->validate($directory, self::$schema['properties']['directory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -172,7 +172,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withMaxDepth(int $maxDepth): self
     {
         $validator = new Validator();
-        $validator->validate($maxDepth, static::$schema['properties']['max_depth']);
+        $validator->validate($maxDepth, self::$schema['properties']['max_depth']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -197,7 +197,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withType(array $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, static::$schema['properties']['type']);
+        $validator->validate($type, self::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -219,7 +219,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withExecutable(bool $executable): self
     {
         $validator = new Validator();
-        $validator->validate($executable, static::$schema['properties']['executable']);
+        $validator->validate($executable, self::$schema['properties']['executable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +241,7 @@ class ProjectFileSystemGetDirectoriesRequest
     public function withHidden(bool $hidden): self
     {
         $validator = new Validator();
-        $validator->validate($hidden, static::$schema['properties']['hidden']);
+        $validator->validate($hidden, self::$schema['properties']['hidden']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -354,7 +354,7 @@ class ProjectFileSystemGetDirectoriesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

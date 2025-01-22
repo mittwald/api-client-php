@@ -308,7 +308,7 @@ class Extension
     public function withBlocked(bool $blocked): self
     {
         $validator = new Validator();
-        $validator->validate($blocked, static::$schema['properties']['blocked']);
+        $validator->validate($blocked, self::$schema['properties']['blocked']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -330,7 +330,7 @@ class Extension
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, static::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -360,7 +360,7 @@ class Extension
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, static::$schema['properties']['description']);
+        $validator->validate($description, self::$schema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -390,7 +390,7 @@ class Extension
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, static::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$schema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -426,7 +426,7 @@ class Extension
     public function withFrontendFragments(array $frontendFragments): self
     {
         $validator = new Validator();
-        $validator->validate($frontendFragments, static::$schema['properties']['frontendFragments']);
+        $validator->validate($frontendFragments, self::$schema['properties']['frontendFragments']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -448,7 +448,7 @@ class Extension
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -462,7 +462,7 @@ class Extension
     public function withLogoRefId(string $logoRefId): self
     {
         $validator = new Validator();
-        $validator->validate($logoRefId, static::$schema['properties']['logoRefId']);
+        $validator->validate($logoRefId, self::$schema['properties']['logoRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -484,7 +484,7 @@ class Extension
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, static::$schema['properties']['name']);
+        $validator->validate($name, self::$schema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -498,7 +498,7 @@ class Extension
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
-        $validator->validate($published, static::$schema['properties']['published']);
+        $validator->validate($published, self::$schema['properties']['published']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -515,7 +515,7 @@ class Extension
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, static::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$schema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -551,7 +551,7 @@ class Extension
     public function withTags(array $tags): self
     {
         $validator = new Validator();
-        $validator->validate($tags, static::$schema['properties']['tags']);
+        $validator->validate($tags, self::$schema['properties']['tags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -670,7 +670,7 @@ class Extension
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

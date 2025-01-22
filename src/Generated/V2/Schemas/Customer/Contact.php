@@ -151,7 +151,7 @@ class Contact
     public function withCompany(string $company): self
     {
         $validator = new Validator();
-        $validator->validate($company, static::$schema['properties']['company']);
+        $validator->validate($company, self::$schema['properties']['company']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class Contact
     public function withEmailAddress(string $emailAddress): self
     {
         $validator = new Validator();
-        $validator->validate($emailAddress, static::$schema['properties']['emailAddress']);
+        $validator->validate($emailAddress, self::$schema['properties']['emailAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -195,7 +195,7 @@ class Contact
     public function withFirstName(string $firstName): self
     {
         $validator = new Validator();
-        $validator->validate($firstName, static::$schema['properties']['firstName']);
+        $validator->validate($firstName, self::$schema['properties']['firstName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -217,7 +217,7 @@ class Contact
     public function withLastName(string $lastName): self
     {
         $validator = new Validator();
-        $validator->validate($lastName, static::$schema['properties']['lastName']);
+        $validator->validate($lastName, self::$schema['properties']['lastName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -242,7 +242,7 @@ class Contact
     public function withPhoneNumbers(array $phoneNumbers): self
     {
         $validator = new Validator();
-        $validator->validate($phoneNumbers, static::$schema['properties']['phoneNumbers']);
+        $validator->validate($phoneNumbers, self::$schema['properties']['phoneNumbers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -272,7 +272,7 @@ class Contact
     public function withTitle(string $title): self
     {
         $validator = new Validator();
-        $validator->validate($title, static::$schema['properties']['title']);
+        $validator->validate($title, self::$schema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -294,7 +294,7 @@ class Contact
     public function withUseFormalTerm(bool $useFormalTerm): self
     {
         $validator = new Validator();
-        $validator->validate($useFormalTerm, static::$schema['properties']['useFormalTerm']);
+        $validator->validate($useFormalTerm, self::$schema['properties']['useFormalTerm']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -417,7 +417,7 @@ class Contact
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

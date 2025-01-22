@@ -58,7 +58,7 @@ class GetFileMetaRequest
     public function withFileId(string $fileId): self
     {
         $validator = new Validator();
-        $validator->validate($fileId, static::$schema['properties']['fileId']);
+        $validator->validate($fileId, self::$schema['properties']['fileId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -72,7 +72,7 @@ class GetFileMetaRequest
     public function withToken(string $token): self
     {
         $validator = new Validator();
-        $validator->validate($token, static::$schema['properties']['token']);
+        $validator->validate($token, self::$schema['properties']['token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +145,7 @@ class GetFileMetaRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

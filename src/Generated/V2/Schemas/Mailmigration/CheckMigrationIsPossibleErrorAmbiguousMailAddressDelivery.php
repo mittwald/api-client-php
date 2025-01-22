@@ -77,7 +77,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery
     public function withAddresses(array $addresses): self
     {
         $validator = new Validator();
-        $validator->validate($addresses, static::$schema['properties']['addresses']);
+        $validator->validate($addresses, self::$schema['properties']['addresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -91,7 +91,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery
     public function withMailboxName(string $mailboxName): self
     {
         $validator = new Validator();
-        $validator->validate($mailboxName, static::$schema['properties']['mailboxName']);
+        $validator->validate($mailboxName, self::$schema['properties']['mailboxName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

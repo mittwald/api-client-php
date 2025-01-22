@@ -70,7 +70,7 @@ class ReadableChangeArticleOptionsInfo
     public function withArticleName(string $articleName): self
     {
         $validator = new Validator();
-        $validator->validate($articleName, static::$schema['properties']['articleName']);
+        $validator->validate($articleName, self::$schema['properties']['articleName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class ReadableChangeArticleOptionsInfo
     public function withArticleTemplateName(string $articleTemplateName): self
     {
         $validator = new Validator();
-        $validator->validate($articleTemplateName, static::$schema['properties']['articleTemplateName']);
+        $validator->validate($articleTemplateName, self::$schema['properties']['articleTemplateName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class ReadableChangeArticleOptionsInfo
     public function withFromArticleTemplate(bool $fromArticleTemplate): self
     {
         $validator = new Validator();
-        $validator->validate($fromArticleTemplate, static::$schema['properties']['fromArticleTemplate']);
+        $validator->validate($fromArticleTemplate, self::$schema['properties']['fromArticleTemplate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -201,7 +201,7 @@ class ReadableChangeArticleOptionsInfo
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

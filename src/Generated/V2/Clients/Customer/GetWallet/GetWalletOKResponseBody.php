@@ -80,7 +80,7 @@ class GetWalletOKResponseBody
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, static::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class GetWalletOKResponseBody
     public function withPoints(int|float $points): self
     {
         $validator = new Validator();
-        $validator->validate($points, static::$schema['properties']['points']);
+        $validator->validate($points, self::$schema['properties']['points']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +111,7 @@ class GetWalletOKResponseBody
     public function withRecommendationCode(string $recommendationCode): self
     {
         $validator = new Validator();
-        $validator->validate($recommendationCode, static::$schema['properties']['recommendationCode']);
+        $validator->validate($recommendationCode, self::$schema['properties']['recommendationCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class GetWalletOKResponseBody
     public function withWalletId(string $walletId): self
     {
         $validator = new Validator();
-        $validator->validate($walletId, static::$schema['properties']['walletId']);
+        $validator->validate($walletId, self::$schema['properties']['walletId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -202,7 +202,7 @@ class GetWalletOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

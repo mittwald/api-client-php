@@ -66,7 +66,7 @@ class NotificationsReadNotificationRequest
     public function withNotificationId(string $notificationId): self
     {
         $validator = new Validator();
-        $validator->validate($notificationId, static::$schema['properties']['notificationId']);
+        $validator->validate($notificationId, self::$schema['properties']['notificationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,7 +134,7 @@ class NotificationsReadNotificationRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

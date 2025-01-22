@@ -64,7 +64,7 @@ class SystemSoftwareDependency
     public function withSystemSoftwareId(string $systemSoftwareId): self
     {
         $validator = new Validator();
-        $validator->validate($systemSoftwareId, static::$schema['properties']['systemSoftwareId']);
+        $validator->validate($systemSoftwareId, self::$schema['properties']['systemSoftwareId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -78,7 +78,7 @@ class SystemSoftwareDependency
     public function withVersionRange(string $versionRange): self
     {
         $validator = new Validator();
-        $validator->validate($versionRange, static::$schema['properties']['versionRange']);
+        $validator->validate($versionRange, self::$schema['properties']['versionRange']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -138,7 +138,7 @@ class SystemSoftwareDependency
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

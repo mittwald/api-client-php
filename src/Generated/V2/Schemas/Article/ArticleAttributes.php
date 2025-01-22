@@ -117,7 +117,7 @@ class ArticleAttributes
     public function withCustomerEditable(bool $customerEditable): self
     {
         $validator = new Validator();
-        $validator->validate($customerEditable, static::$schema['properties']['customerEditable']);
+        $validator->validate($customerEditable, self::$schema['properties']['customerEditable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -139,7 +139,7 @@ class ArticleAttributes
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, static::$schema['properties']['key']);
+        $validator->validate($key, self::$schema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,7 +169,7 @@ class ArticleAttributes
     public function withReadonly(bool $readonly): self
     {
         $validator = new Validator();
-        $validator->validate($readonly, static::$schema['properties']['readonly']);
+        $validator->validate($readonly, self::$schema['properties']['readonly']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -191,7 +191,7 @@ class ArticleAttributes
     public function withRequired(bool $required): self
     {
         $validator = new Validator();
-        $validator->validate($required, static::$schema['properties']['required']);
+        $validator->validate($required, self::$schema['properties']['required']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,7 +213,7 @@ class ArticleAttributes
     public function withUnit(string $unit): self
     {
         $validator = new Validator();
-        $validator->validate($unit, static::$schema['properties']['unit']);
+        $validator->validate($unit, self::$schema['properties']['unit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -235,7 +235,7 @@ class ArticleAttributes
     public function withValue(string $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, static::$schema['properties']['value']);
+        $validator->validate($value, self::$schema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -348,7 +348,7 @@ class ArticleAttributes
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -88,7 +88,7 @@ class OrderSummary
     public function withNonRecurring(int|float $nonRecurring): self
     {
         $validator = new Validator();
-        $validator->validate($nonRecurring, static::$schema['properties']['nonRecurring']);
+        $validator->validate($nonRecurring, self::$schema['properties']['nonRecurring']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class OrderSummary
     public function withRecurring(int|float $recurring): self
     {
         $validator = new Validator();
-        $validator->validate($recurring, static::$schema['properties']['recurring']);
+        $validator->validate($recurring, self::$schema['properties']['recurring']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -122,7 +122,7 @@ class OrderSummary
     public function withSummary(int|float $summary): self
     {
         $validator = new Validator();
-        $validator->validate($summary, static::$schema['properties']['summary']);
+        $validator->validate($summary, self::$schema['properties']['summary']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -184,7 +184,7 @@ class OrderSummary
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

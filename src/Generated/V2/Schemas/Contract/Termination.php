@@ -99,7 +99,7 @@ class Termination
     public function withCancellationForbidden(bool $cancellationForbidden): self
     {
         $validator = new Validator();
-        $validator->validate($cancellationForbidden, static::$schema['properties']['cancellationForbidden']);
+        $validator->validate($cancellationForbidden, self::$schema['properties']['cancellationForbidden']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -121,7 +121,7 @@ class Termination
     public function withReason(string $reason): self
     {
         $validator = new Validator();
-        $validator->validate($reason, static::$schema['properties']['reason']);
+        $validator->validate($reason, self::$schema['properties']['reason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +151,7 @@ class Termination
     public function withScheduledByUserId(string $scheduledByUserId): self
     {
         $validator = new Validator();
-        $validator->validate($scheduledByUserId, static::$schema['properties']['scheduledByUserId']);
+        $validator->validate($scheduledByUserId, self::$schema['properties']['scheduledByUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -250,7 +250,7 @@ class Termination
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

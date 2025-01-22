@@ -62,7 +62,7 @@ class VersionStatus
     public function withCurrent(string $current): self
     {
         $validator = new Validator();
-        $validator->validate($current, static::$schema['properties']['current']);
+        $validator->validate($current, self::$schema['properties']['current']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -84,7 +84,7 @@ class VersionStatus
     public function withDesired(string $desired): self
     {
         $validator = new Validator();
-        $validator->validate($desired, static::$schema['properties']['desired']);
+        $validator->validate($desired, self::$schema['properties']['desired']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class VersionStatus
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

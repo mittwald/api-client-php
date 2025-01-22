@@ -180,7 +180,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
-        $validator->validate($domain, static::$schema['properties']['domain']);
+        $validator->validate($domain, self::$schema['properties']['domain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -216,7 +216,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withMoreDataAvailable(array $moreDataAvailable): self
     {
         $validator = new Validator();
-        $validator->validate($moreDataAvailable, static::$schema['properties']['moreDataAvailable']);
+        $validator->validate($moreDataAvailable, self::$schema['properties']['moreDataAvailable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -238,7 +238,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, static::$schema['properties']['path']);
+        $validator->validate($path, self::$schema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -255,7 +255,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     public function withPerformanceScore(int|float $performanceScore): self
     {
         $validator = new Validator();
-        $validator->validate($performanceScore, static::$schema['properties']['performanceScore']);
+        $validator->validate($performanceScore, self::$schema['properties']['performanceScore']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -364,7 +364,7 @@ class PageinsightsGetPerformanceDataOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

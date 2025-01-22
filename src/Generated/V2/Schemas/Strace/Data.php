@@ -293,7 +293,7 @@ class Data
     public function withActualUrl(string $actualUrl): self
     {
         $validator = new Validator();
-        $validator->validate($actualUrl, static::$schema['properties']['actualUrl']);
+        $validator->validate($actualUrl, self::$schema['properties']['actualUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -375,7 +375,7 @@ class Data
     public function withSlowdownFactor(int|float $slowdownFactor): self
     {
         $validator = new Validator();
-        $validator->validate($slowdownFactor, static::$schema['properties']['slowdownFactor']);
+        $validator->validate($slowdownFactor, self::$schema['properties']['slowdownFactor']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -389,7 +389,7 @@ class Data
     public function withTtfbMs(int $ttfbMs): self
     {
         $validator = new Validator();
-        $validator->validate($ttfbMs, static::$schema['properties']['ttfbMs']);
+        $validator->validate($ttfbMs, self::$schema['properties']['ttfbMs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -465,7 +465,7 @@ class Data
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

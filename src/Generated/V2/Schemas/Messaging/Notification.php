@@ -126,7 +126,7 @@ class Notification
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, static::$schema['properties']['id']);
+        $validator->validate($id, self::$schema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -140,7 +140,7 @@ class Notification
     public function withRead(bool $read): self
     {
         $validator = new Validator();
-        $validator->validate($read, static::$schema['properties']['read']);
+        $validator->validate($read, self::$schema['properties']['read']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class Notification
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, static::$schema['properties']['type']);
+        $validator->validate($type, self::$schema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -238,7 +238,7 @@ class Notification
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

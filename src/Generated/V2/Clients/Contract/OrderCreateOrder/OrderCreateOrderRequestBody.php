@@ -126,6 +126,7 @@ class OrderCreateOrderRequestBody
                 ServerOrder::validateInput($input->{'orderData'}, true) => ServerOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 DomainOrder::validateInput($input->{'orderData'}, true) => DomainOrder::buildFromInput($input->{'orderData'}, validate: $validate),
                 ExternalCertificateOrder::validateInput($input->{'orderData'}, true) => ExternalCertificateOrder::buildFromInput($input->{'orderData'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'orderData' from JSON"),
             };
         }
         $orderType = null;
@@ -171,7 +172,7 @@ class OrderCreateOrderRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

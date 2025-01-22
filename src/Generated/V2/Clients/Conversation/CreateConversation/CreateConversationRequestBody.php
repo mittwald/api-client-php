@@ -109,7 +109,7 @@ class CreateConversationRequestBody
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
-        $validator->validate($categoryId, static::$schema['properties']['categoryId']);
+        $validator->validate($categoryId, self::$schema['properties']['categoryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,7 +131,7 @@ class CreateConversationRequestBody
     public function withMainUserId(string $mainUserId): self
     {
         $validator = new Validator();
-        $validator->validate($mainUserId, static::$schema['properties']['mainUserId']);
+        $validator->validate($mainUserId, self::$schema['properties']['mainUserId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -210,7 +210,7 @@ class CreateConversationRequestBody
     public function withTitle(string $title): self
     {
         $validator = new Validator();
-        $validator->validate($title, static::$schema['properties']['title']);
+        $validator->validate($title, self::$schema['properties']['title']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -341,7 +341,7 @@ class CreateConversationRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

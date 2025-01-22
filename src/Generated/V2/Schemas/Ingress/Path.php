@@ -80,7 +80,7 @@ class Path
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, static::$schema['properties']['path']);
+        $validator->validate($path, self::$schema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -124,6 +124,7 @@ class Path
             TargetInstallation::validateInput($input->{'target'}, true) => TargetInstallation::buildFromInput($input->{'target'}, validate: $validate),
             TargetUseDefaultPage::validateInput($input->{'target'}, true) => TargetUseDefaultPage::buildFromInput($input->{'target'}, validate: $validate),
             TargetContainer::validateInput($input->{'target'}, true) => TargetContainer::buildFromInput($input->{'target'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'target' from JSON"),
         };
 
         $obj = new self($path, $target);
@@ -159,7 +160,7 @@ class Path
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -76,7 +76,7 @@ class DeprecatedUserServiceIssueNewRequestBody
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, static::$schema['properties']['message']);
+        $validator->validate($message, self::$schema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -90,7 +90,7 @@ class DeprecatedUserServiceIssueNewRequestBody
     public function withOrigin(string $origin): self
     {
         $validator = new Validator();
-        $validator->validate($origin, static::$schema['properties']['origin']);
+        $validator->validate($origin, self::$schema['properties']['origin']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +112,7 @@ class DeprecatedUserServiceIssueNewRequestBody
     public function withSubject(string $subject): self
     {
         $validator = new Validator();
-        $validator->validate($subject, static::$schema['properties']['subject']);
+        $validator->validate($subject, self::$schema['properties']['subject']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -203,7 +203,7 @@ class DeprecatedUserServiceIssueNewRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, static::$schema);
+        $validator->validate($input, self::$schema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
