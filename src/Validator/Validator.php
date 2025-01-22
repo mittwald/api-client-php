@@ -17,12 +17,8 @@ class Validator extends \JsonSchema\Validator
 {
     public function __construct()
     {
-        /**
-         * Psalm needs an override here, because JsonSchema's doc-comments are... incorrect.
-         * @psalm-var \JsonSchema\SchemaStorage $schemaStorage
-         */
         $schemaStorage = new SchemaStorage();
-        $factory = new Factory($schemaStorage);
+        $factory = new Factory($schemaStorage); // @phpstan-ignore argument.type (doc-comments are incorrect)
 
         parent::__construct($factory);
     }
