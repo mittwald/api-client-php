@@ -1,0 +1,8 @@
+parameters:
+  level: 5
+  paths:
+    - src
+  ignoreErrors:
+  # Ignore until this can be fixed in client generation
+  - identifier: match.unhandled
+    path: src/Generated/V2/Clients/*/*ClientImpl.php

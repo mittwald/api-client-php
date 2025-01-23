@@ -9,6 +9,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness\BrokerGetLivenessDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness\BrokerGetLivenessOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness\BrokerGetLivenessRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness\BrokerGetLivenessTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceNotFoundResponse;
@@ -583,6 +587,28 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListOwnExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListOwnExtensionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get Liveness status.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/marketplace-broker-get-liveness
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param BrokerGetLivenessRequest $request An object representing the request for this operation
+     * @return BrokerGetLivenessOKResponse OK
+     */
+    public function brokerGetLiveness(BrokerGetLivenessRequest $request): BrokerGetLivenessOKResponse
+    {
+        $httpRequest = new Request(BrokerGetLivenessRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return BrokerGetLivenessOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => BrokerGetLivenessTooManyRequestsResponse::fromResponse($httpResponse),
+            default => BrokerGetLivenessDefaultResponse::fromResponse($httpResponse),
         });
     }
 }
