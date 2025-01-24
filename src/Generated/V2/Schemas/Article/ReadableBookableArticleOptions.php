@@ -112,9 +112,6 @@ class ReadableBookableArticleOptions
         return $clone;
     }
 
-    /**
-     * @param int|float $maxArticleCount
-     */
     public function withMaxArticleCount(int|float $maxArticleCount): self
     {
         $validator = new Validator();

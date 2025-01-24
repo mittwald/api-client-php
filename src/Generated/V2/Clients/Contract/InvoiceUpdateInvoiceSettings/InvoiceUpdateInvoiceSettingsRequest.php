@@ -50,6 +50,8 @@ class InvoiceUpdateInvoiceSettingsRequest
                         'type' => 'boolean',
                     ],
                     'targetDay' => [
+                        'deprecated' => true,
+                        'description' => 'parameter is deprecated and will be ignored',
                         'example' => 15,
                         'maximum' => 28,
                         'minimum' => 0,

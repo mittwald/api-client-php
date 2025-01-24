@@ -119,7 +119,6 @@ class CustomerOrder
     private OrderType $type;
 
     /**
-     * @param int|float $invoicingPeriod
      * @param OrderItem[] $items
      */
     public function __construct(string $customerId, int|float $invoicingPeriod, array $items, string $orderId, string $orderNumber, OrderStatus $status, OrderSummary $summary, OrderType $type)
@@ -249,9 +248,6 @@ class CustomerOrder
         return $clone;
     }
 
-    /**
-     * @param int|float $invoicingPeriod
-     */
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
         $validator = new Validator();

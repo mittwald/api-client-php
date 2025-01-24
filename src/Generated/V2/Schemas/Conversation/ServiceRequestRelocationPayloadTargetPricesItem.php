@@ -78,9 +78,6 @@ class ServiceRequestRelocationPayloadTargetPricesItem
         return $clone;
     }
 
-    /**
-     * @param int|float $price
-     */
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();

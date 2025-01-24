@@ -102,9 +102,6 @@ class OrderItem
 
     private ?Reference $reference = null;
 
-    /**
-     * @param int|float $price
-     */
     public function __construct(string $articleId, bool $isInclusive, string $orderItemId, int|float $price)
     {
         $this->articleId = $articleId;
@@ -315,9 +312,6 @@ class OrderItem
         return $clone;
     }
 
-    /**
-     * @param int|float $price
-     */
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();

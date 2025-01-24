@@ -48,9 +48,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
 
     ];
 
-    /**
-     * @param RecordUnset|RecordMXCustom $body
-     */
     public function __construct(string $zoneId, RecordMXCustom|RecordUnset $body)
     {
         $this->zoneId = $zoneId;
@@ -81,9 +78,6 @@ class DnsRecordMxSetCustomDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordMXCustom $body
-     */
     public function withBody(RecordMXCustom|RecordUnset $body): self
     {
         $clone = clone $this;

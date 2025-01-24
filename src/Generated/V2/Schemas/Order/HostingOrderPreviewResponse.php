@@ -51,11 +51,6 @@ class HostingOrderPreviewResponse
 
     private int|float $totalPrice;
 
-    /**
-     * @param int|float $machineTypePrice
-     * @param int|float $storagePrice
-     * @param int|float $totalPrice
-     */
     public function __construct(int|float $machineTypePrice, int|float $storagePrice, int|float $totalPrice)
     {
         $this->machineTypePrice = $machineTypePrice;
@@ -78,9 +73,6 @@ class HostingOrderPreviewResponse
         return $this->totalPrice;
     }
 
-    /**
-     * @param int|float $machineTypePrice
-     */
     public function withMachineTypePrice(int|float $machineTypePrice): self
     {
         $validator = new Validator();
@@ -95,9 +87,6 @@ class HostingOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $storagePrice
-     */
     public function withStoragePrice(int|float $storagePrice): self
     {
         $validator = new Validator();
@@ -112,9 +101,6 @@ class HostingOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $totalPrice
-     */
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();

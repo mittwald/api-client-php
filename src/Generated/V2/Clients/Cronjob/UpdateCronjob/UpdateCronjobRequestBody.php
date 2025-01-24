@@ -143,9 +143,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @param CronjobUrl|CronjobCommand $destination
-     */
     public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
         $clone = clone $this;
@@ -206,9 +203,6 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    /**
-     * @param int|float $timeout
-     */
     public function withTimeout(int|float $timeout): self
     {
         $validator = new Validator();

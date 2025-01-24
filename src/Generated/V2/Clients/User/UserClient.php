@@ -41,6 +41,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserDisableMfa\DeprecatedUserDisableMfaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditApiToken\DeprecatedUserEditApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserLogout\DeprecatedUserLogoutRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserResendVerificationEmail\DeprecatedUserResendVerificationEmailRequest;
@@ -74,8 +76,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenOKRespon
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetApiToken\GetApiTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetPasswordUpdatedAt\GetPasswordUpdatedAtOKResponse;
@@ -152,7 +152,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\VerifyRegistration\VerifyRegist
 interface UserClient
 {
     /**
-     * Change your Email-Address.
+     * Change your Email-Address. Replaced by `PUT` `/v2/users/self/credentials/email`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-change-email
      * @throws GuzzleException
@@ -164,7 +164,7 @@ interface UserClient
      */
     public function deprecatedUserChangeEmail(DeprecatedUserChangeEmailRequest $request): EmptyResponse;
     /**
-     * Confirm password reset.
+     * Confirm password reset. Replaced by `POST` `/v2/users/self/credentials/password/confirm-reset`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-confirm-password-reset
      * @throws GuzzleException
@@ -186,7 +186,7 @@ interface UserClient
      */
     public function deprecatedUserCreateIssue(DeprecatedUserCreateIssueRequest $request): DeprecatedUserCreateIssueCreatedResponse;
     /**
-     * Deletes an ApiToken.
+     * Deletes an ApiToken. Replaces by `DELETE` `/v2/user/{userid}/api-tokens/{apiTokenId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-api-token
      * @throws GuzzleException
@@ -197,7 +197,7 @@ interface UserClient
      */
     public function deprecatedUserDeleteApiToken(DeprecatedUserDeleteApiTokenRequest $request): EmptyResponse;
     /**
-     * Remove a ssh-key.
+     * Remove a ssh-key. Replaced by `DELETE` `/v2/users/self/ssh-keys/{sshKeyId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-ssh-key
      * @throws GuzzleException
@@ -208,7 +208,7 @@ interface UserClient
      */
     public function deprecatedUserDeleteSshKey(DeprecatedUserDeleteSshKeyRequest $request): EmptyResponse;
     /**
-     * Disable Multi Factor Authentication.
+     * Disable Multi Factor Authentication. Replaced by `DELETE` `/v2/users/self/credentials/mfa`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-disable-mfa
      * @throws GuzzleException
@@ -219,7 +219,7 @@ interface UserClient
      */
     public function deprecatedUserDisableMfa(DeprecatedUserDisableMfaRequest $request): DeprecatedUserDisableMfaOKResponse;
     /**
-     * Update an existing `ApiToken`.
+     * Update an existing `ApiToken`. Replaced by `PUT` `/v2/users/{userId}/api-tokens/{apiTokenId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
      * @throws GuzzleException
@@ -230,7 +230,7 @@ interface UserClient
      */
     public function deprecatedUserEditApiToken(DeprecatedUserEditApiTokenRequest $request): EmptyResponse;
     /**
-     * Edit a stored ssh-key.
+     * Edit a stored ssh-key. Replaced by `PUT` `/v2/users/self/ssh-keys/{sshKeyId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
      * @throws GuzzleException
@@ -241,7 +241,19 @@ interface UserClient
      */
     public function deprecatedUserEditSshKey(DeprecatedUserEditSshKeyRequest $request): EmptyResponse;
     /**
-     * Initialize password reset process.
+     * Get your account information. Replaced by `GET` `/v2/users/self`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-get-own-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserGetOwnAccountRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserGetOwnAccountOKResponse Account information.
+     */
+    public function deprecatedUserGetOwnAccount(DeprecatedUserGetOwnAccountRequest $request): DeprecatedUserGetOwnAccountOKResponse;
+    /**
+     * Initialize password reset process. Replaced by `POST` `/v2/users/self/credentials/actions/init-password-reset`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-init-password-reset
      * @throws GuzzleException
@@ -252,7 +264,7 @@ interface UserClient
      */
     public function deprecatedUserInitPasswordReset(DeprecatedUserInitPasswordResetRequest $request): EmptyResponse;
     /**
-     * Terminate session and invalidate access token.
+     * Terminate session and invalidate access token. Replaced by `DELETE` `/v2/users/self/sessions/{current}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-logout
      * @throws GuzzleException
@@ -263,7 +275,8 @@ interface UserClient
      */
     public function deprecatedUserLogout(DeprecatedUserLogoutRequest $request): EmptyResponse;
     /**
-     * Resend the Email-Address verification email.
+     * Resend the Email-Address verification email. Replaced by `POST` `/v2/users/self/credentials/email/actions/resend-email`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-resend-verification-email
      * @throws GuzzleException
@@ -416,7 +429,7 @@ interface UserClient
      */
     public function deprecatedUserServiceUserGetOwn(DeprecatedUserServiceUserGetOwnRequest $request): DeprecatedUserServiceUserGetOwnOKResponse;
     /**
-     * Terminate all sessions, except the current session.
+     * Terminate all sessions, except the current session. Replaced by `DELETE` `/v2/users/self/sessions`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-terminate-all-sessions
      * @throws GuzzleException
@@ -427,7 +440,7 @@ interface UserClient
      */
     public function deprecatedUserTerminateAllSessions(DeprecatedUserTerminateAllSessionsRequest $request): EmptyResponse;
     /**
-     * Terminate a specific Session.
+     * Terminate a specific Session. Replaced by `DELETE` `/v2/users/self/sessions/{tokenId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-terminate-session
      * @throws GuzzleException
@@ -449,7 +462,7 @@ interface UserClient
      */
     public function deprecatedUserUpdateAccount(DeprecatedUserUpdateAccountRequest $request): EmptyResponse;
     /**
-     * Verify an added Email-Address.
+     * Verify an added Email-Address. Replaced by `POST` `/v2/users/self/credentials/email/actions/verify-email`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-verify-email
      * @throws GuzzleException
@@ -681,16 +694,6 @@ interface UserClient
      * @return GetMfaStatusOKResponse Multi factor auth status
      */
     public function getMfaStatus(GetMfaStatusRequest $request): GetMfaStatusOKResponse;
-    /**
-     * Get your account information.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-account
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetOwnAccountRequest $request An object representing the request for this operation
-     * @return GetOwnAccountOKResponse Account information.
-     */
-    public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse;
     /**
      * Get your verified Email-Address.
      *

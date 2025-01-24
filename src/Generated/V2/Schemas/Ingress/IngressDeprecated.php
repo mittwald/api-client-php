@@ -148,7 +148,6 @@ class IngressDeprecated
     /**
      * @param string[] $dnsValidationErrors
      * @param Path[] $paths
-     * @param TlsAcmeDeprecated|TlsCertificate $tls
      */
     public function __construct(array $dnsValidationErrors, string $hostname, string $id, IngressDeprecatedIps $ips, bool $isDefault, bool $isEnabled, Ownership $ownership, array $paths, string $projectId, TlsAcmeDeprecated|TlsCertificate $tls)
     {
@@ -361,9 +360,6 @@ class IngressDeprecated
         return $clone;
     }
 
-    /**
-     * @param TlsAcmeDeprecated|TlsCertificate $tls
-     */
     public function withTls(TlsAcmeDeprecated|TlsCertificate $tls): self
     {
         $clone = clone $this;

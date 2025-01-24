@@ -62,9 +62,6 @@ class ReadableModifierArticleOptions
 
     private int|float $maxArticleCount;
 
-    /**
-     * @param int|float $maxArticleCount
-     */
     public function __construct(string $articleId, int|float $maxArticleCount)
     {
         $this->articleId = $articleId;
@@ -116,9 +113,6 @@ class ReadableModifierArticleOptions
         return $clone;
     }
 
-    /**
-     * @param int|float $maxArticleCount
-     */
     public function withMaxArticleCount(int|float $maxArticleCount): self
     {
         $validator = new Validator();

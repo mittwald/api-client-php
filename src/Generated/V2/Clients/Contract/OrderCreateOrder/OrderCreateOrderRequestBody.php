@@ -69,9 +69,6 @@ class OrderCreateOrderRequestBody
         return $this->orderType ?? null;
     }
 
-    /**
-     * @param ProjectHostingOrder|ServerOrder|DomainOrder|ExternalCertificateOrder $orderData
-     */
     public function withOrderData(DomainOrder|ExternalCertificateOrder|ProjectHostingOrder|ServerOrder $orderData): self
     {
         $clone = clone $this;

@@ -47,9 +47,6 @@ class GetWalletOKResponseBody
 
     private string $walletId;
 
-    /**
-     * @param int|float $points
-     */
     public function __construct(string $customerId, int|float $points, string $walletId)
     {
         $this->customerId = $customerId;
@@ -91,9 +88,6 @@ class GetWalletOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int|float $points
-     */
     public function withPoints(int|float $points): self
     {
         $validator = new Validator();

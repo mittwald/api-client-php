@@ -68,9 +68,6 @@ class OrderPreviewOrderRequestBody
         return $this->orderType ?? null;
     }
 
-    /**
-     * @param ProjectHostingOrderPreview|ServerOrderPreview|DomainOrderPreview|ExternalCertificateOrderPreview $orderData
-     */
     public function withOrderData(DomainOrderPreview|ExternalCertificateOrderPreview|ProjectHostingOrderPreview|ServerOrderPreview $orderData): self
     {
         $clone = clone $this;

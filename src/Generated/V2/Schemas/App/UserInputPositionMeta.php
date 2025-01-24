@@ -67,9 +67,6 @@ class UserInputPositionMeta
         return $this->step ?? null;
     }
 
-    /**
-     * @param int|float $index
-     */
     public function withIndex(int|float $index): self
     {
         $validator = new Validator();

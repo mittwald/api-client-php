@@ -48,9 +48,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
 
     private int|float $value;
 
-    /**
-     * @param int|float $value
-     */
     public function __construct(DateTime $createdAt, string $name, int|float $value)
     {
         $this->createdAt = $createdAt;
@@ -100,9 +97,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         return $clone;
     }
 
-    /**
-     * @param int|float $score
-     */
     public function withScore(int|float $score): self
     {
         $validator = new Validator();
@@ -125,9 +119,6 @@ class PageinsightsGetPerformanceDataOKResponseBodyMetricsItem
         return $clone;
     }
 
-    /**
-     * @param int|float $value
-     */
     public function withValue(int|float $value): self
     {
         $validator = new Validator();

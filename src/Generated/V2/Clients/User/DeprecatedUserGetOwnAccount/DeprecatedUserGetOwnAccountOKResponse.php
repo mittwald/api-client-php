@@ -2,25 +2,51 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Signup\Account;
+use Psr\Http\Message\ResponseInterface;
 
-class GetOwnAccountRequestBody
+class DeprecatedUserGetOwnAccountOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'type' => 'object',
+        'required' => [
+            'body',
+        ],
+        'properties' => [
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.signup.Account',
+            ],
+        ],
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    private Account $body;
+
+    private ResponseInterface|null $httpResponse = null;
+
+    public function __construct(Account $body)
     {
+        $this->body = $body;
+    }
+
+    public function getBody(): Account
+    {
+        return $this->body;
+    }
+
+    public function withBody(Account $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
     }
 
     /**
@@ -28,19 +54,19 @@ class GetOwnAccountRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetOwnAccountRequestBody Created instance
+     * @return DeprecatedUserGetOwnAccountOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetOwnAccountRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserGetOwnAccountOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $body = Account::buildFromInput($input->{'body'}, validate: $validate);
 
-
-        $obj = new self();
+        $obj = new self($body);
 
         return $obj;
     }
@@ -53,7 +79,7 @@ class GetOwnAccountRequestBody
     public function toJson(): array
     {
         $output = [];
-
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -84,5 +110,18 @@ class GetOwnAccountRequestBody
 
     public function __clone()
     {
+    }
+
+    public static function fromResponse(ResponseInterface $httpResponse): self
+    {
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
+    }
+
+    public function getResponse(): ResponseInterface|null
+    {
+        return $this->httpResponse;
     }
 }

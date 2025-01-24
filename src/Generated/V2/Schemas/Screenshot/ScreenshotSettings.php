@@ -65,12 +65,6 @@ class ScreenshotSettings
 
     private int|float $width;
 
-    /**
-     * @param int|float $delay
-     * @param int|float $height
-     * @param int|float $quality
-     * @param int|float $width
-     */
     public function __construct(ScreenshotSettingsDataType $dataType, int|float $delay, int|float $height, int|float $quality, int|float $width)
     {
         $this->dataType = $dataType;
@@ -113,9 +107,6 @@ class ScreenshotSettings
         return $clone;
     }
 
-    /**
-     * @param int|float $delay
-     */
     public function withDelay(int|float $delay): self
     {
         $validator = new Validator();
@@ -130,9 +121,6 @@ class ScreenshotSettings
         return $clone;
     }
 
-    /**
-     * @param int|float $height
-     */
     public function withHeight(int|float $height): self
     {
         $validator = new Validator();
@@ -147,9 +135,6 @@ class ScreenshotSettings
         return $clone;
     }
 
-    /**
-     * @param int|float $quality
-     */
     public function withQuality(int|float $quality): self
     {
         $validator = new Validator();
@@ -164,9 +149,6 @@ class ScreenshotSettings
         return $clone;
     }
 
-    /**
-     * @param int|float $width
-     */
     public function withWidth(int|float $width): self
     {
         $validator = new Validator();

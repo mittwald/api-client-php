@@ -116,6 +116,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\Deprec
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserEditSshKey\DeprecatedUserEditSshKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount\DeprecatedUserGetOwnAccountTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserInitPasswordReset\DeprecatedUserInitPasswordResetRequest;
@@ -225,10 +229,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusDefaul
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetMfaStatus\GetMfaStatusTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount\GetOwnAccountTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnEmail\GetOwnEmailOKResponse;
@@ -414,7 +414,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Change your Email-Address.
+     * Change your Email-Address. Replaced by `PUT` `/v2/users/self/credentials/email`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-change-email
      * @throws GuzzleException
@@ -439,7 +439,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Confirm password reset.
+     * Confirm password reset. Replaced by `POST` `/v2/users/self/credentials/password/confirm-reset`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-confirm-password-reset
      * @throws GuzzleException
@@ -488,7 +488,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Deletes an ApiToken.
+     * Deletes an ApiToken. Replaces by `DELETE` `/v2/user/{userid}/api-tokens/{apiTokenId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-api-token
      * @throws GuzzleException
@@ -512,7 +512,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Remove a ssh-key.
+     * Remove a ssh-key. Replaced by `DELETE` `/v2/users/self/ssh-keys/{sshKeyId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-delete-ssh-key
      * @throws GuzzleException
@@ -535,7 +535,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Disable Multi Factor Authentication.
+     * Disable Multi Factor Authentication. Replaced by `DELETE` `/v2/users/self/credentials/mfa`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-disable-mfa
      * @throws GuzzleException
@@ -559,7 +559,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Update an existing `ApiToken`.
+     * Update an existing `ApiToken`. Replaced by `PUT` `/v2/users/{userId}/api-tokens/{apiTokenId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-api-token
      * @throws GuzzleException
@@ -583,7 +583,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Edit a stored ssh-key.
+     * Edit a stored ssh-key. Replaced by `PUT` `/v2/users/self/ssh-keys/{sshKeyId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-edit-ssh-key
      * @throws GuzzleException
@@ -607,7 +607,31 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Initialize password reset process.
+     * Get your account information. Replaced by `GET` `/v2/users/self`.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-get-own-account
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedUserGetOwnAccountRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedUserGetOwnAccountOKResponse Account information.
+     */
+    public function deprecatedUserGetOwnAccount(DeprecatedUserGetOwnAccountRequest $request): DeprecatedUserGetOwnAccountOKResponse
+    {
+        $httpRequest = new Request(DeprecatedUserGetOwnAccountRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedUserGetOwnAccountOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => DeprecatedUserGetOwnAccountTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedUserGetOwnAccountDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Initialize password reset process. Replaced by `POST` `/v2/users/self/credentials/actions/init-password-reset`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-init-password-reset
      * @throws GuzzleException
@@ -631,7 +655,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Terminate session and invalidate access token.
+     * Terminate session and invalidate access token. Replaced by `DELETE` `/v2/users/self/sessions/{current}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-logout
      * @throws GuzzleException
@@ -655,7 +679,8 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Resend the Email-Address verification email.
+     * Resend the Email-Address verification email. Replaced by `POST` `/v2/users/self/credentials/email/actions/resend-email`.
+     *
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-resend-verification-email
      * @throws GuzzleException
@@ -992,7 +1017,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Terminate all sessions, except the current session.
+     * Terminate all sessions, except the current session. Replaced by `DELETE` `/v2/users/self/sessions`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-terminate-all-sessions
      * @throws GuzzleException
@@ -1015,7 +1040,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Terminate a specific Session.
+     * Terminate a specific Session. Replaced by `DELETE` `/v2/users/self/sessions/{tokenId}`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-terminate-session
      * @throws GuzzleException
@@ -1063,7 +1088,7 @@ class UserClientImpl implements UserClient
     }
 
     /**
-     * Verify an added Email-Address.
+     * Verify an added Email-Address. Replaced by `POST` `/v2/users/self/credentials/email/actions/verify-email`.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-verify-email
      * @throws GuzzleException
@@ -1595,28 +1620,6 @@ class UserClientImpl implements UserClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => GetMfaStatusTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetMfaStatusDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Get your account information.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/user-get-own-account
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetOwnAccountRequest $request An object representing the request for this operation
-     * @return GetOwnAccountOKResponse Account information.
-     */
-    public function getOwnAccount(GetOwnAccountRequest $request): GetOwnAccountOKResponse
-    {
-        $httpRequest = new Request(GetOwnAccountRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetOwnAccountOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => GetOwnAccountTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetOwnAccountDefaultResponse::fromResponse($httpResponse),
         });
     }
 

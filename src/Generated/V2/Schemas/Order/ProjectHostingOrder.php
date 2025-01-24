@@ -81,10 +81,6 @@ class ProjectHostingOrder
 
     private ?bool $useFreeTrial = null;
 
-    /**
-     * @param int|float $diskspaceInGiB
-     * @param MachineTypeSpec|HardwareSpec $spec
-     */
     public function __construct(string $customerId, string $description, int|float $diskspaceInGiB, HardwareSpec|MachineTypeSpec $spec)
     {
         $this->customerId = $customerId;
@@ -156,9 +152,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
@@ -217,9 +210,6 @@ class ProjectHostingOrder
         return $clone;
     }
 
-    /**
-     * @param MachineTypeSpec|HardwareSpec $spec
-     */
     public function withSpec(HardwareSpec|MachineTypeSpec $spec): self
     {
         $clone = clone $this;

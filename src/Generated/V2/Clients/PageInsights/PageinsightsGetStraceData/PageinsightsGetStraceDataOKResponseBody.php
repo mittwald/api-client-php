@@ -50,9 +50,6 @@ class PageinsightsGetStraceDataOKResponseBody
 
     private Error|Data $result;
 
-    /**
-     * @param Error|Data $result
-     */
     public function __construct(DateTime $executedAt, string $id, Data|Error $result)
     {
         $this->executedAt = $executedAt;
@@ -97,9 +94,6 @@ class PageinsightsGetStraceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param Error|Data $result
-     */
     public function withResult(Data|Error $result): self
     {
         $clone = clone $this;

@@ -148,7 +148,6 @@ class Ingress
     /**
      * @param string[] $dnsValidationErrors
      * @param Path[] $paths
-     * @param TlsAcme|TlsCertificate $tls
      */
     public function __construct(array $dnsValidationErrors, string $hostname, string $id, IngressIps $ips, bool $isDefault, bool $isEnabled, Ownership $ownership, array $paths, string $projectId, TlsAcme|TlsCertificate $tls)
     {
@@ -361,9 +360,6 @@ class Ingress
         return $clone;
     }
 
-    /**
-     * @param TlsAcme|TlsCertificate $tls
-     */
     public function withTls(TlsAcme|TlsCertificate $tls): self
     {
         $clone = clone $this;

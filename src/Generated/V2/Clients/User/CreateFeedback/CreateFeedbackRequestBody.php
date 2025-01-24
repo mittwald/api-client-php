@@ -180,9 +180,6 @@ class CreateFeedbackRequestBody
         return $clone;
     }
 
-    /**
-     * @param int|float $vote
-     */
     public function withVote(int|float $vote): self
     {
         $validator = new Validator();

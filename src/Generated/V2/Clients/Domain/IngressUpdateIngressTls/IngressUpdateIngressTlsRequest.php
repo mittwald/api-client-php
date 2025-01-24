@@ -76,9 +76,6 @@ class IngressUpdateIngressTlsRequest
 
     ];
 
-    /**
-     * @param IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body
-     */
     public function __construct(string $ingressId, IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body)
     {
         $this->ingressId = $ingressId;
@@ -109,9 +106,6 @@ class IngressUpdateIngressTlsRequest
         return $clone;
     }
 
-    /**
-     * @param IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body
-     */
     public function withBody(IngressUpdateIngressTlsRequestBodyAlternative1|IngressUpdateIngressTlsRequestBodyAlternative2 $body): self
     {
         $clone = clone $this;

@@ -54,9 +54,6 @@ class CreateMailAddressMailbox
      */
     private int|float $quotaInBytes;
 
-    /**
-     * @param int|float $quotaInBytes
-     */
     public function __construct(bool $enableSpamProtection, string $password, int|float $quotaInBytes)
     {
         $this->enableSpamProtection = $enableSpamProtection;
@@ -107,9 +104,6 @@ class CreateMailAddressMailbox
         return $clone;
     }
 
-    /**
-     * @param int|float $quotaInBytes
-     */
     public function withQuotaInBytes(int|float $quotaInBytes): self
     {
         $validator = new Validator();

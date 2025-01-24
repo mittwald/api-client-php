@@ -74,10 +74,6 @@ class Statistics
      */
     private int|float $userspaceMs;
 
-    /**
-     * @param int|float $kernelMs
-     * @param int|float $userspaceMs
-     */
     public function __construct(int|float $kernelMs, int $occurrences, int $syscallCount, int|float $userspaceMs)
     {
         $this->kernelMs = $kernelMs;
@@ -106,9 +102,6 @@ class Statistics
         return $this->userspaceMs;
     }
 
-    /**
-     * @param int|float $kernelMs
-     */
     public function withKernelMs(int|float $kernelMs): self
     {
         $validator = new Validator();
@@ -151,9 +144,6 @@ class Statistics
         return $clone;
     }
 
-    /**
-     * @param int|float $userspaceMs
-     */
     public function withUserspaceMs(int|float $userspaceMs): self
     {
         $validator = new Validator();

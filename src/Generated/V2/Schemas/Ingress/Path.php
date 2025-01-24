@@ -58,9 +58,6 @@ class Path
 
     private TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target;
 
-    /**
-     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target
-     */
     public function __construct(string $path, TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
     {
         $this->path = $path;
@@ -91,9 +88,6 @@ class Path
         return $clone;
     }
 
-    /**
-     * @param TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target
-     */
     public function withTarget(TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
     {
         $clone = clone $this;

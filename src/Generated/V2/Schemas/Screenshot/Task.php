@@ -80,9 +80,6 @@ class Task
 
     private string|Error|null $taskState = null;
 
-    /**
-     * @param int|float $priority
-     */
     public function __construct(string $id, int|float $priority, ScreenshotSettings $settings, Target $target)
     {
         $this->id = $id;
@@ -178,9 +175,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @param int|float $priority
-     */
     public function withPriority(int|float $priority): self
     {
         $validator = new Validator();
@@ -211,9 +205,6 @@ class Task
         return $clone;
     }
 
-    /**
-     * @param string|Error $taskState
-     */
     public function withTaskState(Error|string $taskState): self
     {
         $clone = clone $this;

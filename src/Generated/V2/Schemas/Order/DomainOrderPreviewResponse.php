@@ -62,12 +62,6 @@ class DomainOrderPreviewResponse
 
     private int|float $totalPrice;
 
-    /**
-     * @param int|float $domainContractDuration
-     * @param int|float $domainPrice
-     * @param int|float $feePrice
-     * @param int|float $totalPrice
-     */
     public function __construct(int|float $domainContractDuration, int|float $domainPrice, int|float $feePrice, int|float $totalPrice)
     {
         $this->domainContractDuration = $domainContractDuration;
@@ -96,9 +90,6 @@ class DomainOrderPreviewResponse
         return $this->totalPrice;
     }
 
-    /**
-     * @param int|float $domainContractDuration
-     */
     public function withDomainContractDuration(int|float $domainContractDuration): self
     {
         $validator = new Validator();
@@ -113,9 +104,6 @@ class DomainOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $domainPrice
-     */
     public function withDomainPrice(int|float $domainPrice): self
     {
         $validator = new Validator();
@@ -130,9 +118,6 @@ class DomainOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $feePrice
-     */
     public function withFeePrice(int|float $feePrice): self
     {
         $validator = new Validator();
@@ -147,9 +132,6 @@ class DomainOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $totalPrice
-     */
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();

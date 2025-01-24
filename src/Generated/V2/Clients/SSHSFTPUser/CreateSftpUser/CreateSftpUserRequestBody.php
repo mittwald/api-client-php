@@ -64,7 +64,6 @@ class CreateSftpUserRequestBody
     private ?DateTime $expiresAt = null;
 
     /**
-     * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
      * @param string[] $directories
      */
     public function __construct(AuthenticationAlternative1|AuthenticationAlternative2 $authentication, string $description, array $directories)
@@ -118,9 +117,6 @@ class CreateSftpUserRequestBody
         return $clone;
     }
 
-    /**
-     * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     */
     public function withAuthentication(AuthenticationAlternative1|AuthenticationAlternative2 $authentication): self
     {
         $clone = clone $this;

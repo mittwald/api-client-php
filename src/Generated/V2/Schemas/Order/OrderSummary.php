@@ -55,11 +55,6 @@ class OrderSummary
      */
     private int|float $summary;
 
-    /**
-     * @param int|float $nonRecurring
-     * @param int|float $recurring
-     * @param int|float $summary
-     */
     public function __construct(int|float $nonRecurring, int|float $recurring, int|float $summary)
     {
         $this->nonRecurring = $nonRecurring;
@@ -82,9 +77,6 @@ class OrderSummary
         return $this->summary;
     }
 
-    /**
-     * @param int|float $nonRecurring
-     */
     public function withNonRecurring(int|float $nonRecurring): self
     {
         $validator = new Validator();
@@ -99,9 +91,6 @@ class OrderSummary
         return $clone;
     }
 
-    /**
-     * @param int|float $recurring
-     */
     public function withRecurring(int|float $recurring): self
     {
         $validator = new Validator();
@@ -116,9 +105,6 @@ class OrderSummary
         return $clone;
     }
 
-    /**
-     * @param int|float $summary
-     */
     public function withSummary(int|float $summary): self
     {
         $validator = new Validator();

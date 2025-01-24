@@ -52,9 +52,6 @@ class RecordSettings
         return $this->ttl;
     }
 
-    /**
-     * @param TtlSeconds|TtlAuto $ttl
-     */
     public function withTtl(TtlAuto|TtlSeconds $ttl): self
     {
         $clone = clone $this;

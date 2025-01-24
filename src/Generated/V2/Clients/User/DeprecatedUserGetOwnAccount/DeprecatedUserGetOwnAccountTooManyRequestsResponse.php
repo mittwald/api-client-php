@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\User\GetOwnAccount;
+namespace Mittwald\ApiClient\Generated\V2\Clients\User\DeprecatedUserGetOwnAccount;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class GetOwnAccountTooManyRequestsResponse implements ResponseContainer
+class DeprecatedUserGetOwnAccountTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -36,21 +36,21 @@ class GetOwnAccountTooManyRequestsResponse implements ResponseContainer
         ],
     ];
 
-    private GetOwnAccountTooManyRequestsResponseBody $body;
+    private DeprecatedUserGetOwnAccountTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(GetOwnAccountTooManyRequestsResponseBody $body)
+    public function __construct(DeprecatedUserGetOwnAccountTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): GetOwnAccountTooManyRequestsResponseBody
+    public function getBody(): DeprecatedUserGetOwnAccountTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(GetOwnAccountTooManyRequestsResponseBody $body): self
+    public function withBody(DeprecatedUserGetOwnAccountTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -63,17 +63,17 @@ class GetOwnAccountTooManyRequestsResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetOwnAccountTooManyRequestsResponse Created instance
+     * @return DeprecatedUserGetOwnAccountTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetOwnAccountTooManyRequestsResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedUserGetOwnAccountTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = GetOwnAccountTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DeprecatedUserGetOwnAccountTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

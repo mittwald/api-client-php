@@ -55,9 +55,6 @@ class MailAddressMailboxStorageInBytes
 
     private int|float $limit;
 
-    /**
-     * @param int|float $limit
-     */
     public function __construct(MailAddressMailboxStorageInBytesCurrent $current, int|float $limit)
     {
         $this->current = $current;
@@ -82,9 +79,6 @@ class MailAddressMailboxStorageInBytes
         return $clone;
     }
 
-    /**
-     * @param int|float $limit
-     */
     public function withLimit(int|float $limit): self
     {
         $validator = new Validator();

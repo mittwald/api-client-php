@@ -45,6 +45,8 @@ class InvoiceUpdateInvoiceSettingsRequestBody
                 'type' => 'boolean',
             ],
             'targetDay' => [
+                'deprecated' => true,
+                'description' => 'parameter is deprecated and will be ignored',
                 'example' => 15,
                 'maximum' => 28,
                 'minimum' => 0,
@@ -73,11 +75,13 @@ class InvoiceUpdateInvoiceSettingsRequestBody
 
     private ?bool $recipientSameAsOwner = null;
 
+    /**
+     * parameter is deprecated and will be ignored
+     *
+     * @deprecated
+     */
     private ?int $targetDay = null;
 
-    /**
-     * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     */
     public function __construct(int $invoicePeriod, PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings)
     {
         $this->invoicePeriod = $invoicePeriod;
@@ -117,6 +121,9 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $this->recipientSameAsOwner ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getTargetDay(): ?int
     {
         return $this->targetDay ?? null;
@@ -161,9 +168,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     */
     public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
         $clone = clone $this;
@@ -232,6 +236,9 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withTargetDay(int $targetDay): self
     {
         $validator = new Validator();

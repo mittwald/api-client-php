@@ -62,9 +62,6 @@ class ResourceFee
         return $this->id;
     }
 
-    /**
-     * @param OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy $feeStrategy
-     */
     public function withFeeStrategy(OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy $feeStrategy): self
     {
         $clone = clone $this;

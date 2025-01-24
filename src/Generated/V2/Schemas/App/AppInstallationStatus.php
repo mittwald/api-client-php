@@ -85,9 +85,6 @@ class AppInstallationStatus
         return $this->uptimeSeconds;
     }
 
-    /**
-     * @param int|float $lastExitCode
-     */
     public function withLastExitCode(int|float $lastExitCode): self
     {
         $validator = new Validator();
@@ -132,9 +129,6 @@ class AppInstallationStatus
         return $clone;
     }
 
-    /**
-     * @param int|float $uptimeSeconds
-     */
     public function withUptimeSeconds(int|float $uptimeSeconds): self
     {
         $validator = new Validator();

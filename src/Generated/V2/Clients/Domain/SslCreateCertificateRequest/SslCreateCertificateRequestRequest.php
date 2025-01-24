@@ -41,9 +41,6 @@ class SslCreateCertificateRequestRequest
 
     ];
 
-    /**
-     * @param CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body
-     */
     public function __construct(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body)
     {
         $this->body = $body;
@@ -54,9 +51,6 @@ class SslCreateCertificateRequestRequest
         return $this->body;
     }
 
-    /**
-     * @param CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body
-     */
     public function withBody(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body): self
     {
         $clone = clone $this;

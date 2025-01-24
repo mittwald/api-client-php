@@ -41,9 +41,6 @@ class OneTimePaymentFeeStrategy
      */
     private int|float $price;
 
-    /**
-     * @param int|float $price
-     */
     public function __construct(int|float $price)
     {
         $this->price = $price;
@@ -54,9 +51,6 @@ class OneTimePaymentFeeStrategy
         return $this->price;
     }
 
-    /**
-     * @param int|float $price
-     */
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();

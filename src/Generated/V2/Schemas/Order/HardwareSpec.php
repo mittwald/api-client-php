@@ -57,9 +57,6 @@ class HardwareSpec
         return $this->vcpu;
     }
 
-    /**
-     * @param int|float $ram
-     */
     public function withRam(int|float $ram): self
     {
         $validator = new Validator();
@@ -82,9 +79,6 @@ class HardwareSpec
         return $clone;
     }
 
-    /**
-     * @param int|float $vcpu
-     */
     public function withVcpu(int|float $vcpu): self
     {
         $validator = new Validator();

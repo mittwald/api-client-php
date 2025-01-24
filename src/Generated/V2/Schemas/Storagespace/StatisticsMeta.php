@@ -267,9 +267,6 @@ class StatisticsMeta
         return $clone;
     }
 
-    /**
-     * @param int|float $totalFreeInPercentage
-     */
     public function withTotalFreeInPercentage(int|float $totalFreeInPercentage): self
     {
         $validator = new Validator();
@@ -306,9 +303,6 @@ class StatisticsMeta
         return $clone;
     }
 
-    /**
-     * @param int|float $totalUsageInPercentage
-     */
     public function withTotalUsageInPercentage(int|float $totalUsageInPercentage): self
     {
         $validator = new Validator();

@@ -55,9 +55,6 @@ class ConfigExpiration
         return $this->retentionTime;
     }
 
-    /**
-     * @param int|float $maxVersions
-     */
     public function withMaxVersions(int|float $maxVersions): self
     {
         $validator = new Validator();
@@ -80,9 +77,6 @@ class ConfigExpiration
         return $clone;
     }
 
-    /**
-     * @param int|float $retentionTime
-     */
     public function withRetentionTime(int|float $retentionTime): self
     {
         $validator = new Validator();

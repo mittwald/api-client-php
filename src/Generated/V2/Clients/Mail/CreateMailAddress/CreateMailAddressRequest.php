@@ -47,9 +47,6 @@ class CreateMailAddressRequest
 
     ];
 
-    /**
-     * @param CreateForwardAddress|CreateMailAddress $body
-     */
     public function __construct(string $projectId, CreateForwardAddress|CreateMailAddress $body)
     {
         $this->projectId = $projectId;
@@ -80,9 +77,6 @@ class CreateMailAddressRequest
         return $clone;
     }
 
-    /**
-     * @param CreateForwardAddress|CreateMailAddress $body
-     */
     public function withBody(CreateForwardAddress|CreateMailAddress $body): self
     {
         $clone = clone $this;

@@ -148,9 +148,6 @@ class ExtensionDryRunWebhookOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int|float $responseCode
-     */
     public function withResponseCode(int|float $responseCode): self
     {
         $validator = new Validator();

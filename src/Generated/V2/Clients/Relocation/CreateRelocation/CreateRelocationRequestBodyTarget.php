@@ -82,9 +82,6 @@ class CreateRelocationRequestBodyTarget
      */
     private CreateRelocationRequestBodyTargetSystem $system;
 
-    /**
-     * @param string|CreateRelocationRequestBodyTargetProductAlternative2 $product
-     */
     public function __construct(string $organisation, CreateRelocationRequestBodyTargetProductAlternative2|string $product, string $projectName, CreateRelocationRequestBodyTargetSystem $system)
     {
         $this->organisation = $organisation;
@@ -127,9 +124,6 @@ class CreateRelocationRequestBodyTarget
         return $clone;
     }
 
-    /**
-     * @param string|CreateRelocationRequestBodyTargetProductAlternative2 $product
-     */
     public function withProduct(CreateRelocationRequestBodyTargetProductAlternative2|string $product): self
     {
         $clone = clone $this;
