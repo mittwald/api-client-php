@@ -31,6 +31,15 @@ class ExtensionDeprecation
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'note' => [
+                'example' => 'This extension is no longer actively maintained. Please Use the successor extension instead.',
+                'type' => 'string',
+            ],
+            'successorId' => [
+                'description' => 'The ID of the successor extension.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'deprecatedAt',
@@ -39,6 +48,13 @@ class ExtensionDeprecation
     ];
 
     private DateTime $deprecatedAt;
+
+    private ?string $note = null;
+
+    /**
+     * The ID of the successor extension.
+     */
+    private ?string $successorId = null;
 
     public function __construct(DateTime $deprecatedAt)
     {
@@ -50,10 +66,64 @@ class ExtensionDeprecation
         return $this->deprecatedAt;
     }
 
+    public function getNote(): ?string
+    {
+        return $this->note ?? null;
+    }
+
+    public function getSuccessorId(): ?string
+    {
+        return $this->successorId ?? null;
+    }
+
     public function withDeprecatedAt(DateTime $deprecatedAt): self
     {
         $clone = clone $this;
         $clone->deprecatedAt = $deprecatedAt;
+
+        return $clone;
+    }
+
+    public function withNote(string $note): self
+    {
+        $validator = new Validator();
+        $validator->validate($note, self::$schema['properties']['note']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->note = $note;
+
+        return $clone;
+    }
+
+    public function withoutNote(): self
+    {
+        $clone = clone $this;
+        unset($clone->note);
+
+        return $clone;
+    }
+
+    public function withSuccessorId(string $successorId): self
+    {
+        $validator = new Validator();
+        $validator->validate($successorId, self::$schema['properties']['successorId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->successorId = $successorId;
+
+        return $clone;
+    }
+
+    public function withoutSuccessorId(): self
+    {
+        $clone = clone $this;
+        unset($clone->successorId);
 
         return $clone;
     }
@@ -74,9 +144,18 @@ class ExtensionDeprecation
         }
 
         $deprecatedAt = new DateTime($input->{'deprecatedAt'});
+        $note = null;
+        if (isset($input->{'note'})) {
+            $note = $input->{'note'};
+        }
+        $successorId = null;
+        if (isset($input->{'successorId'})) {
+            $successorId = $input->{'successorId'};
+        }
 
         $obj = new self($deprecatedAt);
-
+        $obj->note = $note;
+        $obj->successorId = $successorId;
         return $obj;
     }
 
@@ -89,6 +168,12 @@ class ExtensionDeprecation
     {
         $output = [];
         $output['deprecatedAt'] = ($this->deprecatedAt)->format(DateTime::ATOM);
+        if (isset($this->note)) {
+            $output['note'] = $this->note;
+        }
+        if (isset($this->successorId)) {
+            $output['successorId'] = $this->successorId;
+        }
 
         return $output;
     }
