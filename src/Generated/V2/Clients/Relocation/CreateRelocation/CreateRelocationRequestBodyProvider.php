@@ -82,9 +82,6 @@ class CreateRelocationRequestBodyProvider
      */
     private string $userName;
 
-    /**
-     * @param string|CreateRelocationRequestBodyProviderNameAlternative2 $name
-     */
     public function __construct(string $loginUrl, CreateRelocationRequestBodyProviderNameAlternative2|string $name, string $password, string $sourceAccount, string $userName)
     {
         $this->loginUrl = $loginUrl;
@@ -133,9 +130,6 @@ class CreateRelocationRequestBodyProvider
         return $clone;
     }
 
-    /**
-     * @param string|CreateRelocationRequestBodyProviderNameAlternative2 $name
-     */
     public function withName(CreateRelocationRequestBodyProviderNameAlternative2|string $name): self
     {
         $clone = clone $this;

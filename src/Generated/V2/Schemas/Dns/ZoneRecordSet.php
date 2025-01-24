@@ -66,14 +66,6 @@ class ZoneRecordSet
 
     private RecordUnset|RecordTXTComponent $txt;
 
-    /**
-     * @param RecordUnset|RecordCAAComponent $caa
-     * @param RecordUnset|RecordCNAMEComponent $cname
-     * @param RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords
-     * @param RecordUnset|RecordMXManaged|RecordMXCustom $mx
-     * @param RecordUnset|RecordSRVComponent $srv
-     * @param RecordUnset|RecordTXTComponent $txt
-     */
     public function __construct(RecordCAAComponent|RecordUnset $caa, RecordCNAMEComponent|RecordUnset $cname, CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords, RecordMXCustom|RecordMXManaged|RecordUnset $mx, RecordSRVComponent|RecordUnset $srv, RecordTXTComponent|RecordUnset $txt)
     {
         $this->caa = $caa;
@@ -114,9 +106,6 @@ class ZoneRecordSet
         return $this->txt;
     }
 
-    /**
-     * @param RecordUnset|RecordCAAComponent $caa
-     */
     public function withCaa(RecordCAAComponent|RecordUnset $caa): self
     {
         $clone = clone $this;
@@ -125,9 +114,6 @@ class ZoneRecordSet
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordCNAMEComponent $cname
-     */
     public function withCname(RecordCNAMEComponent|RecordUnset $cname): self
     {
         $clone = clone $this;
@@ -136,9 +122,6 @@ class ZoneRecordSet
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|CombinedACustom|CombinedAManaged $combinedARecords
-     */
     public function withCombinedARecords(CombinedACustom|CombinedAManaged|RecordUnset $combinedARecords): self
     {
         $clone = clone $this;
@@ -147,9 +130,6 @@ class ZoneRecordSet
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordMXManaged|RecordMXCustom $mx
-     */
     public function withMx(RecordMXCustom|RecordMXManaged|RecordUnset $mx): self
     {
         $clone = clone $this;
@@ -158,9 +138,6 @@ class ZoneRecordSet
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordSRVComponent $srv
-     */
     public function withSrv(RecordSRVComponent|RecordUnset $srv): self
     {
         $clone = clone $this;
@@ -169,9 +146,6 @@ class ZoneRecordSet
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordTXTComponent $txt
-     */
     public function withTxt(RecordTXTComponent|RecordUnset $txt): self
     {
         $clone = clone $this;

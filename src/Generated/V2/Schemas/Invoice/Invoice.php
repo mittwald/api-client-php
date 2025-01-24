@@ -184,10 +184,7 @@ class Invoice
     private ?string $vatId = null;
 
     /**
-     * @param int|float $amountPaid
      * @param InvoiceGroupsItem[] $groups
-     * @param int|float $totalGross
-     * @param int|float $totalNet
      */
     public function __construct(int|float $amountPaid, string $currency, string $customerId, DateTime $date, array $groups, string $id, string $invoiceNumber, InvoiceInvoiceType $invoiceType, string $pdfId, Recipient $recipient, InvoiceStatus $status, int|float $totalGross, int|float $totalNet)
     {
@@ -294,9 +291,6 @@ class Invoice
         return $this->vatId ?? null;
     }
 
-    /**
-     * @param int|float $amountPaid
-     */
     public function withAmountPaid(int|float $amountPaid): self
     {
         $validator = new Validator();
@@ -432,9 +426,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     */
     public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
         $clone = clone $this;
@@ -481,9 +472,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param int|float $totalGross
-     */
     public function withTotalGross(int|float $totalGross): self
     {
         $validator = new Validator();
@@ -498,9 +486,6 @@ class Invoice
         return $clone;
     }
 
-    /**
-     * @param int|float $totalNet
-     */
     public function withTotalNet(int|float $totalNet): self
     {
         $validator = new Validator();

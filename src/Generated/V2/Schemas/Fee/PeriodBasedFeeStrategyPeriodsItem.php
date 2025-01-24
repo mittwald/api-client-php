@@ -53,9 +53,6 @@ class PeriodBasedFeeStrategyPeriodsItem
      */
     private int|float $monthlyPrice;
 
-    /**
-     * @param int|float $monthlyPrice
-     */
     public function __construct(int|float $monthlyPrice)
     {
         $this->monthlyPrice = $monthlyPrice;
@@ -108,9 +105,6 @@ class PeriodBasedFeeStrategyPeriodsItem
         return $clone;
     }
 
-    /**
-     * @param int|float $monthlyPrice
-     */
     public function withMonthlyPrice(int|float $monthlyPrice): self
     {
         $validator = new Validator();

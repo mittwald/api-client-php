@@ -7,8 +7,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness\BrokerGetLivenessOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness\BrokerGetLivenessRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
@@ -263,14 +261,4 @@ interface MarketplaceClient
      * @return ExtensionListOwnExtensionsOKResponse OK
      */
     public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse;
-    /**
-     * Get Liveness status.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/marketplace-broker-get-liveness
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param BrokerGetLivenessRequest $request An object representing the request for this operation
-     * @return BrokerGetLivenessOKResponse OK
-     */
-    public function brokerGetLiveness(BrokerGetLivenessRequest $request): BrokerGetLivenessOKResponse;
 }

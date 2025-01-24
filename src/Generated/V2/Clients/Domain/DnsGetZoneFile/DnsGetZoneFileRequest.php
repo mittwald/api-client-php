@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\SslCreateCertificateRequest;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateRequest;
-use Mittwald\ApiClient\Generated\V2\Schemas\Ssl\CertificateRequestCreateWithCSRRequest;
 
-class SslCreateCertificateRequestRequest
+class DnsGetZoneFileRequest
 {
-    public const method = 'post';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -19,42 +17,42 @@ class SslCreateCertificateRequestRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'body' => [
-                'oneOf' => [
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateRequest',
-                    ],
-                    [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateWithCSRRequest',
-                    ],
-                ],
+            'dnsZoneId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'body',
+            'dnsZoneId',
         ],
     ];
 
-    private CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body;
+    private string $dnsZoneId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body)
+    public function __construct(string $dnsZoneId)
     {
-        $this->body = $body;
+        $this->dnsZoneId = $dnsZoneId;
     }
 
-    public function getBody(): CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest
+    public function getDnsZoneId(): string
     {
-        return $this->body;
+        return $this->dnsZoneId;
     }
 
-    public function withBody(CertificateRequestCreateRequest|CertificateRequestCreateWithCSRRequest $body): self
+    public function withDnsZoneId(string $dnsZoneId): self
     {
+        $validator = new Validator();
+        $validator->validate($dnsZoneId, self::$schema['properties']['dnsZoneId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->dnsZoneId = $dnsZoneId;
 
         return $clone;
     }
@@ -64,23 +62,19 @@ class SslCreateCertificateRequestRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return SslCreateCertificateRequestRequest Created instance
+     * @return DnsGetZoneFileRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): SslCreateCertificateRequestRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = match (true) {
-            CertificateRequestCreateRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateRequest::buildFromInput($input->{'body'}, validate: $validate),
-            CertificateRequestCreateWithCSRRequest::validateInput($input->{'body'}, true) => CertificateRequestCreateWithCSRRequest::buildFromInput($input->{'body'}, validate: $validate),
-            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
-        };
+        $dnsZoneId = $input->{'dnsZoneId'};
 
-        $obj = new self($body);
+        $obj = new self($dnsZoneId);
 
         return $obj;
     }
@@ -93,9 +87,7 @@ class SslCreateCertificateRequestRequest
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = match (true) {
-            ($this->body) instanceof CertificateRequestCreateRequest, ($this->body) instanceof CertificateRequestCreateWithCSRRequest => $this->body->toJson(),
-        };
+        $output['dnsZoneId'] = $this->dnsZoneId;
 
         return $output;
     }
@@ -126,9 +118,6 @@ class SslCreateCertificateRequestRequest
 
     public function __clone()
     {
-        $this->body = match (true) {
-            ($this->body) instanceof CertificateRequestCreateRequest, ($this->body) instanceof CertificateRequestCreateWithCSRRequest => $this->body,
-        };
     }
 
     /**
@@ -143,7 +132,8 @@ class SslCreateCertificateRequestRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/certificate-requests';
+        $dnsZoneId = urlencode($mapped['dnsZoneId']);
+        return '/v2/dns-zones/' . $dnsZoneId . '/zone-file';
     }
 
     /**
@@ -162,7 +152,6 @@ class SslCreateCertificateRequestRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

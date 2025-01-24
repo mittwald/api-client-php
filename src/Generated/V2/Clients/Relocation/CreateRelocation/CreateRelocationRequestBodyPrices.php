@@ -55,7 +55,6 @@ class CreateRelocationRequestBodyPrices
 
     /**
      * @param CreateRelocationRequestBodyPricesPositionsItem[] $positions
-     * @param int|float $total
      */
     public function __construct(array $positions, int|float $total)
     {
@@ -87,9 +86,6 @@ class CreateRelocationRequestBodyPrices
         return $clone;
     }
 
-    /**
-     * @param int|float $total
-     */
     public function withTotal(int|float $total): self
     {
         $validator = new Validator();

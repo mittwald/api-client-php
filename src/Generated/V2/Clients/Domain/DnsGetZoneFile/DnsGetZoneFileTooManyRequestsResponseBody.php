@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class BrokerGetLivenessTooManyRequestsResponseBody
+class DnsGetZoneFileTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -96,10 +96,10 @@ class BrokerGetLivenessTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return BrokerGetLivenessTooManyRequestsResponseBody Created instance
+     * @return DnsGetZoneFileTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): BrokerGetLivenessTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {

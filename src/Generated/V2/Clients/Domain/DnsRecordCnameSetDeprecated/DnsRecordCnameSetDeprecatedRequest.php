@@ -48,9 +48,6 @@ class DnsRecordCnameSetDeprecatedRequest
 
     ];
 
-    /**
-     * @param RecordUnset|RecordCNAMEComponent $body
-     */
     public function __construct(string $zoneId, RecordCNAMEComponent|RecordUnset $body)
     {
         $this->zoneId = $zoneId;
@@ -81,9 +78,6 @@ class DnsRecordCnameSetDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordCNAMEComponent $body
-     */
     public function withBody(RecordCNAMEComponent|RecordUnset $body): self
     {
         $clone = clone $this;

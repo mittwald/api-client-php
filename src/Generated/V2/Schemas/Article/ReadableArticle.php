@@ -188,9 +188,6 @@ class ReadableArticle
 
     private ArticleTemplate $template;
 
-    /**
-     * @param int|float $contractDurationInMonth
-     */
     public function __construct(string $articleId, int|float $contractDurationInMonth, string $name, ReadableArticleOrderable $orderable, ArticleTemplate $template)
     {
         $this->articleId = $articleId;
@@ -374,9 +371,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param int|float $contractDurationInMonth
-     */
     public function withContractDurationInMonth(int|float $contractDurationInMonth): self
     {
         $validator = new Validator();
@@ -413,9 +407,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param int|float $forcedInvoicingPeriodInMonth
-     */
     public function withForcedInvoicingPeriodInMonth(int|float $forcedInvoicingPeriodInMonth): self
     {
         $validator = new Validator();
@@ -558,9 +549,6 @@ class ReadableArticle
         return $clone;
     }
 
-    /**
-     * @param int|float $price
-     */
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();

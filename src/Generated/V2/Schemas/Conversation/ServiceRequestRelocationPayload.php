@@ -181,9 +181,6 @@ class ServiceRequestRelocationPayload
 
     private string $userId;
 
-    /**
-     * @param int|float $redirectusKey
-     */
     public function __construct(ServiceRequestRelocationPayloadContact $contact, int|float $redirectusKey, ServiceRequestRelocationPayloadSource $source, ServiceRequestRelocationPayloadTarget $target, string $userId)
     {
         $this->contact = $contact;
@@ -295,9 +292,6 @@ class ServiceRequestRelocationPayload
         return $clone;
     }
 
-    /**
-     * @param int|float $redirectusKey
-     */
     public function withRedirectusKey(int|float $redirectusKey): self
     {
         $validator = new Validator();

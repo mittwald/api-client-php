@@ -67,9 +67,6 @@ class UserFeedback
 
     private int|float $vote;
 
-    /**
-     * @param int|float $vote
-     */
     public function __construct(string $id, string $message, string $origin, string $subject, int|float $vote)
     {
         $this->id = $id;
@@ -160,9 +157,6 @@ class UserFeedback
         return $clone;
     }
 
-    /**
-     * @param int|float $vote
-     */
     public function withVote(int|float $vote): self
     {
         $validator = new Validator();

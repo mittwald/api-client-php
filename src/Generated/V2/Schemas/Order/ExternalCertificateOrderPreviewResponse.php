@@ -52,11 +52,6 @@ class ExternalCertificateOrderPreviewResponse
 
     private int|float $totalPrice;
 
-    /**
-     * @param int|float $feePrice
-     * @param int|float $recurringPrice
-     * @param int|float $totalPrice
-     */
     public function __construct(int|float $feePrice, int|float $recurringPrice, int|float $totalPrice)
     {
         $this->feePrice = $feePrice;
@@ -79,9 +74,6 @@ class ExternalCertificateOrderPreviewResponse
         return $this->totalPrice;
     }
 
-    /**
-     * @param int|float $feePrice
-     */
     public function withFeePrice(int|float $feePrice): self
     {
         $validator = new Validator();
@@ -96,9 +88,6 @@ class ExternalCertificateOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $recurringPrice
-     */
     public function withRecurringPrice(int|float $recurringPrice): self
     {
         $validator = new Validator();
@@ -113,9 +102,6 @@ class ExternalCertificateOrderPreviewResponse
         return $clone;
     }
 
-    /**
-     * @param int|float $totalPrice
-     */
     public function withTotalPrice(int|float $totalPrice): self
     {
         $validator = new Validator();

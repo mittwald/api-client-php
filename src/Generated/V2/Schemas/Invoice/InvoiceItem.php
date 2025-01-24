@@ -118,13 +118,13 @@ class InvoiceItem
 
     private ?DateTime $serviceDate = null;
 
+    /**
+     * @var DatePeriod|null
+     */
     private ?DatePeriod $servicePeriod = null;
 
     private int|float $vatRate;
 
-    /**
-     * @param int|float $vatRate
-     */
     public function __construct(string $contractItemId, string $description, string $itemId, Price $price, int|float $vatRate)
     {
         $this->contractItemId = $contractItemId;
@@ -177,6 +177,9 @@ class InvoiceItem
         return $this->serviceDate ?? null;
     }
 
+    /**
+     * @return DatePeriod|null
+     */
     public function getServicePeriod(): ?DatePeriod
     {
         return $this->servicePeriod ?? null;
@@ -310,6 +313,9 @@ class InvoiceItem
         return $clone;
     }
 
+    /**
+     * @param DatePeriod $servicePeriod
+     */
     public function withServicePeriod(DatePeriod $servicePeriod): self
     {
         $clone = clone $this;
@@ -326,9 +332,6 @@ class InvoiceItem
         return $clone;
     }
 
-    /**
-     * @param int|float $vatRate
-     */
     public function withVatRate(int|float $vatRate): self
     {
         $validator = new Validator();

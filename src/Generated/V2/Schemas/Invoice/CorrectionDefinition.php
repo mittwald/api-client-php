@@ -41,8 +41,14 @@ class CorrectionDefinition
 
     private string $contractItemId;
 
+    /**
+     * @var DatePeriod
+     */
     private DatePeriod $creditPeriod;
 
+    /**
+     * @param DatePeriod $creditPeriod
+     */
     public function __construct(string $contractItemId, DatePeriod $creditPeriod)
     {
         $this->contractItemId = $contractItemId;
@@ -54,6 +60,9 @@ class CorrectionDefinition
         return $this->contractItemId;
     }
 
+    /**
+     * @return DatePeriod
+     */
     public function getCreditPeriod(): DatePeriod
     {
         return $this->creditPeriod;
@@ -73,6 +82,9 @@ class CorrectionDefinition
         return $clone;
     }
 
+    /**
+     * @param DatePeriod $creditPeriod
+     */
     public function withCreditPeriod(DatePeriod $creditPeriod): self
     {
         $clone = clone $this;

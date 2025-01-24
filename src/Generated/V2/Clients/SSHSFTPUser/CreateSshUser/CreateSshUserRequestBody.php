@@ -41,9 +41,6 @@ class CreateSshUserRequestBody
 
     private ?DateTime $expiresAt = null;
 
-    /**
-     * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     */
     public function __construct(AuthenticationAlternative1|AuthenticationAlternative2 $authentication, string $description)
     {
         $this->authentication = $authentication;
@@ -65,9 +62,6 @@ class CreateSshUserRequestBody
         return $this->expiresAt ?? null;
     }
 
-    /**
-     * @param AuthenticationAlternative1|AuthenticationAlternative2 $authentication
-     */
     public function withAuthentication(AuthenticationAlternative1|AuthenticationAlternative2 $authentication): self
     {
         $clone = clone $this;

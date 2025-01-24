@@ -48,9 +48,6 @@ class DeprecatedIngressTlsRequest
 
     ];
 
-    /**
-     * @param TlsAcme|TlsCertificate $body
-     */
     public function __construct(string $ingressId, TlsAcme|TlsCertificate $body)
     {
         $this->ingressId = $ingressId;
@@ -81,9 +78,6 @@ class DeprecatedIngressTlsRequest
         return $clone;
     }
 
-    /**
-     * @param TlsAcme|TlsCertificate $body
-     */
     public function withBody(TlsAcme|TlsCertificate $body): self
     {
         $clone = clone $this;

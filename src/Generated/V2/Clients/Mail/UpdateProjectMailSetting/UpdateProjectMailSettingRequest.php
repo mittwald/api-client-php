@@ -79,9 +79,6 @@ class UpdateProjectMailSettingRequest
 
     ];
 
-    /**
-     * @param UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body
-     */
     public function __construct(string $projectId, UpdateProjectMailSettingRequestMailSetting $mailSetting, UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body)
     {
         $this->projectId = $projectId;
@@ -126,9 +123,6 @@ class UpdateProjectMailSettingRequest
         return $clone;
     }
 
-    /**
-     * @param UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body
-     */
     public function withBody(UpdateProjectMailSettingRequestBodyAlternative1|UpdateProjectMailSettingRequestBodyAlternative2 $body): self
     {
         $clone = clone $this;

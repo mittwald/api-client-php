@@ -2,49 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
-use Psr\Http\Message\ResponseInterface;
 
-class BrokerGetLivenessDefaultResponse implements ResponseContainer
+class DnsGetZoneFileOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
+            'file' => [
+                'type' => 'string',
             ],
         ],
+        'type' => 'object',
     ];
 
-    private Error $body;
+    private ?string $file = null;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(Error $body)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->body = $body;
     }
 
-    public function getBody(): Error
+    public function getFile(): ?string
     {
-        return $this->body;
+        return $this->file ?? null;
     }
 
-    public function withBody(Error $body): self
+    public function withFile(string $file): self
+    {
+        $validator = new Validator();
+        $validator->validate($file, self::$schema['properties']['file']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->file = $file;
+
+        return $clone;
+    }
+
+    public function withoutFile(): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        unset($clone->file);
 
         return $clone;
     }
@@ -54,20 +62,23 @@ class BrokerGetLivenessDefaultResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return BrokerGetLivenessDefaultResponse Created instance
+     * @return DnsGetZoneFileOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): BrokerGetLivenessDefaultResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
+        $file = null;
+        if (isset($input->{'file'})) {
+            $file = $input->{'file'};
+        }
 
-        $obj = new self($body);
-
+        $obj = new self();
+        $obj->file = $file;
         return $obj;
     }
 
@@ -79,7 +90,9 @@ class BrokerGetLivenessDefaultResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        if (isset($this->file)) {
+            $output['file'] = $this->file;
+        }
 
         return $output;
     }
@@ -110,18 +123,5 @@ class BrokerGetLivenessDefaultResponse implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

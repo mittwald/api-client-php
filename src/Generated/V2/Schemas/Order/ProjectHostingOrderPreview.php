@@ -61,10 +61,6 @@ class ProjectHostingOrderPreview
 
     private MachineTypeSpec|HardwareSpec $spec;
 
-    /**
-     * @param int|float $diskspaceInGiB
-     * @param MachineTypeSpec|HardwareSpec $spec
-     */
     public function __construct(int|float $diskspaceInGiB, HardwareSpec|MachineTypeSpec $spec)
     {
         $this->diskspaceInGiB = $diskspaceInGiB;
@@ -135,9 +131,6 @@ class ProjectHostingOrderPreview
         return $clone;
     }
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
@@ -152,9 +145,6 @@ class ProjectHostingOrderPreview
         return $clone;
     }
 
-    /**
-     * @param MachineTypeSpec|HardwareSpec $spec
-     */
     public function withSpec(HardwareSpec|MachineTypeSpec $spec): self
     {
         $clone = clone $this;

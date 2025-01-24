@@ -110,9 +110,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
 
     private ?PageinsightsGetPerformanceDataOKResponseBodyScreenshot $screenshot = null;
 
-    /**
-     * @param int|float $performanceScore
-     */
     public function __construct(string $domain, string $path, int|float $performanceScore)
     {
         $this->domain = $domain;
@@ -249,9 +246,6 @@ class PageinsightsGetPerformanceDataOKResponseBody
         return $clone;
     }
 
-    /**
-     * @param int|float $performanceScore
-     */
     public function withPerformanceScore(int|float $performanceScore): self
     {
         $validator = new Validator();

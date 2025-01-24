@@ -685,9 +685,6 @@ class Project
         return $clone;
     }
 
-    /**
-     * @param VisitorSpec|HardwareSpec $spec
-     */
     public function withSpec(HardwareSpec|VisitorSpec $spec): self
     {
         $clone = clone $this;

@@ -44,9 +44,6 @@ class MailAddressMailboxStorageInBytesCurrent
 
     private int|float $value;
 
-    /**
-     * @param int|float $value
-     */
     public function __construct(DateTime $updatedAt, int|float $value)
     {
         $this->updatedAt = $updatedAt;
@@ -71,9 +68,6 @@ class MailAddressMailboxStorageInBytesCurrent
         return $clone;
     }
 
-    /**
-     * @param int|float $value
-     */
     public function withValue(int|float $value): self
     {
         $validator = new Validator();

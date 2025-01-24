@@ -169,9 +169,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo
-     */
     public function withRelatedTo(RelatedAggregateReferenceAlternative1|RelatedAggregateReferenceAlternative2|RelatedAggregateReferenceAlternative3|RelatedAggregateReferenceAlternative4|RelatedAggregateReferenceAlternative5|RelatedAggregateReferenceAlternative6 $relatedTo): self
     {
         $clone = clone $this;
@@ -188,9 +185,6 @@ class CreateConversationRequestBody
         return $clone;
     }
 
-    /**
-     * @param ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith
-     */
     public function withSharedWith(ShareableAggregateReferenceAlternative1|ShareableAggregateReferenceAlternative2|ShareableAggregateReferenceAlternative3|ShareableAggregateReferenceAlternative4 $sharedWith): self
     {
         $clone = clone $this;

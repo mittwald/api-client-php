@@ -215,7 +215,6 @@ class Data
      * @param DataDbQueriesItem[] $dbQueries
      * @param DataFileOpsItem[] $fileOps
      * @param DataNetworkingOpsItem[] $networkingOps
-     * @param int|float $slowdownFactor
      */
     public function __construct(string $actualUrl, array $dbQueries, Statistics $dbStats, array $fileOps, Statistics $fileOpsStats, Statistics $miscStats, array $networkingOps, Statistics $networkingStats, int|float $slowdownFactor, int $ttfbMs)
     {
@@ -369,9 +368,6 @@ class Data
         return $clone;
     }
 
-    /**
-     * @param int|float $slowdownFactor
-     */
     public function withSlowdownFactor(int|float $slowdownFactor): self
     {
         $validator = new Validator();

@@ -175,9 +175,6 @@ class SystemSoftwareVersion
         return $clone;
     }
 
-    /**
-     * @param OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy $fee
-     */
     public function withFee(OneTimePaymentFeeStrategy|PeriodBasedFeeStrategy $fee): self
     {
         $clone = clone $this;

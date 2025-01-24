@@ -79,9 +79,6 @@ class DeprecatedMailUpdateProjectMailSettingRequest
 
     ];
 
-    /**
-     * @param DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body
-     */
     public function __construct(string $projectId, DeprecatedMailUpdateProjectMailSettingRequestSetting $setting, DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body)
     {
         $this->projectId = $projectId;
@@ -126,9 +123,6 @@ class DeprecatedMailUpdateProjectMailSettingRequest
         return $clone;
     }
 
-    /**
-     * @param DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body
-     */
     public function withBody(DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative1|DeprecatedMailUpdateProjectMailSettingRequestBodyAlternative2 $body): self
     {
         $clone = clone $this;

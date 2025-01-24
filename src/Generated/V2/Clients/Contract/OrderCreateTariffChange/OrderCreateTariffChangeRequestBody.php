@@ -58,9 +58,6 @@ class OrderCreateTariffChangeRequestBody
         return $this->tariffChangeType ?? null;
     }
 
-    /**
-     * @param ProjectHostingTariffChange|ServerTariffChange $tariffChangeData
-     */
     public function withTariffChangeData(ProjectHostingTariffChange|ServerTariffChange $tariffChangeData): self
     {
         $clone = clone $this;

@@ -90,9 +90,6 @@ class SoftwareConfig
         return $clone;
     }
 
-    /**
-     * @param int|float $latestConfigRevision
-     */
     public function withLatestConfigRevision(int|float $latestConfigRevision): self
     {
         $validator = new Validator();

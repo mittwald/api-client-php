@@ -192,7 +192,6 @@ class ContractItem
 
     /**
      * @param Article[] $articles
-     * @param int|float $contractPeriod
      */
     public function __construct(array $articles, int|float $contractPeriod, string $description, bool $isActivated, bool $isBaseItem, string $itemId, Price $totalPrice)
     {
@@ -366,9 +365,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param int|float $contractPeriod
-     */
     public function withContractPeriod(int|float $contractPeriod): self
     {
         $validator = new Validator();
@@ -397,9 +393,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param int|float $freeTrialDays
-     */
     public function withFreeTrialDays(int|float $freeTrialDays): self
     {
         $validator = new Validator();
@@ -460,9 +453,6 @@ class ContractItem
         return $clone;
     }
 
-    /**
-     * @param int|float $invoicingPeriod
-     */
     public function withInvoicingPeriod(int|float $invoicingPeriod): self
     {
         $validator = new Validator();

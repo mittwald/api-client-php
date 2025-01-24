@@ -34,9 +34,6 @@ class CreateRelocationRequestBodyPricesPositionsItem
 
     private int|float $price;
 
-    /**
-     * @param int|float $price
-     */
     public function __construct(string $name, int|float $price)
     {
         $this->name = $name;
@@ -67,9 +64,6 @@ class CreateRelocationRequestBodyPricesPositionsItem
         return $clone;
     }
 
-    /**
-     * @param int|float $price
-     */
     public function withPrice(int|float $price): self
     {
         $validator = new Validator();

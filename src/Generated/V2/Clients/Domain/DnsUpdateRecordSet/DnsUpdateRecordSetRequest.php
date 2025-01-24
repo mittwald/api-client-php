@@ -82,9 +82,6 @@ class DnsUpdateRecordSetRequest
 
     ];
 
-    /**
-     * @param RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent|RecordCAAComponent $body
-     */
     public function __construct(string $dnsZoneId, DnsUpdateRecordSetRequestRecordSet $recordSet, CombinedACustom|RecordCAAComponent|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body)
     {
         $this->dnsZoneId = $dnsZoneId;
@@ -129,9 +126,6 @@ class DnsUpdateRecordSetRequest
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent|RecordCAAComponent $body
-     */
     public function withBody(CombinedACustom|RecordCAAComponent|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body): self
     {
         $clone = clone $this;

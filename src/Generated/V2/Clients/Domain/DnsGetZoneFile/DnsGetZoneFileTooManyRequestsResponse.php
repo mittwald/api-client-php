@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\File\FileMeta;
 use Psr\Http\Message\ResponseInterface;
 
-class BrokerGetLivenessOKResponse implements ResponseContainer
+class DnsGetZoneFileTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +21,36 @@ class BrokerGetLivenessOKResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.file.FileMeta',
+                'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
+                    ],
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
+                ],
             ],
         ],
     ];
 
-    private FileMeta $body;
+    private DnsGetZoneFileTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(FileMeta $body)
+    public function __construct(DnsGetZoneFileTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): FileMeta
+    public function getBody(): DnsGetZoneFileTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(FileMeta $body): self
+    public function withBody(DnsGetZoneFileTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +63,17 @@ class BrokerGetLivenessOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return BrokerGetLivenessOKResponse Created instance
+     * @return DnsGetZoneFileTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): BrokerGetLivenessOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = FileMeta::buildFromInput($input->{'body'}, validate: $validate);
+        $body = DnsGetZoneFileTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -79,7 +88,7 @@ class BrokerGetLivenessOKResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -110,6 +119,7 @@ class BrokerGetLivenessOKResponse implements ResponseContainer
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

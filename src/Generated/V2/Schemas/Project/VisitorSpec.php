@@ -42,9 +42,6 @@ class VisitorSpec
 
     private int|float $visitors;
 
-    /**
-     * @param int|float $visitors
-     */
     public function __construct(string $storage, int|float $visitors)
     {
         $this->storage = $storage;
@@ -75,9 +72,6 @@ class VisitorSpec
         return $clone;
     }
 
-    /**
-     * @param int|float $visitors
-     */
     public function withVisitors(int|float $visitors): self
     {
         $validator = new Validator();

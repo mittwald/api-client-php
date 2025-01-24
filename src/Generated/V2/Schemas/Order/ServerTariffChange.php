@@ -51,9 +51,6 @@ class ServerTariffChange
 
     private string $machineType;
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function __construct(string $contractId, int|float $diskspaceInGiB, string $machineType)
     {
         $this->contractId = $contractId;
@@ -90,9 +87,6 @@ class ServerTariffChange
         return $clone;
     }
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();

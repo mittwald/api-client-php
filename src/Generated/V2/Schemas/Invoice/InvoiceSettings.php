@@ -263,9 +263,6 @@ class InvoiceSettings
         return $clone;
     }
 
-    /**
-     * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     */
     public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
         $clone = clone $this;

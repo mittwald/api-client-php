@@ -2,37 +2,51 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\BrokerGetLiveness;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
+use Psr\Http\Message\ResponseInterface;
 
-class BrokerGetLivenessRequest
+class DnsGetZoneFileBadRequestResponse implements ResponseContainer
 {
-    public const method = 'get';
-
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'type' => 'object',
-        'properties' => [
-
-        ],
         'required' => [
-
+            'body',
+        ],
+        'properties' => [
+            'body' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+            ],
         ],
     ];
 
-    private array $headers = [
+    private ValidationErrors $body;
 
-    ];
+    private ResponseInterface|null $httpResponse = null;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(ValidationErrors $body)
     {
+        $this->body = $body;
+    }
+
+    public function getBody(): ValidationErrors
+    {
+        return $this->body;
+    }
+
+    public function withBody(ValidationErrors $body): self
+    {
+        $clone = clone $this;
+        $clone->body = $body;
+
+        return $clone;
     }
 
     /**
@@ -40,19 +54,19 @@ class BrokerGetLivenessRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return BrokerGetLivenessRequest Created instance
+     * @return DnsGetZoneFileBadRequestResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): BrokerGetLivenessRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileBadRequestResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
+        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
 
-
-        $obj = new self();
+        $obj = new self($body);
 
         return $obj;
     }
@@ -65,7 +79,7 @@ class BrokerGetLivenessRequest
     public function toJson(): array
     {
         $output = [];
-
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -98,53 +112,16 @@ class BrokerGetLivenessRequest
     {
     }
 
-    /**
-     * Builds the URL for this request
-     *
-     * This method is used internally by the client to build the URL for this request.
-     * You should not need to call this method directly.
-     *
-     * @internal
-     * @return string The URL for this request
-     */
-    public function buildUrl(): string
+    public static function fromResponse(ResponseInterface $httpResponse): self
     {
-        $mapped = $this->toJson();
-        return '/v2/broker/health/liveness';
+        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
+        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
+        $response->httpResponse = $httpResponse;
+        return $response;
     }
 
-    /**
-     * Builds the request options for this request
-     *
-     * This method is used internally by the client to build the Guzzle request options
-     * for this request. You should not need to call this method directly.
-     *
-     * @internal
-     * @return array The Guzzle request options for this request
-     */
-    public function buildRequestOptions(): array
+    public function getResponse(): ResponseInterface|null
     {
-        $mapped = $this->toJson();
-        $query = [];
-        return [
-            'query' => $query,
-            'headers' => $this->headers,
-        ];
-    }
-
-    /**
-     * Adds a header to this request
-     *
-     * You can use this method to add custom HTTP headers to the request.
-     *
-     * @param string $name The name of the header to add
-     * @param string|array $value The value of the header to add
-     * @return self A clone of this request with the header added
-     */
-    public function withHeader(string $name, string|array $value): self
-    {
-        $clone = clone $this;
-        $clone->headers[$name] = $value;
-        return $clone;
+        return $this->httpResponse;
     }
 }

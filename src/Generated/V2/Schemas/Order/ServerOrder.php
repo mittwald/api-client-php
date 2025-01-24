@@ -76,9 +76,6 @@ class ServerOrder
 
     private ?bool $useFreeTrial = null;
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function __construct(string $customerId, string $description, int|float $diskspaceInGiB, string $machineType)
     {
         $this->customerId = $customerId;
@@ -150,9 +147,6 @@ class ServerOrder
         return $clone;
     }
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();

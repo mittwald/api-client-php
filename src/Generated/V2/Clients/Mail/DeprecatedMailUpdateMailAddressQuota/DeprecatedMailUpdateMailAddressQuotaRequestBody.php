@@ -31,9 +31,6 @@ class DeprecatedMailUpdateMailAddressQuotaRequestBody
      */
     private int|float $quotaInBytes;
 
-    /**
-     * @param int|float $quotaInBytes
-     */
     public function __construct(int|float $quotaInBytes)
     {
         $this->quotaInBytes = $quotaInBytes;
@@ -44,9 +41,6 @@ class DeprecatedMailUpdateMailAddressQuotaRequestBody
         return $this->quotaInBytes;
     }
 
-    /**
-     * @param int|float $quotaInBytes
-     */
     public function withQuotaInBytes(int|float $quotaInBytes): self
     {
         $validator = new Validator();

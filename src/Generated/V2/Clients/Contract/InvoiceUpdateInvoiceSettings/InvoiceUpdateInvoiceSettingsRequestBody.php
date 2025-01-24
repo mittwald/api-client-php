@@ -75,9 +75,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
 
     private ?int $targetDay = null;
 
-    /**
-     * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     */
     public function __construct(int $invoicePeriod, PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings)
     {
         $this->invoicePeriod = $invoicePeriod;
@@ -161,9 +158,6 @@ class InvoiceUpdateInvoiceSettingsRequestBody
         return $clone;
     }
 
-    /**
-     * @param PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings
-     */
     public function withPaymentSettings(PaymentSettingsDebit|PaymentSettingsInvoice $paymentSettings): self
     {
         $clone = clone $this;

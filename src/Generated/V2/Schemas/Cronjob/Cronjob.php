@@ -130,10 +130,6 @@ class Cronjob
 
     private DateTime $updatedAt;
 
-    /**
-     * @param CronjobUrl|CronjobCommand $destination
-     * @param int|float $timeout
-     */
     public function __construct(bool $active, string $appId, DateTime $createdAt, string $description, CronjobCommand|CronjobUrl $destination, string $id, string $interval, string $shortId, int|float $timeout, DateTime $updatedAt)
     {
         $this->active = $active;
@@ -268,9 +264,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param CronjobUrl|CronjobCommand $destination
-     */
     public function withDestination(CronjobCommand|CronjobUrl $destination): self
     {
         $clone = clone $this;
@@ -397,9 +390,6 @@ class Cronjob
         return $clone;
     }
 
-    /**
-     * @param int|float $timeout
-     */
     public function withTimeout(int|float $timeout): self
     {
         $validator = new Validator();

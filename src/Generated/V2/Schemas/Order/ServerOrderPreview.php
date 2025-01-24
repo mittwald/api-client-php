@@ -56,9 +56,6 @@ class ServerOrderPreview
 
     private string $machineType;
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function __construct(int|float $diskspaceInGiB, string $machineType)
     {
         $this->diskspaceInGiB = $diskspaceInGiB;
@@ -129,9 +126,6 @@ class ServerOrderPreview
         return $clone;
     }
 
-    /**
-     * @param int|float $diskspaceInGiB
-     */
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();

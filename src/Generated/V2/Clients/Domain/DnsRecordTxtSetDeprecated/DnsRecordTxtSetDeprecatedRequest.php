@@ -48,9 +48,6 @@ class DnsRecordTxtSetDeprecatedRequest
 
     ];
 
-    /**
-     * @param RecordUnset|RecordTXTComponent $body
-     */
     public function __construct(string $zoneId, RecordTXTComponent|RecordUnset $body)
     {
         $this->zoneId = $zoneId;
@@ -81,9 +78,6 @@ class DnsRecordTxtSetDeprecatedRequest
         return $clone;
     }
 
-    /**
-     * @param RecordUnset|RecordTXTComponent $body
-     */
     public function withBody(RecordTXTComponent|RecordUnset $body): self
     {
         $clone = clone $this;
