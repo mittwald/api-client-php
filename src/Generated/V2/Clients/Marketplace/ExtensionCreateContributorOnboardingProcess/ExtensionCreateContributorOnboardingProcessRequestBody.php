@@ -13,14 +13,49 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'properties' => [
+            'shippingCountryRestriction' => [
+                'description' => 'You can restrict your customers to certain countries.',
+                'enum' => [
+                    'onlyDomestic',
+                ],
+                'type' => 'string',
+            ],
+        ],
         'type' => 'object',
     ];
+
+    /**
+     * You can restrict your customers to certain countries.
+     */
+    private ?ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction $shippingCountryRestriction = null;
 
     /**
      *
      */
     public function __construct()
     {
+    }
+
+    public function getShippingCountryRestriction(): ?ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction
+    {
+        return $this->shippingCountryRestriction ?? null;
+    }
+
+    public function withShippingCountryRestriction(ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction $shippingCountryRestriction): self
+    {
+        $clone = clone $this;
+        $clone->shippingCountryRestriction = $shippingCountryRestriction;
+
+        return $clone;
+    }
+
+    public function withoutShippingCountryRestriction(): self
+    {
+        $clone = clone $this;
+        unset($clone->shippingCountryRestriction);
+
+        return $clone;
     }
 
     /**
@@ -38,10 +73,13 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
             static::validateInput($input);
         }
 
-
+        $shippingCountryRestriction = null;
+        if (isset($input->{'shippingCountryRestriction'})) {
+            $shippingCountryRestriction = ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction::from($input->{'shippingCountryRestriction'});
+        }
 
         $obj = new self();
-
+        $obj->shippingCountryRestriction = $shippingCountryRestriction;
         return $obj;
     }
 
@@ -53,7 +91,9 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
     public function toJson(): array
     {
         $output = [];
-
+        if (isset($this->shippingCountryRestriction)) {
+            $output['shippingCountryRestriction'] = ($this->shippingCountryRestriction)->value;
+        }
 
         return $output;
     }

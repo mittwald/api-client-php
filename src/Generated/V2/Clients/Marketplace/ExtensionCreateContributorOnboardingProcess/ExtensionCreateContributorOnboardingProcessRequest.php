@@ -22,6 +22,15 @@ class ExtensionCreateContributorOnboardingProcessRequest
                 'type' => 'string',
             ],
             'body' => [
+                'properties' => [
+                    'shippingCountryRestriction' => [
+                        'description' => 'You can restrict your customers to certain countries.',
+                        'enum' => [
+                            'onlyDomestic',
+                        ],
+                        'type' => 'string',
+                    ],
+                ],
                 'type' => 'object',
             ],
         ],
