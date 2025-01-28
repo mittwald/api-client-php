@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Generated\V2\Schemas\Dns\CombinedACustom;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordCAAComponent;
 use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordCNAMEComponent;
 use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordMXCustom;
 use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordSRVComponent;
@@ -34,6 +35,7 @@ class DnsUpdateRecordSetRequest
                     'txt',
                     'srv',
                     'cname',
+                    'caa',
                 ],
                 'type' => 'string',
             ],
@@ -57,6 +59,9 @@ class DnsUpdateRecordSetRequest
                     [
                         '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent',
                     ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCAAComponent',
+                    ],
                 ],
             ],
         ],
@@ -71,13 +76,13 @@ class DnsUpdateRecordSetRequest
 
     private DnsUpdateRecordSetRequestRecordSet $recordSet;
 
-    private RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent $body;
+    private RecordUnset|CombinedACustom|RecordMXCustom|RecordTXTComponent|RecordSRVComponent|RecordCNAMEComponent|RecordCAAComponent $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $dnsZoneId, DnsUpdateRecordSetRequestRecordSet $recordSet, CombinedACustom|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body)
+    public function __construct(string $dnsZoneId, DnsUpdateRecordSetRequestRecordSet $recordSet, CombinedACustom|RecordCAAComponent|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body)
     {
         $this->dnsZoneId = $dnsZoneId;
         $this->recordSet = $recordSet;
@@ -94,7 +99,7 @@ class DnsUpdateRecordSetRequest
         return $this->recordSet;
     }
 
-    public function getBody(): CombinedACustom|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset
+    public function getBody(): CombinedACustom|RecordCAAComponent|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset
     {
         return $this->body;
     }
@@ -121,7 +126,7 @@ class DnsUpdateRecordSetRequest
         return $clone;
     }
 
-    public function withBody(CombinedACustom|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body): self
+    public function withBody(CombinedACustom|RecordCAAComponent|RecordCNAMEComponent|RecordMXCustom|RecordSRVComponent|RecordTXTComponent|RecordUnset $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -153,6 +158,7 @@ class DnsUpdateRecordSetRequest
             RecordTXTComponent::validateInput($input->{'body'}, true) => RecordTXTComponent::buildFromInput($input->{'body'}, validate: $validate),
             RecordSRVComponent::validateInput($input->{'body'}, true) => RecordSRVComponent::buildFromInput($input->{'body'}, validate: $validate),
             RecordCNAMEComponent::validateInput($input->{'body'}, true) => RecordCNAMEComponent::buildFromInput($input->{'body'}, validate: $validate),
+            RecordCAAComponent::validateInput($input->{'body'}, true) => RecordCAAComponent::buildFromInput($input->{'body'}, validate: $validate),
             default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
         };
 
@@ -172,7 +178,7 @@ class DnsUpdateRecordSetRequest
         $output['dnsZoneId'] = $this->dnsZoneId;
         $output['recordSet'] = ($this->recordSet)->value;
         $output['body'] = match (true) {
-            ($this->body) instanceof RecordUnset, ($this->body) instanceof CombinedACustom, ($this->body) instanceof RecordMXCustom, ($this->body) instanceof RecordTXTComponent, ($this->body) instanceof RecordSRVComponent, ($this->body) instanceof RecordCNAMEComponent => $this->body->toJson(),
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof CombinedACustom, ($this->body) instanceof RecordMXCustom, ($this->body) instanceof RecordTXTComponent, ($this->body) instanceof RecordSRVComponent, ($this->body) instanceof RecordCNAMEComponent, ($this->body) instanceof RecordCAAComponent => $this->body->toJson(),
         };
 
         return $output;
@@ -205,7 +211,7 @@ class DnsUpdateRecordSetRequest
     public function __clone()
     {
         $this->body = match (true) {
-            ($this->body) instanceof RecordUnset, ($this->body) instanceof CombinedACustom, ($this->body) instanceof RecordMXCustom, ($this->body) instanceof RecordTXTComponent, ($this->body) instanceof RecordSRVComponent, ($this->body) instanceof RecordCNAMEComponent => $this->body,
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof CombinedACustom, ($this->body) instanceof RecordMXCustom, ($this->body) instanceof RecordTXTComponent, ($this->body) instanceof RecordSRVComponent, ($this->body) instanceof RecordCNAMEComponent, ($this->body) instanceof RecordCAAComponent => $this->body,
         };
     }
 
