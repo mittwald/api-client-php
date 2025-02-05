@@ -17,11 +17,54 @@ class ListConversationsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-
+            'sort' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'createdAt',
+                        'lastMessage.createdAt',
+                        'title',
+                        'priority',
+                        'shortId',
+                        'conversationId',
+                    ],
+                ],
+                'default' => [
+                    'lastMessage.createdAt',
+                ],
+            ],
+            'order' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'asc',
+                        'desc',
+                    ],
+                ],
+                'default' => [
+                    'desc',
+                ],
+            ],
         ],
         'required' => [
 
         ],
+    ];
+
+    /**
+     * @var string[]
+     */
+    private array $sort = [
+        'lastMessage.createdAt',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private array $order = [
+        'desc',
     ];
 
     private array $headers = [
@@ -33,6 +76,56 @@ class ListConversationsRequest
      */
     public function __construct()
     {
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSort(): array
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOrder(): array
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param string[] $sort
+     */
+    public function withSort(array $sort): self
+    {
+        $validator = new Validator();
+        $validator->validate($sort, self::$schema['properties']['sort']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $order
+     */
+    public function withOrder(array $order): self
+    {
+        $validator = new Validator();
+        $validator->validate($order, self::$schema['properties']['order']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->order = $order;
+
+        return $clone;
     }
 
     /**
@@ -50,10 +143,22 @@ class ListConversationsRequest
             static::validateInput($input);
         }
 
-
+        $sort = [
+                'lastMessage.createdAt',
+            ];
+        if (isset($input->{'sort'})) {
+            $sort = $input->{'sort'};
+        }
+        $order = [
+                'desc',
+            ];
+        if (isset($input->{'order'})) {
+            $order = $input->{'order'};
+        }
 
         $obj = new self();
-
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -65,7 +170,8 @@ class ListConversationsRequest
     public function toJson(): array
     {
         $output = [];
-
+        $output['sort'] = $this->sort;
+        $output['order'] = $this->order;
 
         return $output;
     }
@@ -126,6 +232,12 @@ class ListConversationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
