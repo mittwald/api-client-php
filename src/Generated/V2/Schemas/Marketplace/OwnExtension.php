@@ -83,6 +83,9 @@ class OwnExtension
                 ],
                 'type' => 'string',
             ],
+            'subTitle' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
+            ],
             'support' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
             ],
@@ -144,6 +147,8 @@ class OwnExtension
      * deprecated
      */
     private ?OwnExtensionState $state = null;
+
+    private ?SubTitle $subTitle = null;
 
     private ?SupportMeta $support = null;
 
@@ -239,6 +244,11 @@ class OwnExtension
     public function getState(): ?OwnExtensionState
     {
         return $this->state ?? null;
+    }
+
+    public function getSubTitle(): ?SubTitle
+    {
+        return $this->subTitle ?? null;
     }
 
     public function getSupport(): ?SupportMeta
@@ -514,6 +524,22 @@ class OwnExtension
         return $clone;
     }
 
+    public function withSubTitle(SubTitle $subTitle): self
+    {
+        $clone = clone $this;
+        $clone->subTitle = $subTitle;
+
+        return $clone;
+    }
+
+    public function withoutSubTitle(): self
+    {
+        $clone = clone $this;
+        unset($clone->subTitle);
+
+        return $clone;
+    }
+
     public function withSupport(SupportMeta $support): self
     {
         $clone = clone $this;
@@ -617,6 +643,10 @@ class OwnExtension
         if (isset($input->{'state'})) {
             $state = OwnExtensionState::from($input->{'state'});
         }
+        $subTitle = null;
+        if (isset($input->{'subTitle'})) {
+            $subTitle = SubTitle::buildFromInput($input->{'subTitle'}, validate: $validate);
+        }
         $support = null;
         if (isset($input->{'support'})) {
             $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
@@ -638,6 +668,7 @@ class OwnExtension
         $obj->frontendFragments = $frontendFragments;
         $obj->scopes = $scopes;
         $obj->state = $state;
+        $obj->subTitle = $subTitle;
         $obj->support = $support;
         $obj->tags = $tags;
         return $obj;
@@ -686,6 +717,9 @@ class OwnExtension
         }
         if (isset($this->state)) {
             $output['state'] = ($this->state)->value;
+        }
+        if (isset($this->subTitle)) {
+            $output['subTitle'] = $this->subTitle->toJson();
         }
         if (isset($this->support)) {
             $output['support'] = $this->support->toJson();
