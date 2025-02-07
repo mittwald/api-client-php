@@ -16,6 +16,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDo
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CreateDomainAuthCode\CreateDomainAuthCodeRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeleteDomain\DeleteDomainRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordASetCustom\DeprecatedDnsRecordASetCustomRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordASetManagedByIngress\DeprecatedDnsRecordASetManagedByIngressNoContentResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordASetManagedByIngress\DeprecatedDnsRecordASetManagedByIngressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordCnameSet\DeprecatedDnsRecordCnameSetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordMxSetCustom\DeprecatedDnsRecordMxSetCustomRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordMxSetManaged\DeprecatedDnsRecordMxSetManagedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordSrvSet\DeprecatedDnsRecordSrvSetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordTxtSet\DeprecatedDnsRecordTxtSetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeOwnercOfDomain\DeprecatedDomainChangeOwnercOfDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDomainChangeProjectOfDomain\DeprecatedDomainChangeProjectOfDomainRequest;
@@ -42,16 +50,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDns
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetCustomDeprecated\DnsRecordASetCustomDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedNoContentResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordASetManagedByIngressDeprecated\DnsRecordASetManagedByIngressDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordCnameSetDeprecated\DnsRecordCnameSetDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetCustomDeprecated\DnsRecordMxSetCustomDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordMxSetManagedDeprecated\DnsRecordMxSetManagedDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordSrvSetDeprecated\DnsRecordSrvSetDeprecatedRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsRecordTxtSetDeprecated\DnsRecordTxtSetDeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedNoContentResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
@@ -121,6 +123,97 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\UpdateDomainProjectId\UpdateD
  */
 interface DomainClient
 {
+    /**
+     * updates a-records for a specific zone
+     *
+     * This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-a-set-custom
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordASetCustomRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse recordset updated
+     */
+    public function deprecatedDnsRecordASetCustom(DeprecatedDnsRecordASetCustomRequest $request): EmptyResponse;
+    /**
+     * set a-records managed by ingress for a specific zone
+     *
+     * This operation is deprecated. Use the POST v2/dns-zones/{dnsZoneId}/record-sets/{recordSet}/actions/set-managed endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-a-set-managed-by-ingress
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordASetManagedByIngressRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedDnsRecordASetManagedByIngressNoContentResponse zone set managed by ingressId
+     */
+    public function deprecatedDnsRecordASetManagedByIngress(DeprecatedDnsRecordASetManagedByIngressRequest $request): DeprecatedDnsRecordASetManagedByIngressNoContentResponse;
+    /**
+     * updates cname-record for a specific zone
+     *
+     * This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-cname-set
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordCnameSetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse recordset updated
+     */
+    public function deprecatedDnsRecordCnameSet(DeprecatedDnsRecordCnameSetRequest $request): EmptyResponse;
+    /**
+     * updates mx-records for a specific zone
+     *
+     * This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-mx-set-custom
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordMxSetCustomRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse recordset updated
+     */
+    public function deprecatedDnsRecordMxSetCustom(DeprecatedDnsRecordMxSetCustomRequest $request): EmptyResponse;
+    /**
+     * sets mx-records to managed for a specific zone
+     *
+     * This operation is deprecated. Use the POST v2/dns-zones/{dnsZoneId}/record-sets/{recordSet}/actions/set-managed endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-mx-set-managed
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordMxSetManagedRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse recordset updated
+     */
+    public function deprecatedDnsRecordMxSetManaged(DeprecatedDnsRecordMxSetManagedRequest $request): EmptyResponse;
+    /**
+     * updates srv-records for a specific zone
+     *
+     * This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-srv-set
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordSrvSetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse recordset updated
+     */
+    public function deprecatedDnsRecordSrvSet(DeprecatedDnsRecordSrvSetRequest $request): EmptyResponse;
+    /**
+     * updates txt-records for a specific zone
+     *
+     * This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-dns-record-txt-set
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedDnsRecordTxtSetRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return EmptyResponse recordset updated
+     */
+    public function deprecatedDnsRecordTxtSet(DeprecatedDnsRecordTxtSetRequest $request): EmptyResponse;
     /**
      * Change the owner contact of a domain.
      *
@@ -306,6 +399,18 @@ interface DomainClient
      */
     public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZoneOKResponse;
     /**
+     * Get a zone file for a DNSZone.
+     *
+     * Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-zone-file
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsGetZoneFileRequest $request An object representing the request for this operation
+     * @return DnsGetZoneFileOKResponse Returns the zone file.
+     */
+    public function dnsGetZoneFile(DnsGetZoneFileRequest $request): DnsGetZoneFileOKResponse;
+    /**
      * List DNSZones belonging to a Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-list-dns-zones
@@ -315,83 +420,6 @@ interface DomainClient
      * @return DnsListDnsZonesOKResponse An array of DNSZone objects.
      */
     public function dnsListDnsZones(DnsListDnsZonesRequest $request): DnsListDnsZonesOKResponse;
-    /**
-     * updates a-records for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-custom-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordASetCustomDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse recordset updated
-     */
-    public function dnsRecordASetCustomDeprecated(DnsRecordASetCustomDeprecatedRequest $request): EmptyResponse;
-    /**
-     * set a-records managed by ingress for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-a-set-managed-by-ingress-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordASetManagedByIngressDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return DnsRecordASetManagedByIngressDeprecatedNoContentResponse zone set managed by ingressId
-     */
-    public function dnsRecordASetManagedByIngressDeprecated(DnsRecordASetManagedByIngressDeprecatedRequest $request): DnsRecordASetManagedByIngressDeprecatedNoContentResponse;
-    /**
-     * updates cname-record for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-cname-set-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordCnameSetDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse recordset updated
-     */
-    public function dnsRecordCnameSetDeprecated(DnsRecordCnameSetDeprecatedRequest $request): EmptyResponse;
-    /**
-     * updates mx-records for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-custom-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordMxSetCustomDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse recordset updated
-     */
-    public function dnsRecordMxSetCustomDeprecated(DnsRecordMxSetCustomDeprecatedRequest $request): EmptyResponse;
-    /**
-     * sets mx-records to managed for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-mx-set-managed-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordMxSetManagedDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse recordset updated
-     */
-    public function dnsRecordMxSetManagedDeprecated(DnsRecordMxSetManagedDeprecatedRequest $request): EmptyResponse;
-    /**
-     * updates srv-records for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-srv-set-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordSrvSetDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse recordset updated
-     */
-    public function dnsRecordSrvSetDeprecated(DnsRecordSrvSetDeprecatedRequest $request): EmptyResponse;
-    /**
-     * updates txt-records for a specific zone
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-record-txt-set-deprecated
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsRecordTxtSetDeprecatedRequest $request An object representing the request for this operation
-     * @deprecated
-     * @return EmptyResponse recordset updated
-     */
-    public function dnsRecordTxtSetDeprecated(DnsRecordTxtSetDeprecatedRequest $request): EmptyResponse;
     /**
      * Set a record set on a DNSZone to managed.
      *

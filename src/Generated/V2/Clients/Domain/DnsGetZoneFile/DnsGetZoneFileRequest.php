@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetFileUploadTypeRulesRequest
+class DnsGetZoneFileRequest
 {
     public const method = 'get';
 
@@ -17,42 +17,42 @@ class GetFileUploadTypeRulesRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'fileUploadType' => [
-                'enum' => [
-                    'avatar',
-                    'extensionAssetImage',
-                    'extensionAssetVideo',
-                    'conversation',
-                ],
-                'example' => 'avatar',
+            'dnsZoneId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'fileUploadType',
+            'dnsZoneId',
         ],
     ];
 
-    private GetFileUploadTypeRulesRequestFileUploadType $fileUploadType;
+    private string $dnsZoneId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType)
+    public function __construct(string $dnsZoneId)
     {
-        $this->fileUploadType = $fileUploadType;
+        $this->dnsZoneId = $dnsZoneId;
     }
 
-    public function getFileUploadType(): GetFileUploadTypeRulesRequestFileUploadType
+    public function getDnsZoneId(): string
     {
-        return $this->fileUploadType;
+        return $this->dnsZoneId;
     }
 
-    public function withFileUploadType(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType): self
+    public function withDnsZoneId(string $dnsZoneId): self
     {
+        $validator = new Validator();
+        $validator->validate($dnsZoneId, self::$schema['properties']['dnsZoneId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->fileUploadType = $fileUploadType;
+        $clone->dnsZoneId = $dnsZoneId;
 
         return $clone;
     }
@@ -62,19 +62,19 @@ class GetFileUploadTypeRulesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileUploadTypeRulesRequest Created instance
+     * @return DnsGetZoneFileRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTypeRulesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $fileUploadType = GetFileUploadTypeRulesRequestFileUploadType::from($input->{'fileUploadType'});
+        $dnsZoneId = $input->{'dnsZoneId'};
 
-        $obj = new self($fileUploadType);
+        $obj = new self($dnsZoneId);
 
         return $obj;
     }
@@ -87,7 +87,7 @@ class GetFileUploadTypeRulesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['fileUploadType'] = ($this->fileUploadType)->value;
+        $output['dnsZoneId'] = $this->dnsZoneId;
 
         return $output;
     }
@@ -132,8 +132,8 @@ class GetFileUploadTypeRulesRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $fileUploadType = urlencode($mapped['fileUploadType']);
-        return '/v2/file-upload-types/' . $fileUploadType . '/rules';
+        $dnsZoneId = urlencode($mapped['dnsZoneId']);
+        return '/v2/dns-zones/' . $dnsZoneId . '/zone-file';
     }
 
     /**

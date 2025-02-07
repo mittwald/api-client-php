@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordMxSetManaged;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class GetFileUploadTypeRulesRequest
+class DeprecatedDnsRecordMxSetManagedRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,42 +17,63 @@ class GetFileUploadTypeRulesRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'fileUploadType' => [
-                'enum' => [
-                    'avatar',
-                    'extensionAssetImage',
-                    'extensionAssetVideo',
-                    'conversation',
-                ],
-                'example' => 'avatar',
+            'zoneId' => [
+                'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'body' => [
+                'additionalProperties' => false,
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'fileUploadType',
+            'zoneId',
+            'body',
         ],
     ];
 
-    private GetFileUploadTypeRulesRequestFileUploadType $fileUploadType;
+    private string $zoneId;
+
+    private DeprecatedDnsRecordMxSetManagedRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType)
+    public function __construct(string $zoneId, DeprecatedDnsRecordMxSetManagedRequestBody $body)
     {
-        $this->fileUploadType = $fileUploadType;
+        $this->zoneId = $zoneId;
+        $this->body = $body;
     }
 
-    public function getFileUploadType(): GetFileUploadTypeRulesRequestFileUploadType
+    public function getZoneId(): string
     {
-        return $this->fileUploadType;
+        return $this->zoneId;
     }
 
-    public function withFileUploadType(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType): self
+    public function getBody(): DeprecatedDnsRecordMxSetManagedRequestBody
+    {
+        return $this->body;
+    }
+
+    public function withZoneId(string $zoneId): self
+    {
+        $validator = new Validator();
+        $validator->validate($zoneId, self::$schema['properties']['zoneId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->zoneId = $zoneId;
+
+        return $clone;
+    }
+
+    public function withBody(DeprecatedDnsRecordMxSetManagedRequestBody $body): self
     {
         $clone = clone $this;
-        $clone->fileUploadType = $fileUploadType;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -62,19 +83,20 @@ class GetFileUploadTypeRulesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileUploadTypeRulesRequest Created instance
+     * @return DeprecatedDnsRecordMxSetManagedRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTypeRulesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedDnsRecordMxSetManagedRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $fileUploadType = GetFileUploadTypeRulesRequestFileUploadType::from($input->{'fileUploadType'});
+        $zoneId = $input->{'zoneId'};
+        $body = DeprecatedDnsRecordMxSetManagedRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($fileUploadType);
+        $obj = new self($zoneId, $body);
 
         return $obj;
     }
@@ -87,7 +109,8 @@ class GetFileUploadTypeRulesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['fileUploadType'] = ($this->fileUploadType)->value;
+        $output['zoneId'] = $this->zoneId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -118,6 +141,7 @@ class GetFileUploadTypeRulesRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -132,8 +156,8 @@ class GetFileUploadTypeRulesRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $fileUploadType = urlencode($mapped['fileUploadType']);
-        return '/v2/file-upload-types/' . $fileUploadType . '/rules';
+        $zoneId = urlencode($mapped['zoneId']);
+        return '/v2/dns/zones/' . $zoneId . '/recordset/mx/managed';
     }
 
     /**
@@ -152,6 +176,7 @@ class GetFileUploadTypeRulesRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

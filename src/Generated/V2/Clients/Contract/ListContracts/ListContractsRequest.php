@@ -23,12 +23,16 @@ class ListContractsRequest
             ],
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
                 'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -38,9 +42,9 @@ class ListContractsRequest
 
     private string $customerId;
 
-    private ?int $limit = null;
+    private int $limit = 1000;
 
-    private ?int $skip = null;
+    private int $skip = 0;
 
     private ?int $page = null;
 
@@ -58,14 +62,14 @@ class ListContractsRequest
         return $this->customerId;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
     }
 
     public function getPage(): ?int
@@ -101,14 +105,6 @@ class ListContractsRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -119,14 +115,6 @@ class ListContractsRequest
 
         $clone = clone $this;
         $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withoutSkip(): self
-    {
-        $clone = clone $this;
-        unset($clone->skip);
 
         return $clone;
     }
@@ -169,11 +157,11 @@ class ListContractsRequest
         }
 
         $customerId = $input->{'customerId'};
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
@@ -198,12 +186,8 @@ class ListContractsRequest
     {
         $output = [];
         $output['customerId'] = $this->customerId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
-        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }

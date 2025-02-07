@@ -39,6 +39,7 @@ class Extension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation',
             ],
             'description' => [
+                'description' => 'A short description of the capabilites of the Extension.',
                 'type' => 'string',
             ],
             'detailedDescriptions' => [
@@ -69,6 +70,7 @@ class Extension
                 'type' => 'string',
             ],
             'name' => [
+                'example' => 'MyPingExtension',
                 'type' => 'string',
             ],
             'published' => [
@@ -91,6 +93,12 @@ class Extension
                 ],
                 'type' => 'string',
             ],
+            'statistics' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionStatistics',
+            ],
+            'subTitle' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
+            ],
             'support' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
             ],
@@ -109,12 +117,14 @@ class Extension
             'state',
             'published',
             'name',
+            'subTitle',
             'description',
             'tags',
             'context',
             'scopes',
             'disabled',
             'blocked',
+            'statistics',
         ],
         'type' => 'object',
     ];
@@ -130,6 +140,9 @@ class Extension
 
     private ?ExtensionDeprecation $deprecation = null;
 
+    /**
+     * A short description of the capabilites of the Extension.
+     */
     private string $description;
 
     private ?DetailedDescriptions $detailedDescriptions = null;
@@ -172,6 +185,10 @@ class Extension
      */
     private ExtensionState $state;
 
+    private ExtensionStatistics $statistics;
+
+    private SubTitle $subTitle;
+
     private SupportMeta $support;
 
     /**
@@ -183,7 +200,7 @@ class Extension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, bool $published, array $scopes, ExtensionState $state, SupportMeta $support, array $tags)
+    public function __construct(bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, SupportMeta $support, array $tags)
     {
         $this->blocked = $blocked;
         $this->context = $context;
@@ -195,6 +212,8 @@ class Extension
         $this->published = $published;
         $this->scopes = $scopes;
         $this->state = $state;
+        $this->statistics = $statistics;
+        $this->subTitle = $subTitle;
         $this->support = $support;
         $this->tags = $tags;
     }
@@ -287,6 +306,16 @@ class Extension
     public function getState(): ExtensionState
     {
         return $this->state;
+    }
+
+    public function getStatistics(): ExtensionStatistics
+    {
+        return $this->statistics;
+    }
+
+    public function getSubTitle(): SubTitle
+    {
+        return $this->subTitle;
     }
 
     public function getSupport(): SupportMeta
@@ -537,6 +566,22 @@ class Extension
         return $clone;
     }
 
+    public function withStatistics(ExtensionStatistics $statistics): self
+    {
+        $clone = clone $this;
+        $clone->statistics = $statistics;
+
+        return $clone;
+    }
+
+    public function withSubTitle(SubTitle $subTitle): self
+    {
+        $clone = clone $this;
+        $clone->subTitle = $subTitle;
+
+        return $clone;
+    }
+
     public function withSupport(SupportMeta $support): self
     {
         $clone = clone $this;
@@ -607,10 +652,12 @@ class Extension
         $published = (bool)($input->{'published'});
         $scopes = $input->{'scopes'};
         $state = ExtensionState::from($input->{'state'});
+        $statistics = ExtensionStatistics::buildFromInput($input->{'statistics'}, validate: $validate);
+        $subTitle = SubTitle::buildFromInput($input->{'subTitle'}, validate: $validate);
         $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $published, $scopes, $state, $support, $tags);
+        $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
         $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->frontendComponents = $frontendComponents;
@@ -652,6 +699,8 @@ class Extension
         $output['published'] = $this->published;
         $output['scopes'] = $this->scopes;
         $output['state'] = ($this->state)->value;
+        $output['statistics'] = $this->statistics->toJson();
+        $output['subTitle'] = $this->subTitle->toJson();
         $output['support'] = $this->support->toJson();
         $output['tags'] = $this->tags;
 

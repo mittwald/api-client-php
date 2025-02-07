@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\File\GetFileUploadTypeRules;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DeprecatedDnsRecordCnameSet;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordCNAMEComponent;
+use Mittwald\ApiClient\Generated\V2\Schemas\Dns\RecordUnset;
 
-class GetFileUploadTypeRulesRequest
+class DeprecatedDnsRecordCnameSetRequest
 {
-    public const method = 'get';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,42 +19,69 @@ class GetFileUploadTypeRulesRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'fileUploadType' => [
-                'enum' => [
-                    'avatar',
-                    'extensionAssetImage',
-                    'extensionAssetVideo',
-                    'conversation',
-                ],
-                'example' => 'avatar',
+            'zoneId' => [
+                'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'body' => [
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordUnset',
+                    ],
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent',
+                    ],
+                ],
             ],
         ],
         'required' => [
-            'fileUploadType',
+            'zoneId',
+            'body',
         ],
     ];
 
-    private GetFileUploadTypeRulesRequestFileUploadType $fileUploadType;
+    private string $zoneId;
+
+    private RecordUnset|RecordCNAMEComponent $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType)
+    public function __construct(string $zoneId, RecordCNAMEComponent|RecordUnset $body)
     {
-        $this->fileUploadType = $fileUploadType;
+        $this->zoneId = $zoneId;
+        $this->body = $body;
     }
 
-    public function getFileUploadType(): GetFileUploadTypeRulesRequestFileUploadType
+    public function getZoneId(): string
     {
-        return $this->fileUploadType;
+        return $this->zoneId;
     }
 
-    public function withFileUploadType(GetFileUploadTypeRulesRequestFileUploadType $fileUploadType): self
+    public function getBody(): RecordCNAMEComponent|RecordUnset
+    {
+        return $this->body;
+    }
+
+    public function withZoneId(string $zoneId): self
+    {
+        $validator = new Validator();
+        $validator->validate($zoneId, self::$schema['properties']['zoneId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->zoneId = $zoneId;
+
+        return $clone;
+    }
+
+    public function withBody(RecordCNAMEComponent|RecordUnset $body): self
     {
         $clone = clone $this;
-        $clone->fileUploadType = $fileUploadType;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -62,19 +91,24 @@ class GetFileUploadTypeRulesRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return GetFileUploadTypeRulesRequest Created instance
+     * @return DeprecatedDnsRecordCnameSetRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): GetFileUploadTypeRulesRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DeprecatedDnsRecordCnameSetRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $fileUploadType = GetFileUploadTypeRulesRequestFileUploadType::from($input->{'fileUploadType'});
+        $zoneId = $input->{'zoneId'};
+        $body = match (true) {
+            RecordUnset::validateInput($input->{'body'}, true) => RecordUnset::buildFromInput($input->{'body'}, validate: $validate),
+            RecordCNAMEComponent::validateInput($input->{'body'}, true) => RecordCNAMEComponent::buildFromInput($input->{'body'}, validate: $validate),
+            default => throw new InvalidArgumentException("could not build property 'body' from JSON"),
+        };
 
-        $obj = new self($fileUploadType);
+        $obj = new self($zoneId, $body);
 
         return $obj;
     }
@@ -87,7 +121,10 @@ class GetFileUploadTypeRulesRequest
     public function toJson(): array
     {
         $output = [];
-        $output['fileUploadType'] = ($this->fileUploadType)->value;
+        $output['zoneId'] = $this->zoneId;
+        $output['body'] = match (true) {
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof RecordCNAMEComponent => $this->body->toJson(),
+        };
 
         return $output;
     }
@@ -118,6 +155,9 @@ class GetFileUploadTypeRulesRequest
 
     public function __clone()
     {
+        $this->body = match (true) {
+            ($this->body) instanceof RecordUnset, ($this->body) instanceof RecordCNAMEComponent => $this->body,
+        };
     }
 
     /**
@@ -132,8 +172,8 @@ class GetFileUploadTypeRulesRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $fileUploadType = urlencode($mapped['fileUploadType']);
-        return '/v2/file-upload-types/' . $fileUploadType . '/rules';
+        $zoneId = urlencode($mapped['zoneId']);
+        return '/v2/dns/zones/' . $zoneId . '/recordset/cname';
     }
 
     /**
@@ -152,6 +192,7 @@ class GetFileUploadTypeRulesRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 
