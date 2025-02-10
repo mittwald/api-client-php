@@ -32,6 +32,7 @@ class Contributor
                 'type' => 'string',
             ],
             'email' => [
+                'deprecated' => true,
                 'type' => 'string',
             ],
             'id' => [
@@ -45,10 +46,14 @@ class Contributor
                 'type' => 'string',
             ],
             'phone' => [
+                'deprecated' => true,
                 'type' => 'string',
             ],
             'state' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ContributorState',
+            ],
+            'supportInformation' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
             ],
             'url' => [
                 'type' => 'string',
@@ -59,6 +64,7 @@ class Contributor
             'customerId',
             'state',
             'name',
+            'supportInformation',
         ],
         'type' => 'object',
     ];
@@ -67,6 +73,9 @@ class Contributor
 
     private ?string $description = null;
 
+    /**
+     * @deprecated
+     */
     private ?string $email = null;
 
     private string $id;
@@ -75,18 +84,24 @@ class Contributor
 
     private string $name;
 
+    /**
+     * @deprecated
+     */
     private ?string $phone = null;
 
     private ContributorState $state;
 
+    private SupportMeta $supportInformation;
+
     private ?string $url = null;
 
-    public function __construct(string $customerId, string $id, string $name, ContributorState $state)
+    public function __construct(string $customerId, string $id, string $name, ContributorState $state, SupportMeta $supportInformation)
     {
         $this->customerId = $customerId;
         $this->id = $id;
         $this->name = $name;
         $this->state = $state;
+        $this->supportInformation = $supportInformation;
     }
 
     public function getCustomerId(): string
@@ -99,6 +114,9 @@ class Contributor
         return $this->description ?? null;
     }
 
+    /**
+     * @deprecated
+     */
     public function getEmail(): ?string
     {
         return $this->email ?? null;
@@ -119,6 +137,9 @@ class Contributor
         return $this->name;
     }
 
+    /**
+     * @deprecated
+     */
     public function getPhone(): ?string
     {
         return $this->phone ?? null;
@@ -127,6 +148,11 @@ class Contributor
     public function getState(): ContributorState
     {
         return $this->state;
+    }
+
+    public function getSupportInformation(): SupportMeta
+    {
+        return $this->supportInformation;
     }
 
     public function getUrl(): ?string
@@ -170,6 +196,9 @@ class Contributor
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withEmail(string $email): self
     {
         $validator = new Validator();
@@ -242,6 +271,9 @@ class Contributor
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withPhone(string $phone): self
     {
         $validator = new Validator();
@@ -268,6 +300,14 @@ class Contributor
     {
         $clone = clone $this;
         $clone->state = $state;
+
+        return $clone;
+    }
+
+    public function withSupportInformation(SupportMeta $supportInformation): self
+    {
+        $clone = clone $this;
+        $clone->supportInformation = $supportInformation;
 
         return $clone;
     }
@@ -329,12 +369,13 @@ class Contributor
             $phone = $input->{'phone'};
         }
         $state = ContributorState::from($input->{'state'});
+        $supportInformation = SupportMeta::buildFromInput($input->{'supportInformation'}, validate: $validate);
         $url = null;
         if (isset($input->{'url'})) {
             $url = $input->{'url'};
         }
 
-        $obj = new self($customerId, $id, $name, $state);
+        $obj = new self($customerId, $id, $name, $state, $supportInformation);
         $obj->description = $description;
         $obj->email = $email;
         $obj->logoRefId = $logoRefId;
@@ -367,6 +408,7 @@ class Contributor
             $output['phone'] = $this->phone;
         }
         $output['state'] = $this->state->value;
+        $output['supportInformation'] = $this->supportInformation->toJson();
         if (isset($this->url)) {
             $output['url'] = $this->url;
         }
