@@ -43,6 +43,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingRequest;
 
 /**
  * Client for Marketplace API
@@ -261,4 +263,16 @@ interface MarketplaceClient
      * @return ExtensionListOwnExtensionsOKResponse A list of extensions of the contributor.
      */
     public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse;
+    /**
+     * Creates or Updates Pricing for an Extension.
+     *
+     * The Pricing is needed to publish paid extensions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-update-extension-pricing
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionUpdateExtensionPricingRequest $request An object representing the request for this operation
+     * @return ExtensionUpdateExtensionPricingOKResponse The Pricing has been updated.
+     */
+    public function extensionUpdateExtensionPricing(ExtensionUpdateExtensionPricingRequest $request): ExtensionUpdateExtensionPricingOKResponse;
 }
