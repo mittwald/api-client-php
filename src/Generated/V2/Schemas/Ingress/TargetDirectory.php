@@ -25,6 +25,8 @@ class TargetDirectory
     private static array $schema = [
         'properties' => [
             'directory' => [
+                'deprecated' => true,
+                'description' => 'This property is deprecated. It will only be supported until the end of march. Please use installationId instead.',
                 'type' => 'string',
             ],
         ],
@@ -34,6 +36,11 @@ class TargetDirectory
         'type' => 'object',
     ];
 
+    /**
+     * This property is deprecated. It will only be supported until the end of march. Please use installationId instead.
+     *
+     * @deprecated
+     */
     private string $directory;
 
     public function __construct(string $directory)
@@ -41,11 +48,17 @@ class TargetDirectory
         $this->directory = $directory;
     }
 
+    /**
+     * @deprecated
+     */
     public function getDirectory(): string
     {
         return $this->directory;
     }
 
+    /**
+     * @deprecated
+     */
     public function withDirectory(string $directory): self
     {
         $validator = new Validator();
