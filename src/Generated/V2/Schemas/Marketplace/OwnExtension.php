@@ -61,12 +61,44 @@ class OwnExtension
                 ],
                 'type' => 'object',
             ],
+            'functional' => [
+                'type' => 'boolean',
+            ],
             'id' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'logoRefId' => [
+                'description' => 'This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.',
                 'format' => 'uuid',
                 'type' => 'string',
             ],
             'name' => [
                 'type' => 'string',
+            ],
+            'published' => [
+                'type' => 'boolean',
+            ],
+            'requestedChanges' => [
+                'additionalProperties' => false,
+                'properties' => [
+                    'context' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
+                    ],
+                    'scopes' => [
+                        'items' => [
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
+                    'webhookUrls' => [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.BackendComponents',
+                    ],
+                ],
+                'required' => [
+
+                ],
+                'type' => 'object',
             ],
             'scopes' => [
                 'items' => [
@@ -99,12 +131,22 @@ class OwnExtension
                 'minItems' => 0,
                 'type' => 'array',
             ],
+            'verificationRequested' => [
+                'type' => 'boolean',
+            ],
+            'verified' => [
+                'type' => 'boolean',
+            ],
         ],
         'required' => [
             'id',
             'contributorId',
             'name',
             'statistics',
+            'published',
+            'verified',
+            'verificationRequested',
+            'functional',
         ],
         'type' => 'object',
     ];
@@ -138,9 +180,20 @@ class OwnExtension
      */
     private ?array $frontendFragments = null;
 
+    private bool $functional;
+
     private string $id;
 
+    /**
+     * This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.
+     */
+    private ?string $logoRefId = null;
+
     private string $name;
+
+    private bool $published;
+
+    private ?OwnExtensionRequestedChanges $requestedChanges = null;
 
     /**
      * @var string[]|null
@@ -163,12 +216,20 @@ class OwnExtension
      */
     private ?array $tags = null;
 
-    public function __construct(string $contributorId, string $id, string $name, ExtensionStatistics $statistics)
+    private bool $verificationRequested;
+
+    private bool $verified;
+
+    public function __construct(string $contributorId, bool $functional, string $id, string $name, bool $published, ExtensionStatistics $statistics, bool $verificationRequested, bool $verified)
     {
         $this->contributorId = $contributorId;
+        $this->functional = $functional;
         $this->id = $id;
         $this->name = $name;
+        $this->published = $published;
         $this->statistics = $statistics;
+        $this->verificationRequested = $verificationRequested;
+        $this->verified = $verified;
     }
 
     public function getBackendComponents(): ?BackendComponents
@@ -230,14 +291,34 @@ class OwnExtension
         return $this->frontendFragments ?? null;
     }
 
+    public function getFunctional(): bool
+    {
+        return $this->functional;
+    }
+
     public function getId(): string
     {
         return $this->id;
     }
 
+    public function getLogoRefId(): ?string
+    {
+        return $this->logoRefId ?? null;
+    }
+
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPublished(): bool
+    {
+        return $this->published;
+    }
+
+    public function getRequestedChanges(): ?OwnExtensionRequestedChanges
+    {
+        return $this->requestedChanges ?? null;
     }
 
     /**
@@ -274,6 +355,16 @@ class OwnExtension
     public function getTags(): ?array
     {
         return $this->tags ?? null;
+    }
+
+    public function getVerificationRequested(): bool
+    {
+        return $this->verificationRequested;
+    }
+
+    public function getVerified(): bool
+    {
+        return $this->verified;
     }
 
     public function withBackendComponents(BackendComponents $backendComponents): self
@@ -467,6 +558,20 @@ class OwnExtension
         return $clone;
     }
 
+    public function withFunctional(bool $functional): self
+    {
+        $validator = new Validator();
+        $validator->validate($functional, self::$schema['properties']['functional']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->functional = $functional;
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
@@ -481,6 +586,28 @@ class OwnExtension
         return $clone;
     }
 
+    public function withLogoRefId(string $logoRefId): self
+    {
+        $validator = new Validator();
+        $validator->validate($logoRefId, self::$schema['properties']['logoRefId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->logoRefId = $logoRefId;
+
+        return $clone;
+    }
+
+    public function withoutLogoRefId(): self
+    {
+        $clone = clone $this;
+        unset($clone->logoRefId);
+
+        return $clone;
+    }
+
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -491,6 +618,36 @@ class OwnExtension
 
         $clone = clone $this;
         $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withPublished(bool $published): self
+    {
+        $validator = new Validator();
+        $validator->validate($published, self::$schema['properties']['published']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->published = $published;
+
+        return $clone;
+    }
+
+    public function withRequestedChanges(OwnExtensionRequestedChanges $requestedChanges): self
+    {
+        $clone = clone $this;
+        $clone->requestedChanges = $requestedChanges;
+
+        return $clone;
+    }
+
+    public function withoutRequestedChanges(): self
+    {
+        $clone = clone $this;
+        unset($clone->requestedChanges);
 
         return $clone;
     }
@@ -601,6 +758,34 @@ class OwnExtension
         return $clone;
     }
 
+    public function withVerificationRequested(bool $verificationRequested): self
+    {
+        $validator = new Validator();
+        $validator->validate($verificationRequested, self::$schema['properties']['verificationRequested']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->verificationRequested = $verificationRequested;
+
+        return $clone;
+    }
+
+    public function withVerified(bool $verified): self
+    {
+        $validator = new Validator();
+        $validator->validate($verified, self::$schema['properties']['verified']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->verified = $verified;
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -653,8 +838,18 @@ class OwnExtension
         if (isset($input->{'frontendFragments'})) {
             $frontendFragments = (array)$input->{'frontendFragments'};
         }
+        $functional = (bool)($input->{'functional'});
         $id = $input->{'id'};
+        $logoRefId = null;
+        if (isset($input->{'logoRefId'})) {
+            $logoRefId = $input->{'logoRefId'};
+        }
         $name = $input->{'name'};
+        $published = (bool)($input->{'published'});
+        $requestedChanges = null;
+        if (isset($input->{'requestedChanges'})) {
+            $requestedChanges = OwnExtensionRequestedChanges::buildFromInput($input->{'requestedChanges'}, validate: $validate);
+        }
         $scopes = null;
         if (isset($input->{'scopes'})) {
             $scopes = $input->{'scopes'};
@@ -676,8 +871,10 @@ class OwnExtension
         if (isset($input->{'tags'})) {
             $tags = $input->{'tags'};
         }
+        $verificationRequested = (bool)($input->{'verificationRequested'});
+        $verified = (bool)($input->{'verified'});
 
-        $obj = new self($contributorId, $id, $name, $statistics);
+        $obj = new self($contributorId, $functional, $id, $name, $published, $statistics, $verificationRequested, $verified);
         $obj->backendComponents = $backendComponents;
         $obj->blocked = $blocked;
         $obj->context = $context;
@@ -687,6 +884,8 @@ class OwnExtension
         $obj->disabled = $disabled;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
+        $obj->logoRefId = $logoRefId;
+        $obj->requestedChanges = $requestedChanges;
         $obj->scopes = $scopes;
         $obj->state = $state;
         $obj->subTitle = $subTitle;
@@ -731,8 +930,16 @@ class OwnExtension
         if (isset($this->frontendFragments)) {
             $output['frontendFragments'] = $this->frontendFragments;
         }
+        $output['functional'] = $this->functional;
         $output['id'] = $this->id;
+        if (isset($this->logoRefId)) {
+            $output['logoRefId'] = $this->logoRefId;
+        }
         $output['name'] = $this->name;
+        $output['published'] = $this->published;
+        if (isset($this->requestedChanges)) {
+            $output['requestedChanges'] = ($this->requestedChanges)->toJson();
+        }
         if (isset($this->scopes)) {
             $output['scopes'] = $this->scopes;
         }
@@ -749,6 +956,8 @@ class OwnExtension
         if (isset($this->tags)) {
             $output['tags'] = $this->tags;
         }
+        $output['verificationRequested'] = $this->verificationRequested;
+        $output['verified'] = $this->verified;
 
         return $output;
     }
@@ -779,5 +988,8 @@ class OwnExtension
 
     public function __clone()
     {
+        if (isset($this->requestedChanges)) {
+            $this->requestedChanges = clone $this->requestedChanges;
+        }
     }
 }

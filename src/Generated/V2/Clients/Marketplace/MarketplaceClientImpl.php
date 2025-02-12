@@ -539,7 +539,7 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionListOwnExtensionsRequest $request An object representing the request for this operation
-     * @return ExtensionListOwnExtensionsOKResponse OK
+     * @return ExtensionListOwnExtensionsOKResponse A list of extensions of the contributor.
      */
     public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse
     {
