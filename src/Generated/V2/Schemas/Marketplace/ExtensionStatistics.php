@@ -26,7 +26,6 @@ class ExtensionStatistics
         'properties' => [
             'amountOfInstances' => [
                 'example' => 42,
-                'exclusiveMinimum' => false,
                 'minimum' => 0,
                 'type' => 'integer',
             ],

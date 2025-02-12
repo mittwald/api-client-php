@@ -70,9 +70,14 @@ class ContainerImageConfig
                 'type' => 'integer',
             ],
             'user' => [
-                'description' => 'The user the container image is running with.',
+                'description' => 'The user the container image is running with, if overwritingUser is not set.',
                 'example' => 'mysql',
                 'type' => 'string',
+            ],
+            'userId' => [
+                'description' => 'The user id the container image is running with, if overwritingUser is not set.',
+                'example' => 0,
+                'type' => 'integer',
             ],
             'volumes' => [
                 'description' => 'List of volumes the container image has.',
@@ -84,6 +89,7 @@ class ContainerImageConfig
         ],
         'required' => [
             'user',
+            'userId',
             'isUserRoot',
             'hasAiGeneratedData',
         ],
@@ -134,9 +140,14 @@ class ContainerImageConfig
     private ?int $overwritingUser = null;
 
     /**
-     * The user the container image is running with.
+     * The user the container image is running with, if overwritingUser is not set.
      */
     private string $user;
+
+    /**
+     * The user id the container image is running with, if overwritingUser is not set.
+     */
+    private int $userId;
 
     /**
      * List of volumes the container image has.
@@ -145,11 +156,12 @@ class ContainerImageConfig
      */
     private ?array $volumes = null;
 
-    public function __construct(bool $hasAiGeneratedData, bool $isUserRoot, string $user)
+    public function __construct(bool $hasAiGeneratedData, bool $isUserRoot, string $user, int $userId)
     {
         $this->hasAiGeneratedData = $hasAiGeneratedData;
         $this->isUserRoot = $isUserRoot;
         $this->user = $user;
+        $this->userId = $userId;
     }
 
     /**
@@ -202,6 +214,11 @@ class ContainerImageConfig
     public function getUser(): string
     {
         return $this->user;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
     }
 
     /**
@@ -364,6 +381,20 @@ class ContainerImageConfig
         return $clone;
     }
 
+    public function withUserId(int $userId): self
+    {
+        $validator = new Validator();
+        $validator->validate($userId, self::$schema['properties']['userId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->userId = $userId;
+
+        return $clone;
+    }
+
     /**
      * @param ContainerImageConfigVolume[] $volumes
      */
@@ -421,12 +452,13 @@ class ContainerImageConfig
             $overwritingUser = (int)($input->{'overwritingUser'});
         }
         $user = $input->{'user'};
+        $userId = (int)($input->{'userId'});
         $volumes = null;
         if (isset($input->{'volumes'})) {
             $volumes = array_map(fn (array|object $i): ContainerImageConfigVolume => ContainerImageConfigVolume::buildFromInput($i, validate: $validate), $input->{'volumes'});
         }
 
-        $obj = new self($hasAiGeneratedData, $isUserRoot, $user);
+        $obj = new self($hasAiGeneratedData, $isUserRoot, $user, $userId);
         $obj->command = $command;
         $obj->entrypoint = $entrypoint;
         $obj->env = $env;
@@ -462,6 +494,7 @@ class ContainerImageConfig
             $output['overwritingUser'] = $this->overwritingUser;
         }
         $output['user'] = $this->user;
+        $output['userId'] = $this->userId;
         if (isset($this->volumes)) {
             $output['volumes'] = array_map(fn (ContainerImageConfigVolume $i): array => $i->toJson(), $this->volumes);
         }
