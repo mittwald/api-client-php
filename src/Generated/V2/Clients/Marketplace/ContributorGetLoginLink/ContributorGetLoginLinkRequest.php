@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListProjectBackupsRequest
+class ContributorGetLoginLinkRequest
 {
     public const method = 'get';
 
@@ -17,74 +17,42 @@ class ListProjectBackupsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'contributorId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'withExportsOnly' => [
-                'type' => 'boolean',
-            ],
         ],
         'required' => [
-            'projectId',
+            'contributorId',
         ],
     ];
 
-    private string $projectId;
-
-    private ?bool $withExportsOnly = null;
+    private string $contributorId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $contributorId)
     {
-        $this->projectId = $projectId;
+        $this->contributorId = $contributorId;
     }
 
-    public function getProjectId(): string
+    public function getContributorId(): string
     {
-        return $this->projectId;
+        return $this->contributorId;
     }
 
-    public function getWithExportsOnly(): ?bool
-    {
-        return $this->withExportsOnly ?? null;
-    }
-
-    public function withProjectId(string $projectId): self
+    public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    public function withWithExportsOnly(bool $withExportsOnly): self
-    {
-        $validator = new Validator();
-        $validator->validate($withExportsOnly, self::$schema['properties']['withExportsOnly']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->withExportsOnly = $withExportsOnly;
-
-        return $clone;
-    }
-
-    public function withoutWithExportsOnly(): self
-    {
-        $clone = clone $this;
-        unset($clone->withExportsOnly);
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
@@ -94,24 +62,20 @@ class ListProjectBackupsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListProjectBackupsRequest Created instance
+     * @return ContributorGetLoginLinkRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListProjectBackupsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorGetLoginLinkRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $withExportsOnly = null;
-        if (isset($input->{'withExportsOnly'})) {
-            $withExportsOnly = (bool)($input->{'withExportsOnly'});
-        }
+        $contributorId = $input->{'contributorId'};
 
-        $obj = new self($projectId);
-        $obj->withExportsOnly = $withExportsOnly;
+        $obj = new self($contributorId);
+
         return $obj;
     }
 
@@ -123,10 +87,7 @@ class ListProjectBackupsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        if (isset($this->withExportsOnly)) {
-            $output['withExportsOnly'] = $this->withExportsOnly;
-        }
+        $output['contributorId'] = $this->contributorId;
 
         return $output;
     }
@@ -171,8 +132,8 @@ class ListProjectBackupsRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/backups';
+        $contributorId = urlencode($mapped['contributorId']);
+        return '/v2/contributors/' . $contributorId . '/dashboard';
     }
 
     /**
@@ -188,9 +149,6 @@ class ListProjectBackupsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['withExportsOnly'])) {
-            $query['withExportsOnly'] = $mapped['withExportsOnly'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,

@@ -24,6 +24,14 @@ class Extension
      */
     private static array $schema = [
         'properties' => [
+            'assets' => [
+                'description' => 'The assets/media (images and videos) of the extension.',
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionAsset',
+                ],
+                'maxItems' => 4,
+                'type' => 'array',
+            ],
             'blocked' => [
                 'deprecated' => true,
                 'type' => 'boolean',
@@ -48,7 +56,14 @@ class Extension
             'disabled' => [
                 'type' => 'boolean',
             ],
+            'externalFrontends' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
+                ],
+                'type' => 'array',
+            ],
             'frontendComponents' => [
+                'deprecated' => true,
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
                 ],
@@ -124,10 +139,18 @@ class Extension
             'scopes',
             'disabled',
             'blocked',
+            'assets',
             'statistics',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * The assets/media (images and videos) of the extension.
+     *
+     * @var ExtensionAsset[]
+     */
+    private array $assets;
 
     /**
      * @deprecated
@@ -151,6 +174,12 @@ class Extension
 
     /**
      * @var ExternalComponent[]|null
+     */
+    private ?array $externalFrontends = null;
+
+    /**
+     * @var ExternalComponent[]|null
+     * @deprecated
      */
     private ?array $frontendComponents = null;
 
@@ -197,11 +226,13 @@ class Extension
     private array $tags;
 
     /**
+     * @param ExtensionAsset[] $assets
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, SupportMeta $support, array $tags)
+    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, SupportMeta $support, array $tags)
     {
+        $this->assets = $assets;
         $this->blocked = $blocked;
         $this->context = $context;
         $this->contributorId = $contributorId;
@@ -216,6 +247,14 @@ class Extension
         $this->subTitle = $subTitle;
         $this->support = $support;
         $this->tags = $tags;
+    }
+
+    /**
+     * @return ExtensionAsset[]
+     */
+    public function getAssets(): array
+    {
+        return $this->assets;
     }
 
     /**
@@ -258,6 +297,15 @@ class Extension
 
     /**
      * @return ExternalComponent[]|null
+     */
+    public function getExternalFrontends(): ?array
+    {
+        return $this->externalFrontends ?? null;
+    }
+
+    /**
+     * @return ExternalComponent[]|null
+     * @deprecated
      */
     public function getFrontendComponents(): ?array
     {
@@ -329,6 +377,17 @@ class Extension
     public function getTags(): array
     {
         return $this->tags;
+    }
+
+    /**
+     * @param ExtensionAsset[] $assets
+     */
+    public function withAssets(array $assets): self
+    {
+        $clone = clone $this;
+        $clone->assets = $assets;
+
+        return $clone;
     }
 
     /**
@@ -431,7 +490,27 @@ class Extension
     }
 
     /**
+     * @param ExternalComponent[] $externalFrontends
+     */
+    public function withExternalFrontends(array $externalFrontends): self
+    {
+        $clone = clone $this;
+        $clone->externalFrontends = $externalFrontends;
+
+        return $clone;
+    }
+
+    public function withoutExternalFrontends(): self
+    {
+        $clone = clone $this;
+        unset($clone->externalFrontends);
+
+        return $clone;
+    }
+
+    /**
      * @param ExternalComponent[] $frontendComponents
+     * @deprecated
      */
     public function withFrontendComponents(array $frontendComponents): self
     {
@@ -622,6 +701,7 @@ class Extension
             static::validateInput($input);
         }
 
+        $assets = array_map(fn (array|object $i): ExtensionAsset => ExtensionAsset::buildFromInput($i, validate: $validate), $input->{'assets'});
         $blocked = (bool)($input->{'blocked'});
         $context = Context::from($input->{'context'});
         $contributorId = $input->{'contributorId'};
@@ -635,6 +715,10 @@ class Extension
             $detailedDescriptions = DetailedDescriptions::buildFromInput($input->{'detailedDescriptions'}, validate: $validate);
         }
         $disabled = (bool)($input->{'disabled'});
+        $externalFrontends = null;
+        if (isset($input->{'externalFrontends'})) {
+            $externalFrontends = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'externalFrontends'});
+        }
         $frontendComponents = null;
         if (isset($input->{'frontendComponents'})) {
             $frontendComponents = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'frontendComponents'});
@@ -657,9 +741,10 @@ class Extension
         $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($blocked, $context, $contributorId, $description, $disabled, $id, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
+        $obj = new self($assets, $blocked, $context, $contributorId, $description, $disabled, $id, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
         $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
+        $obj->externalFrontends = $externalFrontends;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
         $obj->logoRefId = $logoRefId;
@@ -674,6 +759,7 @@ class Extension
     public function toJson(): array
     {
         $output = [];
+        $output['assets'] = array_map(fn (ExtensionAsset $i): array => $i->toJson(), $this->assets);
         $output['blocked'] = $this->blocked;
         $output['context'] = $this->context->value;
         $output['contributorId'] = $this->contributorId;
@@ -685,6 +771,9 @@ class Extension
             $output['detailedDescriptions'] = $this->detailedDescriptions->toJson();
         }
         $output['disabled'] = $this->disabled;
+        if (isset($this->externalFrontends)) {
+            $output['externalFrontends'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->externalFrontends);
+        }
         if (isset($this->frontendComponents)) {
             $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
         }

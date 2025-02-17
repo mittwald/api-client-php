@@ -9,6 +9,12 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceNotFoundResponse;
@@ -103,6 +109,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingNotFoundResponse;
@@ -130,6 +142,32 @@ class MarketplaceClientImpl implements MarketplaceClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Get the Stripe Dashboard Link for a Contributor.
+     *
+     * Get the Stripe Dashboard Link for a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-login-link
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetLoginLinkRequest $request An object representing the request for this operation
+     * @return ContributorGetLoginLinkOKResponse The generated link to the stripe dashboard
+     */
+    public function contributorGetLoginLink(ContributorGetLoginLinkRequest $request): ContributorGetLoginLinkOKResponse
+    {
+        $httpRequest = new Request(ContributorGetLoginLinkRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorGetLoginLinkOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorGetLoginLinkBadRequestResponse::fromResponse($httpResponse),
+            404 => ContributorGetLoginLinkNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorGetLoginLinkTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorGetLoginLinkDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**
@@ -589,6 +627,32 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListOwnExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListOwnExtensionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update or Create Contract for existing Extension Instances.
+     *
+     * Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-update-extension-instance-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionUpdateExtensionInstanceContractRequest $request An object representing the request for this operation
+     * @return ExtensionUpdateExtensionInstanceContractOKResponse The Pricing adjustment can be confirmed in the checkout with the given url.
+     */
+    public function extensionUpdateExtensionInstanceContract(ExtensionUpdateExtensionInstanceContractRequest $request): ExtensionUpdateExtensionInstanceContractOKResponse
+    {
+        $httpRequest = new Request(ExtensionUpdateExtensionInstanceContractRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionUpdateExtensionInstanceContractOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionUpdateExtensionInstanceContractBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionUpdateExtensionInstanceContractNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionUpdateExtensionInstanceContractTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionUpdateExtensionInstanceContractDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -23,6 +23,7 @@ class BackendComponents
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'deprecated' => true,
         'properties' => [
             'extensionAddedToContext' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.BackendComponent',

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListProjectBackupsRequest
+class ExtensionUpdateExtensionInstanceContractRequest
 {
-    public const method = 'get';
+    public const method = 'put';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,74 +17,62 @@ class ListProjectBackupsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'extensionInstanceId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'withExportsOnly' => [
-                'type' => 'boolean',
+            'body' => [
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'projectId',
+            'extensionInstanceId',
+            'body',
         ],
     ];
 
-    private string $projectId;
+    private string $extensionInstanceId;
 
-    private ?bool $withExportsOnly = null;
+    private ExtensionUpdateExtensionInstanceContractRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $extensionInstanceId, ExtensionUpdateExtensionInstanceContractRequestBody $body)
     {
-        $this->projectId = $projectId;
+        $this->extensionInstanceId = $extensionInstanceId;
+        $this->body = $body;
     }
 
-    public function getProjectId(): string
+    public function getExtensionInstanceId(): string
     {
-        return $this->projectId;
+        return $this->extensionInstanceId;
     }
 
-    public function getWithExportsOnly(): ?bool
+    public function getBody(): ExtensionUpdateExtensionInstanceContractRequestBody
     {
-        return $this->withExportsOnly ?? null;
+        return $this->body;
     }
 
-    public function withProjectId(string $projectId): self
+    public function withExtensionInstanceId(string $extensionInstanceId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($extensionInstanceId, self::$schema['properties']['extensionInstanceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->extensionInstanceId = $extensionInstanceId;
 
         return $clone;
     }
 
-    public function withWithExportsOnly(bool $withExportsOnly): self
-    {
-        $validator = new Validator();
-        $validator->validate($withExportsOnly, self::$schema['properties']['withExportsOnly']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->withExportsOnly = $withExportsOnly;
-
-        return $clone;
-    }
-
-    public function withoutWithExportsOnly(): self
+    public function withBody(ExtensionUpdateExtensionInstanceContractRequestBody $body): self
     {
         $clone = clone $this;
-        unset($clone->withExportsOnly);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -94,24 +82,21 @@ class ListProjectBackupsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListProjectBackupsRequest Created instance
+     * @return ExtensionUpdateExtensionInstanceContractRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListProjectBackupsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionInstanceContractRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $withExportsOnly = null;
-        if (isset($input->{'withExportsOnly'})) {
-            $withExportsOnly = (bool)($input->{'withExportsOnly'});
-        }
+        $extensionInstanceId = $input->{'extensionInstanceId'};
+        $body = ExtensionUpdateExtensionInstanceContractRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($projectId);
-        $obj->withExportsOnly = $withExportsOnly;
+        $obj = new self($extensionInstanceId, $body);
+
         return $obj;
     }
 
@@ -123,10 +108,8 @@ class ListProjectBackupsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        if (isset($this->withExportsOnly)) {
-            $output['withExportsOnly'] = $this->withExportsOnly;
-        }
+        $output['extensionInstanceId'] = $this->extensionInstanceId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -157,6 +140,7 @@ class ListProjectBackupsRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -171,8 +155,8 @@ class ListProjectBackupsRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/backups';
+        $extensionInstanceId = urlencode($mapped['extensionInstanceId']);
+        return '/v2/extension-instances/' . $extensionInstanceId . '/contract';
     }
 
     /**
@@ -188,12 +172,10 @@ class ListProjectBackupsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['withExportsOnly'])) {
-            $query['withExportsOnly'] = $mapped['withExportsOnly'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

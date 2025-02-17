@@ -19,6 +19,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBa
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackup\GetProjectBackupRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetSuccessfulBackupListProjectBackups\GetSuccessfulBackupListProjectBackupsOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetSuccessfulBackupListProjectBackups\GetSuccessfulBackupListProjectBackupsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackupSchedules\ListProjectBackupSchedulesOKResponse;
@@ -120,6 +122,16 @@ interface BackupClient
      * @return GetProjectBackupScheduleOKResponse OK
      */
     public function getProjectBackupSchedule(GetProjectBackupScheduleRequest $request): GetProjectBackupScheduleOKResponse;
+    /**
+     * List projects with last successful backups older than 24 hours or no backups at all.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-successful-backup-list-project-backups
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetSuccessfulBackupListProjectBackupsRequest $request An object representing the request for this operation
+     * @return GetSuccessfulBackupListProjectBackupsOKResponse OK
+     */
+    public function getSuccessfulBackupListProjectBackups(GetSuccessfulBackupListProjectBackupsRequest $request): GetSuccessfulBackupListProjectBackupsOKResponse;
     /**
      * List BackupSchedules belonging to a Project.
      *

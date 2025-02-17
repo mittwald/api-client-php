@@ -35,11 +35,8 @@ class OwnExtensionRequestedChanges
                 'type' => 'array',
             ],
             'webhookUrls' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.BackendComponents',
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
             ],
-        ],
-        'required' => [
-
         ],
         'type' => 'object',
     ];
@@ -51,7 +48,7 @@ class OwnExtensionRequestedChanges
      */
     private ?array $scopes = null;
 
-    private ?BackendComponents $webhookUrls = null;
+    private ?WebhookUrls $webhookUrls = null;
 
     /**
      *
@@ -73,7 +70,7 @@ class OwnExtensionRequestedChanges
         return $this->scopes ?? null;
     }
 
-    public function getWebhookUrls(): ?BackendComponents
+    public function getWebhookUrls(): ?WebhookUrls
     {
         return $this->webhookUrls ?? null;
     }
@@ -119,7 +116,7 @@ class OwnExtensionRequestedChanges
         return $clone;
     }
 
-    public function withWebhookUrls(BackendComponents $webhookUrls): self
+    public function withWebhookUrls(WebhookUrls $webhookUrls): self
     {
         $clone = clone $this;
         $clone->webhookUrls = $webhookUrls;
@@ -160,7 +157,7 @@ class OwnExtensionRequestedChanges
         }
         $webhookUrls = null;
         if (isset($input->{'webhookUrls'})) {
-            $webhookUrls = BackendComponents::buildFromInput($input->{'webhookUrls'}, validate: $validate);
+            $webhookUrls = WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
         }
 
         $obj = new self();
