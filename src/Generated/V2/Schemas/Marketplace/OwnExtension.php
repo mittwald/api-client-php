@@ -24,6 +24,12 @@ class OwnExtension
      */
     private static array $schema = [
         'properties' => [
+            'assets' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionAsset',
+                ],
+                'type' => 'array',
+            ],
             'backendComponents' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.BackendComponents',
             ],
@@ -49,7 +55,14 @@ class OwnExtension
             'disabled' => [
                 'type' => 'boolean',
             ],
+            'externalFrontends' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
+                ],
+                'type' => 'array',
+            ],
             'frontendComponents' => [
+                'deprecated' => true,
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
                 ],
@@ -92,11 +105,8 @@ class OwnExtension
                         'type' => 'array',
                     ],
                     'webhookUrls' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.BackendComponents',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
                     ],
-                ],
-                'required' => [
-
                 ],
                 'type' => 'object',
             ],
@@ -137,12 +147,16 @@ class OwnExtension
             'verified' => [
                 'type' => 'boolean',
             ],
+            'webhookUrls' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+            ],
         ],
         'required' => [
             'id',
             'contributorId',
             'name',
             'statistics',
+            'assets',
             'published',
             'verified',
             'verificationRequested',
@@ -150,6 +164,11 @@ class OwnExtension
         ],
         'type' => 'object',
     ];
+
+    /**
+     * @var ExtensionAsset[]
+     */
+    private array $assets;
 
     private ?BackendComponents $backendComponents = null;
 
@@ -172,6 +191,12 @@ class OwnExtension
 
     /**
      * @var ExternalComponent[]|null
+     */
+    private ?array $externalFrontends = null;
+
+    /**
+     * @var ExternalComponent[]|null
+     * @deprecated
      */
     private ?array $frontendComponents = null;
 
@@ -220,8 +245,14 @@ class OwnExtension
 
     private bool $verified;
 
-    public function __construct(string $contributorId, bool $functional, string $id, string $name, bool $published, ExtensionStatistics $statistics, bool $verificationRequested, bool $verified)
+    private ?WebhookUrls $webhookUrls = null;
+
+    /**
+     * @param ExtensionAsset[] $assets
+     */
+    public function __construct(array $assets, string $contributorId, bool $functional, string $id, string $name, bool $published, ExtensionStatistics $statistics, bool $verificationRequested, bool $verified)
     {
+        $this->assets = $assets;
         $this->contributorId = $contributorId;
         $this->functional = $functional;
         $this->id = $id;
@@ -230,6 +261,14 @@ class OwnExtension
         $this->statistics = $statistics;
         $this->verificationRequested = $verificationRequested;
         $this->verified = $verified;
+    }
+
+    /**
+     * @return ExtensionAsset[]
+     */
+    public function getAssets(): array
+    {
+        return $this->assets;
     }
 
     public function getBackendComponents(): ?BackendComponents
@@ -277,6 +316,15 @@ class OwnExtension
 
     /**
      * @return ExternalComponent[]|null
+     */
+    public function getExternalFrontends(): ?array
+    {
+        return $this->externalFrontends ?? null;
+    }
+
+    /**
+     * @return ExternalComponent[]|null
+     * @deprecated
      */
     public function getFrontendComponents(): ?array
     {
@@ -365,6 +413,22 @@ class OwnExtension
     public function getVerified(): bool
     {
         return $this->verified;
+    }
+
+    public function getWebhookUrls(): ?WebhookUrls
+    {
+        return $this->webhookUrls ?? null;
+    }
+
+    /**
+     * @param ExtensionAsset[] $assets
+     */
+    public function withAssets(array $assets): self
+    {
+        $clone = clone $this;
+        $clone->assets = $assets;
+
+        return $clone;
     }
 
     public function withBackendComponents(BackendComponents $backendComponents): self
@@ -515,7 +579,27 @@ class OwnExtension
     }
 
     /**
+     * @param ExternalComponent[] $externalFrontends
+     */
+    public function withExternalFrontends(array $externalFrontends): self
+    {
+        $clone = clone $this;
+        $clone->externalFrontends = $externalFrontends;
+
+        return $clone;
+    }
+
+    public function withoutExternalFrontends(): self
+    {
+        $clone = clone $this;
+        unset($clone->externalFrontends);
+
+        return $clone;
+    }
+
+    /**
      * @param ExternalComponent[] $frontendComponents
+     * @deprecated
      */
     public function withFrontendComponents(array $frontendComponents): self
     {
@@ -786,6 +870,22 @@ class OwnExtension
         return $clone;
     }
 
+    public function withWebhookUrls(WebhookUrls $webhookUrls): self
+    {
+        $clone = clone $this;
+        $clone->webhookUrls = $webhookUrls;
+
+        return $clone;
+    }
+
+    public function withoutWebhookUrls(): self
+    {
+        $clone = clone $this;
+        unset($clone->webhookUrls);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -801,6 +901,7 @@ class OwnExtension
             static::validateInput($input);
         }
 
+        $assets = array_map(fn (array|object $i): ExtensionAsset => ExtensionAsset::buildFromInput($i, validate: $validate), $input->{'assets'});
         $backendComponents = null;
         if (isset($input->{'backendComponents'})) {
             $backendComponents = BackendComponents::buildFromInput($input->{'backendComponents'}, validate: $validate);
@@ -829,6 +930,10 @@ class OwnExtension
         $disabled = null;
         if (isset($input->{'disabled'})) {
             $disabled = (bool)($input->{'disabled'});
+        }
+        $externalFrontends = null;
+        if (isset($input->{'externalFrontends'})) {
+            $externalFrontends = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'externalFrontends'});
         }
         $frontendComponents = null;
         if (isset($input->{'frontendComponents'})) {
@@ -873,8 +978,12 @@ class OwnExtension
         }
         $verificationRequested = (bool)($input->{'verificationRequested'});
         $verified = (bool)($input->{'verified'});
+        $webhookUrls = null;
+        if (isset($input->{'webhookUrls'})) {
+            $webhookUrls = WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
+        }
 
-        $obj = new self($contributorId, $functional, $id, $name, $published, $statistics, $verificationRequested, $verified);
+        $obj = new self($assets, $contributorId, $functional, $id, $name, $published, $statistics, $verificationRequested, $verified);
         $obj->backendComponents = $backendComponents;
         $obj->blocked = $blocked;
         $obj->context = $context;
@@ -882,6 +991,7 @@ class OwnExtension
         $obj->description = $description;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->disabled = $disabled;
+        $obj->externalFrontends = $externalFrontends;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
         $obj->logoRefId = $logoRefId;
@@ -891,6 +1001,7 @@ class OwnExtension
         $obj->subTitle = $subTitle;
         $obj->support = $support;
         $obj->tags = $tags;
+        $obj->webhookUrls = $webhookUrls;
         return $obj;
     }
 
@@ -902,6 +1013,7 @@ class OwnExtension
     public function toJson(): array
     {
         $output = [];
+        $output['assets'] = array_map(fn (ExtensionAsset $i): array => $i->toJson(), $this->assets);
         if (isset($this->backendComponents)) {
             $output['backendComponents'] = $this->backendComponents->toJson();
         }
@@ -923,6 +1035,9 @@ class OwnExtension
         }
         if (isset($this->disabled)) {
             $output['disabled'] = $this->disabled;
+        }
+        if (isset($this->externalFrontends)) {
+            $output['externalFrontends'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->externalFrontends);
         }
         if (isset($this->frontendComponents)) {
             $output['frontendComponents'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->frontendComponents);
@@ -958,6 +1073,9 @@ class OwnExtension
         }
         $output['verificationRequested'] = $this->verificationRequested;
         $output['verified'] = $this->verified;
+        if (isset($this->webhookUrls)) {
+            $output['webhookUrls'] = $this->webhookUrls->toJson();
+        }
 
         return $output;
     }
