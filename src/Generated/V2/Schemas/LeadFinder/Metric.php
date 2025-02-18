@@ -25,7 +25,10 @@ class Metric
     private static array $schema = [
         'properties' => [
             'category' => [
-                'type' => 'number',
+                'type' => 'string',
+            ],
+            'name' => [
+                'type' => 'string',
             ],
             'score' => [
                 'type' => 'number',
@@ -39,11 +42,14 @@ class Metric
         ],
         'required' => [
             'category',
+            'name',
         ],
         'type' => 'object',
     ];
 
-    private int|float $category;
+    private string $category;
+
+    private string $name;
 
     private int|float|null $score = null;
 
@@ -51,14 +57,20 @@ class Metric
 
     private int|float|null $value = null;
 
-    public function __construct(int|float $category)
+    public function __construct(string $category, string $name)
     {
         $this->category = $category;
+        $this->name = $name;
     }
 
-    public function getCategory(): int|float
+    public function getCategory(): string
     {
         return $this->category;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getScore(): int|float|null
@@ -76,7 +88,7 @@ class Metric
         return $this->value;
     }
 
-    public function withCategory(int|float $category): self
+    public function withCategory(string $category): self
     {
         $validator = new Validator();
         $validator->validate($category, self::$schema['properties']['category']);
@@ -86,6 +98,20 @@ class Metric
 
         $clone = clone $this;
         $clone->category = $category;
+
+        return $clone;
+    }
+
+    public function withName(string $name): self
+    {
+        $validator = new Validator();
+        $validator->validate($name, self::$schema['properties']['name']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->name = $name;
 
         return $clone;
     }
@@ -171,7 +197,8 @@ class Metric
             static::validateInput($input);
         }
 
-        $category = str_contains((string)($input->{'category'}), '.') ? (float)($input->{'category'}) : (int)($input->{'category'});
+        $category = $input->{'category'};
+        $name = $input->{'name'};
         $score = null;
         if (isset($input->{'score'})) {
             $score = str_contains((string)($input->{'score'}), '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
@@ -185,7 +212,7 @@ class Metric
             $value = str_contains((string)($input->{'value'}), '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
         }
 
-        $obj = new self($category);
+        $obj = new self($category, $name);
         $obj->score = $score;
         $obj->unit = $unit;
         $obj->value = $value;
@@ -201,6 +228,7 @@ class Metric
     {
         $output = [];
         $output['category'] = $this->category;
+        $output['name'] = $this->name;
         if (isset($this->score)) {
             $output['score'] = $this->score;
         }

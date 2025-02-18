@@ -31,10 +31,6 @@ class Contact
             'company' => [
                 'type' => 'string',
             ],
-            'emailAddress' => [
-                'format' => 'email',
-                'type' => 'string',
-            ],
             'phoneNumbers' => [
                 'items' => [
                     'type' => 'string',
@@ -52,8 +48,6 @@ class Contact
     private Address $address;
 
     private string $company;
-
-    private ?string $emailAddress = null;
 
     /**
      * @var string[]|null
@@ -74,11 +68,6 @@ class Contact
     public function getCompany(): string
     {
         return $this->company;
-    }
-
-    public function getEmailAddress(): ?string
-    {
-        return $this->emailAddress ?? null;
     }
 
     /**
@@ -107,28 +96,6 @@ class Contact
 
         $clone = clone $this;
         $clone->company = $company;
-
-        return $clone;
-    }
-
-    public function withEmailAddress(string $emailAddress): self
-    {
-        $validator = new Validator();
-        $validator->validate($emailAddress, self::$schema['properties']['emailAddress']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->emailAddress = $emailAddress;
-
-        return $clone;
-    }
-
-    public function withoutEmailAddress(): self
-    {
-        $clone = clone $this;
-        unset($clone->emailAddress);
 
         return $clone;
     }
@@ -175,17 +142,12 @@ class Contact
 
         $address = Address::buildFromInput($input->{'address'}, validate: $validate);
         $company = $input->{'company'};
-        $emailAddress = null;
-        if (isset($input->{'emailAddress'})) {
-            $emailAddress = $input->{'emailAddress'};
-        }
         $phoneNumbers = null;
         if (isset($input->{'phoneNumbers'})) {
             $phoneNumbers = $input->{'phoneNumbers'};
         }
 
         $obj = new self($address, $company);
-        $obj->emailAddress = $emailAddress;
         $obj->phoneNumbers = $phoneNumbers;
         return $obj;
     }
@@ -200,9 +162,6 @@ class Contact
         $output = [];
         $output['address'] = $this->address->toJson();
         $output['company'] = $this->company;
-        if (isset($this->emailAddress)) {
-            $output['emailAddress'] = $this->emailAddress;
-        }
         if (isset($this->phoneNumbers)) {
             $output['phoneNumbers'] = $this->phoneNumbers;
         }

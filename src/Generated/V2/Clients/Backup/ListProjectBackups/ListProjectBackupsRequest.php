@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\BackupSortOrder;
 
 class ListProjectBackupsRequest
 {
@@ -24,6 +25,9 @@ class ListProjectBackupsRequest
             'withExportsOnly' => [
                 'type' => 'boolean',
             ],
+            'sortOrder' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.BackupSortOrder',
+            ],
         ],
         'required' => [
             'projectId',
@@ -33,6 +37,8 @@ class ListProjectBackupsRequest
     private string $projectId;
 
     private ?bool $withExportsOnly = null;
+
+    private ?BackupSortOrder $sortOrder = null;
 
     private array $headers = [
 
@@ -51,6 +57,11 @@ class ListProjectBackupsRequest
     public function getWithExportsOnly(): ?bool
     {
         return $this->withExportsOnly ?? null;
+    }
+
+    public function getSortOrder(): ?BackupSortOrder
+    {
+        return $this->sortOrder ?? null;
     }
 
     public function withProjectId(string $projectId): self
@@ -89,6 +100,22 @@ class ListProjectBackupsRequest
         return $clone;
     }
 
+    public function withSortOrder(BackupSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -109,9 +136,14 @@ class ListProjectBackupsRequest
         if (isset($input->{'withExportsOnly'})) {
             $withExportsOnly = (bool)($input->{'withExportsOnly'});
         }
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = BackupSortOrder::from($input->{'sortOrder'});
+        }
 
         $obj = new self($projectId);
         $obj->withExportsOnly = $withExportsOnly;
+        $obj->sortOrder = $sortOrder;
         return $obj;
     }
 
@@ -126,6 +158,9 @@ class ListProjectBackupsRequest
         $output['projectId'] = $this->projectId;
         if (isset($this->withExportsOnly)) {
             $output['withExportsOnly'] = $this->withExportsOnly;
+        }
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = $this->sortOrder->value;
         }
 
         return $output;
@@ -190,6 +225,9 @@ class ListProjectBackupsRequest
         $query = [];
         if (isset($mapped['withExportsOnly'])) {
             $query['withExportsOnly'] = $mapped['withExportsOnly'];
+        }
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
         }
         return [
             'query' => $query,

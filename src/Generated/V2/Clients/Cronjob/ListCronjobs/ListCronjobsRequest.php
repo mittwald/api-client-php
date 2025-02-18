@@ -22,17 +22,16 @@ class ListCronjobsRequest
                 'type' => 'string',
             ],
             'limit' => [
+                'minimum' => 0,
                 'type' => 'integer',
-                'default' => 1000,
-                'minimum' => 1,
             ],
             'skip' => [
+                'minimum' => 0,
                 'type' => 'integer',
-                'default' => 0,
             ],
             'page' => [
+                'minimum' => 0,
                 'type' => 'integer',
-                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -42,9 +41,9 @@ class ListCronjobsRequest
 
     private string $projectId;
 
-    private int $limit = 1000;
+    private ?int $limit = null;
 
-    private int $skip = 0;
+    private ?int $skip = null;
 
     private ?int $page = null;
 
@@ -62,14 +61,14 @@ class ListCronjobsRequest
         return $this->projectId;
     }
 
-    public function getLimit(): int
+    public function getLimit(): ?int
     {
-        return $this->limit;
+        return $this->limit ?? null;
     }
 
-    public function getSkip(): int
+    public function getSkip(): ?int
     {
-        return $this->skip;
+        return $this->skip ?? null;
     }
 
     public function getPage(): ?int
@@ -105,6 +104,14 @@ class ListCronjobsRequest
         return $clone;
     }
 
+    public function withoutLimit(): self
+    {
+        $clone = clone $this;
+        unset($clone->limit);
+
+        return $clone;
+    }
+
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -115,6 +122,14 @@ class ListCronjobsRequest
 
         $clone = clone $this;
         $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withoutSkip(): self
+    {
+        $clone = clone $this;
+        unset($clone->skip);
 
         return $clone;
     }
@@ -157,11 +172,11 @@ class ListCronjobsRequest
         }
 
         $projectId = $input->{'projectId'};
-        $limit = 1000;
+        $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = 0;
+        $skip = null;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
@@ -186,8 +201,12 @@ class ListCronjobsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        $output['limit'] = $this->limit;
-        $output['skip'] = $this->skip;
+        if (isset($this->limit)) {
+            $output['limit'] = $this->limit;
+        }
+        if (isset($this->skip)) {
+            $output['skip'] = $this->skip;
+        }
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
