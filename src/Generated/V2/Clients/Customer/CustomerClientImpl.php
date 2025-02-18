@@ -758,6 +758,8 @@ class CustomerClientImpl implements CustomerClient
     /**
      * Leave a Customer.
      *
+     * Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/deprecated-customer-leave-customer
      * @throws GuzzleException
      * @throws UnexpectedResponseException

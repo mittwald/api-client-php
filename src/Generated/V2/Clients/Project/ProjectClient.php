@@ -76,6 +76,8 @@ interface ProjectClient
     /**
      * Leave a Project.
      *
+     * Deprecated by `DELETE /v2/project-memberships/{projectMembershipId}`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Project/operation/deprecated-project-leave-project
      * @throws GuzzleException
      * @throws UnexpectedResponseException

@@ -20,6 +20,8 @@ class GetFileUploadTypeRulesRequest
             'fileUploadType' => [
                 'enum' => [
                     'avatar',
+                    'extensionAssetImage',
+                    'extensionAssetVideo',
                     'conversation',
                 ],
                 'example' => 'avatar',
