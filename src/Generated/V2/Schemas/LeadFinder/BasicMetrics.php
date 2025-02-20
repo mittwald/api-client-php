@@ -25,6 +25,9 @@ class BasicMetrics
     private static array $schema = [
         'properties' => [
             'co2' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
             'desktop' => [
@@ -38,31 +41,27 @@ class BasicMetrics
             ],
         ],
         'required' => [
-            'timeToFirstByteMs',
-            'co2',
             'desktop',
             'mobile',
         ],
         'type' => 'object',
     ];
 
-    private int|float $co2;
+    private int|float|null $co2 = null;
 
     private Lighthouse $desktop;
 
     private Lighthouse $mobile;
 
-    private int|float $timeToFirstByteMs;
+    private int|float|null $timeToFirstByteMs = null;
 
-    public function __construct(int|float $co2, Lighthouse $desktop, Lighthouse $mobile, int|float $timeToFirstByteMs)
+    public function __construct(Lighthouse $desktop, Lighthouse $mobile)
     {
-        $this->co2 = $co2;
         $this->desktop = $desktop;
         $this->mobile = $mobile;
-        $this->timeToFirstByteMs = $timeToFirstByteMs;
     }
 
-    public function getCo2(): int|float
+    public function getCo2(): int|float|null
     {
         return $this->co2;
     }
@@ -77,7 +76,7 @@ class BasicMetrics
         return $this->mobile;
     }
 
-    public function getTimeToFirstByteMs(): int|float
+    public function getTimeToFirstByteMs(): int|float|null
     {
         return $this->timeToFirstByteMs;
     }
@@ -92,6 +91,14 @@ class BasicMetrics
 
         $clone = clone $this;
         $clone->co2 = $co2;
+
+        return $clone;
+    }
+
+    public function withoutCo2(): self
+    {
+        $clone = clone $this;
+        unset($clone->co2);
 
         return $clone;
     }
@@ -126,6 +133,14 @@ class BasicMetrics
         return $clone;
     }
 
+    public function withoutTimeToFirstByteMs(): self
+    {
+        $clone = clone $this;
+        unset($clone->timeToFirstByteMs);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -141,13 +156,20 @@ class BasicMetrics
             static::validateInput($input);
         }
 
-        $co2 = str_contains((string)($input->{'co2'}), '.') ? (float)($input->{'co2'}) : (int)($input->{'co2'});
+        $co2 = null;
+        if (isset($input->{'co2'})) {
+            $co2 = str_contains((string)($input->{'co2'}), '.') ? (float)($input->{'co2'}) : (int)($input->{'co2'});
+        }
         $desktop = Lighthouse::buildFromInput($input->{'desktop'}, validate: $validate);
         $mobile = Lighthouse::buildFromInput($input->{'mobile'}, validate: $validate);
-        $timeToFirstByteMs = str_contains((string)($input->{'timeToFirstByteMs'}), '.') ? (float)($input->{'timeToFirstByteMs'}) : (int)($input->{'timeToFirstByteMs'});
+        $timeToFirstByteMs = null;
+        if (isset($input->{'timeToFirstByteMs'})) {
+            $timeToFirstByteMs = str_contains((string)($input->{'timeToFirstByteMs'}), '.') ? (float)($input->{'timeToFirstByteMs'}) : (int)($input->{'timeToFirstByteMs'});
+        }
 
-        $obj = new self($co2, $desktop, $mobile, $timeToFirstByteMs);
-
+        $obj = new self($desktop, $mobile);
+        $obj->co2 = $co2;
+        $obj->timeToFirstByteMs = $timeToFirstByteMs;
         return $obj;
     }
 
@@ -159,10 +181,14 @@ class BasicMetrics
     public function toJson(): array
     {
         $output = [];
-        $output['co2'] = $this->co2;
+        if (isset($this->co2)) {
+            $output['co2'] = $this->co2;
+        }
         $output['desktop'] = $this->desktop->toJson();
         $output['mobile'] = $this->mobile->toJson();
-        $output['timeToFirstByteMs'] = $this->timeToFirstByteMs;
+        if (isset($this->timeToFirstByteMs)) {
+            $output['timeToFirstByteMs'] = $this->timeToFirstByteMs;
+        }
 
         return $output;
     }

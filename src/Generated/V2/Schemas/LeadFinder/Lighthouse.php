@@ -25,59 +25,64 @@ class Lighthouse
     private static array $schema = [
         'properties' => [
             'accessibility' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
             'bestPractice' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
             'performance' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
             'seo' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
-        ],
-        'required' => [
-            'performance',
-            'bestPractice',
-            'accessibility',
-            'seo',
         ],
         'type' => 'object',
     ];
 
-    private int|float $accessibility;
+    private int|float|null $accessibility = null;
 
-    private int|float $bestPractice;
+    private int|float|null $bestPractice = null;
 
-    private int|float $performance;
+    private int|float|null $performance = null;
 
-    private int|float $seo;
+    private int|float|null $seo = null;
 
-    public function __construct(int|float $accessibility, int|float $bestPractice, int|float $performance, int|float $seo)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->accessibility = $accessibility;
-        $this->bestPractice = $bestPractice;
-        $this->performance = $performance;
-        $this->seo = $seo;
     }
 
-    public function getAccessibility(): int|float
+    public function getAccessibility(): int|float|null
     {
         return $this->accessibility;
     }
 
-    public function getBestPractice(): int|float
+    public function getBestPractice(): int|float|null
     {
         return $this->bestPractice;
     }
 
-    public function getPerformance(): int|float
+    public function getPerformance(): int|float|null
     {
         return $this->performance;
     }
 
-    public function getSeo(): int|float
+    public function getSeo(): int|float|null
     {
         return $this->seo;
     }
@@ -96,6 +101,14 @@ class Lighthouse
         return $clone;
     }
 
+    public function withoutAccessibility(): self
+    {
+        $clone = clone $this;
+        unset($clone->accessibility);
+
+        return $clone;
+    }
+
     public function withBestPractice(int|float $bestPractice): self
     {
         $validator = new Validator();
@@ -106,6 +119,14 @@ class Lighthouse
 
         $clone = clone $this;
         $clone->bestPractice = $bestPractice;
+
+        return $clone;
+    }
+
+    public function withoutBestPractice(): self
+    {
+        $clone = clone $this;
+        unset($clone->bestPractice);
 
         return $clone;
     }
@@ -124,6 +145,14 @@ class Lighthouse
         return $clone;
     }
 
+    public function withoutPerformance(): self
+    {
+        $clone = clone $this;
+        unset($clone->performance);
+
+        return $clone;
+    }
+
     public function withSeo(int|float $seo): self
     {
         $validator = new Validator();
@@ -134,6 +163,14 @@ class Lighthouse
 
         $clone = clone $this;
         $clone->seo = $seo;
+
+        return $clone;
+    }
+
+    public function withoutSeo(): self
+    {
+        $clone = clone $this;
+        unset($clone->seo);
 
         return $clone;
     }
@@ -153,13 +190,28 @@ class Lighthouse
             static::validateInput($input);
         }
 
-        $accessibility = str_contains((string)($input->{'accessibility'}), '.') ? (float)($input->{'accessibility'}) : (int)($input->{'accessibility'});
-        $bestPractice = str_contains((string)($input->{'bestPractice'}), '.') ? (float)($input->{'bestPractice'}) : (int)($input->{'bestPractice'});
-        $performance = str_contains((string)($input->{'performance'}), '.') ? (float)($input->{'performance'}) : (int)($input->{'performance'});
-        $seo = str_contains((string)($input->{'seo'}), '.') ? (float)($input->{'seo'}) : (int)($input->{'seo'});
+        $accessibility = null;
+        if (isset($input->{'accessibility'})) {
+            $accessibility = str_contains((string)($input->{'accessibility'}), '.') ? (float)($input->{'accessibility'}) : (int)($input->{'accessibility'});
+        }
+        $bestPractice = null;
+        if (isset($input->{'bestPractice'})) {
+            $bestPractice = str_contains((string)($input->{'bestPractice'}), '.') ? (float)($input->{'bestPractice'}) : (int)($input->{'bestPractice'});
+        }
+        $performance = null;
+        if (isset($input->{'performance'})) {
+            $performance = str_contains((string)($input->{'performance'}), '.') ? (float)($input->{'performance'}) : (int)($input->{'performance'});
+        }
+        $seo = null;
+        if (isset($input->{'seo'})) {
+            $seo = str_contains((string)($input->{'seo'}), '.') ? (float)($input->{'seo'}) : (int)($input->{'seo'});
+        }
 
-        $obj = new self($accessibility, $bestPractice, $performance, $seo);
-
+        $obj = new self();
+        $obj->accessibility = $accessibility;
+        $obj->bestPractice = $bestPractice;
+        $obj->performance = $performance;
+        $obj->seo = $seo;
         return $obj;
     }
 
@@ -171,10 +223,18 @@ class Lighthouse
     public function toJson(): array
     {
         $output = [];
-        $output['accessibility'] = $this->accessibility;
-        $output['bestPractice'] = $this->bestPractice;
-        $output['performance'] = $this->performance;
-        $output['seo'] = $this->seo;
+        if (isset($this->accessibility)) {
+            $output['accessibility'] = $this->accessibility;
+        }
+        if (isset($this->bestPractice)) {
+            $output['bestPractice'] = $this->bestPractice;
+        }
+        if (isset($this->performance)) {
+            $output['performance'] = $this->performance;
+        }
+        if (isset($this->seo)) {
+            $output['seo'] = $this->seo;
+        }
 
         return $output;
     }

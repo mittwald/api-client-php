@@ -46,6 +46,9 @@ class Lead
                 '$ref' => '#/components/schemas/de.mittwald.v1.lead-finder.BasicMetrics',
             ],
             'score' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
             'screenshot' => [

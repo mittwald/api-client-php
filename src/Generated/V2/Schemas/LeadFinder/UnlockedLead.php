@@ -60,6 +60,9 @@ class UnlockedLead
                 'type' => 'string',
             ],
             'score' => [
+                'format' => 'float',
+                'maximum' => 1,
+                'minimum' => 0,
                 'type' => 'number',
             ],
             'screenshot' => [
