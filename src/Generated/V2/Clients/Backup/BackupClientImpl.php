@@ -54,10 +54,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetP
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetProjectBackupSchedule\GetProjectBackupScheduleTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetSuccessfulBackupListProjectBackups\GetSuccessfulBackupListProjectBackupsDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetSuccessfulBackupListProjectBackups\GetSuccessfulBackupListProjectBackupsOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetSuccessfulBackupListProjectBackups\GetSuccessfulBackupListProjectBackupsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Backup\GetSuccessfulBackupListProjectBackups\GetSuccessfulBackupListProjectBackupsTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups\ListProjectBackupsRequest;
@@ -290,28 +286,6 @@ class BackupClientImpl implements BackupClient
             404 => GetProjectBackupScheduleNotFoundResponse::fromResponse($httpResponse),
             429 => GetProjectBackupScheduleTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetProjectBackupScheduleDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * List projects with last successful backups older than 24 hours or no backups at all.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Backup/operation/backup-get-successful-backup-list-project-backups
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetSuccessfulBackupListProjectBackupsRequest $request An object representing the request for this operation
-     * @return GetSuccessfulBackupListProjectBackupsOKResponse OK
-     */
-    public function getSuccessfulBackupListProjectBackups(GetSuccessfulBackupListProjectBackupsRequest $request): GetSuccessfulBackupListProjectBackupsOKResponse
-    {
-        $httpRequest = new Request(GetSuccessfulBackupListProjectBackupsRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetSuccessfulBackupListProjectBackupsOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            429 => GetSuccessfulBackupListProjectBackupsTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetSuccessfulBackupListProjectBackupsDefaultResponse::fromResponse($httpResponse),
         });
     }
 

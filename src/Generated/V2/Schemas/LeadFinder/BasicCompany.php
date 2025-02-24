@@ -38,9 +38,6 @@ class BasicCompany
             ],
         ],
         'required' => [
-            'employeeCount',
-            'foundingYear',
-            'salesVolume',
             'city',
         ],
         'type' => 'object',
@@ -48,18 +45,15 @@ class BasicCompany
 
     private string $city;
 
-    private int|float $employeeCount;
+    private int|float|null $employeeCount = null;
 
-    private int|float $foundingYear;
+    private int|float|null $foundingYear = null;
 
-    private int|float $salesVolume;
+    private int|float|null $salesVolume = null;
 
-    public function __construct(string $city, int|float $employeeCount, int|float $foundingYear, int|float $salesVolume)
+    public function __construct(string $city)
     {
         $this->city = $city;
-        $this->employeeCount = $employeeCount;
-        $this->foundingYear = $foundingYear;
-        $this->salesVolume = $salesVolume;
     }
 
     public function getCity(): string
@@ -67,17 +61,17 @@ class BasicCompany
         return $this->city;
     }
 
-    public function getEmployeeCount(): int|float
+    public function getEmployeeCount(): int|float|null
     {
         return $this->employeeCount;
     }
 
-    public function getFoundingYear(): int|float
+    public function getFoundingYear(): int|float|null
     {
         return $this->foundingYear;
     }
 
-    public function getSalesVolume(): int|float
+    public function getSalesVolume(): int|float|null
     {
         return $this->salesVolume;
     }
@@ -110,6 +104,14 @@ class BasicCompany
         return $clone;
     }
 
+    public function withoutEmployeeCount(): self
+    {
+        $clone = clone $this;
+        unset($clone->employeeCount);
+
+        return $clone;
+    }
+
     public function withFoundingYear(int|float $foundingYear): self
     {
         $validator = new Validator();
@@ -124,6 +126,14 @@ class BasicCompany
         return $clone;
     }
 
+    public function withoutFoundingYear(): self
+    {
+        $clone = clone $this;
+        unset($clone->foundingYear);
+
+        return $clone;
+    }
+
     public function withSalesVolume(int|float $salesVolume): self
     {
         $validator = new Validator();
@@ -134,6 +144,14 @@ class BasicCompany
 
         $clone = clone $this;
         $clone->salesVolume = $salesVolume;
+
+        return $clone;
+    }
+
+    public function withoutSalesVolume(): self
+    {
+        $clone = clone $this;
+        unset($clone->salesVolume);
 
         return $clone;
     }
@@ -154,12 +172,23 @@ class BasicCompany
         }
 
         $city = $input->{'city'};
-        $employeeCount = str_contains((string)($input->{'employeeCount'}), '.') ? (float)($input->{'employeeCount'}) : (int)($input->{'employeeCount'});
-        $foundingYear = str_contains((string)($input->{'foundingYear'}), '.') ? (float)($input->{'foundingYear'}) : (int)($input->{'foundingYear'});
-        $salesVolume = str_contains((string)($input->{'salesVolume'}), '.') ? (float)($input->{'salesVolume'}) : (int)($input->{'salesVolume'});
+        $employeeCount = null;
+        if (isset($input->{'employeeCount'})) {
+            $employeeCount = str_contains((string)($input->{'employeeCount'}), '.') ? (float)($input->{'employeeCount'}) : (int)($input->{'employeeCount'});
+        }
+        $foundingYear = null;
+        if (isset($input->{'foundingYear'})) {
+            $foundingYear = str_contains((string)($input->{'foundingYear'}), '.') ? (float)($input->{'foundingYear'}) : (int)($input->{'foundingYear'});
+        }
+        $salesVolume = null;
+        if (isset($input->{'salesVolume'})) {
+            $salesVolume = str_contains((string)($input->{'salesVolume'}), '.') ? (float)($input->{'salesVolume'}) : (int)($input->{'salesVolume'});
+        }
 
-        $obj = new self($city, $employeeCount, $foundingYear, $salesVolume);
-
+        $obj = new self($city);
+        $obj->employeeCount = $employeeCount;
+        $obj->foundingYear = $foundingYear;
+        $obj->salesVolume = $salesVolume;
         return $obj;
     }
 
@@ -172,9 +201,15 @@ class BasicCompany
     {
         $output = [];
         $output['city'] = $this->city;
-        $output['employeeCount'] = $this->employeeCount;
-        $output['foundingYear'] = $this->foundingYear;
-        $output['salesVolume'] = $this->salesVolume;
+        if (isset($this->employeeCount)) {
+            $output['employeeCount'] = $this->employeeCount;
+        }
+        if (isset($this->foundingYear)) {
+            $output['foundingYear'] = $this->foundingYear;
+        }
+        if (isset($this->salesVolume)) {
+            $output['salesVolume'] = $this->salesVolume;
+        }
 
         return $output;
     }
