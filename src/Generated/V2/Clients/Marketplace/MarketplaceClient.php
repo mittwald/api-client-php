@@ -8,6 +8,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
@@ -83,6 +85,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtension
 interface MarketplaceClient
 {
     /**
+     * Get the Stripe Billing Portal Link for a Customer
+     *
+     * Get the Stripe Billing Portal Link for a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-customer-billing-portal-link
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetCustomerBillingPortalLinkRequest $request An object representing the request for this operation
+     * @return ContributorGetCustomerBillingPortalLinkOKResponse The generated link to the Stripe Billing Portal
+     */
+    public function contributorGetCustomerBillingPortalLink(ContributorGetCustomerBillingPortalLinkRequest $request): ContributorGetCustomerBillingPortalLinkOKResponse;
+    /**
      * Get the Stripe Dashboard Link for a Contributor.
      *
      * Get the Stripe Dashboard Link for a Contributor.
@@ -91,7 +105,7 @@ interface MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ContributorGetLoginLinkRequest $request An object representing the request for this operation
-     * @return ContributorGetLoginLinkOKResponse The generated link to the stripe dashboard
+     * @return ContributorGetLoginLinkOKResponse The generated link to the Stripe dashboard
      */
     public function contributorGetLoginLink(ContributorGetLoginLinkRequest $request): ContributorGetLoginLinkOKResponse;
     /**

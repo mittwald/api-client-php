@@ -10,6 +10,12 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkNotFoundResponse;
@@ -190,6 +196,32 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Get the Stripe Billing Portal Link for a Customer
+     *
+     * Get the Stripe Billing Portal Link for a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-customer-billing-portal-link
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetCustomerBillingPortalLinkRequest $request An object representing the request for this operation
+     * @return ContributorGetCustomerBillingPortalLinkOKResponse The generated link to the Stripe Billing Portal
+     */
+    public function contributorGetCustomerBillingPortalLink(ContributorGetCustomerBillingPortalLinkRequest $request): ContributorGetCustomerBillingPortalLinkOKResponse
+    {
+        $httpRequest = new Request(ContributorGetCustomerBillingPortalLinkRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorGetCustomerBillingPortalLinkOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorGetCustomerBillingPortalLinkBadRequestResponse::fromResponse($httpResponse),
+            404 => ContributorGetCustomerBillingPortalLinkNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorGetCustomerBillingPortalLinkTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorGetCustomerBillingPortalLinkDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get the Stripe Dashboard Link for a Contributor.
      *
      * Get the Stripe Dashboard Link for a Contributor.
@@ -198,7 +230,7 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ContributorGetLoginLinkRequest $request An object representing the request for this operation
-     * @return ContributorGetLoginLinkOKResponse The generated link to the stripe dashboard
+     * @return ContributorGetLoginLinkOKResponse The generated link to the Stripe dashboard
      */
     public function contributorGetLoginLink(ContributorGetLoginLinkRequest $request): ContributorGetLoginLinkOKResponse
     {
