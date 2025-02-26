@@ -50,8 +50,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDns
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedNoContentResponse;
@@ -398,18 +396,6 @@ interface DomainClient
      * @return DnsGetDnsZoneOKResponse The requested DNSZone.
      */
     public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZoneOKResponse;
-    /**
-     * Get a zone file for a DNSZone.
-     *
-     * Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-zone-file
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param DnsGetZoneFileRequest $request An object representing the request for this operation
-     * @return DnsGetZoneFileOKResponse Returns the zone file.
-     */
-    public function dnsGetZoneFile(DnsGetZoneFileRequest $request): DnsGetZoneFileOKResponse;
     /**
      * List DNSZones belonging to a Project.
      *
