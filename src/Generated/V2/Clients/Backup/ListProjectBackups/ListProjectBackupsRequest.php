@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Backup\ListProjectBackups;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Backup\BackupSortOrder;
 
 class ListProjectBackupsRequest
 {
@@ -21,6 +22,12 @@ class ListProjectBackupsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'withExportsOnly' => [
+                'type' => 'boolean',
+            ],
+            'sortOrder' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.BackupSortOrder',
+            ],
         ],
         'required' => [
             'projectId',
@@ -28,6 +35,10 @@ class ListProjectBackupsRequest
     ];
 
     private string $projectId;
+
+    private ?bool $withExportsOnly = null;
+
+    private ?BackupSortOrder $sortOrder = null;
 
     private array $headers = [
 
@@ -43,6 +54,16 @@ class ListProjectBackupsRequest
         return $this->projectId;
     }
 
+    public function getWithExportsOnly(): ?bool
+    {
+        return $this->withExportsOnly ?? null;
+    }
+
+    public function getSortOrder(): ?BackupSortOrder
+    {
+        return $this->sortOrder ?? null;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
@@ -53,6 +74,44 @@ class ListProjectBackupsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withWithExportsOnly(bool $withExportsOnly): self
+    {
+        $validator = new Validator();
+        $validator->validate($withExportsOnly, self::$schema['properties']['withExportsOnly']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->withExportsOnly = $withExportsOnly;
+
+        return $clone;
+    }
+
+    public function withoutWithExportsOnly(): self
+    {
+        $clone = clone $this;
+        unset($clone->withExportsOnly);
+
+        return $clone;
+    }
+
+    public function withSortOrder(BackupSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
 
         return $clone;
     }
@@ -73,9 +132,18 @@ class ListProjectBackupsRequest
         }
 
         $projectId = $input->{'projectId'};
+        $withExportsOnly = null;
+        if (isset($input->{'withExportsOnly'})) {
+            $withExportsOnly = (bool)($input->{'withExportsOnly'});
+        }
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = BackupSortOrder::from($input->{'sortOrder'});
+        }
 
         $obj = new self($projectId);
-
+        $obj->withExportsOnly = $withExportsOnly;
+        $obj->sortOrder = $sortOrder;
         return $obj;
     }
 
@@ -88,6 +156,12 @@ class ListProjectBackupsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->withExportsOnly)) {
+            $output['withExportsOnly'] = $this->withExportsOnly;
+        }
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = $this->sortOrder->value;
+        }
 
         return $output;
     }
@@ -149,6 +223,12 @@ class ListProjectBackupsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['withExportsOnly'])) {
+            $query['withExportsOnly'] = $mapped['withExportsOnly'];
+        }
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,
