@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListExecutions;
 use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Cronjob\CronjobExecutionSortOrder;
 
 class ListExecutionsRequest
 {
@@ -46,6 +47,13 @@ class ListExecutionsRequest
                 'example' => 'Complete',
                 'type' => 'string',
             ],
+            'triggeredByUser' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'sortOrder' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobExecutionSortOrder',
+            ],
         ],
         'required' => [
             'cronjobId',
@@ -65,6 +73,10 @@ class ListExecutionsRequest
     private ?DateTime $until = null;
 
     private ?string $status = null;
+
+    private ?string $triggeredByUser = null;
+
+    private ?CronjobExecutionSortOrder $sortOrder = null;
 
     private array $headers = [
 
@@ -108,6 +120,16 @@ class ListExecutionsRequest
     public function getStatus(): ?string
     {
         return $this->status ?? null;
+    }
+
+    public function getTriggeredByUser(): ?string
+    {
+        return $this->triggeredByUser ?? null;
+    }
+
+    public function getSortOrder(): ?CronjobExecutionSortOrder
+    {
+        return $this->sortOrder ?? null;
     }
 
     public function withCronjobId(string $cronjobId): self
@@ -244,6 +266,44 @@ class ListExecutionsRequest
         return $clone;
     }
 
+    public function withTriggeredByUser(string $triggeredByUser): self
+    {
+        $validator = new Validator();
+        $validator->validate($triggeredByUser, self::$schema['properties']['triggeredByUser']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->triggeredByUser = $triggeredByUser;
+
+        return $clone;
+    }
+
+    public function withoutTriggeredByUser(): self
+    {
+        $clone = clone $this;
+        unset($clone->triggeredByUser);
+
+        return $clone;
+    }
+
+    public function withSortOrder(CronjobExecutionSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
+
+        return $clone;
+    }
+
     /**
      * Builds a new instance from an input array
      *
@@ -284,6 +344,14 @@ class ListExecutionsRequest
         if (isset($input->{'status'})) {
             $status = $input->{'status'};
         }
+        $triggeredByUser = null;
+        if (isset($input->{'triggeredByUser'})) {
+            $triggeredByUser = $input->{'triggeredByUser'};
+        }
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = CronjobExecutionSortOrder::from($input->{'sortOrder'});
+        }
 
         $obj = new self($cronjobId);
         $obj->limit = $limit;
@@ -292,6 +360,8 @@ class ListExecutionsRequest
         $obj->since = $since;
         $obj->until = $until;
         $obj->status = $status;
+        $obj->triggeredByUser = $triggeredByUser;
+        $obj->sortOrder = $sortOrder;
         return $obj;
     }
 
@@ -321,6 +391,12 @@ class ListExecutionsRequest
         }
         if (isset($this->status)) {
             $output['status'] = $this->status;
+        }
+        if (isset($this->triggeredByUser)) {
+            $output['triggeredByUser'] = $this->triggeredByUser;
+        }
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = $this->sortOrder->value;
         }
 
         return $output;
@@ -406,6 +482,12 @@ class ListExecutionsRequest
         }
         if (isset($mapped['status'])) {
             $query['status'] = $mapped['status'];
+        }
+        if (isset($mapped['triggeredByUser'])) {
+            $query['triggeredByUser'] = $mapped['triggeredByUser'];
+        }
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
         }
         return [
             'query' => $query,
