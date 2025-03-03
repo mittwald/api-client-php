@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkOKResponse;
@@ -16,10 +15,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretF
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationNoContentResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessRequest;
@@ -27,7 +22,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
@@ -43,8 +37,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
@@ -55,15 +47,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingOKResponse;
@@ -129,26 +112,6 @@ interface MarketplaceClient
      */
     public function extensionAuthenticateInstance(ExtensionAuthenticateInstanceRequest $request): ExtensionAuthenticateInstanceCreatedResponse;
     /**
-     * Cancel the verification process of an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-cancel-extension-verification
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionCancelExtensionVerificationRequest $request An object representing the request for this operation
-     * @return ExtensionCancelExtensionVerificationNoContentResponse The verification has been cancelled.
-     */
-    public function extensionCancelExtensionVerification(ExtensionCancelExtensionVerificationRequest $request): ExtensionCancelExtensionVerificationNoContentResponse;
-    /**
-     * Change the context of an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionChangeContextRequest $request An object representing the request for this operation
-     * @return ExtensionChangeContextOKResponse The Extension context-change has been requested.
-     */
-    public function extensionChangeContext(ExtensionChangeContextRequest $request): ExtensionChangeContextOKResponse;
-    /**
      * Consent to extension scopes.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-consent-to-extension-scopes
@@ -190,18 +153,6 @@ interface MarketplaceClient
      * @return ExtensionCreateRetrievalKeyOKResponse An access token retrieval key. This key can be used to retrieve a scoped access token from an external application.
      */
     public function extensionCreateRetrievalKey(ExtensionCreateRetrievalKeyRequest $request): ExtensionCreateRetrievalKeyOKResponse;
-    /**
-     * Delete an extension.
-     *
-     * This action deletes all ExtensionInstances and afterwards the Extension itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
-     * @return EmptyResponse The extension will be removed asynchronously
-     */
-    public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse;
     /**
      * Delete an ExtensionInstance.
      *
@@ -293,16 +244,6 @@ interface MarketplaceClient
      */
     public function extensionGetExtensionInstanceForProject(ExtensionGetExtensionInstanceForProjectRequest $request): ExtensionGetExtensionInstanceForProjectOKResponse;
     /**
-     * Get Extension of own contributor.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-own-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionGetOwnExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionGetOwnExtensionOKResponse Get your own extension.
-     */
-    public function extensionGetOwnExtension(ExtensionGetOwnExtensionRequest $request): ExtensionGetOwnExtensionOKResponse;
-    /**
      * Get the public key to verify the webhook signature.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-public-key
@@ -352,56 +293,6 @@ interface MarketplaceClient
      * @return ExtensionListOwnExtensionsOKResponse A list of extensions of the contributor.
      */
     public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse;
-    /**
-     * Patch Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-patch-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionPatchExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionPatchExtensionOKResponse The extension has been patched.
-     */
-    public function extensionPatchExtension(ExtensionPatchExtensionRequest $request): ExtensionPatchExtensionOKResponse;
-    /**
-     * Register an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-register-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRegisterExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
-     */
-    public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse;
-    /**
-     * Remove the logo of an extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-remove-logo
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRemoveLogoRequest $request An object representing the request for this operation
-     * @return EmptyResponse The Logo has been removed.
-     */
-    public function extensionRemoveLogo(ExtensionRemoveLogoRequest $request): EmptyResponse;
-    /**
-     * Start the verification process of an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-extension-verification
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRequestExtensionVerificationRequest $request An object representing the request for this operation
-     * @return ExtensionRequestExtensionVerificationNoContentResponse The verification has been requested.
-     */
-    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): ExtensionRequestExtensionVerificationNoContentResponse;
-    /**
-     * Add a logo to an extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-logo-upload
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRequestLogoUploadRequest $request An object representing the request for this operation
-     * @return ExtensionRequestLogoUploadOKResponse The Upload of a logo for the extension has been requested.
-     */
-    public function extensionRequestLogoUpload(ExtensionRequestLogoUploadRequest $request): ExtensionRequestLogoUploadOKResponse;
     /**
      * Update or Create Contract for existing Extension Instances.
      *

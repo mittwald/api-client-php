@@ -48,8 +48,7 @@ class ListExecutionsRequest
                 'type' => 'string',
             ],
             'triggeredByUser' => [
-                'format' => 'uuid',
-                'type' => 'string',
+                'type' => 'boolean',
             ],
             'sortOrder' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.cronjob.CronjobExecutionSortOrder',
@@ -74,7 +73,7 @@ class ListExecutionsRequest
 
     private ?string $status = null;
 
-    private ?string $triggeredByUser = null;
+    private ?bool $triggeredByUser = null;
 
     private ?CronjobExecutionSortOrder $sortOrder = null;
 
@@ -122,7 +121,7 @@ class ListExecutionsRequest
         return $this->status ?? null;
     }
 
-    public function getTriggeredByUser(): ?string
+    public function getTriggeredByUser(): ?bool
     {
         return $this->triggeredByUser ?? null;
     }
@@ -266,7 +265,7 @@ class ListExecutionsRequest
         return $clone;
     }
 
-    public function withTriggeredByUser(string $triggeredByUser): self
+    public function withTriggeredByUser(bool $triggeredByUser): self
     {
         $validator = new Validator();
         $validator->validate($triggeredByUser, self::$schema['properties']['triggeredByUser']);
@@ -346,7 +345,7 @@ class ListExecutionsRequest
         }
         $triggeredByUser = null;
         if (isset($input->{'triggeredByUser'})) {
-            $triggeredByUser = $input->{'triggeredByUser'};
+            $triggeredByUser = (bool)($input->{'triggeredByUser'});
         }
         $sortOrder = null;
         if (isset($input->{'sortOrder'})) {

@@ -7,7 +7,6 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkBadRequestResponse;
@@ -32,16 +31,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationNoContentResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionVerification\ExtensionCancelExtensionVerificationTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
@@ -62,10 +51,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrieval
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
@@ -108,11 +93,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
@@ -135,31 +115,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractNotFoundResponse;
@@ -294,52 +249,6 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Cancel the verification process of an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-cancel-extension-verification
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionCancelExtensionVerificationRequest $request An object representing the request for this operation
-     * @return ExtensionCancelExtensionVerificationNoContentResponse The verification has been cancelled.
-     */
-    public function extensionCancelExtensionVerification(ExtensionCancelExtensionVerificationRequest $request): ExtensionCancelExtensionVerificationNoContentResponse
-    {
-        $httpRequest = new Request(ExtensionCancelExtensionVerificationRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return ExtensionCancelExtensionVerificationNoContentResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionCancelExtensionVerificationBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionCancelExtensionVerificationTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionCancelExtensionVerificationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Change the context of an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionChangeContextRequest $request An object representing the request for this operation
-     * @return ExtensionChangeContextOKResponse The Extension context-change has been requested.
-     */
-    public function extensionChangeContext(ExtensionChangeContextRequest $request): ExtensionChangeContextOKResponse
-    {
-        $httpRequest = new Request(ExtensionChangeContextRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionChangeContextOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ExtensionChangeContextNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionChangeContextTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionChangeContextDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Consent to extension scopes.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-consent-to-extension-scopes
@@ -431,31 +340,6 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionCreateRetrievalKeyBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionCreateRetrievalKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionCreateRetrievalKeyDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Delete an extension.
-     *
-     * This action deletes all ExtensionInstances and afterwards the Extension itself.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
-     * @return EmptyResponse The extension will be removed asynchronously
-     */
-    public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(ExtensionDeleteExtensionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ExtensionDeleteExtensionNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionDeleteExtensionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionDeleteExtensionDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -667,29 +551,6 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Get Extension of own contributor.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-own-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionGetOwnExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionGetOwnExtensionOKResponse Get your own extension.
-     */
-    public function extensionGetOwnExtension(ExtensionGetOwnExtensionRequest $request): ExtensionGetOwnExtensionOKResponse
-    {
-        $httpRequest = new Request(ExtensionGetOwnExtensionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionGetOwnExtensionOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ExtensionGetOwnExtensionNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionGetOwnExtensionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionGetOwnExtensionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Get the public key to verify the webhook signature.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-public-key
@@ -798,122 +659,6 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListOwnExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListOwnExtensionsDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Patch Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-patch-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionPatchExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionPatchExtensionOKResponse The extension has been patched.
-     */
-    public function extensionPatchExtension(ExtensionPatchExtensionRequest $request): ExtensionPatchExtensionOKResponse
-    {
-        $httpRequest = new Request(ExtensionPatchExtensionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionPatchExtensionOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionPatchExtensionBadRequestResponse::fromResponse($httpResponse),
-            404 => ExtensionPatchExtensionNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionPatchExtensionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionPatchExtensionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Register an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-register-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRegisterExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
-     */
-    public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse
-    {
-        $httpRequest = new Request(ExtensionRegisterExtensionRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return ExtensionRegisterExtensionCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionRegisterExtensionBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionRegisterExtensionTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionRegisterExtensionDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Remove the logo of an extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-remove-logo
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRemoveLogoRequest $request An object representing the request for this operation
-     * @return EmptyResponse The Logo has been removed.
-     */
-    public function extensionRemoveLogo(ExtensionRemoveLogoRequest $request): EmptyResponse
-    {
-        $httpRequest = new Request(ExtensionRemoveLogoRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return new EmptyResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ExtensionRemoveLogoNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionRemoveLogoTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionRemoveLogoDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Start the verification process of an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-extension-verification
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRequestExtensionVerificationRequest $request An object representing the request for this operation
-     * @return ExtensionRequestExtensionVerificationNoContentResponse The verification has been requested.
-     */
-    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): ExtensionRequestExtensionVerificationNoContentResponse
-    {
-        $httpRequest = new Request(ExtensionRequestExtensionVerificationRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 204) {
-            return ExtensionRequestExtensionVerificationNoContentResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionRequestExtensionVerificationBadRequestResponse::fromResponse($httpResponse),
-            429 => ExtensionRequestExtensionVerificationTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionRequestExtensionVerificationDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Add a logo to an extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-logo-upload
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRequestLogoUploadRequest $request An object representing the request for this operation
-     * @return ExtensionRequestLogoUploadOKResponse The Upload of a logo for the extension has been requested.
-     */
-    public function extensionRequestLogoUpload(ExtensionRequestLogoUploadRequest $request): ExtensionRequestLogoUploadOKResponse
-    {
-        $httpRequest = new Request(ExtensionRequestLogoUploadRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionRequestLogoUploadOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            404 => ExtensionRequestLogoUploadNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionRequestLogoUploadTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionRequestLogoUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
 
