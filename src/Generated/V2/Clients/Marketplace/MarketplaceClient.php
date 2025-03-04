@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkOKResponse;
@@ -118,9 +119,9 @@ interface MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionConsentToExtensionScopesRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): UntypedResponse;
+    public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): EmptyResponse;
     /**
      * Create the OnboardingProcess of a Contributor.
      *

@@ -75,7 +75,7 @@ class ServiceRequest
             ],
             'volumes' => [
                 'example' => [
-                    'data:/var/lib/mysql',
+                    'data:/var/lib/mysql:ro',
                 ],
                 'items' => [
                     'type' => 'string',
