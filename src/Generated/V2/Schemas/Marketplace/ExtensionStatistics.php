@@ -25,27 +25,33 @@ class ExtensionStatistics
     private static array $schema = [
         'properties' => [
             'amountOfInstances' => [
+                'description' => 'The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.',
                 'example' => 42,
                 'minimum' => 0,
                 'type' => 'integer',
             ],
         ],
         'required' => [
-            'amountOfInstances',
+
         ],
         'type' => 'object',
     ];
 
-    private int $amountOfInstances;
+    /**
+     * The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred.
+     */
+    private ?int $amountOfInstances = null;
 
-    public function __construct(int $amountOfInstances)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->amountOfInstances = $amountOfInstances;
     }
 
-    public function getAmountOfInstances(): int
+    public function getAmountOfInstances(): ?int
     {
-        return $this->amountOfInstances;
+        return $this->amountOfInstances ?? null;
     }
 
     public function withAmountOfInstances(int $amountOfInstances): self
@@ -58,6 +64,14 @@ class ExtensionStatistics
 
         $clone = clone $this;
         $clone->amountOfInstances = $amountOfInstances;
+
+        return $clone;
+    }
+
+    public function withoutAmountOfInstances(): self
+    {
+        $clone = clone $this;
+        unset($clone->amountOfInstances);
 
         return $clone;
     }
@@ -77,10 +91,13 @@ class ExtensionStatistics
             static::validateInput($input);
         }
 
-        $amountOfInstances = (int)($input->{'amountOfInstances'});
+        $amountOfInstances = null;
+        if (isset($input->{'amountOfInstances'})) {
+            $amountOfInstances = (int)($input->{'amountOfInstances'});
+        }
 
-        $obj = new self($amountOfInstances);
-
+        $obj = new self();
+        $obj->amountOfInstances = $amountOfInstances;
         return $obj;
     }
 
@@ -92,7 +109,9 @@ class ExtensionStatistics
     public function toJson(): array
     {
         $output = [];
-        $output['amountOfInstances'] = $this->amountOfInstances;
+        if (isset($this->amountOfInstances)) {
+            $output['amountOfInstances'] = $this->amountOfInstances;
+        }
 
         return $output;
     }

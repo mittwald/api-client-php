@@ -32,7 +32,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequest
                 'required' => [
                     'userId',
                     'accessTokenRetrievalKey',
-                    'refreshToken',
                 ],
                 'type' => 'object',
             ],

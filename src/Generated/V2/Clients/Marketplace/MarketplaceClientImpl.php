@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
+use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceBadRequestResponse;
@@ -26,6 +27,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtens
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstancePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyBadRequestResponse;
@@ -173,14 +176,14 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionConsentToExtensionScopesRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return EmptyResponse NoContent
      */
-    public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): UntypedResponse
+    public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): EmptyResponse
     {
         $httpRequest = new Request(ExtensionConsentToExtensionScopesRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 204) {
-            return UntypedResponse::fromResponse($httpResponse);
+            return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionConsentToExtensionScopesBadRequestResponse::fromResponse($httpResponse),
@@ -207,6 +210,8 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionCreateExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionCreateExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionCreateExtensionInstancePreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionCreateExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionCreateExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });

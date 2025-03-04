@@ -27,7 +27,6 @@ class AuthenticateWithAccessTokenRetrievalKeyRequestBody
         'required' => [
             'userId',
             'accessTokenRetrievalKey',
-            'refreshToken',
         ],
         'type' => 'object',
     ];
