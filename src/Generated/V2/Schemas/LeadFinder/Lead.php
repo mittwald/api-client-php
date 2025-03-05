@@ -45,7 +45,7 @@ class Lead
             'metrics' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.lead-finder.BasicMetrics',
             ],
-            'score' => [
+            'potential' => [
                 'format' => 'float',
                 'maximum' => 1,
                 'minimum' => 0,
@@ -63,7 +63,7 @@ class Lead
         ],
         'required' => [
             'leadId',
-            'score',
+            'potential',
             'screenshot',
             'company',
             'metrics',
@@ -89,7 +89,7 @@ class Lead
 
     private BasicMetrics $metrics;
 
-    private int|float $score;
+    private int|float $potential;
 
     private string $screenshot;
 
@@ -102,14 +102,14 @@ class Lead
      * @param string[] $businessFields
      * @param Technology[] $technologies
      */
-    public function __construct(array $businessFields, BasicCompany $company, string $description, string $leadId, BasicMetrics $metrics, int|float $score, string $screenshot, array $technologies)
+    public function __construct(array $businessFields, BasicCompany $company, string $description, string $leadId, BasicMetrics $metrics, int|float $potential, string $screenshot, array $technologies)
     {
         $this->businessFields = $businessFields;
         $this->company = $company;
         $this->description = $description;
         $this->leadId = $leadId;
         $this->metrics = $metrics;
-        $this->score = $score;
+        $this->potential = $potential;
         $this->screenshot = $screenshot;
         $this->technologies = $technologies;
     }
@@ -147,9 +147,9 @@ class Lead
         return $this->metrics;
     }
 
-    public function getScore(): int|float
+    public function getPotential(): int|float
     {
-        return $this->score;
+        return $this->potential;
     }
 
     public function getScreenshot(): string
@@ -242,16 +242,16 @@ class Lead
         return $clone;
     }
 
-    public function withScore(int|float $score): self
+    public function withPotential(int|float $potential): self
     {
         $validator = new Validator();
-        $validator->validate($score, self::$schema['properties']['score']);
+        $validator->validate($potential, self::$schema['properties']['potential']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->score = $score;
+        $clone->potential = $potential;
 
         return $clone;
     }
@@ -305,11 +305,11 @@ class Lead
             $mainTechnology = Technology::buildFromInput($input->{'mainTechnology'}, validate: $validate);
         }
         $metrics = BasicMetrics::buildFromInput($input->{'metrics'}, validate: $validate);
-        $score = str_contains((string)($input->{'score'}), '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
+        $potential = str_contains((string)($input->{'potential'}), '.') ? (float)($input->{'potential'}) : (int)($input->{'potential'});
         $screenshot = $input->{'screenshot'};
         $technologies = array_map(fn (array|object $i): Technology => Technology::buildFromInput($i, validate: $validate), $input->{'technologies'});
 
-        $obj = new self($businessFields, $company, $description, $leadId, $metrics, $score, $screenshot, $technologies);
+        $obj = new self($businessFields, $company, $description, $leadId, $metrics, $potential, $screenshot, $technologies);
         $obj->mainTechnology = $mainTechnology;
         return $obj;
     }
@@ -330,7 +330,7 @@ class Lead
             $output['mainTechnology'] = $this->mainTechnology->toJson();
         }
         $output['metrics'] = $this->metrics->toJson();
-        $output['score'] = $this->score;
+        $output['potential'] = $this->potential;
         $output['screenshot'] = $this->screenshot;
         $output['technologies'] = array_map(fn (Technology $i): array => $i->toJson(), $this->technologies);
 

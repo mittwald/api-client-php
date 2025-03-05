@@ -55,15 +55,15 @@ class UnlockedLead
             'metrics' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.lead-finder.DetailMetrics',
             ],
-            'reservedUntil' => [
-                'format' => 'date-time',
-                'type' => 'string',
-            ],
-            'score' => [
+            'potential' => [
                 'format' => 'float',
                 'maximum' => 1,
                 'minimum' => 0,
                 'type' => 'number',
+            ],
+            'reservedUntil' => [
+                'format' => 'date-time',
+                'type' => 'string',
             ],
             'screenshot' => [
                 'type' => 'string',
@@ -87,7 +87,7 @@ class UnlockedLead
         ],
         'required' => [
             'leadId',
-            'score',
+            'potential',
             'screenshot',
             'company',
             'metrics',
@@ -124,9 +124,9 @@ class UnlockedLead
 
     private DetailMetrics $metrics;
 
-    private ?DateTime $reservedUntil = null;
+    private int|float $potential;
 
-    private int|float $score;
+    private ?DateTime $reservedUntil = null;
 
     private string $screenshot;
 
@@ -147,7 +147,7 @@ class UnlockedLead
      * @param SocialMedia[] $socialMedia
      * @param Technology[] $technologies
      */
-    public function __construct(array $businessFields, DetailCompany $company, Contact $contact, string $description, string $domain, Hoster $hoster, string $leadId, DetailMetrics $metrics, int|float $score, string $screenshot, array $socialMedia, array $technologies, DateTime $unlockedAt)
+    public function __construct(array $businessFields, DetailCompany $company, Contact $contact, string $description, string $domain, Hoster $hoster, string $leadId, DetailMetrics $metrics, int|float $potential, string $screenshot, array $socialMedia, array $technologies, DateTime $unlockedAt)
     {
         $this->businessFields = $businessFields;
         $this->company = $company;
@@ -157,7 +157,7 @@ class UnlockedLead
         $this->hoster = $hoster;
         $this->leadId = $leadId;
         $this->metrics = $metrics;
-        $this->score = $score;
+        $this->potential = $potential;
         $this->screenshot = $screenshot;
         $this->socialMedia = $socialMedia;
         $this->technologies = $technologies;
@@ -212,14 +212,14 @@ class UnlockedLead
         return $this->metrics;
     }
 
+    public function getPotential(): int|float
+    {
+        return $this->potential;
+    }
+
     public function getReservedUntil(): ?DateTime
     {
         return $this->reservedUntil ?? null;
-    }
-
-    public function getScore(): int|float
-    {
-        return $this->score;
     }
 
     public function getScreenshot(): string
@@ -355,6 +355,20 @@ class UnlockedLead
         return $clone;
     }
 
+    public function withPotential(int|float $potential): self
+    {
+        $validator = new Validator();
+        $validator->validate($potential, self::$schema['properties']['potential']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->potential = $potential;
+
+        return $clone;
+    }
+
     public function withReservedUntil(DateTime $reservedUntil): self
     {
         $clone = clone $this;
@@ -367,20 +381,6 @@ class UnlockedLead
     {
         $clone = clone $this;
         unset($clone->reservedUntil);
-
-        return $clone;
-    }
-
-    public function withScore(int|float $score): self
-    {
-        $validator = new Validator();
-        $validator->validate($score, self::$schema['properties']['score']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->score = $score;
 
         return $clone;
     }
@@ -456,17 +456,17 @@ class UnlockedLead
             $mainTechnology = Technology::buildFromInput($input->{'mainTechnology'}, validate: $validate);
         }
         $metrics = DetailMetrics::buildFromInput($input->{'metrics'}, validate: $validate);
+        $potential = str_contains((string)($input->{'potential'}), '.') ? (float)($input->{'potential'}) : (int)($input->{'potential'});
         $reservedUntil = null;
         if (isset($input->{'reservedUntil'})) {
             $reservedUntil = new DateTime($input->{'reservedUntil'});
         }
-        $score = str_contains((string)($input->{'score'}), '.') ? (float)($input->{'score'}) : (int)($input->{'score'});
         $screenshot = $input->{'screenshot'};
         $socialMedia = array_map(fn (array|object $i): SocialMedia => SocialMedia::buildFromInput($i, validate: $validate), $input->{'socialMedia'});
         $technologies = array_map(fn (array|object $i): Technology => Technology::buildFromInput($i, validate: $validate), $input->{'technologies'});
         $unlockedAt = new DateTime($input->{'unlockedAt'});
 
-        $obj = new self($businessFields, $company, $contact, $description, $domain, $hoster, $leadId, $metrics, $score, $screenshot, $socialMedia, $technologies, $unlockedAt);
+        $obj = new self($businessFields, $company, $contact, $description, $domain, $hoster, $leadId, $metrics, $potential, $screenshot, $socialMedia, $technologies, $unlockedAt);
         $obj->mainTechnology = $mainTechnology;
         $obj->reservedUntil = $reservedUntil;
         return $obj;
@@ -491,10 +491,10 @@ class UnlockedLead
             $output['mainTechnology'] = $this->mainTechnology->toJson();
         }
         $output['metrics'] = $this->metrics->toJson();
+        $output['potential'] = $this->potential;
         if (isset($this->reservedUntil)) {
             $output['reservedUntil'] = ($this->reservedUntil)->format(DateTime::ATOM);
         }
-        $output['score'] = $this->score;
         $output['screenshot'] = $this->screenshot;
         $output['socialMedia'] = array_map(fn (SocialMedia $i): array => $i->toJson(), $this->socialMedia);
         $output['technologies'] = array_map(fn (Technology $i): array => $i->toJson(), $this->technologies);
