@@ -31,9 +31,6 @@ class ExtensionStatistics
                 'type' => 'integer',
             ],
         ],
-        'required' => [
-
-        ],
         'type' => 'object',
     ];
 

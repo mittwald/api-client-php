@@ -38,7 +38,7 @@ class TerminateContractCreatedResponse implements ResponseContainer
                         'type' => 'string',
                     ],
                     'terminationTargetDate' => [
-                        'format' => 'date',
+                        'format' => 'date-time',
                         'type' => 'string',
                     ],
                 ],

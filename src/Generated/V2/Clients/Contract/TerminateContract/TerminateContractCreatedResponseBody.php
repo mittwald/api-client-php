@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Clients\Contract\TerminateContract;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -30,7 +31,7 @@ class TerminateContractCreatedResponseBody
                 'type' => 'string',
             ],
             'terminationTargetDate' => [
-                'format' => 'date',
+                'format' => 'date-time',
                 'type' => 'string',
             ],
         ],
@@ -45,7 +46,7 @@ class TerminateContractCreatedResponseBody
 
     private ?string $reason = null;
 
-    private ?string $terminationTargetDate = null;
+    private ?DateTime $terminationTargetDate = null;
 
     /**
      *
@@ -72,7 +73,7 @@ class TerminateContractCreatedResponseBody
         return $this->reason ?? null;
     }
 
-    public function getTerminationTargetDate(): ?string
+    public function getTerminationTargetDate(): ?DateTime
     {
         return $this->terminationTargetDate ?? null;
     }
@@ -146,14 +147,8 @@ class TerminateContractCreatedResponseBody
         return $clone;
     }
 
-    public function withTerminationTargetDate(string $terminationTargetDate): self
+    public function withTerminationTargetDate(DateTime $terminationTargetDate): self
     {
-        $validator = new Validator();
-        $validator->validate($terminationTargetDate, self::$schema['properties']['terminationTargetDate']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->terminationTargetDate = $terminationTargetDate;
 
@@ -197,7 +192,7 @@ class TerminateContractCreatedResponseBody
         }
         $terminationTargetDate = null;
         if (isset($input->{'terminationTargetDate'})) {
-            $terminationTargetDate = $input->{'terminationTargetDate'};
+            $terminationTargetDate = new DateTime($input->{'terminationTargetDate'});
         }
 
         $obj = new self();
@@ -226,7 +221,7 @@ class TerminateContractCreatedResponseBody
             $output['reason'] = $this->reason;
         }
         if (isset($this->terminationTargetDate)) {
-            $output['terminationTargetDate'] = $this->terminationTargetDate;
+            $output['terminationTargetDate'] = ($this->terminationTargetDate)->format(DateTime::ATOM);
         }
 
         return $output;
@@ -258,5 +253,8 @@ class TerminateContractCreatedResponseBody
 
     public function __clone()
     {
+        if (isset($this->terminationTargetDate)) {
+            $this->terminationTargetDate = clone $this->terminationTargetDate;
+        }
     }
 }
