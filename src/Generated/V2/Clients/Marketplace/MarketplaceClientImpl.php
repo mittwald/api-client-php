@@ -78,6 +78,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
@@ -444,6 +449,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionGetExtensionInstanceForProjectNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionGetExtensionInstanceForProjectTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetExtensionInstanceForProjectDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get Extension of own contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-own-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetOwnExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionGetOwnExtensionOKResponse Get your own extension.
+     */
+    public function extensionGetOwnExtension(ExtensionGetOwnExtensionRequest $request): ExtensionGetOwnExtensionOKResponse
+    {
+        $httpRequest = new Request(ExtensionGetOwnExtensionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGetOwnExtensionOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionGetOwnExtensionNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGetOwnExtensionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGetOwnExtensionDefaultResponse::fromResponse($httpResponse),
         });
     }
 
