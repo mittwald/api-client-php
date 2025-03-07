@@ -36,6 +36,9 @@ class Lead
             'description' => [
                 'type' => 'string',
             ],
+            'globalUnlockedCount' => [
+                'type' => 'number',
+            ],
             'leadId' => [
                 'type' => 'string',
             ],
@@ -70,6 +73,7 @@ class Lead
             'businessFields',
             'description',
             'technologies',
+            'globalUnlockedCount',
         ],
         'type' => 'object',
     ];
@@ -82,6 +86,8 @@ class Lead
     private BasicCompany $company;
 
     private string $description;
+
+    private int|float $globalUnlockedCount;
 
     private string $leadId;
 
@@ -102,11 +108,12 @@ class Lead
      * @param string[] $businessFields
      * @param Technology[] $technologies
      */
-    public function __construct(array $businessFields, BasicCompany $company, string $description, string $leadId, BasicMetrics $metrics, int|float $potential, string $screenshot, array $technologies)
+    public function __construct(array $businessFields, BasicCompany $company, string $description, int|float $globalUnlockedCount, string $leadId, BasicMetrics $metrics, int|float $potential, string $screenshot, array $technologies)
     {
         $this->businessFields = $businessFields;
         $this->company = $company;
         $this->description = $description;
+        $this->globalUnlockedCount = $globalUnlockedCount;
         $this->leadId = $leadId;
         $this->metrics = $metrics;
         $this->potential = $potential;
@@ -130,6 +137,11 @@ class Lead
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getGlobalUnlockedCount(): int|float
+    {
+        return $this->globalUnlockedCount;
     }
 
     public function getLeadId(): string
@@ -200,6 +212,20 @@ class Lead
 
         $clone = clone $this;
         $clone->description = $description;
+
+        return $clone;
+    }
+
+    public function withGlobalUnlockedCount(int|float $globalUnlockedCount): self
+    {
+        $validator = new Validator();
+        $validator->validate($globalUnlockedCount, self::$schema['properties']['globalUnlockedCount']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->globalUnlockedCount = $globalUnlockedCount;
 
         return $clone;
     }
@@ -299,6 +325,7 @@ class Lead
         $businessFields = $input->{'businessFields'};
         $company = BasicCompany::buildFromInput($input->{'company'}, validate: $validate);
         $description = $input->{'description'};
+        $globalUnlockedCount = str_contains((string)($input->{'globalUnlockedCount'}), '.') ? (float)($input->{'globalUnlockedCount'}) : (int)($input->{'globalUnlockedCount'});
         $leadId = $input->{'leadId'};
         $mainTechnology = null;
         if (isset($input->{'mainTechnology'})) {
@@ -309,7 +336,7 @@ class Lead
         $screenshot = $input->{'screenshot'};
         $technologies = array_map(fn (array|object $i): Technology => Technology::buildFromInput($i, validate: $validate), $input->{'technologies'});
 
-        $obj = new self($businessFields, $company, $description, $leadId, $metrics, $potential, $screenshot, $technologies);
+        $obj = new self($businessFields, $company, $description, $globalUnlockedCount, $leadId, $metrics, $potential, $screenshot, $technologies);
         $obj->mainTechnology = $mainTechnology;
         return $obj;
     }
@@ -325,6 +352,7 @@ class Lead
         $output['businessFields'] = $this->businessFields;
         $output['company'] = $this->company->toJson();
         $output['description'] = $this->description;
+        $output['globalUnlockedCount'] = $this->globalUnlockedCount;
         $output['leadId'] = $this->leadId;
         if (isset($this->mainTechnology)) {
             $output['mainTechnology'] = $this->mainTechnology->toJson();

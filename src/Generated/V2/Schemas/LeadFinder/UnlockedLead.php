@@ -43,6 +43,9 @@ class UnlockedLead
             'domain' => [
                 'type' => 'string',
             ],
+            'globalUnlockedCount' => [
+                'type' => 'number',
+            ],
             'hoster' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.lead-finder.Hoster',
             ],
@@ -99,6 +102,7 @@ class UnlockedLead
             'contact',
             'hoster',
             'unlockedAt',
+            'globalUnlockedCount',
         ],
         'type' => 'object',
     ];
@@ -115,6 +119,8 @@ class UnlockedLead
     private string $description;
 
     private string $domain;
+
+    private int|float $globalUnlockedCount;
 
     private Hoster $hoster;
 
@@ -147,13 +153,14 @@ class UnlockedLead
      * @param SocialMedia[] $socialMedia
      * @param Technology[] $technologies
      */
-    public function __construct(array $businessFields, DetailCompany $company, Contact $contact, string $description, string $domain, Hoster $hoster, string $leadId, DetailMetrics $metrics, int|float $potential, string $screenshot, array $socialMedia, array $technologies, DateTime $unlockedAt)
+    public function __construct(array $businessFields, DetailCompany $company, Contact $contact, string $description, string $domain, int|float $globalUnlockedCount, Hoster $hoster, string $leadId, DetailMetrics $metrics, int|float $potential, string $screenshot, array $socialMedia, array $technologies, DateTime $unlockedAt)
     {
         $this->businessFields = $businessFields;
         $this->company = $company;
         $this->contact = $contact;
         $this->description = $description;
         $this->domain = $domain;
+        $this->globalUnlockedCount = $globalUnlockedCount;
         $this->hoster = $hoster;
         $this->leadId = $leadId;
         $this->metrics = $metrics;
@@ -190,6 +197,11 @@ class UnlockedLead
     public function getDomain(): string
     {
         return $this->domain;
+    }
+
+    public function getGlobalUnlockedCount(): int|float
+    {
+        return $this->globalUnlockedCount;
     }
 
     public function getHoster(): Hoster
@@ -305,6 +317,20 @@ class UnlockedLead
 
         $clone = clone $this;
         $clone->domain = $domain;
+
+        return $clone;
+    }
+
+    public function withGlobalUnlockedCount(int|float $globalUnlockedCount): self
+    {
+        $validator = new Validator();
+        $validator->validate($globalUnlockedCount, self::$schema['properties']['globalUnlockedCount']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->globalUnlockedCount = $globalUnlockedCount;
 
         return $clone;
     }
@@ -449,6 +475,7 @@ class UnlockedLead
         $contact = Contact::buildFromInput($input->{'contact'}, validate: $validate);
         $description = $input->{'description'};
         $domain = $input->{'domain'};
+        $globalUnlockedCount = str_contains((string)($input->{'globalUnlockedCount'}), '.') ? (float)($input->{'globalUnlockedCount'}) : (int)($input->{'globalUnlockedCount'});
         $hoster = Hoster::buildFromInput($input->{'hoster'}, validate: $validate);
         $leadId = $input->{'leadId'};
         $mainTechnology = null;
@@ -466,7 +493,7 @@ class UnlockedLead
         $technologies = array_map(fn (array|object $i): Technology => Technology::buildFromInput($i, validate: $validate), $input->{'technologies'});
         $unlockedAt = new DateTime($input->{'unlockedAt'});
 
-        $obj = new self($businessFields, $company, $contact, $description, $domain, $hoster, $leadId, $metrics, $potential, $screenshot, $socialMedia, $technologies, $unlockedAt);
+        $obj = new self($businessFields, $company, $contact, $description, $domain, $globalUnlockedCount, $hoster, $leadId, $metrics, $potential, $screenshot, $socialMedia, $technologies, $unlockedAt);
         $obj->mainTechnology = $mainTechnology;
         $obj->reservedUntil = $reservedUntil;
         return $obj;
@@ -485,6 +512,7 @@ class UnlockedLead
         $output['contact'] = $this->contact->toJson();
         $output['description'] = $this->description;
         $output['domain'] = $this->domain;
+        $output['globalUnlockedCount'] = $this->globalUnlockedCount;
         $output['hoster'] = $this->hoster->toJson();
         $output['leadId'] = $this->leadId;
         if (isset($this->mainTechnology)) {
