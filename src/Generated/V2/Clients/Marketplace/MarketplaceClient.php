@@ -44,6 +44,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
 
 /**
  * Client for Marketplace API
@@ -260,4 +264,24 @@ interface MarketplaceClient
      * @return ExtensionListOwnExtensionsOKResponse A list of extensions of the contributor.
      */
     public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse;
+    /**
+     * Patch Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-patch-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionPatchExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionPatchExtensionOKResponse The extension has been patched.
+     */
+    public function extensionPatchExtension(ExtensionPatchExtensionRequest $request): ExtensionPatchExtensionOKResponse;
+    /**
+     * Register an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-register-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRegisterExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
+     */
+    public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse;
 }
