@@ -116,12 +116,6 @@ class OwnExtension
                 ],
                 'type' => 'array',
             ],
-            'secrets' => [
-                'items' => [
-                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionSecret',
-                ],
-                'type' => 'array',
-            ],
             'state' => [
                 'description' => 'deprecated',
                 'enum' => [
@@ -167,7 +161,6 @@ class OwnExtension
             'verified',
             'verificationRequested',
             'functional',
-            'secrets',
         ],
         'type' => 'object',
     ];
@@ -233,11 +226,6 @@ class OwnExtension
     private ?array $scopes = null;
 
     /**
-     * @var ExtensionSecret[]
-     */
-    private array $secrets;
-
-    /**
      * deprecated
      */
     private ?OwnExtensionState $state = null;
@@ -261,9 +249,8 @@ class OwnExtension
 
     /**
      * @param ExtensionAsset[] $assets
-     * @param ExtensionSecret[] $secrets
      */
-    public function __construct(array $assets, string $contributorId, bool $functional, string $id, string $name, bool $published, array $secrets, ExtensionStatistics $statistics, bool $verificationRequested, bool $verified)
+    public function __construct(array $assets, string $contributorId, bool $functional, string $id, string $name, bool $published, ExtensionStatistics $statistics, bool $verificationRequested, bool $verified)
     {
         $this->assets = $assets;
         $this->contributorId = $contributorId;
@@ -271,7 +258,6 @@ class OwnExtension
         $this->id = $id;
         $this->name = $name;
         $this->published = $published;
-        $this->secrets = $secrets;
         $this->statistics = $statistics;
         $this->verificationRequested = $verificationRequested;
         $this->verified = $verified;
@@ -389,14 +375,6 @@ class OwnExtension
     public function getScopes(): ?array
     {
         return $this->scopes ?? null;
-    }
-
-    /**
-     * @return ExtensionSecret[]
-     */
-    public function getSecrets(): array
-    {
-        return $this->secrets;
     }
 
     public function getState(): ?OwnExtensionState
@@ -783,17 +761,6 @@ class OwnExtension
         return $clone;
     }
 
-    /**
-     * @param ExtensionSecret[] $secrets
-     */
-    public function withSecrets(array $secrets): self
-    {
-        $clone = clone $this;
-        $clone->secrets = $secrets;
-
-        return $clone;
-    }
-
     public function withState(OwnExtensionState $state): self
     {
         $clone = clone $this;
@@ -992,7 +959,6 @@ class OwnExtension
         if (isset($input->{'scopes'})) {
             $scopes = $input->{'scopes'};
         }
-        $secrets = array_map(fn (array|object $i): ExtensionSecret => ExtensionSecret::buildFromInput($i, validate: $validate), $input->{'secrets'});
         $state = null;
         if (isset($input->{'state'})) {
             $state = OwnExtensionState::from($input->{'state'});
@@ -1017,7 +983,7 @@ class OwnExtension
             $webhookUrls = WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
         }
 
-        $obj = new self($assets, $contributorId, $functional, $id, $name, $published, $secrets, $statistics, $verificationRequested, $verified);
+        $obj = new self($assets, $contributorId, $functional, $id, $name, $published, $statistics, $verificationRequested, $verified);
         $obj->backendComponents = $backendComponents;
         $obj->blocked = $blocked;
         $obj->context = $context;
@@ -1092,7 +1058,6 @@ class OwnExtension
         if (isset($this->scopes)) {
             $output['scopes'] = $this->scopes;
         }
-        $output['secrets'] = array_map(fn (ExtensionSecret $i): array => $i->toJson(), $this->secrets);
         if (isset($this->state)) {
             $output['state'] = ($this->state)->value;
         }

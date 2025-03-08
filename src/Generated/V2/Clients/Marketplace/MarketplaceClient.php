@@ -32,8 +32,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
@@ -44,10 +42,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListExtensions\ExtensionListExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
 
 /**
  * Client for Marketplace API
@@ -205,16 +199,6 @@ interface MarketplaceClient
      */
     public function extensionGetExtensionInstanceForProject(ExtensionGetExtensionInstanceForProjectRequest $request): ExtensionGetExtensionInstanceForProjectOKResponse;
     /**
-     * Get Extension of own contributor.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-own-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionGetOwnExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionGetOwnExtensionOKResponse Get your own extension.
-     */
-    public function extensionGetOwnExtension(ExtensionGetOwnExtensionRequest $request): ExtensionGetOwnExtensionOKResponse;
-    /**
      * Get the public key to verify the webhook signature.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-public-key
@@ -264,24 +248,4 @@ interface MarketplaceClient
      * @return ExtensionListOwnExtensionsOKResponse A list of extensions of the contributor.
      */
     public function extensionListOwnExtensions(ExtensionListOwnExtensionsRequest $request): ExtensionListOwnExtensionsOKResponse;
-    /**
-     * Patch Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-patch-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionPatchExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionPatchExtensionOKResponse The extension has been patched.
-     */
-    public function extensionPatchExtension(ExtensionPatchExtensionRequest $request): ExtensionPatchExtensionOKResponse;
-    /**
-     * Register an Extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-register-extension
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionRegisterExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
-     */
-    public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse;
 }
