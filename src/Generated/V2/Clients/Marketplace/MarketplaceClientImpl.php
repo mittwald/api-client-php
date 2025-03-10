@@ -78,6 +78,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForProject\ExtensionGetExtensionInstanceForProjectTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
@@ -100,6 +105,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionConflictResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionTooManyRequestsResponse;
 
 /**
  * Client for Marketplace API
@@ -448,6 +465,29 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Get Extension of own contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-own-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetOwnExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionGetOwnExtensionOKResponse Get your own extension.
+     */
+    public function extensionGetOwnExtension(ExtensionGetOwnExtensionRequest $request): ExtensionGetOwnExtensionOKResponse
+    {
+        $httpRequest = new Request(ExtensionGetOwnExtensionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGetOwnExtensionOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionGetOwnExtensionNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGetOwnExtensionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGetOwnExtensionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get the public key to verify the webhook signature.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-public-key
@@ -556,6 +596,54 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListOwnExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListOwnExtensionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Patch Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-patch-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionPatchExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionPatchExtensionOKResponse The extension has been patched.
+     */
+    public function extensionPatchExtension(ExtensionPatchExtensionRequest $request): ExtensionPatchExtensionOKResponse
+    {
+        $httpRequest = new Request(ExtensionPatchExtensionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionPatchExtensionOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionPatchExtensionBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionPatchExtensionNotFoundResponse::fromResponse($httpResponse),
+            409 => ExtensionPatchExtensionConflictResponse::fromResponse($httpResponse),
+            429 => ExtensionPatchExtensionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionPatchExtensionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Register an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-register-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRegisterExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
+     */
+    public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse
+    {
+        $httpRequest = new Request(ExtensionRegisterExtensionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ExtensionRegisterExtensionCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionRegisterExtensionBadRequestResponse::fromResponse($httpResponse),
+            429 => ExtensionRegisterExtensionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionRegisterExtensionDefaultResponse::fromResponse($httpResponse),
         });
     }
 }
