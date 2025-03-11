@@ -17,6 +17,17 @@ class ListAppinstallationsForUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
+            'appId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
+            'phpVersion' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 1,
@@ -35,6 +46,12 @@ class ListAppinstallationsForUserRequest
         ],
     ];
 
+    private ?string $appId = null;
+
+    private ?string $searchTerm = null;
+
+    private ?string $phpVersion = null;
+
     private ?int $limit = null;
 
     private int $skip = 0;
@@ -52,6 +69,21 @@ class ListAppinstallationsForUserRequest
     {
     }
 
+    public function getAppId(): ?string
+    {
+        return $this->appId ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
+    public function getPhpVersion(): ?string
+    {
+        return $this->phpVersion ?? null;
+    }
+
     public function getLimit(): ?int
     {
         return $this->limit ?? null;
@@ -65,6 +97,72 @@ class ListAppinstallationsForUserRequest
     public function getPage(): ?int
     {
         return $this->page ?? null;
+    }
+
+    public function withAppId(string $appId): self
+    {
+        $validator = new Validator();
+        $validator->validate($appId, self::$schema['properties']['appId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withoutAppId(): self
+    {
+        $clone = clone $this;
+        unset($clone->appId);
+
+        return $clone;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$schema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
+    public function withPhpVersion(string $phpVersion): self
+    {
+        $validator = new Validator();
+        $validator->validate($phpVersion, self::$schema['properties']['phpVersion']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->phpVersion = $phpVersion;
+
+        return $clone;
+    }
+
+    public function withoutPhpVersion(): self
+    {
+        $clone = clone $this;
+        unset($clone->phpVersion);
+
+        return $clone;
     }
 
     public function withLimit(int $limit): self
@@ -140,6 +238,18 @@ class ListAppinstallationsForUserRequest
             static::validateInput($input);
         }
 
+        $appId = null;
+        if (isset($input->{'appId'})) {
+            $appId = $input->{'appId'};
+        }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
+        $phpVersion = null;
+        if (isset($input->{'phpVersion'})) {
+            $phpVersion = $input->{'phpVersion'};
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -154,6 +264,9 @@ class ListAppinstallationsForUserRequest
         }
 
         $obj = new self();
+        $obj->appId = $appId;
+        $obj->searchTerm = $searchTerm;
+        $obj->phpVersion = $phpVersion;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -168,6 +281,15 @@ class ListAppinstallationsForUserRequest
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->appId)) {
+            $output['appId'] = $this->appId;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
+        if (isset($this->phpVersion)) {
+            $output['phpVersion'] = $this->phpVersion;
+        }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
@@ -235,6 +357,15 @@ class ListAppinstallationsForUserRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['appId'])) {
+            $query['appId'] = $mapped['appId'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
+        if (isset($mapped['phpVersion'])) {
+            $query['phpVersion'] = $mapped['phpVersion'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

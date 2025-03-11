@@ -8,11 +8,17 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContributorOnboardingProcess\ExtensionCreateContributorOnboardingProcessRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
@@ -48,6 +54,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingRequest;
 
 /**
  * Client for Marketplace API
@@ -64,6 +74,30 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtensi
  */
 interface MarketplaceClient
 {
+    /**
+     * Get the Stripe Billing Portal Link for a Customer
+     *
+     * Get the Stripe Billing Portal Link for a Customer.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-customer-billing-portal-link
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetCustomerBillingPortalLinkRequest $request An object representing the request for this operation
+     * @return ContributorGetCustomerBillingPortalLinkOKResponse The generated link to the Stripe Billing Portal
+     */
+    public function contributorGetCustomerBillingPortalLink(ContributorGetCustomerBillingPortalLinkRequest $request): ContributorGetCustomerBillingPortalLinkOKResponse;
+    /**
+     * Get the Stripe Dashboard Link for a Contributor.
+     *
+     * Get the Stripe Dashboard Link for a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-login-link
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetLoginLinkRequest $request An object representing the request for this operation
+     * @return ContributorGetLoginLinkOKResponse The generated link to the Stripe dashboard
+     */
+    public function contributorGetLoginLink(ContributorGetLoginLinkRequest $request): ContributorGetLoginLinkOKResponse;
     /**
      * Rotate the secret for an extension instance.
      *
@@ -94,6 +128,18 @@ interface MarketplaceClient
      * @return EmptyResponse NoContent
      */
     public function extensionConsentToExtensionScopes(ExtensionConsentToExtensionScopesRequest $request): EmptyResponse;
+    /**
+     * Create the OnboardingProcess of a Contributor.
+     *
+     * The OnboardingProcess is needed to publish paid extensions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-create-contributor-onboarding-process
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCreateContributorOnboardingProcessRequest $request An object representing the request for this operation
+     * @return ExtensionCreateContributorOnboardingProcessCreatedResponse The Process has been started.
+     */
+    public function extensionCreateContributorOnboardingProcess(ExtensionCreateContributorOnboardingProcessRequest $request): ExtensionCreateContributorOnboardingProcessCreatedResponse;
     /**
      * Create an ExtensionInstance.
      *
@@ -284,4 +330,28 @@ interface MarketplaceClient
      * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
      */
     public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse;
+    /**
+     * Update or Create Contract for existing Extension Instances.
+     *
+     * Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-update-extension-instance-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionUpdateExtensionInstanceContractRequest $request An object representing the request for this operation
+     * @return ExtensionUpdateExtensionInstanceContractOKResponse The Pricing adjustment can be confirmed in the checkout with the given url.
+     */
+    public function extensionUpdateExtensionInstanceContract(ExtensionUpdateExtensionInstanceContractRequest $request): ExtensionUpdateExtensionInstanceContractOKResponse;
+    /**
+     * Creates or Updates Pricing for an Extension.
+     *
+     * The Pricing is needed to publish paid extensions.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-update-extension-pricing
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionUpdateExtensionPricingRequest $request An object representing the request for this operation
+     * @return ExtensionUpdateExtensionPricingOKResponse The Pricing has been updated.
+     */
+    public function extensionUpdateExtensionPricing(ExtensionUpdateExtensionPricingRequest $request): ExtensionUpdateExtensionPricingOKResponse;
 }
