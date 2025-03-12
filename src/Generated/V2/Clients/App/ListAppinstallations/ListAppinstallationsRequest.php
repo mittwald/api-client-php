@@ -21,17 +21,6 @@ class ListAppinstallationsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'appIds' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-            'searchTerm' => [
-                'type' => 'string',
-            ],
-            'phpVersions' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 1,
@@ -52,12 +41,6 @@ class ListAppinstallationsRequest
 
     private string $projectId;
 
-    private ?string $appIds = null;
-
-    private ?string $searchTerm = null;
-
-    private ?string $phpVersions = null;
-
     private ?int $limit = null;
 
     private int $skip = 0;
@@ -76,21 +59,6 @@ class ListAppinstallationsRequest
     public function getProjectId(): string
     {
         return $this->projectId;
-    }
-
-    public function getAppIds(): ?string
-    {
-        return $this->appIds ?? null;
-    }
-
-    public function getSearchTerm(): ?string
-    {
-        return $this->searchTerm ?? null;
-    }
-
-    public function getPhpVersions(): ?string
-    {
-        return $this->phpVersions ?? null;
     }
 
     public function getLimit(): ?int
@@ -118,72 +86,6 @@ class ListAppinstallationsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    public function withAppIds(string $appIds): self
-    {
-        $validator = new Validator();
-        $validator->validate($appIds, self::$schema['properties']['appIds']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->appIds = $appIds;
-
-        return $clone;
-    }
-
-    public function withoutAppIds(): self
-    {
-        $clone = clone $this;
-        unset($clone->appIds);
-
-        return $clone;
-    }
-
-    public function withSearchTerm(string $searchTerm): self
-    {
-        $validator = new Validator();
-        $validator->validate($searchTerm, self::$schema['properties']['searchTerm']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->searchTerm = $searchTerm;
-
-        return $clone;
-    }
-
-    public function withoutSearchTerm(): self
-    {
-        $clone = clone $this;
-        unset($clone->searchTerm);
-
-        return $clone;
-    }
-
-    public function withPhpVersions(string $phpVersions): self
-    {
-        $validator = new Validator();
-        $validator->validate($phpVersions, self::$schema['properties']['phpVersions']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->phpVersions = $phpVersions;
-
-        return $clone;
-    }
-
-    public function withoutPhpVersions(): self
-    {
-        $clone = clone $this;
-        unset($clone->phpVersions);
 
         return $clone;
     }
@@ -262,18 +164,6 @@ class ListAppinstallationsRequest
         }
 
         $projectId = $input->{'projectId'};
-        $appIds = null;
-        if (isset($input->{'appIds'})) {
-            $appIds = $input->{'appIds'};
-        }
-        $searchTerm = null;
-        if (isset($input->{'searchTerm'})) {
-            $searchTerm = $input->{'searchTerm'};
-        }
-        $phpVersions = null;
-        if (isset($input->{'phpVersions'})) {
-            $phpVersions = $input->{'phpVersions'};
-        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -288,9 +178,6 @@ class ListAppinstallationsRequest
         }
 
         $obj = new self($projectId);
-        $obj->appIds = $appIds;
-        $obj->searchTerm = $searchTerm;
-        $obj->phpVersions = $phpVersions;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -306,15 +193,6 @@ class ListAppinstallationsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        if (isset($this->appIds)) {
-            $output['appIds'] = $this->appIds;
-        }
-        if (isset($this->searchTerm)) {
-            $output['searchTerm'] = $this->searchTerm;
-        }
-        if (isset($this->phpVersions)) {
-            $output['phpVersions'] = $this->phpVersions;
-        }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
@@ -383,15 +261,6 @@ class ListAppinstallationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['appIds'])) {
-            $query['appIds'] = $mapped['appIds'];
-        }
-        if (isset($mapped['searchTerm'])) {
-            $query['searchTerm'] = $mapped['searchTerm'];
-        }
-        if (isset($mapped['phpVersions'])) {
-            $query['phpVersions'] = $mapped['phpVersions'];
-        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

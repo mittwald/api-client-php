@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Cronjob\ListCronjobs;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListCronjobsRequest
+class ExtensionGenerateSessionKeyRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,126 +17,69 @@ class ListCronjobsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'extensionInstanceId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'limit' => [
-                'type' => 'integer',
-                'default' => 1000,
-                'minimum' => 1,
-            ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 1,
+            'sessionId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'projectId',
+            'extensionInstanceId',
+            'sessionId',
         ],
     ];
 
-    private string $projectId;
+    private string $extensionInstanceId;
 
-    private int $limit = 1000;
-
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private string $sessionId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $extensionInstanceId, string $sessionId)
     {
-        $this->projectId = $projectId;
+        $this->extensionInstanceId = $extensionInstanceId;
+        $this->sessionId = $sessionId;
     }
 
-    public function getProjectId(): string
+    public function getExtensionInstanceId(): string
     {
-        return $this->projectId;
+        return $this->extensionInstanceId;
     }
 
-    public function getLimit(): int
+    public function getSessionId(): string
     {
-        return $this->limit;
+        return $this->sessionId;
     }
 
-    public function getSkip(): int
-    {
-        return $this->skip;
-    }
-
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withProjectId(string $projectId): self
+    public function withExtensionInstanceId(string $extensionInstanceId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($extensionInstanceId, self::$schema['properties']['extensionInstanceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->extensionInstanceId = $extensionInstanceId;
 
         return $clone;
     }
 
-    public function withLimit(int $limit): self
+    public function withSessionId(string $sessionId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($sessionId, self::$schema['properties']['sessionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
+        $clone->sessionId = $sessionId;
 
         return $clone;
     }
@@ -146,34 +89,21 @@ class ListCronjobsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListCronjobsRequest Created instance
+     * @return ExtensionGenerateSessionKeyRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListCronjobsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionKeyRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $limit = 1000;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $extensionInstanceId = $input->{'extensionInstanceId'};
+        $sessionId = $input->{'sessionId'};
 
-        $obj = new self($projectId);
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($extensionInstanceId, $sessionId);
+
         return $obj;
     }
 
@@ -185,12 +115,8 @@ class ListCronjobsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        $output['limit'] = $this->limit;
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['extensionInstanceId'] = $this->extensionInstanceId;
+        $output['sessionId'] = $this->sessionId;
 
         return $output;
     }
@@ -235,8 +161,9 @@ class ListCronjobsRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/cronjobs';
+        $extensionInstanceId = urlencode($mapped['extensionInstanceId']);
+        $sessionId = urlencode($mapped['sessionId']);
+        return '/v2/extension-instances/' . $extensionInstanceId . '/session/' . $sessionId;
     }
 
     /**
@@ -252,15 +179,6 @@ class ListCronjobsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
