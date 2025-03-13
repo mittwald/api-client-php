@@ -22,6 +22,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionOKResponse;
@@ -154,6 +156,16 @@ interface MarketplaceClient
      * @return UntypedResponse NoContent
      */
     public function extensionEnableExtensionInstance(ExtensionEnableExtensionInstanceRequest $request): UntypedResponse;
+    /**
+     * Generate a session key to transmit it to the extensions frontend fragment.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGenerateSessionKeyRequest $request An object representing the request for this operation
+     * @return ExtensionGenerateSessionKeyOKResponse The generated session key
+     */
+    public function extensionGenerateSessionKey(ExtensionGenerateSessionKeyRequest $request): ExtensionGenerateSessionKeyOKResponse;
     /**
      * Get a Contributor.
      *

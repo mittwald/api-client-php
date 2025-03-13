@@ -53,6 +53,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
@@ -346,6 +352,30 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionEnableExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionEnableExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionEnableExtensionInstanceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Generate a session key to transmit it to the extensions frontend fragment.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-key
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGenerateSessionKeyRequest $request An object representing the request for this operation
+     * @return ExtensionGenerateSessionKeyOKResponse The generated session key
+     */
+    public function extensionGenerateSessionKey(ExtensionGenerateSessionKeyRequest $request): ExtensionGenerateSessionKeyOKResponse
+    {
+        $httpRequest = new Request(ExtensionGenerateSessionKeyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGenerateSessionKeyOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionGenerateSessionKeyBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionGenerateSessionKeyNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGenerateSessionKeyTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGenerateSessionKeyDefaultResponse::fromResponse($httpResponse),
         });
     }
 
