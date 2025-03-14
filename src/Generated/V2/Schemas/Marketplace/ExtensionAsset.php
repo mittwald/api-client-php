@@ -35,6 +35,7 @@ class ExtensionAsset
                 'type' => 'string',
             ],
             'fileName' => [
+                'deprecated' => true,
                 'example' => 'myFile.png',
                 'type' => 'string',
             ],
@@ -52,7 +53,6 @@ class ExtensionAsset
         ],
         'required' => [
             'id',
-            'fileName',
             'index',
             'assetType',
         ],
@@ -61,7 +61,10 @@ class ExtensionAsset
 
     private ExtensionAssetAssetType $assetType;
 
-    private string $fileName;
+    /**
+     * @deprecated
+     */
+    private ?string $fileName = null;
 
     /**
      * The asset ID and reference ID to its file. Retrieve the file with this id on `/v2/files/{id}
@@ -70,10 +73,9 @@ class ExtensionAsset
 
     private int $index;
 
-    public function __construct(ExtensionAssetAssetType $assetType, string $fileName, string $id, int $index)
+    public function __construct(ExtensionAssetAssetType $assetType, string $id, int $index)
     {
         $this->assetType = $assetType;
-        $this->fileName = $fileName;
         $this->id = $id;
         $this->index = $index;
     }
@@ -83,9 +85,12 @@ class ExtensionAsset
         return $this->assetType;
     }
 
-    public function getFileName(): string
+    /**
+     * @deprecated
+     */
+    public function getFileName(): ?string
     {
-        return $this->fileName;
+        return $this->fileName ?? null;
     }
 
     public function getId(): string
@@ -106,6 +111,9 @@ class ExtensionAsset
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withFileName(string $fileName): self
     {
         $validator = new Validator();
@@ -116,6 +124,14 @@ class ExtensionAsset
 
         $clone = clone $this;
         $clone->fileName = $fileName;
+
+        return $clone;
+    }
+
+    public function withoutFileName(): self
+    {
+        $clone = clone $this;
+        unset($clone->fileName);
 
         return $clone;
     }
@@ -164,12 +180,15 @@ class ExtensionAsset
         }
 
         $assetType = ExtensionAssetAssetType::from($input->{'assetType'});
-        $fileName = $input->{'fileName'};
+        $fileName = null;
+        if (isset($input->{'fileName'})) {
+            $fileName = $input->{'fileName'};
+        }
         $id = $input->{'id'};
         $index = (int)($input->{'index'});
 
-        $obj = new self($assetType, $fileName, $id, $index);
-
+        $obj = new self($assetType, $id, $index);
+        $obj->fileName = $fileName;
         return $obj;
     }
 
@@ -182,7 +201,9 @@ class ExtensionAsset
     {
         $output = [];
         $output['assetType'] = ($this->assetType)->value;
-        $output['fileName'] = $this->fileName;
+        if (isset($this->fileName)) {
+            $output['fileName'] = $this->fileName;
+        }
         $output['id'] = $this->id;
         $output['index'] = $this->index;
 
