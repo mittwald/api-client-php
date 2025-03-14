@@ -141,6 +141,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtensi
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractNotFoundResponse;
@@ -782,6 +792,52 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionRegisterExtensionBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionRegisterExtensionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionRegisterExtensionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Start the verification process of an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-extension-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRequestExtensionVerificationRequest $request An object representing the request for this operation
+     * @return ExtensionRequestExtensionVerificationNoContentResponse The verification has been requested.
+     */
+    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): ExtensionRequestExtensionVerificationNoContentResponse
+    {
+        $httpRequest = new Request(ExtensionRequestExtensionVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return ExtensionRequestExtensionVerificationNoContentResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionRequestExtensionVerificationBadRequestResponse::fromResponse($httpResponse),
+            429 => ExtensionRequestExtensionVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionRequestExtensionVerificationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Publish or withdraw an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-set-extension-published-state
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionSetExtensionPublishedStateRequest $request An object representing the request for this operation
+     * @return ExtensionSetExtensionPublishedStateOKResponse The Extension visibility has been adjusted.
+     */
+    public function extensionSetExtensionPublishedState(ExtensionSetExtensionPublishedStateRequest $request): ExtensionSetExtensionPublishedStateOKResponse
+    {
+        $httpRequest = new Request(ExtensionSetExtensionPublishedStateRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionSetExtensionPublishedStateOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionSetExtensionPublishedStateNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionSetExtensionPublishedStateTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionSetExtensionPublishedStateDefaultResponse::fromResponse($httpResponse),
         });
     }
 

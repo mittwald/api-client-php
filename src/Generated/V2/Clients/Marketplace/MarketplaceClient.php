@@ -56,6 +56,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingOKResponse;
@@ -342,6 +346,26 @@ interface MarketplaceClient
      * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
      */
     public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse;
+    /**
+     * Start the verification process of an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-extension-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRequestExtensionVerificationRequest $request An object representing the request for this operation
+     * @return ExtensionRequestExtensionVerificationNoContentResponse The verification has been requested.
+     */
+    public function extensionRequestExtensionVerification(ExtensionRequestExtensionVerificationRequest $request): ExtensionRequestExtensionVerificationNoContentResponse;
+    /**
+     * Publish or withdraw an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-set-extension-published-state
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionSetExtensionPublishedStateRequest $request An object representing the request for this operation
+     * @return ExtensionSetExtensionPublishedStateOKResponse The Extension visibility has been adjusted.
+     */
+    public function extensionSetExtensionPublishedState(ExtensionSetExtensionPublishedStateRequest $request): ExtensionSetExtensionPublishedStateOKResponse;
     /**
      * Update or Create Contract for existing Extension Instances.
      *
