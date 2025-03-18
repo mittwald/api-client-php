@@ -45,9 +45,8 @@ class ExtensionAsset
                 'type' => 'string',
             ],
             'index' => [
-                'example' => 0,
-                'maximum' => 3,
-                'minimum' => 0,
+                'description' => 'The index of the asset. Does not have to be successive. Can be used to order the assets.',
+                'example' => 1,
                 'type' => 'integer',
             ],
         ],
@@ -71,6 +70,9 @@ class ExtensionAsset
      */
     private string $id;
 
+    /**
+     * The index of the asset. Does not have to be successive. Can be used to order the assets.
+     */
     private int $index;
 
     public function __construct(ExtensionAssetAssetType $assetType, string $id, int $index)

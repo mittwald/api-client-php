@@ -22,6 +22,9 @@ class ListProjectBackupsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
             'withExportsOnly' => [
                 'type' => 'boolean',
             ],
@@ -48,6 +51,8 @@ class ListProjectBackupsRequest
 
     private string $projectId;
 
+    private ?string $searchTerm = null;
+
     private ?bool $withExportsOnly = null;
 
     private ?BackupSortOrder $sortOrder = null;
@@ -70,6 +75,11 @@ class ListProjectBackupsRequest
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
     }
 
     public function getWithExportsOnly(): ?bool
@@ -107,6 +117,28 @@ class ListProjectBackupsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$schema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
 
         return $clone;
     }
@@ -223,6 +255,10 @@ class ListProjectBackupsRequest
         }
 
         $projectId = $input->{'projectId'};
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
         $withExportsOnly = null;
         if (isset($input->{'withExportsOnly'})) {
             $withExportsOnly = (bool)($input->{'withExportsOnly'});
@@ -245,6 +281,7 @@ class ListProjectBackupsRequest
         }
 
         $obj = new self($projectId);
+        $obj->searchTerm = $searchTerm;
         $obj->withExportsOnly = $withExportsOnly;
         $obj->sortOrder = $sortOrder;
         $obj->limit = $limit;
@@ -262,6 +299,9 @@ class ListProjectBackupsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
         if (isset($this->withExportsOnly)) {
             $output['withExportsOnly'] = $this->withExportsOnly;
         }
@@ -336,6 +376,9 @@ class ListProjectBackupsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['withExportsOnly'])) {
             $query['withExportsOnly'] = $mapped['withExportsOnly'];
         }

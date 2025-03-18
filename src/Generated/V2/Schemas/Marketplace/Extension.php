@@ -141,6 +141,7 @@ class Extension
             'blocked',
             'assets',
             'statistics',
+            'logoRefId',
         ],
         'type' => 'object',
     ];
@@ -193,7 +194,7 @@ class Extension
     /**
      * This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`.
      */
-    private ?string $logoRefId = null;
+    private string $logoRefId;
 
     private string $name;
 
@@ -230,7 +231,7 @@ class Extension
      * @param string[] $scopes
      * @param string[] $tags
      */
-    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, SupportMeta $support, array $tags)
+    public function __construct(array $assets, bool $blocked, Context $context, string $contributorId, string $description, bool $disabled, string $id, string $logoRefId, string $name, bool $published, array $scopes, ExtensionState $state, ExtensionStatistics $statistics, SubTitle $subTitle, SupportMeta $support, array $tags)
     {
         $this->assets = $assets;
         $this->blocked = $blocked;
@@ -239,6 +240,7 @@ class Extension
         $this->description = $description;
         $this->disabled = $disabled;
         $this->id = $id;
+        $this->logoRefId = $logoRefId;
         $this->name = $name;
         $this->published = $published;
         $this->scopes = $scopes;
@@ -325,9 +327,9 @@ class Extension
         return $this->id;
     }
 
-    public function getLogoRefId(): ?string
+    public function getLogoRefId(): string
     {
-        return $this->logoRefId ?? null;
+        return $this->logoRefId;
     }
 
     public function getName(): string
@@ -581,14 +583,6 @@ class Extension
         return $clone;
     }
 
-    public function withoutLogoRefId(): self
-    {
-        $clone = clone $this;
-        unset($clone->logoRefId);
-
-        return $clone;
-    }
-
     public function withName(string $name): self
     {
         $validator = new Validator();
@@ -728,10 +722,7 @@ class Extension
             $frontendFragments = (array)$input->{'frontendFragments'};
         }
         $id = $input->{'id'};
-        $logoRefId = null;
-        if (isset($input->{'logoRefId'})) {
-            $logoRefId = $input->{'logoRefId'};
-        }
+        $logoRefId = $input->{'logoRefId'};
         $name = $input->{'name'};
         $published = (bool)($input->{'published'});
         $scopes = $input->{'scopes'};
@@ -741,13 +732,12 @@ class Extension
         $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
         $tags = $input->{'tags'};
 
-        $obj = new self($assets, $blocked, $context, $contributorId, $description, $disabled, $id, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
+        $obj = new self($assets, $blocked, $context, $contributorId, $description, $disabled, $id, $logoRefId, $name, $published, $scopes, $state, $statistics, $subTitle, $support, $tags);
         $obj->deprecation = $deprecation;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->externalFrontends = $externalFrontends;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
-        $obj->logoRefId = $logoRefId;
         return $obj;
     }
 
@@ -781,9 +771,7 @@ class Extension
             $output['frontendFragments'] = $this->frontendFragments;
         }
         $output['id'] = $this->id;
-        if (isset($this->logoRefId)) {
-            $output['logoRefId'] = $this->logoRefId;
-        }
+        $output['logoRefId'] = $this->logoRefId;
         $output['name'] = $this->name;
         $output['published'] = $this->published;
         $output['scopes'] = $this->scopes;

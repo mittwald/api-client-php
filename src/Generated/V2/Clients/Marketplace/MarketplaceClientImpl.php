@@ -146,6 +146,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
@@ -815,6 +820,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionRequestExtensionVerificationBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionRequestExtensionVerificationTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionRequestExtensionVerificationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Add a logo to an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-logo-upload
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRequestLogoUploadRequest $request An object representing the request for this operation
+     * @return ExtensionRequestLogoUploadOKResponse The Upload of a logo for the extension has been requested.
+     */
+    public function extensionRequestLogoUpload(ExtensionRequestLogoUploadRequest $request): ExtensionRequestLogoUploadOKResponse
+    {
+        $httpRequest = new Request(ExtensionRequestLogoUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionRequestLogoUploadOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionRequestLogoUploadNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionRequestLogoUploadTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionRequestLogoUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -59,6 +59,11 @@ class ContainerImageConfig
                 'example' => true,
                 'type' => 'boolean',
             ],
+            'isAiAvailable' => [
+                'description' => 'Whether ai generation is available for the image reference.',
+                'example' => true,
+                'type' => 'boolean',
+            ],
             'isUserRoot' => [
                 'description' => 'Whether the container user is root.',
                 'example' => false,
@@ -92,6 +97,7 @@ class ContainerImageConfig
             'userId',
             'isUserRoot',
             'hasAiGeneratedData',
+            'isAiAvailable',
         ],
         'type' => 'object',
     ];
@@ -130,6 +136,11 @@ class ContainerImageConfig
     private bool $hasAiGeneratedData;
 
     /**
+     * Whether ai generation is available for the image reference.
+     */
+    private bool $isAiAvailable;
+
+    /**
      * Whether the container user is root.
      */
     private bool $isUserRoot;
@@ -156,9 +167,10 @@ class ContainerImageConfig
      */
     private ?array $volumes = null;
 
-    public function __construct(bool $hasAiGeneratedData, bool $isUserRoot, string $user, int $userId)
+    public function __construct(bool $hasAiGeneratedData, bool $isAiAvailable, bool $isUserRoot, string $user, int $userId)
     {
         $this->hasAiGeneratedData = $hasAiGeneratedData;
+        $this->isAiAvailable = $isAiAvailable;
         $this->isUserRoot = $isUserRoot;
         $this->user = $user;
         $this->userId = $userId;
@@ -199,6 +211,11 @@ class ContainerImageConfig
     public function getHasAiGeneratedData(): bool
     {
         return $this->hasAiGeneratedData;
+    }
+
+    public function getIsAiAvailable(): bool
+    {
+        return $this->isAiAvailable;
     }
 
     public function getIsUserRoot(): bool
@@ -331,6 +348,20 @@ class ContainerImageConfig
         return $clone;
     }
 
+    public function withIsAiAvailable(bool $isAiAvailable): self
+    {
+        $validator = new Validator();
+        $validator->validate($isAiAvailable, self::$schema['properties']['isAiAvailable']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isAiAvailable = $isAiAvailable;
+
+        return $clone;
+    }
+
     public function withIsUserRoot(bool $isUserRoot): self
     {
         $validator = new Validator();
@@ -446,6 +477,7 @@ class ContainerImageConfig
             $exposedPorts = array_map(fn (array|object $i): ContainerImageConfigExposedPort => ContainerImageConfigExposedPort::buildFromInput($i, validate: $validate), $input->{'exposedPorts'});
         }
         $hasAiGeneratedData = (bool)($input->{'hasAiGeneratedData'});
+        $isAiAvailable = (bool)($input->{'isAiAvailable'});
         $isUserRoot = (bool)($input->{'isUserRoot'});
         $overwritingUser = null;
         if (isset($input->{'overwritingUser'})) {
@@ -458,7 +490,7 @@ class ContainerImageConfig
             $volumes = array_map(fn (array|object $i): ContainerImageConfigVolume => ContainerImageConfigVolume::buildFromInput($i, validate: $validate), $input->{'volumes'});
         }
 
-        $obj = new self($hasAiGeneratedData, $isUserRoot, $user, $userId);
+        $obj = new self($hasAiGeneratedData, $isAiAvailable, $isUserRoot, $user, $userId);
         $obj->command = $command;
         $obj->entrypoint = $entrypoint;
         $obj->env = $env;
@@ -489,6 +521,7 @@ class ContainerImageConfig
             $output['exposedPorts'] = array_map(fn (ContainerImageConfigExposedPort $i): array => $i->toJson(), $this->exposedPorts);
         }
         $output['hasAiGeneratedData'] = $this->hasAiGeneratedData;
+        $output['isAiAvailable'] = $this->isAiAvailable;
         $output['isUserRoot'] = $this->isUserRoot;
         if (isset($this->overwritingUser)) {
             $output['overwritingUser'] = $this->overwritingUser;
