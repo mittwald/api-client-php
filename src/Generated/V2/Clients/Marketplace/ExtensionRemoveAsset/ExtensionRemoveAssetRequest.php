@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionRegisterExtensionRequest
+class ExtensionRemoveAssetRequest
 {
-    public const method = 'post';
+    public const method = 'delete';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -20,85 +20,37 @@ class ExtensionRegisterExtensionRequest
             'contributorId' => [
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'context' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
-                    ],
-                    'description' => [
-                        'type' => 'string',
-                    ],
-                    'detailedDescriptions' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
-                    ],
-                    'externalFrontend' => [
-                        'deprecated' => true,
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'externalFrontends' => [
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'frontendFragments' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'name' => [
-                        'type' => 'string',
-                    ],
-                    'scopes' => [
-                        'items' => [
-                            'type' => 'string',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'subTitle' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
-                    ],
-                    'support' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
-                    ],
-                    'tags' => [
-                        'items' => [
-                            'type' => 'string',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'webhookURLs' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
-                    ],
-                ],
-                'required' => [
-                    'name',
-                ],
-                'type' => 'object',
+            'extensionId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'assetRefId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
             'contributorId',
-            'body',
+            'extensionId',
+            'assetRefId',
         ],
     ];
 
     private string $contributorId;
 
-    private ExtensionRegisterExtensionRequestBody $body;
+    private string $extensionId;
+
+    private string $assetRefId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $contributorId, ExtensionRegisterExtensionRequestBody $body)
+    public function __construct(string $contributorId, string $extensionId, string $assetRefId)
     {
         $this->contributorId = $contributorId;
-        $this->body = $body;
+        $this->extensionId = $extensionId;
+        $this->assetRefId = $assetRefId;
     }
 
     public function getContributorId(): string
@@ -106,9 +58,14 @@ class ExtensionRegisterExtensionRequest
         return $this->contributorId;
     }
 
-    public function getBody(): ExtensionRegisterExtensionRequestBody
+    public function getExtensionId(): string
     {
-        return $this->body;
+        return $this->extensionId;
+    }
+
+    public function getAssetRefId(): string
+    {
+        return $this->assetRefId;
     }
 
     public function withContributorId(string $contributorId): self
@@ -125,10 +82,30 @@ class ExtensionRegisterExtensionRequest
         return $clone;
     }
 
-    public function withBody(ExtensionRegisterExtensionRequestBody $body): self
+    public function withExtensionId(string $extensionId): self
     {
+        $validator = new Validator();
+        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->extensionId = $extensionId;
+
+        return $clone;
+    }
+
+    public function withAssetRefId(string $assetRefId): self
+    {
+        $validator = new Validator();
+        $validator->validate($assetRefId, self::$schema['properties']['assetRefId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->assetRefId = $assetRefId;
 
         return $clone;
     }
@@ -138,10 +115,10 @@ class ExtensionRegisterExtensionRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionRegisterExtensionRequest Created instance
+     * @return ExtensionRemoveAssetRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionRegisterExtensionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionRemoveAssetRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -149,9 +126,10 @@ class ExtensionRegisterExtensionRequest
         }
 
         $contributorId = $input->{'contributorId'};
-        $body = ExtensionRegisterExtensionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $extensionId = $input->{'extensionId'};
+        $assetRefId = $input->{'assetRefId'};
 
-        $obj = new self($contributorId, $body);
+        $obj = new self($contributorId, $extensionId, $assetRefId);
 
         return $obj;
     }
@@ -165,7 +143,8 @@ class ExtensionRegisterExtensionRequest
     {
         $output = [];
         $output['contributorId'] = $this->contributorId;
-        $output['body'] = ($this->body)->toJson();
+        $output['extensionId'] = $this->extensionId;
+        $output['assetRefId'] = $this->assetRefId;
 
         return $output;
     }
@@ -196,7 +175,6 @@ class ExtensionRegisterExtensionRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -212,7 +190,9 @@ class ExtensionRegisterExtensionRequest
     {
         $mapped = $this->toJson();
         $contributorId = urlencode($mapped['contributorId']);
-        return '/v2/contributors/' . $contributorId . '/extensions';
+        $extensionId = urlencode($mapped['extensionId']);
+        $assetRefId = urlencode($mapped['assetRefId']);
+        return '/v2/contributors/' . $contributorId . '/extensions/' . $extensionId . '/assets/' . $assetRefId;
     }
 
     /**
@@ -231,7 +211,6 @@ class ExtensionRegisterExtensionRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionRegisterExtensionRequest
+class ExtensionRequestLogoUploadRequest
 {
     public const method = 'post';
 
@@ -20,85 +20,29 @@ class ExtensionRegisterExtensionRequest
             'contributorId' => [
                 'type' => 'string',
             ],
-            'body' => [
-                'properties' => [
-                    'context' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
-                    ],
-                    'description' => [
-                        'type' => 'string',
-                    ],
-                    'detailedDescriptions' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
-                    ],
-                    'externalFrontend' => [
-                        'deprecated' => true,
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'externalFrontends' => [
-                        'items' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'frontendFragments' => [
-                        'additionalProperties' => [
-                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment',
-                        ],
-                        'type' => 'object',
-                    ],
-                    'name' => [
-                        'type' => 'string',
-                    ],
-                    'scopes' => [
-                        'items' => [
-                            'type' => 'string',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'subTitle' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
-                    ],
-                    'support' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
-                    ],
-                    'tags' => [
-                        'items' => [
-                            'type' => 'string',
-                        ],
-                        'type' => 'array',
-                    ],
-                    'webhookURLs' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
-                    ],
-                ],
-                'required' => [
-                    'name',
-                ],
-                'type' => 'object',
+            'extensionId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
             'contributorId',
-            'body',
+            'extensionId',
         ],
     ];
 
     private string $contributorId;
 
-    private ExtensionRegisterExtensionRequestBody $body;
+    private string $extensionId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $contributorId, ExtensionRegisterExtensionRequestBody $body)
+    public function __construct(string $contributorId, string $extensionId)
     {
         $this->contributorId = $contributorId;
-        $this->body = $body;
+        $this->extensionId = $extensionId;
     }
 
     public function getContributorId(): string
@@ -106,9 +50,9 @@ class ExtensionRegisterExtensionRequest
         return $this->contributorId;
     }
 
-    public function getBody(): ExtensionRegisterExtensionRequestBody
+    public function getExtensionId(): string
     {
-        return $this->body;
+        return $this->extensionId;
     }
 
     public function withContributorId(string $contributorId): self
@@ -125,10 +69,16 @@ class ExtensionRegisterExtensionRequest
         return $clone;
     }
 
-    public function withBody(ExtensionRegisterExtensionRequestBody $body): self
+    public function withExtensionId(string $extensionId): self
     {
+        $validator = new Validator();
+        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->body = $body;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
@@ -138,10 +88,10 @@ class ExtensionRegisterExtensionRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionRegisterExtensionRequest Created instance
+     * @return ExtensionRequestLogoUploadRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionRegisterExtensionRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionRequestLogoUploadRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -149,9 +99,9 @@ class ExtensionRegisterExtensionRequest
         }
 
         $contributorId = $input->{'contributorId'};
-        $body = ExtensionRegisterExtensionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $extensionId = $input->{'extensionId'};
 
-        $obj = new self($contributorId, $body);
+        $obj = new self($contributorId, $extensionId);
 
         return $obj;
     }
@@ -165,7 +115,7 @@ class ExtensionRegisterExtensionRequest
     {
         $output = [];
         $output['contributorId'] = $this->contributorId;
-        $output['body'] = ($this->body)->toJson();
+        $output['extensionId'] = $this->extensionId;
 
         return $output;
     }
@@ -196,7 +146,6 @@ class ExtensionRegisterExtensionRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -212,7 +161,8 @@ class ExtensionRegisterExtensionRequest
     {
         $mapped = $this->toJson();
         $contributorId = urlencode($mapped['contributorId']);
-        return '/v2/contributors/' . $contributorId . '/extensions';
+        $extensionId = urlencode($mapped['extensionId']);
+        return '/v2/contributors/' . $contributorId . '/extensions/' . $extensionId . '/logo';
     }
 
     /**
@@ -231,7 +181,6 @@ class ExtensionRegisterExtensionRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 
