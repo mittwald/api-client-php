@@ -32,6 +32,13 @@ class ExtensionRegisterExtensionRequest
                         '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
                     ],
                     'externalFrontend' => [
+                        'deprecated' => true,
+                        'items' => [
+                            '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
+                        ],
+                        'type' => 'array',
+                    ],
+                    'externalFrontends' => [
                         'items' => [
                             '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
                         ],

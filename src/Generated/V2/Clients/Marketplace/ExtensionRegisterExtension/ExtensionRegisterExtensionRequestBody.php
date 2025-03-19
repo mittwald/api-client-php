@@ -30,6 +30,13 @@ class ExtensionRegisterExtensionRequestBody
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions',
             ],
             'externalFrontend' => [
+                'deprecated' => true,
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
+                ],
+                'type' => 'array',
+            ],
+            'externalFrontends' => [
                 'items' => [
                     '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent',
                 ],
@@ -80,8 +87,14 @@ class ExtensionRegisterExtensionRequestBody
 
     /**
      * @var ExternalComponent[]|null
+     * @deprecated
      */
     private ?array $externalFrontend = null;
+
+    /**
+     * @var ExternalComponent[]|null
+     */
+    private ?array $externalFrontends = null;
 
     /**
      * @var mixed[]|null
@@ -128,10 +141,19 @@ class ExtensionRegisterExtensionRequestBody
 
     /**
      * @return ExternalComponent[]|null
+     * @deprecated
      */
     public function getExternalFrontend(): ?array
     {
         return $this->externalFrontend ?? null;
+    }
+
+    /**
+     * @return ExternalComponent[]|null
+     */
+    public function getExternalFrontends(): ?array
+    {
+        return $this->externalFrontends ?? null;
     }
 
     /**
@@ -234,6 +256,7 @@ class ExtensionRegisterExtensionRequestBody
 
     /**
      * @param ExternalComponent[] $externalFrontend
+     * @deprecated
      */
     public function withExternalFrontend(array $externalFrontend): self
     {
@@ -247,6 +270,25 @@ class ExtensionRegisterExtensionRequestBody
     {
         $clone = clone $this;
         unset($clone->externalFrontend);
+
+        return $clone;
+    }
+
+    /**
+     * @param ExternalComponent[] $externalFrontends
+     */
+    public function withExternalFrontends(array $externalFrontends): self
+    {
+        $clone = clone $this;
+        $clone->externalFrontends = $externalFrontends;
+
+        return $clone;
+    }
+
+    public function withoutExternalFrontends(): self
+    {
+        $clone = clone $this;
+        unset($clone->externalFrontends);
 
         return $clone;
     }
@@ -419,6 +461,10 @@ class ExtensionRegisterExtensionRequestBody
         if (isset($input->{'externalFrontend'})) {
             $externalFrontend = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'externalFrontend'});
         }
+        $externalFrontends = null;
+        if (isset($input->{'externalFrontends'})) {
+            $externalFrontends = array_map(fn (array|object $i): ExternalComponent => ExternalComponent::buildFromInput($i, validate: $validate), $input->{'externalFrontends'});
+        }
         $frontendFragments = null;
         if (isset($input->{'frontendFragments'})) {
             $frontendFragments = (array)$input->{'frontendFragments'};
@@ -450,6 +496,7 @@ class ExtensionRegisterExtensionRequestBody
         $obj->description = $description;
         $obj->detailedDescriptions = $detailedDescriptions;
         $obj->externalFrontend = $externalFrontend;
+        $obj->externalFrontends = $externalFrontends;
         $obj->frontendFragments = $frontendFragments;
         $obj->scopes = $scopes;
         $obj->subTitle = $subTitle;
@@ -478,6 +525,9 @@ class ExtensionRegisterExtensionRequestBody
         }
         if (isset($this->externalFrontend)) {
             $output['externalFrontend'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->externalFrontend);
+        }
+        if (isset($this->externalFrontends)) {
+            $output['externalFrontends'] = array_map(fn (ExternalComponent $i): array => $i->toJson(), $this->externalFrontends);
         }
         if (isset($this->frontendFragments)) {
             $output['frontendFragments'] = $this->frontendFragments;

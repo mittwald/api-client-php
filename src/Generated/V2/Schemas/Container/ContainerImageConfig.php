@@ -70,17 +70,18 @@ class ContainerImageConfig
                 'type' => 'boolean',
             ],
             'overwritingUser' => [
-                'description' => 'If set, this user will be used to run the container.',
+                'deprecated' => true,
+                'description' => 'Deprecated, user will never be overwritten.',
                 'example' => 1000,
                 'type' => 'integer',
             ],
             'user' => [
-                'description' => 'The user the container image is running with, if overwritingUser is not set.',
+                'description' => 'The user the container image is running with.',
                 'example' => 'mysql',
                 'type' => 'string',
             ],
             'userId' => [
-                'description' => 'The user id the container image is running with, if overwritingUser is not set.',
+                'description' => 'The user id the container image is running with.',
                 'example' => 0,
                 'type' => 'integer',
             ],
@@ -146,17 +147,19 @@ class ContainerImageConfig
     private bool $isUserRoot;
 
     /**
-     * If set, this user will be used to run the container.
+     * Deprecated, user will never be overwritten.
+     *
+     * @deprecated
      */
     private ?int $overwritingUser = null;
 
     /**
-     * The user the container image is running with, if overwritingUser is not set.
+     * The user the container image is running with.
      */
     private string $user;
 
     /**
-     * The user id the container image is running with, if overwritingUser is not set.
+     * The user id the container image is running with.
      */
     private int $userId;
 
@@ -223,6 +226,9 @@ class ContainerImageConfig
         return $this->isUserRoot;
     }
 
+    /**
+     * @deprecated
+     */
     public function getOverwritingUser(): ?int
     {
         return $this->overwritingUser ?? null;
@@ -376,6 +382,9 @@ class ContainerImageConfig
         return $clone;
     }
 
+    /**
+     * @deprecated
+     */
     public function withOverwritingUser(int $overwritingUser): self
     {
         $validator = new Validator();

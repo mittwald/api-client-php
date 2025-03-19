@@ -56,6 +56,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
@@ -348,6 +351,26 @@ interface MarketplaceClient
      * @return ExtensionRegisterExtensionCreatedResponse The extension has been registered.
      */
     public function extensionRegisterExtension(ExtensionRegisterExtensionRequest $request): ExtensionRegisterExtensionCreatedResponse;
+    /**
+     * Remove an asset of an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-remove-asset
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRemoveAssetRequest $request An object representing the request for this operation
+     * @return EmptyResponse The asset has been removed.
+     */
+    public function extensionRemoveAsset(ExtensionRemoveAssetRequest $request): EmptyResponse;
+    /**
+     * Add an asset to an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-asset-upload
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRequestAssetUploadRequest $request An object representing the request for this operation
+     * @return ExtensionRequestAssetUploadOKResponse The Upload of an asset for the extension has been requested.
+     */
+    public function extensionRequestAssetUpload(ExtensionRequestAssetUploadRequest $request): ExtensionRequestAssetUploadOKResponse;
     /**
      * Start the verification process of an Extension.
      *

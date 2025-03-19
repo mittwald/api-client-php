@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAppinstallationsRequest
+class ExtensionRemoveAssetRequest
 {
-    public const method = 'get';
+    public const method = 'delete';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,133 +17,95 @@ class ListAppinstallationsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'contributorId' => [
+                'type' => 'string',
+            ],
+            'extensionId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'limit' => [
-                'type' => 'integer',
-                'minimum' => 1,
-            ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 1,
+            'assetRefId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'projectId',
+            'contributorId',
+            'extensionId',
+            'assetRefId',
         ],
     ];
 
-    private string $projectId;
+    private string $contributorId;
 
-    private ?int $limit = null;
+    private string $extensionId;
 
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private string $assetRefId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $contributorId, string $extensionId, string $assetRefId)
     {
-        $this->projectId = $projectId;
+        $this->contributorId = $contributorId;
+        $this->extensionId = $extensionId;
+        $this->assetRefId = $assetRefId;
     }
 
-    public function getProjectId(): string
+    public function getContributorId(): string
     {
-        return $this->projectId;
+        return $this->contributorId;
     }
 
-    public function getLimit(): ?int
+    public function getExtensionId(): string
     {
-        return $this->limit ?? null;
+        return $this->extensionId;
     }
 
-    public function getSkip(): int
+    public function getAssetRefId(): string
     {
-        return $this->skip;
+        return $this->assetRefId;
     }
 
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withProjectId(string $projectId): self
+    public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
 
-    public function withLimit(int $limit): self
+    public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
+    public function withAssetRefId(string $assetRefId): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($assetRefId, self::$schema['properties']['assetRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
+        $clone->assetRefId = $assetRefId;
 
         return $clone;
     }
@@ -153,34 +115,22 @@ class ListAppinstallationsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAppinstallationsRequest Created instance
+     * @return ExtensionRemoveAssetRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAppinstallationsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionRemoveAssetRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $contributorId = $input->{'contributorId'};
+        $extensionId = $input->{'extensionId'};
+        $assetRefId = $input->{'assetRefId'};
 
-        $obj = new self($projectId);
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($contributorId, $extensionId, $assetRefId);
+
         return $obj;
     }
 
@@ -192,14 +142,9 @@ class ListAppinstallationsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['contributorId'] = $this->contributorId;
+        $output['extensionId'] = $this->extensionId;
+        $output['assetRefId'] = $this->assetRefId;
 
         return $output;
     }
@@ -244,8 +189,10 @@ class ListAppinstallationsRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/app-installations';
+        $contributorId = urlencode($mapped['contributorId']);
+        $extensionId = urlencode($mapped['extensionId']);
+        $assetRefId = urlencode($mapped['assetRefId']);
+        return '/v2/contributors/' . $contributorId . '/extensions/' . $extensionId . '/assets/' . $assetRefId;
     }
 
     /**
@@ -261,15 +208,6 @@ class ListAppinstallationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,

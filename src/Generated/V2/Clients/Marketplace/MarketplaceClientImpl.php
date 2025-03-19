@@ -141,6 +141,17 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtensi
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
@@ -797,6 +808,54 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionRegisterExtensionBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionRegisterExtensionTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionRegisterExtensionDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Remove an asset of an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-remove-asset
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRemoveAssetRequest $request An object representing the request for this operation
+     * @return EmptyResponse The asset has been removed.
+     */
+    public function extensionRemoveAsset(ExtensionRemoveAssetRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ExtensionRemoveAssetRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionRemoveAssetNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionRemoveAssetTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionRemoveAssetDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Add an asset to an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-request-asset-upload
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRequestAssetUploadRequest $request An object representing the request for this operation
+     * @return ExtensionRequestAssetUploadOKResponse The Upload of an asset for the extension has been requested.
+     */
+    public function extensionRequestAssetUpload(ExtensionRequestAssetUploadRequest $request): ExtensionRequestAssetUploadOKResponse
+    {
+        $httpRequest = new Request(ExtensionRequestAssetUploadRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionRequestAssetUploadOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionRequestAssetUploadBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionRequestAssetUploadNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionRequestAssetUploadPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ExtensionRequestAssetUploadTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionRequestAssetUploadDefaultResponse::fromResponse($httpResponse),
         });
     }
 
