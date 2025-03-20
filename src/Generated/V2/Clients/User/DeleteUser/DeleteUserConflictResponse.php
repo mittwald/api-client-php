@@ -35,6 +35,9 @@ class DeleteUserConflictResponse implements ResponseContainer
                         'type' => 'string',
                     ],
                     'name' => [
+                        'enum' => [
+                            'RemovingLastOwnerNotAllowedError',
+                        ],
                         'example' => 'RemovingLastOwnerNotAllowedError',
                         'type' => 'string',
                     ],
