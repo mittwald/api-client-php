@@ -21,6 +21,7 @@ class CreateCustomerCreatedResponseBody
                 'type' => 'string',
             ],
             'name' => [
+                'maxLength' => 80,
                 'type' => 'string',
             ],
         ],

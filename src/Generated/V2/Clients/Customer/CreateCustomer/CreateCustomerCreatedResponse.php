@@ -29,6 +29,7 @@ class CreateCustomerCreatedResponse implements ResponseContainer
                         'type' => 'string',
                     ],
                     'name' => [
+                        'maxLength' => 80,
                         'type' => 'string',
                     ],
                 ],

@@ -59,11 +59,24 @@ class Customer
                 ],
                 'type' => 'array',
             ],
+            'flags' => [
+                'items' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.customer.CustomerFlag',
+                ],
+                'type' => 'array',
+            ],
             'isBanned' => [
                 'type' => 'boolean',
             ],
             'isInDefaultOfPayment' => [
                 'type' => 'boolean',
+            ],
+            'levelOfUndeliverableDunningNotice' => [
+                'enum' => [
+                    'first',
+                    'second',
+                ],
+                'type' => 'string',
             ],
             'memberCount' => [
                 'minimum' => 0,
@@ -120,9 +133,16 @@ class Customer
      */
     private ?array $executingUserRoles = null;
 
+    /**
+     * @var CustomerFlag[]|null
+     */
+    private ?array $flags = null;
+
     private ?bool $isBanned = null;
 
     private ?bool $isInDefaultOfPayment = null;
+
+    private ?CustomerLevelOfUndeliverableDunningNotice $levelOfUndeliverableDunningNotice = null;
 
     private int $memberCount;
 
@@ -184,6 +204,14 @@ class Customer
         return $this->executingUserRoles ?? null;
     }
 
+    /**
+     * @return CustomerFlag[]|null
+     */
+    public function getFlags(): ?array
+    {
+        return $this->flags ?? null;
+    }
+
     public function getIsBanned(): ?bool
     {
         return $this->isBanned ?? null;
@@ -192,6 +220,11 @@ class Customer
     public function getIsInDefaultOfPayment(): ?bool
     {
         return $this->isInDefaultOfPayment ?? null;
+    }
+
+    public function getLevelOfUndeliverableDunningNotice(): ?CustomerLevelOfUndeliverableDunningNotice
+    {
+        return $this->levelOfUndeliverableDunningNotice ?? null;
     }
 
     public function getMemberCount(): int
@@ -339,6 +372,25 @@ class Customer
         return $clone;
     }
 
+    /**
+     * @param CustomerFlag[] $flags
+     */
+    public function withFlags(array $flags): self
+    {
+        $clone = clone $this;
+        $clone->flags = $flags;
+
+        return $clone;
+    }
+
+    public function withoutFlags(): self
+    {
+        $clone = clone $this;
+        unset($clone->flags);
+
+        return $clone;
+    }
+
     public function withIsBanned(bool $isBanned): self
     {
         $validator = new Validator();
@@ -379,6 +431,22 @@ class Customer
     {
         $clone = clone $this;
         unset($clone->isInDefaultOfPayment);
+
+        return $clone;
+    }
+
+    public function withLevelOfUndeliverableDunningNotice(CustomerLevelOfUndeliverableDunningNotice $levelOfUndeliverableDunningNotice): self
+    {
+        $clone = clone $this;
+        $clone->levelOfUndeliverableDunningNotice = $levelOfUndeliverableDunningNotice;
+
+        return $clone;
+    }
+
+    public function withoutLevelOfUndeliverableDunningNotice(): self
+    {
+        $clone = clone $this;
+        unset($clone->levelOfUndeliverableDunningNotice);
 
         return $clone;
     }
@@ -513,6 +581,10 @@ class Customer
         if (isset($input->{'executingUserRoles'})) {
             $executingUserRoles = array_map(fn (string $i): Role => Role::from($i), $input->{'executingUserRoles'});
         }
+        $flags = null;
+        if (isset($input->{'flags'})) {
+            $flags = array_map(fn (string $i): CustomerFlag => CustomerFlag::from($i), $input->{'flags'});
+        }
         $isBanned = null;
         if (isset($input->{'isBanned'})) {
             $isBanned = (bool)($input->{'isBanned'});
@@ -520,6 +592,10 @@ class Customer
         $isInDefaultOfPayment = null;
         if (isset($input->{'isInDefaultOfPayment'})) {
             $isInDefaultOfPayment = (bool)($input->{'isInDefaultOfPayment'});
+        }
+        $levelOfUndeliverableDunningNotice = null;
+        if (isset($input->{'levelOfUndeliverableDunningNotice'})) {
+            $levelOfUndeliverableDunningNotice = CustomerLevelOfUndeliverableDunningNotice::from($input->{'levelOfUndeliverableDunningNotice'});
         }
         $memberCount = (int)($input->{'memberCount'});
         $name = $input->{'name'};
@@ -542,8 +618,10 @@ class Customer
         $obj->avatarRefId = $avatarRefId;
         $obj->categoryId = $categoryId;
         $obj->executingUserRoles = $executingUserRoles;
+        $obj->flags = $flags;
         $obj->isBanned = $isBanned;
         $obj->isInDefaultOfPayment = $isInDefaultOfPayment;
+        $obj->levelOfUndeliverableDunningNotice = $levelOfUndeliverableDunningNotice;
         $obj->owner = $owner;
         $obj->vatId = $vatId;
         $obj->vatIdValidationState = $vatIdValidationState;
@@ -573,11 +651,17 @@ class Customer
         if (isset($this->executingUserRoles)) {
             $output['executingUserRoles'] = array_map(fn (Role $i): string => $i->value, $this->executingUserRoles);
         }
+        if (isset($this->flags)) {
+            $output['flags'] = array_map(fn (CustomerFlag $i): string => $i->value, $this->flags);
+        }
         if (isset($this->isBanned)) {
             $output['isBanned'] = $this->isBanned;
         }
         if (isset($this->isInDefaultOfPayment)) {
             $output['isInDefaultOfPayment'] = $this->isInDefaultOfPayment;
+        }
+        if (isset($this->levelOfUndeliverableDunningNotice)) {
+            $output['levelOfUndeliverableDunningNotice'] = ($this->levelOfUndeliverableDunningNotice)->value;
         }
         $output['memberCount'] = $this->memberCount;
         $output['name'] = $this->name;
