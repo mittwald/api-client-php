@@ -46,6 +46,10 @@ class ServiceResponse
                 'example' => 'mysql-db',
                 'type' => 'string',
             ],
+            'shortId' => [
+                'example' => 'c-12e4u6',
+                'type' => 'string',
+            ],
             'stackId' => [
                 'format' => 'uuid',
                 'type' => 'string',
@@ -63,6 +67,7 @@ class ServiceResponse
             'pendingState',
             'deployedState',
             'status',
+            'shortId',
         ],
         'type' => 'object',
     ];
@@ -79,11 +84,13 @@ class ServiceResponse
 
     private string $serviceName;
 
+    private string $shortId;
+
     private string $stackId;
 
     private ServiceStatus $status;
 
-    public function __construct(ServiceState $deployedState, string $description, string $id, ServiceState $pendingState, string $projectId, string $serviceName, string $stackId, ServiceStatus $status)
+    public function __construct(ServiceState $deployedState, string $description, string $id, ServiceState $pendingState, string $projectId, string $serviceName, string $shortId, string $stackId, ServiceStatus $status)
     {
         $this->deployedState = $deployedState;
         $this->description = $description;
@@ -91,6 +98,7 @@ class ServiceResponse
         $this->pendingState = $pendingState;
         $this->projectId = $projectId;
         $this->serviceName = $serviceName;
+        $this->shortId = $shortId;
         $this->stackId = $stackId;
         $this->status = $status;
     }
@@ -123,6 +131,11 @@ class ServiceResponse
     public function getServiceName(): string
     {
         return $this->serviceName;
+    }
+
+    public function getShortId(): string
+    {
+        return $this->shortId;
     }
 
     public function getStackId(): string
@@ -207,6 +220,20 @@ class ServiceResponse
         return $clone;
     }
 
+    public function withShortId(string $shortId): self
+    {
+        $validator = new Validator();
+        $validator->validate($shortId, self::$schema['properties']['shortId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->shortId = $shortId;
+
+        return $clone;
+    }
+
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
@@ -250,10 +277,11 @@ class ServiceResponse
         $pendingState = ServiceState::buildFromInput($input->{'pendingState'}, validate: $validate);
         $projectId = $input->{'projectId'};
         $serviceName = $input->{'serviceName'};
+        $shortId = $input->{'shortId'};
         $stackId = $input->{'stackId'};
         $status = ServiceStatus::from($input->{'status'});
 
-        $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $serviceName, $stackId, $status);
+        $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $serviceName, $shortId, $stackId, $status);
 
         return $obj;
     }
@@ -272,6 +300,7 @@ class ServiceResponse
         $output['pendingState'] = $this->pendingState->toJson();
         $output['projectId'] = $this->projectId;
         $output['serviceName'] = $this->serviceName;
+        $output['shortId'] = $this->shortId;
         $output['stackId'] = $this->stackId;
         $output['status'] = $this->status->value;
 
