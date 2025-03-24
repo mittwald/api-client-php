@@ -54,6 +54,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrieval
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
@@ -394,6 +398,31 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionCreateRetrievalKeyBadRequestResponse::fromResponse($httpResponse),
             429 => ExtensionCreateRetrievalKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionCreateRetrievalKeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Delete an extension.
+     *
+     * This action deletes all ExtensionInstances and afterwards the Extension itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
+     * @return EmptyResponse The extension will be removed asynchronously
+     */
+    public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ExtensionDeleteExtensionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionDeleteExtensionNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionDeleteExtensionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionDeleteExtensionDefaultResponse::fromResponse($httpResponse),
         });
     }
 

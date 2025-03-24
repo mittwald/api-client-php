@@ -23,6 +23,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
@@ -171,6 +172,18 @@ interface MarketplaceClient
      * @return ExtensionCreateRetrievalKeyOKResponse An access token retrieval key. This key can be used to retrieve a scoped access token from an external application.
      */
     public function extensionCreateRetrievalKey(ExtensionCreateRetrievalKeyRequest $request): ExtensionCreateRetrievalKeyOKResponse;
+    /**
+     * Delete an extension.
+     *
+     * This action deletes all ExtensionInstances and afterwards the Extension itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
+     * @return EmptyResponse The extension will be removed asynchronously
+     */
+    public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse;
     /**
      * Delete an ExtensionInstance.
      *
