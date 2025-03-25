@@ -32,6 +32,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
@@ -75,12 +79,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
@@ -305,6 +309,28 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Authenticate your external application using the extensionInstanceSecret.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-authenticate-with-session-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionAuthenticateWithSessionTokenRequest $request An object representing the request for this operation
+     * @return ExtensionAuthenticateWithSessionTokenCreatedResponse You received a public token with a short expiry. You can now perform domain actions.
+     */
+    public function extensionAuthenticateWithSessionToken(ExtensionAuthenticateWithSessionTokenRequest $request): ExtensionAuthenticateWithSessionTokenCreatedResponse
+    {
+        $httpRequest = new Request(ExtensionAuthenticateWithSessionTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ExtensionAuthenticateWithSessionTokenCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionAuthenticateWithSessionTokenBadRequestResponse::fromResponse($httpResponse),
+            default => ExtensionAuthenticateWithSessionTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Consent to extension scopes.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-consent-to-extension-scopes
@@ -519,26 +545,26 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Generate a session key to transmit it to the extensions frontend fragment.
+     * Generate a session token to transmit it to the extensions frontend fragment.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-key
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ExtensionGenerateSessionKeyRequest $request An object representing the request for this operation
-     * @return ExtensionGenerateSessionKeyOKResponse The generated session key
+     * @param ExtensionGenerateSessionTokenRequest $request An object representing the request for this operation
+     * @return ExtensionGenerateSessionTokenOKResponse The generated session token
      */
-    public function extensionGenerateSessionKey(ExtensionGenerateSessionKeyRequest $request): ExtensionGenerateSessionKeyOKResponse
+    public function extensionGenerateSessionToken(ExtensionGenerateSessionTokenRequest $request): ExtensionGenerateSessionTokenOKResponse
     {
-        $httpRequest = new Request(ExtensionGenerateSessionKeyRequest::method, $request->buildUrl());
+        $httpRequest = new Request(ExtensionGenerateSessionTokenRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionGenerateSessionKeyOKResponse::fromResponse($httpResponse);
+            return ExtensionGenerateSessionTokenOKResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionGenerateSessionKeyBadRequestResponse::fromResponse($httpResponse),
-            404 => ExtensionGenerateSessionKeyNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionGenerateSessionKeyTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionGenerateSessionKeyDefaultResponse::fromResponse($httpResponse),
+            400 => ExtensionGenerateSessionTokenBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionGenerateSessionTokenNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGenerateSessionTokenTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGenerateSessionTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
 

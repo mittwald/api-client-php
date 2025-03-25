@@ -2,49 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
-use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
-use Psr\Http\Message\ResponseInterface;
 
-class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
+class ExtensionGenerateSessionTokenOKResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
-        'type' => 'object',
-        'required' => [
-            'body',
-        ],
         'properties' => [
-            'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+            'sessionToken' => [
+                'type' => 'string',
             ],
         ],
+        'type' => 'object',
     ];
 
-    private ValidationErrors $body;
+    private ?string $sessionToken = null;
 
-    private ResponseInterface|null $httpResponse = null;
-
-    public function __construct(ValidationErrors $body)
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->body = $body;
     }
 
-    public function getBody(): ValidationErrors
+    public function getSessionToken(): ?string
     {
-        return $this->body;
+        return $this->sessionToken ?? null;
     }
 
-    public function withBody(ValidationErrors $body): self
+    public function withSessionToken(string $sessionToken): self
+    {
+        $validator = new Validator();
+        $validator->validate($sessionToken, self::$schema['properties']['sessionToken']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sessionToken = $sessionToken;
+
+        return $clone;
+    }
+
+    public function withoutSessionToken(): self
     {
         $clone = clone $this;
-        $clone->body = $body;
+        unset($clone->sessionToken);
 
         return $clone;
     }
@@ -54,20 +62,23 @@ class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionKeyBadRequestResponse Created instance
+     * @return ExtensionGenerateSessionTokenOKResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionKeyBadRequestResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionTokenOKResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
+        $sessionToken = null;
+        if (isset($input->{'sessionToken'})) {
+            $sessionToken = $input->{'sessionToken'};
+        }
 
-        $obj = new self($body);
-
+        $obj = new self();
+        $obj->sessionToken = $sessionToken;
         return $obj;
     }
 
@@ -79,7 +90,9 @@ class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = $this->body->toJson();
+        if (isset($this->sessionToken)) {
+            $output['sessionToken'] = $this->sessionToken;
+        }
 
         return $output;
     }
@@ -110,18 +123,5 @@ class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
 
     public function __clone()
     {
-    }
-
-    public static function fromResponse(ResponseInterface $httpResponse): self
-    {
-        $parsedBody = json_decode($httpResponse->getBody()->getContents(), associative: true);
-        $response = static::buildFromInput(['body' => $parsedBody], validate: false);
-        $response->httpResponse = $httpResponse;
-        return $response;
-    }
-
-    public function getResponse(): ResponseInterface|null
-    {
-        return $this->httpResponse;
     }
 }

@@ -2,57 +2,76 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGenerateSessionKeyOKResponseBody
+class ExtensionAuthenticateWithSessionTokenCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'sessionKeyJwt' => [
+            'expiry' => [
+                'format' => 'date-time',
                 'type' => 'string',
             ],
+            'publicToken' => [
+                'description' => 'Set this in the \'x-access-token\' header when performing domain actions.',
+                'type' => 'string',
+            ],
+        ],
+        'required' => [
+            'publicToken',
+            'expiry',
         ],
         'type' => 'object',
     ];
 
-    private ?string $sessionKeyJwt = null;
+    private DateTime $expiry;
 
     /**
-     *
+     * Set this in the 'x-access-token' header when performing domain actions.
      */
-    public function __construct()
+    private string $publicToken;
+
+    public function __construct(DateTime $expiry, string $publicToken)
     {
+        $this->expiry = $expiry;
+        $this->publicToken = $publicToken;
     }
 
-    public function getSessionKeyJwt(): ?string
+    public function getExpiry(): DateTime
     {
-        return $this->sessionKeyJwt ?? null;
+        return $this->expiry;
     }
 
-    public function withSessionKeyJwt(string $sessionKeyJwt): self
+    public function getPublicToken(): string
+    {
+        return $this->publicToken;
+    }
+
+    public function withExpiry(DateTime $expiry): self
+    {
+        $clone = clone $this;
+        $clone->expiry = $expiry;
+
+        return $clone;
+    }
+
+    public function withPublicToken(string $publicToken): self
     {
         $validator = new Validator();
-        $validator->validate($sessionKeyJwt, self::$schema['properties']['sessionKeyJwt']);
+        $validator->validate($publicToken, self::$schema['properties']['publicToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->sessionKeyJwt = $sessionKeyJwt;
-
-        return $clone;
-    }
-
-    public function withoutSessionKeyJwt(): self
-    {
-        $clone = clone $this;
-        unset($clone->sessionKeyJwt);
+        $clone->publicToken = $publicToken;
 
         return $clone;
     }
@@ -62,23 +81,21 @@ class ExtensionGenerateSessionKeyOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionKeyOKResponseBody Created instance
+     * @return ExtensionAuthenticateWithSessionTokenCreatedResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionKeyOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionAuthenticateWithSessionTokenCreatedResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $sessionKeyJwt = null;
-        if (isset($input->{'sessionKeyJwt'})) {
-            $sessionKeyJwt = $input->{'sessionKeyJwt'};
-        }
+        $expiry = new DateTime($input->{'expiry'});
+        $publicToken = $input->{'publicToken'};
 
-        $obj = new self();
-        $obj->sessionKeyJwt = $sessionKeyJwt;
+        $obj = new self($expiry, $publicToken);
+
         return $obj;
     }
 
@@ -90,9 +107,8 @@ class ExtensionGenerateSessionKeyOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->sessionKeyJwt)) {
-            $output['sessionKeyJwt'] = $this->sessionKeyJwt;
-        }
+        $output['expiry'] = ($this->expiry)->format(DateTime::ATOM);
+        $output['publicToken'] = $this->publicToken;
 
         return $output;
     }
@@ -123,5 +139,6 @@ class ExtensionGenerateSessionKeyOKResponseBody
 
     public function __clone()
     {
+        $this->expiry = clone $this->expiry;
     }
 }
