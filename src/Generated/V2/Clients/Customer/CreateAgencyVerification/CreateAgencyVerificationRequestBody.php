@@ -2,50 +2,91 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGenerateSessionTokenOKResponseBody
+class CreateAgencyVerificationRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'sessionToken' => [
+            'domain' => [
+                'minLength' => 1,
                 'type' => 'string',
             ],
-        ],
-        'required' => [
-            'sessionToken',
+            'email' => [
+                'minLength' => 1,
+                'type' => 'string',
+            ],
         ],
         'type' => 'object',
     ];
 
-    private string $sessionToken;
+    private ?string $domain = null;
 
-    public function __construct(string $sessionToken)
+    private ?string $email = null;
+
+    /**
+     *
+     */
+    public function __construct()
     {
-        $this->sessionToken = $sessionToken;
     }
 
-    public function getSessionToken(): string
+    public function getDomain(): ?string
     {
-        return $this->sessionToken;
+        return $this->domain ?? null;
     }
 
-    public function withSessionToken(string $sessionToken): self
+    public function getEmail(): ?string
+    {
+        return $this->email ?? null;
+    }
+
+    public function withDomain(string $domain): self
     {
         $validator = new Validator();
-        $validator->validate($sessionToken, self::$schema['properties']['sessionToken']);
+        $validator->validate($domain, self::$schema['properties']['domain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->sessionToken = $sessionToken;
+        $clone->domain = $domain;
+
+        return $clone;
+    }
+
+    public function withoutDomain(): self
+    {
+        $clone = clone $this;
+        unset($clone->domain);
+
+        return $clone;
+    }
+
+    public function withEmail(string $email): self
+    {
+        $validator = new Validator();
+        $validator->validate($email, self::$schema['properties']['email']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->email = $email;
+
+        return $clone;
+    }
+
+    public function withoutEmail(): self
+    {
+        $clone = clone $this;
+        unset($clone->email);
 
         return $clone;
     }
@@ -55,20 +96,28 @@ class ExtensionGenerateSessionTokenOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionTokenOKResponseBody Created instance
+     * @return CreateAgencyVerificationRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionTokenOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateAgencyVerificationRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $sessionToken = $input->{'sessionToken'};
+        $domain = null;
+        if (isset($input->{'domain'})) {
+            $domain = $input->{'domain'};
+        }
+        $email = null;
+        if (isset($input->{'email'})) {
+            $email = $input->{'email'};
+        }
 
-        $obj = new self($sessionToken);
-
+        $obj = new self();
+        $obj->domain = $domain;
+        $obj->email = $email;
         return $obj;
     }
 
@@ -80,7 +129,12 @@ class ExtensionGenerateSessionTokenOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['sessionToken'] = $this->sessionToken;
+        if (isset($this->domain)) {
+            $output['domain'] = $this->domain;
+        }
+        if (isset($this->email)) {
+            $output['email'] = $this->email;
+        }
 
         return $output;
     }

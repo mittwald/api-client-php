@@ -35,6 +35,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
@@ -309,7 +310,7 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Authenticate your external application using the extensionInstanceSecret.
+     * Authenticate your external application using a session token and an extension secret
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-authenticate-with-session-token
      * @throws GuzzleException
@@ -326,6 +327,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionAuthenticateWithSessionTokenBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionAuthenticateWithSessionTokenNotFoundResponse::fromResponse($httpResponse),
             default => ExtensionAuthenticateWithSessionTokenDefaultResponse::fromResponse($httpResponse),
         });
     }

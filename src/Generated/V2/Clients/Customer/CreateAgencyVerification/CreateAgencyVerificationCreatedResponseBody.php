@@ -2,50 +2,51 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGenerateSessionTokenOKResponseBody
+class CreateAgencyVerificationCreatedResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
         'properties' => [
-            'sessionToken' => [
+            'verificationId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
         ],
         'required' => [
-            'sessionToken',
+            'verificationId',
         ],
         'type' => 'object',
     ];
 
-    private string $sessionToken;
+    private string $verificationId;
 
-    public function __construct(string $sessionToken)
+    public function __construct(string $verificationId)
     {
-        $this->sessionToken = $sessionToken;
+        $this->verificationId = $verificationId;
     }
 
-    public function getSessionToken(): string
+    public function getVerificationId(): string
     {
-        return $this->sessionToken;
+        return $this->verificationId;
     }
 
-    public function withSessionToken(string $sessionToken): self
+    public function withVerificationId(string $verificationId): self
     {
         $validator = new Validator();
-        $validator->validate($sessionToken, self::$schema['properties']['sessionToken']);
+        $validator->validate($verificationId, self::$schema['properties']['verificationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->sessionToken = $sessionToken;
+        $clone->verificationId = $verificationId;
 
         return $clone;
     }
@@ -55,19 +56,19 @@ class ExtensionGenerateSessionTokenOKResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionTokenOKResponseBody Created instance
+     * @return CreateAgencyVerificationCreatedResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionTokenOKResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateAgencyVerificationCreatedResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $sessionToken = $input->{'sessionToken'};
+        $verificationId = $input->{'verificationId'};
 
-        $obj = new self($sessionToken);
+        $obj = new self($verificationId);
 
         return $obj;
     }
@@ -80,7 +81,7 @@ class ExtensionGenerateSessionTokenOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        $output['sessionToken'] = $this->sessionToken;
+        $output['verificationId'] = $this->verificationId;
 
         return $output;
     }

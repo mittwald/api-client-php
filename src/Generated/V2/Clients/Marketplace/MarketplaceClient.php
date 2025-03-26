@@ -133,7 +133,7 @@ interface MarketplaceClient
      */
     public function extensionAuthenticateInstance(ExtensionAuthenticateInstanceRequest $request): ExtensionAuthenticateInstanceCreatedResponse;
     /**
-     * Authenticate your external application using the extensionInstanceSecret.
+     * Authenticate your external application using a session token and an extension secret
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-authenticate-with-session-token
      * @throws GuzzleException

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ExtensionGenerateSessionTokenOKResponse implements ResponseContainer
+class AbortAgencyVerificationOKResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,33 +22,32 @@ class ExtensionGenerateSessionTokenOKResponse implements ResponseContainer
         'properties' => [
             'body' => [
                 'properties' => [
-                    'sessionToken' => [
+                    'verificationId' => [
+                        'description' => 'The ID of the verification',
+                        'format' => 'uuid',
                         'type' => 'string',
                     ],
-                ],
-                'required' => [
-                    'sessionToken',
                 ],
                 'type' => 'object',
             ],
         ],
     ];
 
-    private ExtensionGenerateSessionTokenOKResponseBody $body;
+    private AbortAgencyVerificationOKResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ExtensionGenerateSessionTokenOKResponseBody $body)
+    public function __construct(AbortAgencyVerificationOKResponseBody $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ExtensionGenerateSessionTokenOKResponseBody
+    public function getBody(): AbortAgencyVerificationOKResponseBody
     {
         return $this->body;
     }
 
-    public function withBody(ExtensionGenerateSessionTokenOKResponseBody $body): self
+    public function withBody(AbortAgencyVerificationOKResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -61,17 +60,17 @@ class ExtensionGenerateSessionTokenOKResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionTokenOKResponse Created instance
+     * @return AbortAgencyVerificationOKResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionTokenOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): AbortAgencyVerificationOKResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ExtensionGenerateSessionTokenOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
+        $body = AbortAgencyVerificationOKResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

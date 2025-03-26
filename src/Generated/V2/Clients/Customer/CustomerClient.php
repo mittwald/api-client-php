@@ -7,7 +7,11 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Customer;
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomerInvite\CreateCustomerInviteCreatedResponse;
@@ -30,6 +34,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCu
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerMembership\GetCustomerMembershipRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\IsCustomerLegallyCompetent\IsCustomerLegallyCompetentOKResponse;
@@ -67,6 +73,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\UpdateCustomerMembership\Up
 interface CustomerClient
 {
     /**
+     * Abort an open agency verification process
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-abort-agency-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AbortAgencyVerificationRequest $request An object representing the request for this operation
+     * @return AbortAgencyVerificationOKResponse Abort response.
+     */
+    public function abortAgencyVerification(AbortAgencyVerificationRequest $request): AbortAgencyVerificationOKResponse;
+    /**
      * Accept a CustomerInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-accept-customer-invite
@@ -75,6 +91,15 @@ interface CustomerClient
      * @param AcceptCustomerInviteRequest $request An object representing the request for this operation
      */
     public function acceptCustomerInvite(AcceptCustomerInviteRequest $request): EmptyResponse;
+    /**
+     * Creates a new agency verification request. Only one active verification can be active at the same time.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-agency-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateAgencyVerificationRequest $request An object representing the request for this operation
+     */
+    public function createAgencyVerification(CreateAgencyVerificationRequest $request): CreateAgencyVerificationCreatedResponse;
     /**
      * Create a new customer profile.
      *
@@ -190,6 +215,16 @@ interface CustomerClient
      * @param GetCustomerTokenInviteRequest $request An object representing the request for this operation
      */
     public function getCustomerTokenInvite(GetCustomerTokenInviteRequest $request): GetCustomerTokenInviteOKResponse;
+    /**
+     * Gets the status of a agency verification request..
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-open-agency-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetOpenAgencyVerificationRequest $request An object representing the request for this operation
+     * @return GetOpenAgencyVerificationOKResponse The open agency verification request.
+     */
+    public function getOpenAgencyVerification(GetOpenAgencyVerificationRequest $request): GetOpenAgencyVerificationOKResponse;
     /**
      * Gets the Wallet of the Customer.
      *

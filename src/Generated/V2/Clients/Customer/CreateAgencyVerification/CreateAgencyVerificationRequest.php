@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionAuthenticateWithSessionTokenRequest
+class CreateAgencyVerificationRequest
 {
     public const method = 'post';
 
@@ -17,45 +17,69 @@ class ExtensionAuthenticateWithSessionTokenRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
+            'customerId' => [
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'body' => [
                 'properties' => [
-                    'extensionSecret' => [
-                        'description' => 'The secret you you generated for your extension.',
+                    'domain' => [
+                        'minLength' => 1,
                         'type' => 'string',
                     ],
-                    'sessionToken' => [
-                        'description' => 'The session token you received from the mStudio.',
+                    'email' => [
+                        'minLength' => 1,
                         'type' => 'string',
                     ],
-                ],
-                'required' => [
-                    'sessionToken',
                 ],
                 'type' => 'object',
             ],
         ],
         'required' => [
+            'customerId',
             'body',
         ],
     ];
 
-    private ExtensionAuthenticateWithSessionTokenRequestBody $body;
+    private string $customerId;
+
+    private CreateAgencyVerificationRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(ExtensionAuthenticateWithSessionTokenRequestBody $body)
+    public function __construct(string $customerId, CreateAgencyVerificationRequestBody $body)
     {
+        $this->customerId = $customerId;
         $this->body = $body;
     }
 
-    public function getBody(): ExtensionAuthenticateWithSessionTokenRequestBody
+    public function getCustomerId(): string
+    {
+        return $this->customerId;
+    }
+
+    public function getBody(): CreateAgencyVerificationRequestBody
     {
         return $this->body;
     }
 
-    public function withBody(ExtensionAuthenticateWithSessionTokenRequestBody $body): self
+    public function withCustomerId(string $customerId): self
+    {
+        $validator = new Validator();
+        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->customerId = $customerId;
+
+        return $clone;
+    }
+
+    public function withBody(CreateAgencyVerificationRequestBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -68,19 +92,20 @@ class ExtensionAuthenticateWithSessionTokenRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionAuthenticateWithSessionTokenRequest Created instance
+     * @return CreateAgencyVerificationRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionAuthenticateWithSessionTokenRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): CreateAgencyVerificationRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ExtensionAuthenticateWithSessionTokenRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $customerId = $input->{'customerId'};
+        $body = CreateAgencyVerificationRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($body);
+        $obj = new self($customerId, $body);
 
         return $obj;
     }
@@ -93,6 +118,7 @@ class ExtensionAuthenticateWithSessionTokenRequest
     public function toJson(): array
     {
         $output = [];
+        $output['customerId'] = $this->customerId;
         $output['body'] = ($this->body)->toJson();
 
         return $output;
@@ -139,7 +165,8 @@ class ExtensionAuthenticateWithSessionTokenRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/authenticate-session-token';
+        $customerId = urlencode($mapped['customerId']);
+        return '/v2/customers/' . $customerId . '/agency-verification';
     }
 
     /**
