@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
-use Mittwald\ApiClient\Generated\V2\Schemas\Commons\ValidationErrors;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
+class ExtensionAuthenticateWithSessionTokenNotFoundResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -22,26 +22,26 @@ class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
         ],
         'properties' => [
             'body' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.commons.ValidationErrors',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    private ValidationErrors $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    public function __construct(ValidationErrors $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    public function getBody(): ValidationErrors
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    public function withBody(ValidationErrors $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -54,17 +54,17 @@ class ExtensionGenerateSessionKeyBadRequestResponse implements ResponseContainer
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionKeyBadRequestResponse Created instance
+     * @return ExtensionAuthenticateWithSessionTokenNotFoundResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionKeyBadRequestResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionAuthenticateWithSessionTokenNotFoundResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = ValidationErrors::buildFromInput($input->{'body'}, validate: $validate);
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 

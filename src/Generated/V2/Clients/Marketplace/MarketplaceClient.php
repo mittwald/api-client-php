@@ -12,18 +12,21 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretF
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateRetrievalKey\ExtensionCreateRetrievalKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\ExtensionDryRunWebhookRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey\ExtensionGenerateSessionKeyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionOKResponse;
@@ -96,6 +99,16 @@ interface MarketplaceClient
      */
     public function extensionAuthenticateInstance(ExtensionAuthenticateInstanceRequest $request): ExtensionAuthenticateInstanceCreatedResponse;
     /**
+     * Authenticate your external application using the extensionInstanceSecret.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-authenticate-with-session-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionAuthenticateWithSessionTokenRequest $request An object representing the request for this operation
+     * @return ExtensionAuthenticateWithSessionTokenCreatedResponse You received a public token with a short expiry. You can now perform domain actions.
+     */
+    public function extensionAuthenticateWithSessionToken(ExtensionAuthenticateWithSessionTokenRequest $request): ExtensionAuthenticateWithSessionTokenCreatedResponse;
+    /**
      * Consent to extension scopes.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-consent-to-extension-scopes
@@ -125,6 +138,18 @@ interface MarketplaceClient
      * @return ExtensionCreateRetrievalKeyOKResponse An access token retrieval key. This key can be used to retrieve a scoped access token from an external application.
      */
     public function extensionCreateRetrievalKey(ExtensionCreateRetrievalKeyRequest $request): ExtensionCreateRetrievalKeyOKResponse;
+    /**
+     * Delete an extension.
+     *
+     * This action deletes all ExtensionInstances and afterwards the Extension itself.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionDeleteExtensionRequest $request An object representing the request for this operation
+     * @return EmptyResponse The extension will be removed asynchronously
+     */
+    public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse;
     /**
      * Delete an ExtensionInstance.
      *
@@ -166,15 +191,15 @@ interface MarketplaceClient
      */
     public function extensionEnableExtensionInstance(ExtensionEnableExtensionInstanceRequest $request): UntypedResponse;
     /**
-     * Generate a session key to transmit it to the extensions frontend fragment.
+     * Generate a session token to transmit it to the extensions frontend fragment.
      *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-key
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-token
      * @throws GuzzleException
      * @throws UnexpectedResponseException
-     * @param ExtensionGenerateSessionKeyRequest $request An object representing the request for this operation
-     * @return ExtensionGenerateSessionKeyOKResponse The generated session key
+     * @param ExtensionGenerateSessionTokenRequest $request An object representing the request for this operation
+     * @return ExtensionGenerateSessionTokenOKResponse The generated session token
      */
-    public function extensionGenerateSessionKey(ExtensionGenerateSessionKeyRequest $request): ExtensionGenerateSessionKeyOKResponse;
+    public function extensionGenerateSessionToken(ExtensionGenerateSessionTokenRequest $request): ExtensionGenerateSessionTokenOKResponse;
     /**
      * Get a Contributor.
      *

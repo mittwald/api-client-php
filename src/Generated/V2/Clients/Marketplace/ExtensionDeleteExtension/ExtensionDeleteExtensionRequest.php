@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGetPublicKeyRequest
+class ExtensionDeleteExtensionRequest
 {
-    public const method = 'get';
+    public const method = 'delete';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,89 +17,94 @@ class ExtensionGetPublicKeyRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'serial' => [
-                'example' => 'latest',
+            'contributorId' => [
                 'type' => 'string',
             ],
-            'purpose' => [
-                'default' => 'webhook',
-                'enum' => [
-                    'webhook',
-                    'session_token',
-                ],
-                'example' => 'webhook',
+            'extensionId' => [
+                'format' => 'uuid',
                 'type' => 'string',
             ],
-            'format' => [
-                'default' => 'raw',
-                'enum' => [
-                    'raw',
-                    'spki',
+            'body' => [
+                'properties' => [
+                    'reason' => [
+                        'example' => 'The deprecation phase of the extension has ended. The successor will now be the only usable version of this extension.',
+                        'type' => 'string',
+                    ],
                 ],
-                'type' => 'string',
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'serial',
+            'contributorId',
+            'extensionId',
+            'body',
         ],
     ];
 
-    private string $serial;
+    private string $contributorId;
 
-    private ExtensionGetPublicKeyRequestPurpose $purpose = ExtensionGetPublicKeyRequestPurpose::webhook;
+    private string $extensionId;
 
-    private ExtensionGetPublicKeyRequestFormat $format = ExtensionGetPublicKeyRequestFormat::raw;
+    private ExtensionDeleteExtensionRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $serial)
+    public function __construct(string $contributorId, string $extensionId, ExtensionDeleteExtensionRequestBody $body)
     {
-        $this->serial = $serial;
+        $this->contributorId = $contributorId;
+        $this->extensionId = $extensionId;
+        $this->body = $body;
     }
 
-    public function getSerial(): string
+    public function getContributorId(): string
     {
-        return $this->serial;
+        return $this->contributorId;
     }
 
-    public function getPurpose(): ExtensionGetPublicKeyRequestPurpose
+    public function getExtensionId(): string
     {
-        return $this->purpose;
+        return $this->extensionId;
     }
 
-    public function getFormat(): ExtensionGetPublicKeyRequestFormat
+    public function getBody(): ExtensionDeleteExtensionRequestBody
     {
-        return $this->format;
+        return $this->body;
     }
 
-    public function withSerial(string $serial): self
+    public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($serial, self::$schema['properties']['serial']);
+        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->serial = $serial;
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
 
-    public function withPurpose(ExtensionGetPublicKeyRequestPurpose $purpose): self
+    public function withExtensionId(string $extensionId): self
     {
+        $validator = new Validator();
+        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
         $clone = clone $this;
-        $clone->purpose = $purpose;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
 
-    public function withFormat(ExtensionGetPublicKeyRequestFormat $format): self
+    public function withBody(ExtensionDeleteExtensionRequestBody $body): self
     {
         $clone = clone $this;
-        $clone->format = $format;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -109,29 +114,22 @@ class ExtensionGetPublicKeyRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGetPublicKeyRequest Created instance
+     * @return ExtensionDeleteExtensionRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGetPublicKeyRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionDeleteExtensionRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $serial = $input->{'serial'};
-        $purpose = ExtensionGetPublicKeyRequestPurpose::webhook;
-        if (isset($input->{'purpose'})) {
-            $purpose = ExtensionGetPublicKeyRequestPurpose::from($input->{'purpose'});
-        }
-        $format = ExtensionGetPublicKeyRequestFormat::raw;
-        if (isset($input->{'format'})) {
-            $format = ExtensionGetPublicKeyRequestFormat::from($input->{'format'});
-        }
+        $contributorId = $input->{'contributorId'};
+        $extensionId = $input->{'extensionId'};
+        $body = ExtensionDeleteExtensionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($serial);
-        $obj->purpose = $purpose;
-        $obj->format = $format;
+        $obj = new self($contributorId, $extensionId, $body);
+
         return $obj;
     }
 
@@ -143,9 +141,9 @@ class ExtensionGetPublicKeyRequest
     public function toJson(): array
     {
         $output = [];
-        $output['serial'] = $this->serial;
-        $output['purpose'] = ($this->purpose)->value;
-        $output['format'] = ($this->format)->value;
+        $output['contributorId'] = $this->contributorId;
+        $output['extensionId'] = $this->extensionId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -176,6 +174,7 @@ class ExtensionGetPublicKeyRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -190,8 +189,9 @@ class ExtensionGetPublicKeyRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $serial = urlencode($mapped['serial']);
-        return '/v2/public-keys/' . $serial;
+        $contributorId = urlencode($mapped['contributorId']);
+        $extensionId = urlencode($mapped['extensionId']);
+        return '/v2/contributors/' . $contributorId . '/extensions/' . $extensionId;
     }
 
     /**
@@ -207,15 +207,10 @@ class ExtensionGetPublicKeyRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['purpose'])) {
-            $query['purpose'] = $mapped['purpose'];
-        }
-        if (isset($mapped['format'])) {
-            $query['format'] = $mapped['format'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

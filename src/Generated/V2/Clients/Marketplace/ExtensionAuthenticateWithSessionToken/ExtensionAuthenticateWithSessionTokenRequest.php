@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGetPublicKeyRequest
+class ExtensionAuthenticateWithSessionTokenRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,89 +17,48 @@ class ExtensionGetPublicKeyRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'serial' => [
-                'example' => 'latest',
-                'type' => 'string',
-            ],
-            'purpose' => [
-                'default' => 'webhook',
-                'enum' => [
-                    'webhook',
-                    'session_token',
+            'body' => [
+                'properties' => [
+                    'extensionSecret' => [
+                        'description' => 'The secret you you generated for your extension.',
+                        'type' => 'string',
+                    ],
+                    'sessionToken' => [
+                        'description' => 'The session token you received from the mStudio.',
+                        'type' => 'string',
+                    ],
                 ],
-                'example' => 'webhook',
-                'type' => 'string',
-            ],
-            'format' => [
-                'default' => 'raw',
-                'enum' => [
-                    'raw',
-                    'spki',
+                'required' => [
+                    'sessionToken',
                 ],
-                'type' => 'string',
+                'type' => 'object',
             ],
         ],
         'required' => [
-            'serial',
+            'body',
         ],
     ];
 
-    private string $serial;
-
-    private ExtensionGetPublicKeyRequestPurpose $purpose = ExtensionGetPublicKeyRequestPurpose::webhook;
-
-    private ExtensionGetPublicKeyRequestFormat $format = ExtensionGetPublicKeyRequestFormat::raw;
+    private ExtensionAuthenticateWithSessionTokenRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $serial)
+    public function __construct(ExtensionAuthenticateWithSessionTokenRequestBody $body)
     {
-        $this->serial = $serial;
+        $this->body = $body;
     }
 
-    public function getSerial(): string
+    public function getBody(): ExtensionAuthenticateWithSessionTokenRequestBody
     {
-        return $this->serial;
+        return $this->body;
     }
 
-    public function getPurpose(): ExtensionGetPublicKeyRequestPurpose
-    {
-        return $this->purpose;
-    }
-
-    public function getFormat(): ExtensionGetPublicKeyRequestFormat
-    {
-        return $this->format;
-    }
-
-    public function withSerial(string $serial): self
-    {
-        $validator = new Validator();
-        $validator->validate($serial, self::$schema['properties']['serial']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->serial = $serial;
-
-        return $clone;
-    }
-
-    public function withPurpose(ExtensionGetPublicKeyRequestPurpose $purpose): self
+    public function withBody(ExtensionAuthenticateWithSessionTokenRequestBody $body): self
     {
         $clone = clone $this;
-        $clone->purpose = $purpose;
-
-        return $clone;
-    }
-
-    public function withFormat(ExtensionGetPublicKeyRequestFormat $format): self
-    {
-        $clone = clone $this;
-        $clone->format = $format;
+        $clone->body = $body;
 
         return $clone;
     }
@@ -109,29 +68,20 @@ class ExtensionGetPublicKeyRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGetPublicKeyRequest Created instance
+     * @return ExtensionAuthenticateWithSessionTokenRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGetPublicKeyRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionAuthenticateWithSessionTokenRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $serial = $input->{'serial'};
-        $purpose = ExtensionGetPublicKeyRequestPurpose::webhook;
-        if (isset($input->{'purpose'})) {
-            $purpose = ExtensionGetPublicKeyRequestPurpose::from($input->{'purpose'});
-        }
-        $format = ExtensionGetPublicKeyRequestFormat::raw;
-        if (isset($input->{'format'})) {
-            $format = ExtensionGetPublicKeyRequestFormat::from($input->{'format'});
-        }
+        $body = ExtensionAuthenticateWithSessionTokenRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($serial);
-        $obj->purpose = $purpose;
-        $obj->format = $format;
+        $obj = new self($body);
+
         return $obj;
     }
 
@@ -143,9 +93,7 @@ class ExtensionGetPublicKeyRequest
     public function toJson(): array
     {
         $output = [];
-        $output['serial'] = $this->serial;
-        $output['purpose'] = ($this->purpose)->value;
-        $output['format'] = ($this->format)->value;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -176,6 +124,7 @@ class ExtensionGetPublicKeyRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -190,8 +139,7 @@ class ExtensionGetPublicKeyRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $serial = urlencode($mapped['serial']);
-        return '/v2/public-keys/' . $serial;
+        return '/v2/authenticate-session-token';
     }
 
     /**
@@ -207,15 +155,10 @@ class ExtensionGetPublicKeyRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['purpose'])) {
-            $query['purpose'] = $mapped['purpose'];
-        }
-        if (isset($mapped['format'])) {
-            $query['format'] = $mapped['format'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 

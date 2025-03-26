@@ -2,91 +2,90 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGenerateSessionKeyTooManyRequestsResponseBody
+class ExtensionAuthenticateWithSessionTokenRequestBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
-        'type' => 'object',
         'properties' => [
-            'message' => [
+            'extensionSecret' => [
+                'description' => 'The secret you you generated for your extension.',
                 'type' => 'string',
-                'example' => 'too many requests',
             ],
-            'type' => [
+            'sessionToken' => [
+                'description' => 'The session token you received from the mStudio.',
                 'type' => 'string',
-                'example' => 'RateLimitError',
             ],
         ],
+        'required' => [
+            'sessionToken',
+        ],
+        'type' => 'object',
     ];
 
-    private ?string $message = null;
-
-    private ?string $type = null;
+    /**
+     * The secret you you generated for your extension.
+     */
+    private ?string $extensionSecret = null;
 
     /**
-     *
+     * The session token you received from the mStudio.
      */
-    public function __construct()
+    private string $sessionToken;
+
+    public function __construct(string $sessionToken)
     {
+        $this->sessionToken = $sessionToken;
     }
 
-    public function getMessage(): ?string
+    public function getExtensionSecret(): ?string
     {
-        return $this->message ?? null;
+        return $this->extensionSecret ?? null;
     }
 
-    public function getType(): ?string
+    public function getSessionToken(): string
     {
-        return $this->type ?? null;
+        return $this->sessionToken;
     }
 
-    public function withMessage(string $message): self
+    public function withExtensionSecret(string $extensionSecret): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$schema['properties']['message']);
+        $validator->validate($extensionSecret, self::$schema['properties']['extensionSecret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->message = $message;
+        $clone->extensionSecret = $extensionSecret;
 
         return $clone;
     }
 
-    public function withoutMessage(): self
+    public function withoutExtensionSecret(): self
     {
         $clone = clone $this;
-        unset($clone->message);
+        unset($clone->extensionSecret);
 
         return $clone;
     }
 
-    public function withType(string $type): self
+    public function withSessionToken(string $sessionToken): self
     {
         $validator = new Validator();
-        $validator->validate($type, self::$schema['properties']['type']);
+        $validator->validate($sessionToken, self::$schema['properties']['sessionToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->type = $type;
-
-        return $clone;
-    }
-
-    public function withoutType(): self
-    {
-        $clone = clone $this;
-        unset($clone->type);
+        $clone->sessionToken = $sessionToken;
 
         return $clone;
     }
@@ -96,28 +95,24 @@ class ExtensionGenerateSessionKeyTooManyRequestsResponseBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionKeyTooManyRequestsResponseBody Created instance
+     * @return ExtensionAuthenticateWithSessionTokenRequestBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionKeyTooManyRequestsResponseBody
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionAuthenticateWithSessionTokenRequestBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $message = null;
-        if (isset($input->{'message'})) {
-            $message = $input->{'message'};
+        $extensionSecret = null;
+        if (isset($input->{'extensionSecret'})) {
+            $extensionSecret = $input->{'extensionSecret'};
         }
-        $type = null;
-        if (isset($input->{'type'})) {
-            $type = $input->{'type'};
-        }
+        $sessionToken = $input->{'sessionToken'};
 
-        $obj = new self();
-        $obj->message = $message;
-        $obj->type = $type;
+        $obj = new self($sessionToken);
+        $obj->extensionSecret = $extensionSecret;
         return $obj;
     }
 
@@ -129,12 +124,10 @@ class ExtensionGenerateSessionKeyTooManyRequestsResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->message)) {
-            $output['message'] = $this->message;
+        if (isset($this->extensionSecret)) {
+            $output['extensionSecret'] = $this->extensionSecret;
         }
-        if (isset($this->type)) {
-            $output['type'] = $this->type;
-        }
+        $output['sessionToken'] = $this->sessionToken;
 
         return $output;
     }

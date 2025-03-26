@@ -29,9 +29,17 @@ class PublicKey
                 'type' => 'string',
             ],
             'key' => [
-                'description' => 'base64 encoded public key',
-                'format' => 'byte',
-                'type' => 'string',
+                'anyOf' => [
+                    [
+                        'description' => 'raw base64 public key',
+                        'format' => 'byte',
+                        'type' => 'string',
+                    ],
+                    [
+                        'description' => 'SPKI, ASN.1 DER serialized, PEM encoded public key',
+                        'type' => 'string',
+                    ],
+                ],
             ],
             'serial' => [
                 'format' => 'uuid',
@@ -48,9 +56,6 @@ class PublicKey
 
     private string $algorithm;
 
-    /**
-     * base64 encoded public key
-     */
     private string $key;
 
     private string $serial;
@@ -93,12 +98,6 @@ class PublicKey
 
     public function withKey(string $key): self
     {
-        $validator = new Validator();
-        $validator->validate($key, self::$schema['properties']['key']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
         $clone = clone $this;
         $clone->key = $key;
 
@@ -135,7 +134,10 @@ class PublicKey
         }
 
         $algorithm = $input->{'algorithm'};
-        $key = $input->{'key'};
+        $key = match (true) {
+            is_string($input->{'key'}) => $input->{'key'},
+            default => throw new InvalidArgumentException("could not build property 'key' from JSON"),
+        };
         $serial = $input->{'serial'};
 
         $obj = new self($algorithm, $key, $serial);
@@ -152,7 +154,9 @@ class PublicKey
     {
         $output = [];
         $output['algorithm'] = $this->algorithm;
-        $output['key'] = $this->key;
+        $output['key'] = match (true) {
+            is_string($this->key) => $this->key,
+        };
         $output['serial'] = $this->serial;
 
         return $output;
@@ -184,5 +188,8 @@ class PublicKey
 
     public function __clone()
     {
+        $this->key = match (true) {
+            is_string($this->key) => $this->key,
+        };
     }
 }

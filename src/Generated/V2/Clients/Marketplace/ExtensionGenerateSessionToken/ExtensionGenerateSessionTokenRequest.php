@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionKey;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionGenerateSessionKeyRequest
+class ExtensionGenerateSessionTokenRequest
 {
     public const method = 'post';
 
@@ -89,10 +89,10 @@ class ExtensionGenerateSessionKeyRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGenerateSessionKeyRequest Created instance
+     * @return ExtensionGenerateSessionTokenRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionKeyRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGenerateSessionTokenRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
@@ -163,7 +163,7 @@ class ExtensionGenerateSessionKeyRequest
         $mapped = $this->toJson();
         $extensionInstanceId = urlencode($mapped['extensionInstanceId']);
         $sessionId = urlencode($mapped['sessionId']);
-        return '/v2/extension-instances/' . $extensionInstanceId . '/session/' . $sessionId;
+        return '/v2/extension-instances/' . $extensionInstanceId . '/sessions/' . $sessionId;
     }
 
     /**
