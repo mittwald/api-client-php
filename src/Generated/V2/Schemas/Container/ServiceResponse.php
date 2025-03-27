@@ -35,6 +35,10 @@ class ServiceResponse
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'message' => [
+                'example' => 'Container ready',
+                'type' => 'string',
+            ],
             'pendingState' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceState',
             ],
@@ -78,6 +82,8 @@ class ServiceResponse
 
     private string $id;
 
+    private ?string $message = null;
+
     private ServiceState $pendingState;
 
     private string $projectId;
@@ -116,6 +122,11 @@ class ServiceResponse
     public function getId(): string
     {
         return $this->id;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message ?? null;
     }
 
     public function getPendingState(): ServiceState
@@ -180,6 +191,28 @@ class ServiceResponse
 
         $clone = clone $this;
         $clone->id = $id;
+
+        return $clone;
+    }
+
+    public function withMessage(string $message): self
+    {
+        $validator = new Validator();
+        $validator->validate($message, self::$schema['properties']['message']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->message = $message;
+
+        return $clone;
+    }
+
+    public function withoutMessage(): self
+    {
+        $clone = clone $this;
+        unset($clone->message);
 
         return $clone;
     }
@@ -274,6 +307,10 @@ class ServiceResponse
         $deployedState = ServiceState::buildFromInput($input->{'deployedState'}, validate: $validate);
         $description = $input->{'description'};
         $id = $input->{'id'};
+        $message = null;
+        if (isset($input->{'message'})) {
+            $message = $input->{'message'};
+        }
         $pendingState = ServiceState::buildFromInput($input->{'pendingState'}, validate: $validate);
         $projectId = $input->{'projectId'};
         $serviceName = $input->{'serviceName'};
@@ -282,7 +319,7 @@ class ServiceResponse
         $status = ServiceStatus::from($input->{'status'});
 
         $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $serviceName, $shortId, $stackId, $status);
-
+        $obj->message = $message;
         return $obj;
     }
 
@@ -297,6 +334,9 @@ class ServiceResponse
         $output['deployedState'] = $this->deployedState->toJson();
         $output['description'] = $this->description;
         $output['id'] = $this->id;
+        if (isset($this->message)) {
+            $output['message'] = $this->message;
+        }
         $output['pendingState'] = $this->pendingState->toJson();
         $output['projectId'] = $this->projectId;
         $output['serviceName'] = $this->serviceName;
