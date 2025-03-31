@@ -32,6 +32,9 @@ class ListAppinstallationsRequest
                 'type' => 'string',
             ],
             'phpVersions' => [
+                'default' => [
+                    '',
+                ],
                 'items' => [
                     'type' => 'string',
                 ],
@@ -65,9 +68,11 @@ class ListAppinstallationsRequest
     private ?string $searchTerm = null;
 
     /**
-     * @var string[]|null
+     * @var string[]
      */
-    private ?array $phpVersions = null;
+    private array $phpVersions = [
+        '',
+    ];
 
     private ?int $limit = null;
 
@@ -103,11 +108,11 @@ class ListAppinstallationsRequest
     }
 
     /**
-     * @return string[]|null
+     * @return string[]
      */
-    public function getPhpVersions(): ?array
+    public function getPhpVersions(): array
     {
-        return $this->phpVersions ?? null;
+        return $this->phpVersions;
     }
 
     public function getLimit(): ?int
@@ -203,14 +208,6 @@ class ListAppinstallationsRequest
         return $clone;
     }
 
-    public function withoutPhpVersions(): self
-    {
-        $clone = clone $this;
-        unset($clone->phpVersions);
-
-        return $clone;
-    }
-
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
@@ -293,7 +290,9 @@ class ListAppinstallationsRequest
         if (isset($input->{'searchTerm'})) {
             $searchTerm = $input->{'searchTerm'};
         }
-        $phpVersions = null;
+        $phpVersions = [
+                '',
+            ];
         if (isset($input->{'phpVersions'})) {
             $phpVersions = $input->{'phpVersions'};
         }
@@ -335,9 +334,7 @@ class ListAppinstallationsRequest
         if (isset($this->searchTerm)) {
             $output['searchTerm'] = $this->searchTerm;
         }
-        if (isset($this->phpVersions)) {
-            $output['phpVersions'] = $this->phpVersions;
-        }
+        $output['phpVersions'] = $this->phpVersions;
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
