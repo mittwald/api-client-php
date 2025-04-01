@@ -14,6 +14,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
@@ -54,6 +56,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRegisterExtension\ExtensionRegisterExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationNoContentResponse;
@@ -108,6 +111,16 @@ interface MarketplaceClient
      * @return ExtensionAuthenticateWithSessionTokenCreatedResponse You received a public token with a short expiry. You can now perform domain actions.
      */
     public function extensionAuthenticateWithSessionToken(ExtensionAuthenticateWithSessionTokenRequest $request): ExtensionAuthenticateWithSessionTokenCreatedResponse;
+    /**
+     * Change the context of an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionChangeContextRequest $request An object representing the request for this operation
+     * @return ExtensionChangeContextOKResponse The Extension context-change has been requested.
+     */
+    public function extensionChangeContext(ExtensionChangeContextRequest $request): ExtensionChangeContextOKResponse;
     /**
      * Consent to extension scopes.
      *
@@ -340,6 +353,16 @@ interface MarketplaceClient
      * @return EmptyResponse The asset has been removed.
      */
     public function extensionRemoveAsset(ExtensionRemoveAssetRequest $request): EmptyResponse;
+    /**
+     * Remove the logo of an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-remove-logo
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRemoveLogoRequest $request An object representing the request for this operation
+     * @return EmptyResponse The Logo has been removed.
+     */
+    public function extensionRemoveLogo(ExtensionRemoveLogoRequest $request): EmptyResponse;
     /**
      * Add an asset to an extension.
      *

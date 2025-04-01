@@ -25,6 +25,11 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWit
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
@@ -136,6 +141,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\Ext
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveAsset\ExtensionRemoveAssetTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRemoveLogo\ExtensionRemoveLogoTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestAssetUpload\ExtensionRequestAssetUploadNotFoundResponse;
@@ -247,6 +256,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             400 => ExtensionAuthenticateWithSessionTokenBadRequestResponse::fromResponse($httpResponse),
             404 => ExtensionAuthenticateWithSessionTokenNotFoundResponse::fromResponse($httpResponse),
             default => ExtensionAuthenticateWithSessionTokenDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Change the context of an Extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionChangeContextRequest $request An object representing the request for this operation
+     * @return ExtensionChangeContextOKResponse The Extension context-change has been requested.
+     */
+    public function extensionChangeContext(ExtensionChangeContextRequest $request): ExtensionChangeContextOKResponse
+    {
+        $httpRequest = new Request(ExtensionChangeContextRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionChangeContextOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionChangeContextNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionChangeContextTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionChangeContextDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -780,6 +812,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionRemoveAssetNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionRemoveAssetTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionRemoveAssetDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Remove the logo of an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-remove-logo
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionRemoveLogoRequest $request An object representing the request for this operation
+     * @return EmptyResponse The Logo has been removed.
+     */
+    public function extensionRemoveLogo(ExtensionRemoveLogoRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ExtensionRemoveLogoRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ExtensionRemoveLogoNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionRemoveLogoTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionRemoveLogoDefaultResponse::fromResponse($httpResponse),
         });
     }
 

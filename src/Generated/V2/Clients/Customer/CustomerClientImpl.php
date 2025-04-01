@@ -9,12 +9,26 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\AbortAgencyVerification\AbortAgencyVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInvitePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\AcceptCustomerInvite\AcceptCustomerInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateAgencyVerification\CreateAgencyVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\CreateCustomer\CreateCustomerDefaultResponse;
@@ -83,6 +97,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetC
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetCustomerTokenInvite\GetCustomerTokenInviteTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetOpenAgencyVerification\GetOpenAgencyVerificationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Customer\GetWallet\GetWalletDefaultResponse;
@@ -171,6 +192,31 @@ class CustomerClientImpl implements CustomerClient
     }
 
     /**
+     * Abort an open agency verification process
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-abort-agency-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param AbortAgencyVerificationRequest $request An object representing the request for this operation
+     * @return AbortAgencyVerificationOKResponse Abort response.
+     */
+    public function abortAgencyVerification(AbortAgencyVerificationRequest $request): AbortAgencyVerificationOKResponse
+    {
+        $httpRequest = new Request(AbortAgencyVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return AbortAgencyVerificationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => AbortAgencyVerificationBadRequestResponse::fromResponse($httpResponse),
+            403 => AbortAgencyVerificationForbiddenResponse::fromResponse($httpResponse),
+            404 => AbortAgencyVerificationNotFoundResponse::fromResponse($httpResponse),
+            429 => AbortAgencyVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => AbortAgencyVerificationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Accept a CustomerInvite.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-accept-customer-invite
@@ -191,6 +237,30 @@ class CustomerClientImpl implements CustomerClient
             412 => AcceptCustomerInvitePreconditionFailedResponse::fromResponse($httpResponse),
             429 => AcceptCustomerInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => AcceptCustomerInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Creates a new agency verification request. Only one active verification can be active at the same time.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-create-agency-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CreateAgencyVerificationRequest $request An object representing the request for this operation
+     */
+    public function createAgencyVerification(CreateAgencyVerificationRequest $request): CreateAgencyVerificationCreatedResponse
+    {
+        $httpRequest = new Request(CreateAgencyVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return CreateAgencyVerificationCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CreateAgencyVerificationBadRequestResponse::fromResponse($httpResponse),
+            403 => CreateAgencyVerificationForbiddenResponse::fromResponse($httpResponse),
+            404 => CreateAgencyVerificationNotFoundResponse::fromResponse($httpResponse),
+            429 => CreateAgencyVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CreateAgencyVerificationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -470,6 +540,31 @@ class CustomerClientImpl implements CustomerClient
             404 => GetCustomerTokenInviteNotFoundResponse::fromResponse($httpResponse),
             429 => GetCustomerTokenInviteTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetCustomerTokenInviteDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Gets the status of a agency verification request..
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Customer/operation/customer-get-open-agency-verification
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetOpenAgencyVerificationRequest $request An object representing the request for this operation
+     * @return GetOpenAgencyVerificationOKResponse The open agency verification request.
+     */
+    public function getOpenAgencyVerification(GetOpenAgencyVerificationRequest $request): GetOpenAgencyVerificationOKResponse
+    {
+        $httpRequest = new Request(GetOpenAgencyVerificationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetOpenAgencyVerificationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetOpenAgencyVerificationBadRequestResponse::fromResponse($httpResponse),
+            403 => GetOpenAgencyVerificationForbiddenResponse::fromResponse($httpResponse),
+            404 => GetOpenAgencyVerificationNotFoundResponse::fromResponse($httpResponse),
+            429 => GetOpenAgencyVerificationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetOpenAgencyVerificationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
