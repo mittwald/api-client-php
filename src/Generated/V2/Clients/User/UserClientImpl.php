@@ -465,6 +465,8 @@ class UserClientImpl implements UserClient
     /**
      * Create a new issue.
      *
+     * was replaced by /v2/users/self/feedback.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-create-issue
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -706,6 +708,8 @@ class UserClientImpl implements UserClient
     /**
      * Remove Avatar
      *
+     * Use /v2/users/{userId}/avatar instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-avatar-remove
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -729,6 +733,8 @@ class UserClientImpl implements UserClient
 
     /**
      * Request a new avatar upload
+     *
+     * Use /v2/users/{userId}/avatar instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-avatar-request-upload
      * @throws GuzzleException
@@ -754,6 +760,8 @@ class UserClientImpl implements UserClient
     /**
      * Submit user feedback
      *
+     * Use /v2/users/self/feedback instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-feedback-create
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -778,6 +786,8 @@ class UserClientImpl implements UserClient
     /**
      * Returns your submitted feedback
      *
+     * Use /v2/users/{userId}/feedback instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-feedback-list
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -801,6 +811,8 @@ class UserClientImpl implements UserClient
     /**
      * create a new issue
      *
+     * was replaced by /v2/users/self/feedback.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-issue-new
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -823,6 +835,8 @@ class UserClientImpl implements UserClient
 
     /**
      * Change your personal information
+     *
+     * Use /v2/users/{userId} instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personal-information-update
      * @throws GuzzleException
@@ -848,6 +862,8 @@ class UserClientImpl implements UserClient
     /**
      * Get personalized settings for the user executing the request
      *
+     * Use /v2/users/{userId}/settings instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-get
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -870,6 +886,8 @@ class UserClientImpl implements UserClient
 
     /**
      * update personalized settings
+     *
+     * Use /v2/users/{userId}/settings instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-personalized-settings-update
      * @throws GuzzleException
@@ -894,6 +912,8 @@ class UserClientImpl implements UserClient
 
     /**
      * Add phone number and init verification process
+     *
+     * use /v2/users/{userId}/phone instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-add
      * @throws GuzzleException
@@ -920,6 +940,8 @@ class UserClientImpl implements UserClient
     /**
      * remove your PhoneNumber
      *
+     * Use /v2/users/{userId}/phone instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-remove
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -943,6 +965,8 @@ class UserClientImpl implements UserClient
 
     /**
      * Verify phone number
+     *
+     * Instead, use /v2/users/{userId}/actions/verify-phone or alternatively /v2/users/{userId}/phone/verify.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-phone-number-verify
      * @throws GuzzleException
@@ -970,6 +994,8 @@ class UserClientImpl implements UserClient
     /**
      * Get profile information for the specified user if the user is related to the executing user
      *
+     * Use /v2/users/{userId} instead.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -995,6 +1021,8 @@ class UserClientImpl implements UserClient
 
     /**
      * Get profile information for the executing user
+     *
+     * Use /v2/users/{userId} instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/deprecated-user-service-user-get-own
      * @throws GuzzleException
