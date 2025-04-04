@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallations;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAppinstallationsRequest
+class PullImageForServiceRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,133 +17,69 @@ class ListAppinstallationsRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'projectId' => [
+            'stackId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'limit' => [
-                'type' => 'integer',
-                'minimum' => 1,
-            ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 1,
+            'serviceId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-            'projectId',
+            'stackId',
+            'serviceId',
         ],
     ];
 
-    private string $projectId;
+    private string $stackId;
 
-    private ?int $limit = null;
-
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private string $serviceId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $projectId)
+    public function __construct(string $stackId, string $serviceId)
     {
-        $this->projectId = $projectId;
+        $this->stackId = $stackId;
+        $this->serviceId = $serviceId;
     }
 
-    public function getProjectId(): string
+    public function getStackId(): string
     {
-        return $this->projectId;
+        return $this->stackId;
     }
 
-    public function getLimit(): ?int
+    public function getServiceId(): string
     {
-        return $this->limit ?? null;
+        return $this->serviceId;
     }
 
-    public function getSkip(): int
-    {
-        return $this->skip;
-    }
-
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withProjectId(string $projectId): self
+    public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($stackId, self::$schema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->projectId = $projectId;
+        $clone->stackId = $stackId;
 
         return $clone;
     }
 
-    public function withLimit(int $limit): self
+    public function withServiceId(string $serviceId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($serviceId, self::$schema['properties']['serviceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
+        $clone->serviceId = $serviceId;
 
         return $clone;
     }
@@ -153,34 +89,21 @@ class ListAppinstallationsRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAppinstallationsRequest Created instance
+     * @return PullImageForServiceRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAppinstallationsRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): PullImageForServiceRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $projectId = $input->{'projectId'};
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $stackId = $input->{'stackId'};
+        $serviceId = $input->{'serviceId'};
 
-        $obj = new self($projectId);
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($stackId, $serviceId);
+
         return $obj;
     }
 
@@ -192,14 +115,8 @@ class ListAppinstallationsRequest
     public function toJson(): array
     {
         $output = [];
-        $output['projectId'] = $this->projectId;
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['stackId'] = $this->stackId;
+        $output['serviceId'] = $this->serviceId;
 
         return $output;
     }
@@ -244,8 +161,9 @@ class ListAppinstallationsRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $projectId = urlencode($mapped['projectId']);
-        return '/v2/projects/' . $projectId . '/app-installations';
+        $stackId = urlencode($mapped['stackId']);
+        $serviceId = urlencode($mapped['serviceId']);
+        return '/v2/stacks/' . $stackId . '/services/' . $serviceId . '/actions/pull';
     }
 
     /**
@@ -261,15 +179,6 @@ class ListAppinstallationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,

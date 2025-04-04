@@ -117,6 +117,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesInt
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceForbiddenResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServicePreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RecreateService\RecreateServiceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RecreateService\RecreateServiceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RecreateService\RecreateServiceForbiddenResponse;
@@ -565,6 +573,33 @@ class ContainerClientImpl implements ContainerClient
             429 => ListVolumesTooManyRequestsResponse::fromResponse($httpResponse),
             500 => ListVolumesInternalServerErrorResponse::fromResponse($httpResponse),
             default => ListVolumesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Pulls the latest version oof the Service's image and recreates the Service.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-pull-image-for-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PullImageForServiceRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function pullImageForService(PullImageForServiceRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(PullImageForServiceRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => PullImageForServiceBadRequestResponse::fromResponse($httpResponse),
+            403 => PullImageForServiceForbiddenResponse::fromResponse($httpResponse),
+            404 => PullImageForServiceNotFoundResponse::fromResponse($httpResponse),
+            412 => PullImageForServicePreconditionFailedResponse::fromResponse($httpResponse),
+            429 => PullImageForServiceTooManyRequestsResponse::fromResponse($httpResponse),
+            500 => PullImageForServiceInternalServerErrorResponse::fromResponse($httpResponse),
+            default => PullImageForServiceDefaultResponse::fromResponse($httpResponse),
         });
     }
 

@@ -33,6 +33,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksOKRes
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListStacks\ListStacksRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\ListVolumes\ListVolumesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\PullImageForService\PullImageForServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RecreateService\RecreateServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\RestartService\RestartServiceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\StartService\StartServiceRequest;
@@ -200,6 +201,16 @@ interface ContainerClient
      * @return ListVolumesOKResponse OK
      */
     public function listVolumes(ListVolumesRequest $request): ListVolumesOKResponse;
+    /**
+     * Pulls the latest version oof the Service's image and recreates the Service.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-pull-image-for-service
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PullImageForServiceRequest $request An object representing the request for this operation
+     * @return EmptyResponse NoContent
+     */
+    public function pullImageForService(PullImageForServiceRequest $request): EmptyResponse;
     /**
      * Recreate a Service.
      *

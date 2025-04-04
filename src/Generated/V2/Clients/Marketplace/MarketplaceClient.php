@@ -12,6 +12,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBi
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
@@ -71,6 +75,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUplo
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingOKResponse;
@@ -115,6 +121,28 @@ interface MarketplaceClient
      * @return ContributorGetLoginLinkOKResponse The generated link to the Stripe dashboard
      */
     public function contributorGetLoginLink(ContributorGetLoginLinkRequest $request): ContributorGetLoginLinkOKResponse;
+    /**
+     * List incoming Invoices of a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-list-incoming-invoices
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorListIncomingInvoicesRequest $request An object representing the request for this operation
+     * @return ContributorListIncomingInvoicesOKResponse List of incoming Invoices
+     */
+    public function contributorListIncomingInvoices(ContributorListIncomingInvoicesRequest $request): ContributorListIncomingInvoicesOKResponse;
+    /**
+     * List all invoices on behalf of a contributor.
+     *
+     * List all invoices on behalf of a contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-list-onbehalf-invoices
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorListOnbehalfInvoicesRequest $request An object representing the request for this operation
+     * @return ContributorListOnbehalfInvoicesOKResponse The list of invoices on behalf of a contributor.
+     */
+    public function contributorListOnbehalfInvoices(ContributorListOnbehalfInvoicesRequest $request): ContributorListOnbehalfInvoicesOKResponse;
     /**
      * Rotate the secret for an extension instance.
      *
@@ -449,6 +477,16 @@ interface MarketplaceClient
      * @return ExtensionSetExtensionPublishedStateOKResponse The Extension visibility has been adjusted.
      */
     public function extensionSetExtensionPublishedState(ExtensionSetExtensionPublishedStateRequest $request): ExtensionSetExtensionPublishedStateOKResponse;
+    /**
+     * Start a checkout process for an extension.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-start-extension-checkout
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionStartExtensionCheckoutRequest $request An object representing the request for this operation
+     * @return ExtensionStartExtensionCheckoutCreatedResponse A Checkout URL has been created.
+     */
+    public function extensionStartExtensionCheckout(ExtensionStartExtensionCheckoutRequest $request): ExtensionStartExtensionCheckoutCreatedResponse;
     /**
      * Update or Create Contract for existing Extension Instances.
      *

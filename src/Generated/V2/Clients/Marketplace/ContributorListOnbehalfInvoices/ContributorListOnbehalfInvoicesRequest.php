@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAppinstallationsForUserRequest
+class ContributorListOnbehalfInvoicesRequest
 {
     public const method = 'get';
 
@@ -17,110 +17,42 @@ class ListAppinstallationsForUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'limit' => [
-                'type' => 'integer',
-                'minimum' => 1,
-            ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 1,
+            'contributorId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
         ],
         'required' => [
-
+            'contributorId',
         ],
     ];
 
-    private ?int $limit = null;
-
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private string $contributorId;
 
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $contributorId)
     {
+        $this->contributorId = $contributorId;
     }
 
-    public function getLimit(): ?int
+    public function getContributorId(): string
     {
-        return $this->limit ?? null;
+        return $this->contributorId;
     }
 
-    public function getSkip(): int
-    {
-        return $this->skip;
-    }
-
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withLimit(int $limit): self
+    public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
-
-        return $clone;
-    }
-
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
+        $clone->contributorId = $contributorId;
 
         return $clone;
     }
@@ -130,33 +62,20 @@ class ListAppinstallationsForUserRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAppinstallationsForUserRequest Created instance
+     * @return ContributorListOnbehalfInvoicesRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAppinstallationsForUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorListOnbehalfInvoicesRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $contributorId = $input->{'contributorId'};
 
-        $obj = new self();
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($contributorId);
+
         return $obj;
     }
 
@@ -168,13 +87,7 @@ class ListAppinstallationsForUserRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['contributorId'] = $this->contributorId;
 
         return $output;
     }
@@ -219,7 +132,8 @@ class ListAppinstallationsForUserRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/app-installations';
+        $contributorId = urlencode($mapped['contributorId']);
+        return '/v2/contributors/' . $contributorId . '/invoices/outgoing';
     }
 
     /**
@@ -235,15 +149,6 @@ class ListAppinstallationsForUserRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,

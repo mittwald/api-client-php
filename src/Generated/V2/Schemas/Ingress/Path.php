@@ -30,9 +30,6 @@ class Path
             'target' => [
                 'oneOf' => [
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TargetDirectory',
-                    ],
-                    [
                         '$ref' => '#/components/schemas/de.mittwald.v1.ingress.TargetUrl',
                     ],
                     [
@@ -56,9 +53,9 @@ class Path
 
     private string $path;
 
-    private TargetDirectory|TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target;
+    private TargetUrl|TargetInstallation|TargetUseDefaultPage|TargetContainer $target;
 
-    public function __construct(string $path, TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
+    public function __construct(string $path, TargetContainer|TargetInstallation|TargetUrl|TargetUseDefaultPage $target)
     {
         $this->path = $path;
         $this->target = $target;
@@ -69,7 +66,7 @@ class Path
         return $this->path;
     }
 
-    public function getTarget(): TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage
+    public function getTarget(): TargetContainer|TargetInstallation|TargetUrl|TargetUseDefaultPage
     {
         return $this->target;
     }
@@ -88,7 +85,7 @@ class Path
         return $clone;
     }
 
-    public function withTarget(TargetContainer|TargetDirectory|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
+    public function withTarget(TargetContainer|TargetInstallation|TargetUrl|TargetUseDefaultPage $target): self
     {
         $clone = clone $this;
         $clone->target = $target;
@@ -113,7 +110,6 @@ class Path
 
         $path = $input->{'path'};
         $target = match (true) {
-            TargetDirectory::validateInput($input->{'target'}, true) => TargetDirectory::buildFromInput($input->{'target'}, validate: $validate),
             TargetUrl::validateInput($input->{'target'}, true) => TargetUrl::buildFromInput($input->{'target'}, validate: $validate),
             TargetInstallation::validateInput($input->{'target'}, true) => TargetInstallation::buildFromInput($input->{'target'}, validate: $validate),
             TargetUseDefaultPage::validateInput($input->{'target'}, true) => TargetUseDefaultPage::buildFromInput($input->{'target'}, validate: $validate),
@@ -136,7 +132,7 @@ class Path
         $output = [];
         $output['path'] = $this->path;
         $output['target'] = match (true) {
-            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage, ($this->target) instanceof TargetContainer => $this->target->toJson(),
+            ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage, ($this->target) instanceof TargetContainer => $this->target->toJson(),
         };
 
         return $output;
@@ -169,7 +165,7 @@ class Path
     public function __clone()
     {
         $this->target = match (true) {
-            ($this->target) instanceof TargetDirectory, ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage, ($this->target) instanceof TargetContainer => $this->target,
+            ($this->target) instanceof TargetUrl, ($this->target) instanceof TargetInstallation, ($this->target) instanceof TargetUseDefaultPage, ($this->target) instanceof TargetContainer => $this->target,
         };
     }
 }

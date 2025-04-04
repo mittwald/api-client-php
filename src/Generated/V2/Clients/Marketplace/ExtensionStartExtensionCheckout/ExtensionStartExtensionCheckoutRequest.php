@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\App\ListAppinstallationsForUser;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ListAppinstallationsForUserRequest
+class ExtensionStartExtensionCheckoutRequest
 {
-    public const method = 'get';
+    public const method = 'post';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,110 +17,86 @@ class ListAppinstallationsForUserRequest
     private static array $schema = [
         'type' => 'object',
         'properties' => [
-            'limit' => [
-                'type' => 'integer',
-                'minimum' => 1,
+            'extensionId' => [
+                'format' => 'uuid',
+                'type' => 'string',
             ],
-            'skip' => [
-                'type' => 'integer',
-                'default' => 0,
-            ],
-            'page' => [
-                'type' => 'integer',
-                'minimum' => 1,
+            'body' => [
+                'properties' => [
+                    'consentedScopes' => [
+                        'description' => 'the consented scopes the extension needs.',
+                        'items' => [
+                            'format' => 'uuid',
+                            'type' => 'string',
+                        ],
+                        'type' => 'array',
+                    ],
+                    'customerId' => [
+                        'description' => 'the customer the extension should be booked for.',
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
+                    'projectId' => [
+                        'description' => 'the project the extension should assigned to.',
+                        'format' => 'uuid',
+                        'type' => 'string',
+                    ],
+                ],
+                'required' => [
+                    'customerId',
+                    'consentedScopes',
+                ],
+                'type' => 'object',
             ],
         ],
         'required' => [
-
+            'extensionId',
+            'body',
         ],
     ];
 
-    private ?int $limit = null;
+    private string $extensionId;
 
-    private int $skip = 0;
-
-    private ?int $page = null;
+    private ExtensionStartExtensionCheckoutRequestBody $body;
 
     private array $headers = [
 
     ];
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(string $extensionId, ExtensionStartExtensionCheckoutRequestBody $body)
     {
+        $this->extensionId = $extensionId;
+        $this->body = $body;
     }
 
-    public function getLimit(): ?int
+    public function getExtensionId(): string
     {
-        return $this->limit ?? null;
+        return $this->extensionId;
     }
 
-    public function getSkip(): int
+    public function getBody(): ExtensionStartExtensionCheckoutRequestBody
     {
-        return $this->skip;
+        return $this->body;
     }
 
-    public function getPage(): ?int
-    {
-        return $this->page ?? null;
-    }
-
-    public function withLimit(int $limit): self
+    public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->limit = $limit;
+        $clone->extensionId = $extensionId;
 
         return $clone;
     }
 
-    public function withoutLimit(): self
+    public function withBody(ExtensionStartExtensionCheckoutRequestBody $body): self
     {
         $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
-    public function withSkip(int $skip): self
-    {
-        $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->skip = $skip;
-
-        return $clone;
-    }
-
-    public function withPage(int $page): self
-    {
-        $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->page = $page;
-
-        return $clone;
-    }
-
-    public function withoutPage(): self
-    {
-        $clone = clone $this;
-        unset($clone->page);
+        $clone->body = $body;
 
         return $clone;
     }
@@ -130,33 +106,21 @@ class ListAppinstallationsForUserRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ListAppinstallationsForUserRequest Created instance
+     * @return ExtensionStartExtensionCheckoutRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ListAppinstallationsForUserRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionStartExtensionCheckoutRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $limit = null;
-        if (isset($input->{'limit'})) {
-            $limit = (int)($input->{'limit'});
-        }
-        $skip = 0;
-        if (isset($input->{'skip'})) {
-            $skip = (int)($input->{'skip'});
-        }
-        $page = null;
-        if (isset($input->{'page'})) {
-            $page = (int)($input->{'page'});
-        }
+        $extensionId = $input->{'extensionId'};
+        $body = ExtensionStartExtensionCheckoutRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self();
-        $obj->limit = $limit;
-        $obj->skip = $skip;
-        $obj->page = $page;
+        $obj = new self($extensionId, $body);
+
         return $obj;
     }
 
@@ -168,13 +132,8 @@ class ListAppinstallationsForUserRequest
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        $output['skip'] = $this->skip;
-        if (isset($this->page)) {
-            $output['page'] = $this->page;
-        }
+        $output['extensionId'] = $this->extensionId;
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -205,6 +164,7 @@ class ListAppinstallationsForUserRequest
 
     public function __clone()
     {
+        $this->body = clone $this->body;
     }
 
     /**
@@ -219,7 +179,8 @@ class ListAppinstallationsForUserRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        return '/v2/app-installations';
+        $extensionId = urlencode($mapped['extensionId']);
+        return '/v2/extensions/' . $extensionId . '/checkout';
     }
 
     /**
@@ -235,18 +196,10 @@ class ListAppinstallationsForUserRequest
     {
         $mapped = $this->toJson();
         $query = [];
-        if (isset($mapped['limit'])) {
-            $query['limit'] = $mapped['limit'];
-        }
-        if (isset($mapped['skip'])) {
-            $query['skip'] = $mapped['skip'];
-        }
-        if (isset($mapped['page'])) {
-            $query['page'] = $mapped['page'];
-        }
         return [
             'query' => $query,
             'headers' => $this->headers,
+            'json' => $this->getBody()->toJson(),
         ];
     }
 
