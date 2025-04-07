@@ -577,7 +577,7 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
-     * Pulls the latest version oof the Service's image and recreates the Service.
+     * Pulls the latest version of the Service's image and recreates the Service.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-pull-image-for-service
      * @throws GuzzleException

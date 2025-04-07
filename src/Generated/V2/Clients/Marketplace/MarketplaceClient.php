@@ -16,6 +16,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingI
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
@@ -143,6 +145,16 @@ interface MarketplaceClient
      * @return ContributorListOnbehalfInvoicesOKResponse The list of invoices on behalf of a contributor.
      */
     public function contributorListOnbehalfInvoices(ContributorListOnbehalfInvoicesRequest $request): ContributorListOnbehalfInvoicesOKResponse;
+    /**
+     * Request an Access Token for the Incoming Invoice file.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-receipt-get-file-access-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorReceiptGetFileAccessTokenRequest $request An object representing the request for this operation
+     * @return ContributorReceiptGetFileAccessTokenOKResponse The File Access Token required to access the Incoming Invoice file.
+     */
+    public function contributorReceiptGetFileAccessToken(ContributorReceiptGetFileAccessTokenRequest $request): ContributorReceiptGetFileAccessTokenOKResponse;
     /**
      * Rotate the secret for an extension instance.
      *

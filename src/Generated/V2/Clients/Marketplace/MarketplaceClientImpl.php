@@ -34,6 +34,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfI
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceNotFoundResponse;
@@ -337,6 +343,30 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ContributorListOnbehalfInvoicesNotFoundResponse::fromResponse($httpResponse),
             429 => ContributorListOnbehalfInvoicesTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorListOnbehalfInvoicesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Request an Access Token for the Incoming Invoice file.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-receipt-get-file-access-token
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorReceiptGetFileAccessTokenRequest $request An object representing the request for this operation
+     * @return ContributorReceiptGetFileAccessTokenOKResponse The File Access Token required to access the Incoming Invoice file.
+     */
+    public function contributorReceiptGetFileAccessToken(ContributorReceiptGetFileAccessTokenRequest $request): ContributorReceiptGetFileAccessTokenOKResponse
+    {
+        $httpRequest = new Request(ContributorReceiptGetFileAccessTokenRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorReceiptGetFileAccessTokenOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorReceiptGetFileAccessTokenBadRequestResponse::fromResponse($httpResponse),
+            404 => ContributorReceiptGetFileAccessTokenNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorReceiptGetFileAccessTokenTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorReceiptGetFileAccessTokenDefaultResponse::fromResponse($httpResponse),
         });
     }
 

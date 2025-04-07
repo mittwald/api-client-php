@@ -21,6 +21,16 @@ class ListAppinstallationsRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'appIds' => [
+                'items' => [
+                    'format' => 'uuid',
+                    'type' => 'string',
+                ],
+                'type' => 'array',
+            ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
             'limit' => [
                 'type' => 'integer',
                 'minimum' => 1,
@@ -41,6 +51,13 @@ class ListAppinstallationsRequest
 
     private string $projectId;
 
+    /**
+     * @var string[]|null
+     */
+    private ?array $appIds = null;
+
+    private ?string $searchTerm = null;
+
     private ?int $limit = null;
 
     private int $skip = 0;
@@ -59,6 +76,19 @@ class ListAppinstallationsRequest
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getAppIds(): ?array
+    {
+        return $this->appIds ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
     }
 
     public function getLimit(): ?int
@@ -86,6 +116,53 @@ class ListAppinstallationsRequest
 
         $clone = clone $this;
         $clone->projectId = $projectId;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $appIds
+     */
+    public function withAppIds(array $appIds): self
+    {
+        $validator = new Validator();
+        $validator->validate($appIds, self::$schema['properties']['appIds']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->appIds = $appIds;
+
+        return $clone;
+    }
+
+    public function withoutAppIds(): self
+    {
+        $clone = clone $this;
+        unset($clone->appIds);
+
+        return $clone;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$schema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
 
         return $clone;
     }
@@ -164,6 +241,14 @@ class ListAppinstallationsRequest
         }
 
         $projectId = $input->{'projectId'};
+        $appIds = null;
+        if (isset($input->{'appIds'})) {
+            $appIds = $input->{'appIds'};
+        }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
         $limit = null;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -178,6 +263,8 @@ class ListAppinstallationsRequest
         }
 
         $obj = new self($projectId);
+        $obj->appIds = $appIds;
+        $obj->searchTerm = $searchTerm;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
@@ -193,6 +280,12 @@ class ListAppinstallationsRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
+        if (isset($this->appIds)) {
+            $output['appIds'] = $this->appIds;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
         if (isset($this->limit)) {
             $output['limit'] = $this->limit;
         }
@@ -261,6 +354,12 @@ class ListAppinstallationsRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['appIds'])) {
+            $query['appIds'] = $mapped['appIds'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }

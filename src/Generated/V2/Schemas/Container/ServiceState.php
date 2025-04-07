@@ -45,6 +45,9 @@ class ServiceState
             'image' => [
                 'type' => 'string',
             ],
+            'imageDigest' => [
+                'type' => 'string',
+            ],
             'ports' => [
                 'items' => [
                     'type' => 'string',
@@ -80,6 +83,8 @@ class ServiceState
     private ?array $envs = null;
 
     private string $image;
+
+    private ?string $imageDigest = null;
 
     /**
      * @var string[]|null
@@ -123,6 +128,11 @@ class ServiceState
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    public function getImageDigest(): ?string
+    {
+        return $this->imageDigest ?? null;
     }
 
     /**
@@ -230,6 +240,28 @@ class ServiceState
         return $clone;
     }
 
+    public function withImageDigest(string $imageDigest): self
+    {
+        $validator = new Validator();
+        $validator->validate($imageDigest, self::$schema['properties']['imageDigest']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->imageDigest = $imageDigest;
+
+        return $clone;
+    }
+
+    public function withoutImageDigest(): self
+    {
+        $clone = clone $this;
+        unset($clone->imageDigest);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $ports
      */
@@ -308,6 +340,10 @@ class ServiceState
             $envs = (array)$input->{'envs'};
         }
         $image = $input->{'image'};
+        $imageDigest = null;
+        if (isset($input->{'imageDigest'})) {
+            $imageDigest = $input->{'imageDigest'};
+        }
         $ports = null;
         if (isset($input->{'ports'})) {
             $ports = $input->{'ports'};
@@ -321,6 +357,7 @@ class ServiceState
         $obj->command = $command;
         $obj->entrypoint = $entrypoint;
         $obj->envs = $envs;
+        $obj->imageDigest = $imageDigest;
         $obj->ports = $ports;
         $obj->volumes = $volumes;
         return $obj;
@@ -344,6 +381,9 @@ class ServiceState
             $output['envs'] = $this->envs;
         }
         $output['image'] = $this->image;
+        if (isset($this->imageDigest)) {
+            $output['imageDigest'] = $this->imageDigest;
+        }
         if (isset($this->ports)) {
             $output['ports'] = $this->ports;
         }
