@@ -65,6 +65,9 @@ class Customer
                 ],
                 'type' => 'array',
             ],
+            'isAllowedToPlaceOrders' => [
+                'type' => 'boolean',
+            ],
             'isBanned' => [
                 'type' => 'boolean',
             ],
@@ -138,6 +141,8 @@ class Customer
      */
     private ?array $flags = null;
 
+    private ?bool $isAllowedToPlaceOrders = null;
+
     private ?bool $isBanned = null;
 
     private ?bool $isInDefaultOfPayment = null;
@@ -210,6 +215,11 @@ class Customer
     public function getFlags(): ?array
     {
         return $this->flags ?? null;
+    }
+
+    public function getIsAllowedToPlaceOrders(): ?bool
+    {
+        return $this->isAllowedToPlaceOrders ?? null;
     }
 
     public function getIsBanned(): ?bool
@@ -387,6 +397,28 @@ class Customer
     {
         $clone = clone $this;
         unset($clone->flags);
+
+        return $clone;
+    }
+
+    public function withIsAllowedToPlaceOrders(bool $isAllowedToPlaceOrders): self
+    {
+        $validator = new Validator();
+        $validator->validate($isAllowedToPlaceOrders, self::$schema['properties']['isAllowedToPlaceOrders']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isAllowedToPlaceOrders = $isAllowedToPlaceOrders;
+
+        return $clone;
+    }
+
+    public function withoutIsAllowedToPlaceOrders(): self
+    {
+        $clone = clone $this;
+        unset($clone->isAllowedToPlaceOrders);
 
         return $clone;
     }
@@ -585,6 +617,10 @@ class Customer
         if (isset($input->{'flags'})) {
             $flags = array_map(fn (string $i): CustomerFlag => CustomerFlag::from($i), $input->{'flags'});
         }
+        $isAllowedToPlaceOrders = null;
+        if (isset($input->{'isAllowedToPlaceOrders'})) {
+            $isAllowedToPlaceOrders = (bool)($input->{'isAllowedToPlaceOrders'});
+        }
         $isBanned = null;
         if (isset($input->{'isBanned'})) {
             $isBanned = (bool)($input->{'isBanned'});
@@ -619,6 +655,7 @@ class Customer
         $obj->categoryId = $categoryId;
         $obj->executingUserRoles = $executingUserRoles;
         $obj->flags = $flags;
+        $obj->isAllowedToPlaceOrders = $isAllowedToPlaceOrders;
         $obj->isBanned = $isBanned;
         $obj->isInDefaultOfPayment = $isInDefaultOfPayment;
         $obj->levelOfUndeliverableDunningNotice = $levelOfUndeliverableDunningNotice;
@@ -653,6 +690,9 @@ class Customer
         }
         if (isset($this->flags)) {
             $output['flags'] = array_map(fn (CustomerFlag $i): string => $i->value, $this->flags);
+        }
+        if (isset($this->isAllowedToPlaceOrders)) {
+            $output['isAllowedToPlaceOrders'] = $this->isAllowedToPlaceOrders;
         }
         if (isset($this->isBanned)) {
             $output['isBanned'] = $this->isBanned;
