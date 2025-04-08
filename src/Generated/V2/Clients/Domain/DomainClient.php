@@ -382,7 +382,7 @@ interface DomainClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DnsDeleteDnsZoneRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse No Content
      */
     public function dnsDeleteDnsZone(DnsDeleteDnsZoneRequest $request): EmptyResponse;
     /**

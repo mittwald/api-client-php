@@ -855,13 +855,13 @@ class DomainClientImpl implements DomainClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DnsDeleteDnsZoneRequest $request An object representing the request for this operation
-     * @return EmptyResponse OK
+     * @return EmptyResponse No Content
      */
     public function dnsDeleteDnsZone(DnsDeleteDnsZoneRequest $request): EmptyResponse
     {
         $httpRequest = new Request(DnsDeleteDnsZoneRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
+        if ($httpResponse->getStatusCode() === 204) {
             return new EmptyResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
