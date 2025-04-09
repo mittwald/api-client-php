@@ -55,6 +55,10 @@ class ProjectBackup
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'requestedAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
             'status' => [
                 'example' => 'Completed',
                 'type' => 'string',
@@ -84,6 +88,8 @@ class ProjectBackup
     private ?string $parentId = null;
 
     private string $projectId;
+
+    private ?DateTime $requestedAt = null;
 
     private string $status;
 
@@ -133,6 +139,11 @@ class ProjectBackup
     public function getProjectId(): string
     {
         return $this->projectId;
+    }
+
+    public function getRequestedAt(): ?DateTime
+    {
+        return $this->requestedAt ?? null;
     }
 
     public function getStatus(): string
@@ -274,6 +285,22 @@ class ProjectBackup
         return $clone;
     }
 
+    public function withRequestedAt(DateTime $requestedAt): self
+    {
+        $clone = clone $this;
+        $clone->requestedAt = $requestedAt;
+
+        return $clone;
+    }
+
+    public function withoutRequestedAt(): self
+    {
+        $clone = clone $this;
+        unset($clone->requestedAt);
+
+        return $clone;
+    }
+
     public function withStatus(string $status): self
     {
         $validator = new Validator();
@@ -326,6 +353,10 @@ class ProjectBackup
             $parentId = $input->{'parentId'};
         }
         $projectId = $input->{'projectId'};
+        $requestedAt = null;
+        if (isset($input->{'requestedAt'})) {
+            $requestedAt = new DateTime($input->{'requestedAt'});
+        }
         $status = $input->{'status'};
 
         $obj = new self($deletable, $id, $projectId, $status);
@@ -334,6 +365,7 @@ class ProjectBackup
         $obj->expiresAt = $expiresAt;
         $obj->export = $export;
         $obj->parentId = $parentId;
+        $obj->requestedAt = $requestedAt;
         return $obj;
     }
 
@@ -363,6 +395,9 @@ class ProjectBackup
             $output['parentId'] = $this->parentId;
         }
         $output['projectId'] = $this->projectId;
+        if (isset($this->requestedAt)) {
+            $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
+        }
         $output['status'] = $this->status;
 
         return $output;
@@ -399,6 +434,9 @@ class ProjectBackup
         }
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
+        }
+        if (isset($this->requestedAt)) {
+            $this->requestedAt = clone $this->requestedAt;
         }
     }
 }
