@@ -11,6 +11,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClientImpl;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClientImpl;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
@@ -133,6 +135,11 @@ class ClientImpl extends BaseClient implements Client
     public function article(): ArticleClient
     {
         return new ArticleClientImpl($this->client);
+    }
+
+    public function container(): ContainerClient
+    {
+        return new ContainerClientImpl($this->client);
     }
 
     public function pageInsights(): PageInsightsClient

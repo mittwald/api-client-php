@@ -7,6 +7,7 @@ namespace Mittwald\ApiClient\Generated\V2;
 use Mittwald\ApiClient\Generated\V2\Clients\App\AppClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Article\ArticleClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Backup\BackupClient;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\ContainerClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\ContractClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Conversation\ConversationClient;
 use Mittwald\ApiClient\Generated\V2\Clients\Cronjob\CronjobClient;
@@ -50,6 +51,7 @@ interface Client
     public function file(): FileClient;
     public function mail(): MailClient;
     public function article(): ArticleClient;
+    public function container(): ContainerClient;
     public function pageInsights(): PageInsightsClient;
     public function relocation(): RelocationClient;
     public function marketplace(): MarketplaceClient;
