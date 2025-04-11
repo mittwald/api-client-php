@@ -8,6 +8,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
@@ -99,6 +101,16 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtension
  */
 interface MarketplaceClient
 {
+    /**
+     * Get Contributor Billing Information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-billing-information
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetBillingInformationRequest $request An object representing the request for this operation
+     * @return ContributorGetBillingInformationOKResponse The billing related information of the Contributor
+     */
+    public function contributorGetBillingInformation(ContributorGetBillingInformationRequest $request): ContributorGetBillingInformationOKResponse;
     /**
      * Get the Stripe Billing Portal Link for a Customer
      *

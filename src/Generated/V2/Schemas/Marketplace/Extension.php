@@ -88,6 +88,13 @@ class Extension
                 'example' => 'MyPingExtension',
                 'type' => 'string',
             ],
+            'pricing' => [
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy',
+                    ],
+                ],
+            ],
             'published' => [
                 'description' => 'Whether the extension has been published by the contributor.',
                 'type' => 'boolean',
@@ -197,6 +204,8 @@ class Extension
     private string $logoRefId;
 
     private string $name;
+
+    private ?MonthlyPricingStrategy $pricing = null;
 
     /**
      * Whether the extension has been published by the contributor.
@@ -335,6 +344,11 @@ class Extension
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPricing(): ?MonthlyPricingStrategy
+    {
+        return $this->pricing ?? null;
     }
 
     public function getPublished(): bool
@@ -597,6 +611,22 @@ class Extension
         return $clone;
     }
 
+    public function withPricing(MonthlyPricingStrategy $pricing): self
+    {
+        $clone = clone $this;
+        $clone->pricing = $pricing;
+
+        return $clone;
+    }
+
+    public function withoutPricing(): self
+    {
+        $clone = clone $this;
+        unset($clone->pricing);
+
+        return $clone;
+    }
+
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
@@ -724,6 +754,13 @@ class Extension
         $id = $input->{'id'};
         $logoRefId = $input->{'logoRefId'};
         $name = $input->{'name'};
+        $pricing = null;
+        if (isset($input->{'pricing'})) {
+            $pricing = match (true) {
+                MonthlyPricingStrategy::validateInput($input->{'pricing'}, true) => MonthlyPricingStrategy::buildFromInput($input->{'pricing'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
+            };
+        }
         $published = (bool)($input->{'published'});
         $scopes = $input->{'scopes'};
         $state = ExtensionState::from($input->{'state'});
@@ -738,6 +775,7 @@ class Extension
         $obj->externalFrontends = $externalFrontends;
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
+        $obj->pricing = $pricing;
         return $obj;
     }
 
@@ -773,6 +811,11 @@ class Extension
         $output['id'] = $this->id;
         $output['logoRefId'] = $this->logoRefId;
         $output['name'] = $this->name;
+        if (isset($this->pricing)) {
+            $output['pricing'] = match (true) {
+                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing->toJson(),
+            };
+        }
         $output['published'] = $this->published;
         $output['scopes'] = $this->scopes;
         $output['state'] = ($this->state)->value;
@@ -810,5 +853,10 @@ class Extension
 
     public function __clone()
     {
+        if (isset($this->pricing)) {
+            $this->pricing = match (true) {
+                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing,
+            };
+        }
     }
 }

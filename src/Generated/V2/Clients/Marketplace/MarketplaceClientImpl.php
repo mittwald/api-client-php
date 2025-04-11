@@ -10,6 +10,12 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetCustomerBillingPortalLink\ContributorGetCustomerBillingPortalLinkNotFoundResponse;
@@ -242,6 +248,30 @@ class MarketplaceClientImpl implements MarketplaceClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Get Contributor Billing Information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-get-billing-information
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorGetBillingInformationRequest $request An object representing the request for this operation
+     * @return ContributorGetBillingInformationOKResponse The billing related information of the Contributor
+     */
+    public function contributorGetBillingInformation(ContributorGetBillingInformationRequest $request): ContributorGetBillingInformationOKResponse
+    {
+        $httpRequest = new Request(ContributorGetBillingInformationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorGetBillingInformationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorGetBillingInformationBadRequestResponse::fromResponse($httpResponse),
+            404 => ContributorGetBillingInformationNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorGetBillingInformationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorGetBillingInformationDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**
