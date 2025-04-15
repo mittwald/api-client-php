@@ -33,6 +33,7 @@ class ListProjectBackupsRequest
             ],
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
                 'minimum' => 1,
             ],
             'skip' => [
@@ -57,7 +58,7 @@ class ListProjectBackupsRequest
 
     private ?BackupSortOrder $sortOrder = null;
 
-    private ?int $limit = null;
+    private int $limit = 1000;
 
     private int $skip = 0;
 
@@ -92,9 +93,9 @@ class ListProjectBackupsRequest
         return $this->sortOrder ?? null;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
     public function getSkip(): int
@@ -195,14 +196,6 @@ class ListProjectBackupsRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
@@ -267,7 +260,7 @@ class ListProjectBackupsRequest
         if (isset($input->{'sortOrder'})) {
             $sortOrder = BackupSortOrder::from($input->{'sortOrder'});
         }
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
@@ -308,9 +301,7 @@ class ListProjectBackupsRequest
         if (isset($this->sortOrder)) {
             $output['sortOrder'] = $this->sortOrder->value;
         }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
+        $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;

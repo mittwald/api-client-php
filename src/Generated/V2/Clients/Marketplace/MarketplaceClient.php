@@ -164,13 +164,13 @@ interface MarketplaceClient
      */
     public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse;
     /**
-     * Delete an ExtensionInstance.
+     * Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension-instance
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return UntypedResponse The ExtensionInstance has been removed. It will be cleaned up in the background.
      */
     public function extensionDeleteExtensionInstance(ExtensionDeleteExtensionInstanceRequest $request): UntypedResponse;
     /**

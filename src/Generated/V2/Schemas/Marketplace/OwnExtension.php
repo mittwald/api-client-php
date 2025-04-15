@@ -89,6 +89,13 @@ class OwnExtension
             'name' => [
                 'type' => 'string',
             ],
+            'pricing' => [
+                'oneOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy',
+                    ],
+                ],
+            ],
             'published' => [
                 'type' => 'boolean',
             ],
@@ -222,6 +229,8 @@ class OwnExtension
     private ?string $logoRefId = null;
 
     private string $name;
+
+    private ?MonthlyPricingStrategy $pricing = null;
 
     private bool $published;
 
@@ -371,6 +380,11 @@ class OwnExtension
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getPricing(): ?MonthlyPricingStrategy
+    {
+        return $this->pricing ?? null;
     }
 
     public function getPublished(): bool
@@ -728,6 +742,22 @@ class OwnExtension
         return $clone;
     }
 
+    public function withPricing(MonthlyPricingStrategy $pricing): self
+    {
+        $clone = clone $this;
+        $clone->pricing = $pricing;
+
+        return $clone;
+    }
+
+    public function withoutPricing(): self
+    {
+        $clone = clone $this;
+        unset($clone->pricing);
+
+        return $clone;
+    }
+
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
@@ -983,6 +1013,13 @@ class OwnExtension
             $logoRefId = $input->{'logoRefId'};
         }
         $name = $input->{'name'};
+        $pricing = null;
+        if (isset($input->{'pricing'})) {
+            $pricing = match (true) {
+                MonthlyPricingStrategy::validateInput($input->{'pricing'}, true) => MonthlyPricingStrategy::buildFromInput($input->{'pricing'}, validate: $validate),
+                default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
+            };
+        }
         $published = (bool)($input->{'published'});
         $requestedChanges = null;
         if (isset($input->{'requestedChanges'})) {
@@ -1029,6 +1066,7 @@ class OwnExtension
         $obj->frontendComponents = $frontendComponents;
         $obj->frontendFragments = $frontendFragments;
         $obj->logoRefId = $logoRefId;
+        $obj->pricing = $pricing;
         $obj->requestedChanges = $requestedChanges;
         $obj->scopes = $scopes;
         $obj->state = $state;
@@ -1085,6 +1123,11 @@ class OwnExtension
             $output['logoRefId'] = $this->logoRefId;
         }
         $output['name'] = $this->name;
+        if (isset($this->pricing)) {
+            $output['pricing'] = match (true) {
+                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing->toJson(),
+            };
+        }
         $output['published'] = $this->published;
         if (isset($this->requestedChanges)) {
             $output['requestedChanges'] = ($this->requestedChanges)->toJson();
@@ -1141,6 +1184,11 @@ class OwnExtension
 
     public function __clone()
     {
+        if (isset($this->pricing)) {
+            $this->pricing = match (true) {
+                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing,
+            };
+        }
         if (isset($this->requestedChanges)) {
             $this->requestedChanges = clone $this->requestedChanges;
         }

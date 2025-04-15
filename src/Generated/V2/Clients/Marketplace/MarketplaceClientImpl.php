@@ -52,6 +52,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstancePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceBadRequestResponse;
@@ -379,13 +380,13 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Delete an ExtensionInstance.
+     * Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension-instance
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return UntypedResponse The ExtensionInstance has been removed. It will be cleaned up in the background.
      */
     public function extensionDeleteExtensionInstance(ExtensionDeleteExtensionInstanceRequest $request): UntypedResponse
     {
@@ -396,6 +397,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionDeleteExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionDeleteExtensionInstancePreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionDeleteExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDeleteExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
