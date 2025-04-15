@@ -61,6 +61,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWit
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
@@ -94,6 +100,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtension\ExtensionDeleteExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstancePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDeleteExtensionInstance\ExtensionDeleteExtensionInstanceTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDisableExtensionInstance\ExtensionDisableExtensionInstanceBadRequestResponse;
@@ -204,6 +211,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUplo
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
@@ -470,6 +483,30 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Cancel an Extension Instance Termination.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-cancel-extension-termination
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCancelExtensionTerminationRequest $request An object representing the request for this operation
+     * @return ExtensionCancelExtensionTerminationOKResponse The Termination was cancelled.
+     */
+    public function extensionCancelExtensionTermination(ExtensionCancelExtensionTerminationRequest $request): ExtensionCancelExtensionTerminationOKResponse
+    {
+        $httpRequest = new Request(ExtensionCancelExtensionTerminationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionCancelExtensionTerminationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionCancelExtensionTerminationBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionCancelExtensionTerminationNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionCancelExtensionTerminationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionCancelExtensionTerminationDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Change the context of an Extension.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
@@ -615,13 +652,13 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Delete an ExtensionInstance.
+     * Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension-instance
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return UntypedResponse The ExtensionInstance has been removed. It will be cleaned up in the background.
      */
     public function extensionDeleteExtensionInstance(ExtensionDeleteExtensionInstanceRequest $request): UntypedResponse
     {
@@ -632,6 +669,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionDeleteExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionDeleteExtensionInstancePreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionDeleteExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionDeleteExtensionInstanceDefaultResponse::fromResponse($httpResponse),
         });
@@ -1142,6 +1180,30 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionRequestLogoUploadNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionRequestLogoUploadTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionRequestLogoUploadDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Schedule an Extension Instance Termination for the next possible date.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-schedule-extension-termination
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionScheduleExtensionTerminationRequest $request An object representing the request for this operation
+     * @return ExtensionScheduleExtensionTerminationCreatedResponse A Termination was scheduled.
+     */
+    public function extensionScheduleExtensionTermination(ExtensionScheduleExtensionTerminationRequest $request): ExtensionScheduleExtensionTerminationCreatedResponse
+    {
+        $httpRequest = new Request(ExtensionScheduleExtensionTerminationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ExtensionScheduleExtensionTerminationCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionScheduleExtensionTerminationBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionScheduleExtensionTerminationNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionScheduleExtensionTerminationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionScheduleExtensionTerminationDefaultResponse::fromResponse($httpResponse),
         });
     }
 

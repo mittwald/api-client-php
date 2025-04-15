@@ -26,6 +26,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateWithSessionToken\ExtensionAuthenticateWithSessionTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCancelExtensionTermination\ExtensionCancelExtensionTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionChangeContext\ExtensionChangeContextRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionConsentToExtensionScopes\ExtensionConsentToExtensionScopesRequest;
@@ -77,6 +79,8 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestExtensionVerification\ExtensionRequestExtensionVerificationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionRequestLogoUpload\ExtensionRequestLogoUploadRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionScheduleExtensionTermination\ExtensionScheduleExtensionTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutCreatedResponse;
@@ -198,6 +202,16 @@ interface MarketplaceClient
      */
     public function extensionAuthenticateWithSessionToken(ExtensionAuthenticateWithSessionTokenRequest $request): ExtensionAuthenticateWithSessionTokenCreatedResponse;
     /**
+     * Cancel an Extension Instance Termination.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-cancel-extension-termination
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionCancelExtensionTerminationRequest $request An object representing the request for this operation
+     * @return ExtensionCancelExtensionTerminationOKResponse The Termination was cancelled.
+     */
+    public function extensionCancelExtensionTermination(ExtensionCancelExtensionTerminationRequest $request): ExtensionCancelExtensionTerminationOKResponse;
+    /**
      * Change the context of an Extension.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-change-context
@@ -262,13 +276,13 @@ interface MarketplaceClient
      */
     public function extensionDeleteExtension(ExtensionDeleteExtensionRequest $request): EmptyResponse;
     /**
-     * Delete an ExtensionInstance.
+     * Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-delete-extension-instance
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionDeleteExtensionInstanceRequest $request An object representing the request for this operation
-     * @return UntypedResponse NoContent
+     * @return UntypedResponse The ExtensionInstance has been removed. It will be cleaned up in the background.
      */
     public function extensionDeleteExtensionInstance(ExtensionDeleteExtensionInstanceRequest $request): UntypedResponse;
     /**
@@ -491,6 +505,16 @@ interface MarketplaceClient
      * @return ExtensionRequestLogoUploadOKResponse The Upload of a logo for the extension has been requested.
      */
     public function extensionRequestLogoUpload(ExtensionRequestLogoUploadRequest $request): ExtensionRequestLogoUploadOKResponse;
+    /**
+     * Schedule an Extension Instance Termination for the next possible date.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-schedule-extension-termination
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionScheduleExtensionTerminationRequest $request An object representing the request for this operation
+     * @return ExtensionScheduleExtensionTerminationCreatedResponse A Termination was scheduled.
+     */
+    public function extensionScheduleExtensionTermination(ExtensionScheduleExtensionTerminationRequest $request): ExtensionScheduleExtensionTerminationCreatedResponse;
     /**
      * Publish or withdraw an Extension.
      *
