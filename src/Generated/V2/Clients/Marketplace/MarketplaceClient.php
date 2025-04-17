@@ -29,7 +29,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionDryRunWebhook\E
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionRequest;
@@ -220,9 +219,9 @@ interface MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionGetContributorRequest $request An object representing the request for this operation
-     * @return ExtensionGetContributorOKResponse OK
+     * @return UntypedResponse OK
      */
-    public function extensionGetContributor(ExtensionGetContributorRequest $request): ExtensionGetContributorOKResponse;
+    public function extensionGetContributor(ExtensionGetContributorRequest $request): UntypedResponse;
     /**
      * Get an Extension.
      *

@@ -76,7 +76,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSession
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionDefaultResponse;
@@ -503,14 +502,14 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionGetContributorRequest $request An object representing the request for this operation
-     * @return ExtensionGetContributorOKResponse OK
+     * @return UntypedResponse OK
      */
-    public function extensionGetContributor(ExtensionGetContributorRequest $request): ExtensionGetContributorOKResponse
+    public function extensionGetContributor(ExtensionGetContributorRequest $request): UntypedResponse
     {
         $httpRequest = new Request(ExtensionGetContributorRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionGetContributorOKResponse::fromResponse($httpResponse);
+            return UntypedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionGetContributorNotFoundResponse::fromResponse($httpResponse),
