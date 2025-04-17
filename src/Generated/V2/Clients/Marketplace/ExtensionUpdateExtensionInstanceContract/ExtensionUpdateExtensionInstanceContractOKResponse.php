@@ -23,6 +23,7 @@ class ExtensionUpdateExtensionInstanceContractOKResponse implements ResponseCont
             'body' => [
                 'properties' => [
                     'checkoutUrl' => [
+                        'description' => 'If left empty the new Pricing was already applied without external checkout.',
                         'type' => 'string',
                     ],
                 ],

@@ -13,14 +13,52 @@ class ExtensionScheduleExtensionTerminationRequestBody
      * Schema used to validate input for creating instances of this class
      */
     private static array $schema = [
+        'properties' => [
+            'instantTermination' => [
+                'description' => 'If set, the Extension Instance will be removed as fast as possible. No credit will be given.',
+                'type' => 'boolean',
+            ],
+        ],
         'type' => 'object',
     ];
+
+    /**
+     * If set, the Extension Instance will be removed as fast as possible. No credit will be given.
+     */
+    private ?bool $instantTermination = null;
 
     /**
      *
      */
     public function __construct()
     {
+    }
+
+    public function getInstantTermination(): ?bool
+    {
+        return $this->instantTermination ?? null;
+    }
+
+    public function withInstantTermination(bool $instantTermination): self
+    {
+        $validator = new Validator();
+        $validator->validate($instantTermination, self::$schema['properties']['instantTermination']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->instantTermination = $instantTermination;
+
+        return $clone;
+    }
+
+    public function withoutInstantTermination(): self
+    {
+        $clone = clone $this;
+        unset($clone->instantTermination);
+
+        return $clone;
     }
 
     /**
@@ -38,10 +76,13 @@ class ExtensionScheduleExtensionTerminationRequestBody
             static::validateInput($input);
         }
 
-
+        $instantTermination = null;
+        if (isset($input->{'instantTermination'})) {
+            $instantTermination = (bool)($input->{'instantTermination'});
+        }
 
         $obj = new self();
-
+        $obj->instantTermination = $instantTermination;
         return $obj;
     }
 
@@ -53,7 +94,9 @@ class ExtensionScheduleExtensionTerminationRequestBody
     public function toJson(): array
     {
         $output = [];
-
+        if (isset($this->instantTermination)) {
+            $output['instantTermination'] = $this->instantTermination;
+        }
 
         return $output;
     }

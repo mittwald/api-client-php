@@ -22,6 +22,12 @@ class ExtensionScheduleExtensionTerminationRequest
                 'type' => 'string',
             ],
             'body' => [
+                'properties' => [
+                    'instantTermination' => [
+                        'description' => 'If set, the Extension Instance will be removed as fast as possible. No credit will be given.',
+                        'type' => 'boolean',
+                    ],
+                ],
                 'type' => 'object',
             ],
         ],

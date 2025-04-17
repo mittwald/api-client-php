@@ -15,12 +15,16 @@ class ExtensionUpdateExtensionInstanceContractOKResponseBody
     private static array $schema = [
         'properties' => [
             'checkoutUrl' => [
+                'description' => 'If left empty the new Pricing was already applied without external checkout.',
                 'type' => 'string',
             ],
         ],
         'type' => 'object',
     ];
 
+    /**
+     * If left empty the new Pricing was already applied without external checkout.
+     */
     private ?string $checkoutUrl = null;
 
     /**
