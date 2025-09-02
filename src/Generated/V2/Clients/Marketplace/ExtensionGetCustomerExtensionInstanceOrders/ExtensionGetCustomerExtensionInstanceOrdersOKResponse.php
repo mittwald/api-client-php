@@ -23,7 +23,17 @@ class ExtensionGetCustomerExtensionInstanceOrdersOKResponse implements ResponseC
             'body' => [
                 'items' => [
                     'properties' => [
+                        'context' => [
+                            'enum' => [
+                                'project',
+                                'customer',
+                            ],
+                            'type' => 'string',
+                        ],
                         'extensionId' => [
+                            'type' => 'string',
+                        ],
+                        'referencedId' => [
                             'type' => 'string',
                         ],
                     ],

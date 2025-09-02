@@ -6,6 +6,7 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Domain;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\CheckDomainRegistrability\CheckDomainRegistrabilityOKResponse;
@@ -50,6 +51,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsCreateDnsZone\DnsCreateDns
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsDeleteDnsZone\DnsDeleteDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedOKResponse;
@@ -398,6 +400,18 @@ interface DomainClient
      * @return DnsGetDnsZoneOKResponse The requested DNSZone.
      */
     public function dnsGetDnsZone(DnsGetDnsZoneRequest $request): DnsGetDnsZoneOKResponse;
+    /**
+     * Get a zone file for a DNSZone.
+     *
+     * Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-zone-file
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsGetZoneFileRequest $request An object representing the request for this operation
+     * @return StringResponse Returns the zone file as plain text.
+     */
+    public function dnsGetZoneFile(DnsGetZoneFileRequest $request): StringResponse;
     /**
      * List DNSZones belonging to a Project.
      *

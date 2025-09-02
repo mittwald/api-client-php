@@ -2,40 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionUpdateExtensionPricingRequestBody
+class DnsGetZoneFileTooManyRequestsResponseBody
 {
     /**
      * Schema used to validate input for creating instances of this class
      */
     private static array $internalValidationSchema = [
+        'type' => 'object',
         'properties' => [
-            'dryRun' => [
-                'default' => false,
-                'description' => 'If set to true, the request will be validated but not executed.',
-                'type' => 'boolean',
+            'message' => [
+                'type' => 'string',
+                'example' => 'too many requests',
             ],
-            'priceInCents' => [
-                'description' => 'Price in cents.',
-                'type' => 'number',
+            'type' => [
+                'type' => 'string',
+                'example' => 'RateLimitError',
             ],
         ],
-        'type' => 'object',
     ];
 
-    /**
-     * If set to true, the request will be validated but not executed.
-     */
-    private bool $dryRun = false;
+    private ?string $message = null;
 
-    /**
-     * Price in cents.
-     */
-    private int|float|null $priceInCents = null;
+    private ?string $type = null;
 
     /**
      *
@@ -44,48 +37,56 @@ class ExtensionUpdateExtensionPricingRequestBody
     {
     }
 
-    public function getDryRun(): bool
+    public function getMessage(): ?string
     {
-        return $this->dryRun;
+        return $this->message ?? null;
     }
 
-    public function getPriceInCents(): int|float|null
+    public function getType(): ?string
     {
-        return $this->priceInCents;
+        return $this->type ?? null;
     }
 
-    public function withDryRun(bool $dryRun): self
+    public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($dryRun, self::$internalValidationSchema['properties']['dryRun']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->dryRun = $dryRun;
+        $clone->message = $message;
 
         return $clone;
     }
 
-    public function withPriceInCents(int|float $priceInCents): self
+    public function withoutMessage(): self
+    {
+        $clone = clone $this;
+        unset($clone->message);
+
+        return $clone;
+    }
+
+    public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($priceInCents, self::$internalValidationSchema['properties']['priceInCents']);
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->priceInCents = $priceInCents;
+        $clone->type = $type;
 
         return $clone;
     }
 
-    public function withoutPriceInCents(): self
+    public function withoutType(): self
     {
         $clone = clone $this;
-        unset($clone->priceInCents);
+        unset($clone->type);
 
         return $clone;
     }
@@ -95,28 +96,28 @@ class ExtensionUpdateExtensionPricingRequestBody
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionPricingRequestBody Created instance
+     * @return DnsGetZoneFileTooManyRequestsResponseBody Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequestBody
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileTooManyRequestsResponseBody
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $dryRun = false;
-        if (isset($input->{'dryRun'})) {
-            $dryRun = (bool)($input->{'dryRun'});
+        $message = null;
+        if (isset($input->{'message'})) {
+            $message = $input->{'message'};
         }
-        $priceInCents = null;
-        if (isset($input->{'priceInCents'})) {
-            $priceInCents = str_contains((string)($input->{'priceInCents'}), '.') ? (float)($input->{'priceInCents'}) : (int)($input->{'priceInCents'});
+        $type = null;
+        if (isset($input->{'type'})) {
+            $type = $input->{'type'};
         }
 
         $obj = new self();
-        $obj->dryRun = $dryRun;
-        $obj->priceInCents = $priceInCents;
+        $obj->message = $message;
+        $obj->type = $type;
         return $obj;
     }
 
@@ -128,9 +129,11 @@ class ExtensionUpdateExtensionPricingRequestBody
     public function toJson(): array
     {
         $output = [];
-        $output['dryRun'] = $this->dryRun;
-        if (isset($this->priceInCents)) {
-            $output['priceInCents'] = $this->priceInCents;
+        if (isset($this->message)) {
+            $output['message'] = $this->message;
+        }
+        if (isset($this->type)) {
+            $output['type'] = $this->type;
         }
 
         return $output;

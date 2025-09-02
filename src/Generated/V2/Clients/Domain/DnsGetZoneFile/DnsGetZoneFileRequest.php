@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
-class ExtensionUpdateExtensionPricingRequest
+class DnsGetZoneFileRequest
 {
-    public const method = 'put';
+    public const method = 'get';
 
     /**
      * Schema used to validate input for creating instances of this class
@@ -17,100 +17,42 @@ class ExtensionUpdateExtensionPricingRequest
     private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
-            'extensionId' => [
+            'dnsZoneId' => [
                 'format' => 'uuid',
                 'type' => 'string',
-            ],
-            'contributorId' => [
-                'format' => 'uuid',
-                'type' => 'string',
-            ],
-            'body' => [
-                'properties' => [
-                    'dryRun' => [
-                        'default' => false,
-                        'description' => 'If set to true, the request will be validated but not executed.',
-                        'type' => 'boolean',
-                    ],
-                    'priceInCents' => [
-                        'description' => 'Price in cents.',
-                        'type' => 'number',
-                    ],
-                ],
-                'type' => 'object',
             ],
         ],
         'required' => [
-            'extensionId',
-            'contributorId',
-            'body',
+            'dnsZoneId',
         ],
     ];
 
-    private string $extensionId;
-
-    private string $contributorId;
-
-    private ExtensionUpdateExtensionPricingRequestBody $body;
+    private string $dnsZoneId;
 
     private array $headers = [
 
     ];
 
-    public function __construct(string $extensionId, string $contributorId, ExtensionUpdateExtensionPricingRequestBody $body)
+    public function __construct(string $dnsZoneId)
     {
-        $this->extensionId = $extensionId;
-        $this->contributorId = $contributorId;
-        $this->body = $body;
+        $this->dnsZoneId = $dnsZoneId;
     }
 
-    public function getExtensionId(): string
+    public function getDnsZoneId(): string
     {
-        return $this->extensionId;
+        return $this->dnsZoneId;
     }
 
-    public function getContributorId(): string
-    {
-        return $this->contributorId;
-    }
-
-    public function getBody(): ExtensionUpdateExtensionPricingRequestBody
-    {
-        return $this->body;
-    }
-
-    public function withExtensionId(string $extensionId): self
+    public function withDnsZoneId(string $dnsZoneId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
+        $validator->validate($dnsZoneId, self::$internalValidationSchema['properties']['dnsZoneId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->extensionId = $extensionId;
-
-        return $clone;
-    }
-
-    public function withContributorId(string $contributorId): self
-    {
-        $validator = new Validator();
-        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->contributorId = $contributorId;
-
-        return $clone;
-    }
-
-    public function withBody(ExtensionUpdateExtensionPricingRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
+        $clone->dnsZoneId = $dnsZoneId;
 
         return $clone;
     }
@@ -120,21 +62,19 @@ class ExtensionUpdateExtensionPricingRequest
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionUpdateExtensionPricingRequest Created instance
+     * @return DnsGetZoneFileRequest Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionUpdateExtensionPricingRequest
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileRequest
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $extensionId = $input->{'extensionId'};
-        $contributorId = $input->{'contributorId'};
-        $body = ExtensionUpdateExtensionPricingRequestBody::buildFromInput($input->{'body'}, validate: $validate);
+        $dnsZoneId = $input->{'dnsZoneId'};
 
-        $obj = new self($extensionId, $contributorId, $body);
+        $obj = new self($dnsZoneId);
 
         return $obj;
     }
@@ -147,9 +87,7 @@ class ExtensionUpdateExtensionPricingRequest
     public function toJson(): array
     {
         $output = [];
-        $output['extensionId'] = $this->extensionId;
-        $output['contributorId'] = $this->contributorId;
-        $output['body'] = ($this->body)->toJson();
+        $output['dnsZoneId'] = $this->dnsZoneId;
 
         return $output;
     }
@@ -180,7 +118,6 @@ class ExtensionUpdateExtensionPricingRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -195,9 +132,8 @@ class ExtensionUpdateExtensionPricingRequest
     public function buildUrl(): string
     {
         $mapped = $this->toJson();
-        $extensionId = urlencode($mapped['extensionId']);
-        $contributorId = urlencode($mapped['contributorId']);
-        return '/v2/contributors/' . $contributorId . '/extensions/' . $extensionId . '/pricing';
+        $dnsZoneId = urlencode($mapped['dnsZoneId']);
+        return '/v2/dns-zones/' . $dnsZoneId . '/zone-file';
     }
 
     /**
@@ -216,7 +152,6 @@ class ExtensionUpdateExtensionPricingRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

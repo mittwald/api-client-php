@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
 use Psr\Http\Message\ResponseInterface;
 
-class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseContainer
+class DnsGetZoneFileTooManyRequestsResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,56 +21,36 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
         ],
         'properties' => [
             'body' => [
-                'items' => [
-                    'properties' => [
-                        'context' => [
-                            'enum' => [
-                                'project',
-                                'customer',
-                            ],
-                            'type' => 'string',
-                        ],
-                        'extensionId' => [
-                            'type' => 'string',
-                        ],
-                        'referencedId' => [
-                            'type' => 'string',
-                        ],
+                'type' => 'object',
+                'properties' => [
+                    'message' => [
+                        'type' => 'string',
+                        'example' => 'too many requests',
                     ],
-                    'type' => 'object',
+                    'type' => [
+                        'type' => 'string',
+                        'example' => 'RateLimitError',
+                    ],
                 ],
-                'type' => 'array',
             ],
         ],
     ];
 
-    /**
-     * @var ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[]
-     */
-    private array $body;
+    private DnsGetZoneFileTooManyRequestsResponseBody $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[] $body
-     */
-    public function __construct(array $body)
+    public function __construct(DnsGetZoneFileTooManyRequestsResponseBody $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[]
-     */
-    public function getBody(): array
+    public function getBody(): DnsGetZoneFileTooManyRequestsResponseBody
     {
         return $this->body;
     }
 
-    /**
-     * @param ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[] $body
-     */
-    public function withBody(array $body): self
+    public function withBody(DnsGetZoneFileTooManyRequestsResponseBody $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -83,17 +63,17 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGetProjectExtensionInstanceOrdersOKResponse Created instance
+     * @return DnsGetZoneFileTooManyRequestsResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGetProjectExtensionInstanceOrdersOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileTooManyRequestsResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array|object $i): ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem => ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = DnsGetZoneFileTooManyRequestsResponseBody::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -108,7 +88,7 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem $i) => $i->toJson(), $this->body);
+        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -139,7 +119,7 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
 
     public function __clone()
     {
-        $this->body = array_map(fn (ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem $i) => clone $i, $this->body);
+        $this->body = clone $this->body;
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self

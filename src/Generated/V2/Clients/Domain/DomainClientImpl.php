@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
+use Mittwald\ApiClient\Client\StringResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\AbortDomainDeclaration\AbortDomainDeclarationDefaultResponse;
@@ -141,6 +142,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneDe
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile\DnsGetZoneFileTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesOKResponse;
@@ -902,6 +907,31 @@ class DomainClientImpl implements DomainClient
             400 => DnsGetDnsZoneBadRequestResponse::fromResponse($httpResponse),
             429 => DnsGetDnsZoneTooManyRequestsResponse::fromResponse($httpResponse),
             default => DnsGetDnsZoneDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a zone file for a DNSZone.
+     *
+     * Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/dns-get-zone-file
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DnsGetZoneFileRequest $request An object representing the request for this operation
+     * @return StringResponse Returns the zone file as plain text.
+     */
+    public function dnsGetZoneFile(DnsGetZoneFileRequest $request): StringResponse
+    {
+        $httpRequest = new Request(DnsGetZoneFileRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return StringResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DnsGetZoneFileBadRequestResponse::fromResponse($httpResponse),
+            429 => DnsGetZoneFileTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DnsGetZoneFileDefaultResponse::fromResponse($httpResponse),
         });
     }
 

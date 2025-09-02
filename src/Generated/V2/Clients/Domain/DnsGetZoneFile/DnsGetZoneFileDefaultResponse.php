@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders;
+namespace Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetZoneFile;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
 use Mittwald\ApiClient\Client\ResponseContainer;
+use Mittwald\ApiClient\Generated\V2\Schemas\Commons\Error;
 use Psr\Http\Message\ResponseInterface;
 
-class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseContainer
+class DnsGetZoneFileDefaultResponse implements ResponseContainer
 {
     /**
      * Schema used to validate input for creating instances of this class
@@ -21,56 +22,26 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
         ],
         'properties' => [
             'body' => [
-                'items' => [
-                    'properties' => [
-                        'context' => [
-                            'enum' => [
-                                'project',
-                                'customer',
-                            ],
-                            'type' => 'string',
-                        ],
-                        'extensionId' => [
-                            'type' => 'string',
-                        ],
-                        'referencedId' => [
-                            'type' => 'string',
-                        ],
-                    ],
-                    'type' => 'object',
-                ],
-                'type' => 'array',
+                '$ref' => '#/components/schemas/de.mittwald.v1.commons.Error',
             ],
         ],
     ];
 
-    /**
-     * @var ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[]
-     */
-    private array $body;
+    private Error $body;
 
     private ResponseInterface|null $httpResponse = null;
 
-    /**
-     * @param ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[] $body
-     */
-    public function __construct(array $body)
+    public function __construct(Error $body)
     {
         $this->body = $body;
     }
 
-    /**
-     * @return ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[]
-     */
-    public function getBody(): array
+    public function getBody(): Error
     {
         return $this->body;
     }
 
-    /**
-     * @param ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem[] $body
-     */
-    public function withBody(array $body): self
+    public function withBody(Error $body): self
     {
         $clone = clone $this;
         $clone->body = $body;
@@ -83,17 +54,17 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
      *
      * @param array|object $input Input data
      * @param bool $validate Set this to false to skip validation; use at own risk
-     * @return ExtensionGetProjectExtensionInstanceOrdersOKResponse Created instance
+     * @return DnsGetZoneFileDefaultResponse Created instance
      * @throws InvalidArgumentException
      */
-    public static function buildFromInput(array|object $input, bool $validate = true): ExtensionGetProjectExtensionInstanceOrdersOKResponse
+    public static function buildFromInput(array|object $input, bool $validate = true): DnsGetZoneFileDefaultResponse
     {
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
         if ($validate) {
             static::validateInput($input);
         }
 
-        $body = array_map(fn (array|object $i): ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem => ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem::buildFromInput($i, validate: $validate), $input->{'body'});
+        $body = Error::buildFromInput($input->{'body'}, validate: $validate);
 
         $obj = new self($body);
 
@@ -108,7 +79,7 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
     public function toJson(): array
     {
         $output = [];
-        $output['body'] = array_map(fn (ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem $i) => $i->toJson(), $this->body);
+        $output['body'] = $this->body->toJson();
 
         return $output;
     }
@@ -139,7 +110,6 @@ class ExtensionGetProjectExtensionInstanceOrdersOKResponse implements ResponseCo
 
     public function __clone()
     {
-        $this->body = array_map(fn (ExtensionGetProjectExtensionInstanceOrdersOKResponseBodyItem $i) => clone $i, $this->body);
     }
 
     public static function fromResponse(ResponseInterface $httpResponse): self
