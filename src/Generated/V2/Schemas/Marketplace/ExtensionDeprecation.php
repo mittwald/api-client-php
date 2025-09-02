@@ -24,7 +24,7 @@ class ExtensionDeprecation
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'The Extension is deprecated by the contributor and will expire at the given date.',
         'properties' => [
             'deprecatedAt' => [
@@ -87,7 +87,7 @@ class ExtensionDeprecation
     public function withNote(string $note): self
     {
         $validator = new Validator();
-        $validator->validate($note, self::$schema['properties']['note']);
+        $validator->validate($note, self::$internalValidationSchema['properties']['note']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -109,7 +109,7 @@ class ExtensionDeprecation
     public function withSuccessorId(string $successorId): self
     {
         $validator = new Validator();
-        $validator->validate($successorId, self::$schema['properties']['successorId']);
+        $validator->validate($successorId, self::$internalValidationSchema['properties']['successorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -190,7 +190,7 @@ class ExtensionDeprecation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

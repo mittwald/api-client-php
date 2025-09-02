@@ -23,8 +23,13 @@ class ProjectMembership
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
+            'avatarRef' => [
+                'description' => 'Avatar file reference id of the user.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'email' => [
                 'description' => 'Email used by the invited user.',
                 'format' => 'email',
@@ -33,6 +38,10 @@ class ProjectMembership
             'expiresAt' => [
                 'description' => 'Time the ProjectMembership should expire at.',
                 'format' => 'date-time',
+                'type' => 'string',
+            ],
+            'firstName' => [
+                'description' => 'First name of the user.',
                 'type' => 'string',
             ],
             'id' => [
@@ -47,6 +56,10 @@ class ProjectMembership
             'inviteId' => [
                 'description' => 'ID of the ProjectInvite the membership was created from.',
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'lastName' => [
+                'description' => 'Last name of the user.',
                 'type' => 'string',
             ],
             'memberSince' => [
@@ -80,9 +93,16 @@ class ProjectMembership
             'inherited',
             'email',
             'mfa',
+            'firstName',
+            'lastName',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * Avatar file reference id of the user.
+     */
+    private ?string $avatarRef = null;
 
     /**
      * Email used by the invited user.
@@ -93,6 +113,11 @@ class ProjectMembership
      * Time the ProjectMembership should expire at.
      */
     private ?DateTime $expiresAt = null;
+
+    /**
+     * First name of the user.
+     */
+    private string $firstName;
 
     /**
      * ID of the ProjectMembership.
@@ -108,6 +133,11 @@ class ProjectMembership
      * ID of the ProjectInvite the membership was created from.
      */
     private ?string $inviteId = null;
+
+    /**
+     * Last name of the user.
+     */
+    private string $lastName;
 
     /**
      * Date the projectMembership was created at.
@@ -131,15 +161,22 @@ class ProjectMembership
      */
     private string $userId;
 
-    public function __construct(string $email, string $id, bool $inherited, bool $mfa, string $projectId, ProjectRoles $role, string $userId)
+    public function __construct(string $email, string $firstName, string $id, bool $inherited, string $lastName, bool $mfa, string $projectId, ProjectRoles $role, string $userId)
     {
         $this->email = $email;
+        $this->firstName = $firstName;
         $this->id = $id;
         $this->inherited = $inherited;
+        $this->lastName = $lastName;
         $this->mfa = $mfa;
         $this->projectId = $projectId;
         $this->role = $role;
         $this->userId = $userId;
+    }
+
+    public function getAvatarRef(): ?string
+    {
+        return $this->avatarRef ?? null;
     }
 
     public function getEmail(): string
@@ -150,6 +187,11 @@ class ProjectMembership
     public function getExpiresAt(): ?DateTime
     {
         return $this->expiresAt ?? null;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
     }
 
     public function getId(): string
@@ -165,6 +207,11 @@ class ProjectMembership
     public function getInviteId(): ?string
     {
         return $this->inviteId ?? null;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
     }
 
     public function getMemberSince(): ?DateTime
@@ -192,10 +239,32 @@ class ProjectMembership
         return $this->userId;
     }
 
+    public function withAvatarRef(string $avatarRef): self
+    {
+        $validator = new Validator();
+        $validator->validate($avatarRef, self::$internalValidationSchema['properties']['avatarRef']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->avatarRef = $avatarRef;
+
+        return $clone;
+    }
+
+    public function withoutAvatarRef(): self
+    {
+        $clone = clone $this;
+        unset($clone->avatarRef);
+
+        return $clone;
+    }
+
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,10 +291,24 @@ class ProjectMembership
         return $clone;
     }
 
+    public function withFirstName(string $firstName): self
+    {
+        $validator = new Validator();
+        $validator->validate($firstName, self::$internalValidationSchema['properties']['firstName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->firstName = $firstName;
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -239,7 +322,7 @@ class ProjectMembership
     public function withInherited(bool $inherited): self
     {
         $validator = new Validator();
-        $validator->validate($inherited, self::$schema['properties']['inherited']);
+        $validator->validate($inherited, self::$internalValidationSchema['properties']['inherited']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -253,7 +336,7 @@ class ProjectMembership
     public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($inviteId, self::$schema['properties']['inviteId']);
+        $validator->validate($inviteId, self::$internalValidationSchema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -268,6 +351,20 @@ class ProjectMembership
     {
         $clone = clone $this;
         unset($clone->inviteId);
+
+        return $clone;
+    }
+
+    public function withLastName(string $lastName): self
+    {
+        $validator = new Validator();
+        $validator->validate($lastName, self::$internalValidationSchema['properties']['lastName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->lastName = $lastName;
 
         return $clone;
     }
@@ -291,7 +388,7 @@ class ProjectMembership
     public function withMfa(bool $mfa): self
     {
         $validator = new Validator();
-        $validator->validate($mfa, self::$schema['properties']['mfa']);
+        $validator->validate($mfa, self::$internalValidationSchema['properties']['mfa']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -305,7 +402,7 @@ class ProjectMembership
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -327,7 +424,7 @@ class ProjectMembership
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, self::$schema['properties']['userId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -353,17 +450,23 @@ class ProjectMembership
             static::validateInput($input);
         }
 
+        $avatarRef = null;
+        if (isset($input->{'avatarRef'})) {
+            $avatarRef = $input->{'avatarRef'};
+        }
         $email = $input->{'email'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
+        $firstName = $input->{'firstName'};
         $id = $input->{'id'};
         $inherited = (bool)($input->{'inherited'});
         $inviteId = null;
         if (isset($input->{'inviteId'})) {
             $inviteId = $input->{'inviteId'};
         }
+        $lastName = $input->{'lastName'};
         $memberSince = null;
         if (isset($input->{'memberSince'})) {
             $memberSince = new DateTime($input->{'memberSince'});
@@ -373,7 +476,8 @@ class ProjectMembership
         $role = ProjectRoles::from($input->{'role'});
         $userId = $input->{'userId'};
 
-        $obj = new self($email, $id, $inherited, $mfa, $projectId, $role, $userId);
+        $obj = new self($email, $firstName, $id, $inherited, $lastName, $mfa, $projectId, $role, $userId);
+        $obj->avatarRef = $avatarRef;
         $obj->expiresAt = $expiresAt;
         $obj->inviteId = $inviteId;
         $obj->memberSince = $memberSince;
@@ -388,15 +492,20 @@ class ProjectMembership
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->avatarRef)) {
+            $output['avatarRef'] = $this->avatarRef;
+        }
         $output['email'] = $this->email;
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
+        $output['firstName'] = $this->firstName;
         $output['id'] = $this->id;
         $output['inherited'] = $this->inherited;
         if (isset($this->inviteId)) {
             $output['inviteId'] = $this->inviteId;
         }
+        $output['lastName'] = $this->lastName;
         if (isset($this->memberSince)) {
             $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }
@@ -420,7 +529,7 @@ class ProjectMembership
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

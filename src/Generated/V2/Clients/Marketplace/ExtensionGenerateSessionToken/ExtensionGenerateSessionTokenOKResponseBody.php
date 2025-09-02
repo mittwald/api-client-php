@@ -12,7 +12,7 @@ class ExtensionGenerateSessionTokenOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'sessionToken' => [
                 'type' => 'string',
@@ -39,7 +39,7 @@ class ExtensionGenerateSessionTokenOKResponseBody
     public function withSessionToken(string $sessionToken): self
     {
         $validator = new Validator();
-        $validator->validate($sessionToken, self::$schema['properties']['sessionToken']);
+        $validator->validate($sessionToken, self::$internalValidationSchema['properties']['sessionToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class ExtensionGenerateSessionTokenOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

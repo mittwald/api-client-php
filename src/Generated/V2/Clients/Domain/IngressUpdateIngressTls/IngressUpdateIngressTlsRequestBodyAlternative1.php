@@ -13,7 +13,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'additionalProperties' => false,
         'properties' => [
             'acme' => [
@@ -82,7 +82,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
     public function withAcme(bool $acme): self
     {
         $validator = new Validator();
-        $validator->validate($acme, self::$schema['properties']['acme']);
+        $validator->validate($acme, self::$internalValidationSchema['properties']['acme']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -99,7 +99,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
     public function withIsCreated(bool $isCreated): self
     {
         $validator = new Validator();
-        $validator->validate($isCreated, self::$schema['properties']['isCreated']);
+        $validator->validate($isCreated, self::$internalValidationSchema['properties']['isCreated']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -199,7 +199,7 @@ class IngressUpdateIngressTlsRequestBodyAlternative1
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

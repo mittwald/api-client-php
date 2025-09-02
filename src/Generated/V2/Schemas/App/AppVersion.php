@@ -23,11 +23,14 @@ class AppVersion
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.',
         'properties' => [
             'appId' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'backendPathTemplate' => [
                 'type' => 'string',
             ],
             'breakingNote' => [
@@ -89,6 +92,8 @@ class AppVersion
 
     private string $appId;
 
+    private ?string $backendPathTemplate = null;
+
     private ?BreakingNote $breakingNote = null;
 
     /**
@@ -133,6 +138,11 @@ class AppVersion
     public function getAppId(): string
     {
         return $this->appId;
+    }
+
+    public function getBackendPathTemplate(): ?string
+    {
+        return $this->backendPathTemplate ?? null;
     }
 
     public function getBreakingNote(): ?BreakingNote
@@ -202,13 +212,35 @@ class AppVersion
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
-        $validator->validate($appId, self::$schema['properties']['appId']);
+        $validator->validate($appId, self::$internalValidationSchema['properties']['appId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->appId = $appId;
+
+        return $clone;
+    }
+
+    public function withBackendPathTemplate(string $backendPathTemplate): self
+    {
+        $validator = new Validator();
+        $validator->validate($backendPathTemplate, self::$internalValidationSchema['properties']['backendPathTemplate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->backendPathTemplate = $backendPathTemplate;
+
+        return $clone;
+    }
+
+    public function withoutBackendPathTemplate(): self
+    {
+        $clone = clone $this;
+        unset($clone->backendPathTemplate);
 
         return $clone;
     }
@@ -251,7 +283,7 @@ class AppVersion
     public function withDocRoot(string $docRoot): self
     {
         $validator = new Validator();
-        $validator->validate($docRoot, self::$schema['properties']['docRoot']);
+        $validator->validate($docRoot, self::$internalValidationSchema['properties']['docRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -265,7 +297,7 @@ class AppVersion
     public function withDocRootUserEditable(bool $docRootUserEditable): self
     {
         $validator = new Validator();
-        $validator->validate($docRootUserEditable, self::$schema['properties']['docRootUserEditable']);
+        $validator->validate($docRootUserEditable, self::$internalValidationSchema['properties']['docRootUserEditable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -279,7 +311,7 @@ class AppVersion
     public function withExternalVersion(string $externalVersion): self
     {
         $validator = new Validator();
-        $validator->validate($externalVersion, self::$schema['properties']['externalVersion']);
+        $validator->validate($externalVersion, self::$internalValidationSchema['properties']['externalVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -293,7 +325,7 @@ class AppVersion
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -307,7 +339,7 @@ class AppVersion
     public function withInternalVersion(string $internalVersion): self
     {
         $validator = new Validator();
-        $validator->validate($internalVersion, self::$schema['properties']['internalVersion']);
+        $validator->validate($internalVersion, self::$internalValidationSchema['properties']['internalVersion']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -321,7 +353,7 @@ class AppVersion
     public function withRecommended(bool $recommended): self
     {
         $validator = new Validator();
-        $validator->validate($recommended, self::$schema['properties']['recommended']);
+        $validator->validate($recommended, self::$internalValidationSchema['properties']['recommended']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -410,6 +442,10 @@ class AppVersion
         }
 
         $appId = $input->{'appId'};
+        $backendPathTemplate = null;
+        if (isset($input->{'backendPathTemplate'})) {
+            $backendPathTemplate = $input->{'backendPathTemplate'};
+        }
         $breakingNote = null;
         if (isset($input->{'breakingNote'})) {
             $breakingNote = BreakingNote::buildFromInput($input->{'breakingNote'}, validate: $validate);
@@ -441,6 +477,7 @@ class AppVersion
         }
 
         $obj = new self($appId, $docRoot, $docRootUserEditable, $externalVersion, $id, $internalVersion);
+        $obj->backendPathTemplate = $backendPathTemplate;
         $obj->breakingNote = $breakingNote;
         $obj->databases = $databases;
         $obj->recommended = $recommended;
@@ -459,6 +496,9 @@ class AppVersion
     {
         $output = [];
         $output['appId'] = $this->appId;
+        if (isset($this->backendPathTemplate)) {
+            $output['backendPathTemplate'] = $this->backendPathTemplate;
+        }
         if (isset($this->breakingNote)) {
             $output['breakingNote'] = $this->breakingNote->toJson();
         }
@@ -498,7 +538,7 @@ class AppVersion
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

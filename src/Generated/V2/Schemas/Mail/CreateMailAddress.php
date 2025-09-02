@@ -22,11 +22,18 @@ class CreateMailAddress
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'address' => [
                 'format' => 'idn-email',
                 'type' => 'string',
+            ],
+            'forwardAddresses' => [
+                'items' => [
+                    'format' => 'idn-email',
+                    'type' => 'string',
+                ],
+                'type' => 'array',
             ],
             'isCatchAll' => [
                 'type' => 'boolean',
@@ -42,8 +49,9 @@ class CreateMailAddress
                     'quotaInBytes' => [
                         'description' => '2 GB',
                         'example' => 2147483648,
+                        'format' => 'int64',
                         'minimum' => -1,
-                        'type' => 'number',
+                        'type' => 'integer',
                     ],
                 ],
                 'required' => [
@@ -64,6 +72,11 @@ class CreateMailAddress
 
     private string $address;
 
+    /**
+     * @var string[]|null
+     */
+    private ?array $forwardAddresses = null;
+
     private bool $isCatchAll;
 
     private CreateMailAddressMailbox $mailbox;
@@ -80,6 +93,14 @@ class CreateMailAddress
         return $this->address;
     }
 
+    /**
+     * @return string[]|null
+     */
+    public function getForwardAddresses(): ?array
+    {
+        return $this->forwardAddresses ?? null;
+    }
+
     public function getIsCatchAll(): bool
     {
         return $this->isCatchAll;
@@ -93,7 +114,7 @@ class CreateMailAddress
     public function withAddress(string $address): self
     {
         $validator = new Validator();
-        $validator->validate($address, self::$schema['properties']['address']);
+        $validator->validate($address, self::$internalValidationSchema['properties']['address']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,10 +125,35 @@ class CreateMailAddress
         return $clone;
     }
 
+    /**
+     * @param string[] $forwardAddresses
+     */
+    public function withForwardAddresses(array $forwardAddresses): self
+    {
+        $validator = new Validator();
+        $validator->validate($forwardAddresses, self::$internalValidationSchema['properties']['forwardAddresses']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->forwardAddresses = $forwardAddresses;
+
+        return $clone;
+    }
+
+    public function withoutForwardAddresses(): self
+    {
+        $clone = clone $this;
+        unset($clone->forwardAddresses);
+
+        return $clone;
+    }
+
     public function withIsCatchAll(bool $isCatchAll): self
     {
         $validator = new Validator();
-        $validator->validate($isCatchAll, self::$schema['properties']['isCatchAll']);
+        $validator->validate($isCatchAll, self::$internalValidationSchema['properties']['isCatchAll']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -142,11 +188,15 @@ class CreateMailAddress
         }
 
         $address = $input->{'address'};
+        $forwardAddresses = null;
+        if (isset($input->{'forwardAddresses'})) {
+            $forwardAddresses = $input->{'forwardAddresses'};
+        }
         $isCatchAll = (bool)($input->{'isCatchAll'});
         $mailbox = CreateMailAddressMailbox::buildFromInput($input->{'mailbox'}, validate: $validate);
 
         $obj = new self($address, $isCatchAll, $mailbox);
-
+        $obj->forwardAddresses = $forwardAddresses;
         return $obj;
     }
 
@@ -159,6 +209,9 @@ class CreateMailAddress
     {
         $output = [];
         $output['address'] = $this->address;
+        if (isset($this->forwardAddresses)) {
+            $output['forwardAddresses'] = $this->forwardAddresses;
+        }
         $output['isCatchAll'] = $this->isCatchAll;
         $output['mailbox'] = ($this->mailbox)->toJson();
 
@@ -177,7 +230,7 @@ class CreateMailAddress
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

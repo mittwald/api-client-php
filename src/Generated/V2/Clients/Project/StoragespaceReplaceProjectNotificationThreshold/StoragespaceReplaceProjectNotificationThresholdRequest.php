@@ -14,7 +14,7 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
@@ -24,6 +24,7 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
                 'properties' => [
                     'notificationThresholdInBytes' => [
                         'example' => 10000,
+                        'format' => 'int64',
                         'nullable' => true,
                         'type' => 'integer',
                     ],
@@ -63,7 +64,7 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -131,7 +132,7 @@ class StoragespaceReplaceProjectNotificationThresholdRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

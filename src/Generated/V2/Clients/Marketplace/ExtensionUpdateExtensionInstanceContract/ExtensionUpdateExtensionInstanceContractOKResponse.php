@@ -14,7 +14,7 @@ class ExtensionUpdateExtensionInstanceContractOKResponse implements ResponseCont
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'required' => [
             'body',
@@ -22,10 +22,7 @@ class ExtensionUpdateExtensionInstanceContractOKResponse implements ResponseCont
         'properties' => [
             'body' => [
                 'properties' => [
-                    'checkoutUrl' => [
-                        'description' => 'If left empty the new Pricing was already applied without external checkout.',
-                        'type' => 'string',
-                    ],
+
                 ],
                 'type' => 'object',
             ],
@@ -101,7 +98,7 @@ class ExtensionUpdateExtensionInstanceContractOKResponse implements ResponseCont
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

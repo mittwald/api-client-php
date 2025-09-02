@@ -14,7 +14,7 @@ class SetDatabaseUsersRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'appInstallationId' => [
@@ -82,7 +82,7 @@ class SetDatabaseUsersRequest
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$schema['properties']['appInstallationId']);
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class SetDatabaseUsersRequest
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, self::$schema['properties']['databaseId']);
+        $validator->validate($databaseId, self::$internalValidationSchema['properties']['databaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -166,7 +166,7 @@ class SetDatabaseUsersRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

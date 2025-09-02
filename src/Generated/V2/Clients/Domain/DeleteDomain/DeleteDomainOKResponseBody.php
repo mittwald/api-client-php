@@ -12,7 +12,7 @@ class DeleteDomainOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'isAsync' => [
                 'type' => 'boolean',
@@ -48,7 +48,7 @@ class DeleteDomainOKResponseBody
     public function withIsAsync(bool $isAsync): self
     {
         $validator = new Validator();
-        $validator->validate($isAsync, self::$schema['properties']['isAsync']);
+        $validator->validate($isAsync, self::$internalValidationSchema['properties']['isAsync']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -70,7 +70,7 @@ class DeleteDomainOKResponseBody
     public function withTransactionId(string $transactionId): self
     {
         $validator = new Validator();
-        $validator->validate($transactionId, self::$schema['properties']['transactionId']);
+        $validator->validate($transactionId, self::$internalValidationSchema['properties']['transactionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class DeleteDomainOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

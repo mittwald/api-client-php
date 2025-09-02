@@ -23,8 +23,13 @@ class CustomerMembership
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
+            'avatarRef' => [
+                'description' => 'Avatar file reference id of the user.',
+                'format' => 'uuid',
+                'type' => 'string',
+            ],
             'customerId' => [
                 'description' => 'ID of the Customer the CustomerMembership is for.',
                 'format' => 'uuid',
@@ -40,6 +45,10 @@ class CustomerMembership
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'firstName' => [
+                'description' => 'First name of the user.',
+                'type' => 'string',
+            ],
             'id' => [
                 'description' => 'ID of the CustomerMembership.',
                 'format' => 'uuid',
@@ -48,6 +57,10 @@ class CustomerMembership
             'inviteId' => [
                 'description' => 'ID of the CustomerInvite the membership was created from.',
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'lastName' => [
+                'description' => 'Last name of the user.',
                 'type' => 'string',
             ],
             'memberSince' => [
@@ -75,9 +88,16 @@ class CustomerMembership
             'role',
             'email',
             'mfa',
+            'firstName',
+            'lastName',
         ],
         'type' => 'object',
     ];
+
+    /**
+     * Avatar file reference id of the user.
+     */
+    private ?string $avatarRef = null;
 
     /**
      * ID of the Customer the CustomerMembership is for.
@@ -95,6 +115,11 @@ class CustomerMembership
     private ?DateTime $expiresAt = null;
 
     /**
+     * First name of the user.
+     */
+    private string $firstName;
+
+    /**
      * ID of the CustomerMembership.
      */
     private string $id;
@@ -103,6 +128,11 @@ class CustomerMembership
      * ID of the CustomerInvite the membership was created from.
      */
     private ?string $inviteId = null;
+
+    /**
+     * Last name of the user.
+     */
+    private string $lastName;
 
     /**
      * Date the CustomerMembership was created at.
@@ -121,14 +151,21 @@ class CustomerMembership
      */
     private string $userId;
 
-    public function __construct(string $customerId, string $email, string $id, bool $mfa, CustomerRoles $role, string $userId)
+    public function __construct(string $customerId, string $email, string $firstName, string $id, string $lastName, bool $mfa, CustomerRoles $role, string $userId)
     {
         $this->customerId = $customerId;
         $this->email = $email;
+        $this->firstName = $firstName;
         $this->id = $id;
+        $this->lastName = $lastName;
         $this->mfa = $mfa;
         $this->role = $role;
         $this->userId = $userId;
+    }
+
+    public function getAvatarRef(): ?string
+    {
+        return $this->avatarRef ?? null;
     }
 
     public function getCustomerId(): string
@@ -146,6 +183,11 @@ class CustomerMembership
         return $this->expiresAt ?? null;
     }
 
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
     public function getId(): string
     {
         return $this->id;
@@ -154,6 +196,11 @@ class CustomerMembership
     public function getInviteId(): ?string
     {
         return $this->inviteId ?? null;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
     }
 
     public function getMemberSince(): ?DateTime
@@ -176,10 +223,32 @@ class CustomerMembership
         return $this->userId;
     }
 
+    public function withAvatarRef(string $avatarRef): self
+    {
+        $validator = new Validator();
+        $validator->validate($avatarRef, self::$internalValidationSchema['properties']['avatarRef']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->avatarRef = $avatarRef;
+
+        return $clone;
+    }
+
+    public function withoutAvatarRef(): self
+    {
+        $clone = clone $this;
+        unset($clone->avatarRef);
+
+        return $clone;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -193,7 +262,7 @@ class CustomerMembership
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -220,10 +289,24 @@ class CustomerMembership
         return $clone;
     }
 
+    public function withFirstName(string $firstName): self
+    {
+        $validator = new Validator();
+        $validator->validate($firstName, self::$internalValidationSchema['properties']['firstName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->firstName = $firstName;
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -237,7 +320,7 @@ class CustomerMembership
     public function withInviteId(string $inviteId): self
     {
         $validator = new Validator();
-        $validator->validate($inviteId, self::$schema['properties']['inviteId']);
+        $validator->validate($inviteId, self::$internalValidationSchema['properties']['inviteId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -252,6 +335,20 @@ class CustomerMembership
     {
         $clone = clone $this;
         unset($clone->inviteId);
+
+        return $clone;
+    }
+
+    public function withLastName(string $lastName): self
+    {
+        $validator = new Validator();
+        $validator->validate($lastName, self::$internalValidationSchema['properties']['lastName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->lastName = $lastName;
 
         return $clone;
     }
@@ -275,7 +372,7 @@ class CustomerMembership
     public function withMfa(bool $mfa): self
     {
         $validator = new Validator();
-        $validator->validate($mfa, self::$schema['properties']['mfa']);
+        $validator->validate($mfa, self::$internalValidationSchema['properties']['mfa']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -297,7 +394,7 @@ class CustomerMembership
     public function withUserId(string $userId): self
     {
         $validator = new Validator();
-        $validator->validate($userId, self::$schema['properties']['userId']);
+        $validator->validate($userId, self::$internalValidationSchema['properties']['userId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -323,17 +420,23 @@ class CustomerMembership
             static::validateInput($input);
         }
 
+        $avatarRef = null;
+        if (isset($input->{'avatarRef'})) {
+            $avatarRef = $input->{'avatarRef'};
+        }
         $customerId = $input->{'customerId'};
         $email = $input->{'email'};
         $expiresAt = null;
         if (isset($input->{'expiresAt'})) {
             $expiresAt = new DateTime($input->{'expiresAt'});
         }
+        $firstName = $input->{'firstName'};
         $id = $input->{'id'};
         $inviteId = null;
         if (isset($input->{'inviteId'})) {
             $inviteId = $input->{'inviteId'};
         }
+        $lastName = $input->{'lastName'};
         $memberSince = null;
         if (isset($input->{'memberSince'})) {
             $memberSince = new DateTime($input->{'memberSince'});
@@ -342,7 +445,8 @@ class CustomerMembership
         $role = CustomerRoles::from($input->{'role'});
         $userId = $input->{'userId'};
 
-        $obj = new self($customerId, $email, $id, $mfa, $role, $userId);
+        $obj = new self($customerId, $email, $firstName, $id, $lastName, $mfa, $role, $userId);
+        $obj->avatarRef = $avatarRef;
         $obj->expiresAt = $expiresAt;
         $obj->inviteId = $inviteId;
         $obj->memberSince = $memberSince;
@@ -357,15 +461,20 @@ class CustomerMembership
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->avatarRef)) {
+            $output['avatarRef'] = $this->avatarRef;
+        }
         $output['customerId'] = $this->customerId;
         $output['email'] = $this->email;
         if (isset($this->expiresAt)) {
             $output['expiresAt'] = ($this->expiresAt)->format(DateTime::ATOM);
         }
+        $output['firstName'] = $this->firstName;
         $output['id'] = $this->id;
         if (isset($this->inviteId)) {
             $output['inviteId'] = $this->inviteId;
         }
+        $output['lastName'] = $this->lastName;
         if (isset($this->memberSince)) {
             $output['memberSince'] = ($this->memberSince)->format(DateTime::ATOM);
         }
@@ -388,7 +497,7 @@ class CustomerMembership
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

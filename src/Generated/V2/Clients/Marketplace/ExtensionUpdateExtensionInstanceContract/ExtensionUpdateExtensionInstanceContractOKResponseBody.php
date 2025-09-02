@@ -12,53 +12,18 @@ class ExtensionUpdateExtensionInstanceContractOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
-            'checkoutUrl' => [
-                'description' => 'If left empty the new Pricing was already applied without external checkout.',
-                'type' => 'string',
-            ],
+
         ],
         'type' => 'object',
     ];
-
-    /**
-     * If left empty the new Pricing was already applied without external checkout.
-     */
-    private ?string $checkoutUrl = null;
 
     /**
      *
      */
     public function __construct()
     {
-    }
-
-    public function getCheckoutUrl(): ?string
-    {
-        return $this->checkoutUrl ?? null;
-    }
-
-    public function withCheckoutUrl(string $checkoutUrl): self
-    {
-        $validator = new Validator();
-        $validator->validate($checkoutUrl, self::$schema['properties']['checkoutUrl']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->checkoutUrl = $checkoutUrl;
-
-        return $clone;
-    }
-
-    public function withoutCheckoutUrl(): self
-    {
-        $clone = clone $this;
-        unset($clone->checkoutUrl);
-
-        return $clone;
     }
 
     /**
@@ -76,13 +41,10 @@ class ExtensionUpdateExtensionInstanceContractOKResponseBody
             static::validateInput($input);
         }
 
-        $checkoutUrl = null;
-        if (isset($input->{'checkoutUrl'})) {
-            $checkoutUrl = $input->{'checkoutUrl'};
-        }
+
 
         $obj = new self();
-        $obj->checkoutUrl = $checkoutUrl;
+
         return $obj;
     }
 
@@ -94,9 +56,7 @@ class ExtensionUpdateExtensionInstanceContractOKResponseBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->checkoutUrl)) {
-            $output['checkoutUrl'] = $this->checkoutUrl;
-        }
+
 
         return $output;
     }
@@ -113,7 +73,7 @@ class ExtensionUpdateExtensionInstanceContractOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

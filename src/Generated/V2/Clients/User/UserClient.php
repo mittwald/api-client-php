@@ -107,6 +107,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetA
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthGetAuthorization\OauthGetAuthorizationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\RefreshSession\RefreshSessionOKResponse;
@@ -496,6 +500,27 @@ interface UserClient
      * @return EmptyResponse Email has been verified.
      */
     public function deprecatedUserVerifyEmail(DeprecatedUserVerifyEmailRequest $request): EmptyResponse;
+    /**
+     * Get a PasswordPolicy.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PasswordValidationGetPasswordPolicyRequest $request An object representing the request for this operation
+     * @return PasswordValidationGetPasswordPolicyOKResponse The PasswordPolicy to be retrieved.
+     */
+    public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicyOKResponse;
+    /**
+     * Get a password policy.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy-v2-deprecated
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse The requested password policy
+     */
+    public function passwordValidationGetPasswordPolicyV2Deprecated(PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request): PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
     /**
      * Add phone number and start verification process.
      *

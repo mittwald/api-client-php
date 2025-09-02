@@ -22,7 +22,7 @@ class PublicKey
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A representation of an ssh-public-key.',
         'properties' => [
             'comment' => [
@@ -62,7 +62,7 @@ class PublicKey
     public function withComment(string $comment): self
     {
         $validator = new Validator();
-        $validator->validate($comment, self::$schema['properties']['comment']);
+        $validator->validate($comment, self::$internalValidationSchema['properties']['comment']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -76,7 +76,7 @@ class PublicKey
     public function withKey(string $key): self
     {
         $validator = new Validator();
-        $validator->validate($key, self::$schema['properties']['key']);
+        $validator->validate($key, self::$internalValidationSchema['properties']['key']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class PublicKey
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

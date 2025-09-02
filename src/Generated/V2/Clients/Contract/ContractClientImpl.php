@@ -28,6 +28,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\C
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\CancelContractTermination\CancelContractTerminationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedContractGetNextTerminationDateForItem\DeprecatedContractGetNextTerminationDateForItemTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\DeprecatedInvoiceDetailOfInvoice\DeprecatedInvoiceDetailOfInvoiceNotFoundResponse;
@@ -58,6 +64,18 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByDomain\GetDetailOfContractByDomainTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByLeadFyndr\GetDetailOfContractByLeadFyndrTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByMailAddress\GetDetailOfContractByMailAddressTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractByProject\GetDetailOfContractByProjectNotFoundResponse;
@@ -76,12 +94,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\Get
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetDetailOfContractItem\GetDetailOfContractItemTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemOKResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Contract\GetNextTerminationDateForItem\GetNextTerminationDateForItemTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Contract\InvoiceDetail\InvoiceDetailNotFoundResponse;
@@ -358,6 +370,54 @@ class ContractClientImpl implements ContractClient
     }
 
     /**
+     * Return the Contract for the given LeadFyndrProfile.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-lead-fyndr
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByLeadFyndrRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByLeadFyndrOKResponse Returns an active Contract for the given LeadFyndrProfile.
+     */
+    public function getDetailOfContractByLeadFyndr(GetDetailOfContractByLeadFyndrRequest $request): GetDetailOfContractByLeadFyndrOKResponse
+    {
+        $httpRequest = new Request(GetDetailOfContractByLeadFyndrRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDetailOfContractByLeadFyndrOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDetailOfContractByLeadFyndrBadRequestResponse::fromResponse($httpResponse),
+            404 => GetDetailOfContractByLeadFyndrNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByLeadFyndrTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetDetailOfContractByLeadFyndrDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Return the Contract for the given Mail Address.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-mail-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param GetDetailOfContractByMailAddressRequest $request An object representing the request for this operation
+     * @return GetDetailOfContractByMailAddressOKResponse Returns an active Contract for the given Mail Address.
+     */
+    public function getDetailOfContractByMailAddress(GetDetailOfContractByMailAddressRequest $request): GetDetailOfContractByMailAddressOKResponse
+    {
+        $httpRequest = new Request(GetDetailOfContractByMailAddressRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return GetDetailOfContractByMailAddressOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => GetDetailOfContractByMailAddressBadRequestResponse::fromResponse($httpResponse),
+            404 => GetDetailOfContractByMailAddressNotFoundResponse::fromResponse($httpResponse),
+            429 => GetDetailOfContractByMailAddressTooManyRequestsResponse::fromResponse($httpResponse),
+            default => GetDetailOfContractByMailAddressDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Return the Contract for the given Project.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-detail-of-contract-by-project
@@ -425,30 +485,6 @@ class ContractClientImpl implements ContractClient
             404 => GetDetailOfContractItemNotFoundResponse::fromResponse($httpResponse),
             429 => GetDetailOfContractItemTooManyRequestsResponse::fromResponse($httpResponse),
             default => GetDetailOfContractItemDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
-     * Return the next TerminationDate for the ContractItem with the given ID.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/contract-get-next-termination-date-for-item
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param GetNextTerminationDateForItemRequest $request An object representing the request for this operation
-     * @return GetNextTerminationDateForItemOKResponse Return the next possible TerminationDate for the ContractItem as date.
-     */
-    public function getNextTerminationDateForItem(GetNextTerminationDateForItemRequest $request): GetNextTerminationDateForItemOKResponse
-    {
-        $httpRequest = new Request(GetNextTerminationDateForItemRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 200) {
-            return GetNextTerminationDateForItemOKResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => GetNextTerminationDateForItemBadRequestResponse::fromResponse($httpResponse),
-            404 => GetNextTerminationDateForItemNotFoundResponse::fromResponse($httpResponse),
-            429 => GetNextTerminationDateForItemTooManyRequestsResponse::fromResponse($httpResponse),
-            default => GetNextTerminationDateForItemDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -521,6 +557,33 @@ class ContractClientImpl implements ContractClient
             404 => TerminateContractItemNotFoundResponse::fromResponse($httpResponse),
             429 => TerminateContractItemTooManyRequestsResponse::fromResponse($httpResponse),
             default => TerminateContractItemDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Return the next TerminationDate for the ContractItem with the given ID.
+     *
+     * This route is deprecated. Use GET /v2/contracts/{contractId}/items/{contractItemId} instead.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Contract/operation/deprecated-contract-get-next-termination-date-for-item
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DeprecatedContractGetNextTerminationDateForItemRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return DeprecatedContractGetNextTerminationDateForItemOKResponse Return the next possible TerminationDate for the ContractItem as date.
+     */
+    public function deprecatedContractGetNextTerminationDateForItem(DeprecatedContractGetNextTerminationDateForItemRequest $request): DeprecatedContractGetNextTerminationDateForItemOKResponse
+    {
+        $httpRequest = new Request(DeprecatedContractGetNextTerminationDateForItemRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return DeprecatedContractGetNextTerminationDateForItemOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => DeprecatedContractGetNextTerminationDateForItemBadRequestResponse::fromResponse($httpResponse),
+            404 => DeprecatedContractGetNextTerminationDateForItemNotFoundResponse::fromResponse($httpResponse),
+            429 => DeprecatedContractGetNextTerminationDateForItemTooManyRequestsResponse::fromResponse($httpResponse),
+            default => DeprecatedContractGetNextTerminationDateForItemDefaultResponse::fromResponse($httpResponse),
         });
     }
 

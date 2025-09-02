@@ -12,7 +12,7 @@ class DeprecatedUserVerifyEmailRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'email' => [
                 'description' => 'The Email-Address to verify.',
@@ -60,7 +60,7 @@ class DeprecatedUserVerifyEmailRequestBody
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -74,7 +74,7 @@ class DeprecatedUserVerifyEmailRequestBody
     public function withToken(string $token): self
     {
         $validator = new Validator();
-        $validator->validate($token, self::$schema['properties']['token']);
+        $validator->validate($token, self::$internalValidationSchema['properties']['token']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -147,7 +147,7 @@ class DeprecatedUserVerifyEmailRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

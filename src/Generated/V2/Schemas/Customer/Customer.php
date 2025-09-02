@@ -23,7 +23,7 @@ class Customer
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'activeSuspension' => [
                 'properties' => [
@@ -286,7 +286,7 @@ class Customer
     public function withAvatarRefId(string $avatarRefId): self
     {
         $validator = new Validator();
-        $validator->validate($avatarRefId, self::$schema['properties']['avatarRefId']);
+        $validator->validate($avatarRefId, self::$internalValidationSchema['properties']['avatarRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -308,7 +308,7 @@ class Customer
     public function withCategoryId(string $categoryId): self
     {
         $validator = new Validator();
-        $validator->validate($categoryId, self::$schema['properties']['categoryId']);
+        $validator->validate($categoryId, self::$internalValidationSchema['properties']['categoryId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -338,7 +338,7 @@ class Customer
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -352,7 +352,7 @@ class Customer
     public function withCustomerNumber(string $customerNumber): self
     {
         $validator = new Validator();
-        $validator->validate($customerNumber, self::$schema['properties']['customerNumber']);
+        $validator->validate($customerNumber, self::$internalValidationSchema['properties']['customerNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -404,7 +404,7 @@ class Customer
     public function withIsAllowedToPlaceOrders(bool $isAllowedToPlaceOrders): self
     {
         $validator = new Validator();
-        $validator->validate($isAllowedToPlaceOrders, self::$schema['properties']['isAllowedToPlaceOrders']);
+        $validator->validate($isAllowedToPlaceOrders, self::$internalValidationSchema['properties']['isAllowedToPlaceOrders']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -426,7 +426,7 @@ class Customer
     public function withIsBanned(bool $isBanned): self
     {
         $validator = new Validator();
-        $validator->validate($isBanned, self::$schema['properties']['isBanned']);
+        $validator->validate($isBanned, self::$internalValidationSchema['properties']['isBanned']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -448,7 +448,7 @@ class Customer
     public function withIsInDefaultOfPayment(bool $isInDefaultOfPayment): self
     {
         $validator = new Validator();
-        $validator->validate($isInDefaultOfPayment, self::$schema['properties']['isInDefaultOfPayment']);
+        $validator->validate($isInDefaultOfPayment, self::$internalValidationSchema['properties']['isInDefaultOfPayment']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -486,7 +486,7 @@ class Customer
     public function withMemberCount(int $memberCount): self
     {
         $validator = new Validator();
-        $validator->validate($memberCount, self::$schema['properties']['memberCount']);
+        $validator->validate($memberCount, self::$internalValidationSchema['properties']['memberCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -500,7 +500,7 @@ class Customer
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -530,7 +530,7 @@ class Customer
     public function withProjectCount(int $projectCount): self
     {
         $validator = new Validator();
-        $validator->validate($projectCount, self::$schema['properties']['projectCount']);
+        $validator->validate($projectCount, self::$internalValidationSchema['properties']['projectCount']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -544,7 +544,7 @@ class Customer
     public function withVatId(string $vatId): self
     {
         $validator = new Validator();
-        $validator->validate($vatId, self::$schema['properties']['vatId']);
+        $validator->validate($vatId, self::$internalValidationSchema['properties']['vatId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -731,7 +731,7 @@ class Customer
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

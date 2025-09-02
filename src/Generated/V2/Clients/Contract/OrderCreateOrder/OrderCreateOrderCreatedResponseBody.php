@@ -12,7 +12,7 @@ class OrderCreateOrderCreatedResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'orderId' => [
                 'type' => 'string',
@@ -38,7 +38,7 @@ class OrderCreateOrderCreatedResponseBody
     public function withOrderId(string $orderId): self
     {
         $validator = new Validator();
-        $validator->validate($orderId, self::$schema['properties']['orderId']);
+        $validator->validate($orderId, self::$internalValidationSchema['properties']['orderId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -96,7 +96,7 @@ class OrderCreateOrderCreatedResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

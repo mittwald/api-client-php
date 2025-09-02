@@ -22,7 +22,7 @@ class IngressDeprecated
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'dnsValidationErrors' => [
                 'description' => 'A list of errors that occurred while validating the ingress\'s dns before requesting a certificate.',
@@ -230,7 +230,7 @@ class IngressDeprecated
     public function withDnsValidationErrors(array $dnsValidationErrors): self
     {
         $validator = new Validator();
-        $validator->validate($dnsValidationErrors, self::$schema['properties']['dnsValidationErrors']);
+        $validator->validate($dnsValidationErrors, self::$internalValidationSchema['properties']['dnsValidationErrors']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -244,7 +244,7 @@ class IngressDeprecated
     public function withHostname(string $hostname): self
     {
         $validator = new Validator();
-        $validator->validate($hostname, self::$schema['properties']['hostname']);
+        $validator->validate($hostname, self::$internalValidationSchema['properties']['hostname']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -258,7 +258,7 @@ class IngressDeprecated
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -280,7 +280,7 @@ class IngressDeprecated
     public function withIsDefault(bool $isDefault): self
     {
         $validator = new Validator();
-        $validator->validate($isDefault, self::$schema['properties']['isDefault']);
+        $validator->validate($isDefault, self::$internalValidationSchema['properties']['isDefault']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -294,7 +294,7 @@ class IngressDeprecated
     public function withIsDomain(bool $isDomain): self
     {
         $validator = new Validator();
-        $validator->validate($isDomain, self::$schema['properties']['isDomain']);
+        $validator->validate($isDomain, self::$internalValidationSchema['properties']['isDomain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -316,7 +316,7 @@ class IngressDeprecated
     public function withIsEnabled(bool $isEnabled): self
     {
         $validator = new Validator();
-        $validator->validate($isEnabled, self::$schema['properties']['isEnabled']);
+        $validator->validate($isEnabled, self::$internalValidationSchema['properties']['isEnabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -349,7 +349,7 @@ class IngressDeprecated
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -446,7 +446,7 @@ class IngressDeprecated
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

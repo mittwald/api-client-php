@@ -14,41 +14,28 @@ class CreateExecutionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'cronjobId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-
-            ],
         ],
         'required' => [
             'cronjobId',
-            'body',
         ],
     ];
 
     private string $cronjobId;
 
-    /**
-     * @var mixed
-     */
-    private $body;
-
     private array $headers = [
 
     ];
 
-    /**
-     * @param mixed $body
-     */
-    public function __construct(string $cronjobId, $body)
+    public function __construct(string $cronjobId)
     {
         $this->cronjobId = $cronjobId;
-        $this->body = $body;
     }
 
     public function getCronjobId(): string
@@ -56,41 +43,16 @@ class CreateExecutionRequest
         return $this->cronjobId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
     public function withCronjobId(string $cronjobId): self
     {
         $validator = new Validator();
-        $validator->validate($cronjobId, self::$schema['properties']['cronjobId']);
+        $validator->validate($cronjobId, self::$internalValidationSchema['properties']['cronjobId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->cronjobId = $cronjobId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, self::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
 
         return $clone;
     }
@@ -111,9 +73,8 @@ class CreateExecutionRequest
         }
 
         $cronjobId = $input->{'cronjobId'};
-        $body = $input->{'body'};
 
-        $obj = new self($cronjobId, $body);
+        $obj = new self($cronjobId);
 
         return $obj;
     }
@@ -127,7 +88,6 @@ class CreateExecutionRequest
     {
         $output = [];
         $output['cronjobId'] = $this->cronjobId;
-        $output['body'] = $this->body;
 
         return $output;
     }
@@ -144,7 +104,7 @@ class CreateExecutionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -192,7 +152,6 @@ class CreateExecutionRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

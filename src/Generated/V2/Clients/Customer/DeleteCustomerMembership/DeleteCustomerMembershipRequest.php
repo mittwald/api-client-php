@@ -14,7 +14,7 @@ class DeleteCustomerMembershipRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'customerMembershipId' => [
@@ -46,7 +46,7 @@ class DeleteCustomerMembershipRequest
     public function withCustomerMembershipId(string $customerMembershipId): self
     {
         $validator = new Validator();
-        $validator->validate($customerMembershipId, self::$schema['properties']['customerMembershipId']);
+        $validator->validate($customerMembershipId, self::$internalValidationSchema['properties']['customerMembershipId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class DeleteCustomerMembershipRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

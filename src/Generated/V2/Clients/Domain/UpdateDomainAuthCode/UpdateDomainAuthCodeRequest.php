@@ -14,11 +14,10 @@ class UpdateDomainAuthCodeRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'domainId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'body' => [
@@ -66,7 +65,7 @@ class UpdateDomainAuthCodeRequest
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($domainId, self::$schema['properties']['domainId']);
+        $validator->validate($domainId, self::$internalValidationSchema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -134,7 +133,7 @@ class UpdateDomainAuthCodeRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

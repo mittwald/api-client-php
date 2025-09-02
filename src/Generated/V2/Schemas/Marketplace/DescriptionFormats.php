@@ -22,7 +22,7 @@ class DescriptionFormats
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'Language specific descriptions in various formats.',
         'properties' => [
             'markdown' => [
@@ -62,7 +62,7 @@ class DescriptionFormats
     public function withMarkdown(string $markdown): self
     {
         $validator = new Validator();
-        $validator->validate($markdown, self::$schema['properties']['markdown']);
+        $validator->validate($markdown, self::$internalValidationSchema['properties']['markdown']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -76,7 +76,7 @@ class DescriptionFormats
     public function withPlain(string $plain): self
     {
         $validator = new Validator();
-        $validator->validate($plain, self::$schema['properties']['plain']);
+        $validator->validate($plain, self::$internalValidationSchema['properties']['plain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -149,7 +149,7 @@ class DescriptionFormats
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

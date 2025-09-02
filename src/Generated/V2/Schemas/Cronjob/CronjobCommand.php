@@ -22,7 +22,7 @@ class CronjobCommand
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'interpreter' => [
                 'example' => '/usr/bin/bash',
@@ -74,7 +74,7 @@ class CronjobCommand
     public function withInterpreter(string $interpreter): self
     {
         $validator = new Validator();
-        $validator->validate($interpreter, self::$schema['properties']['interpreter']);
+        $validator->validate($interpreter, self::$internalValidationSchema['properties']['interpreter']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -88,7 +88,7 @@ class CronjobCommand
     public function withParameters(string $parameters): self
     {
         $validator = new Validator();
-        $validator->validate($parameters, self::$schema['properties']['parameters']);
+        $validator->validate($parameters, self::$internalValidationSchema['properties']['parameters']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -110,7 +110,7 @@ class CronjobCommand
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, self::$schema['properties']['path']);
+        $validator->validate($path, self::$internalValidationSchema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -177,7 +177,7 @@ class CronjobCommand
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -303,6 +303,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthR
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\User\OauthRetrieveAccessToken\OauthRetrieveAccessTokenTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicy\PasswordValidationGetPasswordPolicyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\User\PasswordValidationGetPasswordPolicyV2Deprecated\PasswordValidationGetPasswordPolicyV2DeprecatedTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\User\PostPollStatus\PostPollStatusForbiddenResponse;
@@ -1129,6 +1137,51 @@ class UserClientImpl implements UserClient
             404 => DeprecatedUserVerifyEmailNotFoundResponse::fromResponse($httpResponse),
             429 => DeprecatedUserVerifyEmailTooManyRequestsResponse::fromResponse($httpResponse),
             default => DeprecatedUserVerifyEmailDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a PasswordPolicy.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PasswordValidationGetPasswordPolicyRequest $request An object representing the request for this operation
+     * @return PasswordValidationGetPasswordPolicyOKResponse The PasswordPolicy to be retrieved.
+     */
+    public function passwordValidationGetPasswordPolicy(PasswordValidationGetPasswordPolicyRequest $request): PasswordValidationGetPasswordPolicyOKResponse
+    {
+        $httpRequest = new Request(PasswordValidationGetPasswordPolicyRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return PasswordValidationGetPasswordPolicyOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => PasswordValidationGetPasswordPolicyTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PasswordValidationGetPasswordPolicyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get a password policy.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/User/operation/password-validation-get-password-policy-v2-deprecated
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request An object representing the request for this operation
+     * @deprecated
+     * @return PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse The requested password policy
+     */
+    public function passwordValidationGetPasswordPolicyV2Deprecated(PasswordValidationGetPasswordPolicyV2DeprecatedRequest $request): PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse
+    {
+        $httpRequest = new Request(PasswordValidationGetPasswordPolicyV2DeprecatedRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return PasswordValidationGetPasswordPolicyV2DeprecatedOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => PasswordValidationGetPasswordPolicyV2DeprecatedTooManyRequestsResponse::fromResponse($httpResponse),
+            default => PasswordValidationGetPasswordPolicyV2DeprecatedDefaultResponse::fromResponse($httpResponse),
         });
     }
 

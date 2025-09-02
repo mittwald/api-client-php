@@ -13,7 +13,7 @@ class SupportCodeRequestOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'expiresAt' => [
                 'description' => 'Expiration of the support code',
@@ -70,7 +70,7 @@ class SupportCodeRequestOKResponseBody
     public function withSupportCode(string $supportCode): self
     {
         $validator = new Validator();
-        $validator->validate($supportCode, self::$schema['properties']['supportCode']);
+        $validator->validate($supportCode, self::$internalValidationSchema['properties']['supportCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -130,7 +130,7 @@ class SupportCodeRequestOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

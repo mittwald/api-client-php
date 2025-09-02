@@ -22,7 +22,7 @@ class Data
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'actualUrl' => [
                 'example' => 'https://www.mittwald.de/~b',
@@ -292,7 +292,7 @@ class Data
     public function withActualUrl(string $actualUrl): self
     {
         $validator = new Validator();
-        $validator->validate($actualUrl, self::$schema['properties']['actualUrl']);
+        $validator->validate($actualUrl, self::$internalValidationSchema['properties']['actualUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -371,7 +371,7 @@ class Data
     public function withSlowdownFactor(int|float $slowdownFactor): self
     {
         $validator = new Validator();
-        $validator->validate($slowdownFactor, self::$schema['properties']['slowdownFactor']);
+        $validator->validate($slowdownFactor, self::$internalValidationSchema['properties']['slowdownFactor']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -385,7 +385,7 @@ class Data
     public function withTtfbMs(int $ttfbMs): self
     {
         $validator = new Validator();
-        $validator->validate($ttfbMs, self::$schema['properties']['ttfbMs']);
+        $validator->validate($ttfbMs, self::$internalValidationSchema['properties']['ttfbMs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -461,7 +461,7 @@ class Data
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

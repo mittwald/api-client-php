@@ -22,7 +22,7 @@ class OAuthClient
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'allowedGrantTypes' => [
                 'items' => [
@@ -143,7 +143,7 @@ class OAuthClient
     public function withAllowedGrantTypes(array $allowedGrantTypes): self
     {
         $validator = new Validator();
-        $validator->validate($allowedGrantTypes, self::$schema['properties']['allowedGrantTypes']);
+        $validator->validate($allowedGrantTypes, self::$internalValidationSchema['properties']['allowedGrantTypes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -168,7 +168,7 @@ class OAuthClient
     public function withAllowedRedirectUris(array $allowedRedirectUris): self
     {
         $validator = new Validator();
-        $validator->validate($allowedRedirectUris, self::$schema['properties']['allowedRedirectUris']);
+        $validator->validate($allowedRedirectUris, self::$internalValidationSchema['properties']['allowedRedirectUris']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -193,7 +193,7 @@ class OAuthClient
     public function withAllowedScopes(array $allowedScopes): self
     {
         $validator = new Validator();
-        $validator->validate($allowedScopes, self::$schema['properties']['allowedScopes']);
+        $validator->validate($allowedScopes, self::$internalValidationSchema['properties']['allowedScopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -215,7 +215,7 @@ class OAuthClient
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -229,7 +229,7 @@ class OAuthClient
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -251,7 +251,7 @@ class OAuthClient
     public function withHumanReadableName(string $humanReadableName): self
     {
         $validator = new Validator();
-        $validator->validate($humanReadableName, self::$schema['properties']['humanReadableName']);
+        $validator->validate($humanReadableName, self::$internalValidationSchema['properties']['humanReadableName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -265,7 +265,7 @@ class OAuthClient
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -358,7 +358,7 @@ class OAuthClient
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

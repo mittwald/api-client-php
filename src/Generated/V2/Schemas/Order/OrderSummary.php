@@ -22,7 +22,7 @@ class OrderSummary
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'nonRecurring' => [
                 'example' => 1000,
@@ -80,7 +80,7 @@ class OrderSummary
     public function withNonRecurring(int|float $nonRecurring): self
     {
         $validator = new Validator();
-        $validator->validate($nonRecurring, self::$schema['properties']['nonRecurring']);
+        $validator->validate($nonRecurring, self::$internalValidationSchema['properties']['nonRecurring']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -94,7 +94,7 @@ class OrderSummary
     public function withRecurring(int|float $recurring): self
     {
         $validator = new Validator();
-        $validator->validate($recurring, self::$schema['properties']['recurring']);
+        $validator->validate($recurring, self::$internalValidationSchema['properties']['recurring']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class OrderSummary
     public function withSummary(int|float $summary): self
     {
         $validator = new Validator();
-        $validator->validate($summary, self::$schema['properties']['summary']);
+        $validator->validate($summary, self::$internalValidationSchema['properties']['summary']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -170,7 +170,7 @@ class OrderSummary
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

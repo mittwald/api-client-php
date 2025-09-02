@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mittwald\ApiClient\Generated\V2\Schemas\Container;
 
+use DateTime;
 use InvalidArgumentException;
 use JsonSchema\Validator;
 
@@ -22,7 +23,7 @@ class ServiceResponse
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'deployedState' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceState',
@@ -46,6 +47,9 @@ class ServiceResponse
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'requiresRecreate' => [
+                'type' => 'boolean',
+            ],
             'serviceName' => [
                 'example' => 'mysql-db',
                 'type' => 'string',
@@ -61,6 +65,10 @@ class ServiceResponse
             'status' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceStatus',
             ],
+            'statusSetAt' => [
+                'format' => 'date-time',
+                'type' => 'string',
+            ],
         ],
         'required' => [
             'id',
@@ -72,6 +80,8 @@ class ServiceResponse
             'deployedState',
             'status',
             'shortId',
+            'statusSetAt',
+            'requiresRecreate',
         ],
         'type' => 'object',
     ];
@@ -88,6 +98,8 @@ class ServiceResponse
 
     private string $projectId;
 
+    private bool $requiresRecreate;
+
     private string $serviceName;
 
     private string $shortId;
@@ -96,17 +108,21 @@ class ServiceResponse
 
     private ServiceStatus $status;
 
-    public function __construct(ServiceState $deployedState, string $description, string $id, ServiceState $pendingState, string $projectId, string $serviceName, string $shortId, string $stackId, ServiceStatus $status)
+    private DateTime $statusSetAt;
+
+    public function __construct(ServiceState $deployedState, string $description, string $id, ServiceState $pendingState, string $projectId, bool $requiresRecreate, string $serviceName, string $shortId, string $stackId, ServiceStatus $status, DateTime $statusSetAt)
     {
         $this->deployedState = $deployedState;
         $this->description = $description;
         $this->id = $id;
         $this->pendingState = $pendingState;
         $this->projectId = $projectId;
+        $this->requiresRecreate = $requiresRecreate;
         $this->serviceName = $serviceName;
         $this->shortId = $shortId;
         $this->stackId = $stackId;
         $this->status = $status;
+        $this->statusSetAt = $statusSetAt;
     }
 
     public function getDeployedState(): ServiceState
@@ -139,6 +155,11 @@ class ServiceResponse
         return $this->projectId;
     }
 
+    public function getRequiresRecreate(): bool
+    {
+        return $this->requiresRecreate;
+    }
+
     public function getServiceName(): string
     {
         return $this->serviceName;
@@ -159,6 +180,11 @@ class ServiceResponse
         return $this->status;
     }
 
+    public function getStatusSetAt(): DateTime
+    {
+        return $this->statusSetAt;
+    }
+
     public function withDeployedState(ServiceState $deployedState): self
     {
         $clone = clone $this;
@@ -170,7 +196,7 @@ class ServiceResponse
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -184,7 +210,7 @@ class ServiceResponse
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -198,7 +224,7 @@ class ServiceResponse
     public function withMessage(string $message): self
     {
         $validator = new Validator();
-        $validator->validate($message, self::$schema['properties']['message']);
+        $validator->validate($message, self::$internalValidationSchema['properties']['message']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -228,7 +254,7 @@ class ServiceResponse
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -239,10 +265,24 @@ class ServiceResponse
         return $clone;
     }
 
+    public function withRequiresRecreate(bool $requiresRecreate): self
+    {
+        $validator = new Validator();
+        $validator->validate($requiresRecreate, self::$internalValidationSchema['properties']['requiresRecreate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->requiresRecreate = $requiresRecreate;
+
+        return $clone;
+    }
+
     public function withServiceName(string $serviceName): self
     {
         $validator = new Validator();
-        $validator->validate($serviceName, self::$schema['properties']['serviceName']);
+        $validator->validate($serviceName, self::$internalValidationSchema['properties']['serviceName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -256,7 +296,7 @@ class ServiceResponse
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, self::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$internalValidationSchema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -270,7 +310,7 @@ class ServiceResponse
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -285,6 +325,14 @@ class ServiceResponse
     {
         $clone = clone $this;
         $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withStatusSetAt(DateTime $statusSetAt): self
+    {
+        $clone = clone $this;
+        $clone->statusSetAt = $statusSetAt;
 
         return $clone;
     }
@@ -313,12 +361,14 @@ class ServiceResponse
         }
         $pendingState = ServiceState::buildFromInput($input->{'pendingState'}, validate: $validate);
         $projectId = $input->{'projectId'};
+        $requiresRecreate = (bool)($input->{'requiresRecreate'});
         $serviceName = $input->{'serviceName'};
         $shortId = $input->{'shortId'};
         $stackId = $input->{'stackId'};
         $status = ServiceStatus::from($input->{'status'});
+        $statusSetAt = new DateTime($input->{'statusSetAt'});
 
-        $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $serviceName, $shortId, $stackId, $status);
+        $obj = new self($deployedState, $description, $id, $pendingState, $projectId, $requiresRecreate, $serviceName, $shortId, $stackId, $status, $statusSetAt);
         $obj->message = $message;
         return $obj;
     }
@@ -339,10 +389,12 @@ class ServiceResponse
         }
         $output['pendingState'] = $this->pendingState->toJson();
         $output['projectId'] = $this->projectId;
+        $output['requiresRecreate'] = $this->requiresRecreate;
         $output['serviceName'] = $this->serviceName;
         $output['shortId'] = $this->shortId;
         $output['stackId'] = $this->stackId;
         $output['status'] = $this->status->value;
+        $output['statusSetAt'] = ($this->statusSetAt)->format(DateTime::ATOM);
 
         return $output;
     }
@@ -359,7 +411,7 @@ class ServiceResponse
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -373,5 +425,6 @@ class ServiceResponse
 
     public function __clone()
     {
+        $this->statusSetAt = clone $this->statusSetAt;
     }
 }

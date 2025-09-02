@@ -46,7 +46,9 @@ use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\Ge
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigInternalServerErrorResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetContainerImageConfig\GetContainerImageConfigTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Container\GetRegistry\GetRegistryBadRequestResponse;
@@ -339,6 +341,8 @@ class ContainerClientImpl implements ContainerClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => GetContainerImageConfigBadRequestResponse::fromResponse($httpResponse),
             403 => GetContainerImageConfigForbiddenResponse::fromResponse($httpResponse),
+            404 => GetContainerImageConfigNotFoundResponse::fromResponse($httpResponse),
+            412 => GetContainerImageConfigPreconditionFailedResponse::fromResponse($httpResponse),
             429 => GetContainerImageConfigTooManyRequestsResponse::fromResponse($httpResponse),
             500 => GetContainerImageConfigInternalServerErrorResponse::fromResponse($httpResponse),
             default => GetContainerImageConfigDefaultResponse::fromResponse($httpResponse),
@@ -577,7 +581,7 @@ class ContainerClientImpl implements ContainerClient
     }
 
     /**
-     * Pulls the latest version of the Service's image and recreates the Service.
+     * Pulls the latest version of the Service's image and optionally recreates the Service.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Container/operation/container-pull-image-for-service
      * @throws GuzzleException

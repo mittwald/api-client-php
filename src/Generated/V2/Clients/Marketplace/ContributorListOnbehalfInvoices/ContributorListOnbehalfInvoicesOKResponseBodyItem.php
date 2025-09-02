@@ -13,7 +13,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'invoiceDate' => [
                 'format' => 'date-time',
@@ -31,6 +31,9 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
             'totalGross' => [
                 'type' => 'number',
             ],
+            'totalNet' => [
+                'type' => 'number',
+            ],
             'webLink' => [
                 'type' => 'string',
             ],
@@ -39,6 +42,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
             'invoiceId',
             'invoiceNumber',
             'invoiceDate',
+            'totalNet',
             'totalGross',
             'webLink',
             'pdfLink',
@@ -56,15 +60,18 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
 
     private int|float $totalGross;
 
+    private int|float $totalNet;
+
     private string $webLink;
 
-    public function __construct(DateTime $invoiceDate, string $invoiceId, string $invoiceNumber, string $pdfLink, int|float $totalGross, string $webLink)
+    public function __construct(DateTime $invoiceDate, string $invoiceId, string $invoiceNumber, string $pdfLink, int|float $totalGross, int|float $totalNet, string $webLink)
     {
         $this->invoiceDate = $invoiceDate;
         $this->invoiceId = $invoiceId;
         $this->invoiceNumber = $invoiceNumber;
         $this->pdfLink = $pdfLink;
         $this->totalGross = $totalGross;
+        $this->totalNet = $totalNet;
         $this->webLink = $webLink;
     }
 
@@ -93,6 +100,11 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         return $this->totalGross;
     }
 
+    public function getTotalNet(): int|float
+    {
+        return $this->totalNet;
+    }
+
     public function getWebLink(): string
     {
         return $this->webLink;
@@ -109,7 +121,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
     public function withInvoiceId(string $invoiceId): self
     {
         $validator = new Validator();
-        $validator->validate($invoiceId, self::$schema['properties']['invoiceId']);
+        $validator->validate($invoiceId, self::$internalValidationSchema['properties']['invoiceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -123,7 +135,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
     public function withInvoiceNumber(string $invoiceNumber): self
     {
         $validator = new Validator();
-        $validator->validate($invoiceNumber, self::$schema['properties']['invoiceNumber']);
+        $validator->validate($invoiceNumber, self::$internalValidationSchema['properties']['invoiceNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -137,7 +149,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
     public function withPdfLink(string $pdfLink): self
     {
         $validator = new Validator();
-        $validator->validate($pdfLink, self::$schema['properties']['pdfLink']);
+        $validator->validate($pdfLink, self::$internalValidationSchema['properties']['pdfLink']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -151,7 +163,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
     public function withTotalGross(int|float $totalGross): self
     {
         $validator = new Validator();
-        $validator->validate($totalGross, self::$schema['properties']['totalGross']);
+        $validator->validate($totalGross, self::$internalValidationSchema['properties']['totalGross']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -162,10 +174,24 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         return $clone;
     }
 
+    public function withTotalNet(int|float $totalNet): self
+    {
+        $validator = new Validator();
+        $validator->validate($totalNet, self::$internalValidationSchema['properties']['totalNet']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->totalNet = $totalNet;
+
+        return $clone;
+    }
+
     public function withWebLink(string $webLink): self
     {
         $validator = new Validator();
-        $validator->validate($webLink, self::$schema['properties']['webLink']);
+        $validator->validate($webLink, self::$internalValidationSchema['properties']['webLink']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -196,9 +222,10 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         $invoiceNumber = $input->{'invoiceNumber'};
         $pdfLink = $input->{'pdfLink'};
         $totalGross = str_contains((string)($input->{'totalGross'}), '.') ? (float)($input->{'totalGross'}) : (int)($input->{'totalGross'});
+        $totalNet = str_contains((string)($input->{'totalNet'}), '.') ? (float)($input->{'totalNet'}) : (int)($input->{'totalNet'});
         $webLink = $input->{'webLink'};
 
-        $obj = new self($invoiceDate, $invoiceId, $invoiceNumber, $pdfLink, $totalGross, $webLink);
+        $obj = new self($invoiceDate, $invoiceId, $invoiceNumber, $pdfLink, $totalGross, $totalNet, $webLink);
 
         return $obj;
     }
@@ -216,6 +243,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
         $output['invoiceNumber'] = $this->invoiceNumber;
         $output['pdfLink'] = $this->pdfLink;
         $output['totalGross'] = $this->totalGross;
+        $output['totalNet'] = $this->totalNet;
         $output['webLink'] = $this->webLink;
 
         return $output;
@@ -233,7 +261,7 @@ class ContributorListOnbehalfInvoicesOKResponseBodyItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -12,10 +12,13 @@ class ContributorGetBillingInformationOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'contributorId' => [
                 'format' => 'uuid',
+                'type' => 'string',
+            ],
+            'invoiceFooter' => [
                 'type' => 'string',
             ],
             'onboardingStatus' => [
@@ -26,13 +29,20 @@ class ContributorGetBillingInformationOKResponseBody
                 ],
                 'type' => 'string',
             ],
+            'stripeAccountId' => [
+                'type' => 'string',
+            ],
         ],
         'type' => 'object',
     ];
 
     private ?string $contributorId = null;
 
+    private ?string $invoiceFooter = null;
+
     private ?ContributorGetBillingInformationOKResponseBodyOnboardingStatus $onboardingStatus = null;
+
+    private ?string $stripeAccountId = null;
 
     /**
      *
@@ -46,15 +56,25 @@ class ContributorGetBillingInformationOKResponseBody
         return $this->contributorId ?? null;
     }
 
+    public function getInvoiceFooter(): ?string
+    {
+        return $this->invoiceFooter ?? null;
+    }
+
     public function getOnboardingStatus(): ?ContributorGetBillingInformationOKResponseBodyOnboardingStatus
     {
         return $this->onboardingStatus ?? null;
     }
 
+    public function getStripeAccountId(): ?string
+    {
+        return $this->stripeAccountId ?? null;
+    }
+
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,6 +93,28 @@ class ContributorGetBillingInformationOKResponseBody
         return $clone;
     }
 
+    public function withInvoiceFooter(string $invoiceFooter): self
+    {
+        $validator = new Validator();
+        $validator->validate($invoiceFooter, self::$internalValidationSchema['properties']['invoiceFooter']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->invoiceFooter = $invoiceFooter;
+
+        return $clone;
+    }
+
+    public function withoutInvoiceFooter(): self
+    {
+        $clone = clone $this;
+        unset($clone->invoiceFooter);
+
+        return $clone;
+    }
+
     public function withOnboardingStatus(ContributorGetBillingInformationOKResponseBodyOnboardingStatus $onboardingStatus): self
     {
         $clone = clone $this;
@@ -85,6 +127,28 @@ class ContributorGetBillingInformationOKResponseBody
     {
         $clone = clone $this;
         unset($clone->onboardingStatus);
+
+        return $clone;
+    }
+
+    public function withStripeAccountId(string $stripeAccountId): self
+    {
+        $validator = new Validator();
+        $validator->validate($stripeAccountId, self::$internalValidationSchema['properties']['stripeAccountId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->stripeAccountId = $stripeAccountId;
+
+        return $clone;
+    }
+
+    public function withoutStripeAccountId(): self
+    {
+        $clone = clone $this;
+        unset($clone->stripeAccountId);
 
         return $clone;
     }
@@ -108,14 +172,24 @@ class ContributorGetBillingInformationOKResponseBody
         if (isset($input->{'contributorId'})) {
             $contributorId = $input->{'contributorId'};
         }
+        $invoiceFooter = null;
+        if (isset($input->{'invoiceFooter'})) {
+            $invoiceFooter = $input->{'invoiceFooter'};
+        }
         $onboardingStatus = null;
         if (isset($input->{'onboardingStatus'})) {
             $onboardingStatus = ContributorGetBillingInformationOKResponseBodyOnboardingStatus::from($input->{'onboardingStatus'});
         }
+        $stripeAccountId = null;
+        if (isset($input->{'stripeAccountId'})) {
+            $stripeAccountId = $input->{'stripeAccountId'};
+        }
 
         $obj = new self();
         $obj->contributorId = $contributorId;
+        $obj->invoiceFooter = $invoiceFooter;
         $obj->onboardingStatus = $onboardingStatus;
+        $obj->stripeAccountId = $stripeAccountId;
         return $obj;
     }
 
@@ -130,8 +204,14 @@ class ContributorGetBillingInformationOKResponseBody
         if (isset($this->contributorId)) {
             $output['contributorId'] = $this->contributorId;
         }
+        if (isset($this->invoiceFooter)) {
+            $output['invoiceFooter'] = $this->invoiceFooter;
+        }
         if (isset($this->onboardingStatus)) {
             $output['onboardingStatus'] = ($this->onboardingStatus)->value;
+        }
+        if (isset($this->stripeAccountId)) {
+            $output['stripeAccountId'] = $this->stripeAccountId;
         }
 
         return $output;
@@ -149,7 +229,7 @@ class ContributorGetBillingInformationOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

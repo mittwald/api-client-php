@@ -23,7 +23,7 @@ class Message
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'conversationId' => [
                 'format' => 'uuid',
@@ -75,7 +75,7 @@ class Message
     private ?User $createdBy = null;
 
     /**
-     * @var (RequestedFile|UploadedFile)[]|null
+     * @var (RequestedFile|UploadedFile|DeletedFile)[]|null
      */
     private ?array $files = null;
 
@@ -111,7 +111,7 @@ class Message
     }
 
     /**
-     * @return (RequestedFile|UploadedFile)[]|null
+     * @return (RequestedFile|UploadedFile|DeletedFile)[]|null
      */
     public function getFiles(): ?array
     {
@@ -141,7 +141,7 @@ class Message
     public function withConversationId(string $conversationId): self
     {
         $validator = new Validator();
-        $validator->validate($conversationId, self::$schema['properties']['conversationId']);
+        $validator->validate($conversationId, self::$internalValidationSchema['properties']['conversationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -177,7 +177,7 @@ class Message
     }
 
     /**
-     * @param (RequestedFile|UploadedFile)[] $files
+     * @param (RequestedFile|UploadedFile|DeletedFile)[] $files
      */
     public function withFiles(array $files): self
     {
@@ -198,7 +198,7 @@ class Message
     public function withInternal(bool $internal): self
     {
         $validator = new Validator();
-        $validator->validate($internal, self::$schema['properties']['internal']);
+        $validator->validate($internal, self::$internalValidationSchema['properties']['internal']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -220,7 +220,7 @@ class Message
     public function withMessageContent(string $messageContent): self
     {
         $validator = new Validator();
-        $validator->validate($messageContent, self::$schema['properties']['messageContent']);
+        $validator->validate($messageContent, self::$internalValidationSchema['properties']['messageContent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -242,7 +242,7 @@ class Message
     public function withMessageId(string $messageId): self
     {
         $validator = new Validator();
-        $validator->validate($messageId, self::$schema['properties']['messageId']);
+        $validator->validate($messageId, self::$internalValidationSchema['properties']['messageId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -284,10 +284,11 @@ class Message
         }
         $files = null;
         if (isset($input->{'files'})) {
-            $files = array_map(fn (array|object $i): RequestedFile|UploadedFile => match (true) {
+            $files = array_map(fn (array|object $i): RequestedFile|UploadedFile|DeletedFile => match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
                 RequestedFile::validateInput($i, true) => RequestedFile::buildFromInput($i, validate: $validate),
                 UploadedFile::validateInput($i, true) => UploadedFile::buildFromInput($i, validate: $validate),
+                DeletedFile::validateInput($i, true) => DeletedFile::buildFromInput($i, validate: $validate),
             }, $input->{'files'});
         }
         $internal = null;
@@ -323,9 +324,9 @@ class Message
             $output['createdBy'] = $this->createdBy->toJson();
         }
         if (isset($this->files)) {
-            $output['files'] = array_map(fn (RequestedFile|UploadedFile $i): array => match (true) {
+            $output['files'] = array_map(fn (RequestedFile|UploadedFile|DeletedFile $i): array => match (true) {
                 default => throw new InvalidArgumentException("input cannot be mapped to any valid type"),
-                ($i) instanceof RequestedFile, ($i) instanceof UploadedFile => $i->toJson(),
+                ($i) instanceof RequestedFile, ($i) instanceof UploadedFile, ($i) instanceof DeletedFile => $i->toJson(),
             }, $this->files);
         }
         if (isset($this->internal)) {
@@ -352,7 +353,7 @@ class Message
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

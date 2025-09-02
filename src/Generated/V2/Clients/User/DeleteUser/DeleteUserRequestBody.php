@@ -12,7 +12,7 @@ class DeleteUserRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'multiFactorCode' => [
                 'description' => 'Multi Factor Code to authorize your request.',
@@ -56,7 +56,7 @@ class DeleteUserRequestBody
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();
-        $validator->validate($multiFactorCode, self::$schema['properties']['multiFactorCode']);
+        $validator->validate($multiFactorCode, self::$internalValidationSchema['properties']['multiFactorCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -78,7 +78,7 @@ class DeleteUserRequestBody
     public function withPassword(string $password): self
     {
         $validator = new Validator();
-        $validator->validate($password, self::$schema['properties']['password']);
+        $validator->validate($password, self::$internalValidationSchema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -143,7 +143,7 @@ class DeleteUserRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

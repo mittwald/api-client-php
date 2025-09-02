@@ -24,7 +24,7 @@ class AppInstallation
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'An AppInstallation is a concrete manifestation of an App in a specific AppVersion.',
         'properties' => [
             'appId' => [
@@ -62,12 +62,14 @@ class AppInstallation
                 ],
                 'type' => 'array',
             ],
-            'processes' => [
-                'items' => [
-                    'format' => 'uuid',
-                    'type' => 'string',
+            'lockedBy' => [
+                'additionalProperties' => [
+                    '$ref' => '#/components/schemas/de.mittwald.v1.app.LockPurpose',
                 ],
-                'type' => 'array',
+                'type' => 'object',
+            ],
+            'phase' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.app.Phase',
             ],
             'projectId' => [
                 'format' => 'uuid',
@@ -109,6 +111,12 @@ class AppInstallation
             'installationPath',
             'disabled',
             'createdAt',
+            'projectId',
+            'systemSoftware',
+            'userInputs',
+            'updatePolicy',
+            'linkedDatabases',
+            'phase',
         ],
         'type' => 'object',
     ];
@@ -130,16 +138,18 @@ class AppInstallation
     private string $installationPath;
 
     /**
-     * @var LinkedDatabase[]|null
+     * @var LinkedDatabase[]
      */
-    private ?array $linkedDatabases = null;
+    private array $linkedDatabases;
 
     /**
-     * @var string[]|null
+     * @var mixed[]|null
      */
-    private ?array $processes = null;
+    private ?array $lockedBy = null;
 
-    private ?string $projectId = null;
+    private Phase $phase;
+
+    private string $projectId;
 
     private ?string $screenshotId = null;
 
@@ -148,18 +158,23 @@ class AppInstallation
     private string $shortId;
 
     /**
-     * @var InstalledSystemSoftware[]|null
+     * @var InstalledSystemSoftware[]
      */
-    private ?array $systemSoftware = null;
+    private array $systemSoftware;
 
-    private ?AppUpdatePolicy $updatePolicy = null;
+    private AppUpdatePolicy $updatePolicy;
 
     /**
-     * @var SavedUserInput[]|null
+     * @var SavedUserInput[]
      */
-    private ?array $userInputs = null;
+    private array $userInputs;
 
-    public function __construct(string $appId, VersionStatus $appVersion, DateTime $createdAt, string $description, string $id, string $installationPath, string $shortId)
+    /**
+     * @param LinkedDatabase[] $linkedDatabases
+     * @param InstalledSystemSoftware[] $systemSoftware
+     * @param SavedUserInput[] $userInputs
+     */
+    public function __construct(string $appId, VersionStatus $appVersion, DateTime $createdAt, string $description, string $id, string $installationPath, array $linkedDatabases, Phase $phase, string $projectId, string $shortId, array $systemSoftware, AppUpdatePolicy $updatePolicy, array $userInputs)
     {
         $this->appId = $appId;
         $this->appVersion = $appVersion;
@@ -167,7 +182,13 @@ class AppInstallation
         $this->description = $description;
         $this->id = $id;
         $this->installationPath = $installationPath;
+        $this->linkedDatabases = $linkedDatabases;
+        $this->phase = $phase;
+        $this->projectId = $projectId;
         $this->shortId = $shortId;
+        $this->systemSoftware = $systemSoftware;
+        $this->updatePolicy = $updatePolicy;
+        $this->userInputs = $userInputs;
     }
 
     public function getAppId(): string
@@ -211,24 +232,29 @@ class AppInstallation
     }
 
     /**
-     * @return LinkedDatabase[]|null
+     * @return LinkedDatabase[]
      */
-    public function getLinkedDatabases(): ?array
+    public function getLinkedDatabases(): array
     {
-        return $this->linkedDatabases ?? null;
+        return $this->linkedDatabases;
     }
 
     /**
-     * @return string[]|null
+     * @return mixed[]|null
      */
-    public function getProcesses(): ?array
+    public function getLockedBy(): ?array
     {
-        return $this->processes ?? null;
+        return $this->lockedBy ?? null;
     }
 
-    public function getProjectId(): ?string
+    public function getPhase(): Phase
     {
-        return $this->projectId ?? null;
+        return $this->phase;
+    }
+
+    public function getProjectId(): string
+    {
+        return $this->projectId;
     }
 
     public function getScreenshotId(): ?string
@@ -247,30 +273,30 @@ class AppInstallation
     }
 
     /**
-     * @return InstalledSystemSoftware[]|null
+     * @return InstalledSystemSoftware[]
      */
-    public function getSystemSoftware(): ?array
+    public function getSystemSoftware(): array
     {
-        return $this->systemSoftware ?? null;
+        return $this->systemSoftware;
     }
 
-    public function getUpdatePolicy(): ?AppUpdatePolicy
+    public function getUpdatePolicy(): AppUpdatePolicy
     {
-        return $this->updatePolicy ?? null;
+        return $this->updatePolicy;
     }
 
     /**
-     * @return SavedUserInput[]|null
+     * @return SavedUserInput[]
      */
-    public function getUserInputs(): ?array
+    public function getUserInputs(): array
     {
-        return $this->userInputs ?? null;
+        return $this->userInputs;
     }
 
     public function withAppId(string $appId): self
     {
         $validator = new Validator();
-        $validator->validate($appId, self::$schema['properties']['appId']);
+        $validator->validate($appId, self::$internalValidationSchema['properties']['appId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -300,7 +326,7 @@ class AppInstallation
     public function withCustomDocumentRoot(string $customDocumentRoot): self
     {
         $validator = new Validator();
-        $validator->validate($customDocumentRoot, self::$schema['properties']['customDocumentRoot']);
+        $validator->validate($customDocumentRoot, self::$internalValidationSchema['properties']['customDocumentRoot']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -322,7 +348,7 @@ class AppInstallation
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -336,7 +362,7 @@ class AppInstallation
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, self::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$internalValidationSchema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -350,7 +376,7 @@ class AppInstallation
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -364,7 +390,7 @@ class AppInstallation
     public function withInstallationPath(string $installationPath): self
     {
         $validator = new Validator();
-        $validator->validate($installationPath, self::$schema['properties']['installationPath']);
+        $validator->validate($installationPath, self::$internalValidationSchema['properties']['installationPath']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -386,35 +412,35 @@ class AppInstallation
         return $clone;
     }
 
-    public function withoutLinkedDatabases(): self
-    {
-        $clone = clone $this;
-        unset($clone->linkedDatabases);
-
-        return $clone;
-    }
-
     /**
-     * @param string[] $processes
+     * @param mixed[] $lockedBy
      */
-    public function withProcesses(array $processes): self
+    public function withLockedBy(array $lockedBy): self
     {
         $validator = new Validator();
-        $validator->validate($processes, self::$schema['properties']['processes']);
+        $validator->validate($lockedBy, self::$internalValidationSchema['properties']['lockedBy']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
-        $clone->processes = $processes;
+        $clone->lockedBy = $lockedBy;
 
         return $clone;
     }
 
-    public function withoutProcesses(): self
+    public function withoutLockedBy(): self
     {
         $clone = clone $this;
-        unset($clone->processes);
+        unset($clone->lockedBy);
+
+        return $clone;
+    }
+
+    public function withPhase(Phase $phase): self
+    {
+        $clone = clone $this;
+        $clone->phase = $phase;
 
         return $clone;
     }
@@ -422,7 +448,7 @@ class AppInstallation
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -433,18 +459,10 @@ class AppInstallation
         return $clone;
     }
 
-    public function withoutProjectId(): self
-    {
-        $clone = clone $this;
-        unset($clone->projectId);
-
-        return $clone;
-    }
-
     public function withScreenshotId(string $screenshotId): self
     {
         $validator = new Validator();
-        $validator->validate($screenshotId, self::$schema['properties']['screenshotId']);
+        $validator->validate($screenshotId, self::$internalValidationSchema['properties']['screenshotId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -466,7 +484,7 @@ class AppInstallation
     public function withScreenshotRef(string $screenshotRef): self
     {
         $validator = new Validator();
-        $validator->validate($screenshotRef, self::$schema['properties']['screenshotRef']);
+        $validator->validate($screenshotRef, self::$internalValidationSchema['properties']['screenshotRef']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -488,7 +506,7 @@ class AppInstallation
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, self::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$internalValidationSchema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -510,26 +528,10 @@ class AppInstallation
         return $clone;
     }
 
-    public function withoutSystemSoftware(): self
-    {
-        $clone = clone $this;
-        unset($clone->systemSoftware);
-
-        return $clone;
-    }
-
     public function withUpdatePolicy(AppUpdatePolicy $updatePolicy): self
     {
         $clone = clone $this;
         $clone->updatePolicy = $updatePolicy;
-
-        return $clone;
-    }
-
-    public function withoutUpdatePolicy(): self
-    {
-        $clone = clone $this;
-        unset($clone->updatePolicy);
 
         return $clone;
     }
@@ -541,14 +543,6 @@ class AppInstallation
     {
         $clone = clone $this;
         $clone->userInputs = $userInputs;
-
-        return $clone;
-    }
-
-    public function withoutUserInputs(): self
-    {
-        $clone = clone $this;
-        unset($clone->userInputs);
 
         return $clone;
     }
@@ -582,18 +576,13 @@ class AppInstallation
         }
         $id = $input->{'id'};
         $installationPath = $input->{'installationPath'};
-        $linkedDatabases = null;
-        if (isset($input->{'linkedDatabases'})) {
-            $linkedDatabases = array_map(fn (array|object $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
+        $linkedDatabases = array_map(fn (array|object $i): LinkedDatabase => LinkedDatabase::buildFromInput($i, validate: $validate), $input->{'linkedDatabases'});
+        $lockedBy = null;
+        if (isset($input->{'lockedBy'})) {
+            $lockedBy = (array)$input->{'lockedBy'};
         }
-        $processes = null;
-        if (isset($input->{'processes'})) {
-            $processes = $input->{'processes'};
-        }
-        $projectId = null;
-        if (isset($input->{'projectId'})) {
-            $projectId = $input->{'projectId'};
-        }
+        $phase = Phase::from($input->{'phase'});
+        $projectId = $input->{'projectId'};
         $screenshotId = null;
         if (isset($input->{'screenshotId'})) {
             $screenshotId = $input->{'screenshotId'};
@@ -603,30 +592,16 @@ class AppInstallation
             $screenshotRef = $input->{'screenshotRef'};
         }
         $shortId = $input->{'shortId'};
-        $systemSoftware = null;
-        if (isset($input->{'systemSoftware'})) {
-            $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
-        }
-        $updatePolicy = null;
-        if (isset($input->{'updatePolicy'})) {
-            $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
-        }
-        $userInputs = null;
-        if (isset($input->{'userInputs'})) {
-            $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
-        }
+        $systemSoftware = array_map(fn (array|object $i): InstalledSystemSoftware => InstalledSystemSoftware::buildFromInput($i, validate: $validate), $input->{'systemSoftware'});
+        $updatePolicy = AppUpdatePolicy::from($input->{'updatePolicy'});
+        $userInputs = array_map(fn (array|object $i): SavedUserInput => SavedUserInput::buildFromInput($i, validate: $validate), $input->{'userInputs'});
 
-        $obj = new self($appId, $appVersion, $createdAt, $description, $id, $installationPath, $shortId);
+        $obj = new self($appId, $appVersion, $createdAt, $description, $id, $installationPath, $linkedDatabases, $phase, $projectId, $shortId, $systemSoftware, $updatePolicy, $userInputs);
         $obj->customDocumentRoot = $customDocumentRoot;
         $obj->disabled = $disabled;
-        $obj->linkedDatabases = $linkedDatabases;
-        $obj->processes = $processes;
-        $obj->projectId = $projectId;
+        $obj->lockedBy = $lockedBy;
         $obj->screenshotId = $screenshotId;
         $obj->screenshotRef = $screenshotRef;
-        $obj->systemSoftware = $systemSoftware;
-        $obj->updatePolicy = $updatePolicy;
-        $obj->userInputs = $userInputs;
         return $obj;
     }
 
@@ -648,15 +623,12 @@ class AppInstallation
         $output['disabled'] = $this->disabled;
         $output['id'] = $this->id;
         $output['installationPath'] = $this->installationPath;
-        if (isset($this->linkedDatabases)) {
-            $output['linkedDatabases'] = array_map(fn (LinkedDatabase $i): array => $i->toJson(), $this->linkedDatabases);
+        $output['linkedDatabases'] = array_map(fn (LinkedDatabase $i): array => $i->toJson(), $this->linkedDatabases);
+        if (isset($this->lockedBy)) {
+            $output['lockedBy'] = $this->lockedBy;
         }
-        if (isset($this->processes)) {
-            $output['processes'] = $this->processes;
-        }
-        if (isset($this->projectId)) {
-            $output['projectId'] = $this->projectId;
-        }
+        $output['phase'] = $this->phase->value;
+        $output['projectId'] = $this->projectId;
         if (isset($this->screenshotId)) {
             $output['screenshotId'] = $this->screenshotId;
         }
@@ -664,15 +636,9 @@ class AppInstallation
             $output['screenshotRef'] = $this->screenshotRef;
         }
         $output['shortId'] = $this->shortId;
-        if (isset($this->systemSoftware)) {
-            $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
-        }
-        if (isset($this->updatePolicy)) {
-            $output['updatePolicy'] = $this->updatePolicy->value;
-        }
-        if (isset($this->userInputs)) {
-            $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
-        }
+        $output['systemSoftware'] = array_map(fn (InstalledSystemSoftware $i): array => $i->toJson(), $this->systemSoftware);
+        $output['updatePolicy'] = $this->updatePolicy->value;
+        $output['userInputs'] = array_map(fn (SavedUserInput $i): array => $i->toJson(), $this->userInputs);
 
         return $output;
     }
@@ -689,7 +655,7 @@ class AppInstallation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

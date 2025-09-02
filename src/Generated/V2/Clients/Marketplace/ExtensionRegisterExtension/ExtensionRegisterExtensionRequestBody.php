@@ -18,7 +18,7 @@ class ExtensionRegisterExtensionRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'context' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
@@ -70,6 +70,17 @@ class ExtensionRegisterExtensionRequestBody
                 'type' => 'array',
             ],
             'webhookURLs' => [
+                'allOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                    ],
+                    [
+                        'deprecated' => true,
+                        'type' => 'object',
+                    ],
+                ],
+            ],
+            'webhookUrls' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
             ],
         ],
@@ -117,7 +128,12 @@ class ExtensionRegisterExtensionRequestBody
      */
     private ?array $tags = null;
 
-    private ?WebhookUrls $webhookURLs = null;
+    /**
+     * @deprecated
+     */
+    private ?ExtensionRegisterExtensionRequestBodyWebhookURLs $webhookURLs = null;
+
+    private ?WebhookUrls $webhookUrls = null;
 
     public function __construct(string $name)
     {
@@ -195,9 +211,9 @@ class ExtensionRegisterExtensionRequestBody
         return $this->tags ?? null;
     }
 
-    public function getWebhookURLs(): ?WebhookUrls
+    public function getWebhookUrls(): ?WebhookUrls
     {
-        return $this->webhookURLs ?? null;
+        return $this->webhookUrls ?? null;
     }
 
     public function withContext(Context $context): self
@@ -219,7 +235,7 @@ class ExtensionRegisterExtensionRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -299,7 +315,7 @@ class ExtensionRegisterExtensionRequestBody
     public function withFrontendFragments(array $frontendFragments): self
     {
         $validator = new Validator();
-        $validator->validate($frontendFragments, self::$schema['properties']['frontendFragments']);
+        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -321,7 +337,7 @@ class ExtensionRegisterExtensionRequestBody
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -338,7 +354,7 @@ class ExtensionRegisterExtensionRequestBody
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, self::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$internalValidationSchema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -395,7 +411,7 @@ class ExtensionRegisterExtensionRequestBody
     public function withTags(array $tags): self
     {
         $validator = new Validator();
-        $validator->validate($tags, self::$schema['properties']['tags']);
+        $validator->validate($tags, self::$internalValidationSchema['properties']['tags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -414,18 +430,18 @@ class ExtensionRegisterExtensionRequestBody
         return $clone;
     }
 
-    public function withWebhookURLs(WebhookUrls $webhookURLs): self
+    public function withWebhookUrls(WebhookUrls $webhookUrls): self
     {
         $clone = clone $this;
-        $clone->webhookURLs = $webhookURLs;
+        $clone->webhookUrls = $webhookUrls;
 
         return $clone;
     }
 
-    public function withoutWebhookURLs(): self
+    public function withoutWebhookUrls(): self
     {
         $clone = clone $this;
-        unset($clone->webhookURLs);
+        unset($clone->webhookUrls);
 
         return $clone;
     }
@@ -488,7 +504,11 @@ class ExtensionRegisterExtensionRequestBody
         }
         $webhookURLs = null;
         if (isset($input->{'webhookURLs'})) {
-            $webhookURLs = WebhookUrls::buildFromInput($input->{'webhookURLs'}, validate: $validate);
+            $webhookURLs = ExtensionRegisterExtensionRequestBodyWebhookURLs::buildFromInput($input->{'webhookURLs'}, validate: $validate);
+        }
+        $webhookUrls = null;
+        if (isset($input->{'webhookUrls'})) {
+            $webhookUrls = WebhookUrls::buildFromInput($input->{'webhookUrls'}, validate: $validate);
         }
 
         $obj = new self($name);
@@ -503,6 +523,7 @@ class ExtensionRegisterExtensionRequestBody
         $obj->support = $support;
         $obj->tags = $tags;
         $obj->webhookURLs = $webhookURLs;
+        $obj->webhookUrls = $webhookUrls;
         return $obj;
     }
 
@@ -546,7 +567,10 @@ class ExtensionRegisterExtensionRequestBody
             $output['tags'] = $this->tags;
         }
         if (isset($this->webhookURLs)) {
-            $output['webhookURLs'] = $this->webhookURLs->toJson();
+            $output['webhookURLs'] = ($this->webhookURLs)->toJson();
+        }
+        if (isset($this->webhookUrls)) {
+            $output['webhookUrls'] = $this->webhookUrls->toJson();
         }
 
         return $output;
@@ -564,7 +588,7 @@ class ExtensionRegisterExtensionRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -578,5 +602,8 @@ class ExtensionRegisterExtensionRequestBody
 
     public function __clone()
     {
+        if (isset($this->webhookURLs)) {
+            $this->webhookURLs = clone $this->webhookURLs;
+        }
     }
 }

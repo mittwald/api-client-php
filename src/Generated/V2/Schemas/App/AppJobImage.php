@@ -22,7 +22,7 @@ class AppJobImage
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'imageTemplate' => [
                 'type' => 'string',
@@ -49,7 +49,7 @@ class AppJobImage
     public function withImageTemplate(string $imageTemplate): self
     {
         $validator = new Validator();
-        $validator->validate($imageTemplate, self::$schema['properties']['imageTemplate']);
+        $validator->validate($imageTemplate, self::$internalValidationSchema['properties']['imageTemplate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -107,7 +107,7 @@ class AppJobImage
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -23,11 +23,18 @@ class VolumeResponse
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'id' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'linkedServices' => [
+                'items' => [
+                    'format' => 'uuid',
+                    'type' => 'string',
+                ],
+                'type' => 'array',
             ],
             'name' => [
                 'type' => 'string',
@@ -41,6 +48,7 @@ class VolumeResponse
                 'type' => 'string',
             ],
             'storageUsageInBytes' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'storageUsageInBytesSetAt' => [
@@ -60,6 +68,11 @@ class VolumeResponse
     ];
 
     private string $id;
+
+    /**
+     * @var string[]|null
+     */
+    private ?array $linkedServices = null;
 
     private string $name;
 
@@ -87,6 +100,14 @@ class VolumeResponse
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getLinkedServices(): ?array
+    {
+        return $this->linkedServices ?? null;
     }
 
     public function getName(): string
@@ -117,7 +138,7 @@ class VolumeResponse
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -128,10 +149,35 @@ class VolumeResponse
         return $clone;
     }
 
+    /**
+     * @param string[] $linkedServices
+     */
+    public function withLinkedServices(array $linkedServices): self
+    {
+        $validator = new Validator();
+        $validator->validate($linkedServices, self::$internalValidationSchema['properties']['linkedServices']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->linkedServices = $linkedServices;
+
+        return $clone;
+    }
+
+    public function withoutLinkedServices(): self
+    {
+        $clone = clone $this;
+        unset($clone->linkedServices);
+
+        return $clone;
+    }
+
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +191,7 @@ class VolumeResponse
     public function withOrphaned(bool $orphaned): self
     {
         $validator = new Validator();
-        $validator->validate($orphaned, self::$schema['properties']['orphaned']);
+        $validator->validate($orphaned, self::$internalValidationSchema['properties']['orphaned']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -159,7 +205,7 @@ class VolumeResponse
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +219,7 @@ class VolumeResponse
     public function withStorageUsageInBytes(int $storageUsageInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($storageUsageInBytes, self::$schema['properties']['storageUsageInBytes']);
+        $validator->validate($storageUsageInBytes, self::$internalValidationSchema['properties']['storageUsageInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -208,6 +254,10 @@ class VolumeResponse
         }
 
         $id = $input->{'id'};
+        $linkedServices = null;
+        if (isset($input->{'linkedServices'})) {
+            $linkedServices = $input->{'linkedServices'};
+        }
         $name = $input->{'name'};
         $orphaned = (bool)($input->{'orphaned'});
         $stackId = $input->{'stackId'};
@@ -215,7 +265,7 @@ class VolumeResponse
         $storageUsageInBytesSetAt = new DateTime($input->{'storageUsageInBytesSetAt'});
 
         $obj = new self($id, $name, $orphaned, $stackId, $storageUsageInBytes, $storageUsageInBytesSetAt);
-
+        $obj->linkedServices = $linkedServices;
         return $obj;
     }
 
@@ -228,6 +278,9 @@ class VolumeResponse
     {
         $output = [];
         $output['id'] = $this->id;
+        if (isset($this->linkedServices)) {
+            $output['linkedServices'] = $this->linkedServices;
+        }
         $output['name'] = $this->name;
         $output['orphaned'] = $this->orphaned;
         $output['stackId'] = $this->stackId;
@@ -249,7 +302,7 @@ class VolumeResponse
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

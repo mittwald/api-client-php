@@ -22,7 +22,7 @@ class ServiceDeclareRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'command' => [
                 'description' => 'Defaults to image config on empty',
@@ -48,10 +48,24 @@ class ServiceDeclareRequest
                 ],
                 'type' => 'array',
             ],
+            'environment' => [
+                'additionalProperties' => [
+                    'type' => 'string',
+                ],
+                'example' => [
+                    'MYSQL_DATABASE' => 'my_db',
+                    'MYSQL_PASSWORD' => 'my_password',
+                    'MYSQL_ROOT_PASSWORD' => 'my_root_password',
+                    'MYSQL_USER' => 'my_user',
+                ],
+                'type' => 'object',
+            ],
             'envs' => [
                 'additionalProperties' => [
                     'type' => 'string',
                 ],
+                'deprecated' => true,
+                'description' => 'DEPRECATED: Use \'environment\' instead. This field will be removed in a future version.',
                 'example' => [
                     'MYSQL_DATABASE' => 'my_db',
                     'MYSQL_PASSWORD' => 'my_password',
@@ -84,9 +98,7 @@ class ServiceDeclareRequest
             ],
         ],
         'required' => [
-            'description',
             'image',
-            'ports',
         ],
         'type' => 'object',
     ];
@@ -98,7 +110,7 @@ class ServiceDeclareRequest
      */
     private ?array $command = null;
 
-    private string $description;
+    private ?string $description = null;
 
     /**
      * Defaults to image config on empty
@@ -110,28 +122,31 @@ class ServiceDeclareRequest
     /**
      * @var string[]|null
      */
+    private ?array $environment = null;
+
+    /**
+     * DEPRECATED: Use 'environment' instead. This field will be removed in a future version.
+     *
+     * @var string[]|null
+     * @deprecated
+     */
     private ?array $envs = null;
 
     private string $image;
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    private array $ports;
+    private ?array $ports = null;
 
     /**
      * @var string[]|null
      */
     private ?array $volumes = null;
 
-    /**
-     * @param string[] $ports
-     */
-    public function __construct(string $description, string $image, array $ports)
+    public function __construct(string $image)
     {
-        $this->description = $description;
         $this->image = $image;
-        $this->ports = $ports;
     }
 
     /**
@@ -142,9 +157,9 @@ class ServiceDeclareRequest
         return $this->command ?? null;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description ?? null;
     }
 
     /**
@@ -158,6 +173,15 @@ class ServiceDeclareRequest
     /**
      * @return string[]|null
      */
+    public function getEnvironment(): ?array
+    {
+        return $this->environment ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     * @deprecated
+     */
     public function getEnvs(): ?array
     {
         return $this->envs ?? null;
@@ -169,11 +193,11 @@ class ServiceDeclareRequest
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getPorts(): array
+    public function getPorts(): ?array
     {
-        return $this->ports;
+        return $this->ports ?? null;
     }
 
     /**
@@ -190,7 +214,7 @@ class ServiceDeclareRequest
     public function withCommand(array $command): self
     {
         $validator = new Validator();
-        $validator->validate($command, self::$schema['properties']['command']);
+        $validator->validate($command, self::$internalValidationSchema['properties']['command']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -212,7 +236,7 @@ class ServiceDeclareRequest
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -223,13 +247,21 @@ class ServiceDeclareRequest
         return $clone;
     }
 
+    public function withoutDescription(): self
+    {
+        $clone = clone $this;
+        unset($clone->description);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $entrypoint
      */
     public function withEntrypoint(array $entrypoint): self
     {
         $validator = new Validator();
-        $validator->validate($entrypoint, self::$schema['properties']['entrypoint']);
+        $validator->validate($entrypoint, self::$internalValidationSchema['properties']['entrypoint']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,12 +281,38 @@ class ServiceDeclareRequest
     }
 
     /**
+     * @param string[] $environment
+     */
+    public function withEnvironment(array $environment): self
+    {
+        $validator = new Validator();
+        $validator->validate($environment, self::$internalValidationSchema['properties']['environment']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->environment = $environment;
+
+        return $clone;
+    }
+
+    public function withoutEnvironment(): self
+    {
+        $clone = clone $this;
+        unset($clone->environment);
+
+        return $clone;
+    }
+
+    /**
      * @param string[] $envs
+     * @deprecated
      */
     public function withEnvs(array $envs): self
     {
         $validator = new Validator();
-        $validator->validate($envs, self::$schema['properties']['envs']);
+        $validator->validate($envs, self::$internalValidationSchema['properties']['envs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -276,7 +334,7 @@ class ServiceDeclareRequest
     public function withImage(string $image): self
     {
         $validator = new Validator();
-        $validator->validate($image, self::$schema['properties']['image']);
+        $validator->validate($image, self::$internalValidationSchema['properties']['image']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -293,7 +351,7 @@ class ServiceDeclareRequest
     public function withPorts(array $ports): self
     {
         $validator = new Validator();
-        $validator->validate($ports, self::$schema['properties']['ports']);
+        $validator->validate($ports, self::$internalValidationSchema['properties']['ports']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -304,13 +362,21 @@ class ServiceDeclareRequest
         return $clone;
     }
 
+    public function withoutPorts(): self
+    {
+        $clone = clone $this;
+        unset($clone->ports);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $volumes
      */
     public function withVolumes(array $volumes): self
     {
         $validator = new Validator();
-        $validator->validate($volumes, self::$schema['properties']['volumes']);
+        $validator->validate($volumes, self::$internalValidationSchema['properties']['volumes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -348,26 +414,39 @@ class ServiceDeclareRequest
         if (isset($input->{'command'})) {
             $command = $input->{'command'};
         }
-        $description = $input->{'description'};
+        $description = null;
+        if (isset($input->{'description'})) {
+            $description = $input->{'description'};
+        }
         $entrypoint = null;
         if (isset($input->{'entrypoint'})) {
             $entrypoint = $input->{'entrypoint'};
+        }
+        $environment = null;
+        if (isset($input->{'environment'})) {
+            $environment = (array)$input->{'environment'};
         }
         $envs = null;
         if (isset($input->{'envs'})) {
             $envs = (array)$input->{'envs'};
         }
         $image = $input->{'image'};
-        $ports = $input->{'ports'};
+        $ports = null;
+        if (isset($input->{'ports'})) {
+            $ports = $input->{'ports'};
+        }
         $volumes = null;
         if (isset($input->{'volumes'})) {
             $volumes = $input->{'volumes'};
         }
 
-        $obj = new self($description, $image, $ports);
+        $obj = new self($image);
         $obj->command = $command;
+        $obj->description = $description;
         $obj->entrypoint = $entrypoint;
+        $obj->environment = $environment;
         $obj->envs = $envs;
+        $obj->ports = $ports;
         $obj->volumes = $volumes;
         return $obj;
     }
@@ -383,15 +462,22 @@ class ServiceDeclareRequest
         if (isset($this->command)) {
             $output['command'] = $this->command;
         }
-        $output['description'] = $this->description;
+        if (isset($this->description)) {
+            $output['description'] = $this->description;
+        }
         if (isset($this->entrypoint)) {
             $output['entrypoint'] = $this->entrypoint;
+        }
+        if (isset($this->environment)) {
+            $output['environment'] = $this->environment;
         }
         if (isset($this->envs)) {
             $output['envs'] = $this->envs;
         }
         $output['image'] = $this->image;
-        $output['ports'] = $this->ports;
+        if (isset($this->ports)) {
+            $output['ports'] = $this->ports;
+        }
         if (isset($this->volumes)) {
             $output['volumes'] = $this->volumes;
         }
@@ -411,7 +497,7 @@ class ServiceDeclareRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

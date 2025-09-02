@@ -22,7 +22,7 @@ class PeriodBasedFeeStrategy
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A strategy for fees that occur periodically',
         'properties' => [
             'periods' => [
@@ -134,7 +134,7 @@ class PeriodBasedFeeStrategy
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

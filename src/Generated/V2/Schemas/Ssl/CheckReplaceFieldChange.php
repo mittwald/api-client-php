@@ -22,7 +22,7 @@ class CheckReplaceFieldChange
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'newValue' => [
                 'type' => 'string',
@@ -61,7 +61,7 @@ class CheckReplaceFieldChange
     public function withNewValue(string $newValue): self
     {
         $validator = new Validator();
-        $validator->validate($newValue, self::$schema['properties']['newValue']);
+        $validator->validate($newValue, self::$internalValidationSchema['properties']['newValue']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -75,7 +75,7 @@ class CheckReplaceFieldChange
     public function withOldValue(string $oldValue): self
     {
         $validator = new Validator();
-        $validator->validate($oldValue, self::$schema['properties']['oldValue']);
+        $validator->validate($oldValue, self::$internalValidationSchema['properties']['oldValue']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -135,7 +135,7 @@ class CheckReplaceFieldChange
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

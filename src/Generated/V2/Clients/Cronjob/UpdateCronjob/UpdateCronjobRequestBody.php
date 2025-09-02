@@ -14,7 +14,7 @@ class UpdateCronjobRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
                 'type' => 'boolean',
@@ -44,7 +44,7 @@ class UpdateCronjobRequestBody
             'timeout' => [
                 'maximum' => 86400,
                 'minimum' => 1,
-                'type' => 'number',
+                'type' => 'integer',
             ],
         ],
         'type' => 'object',
@@ -60,7 +60,7 @@ class UpdateCronjobRequestBody
 
     private ?string $interval = null;
 
-    private int|float|null $timeout = null;
+    private ?int $timeout = null;
 
     /**
      *
@@ -94,15 +94,15 @@ class UpdateCronjobRequestBody
         return $this->interval ?? null;
     }
 
-    public function getTimeout(): int|float|null
+    public function getTimeout(): ?int
     {
-        return $this->timeout;
+        return $this->timeout ?? null;
     }
 
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -124,7 +124,7 @@ class UpdateCronjobRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -162,7 +162,7 @@ class UpdateCronjobRequestBody
     public function withEmail(string $email): self
     {
         $validator = new Validator();
-        $validator->validate($email, self::$schema['properties']['email']);
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -184,7 +184,7 @@ class UpdateCronjobRequestBody
     public function withInterval(string $interval): self
     {
         $validator = new Validator();
-        $validator->validate($interval, self::$schema['properties']['interval']);
+        $validator->validate($interval, self::$internalValidationSchema['properties']['interval']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -203,10 +203,10 @@ class UpdateCronjobRequestBody
         return $clone;
     }
 
-    public function withTimeout(int|float $timeout): self
+    public function withTimeout(int $timeout): self
     {
         $validator = new Validator();
-        $validator->validate($timeout, self::$schema['properties']['timeout']);
+        $validator->validate($timeout, self::$internalValidationSchema['properties']['timeout']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -266,7 +266,7 @@ class UpdateCronjobRequestBody
         }
         $timeout = null;
         if (isset($input->{'timeout'})) {
-            $timeout = str_contains((string)($input->{'timeout'}), '.') ? (float)($input->{'timeout'}) : (int)($input->{'timeout'});
+            $timeout = (int)($input->{'timeout'});
         }
 
         $obj = new self();
@@ -323,7 +323,7 @@ class UpdateCronjobRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

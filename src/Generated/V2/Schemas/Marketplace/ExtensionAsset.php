@@ -23,7 +23,7 @@ class ExtensionAsset
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'The following assets are the media that are associated with the extension and will be shown in extension details page.',
         'properties' => [
             'assetType' => [
@@ -119,7 +119,7 @@ class ExtensionAsset
     public function withFileName(string $fileName): self
     {
         $validator = new Validator();
-        $validator->validate($fileName, self::$schema['properties']['fileName']);
+        $validator->validate($fileName, self::$internalValidationSchema['properties']['fileName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class ExtensionAsset
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -155,7 +155,7 @@ class ExtensionAsset
     public function withIndex(int $index): self
     {
         $validator = new Validator();
-        $validator->validate($index, self::$schema['properties']['index']);
+        $validator->validate($index, self::$internalValidationSchema['properties']['index']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class ExtensionAsset
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

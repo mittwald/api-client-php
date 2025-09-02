@@ -23,7 +23,7 @@ class ProjectBackup
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'createdAt' => [
                 'format' => 'date-time',
@@ -59,6 +59,9 @@ class ProjectBackup
                 'format' => 'date-time',
                 'type' => 'string',
             ],
+            'restorePath' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathResponse',
+            ],
             'status' => [
                 'example' => 'Completed',
                 'type' => 'string',
@@ -69,6 +72,7 @@ class ProjectBackup
             'projectId',
             'status',
             'deletable',
+            'requestedAt',
         ],
         'type' => 'object',
     ];
@@ -89,15 +93,18 @@ class ProjectBackup
 
     private string $projectId;
 
-    private ?DateTime $requestedAt = null;
+    private DateTime $requestedAt;
+
+    private ?ProjectBackupRestorePathResponse $restorePath = null;
 
     private string $status;
 
-    public function __construct(bool $deletable, string $id, string $projectId, string $status)
+    public function __construct(bool $deletable, string $id, string $projectId, DateTime $requestedAt, string $status)
     {
         $this->deletable = $deletable;
         $this->id = $id;
         $this->projectId = $projectId;
+        $this->requestedAt = $requestedAt;
         $this->status = $status;
     }
 
@@ -141,9 +148,14 @@ class ProjectBackup
         return $this->projectId;
     }
 
-    public function getRequestedAt(): ?DateTime
+    public function getRequestedAt(): DateTime
     {
-        return $this->requestedAt ?? null;
+        return $this->requestedAt;
+    }
+
+    public function getRestorePath(): ?ProjectBackupRestorePathResponse
+    {
+        return $this->restorePath ?? null;
     }
 
     public function getStatus(): string
@@ -170,7 +182,7 @@ class ProjectBackup
     public function withDeletable(bool $deletable): self
     {
         $validator = new Validator();
-        $validator->validate($deletable, self::$schema['properties']['deletable']);
+        $validator->validate($deletable, self::$internalValidationSchema['properties']['deletable']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -184,7 +196,7 @@ class ProjectBackup
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -238,7 +250,7 @@ class ProjectBackup
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -252,7 +264,7 @@ class ProjectBackup
     public function withParentId(string $parentId): self
     {
         $validator = new Validator();
-        $validator->validate($parentId, self::$schema['properties']['parentId']);
+        $validator->validate($parentId, self::$internalValidationSchema['properties']['parentId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -274,7 +286,7 @@ class ProjectBackup
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -293,10 +305,18 @@ class ProjectBackup
         return $clone;
     }
 
-    public function withoutRequestedAt(): self
+    public function withRestorePath(ProjectBackupRestorePathResponse $restorePath): self
     {
         $clone = clone $this;
-        unset($clone->requestedAt);
+        $clone->restorePath = $restorePath;
+
+        return $clone;
+    }
+
+    public function withoutRestorePath(): self
+    {
+        $clone = clone $this;
+        unset($clone->restorePath);
 
         return $clone;
     }
@@ -304,7 +324,7 @@ class ProjectBackup
     public function withStatus(string $status): self
     {
         $validator = new Validator();
-        $validator->validate($status, self::$schema['properties']['status']);
+        $validator->validate($status, self::$internalValidationSchema['properties']['status']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -353,19 +373,20 @@ class ProjectBackup
             $parentId = $input->{'parentId'};
         }
         $projectId = $input->{'projectId'};
-        $requestedAt = null;
-        if (isset($input->{'requestedAt'})) {
-            $requestedAt = new DateTime($input->{'requestedAt'});
+        $requestedAt = new DateTime($input->{'requestedAt'});
+        $restorePath = null;
+        if (isset($input->{'restorePath'})) {
+            $restorePath = ProjectBackupRestorePathResponse::buildFromInput($input->{'restorePath'}, validate: $validate);
         }
         $status = $input->{'status'};
 
-        $obj = new self($deletable, $id, $projectId, $status);
+        $obj = new self($deletable, $id, $projectId, $requestedAt, $status);
         $obj->createdAt = $createdAt;
         $obj->description = $description;
         $obj->expiresAt = $expiresAt;
         $obj->export = $export;
         $obj->parentId = $parentId;
-        $obj->requestedAt = $requestedAt;
+        $obj->restorePath = $restorePath;
         return $obj;
     }
 
@@ -395,8 +416,9 @@ class ProjectBackup
             $output['parentId'] = $this->parentId;
         }
         $output['projectId'] = $this->projectId;
-        if (isset($this->requestedAt)) {
-            $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
+        $output['requestedAt'] = ($this->requestedAt)->format(DateTime::ATOM);
+        if (isset($this->restorePath)) {
+            $output['restorePath'] = $this->restorePath->toJson();
         }
         $output['status'] = $this->status;
 
@@ -415,7 +437,7 @@ class ProjectBackup
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -435,8 +457,6 @@ class ProjectBackup
         if (isset($this->expiresAt)) {
             $this->expiresAt = clone $this->expiresAt;
         }
-        if (isset($this->requestedAt)) {
-            $this->requestedAt = clone $this->requestedAt;
-        }
+        $this->requestedAt = clone $this->requestedAt;
     }
 }

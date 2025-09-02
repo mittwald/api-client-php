@@ -15,23 +15,45 @@ class ExtensionListExtensionsRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'context' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.Context',
             ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
+            'includeDeprecated' => [
+                'type' => 'boolean',
+            ],
             'limit' => [
-                'default' => 1000,
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
             ],
             'skip' => [
-                'default' => 0,
                 'type' => 'integer',
+                'default' => 0,
             ],
             'page' => [
-                'default' => 1,
                 'type' => 'integer',
+                'minimum' => 1,
+            ],
+            'sort' => [
+                'type' => 'string',
+                'enum' => [
+                    'name',
+                ],
+                'default' => 'name',
+            ],
+            'order' => [
+                'type' => 'string',
+                'enum' => [
+                    'asc',
+                    'desc',
+                ],
+                'default' => 'asc',
             ],
         ],
         'required' => [
@@ -41,11 +63,19 @@ class ExtensionListExtensionsRequest
 
     private ?Context $context = null;
 
+    private ?string $searchTerm = null;
+
+    private ?bool $includeDeprecated = null;
+
     private int $limit = 1000;
 
     private int $skip = 0;
 
-    private int $page = 1;
+    private ?int $page = null;
+
+    private ExtensionListExtensionsRequestSort $sort = ExtensionListExtensionsRequestSort::name;
+
+    private ExtensionListExtensionsRequestOrder $order = ExtensionListExtensionsRequestOrder::asc;
 
     private array $headers = [
 
@@ -63,6 +93,16 @@ class ExtensionListExtensionsRequest
         return $this->context ?? null;
     }
 
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
+    public function getIncludeDeprecated(): ?bool
+    {
+        return $this->includeDeprecated ?? null;
+    }
+
     public function getLimit(): int
     {
         return $this->limit;
@@ -73,9 +113,19 @@ class ExtensionListExtensionsRequest
         return $this->skip;
     }
 
-    public function getPage(): int
+    public function getPage(): ?int
     {
-        return $this->page;
+        return $this->page ?? null;
+    }
+
+    public function getSort(): ExtensionListExtensionsRequestSort
+    {
+        return $this->sort;
+    }
+
+    public function getOrder(): ExtensionListExtensionsRequestOrder
+    {
+        return $this->order;
     }
 
     public function withContext(Context $context): self
@@ -94,10 +144,54 @@ class ExtensionListExtensionsRequest
         return $clone;
     }
 
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
+    public function withIncludeDeprecated(bool $includeDeprecated): self
+    {
+        $validator = new Validator();
+        $validator->validate($includeDeprecated, self::$internalValidationSchema['properties']['includeDeprecated']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->includeDeprecated = $includeDeprecated;
+
+        return $clone;
+    }
+
+    public function withoutIncludeDeprecated(): self
+    {
+        $clone = clone $this;
+        unset($clone->includeDeprecated);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +205,7 @@ class ExtensionListExtensionsRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -125,13 +219,37 @@ class ExtensionListExtensionsRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
+
+        return $clone;
+    }
+
+    public function withSort(ExtensionListExtensionsRequestSort $sort): self
+    {
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    public function withOrder(ExtensionListExtensionsRequestOrder $order): self
+    {
+        $clone = clone $this;
+        $clone->order = $order;
 
         return $clone;
     }
@@ -155,6 +273,14 @@ class ExtensionListExtensionsRequest
         if (isset($input->{'context'})) {
             $context = Context::from($input->{'context'});
         }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
+        $includeDeprecated = null;
+        if (isset($input->{'includeDeprecated'})) {
+            $includeDeprecated = (bool)($input->{'includeDeprecated'});
+        }
         $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -163,16 +289,28 @@ class ExtensionListExtensionsRequest
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
         }
-        $page = 1;
+        $page = null;
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
+        }
+        $sort = ExtensionListExtensionsRequestSort::name;
+        if (isset($input->{'sort'})) {
+            $sort = ExtensionListExtensionsRequestSort::from($input->{'sort'});
+        }
+        $order = ExtensionListExtensionsRequestOrder::asc;
+        if (isset($input->{'order'})) {
+            $order = ExtensionListExtensionsRequestOrder::from($input->{'order'});
         }
 
         $obj = new self();
         $obj->context = $context;
+        $obj->searchTerm = $searchTerm;
+        $obj->includeDeprecated = $includeDeprecated;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -187,9 +325,19 @@ class ExtensionListExtensionsRequest
         if (isset($this->context)) {
             $output['context'] = $this->context->value;
         }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
+        if (isset($this->includeDeprecated)) {
+            $output['includeDeprecated'] = $this->includeDeprecated;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
-        $output['page'] = $this->page;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
+        }
+        $output['sort'] = ($this->sort)->value;
+        $output['order'] = ($this->order)->value;
 
         return $output;
     }
@@ -206,7 +354,7 @@ class ExtensionListExtensionsRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -253,6 +401,12 @@ class ExtensionListExtensionsRequest
         if (isset($mapped['context'])) {
             $query['context'] = $mapped['context'];
         }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
+        if (isset($mapped['includeDeprecated'])) {
+            $query['includeDeprecated'] = $mapped['includeDeprecated'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
@@ -261,6 +415,12 @@ class ExtensionListExtensionsRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

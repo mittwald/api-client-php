@@ -12,7 +12,7 @@ class ReplaceDatabaseRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'databaseUserIds' => [
                 'additionalProperties' => [
@@ -86,7 +86,7 @@ class ReplaceDatabaseRequestBody
     public function withDatabaseUserIds(array $databaseUserIds): self
     {
         $validator = new Validator();
-        $validator->validate($databaseUserIds, self::$schema['properties']['databaseUserIds']);
+        $validator->validate($databaseUserIds, self::$internalValidationSchema['properties']['databaseUserIds']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class ReplaceDatabaseRequestBody
     public function withNewDatabaseId(string $newDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($newDatabaseId, self::$schema['properties']['newDatabaseId']);
+        $validator->validate($newDatabaseId, self::$internalValidationSchema['properties']['newDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -122,7 +122,7 @@ class ReplaceDatabaseRequestBody
     public function withOldDatabaseId(string $oldDatabaseId): self
     {
         $validator = new Validator();
-        $validator->validate($oldDatabaseId, self::$schema['properties']['oldDatabaseId']);
+        $validator->validate($oldDatabaseId, self::$internalValidationSchema['properties']['oldDatabaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -189,7 +189,7 @@ class ReplaceDatabaseRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

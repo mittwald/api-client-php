@@ -14,7 +14,7 @@ class UpdateSftpUserRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accessLevel' => [
                 'enum' => [
@@ -141,7 +141,7 @@ class UpdateSftpUserRequestBody
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class UpdateSftpUserRequestBody
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -188,7 +188,7 @@ class UpdateSftpUserRequestBody
     public function withDirectories(array $directories): self
     {
         $validator = new Validator();
-        $validator->validate($directories, self::$schema['properties']['directories']);
+        $validator->validate($directories, self::$internalValidationSchema['properties']['directories']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -226,7 +226,7 @@ class UpdateSftpUserRequestBody
     public function withPassword(string $password): self
     {
         $validator = new Validator();
-        $validator->validate($password, self::$schema['properties']['password']);
+        $validator->validate($password, self::$internalValidationSchema['properties']['password']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -364,7 +364,7 @@ class UpdateSftpUserRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

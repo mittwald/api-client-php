@@ -23,7 +23,7 @@ class DatabaseDependency
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'A DatabaseDependency is a generic description of need for a database, used by AppVersions.',
         'properties' => [
             'description' => [
@@ -98,7 +98,7 @@ class DatabaseDependency
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -123,7 +123,7 @@ class DatabaseDependency
     public function withParameters(array $parameters): self
     {
         $validator = new Validator();
-        $validator->validate($parameters, self::$schema['properties']['parameters']);
+        $validator->validate($parameters, self::$internalValidationSchema['properties']['parameters']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,7 +145,7 @@ class DatabaseDependency
     public function withVersion(string $version): self
     {
         $validator = new Validator();
-        $validator->validate($version, self::$schema['properties']['version']);
+        $validator->validate($version, self::$internalValidationSchema['properties']['version']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -214,7 +214,7 @@ class DatabaseDependency
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

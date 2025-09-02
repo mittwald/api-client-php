@@ -23,14 +23,15 @@ class MailAddressMailboxStorageInBytesCurrent
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'updatedAt' => [
                 'format' => 'date-time',
                 'type' => 'string',
             ],
             'value' => [
-                'type' => 'number',
+                'format' => 'int64',
+                'type' => 'integer',
             ],
         ],
         'required' => [
@@ -42,9 +43,9 @@ class MailAddressMailboxStorageInBytesCurrent
 
     private DateTime $updatedAt;
 
-    private int|float $value;
+    private int $value;
 
-    public function __construct(DateTime $updatedAt, int|float $value)
+    public function __construct(DateTime $updatedAt, int $value)
     {
         $this->updatedAt = $updatedAt;
         $this->value = $value;
@@ -55,7 +56,7 @@ class MailAddressMailboxStorageInBytesCurrent
         return $this->updatedAt;
     }
 
-    public function getValue(): int|float
+    public function getValue(): int
     {
         return $this->value;
     }
@@ -68,10 +69,10 @@ class MailAddressMailboxStorageInBytesCurrent
         return $clone;
     }
 
-    public function withValue(int|float $value): self
+    public function withValue(int $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, self::$schema['properties']['value']);
+        $validator->validate($value, self::$internalValidationSchema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -98,7 +99,7 @@ class MailAddressMailboxStorageInBytesCurrent
         }
 
         $updatedAt = new DateTime($input->{'updatedAt'});
-        $value = str_contains((string)($input->{'value'}), '.') ? (float)($input->{'value'}) : (int)($input->{'value'});
+        $value = (int)($input->{'value'});
 
         $obj = new self($updatedAt, $value);
 
@@ -131,7 +132,7 @@ class MailAddressMailboxStorageInBytesCurrent
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

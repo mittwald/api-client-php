@@ -22,7 +22,7 @@ class RecordSRVRecord
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'additionalProperties' => false,
         'properties' => [
             'fqdn' => [
@@ -91,7 +91,7 @@ class RecordSRVRecord
     public function withFqdn(string $fqdn): self
     {
         $validator = new Validator();
-        $validator->validate($fqdn, self::$schema['properties']['fqdn']);
+        $validator->validate($fqdn, self::$internalValidationSchema['properties']['fqdn']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class RecordSRVRecord
     public function withPort(int $port): self
     {
         $validator = new Validator();
-        $validator->validate($port, self::$schema['properties']['port']);
+        $validator->validate($port, self::$internalValidationSchema['properties']['port']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -119,7 +119,7 @@ class RecordSRVRecord
     public function withPriority(int $priority): self
     {
         $validator = new Validator();
-        $validator->validate($priority, self::$schema['properties']['priority']);
+        $validator->validate($priority, self::$internalValidationSchema['properties']['priority']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class RecordSRVRecord
     public function withWeight(int $weight): self
     {
         $validator = new Validator();
-        $validator->validate($weight, self::$schema['properties']['weight']);
+        $validator->validate($weight, self::$internalValidationSchema['properties']['weight']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -224,7 +224,7 @@ class RecordSRVRecord
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

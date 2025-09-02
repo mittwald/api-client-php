@@ -22,14 +22,14 @@ class ServerOrderPreview
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'customerId' => [
                 'example' => 'f3435305-fd26-470e-9f21-43d9be7e67e7',
                 'type' => 'string',
             ],
             'description' => [
-                'example' => 'My first project',
+                'example' => 'My first server',
                 'type' => 'string',
             ],
             'diskspaceInGiB' => [
@@ -38,6 +38,10 @@ class ServerOrderPreview
             ],
             'machineType' => [
                 'example' => 'shared.xlarge',
+                'type' => 'string',
+            ],
+            'promotionCode' => [
+                'example' => '123456',
                 'type' => 'string',
             ],
         ],
@@ -55,6 +59,8 @@ class ServerOrderPreview
     private int|float $diskspaceInGiB;
 
     private string $machineType;
+
+    private ?string $promotionCode = null;
 
     public function __construct(int|float $diskspaceInGiB, string $machineType)
     {
@@ -82,10 +88,15 @@ class ServerOrderPreview
         return $this->machineType;
     }
 
+    public function getPromotionCode(): ?string
+    {
+        return $this->promotionCode ?? null;
+    }
+
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -107,7 +118,7 @@ class ServerOrderPreview
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -129,7 +140,7 @@ class ServerOrderPreview
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
-        $validator->validate($diskspaceInGiB, self::$schema['properties']['diskspaceInGiB']);
+        $validator->validate($diskspaceInGiB, self::$internalValidationSchema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -143,13 +154,35 @@ class ServerOrderPreview
     public function withMachineType(string $machineType): self
     {
         $validator = new Validator();
-        $validator->validate($machineType, self::$schema['properties']['machineType']);
+        $validator->validate($machineType, self::$internalValidationSchema['properties']['machineType']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->machineType = $machineType;
+
+        return $clone;
+    }
+
+    public function withPromotionCode(string $promotionCode): self
+    {
+        $validator = new Validator();
+        $validator->validate($promotionCode, self::$internalValidationSchema['properties']['promotionCode']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->promotionCode = $promotionCode;
+
+        return $clone;
+    }
+
+    public function withoutPromotionCode(): self
+    {
+        $clone = clone $this;
+        unset($clone->promotionCode);
 
         return $clone;
     }
@@ -179,10 +212,15 @@ class ServerOrderPreview
         }
         $diskspaceInGiB = str_contains((string)($input->{'diskspaceInGiB'}), '.') ? (float)($input->{'diskspaceInGiB'}) : (int)($input->{'diskspaceInGiB'});
         $machineType = $input->{'machineType'};
+        $promotionCode = null;
+        if (isset($input->{'promotionCode'})) {
+            $promotionCode = $input->{'promotionCode'};
+        }
 
         $obj = new self($diskspaceInGiB, $machineType);
         $obj->customerId = $customerId;
         $obj->description = $description;
+        $obj->promotionCode = $promotionCode;
         return $obj;
     }
 
@@ -202,6 +240,9 @@ class ServerOrderPreview
         }
         $output['diskspaceInGiB'] = $this->diskspaceInGiB;
         $output['machineType'] = $this->machineType;
+        if (isset($this->promotionCode)) {
+            $output['promotionCode'] = $this->promotionCode;
+        }
 
         return $output;
     }
@@ -218,7 +259,7 @@ class ServerOrderPreview
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class ServiceRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'command' => [
                 'description' => 'Defaults to image config on empty',
@@ -48,10 +48,24 @@ class ServiceRequest
                 ],
                 'type' => 'array',
             ],
+            'environment' => [
+                'additionalProperties' => [
+                    'type' => 'string',
+                ],
+                'example' => [
+                    'MYSQL_DATABASE' => 'my_db',
+                    'MYSQL_PASSWORD' => 'my_password',
+                    'MYSQL_ROOT_PASSWORD' => 'my_root_password',
+                    'MYSQL_USER' => 'my_user',
+                ],
+                'type' => 'object',
+            ],
             'envs' => [
                 'additionalProperties' => [
                     'type' => 'string',
                 ],
+                'deprecated' => true,
+                'description' => 'Deprecated by \'environment\'. This field will be removed in a future version.',
                 'example' => [
                     'MYSQL_DATABASE' => 'my_db',
                     'MYSQL_PASSWORD' => 'my_password',
@@ -105,6 +119,14 @@ class ServiceRequest
     /**
      * @var string[]|null
      */
+    private ?array $environment = null;
+
+    /**
+     * Deprecated by 'environment'. This field will be removed in a future version.
+     *
+     * @var string[]|null
+     * @deprecated
+     */
     private ?array $envs = null;
 
     private ?string $image = null;
@@ -150,6 +172,15 @@ class ServiceRequest
     /**
      * @return string[]|null
      */
+    public function getEnvironment(): ?array
+    {
+        return $this->environment ?? null;
+    }
+
+    /**
+     * @return string[]|null
+     * @deprecated
+     */
     public function getEnvs(): ?array
     {
         return $this->envs ?? null;
@@ -182,7 +213,7 @@ class ServiceRequest
     public function withCommand(array $command): self
     {
         $validator = new Validator();
-        $validator->validate($command, self::$schema['properties']['command']);
+        $validator->validate($command, self::$internalValidationSchema['properties']['command']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -204,7 +235,7 @@ class ServiceRequest
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -229,7 +260,7 @@ class ServiceRequest
     public function withEntrypoint(array $entrypoint): self
     {
         $validator = new Validator();
-        $validator->validate($entrypoint, self::$schema['properties']['entrypoint']);
+        $validator->validate($entrypoint, self::$internalValidationSchema['properties']['entrypoint']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,12 +280,38 @@ class ServiceRequest
     }
 
     /**
+     * @param string[] $environment
+     */
+    public function withEnvironment(array $environment): self
+    {
+        $validator = new Validator();
+        $validator->validate($environment, self::$internalValidationSchema['properties']['environment']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->environment = $environment;
+
+        return $clone;
+    }
+
+    public function withoutEnvironment(): self
+    {
+        $clone = clone $this;
+        unset($clone->environment);
+
+        return $clone;
+    }
+
+    /**
      * @param string[] $envs
+     * @deprecated
      */
     public function withEnvs(array $envs): self
     {
         $validator = new Validator();
-        $validator->validate($envs, self::$schema['properties']['envs']);
+        $validator->validate($envs, self::$internalValidationSchema['properties']['envs']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -276,7 +333,7 @@ class ServiceRequest
     public function withImage(string $image): self
     {
         $validator = new Validator();
-        $validator->validate($image, self::$schema['properties']['image']);
+        $validator->validate($image, self::$internalValidationSchema['properties']['image']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -301,7 +358,7 @@ class ServiceRequest
     public function withPorts(array $ports): self
     {
         $validator = new Validator();
-        $validator->validate($ports, self::$schema['properties']['ports']);
+        $validator->validate($ports, self::$internalValidationSchema['properties']['ports']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -326,7 +383,7 @@ class ServiceRequest
     public function withVolumes(array $volumes): self
     {
         $validator = new Validator();
-        $validator->validate($volumes, self::$schema['properties']['volumes']);
+        $validator->validate($volumes, self::$internalValidationSchema['properties']['volumes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -372,6 +429,10 @@ class ServiceRequest
         if (isset($input->{'entrypoint'})) {
             $entrypoint = $input->{'entrypoint'};
         }
+        $environment = null;
+        if (isset($input->{'environment'})) {
+            $environment = (array)$input->{'environment'};
+        }
         $envs = null;
         if (isset($input->{'envs'})) {
             $envs = (array)$input->{'envs'};
@@ -393,6 +454,7 @@ class ServiceRequest
         $obj->command = $command;
         $obj->description = $description;
         $obj->entrypoint = $entrypoint;
+        $obj->environment = $environment;
         $obj->envs = $envs;
         $obj->image = $image;
         $obj->ports = $ports;
@@ -416,6 +478,9 @@ class ServiceRequest
         }
         if (isset($this->entrypoint)) {
             $output['entrypoint'] = $this->entrypoint;
+        }
+        if (isset($this->environment)) {
+            $output['environment'] = $this->environment;
         }
         if (isset($this->envs)) {
             $output['envs'] = $this->envs;
@@ -445,7 +510,7 @@ class ServiceRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

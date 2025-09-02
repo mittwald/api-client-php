@@ -22,7 +22,7 @@ class ExtensionHealth
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'extensionInstances' => [
                 'items' => [
@@ -130,7 +130,7 @@ class ExtensionHealth
     public function withFunctional(bool $functional): self
     {
         $validator = new Validator();
-        $validator->validate($functional, self::$schema['properties']['functional']);
+        $validator->validate($functional, self::$internalValidationSchema['properties']['functional']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -144,7 +144,7 @@ class ExtensionHealth
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -158,7 +158,7 @@ class ExtensionHealth
     public function withInoperableReason(string $inoperableReason): self
     {
         $validator = new Validator();
-        $validator->validate($inoperableReason, self::$schema['properties']['inoperableReason']);
+        $validator->validate($inoperableReason, self::$internalValidationSchema['properties']['inoperableReason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -180,7 +180,7 @@ class ExtensionHealth
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
-        $validator->validate($published, self::$schema['properties']['published']);
+        $validator->validate($published, self::$internalValidationSchema['properties']['published']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -194,7 +194,7 @@ class ExtensionHealth
     public function withWithdrawalReason(string $withdrawalReason): self
     {
         $validator = new Validator();
-        $validator->validate($withdrawalReason, self::$schema['properties']['withdrawalReason']);
+        $validator->validate($withdrawalReason, self::$internalValidationSchema['properties']['withdrawalReason']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -289,7 +289,7 @@ class ExtensionHealth
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

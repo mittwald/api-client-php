@@ -12,7 +12,7 @@ class ConfirmMfaOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'recoveryCodesList' => [
                 'items' => [
@@ -59,7 +59,7 @@ class ConfirmMfaOKResponseBody
     public function withRecoveryCodesList(array $recoveryCodesList): self
     {
         $validator = new Validator();
-        $validator->validate($recoveryCodesList, self::$schema['properties']['recoveryCodesList']);
+        $validator->validate($recoveryCodesList, self::$internalValidationSchema['properties']['recoveryCodesList']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -117,7 +117,7 @@ class ConfirmMfaOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

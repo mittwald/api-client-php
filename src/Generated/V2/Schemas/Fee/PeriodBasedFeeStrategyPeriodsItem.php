@@ -23,7 +23,7 @@ class PeriodBasedFeeStrategyPeriodsItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'feeValidFrom' => [
                 'format' => 'date-time',
@@ -108,7 +108,7 @@ class PeriodBasedFeeStrategyPeriodsItem
     public function withMonthlyPrice(int|float $monthlyPrice): self
     {
         $validator = new Validator();
-        $validator->validate($monthlyPrice, self::$schema['properties']['monthlyPrice']);
+        $validator->validate($monthlyPrice, self::$internalValidationSchema['properties']['monthlyPrice']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -181,7 +181,7 @@ class PeriodBasedFeeStrategyPeriodsItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

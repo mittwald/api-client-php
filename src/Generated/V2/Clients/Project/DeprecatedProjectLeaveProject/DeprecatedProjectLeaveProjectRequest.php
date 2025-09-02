@@ -14,41 +14,28 @@ class DeprecatedProjectLeaveProjectRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-
-            ],
         ],
         'required' => [
             'projectId',
-            'body',
         ],
     ];
 
     private string $projectId;
 
-    /**
-     * @var mixed
-     */
-    private $body;
-
     private array $headers = [
 
     ];
 
-    /**
-     * @param mixed $body
-     */
-    public function __construct(string $projectId, $body)
+    public function __construct(string $projectId)
     {
         $this->projectId = $projectId;
-        $this->body = $body;
     }
 
     public function getProjectId(): string
@@ -56,41 +43,16 @@ class DeprecatedProjectLeaveProjectRequest
         return $this->projectId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->projectId = $projectId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, self::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
 
         return $clone;
     }
@@ -111,9 +73,8 @@ class DeprecatedProjectLeaveProjectRequest
         }
 
         $projectId = $input->{'projectId'};
-        $body = $input->{'body'};
 
-        $obj = new self($projectId, $body);
+        $obj = new self($projectId);
 
         return $obj;
     }
@@ -127,7 +88,6 @@ class DeprecatedProjectLeaveProjectRequest
     {
         $output = [];
         $output['projectId'] = $this->projectId;
-        $output['body'] = $this->body;
 
         return $output;
     }
@@ -144,7 +104,7 @@ class DeprecatedProjectLeaveProjectRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -192,7 +152,6 @@ class DeprecatedProjectLeaveProjectRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

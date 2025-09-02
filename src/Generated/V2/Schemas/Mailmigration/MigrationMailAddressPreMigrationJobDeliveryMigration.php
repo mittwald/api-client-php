@@ -23,7 +23,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'finished' => [
                 'type' => 'boolean',
@@ -86,7 +86,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
-        $validator->validate($finished, self::$schema['properties']['finished']);
+        $validator->validate($finished, self::$internalValidationSchema['properties']['finished']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -100,7 +100,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withSourceCoabDeliveryMailbox(string $sourceCoabDeliveryMailbox): self
     {
         $validator = new Validator();
-        $validator->validate($sourceCoabDeliveryMailbox, self::$schema['properties']['sourceCoabDeliveryMailbox']);
+        $validator->validate($sourceCoabDeliveryMailbox, self::$internalValidationSchema['properties']['sourceCoabDeliveryMailbox']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withSourceCoabDeliveryUid(int $sourceCoabDeliveryUid): self
     {
         $validator = new Validator();
-        $validator->validate($sourceCoabDeliveryUid, self::$schema['properties']['sourceCoabDeliveryUid']);
+        $validator->validate($sourceCoabDeliveryUid, self::$internalValidationSchema['properties']['sourceCoabDeliveryUid']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -128,7 +128,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     public function withTargetDeliveryAddress(string $targetDeliveryAddress): self
     {
         $validator = new Validator();
-        $validator->validate($targetDeliveryAddress, self::$schema['properties']['targetDeliveryAddress']);
+        $validator->validate($targetDeliveryAddress, self::$internalValidationSchema['properties']['targetDeliveryAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -192,7 +192,7 @@ class MigrationMailAddressPreMigrationJobDeliveryMigration
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

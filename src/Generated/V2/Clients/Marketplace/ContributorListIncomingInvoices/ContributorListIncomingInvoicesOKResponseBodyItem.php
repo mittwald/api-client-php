@@ -14,7 +14,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'currency' => [
                 'example' => 'EUR',
@@ -41,7 +41,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
                 'type' => 'string',
             ],
             'invoiceNumber' => [
-                'example' => 'PG1234567',
+                'example' => 'RG1234567',
                 'type' => 'string',
             ],
             'pdfId' => [
@@ -171,7 +171,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withCurrency(string $currency): self
     {
         $validator = new Validator();
-        $validator->validate($currency, self::$schema['properties']['currency']);
+        $validator->validate($currency, self::$internalValidationSchema['properties']['currency']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -185,7 +185,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -199,7 +199,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withCustomerName(string $customerName): self
     {
         $validator = new Validator();
-        $validator->validate($customerName, self::$schema['properties']['customerName']);
+        $validator->validate($customerName, self::$internalValidationSchema['properties']['customerName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,7 +213,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withCustomerNumber(string $customerNumber): self
     {
         $validator = new Validator();
-        $validator->validate($customerNumber, self::$schema['properties']['customerNumber']);
+        $validator->validate($customerNumber, self::$internalValidationSchema['properties']['customerNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -235,7 +235,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -249,7 +249,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withInvoiceNumber(string $invoiceNumber): self
     {
         $validator = new Validator();
-        $validator->validate($invoiceNumber, self::$schema['properties']['invoiceNumber']);
+        $validator->validate($invoiceNumber, self::$internalValidationSchema['properties']['invoiceNumber']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -263,7 +263,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withPdfId(string $pdfId): self
     {
         $validator = new Validator();
-        $validator->validate($pdfId, self::$schema['properties']['pdfId']);
+        $validator->validate($pdfId, self::$internalValidationSchema['properties']['pdfId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -285,7 +285,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withTotalGross(int|float $totalGross): self
     {
         $validator = new Validator();
-        $validator->validate($totalGross, self::$schema['properties']['totalGross']);
+        $validator->validate($totalGross, self::$internalValidationSchema['properties']['totalGross']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -299,7 +299,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     public function withTotalNet(int|float $totalNet): self
     {
         $validator = new Validator();
-        $validator->validate($totalNet, self::$schema['properties']['totalNet']);
+        $validator->validate($totalNet, self::$internalValidationSchema['properties']['totalNet']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -377,7 +377,7 @@ class ContributorListIncomingInvoicesOKResponseBodyItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class RecordCAARecord
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'additionalProperties' => false,
         'properties' => [
             'flags' => [
@@ -82,7 +82,7 @@ class RecordCAARecord
     public function withFlags(int $flags): self
     {
         $validator = new Validator();
-        $validator->validate($flags, self::$schema['properties']['flags']);
+        $validator->validate($flags, self::$internalValidationSchema['properties']['flags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class RecordCAARecord
     public function withValue(string $value): self
     {
         $validator = new Validator();
-        $validator->validate($value, self::$schema['properties']['value']);
+        $validator->validate($value, self::$internalValidationSchema['properties']['value']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -166,7 +166,7 @@ class RecordCAARecord
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

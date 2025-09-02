@@ -23,7 +23,7 @@ class ExtensionInstance
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'aggregateReference' => [
                 'properties' => [
@@ -45,11 +45,20 @@ class ExtensionInstance
                 ],
                 'type' => 'object',
             ],
+            'chargeability' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.ExtensionInstanceChargeability',
+            ],
             'consentedScopes' => [
                 'items' => [
                     'type' => 'string',
                 ],
                 'type' => 'array',
+            ],
+            'contributorId' => [
+                'type' => 'string',
+            ],
+            'contributorName' => [
+                'type' => 'string',
             ],
             'createdAt' => [
                 'format' => 'date-time',
@@ -62,6 +71,12 @@ class ExtensionInstance
             'extensionId' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'extensionName' => [
+                'type' => 'string',
+            ],
+            'extensionSubTitle' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
             ],
             'id' => [
                 'format' => 'uuid',
@@ -79,27 +94,40 @@ class ExtensionInstance
         'required' => [
             'id',
             'extensionId',
+            'contributorId',
             'disabled',
             'pendingInstallation',
             'pendingRemoval',
             'consentedScopes',
             'aggregateReference',
+            'extensionName',
+            'contributorName',
         ],
         'type' => 'object',
     ];
 
     private ExtensionInstanceAggregateReference $aggregateReference;
 
+    private ?ExtensionInstanceChargeability $chargeability = null;
+
     /**
      * @var string[]
      */
     private array $consentedScopes;
+
+    private string $contributorId;
+
+    private string $contributorName;
 
     private ?DateTime $createdAt = null;
 
     private bool $disabled = false;
 
     private string $extensionId;
+
+    private string $extensionName;
+
+    private ?SubTitle $extensionSubTitle = null;
 
     private string $id;
 
@@ -110,11 +138,14 @@ class ExtensionInstance
     /**
      * @param string[] $consentedScopes
      */
-    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, string $extensionId, string $id)
+    public function __construct(ExtensionInstanceAggregateReference $aggregateReference, array $consentedScopes, string $contributorId, string $contributorName, string $extensionId, string $extensionName, string $id)
     {
         $this->aggregateReference = $aggregateReference;
         $this->consentedScopes = $consentedScopes;
+        $this->contributorId = $contributorId;
+        $this->contributorName = $contributorName;
         $this->extensionId = $extensionId;
+        $this->extensionName = $extensionName;
         $this->id = $id;
     }
 
@@ -123,12 +154,27 @@ class ExtensionInstance
         return $this->aggregateReference;
     }
 
+    public function getChargeability(): ?ExtensionInstanceChargeability
+    {
+        return $this->chargeability ?? null;
+    }
+
     /**
      * @return string[]
      */
     public function getConsentedScopes(): array
     {
         return $this->consentedScopes;
+    }
+
+    public function getContributorId(): string
+    {
+        return $this->contributorId;
+    }
+
+    public function getContributorName(): string
+    {
+        return $this->contributorName;
     }
 
     public function getCreatedAt(): ?DateTime
@@ -144,6 +190,16 @@ class ExtensionInstance
     public function getExtensionId(): string
     {
         return $this->extensionId;
+    }
+
+    public function getExtensionName(): string
+    {
+        return $this->extensionName;
+    }
+
+    public function getExtensionSubTitle(): ?SubTitle
+    {
+        return $this->extensionSubTitle ?? null;
     }
 
     public function getId(): string
@@ -169,19 +225,63 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withChargeability(ExtensionInstanceChargeability $chargeability): self
+    {
+        $clone = clone $this;
+        $clone->chargeability = $chargeability;
+
+        return $clone;
+    }
+
+    public function withoutChargeability(): self
+    {
+        $clone = clone $this;
+        unset($clone->chargeability);
+
+        return $clone;
+    }
+
     /**
      * @param string[] $consentedScopes
      */
     public function withConsentedScopes(array $consentedScopes): self
     {
         $validator = new Validator();
-        $validator->validate($consentedScopes, self::$schema['properties']['consentedScopes']);
+        $validator->validate($consentedScopes, self::$internalValidationSchema['properties']['consentedScopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->consentedScopes = $consentedScopes;
+
+        return $clone;
+    }
+
+    public function withContributorId(string $contributorId): self
+    {
+        $validator = new Validator();
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contributorId = $contributorId;
+
+        return $clone;
+    }
+
+    public function withContributorName(string $contributorName): self
+    {
+        $validator = new Validator();
+        $validator->validate($contributorName, self::$internalValidationSchema['properties']['contributorName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->contributorName = $contributorName;
 
         return $clone;
     }
@@ -205,7 +305,7 @@ class ExtensionInstance
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, self::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$internalValidationSchema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -219,7 +319,7 @@ class ExtensionInstance
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -230,10 +330,40 @@ class ExtensionInstance
         return $clone;
     }
 
+    public function withExtensionName(string $extensionName): self
+    {
+        $validator = new Validator();
+        $validator->validate($extensionName, self::$internalValidationSchema['properties']['extensionName']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->extensionName = $extensionName;
+
+        return $clone;
+    }
+
+    public function withExtensionSubTitle(SubTitle $extensionSubTitle): self
+    {
+        $clone = clone $this;
+        $clone->extensionSubTitle = $extensionSubTitle;
+
+        return $clone;
+    }
+
+    public function withoutExtensionSubTitle(): self
+    {
+        $clone = clone $this;
+        unset($clone->extensionSubTitle);
+
+        return $clone;
+    }
+
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -247,7 +377,7 @@ class ExtensionInstance
     public function withPendingInstallation(bool $pendingInstallation): self
     {
         $validator = new Validator();
-        $validator->validate($pendingInstallation, self::$schema['properties']['pendingInstallation']);
+        $validator->validate($pendingInstallation, self::$internalValidationSchema['properties']['pendingInstallation']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -261,7 +391,7 @@ class ExtensionInstance
     public function withPendingRemoval(bool $pendingRemoval): self
     {
         $validator = new Validator();
-        $validator->validate($pendingRemoval, self::$schema['properties']['pendingRemoval']);
+        $validator->validate($pendingRemoval, self::$internalValidationSchema['properties']['pendingRemoval']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -288,7 +418,13 @@ class ExtensionInstance
         }
 
         $aggregateReference = ExtensionInstanceAggregateReference::buildFromInput($input->{'aggregateReference'}, validate: $validate);
+        $chargeability = null;
+        if (isset($input->{'chargeability'})) {
+            $chargeability = ExtensionInstanceChargeability::buildFromInput($input->{'chargeability'}, validate: $validate);
+        }
         $consentedScopes = $input->{'consentedScopes'};
+        $contributorId = $input->{'contributorId'};
+        $contributorName = $input->{'contributorName'};
         $createdAt = null;
         if (isset($input->{'createdAt'})) {
             $createdAt = new DateTime($input->{'createdAt'});
@@ -298,6 +434,11 @@ class ExtensionInstance
             $disabled = (bool)($input->{'disabled'});
         }
         $extensionId = $input->{'extensionId'};
+        $extensionName = $input->{'extensionName'};
+        $extensionSubTitle = null;
+        if (isset($input->{'extensionSubTitle'})) {
+            $extensionSubTitle = SubTitle::buildFromInput($input->{'extensionSubTitle'}, validate: $validate);
+        }
         $id = $input->{'id'};
         $pendingInstallation = false;
         if (isset($input->{'pendingInstallation'})) {
@@ -308,9 +449,11 @@ class ExtensionInstance
             $pendingRemoval = (bool)($input->{'pendingRemoval'});
         }
 
-        $obj = new self($aggregateReference, $consentedScopes, $extensionId, $id);
+        $obj = new self($aggregateReference, $consentedScopes, $contributorId, $contributorName, $extensionId, $extensionName, $id);
+        $obj->chargeability = $chargeability;
         $obj->createdAt = $createdAt;
         $obj->disabled = $disabled;
+        $obj->extensionSubTitle = $extensionSubTitle;
         $obj->pendingInstallation = $pendingInstallation;
         $obj->pendingRemoval = $pendingRemoval;
         return $obj;
@@ -325,12 +468,21 @@ class ExtensionInstance
     {
         $output = [];
         $output['aggregateReference'] = ($this->aggregateReference)->toJson();
+        if (isset($this->chargeability)) {
+            $output['chargeability'] = $this->chargeability->toJson();
+        }
         $output['consentedScopes'] = $this->consentedScopes;
+        $output['contributorId'] = $this->contributorId;
+        $output['contributorName'] = $this->contributorName;
         if (isset($this->createdAt)) {
             $output['createdAt'] = ($this->createdAt)->format(DateTime::ATOM);
         }
         $output['disabled'] = $this->disabled;
         $output['extensionId'] = $this->extensionId;
+        $output['extensionName'] = $this->extensionName;
+        if (isset($this->extensionSubTitle)) {
+            $output['extensionSubTitle'] = $this->extensionSubTitle->toJson();
+        }
         $output['id'] = $this->id;
         $output['pendingInstallation'] = $this->pendingInstallation;
         $output['pendingRemoval'] = $this->pendingRemoval;
@@ -350,7 +502,7 @@ class ExtensionInstance
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

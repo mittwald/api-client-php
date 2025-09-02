@@ -14,7 +14,7 @@ class OrderPreviewOrderRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'body' => [
@@ -33,6 +33,12 @@ class OrderPreviewOrderRequest
                             [
                                 '$ref' => '#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreview',
                             ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview',
+                            ],
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview',
+                            ],
                         ],
                     ],
                     'orderType' => [
@@ -41,6 +47,8 @@ class OrderPreviewOrderRequest
                             'projectHosting',
                             'server',
                             'externalCertificate',
+                            'leadFyndr',
+                            'mailArchive',
                         ],
                         'type' => 'string',
                     ],
@@ -124,7 +132,7 @@ class OrderPreviewOrderRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

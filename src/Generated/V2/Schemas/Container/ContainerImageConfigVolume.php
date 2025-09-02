@@ -22,7 +22,7 @@ class ContainerImageConfigVolume
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'description' => [
                 'description' => 'The description of the volume path.',
@@ -86,7 +86,7 @@ class ContainerImageConfigVolume
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -108,7 +108,7 @@ class ContainerImageConfigVolume
     public function withIsAiGenerated(bool $isAiGenerated): self
     {
         $validator = new Validator();
-        $validator->validate($isAiGenerated, self::$schema['properties']['isAiGenerated']);
+        $validator->validate($isAiGenerated, self::$internalValidationSchema['properties']['isAiGenerated']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -122,7 +122,7 @@ class ContainerImageConfigVolume
     public function withVolume(string $volume): self
     {
         $validator = new Validator();
-        $validator->validate($volume, self::$schema['properties']['volume']);
+        $validator->validate($volume, self::$internalValidationSchema['properties']['volume']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -189,7 +189,7 @@ class ContainerImageConfigVolume
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

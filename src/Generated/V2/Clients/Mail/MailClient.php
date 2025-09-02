@@ -25,10 +25,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddress
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressQuota\DeprecatedMailUpdateMailAddressQuotaRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateMailAddressSpamProtection\DeprecatedMailUpdateMailAddressSpamProtectionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\DeprecatedMailUpdateProjectMailSetting\DeprecatedMailUpdateProjectMailSettingRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\DisableMailArchive\DisableMailArchiveRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetDeliveryBox\GetDeliveryBoxRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\GetMailAddress\GetMailAddressRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListBackupsForMailAddress\ListBackupsForMailAddressRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListDeliveryBoxes\ListDeliveryBoxesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\ListMailAddresses\ListMailAddressesOKResponse;
@@ -42,6 +45,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationGetMigration\Migration
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationListMigrations\MigrationListMigrationsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\MigrationRequestMailMigration\MigrationRequestMailMigrationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Mail\RecoverMailAddressEmails\RecoverMailAddressEmailsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxDescription\UpdateDeliveryBoxDescriptionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateDeliveryBoxPassword\UpdateDeliveryBoxPasswordRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Mail\UpdateMailAddressAddress\UpdateMailAddressAddressRequest;
@@ -264,6 +268,16 @@ interface MailClient
      */
     public function deleteMailAddress(DeleteMailAddressRequest $request): EmptyResponse;
     /**
+     * Disable a MailAddress Archive.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-disable-mail-archive
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param DisableMailArchiveRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function disableMailArchive(DisableMailArchiveRequest $request): EmptyResponse;
+    /**
      * Get a DeliveryBox.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-get-delivery-box
@@ -283,6 +297,16 @@ interface MailClient
      * @return GetMailAddressOKResponse OK
      */
     public function getMailAddress(GetMailAddressRequest $request): GetMailAddressOKResponse;
+    /**
+     * List backups belonging to a MailAddress.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-list-backups-for-mail-address
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ListBackupsForMailAddressRequest $request An object representing the request for this operation
+     * @return ListBackupsForMailAddressOKResponse OK
+     */
+    public function listBackupsForMailAddress(ListBackupsForMailAddressRequest $request): ListBackupsForMailAddressOKResponse;
     /**
      * List DeliveryBoxes belonging to a Project.
      *
@@ -358,6 +382,16 @@ interface MailClient
      */
     public function migrationRequestMailMigration(MigrationRequestMailMigrationRequest $request): EmptyResponse;
     /**
+     * Recover emails for a MailAddress from a backup.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-recover-mail-address-emails
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param RecoverMailAddressEmailsRequest $request An object representing the request for this operation
+     * @return EmptyResponse OK
+     */
+    public function recoverMailAddressEmails(RecoverMailAddressEmailsRequest $request): EmptyResponse;
+    /**
      * Update the description of a DeliveryBox.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-delivery-box-description
@@ -398,7 +432,7 @@ interface MailClient
      */
     public function updateMailAddressAutoresponder(UpdateMailAddressAutoresponderRequest $request): EmptyResponse;
     /**
-     * Update the catchall of a MailAddress.
+     * Update the catch-all of a MailAddress.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Mail/operation/mail-update-mail-address-catch-all
      * @throws GuzzleException

@@ -14,7 +14,7 @@ class SupportCodeRequestRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'forceRecreate' => [
@@ -47,7 +47,7 @@ class SupportCodeRequestRequest
     public function withForceRecreate(bool $forceRecreate): self
     {
         $validator = new Validator();
-        $validator->validate($forceRecreate, self::$schema['properties']['forceRecreate']);
+        $validator->validate($forceRecreate, self::$internalValidationSchema['properties']['forceRecreate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -118,7 +118,7 @@ class SupportCodeRequestRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

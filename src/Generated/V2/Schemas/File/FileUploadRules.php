@@ -22,7 +22,7 @@ class FileUploadRules
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'extensions' => [
                 'items' => [
@@ -47,18 +47,21 @@ class FileUploadRules
             ],
             'maxSizeInBytes' => [
                 'example' => 1000000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'maxSizeInKB' => [
                 'deprecated' => true,
                 'description' => 'deprecated, see maxSizeInBytes',
                 'example' => 1000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'maxSizeInKb' => [
                 'deprecated' => true,
                 'description' => 'deprecated, see maxSizeInBytes',
                 'example' => 1000,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'mimeTypes' => [
@@ -78,9 +81,11 @@ class FileUploadRules
                             'max' => [
                                 'properties' => [
                                     'height' => [
+                                        'format' => 'int64',
                                         'type' => 'integer',
                                     ],
                                     'width' => [
+                                        'format' => 'int64',
                                         'type' => 'integer',
                                     ],
                                 ],
@@ -89,9 +94,11 @@ class FileUploadRules
                             'min' => [
                                 'properties' => [
                                     'height' => [
+                                        'format' => 'int64',
                                         'type' => 'integer',
                                     ],
                                     'width' => [
+                                        'format' => 'int64',
                                         'type' => 'integer',
                                     ],
                                 ],
@@ -212,7 +219,7 @@ class FileUploadRules
     public function withExtensions(array $extensions): self
     {
         $validator = new Validator();
-        $validator->validate($extensions, self::$schema['properties']['extensions']);
+        $validator->validate($extensions, self::$internalValidationSchema['properties']['extensions']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -237,7 +244,7 @@ class FileUploadRules
     public function withMaxNameLength(int $maxNameLength): self
     {
         $validator = new Validator();
-        $validator->validate($maxNameLength, self::$schema['properties']['maxNameLength']);
+        $validator->validate($maxNameLength, self::$internalValidationSchema['properties']['maxNameLength']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -251,7 +258,7 @@ class FileUploadRules
     public function withMaxSizeInBytes(int $maxSizeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($maxSizeInBytes, self::$schema['properties']['maxSizeInBytes']);
+        $validator->validate($maxSizeInBytes, self::$internalValidationSchema['properties']['maxSizeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -268,7 +275,7 @@ class FileUploadRules
     public function withMimeTypes(array $mimeTypes): self
     {
         $validator = new Validator();
-        $validator->validate($mimeTypes, self::$schema['properties']['mimeTypes']);
+        $validator->validate($mimeTypes, self::$internalValidationSchema['properties']['mimeTypes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -361,7 +368,7 @@ class FileUploadRules
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

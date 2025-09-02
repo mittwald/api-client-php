@@ -22,7 +22,7 @@ class OwnExtension
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'assets' => [
                 'items' => [
@@ -92,7 +92,7 @@ class OwnExtension
             'pricing' => [
                 'oneOf' => [
                     [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy',
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy',
                     ],
                 ],
             ],
@@ -112,7 +112,18 @@ class OwnExtension
                         'type' => 'array',
                     ],
                     'webhookUrls' => [
-                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                        'oneOf' => [
+                            [
+                                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls',
+                            ],
+                            [
+                                'additionalProperties' => false,
+                                'properties' => [
+
+                                ],
+                                'type' => 'object',
+                            ],
+                        ],
                     ],
                 ],
                 'type' => 'object',
@@ -145,7 +156,23 @@ class OwnExtension
                 '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SubTitle',
             ],
             'support' => [
-                '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
+                'allOf' => [
+                    [
+                        '$ref' => '#/components/schemas/de.mittwald.v1.marketplace.SupportMeta',
+                    ],
+                    [
+                        'properties' => [
+                            'inherited' => [
+                                'description' => 'Whether the support information is inherited from the contributor.',
+                                'type' => 'boolean',
+                            ],
+                        ],
+                        'required' => [
+                            'inherited',
+                        ],
+                        'type' => 'object',
+                    ],
+                ],
             ],
             'tags' => [
                 'items' => [
@@ -230,7 +257,7 @@ class OwnExtension
 
     private string $name;
 
-    private ?MonthlyPricingStrategy $pricing = null;
+    private ?MonthlyPricePlanStrategyItem $pricing = null;
 
     private bool $published;
 
@@ -255,7 +282,7 @@ class OwnExtension
 
     private ?SubTitle $subTitle = null;
 
-    private ?SupportMeta $support = null;
+    private ?OwnExtensionSupport $support = null;
 
     /**
      * @var string[]|null
@@ -382,7 +409,7 @@ class OwnExtension
         return $this->name;
     }
 
-    public function getPricing(): ?MonthlyPricingStrategy
+    public function getPricing(): ?MonthlyPricePlanStrategyItem
     {
         return $this->pricing ?? null;
     }
@@ -428,7 +455,7 @@ class OwnExtension
         return $this->subTitle ?? null;
     }
 
-    public function getSupport(): ?SupportMeta
+    public function getSupport(): ?OwnExtensionSupport
     {
         return $this->support ?? null;
     }
@@ -489,7 +516,7 @@ class OwnExtension
     public function withBlocked(bool $blocked): self
     {
         $validator = new Validator();
-        $validator->validate($blocked, self::$schema['properties']['blocked']);
+        $validator->validate($blocked, self::$internalValidationSchema['properties']['blocked']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -527,7 +554,7 @@ class OwnExtension
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -557,7 +584,7 @@ class OwnExtension
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -595,7 +622,7 @@ class OwnExtension
     public function withDisabled(bool $disabled): self
     {
         $validator = new Validator();
-        $validator->validate($disabled, self::$schema['properties']['disabled']);
+        $validator->validate($disabled, self::$internalValidationSchema['properties']['disabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -659,7 +686,7 @@ class OwnExtension
     public function withFrontendFragments(array $frontendFragments): self
     {
         $validator = new Validator();
-        $validator->validate($frontendFragments, self::$schema['properties']['frontendFragments']);
+        $validator->validate($frontendFragments, self::$internalValidationSchema['properties']['frontendFragments']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -681,7 +708,7 @@ class OwnExtension
     public function withFunctional(bool $functional): self
     {
         $validator = new Validator();
-        $validator->validate($functional, self::$schema['properties']['functional']);
+        $validator->validate($functional, self::$internalValidationSchema['properties']['functional']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -695,7 +722,7 @@ class OwnExtension
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -709,7 +736,7 @@ class OwnExtension
     public function withLogoRefId(string $logoRefId): self
     {
         $validator = new Validator();
-        $validator->validate($logoRefId, self::$schema['properties']['logoRefId']);
+        $validator->validate($logoRefId, self::$internalValidationSchema['properties']['logoRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -731,7 +758,7 @@ class OwnExtension
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -742,7 +769,7 @@ class OwnExtension
         return $clone;
     }
 
-    public function withPricing(MonthlyPricingStrategy $pricing): self
+    public function withPricing(MonthlyPricePlanStrategyItem $pricing): self
     {
         $clone = clone $this;
         $clone->pricing = $pricing;
@@ -761,7 +788,7 @@ class OwnExtension
     public function withPublished(bool $published): self
     {
         $validator = new Validator();
-        $validator->validate($published, self::$schema['properties']['published']);
+        $validator->validate($published, self::$internalValidationSchema['properties']['published']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -794,7 +821,7 @@ class OwnExtension
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, self::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$internalValidationSchema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -864,7 +891,7 @@ class OwnExtension
         return $clone;
     }
 
-    public function withSupport(SupportMeta $support): self
+    public function withSupport(OwnExtensionSupport $support): self
     {
         $clone = clone $this;
         $clone->support = $support;
@@ -886,7 +913,7 @@ class OwnExtension
     public function withTags(array $tags): self
     {
         $validator = new Validator();
-        $validator->validate($tags, self::$schema['properties']['tags']);
+        $validator->validate($tags, self::$internalValidationSchema['properties']['tags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -908,7 +935,7 @@ class OwnExtension
     public function withVerificationRequested(bool $verificationRequested): self
     {
         $validator = new Validator();
-        $validator->validate($verificationRequested, self::$schema['properties']['verificationRequested']);
+        $validator->validate($verificationRequested, self::$internalValidationSchema['properties']['verificationRequested']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -922,7 +949,7 @@ class OwnExtension
     public function withVerified(bool $verified): self
     {
         $validator = new Validator();
-        $validator->validate($verified, self::$schema['properties']['verified']);
+        $validator->validate($verified, self::$internalValidationSchema['properties']['verified']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -1016,7 +1043,7 @@ class OwnExtension
         $pricing = null;
         if (isset($input->{'pricing'})) {
             $pricing = match (true) {
-                MonthlyPricingStrategy::validateInput($input->{'pricing'}, true) => MonthlyPricingStrategy::buildFromInput($input->{'pricing'}, validate: $validate),
+                MonthlyPricePlanStrategyItem::validateInput($input->{'pricing'}, true) => MonthlyPricePlanStrategyItem::buildFromInput($input->{'pricing'}, validate: $validate),
                 default => throw new InvalidArgumentException("could not build property 'pricing' from JSON"),
             };
         }
@@ -1041,7 +1068,7 @@ class OwnExtension
         }
         $support = null;
         if (isset($input->{'support'})) {
-            $support = SupportMeta::buildFromInput($input->{'support'}, validate: $validate);
+            $support = OwnExtensionSupport::buildFromInput($input->{'support'}, validate: $validate);
         }
         $tags = null;
         if (isset($input->{'tags'})) {
@@ -1125,7 +1152,7 @@ class OwnExtension
         $output['name'] = $this->name;
         if (isset($this->pricing)) {
             $output['pricing'] = match (true) {
-                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing->toJson(),
+                ($this->pricing) instanceof MonthlyPricePlanStrategyItem => $this->pricing->toJson(),
             };
         }
         $output['published'] = $this->published;
@@ -1144,7 +1171,7 @@ class OwnExtension
             $output['subTitle'] = $this->subTitle->toJson();
         }
         if (isset($this->support)) {
-            $output['support'] = $this->support->toJson();
+            $output['support'] = ($this->support)->toJson();
         }
         if (isset($this->tags)) {
             $output['tags'] = $this->tags;
@@ -1170,7 +1197,7 @@ class OwnExtension
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -1186,11 +1213,14 @@ class OwnExtension
     {
         if (isset($this->pricing)) {
             $this->pricing = match (true) {
-                ($this->pricing) instanceof MonthlyPricingStrategy => $this->pricing,
+                ($this->pricing) instanceof MonthlyPricePlanStrategyItem => $this->pricing,
             };
         }
         if (isset($this->requestedChanges)) {
             $this->requestedChanges = clone $this->requestedChanges;
+        }
+        if (isset($this->support)) {
+            $this->support = clone $this->support;
         }
     }
 }

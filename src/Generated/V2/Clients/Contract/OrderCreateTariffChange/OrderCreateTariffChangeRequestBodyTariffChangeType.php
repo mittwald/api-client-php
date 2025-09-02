@@ -8,4 +8,5 @@ enum OrderCreateTariffChangeRequestBodyTariffChangeType: string
 {
     case projectHosting = 'projectHosting';
     case server = 'server';
+    case leadFyndr = 'leadFyndr';
 }

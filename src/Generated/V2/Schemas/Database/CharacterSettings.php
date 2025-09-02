@@ -22,7 +22,7 @@ class CharacterSettings
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'characterSet' => [
                 'type' => 'string',
@@ -61,7 +61,7 @@ class CharacterSettings
     public function withCharacterSet(string $characterSet): self
     {
         $validator = new Validator();
-        $validator->validate($characterSet, self::$schema['properties']['characterSet']);
+        $validator->validate($characterSet, self::$internalValidationSchema['properties']['characterSet']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -75,7 +75,7 @@ class CharacterSettings
     public function withCollation(string $collation): self
     {
         $validator = new Validator();
-        $validator->validate($collation, self::$schema['properties']['collation']);
+        $validator->validate($collation, self::$internalValidationSchema['properties']['collation']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -135,7 +135,7 @@ class CharacterSettings
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

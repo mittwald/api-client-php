@@ -22,12 +22,14 @@ class AvatarRulesPropertiesImageDimensionsMin
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'height' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'width' => [
+                'format' => 'int64',
                 'type' => 'integer',
             ],
         ],
@@ -58,7 +60,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     public function withHeight(int $height): self
     {
         $validator = new Validator();
-        $validator->validate($height, self::$schema['properties']['height']);
+        $validator->validate($height, self::$internalValidationSchema['properties']['height']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -80,7 +82,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     public function withWidth(int $width): self
     {
         $validator = new Validator();
-        $validator->validate($width, self::$schema['properties']['width']);
+        $validator->validate($width, self::$internalValidationSchema['properties']['width']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -159,7 +161,7 @@ class AvatarRulesPropertiesImageDimensionsMin
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class RedisDatabaseConfiguration
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'The configuration for a RedisDatabase.',
         'properties' => [
             'additionalFlags' => [
@@ -110,7 +110,7 @@ class RedisDatabaseConfiguration
     public function withAdditionalFlags(array $additionalFlags): self
     {
         $validator = new Validator();
-        $validator->validate($additionalFlags, self::$schema['properties']['additionalFlags']);
+        $validator->validate($additionalFlags, self::$internalValidationSchema['properties']['additionalFlags']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -132,7 +132,7 @@ class RedisDatabaseConfiguration
     public function withMaxMemory(string $maxMemory): self
     {
         $validator = new Validator();
-        $validator->validate($maxMemory, self::$schema['properties']['maxMemory']);
+        $validator->validate($maxMemory, self::$internalValidationSchema['properties']['maxMemory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -154,7 +154,7 @@ class RedisDatabaseConfiguration
     public function withMaxMemoryPolicy(string $maxMemoryPolicy): self
     {
         $validator = new Validator();
-        $validator->validate($maxMemoryPolicy, self::$schema['properties']['maxMemoryPolicy']);
+        $validator->validate($maxMemoryPolicy, self::$internalValidationSchema['properties']['maxMemoryPolicy']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -176,7 +176,7 @@ class RedisDatabaseConfiguration
     public function withPersistent(bool $persistent): self
     {
         $validator = new Validator();
-        $validator->validate($persistent, self::$schema['properties']['persistent']);
+        $validator->validate($persistent, self::$internalValidationSchema['properties']['persistent']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -271,7 +271,7 @@ class RedisDatabaseConfiguration
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

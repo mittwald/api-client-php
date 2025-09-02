@@ -23,7 +23,7 @@ class ConfigRevision
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'expire' => [
                 'type' => 'integer',
@@ -108,7 +108,7 @@ class ConfigRevision
     public function withExpire(int $expire): self
     {
         $validator = new Validator();
-        $validator->validate($expire, self::$schema['properties']['expire']);
+        $validator->validate($expire, self::$internalValidationSchema['properties']['expire']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class ConfigRevision
     public function withNote(string $note): self
     {
         $validator = new Validator();
-        $validator->validate($note, self::$schema['properties']['note']);
+        $validator->validate($note, self::$internalValidationSchema['properties']['note']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class ConfigRevision
     public function withRevision(int $revision): self
     {
         $validator = new Validator();
-        $validator->validate($revision, self::$schema['properties']['revision']);
+        $validator->validate($revision, self::$internalValidationSchema['properties']['revision']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -248,7 +248,7 @@ class ConfigRevision
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

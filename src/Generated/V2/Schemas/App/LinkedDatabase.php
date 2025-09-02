@@ -22,7 +22,7 @@ class LinkedDatabase
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'LinkedDatabase is a reference to a concrete Database and DatabaseUsers.',
         'properties' => [
             'databaseId' => [
@@ -103,7 +103,7 @@ class LinkedDatabase
     public function withDatabaseId(string $databaseId): self
     {
         $validator = new Validator();
-        $validator->validate($databaseId, self::$schema['properties']['databaseId']);
+        $validator->validate($databaseId, self::$internalValidationSchema['properties']['databaseId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -120,7 +120,7 @@ class LinkedDatabase
     public function withDatabaseUserIds(array $databaseUserIds): self
     {
         $validator = new Validator();
-        $validator->validate($databaseUserIds, self::$schema['properties']['databaseUserIds']);
+        $validator->validate($databaseUserIds, self::$internalValidationSchema['properties']['databaseUserIds']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -213,7 +213,7 @@ class LinkedDatabase
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -52,7 +52,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneOK
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsGetDnsZone\DnsGetDnsZoneRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsListDnsZones\DnsListDnsZonesRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedNoContentResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsSetRecordSetManaged\DnsSetRecordSetManagedRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\DnsUpdateRecordSet\DnsUpdateRecordSetRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Domain\GetDomain\GetDomainOKResponse;
@@ -306,6 +306,8 @@ interface DomainClient
     /**
      * Get File Service Reference for a Screenshot of a domain.
      *
+     * Deprecated by `GET /v2/domains/{domainId}/latest-screenshot`.
+     *
      * @see https://developer.mittwald.de/reference/v2/#tag/Domain/operation/deprecated-domain-get-screenshot-for-domain
      * @throws GuzzleException
      * @throws UnexpectedResponseException
@@ -413,9 +415,9 @@ interface DomainClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param DnsSetRecordSetManagedRequest $request An object representing the request for this operation
-     * @return DnsSetRecordSetManagedNoContentResponse The ID of the Ingress the a-records were set for, or an empty object if mx-records were set.
+     * @return DnsSetRecordSetManagedOKResponse The ID of the Ingress the a-records were set for, or an empty object if mx-records were set.
      */
-    public function dnsSetRecordSetManaged(DnsSetRecordSetManagedRequest $request): DnsSetRecordSetManagedNoContentResponse;
+    public function dnsSetRecordSetManaged(DnsSetRecordSetManagedRequest $request): DnsSetRecordSetManagedOKResponse;
     /**
      * Update a record set on a DNSZone.
      *

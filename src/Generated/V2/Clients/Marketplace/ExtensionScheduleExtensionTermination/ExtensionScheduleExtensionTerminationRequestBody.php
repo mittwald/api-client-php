@@ -12,7 +12,7 @@ class ExtensionScheduleExtensionTerminationRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'instantTermination' => [
                 'description' => 'If set, the Extension Instance will be removed as fast as possible. No credit will be given.',
@@ -42,7 +42,7 @@ class ExtensionScheduleExtensionTerminationRequestBody
     public function withInstantTermination(bool $instantTermination): self
     {
         $validator = new Validator();
-        $validator->validate($instantTermination, self::$schema['properties']['instantTermination']);
+        $validator->validate($instantTermination, self::$internalValidationSchema['properties']['instantTermination']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -113,7 +113,7 @@ class ExtensionScheduleExtensionTerminationRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

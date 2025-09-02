@@ -23,7 +23,7 @@ class ProjectBackupSchedule
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'createdAt' => [
                 'format' => 'date-time',
@@ -173,7 +173,7 @@ class ProjectBackupSchedule
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -195,7 +195,7 @@ class ProjectBackupSchedule
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -209,7 +209,7 @@ class ProjectBackupSchedule
     public function withIsSystemBackup(bool $isSystemBackup): self
     {
         $validator = new Validator();
-        $validator->validate($isSystemBackup, self::$schema['properties']['isSystemBackup']);
+        $validator->validate($isSystemBackup, self::$internalValidationSchema['properties']['isSystemBackup']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -223,7 +223,7 @@ class ProjectBackupSchedule
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -237,7 +237,7 @@ class ProjectBackupSchedule
     public function withSchedule(string $schedule): self
     {
         $validator = new Validator();
-        $validator->validate($schedule, self::$schema['properties']['schedule']);
+        $validator->validate($schedule, self::$internalValidationSchema['properties']['schedule']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -251,7 +251,7 @@ class ProjectBackupSchedule
     public function withTtl(string $ttl): self
     {
         $validator = new Validator();
-        $validator->validate($ttl, self::$schema['properties']['ttl']);
+        $validator->validate($ttl, self::$internalValidationSchema['properties']['ttl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -370,7 +370,7 @@ class ProjectBackupSchedule
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

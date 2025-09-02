@@ -16,7 +16,7 @@ class ExtensionDryRunWebhookRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'contributorId' => [
@@ -145,7 +145,7 @@ class ExtensionDryRunWebhookRequest
     public function withContributorId(string $contributorId): self
     {
         $validator = new Validator();
-        $validator->validate($contributorId, self::$schema['properties']['contributorId']);
+        $validator->validate($contributorId, self::$internalValidationSchema['properties']['contributorId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -159,7 +159,7 @@ class ExtensionDryRunWebhookRequest
     public function withExtensionId(string $extensionId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionId, self::$schema['properties']['extensionId']);
+        $validator->validate($extensionId, self::$internalValidationSchema['properties']['extensionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -173,7 +173,7 @@ class ExtensionDryRunWebhookRequest
     public function withExtensionInstanceId(string $extensionInstanceId): self
     {
         $validator = new Validator();
-        $validator->validate($extensionInstanceId, self::$schema['properties']['extensionInstanceId']);
+        $validator->validate($extensionInstanceId, self::$internalValidationSchema['properties']['extensionInstanceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -195,7 +195,7 @@ class ExtensionDryRunWebhookRequest
     public function withContextId(string $contextId): self
     {
         $validator = new Validator();
-        $validator->validate($contextId, self::$schema['properties']['contextId']);
+        $validator->validate($contextId, self::$internalValidationSchema['properties']['contextId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -220,7 +220,7 @@ class ExtensionDryRunWebhookRequest
     public function withScopes(array $scopes): self
     {
         $validator = new Validator();
-        $validator->validate($scopes, self::$schema['properties']['scopes']);
+        $validator->validate($scopes, self::$internalValidationSchema['properties']['scopes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -242,7 +242,7 @@ class ExtensionDryRunWebhookRequest
     public function withInstanceDisabled(bool $instanceDisabled): self
     {
         $validator = new Validator();
-        $validator->validate($instanceDisabled, self::$schema['properties']['instanceDisabled']);
+        $validator->validate($instanceDisabled, self::$internalValidationSchema['properties']['instanceDisabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -280,7 +280,7 @@ class ExtensionDryRunWebhookRequest
     public function withSecret(string $secret): self
     {
         $validator = new Validator();
-        $validator->validate($secret, self::$schema['properties']['secret']);
+        $validator->validate($secret, self::$internalValidationSchema['properties']['secret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -391,7 +391,7 @@ class ExtensionDryRunWebhookRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

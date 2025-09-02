@@ -13,7 +13,7 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'createdAt' => [
                 'format' => 'date-time',
@@ -83,7 +83,7 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
     public function withPath(string $path): self
     {
         $validator = new Validator();
-        $validator->validate($path, self::$schema['properties']['path']);
+        $validator->validate($path, self::$internalValidationSchema['properties']['path']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -97,7 +97,7 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
     public function withPerformanceScore(int $performanceScore): self
     {
         $validator = new Validator();
-        $validator->validate($performanceScore, self::$schema['properties']['performanceScore']);
+        $validator->validate($performanceScore, self::$internalValidationSchema['properties']['performanceScore']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +111,7 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
     public function withScreenshotFileRef(string $screenshotFileRef): self
     {
         $validator = new Validator();
-        $validator->validate($screenshotFileRef, self::$schema['properties']['screenshotFileRef']);
+        $validator->validate($screenshotFileRef, self::$internalValidationSchema['properties']['screenshotFileRef']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -188,7 +188,7 @@ class PageinsightsListPerformanceDataForProjectOKResponseBodyItemPathsItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

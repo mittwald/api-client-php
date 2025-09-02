@@ -22,7 +22,7 @@ class FrontendFragment
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'required' => [
 
         ],
@@ -62,7 +62,7 @@ class FrontendFragment
     public function withAdditionalProperties(array $additionalProperties): self
     {
         $validator = new Validator();
-        $validator->validate($additionalProperties, self::$schema['properties']['additionalProperties']);
+        $validator->validate($additionalProperties, self::$internalValidationSchema['properties']['additionalProperties']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class FrontendFragment
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -12,7 +12,7 @@ class GetWalletOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'customerId' => [
                 'example' => 'edefeee4-e8e9-4e2d-ab95-9a2eb6104cfb',
@@ -77,7 +77,7 @@ class GetWalletOKResponseBody
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -91,7 +91,7 @@ class GetWalletOKResponseBody
     public function withPoints(int|float $points): self
     {
         $validator = new Validator();
-        $validator->validate($points, self::$schema['properties']['points']);
+        $validator->validate($points, self::$internalValidationSchema['properties']['points']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -105,7 +105,7 @@ class GetWalletOKResponseBody
     public function withRecommendationCode(string $recommendationCode): self
     {
         $validator = new Validator();
-        $validator->validate($recommendationCode, self::$schema['properties']['recommendationCode']);
+        $validator->validate($recommendationCode, self::$internalValidationSchema['properties']['recommendationCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -127,7 +127,7 @@ class GetWalletOKResponseBody
     public function withWalletId(string $walletId): self
     {
         $validator = new Validator();
-        $validator->validate($walletId, self::$schema['properties']['walletId']);
+        $validator->validate($walletId, self::$internalValidationSchema['properties']['walletId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -196,7 +196,7 @@ class GetWalletOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

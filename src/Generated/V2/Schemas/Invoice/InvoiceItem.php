@@ -23,7 +23,7 @@ class InvoiceItem
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'additionalDescription' => [
                 'example' => 'Short-ID: "s-123456"',
@@ -193,7 +193,7 @@ class InvoiceItem
     public function withAdditionalDescription(string $additionalDescription): self
     {
         $validator = new Validator();
-        $validator->validate($additionalDescription, self::$schema['properties']['additionalDescription']);
+        $validator->validate($additionalDescription, self::$internalValidationSchema['properties']['additionalDescription']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -215,7 +215,7 @@ class InvoiceItem
     public function withContractItemId(string $contractItemId): self
     {
         $validator = new Validator();
-        $validator->validate($contractItemId, self::$schema['properties']['contractItemId']);
+        $validator->validate($contractItemId, self::$internalValidationSchema['properties']['contractItemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -229,7 +229,7 @@ class InvoiceItem
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -262,7 +262,7 @@ class InvoiceItem
     public function withItemId(string $itemId): self
     {
         $validator = new Validator();
-        $validator->validate($itemId, self::$schema['properties']['itemId']);
+        $validator->validate($itemId, self::$internalValidationSchema['properties']['itemId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -335,7 +335,7 @@ class InvoiceItem
     public function withVatRate(int|float $vatRate): self
     {
         $validator = new Validator();
-        $validator->validate($vatRate, self::$schema['properties']['vatRate']);
+        $validator->validate($vatRate, self::$internalValidationSchema['properties']['vatRate']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -440,7 +440,7 @@ class InvoiceItem
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

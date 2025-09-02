@@ -12,7 +12,7 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'shippingCountryRestriction' => [
                 'description' => 'You can restrict your customers to certain countries.',
@@ -22,38 +22,31 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
                 'type' => 'string',
             ],
         ],
+        'required' => [
+            'shippingCountryRestriction',
+        ],
         'type' => 'object',
     ];
 
     /**
      * You can restrict your customers to certain countries.
      */
-    private ?ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction $shippingCountryRestriction = null;
+    private ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction $shippingCountryRestriction;
 
-    /**
-     *
-     */
-    public function __construct()
+    public function __construct(ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction $shippingCountryRestriction)
     {
+        $this->shippingCountryRestriction = $shippingCountryRestriction;
     }
 
-    public function getShippingCountryRestriction(): ?ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction
+    public function getShippingCountryRestriction(): ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction
     {
-        return $this->shippingCountryRestriction ?? null;
+        return $this->shippingCountryRestriction;
     }
 
     public function withShippingCountryRestriction(ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction $shippingCountryRestriction): self
     {
         $clone = clone $this;
         $clone->shippingCountryRestriction = $shippingCountryRestriction;
-
-        return $clone;
-    }
-
-    public function withoutShippingCountryRestriction(): self
-    {
-        $clone = clone $this;
-        unset($clone->shippingCountryRestriction);
 
         return $clone;
     }
@@ -73,13 +66,10 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
             static::validateInput($input);
         }
 
-        $shippingCountryRestriction = null;
-        if (isset($input->{'shippingCountryRestriction'})) {
-            $shippingCountryRestriction = ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction::from($input->{'shippingCountryRestriction'});
-        }
+        $shippingCountryRestriction = ExtensionCreateContributorOnboardingProcessRequestBodyShippingCountryRestriction::from($input->{'shippingCountryRestriction'});
 
-        $obj = new self();
-        $obj->shippingCountryRestriction = $shippingCountryRestriction;
+        $obj = new self($shippingCountryRestriction);
+
         return $obj;
     }
 
@@ -91,9 +81,7 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
     public function toJson(): array
     {
         $output = [];
-        if (isset($this->shippingCountryRestriction)) {
-            $output['shippingCountryRestriction'] = ($this->shippingCountryRestriction)->value;
-        }
+        $output['shippingCountryRestriction'] = ($this->shippingCountryRestriction)->value;
 
         return $output;
     }
@@ -110,7 +98,7 @@ class ExtensionCreateContributorOnboardingProcessRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

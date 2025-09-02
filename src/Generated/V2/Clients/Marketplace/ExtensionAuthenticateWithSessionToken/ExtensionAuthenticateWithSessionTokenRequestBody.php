@@ -12,7 +12,7 @@ class ExtensionAuthenticateWithSessionTokenRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'extensionSecret' => [
                 'description' => 'The secret you you generated for your extension.',
@@ -57,7 +57,7 @@ class ExtensionAuthenticateWithSessionTokenRequestBody
     public function withExtensionSecret(string $extensionSecret): self
     {
         $validator = new Validator();
-        $validator->validate($extensionSecret, self::$schema['properties']['extensionSecret']);
+        $validator->validate($extensionSecret, self::$internalValidationSchema['properties']['extensionSecret']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -79,7 +79,7 @@ class ExtensionAuthenticateWithSessionTokenRequestBody
     public function withSessionToken(string $sessionToken): self
     {
         $validator = new Validator();
-        $validator->validate($sessionToken, self::$schema['properties']['sessionToken']);
+        $validator->validate($sessionToken, self::$internalValidationSchema['properties']['sessionToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -144,7 +144,7 @@ class ExtensionAuthenticateWithSessionTokenRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

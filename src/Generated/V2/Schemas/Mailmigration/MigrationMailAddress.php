@@ -22,7 +22,7 @@ class MigrationMailAddress
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'address' => [
                 'type' => 'string',
@@ -98,7 +98,7 @@ class MigrationMailAddress
     public function withAddress(string $address): self
     {
         $validator = new Validator();
-        $validator->validate($address, self::$schema['properties']['address']);
+        $validator->validate($address, self::$internalValidationSchema['properties']['address']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +112,7 @@ class MigrationMailAddress
     public function withFinished(bool $finished): self
     {
         $validator = new Validator();
-        $validator->validate($finished, self::$schema['properties']['finished']);
+        $validator->validate($finished, self::$internalValidationSchema['properties']['finished']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class MigrationMailAddress
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -208,7 +208,7 @@ class MigrationMailAddress
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

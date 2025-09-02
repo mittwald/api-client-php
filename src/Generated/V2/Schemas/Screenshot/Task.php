@@ -24,7 +24,7 @@ class Task
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'executedAt' => [
                 'format' => 'date-time',
@@ -38,7 +38,7 @@ class Task
                 'type' => 'string',
             ],
             'priority' => [
-                'type' => 'number',
+                'type' => 'integer',
             ],
             'settings' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.screenshot.ScreenshotSettings',
@@ -72,7 +72,7 @@ class Task
 
     private string $id;
 
-    private int|float $priority;
+    private int $priority;
 
     private ScreenshotSettings $settings;
 
@@ -80,7 +80,7 @@ class Task
 
     private string|Error|null $taskState = null;
 
-    public function __construct(string $id, int|float $priority, ScreenshotSettings $settings, Target $target)
+    public function __construct(string $id, int $priority, ScreenshotSettings $settings, Target $target)
     {
         $this->id = $id;
         $this->priority = $priority;
@@ -103,7 +103,7 @@ class Task
         return $this->id;
     }
 
-    public function getPriority(): int|float
+    public function getPriority(): int
     {
         return $this->priority;
     }
@@ -142,7 +142,7 @@ class Task
     public function withFileReference(string $fileReference): self
     {
         $validator = new Validator();
-        $validator->validate($fileReference, self::$schema['properties']['fileReference']);
+        $validator->validate($fileReference, self::$internalValidationSchema['properties']['fileReference']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class Task
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -175,10 +175,10 @@ class Task
         return $clone;
     }
 
-    public function withPriority(int|float $priority): self
+    public function withPriority(int $priority): self
     {
         $validator = new Validator();
-        $validator->validate($priority, self::$schema['properties']['priority']);
+        $validator->validate($priority, self::$internalValidationSchema['properties']['priority']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -245,7 +245,7 @@ class Task
             $fileReference = $input->{'fileReference'};
         }
         $id = $input->{'id'};
-        $priority = str_contains((string)($input->{'priority'}), '.') ? (float)($input->{'priority'}) : (int)($input->{'priority'});
+        $priority = (int)($input->{'priority'});
         $settings = ScreenshotSettings::buildFromInput($input->{'settings'}, validate: $validate);
         $target = Target::buildFromInput($input->{'target'}, validate: $validate);
         $taskState = null;
@@ -304,7 +304,7 @@ class Task
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

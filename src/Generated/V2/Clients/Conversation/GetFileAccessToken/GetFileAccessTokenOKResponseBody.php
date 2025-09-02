@@ -13,7 +13,7 @@ class GetFileAccessTokenOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accessToken' => [
                 'type' => 'string',
@@ -53,7 +53,7 @@ class GetFileAccessTokenOKResponseBody
     public function withAccessToken(string $accessToken): self
     {
         $validator = new Validator();
-        $validator->validate($accessToken, self::$schema['properties']['accessToken']);
+        $validator->validate($accessToken, self::$internalValidationSchema['properties']['accessToken']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -121,7 +121,7 @@ class GetFileAccessTokenOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

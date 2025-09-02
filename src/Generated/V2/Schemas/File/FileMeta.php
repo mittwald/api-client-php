@@ -22,7 +22,7 @@ class FileMeta
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'friendlyURL' => [
                 'deprecated' => true,
@@ -49,6 +49,7 @@ class FileMeta
             ],
             'sizeInBytes' => [
                 'example' => 300,
+                'format' => 'int64',
                 'type' => 'integer',
             ],
             'type' => [
@@ -141,7 +142,7 @@ class FileMeta
     public function withFriendlyUrl(string $friendlyUrl): self
     {
         $validator = new Validator();
-        $validator->validate($friendlyUrl, self::$schema['properties']['friendlyUrl']);
+        $validator->validate($friendlyUrl, self::$internalValidationSchema['properties']['friendlyUrl']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -155,7 +156,7 @@ class FileMeta
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,7 +170,7 @@ class FileMeta
     public function withMimeType(string $mimeType): self
     {
         $validator = new Validator();
-        $validator->validate($mimeType, self::$schema['properties']['mimeType']);
+        $validator->validate($mimeType, self::$internalValidationSchema['properties']['mimeType']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +184,7 @@ class FileMeta
     public function withName(string $name): self
     {
         $validator = new Validator();
-        $validator->validate($name, self::$schema['properties']['name']);
+        $validator->validate($name, self::$internalValidationSchema['properties']['name']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -197,7 +198,7 @@ class FileMeta
     public function withSizeInBytes(int $sizeInBytes): self
     {
         $validator = new Validator();
-        $validator->validate($sizeInBytes, self::$schema['properties']['sizeInBytes']);
+        $validator->validate($sizeInBytes, self::$internalValidationSchema['properties']['sizeInBytes']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -214,7 +215,7 @@ class FileMeta
     public function withType(string $type): self
     {
         $validator = new Validator();
-        $validator->validate($type, self::$schema['properties']['type']);
+        $validator->validate($type, self::$internalValidationSchema['properties']['type']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -284,7 +285,7 @@ class FileMeta
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

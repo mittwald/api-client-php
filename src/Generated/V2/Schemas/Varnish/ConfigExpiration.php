@@ -22,7 +22,7 @@ class ConfigExpiration
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'maxVersions' => [
                 'type' => 'number',
@@ -58,7 +58,7 @@ class ConfigExpiration
     public function withMaxVersions(int|float $maxVersions): self
     {
         $validator = new Validator();
-        $validator->validate($maxVersions, self::$schema['properties']['maxVersions']);
+        $validator->validate($maxVersions, self::$internalValidationSchema['properties']['maxVersions']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -80,7 +80,7 @@ class ConfigExpiration
     public function withRetentionTime(int|float $retentionTime): self
     {
         $validator = new Validator();
-        $validator->validate($retentionTime, self::$schema['properties']['retentionTime']);
+        $validator->validate($retentionTime, self::$internalValidationSchema['properties']['retentionTime']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -159,7 +159,7 @@ class ConfigExpiration
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class MailAddressMailboxSpamProtection
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'active' => [
                 'type' => 'boolean',
@@ -90,7 +90,7 @@ class MailAddressMailboxSpamProtection
     public function withActive(bool $active): self
     {
         $validator = new Validator();
-        $validator->validate($active, self::$schema['properties']['active']);
+        $validator->validate($active, self::$internalValidationSchema['properties']['active']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -104,7 +104,7 @@ class MailAddressMailboxSpamProtection
     public function withAutoDeleteSpam(bool $autoDeleteSpam): self
     {
         $validator = new Validator();
-        $validator->validate($autoDeleteSpam, self::$schema['properties']['autoDeleteSpam']);
+        $validator->validate($autoDeleteSpam, self::$internalValidationSchema['properties']['autoDeleteSpam']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -126,7 +126,7 @@ class MailAddressMailboxSpamProtection
     public function withRelocationMinSpamScore(int $relocationMinSpamScore): self
     {
         $validator = new Validator();
-        $validator->validate($relocationMinSpamScore, self::$schema['properties']['relocationMinSpamScore']);
+        $validator->validate($relocationMinSpamScore, self::$internalValidationSchema['properties']['relocationMinSpamScore']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -190,7 +190,7 @@ class MailAddressMailboxSpamProtection
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

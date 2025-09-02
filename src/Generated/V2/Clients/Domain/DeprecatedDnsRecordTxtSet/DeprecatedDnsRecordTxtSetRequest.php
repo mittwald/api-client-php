@@ -16,7 +16,7 @@ class DeprecatedDnsRecordTxtSetRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'zoneId' => [
@@ -67,7 +67,7 @@ class DeprecatedDnsRecordTxtSetRequest
     public function withZoneId(string $zoneId): self
     {
         $validator = new Validator();
-        $validator->validate($zoneId, self::$schema['properties']['zoneId']);
+        $validator->validate($zoneId, self::$internalValidationSchema['properties']['zoneId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -141,7 +141,7 @@ class DeprecatedDnsRecordTxtSetRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

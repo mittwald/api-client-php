@@ -12,7 +12,7 @@ class ChangePasswordRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'multiFactorCode' => [
                 'description' => 'Multi Factor Code to confirm MFA.
@@ -80,7 +80,7 @@ This is optional, depending on the MFA activation status of the profile.
     public function withMultiFactorCode(string $multiFactorCode): self
     {
         $validator = new Validator();
-        $validator->validate($multiFactorCode, self::$schema['properties']['multiFactorCode']);
+        $validator->validate($multiFactorCode, self::$internalValidationSchema['properties']['multiFactorCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -102,7 +102,7 @@ This is optional, depending on the MFA activation status of the profile.
     public function withNewPassword(string $newPassword): self
     {
         $validator = new Validator();
-        $validator->validate($newPassword, self::$schema['properties']['newPassword']);
+        $validator->validate($newPassword, self::$internalValidationSchema['properties']['newPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -116,7 +116,7 @@ This is optional, depending on the MFA activation status of the profile.
     public function withOldPassword(string $oldPassword): self
     {
         $validator = new Validator();
-        $validator->validate($oldPassword, self::$schema['properties']['oldPassword']);
+        $validator->validate($oldPassword, self::$internalValidationSchema['properties']['oldPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -183,7 +183,7 @@ This is optional, depending on the MFA activation status of the profile.
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

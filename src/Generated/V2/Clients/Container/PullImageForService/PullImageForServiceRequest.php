@@ -14,7 +14,7 @@ class PullImageForServiceRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'stackId' => [
@@ -24,6 +24,9 @@ class PullImageForServiceRequest
             'serviceId' => [
                 'format' => 'uuid',
                 'type' => 'string',
+            ],
+            'skipRecreate' => [
+                'type' => 'boolean',
             ],
         ],
         'required' => [
@@ -35,6 +38,8 @@ class PullImageForServiceRequest
     private string $stackId;
 
     private string $serviceId;
+
+    private ?bool $skipRecreate = null;
 
     private array $headers = [
 
@@ -56,10 +61,15 @@ class PullImageForServiceRequest
         return $this->serviceId;
     }
 
+    public function getSkipRecreate(): ?bool
+    {
+        return $this->skipRecreate ?? null;
+    }
+
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -73,13 +83,35 @@ class PullImageForServiceRequest
     public function withServiceId(string $serviceId): self
     {
         $validator = new Validator();
-        $validator->validate($serviceId, self::$schema['properties']['serviceId']);
+        $validator->validate($serviceId, self::$internalValidationSchema['properties']['serviceId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->serviceId = $serviceId;
+
+        return $clone;
+    }
+
+    public function withSkipRecreate(bool $skipRecreate): self
+    {
+        $validator = new Validator();
+        $validator->validate($skipRecreate, self::$internalValidationSchema['properties']['skipRecreate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skipRecreate = $skipRecreate;
+
+        return $clone;
+    }
+
+    public function withoutSkipRecreate(): self
+    {
+        $clone = clone $this;
+        unset($clone->skipRecreate);
 
         return $clone;
     }
@@ -101,9 +133,13 @@ class PullImageForServiceRequest
 
         $stackId = $input->{'stackId'};
         $serviceId = $input->{'serviceId'};
+        $skipRecreate = null;
+        if (isset($input->{'skipRecreate'})) {
+            $skipRecreate = (bool)($input->{'skipRecreate'});
+        }
 
         $obj = new self($stackId, $serviceId);
-
+        $obj->skipRecreate = $skipRecreate;
         return $obj;
     }
 
@@ -117,6 +153,9 @@ class PullImageForServiceRequest
         $output = [];
         $output['stackId'] = $this->stackId;
         $output['serviceId'] = $this->serviceId;
+        if (isset($this->skipRecreate)) {
+            $output['skipRecreate'] = $this->skipRecreate;
+        }
 
         return $output;
     }
@@ -133,7 +172,7 @@ class PullImageForServiceRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -179,6 +218,9 @@ class PullImageForServiceRequest
     {
         $mapped = $this->toJson();
         $query = [];
+        if (isset($mapped['skipRecreate'])) {
+            $query['skipRecreate'] = $mapped['skipRecreate'];
+        }
         return [
             'query' => $query,
             'headers' => $this->headers,

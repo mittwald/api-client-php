@@ -23,7 +23,7 @@ class ProjectBackupExport
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'downloadURL' => [
                 'format' => 'url',
@@ -49,6 +49,9 @@ class ProjectBackupExport
                 'example' => 'Completed',
                 'type' => 'string',
             ],
+            'sha256Checksum' => [
+                'type' => 'string',
+            ],
             'withPassword' => [
                 'type' => 'boolean',
             ],
@@ -67,6 +70,8 @@ class ProjectBackupExport
     private string $format;
 
     private ?ProjectBackupExportPhase $phase = null;
+
+    private ?string $sha256Checksum = null;
 
     private bool $withPassword;
 
@@ -96,6 +101,11 @@ class ProjectBackupExport
         return $this->phase ?? null;
     }
 
+    public function getSha256Checksum(): ?string
+    {
+        return $this->sha256Checksum ?? null;
+    }
+
     public function getWithPassword(): bool
     {
         return $this->withPassword;
@@ -104,7 +114,7 @@ class ProjectBackupExport
     public function withDownloadURL(string $downloadURL): self
     {
         $validator = new Validator();
-        $validator->validate($downloadURL, self::$schema['properties']['downloadURL']);
+        $validator->validate($downloadURL, self::$internalValidationSchema['properties']['downloadURL']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -142,7 +152,7 @@ class ProjectBackupExport
     public function withFormat(string $format): self
     {
         $validator = new Validator();
-        $validator->validate($format, self::$schema['properties']['format']);
+        $validator->validate($format, self::$internalValidationSchema['properties']['format']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -169,10 +179,32 @@ class ProjectBackupExport
         return $clone;
     }
 
+    public function withSha256Checksum(string $sha256Checksum): self
+    {
+        $validator = new Validator();
+        $validator->validate($sha256Checksum, self::$internalValidationSchema['properties']['sha256Checksum']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sha256Checksum = $sha256Checksum;
+
+        return $clone;
+    }
+
+    public function withoutSha256Checksum(): self
+    {
+        $clone = clone $this;
+        unset($clone->sha256Checksum);
+
+        return $clone;
+    }
+
     public function withWithPassword(bool $withPassword): self
     {
         $validator = new Validator();
-        $validator->validate($withPassword, self::$schema['properties']['withPassword']);
+        $validator->validate($withPassword, self::$internalValidationSchema['properties']['withPassword']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -211,12 +243,17 @@ class ProjectBackupExport
         if (isset($input->{'phase'})) {
             $phase = ProjectBackupExportPhase::from($input->{'phase'});
         }
+        $sha256Checksum = null;
+        if (isset($input->{'sha256Checksum'})) {
+            $sha256Checksum = $input->{'sha256Checksum'};
+        }
         $withPassword = (bool)($input->{'withPassword'});
 
         $obj = new self($format, $withPassword);
         $obj->downloadURL = $downloadURL;
         $obj->expiresAt = $expiresAt;
         $obj->phase = $phase;
+        $obj->sha256Checksum = $sha256Checksum;
         return $obj;
     }
 
@@ -238,6 +275,9 @@ class ProjectBackupExport
         if (isset($this->phase)) {
             $output['phase'] = ($this->phase)->value;
         }
+        if (isset($this->sha256Checksum)) {
+            $output['sha256Checksum'] = $this->sha256Checksum;
+        }
         $output['withPassword'] = $this->withPassword;
 
         return $output;
@@ -255,7 +295,7 @@ class ProjectBackupExport
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

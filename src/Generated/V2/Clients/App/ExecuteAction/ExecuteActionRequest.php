@@ -15,7 +15,7 @@ class ExecuteActionRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'appInstallationId' => [
@@ -24,14 +24,10 @@ class ExecuteActionRequest
             'action' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.app.Action',
             ],
-            'body' => [
-                'type' => 'object',
-            ],
         ],
         'required' => [
             'appInstallationId',
             'action',
-            'body',
         ],
     ];
 
@@ -39,17 +35,14 @@ class ExecuteActionRequest
 
     private Action $action;
 
-    private ExecuteActionRequestBody $body;
-
     private array $headers = [
 
     ];
 
-    public function __construct(string $appInstallationId, Action $action, ExecuteActionRequestBody $body)
+    public function __construct(string $appInstallationId, Action $action)
     {
         $this->appInstallationId = $appInstallationId;
         $this->action = $action;
-        $this->body = $body;
     }
 
     public function getAppInstallationId(): string
@@ -62,15 +55,10 @@ class ExecuteActionRequest
         return $this->action;
     }
 
-    public function getBody(): ExecuteActionRequestBody
-    {
-        return $this->body;
-    }
-
     public function withAppInstallationId(string $appInstallationId): self
     {
         $validator = new Validator();
-        $validator->validate($appInstallationId, self::$schema['properties']['appInstallationId']);
+        $validator->validate($appInstallationId, self::$internalValidationSchema['properties']['appInstallationId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -85,14 +73,6 @@ class ExecuteActionRequest
     {
         $clone = clone $this;
         $clone->action = $action;
-
-        return $clone;
-    }
-
-    public function withBody(ExecuteActionRequestBody $body): self
-    {
-        $clone = clone $this;
-        $clone->body = $body;
 
         return $clone;
     }
@@ -114,9 +94,8 @@ class ExecuteActionRequest
 
         $appInstallationId = $input->{'appInstallationId'};
         $action = Action::from($input->{'action'});
-        $body = ExecuteActionRequestBody::buildFromInput($input->{'body'}, validate: $validate);
 
-        $obj = new self($appInstallationId, $action, $body);
+        $obj = new self($appInstallationId, $action);
 
         return $obj;
     }
@@ -131,7 +110,6 @@ class ExecuteActionRequest
         $output = [];
         $output['appInstallationId'] = $this->appInstallationId;
         $output['action'] = $this->action->value;
-        $output['body'] = ($this->body)->toJson();
 
         return $output;
     }
@@ -148,7 +126,7 @@ class ExecuteActionRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -162,7 +140,6 @@ class ExecuteActionRequest
 
     public function __clone()
     {
-        $this->body = clone $this->body;
     }
 
     /**
@@ -198,7 +175,6 @@ class ExecuteActionRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

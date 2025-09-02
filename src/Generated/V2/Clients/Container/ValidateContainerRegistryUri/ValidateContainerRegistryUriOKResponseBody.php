@@ -12,8 +12,11 @@ class ValidateContainerRegistryUriOKResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
+            'reason' => [
+                'type' => 'string',
+            ],
             'valid' => [
                 'type' => 'boolean',
             ],
@@ -24,6 +27,8 @@ class ValidateContainerRegistryUriOKResponseBody
         'type' => 'object',
     ];
 
+    private ?string $reason = null;
+
     private bool $valid;
 
     public function __construct(bool $valid)
@@ -31,15 +36,42 @@ class ValidateContainerRegistryUriOKResponseBody
         $this->valid = $valid;
     }
 
+    public function getReason(): ?string
+    {
+        return $this->reason ?? null;
+    }
+
     public function getValid(): bool
     {
         return $this->valid;
     }
 
+    public function withReason(string $reason): self
+    {
+        $validator = new Validator();
+        $validator->validate($reason, self::$internalValidationSchema['properties']['reason']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->reason = $reason;
+
+        return $clone;
+    }
+
+    public function withoutReason(): self
+    {
+        $clone = clone $this;
+        unset($clone->reason);
+
+        return $clone;
+    }
+
     public function withValid(bool $valid): self
     {
         $validator = new Validator();
-        $validator->validate($valid, self::$schema['properties']['valid']);
+        $validator->validate($valid, self::$internalValidationSchema['properties']['valid']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -65,10 +97,14 @@ class ValidateContainerRegistryUriOKResponseBody
             static::validateInput($input);
         }
 
+        $reason = null;
+        if (isset($input->{'reason'})) {
+            $reason = $input->{'reason'};
+        }
         $valid = (bool)($input->{'valid'});
 
         $obj = new self($valid);
-
+        $obj->reason = $reason;
         return $obj;
     }
 
@@ -80,6 +116,9 @@ class ValidateContainerRegistryUriOKResponseBody
     public function toJson(): array
     {
         $output = [];
+        if (isset($this->reason)) {
+            $output['reason'] = $this->reason;
+        }
         $output['valid'] = $this->valid;
 
         return $output;
@@ -97,7 +136,7 @@ class ValidateContainerRegistryUriOKResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

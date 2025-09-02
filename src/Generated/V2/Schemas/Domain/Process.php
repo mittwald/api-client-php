@@ -23,7 +23,7 @@ class Process
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'error' => [
                 'type' => 'string',
@@ -117,7 +117,7 @@ class Process
     public function withError(string $error): self
     {
         $validator = new Validator();
-        $validator->validate($error, self::$schema['properties']['error']);
+        $validator->validate($error, self::$internalValidationSchema['properties']['error']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class Process
     public function withStatus(string $status): self
     {
         $validator = new Validator();
-        $validator->validate($status, self::$schema['properties']['status']);
+        $validator->validate($status, self::$internalValidationSchema['properties']['status']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -185,7 +185,7 @@ class Process
     public function withStatusCode(string $statusCode): self
     {
         $validator = new Validator();
-        $validator->validate($statusCode, self::$schema['properties']['statusCode']);
+        $validator->validate($statusCode, self::$internalValidationSchema['properties']['statusCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -207,7 +207,7 @@ class Process
     public function withTransactionId(string $transactionId): self
     {
         $validator = new Validator();
-        $validator->validate($transactionId, self::$schema['properties']['transactionId']);
+        $validator->validate($transactionId, self::$internalValidationSchema['properties']['transactionId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -294,7 +294,7 @@ class Process
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

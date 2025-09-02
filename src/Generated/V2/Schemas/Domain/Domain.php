@@ -22,7 +22,7 @@ class Domain
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'authCode' => [
                 '$ref' => '#/components/schemas/de.mittwald.v1.domain.AuthCode',
@@ -253,7 +253,7 @@ class Domain
     public function withConnected(bool $connected): self
     {
         $validator = new Validator();
-        $validator->validate($connected, self::$schema['properties']['connected']);
+        $validator->validate($connected, self::$internalValidationSchema['properties']['connected']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -267,7 +267,7 @@ class Domain
     public function withContactHash(string $contactHash): self
     {
         $validator = new Validator();
-        $validator->validate($contactHash, self::$schema['properties']['contactHash']);
+        $validator->validate($contactHash, self::$internalValidationSchema['properties']['contactHash']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -289,7 +289,7 @@ class Domain
     public function withDeleted(bool $deleted): self
     {
         $validator = new Validator();
-        $validator->validate($deleted, self::$schema['properties']['deleted']);
+        $validator->validate($deleted, self::$internalValidationSchema['properties']['deleted']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -303,7 +303,7 @@ class Domain
     public function withDomain(string $domain): self
     {
         $validator = new Validator();
-        $validator->validate($domain, self::$schema['properties']['domain']);
+        $validator->validate($domain, self::$internalValidationSchema['properties']['domain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -317,7 +317,7 @@ class Domain
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($domainId, self::$schema['properties']['domainId']);
+        $validator->validate($domainId, self::$internalValidationSchema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -342,7 +342,7 @@ class Domain
     public function withNameservers(array $nameservers): self
     {
         $validator = new Validator();
-        $validator->validate($nameservers, self::$schema['properties']['nameservers']);
+        $validator->validate($nameservers, self::$internalValidationSchema['properties']['nameservers']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -375,7 +375,7 @@ class Domain
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -389,7 +389,7 @@ class Domain
     public function withTransferInAuthCode(string $transferInAuthCode): self
     {
         $validator = new Validator();
-        $validator->validate($transferInAuthCode, self::$schema['properties']['transferInAuthCode']);
+        $validator->validate($transferInAuthCode, self::$internalValidationSchema['properties']['transferInAuthCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -411,7 +411,7 @@ class Domain
     public function withUsesDefaultNameserver(bool $usesDefaultNameserver): self
     {
         $validator = new Validator();
-        $validator->validate($usesDefaultNameserver, self::$schema['properties']['usesDefaultNameserver']);
+        $validator->validate($usesDefaultNameserver, self::$internalValidationSchema['properties']['usesDefaultNameserver']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -522,7 +522,7 @@ class Domain
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

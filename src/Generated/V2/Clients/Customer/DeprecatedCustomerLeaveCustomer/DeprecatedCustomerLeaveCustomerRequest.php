@@ -14,41 +14,28 @@ class DeprecatedCustomerLeaveCustomerRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'customerId' => [
                 'format' => 'uuid',
                 'type' => 'string',
             ],
-            'body' => [
-
-            ],
         ],
         'required' => [
             'customerId',
-            'body',
         ],
     ];
 
     private string $customerId;
 
-    /**
-     * @var mixed
-     */
-    private $body;
-
     private array $headers = [
 
     ];
 
-    /**
-     * @param mixed $body
-     */
-    public function __construct(string $customerId, $body)
+    public function __construct(string $customerId)
     {
         $this->customerId = $customerId;
-        $this->body = $body;
     }
 
     public function getCustomerId(): string
@@ -56,41 +43,16 @@ class DeprecatedCustomerLeaveCustomerRequest
         return $this->customerId;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
-
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->customerId = $customerId;
-
-        return $clone;
-    }
-
-    /**
-     * @param mixed $body
-     */
-    public function withBody($body): self
-    {
-        $validator = new Validator();
-        $validator->validate($body, self::$schema['properties']['body']);
-        if (!$validator->isValid()) {
-            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
-        }
-
-        $clone = clone $this;
-        $clone->body = $body;
 
         return $clone;
     }
@@ -111,9 +73,8 @@ class DeprecatedCustomerLeaveCustomerRequest
         }
 
         $customerId = $input->{'customerId'};
-        $body = $input->{'body'};
 
-        $obj = new self($customerId, $body);
+        $obj = new self($customerId);
 
         return $obj;
     }
@@ -127,7 +88,6 @@ class DeprecatedCustomerLeaveCustomerRequest
     {
         $output = [];
         $output['customerId'] = $this->customerId;
-        $output['body'] = $this->body;
 
         return $output;
     }
@@ -144,7 +104,7 @@ class DeprecatedCustomerLeaveCustomerRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -192,7 +152,6 @@ class DeprecatedCustomerLeaveCustomerRequest
         return [
             'query' => $query,
             'headers' => $this->headers,
-            'json' => $this->getBody()->toJson(),
         ];
     }
 

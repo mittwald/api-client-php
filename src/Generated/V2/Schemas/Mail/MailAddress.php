@@ -23,11 +23,32 @@ class MailAddress
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'address' => [
                 'format' => 'idn-email',
                 'type' => 'string',
+            ],
+            'archive' => [
+                'properties' => [
+                    'active' => [
+                        'type' => 'boolean',
+                    ],
+                    'quota' => [
+                        'format' => 'int64',
+                        'type' => 'integer',
+                    ],
+                    'usedBytes' => [
+                        'format' => 'int64',
+                        'type' => 'integer',
+                    ],
+                ],
+                'required' => [
+                    'active',
+                    'quota',
+                    'usedBytes',
+                ],
+                'type' => 'object',
             ],
             'autoResponder' => [
                 'properties' => [
@@ -63,6 +84,9 @@ class MailAddress
                 'type' => 'string',
             ],
             'isArchived' => [
+                'type' => 'boolean',
+            ],
+            'isBackupInProgress' => [
                 'type' => 'boolean',
             ],
             'isCatchAll' => [
@@ -117,7 +141,8 @@ class MailAddress
                                         'type' => 'string',
                                     ],
                                     'value' => [
-                                        'type' => 'number',
+                                        'format' => 'int64',
+                                        'type' => 'integer',
                                     ],
                                 ],
                                 'required' => [
@@ -127,7 +152,8 @@ class MailAddress
                                 'type' => 'object',
                             ],
                             'limit' => [
-                                'type' => 'number',
+                                'format' => 'int64',
+                                'type' => 'integer',
                             ],
                         ],
                         'required' => [
@@ -167,11 +193,15 @@ class MailAddress
             'updatedAt',
             'autoResponder',
             'isArchived',
+            'isBackupInProgress',
+            'archive',
         ],
         'type' => 'object',
     ];
 
     private string $address;
+
+    private MailAddressArchive $archive;
 
     private MailAddressAutoResponder $autoResponder;
 
@@ -183,6 +213,8 @@ class MailAddress
     private string $id;
 
     private bool $isArchived;
+
+    private bool $isBackupInProgress;
 
     private bool $isCatchAll;
 
@@ -197,13 +229,15 @@ class MailAddress
     /**
      * @param string[] $forwardAddresses
      */
-    public function __construct(string $address, MailAddressAutoResponder $autoResponder, array $forwardAddresses, string $id, bool $isArchived, bool $isCatchAll, string $projectId, bool $receivingDisabled, DateTime $updatedAt)
+    public function __construct(string $address, MailAddressArchive $archive, MailAddressAutoResponder $autoResponder, array $forwardAddresses, string $id, bool $isArchived, bool $isBackupInProgress, bool $isCatchAll, string $projectId, bool $receivingDisabled, DateTime $updatedAt)
     {
         $this->address = $address;
+        $this->archive = $archive;
         $this->autoResponder = $autoResponder;
         $this->forwardAddresses = $forwardAddresses;
         $this->id = $id;
         $this->isArchived = $isArchived;
+        $this->isBackupInProgress = $isBackupInProgress;
         $this->isCatchAll = $isCatchAll;
         $this->projectId = $projectId;
         $this->receivingDisabled = $receivingDisabled;
@@ -213,6 +247,11 @@ class MailAddress
     public function getAddress(): string
     {
         return $this->address;
+    }
+
+    public function getArchive(): MailAddressArchive
+    {
+        return $this->archive;
     }
 
     public function getAutoResponder(): MailAddressAutoResponder
@@ -236,6 +275,11 @@ class MailAddress
     public function getIsArchived(): bool
     {
         return $this->isArchived;
+    }
+
+    public function getIsBackupInProgress(): bool
+    {
+        return $this->isBackupInProgress;
     }
 
     public function getIsCatchAll(): bool
@@ -266,13 +310,21 @@ class MailAddress
     public function withAddress(string $address): self
     {
         $validator = new Validator();
-        $validator->validate($address, self::$schema['properties']['address']);
+        $validator->validate($address, self::$internalValidationSchema['properties']['address']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
 
         $clone = clone $this;
         $clone->address = $address;
+
+        return $clone;
+    }
+
+    public function withArchive(MailAddressArchive $archive): self
+    {
+        $clone = clone $this;
+        $clone->archive = $archive;
 
         return $clone;
     }
@@ -291,7 +343,7 @@ class MailAddress
     public function withForwardAddresses(array $forwardAddresses): self
     {
         $validator = new Validator();
-        $validator->validate($forwardAddresses, self::$schema['properties']['forwardAddresses']);
+        $validator->validate($forwardAddresses, self::$internalValidationSchema['properties']['forwardAddresses']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -305,7 +357,7 @@ class MailAddress
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -319,7 +371,7 @@ class MailAddress
     public function withIsArchived(bool $isArchived): self
     {
         $validator = new Validator();
-        $validator->validate($isArchived, self::$schema['properties']['isArchived']);
+        $validator->validate($isArchived, self::$internalValidationSchema['properties']['isArchived']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -330,10 +382,24 @@ class MailAddress
         return $clone;
     }
 
+    public function withIsBackupInProgress(bool $isBackupInProgress): self
+    {
+        $validator = new Validator();
+        $validator->validate($isBackupInProgress, self::$internalValidationSchema['properties']['isBackupInProgress']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->isBackupInProgress = $isBackupInProgress;
+
+        return $clone;
+    }
+
     public function withIsCatchAll(bool $isCatchAll): self
     {
         $validator = new Validator();
-        $validator->validate($isCatchAll, self::$schema['properties']['isCatchAll']);
+        $validator->validate($isCatchAll, self::$internalValidationSchema['properties']['isCatchAll']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -363,7 +429,7 @@ class MailAddress
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -377,7 +443,7 @@ class MailAddress
     public function withReceivingDisabled(bool $receivingDisabled): self
     {
         $validator = new Validator();
-        $validator->validate($receivingDisabled, self::$schema['properties']['receivingDisabled']);
+        $validator->validate($receivingDisabled, self::$internalValidationSchema['properties']['receivingDisabled']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -412,10 +478,12 @@ class MailAddress
         }
 
         $address = $input->{'address'};
+        $archive = MailAddressArchive::buildFromInput($input->{'archive'}, validate: $validate);
         $autoResponder = MailAddressAutoResponder::buildFromInput($input->{'autoResponder'}, validate: $validate);
         $forwardAddresses = $input->{'forwardAddresses'};
         $id = $input->{'id'};
         $isArchived = (bool)($input->{'isArchived'});
+        $isBackupInProgress = (bool)($input->{'isBackupInProgress'});
         $isCatchAll = (bool)($input->{'isCatchAll'});
         $mailbox = null;
         if (isset($input->{'mailbox'})) {
@@ -425,7 +493,7 @@ class MailAddress
         $receivingDisabled = (bool)($input->{'receivingDisabled'});
         $updatedAt = new DateTime($input->{'updatedAt'});
 
-        $obj = new self($address, $autoResponder, $forwardAddresses, $id, $isArchived, $isCatchAll, $projectId, $receivingDisabled, $updatedAt);
+        $obj = new self($address, $archive, $autoResponder, $forwardAddresses, $id, $isArchived, $isBackupInProgress, $isCatchAll, $projectId, $receivingDisabled, $updatedAt);
         $obj->mailbox = $mailbox;
         return $obj;
     }
@@ -439,10 +507,12 @@ class MailAddress
     {
         $output = [];
         $output['address'] = $this->address;
+        $output['archive'] = ($this->archive)->toJson();
         $output['autoResponder'] = ($this->autoResponder)->toJson();
         $output['forwardAddresses'] = $this->forwardAddresses;
         $output['id'] = $this->id;
         $output['isArchived'] = $this->isArchived;
+        $output['isBackupInProgress'] = $this->isBackupInProgress;
         $output['isCatchAll'] = $this->isCatchAll;
         if (isset($this->mailbox)) {
             $output['mailbox'] = ($this->mailbox)->toJson();
@@ -466,7 +536,7 @@ class MailAddress
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -480,6 +550,7 @@ class MailAddress
 
     public function __clone()
     {
+        $this->archive = clone $this->archive;
         $this->autoResponder = clone $this->autoResponder;
         if (isset($this->mailbox)) {
             $this->mailbox = clone $this->mailbox;

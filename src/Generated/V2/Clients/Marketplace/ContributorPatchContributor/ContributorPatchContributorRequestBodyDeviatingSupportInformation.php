@@ -1,0 +1,155 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor;
+
+use InvalidArgumentException;
+use JsonSchema\Validator;
+
+class ContributorPatchContributorRequestBodyDeviatingSupportInformation
+{
+    /**
+     * Schema used to validate input for creating instances of this class
+     */
+    private static array $internalValidationSchema = [
+        'required' => [
+            'email',
+        ],
+        'properties' => [
+            'email' => [
+                'example' => 'a.lovelace@example.com',
+                'format' => 'email',
+                'type' => 'string',
+            ],
+            'phone' => [
+                'type' => 'string',
+            ],
+        ],
+    ];
+
+    private string $email;
+
+    private ?string $phone = null;
+
+    public function __construct(string $email)
+    {
+        $this->email = $email;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone ?? null;
+    }
+
+    public function withEmail(string $email): self
+    {
+        $validator = new Validator();
+        $validator->validate($email, self::$internalValidationSchema['properties']['email']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->email = $email;
+
+        return $clone;
+    }
+
+    public function withPhone(string $phone): self
+    {
+        $validator = new Validator();
+        $validator->validate($phone, self::$internalValidationSchema['properties']['phone']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->phone = $phone;
+
+        return $clone;
+    }
+
+    public function withoutPhone(): self
+    {
+        $clone = clone $this;
+        unset($clone->phone);
+
+        return $clone;
+    }
+
+    /**
+     * Builds a new instance from an input array
+     *
+     * @param array|object $input Input data
+     * @param bool $validate Set this to false to skip validation; use at own risk
+     * @return ContributorPatchContributorRequestBodyDeviatingSupportInformation Created instance
+     * @throws InvalidArgumentException
+     */
+    public static function buildFromInput(array|object $input, bool $validate = true): ContributorPatchContributorRequestBodyDeviatingSupportInformation
+    {
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
+        if ($validate) {
+            static::validateInput($input);
+        }
+
+        $email = $input->{'email'};
+        $phone = null;
+        if (isset($input->{'phone'})) {
+            $phone = $input->{'phone'};
+        }
+
+        $obj = new self($email);
+        $obj->phone = $phone;
+        return $obj;
+    }
+
+    /**
+     * Converts this object back to a simple array that can be JSON-serialized
+     *
+     * @return array Converted array
+     */
+    public function toJson(): array
+    {
+        $output = [];
+        $output['email'] = $this->email;
+        if (isset($this->phone)) {
+            $output['phone'] = $this->phone;
+        }
+
+        return $output;
+    }
+
+    /**
+     * Validates an input array
+     *
+     * @param array|object $input Input data
+     * @param bool $return Return instead of throwing errors
+     * @return bool Validation result
+     * @throws InvalidArgumentException
+     */
+    public static function validateInput(array|object $input, bool $return = false): bool
+    {
+        $validator = new \Mittwald\ApiClient\Validator\Validator();
+        $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
+        $validator->validate($input, self::$internalValidationSchema);
+
+        if (!$validator->isValid() && !$return) {
+            $errors = array_map(function (array $e): string {
+                return $e["property"] . ": " . $e["message"];
+            }, $validator->getErrors());
+            throw new InvalidArgumentException(join(", ", $errors));
+        }
+
+        return $validator->isValid();
+    }
+
+    public function __clone()
+    {
+    }
+}

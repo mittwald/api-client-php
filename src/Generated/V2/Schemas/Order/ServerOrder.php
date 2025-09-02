@@ -22,7 +22,7 @@ class ServerOrder
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'customerId' => [
                 'example' => 'f3435305-fd26-470e-9f21-43d9be7e67e7',
@@ -122,7 +122,7 @@ class ServerOrder
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -136,7 +136,7 @@ class ServerOrder
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class ServerOrder
     public function withDiskspaceInGiB(int|float $diskspaceInGiB): self
     {
         $validator = new Validator();
-        $validator->validate($diskspaceInGiB, self::$schema['properties']['diskspaceInGiB']);
+        $validator->validate($diskspaceInGiB, self::$internalValidationSchema['properties']['diskspaceInGiB']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -164,7 +164,7 @@ class ServerOrder
     public function withMachineType(string $machineType): self
     {
         $validator = new Validator();
-        $validator->validate($machineType, self::$schema['properties']['machineType']);
+        $validator->validate($machineType, self::$internalValidationSchema['properties']['machineType']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -178,7 +178,7 @@ class ServerOrder
     public function withPromotionCode(string $promotionCode): self
     {
         $validator = new Validator();
-        $validator->validate($promotionCode, self::$schema['properties']['promotionCode']);
+        $validator->validate($promotionCode, self::$internalValidationSchema['properties']['promotionCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -200,7 +200,7 @@ class ServerOrder
     public function withRecommendationCode(string $recommendationCode): self
     {
         $validator = new Validator();
-        $validator->validate($recommendationCode, self::$schema['properties']['recommendationCode']);
+        $validator->validate($recommendationCode, self::$internalValidationSchema['properties']['recommendationCode']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -222,7 +222,7 @@ class ServerOrder
     public function withUseFreeTrial(bool $useFreeTrial): self
     {
         $validator = new Validator();
-        $validator->validate($useFreeTrial, self::$schema['properties']['useFreeTrial']);
+        $validator->validate($useFreeTrial, self::$internalValidationSchema['properties']['useFreeTrial']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -317,7 +317,7 @@ class ServerOrder
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

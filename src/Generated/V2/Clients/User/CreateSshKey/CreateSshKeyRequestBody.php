@@ -13,7 +13,7 @@ class CreateSshKeyRequestBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'expiresAt' => [
                 'format' => 'date-time',
@@ -68,7 +68,7 @@ class CreateSshKeyRequestBody
     public function withPublicKey(string $publicKey): self
     {
         $validator = new Validator();
-        $validator->validate($publicKey, self::$schema['properties']['publicKey']);
+        $validator->validate($publicKey, self::$internalValidationSchema['properties']['publicKey']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -133,7 +133,7 @@ class CreateSshKeyRequestBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

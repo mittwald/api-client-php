@@ -22,7 +22,7 @@ class MailsystemSettings
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'imapClusterId' => [
                 'type' => 'string',
@@ -73,7 +73,7 @@ class MailsystemSettings
     public function withImapClusterId(string $imapClusterId): self
     {
         $validator = new Validator();
-        $validator->validate($imapClusterId, self::$schema['properties']['imapClusterId']);
+        $validator->validate($imapClusterId, self::$internalValidationSchema['properties']['imapClusterId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -87,7 +87,7 @@ class MailsystemSettings
     public function withMailDirectory(string $mailDirectory): self
     {
         $validator = new Validator();
-        $validator->validate($mailDirectory, self::$schema['properties']['mailDirectory']);
+        $validator->validate($mailDirectory, self::$internalValidationSchema['properties']['mailDirectory']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -101,7 +101,7 @@ class MailsystemSettings
     public function withRateLimitId(string $rateLimitId): self
     {
         $validator = new Validator();
-        $validator->validate($rateLimitId, self::$schema['properties']['rateLimitId']);
+        $validator->validate($rateLimitId, self::$internalValidationSchema['properties']['rateLimitId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -163,7 +163,7 @@ class MailsystemSettings
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -14,7 +14,7 @@ class ListRegistriesRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
@@ -26,9 +26,16 @@ class ListRegistriesRequest
             ],
             'limit' => [
                 'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
             ],
             'skip' => [
                 'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
             ],
         ],
         'required' => [
@@ -40,9 +47,11 @@ class ListRegistriesRequest
 
     private ?bool $hasCredentials = null;
 
-    private ?int $limit = null;
+    private int $limit = 1000;
 
-    private ?int $skip = null;
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -63,20 +72,25 @@ class ListRegistriesRequest
         return $this->hasCredentials ?? null;
     }
 
-    public function getLimit(): ?int
+    public function getLimit(): int
     {
-        return $this->limit ?? null;
+        return $this->limit;
     }
 
-    public function getSkip(): ?int
+    public function getSkip(): int
     {
-        return $this->skip ?? null;
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
     }
 
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -90,7 +104,7 @@ class ListRegistriesRequest
     public function withHasCredentials(bool $hasCredentials): self
     {
         $validator = new Validator();
-        $validator->validate($hasCredentials, self::$schema['properties']['hasCredentials']);
+        $validator->validate($hasCredentials, self::$internalValidationSchema['properties']['hasCredentials']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -112,7 +126,7 @@ class ListRegistriesRequest
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -123,18 +137,10 @@ class ListRegistriesRequest
         return $clone;
     }
 
-    public function withoutLimit(): self
-    {
-        $clone = clone $this;
-        unset($clone->limit);
-
-        return $clone;
-    }
-
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -145,10 +151,24 @@ class ListRegistriesRequest
         return $clone;
     }
 
-    public function withoutSkip(): self
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
     {
         $clone = clone $this;
-        unset($clone->skip);
+        unset($clone->page);
 
         return $clone;
     }
@@ -173,19 +193,24 @@ class ListRegistriesRequest
         if (isset($input->{'hasCredentials'})) {
             $hasCredentials = (bool)($input->{'hasCredentials'});
         }
-        $limit = null;
+        $limit = 1000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
         }
-        $skip = null;
+        $skip = 0;
         if (isset($input->{'skip'})) {
             $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
         }
 
         $obj = new self($projectId);
         $obj->hasCredentials = $hasCredentials;
         $obj->limit = $limit;
         $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -201,11 +226,10 @@ class ListRegistriesRequest
         if (isset($this->hasCredentials)) {
             $output['hasCredentials'] = $this->hasCredentials;
         }
-        if (isset($this->limit)) {
-            $output['limit'] = $this->limit;
-        }
-        if (isset($this->skip)) {
-            $output['skip'] = $this->skip;
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -223,7 +247,7 @@ class ListRegistriesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -276,6 +300,9 @@ class ListRegistriesRequest
         }
         if (isset($mapped['skip'])) {
             $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

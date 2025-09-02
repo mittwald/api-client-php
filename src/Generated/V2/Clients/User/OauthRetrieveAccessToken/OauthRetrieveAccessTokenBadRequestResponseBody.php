@@ -12,7 +12,7 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'error' => [
                 'enum' => [
@@ -65,7 +65,7 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
     public function withErrorDescription(string $errorDescription): self
     {
         $validator = new Validator();
-        $validator->validate($errorDescription, self::$schema['properties']['error_description']);
+        $validator->validate($errorDescription, self::$internalValidationSchema['properties']['error_description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -138,7 +138,7 @@ class OauthRetrieveAccessTokenBadRequestResponseBody
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

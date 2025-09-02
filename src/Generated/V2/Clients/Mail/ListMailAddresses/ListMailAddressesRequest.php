@@ -14,7 +14,7 @@ class ListMailAddressesRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
@@ -22,6 +22,18 @@ class ListMailAddressesRequest
             ],
             'search' => [
                 'type' => 'string',
+            ],
+            'forwardAddress' => [
+                'type' => 'boolean',
+            ],
+            'catchAll' => [
+                'type' => 'boolean',
+            ],
+            'autoResponder' => [
+                'type' => 'boolean',
+            ],
+            'mailArchive' => [
+                'type' => 'boolean',
             ],
             'limit' => [
                 'type' => 'integer',
@@ -36,6 +48,40 @@ class ListMailAddressesRequest
                 'type' => 'integer',
                 'minimum' => 1,
             ],
+            'sort' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'address.domain',
+                        'address.local',
+                        'updatedAt',
+                        'projectId',
+                        'mailbox.quota',
+                        'mailbox.name',
+                        'mailbox.storageInBytes.current',
+                        'mailbox.storageInBytes.limit',
+                    ],
+                ],
+                'default' => [
+                    'address.domain',
+                    'address.local',
+                ],
+            ],
+            'order' => [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'string',
+                    'enum' => [
+                        'asc',
+                        'desc',
+                    ],
+                ],
+                'default' => [
+                    'asc',
+                    'asc',
+                ],
+            ],
         ],
         'required' => [
             'projectId',
@@ -46,11 +92,35 @@ class ListMailAddressesRequest
 
     private ?string $search = null;
 
+    private ?bool $forwardAddress = null;
+
+    private ?bool $catchAll = null;
+
+    private ?bool $autoResponder = null;
+
+    private ?bool $mailArchive = null;
+
     private int $limit = 10000;
 
     private int $skip = 0;
 
     private ?int $page = null;
+
+    /**
+     * @var string[]
+     */
+    private array $sort = [
+        'address.domain',
+        'address.local',
+    ];
+
+    /**
+     * @var string[]
+     */
+    private array $order = [
+        'asc',
+        'asc',
+    ];
 
     private array $headers = [
 
@@ -71,6 +141,26 @@ class ListMailAddressesRequest
         return $this->search ?? null;
     }
 
+    public function getForwardAddress(): ?bool
+    {
+        return $this->forwardAddress ?? null;
+    }
+
+    public function getCatchAll(): ?bool
+    {
+        return $this->catchAll ?? null;
+    }
+
+    public function getAutoResponder(): ?bool
+    {
+        return $this->autoResponder ?? null;
+    }
+
+    public function getMailArchive(): ?bool
+    {
+        return $this->mailArchive ?? null;
+    }
+
     public function getLimit(): int
     {
         return $this->limit;
@@ -86,10 +176,26 @@ class ListMailAddressesRequest
         return $this->page ?? null;
     }
 
+    /**
+     * @return string[]
+     */
+    public function getSort(): array
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getOrder(): array
+    {
+        return $this->order;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -103,7 +209,7 @@ class ListMailAddressesRequest
     public function withSearch(string $search): self
     {
         $validator = new Validator();
-        $validator->validate($search, self::$schema['properties']['search']);
+        $validator->validate($search, self::$internalValidationSchema['properties']['search']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -122,10 +228,98 @@ class ListMailAddressesRequest
         return $clone;
     }
 
+    public function withForwardAddress(bool $forwardAddress): self
+    {
+        $validator = new Validator();
+        $validator->validate($forwardAddress, self::$internalValidationSchema['properties']['forwardAddress']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->forwardAddress = $forwardAddress;
+
+        return $clone;
+    }
+
+    public function withoutForwardAddress(): self
+    {
+        $clone = clone $this;
+        unset($clone->forwardAddress);
+
+        return $clone;
+    }
+
+    public function withCatchAll(bool $catchAll): self
+    {
+        $validator = new Validator();
+        $validator->validate($catchAll, self::$internalValidationSchema['properties']['catchAll']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->catchAll = $catchAll;
+
+        return $clone;
+    }
+
+    public function withoutCatchAll(): self
+    {
+        $clone = clone $this;
+        unset($clone->catchAll);
+
+        return $clone;
+    }
+
+    public function withAutoResponder(bool $autoResponder): self
+    {
+        $validator = new Validator();
+        $validator->validate($autoResponder, self::$internalValidationSchema['properties']['autoResponder']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->autoResponder = $autoResponder;
+
+        return $clone;
+    }
+
+    public function withoutAutoResponder(): self
+    {
+        $clone = clone $this;
+        unset($clone->autoResponder);
+
+        return $clone;
+    }
+
+    public function withMailArchive(bool $mailArchive): self
+    {
+        $validator = new Validator();
+        $validator->validate($mailArchive, self::$internalValidationSchema['properties']['mailArchive']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->mailArchive = $mailArchive;
+
+        return $clone;
+    }
+
+    public function withoutMailArchive(): self
+    {
+        $clone = clone $this;
+        unset($clone->mailArchive);
+
+        return $clone;
+    }
+
     public function withLimit(int $limit): self
     {
         $validator = new Validator();
-        $validator->validate($limit, self::$schema['properties']['limit']);
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -139,7 +333,7 @@ class ListMailAddressesRequest
     public function withSkip(int $skip): self
     {
         $validator = new Validator();
-        $validator->validate($skip, self::$schema['properties']['skip']);
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -153,7 +347,7 @@ class ListMailAddressesRequest
     public function withPage(int $page): self
     {
         $validator = new Validator();
-        $validator->validate($page, self::$schema['properties']['page']);
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -168,6 +362,40 @@ class ListMailAddressesRequest
     {
         $clone = clone $this;
         unset($clone->page);
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $sort
+     */
+    public function withSort(array $sort): self
+    {
+        $validator = new Validator();
+        $validator->validate($sort, self::$internalValidationSchema['properties']['sort']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->sort = $sort;
+
+        return $clone;
+    }
+
+    /**
+     * @param string[] $order
+     */
+    public function withOrder(array $order): self
+    {
+        $validator = new Validator();
+        $validator->validate($order, self::$internalValidationSchema['properties']['order']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->order = $order;
 
         return $clone;
     }
@@ -192,6 +420,22 @@ class ListMailAddressesRequest
         if (isset($input->{'search'})) {
             $search = $input->{'search'};
         }
+        $forwardAddress = null;
+        if (isset($input->{'forwardAddress'})) {
+            $forwardAddress = (bool)($input->{'forwardAddress'});
+        }
+        $catchAll = null;
+        if (isset($input->{'catchAll'})) {
+            $catchAll = (bool)($input->{'catchAll'});
+        }
+        $autoResponder = null;
+        if (isset($input->{'autoResponder'})) {
+            $autoResponder = (bool)($input->{'autoResponder'});
+        }
+        $mailArchive = null;
+        if (isset($input->{'mailArchive'})) {
+            $mailArchive = (bool)($input->{'mailArchive'});
+        }
         $limit = 10000;
         if (isset($input->{'limit'})) {
             $limit = (int)($input->{'limit'});
@@ -204,12 +448,32 @@ class ListMailAddressesRequest
         if (isset($input->{'page'})) {
             $page = (int)($input->{'page'});
         }
+        $sort = [
+                'address.domain',
+                'address.local',
+            ];
+        if (isset($input->{'sort'})) {
+            $sort = $input->{'sort'};
+        }
+        $order = [
+                'asc',
+                'asc',
+            ];
+        if (isset($input->{'order'})) {
+            $order = $input->{'order'};
+        }
 
         $obj = new self($projectId);
         $obj->search = $search;
+        $obj->forwardAddress = $forwardAddress;
+        $obj->catchAll = $catchAll;
+        $obj->autoResponder = $autoResponder;
+        $obj->mailArchive = $mailArchive;
         $obj->limit = $limit;
         $obj->skip = $skip;
         $obj->page = $page;
+        $obj->sort = $sort;
+        $obj->order = $order;
         return $obj;
     }
 
@@ -225,11 +489,25 @@ class ListMailAddressesRequest
         if (isset($this->search)) {
             $output['search'] = $this->search;
         }
+        if (isset($this->forwardAddress)) {
+            $output['forwardAddress'] = $this->forwardAddress;
+        }
+        if (isset($this->catchAll)) {
+            $output['catchAll'] = $this->catchAll;
+        }
+        if (isset($this->autoResponder)) {
+            $output['autoResponder'] = $this->autoResponder;
+        }
+        if (isset($this->mailArchive)) {
+            $output['mailArchive'] = $this->mailArchive;
+        }
         $output['limit'] = $this->limit;
         $output['skip'] = $this->skip;
         if (isset($this->page)) {
             $output['page'] = $this->page;
         }
+        $output['sort'] = $this->sort;
+        $output['order'] = $this->order;
 
         return $output;
     }
@@ -246,7 +524,7 @@ class ListMailAddressesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -294,6 +572,18 @@ class ListMailAddressesRequest
         if (isset($mapped['search'])) {
             $query['search'] = $mapped['search'];
         }
+        if (isset($mapped['forwardAddress'])) {
+            $query['forwardAddress'] = $mapped['forwardAddress'];
+        }
+        if (isset($mapped['catchAll'])) {
+            $query['catchAll'] = $mapped['catchAll'];
+        }
+        if (isset($mapped['autoResponder'])) {
+            $query['autoResponder'] = $mapped['autoResponder'];
+        }
+        if (isset($mapped['mailArchive'])) {
+            $query['mailArchive'] = $mapped['mailArchive'];
+        }
         if (isset($mapped['limit'])) {
             $query['limit'] = $mapped['limit'];
         }
@@ -302,6 +592,12 @@ class ListMailAddressesRequest
         }
         if (isset($mapped['page'])) {
             $query['page'] = $mapped['page'];
+        }
+        if (isset($mapped['sort'])) {
+            $query['sort'] = $mapped['sort'];
+        }
+        if (isset($mapped['order'])) {
+            $query['order'] = $mapped['order'];
         }
         return [
             'query' => $query,

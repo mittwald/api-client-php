@@ -22,7 +22,7 @@ class BankingInformation
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'accountHolder' => [
                 'example' => 'Ada Lovelace',
@@ -74,7 +74,7 @@ class BankingInformation
     public function withAccountHolder(string $accountHolder): self
     {
         $validator = new Validator();
-        $validator->validate($accountHolder, self::$schema['properties']['accountHolder']);
+        $validator->validate($accountHolder, self::$internalValidationSchema['properties']['accountHolder']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -88,7 +88,7 @@ class BankingInformation
     public function withBic(string $bic): self
     {
         $validator = new Validator();
-        $validator->validate($bic, self::$schema['properties']['bic']);
+        $validator->validate($bic, self::$internalValidationSchema['properties']['bic']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -110,7 +110,7 @@ class BankingInformation
     public function withIban(string $iban): self
     {
         $validator = new Validator();
-        $validator->validate($iban, self::$schema['properties']['iban']);
+        $validator->validate($iban, self::$internalValidationSchema['properties']['iban']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -177,7 +177,7 @@ class BankingInformation
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -14,15 +14,13 @@ class DeleteDomainRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'domainId' => [
-                'format' => 'uuid',
                 'type' => 'string',
             ],
             'transit' => [
-                'description' => 'Only for .de Domains.',
                 'type' => 'boolean',
             ],
         ],
@@ -33,9 +31,6 @@ class DeleteDomainRequest
 
     private string $domainId;
 
-    /**
-     * Only for .de Domains.
-     */
     private ?bool $transit = null;
 
     private array $headers = [
@@ -60,7 +55,7 @@ class DeleteDomainRequest
     public function withDomainId(string $domainId): self
     {
         $validator = new Validator();
-        $validator->validate($domainId, self::$schema['properties']['domainId']);
+        $validator->validate($domainId, self::$internalValidationSchema['properties']['domainId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -74,7 +69,7 @@ class DeleteDomainRequest
     public function withTransit(bool $transit): self
     {
         $validator = new Validator();
-        $validator->validate($transit, self::$schema['properties']['transit']);
+        $validator->validate($transit, self::$internalValidationSchema['properties']['transit']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -147,7 +142,7 @@ class DeleteDomainRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

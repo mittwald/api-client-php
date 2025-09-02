@@ -23,11 +23,11 @@ class UserInputPositionMeta
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'description' => 'UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend.',
         'properties' => [
             'index' => [
-                'type' => 'number',
+                'type' => 'integer',
             ],
             'section' => [
                 'type' => 'string',
@@ -39,7 +39,7 @@ class UserInputPositionMeta
         'type' => 'object',
     ];
 
-    private int|float|null $index = null;
+    private ?int $index = null;
 
     private ?string $section = null;
 
@@ -52,9 +52,9 @@ class UserInputPositionMeta
     {
     }
 
-    public function getIndex(): int|float|null
+    public function getIndex(): ?int
     {
-        return $this->index;
+        return $this->index ?? null;
     }
 
     public function getSection(): ?string
@@ -67,10 +67,10 @@ class UserInputPositionMeta
         return $this->step ?? null;
     }
 
-    public function withIndex(int|float $index): self
+    public function withIndex(int $index): self
     {
         $validator = new Validator();
-        $validator->validate($index, self::$schema['properties']['index']);
+        $validator->validate($index, self::$internalValidationSchema['properties']['index']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -92,7 +92,7 @@ class UserInputPositionMeta
     public function withSection(string $section): self
     {
         $validator = new Validator();
-        $validator->validate($section, self::$schema['properties']['section']);
+        $validator->validate($section, self::$internalValidationSchema['properties']['section']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -114,7 +114,7 @@ class UserInputPositionMeta
     public function withStep(string $step): self
     {
         $validator = new Validator();
-        $validator->validate($step, self::$schema['properties']['step']);
+        $validator->validate($step, self::$internalValidationSchema['properties']['step']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -150,7 +150,7 @@ class UserInputPositionMeta
 
         $index = null;
         if (isset($input->{'index'})) {
-            $index = str_contains((string)($input->{'index'}), '.') ? (float)($input->{'index'}) : (int)($input->{'index'});
+            $index = (int)($input->{'index'});
         }
         $section = null;
         if (isset($input->{'section'})) {
@@ -201,7 +201,7 @@ class UserInputPositionMeta
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

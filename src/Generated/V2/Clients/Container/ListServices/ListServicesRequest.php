@@ -6,6 +6,8 @@ namespace Mittwald\ApiClient\Generated\V2\Clients\Container\ListServices;
 
 use InvalidArgumentException;
 use JsonSchema\Validator;
+use Mittwald\ApiClient\Generated\V2\Schemas\Container\ServiceSortOrder;
+use Mittwald\ApiClient\Generated\V2\Schemas\Container\ServiceStatus;
 
 class ListServicesRequest
 {
@@ -14,7 +16,7 @@ class ListServicesRequest
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'type' => 'object',
         'properties' => [
             'projectId' => [
@@ -25,6 +27,31 @@ class ListServicesRequest
                 'format' => 'uuid',
                 'type' => 'string',
             ],
+            'status' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceStatus',
+            ],
+            'requiresRecreate' => [
+                'type' => 'boolean',
+            ],
+            'searchTerm' => [
+                'type' => 'string',
+            ],
+            'sortOrder' => [
+                '$ref' => '#/components/schemas/de.mittwald.v1.container.ServiceSortOrder',
+            ],
+            'limit' => [
+                'type' => 'integer',
+                'default' => 1000,
+                'minimum' => 1,
+            ],
+            'skip' => [
+                'type' => 'integer',
+                'default' => 0,
+            ],
+            'page' => [
+                'type' => 'integer',
+                'minimum' => 1,
+            ],
         ],
         'required' => [
             'projectId',
@@ -34,6 +61,20 @@ class ListServicesRequest
     private string $projectId;
 
     private ?string $stackId = null;
+
+    private ?ServiceStatus $status = null;
+
+    private ?bool $requiresRecreate = null;
+
+    private ?string $searchTerm = null;
+
+    private ?ServiceSortOrder $sortOrder = null;
+
+    private int $limit = 1000;
+
+    private int $skip = 0;
+
+    private ?int $page = null;
 
     private array $headers = [
 
@@ -54,10 +95,45 @@ class ListServicesRequest
         return $this->stackId ?? null;
     }
 
+    public function getStatus(): ?ServiceStatus
+    {
+        return $this->status ?? null;
+    }
+
+    public function getRequiresRecreate(): ?bool
+    {
+        return $this->requiresRecreate ?? null;
+    }
+
+    public function getSearchTerm(): ?string
+    {
+        return $this->searchTerm ?? null;
+    }
+
+    public function getSortOrder(): ?ServiceSortOrder
+    {
+        return $this->sortOrder ?? null;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getSkip(): int
+    {
+        return $this->skip;
+    }
+
+    public function getPage(): ?int
+    {
+        return $this->page ?? null;
+    }
+
     public function withProjectId(string $projectId): self
     {
         $validator = new Validator();
-        $validator->validate($projectId, self::$schema['properties']['projectId']);
+        $validator->validate($projectId, self::$internalValidationSchema['properties']['projectId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -71,7 +147,7 @@ class ListServicesRequest
     public function withStackId(string $stackId): self
     {
         $validator = new Validator();
-        $validator->validate($stackId, self::$schema['properties']['stackId']);
+        $validator->validate($stackId, self::$internalValidationSchema['properties']['stackId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -86,6 +162,132 @@ class ListServicesRequest
     {
         $clone = clone $this;
         unset($clone->stackId);
+
+        return $clone;
+    }
+
+    public function withStatus(ServiceStatus $status): self
+    {
+        $clone = clone $this;
+        $clone->status = $status;
+
+        return $clone;
+    }
+
+    public function withoutStatus(): self
+    {
+        $clone = clone $this;
+        unset($clone->status);
+
+        return $clone;
+    }
+
+    public function withRequiresRecreate(bool $requiresRecreate): self
+    {
+        $validator = new Validator();
+        $validator->validate($requiresRecreate, self::$internalValidationSchema['properties']['requiresRecreate']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->requiresRecreate = $requiresRecreate;
+
+        return $clone;
+    }
+
+    public function withoutRequiresRecreate(): self
+    {
+        $clone = clone $this;
+        unset($clone->requiresRecreate);
+
+        return $clone;
+    }
+
+    public function withSearchTerm(string $searchTerm): self
+    {
+        $validator = new Validator();
+        $validator->validate($searchTerm, self::$internalValidationSchema['properties']['searchTerm']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->searchTerm = $searchTerm;
+
+        return $clone;
+    }
+
+    public function withoutSearchTerm(): self
+    {
+        $clone = clone $this;
+        unset($clone->searchTerm);
+
+        return $clone;
+    }
+
+    public function withSortOrder(ServiceSortOrder $sortOrder): self
+    {
+        $clone = clone $this;
+        $clone->sortOrder = $sortOrder;
+
+        return $clone;
+    }
+
+    public function withoutSortOrder(): self
+    {
+        $clone = clone $this;
+        unset($clone->sortOrder);
+
+        return $clone;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $validator = new Validator();
+        $validator->validate($limit, self::$internalValidationSchema['properties']['limit']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->limit = $limit;
+
+        return $clone;
+    }
+
+    public function withSkip(int $skip): self
+    {
+        $validator = new Validator();
+        $validator->validate($skip, self::$internalValidationSchema['properties']['skip']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->skip = $skip;
+
+        return $clone;
+    }
+
+    public function withPage(int $page): self
+    {
+        $validator = new Validator();
+        $validator->validate($page, self::$internalValidationSchema['properties']['page']);
+        if (!$validator->isValid()) {
+            throw new InvalidArgumentException($validator->getErrors()[0]['message']);
+        }
+
+        $clone = clone $this;
+        $clone->page = $page;
+
+        return $clone;
+    }
+
+    public function withoutPage(): self
+    {
+        $clone = clone $this;
+        unset($clone->page);
 
         return $clone;
     }
@@ -110,9 +312,44 @@ class ListServicesRequest
         if (isset($input->{'stackId'})) {
             $stackId = $input->{'stackId'};
         }
+        $status = null;
+        if (isset($input->{'status'})) {
+            $status = ServiceStatus::from($input->{'status'});
+        }
+        $requiresRecreate = null;
+        if (isset($input->{'requiresRecreate'})) {
+            $requiresRecreate = (bool)($input->{'requiresRecreate'});
+        }
+        $searchTerm = null;
+        if (isset($input->{'searchTerm'})) {
+            $searchTerm = $input->{'searchTerm'};
+        }
+        $sortOrder = null;
+        if (isset($input->{'sortOrder'})) {
+            $sortOrder = ServiceSortOrder::from($input->{'sortOrder'});
+        }
+        $limit = 1000;
+        if (isset($input->{'limit'})) {
+            $limit = (int)($input->{'limit'});
+        }
+        $skip = 0;
+        if (isset($input->{'skip'})) {
+            $skip = (int)($input->{'skip'});
+        }
+        $page = null;
+        if (isset($input->{'page'})) {
+            $page = (int)($input->{'page'});
+        }
 
         $obj = new self($projectId);
         $obj->stackId = $stackId;
+        $obj->status = $status;
+        $obj->requiresRecreate = $requiresRecreate;
+        $obj->searchTerm = $searchTerm;
+        $obj->sortOrder = $sortOrder;
+        $obj->limit = $limit;
+        $obj->skip = $skip;
+        $obj->page = $page;
         return $obj;
     }
 
@@ -127,6 +364,23 @@ class ListServicesRequest
         $output['projectId'] = $this->projectId;
         if (isset($this->stackId)) {
             $output['stackId'] = $this->stackId;
+        }
+        if (isset($this->status)) {
+            $output['status'] = $this->status->value;
+        }
+        if (isset($this->requiresRecreate)) {
+            $output['requiresRecreate'] = $this->requiresRecreate;
+        }
+        if (isset($this->searchTerm)) {
+            $output['searchTerm'] = $this->searchTerm;
+        }
+        if (isset($this->sortOrder)) {
+            $output['sortOrder'] = $this->sortOrder->value;
+        }
+        $output['limit'] = $this->limit;
+        $output['skip'] = $this->skip;
+        if (isset($this->page)) {
+            $output['page'] = $this->page;
         }
 
         return $output;
@@ -144,7 +398,7 @@ class ListServicesRequest
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
@@ -191,6 +445,27 @@ class ListServicesRequest
         $query = [];
         if (isset($mapped['stackId'])) {
             $query['stackId'] = $mapped['stackId'];
+        }
+        if (isset($mapped['status'])) {
+            $query['status'] = $mapped['status'];
+        }
+        if (isset($mapped['requiresRecreate'])) {
+            $query['requiresRecreate'] = $mapped['requiresRecreate'];
+        }
+        if (isset($mapped['searchTerm'])) {
+            $query['searchTerm'] = $mapped['searchTerm'];
+        }
+        if (isset($mapped['sortOrder'])) {
+            $query['sortOrder'] = $mapped['sortOrder'];
+        }
+        if (isset($mapped['limit'])) {
+            $query['limit'] = $mapped['limit'];
+        }
+        if (isset($mapped['skip'])) {
+            $query['skip'] = $mapped['skip'];
+        }
+        if (isset($mapped['page'])) {
+            $query['page'] = $mapped['page'];
         }
         return [
             'query' => $query,

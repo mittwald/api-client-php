@@ -23,7 +23,7 @@ class Server
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'clusterName' => [
                 'type' => 'string',
@@ -219,7 +219,7 @@ class Server
     public function withClusterName(string $clusterName): self
     {
         $validator = new Validator();
-        $validator->validate($clusterName, self::$schema['properties']['clusterName']);
+        $validator->validate($clusterName, self::$internalValidationSchema['properties']['clusterName']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -241,7 +241,7 @@ class Server
     public function withCustomerId(string $customerId): self
     {
         $validator = new Validator();
-        $validator->validate($customerId, self::$schema['properties']['customerId']);
+        $validator->validate($customerId, self::$internalValidationSchema['properties']['customerId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -255,7 +255,7 @@ class Server
     public function withDescription(string $description): self
     {
         $validator = new Validator();
-        $validator->validate($description, self::$schema['properties']['description']);
+        $validator->validate($description, self::$internalValidationSchema['properties']['description']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -285,7 +285,7 @@ class Server
     public function withId(string $id): self
     {
         $validator = new Validator();
-        $validator->validate($id, self::$schema['properties']['id']);
+        $validator->validate($id, self::$internalValidationSchema['properties']['id']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -299,7 +299,7 @@ class Server
     public function withImageRefId(string $imageRefId): self
     {
         $validator = new Validator();
-        $validator->validate($imageRefId, self::$schema['properties']['imageRefId']);
+        $validator->validate($imageRefId, self::$internalValidationSchema['properties']['imageRefId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -324,7 +324,7 @@ class Server
     public function withIsReady(bool $isReady): self
     {
         $validator = new Validator();
-        $validator->validate($isReady, self::$schema['properties']['isReady']);
+        $validator->validate($isReady, self::$internalValidationSchema['properties']['isReady']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -354,7 +354,7 @@ class Server
     public function withShortId(string $shortId): self
     {
         $validator = new Validator();
-        $validator->validate($shortId, self::$schema['properties']['shortId']);
+        $validator->validate($shortId, self::$internalValidationSchema['properties']['shortId']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -368,7 +368,7 @@ class Server
     public function withStatisticsBaseDomain(string $statisticsBaseDomain): self
     {
         $validator = new Validator();
-        $validator->validate($statisticsBaseDomain, self::$schema['properties']['statisticsBaseDomain']);
+        $validator->validate($statisticsBaseDomain, self::$internalValidationSchema['properties']['statisticsBaseDomain']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -398,7 +398,7 @@ class Server
     public function withStorage(string $storage): self
     {
         $validator = new Validator();
-        $validator->validate($storage, self::$schema['properties']['storage']);
+        $validator->validate($storage, self::$internalValidationSchema['properties']['storage']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -499,7 +499,7 @@ class Server
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

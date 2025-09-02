@@ -10,6 +10,15 @@ use GuzzleHttp\Psr7\Request;
 use Mittwald\ApiClient\Client\EmptyResponse;
 use Mittwald\ApiClient\Client\UntypedResponse;
 use Mittwald\ApiClient\Error\UnexpectedResponseException;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorDeleteContributor\ContributorDeleteContributorTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorExpressInterestToContribute\ContributorExpressInterestToContributeTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetBillingInformation\ContributorGetBillingInformationNotFoundResponse;
@@ -28,6 +37,10 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorGetLoginLink\ContributorGetLoginLinkTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListContractPartnersOfContributor\ContributorListContractPartnersOfContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListIncomingInvoices\ContributorListIncomingInvoicesNotFoundResponse;
@@ -40,6 +53,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfI
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorListOnbehalfInvoices\ContributorListOnbehalfInvoicesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorPatchContributor\ContributorPatchContributorTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorReceiptGetFileAccessToken\ContributorReceiptGetFileAccessTokenNotFoundResponse;
@@ -52,6 +71,24 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretF
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorRotateSecretForExtensionInstance\ContributorRotateSecretForExtensionInstanceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ContributorUpdateBillingInformation\ContributorUpdateBillingInformationTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerGetPaymentMethod\CustomerGetPaymentMethodTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\CustomerUpdatePaymentMethod\CustomerUpdatePaymentMethodTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionAuthenticateInstance\ExtensionAuthenticateInstanceDefaultResponse;
@@ -85,6 +122,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateContribut
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceCreatedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceForbiddenResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstancePreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionCreateExtensionInstance\ExtensionCreateExtensionInstanceRequest;
@@ -116,6 +154,13 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionEnableExtensionInstance\ExtensionEnableExtensionInstanceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateExtensionSecret\ExtensionGenerateExtensionSecretTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGenerateSessionToken\ExtensionGenerateSessionTokenNotFoundResponse;
@@ -126,9 +171,14 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetContributor\ExtensionGetContributorTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetCustomerExtensionInstanceOrders\ExtensionGetCustomerExtensionInstanceOrdersBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetCustomerExtensionInstanceOrders\ExtensionGetCustomerExtensionInstanceOrdersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetCustomerExtensionInstanceOrders\ExtensionGetCustomerExtensionInstanceOrdersNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetCustomerExtensionInstanceOrders\ExtensionGetCustomerExtensionInstanceOrdersOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetCustomerExtensionInstanceOrders\ExtensionGetCustomerExtensionInstanceOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetCustomerExtensionInstanceOrders\ExtensionGetCustomerExtensionInstanceOrdersTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtension\ExtensionGetExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceDefaultResponse;
@@ -136,6 +186,12 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionIns
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstance\ExtensionGetExtensionInstanceTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceContract\ExtensionGetExtensionInstanceContractBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceContract\ExtensionGetExtensionInstanceContractDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceContract\ExtensionGetExtensionInstanceContractNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceContract\ExtensionGetExtensionInstanceContractOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceContract\ExtensionGetExtensionInstanceContractRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceContract\ExtensionGetExtensionInstanceContractTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetExtensionInstanceForCustomer\ExtensionGetExtensionInstanceForCustomerOKResponse;
@@ -151,11 +207,23 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetOwnExtension\ExtensionGetOwnExtensionTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders\ExtensionGetProjectExtensionInstanceOrdersBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders\ExtensionGetProjectExtensionInstanceOrdersDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders\ExtensionGetProjectExtensionInstanceOrdersNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders\ExtensionGetProjectExtensionInstanceOrdersOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders\ExtensionGetProjectExtensionInstanceOrdersRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetProjectExtensionInstanceOrders\ExtensionGetProjectExtensionInstanceOrdersTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionGetPublicKey\ExtensionGetPublicKeyTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionInvalidateExtensionSecret\ExtensionInvalidateExtensionSecretTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListContributors\ExtensionListContributorsRequest;
@@ -173,6 +241,17 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensio
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListOwnExtensions\ExtensionListOwnExtensionsTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListScopes\ExtensionListScopesDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListScopes\ExtensionListScopesOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListScopes\ExtensionListScopesRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionListScopes\ExtensionListScopesTooManyRequestsResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionBadRequestResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionCreatedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionDefaultResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionNotFoundResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionPreconditionFailedResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionRequest;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionOrderExtension\ExtensionOrderExtensionTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionConflictResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionPatchExtension\ExtensionPatchExtensionDefaultResponse;
@@ -221,12 +300,6 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPub
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateOKResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionSetExtensionPublishedState\ExtensionSetExtensionPublishedStateTooManyRequestsResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutBadRequestResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutCreatedResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutDefaultResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutNotFoundResponse;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutRequest;
-use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionStartExtensionCheckout\ExtensionStartExtensionCheckoutTooManyRequestsResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractBadRequestResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionInstanceContract\ExtensionUpdateExtensionInstanceContractNotFoundResponse;
@@ -237,6 +310,7 @@ use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtension
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingDefaultResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingNotFoundResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingOKResponse;
+use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingPreconditionFailedResponse;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingRequest;
 use Mittwald\ApiClient\Generated\V2\Clients\Marketplace\ExtensionUpdateExtensionPricing\ExtensionUpdateExtensionPricingTooManyRequestsResponse;
 
@@ -260,6 +334,53 @@ class MarketplaceClientImpl implements MarketplaceClient
     public function __construct(Client $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * Delete a Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-delete-contributor
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorDeleteContributorRequest $request An object representing the request for this operation
+     * @return EmptyResponse The Contributor has been deleted.
+     */
+    public function contributorDeleteContributor(ContributorDeleteContributorRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ContributorDeleteContributorRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            404 => ContributorDeleteContributorNotFoundResponse::fromResponse($httpResponse),
+            412 => new EmptyResponse($httpResponse),
+            429 => ContributorDeleteContributorTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorDeleteContributorDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Express interest to be a contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-express-interest-to-contribute
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorExpressInterestToContributeRequest $request An object representing the request for this operation
+     * @return ContributorExpressInterestToContributeCreatedResponse Customer became an unverified contributor.
+     */
+    public function contributorExpressInterestToContribute(ContributorExpressInterestToContributeRequest $request): ContributorExpressInterestToContributeCreatedResponse
+    {
+        $httpRequest = new Request(ContributorExpressInterestToContributeRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ContributorExpressInterestToContributeCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorExpressInterestToContributeBadRequestResponse::fromResponse($httpResponse),
+            429 => ContributorExpressInterestToContributeTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorExpressInterestToContributeDefaultResponse::fromResponse($httpResponse),
+        });
     }
 
     /**
@@ -339,6 +460,28 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * List ContractPartners of the contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-list-contract-partners-of-contributor
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorListContractPartnersOfContributorRequest $request An object representing the request for this operation
+     * @return ContributorListContractPartnersOfContributorOKResponse A list of contract partners.
+     */
+    public function contributorListContractPartnersOfContributor(ContributorListContractPartnersOfContributorRequest $request): ContributorListContractPartnersOfContributorOKResponse
+    {
+        $httpRequest = new Request(ContributorListContractPartnersOfContributorRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorListContractPartnersOfContributorOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ContributorListContractPartnersOfContributorTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorListContractPartnersOfContributorDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * List incoming Invoices of a Contributor.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-list-incoming-invoices
@@ -389,6 +532,30 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Patch Contributor.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-patch-contributor
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorPatchContributorRequest $request An object representing the request for this operation
+     * @return ContributorPatchContributorOKResponse Contributor has been patched.
+     */
+    public function contributorPatchContributor(ContributorPatchContributorRequest $request): ContributorPatchContributorOKResponse
+    {
+        $httpRequest = new Request(ContributorPatchContributorRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorPatchContributorOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorPatchContributorBadRequestResponse::fromResponse($httpResponse),
+            404 => ContributorPatchContributorNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorPatchContributorTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorPatchContributorDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Request an Access Token for the Incoming Invoice file.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-receipt-get-file-access-token
@@ -433,6 +600,30 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ContributorRotateSecretForExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
             429 => ContributorRotateSecretForExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ContributorRotateSecretForExtensionInstanceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Update Contributor Billing Information.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/contributor-update-billing-information
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ContributorUpdateBillingInformationRequest $request An object representing the request for this operation
+     * @return ContributorUpdateBillingInformationOKResponse The billing related information of the Contributor
+     */
+    public function contributorUpdateBillingInformation(ContributorUpdateBillingInformationRequest $request): ContributorUpdateBillingInformationOKResponse
+    {
+        $httpRequest = new Request(ContributorUpdateBillingInformationRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ContributorUpdateBillingInformationOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ContributorUpdateBillingInformationBadRequestResponse::fromResponse($httpResponse),
+            404 => ContributorUpdateBillingInformationNotFoundResponse::fromResponse($httpResponse),
+            429 => ContributorUpdateBillingInformationTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ContributorUpdateBillingInformationDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -595,6 +786,7 @@ class MarketplaceClientImpl implements MarketplaceClient
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionCreateExtensionInstanceBadRequestResponse::fromResponse($httpResponse),
+            403 => ExtensionCreateExtensionInstanceForbiddenResponse::fromResponse($httpResponse),
             404 => ExtensionCreateExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
             412 => ExtensionCreateExtensionInstancePreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionCreateExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
@@ -744,6 +936,36 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Generate an Extension secret for the given Extension.
+     *
+     * This generates a new Extension secret for the given Extension.
+     * If an Extension secret existed previously, it will deprecate the existing secret.
+     * This means, it will be invalidated after approximately one day.
+     *
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-extension-secret
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGenerateExtensionSecretRequest $request An object representing the request for this operation
+     * @return ExtensionGenerateExtensionSecretOKResponse A new Extension secret has been generated.
+     */
+    public function extensionGenerateExtensionSecret(ExtensionGenerateExtensionSecretRequest $request): ExtensionGenerateExtensionSecretOKResponse
+    {
+        $httpRequest = new Request(ExtensionGenerateExtensionSecretRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGenerateExtensionSecretOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionGenerateExtensionSecretBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionGenerateExtensionSecretNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionGenerateExtensionSecretPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ExtensionGenerateExtensionSecretTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGenerateExtensionSecretDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Generate a session token to transmit it to the extensions frontend fragment.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-generate-session-token
@@ -791,20 +1013,43 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Get all open extension orders for given customer
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-customer-extension-instance-orders
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetCustomerExtensionInstanceOrdersRequest $request An object representing the request for this operation
+     */
+    public function extensionGetCustomerExtensionInstanceOrders(ExtensionGetCustomerExtensionInstanceOrdersRequest $request): ExtensionGetCustomerExtensionInstanceOrdersOKResponse
+    {
+        $httpRequest = new Request(ExtensionGetCustomerExtensionInstanceOrdersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGetCustomerExtensionInstanceOrdersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionGetCustomerExtensionInstanceOrdersBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionGetCustomerExtensionInstanceOrdersNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGetCustomerExtensionInstanceOrdersTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGetCustomerExtensionInstanceOrdersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get an Extension.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-extension
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionGetExtensionRequest $request An object representing the request for this operation
-     * @return ExtensionGetExtensionOKResponse OK
+     * @return UntypedResponse OK
      */
-    public function extensionGetExtension(ExtensionGetExtensionRequest $request): ExtensionGetExtensionOKResponse
+    public function extensionGetExtension(ExtensionGetExtensionRequest $request): UntypedResponse
     {
         $httpRequest = new Request(ExtensionGetExtensionRequest::method, $request->buildUrl());
         $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
         if ($httpResponse->getStatusCode() === 200) {
-            return ExtensionGetExtensionOKResponse::fromResponse($httpResponse);
+            return UntypedResponse::fromResponse($httpResponse);
         }
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             404 => ExtensionGetExtensionNotFoundResponse::fromResponse($httpResponse),
@@ -833,6 +1078,29 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionGetExtensionInstanceNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionGetExtensionInstanceTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetExtensionInstanceDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get the Contract Strategy of an Extension Instance
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-extension-instance-contract
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetExtensionInstanceContractRequest $request An object representing the request for this operation
+     */
+    public function extensionGetExtensionInstanceContract(ExtensionGetExtensionInstanceContractRequest $request): ExtensionGetExtensionInstanceContractOKResponse
+    {
+        $httpRequest = new Request(ExtensionGetExtensionInstanceContractRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGetExtensionInstanceContractOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionGetExtensionInstanceContractBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionGetExtensionInstanceContractNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGetExtensionInstanceContractTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGetExtensionInstanceContractDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -906,6 +1174,29 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
+     * Get all open extension orders for given project
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-project-extension-instance-orders
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionGetProjectExtensionInstanceOrdersRequest $request An object representing the request for this operation
+     */
+    public function extensionGetProjectExtensionInstanceOrders(ExtensionGetProjectExtensionInstanceOrdersRequest $request): ExtensionGetProjectExtensionInstanceOrdersOKResponse
+    {
+        $httpRequest = new Request(ExtensionGetProjectExtensionInstanceOrdersRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionGetProjectExtensionInstanceOrdersOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionGetProjectExtensionInstanceOrdersBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionGetProjectExtensionInstanceOrdersNotFoundResponse::fromResponse($httpResponse),
+            429 => ExtensionGetProjectExtensionInstanceOrdersTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionGetProjectExtensionInstanceOrdersDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
      * Get the public key to verify the webhook signature.
      *
      * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-get-public-key
@@ -925,6 +1216,31 @@ class MarketplaceClientImpl implements MarketplaceClient
             404 => ExtensionGetPublicKeyNotFoundResponse::fromResponse($httpResponse),
             429 => ExtensionGetPublicKeyTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionGetPublicKeyDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Invalidate the given Extension secret immediately.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-invalidate-extension-secret
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionInvalidateExtensionSecretRequest $request An object representing the request for this operation
+     * @return EmptyResponse The Extension secret has been invalidated and cannot be used anymore.
+     */
+    public function extensionInvalidateExtensionSecret(ExtensionInvalidateExtensionSecretRequest $request): EmptyResponse
+    {
+        $httpRequest = new Request(ExtensionInvalidateExtensionSecretRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 204) {
+            return new EmptyResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionInvalidateExtensionSecretBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionInvalidateExtensionSecretNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionInvalidateExtensionSecretPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ExtensionInvalidateExtensionSecretTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionInvalidateExtensionSecretDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -957,7 +1273,7 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionListExtensionInstancesRequest $request An object representing the request for this operation
-     * @return ExtensionListExtensionInstancesOKResponse OK
+     * @return ExtensionListExtensionInstancesOKResponse A list of extension instances.
      */
     public function extensionListExtensionInstances(ExtensionListExtensionInstancesRequest $request): ExtensionListExtensionInstancesOKResponse
     {
@@ -1014,6 +1330,53 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             429 => ExtensionListOwnExtensionsTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionListOwnExtensionsDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * List Scopes.
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-list-scopes
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionListScopesRequest $request An object representing the request for this operation
+     * @return ExtensionListScopesOKResponse A list of possible scopes for the mStudio.
+     */
+    public function extensionListScopes(ExtensionListScopesRequest $request): ExtensionListScopesOKResponse
+    {
+        $httpRequest = new Request(ExtensionListScopesRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return ExtensionListScopesOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            429 => ExtensionListScopesTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionListScopesDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Order Extension with saved payment method
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-order-extension
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param ExtensionOrderExtensionRequest $request An object representing the request for this operation
+     * @return ExtensionOrderExtensionCreatedResponse Order successful. Extension will be installed in the background.
+     */
+    public function extensionOrderExtension(ExtensionOrderExtensionRequest $request): ExtensionOrderExtensionCreatedResponse
+    {
+        $httpRequest = new Request(ExtensionOrderExtensionRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 201) {
+            return ExtensionOrderExtensionCreatedResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => ExtensionOrderExtensionBadRequestResponse::fromResponse($httpResponse),
+            404 => ExtensionOrderExtensionNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionOrderExtensionPreconditionFailedResponse::fromResponse($httpResponse),
+            429 => ExtensionOrderExtensionTooManyRequestsResponse::fromResponse($httpResponse),
+            default => ExtensionOrderExtensionDefaultResponse::fromResponse($httpResponse),
         });
     }
 
@@ -1230,30 +1593,6 @@ class MarketplaceClientImpl implements MarketplaceClient
     }
 
     /**
-     * Start a checkout process for an extension.
-     *
-     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/extension-start-extension-checkout
-     * @throws GuzzleException
-     * @throws UnexpectedResponseException
-     * @param ExtensionStartExtensionCheckoutRequest $request An object representing the request for this operation
-     * @return ExtensionStartExtensionCheckoutCreatedResponse A Checkout URL has been created.
-     */
-    public function extensionStartExtensionCheckout(ExtensionStartExtensionCheckoutRequest $request): ExtensionStartExtensionCheckoutCreatedResponse
-    {
-        $httpRequest = new Request(ExtensionStartExtensionCheckoutRequest::method, $request->buildUrl());
-        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
-        if ($httpResponse->getStatusCode() === 201) {
-            return ExtensionStartExtensionCheckoutCreatedResponse::fromResponse($httpResponse);
-        }
-        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
-            400 => ExtensionStartExtensionCheckoutBadRequestResponse::fromResponse($httpResponse),
-            404 => ExtensionStartExtensionCheckoutNotFoundResponse::fromResponse($httpResponse),
-            429 => ExtensionStartExtensionCheckoutTooManyRequestsResponse::fromResponse($httpResponse),
-            default => ExtensionStartExtensionCheckoutDefaultResponse::fromResponse($httpResponse),
-        });
-    }
-
-    /**
      * Update or Create Contract for existing Extension Instances.
      *
      * Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
@@ -1262,7 +1601,7 @@ class MarketplaceClientImpl implements MarketplaceClient
      * @throws GuzzleException
      * @throws UnexpectedResponseException
      * @param ExtensionUpdateExtensionInstanceContractRequest $request An object representing the request for this operation
-     * @return ExtensionUpdateExtensionInstanceContractOKResponse The Pricing adjustment can be confirmed in the checkout with the given url.
+     * @return ExtensionUpdateExtensionInstanceContractOKResponse The Price Update has successfully confirmed.
      */
     public function extensionUpdateExtensionInstanceContract(ExtensionUpdateExtensionInstanceContractRequest $request): ExtensionUpdateExtensionInstanceContractOKResponse
     {
@@ -1300,8 +1639,57 @@ class MarketplaceClientImpl implements MarketplaceClient
         throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
             400 => ExtensionUpdateExtensionPricingBadRequestResponse::fromResponse($httpResponse),
             404 => ExtensionUpdateExtensionPricingNotFoundResponse::fromResponse($httpResponse),
+            412 => ExtensionUpdateExtensionPricingPreconditionFailedResponse::fromResponse($httpResponse),
             429 => ExtensionUpdateExtensionPricingTooManyRequestsResponse::fromResponse($httpResponse),
             default => ExtensionUpdateExtensionPricingDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get payment method details
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/marketplace-customer-get-payment-method
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerGetPaymentMethodRequest $request An object representing the request for this operation
+     * @return CustomerGetPaymentMethodOKResponse The payment method details
+     */
+    public function customerGetPaymentMethod(CustomerGetPaymentMethodRequest $request): CustomerGetPaymentMethodOKResponse
+    {
+        $httpRequest = new Request(CustomerGetPaymentMethodRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CustomerGetPaymentMethodOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerGetPaymentMethodBadRequestResponse::fromResponse($httpResponse),
+            404 => CustomerGetPaymentMethodNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerGetPaymentMethodTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerGetPaymentMethodDefaultResponse::fromResponse($httpResponse),
+        });
+    }
+
+    /**
+     * Get the link to update the marketplace payment method
+     *
+     * @see https://developer.mittwald.de/reference/v2/#tag/Marketplace/operation/marketplace-customer-update-payment-method
+     * @throws GuzzleException
+     * @throws UnexpectedResponseException
+     * @param CustomerUpdatePaymentMethodRequest $request An object representing the request for this operation
+     * @return CustomerUpdatePaymentMethodOKResponse The generated link to the Stripe payment method setup
+     */
+    public function customerUpdatePaymentMethod(CustomerUpdatePaymentMethodRequest $request): CustomerUpdatePaymentMethodOKResponse
+    {
+        $httpRequest = new Request(CustomerUpdatePaymentMethodRequest::method, $request->buildUrl());
+        $httpResponse = $this->client->send($httpRequest, $request->buildRequestOptions());
+        if ($httpResponse->getStatusCode() === 200) {
+            return CustomerUpdatePaymentMethodOKResponse::fromResponse($httpResponse);
+        }
+        throw new UnexpectedResponseException(match ($httpResponse->getStatusCode()) {
+            400 => CustomerUpdatePaymentMethodBadRequestResponse::fromResponse($httpResponse),
+            404 => CustomerUpdatePaymentMethodNotFoundResponse::fromResponse($httpResponse),
+            429 => CustomerUpdatePaymentMethodTooManyRequestsResponse::fromResponse($httpResponse),
+            default => CustomerUpdatePaymentMethodDefaultResponse::fromResponse($httpResponse),
         });
     }
 }

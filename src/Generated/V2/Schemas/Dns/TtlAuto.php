@@ -22,7 +22,7 @@ class TtlAuto
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'auto' => [
                 'description' => 'this will always be true',
@@ -53,7 +53,7 @@ class TtlAuto
     public function withAuto(bool $auto): self
     {
         $validator = new Validator();
-        $validator->validate($auto, self::$schema['properties']['auto']);
+        $validator->validate($auto, self::$internalValidationSchema['properties']['auto']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -111,7 +111,7 @@ class TtlAuto
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {

@@ -22,7 +22,7 @@ class Location
     /**
      * Schema used to validate input for creating instances of this class
      */
-    private static array $schema = [
+    private static array $internalValidationSchema = [
         'properties' => [
             'city' => [
                 'example' => 'Espelkamp',
@@ -71,7 +71,7 @@ class Location
     public function withCity(string $city): self
     {
         $validator = new Validator();
-        $validator->validate($city, self::$schema['properties']['city']);
+        $validator->validate($city, self::$internalValidationSchema['properties']['city']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -93,7 +93,7 @@ class Location
     public function withCountry(string $country): self
     {
         $validator = new Validator();
-        $validator->validate($country, self::$schema['properties']['country']);
+        $validator->validate($country, self::$internalValidationSchema['properties']['country']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -115,7 +115,7 @@ class Location
     public function withIpAddress(string $ipAddress): self
     {
         $validator = new Validator();
-        $validator->validate($ipAddress, self::$schema['properties']['ipAddress']);
+        $validator->validate($ipAddress, self::$internalValidationSchema['properties']['ipAddress']);
         if (!$validator->isValid()) {
             throw new InvalidArgumentException($validator->getErrors()[0]['message']);
         }
@@ -202,7 +202,7 @@ class Location
     {
         $validator = new \Mittwald\ApiClient\Validator\Validator();
         $input = is_array($input) ? Validator::arrayToObjectRecursive($input) : $input;
-        $validator->validate($input, self::$schema);
+        $validator->validate($input, self::$internalValidationSchema);
 
         if (!$validator->isValid() && !$return) {
             $errors = array_map(function (array $e): string {
